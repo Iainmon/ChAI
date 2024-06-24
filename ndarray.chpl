@@ -105,18 +105,23 @@ record ndarray {
     //     return data.this((...args));
     // }
 
-    proc reshapeDomain(dom: _domain.type) do
+    proc ref reshapeDomain(dom: _domain.type) do
         _domain = dom;
 
     proc reshape(dom: domain(rank,int)) {
         var normalDomain = util.normalizeDomain(dom);
-        var me = new ndarray(data);
+        var me = new ndarray(this);
         me.reshapeDomain(normalDomain);
         return me;
         // alternative. less copying?
         // var arr = new ndarray(normalDomain,eltType);
         // arr.data = foreach (_,a) in zip(normalDomain,data) do a;
         // return arr;
+    }
+
+    proc slice(args...) {
+        const slc = data[(...args)];
+        return new ndarray(slc);
     }
 }
 
@@ -192,9 +197,14 @@ writeln(C);
 
 writeln(C[0,0]);
 
-C[0,0] = 69.0;
+C[0,0] = 70.0;
 
 var D = C[{0..1,0..1}];
 C[{0..1,0..1}]=2.0;
 writeln(D,D.type:string);
 writeln(C,C.type:string);
+
+var E = C.slice(1,..);
+writeln(E);
+
+
