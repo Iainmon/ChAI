@@ -108,11 +108,18 @@ record ndarray {
     proc ref reshapeDomain(dom: _domain.type) do
         _domain = dom;
 
-    proc reshape(dom: domain(rank,int)) {
-        var normalDomain = util.normalizeDomain(dom);
-        var me = new ndarray(this);
-        me.reshapeDomain(normalDomain);
-        return me;
+    proc reshape(dom: domain): ndarray(dom.rank,eltType) where dom.idxType == int {
+        param _rank: int = dom.rank;
+        const normalDomain = util.normalizeDomain(dom);
+        if rank == _rank {
+            var me = new ndarray(this);
+            me.reshapeDomain(normalDomain);
+            return me;
+        } else {
+            var arr = new ndarray(normalDomain,eltType);
+            arr.data = foreach (_,a) in zip(normalDomain,data) do a;
+            return arr;
+        }
         // alternative. less copying?
         // var arr = new ndarray(normalDomain,eltType);
         // arr.data = foreach (_,a) in zip(normalDomain,data) do a;
