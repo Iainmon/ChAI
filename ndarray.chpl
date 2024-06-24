@@ -31,10 +31,16 @@ record ndarray {
         this._domain = util.normalizeDomain(dom);
     }
 
+    proc init(type eltType = real(64), shape: int ...?rank) {
+        const dom = util.domainFromShape(shape);
+        this.init(dom,eltType);
+    }
+
     proc init(arr: [] ?eltType) {
-        const normalDomain = util.normalizeDomain(arr.domain);
-        this.init(normalDomain, arr.eltType);
-        if normalDomain == arr.domain {
+        const arrDom = arr.domain;
+        const normalDomain = util.normalizeDomain(arrDom);
+        this.init(normalDomain,eltType);
+        if normalDomain == arrDom {
             this.data = arr;
         } else {
             this.data = foreach (_,a) in zip(normalDomain,arr) do a;
@@ -47,8 +53,11 @@ record ndarray {
         this.data = A.data;
     }
 
-    proc init(unknown: ?t) do
-        this.init(util.normalizeArray(unknown));
+    proc init(unknown: ?t) where !isDomainType(t) {
+        const arr = unknown;
+        const normalArr = util.normalizeArray(arr);
+        this.init(normalArr);
+    }
 
     proc init=(other: [] ?eltType) do
         this.init(other);
@@ -58,15 +67,56 @@ record ndarray {
         this._domain = other._domain;
         this.data = other.data;
     }
+    // proc ref this(d: _domain.type) ref {
+    //     return data.this(d);
+    // }
+    // proc this(d: _domain.type) const {
+    //     return data.this(d);
+    // }
+    // proc const ref this(d: _domain.type) out {
+    //     const dat = data[d];
+    //     return new ndarray(dat);
+    // }
+    proc ref this(args: int...rank) ref {
+        return data.this((...args));
+    }
+    // proc this(args...rank) out {
+    //     return new ndarray(data[(...args)]);
+    // }
 
-    proc reshapeDomain(dom: this.domain.type) do
-        this._domain = dom;
+    // proc const this(args...) const ref {
+    //     return data.this((...args));
+    // }
+
+    // pragma "no promotion when by ref"
+    // pragma "reference to const when const this"
+    // pragma "removable array access"
+    // pragma "alias scope from this"
+    // proc ref this(const args...?n) ref do
+    //     return data.this((...args));
+
+    // pragma "alias scope from this"
+    // proc const this(const args...?n) where shouldReturnRvalueByValue(data.eltType) {
+    //     return data.this((...args));
+    // }
+
+    // pragma "alias scope from this"
+    // proc const this(const args...?n) const ref {
+    //     return data.this((...args));
+    // }
+
+    proc reshapeDomain(dom: _domain.type) do
+        _domain = dom;
 
     proc reshape(dom: domain(rank,int)) {
-        const normalDomain = util.normalizeDomain(dom);
-        var arr = new ndarray(normalDomain,this.eltType);
-        arr.data = foreach (_,a) in zip(arr.domain,this.data) do a;
-        return arr;
+        var normalDomain = util.normalizeDomain(dom);
+        var me = new ndarray(data);
+        me.reshapeDomain(normalDomain);
+        return me;
+        // alternative. less copying?
+        // var arr = new ndarray(normalDomain,eltType);
+        // arr.data = foreach (_,a) in zip(normalDomain,data) do a;
+        // return arr;
     }
 }
 
@@ -141,3 +191,10 @@ C = C.reshape({0..#5,0..#3});
 writeln(C);
 
 writeln(C[0,0]);
+
+C[0,0] = 69.0;
+
+var D = C[{0..1,0..1}];
+C[{0..1,0..1}]=2.0;
+writeln(D,D.type:string);
+writeln(C,C.type:string);

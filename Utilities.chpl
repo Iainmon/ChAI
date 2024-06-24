@@ -41,12 +41,10 @@ module Utilities {
         }
     }
 
-    proc normalizeArray(arr: []) {
-        const normalDomain = normalizeDomain(arr.domain);
-        // const normalArr: [normalDomain] arr.eltType 
-        //     = foreach (i,a) in zip(normalDomain,arr) do a;
-        // return normalArr;
-        return foreach (i,a) in zip(normalDomain,arr) do a;
+    inline proc normalizeArray(arr: []) {
+        const arrDom = arr.domain;
+        const normalDomain = normalizeDomain(arrDom);
+        return foreach (_,a) in zip(normalDomain,arr) do a;
     }
 
     // proc captureArray(unknown: ?t) {
@@ -57,33 +55,32 @@ module Utilities {
     //     return (arr: ArrayType);
     // }
 
-    proc normalizeArray(unknown: ?t) where !isArrayType(t) {
+    inline proc normalizeArray(unknown: ?t) where !isArrayType(t) {
         const arr: ChapelArray._array = unknown;
-        const normalDomain = normalizeDomain(arr.domain);
-        return foreach (i,a) in zip(normalDomain,arr) do a;
+        const arrDom = arr.domain;
+        const normalDomain = normalizeDomain(arrDom);
+        return foreach (_,a) in zip(normalDomain,arr) do a;
     }
 
-    proc normalizeDomain(dom: domain(?)) where dom.strides == strideKind.one {
-        return domainFromShape((...dom.shape));
-        // param rank = dom.rank;
-        // const shape: rank*int = dom.shape;
-        // var ranges: rank*range;
-        // for param i in 0..<rank do 
-        //     ranges(i) = 0..#(shape(i));
-        // return {(...ranges)};
+    inline proc normalizeDomain(dom: domain(?)): domain(dom.rank,int) /*where dom.strides == strideKind.one*/ {
+        const shape = dom.shape;
+        const normalDom = domainFromShape((...shape));
+        return normalDom;
     }
 
-    proc emptyDomain(param rank: int) : domain(rank,int) {
+    inline proc emptyDomain(param rank: int) : domain(rank,int) {
         var shape: rank*range;
+        const nullRange = 0..#0;
         for param d in 0..<rank do
-            shape(d) = 0..#0;
+            shape(d) = nullRange;
         return {(...shape)};
     }
 
-    proc domainFromShape(shape: int ...?rank): domain(rank,int) {
+    inline proc domainFromShape(shape: int ...?rank): domain(rank,int) {
+        const _shape = shape;
         var ranges: rank*range;
         for param d in 0..<rank do
-            ranges(d) = 0..#shape(d);
+            ranges(d) = 0..<_shape(d);
         return {(...ranges)};
     }
 
