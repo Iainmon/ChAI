@@ -101,7 +101,15 @@ record addOp {
 }
 
 record tensor {
-    forwarding var resource: shared BaseTensorResource;
+    param rank: int;
+    type eltType = real(64);
+    forwarding var resource: shared BaseTensorResource(rank,eltType);
+
+    proc init(resource: shared BaseTensorResource(?rank,?eltType)) {
+        this.rank = rank;
+        this.eltType = eltType;
+        this.resource = resource;
+    }
 
     proc get(): shared TensorResource(?) {
         return try! resource : shared TensorResource;
@@ -126,3 +134,5 @@ writeln(t3.ndarrayData());
 
 t3.forward();
 writeln(t3.ndarrayData());
+
+writeln(t3.type:string);
