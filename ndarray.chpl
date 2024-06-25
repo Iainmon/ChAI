@@ -67,6 +67,9 @@ record ndarray {
         this._domain = other._domain;
         this.data = other.data;
     }
+
+
+
     // proc ref this(d: _domain.type) ref {
     //     return data.this(d);
     // }
@@ -120,10 +123,6 @@ record ndarray {
             arr.data = foreach (_,a) in zip(normalDomain,data) do a;
             return arr;
         }
-        // alternative. less copying?
-        // var arr = new ndarray(normalDomain,eltType);
-        // arr.data = foreach (_,a) in zip(normalDomain,data) do a;
-        // return arr;
     }
 
     proc slice(args...) {
@@ -132,9 +131,15 @@ record ndarray {
     }
 }
 
+
+
 operator =(ref lhs: ndarray(?rank,?eltType), rhs: ndarray(rank,eltType)) {
     lhs._domain = rhs._domain;
     lhs.data = rhs.data;
+}
+
+operator =(ref lhs: ndarray(?rank,?eltType), rhs: [?d] eltType) where d.rank == rank {
+    lhs = new ndarray(rhs);
 }
 
 operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
@@ -142,10 +147,11 @@ operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
 }
 
 
-class tensor_resource {
+class _tensor_resource {
     param rank: int;
     type eltType = real(64);
-    var data: ndarray;
+    var data: remote(ndarray(rank,eltType));
+
 
 }
 
@@ -215,3 +221,5 @@ var E = C.slice(1,..);
 writeln(E);
 
 
+// type T = (int,real);
+// writeln(T:string,isTupleType(T));
