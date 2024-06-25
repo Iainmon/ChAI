@@ -8,14 +8,14 @@ record remote {
     var item: _remoteVarWrapper(eltType);
     var _parentDevice: locale; // is this necessary?
 
-    proc init(item: ?eltType,device: locale) {
+    proc init(in item: ?eltType,device: locale) {
         this.eltType = eltType;
         this.device = device;
         this.item = chpl__buildRemoteWrapper(device,eltType,item);
         this._parentDevice = here;
     }
 
-    proc init(item: ?eltType) {
+    proc init(in item: ?eltType) {
         this.init(item,here);
     }
 
