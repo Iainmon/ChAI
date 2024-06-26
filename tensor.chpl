@@ -67,8 +67,8 @@ operator *(ref a: tensor(?rank,?eltType), ref b: tensor(rank,eltType)) {
 
 proc tensor.reshape(dom: domain) where dom.idxType == int {
     param newRank = dom.rank;
-    var ctx = new reshapeOp(dom, this.meta);
-    return tensorFromCtx(newRank,this.eltType,ctx);
+    var ctx = new reshapeOp(dom,meta);
+    return tensorFromCtx(newRank,eltType,ctx);
 }
 
 proc tensor.relu() {
@@ -76,8 +76,8 @@ proc tensor.relu() {
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.permute(axes: int...this.rank) {
-    var ctx = new permuteOp(axes,meta);
+proc tensor.permute(axes: int...rank) {
+    var ctx = new permuteOp(rank,eltType,axes,meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 

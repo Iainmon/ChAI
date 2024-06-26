@@ -119,4 +119,9 @@ module Utilities {
         }
         return idxs;
     }
+
+    proc argsort(tup: int...?rank) {
+        writeln("IAIN: just do it, it's not that hard. (tuple argsort)");
+        return tup;
+    }
 }

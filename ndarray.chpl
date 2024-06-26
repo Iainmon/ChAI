@@ -125,6 +125,12 @@ record ndarray {
         }
     }
 
+    // This can optimized such that it doesn't use two heavy utility functions...
+    proc reshape(newShape: int ...?newRank): ndarray(newRank,eltType) {
+        const dom = util.domainFromShape((...newShape));
+        return this.reshape(dom);
+    }
+
     proc slice(args...) {
         const slc = data[(...args)];
         return new ndarray(slc);
@@ -191,6 +197,26 @@ record ndarray {
         }
         // expanded.data[(...newRanges)] = data[(...oldRanges)];
         return expanded;
+    }
+
+    proc sum(withAxesMask: rank*int): ndarray(rank,eltType) {
+        return this;
+    }
+
+    proc squeeze(param newRank: int): ndarray(newRank,eltType) where newRank < rank {
+        // I think this will work: (a member of the chapel team needs to review this) 
+        // I suspect heavy performance hits will happen when running this on CUDA. 
+        const oldShape = this.shape;
+        var newShape: newRank*int;
+        var offset: int = 0;
+        for param i in 0..<rank {
+            if oldShape(i + offset) == 1 {
+                offset -= 1;
+            } else {
+                newShape(i) = oldShape(i + offset);
+            }
+        }
+        return this.reshape((...newShape));
     }
 }
 

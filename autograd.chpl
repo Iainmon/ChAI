@@ -3,6 +3,8 @@
 use ndarray;
 use remote;
 
+import Utilities as util;
+
 
 class BaseTensorResource {
     param rank: int;
@@ -204,19 +206,54 @@ record reshapeOp {
     proc forward() do
         return input.array.reshape(dom);
     
-    proc backward(grad: ndarray(dom.rank,input.eltType)): ndarray(input.rank,input.eltType) {
+    proc backward(grad: ndarray(dom.rank,input.eltType)): (ndarray(input.rank,input.eltType),) {
         const inputDom = input.array.domain;
         return grad.reshape(inputDom);
     }
 }
 
 record permuteOp {
+    param rank: int;
+    type eltType = real;
     var permutation; // tuple of ints
-    var input: shared BaseTensorResource(?);
+    var input: shared BaseTensorResource(rank,eltType);
 
     proc children do return (input,);
 
 
     proc forward() do
         return input.array.permute((...permutation));
+    
+    proc backward(grad: ndarray(rank,eltType)): (ndarray(rank,eltType),) {
+        const inversePermutation = util.argsort((...permutation)); // This should be computed only once, in the initializer. 
+        return (grad.permute((...inversePermutation)),);
+    } 
+}
+
+
+record expandOp {
+    param rank: int;
+    type eltType = real;
+    var expandedShape: rank*int; // tuple of ints
+    var input: shared BaseTensorResource(rank,eltType);
+
+    proc children do return (input,);
+
+    // proc init(param rank: int, type eltType, )
+
+    proc forward() {
+        return input.array.expand((...expandedShape));
+    }
+    
+    proc backward(grad: ndarray(rank,eltType)): (ndarray(rank,eltType),) {
+        const inputShape = input.array.shape;
+        var expandedAxesMask: rank*int;
+        for param i in 0..<rank {
+            expandedAxesMask(i) = if expandedShape != inputShape then 1 else 0;
+        }
+        const g = grad.sum(withMask=expandedAxesMask).squeeze();
+        return (g,);
+    } 
+
+
 }
