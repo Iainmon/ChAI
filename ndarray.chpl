@@ -132,16 +132,12 @@ record ndarray {
 
     proc permute(axes: int...rank) {
         const oldShape = data.shape;
-        var newShape: rank*int;
         var newShapeR: rank*range;
         for param i in 0..<rank {
-            // newShape(i) = oldShape(axes(i));
             newShapeR(i) = data.dim(axes(i));
         }
-        // writeln("Shape>",data.shape,newShapeR);
         const newDom = {(...newShapeR)};
         var prm = new ndarray(newDom,eltType);
-        // prm.data[(...newShapeR)] = data[(...data.dims())];
         for (d,dn) in zip(data.domain,newDom) {
             prm.data[dn] = data[d];
         }
@@ -231,7 +227,10 @@ writeln(C[0,0]);
 C[0,0] = 70.0;
 
 var D = C[{0..1,0..1}];
+
 C[{0..1,0..1}]=2.0;
+
+
 writeln(D,D.type:string);
 writeln(C,C.type:string);
 

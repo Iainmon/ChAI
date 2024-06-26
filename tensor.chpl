@@ -4,6 +4,15 @@ use ndarray;
 use remote;
 use autograd;
 
+
+
+
+
+
+
+
+
+
 record tensor {
     param rank: int;
     type eltType = real(64);
@@ -40,7 +49,7 @@ proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType) {
 operator +(ref a: tensor(?rank,?eltType), ref b: tensor(rank,eltType)) {
     var atr = a.resource;
     var btr = b.resource;
-    var ctx = new addOp(atr,btr);
+    var ctx = new addOp(rank,eltType,atr,btr);
     var sumtr = new shared TensorResource(rank,eltType,ctx);
     return new tensor(sumtr, strict = true);
 }
@@ -52,7 +61,7 @@ operator -(ref a: tensor(?rank,?eltType), ref b: tensor(rank,eltType)) {
 }
 
 operator *(ref a: tensor(?rank,?eltType), ref b: tensor(rank,eltType)) {
-    var ctx = new multOp(a.meta,b.meta);
+    var ctx = new multOp(rank,eltType,a.meta,b.meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
@@ -83,7 +92,7 @@ var arr2 = new ndarray([2.0, 8.0, -10.0]);
 
 var input1 = new shared TensorResource(arr1,new baseValue());
 var input2 = new shared TensorResource(arr2,new baseValue());
-var sum = new shared TensorResource(1,real(64), new addOp(input1,input2));
+var sum = new shared TensorResource(1,real(64), new addOp(1,real,input1,input2));
 
 var t1 = new tensor(input1);
 var t2 = new tensor(input2);
@@ -116,4 +125,6 @@ writeln(mat.array.shape,mat.array);
 
 var prm = mat.permute(1,0);
 writeln(prm.array.shape,prm.array);
+
+writeln((t4.meta : shared TensorResource(1,real,addOp(1,real))).operationData.backward(t4.array));
 
