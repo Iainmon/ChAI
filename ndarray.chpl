@@ -108,6 +108,9 @@ record ndarray {
     //     return data.this((...args));
     // }
 
+    proc ref setData(arr: [] eltType) where arr.rank == rank do
+        if arr.domain == _domain { data = arr; } else { this = arr; }
+
     proc ref reshapeDomain(dom: _domain.type) do
         _domain = dom;
 
