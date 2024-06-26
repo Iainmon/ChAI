@@ -132,16 +132,65 @@ record ndarray {
 
     proc permute(axes: int...rank) {
         const oldShape = data.shape;
+        var oldShapeR = data.dims();
+
         var newShapeR: rank*range;
         for param i in 0..<rank {
             newShapeR(i) = data.dim(axes(i));
         }
+
         const newDom = {(...newShapeR)};
         var prm = new ndarray(newDom,eltType);
-        for (d,dn) in zip(data.domain,newDom) {
-            prm.data[dn] = data[d];
+        const newShape = prm.shape;
+
+        ref prmData = prm.data;
+
+        foreach i in 0..<data.size {
+            var oldIdx,newIdx: rank*int;
+            for param j in 0..<rank {
+                oldIdx(j) = i % oldShape(j);
+                newIdx(j) = i % newShape(j);
+            }
+            prmData[newIdx] = data[oldIdx];
         }
+
         return prm;
+    }
+
+    proc expand(axes: int...rank) {
+        const shape = data.domain.shape;
+        const oldRanges = data.dims();
+        var newRanges: rank*range = oldRanges;
+        for param i in 0..<rank {
+            const axis = axes(i);
+            const ds = shape(i);
+            if axis != ds {
+                if ds == 1 {
+                    newRanges(i) = 0..<axis;
+                } else {
+                    halt("Cannot expand an axis that is not 1.");
+                }
+            } else {
+                newRanges(i) = oldRanges(i);
+            }
+        }
+        const dom = util.domainFromShape((...axes));
+        var expanded = new ndarray(dom,eltType);
+
+        const oldShape = shape;
+        const newShape = dom.shape;
+        
+        ref expandedData = expanded.data;
+
+        foreach idx in expandedData.domain {
+            var origIdx = idx;
+            for param i in 0..<rank {
+                if oldShape(i) == 1 then origIdx(i) = 0;
+            }
+            expandedData[idx] = data[origIdx];
+        }
+        // expanded.data[(...newRanges)] = data[(...oldRanges)];
+        return expanded;
     }
 }
 

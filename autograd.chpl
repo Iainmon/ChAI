@@ -26,6 +26,7 @@ class BaseTensorResource {
     // Tensor resource interface
     proc forward() do halt("Forward function not defined for BaseTensorResource.");
     proc backward(grad: remote(ndarray(rank,eltType)), param alreadyPopulated = false) do halt("Backward function not defined for BaseTensorResource.");
+    proc backward() where rank == 1 do halt("Backward function not defined for BaseTensorResource.");
 
     proc array ref : ndarray(rank,eltType) do
         return dataResource.access();
@@ -108,6 +109,15 @@ class TensorResource : BaseTensorResource(?) {
         for param i in 0..<childrenRefs.size do
             childrenRefs(i).backward(childrenRefs(i).gradResource,alreadyPopulated = true);
     }
+
+    override proc backward() where rank == 1 {
+        if array.shape == (1,) {
+            backward(dataResource);
+        } else {
+            halt("Trying to default backpropagate tensor of higher shape than 1.");
+        }
+    }
+
 }
 
 
@@ -117,7 +127,7 @@ class TensorResource : BaseTensorResource(?) {
 
 record baseValue {
     proc forward() do halt("Unimplemented baseValue forward.");
-    proc children do return (nil,);
+    proc children do return (false,);
 }
 
 
@@ -171,7 +181,6 @@ record multOp {
 
     proc children do return (lhs,rhs);
 
-
     proc forward() do 
         return new ndarray(lhs.data * rhs.data);
 
@@ -180,7 +189,7 @@ record multOp {
         ref A = lhs.data;
         ref B = rhs.data;
 
-        // return (new ndarray(B * G),new ndarray(A * G));
+        return (new ndarray(B * G),new ndarray(A * G));
     }
 }
 

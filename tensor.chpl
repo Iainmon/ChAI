@@ -128,3 +128,9 @@ writeln(prm.array.shape,prm.array);
 
 writeln((t4.meta : shared TensorResource(1,real,addOp(1,real))).operationData.backward(t4.array));
 
+var mInput = for (i,j) in {0..<3,0..<1} do i * 10.0 + j + 1;
+var m = new ndarray(mInput);
+writeln(m.data,m.shape);
+var mExpanded = m.expand(3,4);
+writeln(mExpanded.data,mExpanded.shape);
+
