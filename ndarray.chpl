@@ -129,6 +129,24 @@ record ndarray {
         const slc = data[(...args)];
         return new ndarray(slc);
     }
+
+    proc permute(axes: int...rank) {
+        const oldShape = data.shape;
+        var newShape: rank*int;
+        var newShapeR: rank*range;
+        for param i in 0..<rank {
+            // newShape(i) = oldShape(axes(i));
+            newShapeR(i) = data.dim(axes(i));
+        }
+        // writeln("Shape>",data.shape,newShapeR);
+        const newDom = {(...newShapeR)};
+        var prm = new ndarray(newDom,eltType);
+        // prm.data[(...newShapeR)] = data[(...data.dims())];
+        for (d,dn) in zip(data.domain,newDom) {
+            prm.data[dn] = data[d];
+        }
+        return prm;
+    }
 }
 
 

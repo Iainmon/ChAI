@@ -76,81 +76,59 @@ record baseValue {
     proc forward() do halt("Unimplemented baseValue forward.");
 }
 
+
+record reluOp {
+    var input: shared BaseTensorResource(?);
+
+    proc forward() {
+        var output: ndarray(input.rank,input.eltType) = _relu(input.data);
+        return output;
+    }
+    inline proc _relu(x) do
+        return ((0.0 < x):input.eltType) * x;
+}
+
+
+
+
 record addOp {
-    var lhs: shared BaseTensorResource;
-    var rhs: shared BaseTensorResource;
+    var lhs: shared BaseTensorResource(?);
+    var rhs: shared BaseTensorResource(?);
 
     proc forward() do
         return new ndarray(lhs.data + rhs.data);
 }
 
-// record subOp {
-//     var lhs: shared BaseTensorResource;
-//     var rhs: shared BaseTensorResource;
+record subOp {
+    var lhs: shared BaseTensorResource(?);
+    var rhs: shared BaseTensorResource(?);
 
-//     proc forward() do
-//         return new ndarray(lhs.data - rhs.data);
-// }
-
-// record multOp {
-//     var lhs: shared BaseTensorResource;
-//     var rhs: shared BaseTensorResource;
-
-//     proc forward() do
-//         return new ndarray(lhs.data * rhs.data);
-// }
-
-
-
-
-
-record tensor {
-    param rank: int;
-    type eltType = real(64);
-    forwarding var resource: shared BaseTensorResource;
-
-    proc init(param rank: int, type eltType = real(64)) {
-        this.rank = rank;
-        this.eltType = eltType;
-        this.resource = new shared TensorResource(rank,eltType,baseValue);
-    }
-
-    proc init(resource: shared BaseTensorResource(?rank,?eltType)) {
-        this.rank = rank;
-        this.eltType = eltType;
-        this.resource = resource;
-    }
+    proc forward() do
+        return new ndarray(lhs.data - rhs.data);
 }
 
-operator +(ref a: tensor(?rank,?eltType), ref b: tensor(rank,eltType)) {
-    var atr = a.resource;
-    var btr = b.resource;
-    var ctx = new addOp(atr,btr);
-    var sumtr = new shared TensorResource(rank,eltType,ctx);
-    sumtr.forward();
-    return new tensor(sumtr);
+record multOp {
+    var lhs: shared BaseTensorResource(?);
+    var rhs: shared BaseTensorResource(?);
+
+    proc forward() do 
+        return new ndarray(lhs.data * rhs.data);
 }
 
 
-var arr1 = new ndarray([1.0, 1.0, 1.0]);
-var arr2 = new ndarray([2.0, 2.0, 2.0]);
+record reshapeOp {
+    var dom;
+    var input: shared BaseTensorResource(?);
 
-var input1 = new shared TensorResource(arr1,new baseValue());
-var input2 = new shared TensorResource(arr2,new baseValue());
-var sum = new shared TensorResource(1,real(64), new addOp(input1,input2));
+    proc forward() do
+        return input.array.reshape(dom);
+}
 
-var t1 = new tensor(input1);
-var t2 = new tensor(input2);
-var t3 = new tensor(sum);
+record permuteOp {
+    var permutation; // tuple of ints
+    var input: shared BaseTensorResource(?);
 
-writeln(t1);
-writeln(t2);
-writeln(t3.array);
+    proc forward() do
+        return input.array.permute((...permutation));
+}
 
-t3.forward();
-writeln(t3.array);
-
-writeln(t3.type:string);
-
-var t4 = t1 + t2;
-writeln(t1.data);
