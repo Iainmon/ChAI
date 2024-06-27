@@ -42,6 +42,7 @@ record ndarray {
         this.init(normalDomain,eltType);
         if normalDomain == arrDom {
             this.data = arr;
+            // this.data = foreach (_,a) in zip(normalDomain,arr) do a;
         } else {
             this.data = foreach (_,a) in zip(normalDomain,arr) do a;
         }
@@ -63,7 +64,8 @@ record ndarray {
         this.init(other);
 
     proc init=(other: ndarray(?rank,?eltType)) {
-        this.init(rank,eltType);
+        this.rank = rank;
+        this.eltType = eltType;
         this._domain = other._domain;
         this.data = other.data;
     }
@@ -221,6 +223,26 @@ record ndarray {
         }
         return this.reshape((...newShape));
     }
+
+    proc populateRemote(ref re: remote(ndarray(rank,eltType))): remote(ndarray(rank,eltType)) {
+        if here == re.device {
+            re.access()._domain = this.domain;
+            re.access().data = data;
+        } else {
+            // on re.device var meData = data;
+            on re.device {
+                re.access()._domain = this.domain;
+                re.access().data = data;
+            }
+        }
+        return re;
+    }
+
+    proc toRemote(): remote(ndarray(rank,eltType)) {
+        var re = new remote(ndarray(rank,eltType));
+        this.populateRemote(re);
+        return re;
+    }
 }
 
 
@@ -231,11 +253,46 @@ operator =(ref lhs: ndarray(?rank,?eltType), rhs: ndarray(rank,eltType)) {
 }
 
 operator =(ref lhs: ndarray(?rank,?eltType), rhs: [?d] eltType) where d.rank == rank {
-    lhs = new ndarray(rhs);
+    lhs.reshapeDomain(d);
+    lhs.data = rhs;
 }
 
 operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
     return new ndarray(val);
+}
+
+proc remote.init(ref other: ndarray(?rank,?eltType)) {
+    this.init(ndarray(rank,eltType));
+    other.populateRemote(this);
+}
+
+proc remote.init=(ref other: ndarray(?rank,?eltType)) {
+    this.init(ndarray(rank,eltType));
+    other.populateRemote(this);
+}
+
+
+
+operator =(ref lhs: remote(ndarray(?rank,?eltType)), rhs: ndarray(rank,eltType)) {
+    rhs.populateRemote(lhs);
+}
+
+operator :(val: ndarray(?rank,?eltType), type t: remote(ndarray(rank,eltType))) {
+    return val.toRemote();
+}
+
+proc remote.init(ref other: remote(ndarray(?rank,?eltType))) {
+    this.eltType = ndarray(rank,eltType);
+    this.remoteResource = other.remoteResource;
+}
+
+proc remote.init=(ref other: remote(ndarray(?rank,?eltType))) {
+    this.eltType = ndarray(rank,eltType);
+    this.remoteResource = other.remoteResource;
+}
+
+operator =(ref lhs: remote(ndarray(?rank,?eltType)), rhs:remote( ndarray(rank,eltType))) {
+    lhs.remoteResource = rhs.remoteResource;
 }
 
 
@@ -247,10 +304,10 @@ class _tensor_resource {
 
 }
 
-const dom = util.emptyDomain(2);
-writeln(dom);
+// const dom = util.emptyDomain(2);
+// writeln(dom);
 
-printType(ndarray(1));
+// printType(ndarray(1));
 // var A: ndarray(1);
 // A._domain = {0..#3};
 // // A.data = [1.0,2.0,3.0];
@@ -281,39 +338,39 @@ printType(ndarray(1));
 //     writeln("C -> ",C);
 // }
 
-var A: ndarray(1) = [1.0,2.0,3.0];
-writeln(A);
+// var A: ndarray(1) = [1.0,2.0,3.0];
+// writeln(A);
 
-var B: ndarray(1) = new ndarray([1.0,2.0,3.0]);
-// B = [1.0,2.0,3.0];
+// var B: ndarray(1) = new ndarray([1.0,2.0,3.0]);
+// // B = [1.0,2.0,3.0];
 
-writeln(B.domain);
+// writeln(B.domain);
 
-var C: ndarray(2) = new ndarray({0..#3,0..#5});
-var c = 0;
-for i in C.domain {
-    C.data[i] = c;
-    c += 1;
-}
-writeln(C);
+// var C: ndarray(2) = new ndarray({0..#3,0..#5});
+// var c = 0;
+// for i in C.domain {
+//     C.data[i] = c;
+//     c += 1;
+// }
+// writeln(C);
 
-C = C.reshape({0..#5,0..#3});
-writeln(C);
+// C = C.reshape({0..#5,0..#3});
+// writeln(C);
 
-writeln(C[0,0]);
+// writeln(C[0,0]);
 
-C[0,0] = 70.0;
+// C[0,0] = 70.0;
 
-var D = C[{0..1,0..1}];
+// var D = C[{0..1,0..1}];
 
-C[{0..1,0..1}]=2.0;
+// C[{0..1,0..1}]=2.0;
 
 
-writeln(D,D.type:string);
-writeln(C,C.type:string);
+// writeln(D,D.type:string);
+// writeln(C,C.type:string);
 
-var E = C.slice(1,..);
-writeln(E);
+// var E = C.slice(1,..);
+// writeln(E);
 
 
 // type T = (int,real);

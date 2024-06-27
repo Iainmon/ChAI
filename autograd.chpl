@@ -13,9 +13,9 @@ class BaseTensorResource {
     var gradResource: remote(ndarray(rank,eltType));
     // forwarding resource only to, access, device;
 
-    proc to(device: locale) {
-        dataResource.to(device);
-        gradResource.to(device);
+    proc to(device_: locale) {
+        dataResource.to(device_);
+        gradResource.to(device_);
     }
 
     proc device : locale {
@@ -44,7 +44,7 @@ class BaseTensorResource {
     
 }
 
-var defaultDevice = here;
+var defaultDevice = here.gpus[0];
 
 
 class TensorResource : BaseTensorResource(?) {
@@ -63,9 +63,10 @@ class TensorResource : BaseTensorResource(?) {
         this.operationData = operationData;
     }
 
-    proc init(ref resource: remote(ndarray(?rank,?eltType)), operationData: ?operation, device: locale = defaultDevice) {
-        var dataRes = new remote(resource.access(),device);
-        var gradRes = new remote(new ndarray(dataRes.access().domain),device);
+    proc init(ref resource: remote(ndarray(?rank,?eltType)), operationData: ?operation, device_: locale = defaultDevice) {
+        resource.to(device_);
+        var dataRes = resource;
+        var gradRes = resource.copy();
         super.init(rank,eltType,dataRes,gradRes);
         this.operation = operation;
         this.operationData = operationData;
@@ -78,15 +79,18 @@ class TensorResource : BaseTensorResource(?) {
     //     this.forward();
     // }
 
-    proc init(data: ndarray(?rank,?eltType),operationData: ?operation, device: locale = defaultDevice) {
-        this.init(new remote(data,device),operationData);
+    proc init(data: ndarray(?rank,?eltType),operationData: ?operation, device_: locale = defaultDevice) {
+        var res = data.toRemote();
+        res.to(device_);
+        this.init(res,operationData);
     }
 
     override proc forward() {
         if operationData.type != baseValue {
             on dataResource.device {
-                ref data = dataResource.access();
-                data = operationData.forward();
+                // ref data = dataResource.access().data;
+                // data = operationData.forward();
+                dataResource = operationData.forward();
             }
         }
     }
