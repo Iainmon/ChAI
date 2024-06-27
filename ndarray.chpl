@@ -225,14 +225,14 @@ record ndarray {
     }
 
     proc populateRemote(ref re: remote(ndarray(rank,eltType))): remote(ndarray(rank,eltType)) {
+        on re.device const meData = data;
         if here == re.device {
-            re.access()._domain = this.domain;
-            re.access().data = data;
+            re.access()._domain = meData.domain;
+            re.access().data = meData;
         } else {
-            // on re.device var meData = data;
             on re.device {
-                re.access()._domain = this.domain;
-                re.access().data = data;
+                re.access()._domain = meData.domain;
+                re.access().data = meData;
             }
         }
         return re;
