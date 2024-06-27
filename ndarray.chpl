@@ -231,8 +231,7 @@ record ndarray {
             ref reData = reArr.data;
             const thisDomain = data.domain;
             const me: [thisDomain] eltType = data;
-            reArr.reshapeDomain(me.domain);
-            reData = me;
+            reArr = new ndarray(me);
         }
         return re;
     }
