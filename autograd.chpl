@@ -171,8 +171,9 @@ record addOp {
         ref sumData = sum.data;
         ref aData = a.data;
         ref bData = b.data;
-        foreach i in newDom do
-            sumData[i] = aData[i] + bData[i];
+        // foreach i in newDom do
+        //     sumData[i] = aData[i] + bData[i];
+        sumData = aData + bData;
         return sum;
     }
 
