@@ -95,11 +95,16 @@ if diag {
 
 
 
-var arr1 = new ndarray({0..size,0..size,0..size});
-var arr2 = new ndarray({0..size,0..size,0..size});
+// var arr1 = new ndarray({0..size,0..size,0..size});
+// var arr2 = new ndarray({0..size,0..size,0..size});
 
-var t1 = new tensor(arr1);
-var t2 = new tensor(arr2);
+// var t1 = new tensor(arr1);
+// var t2 = new tensor(arr2);
+
+var t1 = new tensor(3,real);
+var t2 = new tensor(3,real);
+t1.array.reshapeDomain({0..size,0..size,0..size});
+t2.array.reshapeDomain({0..size,0..size,0..size});
 var t3 = t1 + t2;
 // for i in 0..n {
 //     t3 = t3 + t1 + t2;
