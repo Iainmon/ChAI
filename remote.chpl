@@ -71,7 +71,9 @@ record remote {
     proc copy(): remote(eltType) {
         var rem = new remote(eltType,this.device);
         on device {
-            rem.access() = this.access();
+            const data: eltType = remoteResource.item.get();
+            ref reData: eltType = rem.remoteResource.item.get();
+            reData = data;
         }
         return rem;
     }
