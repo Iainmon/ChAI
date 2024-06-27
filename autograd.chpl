@@ -159,8 +159,22 @@ record addOp {
 
     proc children do return (lhs,rhs);
 
-    proc forward() do
-        return new ndarray(lhs.data + rhs.data);
+    // proc forward() do
+    //     return new ndarray(lhs.data + rhs.data);
+    proc forward() {
+        var sum = new ndarray(rank,eltType);
+        const a = lhs.array;
+        const b = rhs.array;
+
+        const newDom = a._domain;
+        sum.reshapeDomain(a._domain);
+        ref sumData = sum.data;
+        ref aData = a.data;
+        ref bData = b.data;
+        foreach i in newDom do
+            sumData[i] = aData[i] + bData[i];
+        return sum;
+    }
 
     proc backward(grad: ndarray(rank,eltType)): (ndarray(rank,eltType),ndarray(rank,eltType)) do
         return (grad,grad);
