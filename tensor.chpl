@@ -101,9 +101,9 @@ var arr2 = new ndarray({0..size,0..size,0..size});
 var t1 = new tensor(arr1);
 var t2 = new tensor(arr2);
 var t3 = t1 + t2;
-for i in 0..n {
-    t3 = t3 + t1 + t2;
-}
+// for i in 0..n {
+//     t3 = t3 + t1 + t2;
+// }
 
 // var input1 = new shared TensorResource(arr1,new baseValue());
 // var input2 = new shared TensorResource(arr2,new baseValue());
