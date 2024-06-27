@@ -47,12 +47,10 @@ proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType) {
 }
 
 
-operator +(ref a: tensor(?rank,?eltType), ref b: tensor(rank,eltType)) {
-    var atr = a.resource;
-    var btr = b.resource;
-    var ctx = new addOp(rank,eltType,atr,btr);
-    var sumtr = new shared TensorResource(rank,eltType,ctx);
-    return new tensor(sumtr, strict = true);
+operator +(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
+    var ctx = new addOp(rank,eltType,a.meta,b.meta);
+    var newMeta = new shared TensorResource(rank,eltType,ctx);
+    return new tensor(newMeta, strict = true);
 }
 
 operator -(ref a: tensor(?rank,?eltType), ref b: tensor(rank,eltType)) {
@@ -83,21 +81,30 @@ proc tensor.permute(axes: int...rank) {
 }
 
 
+config const n = 100;
+config const diag = false;
+config const size = 10;
+
+if diag {
+    use GpuDiagnostics;
+
+    startGpuDiagnostics();
+    startVerboseGpu();
+}
 
 
-use GpuDiagnostics;
-
-startGpuDiagnostics();
-startVerboseGpu();
 
 
-
-var arr1 = new ndarray([1.0, 2.0, 3.0]);
-var arr2 = new ndarray([2.0, 8.0, -10.0]);
+var arr1 = new ndarray({0..size,0..size,0..size});
+var arr2 = new ndarray({0..size,0..size,0..size});
 
 var t1 = new tensor(arr1);
 var t2 = new tensor(arr2);
-var t3 = t1 + t2; 
+var t3 = t1 + t2;
+for i in 0..n {
+    t3 = t3 + t1 + t2;
+}
+
 // var input1 = new shared TensorResource(arr1,new baseValue());
 // var input2 = new shared TensorResource(arr2,new baseValue());
 // var sum = new shared TensorResource(1,real(64), new addOp(1,real,input1,input2));
