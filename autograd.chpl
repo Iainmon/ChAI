@@ -44,8 +44,6 @@ class BaseTensorResource {
     
 }
 
-var defaultDevice = here.gpus[0];
-
 
 class TensorResource : BaseTensorResource(?) {
     type operation;

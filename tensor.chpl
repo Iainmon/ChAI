@@ -97,7 +97,7 @@ var arr2 = new ndarray([2.0, 8.0, -10.0]);
 
 var t1 = new tensor(arr1);
 var t2 = new tensor(arr2);
-var t3 = t1 + t2;
+var t3 = t1 + t2; 
 // var input1 = new shared TensorResource(arr1,new baseValue());
 // var input2 = new shared TensorResource(arr2,new baseValue());
 // var sum = new shared TensorResource(1,real(64), new addOp(1,real,input1,input2));

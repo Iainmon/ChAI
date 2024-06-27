@@ -2,7 +2,8 @@ use ChapelRemoteVars;
 
 config const debug = true;
 
-var defaultDevice = here.gpus[0];
+var defaultDevice = if here.gpus.size >= 1 then here.gpus[0] else here;
+
 
 class Remote {
     type eltType;
