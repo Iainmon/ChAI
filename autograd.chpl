@@ -163,8 +163,8 @@ record addOp {
     //     return new ndarray(lhs.data + rhs.data);
     proc forward() {
         var sum = new ndarray(rank,eltType);
-        const a = lhs.array;
-        const b = rhs.array;
+        ref a = lhs.array;
+        ref b = rhs.array;
 
         const newDom = a._domain;
         sum.reshapeDomain(a._domain);
