@@ -88,6 +88,17 @@ record remote {
         return this.remoteResource.item.get();
     }
 
+    proc localAccess() ref do return this.remoteResource.item.get();
+
+    proc download(): eltType {
+        var it: eltType;
+        on this.device {
+            const it_: eltType = this.remoteResource.item.get();
+            it = it_;
+        }
+        return it;
+    }
+
     proc ref unload(): eltType {
         return this.remoteResource.get();
     }

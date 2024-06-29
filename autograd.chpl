@@ -89,7 +89,11 @@ class TensorResource : BaseTensorResource(?) {
                 // ref data = dataResource.access().data;
                 // data = operationData.forward();
                 dataResource = operationData.forward();
+                if gradResource.access().data.size == 0 {
+                    gradResource.access().reshapeDomain(dataResource.access().domain);
+                }
             }
+
         }
     }
 
@@ -101,11 +105,13 @@ class TensorResource : BaseTensorResource(?) {
         grad.to(device);
         on device {
             ref myGradData = gradResource.access().data;
-            const gArr = gradResource.access();
+            ref gArrRef = grad.localAccess();
+            // const gArrRef = g;
             if !alreadyPopulated {
-                ref gData = gArr.data;
+                ref gData = gArrRef.data;
                 myGradData += gData; // This is likely to fail if there is a shape mismatch.
             }
+            ref gArr = gradResource.localAccess();
             const childGrads = operationData.backward(gArr);
             for param i in 0..<childrenRefs.size do
                 childrenRefs(i).grad = childGrads(i);
@@ -117,7 +123,10 @@ class TensorResource : BaseTensorResource(?) {
 
     override proc backward() where rank == 1 {
         if array.shape.size == 1 {
-            backward(dataResource);
+            on gradResource.device {
+                gradResource.access().data = 1.0;
+            }
+            backward(gradResource,alreadyPopulated = true);
         } else {
             halt("Trying to default backpropagate tensor of higher shape than 1.");
         }
@@ -208,8 +217,18 @@ record multOp {
         ref G = grad.data;
         ref A = lhs.data;
         ref B = rhs.data;
-
-        return (new ndarray(B * G),new ndarray(A * G));
+        const gDom = grad.domain;
+        var AG: ndarray(rank,eltType);
+        AG.reshapeDomain(gDom);
+        var BG: ndarray(rank,eltType);
+        BG.reshapeDomain(gDom);
+        ref AGR = AG.data;
+        ref BGR = BG.data;
+        foreach i in gDom {
+            AGR[i] = B[i] * G[i];
+            BGR[i] = A[i] * G[i];
+        }
+        return (AG,BG);
     }
 }
 
@@ -287,6 +306,16 @@ record sumOp {
 
     // proc init(param rank: int, type eltType, )
 
+    proc outRank param : int {
+        if rank - newRank == 0 {
+            if rank == 1 {
+                return rank;
+            }
+            return 1;
+        }
+        return rank - newRank;
+    }
+
     proc forward() {
         param newDim = rank - newRank;
         if newDim == 0 {
@@ -297,8 +326,26 @@ record sumOp {
         }
         return input.array.sum((...axes)).squeeze(newDim);
     }
-    proc backward(grad): (ndarray(rank,eltType),) {
-        return (input.array,);
+    proc backward(grad: ndarray(outRank,eltType)): (ndarray(rank,eltType),) {
+        const inputShape: rank * int = input.array.data.shape;
+        var unsqueezeShape: rank * int;
+        for param i in 0..<rank {
+            var found = false;
+            for param j in 0..<newRank {
+                if i == axes(j) {
+                    found = true;
+                }
+            }
+            if found {
+                unsqueezeShape(i) = 1;
+            } else {
+                unsqueezeShape(i) = inputShape(i);
+            }
+        }
+        const unsqueezeDom = util.domainFromShape((...unsqueezeShape));
+        var g: ndarray(rank,eltType) = grad.reshape((...unsqueezeShape));
+        g = g.expand((...inputShape));
+        return (g,);
     }
     // proc backward(grad: ndarray(rank - newRank,eltType)): (ndarray(rank,eltType),) {
     //     return (grad.reshape(input.domain),);

@@ -1,5 +1,6 @@
 
 import ChapelArray;
+import IO;
 use remote;
 
 import Utilities as util;
@@ -12,7 +13,7 @@ proc printType(type t) {
     }
 }
 
-record ndarray {
+record ndarray : writeSerializable {
     param rank: int;
     type eltType = real(64);
     var _domain: domain(rank,int) = util.emptyDomain(rank);
@@ -69,46 +70,14 @@ record ndarray {
         this._domain = other._domain;
         this.data = other.data;
     }
+    // proc init=(dom: domain(rank,int)) {
+    //     this._domain = dom;
+    // }
 
 
-
-    // proc ref this(d: _domain.type) ref {
-    //     return data.this(d);
-    // }
-    // proc this(d: _domain.type) const {
-    //     return data.this(d);
-    // }
-    // proc const ref this(d: _domain.type) out {
-    //     const dat = data[d];
-    //     return new ndarray(dat);
-    // }
     proc ref this(args: int...rank) ref {
         return data.this((...args));
     }
-    // proc this(args...rank) out {
-    //     return new ndarray(data[(...args)]);
-    // }
-
-    // proc const this(args...) const ref {
-    //     return data.this((...args));
-    // }
-
-    // pragma "no promotion when by ref"
-    // pragma "reference to const when const this"
-    // pragma "removable array access"
-    // pragma "alias scope from this"
-    // proc ref this(const args...?n) ref do
-    //     return data.this((...args));
-
-    // pragma "alias scope from this"
-    // proc const this(const args...?n) where shouldReturnRvalueByValue(data.eltType) {
-    //     return data.this((...args));
-    // }
-
-    // pragma "alias scope from this"
-    // proc const this(const args...?n) const ref {
-    //     return data.this((...args));
-    // }
 
     proc ref setData(arr: [] eltType) where arr.rank == rank do
         if arr.domain == _domain { data = arr; } else { this = arr; }
@@ -136,9 +105,11 @@ record ndarray {
     // This can optimized such that it doesn't use two heavy utility functions...
     proc reshape(newShape: int ...?newRank): ndarray(newRank,eltType) {
         const dom = util.domainFromShape((...newShape));
-        var arr = new ndarray(dom,eltType);
-        writeln(newShape,dom,data.domain);
-        arr.data = foreach (_,a) in zip(dom,data) do a;
+        var arr: ndarray(newRank,eltType);
+        arr.reshapeDomain(dom);
+        ref arrData = arr.data;
+        foreach (i,a) in zip(dom,data) do 
+            arrData[i] = a;
         return arr;
     }
 
@@ -200,7 +171,12 @@ record ndarray {
         ref expandedData = expanded.data;
 
         foreach idx in expandedData.domain {
-            var origIdx = idx;
+            var origIdx: rank * int;
+            if idx.type == int {
+                origIdx(0) = idx;
+            } else {
+                origIdx = idx;
+            }
             for param i in 0..<rank {
                 if oldShape(i) == 1 then origIdx(i) = 0;
             }
@@ -211,7 +187,7 @@ record ndarray {
     }
 
 
-    proc sumOneAxis(axis: int): ndarray(rank,eltType) {
+    proc ref sumOneAxis(axis: int): ndarray(rank,eltType) {
         const dims = this.domain.dims();
         const sumAxis = dims(axis);
         var newDims = dims;
@@ -305,6 +281,9 @@ record ndarray {
         this.populateRemote(re);
         return re;
     }
+
+
+    
 }
 
 
@@ -358,6 +337,50 @@ operator =(ref lhs: remote(ndarray(?rank,?eltType)), rhs:remote( ndarray(rank,el
 }
 
 
+// proc ndarray.serialize(writer: IO.fileWriter(locking=false, ?),ref serializer: ?st) {
+
+// }
+
+
+proc ndarray.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer) {
+    // const name = "ndarray(" + rank:string + "," + eltType:string + ")";
+    // var ser = serializer.startRecord(writer,name,2);
+    // ser.writeField("shape",this.data.shape);
+    // // var serArr = ser.startArray();
+    // ser.writeField("data",this.data);
+    // ser.endRecord();
+
+    writer.write("ndarray(");
+    const shape = this.data.shape;
+    var first: bool = true;
+    for (x,i) in zip(data,0..) {
+        const idx = util.nbase(shape,i);
+        if idx[rank - 1] == 0 {
+            if !first {
+                writer.write("\n        ");
+                // writer.write("  ");
+            }
+            writer.write("[");
+        }
+        writer.writef("%{##.#}",x);
+        
+        if idx[rank - 1] < shape[rank - 1] - 1 {
+            if rank == 1 then
+                writer.write("  ");
+            else
+                writer.write("  ");
+        } else {
+            writer.write("]");
+        }
+        first = false;
+    }
+    writer.write(",\n        shape = ",this.data.shape);
+    writer.write(",\n        rank = ",this.rank);
+    writer.writeln(")");
+    // writer.writeln(", shape=",this.data.shape,", rank=",this.rank,")");
+
+}
+
 class _tensor_resource {
     param rank: int;
     type eltType = real(64);
@@ -365,6 +388,7 @@ class _tensor_resource {
 
 
 }
+
 
 // const dom = util.emptyDomain(2);
 // writeln(dom);

@@ -3,6 +3,7 @@
 use ndarray;
 use remote;
 use autograd;
+import Utilities as util;
 
 
 
@@ -12,8 +13,7 @@ use autograd;
 
 
 
-
-record tensor {
+record tensor : writeSerializable {
     param rank: int;
     type eltType = real(64);
     var resource: shared BaseTensorResource(?);
@@ -41,7 +41,7 @@ record tensor {
     }
 }
 
-proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType) {
+proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType,?) {
     var newMeta = new shared TensorResource(rank,eltType,ctx);
     return new tensor(newMeta, strict = true);
 }
@@ -95,6 +95,13 @@ proc tensor.sum(axes: int...?r) {
     return tensorFromCtx(newDim,eltType,ctx);
 }
 
+proc arange(to: int,type eltType = real(64),shape: ?rank*int): ndarray(rank,eltType) {
+    const dom = util.domainFromShape((...shape));
+    const A: [dom] eltType = foreach (_,x) in zip(dom,0..<to) do x:eltType;
+    const arr: ndarray(rank,eltType) = A;
+    return arr;
+}
+
 
 config const n = 100;
 config const diag = false;
@@ -121,10 +128,10 @@ var t2 = new tensor(3,real);
 t1.array.reshapeDomain({0..size,0..size,0..size});
 t2.array.reshapeDomain({0..size,0..size,0..size});
 var t3 = t1 + t2;
-writeln(t3.array.data);
+writeln(t3.array);
 
 var t4 = t3.sum(0,1);
-writeln(t4.array.data);
+writeln(t4.array);
 
 writeln("-----------------------------");
 
@@ -135,28 +142,37 @@ for (i,n) in zip(t.array.domain,0..<15) do
 writeln(t.array.data,"\n -------------- ");
 
 var u = t.sum(0);
-writeln(u.array.data);
+writeln(u.array);
 
 var w = u.sum(0);
-writeln(w.array.data);
+writeln(w.array);
 
 var x = t.sum(1).sum(0);
-writeln(x.array.data);
+writeln(x.array);
 
 var y = (t + t).sum(0,1);
-writeln(y.array.data);
-writeln(y.rank);
+writeln(y);
+writeln(y);
 
 
-writeln(t.grad.data);
-
-y.resource.backward();
-
-writeln(t.grad.data);
+writeln(t.grad);
 
 y.resource.backward();
-writeln(t.grad.data);
 
+writeln(t.grad);
+
+y.resource.backward();
+writeln(t);
+
+var z = arange(15,real,(3,5));
+writeln(z);
+
+var T = new tensor(z);
+
+var s = (T * T).sum(0,1);
+writeln(s);
+s.resource.backward();
+writeln(T.grad);
 
 // var X = X.expand();
 // for i in 0..n {
@@ -213,3 +229,47 @@ writeln(t.grad.data);
 
 
 
+
+
+
+
+
+
+
+import IO;
+proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer) {
+    // const name = "ndarray(" + rank:string + "," + eltType:string + ")";
+    // var ser = serializer.startRecord(writer,name,2);
+    // ser.writeField("shape",this.data.shape);
+    // // var serArr = ser.startArray();
+    // ser.writeField("data",this.data);
+    // ser.endRecord();
+
+
+    writer.write("tensor(");
+    const shape = this.array.shape;
+    var first: bool = true;
+    for (x,i) in zip(this.array.data,0..) {
+        const idx = util.nbase(shape,i);
+        if idx[rank - 1] == 0 {
+            if !first {
+                writer.write("\n       ");
+            }
+            writer.write("[");
+        }
+        writer.writef("%{##.#}",x);
+        
+        if idx[rank - 1] < shape[rank - 1] - 1 {
+            if rank == 1 then
+                writer.write("  ");
+            else
+                writer.write("  ");
+        } else {
+            writer.write("]");
+        }
+        first = false;
+    }
+    writer.write(",\n       shape = ",this.array.data.shape);
+    writer.write(",\n       rank = ",this.rank);
+    writer.writeln(")");
+}
