@@ -116,15 +116,18 @@ record ndarray {
     proc ref reshapeDomain(dom: _domain.type) do
         _domain = dom;
 
-    proc reshape(dom: domain): ndarray(dom.rank,eltType) where dom.idxType == int {
+    proc reshape(dom: domain(?)): ndarray(dom.rank,eltType) where dom.idxType == int {
         param _rank: int = dom.rank;
-        const normalDomain = util.normalizeDomain(dom);
         if rank == _rank {
-            var me = new ndarray(this);
+            const normalDomain = util.normalizeDomain(dom);
+            var me: ndarray(rank,eltType);
+            me = this;
             me.reshapeDomain(normalDomain);
             return me;
         } else {
-            var arr = new ndarray(normalDomain,eltType);
+            const normalDomain = util.normalizeDomain(dom);
+            var arr: ndarray(_rank,eltType);
+            arr.reshapeDomain(normalDomain);
             arr.data = foreach (_,a) in zip(normalDomain,data) do a;
             return arr;
         }
@@ -133,7 +136,10 @@ record ndarray {
     // This can optimized such that it doesn't use two heavy utility functions...
     proc reshape(newShape: int ...?newRank): ndarray(newRank,eltType) {
         const dom = util.domainFromShape((...newShape));
-        return this.reshape(dom);
+        var arr = new ndarray(dom,eltType);
+        writeln(newShape,dom,data.domain);
+        arr.data = foreach (_,a) in zip(dom,data) do a;
+        return arr;
     }
 
     proc slice(args...) {
@@ -204,24 +210,84 @@ record ndarray {
         return expanded;
     }
 
-    proc sum(withAxesMask: rank*int): ndarray(rank,eltType) {
-        return this;
+
+    proc sumOneAxis(axis: int): ndarray(rank,eltType) {
+        const dims = this.domain.dims();
+        const sumAxis = dims(axis);
+        var newDims = dims;
+        newDims(axis) = 0..<1;
+
+        const newDomain = {(...newDims)};
+        var S = new ndarray(newDomain,eltType);
+        ref B = S.data;
+        ref A = data;
+        foreach idx in newDomain {
+            var origIdx: newDomain.rank * int;
+            if idx.type == int {
+                origIdx(0) = idx;
+            } else {
+                origIdx = idx;
+            }
+
+            var sum: real = 0;
+            for i in sumAxis {
+                origIdx(axis) = i;
+                
+                sum += A[origIdx];
+            }
+            B[idx] = sum;
+        }
+        return S;
+    }
+
+    proc sumAxesMask(withAxesMask: rank*int): ndarray(rank,eltType) {
+        var acc: ndarray(rank,eltType) = this;
+        for param i in 0..<rank {
+            if withAxesMask(i) == 1 {
+                acc = acc.sumOneAxis(i);
+            }
+        }
+        return acc;
+    }
+
+    proc sum(axes: int...?axesCount): ndarray(rank,eltType) {
+        var acc: ndarray(rank,eltType) = this;
+        for param i in 0..<axesCount {
+            acc = acc.sumOneAxis(axes(i));
+        }
+        return acc;
     }
 
     proc squeeze(param newRank: int): ndarray(newRank,eltType) where newRank < rank {
         // I think this will work: (a member of the chapel team needs to review this) 
         // I suspect heavy performance hits will happen when running this on CUDA. 
+        if newRank == 1 {
+            var me = new ndarray(1,eltType);
+            const s = data.size;
+            me.reshapeDomain({0..<s});
+            me.data = foreach (_,a) in zip(me.domain,data) do a;
+            // var j = 0;
+            // for i in data.domain {
+            //     me[j] = data[i];
+            //     j += 1;
+            // }
+            return me;
+        }
         const oldShape = this.shape;
         var newShape: newRank*int;
         var offset: int = 0;
         for param i in 0..<rank {
-            if oldShape(i + offset) == 1 {
+            if oldShape(i) == 1 {
                 offset -= 1;
             } else {
-                newShape(i) = oldShape(i + offset);
+                newShape(i + offset) = oldShape(i);
             }
         }
-        return this.reshape((...newShape));
+        const dom = util.domainFromShape((...newShape));
+        var me = new ndarray(dom,eltType);
+        me.reshapeDomain(dom);
+        me.data = foreach (_,a) in zip(dom,data) do a;
+        return me;
     }
 
     proc populateRemote(ref re: remote(ndarray(rank,eltType))): remote(ndarray(rank,eltType)) {

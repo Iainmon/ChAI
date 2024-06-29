@@ -100,12 +100,13 @@ class TensorResource : BaseTensorResource(?) {
 
         grad.to(device);
         on device {
-            ref myGradData = gradData;
+            ref myGradData = gradResource.access().data;
+            const gArr = gradResource.access();
             if !alreadyPopulated {
-                ref gData = grad.access().data;
+                ref gData = gArr.data;
                 myGradData += gData; // This is likely to fail if there is a shape mismatch.
             }
-            const childGrads = operationData.backward(gradData.access());
+            const childGrads = operationData.backward(gArr);
             for param i in 0..<childrenRefs.size do
                 childrenRefs(i).grad = childGrads(i);
         }
@@ -115,7 +116,7 @@ class TensorResource : BaseTensorResource(?) {
     }
 
     override proc backward() where rank == 1 {
-        if array.shape == (1,) {
+        if array.shape.size == 1 {
             backward(dataResource);
         } else {
             halt("Trying to default backpropagate tensor of higher shape than 1.");
@@ -161,7 +162,7 @@ record addOp {
 
     // proc forward() do
     //     return new ndarray(lhs.data + rhs.data);
-    proc forward() {
+    proc forward(): ndarray(rank,eltType) {
         var sum = new ndarray(rank,eltType);
         ref a = lhs.array;
         ref b = rhs.array;
@@ -268,9 +269,40 @@ record expandOp {
         for param i in 0..<rank {
             expandedAxesMask(i) = if expandedShape != inputShape then 1 else 0;
         }
-        const g = grad.sum(withMask=expandedAxesMask).squeeze();
+        const g = grad.sumAxesMask(withMask=expandedAxesMask).squeeze(rank);
         return (g,);
     } 
+
+
+}
+
+record sumOp {
+    param rank: int;
+    type eltType = real;
+    param newRank: int;
+    var axes: newRank * int; // tuple of ints
+    var input: shared BaseTensorResource(rank,eltType);
+
+    proc children do return (input,);
+
+    // proc init(param rank: int, type eltType, )
+
+    proc forward() {
+        param newDim = rank - newRank;
+        if newDim == 0 {
+            if rank == 1 {
+                return input.array.sum(0);
+            }
+            return input.array.sum((...axes)).squeeze(1);
+        }
+        return input.array.sum((...axes)).squeeze(newDim);
+    }
+    proc backward(grad): (ndarray(rank,eltType),) {
+        return (input.array,);
+    }
+    // proc backward(grad: ndarray(rank - newRank,eltType)): (ndarray(rank,eltType),) {
+    //     return (grad.reshape(input.domain),);
+    // } 
 
 
 }

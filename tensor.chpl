@@ -80,10 +80,25 @@ proc tensor.permute(axes: int...rank) {
     return tensorFromCtx(rank,eltType,ctx);
 }
 
+proc tensor.expand(axes: int...rank) {
+    var ctx = new expandOp(rank,eltType,axes,meta);
+    return tensorFromCtx(rank,eltType,ctx);
+}
+
+proc tensor.sum(axes: int...?r) {
+    if rank - r < 0 {
+        compilerError("Cannot sum more axes than rank. ");
+    }
+    var ctx = new sumOp(rank,eltType,r,axes,meta);
+
+    param newDim = if rank - r == 0 then 1 else rank - r;
+    return tensorFromCtx(newDim,eltType,ctx);
+}
+
 
 config const n = 100;
 config const diag = false;
-config const size = 10;
+config const size = 3;
 
 if diag {
     use GpuDiagnostics;
@@ -106,9 +121,49 @@ var t2 = new tensor(3,real);
 t1.array.reshapeDomain({0..size,0..size,0..size});
 t2.array.reshapeDomain({0..size,0..size,0..size});
 var t3 = t1 + t2;
+writeln(t3.array.data);
+
+var t4 = t3.sum(0,1);
+writeln(t4.array.data);
+
+writeln("-----------------------------");
+
+var t = new tensor(2,real);
+t.array.reshapeDomain({0..<3,0..<5});
+for (i,n) in zip(t.array.domain,0..<15) do
+    t.array.data[i] = n;
+writeln(t.array.data,"\n -------------- ");
+
+var u = t.sum(0);
+writeln(u.array.data);
+
+var w = u.sum(0);
+writeln(w.array.data);
+
+var x = t.sum(1).sum(0);
+writeln(x.array.data);
+
+var y = (t + t).sum(0,1);
+writeln(y.array.data);
+writeln(y.rank);
+
+
+writeln(t.grad.data);
+
+y.resource.backward();
+
+writeln(t.grad.data);
+
+y.resource.backward();
+writeln(t.grad.data);
+
+
+// var X = X.expand();
 // for i in 0..n {
 //     t3 = t3 + t1 + t2;
 // }
+
+
 
 // var input1 = new shared TensorResource(arr1,new baseValue());
 // var input2 = new shared TensorResource(arr2,new baseValue());
