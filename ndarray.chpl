@@ -51,20 +51,34 @@ record ndarray : writeSerializable {
         }
     }
 
+    proc init(arr: [] ?eltType, param isNormal: bool) {
+        this.rank = arr.rank;
+        this.eltType = eltType;
+        this._domain = arr.domain;
+        this.data = arr;
+    }
+
     proc init(A: ndarray(?rank,?eltType)) {
         this.init(rank,eltType);
         this._domain = A._domain;
         this.data = A.data;
     }
 
-    proc init(unknown: ?t) where !isDomainType(t) {
-        const arr = unknown;
-        const normalArr = util.normalizeArray(arr);
-        this.init(normalArr);
+    proc init(it: _iteratorRecord) {
+        const arr = it;
+        this.init(arr,isNormal = true);
     }
 
-    proc init=(other: [] ?eltType) do
-        this.init(other);
+    // proc init(unknown: ?t) where !isDomainType(t) {
+    //     const arr = unknown;
+    //     const normalArr = util.normalizeArray(arr);
+    //     this.init(normalArr);
+    // }
+
+    proc init=(other: [] ?eltType) {
+        // this.init(other); // less efficient
+        this.init(other,isNormal = true);
+    }
 
     proc init=(other: ndarray(?rank,?eltType)) {
         this.rank = rank;
@@ -72,10 +86,11 @@ record ndarray : writeSerializable {
         this._domain = other._domain;
         this.data = other.data;
     }
-    // proc init=(other: _iteratorRecord) {
-    //     var arr = other;
-    //     this.init(arr);
-    // }
+
+    proc init=(other: _iteratorRecord) {
+        this.init(other);
+    }
+    
     // proc init=(dom: domain(rank,int)) {
     //     this._domain = dom;
     // }
@@ -305,7 +320,7 @@ operator =(ref lhs: ndarray(?rank,?eltType), rhs: [?d] eltType) where d.rank == 
 }
 
 operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
-    return new ndarray(val);
+    return new ndarray(val, isNormal = true);
 }
 
 // operator =(ref lhs: ndarray(?rank,?eltType), rhs: _iteratorRecord) {

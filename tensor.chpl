@@ -141,8 +141,8 @@ if diag {
 //     var res = t.meta.dataResource;
 // }
 
-// var a = new tensor(arange(15,real,(3,5)));
-// var b = new tensor(arange(15,real,(3,5)));
+var at = new tensor(arange(15,real,(3,5)));
+var bt = new tensor(arange(15,real,(3,5)));
 // writeln(a.array.data.locale,b.array.data.locale);
 const ar: ndarray(2,real) = arange(15,real,(3,5));
 var a = new remote(ar);
@@ -150,7 +150,8 @@ var b = new remote(ar);
 writeln(a.access().data.locale,b.access().data.locale);
 
 var c = a + b;
-
+writeln(a.access().data.locale,b.access().data.locale);
+var ct = at + bt;
 
 // var arr1 = new ndarray({0..size,0..size,0..size});
 // var arr2 = new ndarray({0..size,0..size,0..size});
