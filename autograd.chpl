@@ -80,7 +80,7 @@ class TensorResource : BaseTensorResource(?) {
     proc init(data: ndarray(?rank,?eltType),operationData: ?operation, device_: locale = defaultDevice) {
         var res = data.toRemote();
         res.to(device_);
-        this.init(res,operationData);
+        this.init(res,operationData,device_);
     }
 
     override proc forward() {

@@ -13,7 +13,7 @@ class Remote {
     proc init(item: ?eltType,device: locale = defaultDevice) {
         this.eltType = eltType;
         this.device = device;
-        this.item = chpl__buildRemoteWrapper(device,item);
+        this.item = chpl__buildRemoteWrapper(device,eltType,item);
     }
 
     proc init(type eltType,device: locale = defaultDevice) {

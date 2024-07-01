@@ -13,6 +13,8 @@ proc printType(type t) {
     }
 }
 
+type remote_ndarray = remote(ndarray(?,?));
+
 record ndarray : writeSerializable {
     param rank: int;
     type eltType = real(64);
@@ -70,6 +72,10 @@ record ndarray : writeSerializable {
         this._domain = other._domain;
         this.data = other.data;
     }
+    // proc init=(other: _iteratorRecord) {
+    //     var arr = other;
+    //     this.init(arr);
+    // }
     // proc init=(dom: domain(rank,int)) {
     //     this._domain = dom;
     // }
@@ -302,7 +308,18 @@ operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
     return new ndarray(val);
 }
 
-proc remote.init(ref other: ndarray(?rank,?eltType)) {
+// operator =(ref lhs: ndarray(?rank,?eltType), rhs: _iteratorRecord) {
+//     var arr = rhs;
+//     lhs._domain = arr.domain;
+//     lhs.data = arr;
+// }
+
+// operator :(val: _iteratorRecord, type t: ndarray(?rank,?eltType)) {
+//     return new ndarray(val);
+// }
+
+// This bunch is problematic.
+proc remote.init(other: ndarray(?rank,?eltType)) {
     this.init(ndarray(rank,eltType));
     other.populateRemote(this);
 }
@@ -335,6 +352,41 @@ proc remote.init=(ref other: remote(ndarray(?rank,?eltType))) {
 operator =(ref lhs: remote(ndarray(?rank,?eltType)), rhs:remote( ndarray(rank,eltType))) {
     lhs.remoteResource = rhs.remoteResource;
 }
+
+proc zipArr(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType),f): ndarray(rank,eltType) {
+    const dom = a.domain;
+    var c: ndarray(rank,eltType);
+    c.reshapeDomain(dom);
+    ref cData = c.data;
+    foreach i in dom do
+        cData[i] = f(a.data[i],b.data[i]);
+    return c;
+}
+
+operator +(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,eltType) {
+    const dom = a.domain;
+    var c: ndarray(rank,eltType);
+    c.reshapeDomain(dom);
+    ref cData = c.data;
+    foreach i in dom do
+        cData[i] = a.data[i] + b.data[i];
+    return c;
+}
+
+operator +(a: remote(ndarray(?rank,?eltType)),b: remote(ndarray(rank,eltType))): remote(ndarray(rank,eltType)) {
+    const device = a.device;
+    var c = new remote(ndarray(rank,eltType),device);
+    on device {
+        ref A = a.localAccess();
+        ref B = b.localAccess();
+        ref C = c.localAccess();
+        C = a.localAccess() + b.localAccess();
+    }
+    return c;
+}
+
+
+
 
 
 // proc ndarray.serialize(writer: IO.fileWriter(locking=false, ?),ref serializer: ?st) {

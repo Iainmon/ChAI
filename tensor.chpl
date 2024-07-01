@@ -114,7 +114,42 @@ if diag {
     startVerboseGpu();
 }
 
+// arange(15,real,(3,5));
 
+// var t = new tensor(2,real);
+// t.array.reshapeDomain({0..<3,0..<5});
+// t.to(here.gpus[0]);
+// on t.device {
+//     ref tarr = t.array;
+//     ref tdata = tarr.data;
+//     // tdata += 1.0;
+//     // foreach i in tdata.domain do
+//     //     tdata[i] = tdata[i] + 1.0;
+//     // tdata = foreach x in tdata do x + 1.0; // causes grained kernel launches 
+//     foreach i in tarr.data.domain do
+//         tdata[i] = tarr.data[i] + 1.0;
+// }
+
+// const ar = arange(15,real,(3,5));
+// var t = new tensor(ar);
+// t.to(here.gpus[0]);
+// // writeln(ar.data.locale);
+// // writeln(t.array.data.locale);
+// on t.device {
+//     ref tarr = t.array;
+//     ref tData = tarr.data;
+//     var res = t.meta.dataResource;
+// }
+
+// var a = new tensor(arange(15,real,(3,5)));
+// var b = new tensor(arange(15,real,(3,5)));
+// writeln(a.array.data.locale,b.array.data.locale);
+const ar: ndarray(2,real) = arange(15,real,(3,5));
+var a = new remote(ar);
+var b = new remote(ar);
+writeln(a.access().data.locale,b.access().data.locale);
+
+var c = a + b;
 
 
 // var arr1 = new ndarray({0..size,0..size,0..size});
@@ -123,56 +158,56 @@ if diag {
 // var t1 = new tensor(arr1);
 // var t2 = new tensor(arr2);
 
-var t1 = new tensor(3,real);
-var t2 = new tensor(3,real);
-t1.array.reshapeDomain({0..size,0..size,0..size});
-t2.array.reshapeDomain({0..size,0..size,0..size});
-var t3 = t1 + t2;
-writeln(t3.array);
+// var t1 = new tensor(3,real);
+// var t2 = new tensor(3,real);
+// t1.array.reshapeDomain({0..size,0..size,0..size});
+// t2.array.reshapeDomain({0..size,0..size,0..size});
+// var t3 = t1 + t2;
+// writeln(t3.array);
 
-var t4 = t3.sum(0,1);
-writeln(t4.array);
+// var t4 = t3.sum(0,1);
+// writeln(t4.array);
 
-writeln("-----------------------------");
+// writeln("-----------------------------");
 
-var t = new tensor(2,real);
-t.array.reshapeDomain({0..<3,0..<5});
-for (i,n) in zip(t.array.domain,0..<15) do
-    t.array.data[i] = n;
-writeln(t.array.data,"\n -------------- ");
+// var t = new tensor(2,real);
+// t.array.reshapeDomain({0..<3,0..<5});
+// for (i,n) in zip(t.array.domain,0..<15) do
+//     t.array.data[i] = n;
+// writeln(t.array.data,"\n -------------- ");
 
-var u = t.sum(0);
-writeln(u.array);
+// var u = t.sum(0);
+// writeln(u.array);
 
-var w = u.sum(0);
-writeln(w.array);
+// var w = u.sum(0);
+// writeln(w.array);
 
-var x = t.sum(1).sum(0);
-writeln(x.array);
+// var x = t.sum(1).sum(0);
+// writeln(x.array);
 
-var y = (t + t).sum(0,1);
-writeln(y);
-writeln(y);
+// var y = (t + t).sum(0,1);
+// writeln(y);
+// writeln(y);
 
 
-writeln(t.grad);
+// writeln(t.grad);
 
-y.resource.backward();
+// y.resource.backward();
 
-writeln(t.grad);
+// writeln(t.grad);
 
-y.resource.backward();
-writeln(t);
+// y.resource.backward();
+// writeln(t);
 
-var z = arange(15,real,(3,5));
-writeln(z);
+// var z = arange(15,real,(3,5));
+// writeln(z);
 
-var T = new tensor(z);
+// var T = new tensor(z);
 
-var s = (T * T).sum(0,1);
-writeln(s);
-s.resource.backward();
-writeln(T.grad);
+// var s = (T * T).sum(0,1);
+// writeln(s);
+// s.resource.backward();
+// writeln(T.grad);
 
 // var X = X.expand();
 // for i in 0..n {
