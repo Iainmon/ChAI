@@ -106,31 +106,30 @@ record ndarray : writeSerializable {
     proc ref reshapeDomain(dom: _domain.type) do
         _domain = dom;
 
-    proc reshape(dom: domain(?)): ndarray(dom.rank,eltType) where dom.idxType == int {
-        param _rank: int = dom.rank;
-        if rank == _rank {
-            const normalDomain = util.normalizeDomain(dom);
-            var me: ndarray(rank,eltType);
-            me = this;
-            me.reshapeDomain(normalDomain);
-            return me;
-        } else {
-            const normalDomain = util.normalizeDomain(dom);
-            var arr: ndarray(_rank,eltType);
-            arr.reshapeDomain(normalDomain);
-            arr.data = foreach (_,a) in zip(normalDomain,data) do a;
-            return arr;
-        }
+    proc reshape(dom: domain(?)): ndarray(rank,eltType) where dom.rank == rank {
+        const normalDomain = util.normalizeDomain(dom);
+        var me: ndarray(rank,eltType);
+        me = this;
+        me.reshapeDomain(normalDomain);
+        return me;
     }
+    proc reshape(dom: domain(?)): ndarray(dom.rank,eltType) where dom.rank != rank {
+        param _rank: int = dom.rank;
+        const normalDomain = util.normalizeDomain(dom);
+        var arr: ndarray(_rank,eltType);
+        arr.reshapeDomain(normalDomain);
+        arr.data = foreach (_,a) in zip(normalDomain,data) do a;
+        return arr;
+    }
+
 
     // This can optimized such that it doesn't use two heavy utility functions...
     proc reshape(newShape: int ...?newRank): ndarray(newRank,eltType) {
-        const dom = util.domainFromShape((...newShape));
+        const normalDomain = util.domainFromShape((...newShape));
         var arr: ndarray(newRank,eltType);
-        arr.reshapeDomain(dom);
+        arr.reshapeDomain(normalDomain);
         ref arrData = arr.data;
-        foreach (i,a) in zip(dom,data) do 
-            arrData[i] = a;
+        arr.data = foreach (_,a) in zip(normalDomain,data) do a;
         return arr;
     }
 
@@ -183,7 +182,8 @@ record ndarray : writeSerializable {
                 newRanges(i) = oldRanges(i);
             }
         }
-        const dom = util.domainFromShape((...axes));
+        // const dom = util.domainFromShape((...axes));
+        const dom = {(...newRanges)};
         var expanded = new ndarray(dom,eltType);
 
         const oldShape = shape;
@@ -249,8 +249,9 @@ record ndarray : writeSerializable {
 
     proc sum(axes: int...?axesCount): ndarray(rank,eltType) {
         var acc: ndarray(rank,eltType) = this;
+        // var offset = 0;
         for param i in 0..<axesCount {
-            acc = acc.sumOneAxis(axes(i));
+            acc = acc.sumOneAxis(axes(i) - i);
         }
         return acc;
     }
@@ -385,6 +386,16 @@ operator +(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
     ref cData = c.data;
     foreach i in dom do
         cData[i] = a.data[i] + b.data[i];
+    return c;
+}
+
+operator *(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,eltType) {
+    const dom = a.domain;
+    var c: ndarray(rank,eltType);
+    c.reshapeDomain(dom);
+    ref cData = c.data;
+    foreach i in dom do
+        cData[i] = a.data[i] * b.data[i];
     return c;
 }
 

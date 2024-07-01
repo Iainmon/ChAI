@@ -16,8 +16,8 @@ import Utilities as util;
 record tensor : writeSerializable {
     param rank: int;
     type eltType = real(64);
-    var resource: shared BaseTensorResource(?);
-    forwarding resource only to, array, grad, device;
+    var resource: shared BaseTensorResource(rank,eltType);
+    forwarding resource only to, array, grad, device, backward;
 
     proc meta do return this.resource;
 
@@ -39,9 +39,21 @@ record tensor : writeSerializable {
         this.eltType = eltType;
         this.resource = new shared TensorResource(nda,new baseValue());
     }
+
+    proc init(dom: domain(?),type eltType = real) {
+        const normal = util.normalizeDomain(dom);
+        this.rank = dom.rank;
+        this.eltType = eltType;
+        this.resource = new shared TensorResource(rank,eltType,baseValue);
+        init this;
+        on this.device {
+            this.array.reshapeDomain(normal);
+            this.grad.reshapeDomain(normal);
+        }
+    }
 }
 
-proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType,?) {
+proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType) {
     var newMeta = new shared TensorResource(rank,eltType,ctx);
     return new tensor(newMeta, strict = true);
 }
@@ -59,14 +71,18 @@ operator -(ref a: tensor(?rank,?eltType), ref b: tensor(rank,eltType)) {
     return new tensor(newMeta, strict = true);
 }
 
-operator *(ref a: tensor(?rank,?eltType), ref b: tensor(rank,eltType)) {
+operator *(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
     var ctx = new multOp(rank,eltType,a.meta,b.meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.reshape(dom: domain(?)) where dom.idxType == int {
+proc tensor.reshape(dom: domain) {
     param newRank = dom.rank;
-    var ctx = new reshapeOp(dom,meta);
+    var ctx = new reshapeOp(rank,newRank,eltType,dom.shape,meta);
+    return tensorFromCtx(newRank,eltType,ctx);
+}
+proc tensor.reshape(newShape: int ...?newRank) {
+    var ctx = new reshapeOp(rank,newRank,eltType,newShape,meta);
     return tensorFromCtx(newRank,eltType,ctx);
 }
 
@@ -102,6 +118,16 @@ proc arange(to: int,type eltType = real(64),shape: ?rank*int): ndarray(rank,eltT
     return arr;
 }
 
+proc matmul(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
+    const (n,) = vec.array.domain.shape;
+    const (m,_n) = mat.array.domain.shape;
+    if n != _n then halt("arrays must be same shape" + n : string + " " + _n : string);
+    var vec_ = vec.reshape(1,n);
+    var v = vec_.expand(m,n);
+    var Mv = mat * v;
+    return Mv.sum(1);
+}
+
 
 config const n = 100;
 config const diag = false;
@@ -116,19 +142,47 @@ if diag {
 
 // arange(15,real,(3,5));
 
-// var t = new tensor(2,real);
-// t.array.reshapeDomain({0..<3,0..<5});
-// t.to(here.gpus[0]);
-// on t.device {
-//     ref tarr = t.array;
-//     ref tdata = tarr.data;
-//     // tdata += 1.0;
-//     // foreach i in tdata.domain do
-//     //     tdata[i] = tdata[i] + 1.0;
-//     // tdata = foreach x in tdata do x + 1.0; // causes grained kernel launches 
-//     foreach i in tarr.data.domain do
-//         tdata[i] = tarr.data[i] + 1.0;
-// }
+var t = new tensor(2,real);
+t.array.reshapeDomain({0..<3,0..<5});
+t.to(defaultDevice);
+on t.device {
+    ref tarr = t.array;
+    ref tdata = tarr.data;
+    // tdata += 1.0;
+    // foreach i in tdata.domain do
+    //     tdata[i] = tdata[i] + 1.0;
+    // tdata = foreach x in tdata do x + 1.0; // causes grained kernel launches 
+    foreach i in tarr.data.domain do
+        tdata[i] = tarr.data[i] + 1.0;
+}
+
+var M = new tensor(arange(15,real,(5,3)));
+writeln(M);
+
+var u = new tensor(arange(3,real,(1,3)));
+writeln(u);
+
+var x = u.expand(5,3);
+writeln(x);
+
+var Mx = M * x;
+writeln(Mx);
+
+var y = Mx.sum(1);
+writeln(y);
+
+
+var u_ = new tensor(arange(3,real,(3,)));
+var y_ = matmul(M,u_);
+
+writeln(y_);
+var z = y_.sum(0);
+writeln(z);
+
+z.backward();
+
+
+writeln(M.grad);
 
 // const ar = arange(15,real,(3,5));
 // var t = new tensor(ar);
@@ -141,17 +195,17 @@ if diag {
 //     var res = t.meta.dataResource;
 // }
 
-var at = new tensor(arange(15,real,(3,5)));
-var bt = new tensor(arange(15,real,(3,5)));
-// writeln(a.array.data.locale,b.array.data.locale);
-const ar: ndarray(2,real) = arange(15,real,(3,5));
-var a = new remote(ar);
-var b = new remote(ar);
-writeln(a.access().data.locale,b.access().data.locale);
+// var at = new tensor(arange(15,real,(3,5)));
+// var bt = new tensor(arange(15,real,(3,5)));
+// // writeln(a.array.data.locale,b.array.data.locale);
+// const ar: ndarray(2,real) = arange(15,real,(3,5));
+// var a = new remote(ar);
+// var b = new remote(ar);
+// writeln(a.access().data.locale,b.access().data.locale);
 
-var c = a + b;
-writeln(a.access().data.locale,b.access().data.locale);
-var ct = at + bt;
+// var c = a + b;
+// writeln(a.access().data.locale,b.access().data.locale);
+// var ct = at + bt;
 
 // var arr1 = new ndarray({0..size,0..size,0..size});
 // var arr2 = new ndarray({0..size,0..size,0..size});

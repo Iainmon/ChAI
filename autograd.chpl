@@ -126,6 +126,10 @@ class TensorResource : BaseTensorResource(?) {
             on gradResource.device {
                 gradResource.access().data = 1.0;
             }
+            // var res = gradResource.copy();
+            // on res.device {
+            //     res.access() = new ndarray([1.0]);
+            // }
             backward(gradResource,alreadyPopulated = true);
         } else {
             halt("Trying to default backpropagate tensor of higher shape than 1.");
@@ -211,7 +215,7 @@ record multOp {
     proc children do return (lhs,rhs);
 
     proc forward() do 
-        return new ndarray(lhs.data * rhs.data);
+        return lhs.array * rhs.array;
 
     proc backward(grad: ndarray(rank,eltType)): (ndarray(rank,eltType),ndarray(rank,eltType)) {
         ref G = grad.data;
@@ -234,18 +238,22 @@ record multOp {
 
 
 record reshapeOp {
-    var dom;
-    var input: shared BaseTensorResource(?);
+    param oldRank: int;
+    param newRank: int;
+    type eltType;
+    var shape: newRank * int;
+    var input: shared BaseTensorResource(oldRank,eltType);
 
     proc children do return (input,);
 
 
-    proc forward() do
-        return input.array.reshape(dom);
+    proc forward(): ndarray(newRank,eltType) do
+        return input.array.reshape((...shape));
     
-    proc backward(grad: ndarray(dom.rank,input.eltType)): (ndarray(input.rank,input.eltType),) {
+    proc backward(grad: ndarray(newRank,eltType)): (ndarray(oldRank,eltType),) {
         const inputDom = input.array.domain;
-        return grad.reshape(inputDom);
+        const g = grad.reshape((...inputDom.shape));
+        return (g,);
     }
 }
 
@@ -284,12 +292,18 @@ record expandOp {
     
     proc backward(grad: ndarray(rank,eltType)): (ndarray(rank,eltType),) {
         const inputShape = input.array.shape;
-        var expandedAxesMask: rank*int;
+        // var expandedAxesMask: rank*int;
+        var offset = 0;
+        var g = grad;
         for param i in 0..<rank {
-            expandedAxesMask(i) = if expandedShape != inputShape then 1 else 0;
+            if expandedShape(i) != inputShape(i) {
+                g = g.sum(i);
+                offset += 1;
+            }
         }
-        const g = grad.sumAxesMask(withMask=expandedAxesMask).squeeze(rank);
         return (g,);
+        // const g_ = g.squeeze(rank);
+        // return (g_,);
     } 
 
 
@@ -298,8 +312,8 @@ record expandOp {
 record sumOp {
     param rank: int;
     type eltType = real;
-    param newRank: int;
-    var axes: newRank * int; // tuple of ints
+    param sumRank: int;
+    var axes: sumRank * int; // tuple of ints
     var input: shared BaseTensorResource(rank,eltType);
 
     proc children do return (input,);
@@ -307,17 +321,17 @@ record sumOp {
     // proc init(param rank: int, type eltType, )
 
     proc outRank param : int {
-        if rank - newRank == 0 {
+        if rank - sumRank == 0 {
             if rank == 1 {
                 return rank;
             }
             return 1;
         }
-        return rank - newRank;
+        return rank - sumRank;
     }
 
     proc forward() {
-        param newDim = rank - newRank;
+        param newDim = rank - sumRank;
         if newDim == 0 {
             if rank == 1 {
                 return input.array.sum(0);
@@ -331,7 +345,7 @@ record sumOp {
         var unsqueezeShape: rank * int;
         for param i in 0..<rank {
             var found = false;
-            for param j in 0..<newRank {
+            for param j in 0..<sumRank {
                 if i == axes(j) {
                     found = true;
                 }
@@ -346,6 +360,20 @@ record sumOp {
         var g: ndarray(rank,eltType) = grad.reshape((...unsqueezeShape));
         g = g.expand((...inputShape));
         return (g,);
+        // var oneDims: rank * int;
+        // for param i in 0..<rank {
+        //     // var found = false;
+        //     // for param j in 0..<shape
+        //     oneDims(i) = 1;
+
+        // }
+        // var g = grad.reshape((...oneDims));
+        // writeln("hello", grad);
+        // writeln("hello1",g);
+        // var g_ = g.expand((...input.array.shape));
+        // writeln("hello3 ", g_);
+
+        // return (g_,);
     }
     // proc backward(grad: ndarray(rank - newRank,eltType)): (ndarray(rank,eltType),) {
     //     return (grad.reshape(input.domain),);
@@ -353,3 +381,6 @@ record sumOp {
 
 
 }
+
+
+
