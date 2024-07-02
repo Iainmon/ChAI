@@ -107,7 +107,7 @@ operator *(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.reshape(dom: domain) {
+proc tensor.reshape(dom: domain(?)) {
     param newRank = dom.rank;
     var ctx = new reshapeOp(rank,newRank,eltType,dom.shape,meta);
     return tensorFromCtx(newRank,eltType,ctx);
@@ -192,21 +192,33 @@ proc type tensor.arange(to: int,type eltType = real,shape: ?rank*int): tensor(ra
     return new tensor(A);
 }
 
-proc type tensor.zeros(shape: int...?rank,type eltType = real): tensor(rank,eltType) {
-    const zro = 0 : eltType;
+proc type tensor.arange(shape: int...?rank): tensor(rank,real) {
     const dom = util.domainFromShape((...shape));
-    var z = new tensor(dom,eltType);
-    z._setArrayData(zro);
-    return z;
+    const to = dom.size;
+    const A: [dom] real = foreach (_,x) in zip(dom,0..<to) do x:real;
+    return new tensor(A);
 }
 
-proc type tensor.ones(shape: int...?rank,type eltType = real): tensor(rank,eltType) {
-    const one = 1 : eltType;
+
+proc type tensor.fromShape(type eltType = real,shape: int...?rank,value: eltType = (0:eltType)): tensor(rank,eltType) {
+    const v = value;
     const dom = util.domainFromShape((...shape));
-    var ones = new tensor(dom,eltType);
-    ones._setArrayData(one);
-    return ones;
+    var t = new tensor(dom,eltType);
+    t._setArrayData(v);
+    return t;
 }
+
+proc type tensor.zeros(shape: int...?rank): tensor(rank,real) do
+    return tensor.fromShape(real,(...shape),0.0);
+
+proc type tensor.zeros(type eltType,shape: int...?rank): tensor(rank,eltType) do
+    return tensor.fromShape(eltType,(...shape),0 : eltType);
+
+proc type tensor.ones(shape: int...?rank): tensor(rank,real) do
+    return tensor.fromShape(real,(...shape),1.0);
+
+proc type tensor.ones(type eltType,shape: int...?rank): tensor(rank,eltType) do
+    return tensor.fromShape(eltType,(...shape),1 : eltType);
 
 
 config const n = 100;
@@ -239,9 +251,9 @@ on t.device {
 
 const run1 = false;
 if run1 {
-    var M = new tensor(arange(15,real,(5,3)));
+    var M = tensor.arange(15,real,(5,3));
     writeln(M);
-    var u = new tensor(arange(3,real,(1,3)));
+    var u = tensor.arange(3,real,(1,3));
     writeln(u);
 
     var x = u.expand(5,3);
@@ -254,7 +266,7 @@ if run1 {
     writeln(y);
 
 
-    var u_ = new tensor(arange(3,real,(3,)));
+    var u_ = tensor.arange(3,real,(3,));
     var y_ = matvec(M,u_);
 
     writeln(y_);
@@ -269,10 +281,10 @@ if run1 {
 
 
 
-var M = new tensor(arange(15,real,(5,3)));
+var M = tensor.arange(15,real,(5,3));
 writeln(M);
 
-var x = new tensor(arange(9,real,(3,3)));
+var x = tensor.arange(9,real,(3,3));
 writeln(x);
 
 var y = matvec(M,x);
@@ -293,7 +305,7 @@ if run2 {
     var U = W.pad((0,3),(0,0));
     writeln(U);
 }
-var W = new tensor(M.array);
+var W = tensor.ones(5,3);
 var Q = W.shrink((1,3),(1,2));
 writeln(Q);
 
@@ -304,6 +316,8 @@ writeln(U);
 U[0..2,0..2].sum(0).sum(0).backward();
 
 writeln(W.grad);
+
+writeln(tensor.arange(5,2));
 
 // writeln(x.array.data[1,0]);
 

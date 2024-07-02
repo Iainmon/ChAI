@@ -13,7 +13,7 @@ proc printType(type t) {
     }
 }
 
-type remote_ndarray = remote(ndarray(?,?));
+// type remote_ndarray = remote(ndarray(?,?));
 
 record ndarray : writeSerializable {
     param rank: int;
@@ -351,7 +351,7 @@ record ndarray : writeSerializable {
 }
 
 
-proc arange(to: int,type eltType = real(64),shape: ?rank*int): ndarray(rank,eltType) {
+proc type ndarray.arange(to: int,type eltType = real(64),shape: ?rank*int): ndarray(rank,eltType) {
     const dom = util.domainFromShape((...shape));
     const A: [dom] eltType = foreach (_,x) in zip(dom,0..<to) do x:eltType;
     const arr: ndarray(rank,eltType) = A;
