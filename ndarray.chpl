@@ -256,6 +256,48 @@ record ndarray : writeSerializable {
         return acc;
     }
 
+    proc shrink(narg: 2*int ... rank,param exactBounds = false): ndarray(rank,eltType) {
+        var newShape: rank * int;
+        var sliceRanges: rank * range;
+        for param i in 0..<rank {
+            var (start,end) = narg(i);
+            if start < 0 && end < 0 {
+                start = 0;
+                end = data.domain.shape(i);
+            }
+            if !exactBounds {
+                sliceRanges(i) = start..#end;
+                // shrunkRanges(i) = 0..#end; // start..#end align 0;
+            } else {
+                sliceRanges(i) = start..<end;
+            }
+            newShape(i) = sliceRanges(i).size;
+        }
+        const sliceDom = {(...sliceRanges)};
+        const newDom = util.domainFromShape((...newShape));
+        var shrunk = new ndarray(newDom,eltType);
+        shrunk.data = data[sliceDom];
+        return shrunk;
+    }
+
+    proc pad(narg: 2*int ... rank,value: eltType = 0): ndarray(rank,eltType) {
+        var newShape: rank * int;
+        var sliceRanges: rank * range;
+        for param i in 0..<rank {
+            const dimSize = data.domain.shape(i);
+            var (left,right) = narg(i);
+            sliceRanges(i) = left..#dimSize;
+            // shrunkRanges(i) = 0..#end; // start..#end align 0;
+            newShape(i) = dimSize + left + right;
+        }
+        const sliceDom = {(...sliceRanges)};
+        const newDom = util.domainFromShape((...newShape));
+        var padded = new ndarray(newDom,eltType);
+        padded.data = value;
+        padded.data[sliceDom] = data;
+        return padded;
+    }
+
     proc squeeze(param newRank: int): ndarray(newRank,eltType) where newRank < rank {
         // I think this will work: (a member of the chapel team needs to review this) 
         // I suspect heavy performance hits will happen when running this on CUDA. 

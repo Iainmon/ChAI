@@ -309,6 +309,79 @@ record expandOp {
 
 }
 
+record padOp {
+    param rank: int;
+    type eltType = real;
+    var arg: rank * (2 * int);
+    var value: eltType;
+    var input: shared BaseTensorResource(rank,eltType);
+
+    proc children do return (input,);
+
+    proc forward(): ndarray(rank,eltType) {
+        return input.array.pad((...arg),value);
+    }
+
+    proc backward(grad: ndarray(rank,eltType)): (ndarray(rank,eltType),) {
+        const shape = input.array.shape;
+        var narg: rank * (2 * int);
+        for param i in 0..<rank {
+            const (p0,p1) = arg(i);
+            const s = shape(i);
+            narg(i) = (p0,s + p0);
+        }
+        const g = grad.shrink((...narg));
+        return (g,);
+    }
+
+}
+
+record shrinkOp {
+    param rank: int;
+    type eltType = real;
+    var arg: rank * (2 * int);
+    var input: shared BaseTensorResource(rank,eltType);
+
+    proc children do return (input,);
+
+    proc forward(): ndarray(rank,eltType) {
+        return input.array.shrink((...arg));
+    }
+
+    proc backward(grad: ndarray(rank,eltType)): (ndarray(rank,eltType),) {
+        const shape = input.array.shape;
+        var narg: rank * (2 * int);
+        for param i in 0..<rank {
+            const (p0,p1) = arg(i);
+            const s = shape(i);
+            narg(i) = (p0,s - p1);
+        }
+        const g = grad.pad((...narg));
+        return (g,);
+    }
+
+}
+
+record sliceOp {
+    param rank: int;
+    type eltType = real;
+    var dom;
+    var input: shared BaseTensorResource(rank,eltType);
+
+    proc children do return (input,);
+
+    proc forward(): ndarray(rank,eltType) {
+        return new ndarray(input.array[dom]);
+    }
+
+    proc backward(grad: ndarray(rank,eltType)): (ndarray(rank,eltType),) {
+        var g = new ndarray(input.array.domain,eltType);
+        g.data[dom] = grad.data;
+        return (g,);
+    }
+
+}
+
 record sumOp {
     param rank: int;
     type eltType = real;

@@ -101,6 +101,21 @@ proc tensor.expand(axes: int...rank) {
     return tensorFromCtx(rank,eltType,ctx);
 }
 
+proc tensor.pad(args: (2 * int)...rank, value: eltType = 0.0) {
+    var ctx = new padOp(rank,eltType,args,value,meta);
+    return tensorFromCtx(rank,eltType,ctx);
+}
+
+proc tensor.shrink(args: (2*int)...rank) {
+    var ctx = new shrinkOp(rank,eltType,args,meta);
+    return tensorFromCtx(rank,eltType,ctx);
+}
+
+proc tensor.slice(dom: domain(?)) where dom.rank == rank {
+    var ctx = new sliceOp(rank,eltType,dom,meta);
+    return tensorFromCtx(rank,eltType,ctx);
+}
+
 proc tensor.sum(axes: int...?r) {
     if rank - r < 0 {
         compilerError("Cannot sum more axes than rank. ");
@@ -118,7 +133,7 @@ proc arange(to: int,type eltType = real(64),shape: ?rank*int): ndarray(rank,eltT
     return arr;
 }
 
-proc matmul(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
+proc matvec(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
     const (n,) = vec.array.domain.shape;
     const (m,_n) = mat.array.domain.shape;
     if n != _n then halt("arrays must be same shape" + n : string + " " + _n : string);
@@ -126,6 +141,18 @@ proc matmul(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
     var v = vec_.expand(m,n);
     var Mv = mat * v;
     return Mv.sum(1);
+}
+
+proc matvec(mat: tensor(2,?eltType),vec: tensor(2,eltType)): tensor(2,eltType) {
+    const (b,n) = vec.array.domain.shape;
+    const (m,_n) = mat.array.domain.shape;
+    if n != _n then halt("arrays must be same shape" + n : string + " " + _n : string);
+    var vec_ = vec.reshape(b,1,n);
+    var v = vec_.expand(b,m,n);
+    var M_ = mat.reshape(1,m,n);
+    var M = M_.expand(b,m,n);
+    var Mv = M * v;
+    return Mv.sum(2);
 }
 
 
@@ -156,33 +183,75 @@ on t.device {
         tdata[i] = tarr.data[i] + 1.0;
 }
 
+
+const run1 = false;
+if run1 {
+    var M = new tensor(arange(15,real,(5,3)));
+    writeln(M);
+    var u = new tensor(arange(3,real,(1,3)));
+    writeln(u);
+
+    var x = u.expand(5,3);
+    writeln(x);
+
+    var Mx = M * x;
+    writeln(Mx);
+
+    var y = Mx.sum(1);
+    writeln(y);
+
+
+    var u_ = new tensor(arange(3,real,(3,)));
+    var y_ = matvec(M,u_);
+
+    writeln(y_);
+    var z = y_.sum(0);
+    writeln(z);
+
+    // z.backward();
+
+
+    writeln(M.grad);
+}
+
+
+
 var M = new tensor(arange(15,real,(5,3)));
 writeln(M);
 
-var u = new tensor(arange(3,real,(1,3)));
-writeln(u);
-
-var x = u.expand(5,3);
+var x = new tensor(arange(9,real,(3,3)));
 writeln(x);
 
-var Mx = M * x;
-writeln(Mx);
-
-var y = Mx.sum(1);
+var y = matvec(M,x);
 writeln(y);
 
-
-var u_ = new tensor(arange(3,real,(3,)));
-var y_ = matmul(M,u_);
-
-writeln(y_);
-var z = y_.sum(0);
-writeln(z);
-
-z.backward();
-
-
+y.sum(0).sum(0).backward();
 writeln(M.grad);
+
+
+
+const run2 = false;
+if run2 {
+    var W = M.grad;
+    var Q = W.shrink((1,3),(1,2));
+    writeln(Q);
+    writeln(Q.domain);
+
+    var U = W.pad((0,3),(0,0));
+    writeln(U);
+}
+var W = new tensor(M.grad);
+var Q = W.shrink((1,3),(1,2));
+writeln(Q);
+
+var U = W.pad((0,3),(0,0));
+writeln(U);
+
+U.slice({0..2,0..2}).sum(0).sum(0).backward();
+
+writeln(W.grad);
+
+// writeln(x.array.data[1,0]);
 
 // const ar = arange(15,real,(3,5));
 // var t = new tensor(ar);
