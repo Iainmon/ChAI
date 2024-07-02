@@ -77,10 +77,9 @@ module Utilities {
     }
 
     inline proc domainFromShape(shape: int ...?rank): domain(rank,int) {
-        const _shape = shape;
         var ranges: rank*range;
-        for param d in 0..<rank do
-            ranges(d) = 0..<_shape(d);
+        for param i in 0..<rank do
+            ranges(i) = 0..<shape(i);
         return {(...ranges)};
     }
 

@@ -351,6 +351,13 @@ record ndarray : writeSerializable {
 }
 
 
+proc arange(to: int,type eltType = real(64),shape: ?rank*int): ndarray(rank,eltType) {
+    const dom = util.domainFromShape((...shape));
+    const A: [dom] eltType = foreach (_,x) in zip(dom,0..<to) do x:eltType;
+    const arr: ndarray(rank,eltType) = A;
+    return arr;
+}
+
 
 operator =(ref lhs: ndarray(?rank,?eltType), rhs: ndarray(rank,eltType)) {
     lhs._domain = rhs._domain;

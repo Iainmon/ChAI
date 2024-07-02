@@ -21,6 +21,8 @@ record tensor : writeSerializable {
 
     proc meta do return this.resource;
 
+    proc _dom do return this.array.domain;
+
     proc init(param rank: int, type eltType = real(64)) {
         this.rank = rank;
         this.eltType = eltType;
@@ -49,6 +51,35 @@ record tensor : writeSerializable {
         on this.device {
             this.array.reshapeDomain(normal);
             this.grad.reshapeDomain(normal);
+        }
+    }
+
+    proc init(arr: [] ?eltType) do
+        this.init(new ndarray(arr));
+
+    proc init(it: _iteratorRecord) {
+        const arr = it;
+        this.init(arr);
+    }
+
+    proc this(args...) {
+        return this.slice((...args));
+    }
+
+    proc reshapeDomain(dom: this._dom.type) {
+        on this.device {
+            ref arr = this.array;
+            ref gra = this.grad;
+            arr.reshapeDomain(dom);
+            gra.reshapeDomain(dom);
+        }
+    }
+
+    proc _setArrayData(value) {
+        on this.device {
+            const devVal = value;
+            ref dat = this.array.data;
+            dat = devVal;
         }
     }
 }
@@ -116,6 +147,12 @@ proc tensor.slice(dom: domain(?)) where dom.rank == rank {
     return tensorFromCtx(rank,eltType,ctx);
 }
 
+proc tensor.slice(rngs: range...rank) {
+    const dom = {(...rngs)};
+    var ctx = new sliceOp(rank,eltType,dom,meta);
+    return tensorFromCtx(rank,eltType,ctx);
+}
+
 proc tensor.sum(axes: int...?r) {
     if rank - r < 0 {
         compilerError("Cannot sum more axes than rank. ");
@@ -126,12 +163,6 @@ proc tensor.sum(axes: int...?r) {
     return tensorFromCtx(newDim,eltType,ctx);
 }
 
-proc arange(to: int,type eltType = real(64),shape: ?rank*int): ndarray(rank,eltType) {
-    const dom = util.domainFromShape((...shape));
-    const A: [dom] eltType = foreach (_,x) in zip(dom,0..<to) do x:eltType;
-    const arr: ndarray(rank,eltType) = A;
-    return arr;
-}
 
 proc matvec(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
     const (n,) = vec.array.domain.shape;
@@ -153,6 +184,28 @@ proc matvec(mat: tensor(2,?eltType),vec: tensor(2,eltType)): tensor(2,eltType) {
     var M = M_.expand(b,m,n);
     var Mv = M * v;
     return Mv.sum(2);
+}
+
+proc type tensor.arange(to: int,type eltType = real,shape: ?rank*int): tensor(rank,eltType) {
+    const dom = util.domainFromShape((...shape));
+    const A: [dom] eltType = foreach (_,x) in zip(dom,0..<to) do x:eltType;
+    return new tensor(A);
+}
+
+proc type tensor.zeros(shape: int...?rank,type eltType = real): tensor(rank,eltType) {
+    const zro = 0 : eltType;
+    const dom = util.domainFromShape((...shape));
+    var z = new tensor(dom,eltType);
+    z._setArrayData(zro);
+    return z;
+}
+
+proc type tensor.ones(shape: int...?rank,type eltType = real): tensor(rank,eltType) {
+    const one = 1 : eltType;
+    const dom = util.domainFromShape((...shape));
+    var ones = new tensor(dom,eltType);
+    ones._setArrayData(one);
+    return ones;
 }
 
 
@@ -240,14 +293,15 @@ if run2 {
     var U = W.pad((0,3),(0,0));
     writeln(U);
 }
-var W = new tensor(M.grad);
+var W = new tensor(M.array);
 var Q = W.shrink((1,3),(1,2));
 writeln(Q);
 
-var U = W.pad((0,3),(0,0));
+var U = W.pad((1,3),(0,0),68);
 writeln(U);
 
-U.slice({0..2,0..2}).sum(0).sum(0).backward();
+// U.slice(0..2,0..2).sum(0).sum(0).backward();
+U[0..2,0..2].sum(0).sum(0).backward();
 
 writeln(W.grad);
 
@@ -385,7 +439,6 @@ writeln(W.grad);
 // writeln(m.data,m.shape);
 // var mExpanded = m.expand(3,4);
 // writeln(mExpanded.data,mExpanded.shape);
-
 
 
 
