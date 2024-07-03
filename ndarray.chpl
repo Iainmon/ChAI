@@ -553,9 +553,9 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
     ref dat = pool.data;
     ref fet = features.data;
     foreach (c,h,w) in dom {
-        var mx: eltType = -10000;
+        var mx: eltType = fet[c,h,w];
         for (sh,sw) in {0..<poolSize,0..<poolSize} {
-            const x: eltType = fet[c,h + sh,w + sw];
+            const x: eltType = fet[c,(h * poolSize) + sh,(w * poolSize) + sw];
             mx = AutoMath.max(x,mx);
         }
         dat[c,h,w] = mx;
