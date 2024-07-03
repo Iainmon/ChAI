@@ -132,7 +132,8 @@ record ndarray : writeSerializable {
         // if normalDomain.size == data.domain.size {
         // const dat = this.data;
         // arr.data = foreach (_,a) in zip(normalDomain,dat) do a;
-        foreach (i,a) in zip(normalDomain,data) do 
+        const dat = data;
+        foreach (i,a) in zip(normalDomain,dat) do 
             arrData[i] = a;
 
         // } else {halt("Cannot grow domain or shrink domain here."); }
