@@ -342,8 +342,8 @@ writeln(x);
 var y = matvec(M,x);
 writeln(y);
 
-y.sum(0).sum(0).backward();
-writeln(M.grad);
+// y.sum(0).sum(0).backward();
+// writeln(M.grad);
 
 
 
