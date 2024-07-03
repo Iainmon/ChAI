@@ -366,7 +366,7 @@ writeln(Q);
 var U = W.pad((1,3),(0,0),68);
 writeln(U);
 
-// U.slice(0..2,0..2).sum(0).sum(0).backward();
+U.slice(0..2,0..2).sum(0).sum(0).backward();
 U[0..2,0..2].sum(0).sum(0).backward();
 
 writeln(W.grad);
