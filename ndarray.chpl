@@ -510,10 +510,10 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const kernelD = {0..<kernelHeight,0..<kernelWidth};
  
     ref dat = outFeatures.data;
-    // ref fet = features.data;
-    // ref ker = kernel.data;
-    const fet = features.data;
-    const ker = kernel.data;
+    ref fet = features.data;
+    ref ker = kernel.data;
+    // const fet = features.data;
+    // const ker = kernel.data;
     foreach (f,h_,w_) in outDom {
         const hi = h_ * stride;
         const wi = w_ * stride;
