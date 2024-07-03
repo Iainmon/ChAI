@@ -204,14 +204,10 @@ proc matvec(mat: tensor(2,?eltType),vec: tensor(2,eltType)): tensor(2,eltType) {
 
 proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), stride: int): tensor(3,eltType) {
     var conv = new tensor(3,eltType);
-    // kernel.to(features.device);
     on features.device {
-        // ref con = conv.array;
         ref fet = features.array;
         ref ker = kernel.array;
-        const c = ndarray.convolve(fet,ker,stride);
-        writeln(c.data);
-        conv.array = c;
+        conv.array = ndarray.convolve(fet,ker,stride);
     }
     return conv;
 }
