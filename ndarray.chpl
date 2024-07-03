@@ -530,7 +530,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
 
 proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(3,eltType) {
 
-    import AutoMath;
+    // import AutoMath;
     const (channels,height,width) = features.shape;
     if height % poolSize != 0 {
         // var fet2 = features;
@@ -559,7 +559,7 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
             const hs = h * poolSize;
             const ws = w * poolSize;
             const x: eltType = fet[c,ph + hs,pw + ws];
-            mx = AutoMath.max(x,mx);
+            mx = max(x,mx);
         }
         dat[c,h,w] = mx;
     }
