@@ -552,8 +552,8 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
     ref fet = features.data;
     foreach (c,h,w) in dom {
         var max: eltType = -10000;
-        for (h_,w_) in {h..#poolSize,w..#poolSize} {
-            const x = fet[c,h_,w_];
+        for (sh,sw) in {0..<poolSize,0..<poolSize} {
+            const x = fet[c,h + sh,w + sw];
             if max < x {
                 max = x;
             }
