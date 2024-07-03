@@ -163,6 +163,22 @@ proc tensor.sum(axes: int...?r) {
     return tensorFromCtx(newDim,eltType,ctx);
 }
 
+proc tensor.unsqueeze(dim: int): tensor(rank + 1,eltType) {
+    const shape = this.array.domain.shape;
+    param newRank: int = rank + 1;
+    var offset: int = 0;
+    var newShape: newRank * int;
+    for param i in 0..<newRank {
+        if i == dim {
+            newShape(i) = 1;
+            offset = 1;
+        } else {
+            newShape(i) = shape(i - offset);
+        }
+    }
+    return this.reshape((...newShape));
+}
+
 
 proc matvec(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
     const (n,) = vec.array.domain.shape;
@@ -318,6 +334,10 @@ U[0..2,0..2].sum(0).sum(0).backward();
 writeln(W.grad);
 
 writeln(tensor.arange(5,2));
+
+var a = tensor.arange(4);
+writeln(a);
+writeln(a.unsqueeze(1));
 
 // writeln(x.array.data[1,0]);
 

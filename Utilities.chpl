@@ -77,11 +77,27 @@ module Utilities {
     }
 
     inline proc domainFromShape(shape: int ...?rank): domain(rank,int) {
+        const _shape = shape;
         var ranges: rank*range;
         for param i in 0..<rank do
-            ranges(i) = 0..<shape(i);
+            ranges(i) = 0..<_shape(i);
         return {(...ranges)};
     }
+
+    inline proc rangeFromBound(high: int): range do
+        return 0..<high;
+
+    inline proc rangeFromBound(low: int, high: int): range do
+        return low..<high;
+
+    inline proc rangeFromStart(start: int, count: int) do
+        return start..#count;
+
+    inline proc rangesFromBounds(bounds: (2*int) ...?rank): rank * range do
+        return bounds.map(rangeFromBound);
+
+    inline proc rangesFromShape(shape: int ...?rank): rank * range do
+        return shape.map(rangeFromBound);
 
 
     // Returns the nth element in a domain of shape `bounds`. Arbitrary mixed base counter.
@@ -122,5 +138,25 @@ module Utilities {
     proc argsort(tup: int...?rank) {
         writeln("IAIN: just do it, it's not that hard. (tuple argsort)");
         return tup;
+    }
+
+    proc _tuple.imageType(f) type {
+        type eltType = this.eltType;
+        const t0: eltType = this(0);
+        return f(t0).type;
+    }
+
+    proc _tuple.eltType type where isHomogeneousTuple(this) {
+        return this(0).type;
+    }
+
+    proc _tuple.map(f): this.size * this.imageType(f) where isHomogeneousTuple(this) {
+        param rank: int = this.size;
+        type eltType = this.eltType;// this(0).type;
+        type outType = this.imageType(f); // img.type;
+        var imgs: rank * outType;
+        for param i in 0..<rank do
+            imgs(i) = f(this(i));
+        return imgs;
     }
 }
