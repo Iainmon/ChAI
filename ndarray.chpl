@@ -519,9 +519,12 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
         const wi = w_ * stride;
         var sum: eltType = 0;
         for c in chanR {
-            const windowD = {hi..#kernelHeight,wi..#kernelWidth}; // kernelD align (hi,wi); 
-            for ((h,w),(kh,kw)) in zip(windowD,kernelD) {
-                sum += fet[c,h,w] * ker[f,c,kh,kw];
+            // const windowD = {hi..#kernelHeight,wi..#kernelWidth}; // kernelD align (hi,wi); 
+            // for ((h,w),(kh,kw)) in zip(windowD,kernelD) {
+            //     sum += fet[c,h,w] * ker[f,c,kh,kw];
+            // }
+            for (kh,kw) in kernelD {
+                sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
             }
         }
         dat[f,h_,w_] = sum;
