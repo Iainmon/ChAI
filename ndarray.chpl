@@ -129,7 +129,14 @@ record ndarray : writeSerializable {
         var arr: ndarray(newRank,eltType);
         arr.reshapeDomain(normalDomain);
         ref arrData = arr.data;
+        // if normalDomain.size == data.domain.size {
         arr.data = foreach (_,a) in zip(normalDomain,data) do a;
+        // } else {halt("Cannot grow domain or shrink domain here."); }
+        // else {
+        //     const sz = this.domain.size;
+        //     const slicedDom = normalDomain # this.domain.shape;
+        //     arr.data[slicedDom] = foreach (_,a) in zip(slicedDom,data) do a;
+        // }
         return arr;
     }
 
@@ -296,6 +303,25 @@ record ndarray : writeSerializable {
         padded.data = value;
         padded.data[sliceDom] = data;
         return padded;
+    }
+
+    proc ref dilate(dil: int) where rank == 3 {
+        const (channels,height,width) = this.shape;
+        const insertH = (height - 1) * dil;
+        const insertW = (width - 1) * dil;
+
+        const newHeight = insertH + height;
+        const newWidth = insertW + width;
+
+        const dom = util.domainFromShape(channels,newHeight,newWidth);
+        var dilated = new ndarray(dom,eltType);
+        ref dat = dilated.data;
+        ref myDat = this.data;
+        const step = dil + 1;
+        foreach (c,h,w) in this.domain {
+            dat[c,h * step,w * step] = myDat[c,h,w];
+        }
+        return dilated;
     }
 
     proc squeeze(param newRank: int): ndarray(newRank,eltType) where newRank < rank {
@@ -494,6 +520,38 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
 }
 
 
+proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(3,eltType) {
+    const (channels,height,width) = features.shape;
+    if height % poolSize != 0 {
+        var fet2 = features;
+        fet2.reshapeDomain(util.domainFromShape(channels,height + 1,width));
+        return ndarray.maxPool(fet2,poolSize);
+    }
+    if width % poolSize != 0 {
+        var fet2 = features;
+        fet2.reshapeDomain(util.domainFromShape(channels,height,width + 1));
+        return ndarray.maxPool(fet2,poolSize);
+    }
+
+    const newHeight: int = height / poolSize;
+    const newWidth: int = width / poolSize;
+    const dom = util.domainFromShape(channels,newHeight,newWidth);
+    var pool = new ndarray(dom,eltType);
+    ref dat = pool.data;
+    ref fet = features.data;
+    foreach (c,h,w) in dom {
+        var max: eltType = -10000;
+        for (h_,w_) in {h..#poolSize,w..#poolSize} {
+            const x = fet[c,h_,w_];
+            if max < x {
+                max = x;
+            }
+        }
+        dat[c,h,w] = max;
+    }
+    return pool;
+}
+
 
 
 
@@ -539,6 +597,19 @@ proc ndarray.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer
     writer.writeln(")");
     // writer.writeln(", shape=",this.data.shape,", rank=",this.rank,")");
 
+}
+
+proc ref ndarray.read(fr: IO.fileReader(?)) throws {
+    var r = fr.read(int);
+    if r != rank then
+        err("Error reading tensor: rank mismatch.", r , " != this." , rank);
+    var s = this.shape;
+    for i in 0..#rank do
+        s[i] = fr.read(int);
+    var d = util.domainFromShape((...s));
+    this._domain = d;
+    for i in d do
+        this.data[i] = fr.read(eltType);
 }
 
 class _tensor_resource {

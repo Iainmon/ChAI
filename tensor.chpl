@@ -213,6 +213,31 @@ proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType)
     return conv;
 }
 
+
+proc tensor.dilate(dil: int): tensor(3,eltType) where this.rank == 3 {
+    var dilated = new tensor(3,eltType);
+    on this.device {
+        ref dat = this.array;
+        ref dila = dilated.array;
+        const d = dat.dilate(dil);
+        dila.reshapeDomain(d.domain);
+        dila = d;
+    }
+    return dilated;
+}
+
+proc tensor.maxPool(poolSize: int): tensor(3,eltType) where this.rank == 3 {
+    var pool = new tensor(3,eltType);
+    on this.device {
+        ref dat = this.array;
+        ref pl = pool.array;
+        const p = ndarray.maxPool(dat,poolSize);
+        pl.reshapeDomain(p.domain);
+        pl = p;
+    }
+    return pool;
+}
+
 proc type tensor.arange(to: int,type eltType = real,shape: ?rank*int): tensor(rank,eltType) {
     const dom = util.domainFromShape((...shape));
     const A: [dom] eltType = foreach (_,x) in zip(dom,0..<to) do x:eltType;
@@ -355,6 +380,12 @@ var img = tensor.arange(3,9,9);
 var ker = tensor.arange(1,3,3,3);
 var fet = tensor.convolve(img,ker,2);
 writeln(fet);
+
+var b = tensor.arange(1,3,3);
+
+writeln(b.dilate(1));
+writeln(b.dilate(1).maxPool(2));
+
 // writeln(x.array.data[1,0]);
 
 // const ar = arange(15,real,(3,5));
@@ -534,4 +565,14 @@ proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer)
     writer.write(",\n       shape = ",this.array.data.shape);
     writer.write(",\n       rank = ",this.rank);
     writer.writeln(")");
+}
+
+proc ref tensor.read(fr: IO.fileReader(?)) throws {
+    var arr = this.array;
+    arr.read(fr);
+    on this.device {
+        const devArr = arr;
+        ref ar = this.array;
+        ar = devArr;
+    }
 }
