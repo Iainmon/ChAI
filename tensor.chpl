@@ -206,12 +206,12 @@ proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType)
     var conv = new tensor(3,eltType);
     // kernel.to(features.device);
     on features.device {
-        ref con = conv.array;
-        ref fet = features.array;
-        ref ker = kernel.array;
+        // ref con = conv.array;
+        const fet = features.array;
+        const ker = kernel.array;
         const c = ndarray.convolve(fet,ker,stride);
-        con.reshapeDomain(c.domain);
-        con.data = c.data;
+        writeln(c.data);
+        conv = new tensor(c);
     }
     return conv;
 }
