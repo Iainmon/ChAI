@@ -132,9 +132,12 @@ record ndarray : writeSerializable {
         // if normalDomain.size == data.domain.size {
         // const dat = this.data;
         // arr.data = foreach (_,a) in zip(normalDomain,dat) do a;
-        // const dat = data;
-        foreach (i,a) in zip(normalDomain,data) do 
-            arrData[i] = a;
+        const myDomain = this.domain;
+        foreach i in 0..<min(myDomain.size,normalDomain.size) {
+            arrData[normalDomain.orderToIndex(i)] = data[myDomain.orderToIndex(i)];
+        }
+        // foreach (i,a) in zip(normalDomain,data) do 
+        //     arrData[i] = a;
 
         // } else {halt("Cannot grow domain or shrink domain here."); }
         // else {
@@ -528,14 +531,17 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
 proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(3,eltType) {
     const (channels,height,width) = features.shape;
     if height % poolSize != 0 {
-        var fet2 = features;
-        fet2.reshapeDomain(util.domainFromShape(channels,height + 1,width));
-        return ndarray.maxPool(fet2,poolSize);
+        // var fet2 = features;
+        // fet2.reshapeDomain(util.domainFromShape(channels,height + 1,width));
+        // return ndarray.maxPool(fet2,poolSize);
+        return ndarray.maxPool(features.reshape(channels,height + 1,width),poolSize);
+
     }
     if width % poolSize != 0 {
-        var fet2 = features;
-        fet2.reshapeDomain(util.domainFromShape(channels,height,width + 1));
-        return ndarray.maxPool(fet2,poolSize);
+        // var fet2 = features;
+        // fet2.reshapeDomain(util.domainFromShape(channels,height,width + 1));
+        // return ndarray.maxPool(fet2,poolSize);
+        return ndarray.maxPool(features.reshape(channels,height,width + 1),poolSize);
     }
 
     const newHeight: int = height / poolSize;
