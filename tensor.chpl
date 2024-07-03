@@ -538,6 +538,9 @@ proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer)
     // ser.writeField("data",this.data);
     // ser.endRecord();
 
+    const prevDev = this.device;
+    this.to(here);
+
 
     writer.write("tensor(");
     const shape = this.array.shape;
@@ -565,6 +568,8 @@ proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer)
     writer.write(",\n       shape = ",this.array.data.shape);
     writer.write(",\n       rank = ",this.rank);
     writer.writeln(")");
+
+    this.to(prevDev);
 }
 
 proc ref tensor.read(fr: IO.fileReader(?)) throws {
