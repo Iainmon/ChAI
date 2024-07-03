@@ -211,7 +211,7 @@ proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType)
         ref ker = kernel.array;
         const c = ndarray.convolve(fet,ker,stride);
         writeln(c.data);
-        conv = new tensor(c);
+        conv.array = c;
     }
     return conv;
 }
