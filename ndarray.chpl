@@ -558,7 +558,7 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
         for (ph,pw) in poolDom {
             const hs = h * poolSize;
             const ws = w * poolSize;
-            const x: eltType = fet[c,ph + hs,pw + pw];
+            const x: eltType = fet[c,ph + hs,pw + ws];
             mx = AutoMath.max(x,mx);
         }
         dat[c,h,w] = mx;
