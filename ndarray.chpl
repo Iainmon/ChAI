@@ -461,6 +461,39 @@ operator +(a: remote(ndarray(?rank,?eltType)),b: remote(ndarray(rank,eltType))):
 }
 
 
+proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltType), stride: int): ndarray(3,eltType) {
+    const (channels,inHeight,inWidth) = features.shape;
+    const (filters,channels_,kernelHeight,kernelWidth) = kernel.shape;
+    if channels != channels_ then halt("Channels must match.");
+
+    const outHeight: int = ((inHeight - kernelHeight) / stride) + 1;
+    const outWidth: int = ((inWidth - kernelWidth) / stride) + 1;
+    const outShape = (filters,outHeight,outWidth);
+    const outDom = util.domainFromShape((...outShape));
+    var outFeatures = new ndarray(outDom,eltType);
+
+    const chanR = 0..<channels; // don't trust daniel's codemotion.
+    const kernelD = {0..<kernelHeight,0..<kernelWidth};
+ 
+    ref dat = outFeatures.data;
+    ref fet = features.data;
+    ref ker = kernel.data;
+    foreach (f,h_,w_) in outDom {
+        const hi = h_ * stride;
+        const wi = w_ * stride;
+        var sum: eltType = 0;
+        for c in chanR {
+            const windowD = {hi..#kernelHeight,wi..#kernelWidth}; // kernelD align (hi,wi); 
+            for ((h,w),(kh,kw)) in zip(windowD,kernelD) {
+                sum += fet[c,h,w] * ker[f,c,kh,kw];
+            }
+        }
+        dat[f,h_,w_] = sum;
+    }
+    return outFeatures;
+}
+
+
 
 
 

@@ -202,6 +202,17 @@ proc matvec(mat: tensor(2,?eltType),vec: tensor(2,eltType)): tensor(2,eltType) {
     return Mv.sum(2);
 }
 
+proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), stride: int): tensor(3,eltType) {
+    var conv = new tensor(3,eltType);
+    on features.device {
+        ref fet = features.array;
+        ref ker = kernel.array;
+        ref con = conv.array;
+        con = ndarray.convolve(fet,ker,stride);
+    }
+    return conv;
+}
+
 proc type tensor.arange(to: int,type eltType = real,shape: ?rank*int): tensor(rank,eltType) {
     const dom = util.domainFromShape((...shape));
     const A: [dom] eltType = foreach (_,x) in zip(dom,0..<to) do x:eltType;
@@ -339,6 +350,11 @@ var a = tensor.arange(4);
 writeln(a);
 writeln(a.unsqueeze(1));
 
+
+var img = tensor.arange(3,9,9);
+var ker = tensor.arange(1,3,3,3);
+var fet = tensor.convolve(img,ker,2);
+writeln(fet);
 // writeln(x.array.data[1,0]);
 
 // const ar = arange(15,real,(3,5));
