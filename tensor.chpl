@@ -356,34 +356,55 @@ if run2 {
     var U = W.pad((0,3),(0,0));
     writeln(U);
 }
-var W = tensor.ones(5,3);
-var Q = W.shrink((1,3),(1,2));
-writeln(Q);
 
-var U = W.pad((1,3),(0,0),68);
-writeln(U);
+config const run3 = false;
+if run3 {
+    var W = tensor.ones(5,3);
+    var Q = W.shrink((1,3),(1,2));
+    writeln(Q);
 
-U.slice(0..2,0..2).sum(0).sum(0).backward();
-U[0..2,0..2].sum(0).sum(0).backward();
+    var U = W.pad((1,3),(0,0),68);
+    writeln(U);
 
-writeln(W.grad);
+    U.slice(0..2,0..2).sum(0).sum(0).backward();
+    U[0..2,0..2].sum(0).sum(0).backward();
 
-writeln(tensor.arange(5,2));
+    writeln(W.grad);
 
-var a = tensor.arange(4);
-writeln(a);
-writeln(a.unsqueeze(1));
+    writeln(tensor.arange(5,2));
+
+    var a = tensor.arange(4);
+    writeln(a);
+    writeln(a.unsqueeze(1));
 
 
-var img = tensor.arange(3,9,9);
-var ker = tensor.arange(1,3,3,3);
-var fet = tensor.convolve(img,ker,2);
+    var img = tensor.arange(3,9,9);
+    var ker = tensor.arange(1,3,3,3);
+    var fet = tensor.convolve(img,ker,2);
+    writeln(fet);
+
+    var b = tensor.arange(1,3,3);
+
+    writeln(b.dilate(1));
+    writeln(b.dilate(1).maxPool(2));
+}
+
+
+
+
+var img = tensor.arange(1,9,9);
+var ker = tensor.arange(1,1,3,3);
+var fet = tensor.convolve(img,ker,1);
 writeln(fet);
+var sm = fet.sum(0).sum(0).sum(0);
+writeln(sm);
+sm.backward();
+writeln(img.grad);
+writeln(ker.grad);
 
-var b = tensor.arange(1,3,3);
-
-writeln(b.dilate(1));
-writeln(b.dilate(1).maxPool(2));
+foreach i in img.array.domain with (ref img) {
+    img.array.data[i] = 2.0;
+}
 
 // writeln(x.array.data[1,0]);
 

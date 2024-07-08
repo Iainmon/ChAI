@@ -514,7 +514,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     ref fet = features.data;
     ref ker = kernel.data;
 
-    foreach (f,h_,w_) in outDom {
+    foreach (f,h_,w_) in util.flatIter(outDom) {
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
         var sum: eltType = 0;

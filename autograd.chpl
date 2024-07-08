@@ -365,7 +365,7 @@ record shrinkOp {
 record sliceOp {
     param rank: int;
     type eltType = real;
-    var dom;
+    var dom: domain(rank,int);
     var input: shared BaseTensorResource(rank,eltType);
 
     proc children do return (input,);
@@ -378,6 +378,33 @@ record sliceOp {
         var g = new ndarray(input.array.domain,eltType);
         g.data[dom] = grad.data;
         return (g,);
+    }
+
+}
+
+record layerSliceOp {
+    param rank: int;
+    type eltType = real;
+    var base: shared BaseTensorResource(rank,eltType);
+    var mask: shared BaseTensorResource(rank,eltType);
+    var maskDomain: domain(rank,int);
+
+    proc children do return (base,mask);
+
+    proc forward(): ndarray(rank,eltType) {
+        var layered = new ndarray(base.array);
+        ref maskData = mask.array.data;
+        layered.data[maskDomain] = maskData[maskDomain];
+        return layered;
+    }
+
+    proc backward(grad: ndarray(rank,eltType)): (ndarray(rank,eltType),ndarray(rank,eltType)) {
+        const zero = 0:eltType;
+        var gBase = new ndarray(grad);
+        gBase.data[maskDomain] = zero;
+        var gMask = new ndarray(mask.array.domain,eltType);
+        gMask.data[maskDomain] = grad.data[maskDomain];
+        return (gBase,gMask);
     }
 
 }
@@ -455,5 +482,14 @@ record sumOp {
 
 }
 
+// record conv2dOp {
+//     type eltType = real;
+//     var features: shared BaseTensorResource(3,?eltType);
+//     var kernel: shared BaseTensorResource(4,eltType);
+//     var stride: int;
 
+//     proc children do return (features,kernel);
+
+//     proc forward()
+// }
 

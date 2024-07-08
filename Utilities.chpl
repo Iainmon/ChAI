@@ -41,6 +41,19 @@ module Utilities {
         }
     }
 
+    iter flatIter(D: domain(?)) {
+        for i in D {
+            yield i;
+        }
+    }
+
+    iter flatIter(param tag: iterKind,D: domain(?)) where tag == iterKind.standalone {
+        const flat = {0..<D.size};
+        foreach i in flat {
+            yield D.orderToIndex(i);
+        }
+    }
+
     inline proc normalizeArray(arr: []) {
         const arrDom = arr.domain;
         const normalDomain = normalizeDomain(arrDom);
