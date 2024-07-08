@@ -47,9 +47,8 @@ module Utilities {
         }
     }
 
-    iter flatIter(param tag: iterKind,D: domain(?)) where tag == iterKind.standalone {
-        const flat = {0..<D.size};
-        foreach i in flat {
+    inline iter flatIter(param tag: iterKind,D: domain(?)) where tag == iterKind.standalone {
+        forall i in 0..<D.size {
             yield D.orderToIndex(i);
         }
     }
