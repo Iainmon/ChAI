@@ -363,7 +363,8 @@ record ndarray : writeSerializable {
         const dom = util.domainFromShape((...newShape));
         var me = new ndarray(dom,eltType);
         me.reshapeDomain(dom);
-        me.data = foreach (_,a) in zip(dom,data) do a;
+        ref meData = me.data;
+        foreach (i,a) in zip(dom,data) do meData[i] = a;
         return me;
     }
 
