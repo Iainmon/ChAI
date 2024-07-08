@@ -399,12 +399,12 @@ writeln(fet);
 var sm = fet.sum(0).sum(0).sum(0);
 writeln(sm);
 sm.backward();
-writeln(img.grad);
-writeln(ker.grad);
+// writeln(img.grad);
+// writeln(ker.grad);
 
-foreach i in img.array.domain with (ref img) {
-    img.array.data[i] = 2.0;
-}
+// foreach i in img.array.domain with (ref img) {
+//     img.array.data[i] = 2.0;
+// }
 
 // writeln(x.array.data[1,0]);
 
