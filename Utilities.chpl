@@ -42,8 +42,8 @@ module Utilities {
     }
 
     iter flatIter(D: domain(?)) {
-        for i in D {
-            yield i;
+        for i in 0..<D.size {
+            yield D.orderToIndex(i);
         }
     }
 
