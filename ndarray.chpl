@@ -424,11 +424,20 @@ record ndarray : writeSerializable {
         var me = new ndarray(data.domain,eltType);
         ref meData = me.data;
         foreach (f,c,h,w) in data.domain {
-            meData[f,c,height - h, width - w] = data[f,c,h,w];
+            meData[f,c,h,w] = data[f,c,height - h - 1,width - w - 1];
         }
         return me;
     }
     
+    proc kernelRot(): ndarray(3,eltType) where rank == 3 {
+        const (channels,height,width) = data.domain.shape;
+        var me = new ndarray(data.domain,eltType);
+        ref meData = me.data;
+        foreach (c,h,w) in data.domain {
+            meData[c,h,w] = data[c,height - h - 1,width - w - 1];
+        }
+        return me;
+    }
 }
 
 

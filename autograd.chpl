@@ -532,15 +532,15 @@ record conv2DOp {
         for f in 0..<filters {
             const rotKernel = kernel.array// .kernelRot()
                                           .slice(f,..,..,..)
-                                          .reshape(1,channels,kerHeight,kerWidth)
-                                          .expand(channels,channels,kerHeight,kerWidth);//.permute(1,0,2,3);
+                                          .reshape(channels,1,kerHeight,kerWidth);
+                                        //   .expand(channels,channels,kerHeight,kerWidth);
             const gradSl: ndarray(2,real) = grad.slice(f,..,..);
             const gslice = gradSl.dilate(strideDil)
                                  .reshape(1,outHeight,outWidth)
-                                 .expand(channels,outHeight,outWidth)
+                                //  .expand(channels,outHeight,outWidth)
                                  .pad((0,0),(padH,padH),(padW,padW));
 
-            const imGrad = ndarray.convolve(gslice,rotKernel,stride=1);
+            const imGrad = ndarray.convolve(gslice,rotKernel,stride=1).expand(channels,inHeight,inWidth).kernelRot();
             fetGrad.data += imGrad.data;
         }
 
