@@ -482,14 +482,48 @@ record sumOp {
 
 }
 
-// record conv2dOp {
-//     type eltType = real;
-//     var features: shared BaseTensorResource(3,?eltType);
-//     var kernel: shared BaseTensorResource(4,eltType);
-//     var stride: int;
+// https://www.adityaagrawal.net/blog/deep_learning/bprop_strided_conv
+record conv2DOp {
+    type eltType = real;
+    var features: shared BaseTensorResource(3,eltType);
+    var kernel: shared BaseTensorResource(4,eltType);
+    var stride: int;
 
-//     proc children do return (features,kernel);
+    proc children do return (features,kernel);
 
-//     proc forward()
-// }
+    proc forward(): ndarray(3,eltType) {
+        return ndarray.convolve(features.array,kernel.array,stride);
+    }
+
+
+    proc backward(grad: ndarray(3,eltType)): (ndarray(3,eltType),ndarray(4,eltType)) {
+        const (channels,inHeight,inWidth) = features.array.domain.shape;
+        const (filters,outHeight,outWidth) = grad.domain.shape;
+        const (_filters,_channels,kerHeight,kerWidth) = kernel.array.domain.shape;
+
+        const strideDil = stride - 1;
+        const dialGrad = if strideDil == 0 then grad else grad.dilate(strideDil);
+
+        const fet: ndarray(4,real) = features.array.reshape(channels,1,inHeight,inWidth)
+                                  .expand(channels,filters,inHeight,inWidth);
+
+        // const kerGrad = ndarray.convolve(dialGrad,fet,stride=1);
+        var kerGrad: ndarray(4,real) = new ndarray(kernel.array.domain,eltType);
+        for f in 0..<filters {
+            const gradSl: ndarray(2,real) = grad.slice(f,..,..);
+            const fets = features.array;
+            const gslice = gradSl.dilate(strideDil)
+                                 .reshape(1,1,outHeight,outWidth)
+                                 .expand(1,channels,outHeight,outWidth);
+            const filterGrad: ndarray(3,real) = ndarray.convolve(fets,gslice,stride=1);
+
+            // foreach (c,h,w) in {0..<channels,0..<kerHeight,0..<kerWidth} with (ref kerGrad) {
+            //     kerGrad.data[f,c,h,w] = filterGrad.data[c,h,w];
+            // }
+            kerGrad.data[f,..,..,..] = filterGrad.data;
+        }
+        return (features.array,kerGrad);
+    }
+
+}
 

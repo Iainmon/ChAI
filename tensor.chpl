@@ -202,14 +202,19 @@ proc matvec(mat: tensor(2,?eltType),vec: tensor(2,eltType)): tensor(2,eltType) {
     return Mv.sum(2);
 }
 
+// proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), stride: int): tensor(3,eltType) {
+//     var conv = new tensor(3,eltType);
+//     on features.device {
+//         ref fet = features.array;
+//         ref ker = kernel.array;
+//         conv.array = ndarray.convolve(fet,ker,stride);
+//     }
+//     return conv;
+// }
+
 proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), stride: int): tensor(3,eltType) {
-    var conv = new tensor(3,eltType);
-    on features.device {
-        ref fet = features.array;
-        ref ker = kernel.array;
-        conv.array = ndarray.convolve(fet,ker,stride);
-    }
-    return conv;
+    var ctx = new conv2DOp(eltType,features.meta,kernel.meta,stride);
+    return tensorFromCtx(3,eltType,ctx);
 }
 
 
@@ -399,8 +404,8 @@ writeln(fet);
 var sm = fet.sum(0).sum(0).sum(0);
 writeln(sm);
 sm.backward();
-// writeln(img.grad);
-// writeln(ker.grad);
+writeln(img.grad);
+writeln(ker.grad);
 
 // foreach i in img.array.domain with (ref img) {
 //     img.array.data[i] = 2.0;

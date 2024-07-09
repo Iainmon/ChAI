@@ -1,22 +1,31 @@
 import Utilities as util;
 
-on here.gpus[0] {
-    const D = {0..<3,0..<3,0..<3};
-    var A: [D] int;
-    foreach i in D {
-        A[i] = A[i] + 1;
-    }
+// on here.gpus[0] {
+//     const D = {0..<3,0..<3,0..<3};
+//     var A: [D] int;
+//     foreach i in D {
+//         A[i] = A[i] + 1;
+//     }
 
-    writeln("My Break");
+//     writeln("My Break");
 
-    foreach i in util.flatIter(D) {
-        A[i] = A[i] + 1;
-    }
+//     foreach i in util.flatIter(D) {
+//         A[i] = A[i] + 1;
+//     }
 
-    writeln("My Break 2");
+//     writeln("My Break 2");
 
-    foreach n in 0..<D.size {
-        const i = D.orderToIndex(n);
-        A[i] = A[i] + 1;
-    }
+//     foreach n in 0..<D.size {
+//         const i = D.orderToIndex(n);
+//         A[i] = A[i] + 1;
+//     }
+// }
+
+
+var tup: 1000*int;
+writeln(tup);
+
+foreach i in 0..<tup.size with (ref tup) {
+    tup(i) = i;
 }
+writeln(tup);

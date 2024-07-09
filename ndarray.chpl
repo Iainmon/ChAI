@@ -313,7 +313,30 @@ record ndarray : writeSerializable {
         return padded;
     }
 
-    proc ref dilate(dil: int) where rank == 3 {
+
+    proc dilate(dil: int) where rank == 2 {
+        if dil < 0 then util.err("Cannot dilate ", this.type:string, ", of shape ", this.shape, ", by dilation=", dil);
+        if dil == 0 then return this;
+        const (height,width) = this.shape;
+        const insertH = (height - 1) * dil;
+        const insertW = (width - 1) * dil;
+
+        const newHeight = insertH + height;
+        const newWidth = insertW + width;
+
+        const dom = util.domainFromShape(newHeight,newWidth);
+        var dilated = new ndarray(dom,eltType);
+        ref dat = dilated.data;
+        const step = dil + 1;
+        foreach (h,w) in data.domain {
+            dat[h * step,w * step] = data[h,w];
+        }
+        return dilated;
+    }
+
+    proc dilate(dil: int) where rank == 3 {
+        if dil < 0 then util.err("Cannot dilate ", this.type:string, ", of shape ", this.shape, ", by dilation=", dil);
+        if dil == 0 then return this;
         const (channels,height,width) = this.shape;
         const insertH = (height - 1) * dil;
         const insertW = (width - 1) * dil;
@@ -324,13 +347,16 @@ record ndarray : writeSerializable {
         const dom = util.domainFromShape(channels,newHeight,newWidth);
         var dilated = new ndarray(dom,eltType);
         ref dat = dilated.data;
-        ref myDat = this.data;
         const step = dil + 1;
-        foreach (c,h,w) in this.domain {
-            dat[c,h * step,w * step] = myDat[c,h,w];
+        foreach (c,h,w) in data.domain {
+            dat[c,h * step,w * step] = data[c,h,w];
         }
         return dilated;
     }
+
+
+    // (3,2,1,4) A
+    // A.squeeze(3) -> (3,2,4)
 
     proc squeeze(param newRank: int): ndarray(newRank,eltType) where newRank < rank {
         // I think this will work: (a member of the chapel team needs to review this) 
@@ -364,7 +390,8 @@ record ndarray : writeSerializable {
         var me = new ndarray(dom,eltType);
         me.reshapeDomain(dom);
         ref meData = me.data;
-        foreach (i,a) in zip(dom,data) do meData[i] = a;
+        // const thisData = this.data;
+        foreach (i,a) in zip(dom,this.data) do meData[i] = a;
         return me;
     }
 
@@ -384,7 +411,13 @@ record ndarray : writeSerializable {
         return re;
     }
 
-
+    iter ref batchify(param dim: int = 0) ref where dim < rank {
+        const dimR = data.domain.shape(dim);
+        var dims = data.dims();
+        for i in dimR {
+            yield data[(...((...dims(0..<dim)),i,(...dims((dim+1)..<rank))))];
+        }
+    }
     
 }
 
@@ -569,6 +602,10 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
     return pool;
 }
 
+
+inline proc type ndarray.fromRanges(type eltType = real, rngs: range...?rank): ndarray(rank,eltType) {
+    return new ndarray({(...rngs)},eltType);
+}
 
 
 
