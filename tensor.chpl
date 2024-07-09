@@ -409,6 +409,16 @@ sm.backward();
 writeln(img.grad);
 writeln(ker.grad);
 
+img = tensor.arange(1,9,9);
+ker = tensor.arange(1,1,3,3);
+fet = tensor.convolve(img,ker,2);
+sm = fet.sum(0).sum(0).sum(0);
+writeln(sm);
+sm.backward();
+writeln(fet.array.shape);
+writeln(fet);
+writeln(img.grad);
+writeln(ker.grad);
 // foreach i in img.array.domain with (ref img) {
 //     img.array.data[i] = 2.0;
 // }

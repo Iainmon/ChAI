@@ -515,17 +515,22 @@ record conv2DOp {
             const gslice = gradSl.dilate(strideDil)
                                  .reshape(1,1,outHeight,outWidth)
                                  .expand(1,channels,outHeight,outWidth);
-            const filterGrad: ndarray(3,real) = ndarray.convolve(fets,gslice,stride=1);
+            const filterGrad: ndarray(3,real) = ndarray.convolve(fets,gslice,stride=stride);
 
             // foreach (c,h,w) in {0..<channels,0..<kerHeight,0..<kerWidth} with (ref kerGrad) {
             //     kerGrad.data[f,c,h,w] = filterGrad.data[c,h,w];
             // }
-            kerGrad.data[f,..,..,..] = filterGrad.data;
+            kerGrad.data[f,..,..,..] = filterGrad.data[..,..,..];
         }
         const rotKernel = kernel.array.kernelRot();
                                 // .permute(0,1,2,3);
-        const padH = (kerHeight - 1);
-        const padW = (kerWidth - 1);
+        const dilHeight = ((outHeight - 1) * strideDil);
+        const dilWidth = ((outWidth - 1) * strideDil);
+
+        const padH: int = (((inHeight - 1)*stride - kerHeight) - dilHeight) / 2; // (kerHeight - 1);
+        const padW: int = (((inWidth - 1)*stride - kerWidth) - dilWidth) / 2;// (kerWidth - 1);
+        writeln((inHeight,kerHeight,outHeight,dilHeight,padH));
+        
 
         const kernelRot = kernel.array.kernelRot();
 
