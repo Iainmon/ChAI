@@ -526,28 +526,32 @@ record conv2DOp {
                                 // .permute(0,1,2,3);
         const padH = (kerHeight - 1);
         const padW = (kerWidth - 1);
-        const paddedDilGrad = grad.dilate(strideDil).pad((0,0),(padH,padH),(padW,padW));
+
+        const kernelRot = kernel.array.kernelRot();
+
         var fetGrad: ndarray(3,real) = new ndarray(features.array.domain,eltType); // ndarray.convolve(paddedDilGrad,rotKernel,stride=1);
- 
         for f in 0..<filters {
-            const rotKernel = kernel.array// .kernelRot()
-                                          .slice(f,..,..,..)
-                                          .reshape(channels,1,kerHeight,kerWidth);
-                                        //   .expand(channels,channels,kerHeight,kerWidth);
-            const gradSl: ndarray(2,real) = grad.slice(f,..,..);
-            const gslice = gradSl.dilate(strideDil)
+
+            // This can really be optimized.
+            const rotKernel = kernelRot.slice(f,..,..,..)
+                                        .reshape(channels,1,kerHeight,kerWidth)
+                                        .expand(channels,channels,kerHeight,kerWidth);
+            const gslice = grad.slice(f,..,..)
+                                 .dilate(strideDil)
                                  .reshape(1,outHeight,outWidth)
-                                //  .expand(channels,outHeight,outWidth)
+                                 .expand(channels,outHeight,outWidth)
                                  .pad((0,0),(padH,padH),(padW,padW));
 
-            const imGrad = ndarray.convolve(gslice,rotKernel,stride=1).expand(channels,inHeight,inWidth).kernelRot();
+            const imGrad = ndarray.convolve(gslice,rotKernel,stride=1);
             fetGrad.data += imGrad.data;
         }
+
 
        if fetGrad.shape != features.array.shape {
             writeln(fetGrad);
             util.err(fetGrad.shape,features.array.shape);
         }
+
 
         return (fetGrad,kerGrad);
     }
