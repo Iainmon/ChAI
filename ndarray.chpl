@@ -418,6 +418,16 @@ record ndarray : writeSerializable {
             yield data[(...((...dims(0..<dim)),i,(...dims((dim+1)..<rank))))];
         }
     }
+
+    proc kernelRot(): ndarray(4,eltType) where rank == 4 {
+        const (features,channels,height,width) = data.domain.shape;
+        var me = new ndarray(data.domain,eltType);
+        ref meData = me.data;
+        foreach (f,c,h,w) in data.domain {
+            meData[f,c,height - h, width - w] = data[f,c,h,w];
+        }
+        return me;
+    }
     
 }
 

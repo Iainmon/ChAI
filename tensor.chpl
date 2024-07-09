@@ -398,6 +398,8 @@ if run3 {
 
 
 var img = tensor.arange(1,9,9);
+writeln(img);
+
 var ker = tensor.arange(1,1,3,3);
 var fet = tensor.convolve(img,ker,1);
 writeln(fet);

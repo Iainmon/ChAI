@@ -502,7 +502,7 @@ record conv2DOp {
         const (_filters,_channels,kerHeight,kerWidth) = kernel.array.domain.shape;
 
         const strideDil = stride - 1;
-        const dialGrad = if strideDil == 0 then grad else grad.dilate(strideDil);
+        const dialGrad = grad.dilate(strideDil);
 
         const fet: ndarray(4,real) = features.array.reshape(channels,1,inHeight,inWidth)
                                   .expand(channels,filters,inHeight,inWidth);
@@ -522,7 +522,34 @@ record conv2DOp {
             // }
             kerGrad.data[f,..,..,..] = filterGrad.data;
         }
-        return (features.array,kerGrad);
+        const rotKernel = kernel.array.kernelRot();
+                                // .permute(0,1,2,3);
+        const padH = (kerHeight - 1);
+        const padW = (kerWidth - 1);
+        const paddedDilGrad = grad.dilate(strideDil).pad((0,0),(padH,padH),(padW,padW));
+        var fetGrad: ndarray(3,real) = new ndarray(features.array.domain,eltType); // ndarray.convolve(paddedDilGrad,rotKernel,stride=1);
+ 
+        for f in 0..<filters {
+            const rotKernel = kernel.array// .kernelRot()
+                                          .slice(f,..,..,..)
+                                          .reshape(1,channels,kerHeight,kerWidth)
+                                          .expand(channels,channels,kerHeight,kerWidth);//.permute(1,0,2,3);
+            const gradSl: ndarray(2,real) = grad.slice(f,..,..);
+            const gslice = gradSl.dilate(strideDil)
+                                 .reshape(1,outHeight,outWidth)
+                                 .expand(channels,outHeight,outWidth)
+                                 .pad((0,0),(padH,padH),(padW,padW));
+
+            const imGrad = ndarray.convolve(gslice,rotKernel,stride=1);
+            fetGrad.data += imGrad.data;
+        }
+
+       if fetGrad.shape != features.array.shape {
+            writeln(fetGrad);
+            util.err(fetGrad.shape,features.array.shape);
+        }
+
+        return (fetGrad,kerGrad);
     }
 
 }
