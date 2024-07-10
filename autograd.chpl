@@ -185,7 +185,7 @@ record addOp {
         ref sumData = sum.data;
         ref aData = a.data;
         ref bData = b.data;
-        foreach i in newDom do
+        foreach i in newDom.each do
             sumData[i] = aData[i] + bData[i];
         // sumData = aData + bData;
         return sum;
@@ -228,7 +228,7 @@ record multOp {
         BG.reshapeDomain(gDom);
         ref AGR = AG.data;
         ref BGR = BG.data;
-        foreach i in gDom {
+        foreach i in gDom.each {
             AGR[i] = B[i] * G[i];
             BGR[i] = A[i] * G[i];
         }
