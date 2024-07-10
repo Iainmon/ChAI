@@ -4,14 +4,15 @@ import IO;
 use remote;
 
 import Utilities as util;
+use Utilities.Standard;
 
-use Reflection;
-proc printType(type t) {
-    param nfs = getNumFields(t);
-    for param i in 0..#nfs {
-        writeln(t:string, ".", getFieldName(t,i):string);
-    }
-}
+// use Reflection;
+// proc printType(type t) {
+//     param nfs = getNumFields(t);
+//     for param i in 0..#nfs {
+//         writeln(t:string, ".", getFieldName(t,i):string);
+//     }
+// }
 
 // type remote_ndarray = remote(ndarray(?,?));
 
@@ -30,8 +31,13 @@ record ndarray : writeSerializable {
     }
 
     proc init(dom: ?t,type eltType = real(64)) where isDomainType(t) {
-        this.init(dom.rank,eltType);
-        this._domain = util.normalizeDomain(dom);
+        this.rank = dom.rank;
+        this.eltType = eltType;
+        if dom.isNormal {
+            this._domain = dom;
+        } else {
+            this._domain = dom.normalize;
+        }
     }
 
     proc init(type eltType = real(64), shape: int ...?rank) {
@@ -39,34 +45,43 @@ record ndarray : writeSerializable {
         this.init(dom,eltType);
     }
 
-    proc init(arr: [] ?eltType) {
-        const arrDom = arr.domain;
-        const normalDomain = util.normalizeDomain(arrDom);
-        this.init(normalDomain,eltType);
-        if normalDomain == arrDom {
-            this.data = arr;
-            // this.data = foreach (_,a) in zip(normalDomain,arr) do a;
-        } else {
-            this.data = foreach (_,a) in zip(normalDomain,arr) do a;
-        }
-    }
-
-    proc init(arr: [] ?eltType, param isNormal: bool) {
+    proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == true {
         this.rank = arr.rank;
         this.eltType = eltType;
         this._domain = arr.domain;
         this.data = arr;
     }
 
+    proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == false {
+        this.rank = arr.rank;
+        this.eltType = eltType;
+        this._domain = arr.domain.normalize;
+        init this;
+        const lw = arr.domain.low;
+        foreach i in arr.domain.each with (ref this) {
+            const idx = i - lw;
+            data[idx] = arr[i];
+        }
+    }
+
+    proc init(arr: [] ?eltType) {
+        if arr.domain.isNormal {
+            this.init(arr,isNormal=true);
+        } else {
+            this.init(arr,isNormal=false);
+        }
+    }
+
     proc init(A: ndarray(?rank,?eltType)) {
-        this.init(rank,eltType);
+        this.rank = rank;
+        this.eltType = eltType;
         this._domain = A._domain;
         this.data = A.data;
     }
 
     proc init(it: _iteratorRecord) {
         const arr = it;
-        this.init(arr,isNormal = true);
+        this.init(arr);
     }
 
     // proc init(unknown: ?t) where !isDomainType(t) {
@@ -76,8 +91,7 @@ record ndarray : writeSerializable {
     // }
 
     proc init=(other: [] ?eltType) {
-        // this.init(other); // less efficient
-        this.init(other,isNormal = true);
+        this.init(other);
     }
 
     proc init=(other: ndarray(?rank,?eltType)) {
@@ -106,46 +120,40 @@ record ndarray : writeSerializable {
     proc ref reshapeDomain(dom: _domain.type) do
         _domain = dom;
 
-    proc reshape(dom: domain(?)): ndarray(rank,eltType) where dom.rank == rank {
-        const normalDomain = util.normalizeDomain(dom);
-        var me: ndarray(rank,eltType);
-        me = this;
+    proc reshape(dom: _domain.type): ndarray(rank,eltType) {
+        const normalDomain = dom.normalize;
+        var me = this;
         me.reshapeDomain(normalDomain);
         return me;
     }
-    proc reshape(dom: domain(?)): ndarray(dom.rank,eltType) where dom.rank != rank {
-        param _rank: int = dom.rank;
-        const normalDomain = util.normalizeDomain(dom);
-        var arr: ndarray(_rank,eltType);
-        arr.reshapeDomain(normalDomain);
-        arr.data = foreach (_,a) in zip(normalDomain,data) do a;
+
+    proc reshape(dom: ?t): ndarray(dom.rank,eltType) where isDomainType(t) && dom.rank != rank {
+        param newRank: int = dom.rank;
+        var arr: ndarray(newRank,eltType) = new ndarray(dom,eltType);
+        const selfDomain = data.domain;
+        const normalDomain = arr.domain;
+        ref meData = arr.data;
+        foreach i in 0..<min(normalDomain.size,selfDomain.size) {
+            const selfIdx = selfDomain.orderToIndex(i);
+            const meIdx = normalDomain.orderToIndex(i);
+            meData[meIdx] = data[selfIdx];
+        }
         return arr;
     }
 
 
     // This can optimized such that it doesn't use two heavy utility functions...
     proc reshape(newShape: int ...?newRank): ndarray(newRank,eltType) {
-        const normalDomain = util.domainFromShape((...newShape));
-        var arr: ndarray(newRank,eltType);
-        arr.reshapeDomain(normalDomain);
-        ref arrData = arr.data;
-        // if normalDomain.size == data.domain.size {
-        // const dat = this.data;
-        // arr.data = foreach (_,a) in zip(normalDomain,dat) do a;
-        const myDomain = this.domain;
-        foreach i in 0..<min(myDomain.size,normalDomain.size) {
-            arrData[normalDomain.orderToIndex(i)] = data[myDomain.orderToIndex(i)];
-        }
-        // foreach (i,a) in zip(normalDomain,data) do 
-        //     arrData[i] = a;
-
-        // } else {halt("Cannot grow domain or shrink domain here."); }
-        // else {
-        //     const sz = this.domain.size;
-        //     const slicedDom = normalDomain # this.domain.shape;
-        //     arr.data[slicedDom] = foreach (_,a) in zip(slicedDom,data) do a;
+        const dom = util.domainFromShape((...newShape));
+        return this.reshape(dom);
+        // const normalDomain = util.domainFromShape((...newShape));
+        // var arr = new ndarray(normalDomain, eltType);
+        // ref arrData = arr.data;
+        // const myDomain = data.domain;
+        // foreach i in 0..<min(myDomain.size,normalDomain.size) {
+        //     arrData[normalDomain.orderToIndex(i)] = data[myDomain.orderToIndex(i)];
         // }
-        return arr;
+        // return arr;
     }
 
     proc slice(args...) {
@@ -206,7 +214,7 @@ record ndarray : writeSerializable {
         
         ref expandedData = expanded.data;
 
-        foreach idx in expandedData.domain {
+        foreach idx in expandedData.domain.each {
             var origIdx: rank * int;
             if idx.type == int {
                 origIdx(0) = idx;
@@ -233,7 +241,7 @@ record ndarray : writeSerializable {
         var S = new ndarray(newDomain,eltType);
         ref B = S.data;
         ref A = data;
-        foreach idx in newDomain {
+        foreach idx in newDomain.each {
             var origIdx: newDomain.rank * int;
             if idx.type == int {
                 origIdx(0) = idx;
@@ -328,7 +336,7 @@ record ndarray : writeSerializable {
         var dilated = new ndarray(dom,eltType);
         ref dat = dilated.data;
         const step = dil + 1;
-        foreach (h,w) in data.domain {
+        foreach (h,w) in data.domain.each {
             dat[h * step,w * step] = data[h,w];
         }
         return dilated;
@@ -348,7 +356,7 @@ record ndarray : writeSerializable {
         var dilated = new ndarray(dom,eltType);
         ref dat = dilated.data;
         const step = dil + 1;
-        foreach (c,h,w) in data.domain {
+        foreach (c,h,w) in data.domain.each {
             dat[c,h * step,w * step] = data[c,h,w];
         }
         return dilated;
@@ -423,7 +431,7 @@ record ndarray : writeSerializable {
         const (features,channels,height,width) = data.domain.shape;
         var me = new ndarray(data.domain,eltType);
         ref meData = me.data;
-        foreach (f,c,h,w) in data.domain {
+        foreach (f,c,h,w) in data.domain.each {
             meData[f,c,h,w] = data[f,c,height - h - 1,width - w - 1];
         }
         return me;
@@ -433,7 +441,7 @@ record ndarray : writeSerializable {
         const (channels,height,width) = data.domain.shape;
         var me = new ndarray(data.domain,eltType);
         ref meData = me.data;
-        foreach (c,h,w) in data.domain {
+        foreach (c,h,w) in data.domain.each {
             meData[c,h,w] = data[c,height - h - 1,width - w - 1];
         }
         return me;
@@ -444,8 +452,7 @@ record ndarray : writeSerializable {
 proc type ndarray.arange(to: int,type eltType = real(64),shape: ?rank*int): ndarray(rank,eltType) {
     const dom = util.domainFromShape((...shape));
     const A: [dom] eltType = foreach (_,x) in zip(dom,0..<to) do x:eltType;
-    const arr: ndarray(rank,eltType) = A;
-    return arr;
+    return new ndarray(A);
 }
 
 
@@ -455,12 +462,12 @@ operator =(ref lhs: ndarray(?rank,?eltType), rhs: ndarray(rank,eltType)) {
 }
 
 operator =(ref lhs: ndarray(?rank,?eltType), rhs: [?d] eltType) where d.rank == rank {
-    lhs.reshapeDomain(d);
+    lhs.reshapeDomain(d.normalize);
     lhs.data = rhs;
 }
 
 operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
-    return new ndarray(val, isNormal = true);
+    return new ndarray(val);
 }
 
 // operator =(ref lhs: ndarray(?rank,?eltType), rhs: _iteratorRecord) {
@@ -510,30 +517,27 @@ operator =(ref lhs: remote(ndarray(?rank,?eltType)), rhs:remote( ndarray(rank,el
 
 proc zipArr(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType),f): ndarray(rank,eltType) {
     const dom = a.domain;
-    var c: ndarray(rank,eltType);
-    c.reshapeDomain(dom);
+    var c: ndarray(rank,eltType) = new ndarray(a.domain,eltType);
     ref cData = c.data;
-    foreach i in dom do
+    foreach i in dom.each do
         cData[i] = f(a.data[i],b.data[i]);
     return c;
 }
 
 operator +(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,eltType) {
     const dom = a.domain;
-    var c: ndarray(rank,eltType);
-    c.reshapeDomain(dom);
+    var c: ndarray(rank,eltType) = new ndarray(a.domain,eltType);
     ref cData = c.data;
-    foreach i in dom do
+    foreach i in dom.each do
         cData[i] = a.data[i] + b.data[i];
     return c;
 }
 
 operator *(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,eltType) {
     const dom = a.domain;
-    var c: ndarray(rank,eltType);
-    c.reshapeDomain(dom);
+    var c: ndarray(rank,eltType) = new ndarray(a.domain,eltType);
     ref cData = c.data;
-    foreach i in dom do
+    foreach i in dom.each do
         cData[i] = a.data[i] * b.data[i];
     return c;
 }
@@ -570,7 +574,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     ref fet = features.data;
     ref ker = kernel.data;
 
-    foreach (f,h_,w_) in util.flatIter(outDom) {
+    foreach (f,h_,w_) in outDom.each {
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
         var sum: eltType = 0;
@@ -608,7 +612,7 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
     ref dat = pool.data;
     ref fet = features.data;
     const poolDom = {0..#poolSize,0..#poolSize};
-    foreach (c,h,w) in dom {
+    foreach (c,h,w) in dom.each {
         var mx: eltType = fet[c,h,w];
         for (ph,pw) in poolDom {
             const hs = h * poolSize;

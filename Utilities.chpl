@@ -1,8 +1,14 @@
 
 module Utilities {
 
+    module Types {
+        type stdRange = range(idxType=int,bounds=boundKind.both,strides=strideKind.one);
+        // type stdDomain = domain(DefaultRectangularDom(?));
+    }
+
     import IO;
     import ChapelArray;
+    // import ChapelDomain;
     import Math;
 
 
@@ -152,23 +158,81 @@ module Utilities {
         return tup;
     }
 
-    proc _tuple.imageType(f) type {
-        type eltType = this.eltType;
-        const t0: eltType = this(0);
-        return f(t0).type;
-    }
+    module Standard {
 
-    proc _tuple.eltType type where isHomogeneousTuple(this) {
-        return this(0).type;
-    }
+        proc _tuple.imageType(f) type {
+            type eltType = this.eltType;
+            const t0: eltType = this(0);
+            return f(t0).type;
+        }
 
-    proc _tuple.map(f): this.size * this.imageType(f) where isHomogeneousTuple(this) {
-        param rank: int = this.size;
-        type eltType = this.eltType;// this(0).type;
-        type outType = this.imageType(f); // img.type;
-        var imgs: rank * outType;
-        for param i in 0..<rank do
-            imgs(i) = f(this(i));
-        return imgs;
+        proc _tuple.eltType type where isHomogeneousTuple(this) {
+            return this(0).type;
+        }
+
+        proc _tuple.map(f): this.size * this.imageType(f) where isHomogeneousTuple(this) {
+            param rank: int = this.size;
+            type eltType = this.eltType;// this(0).type;
+            type outType = this.imageType(f); // img.type;
+            var imgs: rank * outType;
+            for param i in 0..<rank do
+                imgs(i) = f(this(i));
+            return imgs;
+        }
+
+        inline iter _domain.each {
+            for i in 0..<this.size {
+                yield this.orderToIndex(i);
+            }
+        }
+
+        inline iter _domain.each(param tag: iterKind) where tag == iterKind.standalone {
+            forall i in 0..<this.size {
+                yield this.orderToIndex(i);
+            }
+        }
+
+
+        // inline operator =(ref tup: _tuple, val: tup.eltType) where isHomogeneousTuple(tup) {
+        //     for param i in 0..<tup.size {
+        //         tup(i) = val;
+        //     }
+        // }
+
+        // inline proc _range.init=(end: int) {
+        //     this.init(int,0,end);
+        // }
+
+        // inline operator :(end: int, type T: range(idxType=int)) {
+        //     return 0..<end;
+        // }
+
+        inline proc _domain.normalize : this.type where this.isRectangular() {
+            // if this.strides == strideKind.one {
+            //     const lw: this.fullIdxType;
+            //     if lw == this.low {
+            //         return this;
+            //     }
+            // }
+            if this.isNormal then return this;
+
+            const myShape = shape;
+            var ranges: rank*range;
+            for param i in 0..rank-1 do
+                ranges(i) = 0..<myShape(i);
+            return {(...ranges)};
+        }
+
+        inline proc _domain.isNormal: bool where this.isRectangular() {
+            if this.strides == strideKind.one {
+                const lw: this.fullIdxType;
+                return this.stride == lw + 1 && lw == this.low;
+            } else {
+                return false;
+            }
+        }
+
     }
 }
+
+

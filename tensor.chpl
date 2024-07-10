@@ -4,13 +4,7 @@ use ndarray;
 use remote;
 use autograd;
 import Utilities as util;
-
-
-
-
-
-
-
+use Utilities.Standard;
 
 
 record tensor : writeSerializable {
@@ -409,16 +403,36 @@ sm.backward();
 writeln(img.grad);
 writeln(ker.grad);
 
-img = tensor.arange(1,9,9);
-ker = tensor.arange(1,1,3,3);
-fet = tensor.convolve(img,ker,2);
-sm = fet.sum(0).sum(0).sum(0);
-writeln(sm);
-sm.backward();
-writeln(fet.array.shape);
-writeln(fet);
-writeln(img.grad);
-writeln(ker.grad);
+
+// inline iter _domain.each {
+//     for i in 0..<this.size {
+//         yield this.orderToIndex(i);
+//     }
+// }
+
+// const R = 0..<10;
+// writeln(R,R.type:string);
+
+// const D = {R,R};
+// writeln(D,D.type:string);
+
+// const D2: util.Types.stdDomain = {R,R};
+// writeln(D2,D2.type:string);
+
+// const D = {0..<3,0..<5};
+// foreach (a,b) in D.each do
+//     writeln((a,b));
+
+// img = tensor.arange(1,9,9);
+// ker = tensor.arange(1,1,3,3);
+// fet = tensor.convolve(img,ker,2);
+// sm = fet.sum(0).sum(0).sum(0);
+// writeln(sm);
+// sm.backward();
+// writeln(fet.array.shape);
+// writeln(fet);
+// writeln(img.grad);
+// writeln(ker.grad);
 // foreach i in img.array.domain with (ref img) {
 //     img.array.data[i] = 2.0;
 // }

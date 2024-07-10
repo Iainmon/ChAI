@@ -524,12 +524,15 @@ record conv2DOp {
         }
         const rotKernel = kernel.array.kernelRot();
                                 // .permute(0,1,2,3);
-        const dilHeight = ((outHeight - 1) * strideDil);
-        const dilWidth = ((outWidth - 1) * strideDil);
+        // const dilHeight = ((outHeight - 1) * strideDil) + outHeight;
+        // const dilWidth = ((outWidth - 1) * strideDil) + outWidth;
 
-        const padH: int = (((inHeight - 1)*stride - kerHeight) - dilHeight) / 2; // (kerHeight - 1);
-        const padW: int = (((inWidth - 1)*stride - kerWidth) - dilWidth) / 2;// (kerWidth - 1);
-        writeln((inHeight,kerHeight,outHeight,dilHeight,padH));
+        // const padH: int = ((((inHeight - 1)*stride - kerHeight) - dilHeight - 1) / 2); // (kerHeight - 1);
+        // const padW: int = ((((inWidth - 1)*stride - kerWidth) - dilWidth - 1) / 2);// (kerWidth - 1);
+        // writeln((inHeight,kerHeight,outHeight,dilHeight,padH));
+
+        const padH: int = (kerHeight - 1);
+        const padW: int = (kerWidth - 1);
         
 
         const kernelRot = kernel.array.kernelRot();
