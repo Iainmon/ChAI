@@ -404,6 +404,14 @@ writeln(img.grad);
 writeln(ker.grad);
 
 
+{
+    var x = tensor.arange(3,5);
+    writeln(x);
+    writeln(x.array);
+    on x.device { x.array = x.array.reshape(5,3);}
+    writeln(x);
+}
+
 // inline iter _domain.each {
 //     for i in 0..<this.size {
 //         yield this.orderToIndex(i);

@@ -121,22 +121,30 @@ record ndarray : writeSerializable {
         _domain = dom;
 
     proc reshape(dom: _domain.type): ndarray(rank,eltType) {
-        const normalDomain = dom.normalize;
-        var me = this;
+        var me = new ndarray(dom,eltType);
+        const normalDomain = me.domain;
+        const selfDomain = data.domain;
+        ref meData = me.data;
+        foreach i in 0..<selfDomain.size {
+            meData[normalDomain.orderToIndex(i)] = data[selfDomain.orderToIndex(i)];
+        }
         me.reshapeDomain(normalDomain);
         return me;
     }
 
     proc reshape(dom: ?t): ndarray(dom.rank,eltType) where isDomainType(t) && dom.rank != rank {
+        writeln("Hello");
         param newRank: int = dom.rank;
         var arr: ndarray(newRank,eltType) = new ndarray(dom,eltType);
         const selfDomain = data.domain;
         const normalDomain = arr.domain;
+        const zero: eltType = 0;
         ref meData = arr.data;
-        foreach i in 0..<min(normalDomain.size,selfDomain.size) {
+        foreach i in 0..<normalDomain.size {
             const selfIdx = selfDomain.orderToIndex(i);
             const meIdx = normalDomain.orderToIndex(i);
-            meData[meIdx] = data[selfIdx];
+            const a = if selfDomain.contains(selfIdx) then data[selfIdx] else zero;
+            meData[meIdx] = a;
         }
         return arr;
     }
