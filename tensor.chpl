@@ -396,7 +396,7 @@ writeln(img);
 
 var ker = tensor.arange(1,1,3,3);
 var fet = tensor.convolve(img,ker,1);
-writeln(fet);
+writeln("Features:", fet);
 var sm = fet.sum(0).sum(0).sum(0);
 writeln(sm);
 sm.backward();

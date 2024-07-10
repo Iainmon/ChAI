@@ -585,7 +585,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
         var sum: eltType = 0;
-        for (c,kh,kw) in kernelChanD {
+        for (c,kh,kw) in kernelChanD.each {
             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
         }
         dat[f,h_,w_] = sum;
@@ -621,7 +621,7 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
     const poolDom = {0..#poolSize,0..#poolSize};
     foreach (c,h,w) in dom.each {
         var mx: eltType = fet[c,h,w];
-        for (ph,pw) in poolDom {
+        for (ph,pw) in poolDom.each {
             const hs = h * poolSize;
             const ws = w * poolSize;
             const x: eltType = fet[c,ph + hs,pw + ws];
