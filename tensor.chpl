@@ -405,11 +405,26 @@ writeln(ker.grad);
 
 
 {
+    writeln("Begin");
     var x = tensor.arange(3,5);
     writeln(x);
-    writeln(x.array);
-    on x.device { x.array = x.array.reshape(5,3);}
+    // writeln(x.array);
+    on x.device { x.array = x.array.reshape(5,4);}
+    // writeln(x.array.shape);
     writeln(x);
+    on x.device { x.array = x.array.reshape(1,5,4).reshape(3,5);}
+    writeln(x);
+
+}
+
+{
+    var x = tensor.arange(10);
+    writeln(x);
+    var y = x.sum(0);
+    writeln(y);
+    y.backward();
+    writeln(x.grad);
+    writeln(y.grad);
 }
 
 // inline iter _domain.each {

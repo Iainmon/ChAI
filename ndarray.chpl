@@ -133,7 +133,6 @@ record ndarray : writeSerializable {
     }
 
     proc reshape(dom: ?t): ndarray(dom.rank,eltType) where isDomainType(t) && dom.rank != rank {
-        writeln("Hello");
         param newRank: int = dom.rank;
         var arr: ndarray(newRank,eltType) = new ndarray(dom,eltType);
         const selfDomain = data.domain;
