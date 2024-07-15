@@ -634,7 +634,14 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
 
 
 inline proc type ndarray.fromRanges(type eltType = real, rngs: range...?rank): ndarray(rank,eltType) {
-    return new ndarray({(...rngs)},eltType);
+    const dom_ = {(...rngs)};
+    const dom = util.domainFromShape((...dom_.shape));
+    var a = new ndarray(dom,eltType);
+    foreach i in 0..<dom.size with (ref a) {
+        const idx = dom.orderToIndex(i);
+        a.data[idx] = i : eltType;
+    }
+    return a;
 }
 
 
@@ -776,3 +783,168 @@ class _tensor_resource {
 
 // type T = (int,real);
 // writeln(T:string,isTupleType(T));
+
+
+
+
+
+proc type ndarray.fullOuter(a: ndarray(?rankA,?eltType), b: ndarray(?rankB, eltType)): ndarray(rankA + rankB, eltType) {
+    param rankC = rankA + rankB;
+    var newShape: rankC * int = ((...a.shape), (...b.shape));
+    const domC = util.domainFromShape((...newShape));
+    var c: ndarray(rankC,eltType) = new ndarray(domC,eltType);
+    ref cData = c.data;
+    foreach i in domC.each {
+        const aIdx = i.slice(0,rankA); // i(0..<rankA);
+        const bIdx = i.slice(rankA+1,rankB); // i(rankA..<rankB);
+        cData[i] = a.data[aIdx] * b.data[bIdx];
+    }
+    return c;
+}
+
+proc type ndarray.contract(a: ndarray(?rankA,?eltType), b: ndarray(?rankB, eltType), param axisA: int, param axisB: int) {
+    const axA = a.domain.dim(axisA);
+    const axB = b.domain.dim(axisB);
+    if axA != axB then halt("Not same axes!");
+
+    param newRank = a.rank + b.rank - 2;
+    const contractedShapeA = a.shape.removeIdx(axisA);
+    const contractedShapeB = b.shape.removeIdx(axisB);
+
+
+    const newShape = ((...contractedShapeA),(...contractedShapeB));
+    const dom = util.domainFromShape((...newShape));
+    var c: ndarray(newRank, eltType) = new ndarray(dom,eltType);
+    foreach i in c.domain.each with (ref c) {
+        var idxA: a.rank * int = i.slice(0,contractedShapeA.size).insertIdx(axisA,0);
+        var idxB: b.rank * int = i.slice(contractedShapeA.size,newRank).insertIdx(axisB,0);
+        var sum: eltType = 0;
+        for (ai,bi) in {a.domain.dim(axisA),b.domain.dim(axisB)} {
+            idxA(axisA) = ai;
+            idxB(axisB) = bi;
+            sum += a.data[idxA] * b.data[idxB];
+        }
+        c.data[i] = sum;
+    }
+    return c;
+}
+
+proc splitAt(param s: string, param del: string, param idx: int = 0) param {
+    if s[idx] == del {
+        return "";
+    } else {
+        return s[idx] + splitAt(s,del,idx + 1);
+    }
+}
+
+proc getFirstIdx(param s: string, param del: string, param idx: int = 0) param {
+    if s[idx] == del {
+        return idx;
+    } else {
+        return getFirstIdx(s,del,idx + 1);
+    }
+}
+
+proc sliceGeneric(type t, param start: int, param stop: int, param s: t, param idx: int = start) param {
+    compilerAssert(start <= stop);
+    compilerAssert(stop <= s.size);
+    if start <= idx && idx < stop {
+        return s[idx] + slice(start,stop,s,idx + 1);
+    } else {
+        param zero: t;
+        return zero;
+    }
+}
+
+proc slice(param start: int, param stop: int, param s: string, param idx: int = start) param {
+    compilerAssert(start <= stop);
+    compilerAssert(stop <= s.size);
+    if start <= idx && idx < stop {
+        return s[idx] + slice(start,stop,s,idx + 1);
+    } else {
+        param zero: string;
+        return zero;
+    }
+}
+
+proc take(param count: int, param s: string) param do
+    return slice(0,count,s);
+
+proc drop(param count: int, param s: string) param do
+    return slice(count,s.size,s);
+
+
+// proc parseArgs(param s: string) param  {
+//     // var fst: string;
+//     // var snd: string;
+//     param fst = splitAt(s,",");
+//     param snd = splitAt(drop(fst.size + 1,s),"-");
+
+//     return (fst,snd);
+// }
+
+proc type ndarray.einsum(param subscripts: string,a: ndarray(?rankA,?eltType), b: ndarray(?rankB, eltType)) {
+
+    for param i in 0..<subscripts.size {
+        param c = subscripts[i];
+        // writeln(c);
+    }
+    param fst = splitAt(subscripts,",");
+    param subscripts_1 = subscripts.drop(fst.size + 1);
+    param snd = splitAt(subscripts_1,"-");
+    param subscripts_2 = subscripts_1.drop(snd.size + 2);
+
+    writeln((fst,snd,subscripts_2));
+
+
+    for param i in 0..<fst.size {
+        param ci = fst[i];
+        if fst.countOccurrences(ci) != subscripts_2.countOccurrences(ci) {
+            for param j in 0..<snd.size {
+                param cj = snd[j];
+                if snd.countOccurrences(cj) != subscripts_2.countOccurrences(cj) {
+                    return ndarray.contract(a,b,i,j);
+                }
+            }
+        }
+    }
+    // compilerError("Must sum across one axis!");
+    return a;//ndarray.fullOuter(a,b);
+}
+
+
+proc main() {
+    writeln("Hello!");
+    // {
+    //     var A = ndarray.fromRanges(real, 0..<5);
+    //     var B = ndarray.fromRanges(real, 0..<3);
+
+    //     A.data += 1;
+    //     B.data += 1;
+
+    //     writeln(A);
+    //     writeln(B);
+        
+    //     var C = ndarray.fullOuter(A,B);
+    //     writeln(C);
+
+    //     var t = (1,2,3,4,5,6);
+    //     writeln(t);
+    //     writeln(t.removeIdx(3));
+    // }
+
+    var A = ndarray.fromRanges(real, 0..<5,0..<3);
+    var B = ndarray.fromRanges(real, 0..<3,0..<7);
+
+    A.data += 1;
+    B.data += 1;
+
+    var D = ndarray.contract(A,B,1,0);
+    writeln(D);
+
+    var E = ndarray.einsum("ij,kh->ih",A,B);
+    writeln(E);
+
+    // param r = 0..<3;
+    // writeln(r);
+}

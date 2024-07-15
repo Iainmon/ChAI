@@ -180,6 +180,56 @@ module Utilities {
             return imgs;
         }
 
+        proc _tuple.slice(param low: int, param high: int): (high - low) * this.eltType where isHomogeneousTuple(this) && low < high && 0 <= low && high <= this.size {
+            param newRank = high - low;
+            var slc: newRank * this.eltType;
+            for param i in 0..<slc.size do
+                slc(i) = this(i + low);
+            return slc; 
+        }
+
+        proc _tuple.removeIdx(param idx: int): (this.size - 1) * this.eltType {
+            param newRank = this.size - 1;
+            var nw: newRank * this.eltType;
+            var offset = 0;
+            for param i in 0..<this.size {
+                if i == idx {
+                    offset += 1;
+                } else {
+                    nw(i - offset) = this(i);
+                }
+            }
+            return nw; 
+        }
+
+        proc _tuple.untuplify() do
+            if this.size == 1 { return this(0); } else { return this; }
+
+
+        proc _tuple.slice(param start: int, param stop: int, param idx: int = start) param {
+            compilerAssert(start <= stop);
+            compilerAssert(stop <= this.size);
+            compilerAssert(start <= idx);
+            compilerAssert(idx < stop);
+            if idx < stop - 1 {
+                return (this(idx),(...this.slice(start,stop,idx + 1)));
+            } else {
+                return (this(idx),);
+            }
+        }
+
+        proc _tuple.insertIdx(param idx: int, x: this.eltType): (this.size + 1) * this.eltType {
+            param newRank = this.size + 1;
+            var nw: newRank * this.eltType;
+            var offset = 0;
+            for param i in 0..<idx do
+                nw(i) = this(i);
+            nw(idx) = x;
+            for param i in (idx + 1)..<newRank do
+                nw(i) = this(i - 1);
+            return nw;
+        }
+
         inline iter _domain.each {
             for i in 0..<this.size {
                 yield this.orderToIndex(i);
@@ -231,6 +281,37 @@ module Utilities {
                 return false;
             }
         }
+
+
+        inline proc param string.this(param start: int, param stop: int) param do
+            return this.slice(start,stop);
+
+        inline proc param string.slice(param start: int, param stop: int, param idx: int = start) param {
+            compilerAssert(start <= stop);
+            compilerAssert(stop <= this.size);
+            if start <= idx && idx < stop {
+                return this[idx] + slice(start,stop,idx + 1);
+            } else {
+                return "";
+            }
+        }
+
+        inline proc param string.take(param count: int) param do
+            return this.slice(0,count);
+
+        inline proc param string.drop(param count: int) param do
+            return this.slice(count,this.size);
+
+        inline proc param string.countOccurrences(param c: string, param idx: int = 0) param {
+            if idx == this.size {
+                return 0;
+            } else if c == this[idx] {
+                return 1 + this.countOccurrences(c,idx + 1);
+            } else {
+                return countOccurrences(c,idx + 1);
+            }
+        }
+            
 
     }
 }

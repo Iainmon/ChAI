@@ -7,6 +7,12 @@ import Utilities as util;
 use Utilities.Standard;
 
 
+
+record Tensor {
+    
+}
+
+
 record tensor : writeSerializable {
     param rank: int;
     type eltType = real(64);
