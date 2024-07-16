@@ -272,6 +272,7 @@ proc type tensor.ones(type eltType,shape: int...?rank): tensor(rank,eltType) do
     return tensor.fromShape(eltType,(...shape),value=1 : eltType);
 
 
+
 config const n = 100;
 config const diag = false;
 config const size = 3;
