@@ -94,7 +94,7 @@ module Utilities {
         return {(...shape)};
     }
 
-    inline proc domainFromShape(shape: int ...?rank): domain(rank,int) {
+     proc domainFromShape(shape: int ...?rank): domain(rank,int) {
         const _shape = shape;
         var ranges: rank*range;
         for param i in 0..<rank do
@@ -230,6 +230,11 @@ module Utilities {
             return nw;
         }
 
+        // inline operator =(ref tup: _tuple, v: tup(0).type) where isHomogeneousTuple(tup) {
+        //     for param i in 0..<tup.size do
+        //         tup(i) = v;
+        // }
+
         inline iter _domain.each {
             for i in 0..<this.size {
                 yield this.orderToIndex(i);
@@ -311,7 +316,17 @@ module Utilities {
                 return countOccurrences(c,idx + 1);
             }
         }
-            
+
+        inline proc param string.takeUntil(param del: string, param idx: int = 0, param keepDel: bool = false) param {
+            if this[idx] == del {
+                if keepDel then
+                    return this[idx];
+                else
+                    return "";
+            } else {
+                return this[idx] + this.takeUntil(del,idx + 1);
+            }
+        }
 
     }
 }

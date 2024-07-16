@@ -62,8 +62,8 @@ proc readShape(fr) {
 }
 proc loadNumpyArray(path: string): owned NoRankArray {
     var deserializer = new IO.binaryDeserializer(IO.endianness.little);
-    var fr = IO.openReader(path, deserializer=deserializer);
-
+    var fr = IO.openReader(path, deserializer=deserializer,locking=true);
+    // writeln(fr.type:string);
 
     fr.readThrough(b"descr': '");
     const desc = fr.readThrough(b"'",stripSeparator=true);
@@ -91,17 +91,20 @@ proc loadNumpyArray(path: string): owned NoRankArray {
     }
 }
 
-var result = loadNumpyArray("/Users/iainmoncrief/Documents/gputil/notebooks/numpy_x.npy");
 
-if var r1Arr = result : ArrClass(1)? {
-    writeln(r1Arr.rank, " ", r1Arr.data);
-} else if var r2Arr = result : ArrClass(2)? {
-    writeln(r2Arr.rank, " ", r2Arr.data);
-}
+proc main() {
+    var result = loadNumpyArray("/Users/iainmoncrief/Documents/gputil/notebooks/numpy_x.npy");
 
-result = loadNumpyArray("/Users/iainmoncrief/Documents/gputil/notebooks/numpy_y.npy");
-if var r1Arr = result : ArrClass(1)? {
-    writeln(r1Arr.rank, " ", r1Arr.data);
-} else if var r2Arr = result : ArrClass(2)? {
-    writeln(r2Arr.rank, " ", r2Arr.data);
+    if var r1Arr = result : ArrClass(1)? {
+        writeln(r1Arr.rank, " ", r1Arr.data);
+    } else if var r2Arr = result : ArrClass(2)? {
+        writeln(r2Arr.rank, " ", r2Arr.data);
+    }
+
+    result = loadNumpyArray("/Users/iainmoncrief/Documents/gputil/notebooks/numpy_y.npy");
+    if var r1Arr = result : ArrClass(1)? {
+        writeln(r1Arr.rank, " ", r1Arr.data);
+    } else if var r2Arr = result : ArrClass(2)? {
+        writeln(r2Arr.rank, " ", r2Arr.data);
+    }
 }

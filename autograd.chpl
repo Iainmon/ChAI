@@ -6,9 +6,35 @@ use remote;
 import Utilities as util;
 
 
-class BaseTensorResource {
+inline proc checkRank(te: shared TensorEssence(?eltType), param rank: int): bool {
+    if var x = te : shared BaseTensorResource(eltType,rank)? then
+        return true;
+    else 
+        return false;
+}
+
+proc getRank(te: shared TensorEssence(?eltType)): int {
+    for param i in 0..10 do
+        if checkRank(te,i) then return i;
+    // Who would need an 11 tensor?
+    halt("Unable to find rank for this tensor. Rank may be too high.");
+}
+
+proc forceRank(te: shared TensorEssence(?eltType),param rank: int): shared BaseTensorResource(eltType,rank) {
+    return te: shared BaseTensorResource(eltType,rank);
+    // if var ? then
+    //     return tr!;
+    // else
+    //     halt("Unable to force this TensorEssence to rank " + rank : string + " .");
+}
+
+class TensorEssence {
+    type eltType = real;
+}
+
+class BaseTensorResource : TensorEssence {
     param rank: int;
-    type eltType = real(64);
+    // type eltType = real(64);
     var dataResource: remote(ndarray(rank,eltType));
     var gradResource: remote(ndarray(rank,eltType));
     // forwarding resource only to, access, device;
@@ -51,12 +77,12 @@ class TensorResource : BaseTensorResource(?) {
     var operationData: operation;
 
     proc init(param rank: int, type eltType, type operation) {
-        super.init(rank,eltType);
+        super.init(eltType,rank);
         this.operation = operation;
     }
 
     proc init(param rank: int, type eltType, operationData: ?operation) {
-        super.init(rank,eltType);
+        super.init(eltType,rank);
         this.operation = operation;
         this.operationData = operationData;
     }
@@ -65,7 +91,7 @@ class TensorResource : BaseTensorResource(?) {
         resource.to(device_);
         var dataRes = resource;
         var gradRes = resource.copy();
-        super.init(rank,eltType,dataRes,gradRes);
+        super.init(eltType,rank,dataRes,gradRes);
         this.operation = operation;
         this.operationData = operationData;
     }
@@ -168,8 +194,8 @@ record reluOp {
 record addOp {
     param rank: int;
     type eltType;
-    var lhs: shared BaseTensorResource(rank,eltType);
-    var rhs: shared BaseTensorResource(rank,eltType);
+    var lhs: shared BaseTensorResource(eltType,rank);
+    var rhs: shared BaseTensorResource(eltType,rank);
 
     proc children do return (lhs,rhs);
 
@@ -209,8 +235,8 @@ record subOp {
 record multOp {
     param rank: int;
     type eltType;
-    var lhs: shared BaseTensorResource(rank,eltType);
-    var rhs: shared BaseTensorResource(rank,eltType);
+    var lhs: shared BaseTensorResource(eltType,rank);
+    var rhs: shared BaseTensorResource(eltType,rank);
 
     proc children do return (lhs,rhs);
 
@@ -242,7 +268,7 @@ record reshapeOp {
     param newRank: int;
     type eltType;
     var shape: newRank * int;
-    var input: shared BaseTensorResource(oldRank,eltType);
+    var input: shared BaseTensorResource(eltType,oldRank);
 
     proc children do return (input,);
 
@@ -261,7 +287,7 @@ record permuteOp {
     param rank: int;
     type eltType = real;
     var permutation; // tuple of ints
-    var input: shared BaseTensorResource(rank,eltType);
+    var input: shared BaseTensorResource(eltType,rank);
 
     proc children do return (input,);
 
@@ -280,7 +306,7 @@ record expandOp {
     param rank: int;
     type eltType = real;
     var expandedShape: rank*int; // tuple of ints
-    var input: shared BaseTensorResource(rank,eltType);
+    var input: shared BaseTensorResource(eltType,rank);
 
     proc children do return (input,);
 
@@ -314,7 +340,7 @@ record padOp {
     type eltType = real;
     var arg: rank * (2 * int);
     var value: eltType;
-    var input: shared BaseTensorResource(rank,eltType);
+    var input: shared BaseTensorResource(eltType,rank);
 
     proc children do return (input,);
 
@@ -340,7 +366,7 @@ record shrinkOp {
     param rank: int;
     type eltType = real;
     var arg: rank * (2 * int);
-    var input: shared BaseTensorResource(rank,eltType);
+    var input: shared BaseTensorResource(eltType,rank);
 
     proc children do return (input,);
 
@@ -366,7 +392,7 @@ record sliceOp {
     param rank: int;
     type eltType = real;
     var dom: domain(rank,int);
-    var input: shared BaseTensorResource(rank,eltType);
+    var input: shared BaseTensorResource(eltType,rank);
 
     proc children do return (input,);
 
@@ -385,8 +411,8 @@ record sliceOp {
 record layerSliceOp {
     param rank: int;
     type eltType = real;
-    var base: shared BaseTensorResource(rank,eltType);
-    var mask: shared BaseTensorResource(rank,eltType);
+    var base: shared BaseTensorResource(eltType,rank);
+    var mask: shared BaseTensorResource(eltType,rank);
     var maskDomain: domain(rank,int);
 
     proc children do return (base,mask);
@@ -414,7 +440,7 @@ record sumOp {
     type eltType = real;
     param sumRank: int;
     var axes: sumRank * int; // tuple of ints
-    var input: shared BaseTensorResource(rank,eltType);
+    var input: shared BaseTensorResource(eltType,rank);
 
     proc children do return (input,);
 
@@ -485,8 +511,8 @@ record sumOp {
 // https://www.adityaagrawal.net/blog/deep_learning/bprop_strided_conv
 record conv2DOp {
     type eltType = real;
-    var features: shared BaseTensorResource(3,eltType);
-    var kernel: shared BaseTensorResource(4,eltType);
+    var features: shared BaseTensorResource(eltType,3);
+    var kernel: shared BaseTensorResource(eltType,4);
     var stride: int;
 
     proc children do return (features,kernel);

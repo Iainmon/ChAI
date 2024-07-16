@@ -889,12 +889,14 @@ proc type ndarray.einsum(param subscripts: string,a: ndarray(?rankA,?eltType), b
         param c = subscripts[i];
         // writeln(c);
     }
-    param fst = splitAt(subscripts,",");
+    param fst = subscripts.takeUntil(",");
     param subscripts_1 = subscripts.drop(fst.size + 1);
     param snd = splitAt(subscripts_1,"-");
     param subscripts_2 = subscripts_1.drop(snd.size + 2);
-
-    writeln((fst,snd,subscripts_2));
+    // param thd 
+    // param fth
+    // param vth
+    // writeln((fst,snd,subscripts_2));
 
 
     for param i in 0..<fst.size {
@@ -944,7 +946,39 @@ proc main() {
 
     var E = ndarray.einsum("ij,kh->ih",A,B);
     writeln(E);
+    E[1,1] = 2;
+
 
     // param r = 0..<3;
     // writeln(r);
 }
+
+// var arr: Tensor(real) = loadArr("");
+// arr[1,3,4]
+// a
+
+// proc _dom 
+
+// arr + arr;
+
+//   private proc remoteWrapperTypeForIR(value) type {
+//     // var arr = value;
+//     // return owned _remoteVarContainer(arr.type);
+
+//     if value == 15 {
+//         return int;
+//     } else {
+//         return bool;
+//     }
+//   }
+
+
+
+// var t: tensor(2,real);
+// t.data
+// t.data[1..5,1..5] = t[1..5,1..5] 
+// t[1..5,1..5]  = 1;
+
+// var a = t[1..5,1..6] + t[1..5,1..6];
+
+// proc tensor.init=

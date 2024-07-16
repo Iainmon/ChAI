@@ -7,16 +7,29 @@ import Utilities as util;
 use Utilities.Standard;
 
 
+// class TensorEssence {}
 
-record Tensor {
-    
-}
+// class BaseTensorResource : TensorEssence {
+//     param rank: int;
+//     type eltType = real(64);
+//     var dataResource: remote(ndarray(rank,eltType));
+//     var gradResource: remote(ndarray(rank,eltType));
+// }
+
+// class TensorResource : BaseTensorResource(?) {
+//     type operation;
+//     var operationData: operation;
+// }
+
+
+
+
 
 
 record tensor : writeSerializable {
     param rank: int;
     type eltType = real(64);
-    var resource: shared BaseTensorResource(rank,eltType);
+    var resource: shared BaseTensorResource(eltType,rank);
     forwarding resource only to, array, grad, device, backward;
 
     proc meta do return this.resource;
@@ -29,7 +42,7 @@ record tensor : writeSerializable {
         this.resource = new shared TensorResource(rank,eltType,baseValue);
     }
 
-    proc init(resource: shared BaseTensorResource(?rank,?eltType), param strict: bool = false) {
+    proc init(resource: shared BaseTensorResource(?eltType,?rank), param strict: bool = false) {
         this.rank = rank;
         this.eltType = eltType;
         this.resource = resource;
@@ -249,7 +262,8 @@ proc type tensor.arange(to: int,type eltType = real,shape: ?rank*int): tensor(ra
 }
 
 proc type tensor.arange(shape: int...?rank): tensor(rank,real) {
-    const dom = util.domainFromShape((...shape));
+    const _shape: rank * int = shape;
+    const dom = util.domainFromShape((..._shape));
     const to = dom.size;
     const A: [dom] real = foreach (_,x) in zip(dom,0..<to) do x:real;
     return new tensor(A);
@@ -271,337 +285,341 @@ proc type tensor.zeros(type eltType,shape: int...?rank): tensor(rank,eltType) do
     return tensor.fromShape(eltType,(...shape),0 : eltType);
 
 proc type tensor.ones(shape: int...?rank): tensor(rank,real) do
-    return tensor.fromShape(real,(...shape),1.0);
+    return tensor.fromShape(real,(...shape),value=1.0);
 
 proc type tensor.ones(type eltType,shape: int...?rank): tensor(rank,eltType) do
-    return tensor.fromShape(eltType,(...shape),1 : eltType);
+    return tensor.fromShape(eltType,(...shape),value=1 : eltType);
 
 
 config const n = 100;
 config const diag = false;
 config const size = 3;
 
-if diag {
-    use GpuDiagnostics;
-
-    startGpuDiagnostics();
-    startVerboseGpu();
-}
-
-// arange(15,real,(3,5));
-
-var t = new tensor(2,real);
-t.array.reshapeDomain({0..<3,0..<5});
-t.to(defaultDevice);
-on t.device {
-    ref tarr = t.array;
-    ref tdata = tarr.data;
-    // tdata += 1.0;
-    // foreach i in tdata.domain do
-    //     tdata[i] = tdata[i] + 1.0;
-    // tdata = foreach x in tdata do x + 1.0; // causes grained kernel launches 
-    foreach i in tarr.data.domain.each do
-        tdata[i] = tarr.data[i] + 1.0;
-}
+proc main() {
 
 
-const run1 = false;
-if run1 {
+
+    if diag {
+        use GpuDiagnostics;
+
+        startGpuDiagnostics();
+        startVerboseGpu();
+    }
+
+    // arange(15,real,(3,5));
+
+    var t = new tensor(2,real);
+    t.array.reshapeDomain({0..<3,0..<5});
+    t.to(defaultDevice);
+    on t.device {
+        ref tarr = t.array;
+        ref tdata = tarr.data;
+        // tdata += 1.0;
+        // foreach i in tdata.domain do
+        //     tdata[i] = tdata[i] + 1.0;
+        // tdata = foreach x in tdata do x + 1.0; // causes grained kernel launches 
+        foreach i in tarr.data.domain.each do
+            tdata[i] = tarr.data[i] + 1.0;
+    }
+
+
+    const run1 = false;
+    if run1 {
+        var M = tensor.arange(15,real,(5,3));
+        writeln(M);
+        var u = tensor.arange(3,real,(1,3));
+        writeln(u);
+
+        var x = u.expand(5,3);
+        writeln(x);
+
+        var Mx = M * x;
+        writeln(Mx);
+
+        var y = Mx.sum(1);
+        writeln(y);
+
+
+        var u_ = tensor.arange(3,real,(3,));
+        var y_ = matvec(M,u_);
+
+        writeln(y_);
+        var z = y_.sum(0);
+        writeln(z);
+
+        // z.backward();
+
+
+        writeln(M.grad);
+    }
+
+
+
     var M = tensor.arange(15,real,(5,3));
     writeln(M);
-    var u = tensor.arange(3,real,(1,3));
-    writeln(u);
 
-    var x = u.expand(5,3);
+    var x = tensor.arange(9,real,(3,3));
     writeln(x);
 
-    var Mx = M * x;
-    writeln(Mx);
-
-    var y = Mx.sum(1);
+    var y = matvec(M,x);
     writeln(y);
 
-
-    var u_ = tensor.arange(3,real,(3,));
-    var y_ = matvec(M,u_);
-
-    writeln(y_);
-    var z = y_.sum(0);
-    writeln(z);
-
-    // z.backward();
-
-
-    writeln(M.grad);
-}
+    // y.sum(0).sum(0).backward();
+    // writeln(M.grad);
 
 
 
-var M = tensor.arange(15,real,(5,3));
-writeln(M);
+    const run2 = false;
+    if run2 {
+        var W = M.grad;
+        var Q = W.shrink((1,3),(1,2));
+        writeln(Q);
+        writeln(Q.domain);
 
-var x = tensor.arange(9,real,(3,3));
-writeln(x);
+        var U = W.pad((0,3),(0,0));
+        writeln(U);
+    }
 
-var y = matvec(M,x);
-writeln(y);
+    const run3 = false;
+    if run3 {
+        var W = tensor.ones(5,3);
+        var Q = W.shrink((1,3),(1,2));
+        writeln(Q);
 
-// y.sum(0).sum(0).backward();
-// writeln(M.grad);
+        var U = W.pad((1,3),(0,0),68);
+        writeln(U);
 
+        U.slice(0..2,0..2).sum(0).sum(0).backward();
+        U[0..2,0..2].sum(0).sum(0).backward();
 
+        writeln(W.grad);
 
-const run2 = false;
-if run2 {
-    var W = M.grad;
-    var Q = W.shrink((1,3),(1,2));
-    writeln(Q);
-    writeln(Q.domain);
+        writeln(tensor.arange(5,2));
 
-    var U = W.pad((0,3),(0,0));
-    writeln(U);
-}
-
-config const run3 = false;
-if run3 {
-    var W = tensor.ones(5,3);
-    var Q = W.shrink((1,3),(1,2));
-    writeln(Q);
-
-    var U = W.pad((1,3),(0,0),68);
-    writeln(U);
-
-    U.slice(0..2,0..2).sum(0).sum(0).backward();
-    U[0..2,0..2].sum(0).sum(0).backward();
-
-    writeln(W.grad);
-
-    writeln(tensor.arange(5,2));
-
-    var a = tensor.arange(4);
-    writeln(a);
-    writeln(a.unsqueeze(1));
+        var a = tensor.arange(4);
+        writeln(a);
+        writeln(a.unsqueeze(1));
 
 
-    var img = tensor.arange(3,9,9);
-    var ker = tensor.arange(1,3,3,3);
-    var fet = tensor.convolve(img,ker,2);
-    writeln(fet);
+        var img = tensor.arange(3,9,9);
+        var ker = tensor.arange(1,3,3,3);
+        var fet = tensor.convolve(img,ker,2);
+        writeln(fet);
 
-    var b = tensor.arange(1,3,3);
+        var b = tensor.arange(1,3,3);
 
-    writeln(b.dilate(1));
-    writeln(b.dilate(1).maxPool(2));
-}
+        writeln(b.dilate(1));
+        writeln(b.dilate(1).maxPool(2));
+    }
 
 
 
 
-var img = tensor.arange(1,9,9);
-writeln(img);
+    var img = tensor.arange(1,9,9);
+    writeln(img);
 
-var ker = tensor.arange(1,1,3,3);
-var fet = tensor.convolve(img,ker,1);
-writeln("Features:", fet);
-var sm = fet.sum(0).sum(0).sum(0);
-writeln(sm);
-sm.backward();
-writeln(img.grad);
-writeln(ker.grad);
+    var ker = tensor.arange(1,1,3,3);
+    var fet = tensor.convolve(img,ker,1);
+    writeln("Features:", fet);
+    var sm = fet.sum(0).sum(0).sum(0);
+    writeln(sm);
+    sm.backward();
+    writeln(img.grad);
+    writeln(ker.grad);
 
 
-{
-    writeln("Begin");
-    var x = tensor.arange(3,5);
-    writeln(x);
+    // {
+    //     writeln("Begin");
+    //     var x = tensor.arange(3,5);
+    //     writeln(x);
+    //     // writeln(x.array);
+    //     on x.device { x.array = x.array.reshape(5,4);}
+    //     // writeln(x.array.shape);
+    //     writeln(x);
+    //     on x.device { x.array = x.array.reshape(1,5,4).reshape(3,5);}
+    //     writeln(x);
+
+    // }
+
+    // {
+    //     var x = tensor.arange(10);
+    //     writeln(x);
+    //     var y = x.sum(0);
+    //     writeln(y);
+    //     y.backward();
+    //     writeln(x.grad);
+    //     writeln(y.grad);
+    // }
+
+    // inline iter _domain.each {
+    //     for i in 0..<this.size {
+    //         yield this.orderToIndex(i);
+    //     }
+    // }
+
+    // const R = 0..<10;
+    // writeln(R,R.type:string);
+
+    // const D = {R,R};
+    // writeln(D,D.type:string);
+
+    // const D2: util.Types.stdDomain = {R,R};
+    // writeln(D2,D2.type:string);
+
+    // const D = {0..<3,0..<5};
+    // foreach (a,b) in D.each do
+    //     writeln((a,b));
+
+    // img = tensor.arange(1,9,9);
+    // ker = tensor.arange(1,1,3,3);
+    // fet = tensor.convolve(img,ker,2);
+    // sm = fet.sum(0).sum(0).sum(0);
+    // writeln(sm);
+    // sm.backward();
+    // writeln(fet.array.shape);
+    // writeln(fet);
+    // writeln(img.grad);
+    // writeln(ker.grad);
+    // foreach i in img.array.domain with (ref img) {
+    //     img.array.data[i] = 2.0;
+    // }
+
+    // writeln(x.array.data[1,0]);
+
+    // const ar = arange(15,real,(3,5));
+    // var t = new tensor(ar);
+    // t.to(here.gpus[0]);
+    // // writeln(ar.data.locale);
+    // // writeln(t.array.data.locale);
+    // on t.device {
+    //     ref tarr = t.array;
+    //     ref tData = tarr.data;
+    //     var res = t.meta.dataResource;
+    // }
+
+    // var at = new tensor(arange(15,real,(3,5)));
+    // var bt = new tensor(arange(15,real,(3,5)));
+    // // writeln(a.array.data.locale,b.array.data.locale);
+    // const ar: ndarray(2,real) = arange(15,real,(3,5));
+    // var a = new remote(ar);
+    // var b = new remote(ar);
+    // writeln(a.access().data.locale,b.access().data.locale);
+
+    // var c = a + b;
+    // writeln(a.access().data.locale,b.access().data.locale);
+    // var ct = at + bt;
+
+    // var arr1 = new ndarray({0..size,0..size,0..size});
+    // var arr2 = new ndarray({0..size,0..size,0..size});
+
+    // var t1 = new tensor(arr1);
+    // var t2 = new tensor(arr2);
+
+    // var t1 = new tensor(3,real);
+    // var t2 = new tensor(3,real);
+    // t1.array.reshapeDomain({0..size,0..size,0..size});
+    // t2.array.reshapeDomain({0..size,0..size,0..size});
+    // var t3 = t1 + t2;
+    // writeln(t3.array);
+
+    // var t4 = t3.sum(0,1);
+    // writeln(t4.array);
+
+    // writeln("-----------------------------");
+
+    // var t = new tensor(2,real);
+    // t.array.reshapeDomain({0..<3,0..<5});
+    // for (i,n) in zip(t.array.domain,0..<15) do
+    //     t.array.data[i] = n;
+    // writeln(t.array.data,"\n -------------- ");
+
+    // var u = t.sum(0);
+    // writeln(u.array);
+
+    // var w = u.sum(0);
+    // writeln(w.array);
+
+    // var x = t.sum(1).sum(0);
     // writeln(x.array);
-    on x.device { x.array = x.array.reshape(5,4);}
-    // writeln(x.array.shape);
-    writeln(x);
-    on x.device { x.array = x.array.reshape(1,5,4).reshape(3,5);}
-    writeln(x);
+
+    // var y = (t + t).sum(0,1);
+    // writeln(y);
+    // writeln(y);
+
+
+    // writeln(t.grad);
+
+    // y.resource.backward();
+
+    // writeln(t.grad);
+
+    // y.resource.backward();
+    // writeln(t);
+
+    // var z = arange(15,real,(3,5));
+    // writeln(z);
+
+    // var T = new tensor(z);
+
+    // var s = (T * T).sum(0,1);
+    // writeln(s);
+    // s.resource.backward();
+    // writeln(T.grad);
+
+    // var X = X.expand();
+    // for i in 0..n {
+    //     t3 = t3 + t1 + t2;
+    // }
+
+
+
+    // var input1 = new shared TensorResource(arr1,new baseValue());
+    // var input2 = new shared TensorResource(arr2,new baseValue());
+    // var sum = new shared TensorResource(1,real(64), new addOp(1,real,input1,input2));
+
+    // var t1 = new tensor(input1);
+    // var t2 = new tensor(input2);
+    // var t3 = new tensor(sum);
+
+    // writeln(t1);
+    // writeln(t2);
+    // writeln(t3.array);
+
+    // t3.forward();
+    // writeln(t3.array);
+
+    // writeln(t3.type:string);
+
+    // var t4 = t1 + t2;
+    // writeln(t1.data);
+
+    // // writeln((t1 * t2).data);
+
+    // var x = (t1 * t2).reshape({0..1});
+
+
+    // writeln(x.array);
+
+    // var rl = (t2 * t1).relu();
+    // writeln(rl.array);
+
+    // var matInput = for (i,j) in {0..<2,0..<3} do arr1[i] * arr2[j];
+
+    // var mat = new tensor(new ndarray(matInput));
+    // writeln(mat.array.shape,mat.array);
+
+    // var prm = mat.permute(1,0);
+    // writeln(prm.array.shape,prm.array);
+
+    // writeln((t4.meta : shared TensorResource(1,real,addOp(1,real))).operationData.backward(t4.array));
+
+    // var mInput = for (i,j) in {0..<3,0..<1} do i * 10.0 + j + 1;
+    // var m = new ndarray(mInput);
+    // writeln(m.data,m.shape);
+    // var mExpanded = m.expand(3,4);
+    // writeln(mExpanded.data,mExpanded.shape);
 
 }
-
-{
-    var x = tensor.arange(10);
-    writeln(x);
-    var y = x.sum(0);
-    writeln(y);
-    y.backward();
-    writeln(x.grad);
-    writeln(y.grad);
-}
-
-// inline iter _domain.each {
-//     for i in 0..<this.size {
-//         yield this.orderToIndex(i);
-//     }
-// }
-
-// const R = 0..<10;
-// writeln(R,R.type:string);
-
-// const D = {R,R};
-// writeln(D,D.type:string);
-
-// const D2: util.Types.stdDomain = {R,R};
-// writeln(D2,D2.type:string);
-
-// const D = {0..<3,0..<5};
-// foreach (a,b) in D.each do
-//     writeln((a,b));
-
-// img = tensor.arange(1,9,9);
-// ker = tensor.arange(1,1,3,3);
-// fet = tensor.convolve(img,ker,2);
-// sm = fet.sum(0).sum(0).sum(0);
-// writeln(sm);
-// sm.backward();
-// writeln(fet.array.shape);
-// writeln(fet);
-// writeln(img.grad);
-// writeln(ker.grad);
-// foreach i in img.array.domain with (ref img) {
-//     img.array.data[i] = 2.0;
-// }
-
-// writeln(x.array.data[1,0]);
-
-// const ar = arange(15,real,(3,5));
-// var t = new tensor(ar);
-// t.to(here.gpus[0]);
-// // writeln(ar.data.locale);
-// // writeln(t.array.data.locale);
-// on t.device {
-//     ref tarr = t.array;
-//     ref tData = tarr.data;
-//     var res = t.meta.dataResource;
-// }
-
-// var at = new tensor(arange(15,real,(3,5)));
-// var bt = new tensor(arange(15,real,(3,5)));
-// // writeln(a.array.data.locale,b.array.data.locale);
-// const ar: ndarray(2,real) = arange(15,real,(3,5));
-// var a = new remote(ar);
-// var b = new remote(ar);
-// writeln(a.access().data.locale,b.access().data.locale);
-
-// var c = a + b;
-// writeln(a.access().data.locale,b.access().data.locale);
-// var ct = at + bt;
-
-// var arr1 = new ndarray({0..size,0..size,0..size});
-// var arr2 = new ndarray({0..size,0..size,0..size});
-
-// var t1 = new tensor(arr1);
-// var t2 = new tensor(arr2);
-
-// var t1 = new tensor(3,real);
-// var t2 = new tensor(3,real);
-// t1.array.reshapeDomain({0..size,0..size,0..size});
-// t2.array.reshapeDomain({0..size,0..size,0..size});
-// var t3 = t1 + t2;
-// writeln(t3.array);
-
-// var t4 = t3.sum(0,1);
-// writeln(t4.array);
-
-// writeln("-----------------------------");
-
-// var t = new tensor(2,real);
-// t.array.reshapeDomain({0..<3,0..<5});
-// for (i,n) in zip(t.array.domain,0..<15) do
-//     t.array.data[i] = n;
-// writeln(t.array.data,"\n -------------- ");
-
-// var u = t.sum(0);
-// writeln(u.array);
-
-// var w = u.sum(0);
-// writeln(w.array);
-
-// var x = t.sum(1).sum(0);
-// writeln(x.array);
-
-// var y = (t + t).sum(0,1);
-// writeln(y);
-// writeln(y);
-
-
-// writeln(t.grad);
-
-// y.resource.backward();
-
-// writeln(t.grad);
-
-// y.resource.backward();
-// writeln(t);
-
-// var z = arange(15,real,(3,5));
-// writeln(z);
-
-// var T = new tensor(z);
-
-// var s = (T * T).sum(0,1);
-// writeln(s);
-// s.resource.backward();
-// writeln(T.grad);
-
-// var X = X.expand();
-// for i in 0..n {
-//     t3 = t3 + t1 + t2;
-// }
-
-
-
-// var input1 = new shared TensorResource(arr1,new baseValue());
-// var input2 = new shared TensorResource(arr2,new baseValue());
-// var sum = new shared TensorResource(1,real(64), new addOp(1,real,input1,input2));
-
-// var t1 = new tensor(input1);
-// var t2 = new tensor(input2);
-// var t3 = new tensor(sum);
-
-// writeln(t1);
-// writeln(t2);
-// writeln(t3.array);
-
-// t3.forward();
-// writeln(t3.array);
-
-// writeln(t3.type:string);
-
-// var t4 = t1 + t2;
-// writeln(t1.data);
-
-// // writeln((t1 * t2).data);
-
-// var x = (t1 * t2).reshape({0..1});
-
-
-// writeln(x.array);
-
-// var rl = (t2 * t1).relu();
-// writeln(rl.array);
-
-// var matInput = for (i,j) in {0..<2,0..<3} do arr1[i] * arr2[j];
-
-// var mat = new tensor(new ndarray(matInput));
-// writeln(mat.array.shape,mat.array);
-
-// var prm = mat.permute(1,0);
-// writeln(prm.array.shape,prm.array);
-
-// writeln((t4.meta : shared TensorResource(1,real,addOp(1,real))).operationData.backward(t4.array));
-
-// var mInput = for (i,j) in {0..<3,0..<1} do i * 10.0 + j + 1;
-// var m = new ndarray(mInput);
-// writeln(m.data,m.shape);
-// var mExpanded = m.expand(3,4);
-// writeln(mExpanded.data,mExpanded.shape);
-
-
 
 
 
