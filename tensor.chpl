@@ -109,7 +109,7 @@ operator +(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
     return new tensor(newMeta, strict = true);
 }
 
-operator -(ref a: tensor(?rank,?eltType), ref b: tensor(rank,eltType)) {
+operator -(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
     var ctx = new subOp(a.meta,b.meta);
     var newMeta = new shared TensorResource(rank,eltType,ctx);
     return new tensor(newMeta, strict = true);
@@ -641,6 +641,41 @@ proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer)
 
 
     writer.write("tensor(");
+    const shape = this.array.shape;
+    var first: bool = true;
+    for (x,i) in zip(this.array.data,0..) {
+        const idx = util.nbase(shape,i);
+        if idx[rank - 1] == 0 {
+            if !first {
+                writer.write("\n       ");
+            }
+            writer.write("[");
+        }
+        writer.writef("%{##.#}",x);
+        
+        if idx[rank - 1] < shape[rank - 1] - 1 {
+            if rank == 1 then
+                writer.write("  ");
+            else
+                writer.write("  ");
+        } else {
+            writer.write("]");
+        }
+        first = false;
+    }
+    writer.write(",\n       shape = ",this.array.data.shape);
+    writer.write(",\n       rank = ",this.rank);
+    writer.writeln(")");
+
+    this.to(prevDev);
+}
+
+
+proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer,param capitalT: bool) where capitalT == true {
+    const prevDev = this.device;
+    this.to(here);
+
+    writer.write("Tensor(");
     const shape = this.array.shape;
     var first: bool = true;
     for (x,i) in zip(this.array.data,0..) {

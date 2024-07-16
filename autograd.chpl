@@ -14,7 +14,7 @@ inline proc checkRank(te: shared TensorEssence(?eltType), param rank: int): bool
 }
 
 proc getRank(te: shared TensorEssence(?eltType)): int {
-    for param i in 0..10 do
+    for param i in 1..6 do
         if checkRank(te,i) then return i;
     // Who would need an 11 tensor?
     halt("Unable to find rank for this tensor. Rank may be too high.");
