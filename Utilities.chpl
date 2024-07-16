@@ -241,7 +241,13 @@ module Utilities {
             }
         }
 
-        inline iter _domain.each(param tag: iterKind) where tag == iterKind.standalone {
+        inline iter _domain.every() {
+            for i in 0..<this.size {
+                yield this.orderToIndex(i);
+            }
+        }
+
+        inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone {
             forall i in 0..<this.size {
                 yield this.orderToIndex(i);
             }

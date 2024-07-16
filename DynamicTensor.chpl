@@ -120,15 +120,14 @@ record Tensor : writeSerializable {
     // proc ref array(param rank: int) ref : ndarray(rank,eltType) do
     //     return this.resource(rank).array;
 
-    proc array(param rank: int) : ndarray(rank,eltType) {
-        return (this.meta : shared BaseTensorResource(eltType, rank)).array;
-    }
+    proc array(param rank: int) ref : ndarray(rank,eltType) do
+        return (this.meta.borrow() : borrowed BaseTensorResource(eltType, rank)).array;
 
     proc grad(param rank: int) ref : ndarray(rank,eltType) do
-        return this.resource(rank).grad;
+        return (this.meta.borrow() : borrowed BaseTensorResource(eltType, rank)).grad;
 
     proc data(param rank: int) : [] eltType do
-        return this.resource(rank).data;
+        return (this.meta.borrow() : borrowed BaseTensorResource(eltType, rank)).data;
 
 
     proc toNDArray(param rank: int) : ndarray(rank,eltType) {
@@ -257,13 +256,21 @@ writeln(t3.reshape(5,3));
 var t4 = t3.reshape(5,3);
 var t4t: tensor(2,real) = t4.tensorize(2);
 t4t.array.data[1,1] = 70;
+t4.array(2).data[0,0] = 99;
 // t4.array(2).data[0,0]=70; // this doesn't seem to work 
-writeln(t4t);
 
-writeln(t4);
+
+// forall (i,j) in t4t.domain.every() {
+//     writeln(t4t.array.data[i,j]);
+// }
+
+
 
 const a: ndarray(2,real) = t4.array(2);
 writeln(a);
+
+
+
 
 
 // config const iters = 50;
@@ -278,7 +285,7 @@ writeln(a);
 
 
 const npa = Tensor.loadFromNumpy("notebooks/numpy_y.npy");
-writeln(npa);
+// writeln(npa);
 // var t2 = t + t;
 // writeln(t2);
 
