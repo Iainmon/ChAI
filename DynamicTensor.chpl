@@ -2,6 +2,7 @@
 use ndarray;
 use remote;
 use autograd;
+import autograd as ag;
 use tensor;
 import Utilities as util;
 use Utilities.Standard;
@@ -41,9 +42,11 @@ record Tensor : writeSerializable {
     //     this.meta = t.meta;
     // }
 
-    proc forceTensor(param rank: int): tensor(rank,eltType) do
-        return new tensor(forceRank(meta,rank),strict=false);
+    proc forceRank(param rank: int): tensor(rank,eltType) do
+        return new tensor(ag.forceRank(meta,rank),strict=false);
 
+    proc checkRank(param rank: int): bool do
+        return ag.checkRank(meta,rank);
 }
 
 
@@ -92,12 +95,29 @@ operator -(a: Tensor(?eltType),b: Tensor(eltType)): Tensor(eltType) do
 operator *(a: Tensor(?eltType),b: Tensor(eltType)): Tensor(eltType) do
     return zipBinOp("*",a,b);
 
+
+proc Tensor.sum(axes: int...?r): Tensor(eltType) {
+    for param rank in 1..maxRank {
+        if this.checkRank(rank) then
+            return new Tensor(this.forceRank(rank).sum((...axes)));
+    }
+    halt("Could not determine rank in Tensor.sum.");
+    return new Tensor(eltType);
+}
+
+// Right now, the supported shapes are (3,4) -> 3
+proc type Tensor.convolve(features: Tensor(?eltType), kernel: Tensor(eltType), stride: int): Tensor(eltType) do
+    return new Tensor(tensor.convolve(features.forceRank(3),kernel.forceRank(4),stride));
+
+
 proc type Tensor.arange(args...) do
     return new Tensor(tensor.arange((...args)));
 
 proc type Tensor.ones(args...) do
     return new Tensor(tensor.ones((...args)));
 
+proc type Tensor.zeros(args...) do
+    return new Tensor(tensor.zeros((...args)));
 
 
 const t_: tensor(2,real) = tensor.arange(3,5);
@@ -107,6 +127,8 @@ const t2 = t + t;
 
 const t3 = Tensor.arange(3,5);
 writeln(t3 - Tensor.ones(3,5));
+
+writeln(t3.sum(0).sum(0));
 
 
 const npa = Tensor.loadFromNumpy("notebooks/numpy_y.npy");
@@ -119,8 +141,8 @@ writeln(npa);
 import IO;
 proc Tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer) {
     for param rank in 1..maxRank {
-        if checkRank(this.meta,rank) {
-            this.forceTensor(rank).serialize(writer,serializer,capitalT=true);
+        if this.checkRank(rank) {
+            this.forceRank(rank).serialize(writer,serializer,capitalT=true);
             return;
         }
     }

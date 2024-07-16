@@ -7,25 +7,6 @@ import Utilities as util;
 use Utilities.Standard;
 
 
-// class TensorEssence {}
-
-// class BaseTensorResource : TensorEssence {
-//     param rank: int;
-//     type eltType = real(64);
-//     var dataResource: remote(ndarray(rank,eltType));
-//     var gradResource: remote(ndarray(rank,eltType));
-// }
-
-// class TensorResource : BaseTensorResource(?) {
-//     type operation;
-//     var operationData: operation;
-// }
-
-
-
-
-
-
 record tensor : writeSerializable {
     param rank: int;
     type eltType = real(64);
