@@ -19,7 +19,7 @@ record Tensor : writeSerializable {
 
     var meta: shared TensorEssence(eltType);
 
-    var _cached_rank: int = -1;
+    var runtimeRank: int = -1;
 
     proc init(type eltType) {
         this.eltType = eltType;
@@ -30,16 +30,19 @@ record Tensor : writeSerializable {
     proc init(type eltType, meta: shared TensorEssence(eltType)) {
         this.eltType = eltType;
         this.meta = meta;
+        this.runtimeRank = meta.runtimeRank;
     }
 
     proc init(meta: shared TensorEssence(?eltType)) {
         this.eltType = eltType;
         this.meta = meta;
+        this.runtimeRank = meta.runtimeRank;
     }
 
     proc init(t: tensor(?rank,?eltType)) {
         this.eltType = eltType;
         this.meta = t.meta;
+        this.runtimeRank = t.meta.runtimeRank;
     }
 
     proc init(a: ndarray(?rank,?eltType)) do
@@ -54,24 +57,14 @@ record Tensor : writeSerializable {
     // }
 
     proc tensorize(param rank: int) : tensor(rank,eltType) {
-        // if rank != getRank() then 
-        //     halt("Cannot cast this Tensor of rank " + getRank(): string + " to tensor of rank " + rank : string + ".");
-        if var myMeta = meta : shared BaseTensorResource(eltType,rank)? {
-            var myMeta2 = meta : shared BaseTensorResource(eltType,rank);
-            return new tensor(myMeta2,strict=false);
-        } else {
-            halt("Cannot cast this Tensor to tensor of rank " + rank : string + ".");
-        }
+        if rank != runtimeRank then 
+            halt("Cannot cast this Tensor of rank " + runtimeRank: string + " to tensor of rank " + rank : string + ".");
         return forceRank(rank);
     }
 
-    // proc const ref tensorize(param rank: int) : tensor(rank,eltType) {
-    //     return forceRank(rank);
-    // }
-
     proc resource(param rank: int): shared BaseTensorResource(eltType,rank) {
-        if !this.checkRank(rank) then 
-            halt("Given rank " + rank : string + " does not match this Tensor.");
+        if runtimeRank != rank then 
+            halt("Given rank " + rank : string + " does not match this Tensor of rank " + runtimeRank : string);
         return forceRankMeta(rank);
     }
 
@@ -81,28 +74,13 @@ record Tensor : writeSerializable {
     proc forceRankMeta(param rank: int): shared BaseTensorResource(eltType,rank) do
         return meta : shared BaseTensorResource(eltType,rank);
 
-    proc _checkRank(param rank: int): bool {
+    proc hardCheckRank(param rank: int): bool {
         if var myMeta = meta : shared BaseTensorResource(eltType,rank)? then return true;
         return false;
     }
 
     proc checkRank(param rank: int): bool {
-        if 0 < _cached_rank then return rank == _cached_rank;
-        return this._checkRank(rank);
-        // return this.getRank() == rank;
-    }
-
-    proc getRank(): int {
-        if 0 < _cached_rank then 
-            return _cached_rank;
-        for param rank in 1..maxRank {
-            if this._checkRank(rank) {
-                _cached_rank = rank;
-                return rank;
-            }
-        }
-        halt("Unable to find my own rank.");
-        return -1;
+        return rank == runtimeRank;
     }
 
     proc to(device: locale) {
@@ -117,8 +95,6 @@ record Tensor : writeSerializable {
     }
 
 
-    // proc ref array(param rank: int) ref : ndarray(rank,eltType) do
-    //     return this.resource(rank).array;
 
     proc array(param rank: int) ref : ndarray(rank,eltType) do
         return (this.meta.borrow() : borrowed BaseTensorResource(eltType, rank)).array;
@@ -126,7 +102,7 @@ record Tensor : writeSerializable {
     proc grad(param rank: int) ref : ndarray(rank,eltType) do
         return (this.meta.borrow() : borrowed BaseTensorResource(eltType, rank)).grad;
 
-    proc data(param rank: int) : [] eltType do
+    proc data(param rank: int) ref : [] eltType do
         return (this.meta.borrow() : borrowed BaseTensorResource(eltType, rank)).data;
 
 
@@ -148,7 +124,7 @@ inline proc ndarray.toTensor(): Tensor(eltType) do
     return new Tensor(this);
 
 proc tensor.eraseRank(): Tensor(eltType) do
-    return new Tensor(this.meta);
+    return new Tensor(this);
 
 operator :(t: tensor(?rank,?eltType), type T: Tensor(eltType)): Tensor(eltType) do
     return t.eraseRank();
@@ -217,12 +193,12 @@ proc Tensor.reshape(args...): Tensor(eltType) {
 }
 
 proc Tensor.slice(rngs: range...?rank): Tensor(eltType) {
-    if rank != this.getRank() then halt("Rank mismatch in Tensor.slice.");
+    if rank != this.runtimeRank then halt("Rank mismatch in Tensor.slice.");
     return this.tensorize(rank).slice((...rngs)).eraseRank();
 }
 
 proc Tensor.slice(dom: domain(?)): Tensor(eltType) {
-    if dom.rank != this.getRank() then halt("Rank mismatch in Tensor.slice.");
+    if dom.rank != this.runtimeRank then halt("Rank mismatch in Tensor.slice.");
     return this.tensorize(dom.rank).slice(dom).eraseRank();
 }
 
@@ -257,6 +233,9 @@ var t4 = t3.reshape(5,3);
 var t4t: tensor(2,real) = t4.tensorize(2);
 t4t.array.data[1,1] = 70;
 t4.array(2).data[0,0] = 99;
+t4.data(2)[2,2] = 200;
+ref t4Data = t4.data(2);
+t4Data[1,0] = 500;
 // t4.array(2).data[0,0]=70; // this doesn't seem to work 
 
 

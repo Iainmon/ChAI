@@ -30,6 +30,10 @@ proc forceRank(te: shared TensorEssence(?eltType),param rank: int): shared BaseT
 
 class TensorEssence {
     type eltType = real;
+    proc runtimeRank: int {
+        halt("Not implemented.");
+        return -1;
+    }
 }
 
 class BaseTensorResource : TensorEssence {
@@ -67,7 +71,8 @@ class BaseTensorResource : TensorEssence {
 
     proc _loc do return device;
 
-    
+    override proc runtimeRank: int do
+        return rank;
 }
 
 
