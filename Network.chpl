@@ -175,7 +175,7 @@ class Net : Module(?) {
 }
 
 
-
+var flower = Tensor.load("data/flower.chdata");
 
 // var mp = new moduleChildren(real);
 
@@ -194,4 +194,6 @@ writeln(output);
 
 var t = Tensor.load("notebooks/mini_cnn_params.chdata");
 writeln(t);
+
+writeln(flower.tensorize(3).array.domain.shape);
 // writeln(linear);
