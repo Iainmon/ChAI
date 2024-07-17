@@ -101,6 +101,11 @@ operator *(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
     return tensorFromCtx(rank,eltType,ctx);
 }
 
+operator /(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
+    var ctx = new divOp(a.meta,b.meta);
+    return tensorFromCtx(rank,eltType,ctx);
+}
+
 proc tensor.reshape(dom: domain(?)) {
     param newRank = dom.rank;
     var ctx = new reshapeOp(rank,newRank,eltType,dom.shape,meta);
@@ -173,6 +178,35 @@ proc tensor.unsqueeze(dim: int): tensor(rank + 1,eltType) {
     return this.reshape((...newShape));
 }
 
+proc tensor.max(): tensor(1,eltType) {
+    var ctx = new maxOp(rank,eltType,rank,this.array.shape,meta);
+    return tensorFromCtx(1,eltType,ctx);
+}
+
+proc tensor.exp(): tensor(rank,eltType) {
+    var ctx = new expOp(meta);
+    return tensorFromCtx(rank,eltType,ctx);
+}
+
+proc tensor.softmax(): tensor(rank,eltType) {
+
+    const myShape = this.array.domain.shape;
+
+    var baseShape: rank * int;
+    for param i in 0..<rank do
+        baseShape(i) = 1;
+
+    var sumAxes: rank * int;
+    for param i in 0..<rank do
+        sumAxes(i) = i;
+
+    var memx = this.max().reshape((...baseShape)).expand((...myShape));
+    var m = this - memx;
+    var e = m.exp();
+    var ss = e.sum((...sumAxes)).reshape((...baseShape)).expand((...myShape));
+    return e / ss;
+}
+
 
 proc matvec(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
     const (n,) = vec.array.domain.shape;
@@ -194,6 +228,10 @@ proc matvec(mat: tensor(2,?eltType),vec: tensor(2,eltType)): tensor(2,eltType) {
     var M = M_.expand(b,m,n);
     var Mv = M * v;
     return Mv.sum(2);
+}
+
+proc type tensor.matvecmul(m,v) {
+    return matvec(m,v);
 }
 
 // proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), stride: int): tensor(3,eltType) {

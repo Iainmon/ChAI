@@ -5,6 +5,8 @@ use remote;
 
 import Utilities as util;
 
+import Math.exp;
+
 
 inline proc checkRank(te: shared TensorEssence(?eltType), param rank: int): bool {
     if var x = te : shared BaseTensorResource(eltType,rank)? then
@@ -193,7 +195,21 @@ record reluOp {
         return ((0.0 < x):input.eltType) * x;
 }
 
+record expOp {
+    var input: shared BaseTensorResource(?);
 
+    proc children do return (input,);
+
+    proc forward() {
+        var output = new ndarray(input.array.domain,input.array.eltType);
+        ref inDat = input.array.data;
+        ref outDat = output.data;
+        foreach i in outDat.domain.each {
+            outDat[i] = exp(inDat[i]);
+        }
+        return output;
+    }
+}
 
 
 record addOp {
@@ -233,7 +249,17 @@ record subOp {
     var rhs: shared BaseTensorResource(?);
 
     proc forward() do
-        return new ndarray(lhs.data - rhs.data);
+        return lhs.array - rhs.array;
+    
+}
+
+record divOp {
+    var lhs: shared BaseTensorResource(?);
+    var rhs: shared BaseTensorResource(?);
+
+    proc forward() {
+        return lhs.array / rhs.array;
+    }
     
 }
 
@@ -510,6 +536,30 @@ record sumOp {
     //     return (grad.reshape(input.domain),);
     // } 
 
+
+}
+
+record maxOp {
+    param rank: int;
+    type eltType = real;
+    param maxRank: int;
+    var axes: maxRank * int;
+    var input: shared BaseTensorResource(eltType,rank);
+
+    proc children do return (input,);
+
+    proc forward() {
+        if rank - maxRank == 0 {
+            return input.array.max();
+        } else {
+            return input.array.max((...axes)).squeeze(rank - maxRank);
+        }
+    }
+
+    proc backward(grad): (ndarray(rank,eltType),) {
+        return input.array;
+    }
+    
 
 }
 

@@ -137,8 +137,8 @@ operator :(t: tensor(?rank,?eltType), type T: Tensor(eltType)): Tensor(eltType) 
 proc zipBinOp(param opName: string, a: Tensor(?eltType), b: Tensor(eltType)): Tensor(eltType) {
     for param rank in 1..maxRank {
         if a.checkRank(rank) && b.checkRank(rank) {
-            const at: tensor(rank,eltType) = a.forceRank(rank);
-            const bt: tensor(rank,eltType) = b.forceRank(rank);
+            const at: tensor(rank,eltType) = a.tensorize(rank);
+            const bt: tensor(rank,eltType) = b.tensorize(rank);
             select opName {
                 when "+" do
                     return (at + bt).eraseRank();
@@ -187,6 +187,42 @@ proc Tensor.sum(axes: int...?r): Tensor(eltType) {
     return new Tensor(eltType);
 }
 
+proc Tensor.relu(): Tensor(eltType) {
+    for param rank in 1..maxRank {
+        if this.checkRank(rank) then
+            return this.tensorize(rank).relu().eraseRank();
+    }
+    halt("Could not determine rank in Tensor.relu.");
+    return new Tensor(eltType);
+}
+
+proc Tensor.max(): Tensor(eltType) {
+    for param rank in 1..maxRank {
+        if this.checkRank(rank) then
+            return this.tensorize(rank).max().eraseRank();
+    }
+    halt("Could not determine rank in Tensor.max.");
+    return new Tensor(eltType);
+}
+
+proc Tensor.exp(): Tensor(eltType) {
+    for param rank in 1..maxRank {
+        if this.checkRank(rank) then
+            return this.tensorize(rank).exp().eraseRank();
+    }
+    halt("Could not determine rank in Tensor.exp.");
+    return new Tensor(eltType);
+}
+
+proc Tensor.softmax(): Tensor(eltType) {
+    for param rank in 1..maxRank {
+        if this.checkRank(rank) then
+            return this.tensorize(rank).softmax().eraseRank();
+    }
+    halt("Could not determine rank in Tensor.softmax.");
+    return new Tensor(eltType);
+}
+
 proc Tensor.reshape(args...): Tensor(eltType) {
     for param rank in 1..maxRank {
         if this.checkRank(rank) then
@@ -204,6 +240,32 @@ proc Tensor.slice(rngs: range...?rank): Tensor(eltType) {
 proc Tensor.slice(dom: domain(?)): Tensor(eltType) {
     if dom.rank != this.runtimeRank then halt("Rank mismatch in Tensor.slice.");
     return this.tensorize(dom.rank).slice(dom).eraseRank();
+}
+
+proc Tensor.flatten(): Tensor(eltType) {
+    for param rank in 1..maxRank {
+        if this.checkRank(rank) {
+            var t = this.tensorize(rank);
+            const size = t.domain.size;
+            return t.reshape(size).eraseRank();
+        }
+    }
+    halt("Could not determine rank in Tensor.flatten.");
+    return new Tensor(eltType);
+}
+
+proc type Tensor.matvecmul(m: Tensor(?eltType),v: Tensor(eltType)): Tensor(eltType) {
+    for param rankM in 2..2 {
+        if m.checkRank(rankM) {
+            for param rankV in 1..2 {
+                if v.checkRank(rankV) {
+                    return tensor.matvecmul(m.forceRank(rankM),v.forceRank(rankV)).eraseRank();
+                }
+            }
+        }
+    }
+    halt("Could not determine rank in Tensor.matvecmul.");
+    return new Tensor(eltType);
 }
 
 // Right now, the supported shapes are (3,4) -> 3
@@ -317,6 +379,31 @@ proc Tensor.save(path: string) {
     this.write(fw);
     fw.close();
 }
+
+proc type Tensor.load(path: string) {
+    var file = IO.open(path, IO.ioMode.r);
+    var deserializer = new IO.binaryDeserializer(IO.endianness.native);
+    var fr = file.reader(locking=false,deserializer=deserializer);
+    const r = fr.read(int);
+    writeln("rank: ",r);
+    for param rank in 1..maxRank {
+        if r == rank {
+            var shape: rank * int;
+            for param i in 0..<rank do
+                shape(i) = fr.read(int);
+            const dom = util.domainFromShape((...shape));
+            var a: ndarray(rank,real) = new ndarray(dom,real);
+            for i in dom do 
+                a.data[i] = fr.read(real);
+            fr.close();
+            return new Tensor(a);
+        }
+    }
+    halt("Something bad happened.: " + r : string);
+    return new Tensor(real);
+}
+
+
 
 
 

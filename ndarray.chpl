@@ -410,6 +410,18 @@ record ndarray : writeSerializable {
         return me;
     }
 
+    proc max(): ndarray(1,eltType) {
+        var me = new ndarray({0..0},eltType);
+        const myData = this.data;
+        me.data[0] = max reduce myData;
+        return me;
+    }
+
+    proc max(axes: int...?axesCount): ndarray(rank,eltType) {
+        return this; // Implement me.
+    }
+
+
     proc populateRemote(ref re: remote(ndarray(rank,eltType))): remote(ndarray(rank,eltType)) {
         on re.device {
             ref reArr = re.access();
@@ -546,6 +558,24 @@ operator *(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
     ref cData = c.data;
     foreach i in dom.each do
         cData[i] = a.data[i] * b.data[i];
+    return c;
+}
+
+operator -(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,eltType) {
+    const dom = a.domain;
+    var c: ndarray(rank,eltType) = new ndarray(a.domain,eltType);
+    ref cData = c.data;
+    foreach i in dom.each do
+        cData[i] = a.data[i] - b.data[i];
+    return c;
+}
+
+operator /(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,eltType) {
+    const dom = a.domain;
+    var c: ndarray(rank,eltType) = new ndarray(a.domain,eltType);
+    ref cData = c.data;
+    foreach i in dom.each do
+        cData[i] = a.data[i] / b.data[i];
     return c;
 }
 
