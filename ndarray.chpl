@@ -703,6 +703,15 @@ proc ref ndarray.read(fr: IO.fileReader(?)) throws {
         this.data[i] = fr.read(eltType);
 }
 
+
+proc ndarray.write(fw: IO.fileWriter(?)) throws {
+    fw.write(rank);
+    for s in data.domain.shape do
+        fw.write(s:int);
+    for i in data.domain do
+        fw.write(data[i]);
+}
+
 class _tensor_resource {
     param rank: int;
     type eltType = real(64);

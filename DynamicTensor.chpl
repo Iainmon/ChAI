@@ -56,6 +56,11 @@ record Tensor : writeSerializable {
     //     this.meta = t.meta;
     // }
 
+    // todo: proc this(...) // slicing.
+
+    proc this(args...) do
+        return this.slice((...args));
+
     proc tensorize(param rank: int) : tensor(rank,eltType) {
         if rank != runtimeRank then 
             halt("Cannot cast this Tensor of rank " + runtimeRank: string + " to tensor of rank " + rank : string + ".");
@@ -93,7 +98,6 @@ record Tensor : writeSerializable {
         halt("Unable to find my own rank.");
         return this;
     }
-
 
 
     proc array(param rank: int) ref : ndarray(rank,eltType) do
@@ -216,57 +220,69 @@ proc type Tensor.ones(args...) do
 proc type Tensor.zeros(args...) do
     return tensor.zeros((...args)).eraseRank();
 
+proc main() {
+    const t_: tensor(2,real) = tensor.arange(3,5);
+    writeln(t_);
+    const t = new Tensor(t_);
+    const t2 = t + t;
 
-const t_: tensor(2,real) = tensor.arange(3,5);
-writeln(t_);
-const t = new Tensor(t_);
-const t2 = t + t;
+    const t3 = Tensor.arange(3,5);
+    writeln(t3 - Tensor.ones(3,5));
 
-const t3 = Tensor.arange(3,5);
-writeln(t3 - Tensor.ones(3,5));
+    writeln(t3.sum(0).sum(0));
 
-writeln(t3.sum(0).sum(0));
+    writeln(t3.reshape(5,3));
 
-writeln(t3.reshape(5,3));
-
-var t4 = t3.reshape(5,3);
-var t4t: tensor(2,real) = t4.tensorize(2);
-t4t.array.data[1,1] = 70;
-t4.array(2).data[0,0] = 99;
-t4.data(2)[2,2] = 200;
-ref t4Data = t4.data(2);
-t4Data[1,0] = 500;
-// t4.array(2).data[0,0]=70; // this doesn't seem to work 
-
-
-// forall (i,j) in t4t.domain.every() {
-//     writeln(t4t.array.data[i,j]);
-// }
+    var t4 = t3.reshape(5,3);
+    var t4t: tensor(2,real) = t4.tensorize(2);
+    t4t.array.data[1,1] = 70;
+    t4.array(2).data[0,0] = 99;
+    t4.data(2)[2,2] = 200;
+    ref t4Data = t4.data(2);
+    t4Data[1,0] = 500;
+    // t4.array(2).data[0,0]=70; // this doesn't seem to work 
 
 
-
-const a: ndarray(2,real) = t4.array(2);
-writeln(a);
+    // forall (i,j) in t4t.domain.every() {
+    //     writeln(t4t.array.data[i,j]);
+    // }
 
 
 
+    const a: ndarray(2,real) = t4.array(2);
+    writeln(a);
 
+    var img = Tensor.arange(1,9,9);
+    var ker = Tensor.arange(1,1,3,3);
+    var fet = Tensor.convolve(img,ker,1);
 
-// config const iters = 50;
-// var T = Tensor.arange(30,30);
-// for i in 0..<iters {
-//     T = T + T;
-// }
-// writeln(T);
+    writeln(fet);
+    fet.save("data/my_features.chdata");
+
+    // writeln(t4[1,2]);
 
 
 
 
+    // config const iters = 50;
+    // var T = Tensor.arange(30,30);
+    // for i in 0..<iters {
+    //     T = T + T;
+    // }
+    // writeln(T);
 
-const npa = Tensor.loadFromNumpy("notebooks/numpy_y.npy");
-// writeln(npa);
-// var t2 = t + t;
-// writeln(t2);
+
+
+
+
+
+
+    const npa = Tensor.loadFromNumpy("notebooks/numpy_y.npy");
+    // writeln(npa);
+    // var t2 = t + t;
+    // writeln(t2);
+
+}
 
 
 
@@ -279,3 +295,29 @@ proc Tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer)
         }
     }
 }
+
+proc Tensor.write(fw: IO.fileWriter(?)) throws {
+    for param rank in 1..maxRank {
+        if rank == runtimeRank {
+            const a = array(rank);
+            fw.write(rank);
+            for s in a.shape do
+                fw.write(s:int);
+            for i in a.data.domain do
+                fw.write(a.data[i]);
+        }
+    }
+}
+
+
+proc Tensor.save(path: string) {
+    var file = IO.open(path, IO.ioMode.cw);
+    var serializer = new IO.binarySerializer(IO.endianness.native);
+    var fw = file.writer(locking=false,serializer=serializer);
+    this.write(fw);
+    fw.close();
+}
+
+
+
+
