@@ -622,7 +622,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     ref ker = kernel.data;
 
     @assertOnGpu
-    foreach i in 0..<outDom.size {
+    foreach i in 0..<outDom.size with (const kernelChanIter) {
         const (f,h_,w_) = outDom.orderToIndex(i);
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
