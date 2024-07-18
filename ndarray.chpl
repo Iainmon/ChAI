@@ -615,22 +615,31 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const chanR = 0..<channels; // don't trust daniel's codemotion.
     const kernelD = {0..<kernelHeight,0..<kernelWidth};
     const kernelChanD = {0..<channels,0..<kernelHeight,0..<kernelWidth};
-    const kernelChanIter = for j in 0..<kernelChanD.size do kernelChanD.orderToIndex(j);
+    // const kernelChanIter = for j in 0..<kernelChanD.size do kernelChanD.orderToIndex(j);
 
     ref dat = outFeatures.data;
     ref fet = features.data;
     ref ker = kernel.data;
 
     @assertOnGpu
-    foreach i in 0..<outDom.size with (const kernelChanIter) {
+    foreach i in 0..<outDom.size {
         const (f,h_,w_) = outDom.orderToIndex(i);
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
         var sum: eltType = 0;
-        for idx in kernelChanIter {
-            const (c,kh,kw) = idx;
+        for j in 0..<kernelChanD.size {
+            const (c,kh,kw) = kernelChanD.orderToIndex(j);
             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
         }
+        // for c in 0..<channels {
+        //     var csum: eltType = 0;
+
+        //     sum += fet[c,]
+        // }
+        // const window = fet[..,hi..#kernelHeight,wi..#kernelWidth] * ker[f,..,..,..];
+        // // sum = + reduce window;
+        // for x in window do
+        //     sum += x;
         dat[f,h_,w_] = sum;
     }
 
