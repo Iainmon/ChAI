@@ -126,9 +126,12 @@ record ndarray : writeSerializable {
         const normalDomain = me.domain;
         const selfDomain = data.domain;
         ref meData = me.data;
-        foreach i in 0..<selfDomain.size {
-            meData[normalDomain.orderToIndex(i)] = data[selfDomain.orderToIndex(i)];
-        }
+        const zero: eltType = 0;
+        foreach i in 0..<normalDomain.size {
+            const selfIdx = selfDomain.orderToIndex(i);
+            const meIdx = normalDomain.orderToIndex(i);
+            const a = if selfDomain.contains(selfIdx) then data[selfIdx] else zero;
+            meData[meIdx] = a;        }
         return me;
     }
 

@@ -285,3 +285,5 @@ var out_flower = net(flower.maxPool(10));
 writeln(out_flower.tensorize(3).array.domain.shape);
 
 // writeln(linear);
+
+
