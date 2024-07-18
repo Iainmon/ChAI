@@ -573,7 +573,17 @@ record conv2DOp {
     proc children do return (features,kernel);
 
     proc forward(): ndarray(3,eltType) {
-        return ndarray.convolve(features.array,kernel.array,stride);
+        writeln((here,features.device,kernel.device));
+        var output: ndarray(3,eltType);
+        on features.device {
+            const fet = features.array;
+            const ker = kernel.array;
+            const conv = ndarray.convolve(fet,ker,stride);
+            output.reshapeDomain(conv.domain);
+            ref outData = output.data;
+            outData = conv.data;
+        }
+        return output;
     }
 
 
