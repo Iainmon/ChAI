@@ -380,10 +380,19 @@ proc Tensor.save(path: string) {
     fw.close();
 }
 
-proc type Tensor.load(path: string) {
+proc type Tensor.multiReader(path: string) {
     var file = IO.open(path, IO.ioMode.r);
     var deserializer = new IO.binaryDeserializer(IO.endianness.native);
     var fr = file.reader(locking=false,deserializer=deserializer);
+    return fr;
+}
+
+proc type Tensor.load(path: string): Tensor(real) {
+    return Tensor.readInPlace(Tensor.multiReader(path));
+}
+
+
+proc type Tensor.readInPlace(fr: IO.fileReader(?)) {
     const r = fr.read(int);
     writeln("rank: ",r);
     for param rank in 1..maxRank {
@@ -393,16 +402,15 @@ proc type Tensor.load(path: string) {
                 shape(i) = fr.read(int);
             const dom = util.domainFromShape((...shape));
             var a: ndarray(rank,real) = new ndarray(dom,real);
-            for i in dom do 
-                a.data[i] = fr.read(real);
-            fr.close();
+            // for i in dom do 
+            //     a.data[i] = fr.read(real);
+            fr.read(a.data);
             return new Tensor(a);
         }
     }
     halt("Something bad happened.: " + r : string);
     return new Tensor(real);
 }
-
 
 
 

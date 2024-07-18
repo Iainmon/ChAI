@@ -57,6 +57,10 @@ class Module {
         return (subModules.childDict[paramName].borrow() : borrowed Parameter(eltType)).data;
     }
 
+    proc mod(modName: string): borrowed Module(eltType) {
+        return subModules.childDict[modName].borrow();
+    }
+
     iter parameters(): borrowed Parameter(eltType) {
         for m in subModules {
             for p in m.parameters() {
@@ -168,9 +172,13 @@ class Net : Module(?) {
     proc init() {
         super.init(real);
         init this;
-        addModule("conv1",new Conv2D(1,32,3,stride=1));
-        addModule("conv2",new Conv2D(32,64,3,stride=1));
+        addModule("conv1",new Conv2D(3,32,3,stride=1));
+        // addModule("conv2",new Conv2D(32,64,3,stride=1));
         // addModule("")
+    }
+
+    override proc forward(input: Tensor(real)): Tensor(real) {
+        return this.mod("conv1").forward(input);
     }
 }
 
@@ -196,4 +204,13 @@ var t = Tensor.load("notebooks/mini_cnn_params.chdata");
 writeln(t);
 
 writeln(flower.tensorize(3).array.domain.shape);
+
+var net = new Net();
+(net.subModules.childDict["conv1"].subModules.childDict["weights"] : borrowed Parameter(real)).data = Tensor.load("notebooks/mini_cnn_params.chdata");
+
+writeln("Feeding flower through network.");
+
+var out_flower = net(flower);
+writeln(out_flower.tensorize(3).array.domain.shape);
+
 // writeln(linear);
