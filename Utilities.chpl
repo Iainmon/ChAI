@@ -236,8 +236,10 @@ module Utilities {
         // }
 
         inline iter _domain.each {
-            for i in 0..<this.size {
-                yield this.orderToIndex(i);
+            @assertOnGpu
+            foreach i in 0..<this.size {
+                const idx = this.orderToIndex(i);
+                yield idx;
             }
         }
 

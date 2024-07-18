@@ -220,8 +220,10 @@ record ndarray : writeSerializable {
         const newShape = dom.shape;
         
         ref expandedData = expanded.data;
-
-        foreach idx in expandedData.domain.each {
+        const expandedDataDomain = expandedData.domain;
+        @assertOnGpu
+        foreach ind in 0..<expandedDataDomain.size {
+            const idx = expandedDataDomain.orderToIndex(ind);
             var origIdx: rank * int;
             if idx.type == int {
                 origIdx(0) = idx;
