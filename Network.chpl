@@ -173,12 +173,19 @@ class Net : Module(?) {
         super.init(real);
         init this;
         addModule("conv1",new Conv2D(3,32,3,stride=1));
+        addModule("conv2",new Conv2D(32,64,3,stride=1));
+        addModule("conv3",new Conv2D(64,128,3,stride=1));
+        addModule("conv4",new Conv2D(128,256,3,stride=1));
+
         // addModule("conv2",new Conv2D(32,64,3,stride=1));
         // addModule("")
     }
 
     override proc forward(input: Tensor(real)): Tensor(real) {
-        return this.mod("conv1").forward(input);
+        var x1 = this.mod("conv1").forward(input);
+        var x2 = this.mod("conv2").forward(x1);
+        var x3 = this.mod("conv3").forward(x2);
+        return this.mod("conv4").forward(x3);
     }
 }
 
