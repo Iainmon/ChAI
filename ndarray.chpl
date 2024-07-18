@@ -611,15 +611,29 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     ref fet = features.data;
     ref ker = kernel.data;
 
-    foreach (f,h_,w_) in outDom.each {
+    @assertOnGpu
+    foreach i in 0..<outDom.size {
+        const (f,h_,w_) = outDom.orderToIndex(i);
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
         var sum: eltType = 0;
-        for (c,kh,kw) in kernelChanD.each {
+        for j in 0..<kernelChanD.size {
+            const (c,kh,kw) = kernelChanD.orderToIndex(j);
             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
         }
         dat[f,h_,w_] = sum;
     }
+
+    // @assertOnGpu
+    // foreach (f,h_,w_) in outDom.each {
+    //     const hi: int = h_ * stride;
+    //     const wi: int = w_ * stride;
+    //     var sum: eltType = 0;
+    //     for (c,kh,kw) in kernelChanD.each {
+    //         sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+    //     }
+    //     dat[f,h_,w_] = sum;
+    // }
     return outFeatures;
 }
 
