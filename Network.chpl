@@ -99,8 +99,10 @@ class Conv2D : Module(?) {
     var kernelShape: 4*int;
     var stride: int;
 
-    proc init(channels: int, features: int, kernel: int, stride: int = 1) {
-        super.init(real);
+
+
+    proc init(type eltType = real,channels: int, features: int, kernel: int, stride: int = 1) {
+        super.init(eltType);
         this.kernelShape = (features,channels,kernel,kernel);
         this.stride = stride;
         init this;
@@ -111,8 +113,12 @@ class Conv2D : Module(?) {
         addParameter("weights",ker);
         addParameter("bias",bias);
     }
+    
+    proc init(channels: int, features: int, kernel: int, stride: int = 1) {
+        this.init(real,channels,features,kernel,stride);
+    }
 
-    override proc forward(input: Tensor(real)): Tensor(real) {
+    override proc forward(input: Tensor(eltType)): Tensor(eltType) {
         return Tensor.convolve(input,(this.subModules.childDict["weights"] : borrowed Parameter(real)).data,stride);
     }
 }
@@ -169,19 +175,19 @@ class Softmax : Module(?) {
 
 
 class Net : Module(?) {
-    proc init() {
-        super.init(real);
+    proc init(type eltType = real) {
+        super.init(eltType);
         init this;
-        addModule("conv1",new Conv2D(3,32,3,stride=1));
-        addModule("conv2",new Conv2D(32,64,3,stride=1));
-        addModule("conv3",new Conv2D(64,128,3,stride=1));
-        addModule("conv4",new Conv2D(128,256,3,stride=1));
+        addModule("conv1",new Conv2D(eltType,3,32,3,stride=1));
+        addModule("conv2",new Conv2D(eltType,32,64,3,stride=1));
+        addModule("conv3",new Conv2D(eltType,64,128,3,stride=1));
+        addModule("conv4",new Conv2D(eltType,128,256,3,stride=1));
 
         // addModule("conv2",new Conv2D(32,64,3,stride=1));
         // addModule("")
     }
 
-    override proc forward(input: Tensor(real)): Tensor(real) {
+    override proc forward(input: Tensor(eltType)): Tensor(eltType) {
         var x1 = this.mod("conv1").forward(input);
         var x2 = this.mod("conv2").forward(x1);
         var x3 = this.mod("conv3").forward(x2);

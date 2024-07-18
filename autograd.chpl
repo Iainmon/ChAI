@@ -97,7 +97,7 @@ class TensorResource : BaseTensorResource(?) {
     proc init(ref resource: remote(ndarray(?rank,?eltType)), operationData: ?operation, device_: locale = defaultDevice) {
         resource.to(device_);
         var dataRes = resource;
-        var gradRes = resource.copy();
+        var gradRes = new remote(ndarray(rank,eltType));
         super.init(eltType,rank,dataRes,gradRes);
         this.operation = operation;
         this.operationData = operationData;
@@ -122,8 +122,11 @@ class TensorResource : BaseTensorResource(?) {
                 // ref data = dataResource.access().data;
                 // data = operationData.forward();
                 dataResource = operationData.forward();
-                if gradResource.access().data.size == 0 {
-                    gradResource.access().reshapeDomain(dataResource.access().domain);
+                param requiresGrad = false;
+                if requiresGrad {
+                    if gradResource.access().data.size == 0 {
+                        gradResource.access().reshapeDomain(dataResource.access().domain);
+                    }
                 }
             }
 

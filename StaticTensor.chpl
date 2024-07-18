@@ -44,7 +44,7 @@ record tensor : writeSerializable {
         init this;
         on this.device {
             this.array.reshapeDomain(normal);
-            this.grad.reshapeDomain(normal);
+            // this.grad.reshapeDomain(normal);
         }
     }
 
@@ -65,7 +65,7 @@ record tensor : writeSerializable {
             ref arr = this.array;
             ref gra = this.grad;
             arr.reshapeDomain(dom);
-            gra.reshapeDomain(dom);
+            // gra.reshapeDomain(dom);
         }
     }
 
