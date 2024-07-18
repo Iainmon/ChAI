@@ -212,7 +212,10 @@ class Net : Module(?) {
         addModule("pool3",new MaxPool(eltType,2));
         addModule("conv4",new Conv2D(eltType,128,256,3,stride=1));
         addModule("pool4",new MaxPool(eltType,2));
-
+        addModule("conv5",new Conv2D(eltType,256,512,3,stride=1));
+        addModule("pool5",new MaxPool(eltType,2));
+        addModule("conv6",new Conv2D(eltType,512,1024,3,stride=1));
+        addModule("pool6",new MaxPool(eltType,2));
         // addModule("conv2",new Conv2D(32,64,3,stride=1));
         // addModule("")
     }
@@ -227,6 +230,10 @@ class Net : Module(?) {
                     "pool3",
                     "conv4",
                     "pool4",
+                    "conv5",
+                    "pool5",
+                    "conv6",
+                    "pool6",
                     input);
         // var x1 = this.mod("conv1").forward(input);
         // var x2 = this.mod("conv2").forward(x1);
@@ -281,7 +288,7 @@ var net = new Net();
 writeln("Feeding flower through network.");
 
 
-var out_flower = net(flower);
+var out_flower = net(flower.maxPool(4));
 writeln(out_flower.tensorize(3).array.domain.shape);
 
 // writeln(linear);

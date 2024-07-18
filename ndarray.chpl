@@ -651,13 +651,13 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
 
     // import AutoMath;
     const (channels,height,width) = features.shape;
-    writeln(features.shape, " pool: ", poolSize);
+    // writeln(features.shape, " pool: ", poolSize);
     if (height % poolSize != 0) || (width % poolSize != 0) {
         // var fet2 = features;
         // fet2.reshapeDomain(util.domainFromShape(channels,height + 1,width));
         // return ndarray.maxPool(fet2,poolSize);
-        const moreH = (Math.ceil(height / poolSize): int) * poolSize;
-        const moreW = (Math.ceil(width / poolSize): int) * poolSize;
+        const moreH = (Math.ceil(height:real / poolSize:real): int) * poolSize;
+        const moreW = (Math.ceil(width:real / poolSize:real): int) * poolSize;
         return ndarray.maxPool(features.reshape(channels,moreH,moreW),poolSize);
     }
 
