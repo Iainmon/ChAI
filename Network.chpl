@@ -223,17 +223,17 @@ class Net : Module(?) {
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
         return chain(this,
                     "conv1",
-                    "pool1",
+                    // "pool1",
                     "conv2",
-                    "pool2",
+                    // "pool2",
                     "conv3",
-                    "pool3",
+                    // "pool3",
                     "conv4",
-                    "pool4",
+                    // "pool4",
                     "conv5",
-                    "pool5",
+                    // "pool5",
                     "conv6",
-                    "pool6",
+                    // "pool6",
                     input);
         // var x1 = this.mod("conv1").forward(input);
         // var x2 = this.mod("conv2").forward(x1);
