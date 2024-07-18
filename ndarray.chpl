@@ -2,6 +2,7 @@
 import ChapelArray;
 import IO;
 use remote;
+import Math;
 
 import Utilities as util;
 use Utilities.Standard;
@@ -647,18 +648,12 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
 
     // import AutoMath;
     const (channels,height,width) = features.shape;
-    if height % poolSize != 0 {
+    if height % poolSize != 0 || width % poolSize != 0 {
         // var fet2 = features;
         // fet2.reshapeDomain(util.domainFromShape(channels,height + 1,width));
         // return ndarray.maxPool(fet2,poolSize);
-        return ndarray.maxPool(features.reshape(channels,height + 1,width),poolSize);
+        return ndarray.maxPool(features.reshape(channels,height + (height % poolSize),width + (width % poolSize)),poolSize);
 
-    }
-    if width % poolSize != 0 {
-        // var fet2 = features;
-        // fet2.reshapeDomain(util.domainFromShape(channels,height,width + 1));
-        // return ndarray.maxPool(fet2,poolSize);
-        return ndarray.maxPool(features.reshape(channels,height,width + 1),poolSize);
     }
 
     const newHeight: int = height / poolSize;
@@ -670,11 +665,11 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
     const poolDom = {0..#poolSize,0..#poolSize};
     foreach (c,h,w) in dom.each {
         var mx: eltType = fet[c,h,w];
-        for (ph,pw) in poolDom.each {
+        for (ph,pw) in poolDom {
             const hs = h * poolSize;
             const ws = w * poolSize;
             const x: eltType = fet[c,ph + hs,pw + ws];
-            mx = max(x,mx);
+            mx = Math.max(x,mx);
         }
         dat[c,h,w] = mx;
     }

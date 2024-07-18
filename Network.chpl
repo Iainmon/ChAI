@@ -113,13 +113,29 @@ class Conv2D : Module(?) {
         addParameter("weights",ker);
         addParameter("bias",bias);
     }
-    
+
     proc init(channels: int, features: int, kernel: int, stride: int = 1) {
         this.init(real,channels,features,kernel,stride);
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
         return Tensor.convolve(input,(this.subModules.childDict["weights"] : borrowed Parameter(real)).data,stride);
+    }
+}
+
+class MaxPool : Module(?) {
+    var poolSize: int;
+
+    proc init(type eltType = real, poolSize: int) {
+        super.init(eltType);
+        this.poolSize = poolSize;
+    }
+
+    proc init(poolSize: int) do
+        this.init(real,poolSize);
+
+    override proc forward(input: Tensor(eltType)): Tensor(eltType) {
+        return input.maxPool(poolSize);
     }
 }
 
@@ -174,24 +190,48 @@ class Softmax : Module(?) {
 // }
 
 
+proc chain(m: borrowed Module(?), modNames: string...?n, input: Tensor(?eltType)) {
+    writeln("layer 0");
+    var output = m.mod(modNames(0))(input);
+    for param i in 1..<n {
+        writeln("layer ", i);
+        output = m.mod(modNames(i))(output);
+    }
+    return output;
+}
+
 class Net : Module(?) {
     proc init(type eltType = real) {
         super.init(eltType);
         init this;
         addModule("conv1",new Conv2D(eltType,3,32,3,stride=1));
+        addModule("pool1",new MaxPool(eltType,2));
         addModule("conv2",new Conv2D(eltType,32,64,3,stride=1));
+        addModule("pool2",new MaxPool(eltType,2));
         addModule("conv3",new Conv2D(eltType,64,128,3,stride=1));
+        addModule("pool3",new MaxPool(eltType,2));
         addModule("conv4",new Conv2D(eltType,128,256,3,stride=1));
+        addModule("pool4",new MaxPool(eltType,2));
 
         // addModule("conv2",new Conv2D(32,64,3,stride=1));
         // addModule("")
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
-        var x1 = this.mod("conv1").forward(input);
-        var x2 = this.mod("conv2").forward(x1);
-        var x3 = this.mod("conv3").forward(x2);
-        return this.mod("conv4").forward(x3);
+        return chain(this,
+                    "conv1",
+                    "pool1",
+                    "conv2",
+                    "pool2",
+                    "conv3",
+                    "pool3",
+                    "conv4",
+                    "pool4",
+                    input);
+        // var x1 = this.mod("conv1").forward(input);
+        // var x2 = this.mod("conv2").forward(x1);
+        // var x3 = this.mod("conv3").forward(x2);
+        // return this.mod("conv4").forward(x3);
     }
 }
 
@@ -241,7 +281,7 @@ var net = new Net();
 writeln("Feeding flower through network.");
 
 
-var out_flower = net(flower);
+var out_flower = net(flower.maxPool(5));
 writeln(out_flower.tensorize(3).array.domain.shape);
 
 // writeln(linear);

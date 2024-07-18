@@ -223,6 +223,15 @@ proc Tensor.softmax(): Tensor(eltType) {
     return new Tensor(eltType);
 }
 
+proc Tensor.maxPool(poolSize: int): Tensor(eltType) {
+    for param rank in 3..3 {
+        if this.checkRank(rank) then
+            return this.tensorize(rank).maxPool(poolSize).eraseRank();
+    }
+    halt("Could not determine rank in Tensor.maxPool.");
+    return new Tensor(eltType);
+}
+
 proc Tensor.reshape(args...): Tensor(eltType) {
     for param rank in 1..maxRank {
         if this.checkRank(rank) then

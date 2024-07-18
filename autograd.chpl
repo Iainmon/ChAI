@@ -1,4 +1,4 @@
-
+// watch -d -n 0.1 nvidia-smi
 
 use ndarray;
 use remote;
