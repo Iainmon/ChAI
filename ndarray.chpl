@@ -129,7 +129,6 @@ record ndarray : writeSerializable {
         foreach i in 0..<selfDomain.size {
             meData[normalDomain.orderToIndex(i)] = data[selfDomain.orderToIndex(i)];
         }
-        me.reshapeDomain(normalDomain);
         return me;
     }
 
