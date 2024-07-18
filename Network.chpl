@@ -223,9 +223,9 @@ class Net : Module(?) {
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
         return chain(this,
                     "conv1",
-                    "pool1",
+                    // "pool1",
                     "conv2",
-                    "pool2",
+                    // "pool2",
                     "conv3",
                     // "pool3",
                     "conv4",
