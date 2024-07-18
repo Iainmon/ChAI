@@ -281,7 +281,7 @@ var net = new Net();
 writeln("Feeding flower through network.");
 
 
-var out_flower = net(flower.maxPool(5));
+var out_flower = net(flower);
 writeln(out_flower.tensorize(3).array.domain.shape);
 
 // writeln(linear);
