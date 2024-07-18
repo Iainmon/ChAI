@@ -131,7 +131,8 @@ record ndarray : writeSerializable {
             const selfIdx = selfDomain.orderToIndex(i);
             const meIdx = normalDomain.orderToIndex(i);
             const a = if selfDomain.contains(selfIdx) then data[selfIdx] else zero;
-            meData[meIdx] = a;        }
+            meData[meIdx] = a;
+        }
         return me;
     }
 
@@ -650,7 +651,7 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
 
     // import AutoMath;
     const (channels,height,width) = features.shape;
-    if height % poolSize != 0 || width % poolSize != 0 {
+    if (height % poolSize != 0) || (width % poolSize != 0) {
         // var fet2 = features;
         // fet2.reshapeDomain(util.domainFromShape(channels,height + 1,width));
         // return ndarray.maxPool(fet2,poolSize);
