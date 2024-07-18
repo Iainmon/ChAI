@@ -113,7 +113,7 @@ class Conv2D : Module(?) {
     }
 
     override proc forward(input: Tensor(real)): Tensor(real) {
-        return Tensor.convolve(input,this["weights"],stride);
+        return Tensor.convolve(input,(this.subModules.childDict["weights"] : borrowed Parameter(real)).data,stride);
     }
 }
 
@@ -207,6 +207,14 @@ var linear = new Linear(3,49);
 var relu = new ReLU();
 var softmax = new Softmax();
 
+// var model = new Squential(
+//     new Conv2D(1,1,3,stride=1),
+//     new Flatten(),
+//     new Linear(3,49),
+//     new ReLU(),
+//     new Softmax()
+// );
+
 var img = Tensor.arange(1,9,9);
 var fet = conv.forward(img);
 writeln(fet);
@@ -222,7 +230,7 @@ writeln(flower.tensorize(3).array.domain.shape);
 
 
 var net = new Net();
-(net.subModules.childDict["conv1"].subModules.childDict["weights"] : borrowed Parameter(real)).data = Tensor.load("notebooks/mini_cnn_params.chdata");
+// (net.subModules.childDict["conv1"].subModules.childDict["weights"] : borrowed Parameter(real)).data = Tensor.load("notebooks/mini_cnn_params.chdata");
 
 writeln("Feeding flower through network.");
 
