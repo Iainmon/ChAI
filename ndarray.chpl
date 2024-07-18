@@ -615,6 +615,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const chanR = 0..<channels; // don't trust daniel's codemotion.
     const kernelD = {0..<kernelHeight,0..<kernelWidth};
     const kernelChanD = {0..<channels,0..<kernelHeight,0..<kernelWidth};
+    const kernelChanIter = for j in 0..<kernelChanD.size do kernelChanD.orderToIndex(j);
 
     ref dat = outFeatures.data;
     ref fet = features.data;
@@ -626,8 +627,8 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
         var sum: eltType = 0;
-        for j in 0..<kernelChanD.size {
-            const (c,kh,kw) = kernelChanD.orderToIndex(j);
+        for idx in kernelChanIter {
+            const (c,kh,kw) = idx;
             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
         }
         dat[f,h_,w_] = sum;
