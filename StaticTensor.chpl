@@ -645,7 +645,9 @@ proc main() {
 
 
 
-
+// proc tensor.serialize(writer: IO.fileWriter(locking=false,?sr1),ref serializer: ?sr2) {
+//     serializer.beginRecord()
+// }
 
 import IO;
 proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer) {

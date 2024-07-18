@@ -205,10 +205,19 @@ writeln(t);
 
 writeln(flower.tensorize(3).array.domain.shape);
 
+
+
 var net = new Net();
 (net.subModules.childDict["conv1"].subModules.childDict["weights"] : borrowed Parameter(real)).data = Tensor.load("notebooks/mini_cnn_params.chdata");
 
 writeln("Feeding flower through network.");
+
+if diag {
+    use GpuDiagnostics;
+
+    startGpuDiagnostics();
+    startVerboseGpu();
+}
 
 var out_flower = net(flower);
 writeln(out_flower.tensorize(3).array.domain.shape);
