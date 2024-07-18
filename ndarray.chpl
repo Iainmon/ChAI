@@ -241,6 +241,7 @@ record ndarray : writeSerializable {
     proc ref sumOneAxis(axis: int): ndarray(rank,eltType) {
         const dims = this.domain.dims();
         const sumAxis = dims(axis);
+        const sumAxisSize = sumAxis.size;
         var newDims = dims;
         newDims(axis) = 0..<1;
 
@@ -248,7 +249,9 @@ record ndarray : writeSerializable {
         var S = new ndarray(newDomain,eltType);
         ref B = S.data;
         ref A = data;
-        foreach idx in newDomain.each {
+        @assertOnGpu
+        foreach ind in 0..<newDomain.size {
+            const idx = newDomain.orderToIndex(ind);
             var origIdx: newDomain.rank * int;
             if idx.type == int {
                 origIdx(0) = idx;
@@ -257,7 +260,7 @@ record ndarray : writeSerializable {
             }
 
             var sum: real = 0;
-            for i in sumAxis {
+            for i in 0..<sumAxisSize {
                 origIdx(axis) = i;
                 
                 sum += A[origIdx];
