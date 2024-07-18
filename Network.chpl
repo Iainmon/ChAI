@@ -182,6 +182,13 @@ class Net : Module(?) {
     }
 }
 
+if diag {
+    use GpuDiagnostics;
+
+    startGpuDiagnostics();
+    startVerboseGpu();
+}
+
 
 var flower = Tensor.load("data/flower.chdata");
 
@@ -212,12 +219,6 @@ var net = new Net();
 
 writeln("Feeding flower through network.");
 
-if diag {
-    use GpuDiagnostics;
-
-    startGpuDiagnostics();
-    startVerboseGpu();
-}
 
 var out_flower = net(flower);
 writeln(out_flower.tensorize(3).array.domain.shape);
