@@ -349,9 +349,7 @@ proc main() {
 
 
     const npa = Tensor.loadFromNumpy("notebooks/numpy_y.npy");
-    // writeln(npa);
-    // var t2 = t + t;
-    // writeln(t2);
+
 
 }
 

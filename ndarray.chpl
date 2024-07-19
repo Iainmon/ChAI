@@ -17,6 +17,14 @@ use Utilities.Standard;
 
 // type remote_ndarray = remote(ndarray(?,?));
 
+
+class NDArrayData {
+    param rank: int;
+    type eltType = real(64);
+    var _domain: domain(rank,int) = util.emptyDomain(rank);
+    var data: [_domain] eltType;
+}
+
 record ndarray : writeSerializable {
     param rank: int;
     type eltType = real(64);
@@ -631,15 +639,6 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
             const (c,kh,kw) = kernelChanD.orderToIndex(j);
             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
         }
-        // for c in 0..<channels {
-        //     var csum: eltType = 0;
-
-        //     sum += fet[c,]
-        // }
-        // const window = fet[..,hi..#kernelHeight,wi..#kernelWidth] * ker[f,..,..,..];
-        // // sum = + reduce window;
-        // for x in window do
-        //     sum += x;
         dat[f,h_,w_] = sum;
     }
 
