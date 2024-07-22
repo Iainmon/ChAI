@@ -18,7 +18,7 @@ use Utilities.Standard;
 // type remote_ndarray = remote(ndarray(?,?));
 
 
-class NDArrayData {
+class NDArrayData : serializable {
     param rank: int;
     type eltType = real(64);
     var _domain: domain(rank,int) = util.emptyDomain(rank);
@@ -54,7 +54,7 @@ class NDArrayData {
     }
 }
 
-record ndarray : writeSerializable {
+record ndarray : serializable {
     param rank: int;
     type eltType = real(64);
     // var _domain: domain(rank,int) = util.emptyDomain(rank);

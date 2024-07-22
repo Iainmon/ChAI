@@ -281,6 +281,7 @@ writeln(t);
 writeln(flower.tensorize(3).array.domain.shape);
 
 
+writeln("Instantiating network.");
 
 var net = new Net();
 // (net.subModules.childDict["conv1"].subModules.childDict["weights"] : borrowed Parameter(real)).data = Tensor.load("notebooks/mini_cnn_params.chdata");
@@ -288,7 +289,34 @@ var net = new Net();
 writeln("Feeding flower through network.");
 
 
-var out_flower = net(flower);
-writeln(out_flower.tensorize(3).array.domain.shape);
+// var out_flower = net(flower);
+// writeln(out_flower.tensorize(3).array.domain.shape);
 
 // writeln(linear);
+
+import IO;
+import JSON;
+import ObjectSerialization;
+
+var objWriter = IO.stdout.withSerializer(ObjectSerialization.objectSerializer);
+var jsonWriter = IO.stdout.withSerializer(JSON.jsonSerializer);
+
+
+var a = ndarray.arange(15, real, (3,5));
+
+
+jsonWriter.writeln(a);
+objWriter.writeln(a);
+writeln(a);
+
+
+var b = tensor.arange(3,5);
+jsonWriter.writeln(b);
+objWriter.writeln(b);
+writeln(b);
+
+
+var c = Tensor.arange(3,5);
+jsonWriter.writeln(c);
+objWriter.writeln(c);
+writeln(c);

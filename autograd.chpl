@@ -30,7 +30,7 @@ proc forceRank(te: shared TensorEssence(?eltType),param rank: int): shared BaseT
     //     halt("Unable to force this TensorEssence to rank " + rank : string + " .");
 }
 
-class TensorEssence {
+class TensorEssence : serializable {
     type eltType = real;
     proc runtimeRank: int {
         halt("Not implemented.");
@@ -38,7 +38,7 @@ class TensorEssence {
     }
 }
 
-class BaseTensorResource : TensorEssence {
+class BaseTensorResource : TensorEssence, serializable{
     param rank: int;
     // type eltType = real(64);
     var dataResource: remote(ndarray(rank,eltType));
@@ -78,7 +78,7 @@ class BaseTensorResource : TensorEssence {
 }
 
 
-class TensorResource : BaseTensorResource(?) {
+class TensorResource : BaseTensorResource(?), serializable {
     type operation;
 
     var operationData: operation;
@@ -179,13 +179,13 @@ class TensorResource : BaseTensorResource(?) {
 
 // Operations
 
-record baseValue {
+record baseValue : serializable {
     proc forward() do halt("Unimplemented baseValue forward.");
     proc children do return (false,);
 }
 
 
-record reluOp {
+record reluOp : serializable {
     var input: shared BaseTensorResource(?);
 
     proc children do return (input,);
@@ -198,7 +198,7 @@ record reluOp {
         return ((0.0 < x):input.eltType) * x;
 }
 
-record expOp {
+record expOp : serializable {
     var input: shared BaseTensorResource(?);
 
     proc children do return (input,);
@@ -215,7 +215,7 @@ record expOp {
 }
 
 
-record addOp {
+record addOp : serializable {
     param rank: int;
     type eltType;
     var lhs: shared BaseTensorResource(eltType,rank);
@@ -247,7 +247,7 @@ record addOp {
 
 
 
-record subOp {
+record subOp : serializable {
     var lhs: shared BaseTensorResource(?);
     var rhs: shared BaseTensorResource(?);
 
@@ -256,7 +256,7 @@ record subOp {
     
 }
 
-record divOp {
+record divOp : serializable {
     var lhs: shared BaseTensorResource(?);
     var rhs: shared BaseTensorResource(?);
 
@@ -266,7 +266,7 @@ record divOp {
     
 }
 
-record multOp {
+record multOp : serializable {
     param rank: int;
     type eltType;
     var lhs: shared BaseTensorResource(eltType,rank);
@@ -297,7 +297,7 @@ record multOp {
 }
 
 
-record reshapeOp {
+record reshapeOp : serializable {
     param oldRank: int;
     param newRank: int;
     type eltType;
@@ -317,7 +317,7 @@ record reshapeOp {
     }
 }
 
-record permuteOp {
+record permuteOp : serializable {
     param rank: int;
     type eltType = real;
     var permutation; // tuple of ints
@@ -336,7 +336,7 @@ record permuteOp {
 }
 
 
-record expandOp {
+record expandOp : serializable {
     param rank: int;
     type eltType = real;
     var expandedShape: rank*int; // tuple of ints
@@ -369,7 +369,7 @@ record expandOp {
 
 }
 
-record padOp {
+record padOp : serializable {
     param rank: int;
     type eltType = real;
     var arg: rank * (2 * int);
@@ -396,7 +396,7 @@ record padOp {
 
 }
 
-record shrinkOp {
+record shrinkOp : serializable {
     param rank: int;
     type eltType = real;
     var arg: rank * (2 * int);
@@ -422,7 +422,7 @@ record shrinkOp {
 
 }
 
-record sliceOp {
+record sliceOp : serializable {
     param rank: int;
     type eltType = real;
     var dom: domain(rank,int);
@@ -442,7 +442,7 @@ record sliceOp {
 
 }
 
-record layerSliceOp {
+record layerSliceOp : serializable {
     param rank: int;
     type eltType = real;
     var base: shared BaseTensorResource(eltType,rank);
@@ -469,7 +469,7 @@ record layerSliceOp {
 
 }
 
-record sumOp {
+record sumOp : serializable {
     param rank: int;
     type eltType = real;
     param sumRank: int;
@@ -542,7 +542,7 @@ record sumOp {
 
 }
 
-record maxOp {
+record maxOp : serializable {
     param rank: int;
     type eltType = real;
     param maxRank: int;
@@ -567,7 +567,7 @@ record maxOp {
 }
 
 // https://www.adityaagrawal.net/blog/deep_learning/bprop_strided_conv
-record conv2DOp {
+record conv2DOp : serializable {
     type eltType = real;
     var features: shared BaseTensorResource(eltType,3);
     var kernel: shared BaseTensorResource(eltType,4);

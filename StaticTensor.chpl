@@ -7,7 +7,7 @@ import Utilities as util;
 use Utilities.Standard;
 
 
-record tensor : writeSerializable {
+record tensor : serializable {
     param rank: int;
     type eltType = real(64);
     var resource: shared BaseTensorResource(eltType,rank);
@@ -692,6 +692,27 @@ proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer)
     this.to(prevDev);
 }
 
+
+
+proc tensor.serialize(writer: IO.fileWriter(?),ref serializer: ?srt2) where srt2 != IO.defaultSerializer {
+    // const name = "ndarray(" + rank:string + "," + eltType:string + ")";
+    // var ser = serializer.startRecord(writer,name,2);
+    // ser.writeField("shape",this.data.shape);
+    // // var serArr = ser.startArray();
+    // ser.writeField("data",this.data);
+    // ser.endRecord();
+
+    const prevDev = this.device;
+    this.to(here);
+
+    var rh = serializer.startRecord(writer,"tensor",3);
+    rh.writeField("rank",rank);
+    rh.writeField("eltType",eltType:string);
+    rh.writeField("resource",resource);
+    rh.endRecord();
+
+    this.to(prevDev);
+}
 
 proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer,param capitalT: bool) where capitalT == true {
     const prevDev = this.device;

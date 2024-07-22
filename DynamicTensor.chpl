@@ -9,12 +9,12 @@ use StaticTensor;
 import Utilities as util;
 use Utilities.Standard;
 
-param maxRank = 6;
+config param maxRank = 6;
 
 import loadNumpy;
 
 
-record Tensor : writeSerializable {
+record Tensor : serializable {
     type eltType = real;
 
     var meta: shared TensorEssence(eltType);
@@ -99,6 +99,15 @@ record Tensor : writeSerializable {
         return this;
     }
 
+    proc device: locale {
+        for param rank in 1..maxRank {
+            if checkRank(rank) {
+                return this.tensorize(rank).device;
+            }
+        }
+        halt("Unable to find my own rank.");
+        return this;
+    }
 
     proc array(param rank: int) ref : ndarray(rank,eltType) do
         return (this.meta.borrow() : borrowed BaseTensorResource(eltType, rank)).array;
@@ -363,6 +372,19 @@ proc Tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer)
             return;
         }
     }
+}
+
+proc Tensor.serialize(writer: IO.fileWriter(?),ref serializer: ?srt2) where srt2 != IO.defaultSerializer {
+    const prevDev = this.device;
+    this.to(here);
+
+    var rh = serializer.startRecord(writer,"Tensor",2);
+    // rh.writeField("rank",rank);
+    rh.writeField("eltType",eltType:string);
+    rh.writeField("meta",meta);
+    rh.endRecord();
+
+    this.to(prevDev);
 }
 
 proc Tensor.write(fw: IO.fileWriter(?)) throws {

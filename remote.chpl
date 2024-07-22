@@ -5,7 +5,7 @@ config const debug = true;
 var defaultDevice = if here.gpus.size >= 1 then here.gpus[0] else here;
 
 
-class Remote {
+class Remote : serializable {
     type eltType;
     var device: locale = defaultDevice;
     var item: _remoteVarWrapper(eltType);
@@ -36,7 +36,7 @@ class Remote {
 
 }
 
-record remote {
+record remote : serializable {
     type eltType;
     var remoteResource: shared Remote(eltType);
     // forwarding remoteResource only to, get;
