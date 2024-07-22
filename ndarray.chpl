@@ -22,30 +22,78 @@ class NDArrayData {
     param rank: int;
     type eltType = real(64);
     var _domain: domain(rank,int) = util.emptyDomain(rank);
-    var data: [_domain] eltType;
+    var data: [_domain] eltType = noinit;
+
+    proc init(param rank: int, type eltType) {
+        this.rank = rank;
+        this.eltType = eltType;
+    }
+
+    proc init(param rank: int, type eltType, dom: domain(rank,int)) {
+        this.rank = rank;
+        this.eltType = eltType;
+        this._domain = dom;
+    }
+    proc init(param rank: int, type eltType, dom: domain(rank,int),A: [dom] eltType) {
+        this.rank = rank;
+        this.eltType = eltType;
+        this._domain = dom;
+        this.data = A;
+    }
+    proc init(A: [] ?eltType) {
+        this.rank = A.rank;
+        this.eltType = eltType;
+        this._domain = A.domain;
+        this.data = A;
+    }
+    proc init(me: NDArrayData(?rank,?eltType)) {
+        this.rank = rank;
+        this.eltType = eltType;
+        this._domain = me._domain;
+        this.data = me.data;
+    }
 }
 
 record ndarray : writeSerializable {
     param rank: int;
     type eltType = real(64);
-    var _domain: domain(rank,int) = util.emptyDomain(rank);
-    var data: [_domain] eltType;
+    // var _domain: domain(rank,int) = util.emptyDomain(rank);
+    // var data: [_domain] eltType;
     // forwarding data except _dom;
     // proc _dom do return this._domain;
+    // forwarding data;
+
+    var arrayResource: owned NDArrayData(rank,eltType);
+
+    proc borrowResource() : borrowed NDArrayData(rank,eltType) do
+        return arrayResource.borrow();
+    
+    proc resource : borrowed NDArrayData(rank,eltType) do
+        return arrayResource.borrow();
+    
+
+    proc data ref : arrayResource.data.type do 
+        return arrayResource.data;
+    
+
     forwarding data;
+
+    forwarding resource only _domain;
+
 
     proc init(param rank: int, type eltType = real(64)) {
         this.rank = rank;
         this.eltType = eltType;
+        this.arrayResource = new owned NDArrayData(rank,eltType);
     }
 
     proc init(dom: ?t,type eltType = real(64)) where isDomainType(t) {
         this.rank = dom.rank;
         this.eltType = eltType;
         if dom.isNormal {
-            this._domain = dom;
+            this.arrayResource = new owned NDArrayData(rank,eltType,dom);
         } else {
-            this._domain = dom.normalize;
+            this.arrayResource = new owned NDArrayData(rank,eltType,dom.normalize);
         }
     }
 
@@ -57,14 +105,16 @@ record ndarray : writeSerializable {
     proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == true {
         this.rank = arr.rank;
         this.eltType = eltType;
-        this._domain = arr.domain;
-        this.data = arr;
+        this.arrayResource = new owned NDArrayData(arr);
+        // this._domain = arr.domain;
+        // this.data = arr;
     }
 
     proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == false {
         this.rank = arr.rank;
         this.eltType = eltType;
-        this._domain = arr.domain.normalize;
+        this.arrayResource = new owned NDArrayData(rank,eltType,arr.domain.normalize);
+        // this._domain = arr.domain.normalize;
         init this;
         const lw = arr.domain.low;
         foreach i in arr.domain.each with (ref this) {
@@ -84,8 +134,9 @@ record ndarray : writeSerializable {
     proc init(A: ndarray(?rank,?eltType)) {
         this.rank = rank;
         this.eltType = eltType;
-        this._domain = A._domain;
-        this.data = A.data;
+        // this._domain = A._domain;
+        // this.data = A.data;
+        this.arrayResource = new owned NDArrayData(A.arrayResource);
     }
 
     proc init(it: _iteratorRecord) {
@@ -106,8 +157,9 @@ record ndarray : writeSerializable {
     proc init=(other: ndarray(?rank,?eltType)) {
         this.rank = rank;
         this.eltType = eltType;
-        this._domain = other._domain;
-        this.data = other.data;
+        this.arrayResource = new owned NDArrayData(other.arrayResource);
+        // this._domain = other._domain;
+        // this.data = other.data;
     }
 
     proc init=(other: _iteratorRecord) {
@@ -124,12 +176,12 @@ record ndarray : writeSerializable {
     }
 
     proc ref setData(arr: [] eltType) where arr.rank == rank do
-        if arr.domain == _domain { data = arr; } else { this = arr; }
+        if arr.domain == arrayResource._domain { data = arr; } else { this = arr; }
 
-    proc ref reshapeDomain(dom: _domain.type) do
-        _domain = dom;
+    proc ref reshapeDomain(dom: arrayResource._domain.type) do
+        arrayResource._domain = dom;
 
-    proc reshape(dom: _domain.type): ndarray(rank,eltType) {
+    proc reshape(dom: arrayResource._domain.type): ndarray(rank,eltType) {
         var me = new ndarray(dom,eltType);
         const normalDomain = me.domain;
         const selfDomain = data.domain;
@@ -442,16 +494,17 @@ record ndarray : writeSerializable {
     proc populateRemote(ref re: remote(ndarray(rank,eltType))): remote(ndarray(rank,eltType)) {
         on re.device {
             ref reArr = re.access();
-            ref reData = reArr.data;
-            const me: ndarray(rank,eltType) = this;
-            reArr = me;
+            // ref reData = reArr.data;
+            reArr = this;
+            // const me: ndarray(rank,eltType) = this;
+            // reArr = me;
         }
         return re;
     }
 
     proc toRemote(): remote(ndarray(rank,eltType)) {
         var re = new remote(ndarray(rank,eltType));
-        this.populateRemote(re);
+        populateRemote(re);
         return re;
     }
 
@@ -493,13 +546,14 @@ proc type ndarray.arange(to: int,type eltType = real(64),shape: ?rank*int): ndar
 
 
 operator =(ref lhs: ndarray(?rank,?eltType), rhs: ndarray(rank,eltType)) {
-    lhs._domain = rhs._domain;
-    lhs.data = rhs.data;
+    lhs.arrayResource._domain = rhs.arrayResource._domain;
+    lhs.arrayResource.data = rhs.arrayResource.data;
+    // lhs.arrayResource = new owned NDArrayData(rhs.borrowResource());
 }
 
 operator =(ref lhs: ndarray(?rank,?eltType), rhs: [?d] eltType) where d.rank == rank {
-    lhs.reshapeDomain(d.normalize);
-    lhs.data = rhs;
+    lhs.arrayResource._domain = d.normalize;
+    lhs.arrayResource.data = rhs;
 }
 
 operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
@@ -1002,18 +1056,24 @@ proc main() {
     //     writeln(t.removeIdx(3));
     // }
 
+    // var A = ndarray.fromRanges(real, 0..<5,0..<3);
+    // var B = ndarray.fromRanges(real, 0..<3,0..<7);
+
+    // A.data += 1;
+    // B.data += 1;
+
+    // var D = ndarray.contract(A,B,1,0);
+    // writeln(D);
+
+    // var E = ndarray.einsum("ij,kh->ih",A,B);
+    // writeln(E);
+    // E[1,1] = 2;
+
+
     var A = ndarray.fromRanges(real, 0..<5,0..<3);
-    var B = ndarray.fromRanges(real, 0..<3,0..<7);
+    var B = ndarray.fromRanges(real, 0..<5,0..<3);
 
-    A.data += 1;
-    B.data += 1;
-
-    var D = ndarray.contract(A,B,1,0);
-    writeln(D);
-
-    var E = ndarray.einsum("ij,kh->ih",A,B);
-    writeln(E);
-    E[1,1] = 2;
+    writeln(A + B);
 
 
     // param r = 0..<3;
