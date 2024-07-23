@@ -286,6 +286,12 @@ proc type Tensor.matvecmul(m: Tensor(?eltType),v: Tensor(eltType)): Tensor(eltTy
     return new Tensor(eltType);
 }
 
+proc Tensor.argmax(): int {
+    var t = this.tensorize(1);
+    const a = t.array;
+    return a.argmax();
+}
+
 // Right now, the supported shapes are (3,4) -> 3
 proc type Tensor.convolve(features: Tensor(?eltType), kernel: Tensor(eltType), stride: int): Tensor(eltType) do
     return tensor.convolve(features.forceRank(3),kernel.forceRank(4),stride).eraseRank();

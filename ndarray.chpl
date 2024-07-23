@@ -535,6 +535,18 @@ record ndarray : serializable {
         }
         return me;
     }
+
+    proc argmax() where rank == 1 {
+        var mxi: int = 0;
+        var mx: eltType = data[mxi];
+        for i in data.domain {
+            if mx < data[i] {
+                mxi = i;
+                mx = data[i];
+            }
+        }
+        return mxi;
+    }
 }
 
 

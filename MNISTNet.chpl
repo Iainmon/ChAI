@@ -18,17 +18,40 @@ class CNN : Module(?) {
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
+        writeln("conv1");
         var x = mod("conv1")(input);
+
+        writeln("relu");
         x = x.relu();
+
+        writeln("conv2");
         x = mod("conv2")(x);
+
+        writeln("relu");
         x = x.relu();
+
+        writeln("maxpool");
         x = x.maxPool(2);
+
+        writeln("dropout");
         x = mod("dropout1")(x);
+
+        writeln("flatten");
         x = x.flatten();
+
+        writeln("fc1");
         x = mod("fc1")(x);
+
+        writeln("relu");
         x = x.relu();
+
+        writeln("dropout");
         x = mod("dropout1")(x);
+
+        writeln("fc2");
         x = mod("fc2")(x);
+
+        writeln("softmax");
         var output = x.softmax();
         return output;
     }
@@ -60,10 +83,20 @@ var output = cnn(img);
 
 writeln(output);
 
+config const imageCount = 10;
 
-var images = for i in 0..<10 do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
+var images = for i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
+var preds: [images.domain] int;
 
 for i in images.domain {
     var output = cnn(images[i]);
-    writeln(i, output);
+    var pred = output.argmax();
+    preds[i] = pred + 1;
+    writeln((i, pred + 1));
 }
+
+for i in images.domain {
+    writeln((i, preds[i]));
+}
+
+
