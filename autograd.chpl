@@ -191,8 +191,7 @@ record reluOp : serializable {
     proc children do return (input,);
 
     proc forward() {
-        var output: ndarray(input.rank,input.eltType) = _relu(input.data);
-        return output;
+        return input.array.relu();
     }
     inline proc _relu(x) do
         return ((0.0 < x):input.eltType) * x;

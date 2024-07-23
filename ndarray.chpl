@@ -547,6 +547,16 @@ record ndarray : serializable {
         }
         return mxi;
     }
+
+    proc relu() {
+        var rl = new ndarray(data);
+        @assertOnGpu
+        foreach i in rl.domain.each with (ref rl) {
+            const x = rl.data[i];
+            rl.data[i] = if x < 0.0 then 0.0 else x;
+        }
+        return rl;
+    }
 }
 
 
