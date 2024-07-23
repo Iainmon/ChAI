@@ -59,3 +59,11 @@ for m in cnn.modules() {
 var output = cnn(img);
 
 writeln(output);
+
+
+var images = for i in 0..<10 do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
+
+for i in images.domain {
+    var output = cnn(images[i]);
+    writeln(i, output);
+}
