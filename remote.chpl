@@ -34,6 +34,13 @@ class Remote : serializable {
         return this.item.get();
     }
 
+    proc serialize(writer,serializer) {
+        var sr = serializer.startClass(writer,"Remote",2);
+        sr.writeField("device",device.id);
+        sr.writeField("item", item);
+        sr.endClass();
+    }
+
 }
 
 record remote : serializable {

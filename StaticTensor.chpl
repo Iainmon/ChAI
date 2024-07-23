@@ -249,6 +249,15 @@ proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType)
     return tensorFromCtx(3,eltType,ctx);
 }
 
+proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), bias: tensor(1,eltType), stride: int): tensor(3,eltType) {
+    var conv = tensor.convolve(features,kernel,stride);
+    const bs = bias.domain.size;
+    const (ft,h,w) = conv.domain.shape;
+    if bs != ft then halt("Bias length and features must be the same: " + bs : string + " " + ft : string);
+    var expandedBias = bias.reshape(bs,1,1).expand(bs,h,w);
+    return conv + expandedBias;
+}
+
 
 proc tensor.dilate(dil: int): tensor(3,eltType) where this.rank == 3 {
     var dilated = new tensor(3,eltType);
@@ -292,8 +301,8 @@ proc type tensor.arange(shape: int...?rank): tensor(rank,real) {
 proc type tensor.fromShape(type eltType = real,shape: int...?rank,value: eltType = (0:eltType)): tensor(rank,eltType) {
     const v = value;
     const dom = util.domainFromShape((...shape));
-    var t = new tensor(dom,eltType);
-    t._setArrayData(v);
+    const A: [dom] eltType;
+    var t = new tensor(A);
     return t;
 }
 
@@ -650,6 +659,7 @@ proc main() {
 // }
 
 import IO;
+// pretty printing
 proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer) {
     // const name = "ndarray(" + rank:string + "," + eltType:string + ")";
     // var ser = serializer.startRecord(writer,name,2);
@@ -693,14 +703,8 @@ proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer)
 }
 
 
-
+// chapel generic one
 proc tensor.serialize(writer: IO.fileWriter(?),ref serializer: ?srt2) where srt2 != IO.defaultSerializer {
-    // const name = "ndarray(" + rank:string + "," + eltType:string + ")";
-    // var ser = serializer.startRecord(writer,name,2);
-    // ser.writeField("shape",this.data.shape);
-    // // var serArr = ser.startArray();
-    // ser.writeField("data",this.data);
-    // ser.endRecord();
 
     const prevDev = this.device;
     this.to(here);

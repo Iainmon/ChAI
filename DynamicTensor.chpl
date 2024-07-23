@@ -290,6 +290,9 @@ proc type Tensor.matvecmul(m: Tensor(?eltType),v: Tensor(eltType)): Tensor(eltTy
 proc type Tensor.convolve(features: Tensor(?eltType), kernel: Tensor(eltType), stride: int): Tensor(eltType) do
     return tensor.convolve(features.forceRank(3),kernel.forceRank(4),stride).eraseRank();
 
+proc type Tensor.convolve(features: Tensor(?eltType), kernel: Tensor(eltType), bias: Tensor(eltType), stride: int): Tensor(eltType) do
+    return tensor.convolve(features.forceRank(3),kernel.forceRank(4),bias.forceRank(1),stride).eraseRank();
+
 
 proc type Tensor.arange(args...) do
     return tensor.arange((...args)).eraseRank();
@@ -416,12 +419,12 @@ proc type Tensor.multiReader(path: string) {
     return fr;
 }
 
-proc type Tensor.load(path: string): Tensor(real) {
-    return Tensor.readInPlace(Tensor.multiReader(path));
+proc type Tensor.load(path: string,param precision = 64): Tensor(real) {
+    return Tensor.readInPlace(Tensor.multiReader(path),precision);
 }
 
 
-proc type Tensor.readInPlace(fr: IO.fileReader(?)) {
+proc type Tensor.readInPlace(fr: IO.fileReader(?),param precision = 64) {
     const r = fr.read(int);
     writeln("rank: ",r);
     for param rank in 1..maxRank {
@@ -430,10 +433,13 @@ proc type Tensor.readInPlace(fr: IO.fileReader(?)) {
             for param i in 0..<rank do
                 shape(i) = fr.read(int);
             const dom = util.domainFromShape((...shape));
-            var a: ndarray(rank,real) = new ndarray(dom,real);
+            var A: [dom] real(precision);
             // for i in dom do 
             //     a.data[i] = fr.read(real);
-            fr.read(a.data);
+            fr.read(A);
+            const AReal: [dom] real = A : real(64);
+            var a: ndarray(rank,real) = new ndarray(AReal);
+
             return new Tensor(a);
         }
     }

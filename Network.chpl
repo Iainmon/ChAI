@@ -32,39 +32,76 @@ record moduleChildren {
 
 }
 
+var moduleInstances = 0;
+
 class Module {
     type eltType = real;
     var subModules: moduleChildren(eltType);
+    var moduleId: int;
+    var moduleName: string;
 
     proc init(type eltType = real) {
         this.eltType = eltType;
         this.subModules = new moduleChildren(eltType);
+        this.moduleId = moduleInstances;
+        this.moduleName = "module[" + moduleInstances:string + "]";
+        moduleInstances += 1;
+    }
+
+    proc setup() {
+
     }
 
     proc this(input: Tensor(eltType)): Tensor(eltType) do
         return this.forward(input);
 
-    proc addModule(name: string, in m: owned Module(eltType)) do
-        subModules.add(name,m);
+    proc getSubModuleName(name: string): string do
+        return moduleName + "." + name;
 
-    proc addParameter(name: string, data: Tensor(eltType)) do
-        addModule(name,new Parameter(data));
+    proc addModule(name: string, in m: owned Module(eltType)) {
+        const modName = getSubModuleName(name);
+        m.moduleName = modName;
+        m.setup();
+        subModules.add(modName,m);
+    }
+    proc addParameter(name: string, data: Tensor(eltType)) {
+        const modName = getSubModuleName(name);
+        var p = new Parameter(data);
+        p.moduleName = modName;
+        p.setup();
+        subModules.add(modName,p);
+    }
 
     proc forward(input: Tensor(eltType)): Tensor(eltType) do
         halt("Unimplemented.");
 
     proc this(paramName: string) ref : Tensor(eltType) {
-        return (subModules.childDict[paramName].borrow() : borrowed Parameter(eltType)).data;
+        return (subModules.childDict[getSubModuleName(paramName)].borrow() : borrowed Parameter(eltType)).data;
     }
 
     proc mod(modName: string): borrowed Module(eltType) {
-        return subModules.childDict[modName].borrow();
+        return subModules.childDict[getSubModuleName(modName)].borrow();
     }
 
     iter parameters(): borrowed Parameter(eltType) {
         for m in subModules {
             for p in m.parameters() {
                 yield p;
+            }
+        }
+    }
+
+    iter moduleNames(): string {
+        for k in subModules {
+            yield k.moduleName;
+        }
+    }
+
+    iter modules(): borrowed Module(eltType) {
+        for m in subModules {
+            yield m;
+            for m_ in m.modules() {
+                yield m_;
             }
         }
     }
@@ -84,33 +121,45 @@ class Parameter : Module(?) {
 }
 
 class Linear : Module(?) {
-    proc init(m: int, n: int) {
-        super.init(real);
+    var m,n: int;
+
+    proc init(type eltType, m: int, n: int) {
+        super.init(eltType);
         init this;
-        addParameter("weights",Tensor.arange(m,n));
-        addParameter("bias",Tensor.zeros(n));
+        this.m = m;
+        this.n = n;
+    }
+
+    override proc setup() {
+        addParameter("weight",Tensor.arange(n,m));
+        addParameter("bias",Tensor.zeros(m));
+    }
+
+    proc init(m: int, n: int) {
+        this.init(real,m,n);
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
-        return Tensor.matvecmul(this["weights"],input) + this["bias"];
+        return Tensor.matvecmul(this["weight"],input) + this["bias"];
 }
 
 class Conv2D : Module(?) {
     var kernelShape: 4*int;
     var stride: int;
 
-
-
     proc init(type eltType = real,channels: int, features: int, kernel: int, stride: int = 1) {
         super.init(eltType);
         this.kernelShape = (features,channels,kernel,kernel);
         this.stride = stride;
         init this;
+    }
 
+    override proc setup() {
+        const (features,channels,kernel,_) = kernelShape;
         var ker = Tensor.arange(features,channels,kernel,kernel);
-        var bias = Tensor.zeros(features);
+        var bias = Tensor.arange(features);
 
-        addParameter("weights",ker);
+        addParameter("weight",ker);
         addParameter("bias",bias);
     }
 
@@ -119,7 +168,9 @@ class Conv2D : Module(?) {
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
-        return Tensor.convolve(input,(this.subModules.childDict["weights"] : borrowed Parameter(real)).data,stride);
+        var weights = this["weight"];
+        var bias = this["bias"];
+        return Tensor.convolve(input,weights,bias,stride);
     }
 }
 
@@ -161,6 +212,14 @@ class Softmax : Module(?) {
     
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
         return input.softmax();
+}
+
+class Dropout : Module(?) {
+    proc init(type eltType = real,freq: real = 0.5) do
+        super.init(eltType);
+    
+    override proc forward(input: Tensor(eltType)): Tensor(eltType) do
+        return input;
 }
 
 // record parameter {
@@ -249,74 +308,80 @@ if diag {
     startVerboseGpu();
 }
 
+proc main() {
 
-var flower = Tensor.load("data/flower.chdata");
+    var flower = Tensor.load("data/flower.chdata");
 
-// var mp = new moduleChildren(real);
+    // var mp = new moduleChildren(real);
 
-var conv = new Conv2D(1,1,3,stride=1);
-var flat = new Flatten();
-var linear = new Linear(3,49);
-var relu = new ReLU();
-var softmax = new Softmax();
+    var conv = new Conv2D(1,1,3,stride=1);
+    var flat = new Flatten();
+    var linear = new Linear(3,49);
+    var relu = new ReLU();
+    var softmax = new Softmax();
 
-// var model = new Squential(
-//     new Conv2D(1,1,3,stride=1),
-//     new Flatten(),
-//     new Linear(3,49),
-//     new ReLU(),
-//     new Softmax()
-// );
+    // var model = new Squential(
+    //     new Conv2D(1,1,3,stride=1),
+    //     new Flatten(),
+    //     new Linear(3,49),
+    //     new ReLU(),
+    //     new Softmax()
+    // );
 
-var img = Tensor.arange(1,9,9);
-var fet = conv.forward(img);
-writeln(fet);
+    var img = Tensor.arange(1,9,9);
+    var fet = conv.forward(img);
+    writeln(fet);
 
-var output = softmax(relu(linear(flat(conv(img)))));
-writeln(output);
+    var output = softmax(relu(linear(flat(conv(img)))));
+    writeln(output);
 
-var t = Tensor.load("notebooks/mini_cnn_params.chdata");
-writeln(t);
+    var t = Tensor.load("notebooks/mini_cnn_params.chdata");
+    writeln(t);
 
-writeln(flower.tensorize(3).array.domain.shape);
-
-
-writeln("Instantiating network.");
-
-var net = new Net();
-// (net.subModules.childDict["conv1"].subModules.childDict["weights"] : borrowed Parameter(real)).data = Tensor.load("notebooks/mini_cnn_params.chdata");
-
-writeln("Feeding flower through network.");
+    writeln(flower.tensorize(3).array.domain.shape);
 
 
-// var out_flower = net(flower);
-// writeln(out_flower.tensorize(3).array.domain.shape);
+    writeln("Instantiating network.");
 
-// writeln(linear);
+    var net = new Net();
+    // (net.subModules.childDict["conv1"].subModules.childDict["weights"] : borrowed Parameter(real)).data = Tensor.load("notebooks/mini_cnn_params.chdata");
 
-import IO;
-import JSON;
-import ObjectSerialization;
-
-var objWriter = IO.stdout.withSerializer(ObjectSerialization.objectSerializer);
-var jsonWriter = IO.stdout.withSerializer(JSON.jsonSerializer);
+    writeln("Feeding flower through network.");
 
 
-var a = ndarray.arange(15, real, (3,5));
+    // var out_flower = net(flower);
+    // writeln(out_flower.tensorize(3).array.domain.shape);
+
+    // writeln(linear);
+
+    import IO;
+    import JSON;
+    import ObjectSerialization;
+
+    var objWriter = IO.stdout.withSerializer(ObjectSerialization.objectSerializer);
+    var jsonWriter = IO.stdout.withSerializer(JSON.jsonSerializer);
 
 
-jsonWriter.writeln(a);
-objWriter.writeln(a);
-writeln(a);
+    var a = ndarray.arange(15, real, (3,5));
 
 
-var b = tensor.arange(3,5);
-jsonWriter.writeln(b);
-objWriter.writeln(b);
-writeln(b);
+    jsonWriter.writeln(a);
+    objWriter.writeln(a);
+    writeln(a);
 
 
-var c = Tensor.arange(3,5);
-jsonWriter.writeln(c);
-objWriter.writeln(c);
-writeln(c);
+    var b = tensor.arange(3,5);
+    jsonWriter.writeln(b);
+    objWriter.writeln(b);
+    writeln(b);
+
+
+    var c = Tensor.arange(3,5);
+    jsonWriter.writeln(c);
+    objWriter.writeln(c);
+    writeln(c);
+
+    var f = IO.open("myfile.txt", IO.ioMode.cw);
+    var fw = f.writer();
+    fw.writeln(c);
+}
