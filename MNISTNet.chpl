@@ -56,7 +56,14 @@ class CNN : Module(?) {
         return output;
     }
 }
+config const diag = false;
 
+if diag {
+    use GpuDiagnostics;
+
+    startGpuDiagnostics();
+    startVerboseGpu();
+}
 
 var cnn = new CNN(real);
 
