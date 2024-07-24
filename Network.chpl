@@ -140,7 +140,7 @@ class Linear : Module(?) {
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
-        return Tensor.matvecmul(this["weight"],input) + this["bias"];
+        return Tensor.matvecmulFast(this["weight"],input) + this["bias"];
 }
 
 class Conv2D : Module(?) {

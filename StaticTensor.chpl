@@ -250,12 +250,19 @@ proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType)
 }
 
 proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), bias: tensor(1,eltType), stride: int): tensor(3,eltType) {
-    var conv = tensor.convolve(features,kernel,stride);
-    const bs = bias.domain.size;
-    const (ft,h,w) = conv.domain.shape;
-    if bs != ft then halt("Bias length and features must be the same: " + bs : string + " " + ft : string);
-    var expandedBias = bias.reshape(bs,1,1).expand(bs,h,w);
-    return conv + expandedBias;
+    var conv = new tensor(3,eltType);
+    on conv.device {
+        conv.array = ndarray.convolve(features.array,kernel.array,bias.array,stride);
+    }
+    return conv;
+}
+
+proc type tensor.matvecmulFast(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
+    var u = new tensor(1,eltType);
+    on u.device {
+        u.array = ndarray.matvecmul(mat.array,vec.array);
+    }
+    return u;
 }
 
 

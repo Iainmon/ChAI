@@ -286,6 +286,10 @@ proc type Tensor.matvecmul(m: Tensor(?eltType),v: Tensor(eltType)): Tensor(eltTy
     return new Tensor(eltType);
 }
 
+proc type Tensor.matvecmulFast(m: Tensor(?eltType),v: Tensor(eltType)): Tensor(eltType) {
+    return tensor.matvecmulFast(m.forceRank(2),v.forceRank(1)).eraseRank();
+}
+
 proc Tensor.argmax(): int {
     var t = this.tensorize(1);
     const a = t.array;

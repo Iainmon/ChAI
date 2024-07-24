@@ -718,16 +718,45 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
         dat[f,h_,w_] = sum;
     }
 
-    // @assertOnGpu
-    // foreach (f,h_,w_) in outDom.each {
-    //     const hi: int = h_ * stride;
-    //     const wi: int = w_ * stride;
-    //     var sum: eltType = 0;
-    //     for (c,kh,kw) in kernelChanD.each {
-    //         sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
-    //     }
-    //     dat[f,h_,w_] = sum;
-    // }
+    return outFeatures;
+}
+
+proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltType), bias: ndarray(1,eltType), stride: int): ndarray(3,eltType) {
+    const (channels,inHeight,inWidth) = features.shape;
+    const (filters,channels_,kernelHeight,kernelWidth) = kernel.shape;
+    const (filters_,) = bias.shape;
+    if channels != channels_ then halt("Channels must match.");
+    if filters != filters_ then halt("Bias and filters must match.");
+
+    const outHeight: int = ((inHeight - kernelHeight) / stride) + 1;
+    const outWidth: int = ((inWidth - kernelWidth) / stride) + 1;
+    const outShape = (filters,outHeight,outWidth);
+    const outDom = util.domainFromShape((...outShape));
+    var outFeatures = new ndarray(outDom,eltType);
+
+    const chanR = 0..<channels; // don't trust daniel's codemotion.
+    const kernelD = {0..<kernelHeight,0..<kernelWidth};
+    const kernelChanD = {0..<channels,0..<kernelHeight,0..<kernelWidth};
+    // const kernelChanIter = for j in 0..<kernelChanD.size do kernelChanD.orderToIndex(j);
+
+    ref dat = outFeatures.data;
+    ref fet = features.data;
+    ref ker = kernel.data;
+    ref bis = bias.data;
+
+    @assertOnGpu
+    foreach i in 0..<outDom.size {
+        const (f,h_,w_) = outDom.orderToIndex(i);
+        const hi: int = h_ * stride;
+        const wi: int = w_ * stride;
+        var sum: eltType = 0;
+        for j in 0..<kernelChanD.size {
+            const (c,kh,kw) = kernelChanD.orderToIndex(j);
+            sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+        }
+        dat[f,h_,w_] = sum + bis[f];
+    }
+
     return outFeatures;
 }
 
@@ -764,6 +793,24 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
         dat[c,h,w] = mx;
     }
     return pool;
+}
+
+proc type ndarray.matvecmul(mat: ndarray(2,?eltType),vec: ndarray(1,eltType)): ndarray(1,eltType) {
+    const (m,n) = mat.shape;
+    const (n_,) = vec.shape;
+    assert(n == n_, "Vector and matrix must be the same shape.");
+    const dom = util.domainFromShape(m);
+    var u = new ndarray(dom,eltType);
+    ref matD = mat.data;
+    ref vecD = vec.data;
+    foreach i in 0..<m with (ref u) {
+        var sum: eltType;
+        for j in 0..<n {
+            sum += matD[i,j] * vecD[j];
+        }
+        u.data[i] = sum;
+    }
+    return u;
 }
 
 
