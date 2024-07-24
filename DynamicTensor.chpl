@@ -434,23 +434,31 @@ proc type Tensor.load(path: string,param precision = 64): Tensor(real) {
 }
 
 
-proc type Tensor.readInPlace(fr: IO.fileReader(?),param precision = 64) {
+proc type Tensor.readInPlace(fr: IO.fileReader(?),param precision = 64): Tensor(real) {
+    fr.mark();
     const r = fr.read(int);
-    writeln("rank: ",r);
+    // writeln("rank: ",r);
     for param rank in 1..maxRank {
         if r == rank {
-            var shape: rank * int;
-            for param i in 0..<rank do
-                shape(i) = fr.read(int);
-            const dom = util.domainFromShape((...shape));
-            var A: [dom] real(precision);
-            // for i in dom do 
-            //     a.data[i] = fr.read(real);
-            fr.read(A);
-            const AReal: [dom] real = A : real(64);
-            var a: ndarray(rank,real) = new ndarray(AReal);
-
-            return new Tensor(a);
+            try! {
+                var shape: rank * int;
+                for param i in 0..<rank do
+                    shape(i) = fr.read(int);
+                const dom = util.domainFromShape((...shape));
+                var A: [dom] real(precision);
+                // for i in dom do 
+                //     a.data[i] = fr.read(real);
+                fr.read(A);
+                const AReal: [dom] real = A : real(64);
+                var a: ndarray(rank,real) = new ndarray(AReal);
+                fr.commit();
+                return new Tensor(a);
+            } catch e : IO.UnexpectedEofError {
+                IO.stderr.writeln(e);
+                IO.stderr.writeln("Error reading from ", fr.getFile().path, " . Going to try read with 32 bit precision instead of ", precision);
+                fr.revert();
+                return Tensor.readInPlace(fr,precision=32);
+            }
         }
     }
     halt("Something bad happened.: " + r : string);

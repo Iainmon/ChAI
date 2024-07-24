@@ -12,25 +12,119 @@ use Tensor;
 
 use Map; // only map;
 
+use Reflection;
+
+proc helpFindFieldByNameAndType(type superType, arg, x: string) : borrowed superType? {
+  param myFields = getNumFields(arg.type);
+  for param i in 0..<myFields {
+    if !isType(getField(arg, i)) &&
+      isSubtype(getField(arg, i).type, superType) &&
+        getFieldName(arg.type, i) == x {
+          return getField(arg, i).borrow();
+        }
+  }
+  return nil;
+}
+
+proc helpFindModuleByName(arg, x: string) : borrowed Module(?)? {
+  param myFields = getNumFields(arg.type);
+  for param i in 0..<myFields {
+    if !isType(getField(arg, i)) &&
+      isSubtype(getField(arg, i).type, Module) &&
+        getFieldName(arg.type, i) == x {
+          return getField(arg, i).borrow();
+        }
+  }
+  return nil;
+}
+
+proc helpFindParamDataByName(arg, x: string) ref : Tensor(?) {
+  param myFields = getNumFields(arg.type);
+  for param i in 0..<myFields {
+    if !isType(getField(arg, i)) &&
+      isSubtype(getField(arg, i).type, Tensor(?)) &&
+        getFieldName(arg.type, i) == x {
+          return getField(arg, i).borrow();
+        }
+  }
+  return new Tensor(?);
+}
 
 record moduleChildren {
     type eltType = real;
-    var childDict: map(string,owned Module(eltType));
+    var childDict: map(string,borrowed Module(eltType));
 
     proc init(type eltType = real) {
         this.eltType = eltType;
-        this.childDict = new map(string,owned Module(eltType),initialCapacity=1);
+        this.childDict = new map(string,borrowed Module(eltType),initialCapacity=1);
     }
 
     iter ref these(): borrowed Module(eltType) do
-        for k in childDict do
-            yield childDict[k].borrow();
+        for k in childDict.keys() do
+            yield childDict[k];
 
-    proc ref add(name: string,in m: owned Module(eltType)) do
+    proc ref add(name: string,m: borrowed Module(eltType)) do
         childDict.addOrReplace(name,m);
     
 
 }
+
+
+// proc (class).signature(): string {
+//     var sig: string = __primitive("to non nilable class", __primitive("to undecorated class", t)) : string;
+//     sig += "(";
+//     param myFields = getNumFields(arg.type);
+//     for param i in 0..<myFields {
+//         if !isType(getField(arg, i)) &&
+//         isSubtype(getField(arg, i).type, superType) &&
+//             getFieldName(arg.type, i) == x {
+//             return getField(arg, i).borrow();
+//             }
+//     }
+//     return nil;
+// }
+
+
+
+proc (class).this(fieldName: string): borrowed Module(?) where isSubtype(this.type,Module(?)) {
+    return helpFindModuleByName(this,fieldName)!;
+}
+
+proc (class).this(fieldName: string) ref : Tensor(?) where isSubtype(this.type,Parameter(?)) {
+    return helpFindParamDataByName(this,fieldName);
+}
+
+
+iter (class).moduleFieldNames(): string where isSubtype(this.type,Module(?)) {
+    param myFields = getNumFields(this.type);
+    for param i in 0..<myFields {
+        param fieldName = getFieldName(this.type, i);
+        if !isType(getField(this, i)) && isSubtype(getField(this, i).type, Module(?)) {
+            yield fieldName;
+        }
+    }
+}
+
+iter (class).moduleFields(): (string,borrowed Module(?)) where isSubtype(this.type,Module(?)) {
+    for mn in this.moduleFieldNames() {
+        yield (mn,this[mn]);
+    }
+}
+
+proc (class).registerModules() where isSubtype(this.type,Module(?)) {
+    for (n,m) in this.moduleFields() {
+        addModule(n,m);
+    }
+}
+
+// proc (class).this(fieldName: string): Tensor(?) where isSubtype(this.type,Parameter(?)) {
+//     return (helpFindModuleByName(this,fieldName) : borrowed Parameter(?)?)!.data;
+// }
+
+// proc (class).this(fieldName: string): borrowed Parameter(?) where isSubtype(this.type,Module(?)) {
+//     return (helpFindModuleByName(this,fieldName) : borrowed Parameter(?)?)!;
+// }
+
 
 var moduleInstances = 0;
 
@@ -39,6 +133,7 @@ class Module {
     var subModules: moduleChildren(eltType);
     var moduleId: int;
     var moduleName: string;
+    // var ownedMods: list(shared Module(eltType));
 
     proc init(type eltType = real) {
         this.eltType = eltType;
@@ -58,12 +153,19 @@ class Module {
     proc getSubModuleName(name: string): string do
         return moduleName + "." + name;
 
-    proc addModule(name: string, in m: owned Module(eltType)) {
+    proc addModule(name: string, m: borrowed Module(eltType)) {
         const modName = getSubModuleName(name);
         m.moduleName = modName;
         m.setup();
         subModules.add(modName,m);
     }
+
+    // proc addModule(name: string, in m: owned Module(eltType)) {
+    //     const modName = getSubModuleName(name);
+    //     m.moduleName = modName;
+    //     m.setup();
+    //     subModules.add(modName,m);
+    // }
     proc addParameter(name: string, data: Tensor(eltType)) {
         const modName = getSubModuleName(name);
         var p = new Parameter(data);
@@ -75,25 +177,30 @@ class Module {
     proc forward(input: Tensor(eltType)): Tensor(eltType) do
         halt("Unimplemented.");
 
-    proc this(paramName: string) ref : Tensor(eltType) {
-        return (subModules.childDict[getSubModuleName(paramName)].borrow() : borrowed Parameter(eltType)).data;
+    proc par(paramName: string) ref : Tensor(eltType) {
+        return (subModules.childDict[getSubModuleName(paramName)] : borrowed Parameter(eltType)).data;
     }
 
     proc mod(modName: string): borrowed Module(eltType) {
-        return subModules.childDict[getSubModuleName(modName)].borrow();
+        return subModules.childDict[getSubModuleName(modName)];
     }
 
     iter parameters(): borrowed Parameter(eltType) {
-        for m in subModules {
-            for p in m.parameters() {
-                yield p;
-            }
+        for m in modules() {
+            if var p = m : borrowed Parameter(eltType)? then
+                yield p!;
         }
     }
 
     iter moduleNames(): string {
-        for k in subModules {
-            yield k.moduleName;
+        for m in modules() {
+            yield m.moduleName;
+        }
+    }
+
+    iter parameterNames(): string {
+        for p in parameters() {
+            yield p.moduleName;
         }
     }
 
@@ -102,6 +209,22 @@ class Module {
             yield m;
             for m_ in m.modules() {
                 yield m_;
+            }
+        }
+    }
+
+    // iter modules(): borrowed Module(eltType) {
+    //     for (n,m) in this.moduleFields()
+    // }
+    proc loadPyTorchDump(modelPath: string) {
+        for m in modules() {
+            const name = m.moduleName;
+            if var p = m : borrowed Parameter(real)? {
+                const paramName = name[(moduleName.size + 1)..];
+                const paramPath = modelPath + paramName + ".chdata";
+                writeln("Loading ",paramName," from ", paramPath);
+                var loaded = Tensor.load(paramPath);
+                p!.data = loaded;
             }
         }
     }
@@ -115,24 +238,60 @@ class Parameter : Module(?) {
         this.data = data;
     }
 
-    override iter parameters(): borrowed Parameter(eltType) {
-        yield this.borrow();
+    // override iter parameters(): borrowed Parameter(eltType) {
+    //     yield this.borrow();
+    // }
+}
+use List;
+class Sequential : Module(?) {
+    var mds: list(owned Module(eltType));    
+
+    proc init(type eltType = real, in ms: (owned Module(eltType)?)...?rank) {
+        super.init(eltType);
+        this.mds = new list(owned Module(eltType));
+        init this;
+        this.moduleName = "sequential";
+        for param i in 0..<rank {
+            var m : owned Module(eltType) = owned.adopt(owned.release(ms[i])!);
+            var b = m.borrow();
+            mds.insert(m);
+            addModule(i: string,b);
+        }
+    }
+
+    proc init(in ms: (owned Module(real)?)...?rank) do
+        this.init(eltType = real, (...ms));
+
+
+    override proc forward(input: Tensor(eltType)): Tensor(eltType) {
+        var x = mds[0](input);
+        for i in 0..<mds.size {
+            x = mds[i](x);
+        }
+        return x;
     }
 }
 
 class Linear : Module(?) {
     var m,n: int;
+    var weight: owned Parameter(eltType);
+    var bias: owned Parameter(eltType);
 
     proc init(type eltType, m: int, n: int) {
         super.init(eltType);
-        init this;
         this.m = m;
         this.n = n;
+        this.weight = new Parameter(Tensor.arange(n,m));
+        this.bias = new Parameter(Tensor.zeros(m));
+        init this;
+
     }
 
     override proc setup() {
-        addParameter("weight",Tensor.arange(n,m));
-        addParameter("bias",Tensor.zeros(m));
+        // addParameter("weight",weights);
+        // addParameter("bias",bias);
+        addModule("weight",weight);
+        addModule("bias",bias);
     }
 
     proc init(m: int, n: int) {
@@ -140,27 +299,31 @@ class Linear : Module(?) {
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
-        return Tensor.matvecmulFast(this["weight"],input) + this["bias"];
+        return Tensor.matvecmulFast(par["weight"],input) + par["bias"];
 }
 
 class Conv2D : Module(?) {
     var kernelShape: 4*int;
     var stride: int;
+    var kernel: owned Parameter(eltType);
+    var bias: owned Parameter(eltType);
 
     proc init(type eltType = real,channels: int, features: int, kernel: int, stride: int = 1) {
         super.init(eltType);
         this.kernelShape = (features,channels,kernel,kernel);
         this.stride = stride;
+        this.kernel = new Parameter(Tensor.arange(features,channels,kernel,kernel));
+        this.bias = new Parameter(Tensor.arange(features));
         init this;
     }
 
     override proc setup() {
-        const (features,channels,kernel,_) = kernelShape;
-        var ker = Tensor.arange(features,channels,kernel,kernel);
-        var bias = Tensor.arange(features);
+        // const (features,channels,kernel,_) = kernelShape;
+        // var ker = Tensor.arange(features,channels,kernel,kernel);
+        // var bias = Tensor.arange(features);
 
-        addParameter("weight",ker);
-        addParameter("bias",bias);
+        addModule("weight",kernel);
+        addModule("bias",bias);
     }
 
     proc init(channels: int, features: int, kernel: int, stride: int = 1) {
@@ -168,8 +331,8 @@ class Conv2D : Module(?) {
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
-        var weights = this["weight"];
-        var bias = this["bias"];
+        var weights = par["weight"];
+        var bias = par["bias"];
         return Tensor.convolve(input,weights,bias,stride);
     }
 }
@@ -300,6 +463,7 @@ class Net : Module(?) {
         // return this.mod("conv4").forward(x3);
     }
 }
+
 
 if diag {
     use GpuDiagnostics;

@@ -153,12 +153,63 @@ module Utilities {
         return idxs;
     }
 
+    inline proc indexAtHelperProd(n: int, prod: int, shape: int ...?rank): rank * int where rank > 1 {
+        var idx: rank * int;
+        var order = n;
+        var div = prod;
+        for param i in 0..<rank {
+            div /= shape(i);
+            idx(i) = order / div;
+            order %= div;
+        }
+        return idx;
+    }
+
+    inline proc indexAtHelperMultiples(n: int, divs: int ...?rank): rank * int {
+        var idx: rank * int;
+        var order = n;
+        for param i in 0..<rank {
+            idx(i) = order / divs(i);
+            order %= divs(i);
+        }
+        return idx;
+    }
+
+    inline proc indexAt(n: int, shape: int ...?rank): rank * int where rank > 1 {
+        var idx: rank * int;
+        var order = n;
+        var div = 1;
+        for param i in 0..<rank do
+            div *= shape(i);
+        for param i in 0..<rank {
+            div /= shape(i);
+            idx(i) = order / div;
+            order %= div;
+        }
+        return idx;
+    }
+
+    inline iter fastEach(shape: int...?rank): rank * int {
+        var prod = 1;
+        var divs: rank * int;
+        for param j in 0..<rank {
+            param i = rank - j - 1;
+            divs(i) = prod;
+            prod *= shape(i);
+        }
+        foreach i in 0..<prod {
+            yield indexAtHelperMultiples(i,(...divs));
+        }
+    }
+
     proc argsort(tup: int...?rank) {
         writeln("IAIN: just do it, it's not that hard. (tuple argsort)");
         return tup;
     }
 
     module Standard {
+
+        private use Utilities;
 
         proc _tuple.imageType(f) type {
             type eltType = this.eltType;
@@ -230,22 +281,39 @@ module Utilities {
             return nw;
         }
 
+        proc _tuple.indexAt(n: int): this.size * int where isHomogeneousTuple(this) && this(0).type == int {
+            return indexAt(n,(...this));
+        }
+
         // inline operator =(ref tup: _tuple, v: tup(0).type) where isHomogeneousTuple(tup) {
         //     for param i in 0..<tup.size do
         //         tup(i) = v;
         // }
 
         inline iter _domain.each {
-            @assertOnGpu
-            foreach i in 0..<this.size {
-                const idx = this.orderToIndex(i);
-                yield idx;
+            const shape = this.shape;
+            var prod = 1;
+            var divs: rank * int;
+            for param j in 0..<rank {
+                param i = rank - j - 1;
+                divs(i) = prod;
+                prod *= shape(i);
             }
+            @assertOnGpu
+            foreach i in 0..<prod {
+                yield indexAtHelperMultiples(i,(...divs));
+            }
+            // @assertOnGpu
+            // foreach i in 0..<this.size {
+            //     const idx = this.orderToIndex(i);
+            //     yield idx;
+            // }
         }
 
         inline iter _domain.every() {
+            const shape = this.shape;
             for i in 0..<this.size {
-                yield this.orderToIndex(i);
+                yield indexAt(i,shape);
             }
         }
 

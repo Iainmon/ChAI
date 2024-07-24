@@ -347,7 +347,7 @@ record ndarray : serializable {
     }
 
     proc sum(axes: int...?axesCount): ndarray(rank,eltType) {
-        var acc: ndarray(rank,eltType) = this;
+        var acc: ndarray(rank,eltType) = new ndarray(data);
         // var offset = 0;
         for param i in 0..<axesCount {
             acc = acc.sumOneAxis(axes(i) - i);
@@ -553,7 +553,7 @@ record ndarray : serializable {
         @assertOnGpu
         foreach i in rl.domain.each with (ref rl) {
             const x = rl.data[i];
-            rl.data[i] = if x < 0.0 then 0.0 else x;
+            rl.data[i] = Math.max(0,x);
         }
         return rl;
     }
