@@ -176,15 +176,29 @@ module Utilities {
     }
 
     inline proc indexAt(n: int, shape: int ...?rank): rank * int where rank > 1 {
-        var idx: rank * int;
+        // var idx: rank * int;
+        // var order = n;
+        // var div = 1;
+        // for param i in 0..<rank do
+        //     div *= shape(i);
+        // for param i in 0..<rank {
+        //     div /= shape(i);
+        //     idx(i) = order / div;
+        //     order %= div;
+        // }
+        // return idx;
+
         var order = n;
-        var div = 1;
-        for param i in 0..<rank do
-            div *= shape(i);
+        var prod = 1;
+        var idx: rank * int;
+        var divs: rank * int;
         for param i in 0..<rank {
-            div /= shape(i);
-            idx(i) = order / div;
-            order %= div;
+            divs(rank - i - 1) = prod;
+            prod *= shape(rank - i - 1);
+        }
+        for param i in 0..<rank {
+            idx(i) = order / divs(i);
+            order %= divs(i);
         }
         return idx;
     }
@@ -281,9 +295,25 @@ module Utilities {
             return nw;
         }
 
-        proc _tuple.indexAt(n: int): this.size * int where isHomogeneousTuple(this) && this(0).type == int {
+        inline proc _tuple.indexAt(n: int): this.size * int where isHomogeneousTuple(this) && this(0).type == int {
             return indexAt(n,(...this));
         }
+
+        inline iter _tuple.each(n: int): this.size * int where isHomogeneousTuple(this) && this(0).type == int {
+            param rank = this.size;
+            var prod = 1;
+            var divs: rank * int;
+            for param j in 0..<rank {
+                param i = rank - j - 1;
+                divs(i) = prod;
+                prod *= this(i);
+            }
+            @assertOnGpu
+            foreach i in 0..<prod {
+                yield indexAtHelperMultiples(i,(...divs));
+            }
+        }
+
 
         // inline operator =(ref tup: _tuple, v: tup(0).type) where isHomogeneousTuple(tup) {
         //     for param i in 0..<tup.size do

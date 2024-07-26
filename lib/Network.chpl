@@ -117,6 +117,13 @@ proc (class).registerModules() where isSubtype(this.type,Module(?)) {
     }
 }
 
+
+proc (class).postinit() where isSubtype(this.type,Module(?)) {
+    for (n,m) in this.moduleFields() {
+        addModule(n,m);
+    }
+}
+
 // proc (class).this(fieldName: string): Tensor(?) where isSubtype(this.type,Parameter(?)) {
 //     return (helpFindModuleByName(this,fieldName) : borrowed Parameter(?)?)!.data;
 // }
