@@ -5,7 +5,6 @@ use Network;
 use Reflection;
 
 
-
 class CNN : Module(?) {
     var conv1: owned Conv2D(eltType);
     var conv2: owned Conv2D(eltType);

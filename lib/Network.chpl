@@ -14,17 +14,7 @@ use Map; // only map;
 
 use Reflection;
 
-proc helpFindFieldByNameAndType(type superType, arg, x: string) : borrowed superType? {
-  param myFields = getNumFields(arg.type);
-  for param i in 0..<myFields {
-    if !isType(getField(arg, i)) &&
-      isSubtype(getField(arg, i).type, superType) &&
-        getFieldName(arg.type, i) == x {
-          return getField(arg, i).borrow();
-        }
-  }
-  return nil;
-}
+
 
 proc helpFindModuleByName(arg, x: string) : borrowed Module(?)? {
   param myFields = getNumFields(arg.type);
@@ -84,7 +74,24 @@ record moduleChildren {
 //     return nil;
 // }
 
+interface mappable {
+    proc myFunction() {
+        
+    }
+}
 
+
+proc helpFindFieldByNameAndType(type superType, arg, x: string) : borrowed superType? {
+  param myFields = getNumFields(arg.type);
+  for param i in 0..<myFields {
+    if !isType(getField(arg, i)) &&
+      isSubtype(getField(arg, i).type, superType) &&
+        getFieldName(arg.type, i) == x {
+          return getField(arg, i).borrow();
+        }
+  }
+  return nil;
+}
 
 proc (class).this(fieldName: string): borrowed Module(?) where isSubtype(this.type,Module(?)) {
     return helpFindModuleByName(this,fieldName)!;
