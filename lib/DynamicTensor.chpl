@@ -314,6 +314,8 @@ proc type Tensor.zeros(args...) do
     return tensor.zeros((...args)).eraseRank();
 
 proc main() {
+
+    // Just some examples. 
     const t_: tensor(2,real) = tensor.arange(3,5);
     writeln(t_);
     const t = new Tensor(t_);
@@ -333,12 +335,6 @@ proc main() {
     t4.data(2)[2,2] = 200;
     ref t4Data = t4.data(2);
     t4Data[1,0] = 500;
-    // t4.array(2).data[0,0]=70; // this doesn't seem to work 
-
-
-    // forall (i,j) in t4t.domain.every() {
-    //     writeln(t4t.array.data[i,j]);
-    // }
 
 
 

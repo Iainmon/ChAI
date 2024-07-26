@@ -140,16 +140,17 @@ const modelPath = "data/models/mnist_cnn/";
 
 cnn.loadPyTorchDump(modelPath);
 
-// for m in cnn.modules() {
-//     const name = m.moduleName;
-//     if var p = m : borrowed Parameter(real)? {
-//         const paramName = name[4..];
-//         const paramPath = modelPath + paramName + ".chdata";
-//         writeln("Loading ", paramPath);
-//         var loaded = Tensor.load(paramPath);
-//         p!.data = loaded;
-//     }
-// }
+
+for m in cnn.modules() {
+    const name = m.moduleName;
+    if var p = m : borrowed Parameter(real)? {
+        const paramName = name[4..];
+        const paramPath = modelPath + paramName + ".chdata";
+        writeln("Loading ", paramPath);
+        var loaded = Tensor.load(paramPath);
+        p!.data = loaded;
+    }
+}
 
 // for m in cnn.modules() {
 //     const name = m.moduleName;

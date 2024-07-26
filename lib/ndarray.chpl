@@ -7,15 +7,6 @@ import Math;
 import Utilities as util;
 use Utilities.Standard;
 
-// use Reflection;
-// proc printType(type t) {
-//     param nfs = getNumFields(t);
-//     for param i in 0..#nfs {
-//         writeln(t:string, ".", getFieldName(t,i):string);
-//     }
-// }
-
-// type remote_ndarray = remote(ndarray(?,?));
 
 
 class NDArrayData : serializable {
@@ -57,11 +48,6 @@ class NDArrayData : serializable {
 record ndarray : serializable {
     param rank: int;
     type eltType = real(64);
-    // var _domain: domain(rank,int) = util.emptyDomain(rank);
-    // var data: [_domain] eltType;
-    // forwarding data except _dom;
-    // proc _dom do return this._domain;
-    // forwarding data;
 
     var arrayResource: owned NDArrayData(rank,eltType);
 
@@ -106,15 +92,12 @@ record ndarray : serializable {
         this.rank = arr.rank;
         this.eltType = eltType;
         this.arrayResource = new owned NDArrayData(arr);
-        // this._domain = arr.domain;
-        // this.data = arr;
     }
 
     proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == false {
         this.rank = arr.rank;
         this.eltType = eltType;
         this.arrayResource = new owned NDArrayData(rank,eltType,arr.domain.normalize);
-        // this._domain = arr.domain.normalize;
         init this;
         const lw = arr.domain.low;
         foreach i in arr.domain.each with (ref this) {
@@ -134,8 +117,7 @@ record ndarray : serializable {
     proc init(A: ndarray(?rank,?eltType)) {
         this.rank = rank;
         this.eltType = eltType;
-        // this._domain = A._domain;
-        // this.data = A.data;
+
         this.arrayResource = new owned NDArrayData(A.arrayResource);
     }
 
@@ -144,11 +126,6 @@ record ndarray : serializable {
         this.init(arr);
     }
 
-    // proc init(unknown: ?t) where !isDomainType(t) {
-    //     const arr = unknown;
-    //     const normalArr = util.normalizeArray(arr);
-    //     this.init(normalArr);
-    // }
 
     proc init=(other: [] ?eltType) {
         this.init(other);
@@ -158,18 +135,11 @@ record ndarray : serializable {
         this.rank = rank;
         this.eltType = eltType;
         this.arrayResource = new owned NDArrayData(other.arrayResource);
-        // this._domain = other._domain;
-        // this.data = other.data;
     }
 
     proc init=(other: _iteratorRecord) {
         this.init(other);
     }
-    
-    // proc init=(dom: domain(rank,int)) {
-    //     this._domain = dom;
-    // }
-
 
     proc ref this(args: int...rank) ref {
         return data.this((...args));
@@ -299,7 +269,6 @@ record ndarray : serializable {
             }
             expandedData[idx] = data[origIdx];
         }
-        // expanded.data[(...newRanges)] = data[(...oldRanges)];
         return expanded;
     }
 
@@ -366,7 +335,6 @@ record ndarray : serializable {
             }
             if !exactBounds {
                 sliceRanges(i) = start..#end;
-                // shrunkRanges(i) = 0..#end; // start..#end align 0;
             } else {
                 sliceRanges(i) = start..<end;
             }
@@ -386,7 +354,6 @@ record ndarray : serializable {
             const dimSize = data.domain.shape(i);
             var (left,right) = narg(i);
             sliceRanges(i) = left..#dimSize;
-            // shrunkRanges(i) = 0..#end; // start..#end align 0;
             newShape(i) = dimSize + left + right;
         }
         const sliceDom = {(...sliceRanges)};
@@ -439,9 +406,6 @@ record ndarray : serializable {
     }
 
 
-    // (3,2,1,4) A
-    // A.squeeze(3) -> (3,2,4)
-
     proc squeeze(param newRank: int): ndarray(newRank,eltType) where newRank < rank {
         // I think this will work: (a member of the chapel team needs to review this) 
         // I suspect heavy performance hits will happen when running this on CUDA. 
@@ -474,7 +438,6 @@ record ndarray : serializable {
         var me = new ndarray(dom,eltType);
         me.reshapeDomain(dom);
         ref meData = me.data;
-        // const thisData = this.data;
         foreach (i,a) in zip(dom,this.data) do meData[i] = a;
         return me;
     }
@@ -494,10 +457,7 @@ record ndarray : serializable {
     proc populateRemote(ref re: remote(ndarray(rank,eltType))): remote(ndarray(rank,eltType)) {
         on re.device {
             ref reArr = re.access();
-            // ref reData = reArr.data;
             reArr = this;
-            // const me: ndarray(rank,eltType) = this;
-            // reArr = me;
         }
         return re;
     }
@@ -570,7 +530,7 @@ proc type ndarray.arange(to: int,type eltType = real(64),shape: ?rank*int): ndar
 operator =(ref lhs: ndarray(?rank,?eltType), rhs: ndarray(rank,eltType)) {
     lhs.arrayResource._domain = rhs.arrayResource._domain;
     lhs.arrayResource.data = rhs.arrayResource.data;
-    // lhs.arrayResource = new owned NDArrayData(rhs.borrowResource());
+    // lhs.arrayResource = new owned NDArrayData(rhs.borrowResource()); // Would this be faster?
 }
 
 operator =(ref lhs: ndarray(?rank,?eltType), rhs: [?d] eltType) where d.rank == rank {
@@ -582,15 +542,16 @@ operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
     return new ndarray(val);
 }
 
+// Need help implementtion these. 
 // operator =(ref lhs: ndarray(?rank,?eltType), rhs: _iteratorRecord) {
 //     var arr = rhs;
 //     lhs._domain = arr.domain;
 //     lhs.data = arr;
 // }
-
 // operator :(val: _iteratorRecord, type t: ndarray(?rank,?eltType)) {
 //     return new ndarray(val);
 // }
+
 
 // This bunch is problematic.
 proc remote.init(other: ndarray(?rank,?eltType)) {
@@ -626,6 +587,8 @@ proc remote.init=(ref other: remote(ndarray(?rank,?eltType))) {
 operator =(ref lhs: remote(ndarray(?rank,?eltType)), rhs:remote( ndarray(rank,eltType))) {
     lhs.remoteResource = rhs.remoteResource;
 }
+
+// End problemetic bunch.
 
 proc zipArr(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType),f): ndarray(rank,eltType) {
     const dom = a.domain;
@@ -699,7 +662,6 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const chanR = 0..<channels; // don't trust daniel's codemotion.
     const kernelD = {0..<kernelHeight,0..<kernelWidth};
     const kernelChanD = {0..<channels,0..<kernelHeight,0..<kernelWidth};
-    // const kernelChanIter = for j in 0..<kernelChanD.size do kernelChanD.orderToIndex(j);
 
     ref dat = outFeatures.data;
     ref fet = features.data;
@@ -737,7 +699,6 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const chanR = 0..<channels; // don't trust daniel's codemotion.
     const kernelD = {0..<kernelHeight,0..<kernelWidth};
     const kernelChanD = {0..<channels,0..<kernelHeight,0..<kernelWidth};
-    // const kernelChanIter = for j in 0..<kernelChanD.size do kernelChanD.orderToIndex(j);
 
     ref dat = outFeatures.data;
     ref fet = features.data;
@@ -763,13 +724,8 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
 
 proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(3,eltType) {
 
-    // import AutoMath;
     const (channels,height,width) = features.shape;
-    // writeln(features.shape, " pool: ", poolSize);
     if (height % poolSize != 0) || (width % poolSize != 0) {
-        // var fet2 = features;
-        // fet2.reshapeDomain(util.domainFromShape(channels,height + 1,width));
-        // return ndarray.maxPool(fet2,poolSize);
         const moreH = (Math.ceil(height:real / poolSize:real): int) * poolSize;
         const moreW = (Math.ceil(width:real / poolSize:real): int) * poolSize;
         return ndarray.maxPool(features.reshape(channels,moreH,moreW),poolSize);
@@ -827,19 +783,8 @@ inline proc type ndarray.fromRanges(type eltType = real, rngs: range...?rank): n
 
 
 
-// proc ndarray.serialize(writer: IO.fileWriter(locking=false, ?),ref serializer: ?st) {
-
-// }
-
-
+// For printing. 
 proc ndarray.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer) {
-    // const name = "ndarray(" + rank:string + "," + eltType:string + ")";
-    // var ser = serializer.startRecord(writer,name,2);
-    // ser.writeField("shape",this.data.shape);
-    // // var serArr = ser.startArray();
-    // ser.writeField("data",this.data);
-    // ser.endRecord();
-
     writer.write("ndarray(");
     const shape = this.data.shape;
     var first: bool = true;
@@ -901,7 +846,7 @@ class _tensor_resource {
 
 }
 
-
+// Some examples. 
 // const dom = util.emptyDomain(2);
 // writeln(dom);
 
@@ -974,7 +919,7 @@ class _tensor_resource {
 // type T = (int,real);
 // writeln(T:string,isTupleType(T));
 
-
+// end examples. 
 
 
 
@@ -1064,14 +1009,6 @@ proc drop(param count: int, param s: string) param do
     return slice(count,s.size,s);
 
 
-// proc parseArgs(param s: string) param  {
-//     // var fst: string;
-//     // var snd: string;
-//     param fst = splitAt(s,",");
-//     param snd = splitAt(drop(fst.size + 1,s),"-");
-
-//     return (fst,snd);
-// }
 
 proc type ndarray.einsum(param subscripts: string,a: ndarray(?rankA,?eltType), b: ndarray(?rankB, eltType)) {
 
@@ -1086,8 +1023,7 @@ proc type ndarray.einsum(param subscripts: string,a: ndarray(?rankA,?eltType), b
     // param thd 
     // param fth
     // param vth
-    // writeln((fst,snd,subscripts_2));
-
+    // Cool three letter names for 3,4,5
 
     for param i in 0..<fst.size {
         param ci = fst[i];
@@ -1101,11 +1037,12 @@ proc type ndarray.einsum(param subscripts: string,a: ndarray(?rankA,?eltType), b
         }
     }
     // compilerError("Must sum across one axis!");
-    return a;//ndarray.fullOuter(a,b);
+    return a;
 }
 
 
 proc main() {
+    // More examples. 
     writeln("Hello!");
     // {
     //     var A = ndarray.fromRanges(real, 0..<5);
@@ -1148,33 +1085,3 @@ proc main() {
     // param r = 0..<3;
     // writeln(r);
 }
-
-// var arr: Tensor(real) = loadArr("");
-// arr[1,3,4]
-// a
-
-// proc _dom 
-
-// arr + arr;
-
-//   private proc remoteWrapperTypeForIR(value) type {
-//     // var arr = value;
-//     // return owned _remoteVarContainer(arr.type);
-
-//     if value == 15 {
-//         return int;
-//     } else {
-//         return bool;
-//     }
-//   }
-
-
-
-// var t: tensor(2,real);
-// t.data
-// t.data[1..5,1..5] = t[1..5,1..5] 
-// t[1..5,1..5]  = 1;
-
-// var a = t[1..5,1..6] + t[1..5,1..6];
-
-// proc tensor.init=

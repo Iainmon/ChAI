@@ -234,16 +234,6 @@ proc type tensor.matvecmul(m,v) {
     return matvec(m,v);
 }
 
-// proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), stride: int): tensor(3,eltType) {
-//     var conv = new tensor(3,eltType);
-//     on features.device {
-//         ref fet = features.array;
-//         ref ker = kernel.array;
-//         conv.array = ndarray.convolve(fet,ker,stride);
-//     }
-//     return conv;
-// }
-
 proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), stride: int): tensor(3,eltType) {
     var ctx = new conv2DOp(eltType,features.meta,kernel.meta,stride);
     return tensorFromCtx(3,eltType,ctx);

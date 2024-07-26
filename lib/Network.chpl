@@ -295,8 +295,6 @@ class Linear : Module(?) {
     }
 
     override proc setup() {
-        // addParameter("weight",weights);
-        // addParameter("bias",bias);
         addModule("weight",weight);
         addModule("bias",bias);
     }
@@ -392,31 +390,6 @@ class Dropout : Module(?) {
         return input;
 }
 
-// record parameter {
-//     type eltType = real;
-//     var name: string;
-//     var data: Tensor(eltType);
-// }
-
-// record moduleParameters {
-//     type eltType = real;
-//     var paramDict: map(string,parameter(eltType));
-
-//     proc init(type eltType = real) {
-//         this.eltType = eltType;
-//         this.paramDict = new map(string,parameter(eltType),initialCapacity=1);
-//     }
-
-//     iter these() ref : parameter(eltType) {
-//         for k in paramDict {
-//             yield paramDict[k];
-//         }
-//     }
-
-//     proc ref add(name: string,data: Tensor(eltType)) {
-
-//     }
-// }
 
 
 proc chain(m: borrowed Module(?), modNames: string...?n, input: Tensor(?eltType)) {
