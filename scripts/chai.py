@@ -46,7 +46,24 @@ class ChapelTensor(object):
         return bf
     
 
-def dump_model_parameters(model,path_prefix,with_json=True,verbose=True):
+def get_attributes(model):
+    return { str(k):v for (k,v) in dict(model.__dict__).items() if k[0] != '_'}
+
+def get_summary(model,global_name,parent_name=None):
+    model_name = model.__class__.__name__
+    d = {
+        'layer': model_name,
+        'attributes': get_attributes(model),
+        'sub_modules': { name : get_summary(m,global_name=global_name,parent_name=name) for name,m in  model.named_children() }
+    }
+    if parent_name is None:
+        return {
+            'model_name': global_name,
+            global_name: d
+        }
+    return d
+
+def dump_model_parameters(model,path_prefix,model_name,with_json=True,verbose=True):
     Path(path_prefix).mkdir(exist_ok=True)
     for param_tensor in model.state_dict():
         if verbose: print("Serializing ", param_tensor)
@@ -65,9 +82,12 @@ def dump_model_parameters(model,path_prefix,with_json=True,verbose=True):
         f = open(chai_path,'wb')
         t.pack_into(f)
         f.close()
+    with open(Path(path_prefix) / 'summary.json','w') as f:
+        f.write(json.dumps(get_summary(model,model_name),indent=2))
 
-def chai_dump(self,path_prefix,with_json=True,verbose=True):
-    return dump_model_parameters(self,path_prefix,with_json=True,verbose=True)
+
+def chai_dump(self,path_prefix,model_name,with_json=True,verbose=True):
+    return dump_model_parameters(self,path_prefix,model_name,with_json=True,verbose=True)
 
 torch.nn.Module.chai_dump = chai_dump
 
@@ -90,3 +110,4 @@ def chai_save(self,path,name,with_json=True,verbose=True,dtype=None):
     f.close()
 
 torch.Tensor.chai_save = chai_save
+
