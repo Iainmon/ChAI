@@ -1,7 +1,7 @@
 
 
 module Tensor {
-    public use ndarray;
+    public use NDArray;
     public use StaticTensor;
     public use DynamicTensor;
 

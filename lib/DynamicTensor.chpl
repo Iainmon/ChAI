@@ -1,8 +1,8 @@
 
-use ndarray;
-use remote;
-use autograd;
-import autograd as ag;
+use NDArray;
+use Remote;
+use Autograd;
+import Autograd as ag;
 import StaticTensor as tn;
 use StaticTensor;
 

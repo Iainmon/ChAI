@@ -1,8 +1,8 @@
 
 
-use ndarray;
-use remote;
-use autograd;
+use NDArray;
+use Remote;
+use Autograd;
 import Utilities as util;
 use Utilities.Standard;
 

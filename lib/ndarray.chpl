@@ -1,7 +1,7 @@
 
 import ChapelArray;
 import IO;
-use remote;
+use Remote;
 import Math;
 
 import Utilities as util;

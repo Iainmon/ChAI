@@ -132,40 +132,17 @@ for (n,m) in cnn.moduleFields() {
 config const testImgSize = 28;
 
 var img = Tensor.load("data/datasets/mnist/image_idx_0_7_7.chdata");// Tensor.arange(1,testImgSize,testImgSize);
-writeln(img);
-writeln(img.runtimeRank);
+// writeln(img);
+// writeln(img.runtimeRank);
 
 const modelPath = "data/models/mnist_cnn/";
 
 cnn.loadPyTorchDump(modelPath);
 
 
-for m in cnn.modules() {
-    const name = m.moduleName;
-    if var p = m : borrowed Parameter(real)? {
-        const paramName = name[4..];
-        const paramPath = modelPath + paramName + ".chdata";
-        writeln("Loading ", paramPath);
-        var loaded = Tensor.load(paramPath);
-        p!.data = loaded;
-    }
-}
-
-// for m in cnn.modules() {
-//     const name = m.moduleName;
-//     if var p = m : borrowed Parameter(real)? {
-//         const paramName = name[4..];
-//         const paramPath = modelPath + paramName + ".chdata";
-//         writeln("Loading ", paramPath);
-//         var loaded = Tensor.load(paramPath);
-//         p!.data = loaded;
-//     }
-// }
-
-
 var output = cnn(img);
 
-writeln(output);
+// writeln(output);
 
 config const imageCount = 1;
 
@@ -179,9 +156,13 @@ for i in images.domain {
     writeln((i, pred));
 }
 
-for i in images.domain {
-    writeln((i, preds[i]));
+config const printResults = true;
+if printResults {
+    for i in images.domain {
+        writeln((i, preds[i]));
+    }
 }
+
 
 
 // var model = new Sequential(real,new Conv2D(real,channels=1,features=32,kernel=3,stride=1));

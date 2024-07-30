@@ -1,5 +1,5 @@
 /* Documentation for gputil */
-module TeaLeaf {
+module ChAI {
   public import ndarray;
   public import Network;
   public import Tensor;
@@ -8,6 +8,6 @@ module TeaLeaf {
     writeln(Tensor.Tensor.arange(3,5));
 
 
-    writeln("New mason package: TeaLeaf");
+    writeln("New mason package: ChAI");
   }
 }

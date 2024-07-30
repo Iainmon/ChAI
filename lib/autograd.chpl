@@ -1,7 +1,7 @@
 // watch -d -n 0.1 nvidia-smi
 
-use ndarray;
-use remote;
+use NDArray;
+use Remote;
 
 import Utilities as util;
 
