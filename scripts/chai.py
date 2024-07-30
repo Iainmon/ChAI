@@ -47,20 +47,21 @@ class ChapelTensor(object):
     
 
 def get_attributes(model):
-    return { str(k):v for (k,v) in dict(model.__dict__).items() if k[0] != '_'}
+    return { str(k): str(v[0]) if isinstance(v,tuple) else str(v).lower() for (k,v) in dict(model.__dict__).items() if k[0] != '_'}
 
 def get_summary(model,global_name,parent_name=None):
     model_name = model.__class__.__name__
     d = {
-        'layer': model_name,
+        'layerType': model_name,
         'attributes': get_attributes(model),
-        'sub_modules': { name : get_summary(m,global_name=global_name,parent_name=name) for name,m in  model.named_children() }
+        'subModules': { name : get_summary(m,global_name=global_name,parent_name=name) for name,m in  model.named_children() },
+        'subModuleOrder': [name for name,_ in model.named_children()]
     }
-    if parent_name is None:
-        return {
-            'model_name': global_name,
-            global_name: d
-        }
+    # if parent_name is None:
+    #     return {
+    #         'model_name': global_name,
+    #         global_name: d
+    #     }
     return d
 
 def dump_model_parameters(model,path_prefix,model_name,with_json=True,verbose=True):
@@ -82,7 +83,7 @@ def dump_model_parameters(model,path_prefix,model_name,with_json=True,verbose=Tr
         f = open(chai_path,'wb')
         t.pack_into(f)
         f.close()
-    with open(Path(path_prefix) / 'summary.json','w') as f:
+    with open(Path(path_prefix) / 'specification.json','w') as f:
         f.write(json.dumps(get_summary(model,model_name),indent=2))
 
 

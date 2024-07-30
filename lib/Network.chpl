@@ -135,20 +135,21 @@ proc (class).postinit() where isSubtype(this.type,Module(?)) {
 // }
 
 
+
 record moduleAttributes : serializable {
     var layerType: string;
     var moduleName: string;
     var attributes: map(string,string);
     forwarding attributes only this;
 
-    proc init(layerType: string,moduleName: string,attrs: map(string,string)) {
+    proc init(layerType: string,moduleName: string,in attrs: map(string,string,?)) {
         this.layerType = layerType;
         this.moduleName = moduleName;
         this.attributes = attrs;
     }
 
     pragma "last resort"
-    proc init(layerType: string,moduleName: string, attrs...?n) {
+    proc init(layerType: string,moduleName: string, attrs...?n) where !(attrs(0).type <= map(?)) {
         this.layerType = layerType;
         this.moduleName = moduleName;
         this.attributes = new map(string,string);
@@ -177,6 +178,48 @@ record moduleAttributes : serializable {
 
     proc prettyPrintSpec(): string do
         return moduleName + " : " + prettyPrint();
+}
+
+class ModuleSpecification : serializable {
+    var layerType: string;
+    var attributes: map(string,string);
+    var subModules: map(string,owned ModuleSpecification?);
+    var subModuleOrder: list(string);
+}
+
+proc moduleFromSpec(ms_: borrowed ModuleSpecification?): owned Module(real){
+    var ms = ms_!;
+    select ms.layerType {
+        when "Conv2d" {
+            return new Conv2D(real,new moduleAttributes(ms.layerType,"unknown",ms.attributes));
+        }
+        when "Linear" {
+            var ma = new moduleAttributes("Linear","unknown",ms.attributes);
+            return new Linear(real,ma.getInt("in_features"),ma.getInt("out_features"));
+        }
+        when "Dropout" {
+            var ma = new moduleAttributes("Dropout","unknown",ms.attributes);
+            return new Dropout(real,ma["p"] : real);
+        }
+        // when "Flatten" {
+
+        // }
+        otherwise {
+            var sms: map(string,owned Module(real)?) = new map(string,owned Module(real)?);
+            for k in ms.subModuleOrder {
+                sms[k] = moduleFromSpec(ms.subModules[k]) : owned Module(real)?;
+                // sms[k]!.moduleName = k;
+            }
+            return new Sequential(real,ms.subModuleOrder,sms);
+            // return moduleFromSpec(ms.subModules["conv1"]);
+        }
+    }
+                var sms: map(string,owned Module(real)?) = new map(string,owned Module(real)?);
+            for k in ms.subModules {
+                sms[k] = moduleFromSpec(ms.subModules[k]) : owned Module(real)?;
+            }
+            return new Sequential(real,ms.subModuleOrder,sms);
+    // return moduleFromSpec(ms.subModules["conv1"]);
 }
 
 
@@ -303,7 +346,7 @@ class Parameter : Module(?) {
 }
 
 class Sequential : Module(?) {
-    var mds: list(owned Module(eltType));    
+    var mds: list(owned Module(eltType));
 
     proc init(type eltType = real, in ms: (owned Module(eltType)?)...?rank) {
         super.init(eltType);
@@ -313,8 +356,21 @@ class Sequential : Module(?) {
         for param i in 0..<rank {
             var m : owned Module(eltType) = owned.adopt(owned.release(ms[i])!);
             var b = m.borrow();
-            mds.insert(m);
+            mds.pushBack(m);
             addModule(i: string,b);
+        }
+    }
+
+    proc init(type eltType = real, order: list(string), in ms: map(string,owned Module(eltType)?)) {
+        super.init(eltType);
+        this.mds = new list(owned Module(eltType));
+        init this;
+        this.moduleName = "sequential";
+        for i in 0..<order.size {
+            var m : owned Module(eltType) = owned.adopt(owned.release(ms[order[i]])!);
+            mds.pushBack(m);
+            var b = mds[i].borrow();
+            addModule("(" + i: string + ")." + order[i],b);
         }
     }
 
@@ -373,6 +429,25 @@ class Conv2D : Module(?) {
         this.bias = new Parameter(Tensor.arange(features));
         init this;
     }
+
+    proc init(type eltType = real,ma: moduleAttributes) {
+        this.init(real,
+                  ma.getInt("in_channels"),
+                  ma.getInt("out_channels"),
+                  ma.getInt("kernel_size"),
+                  ma.getInt("stride"));
+    }
+
+    // proc init(reader,ref deserializer: jsonDeserializer) {
+    //     var des = deserializer.startClass(reader,"Conv2D");
+    //     const attributes = new moduleAttributes(des.readField("attributes",map(string,string)));
+
+    //     // const channels = des.readField("inChannels",int);
+    //     // const features = des.readField("outChannels",int);
+    //     // const kernel = des.readField("kernel",int);
+    //     // const stride = des.readField("stride",int);
+
+    // }
 
     override proc setup() {
         // const (features,channels,kernel,_) = kernelShape;

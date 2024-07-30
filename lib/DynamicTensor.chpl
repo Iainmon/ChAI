@@ -347,7 +347,6 @@ proc main() {
 
     writeln(fet);
     fet.save("data/my_features.chdata");
-    fet.load(...)
     // writeln(t4[1,2]);
 
 
