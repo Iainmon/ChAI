@@ -1,0 +1,83 @@
+model_name = "cnn"
+
+[cnn]
+layer = "Net"
+
+[cnn.attributes]
+training = true
+
+[cnn.sub_modules.conv1]
+layer = "Conv2d"
+
+[cnn.sub_modules.conv2]
+layer = "Conv2d"
+
+[cnn.sub_modules.dropout1]
+layer = "Dropout"
+
+[cnn.sub_modules.dropout2]
+layer = "Dropout"
+
+[cnn.sub_modules.fc1]
+layer = "Linear"
+
+[cnn.sub_modules.fc2]
+layer = "Linear"
+
+[cnn.sub_modules.conv1.attributes]
+training = true
+in_channels = 1
+out_channels = 32
+kernel_size = [ 3, 3,]
+stride = [ 1, 1,]
+padding = [ 0, 0,]
+dilation = [ 1, 1,]
+transposed = false
+output_padding = [ 0, 0,]
+groups = 1
+padding_mode = "zeros"
+
+[cnn.sub_modules.conv1.sub_modules]
+
+[cnn.sub_modules.conv2.attributes]
+training = true
+in_channels = 32
+out_channels = 64
+kernel_size = [ 3, 3,]
+stride = [ 1, 1,]
+padding = [ 0, 0,]
+dilation = [ 1, 1,]
+transposed = false
+output_padding = [ 0, 0,]
+groups = 1
+padding_mode = "zeros"
+
+[cnn.sub_modules.conv2.sub_modules]
+
+[cnn.sub_modules.dropout1.attributes]
+training = true
+p = 0.25
+inplace = false
+
+[cnn.sub_modules.dropout1.sub_modules]
+
+[cnn.sub_modules.dropout2.attributes]
+training = true
+p = 0.5
+inplace = false
+
+[cnn.sub_modules.dropout2.sub_modules]
+
+[cnn.sub_modules.fc1.attributes]
+training = true
+in_features = 9216
+out_features = 128
+
+[cnn.sub_modules.fc1.sub_modules]
+
+[cnn.sub_modules.fc2.attributes]
+training = true
+in_features = 128
+out_features = 10
+
+[cnn.sub_modules.fc2.sub_modules]

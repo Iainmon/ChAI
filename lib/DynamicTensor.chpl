@@ -321,7 +321,7 @@ proc main() {
     const t = new Tensor(t_);
     const t2 = t + t;
 
-    const t3 = Tensor.arange(3,5);
+    const t3: Tensor(real) = Tensor.arange(3,5);
     writeln(t3 - Tensor.ones(3,5));
 
     writeln(t3.sum(0).sum(0));
@@ -347,7 +347,7 @@ proc main() {
 
     writeln(fet);
     fet.save("data/my_features.chdata");
-
+    fet.load(...)
     // writeln(t4[1,2]);
 
 

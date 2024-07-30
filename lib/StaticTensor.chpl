@@ -441,7 +441,7 @@ proc main() {
 
 
 
-    var img = tensor.arange(1,9,9);
+    var img: tensor(3,real) = tensor.arange(1,9,9);
     writeln(img);
 
     var ker = tensor.arange(1,1,3,3);

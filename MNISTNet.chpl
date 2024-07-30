@@ -4,6 +4,8 @@ use Network;
 
 use Reflection;
 
+import TOML;
+
 
 class CNN : Module(?) {
     var conv1: owned Conv2D(eltType);
@@ -144,7 +146,7 @@ var output = cnn(img);
 
 // writeln(output);
 
-config const imageCount = 1;
+config const imageCount = 0;
 
 var images = for i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
 var preds: [images.domain] int;
@@ -162,6 +164,23 @@ if printResults {
         writeln((i, preds[i]));
     }
 }
+
+writeln(cnn.conv1.getAttributes());
+writeln(cnn.conv1.getAttributes().prettyPrint());
+
+// import IO;
+// import JSON;
+
+// const tomlFile = IO.open("data/models/mnist_cnn/summary.toml", IO.ioMode.r);
+// const toml = TOML.parseToml(tomlFile);
+// writeln(toml);
+
+// writeln(toml["cnn"]);
+
+// var jsw = IO.stdout.withSerializer(JSON.jsonSerializer);
+// toml.writeJSON(jsw);
+// toml.writeTOML(jsw);
+// toml.writeJSON(IO.stdout);
 
 
 

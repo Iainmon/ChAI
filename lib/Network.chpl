@@ -11,6 +11,7 @@
 use Tensor;
 
 use Map; // only map;
+use List;
 
 use Reflection;
 
@@ -74,12 +75,6 @@ record moduleChildren {
 //     return nil;
 // }
 
-interface mappable {
-    proc myFunction() {
-        
-    }
-}
-
 
 proc helpFindFieldByNameAndType(type superType, arg, x: string) : borrowed superType? {
   param myFields = getNumFields(arg.type);
@@ -140,6 +135,51 @@ proc (class).postinit() where isSubtype(this.type,Module(?)) {
 // }
 
 
+record moduleAttributes : serializable {
+    var layerType: string;
+    var moduleName: string;
+    var attributes: map(string,string);
+    forwarding attributes only this;
+
+    proc init(layerType: string,moduleName: string,attrs: map(string,string)) {
+        this.layerType = layerType;
+        this.moduleName = moduleName;
+        this.attributes = attrs;
+    }
+
+    pragma "last resort"
+    proc init(layerType: string,moduleName: string, attrs...?n) {
+        this.layerType = layerType;
+        this.moduleName = moduleName;
+        this.attributes = new map(string,string);
+        init this;
+        for param i in 0..<n {
+            attributes[attrs(i)(0)] = attrs(i)(1) : string;
+        }
+    }
+
+    proc getInt(name: string): int do
+        return attributes[name] : int;
+
+    proc prettyPrint(): string {
+        var s: string = layerType + "(";
+        const size = attributes.size;
+        var idx = 0;
+        for (k,v) in zip(attributes.keys(),attributes.values()) {
+            s += k + "=" + v;
+            if idx < size - 1 then
+                s += ", ";
+            idx += 1;
+        }
+        s += ")";
+        return s;
+    }
+
+    proc prettyPrintSpec(): string do
+        return moduleName + " : " + prettyPrint();
+}
+
+
 var moduleInstances = 0;
 
 class Module {
@@ -147,19 +187,21 @@ class Module {
     var subModules: moduleChildren(eltType);
     var moduleId: int;
     var moduleName: string;
-    // var ownedMods: list(shared Module(eltType));
+    var ownedModules: list(shared Module(eltType));
 
     proc init(type eltType = real) {
         this.eltType = eltType;
         this.subModules = new moduleChildren(eltType);
         this.moduleId = moduleInstances;
         this.moduleName = "module[" + moduleInstances:string + "]";
+        this.ownedModules = new list(shared Module(eltType));
         moduleInstances += 1;
     }
 
-    proc setup() {
+    proc init(type eltType = real,ma: moduleAttributes) do
+        this.init(eltType);
 
-    }
+    proc setup() { }
 
     proc this(input: Tensor(eltType)): Tensor(eltType) do
         return this.forward(input);
@@ -174,15 +216,19 @@ class Module {
         subModules.add(modName,m);
     }
 
-    // proc addModule(name: string, in m: owned Module(eltType)) {
-    //     const modName = getSubModuleName(name);
-    //     m.moduleName = modName;
-    //     m.setup();
-    //     subModules.add(modName,m);
-    // }
+    proc addModule(name: string, m: shared Module(eltType)) {
+        ownedModules.pushBack(m);
+        addModule(name,m.borrow());
+    }
+    pragma "last resort"
+    proc addModule(name: string, in m: owned Module(eltType)) {
+        var sm: shared Module(eltType) = shared.adopt(m);
+        addModule(name,sm);
+    }
+
     proc addParameter(name: string, data: Tensor(eltType)) {
         const modName = getSubModuleName(name);
-        var p = new Parameter(data);
+        var p = new owned Parameter(data);
         p.moduleName = modName;
         p.setup();
         subModules.add(modName,p);
@@ -242,6 +288,9 @@ class Module {
             }
         }
     }
+
+    proc getAttributes(): moduleAttributes do 
+        return new moduleAttributes();
 }
 
 class Parameter : Module(?) {
@@ -251,12 +300,8 @@ class Parameter : Module(?) {
         super.init(eltType);
         this.data = data;
     }
-
-    // override iter parameters(): borrowed Parameter(eltType) {
-    //     yield this.borrow();
-    // }
 }
-use List;
+
 class Sequential : Module(?) {
     var mds: list(owned Module(eltType));    
 
@@ -346,6 +391,17 @@ class Conv2D : Module(?) {
         var weights = par["weight"];
         var bias = par["bias"];
         return Tensor.convolve(input,weights,bias,stride);
+    }
+
+    override proc getAttributes(): moduleAttributes {
+        const (features,channels,kernel,_) = kernelShape;
+        return new moduleAttributes(
+            "Conv2D",
+            moduleName,
+            ("inChannels", channels),
+            ("outChannels", features),
+            ("kernelSize", kernel),
+            ("stride",stride));
     }
 }
 

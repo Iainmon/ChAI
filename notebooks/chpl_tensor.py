@@ -1,11 +1,9 @@
-
-
-
 import struct
 import pickle
 import io
 import numpy as np
 import torch
+import json
 
 def save_tensor(t,path,append=False):
     if isinstance(t,list):
@@ -43,7 +41,6 @@ def sanitize_tensor(x):
     raise AssertionError("Cannot sanitize ", x)
 
 class ChapelTensor(object):
-    # __slots__ = ('rank','shape','dtype','data','__dict__')
     def __init__(self,data = np.arange(1),**kwargs):
         clean = sanitize_tensor(data)
         self.rank = len(tuple(clean.shape))
@@ -51,11 +48,6 @@ class ChapelTensor(object):
         self.dtype = str(clean.dtype)
         self.data = clean
 
-    # def shape(self):
-    #     return tuple(self.data.shape)
-    # def rank(self):
-    #     return len(self.shape())
-    
     def pack_into(self,buffer):
         buffer.write(struct.pack('@q',self.rank))
         for i in range(self.rank):
@@ -68,24 +60,27 @@ class ChapelTensor(object):
         d = dict(self.__dict__)
         d['data'] = d['data'].tolist()
         return d
-    
+
     def pack_bytes(self):
         bf = io.BytesIO()
         self.pack_into(bf)
         return bf
+    
 
-class MyPickler(pickle.Pickler):
-    def reducer_override(self, obj):
-        """Custom reducer for MyClass."""
-        # if isinstance(obj,ChapelTensor):
-        #     return type, (obj.__name__,obj.__bases__,obj.__dict__)
-        return NotImplemented
+def dump_model_parameters(model,path_prefix,with_json=True,verbose=True):
+    for param_tensor in model.state_dict():
+        if verbose: print("Serializing ", param_tensor)
+        t = model.state_dict()[param_tensor]
+        t = ChapelTensor(t.to(torch.float64))
+        path = path_prefix + param_tensor
+        if with_json:
+            if verbose: print("Writing json.")
+            t_json = json.dumps(t.full_dict(),indent=2)
+            f = open(path + '.json', 'w+')
+            f.write(t_json)
+            f.close()
 
-        if getattr(obj, "__name__", None) == "ChapelTensor":
-            return type, (obj.__name__, obj.__bases__,
-                          {'my_attribute': 1})
-        else:
-            # For any other object, fallback to usual reduction
-            return NotImplemented
-
-
+        if verbose: print("Writing bytes.")
+        f = open(path + '.chdata','wb')
+        t.pack_into(f)
+        f.close()
