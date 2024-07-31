@@ -705,6 +705,8 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const chanR = 0..<channels; // don't trust daniel's codemotion.
     const kernelD = {0..<kernelHeight,0..<kernelWidth};
     const kernelChanD = {0..<channels,0..<kernelHeight,0..<kernelWidth};
+    const kernelChanShape = kernelChanD.shape;
+    const outDomShape = outDom.shape;
 
     ref dat = outFeatures.data;
     ref fet = features.data;
@@ -713,12 +715,12 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
 
     @assertOnGpu
     forall i in 0..<outDom.size {
-        const (f,h_,w_) = outDom.indexAt(i);
+        const (f,h_,w_) = util.indexAt(i,(...outDomShape));
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
         var sum: eltType = 0;
         for j in 0..<kernelChanD.size {
-            const (c,kh,kw) = kernelChanD.indexAt(j);
+            const (c,kh,kw) = util.indexAt(j,(...kernelChanShape));
             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
         }
         dat[f,h_,w_] = sum + bis[f];
