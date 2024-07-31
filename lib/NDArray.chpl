@@ -88,13 +88,13 @@ record ndarray : serializable {
         this.init(dom,eltType);
     }
 
-    proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == true {
+    proc init(in arr: [] ?eltType, param isNormal: bool) where isNormal == true {
         this.rank = arr.rank;
         this.eltType = eltType;
         this.arrayResource = new owned NDArrayData(arr);
     }
 
-    proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == false {
+    proc init(in arr: [] ?eltType, param isNormal: bool) where isNormal == false {
         this.rank = arr.rank;
         this.eltType = eltType;
         this.arrayResource = new owned NDArrayData(rank,eltType,arr.domain.normalize);
@@ -106,7 +106,7 @@ record ndarray : serializable {
         }
     }
 
-    proc init(arr: [] ?eltType) {
+    proc init(in arr: [] ?eltType) {
         if arr.domain.isNormal {
             this.init(arr,isNormal=true);
         } else {
@@ -127,7 +127,7 @@ record ndarray : serializable {
     }
 
 
-    proc init=(other: [] ?eltType) {
+    proc init=(in other: [] ?eltType) {
         this.init(other);
     }
 
@@ -137,7 +137,7 @@ record ndarray : serializable {
         this.arrayResource = new owned NDArrayData(other.arrayResource);
     }
 
-    proc init=(other: _iteratorRecord) {
+    proc init=(in other: _iteratorRecord) {
         this.init(other);
     }
 
