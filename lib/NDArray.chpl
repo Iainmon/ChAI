@@ -31,7 +31,7 @@ class NDArrayData : serializable {
         this._domain = dom;
         this.data = A;
     }
-    proc init(A: [] ?eltType) {
+    proc init(in A: [] ?eltType) {
         this.rank = A.rank;
         this.eltType = eltType;
         this._domain = A.domain;
@@ -88,13 +88,13 @@ record ndarray : serializable {
         this.init(dom,eltType);
     }
 
-    proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == true {
+    proc init(in arr: [] ?eltType, param isNormal: bool) where isNormal == true {
         this.rank = arr.rank;
         this.eltType = eltType;
         this.arrayResource = new owned NDArrayData(arr);
     }
 
-    proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == false {
+    proc init(in arr: [] ?eltType, param isNormal: bool) where isNormal == false {
         this.rank = arr.rank;
         this.eltType = eltType;
         this.arrayResource = new owned NDArrayData(rank,eltType,arr.domain.normalize);
@@ -106,7 +106,7 @@ record ndarray : serializable {
         }
     }
 
-    proc init(arr: [] ?eltType) {
+    proc init(in arr: [] ?eltType) {
         if arr.domain.isNormal {
             this.init(arr,isNormal=true);
         } else {
@@ -114,30 +114,30 @@ record ndarray : serializable {
         }
     }
 
-    proc init(A: ndarray(?rank,?eltType)) {
+    proc init(in A: ndarray(?rank,?eltType)) {
         this.rank = rank;
         this.eltType = eltType;
 
         this.arrayResource = new owned NDArrayData(A.arrayResource);
     }
 
-    proc init(it: _iteratorRecord) {
+    proc init(in it: _iteratorRecord) {
         const arr = it;
         this.init(arr);
     }
 
 
-    proc init=(other: [] ?eltType) {
+    proc init=(in other: [] ?eltType) {
         this.init(other);
     }
 
-    proc init=(other: ndarray(?rank,?eltType)) {
+    proc init=(in other: ndarray(?rank,?eltType)) {
         this.rank = rank;
         this.eltType = eltType;
         this.arrayResource = new owned NDArrayData(other.arrayResource);
     }
 
-    proc init=(other: _iteratorRecord) {
+    proc init=(in other: _iteratorRecord) {
         this.init(other);
     }
 
@@ -145,7 +145,7 @@ record ndarray : serializable {
         return data.this((...args));
     }
 
-    proc ref setData(arr: [] eltType) where arr.rank == rank do
+    proc ref setData(in arr: [] eltType) where arr.rank == rank do
         if arr.domain == arrayResource._domain { data = arr; } else { this = arr; }
 
     proc ref reshapeDomain(dom: arrayResource._domain.type) do
@@ -535,12 +535,12 @@ operator =(ref lhs: ndarray(?rank,?eltType), rhs: ndarray(rank,eltType)) {
     // lhs.arrayResource = new owned NDArrayData(rhs.borrowResource()); // Would this be faster?
 }
 
-operator =(ref lhs: ndarray(?rank,?eltType), rhs: [?d] eltType) where d.rank == rank {
+operator =(ref lhs: ndarray(?rank,?eltType),in rhs: [?d] eltType) where d.rank == rank {
     lhs.arrayResource._domain = d.normalize;
     lhs.arrayResource.data = rhs;
 }
 
-operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
+operator :(in val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
     return new ndarray(val);
 }
 
