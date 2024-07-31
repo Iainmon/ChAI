@@ -57,11 +57,6 @@ def get_summary(model,global_name,parent_name=None):
         'subModules': { name : get_summary(m,global_name=global_name,parent_name=name) for name,m in  model.named_children() },
         'subModuleOrder': [name for name,_ in model.named_children()]
     }
-    # if parent_name is None:
-    #     return {
-    #         'model_name': global_name,
-    #         global_name: d
-    #     }
     return d
 
 def dump_model_parameters(model,path_prefix,model_name,with_json=True,verbose=True):

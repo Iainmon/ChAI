@@ -12,6 +12,7 @@ use Tensor;
 
 use Map; // only map;
 use List;
+use OrderedDict;
 
 use Reflection;
 
@@ -44,49 +45,31 @@ proc helpFindParamDataByName(arg, x: string) ref : Tensor(?) {
 record moduleChildren {
     type eltType = real;
     var childDict: map(string,borrowed Module(eltType));
+    var order: list(string);
 
     proc init(type eltType = real) {
         this.eltType = eltType;
         this.childDict = new map(string,borrowed Module(eltType),initialCapacity=1);
+        this.order = new list(string);
     }
 
     iter ref these(): borrowed Module(eltType) do
-        for k in childDict.keys() do
-            yield childDict[k];
-
-    proc ref add(name: string,m: borrowed Module(eltType)) do
-        childDict.addOrReplace(name,m);
+        for k in 0..<order.size do
+            yield childDict[order(k)];
     
+    iter ref items(): (string,borrowed Module(eltType)) do 
+        for n in 0..<order.size do 
+            yield (order(n),childDict[order(n)]);
+
+    proc ref add(name: string,m: borrowed Module(eltType)) {
+        order.pushBack(name);
+        childDict.addOrReplace(name,m);
+    }
 
 }
 
 
-// proc (class).signature(): string {
-//     var sig: string = __primitive("to non nilable class", __primitive("to undecorated class", t)) : string;
-//     sig += "(";
-//     param myFields = getNumFields(arg.type);
-//     for param i in 0..<myFields {
-//         if !isType(getField(arg, i)) &&
-//         isSubtype(getField(arg, i).type, superType) &&
-//             getFieldName(arg.type, i) == x {
-//             return getField(arg, i).borrow();
-//             }
-//     }
-//     return nil;
-// }
 
-
-proc helpFindFieldByNameAndType(type superType, arg, x: string) : borrowed superType? {
-  param myFields = getNumFields(arg.type);
-  for param i in 0..<myFields {
-    if !isType(getField(arg, i)) &&
-      isSubtype(getField(arg, i).type, superType) &&
-        getFieldName(arg.type, i) == x {
-          return getField(arg, i).borrow();
-        }
-  }
-  return nil;
-}
 
 proc (class).this(fieldName: string): borrowed Module(?) where isSubtype(this.type,Module(?)) {
     return helpFindModuleByName(this,fieldName)!;
@@ -126,36 +109,58 @@ proc (class).postinit() where isSubtype(this.type,Module(?)) {
     }
 }
 
-// proc (class).this(fieldName: string): Tensor(?) where isSubtype(this.type,Parameter(?)) {
-//     return (helpFindModuleByName(this,fieldName) : borrowed Parameter(?)?)!.data;
-// }
-
-// proc (class).this(fieldName: string): borrowed Parameter(?) where isSubtype(this.type,Module(?)) {
-//     return (helpFindModuleByName(this,fieldName) : borrowed Parameter(?)?)!;
-// }
 
 
 
 record moduleAttributes : serializable {
     var layerType: string;
     var moduleName: string;
-    var attributes: map(string,string);
+    var attributes: dict(string,string);
     forwarding attributes only this;
 
     proc init(layerType: string,moduleName: string,in attrs: map(string,string,?)) {
         this.layerType = layerType;
         this.moduleName = moduleName;
-        this.attributes = attrs;
+        this.attributes = new dict(attrs);
+    }
+
+    proc init(layerType: string,moduleName: string,in attrs: dict(string,?)) {
+        this.layerType = layerType;
+        this.moduleName = moduleName;
+        this.attributes = new dict(string,string);
+        init this;
+        for (k,v) in attrs do 
+            attributes.insert(k,v : string + "\n\t");
+    }
+
+    proc init(layerType: string,moduleName: string,in attrs: map(string,?valType,?)) where valType != string {
+        this.layerType = layerType;
+        this.moduleName = moduleName;
+        this.attributes = new dict(string,string);
+        init this;
+        for k in attrs.keys() do
+            attributes.insert(k,attrs[k] : string + "\n\t");
+    }
+
+    proc init(layerType: string,moduleName: string,in attrs: map(string,?valType,?),order: list(string)) {
+        this.layerType = layerType;
+        this.moduleName = moduleName;
+        this.attributes = new dict(string,string);
+        init this;
+        for i in 0..<order.size {
+            const k = order(i);
+            attributes.insert(k,attrs[k] : string + "\n\t");
+        }
     }
 
     pragma "last resort"
-    proc init(layerType: string,moduleName: string, attrs...?n) where !(attrs(0).type <= map(?)) {
+    proc init(layerType: string,moduleName: string, attrs...?n) where attrs(0)(0).type == string {
         this.layerType = layerType;
         this.moduleName = moduleName;
-        this.attributes = new map(string,string);
+        this.attributes = new dict(string,string);
         init this;
         for param i in 0..<n {
-            attributes[attrs(i)(0)] = attrs(i)(1) : string;
+            attributes.insert(attrs(i)(0),attrs(i)(1) : string);
         }
     }
 
@@ -166,8 +171,8 @@ record moduleAttributes : serializable {
         var s: string = layerType + "(";
         const size = attributes.size;
         var idx = 0;
-        for (k,v) in zip(attributes.keys(),attributes.values()) {
-            s += k + "=" + v;
+        for (k,v) in attributes {
+            s += k + " = " + v;
             if idx < size - 1 then
                 s += ", ";
             idx += 1;
@@ -178,6 +183,11 @@ record moduleAttributes : serializable {
 
     proc prettyPrintSpec(): string do
         return moduleName + " : " + prettyPrint();
+
+    operator :(ma: moduleAttributes, type T: string) {
+        return ma.prettyPrint();
+        // return ma.prettyPrintSpec();
+    }
 }
 
 class ModuleSpecification : serializable {
@@ -201,9 +211,12 @@ proc moduleFromSpec(ms_: borrowed ModuleSpecification?): owned Module(real){
             var ma = new moduleAttributes("Dropout","unknown",ms.attributes);
             return new Dropout(real,ma["p"] : real);
         }
-        // when "Flatten" {
-
-        // }
+        when "Flatten" {
+            return new Flatten(real);
+        }
+        when "ReLU" {
+            return new ReLU(real);
+        }
         otherwise {
             var sms: map(string,owned Module(real)?) = new map(string,owned Module(real)?);
             for k in ms.subModuleOrder {
@@ -214,11 +227,11 @@ proc moduleFromSpec(ms_: borrowed ModuleSpecification?): owned Module(real){
             // return moduleFromSpec(ms.subModules["conv1"]);
         }
     }
-                var sms: map(string,owned Module(real)?) = new map(string,owned Module(real)?);
-            for k in ms.subModules {
-                sms[k] = moduleFromSpec(ms.subModules[k]) : owned Module(real)?;
-            }
-            return new Sequential(real,ms.subModuleOrder,sms);
+    var sms: map(string,owned Module(real)?) = new map(string,owned Module(real)?);
+    for k in ms.subModules {
+        sms[k] = moduleFromSpec(ms.subModules[k]) : owned Module(real)?;
+    }
+    return new Sequential(real,ms.subModuleOrder,sms);
     // return moduleFromSpec(ms.subModules["conv1"]);
 }
 
@@ -316,6 +329,15 @@ class Module {
         }
     }
 
+    iter namedModules(): (string,borrowed Module(eltType)) {
+        for (n,m) in subModules.items() {
+            yield (n,m);
+            for (n_,m_) in m.namedModules() {
+                yield (n_,m_);
+            }
+        }
+    }
+
     // iter modules(): borrowed Module(eltType) {
     //     for (n,m) in this.moduleFields()
     // }
@@ -332,8 +354,21 @@ class Module {
         }
     }
 
-    proc getAttributes(): moduleAttributes do 
-        return new moduleAttributes();
+    proc attributes(): moduleAttributes {
+        var ms = new map(string,moduleAttributes);
+        for (n,m) in subModules.items() {
+            ms.addOrReplace(n,m.attributes());
+        }
+        return new moduleAttributes(
+            "Module",
+            moduleName,
+            ms,
+            subModules.order
+        );
+    }
+
+    proc signature: string do 
+        return attributes().prettyPrint();
 }
 
 class Parameter : Module(?) {
@@ -343,39 +378,44 @@ class Parameter : Module(?) {
         super.init(eltType);
         this.data = data;
     }
+
+    override proc attributes(): moduleAttributes do 
+        return new moduleAttributes(
+            "Parameter",
+            moduleName,
+            ("data", "<tensor>"));
 }
 
 class Sequential : Module(?) {
-    var mds: list(owned Module(eltType));
+    var mds: list(shared Module(eltType));
 
-    proc init(type eltType = real, in ms: (owned Module(eltType)?)...?rank) {
+    proc init(type eltType = real, in ms) {
         super.init(eltType);
-        this.mds = new list(owned Module(eltType));
+        this.mds = new list(shared Module(eltType));
         init this;
         this.moduleName = "sequential";
-        for param i in 0..<rank {
-            var m : owned Module(eltType) = owned.adopt(owned.release(ms[i])!);
-            var b = m.borrow();
+        for param i in 0..<ms.size {
+            var m : shared Module(eltType) = shared.adopt(owned.release(ms[i])!);
+            addModule(i: string,m.borrow());
             mds.pushBack(m);
-            addModule(i: string,b);
         }
     }
 
     proc init(type eltType = real, order: list(string), in ms: map(string,owned Module(eltType)?)) {
         super.init(eltType);
-        this.mds = new list(owned Module(eltType));
+        this.mds = new list(shared Module(eltType));
         init this;
         this.moduleName = "sequential";
         for i in 0..<order.size {
             var m : owned Module(eltType) = owned.adopt(owned.release(ms[order[i]])!);
-            mds.pushBack(m);
-            var b = mds[i].borrow();
-            addModule("(" + i: string + ")." + order[i],b);
+            const j = mds.pushBack(m);
+            var b = mds[j].borrow();
+            addModule("(" + j: string + ")." + order[i],b);
         }
     }
 
     proc init(in ms: (owned Module(real)?)...?rank) do
-        this.init(eltType = real, (...ms));
+        this.init(real, ms);
 
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
@@ -384,6 +424,18 @@ class Sequential : Module(?) {
             x = mds[i](x);
         }
         return x;
+    }
+
+    override proc attributes(): moduleAttributes {
+        var ms = new dict(string,moduleAttributes);
+        for (n,m) in subModules.items() {
+            ms.insert(n,m.attributes());
+        }
+        return new moduleAttributes(
+            "Sequential",
+            moduleName,
+            ms
+        );
     }
 }
 
@@ -413,6 +465,14 @@ class Linear : Module(?) {
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
         return Tensor.matvecmulFast(par["weight"],input) + par["bias"];
+
+    override proc attributes(): moduleAttributes {
+        return new moduleAttributes(
+            "Linear",
+            moduleName,
+            ("inFeatures", m),
+            ("outFeatures", n));
+    }
 }
 
 class Conv2D : Module(?) {
@@ -468,7 +528,7 @@ class Conv2D : Module(?) {
         return Tensor.convolve(input,weights,bias,stride);
     }
 
-    override proc getAttributes(): moduleAttributes {
+    override proc attributes(): moduleAttributes {
         const (features,channels,kernel,_) = kernelShape;
         return new moduleAttributes(
             "Conv2D",
@@ -493,6 +553,13 @@ class MaxPool : Module(?) {
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
         return input.maxPool(poolSize);
+    }
+
+    override proc attributes(): moduleAttributes {
+        return new moduleAttributes(
+            "MaxPool",
+            moduleName,
+            ("poolSize", poolSize));
     }
 }
 
@@ -526,6 +593,13 @@ class Dropout : Module(?) {
     
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
         return input;
+    
+    override proc attributes(): moduleAttributes {
+        return new moduleAttributes(
+            "Dropout",
+            moduleName,
+            ("frequency", 0.5));
+    }
 }
 
 

@@ -342,14 +342,31 @@ module Utilities {
 
         inline iter _domain.every() {
             const shape = this.shape;
-            for i in 0..<this.size {
-                yield indexAt(i,shape);
+            var prod = 1;
+            var divs: rank * int;
+            for param j in 0..<rank {
+                param i = rank - j - 1;
+                divs(i) = prod;
+                prod *= shape(i);
+            }
+            @assertOnGpu
+            foreach i in 0..<prod {
+                yield indexAtHelperMultiples(i,(...divs));
             }
         }
 
         inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone {
-            forall i in 0..<this.size {
-                yield this.orderToIndex(i);
+            const shape = this.shape;
+            var prod = 1;
+            var divs: rank * int;
+            for param j in 0..<rank {
+                param i = rank - j - 1;
+                divs(i) = prod;
+                prod *= shape(i);
+            }
+            @assertOnGpu
+            forall i in 0..<prod {
+                yield indexAtHelperMultiples(i,(...divs));
             }
         }
 

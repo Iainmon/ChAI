@@ -44,6 +44,13 @@ var reader = fl.reader(deserializer=new jsonDeserializer());
 var m = modelFromSpec(reader);
 
 writeln(m.moduleNames());
+
+for (n,md) in m.namedModules() {
+    writeln((n,md.moduleName));
+}
+
+writeln(m.signature);
+writeln(m.subModules.order);
 // writeln(m);
 // writeln(m);
 // var ms = reader.deserializer.deserializeType(reader,shared ModuleSpecification);

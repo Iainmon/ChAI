@@ -11,7 +11,7 @@ use Utilities.Standard;
 
 config param maxRank = 6;
 
-import loadNumpy;
+import LoadNumpy;
 
 
 record Tensor : serializable {
@@ -166,9 +166,9 @@ proc zipBinOp(param opName: string, a: Tensor(?eltType), b: Tensor(eltType)): Te
 }
 
 proc type Tensor.loadFromNumpy(path: string): Tensor(real) {
-    var npa = loadNumpy.loadNumpyArray(path);
+    var npa = LoadNumpy.loadNumpyArray(path);
     for param rank in 1..maxRank {
-        if const x = npa : owned loadNumpy.ArrClass(rank)? {
+        if const x = npa : owned LoadNumpy.ArrClass(rank)? {
             const t: tensor(rank,real) = new tensor(x!.data);
             return t.eraseRank();
         }

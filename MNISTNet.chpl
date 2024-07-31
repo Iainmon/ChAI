@@ -165,8 +165,20 @@ if printResults {
     }
 }
 
-writeln(cnn.conv1.getAttributes());
-writeln(cnn.conv1.getAttributes().prettyPrint());
+writeln(cnn.conv1.attributes());
+writeln(cnn.conv1.attributes().prettyPrint());
+
+var cnn2 = new Sequential(real,(
+    new Conv2D(real,channels=1,features=32,kernel=3,stride=1)?
+    ,new Conv2D(real,channels=32,features=64,kernel=3,stride=1)?
+    ,new Dropout(real,0.25)?
+    ,new Dropout(real,0.5)?
+    ,new Flatten(real)?
+    ,new Linear(real,9216,128)?
+    ,new Linear(real,128,10)?)
+        );
+
+
 
 // import IO;
 // import JSON;
