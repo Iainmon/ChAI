@@ -377,7 +377,7 @@ module Utilities {
         }
 
         inline proc _domain.indexAt(in n: int) {
-            const shape = this.shape;
+            const shape = this.fastShape;
             var idx: rank * int;
             var order = n;
             var div = 1;
