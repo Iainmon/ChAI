@@ -151,7 +151,7 @@ config const imageCount = 0;
 var images = for i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
 var preds: [images.domain] int;
 
-for i in images.domain {
+forall i in images.domain {
     var output = cnn(images[i]);
     var pred = output.argmax();
     preds[i] = pred;
