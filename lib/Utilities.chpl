@@ -180,31 +180,31 @@ module Utilities {
         return n;
 
     inline proc indexAt(n: int, shape: int ...?rank): rank * int where rank > 1 {
-        // var idx: rank * int;
-        // var order = n;
-        // var div = 1;
-        // for param i in 0..<rank do
-        //     div *= shape(i);
-        // for param i in 0..<rank {
-        //     div /= shape(i);
-        //     idx(i) = order / div;
-        //     order %= div;
-        // }
-        // return idx;
-
-        var order = n;
-        var prod = 1;
         var idx: rank * int;
-        var divs: rank * int;
+        var order = n;
+        var div = 1;
+        for param i in 0..<rank do
+            div *= shape(i);
         for param i in 0..<rank {
-            divs(rank - i - 1) = prod;
-            prod *= shape(rank - i - 1);
-        }
-        for param i in 0..<rank {
-            idx(i) = order / divs(i);
-            order %= divs(i);
+            div /= shape(i);
+            idx(i) = order / div;
+            order %= div;
         }
         return idx;
+
+        // var order = n;
+        // var prod = 1;
+        // var idx: rank * int;
+        // var divs: rank * int;
+        // for param i in 0..<rank {
+        //     divs(rank - i - 1) = prod;
+        //     prod *= shape(rank - i - 1);
+        // }
+        // for param i in 0..<rank {
+        //     idx(i) = order / divs(i);
+        //     order %= divs(i);
+        // }
+        // return idx;
     }
 
     inline iter fastEach(shape: int...?rank): rank * int {
