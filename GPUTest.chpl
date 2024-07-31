@@ -1,4 +1,6 @@
 
+import Utilities as util;
+use Utilities.Standard;
 
 inline proc indexAt(n: int,shape: int ...?rank) {
     var idx: rank * int;
@@ -20,10 +22,11 @@ on here.gpus[0] {
     var D = {0..100,0..100};
     var A: [D] int;
     const shape = D.shape;
+    ref AData = A;
     @assertOnGpu
     forall i in 0..<D.size {
-        const idx = indexAt(i,(...shape));
-        A[idx] = i;
+        const idx = D.indexAt(i);
+        AData[idx] = i;
     }
     writeln(A);
 }
