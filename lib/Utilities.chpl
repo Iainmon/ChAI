@@ -62,7 +62,8 @@ module Utilities {
     inline proc normalizeArray(arr: []) {
         const arrDom = arr.domain;
         const normalDomain = normalizeDomain(arrDom);
-        return foreach (_,a) in zip(normalDomain,arr) do a;
+        compilerWarning("normalizeArray should be used sparingly.");
+        return forall (_,a) in zip(normalDomain,arr) do a;
     }
 
     // proc captureArray(unknown: ?t) {
@@ -175,6 +176,9 @@ module Utilities {
         return idx;
     }
 
+    inline proc indexAt(n: int, shape: int) do 
+        return n;
+
     inline proc indexAt(n: int, shape: int ...?rank): rank * int where rank > 1 {
         // var idx: rank * int;
         // var order = n;
@@ -224,6 +228,7 @@ module Utilities {
     module Standard {
 
         private use Utilities;
+        private import Utilities as util;
 
         proc _tuple.imageType(f) type {
             type eltType = this.eltType;
@@ -356,6 +361,7 @@ module Utilities {
         }
 
         inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone {
+            // compilerWarning("Using domain every.");
             const shape = this.shape;
             var prod = 1;
             var divs: rank * int;
@@ -369,6 +375,9 @@ module Utilities {
                 yield indexAtHelperMultiples(i,(...divs));
             }
         }
+
+        inline proc _domain.indexAt(i: int) do
+            return util.indexAt(i,(...this.shape));
 
 
         // inline operator =(ref tup: _tuple, val: tup.eltType) where isHomogeneousTuple(tup) {
