@@ -377,7 +377,7 @@ module Utilities {
         }
 
         inline proc _domain.indexAt(i: int) do
-            return this.orderToIndex(i); // util.indexAt(i,(...this.shape));
+            return util.indexAt(i,(...this.shape));
 
 
         // inline operator =(ref tup: _tuple, val: tup.eltType) where isHomogeneousTuple(tup) {
