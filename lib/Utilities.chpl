@@ -390,6 +390,18 @@ module Utilities {
             }
             return idx;
         }
+
+        inline proc _domain.fastShape {
+            var s: rank * int;
+            const dms = dims();
+            for param i in 0..<rank {
+                s(i) = dms(i).high;
+            }
+            if rank == 1 then 
+                return s(0);
+            else
+                return s;
+        }
             
 
 
