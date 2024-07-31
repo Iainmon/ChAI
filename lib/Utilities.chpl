@@ -362,35 +362,36 @@ module Utilities {
 
         inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone {
             // compilerWarning("Using domain every.");
-            const shape = this.shape;
-            var prod = 1;
-            var divs: rank * int;
-            for param j in 0..<rank {
-                param i = rank - j - 1;
-                divs(i) = prod;
-                prod *= shape(i);
-            }
+            // const shape = this.shape;
+            // var prod = 1;
+            // var divs: rank * int;
+            // for param j in 0..<rank {
+            //     param i = rank - j - 1;
+            //     divs(i) = prod;
+            //     prod *= shape(i);
+            // }
             @assertOnGpu
-            forall i in 0..<prod {
-                yield indexAtHelperMultiples(i,(...divs));
+            forall i in 0..<this.size {
+                yield orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
             }
         }
         inline proc _domain.indexAt(n: int) where rank == 1 {
             return n;
         }
         inline proc _domain.indexAt(n: int) where rank > 1 {
-            const shape_ = this.fastShape;
-            var idx: rank * int;
-            var order = n;
-            var div = 1;
-            for param i in 0..<rank do
-                div *= shape_(i);
-            for param i in 0..<rank {
-                div /= shape_(i);
-                idx(i) = order / div;
-                order %= div;
-            }
-            return idx;
+            return this.orderToIndex(n);
+            // const shape_ = this.fastShape;
+            // var idx: rank * int;
+            // var order = n;
+            // var div = 1;
+            // for param i in 0..<rank do
+            //     div *= shape_(i);
+            // for param i in 0..<rank {
+            //     div /= shape_(i);
+            //     idx(i) = order / div;
+            //     order %= div;
+            // }
+            // return idx;
         }
 
         inline proc _domain.fastShape {

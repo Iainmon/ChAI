@@ -523,8 +523,8 @@ class Conv2D : Module(?) {
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
-        var weights = par["weight"];
-        var bias = par["bias"];
+        var weights = this.kernel.data;
+        var bias = this.bias.data;
         return Tensor.convolve(input,weights,bias,stride);
     }
 
