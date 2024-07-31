@@ -114,7 +114,7 @@ record ndarray : serializable {
         }
     }
 
-    proc init(A: ndarray(?rank,?eltType)) {
+    proc init(in A: ndarray(?rank,?eltType)) {
         this.rank = rank;
         this.eltType = eltType;
 
@@ -131,7 +131,7 @@ record ndarray : serializable {
         this.init(other);
     }
 
-    proc init=(other: ndarray(?rank,?eltType)) {
+    proc init=(in other: ndarray(?rank,?eltType)) {
         this.rank = rank;
         this.eltType = eltType;
         this.arrayResource = new owned NDArrayData(other.arrayResource);
@@ -145,7 +145,7 @@ record ndarray : serializable {
         return data.this((...args));
     }
 
-    proc ref setData(arr: [] eltType) where arr.rank == rank do
+    proc ref setData(in arr: [] eltType) where arr.rank == rank do
         if arr.domain == arrayResource._domain { data = arr; } else { this = arr; }
 
     proc ref reshapeDomain(dom: arrayResource._domain.type) do
@@ -556,12 +556,12 @@ operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
 
 
 // This bunch is problematic.
-proc remote.init(other: ndarray(?rank,?eltType)) {
+proc remote.init(in other: ndarray(?rank,?eltType)) {
     this.init(ndarray(rank,eltType));
     other.populateRemote(this);
 }
 
-proc remote.init=(ref other: ndarray(?rank,?eltType)) {
+proc remote.init=(in other: ndarray(?rank,?eltType)) {
     this.init(ndarray(rank,eltType));
     other.populateRemote(this);
 }
@@ -581,7 +581,7 @@ proc remote.init(ref other: remote(ndarray(?rank,?eltType))) {
     this.remoteResource = other.remoteResource;
 }
 
-proc remote.init=(ref other: remote(ndarray(?rank,?eltType))) {
+proc remote.init=(in other: remote(ndarray(?rank,?eltType))) {
     this.eltType = ndarray(rank,eltType);
     this.remoteResource = other.remoteResource;
 }
