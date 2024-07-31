@@ -31,7 +31,7 @@ class NDArrayData : serializable {
         this._domain = dom;
         this.data = A;
     }
-    proc init(A: [] ?eltType) {
+    proc init(in A: [] ?eltType) {
         this.rank = A.rank;
         this.eltType = eltType;
         this._domain = A.domain;
