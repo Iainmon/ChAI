@@ -376,8 +376,21 @@ module Utilities {
             }
         }
 
-        inline proc _domain.indexAt(i: int) do
-            return util.indexAt(i,(...this.shape));
+        inline proc _domain.indexAt(in n: int) {
+            const shape = this.shape;
+            var idx: rank * int;
+            var order = n;
+            var div = 1;
+            for param i in 0..<rank do
+                div *= shape(i);
+            for param i in 0..<rank {
+                div /= shape(i);
+                idx(i) = order / div;
+                order %= div;
+            }
+            return idx;
+        }
+            
 
 
         // inline operator =(ref tup: _tuple, val: tup.eltType) where isHomogeneousTuple(tup) {
