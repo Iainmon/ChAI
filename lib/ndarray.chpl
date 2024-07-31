@@ -714,13 +714,13 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     ref bis = bias.data;
 
     @assertOnGpu
-    forall i in 0..<outDom.size {
-        const (f,h_,w_) = outDom.indexAt(i);// util.indexAt(i,(...outDomShape));
+    forall (f,h_,w_) in outDom.every() {
+        // const (f,h_,w_) = outDom.indexAt(i);// util.indexAt(i,(...outDomShape));
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
         var sum: eltType = 0;
-        for j in 0..<kernelChanD.size {
-            const (c,kh,kw) = kernelChanD.indexAt(j); //util.indexAt(j,(...kernelChanShape));
+        for (c,kh,kw) in kernelChanD {
+            // const (c,kh,kw) = kernelChanD.indexAt(j); //util.indexAt(j,(...kernelChanShape));
             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
         }
         dat[f,h_,w_] = sum + bis[f];
