@@ -375,16 +375,18 @@ module Utilities {
                 yield indexAtHelperMultiples(i,(...divs));
             }
         }
-
-        inline proc _domain.indexAt(in n: int) {
-            const shape = this.fastShape;
+        inline proc _domain.indexAt(n: int) where rank == 1 {
+            return n;
+        }
+        inline proc _domain.indexAt(n: int) where rank > 1 {
+            const shape_ = this.fastShape;
             var idx: rank * int;
             var order = n;
             var div = 1;
             for param i in 0..<rank do
-                div *= shape(i);
+                div *= shape_(i);
             for param i in 0..<rank {
-                div /= shape(i);
+                div /= shape_(i);
                 idx(i) = order / div;
                 order %= div;
             }
