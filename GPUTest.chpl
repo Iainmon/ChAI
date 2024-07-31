@@ -1,7 +1,6 @@
 
 
-inline proc indexAt(n: int,shape) {
-    param rank = shape.size;
+inline proc indexAt(n: int,shape: int ...?rank) {
     var idx: rank * int;
     var order = n;
     var div = 1;
@@ -21,8 +20,9 @@ on here.gpus[0] {
     var D = {0..100,0..100};
     var A: [D] int;
     const shape = D.shape;
+    @assertOnGpu
     forall i in 0..<D.size {
-        const idx = indexAt(i,shape);
+        const idx = indexAt(i,(...shape));
         A[idx] = i;
     }
     writeln(A);
