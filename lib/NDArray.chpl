@@ -157,9 +157,8 @@ record ndarray : serializable {
         const selfDomain = data.domain;
         ref meData = me.data;
         const zero: eltType = 0;
-        forall i in 0..<normalDomain.size {
+        forall (i,meIdx) in normalDomain.everyZip() {
             const selfIdx = selfDomain.indexAt(i);
-            const meIdx = normalDomain.indexAt(i);
             const a = if selfDomain.contains(selfIdx) then data[selfIdx] else zero;
             meData[meIdx] = a;
         }
@@ -173,9 +172,8 @@ record ndarray : serializable {
         const normalDomain = arr.domain;
         const zero: eltType = 0;
         ref meData = arr.data;
-        forall i in 0..<normalDomain.size {
+        forall (i,meIdx) in normalDomain.everyZip() {
             const selfIdx = selfDomain.indexAt(i);
-            const meIdx = normalDomain.indexAt(i);
             const a = if selfDomain.contains(selfIdx) then data[selfIdx] else zero;
             meData[meIdx] = a;
         }

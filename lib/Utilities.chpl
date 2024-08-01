@@ -379,8 +379,6 @@ module Utilities {
             }
         }
 
-
-
         inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone && rank == 1 {
             if loopGpuSupport {
                 @assertOnGpu
@@ -392,9 +390,8 @@ module Utilities {
             }
         }
 
-
         inline iter _domain.every() where rank > 1 {
-            const shape = this.shape;
+            const shape = this.fastShape;
             var prod = 1;
             var divs: rank * int;
             for param j in 0..<rank {
@@ -416,7 +413,7 @@ module Utilities {
 
         inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone && rank > 1 {
             // compilerWarning("Using domain every.");
-            const shape = this.shape;
+            const shape = this.fastShape;
             var prod = 1;
             var divs: rank * int;
             for param j in 0..<rank {
@@ -426,16 +423,83 @@ module Utilities {
             }
             if loopGpuSupport {
                 @assertOnGpu
-                forall i in 0..<this.size {
+                forall i in 0..<prod {
                     yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
                 }
             } else {
-                forall i in 0..<this.size {
+                forall i in 0..<prod {
                     yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
                 }
             }
 
         }
+
+        inline iter _domain.everyZip() {
+            const shape = this.fastShape;
+            var prod = 1;
+            if rank == 1 {
+                prod = shape;
+                if loopGpuSupport {
+                    @assertOnGpu
+                    foreach i in 0..<prod do 
+                        yield (i,i);
+                } else {
+                    foreach i in 0..<prod do
+                        yield (i,i);
+                }
+            } else {
+                var divs: rank * int;
+                for param j in 0..<rank {
+                    param i = rank - j - 1;
+                    divs(i) = prod;
+                    prod *= shape(i);
+                }
+                if loopGpuSupport {
+                    @assertOnGpu
+                    foreach i in 0..<prod {
+                        yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                    }
+                } else {
+                    foreach i in 0..<prod {
+                        yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                    }
+                }
+            }
+        }
+
+        inline iter _domain.everyZip(param tag: iterKind) where tag == iterKind.standalone {
+            const shape = this.fastShape;
+            var prod = 1;
+            if rank == 1 {
+                prod = shape;
+                if loopGpuSupport {
+                    @assertOnGpu
+                    forall i in 0..<prod do 
+                        yield (i,i);
+                } else {
+                    forall i in 0..<prod do
+                        yield (i,i);
+                }
+            } else {
+                var divs: rank * int;
+                for param j in 0..<rank {
+                    param i = rank - j - 1;
+                    divs(i) = prod;
+                    prod *= shape(i);
+                }
+                if loopGpuSupport {
+                    @assertOnGpu
+                    forall i in 0..<prod {
+                        yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                    }
+                } else {
+                    forall i in 0..<prod {
+                        yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                    }
+                }
+            }
+        }
+
         inline proc _domain.indexAt(n: int) where rank == 1 {
             return n;
         }
