@@ -12,3 +12,6 @@ for i in 0..<d.size {
 writeln(d.shape, d.fastShape);
 
 writeln({0..1}.shape);
+
+const r = 0..<10;
+writeln((r.highBound,r.high,r.low,r.lowBound));

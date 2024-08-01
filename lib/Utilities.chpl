@@ -396,7 +396,7 @@ module Utilities {
         inline proc _domain.indexAt(n: int) where rank > 1 {
             // return util.indexAt(n,(...this.fastShape)); // this.orderToIndex(n);
             const shape_ = this.fastShape;
-            // var idx: rank * int;
+            // var idx: rank * int; // 33 sec @ 1000
             // var order = n;
             // var div = 1;
             // for param i in 0..<rank do
@@ -427,7 +427,7 @@ module Utilities {
             var s: rank * int;
             const dms = dims();
             for param i in 0..<rank {
-                s(i) = (dms(i).highBound - dms(i).low) + 1;
+                s(i) = (dms(i).highBound - dms(i).lowBound) + 1;
             }
             if rank == 1 then 
                 return s(0);
