@@ -153,7 +153,7 @@ var preds: [images.domain] int;
 
 writeln(images[1]);
 
-for i in images.domain {
+forall i in images.domain {
     var output = cnn(images[i]);
     var pred = output.argmax();
     preds[i] = pred;
