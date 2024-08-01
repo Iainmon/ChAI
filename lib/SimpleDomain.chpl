@@ -17,8 +17,10 @@ record rect {
         this.shape = shape;
     }
 
-    proc size {
-        var s = 1;
-        
+    inline proc size: int {
+        var s: int = 1;
+        for param i in 0..<rank do
+            s *= shape(i);
+        return s;
     }
 }

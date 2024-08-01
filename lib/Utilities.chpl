@@ -413,7 +413,7 @@ module Utilities {
             var s: rank * int;
             const dms = dims();
             for param i in 0..<rank {
-                s(i) = dms(i).highBound - dms(i).lowBound;
+                s(i) = (dms(i).highBound - dms(i).low) + 1;
             }
             if rank == 1 then 
                 return s(0);
