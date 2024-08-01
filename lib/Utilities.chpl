@@ -413,14 +413,21 @@ module Utilities {
             var s: rank * int;
             const dms = dims();
             for param i in 0..<rank {
-                s(i) = dms(i).highBound - dims(i).lowBound;
+                s(i) = dms(i).highBound - dms(i).lowBound;
             }
             if rank == 1 then 
                 return s(0);
             else
                 return s;
         }
-            
+        inline proc _domain.myShape {
+            var s: rank * int;
+            const dms = dims();
+            for param i in 0..<rank {
+                s(i) = dms(i).highBound - dms(i).lowBound;
+            }
+            return s;
+        }
 
 
         // inline operator =(ref tup: _tuple, val: tup.eltType) where isHomogeneousTuple(tup) {
