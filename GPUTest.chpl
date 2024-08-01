@@ -25,7 +25,8 @@ on here.gpus[0] {
     ref AData = A;
     @assertOnGpu
     forall i in 0..<D.size {
-        const idx = util.indexAt(i,(...D.fastShape));// D.indexAt(i);
+        // const idx = util.indexAt(i,(...D.fastShape));// D.indexAt(i);
+        const idx = indexAt(i,(...D.shape));
         AData[idx] = i;
     }
     writeln(A);

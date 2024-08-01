@@ -394,26 +394,26 @@ module Utilities {
             return n;
         }
         inline proc _domain.indexAt(n: int) where rank > 1 {
-            return util.indexAt(n,(...this.fastShape)); // this.orderToIndex(n);
-            // const shape_ = this.fastShape;
-            // var idx: rank * int;
-            // var order = n;
-            // var div = 1;
-            // for param i in 0..<rank do
-            //     div *= shape_(i);
-            // for param i in 0..<rank {
-            //     div /= shape_(i);
-            //     idx(i) = order / div;
-            //     order %= div;
-            // }
-            // return idx;
+            // return util.indexAt(n,(...this.fastShape)); // this.orderToIndex(n);
+            const shape_ = this.fastShape;
+            var idx: rank * int;
+            var order = n;
+            var div = 1;
+            for param i in 0..<rank do
+                div *= shape_(i);
+            for param i in 0..<rank {
+                div /= shape_(i);
+                idx(i) = order / div;
+                order %= div;
+            }
+            return idx;
         }
 
         inline proc _domain.fastShape {
             var s: rank * int;
             const dms = dims();
             for param i in 0..<rank {
-                s(i) = dms(i).high + 1;
+                s(i) = dms(i).highBound - dims(i).lowBound;
             }
             if rank == 1 then 
                 return s(0);
