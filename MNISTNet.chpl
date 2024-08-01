@@ -148,7 +148,7 @@ var output = cnn(img);
 
 config const imageCount = 0;
 
-var images = for i in 0..<imageCount do Tensor.load("data/datasets/mnist_dump2/image_idx_" + i:string + ".chdata");
+var images = for i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
 var preds: [images.domain] int;
 
 writeln(images[1]);
