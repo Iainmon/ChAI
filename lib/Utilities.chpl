@@ -180,17 +180,32 @@ module Utilities {
         return n;
 
     inline proc indexAt(n: int, shape: int ...?rank): rank * int where rank > 1 {
-        var idx: rank * int;
-        var order = n;
-        var div = 1;
-        for param i in 0..<rank do
-            div *= shape(i);
+        var result: rank * int;
+        var strides: rank * int;
+        var idx = n;
+        var stride = 1;
         for param i in 0..<rank {
-            div /= shape(i);
-            idx(i) = order / div;
-            order %= div;
+            param j = rank - 1 - i;
+            strides(j) = stride;
+            stride *= shape(j);
         }
-        return idx;
+        for param i in 0..<rank {
+            result(i) = idx / strides(i);
+            idx %= strides(i);
+        }
+        return result;
+
+        // var idx: rank * int;
+        // var order = n;
+        // var div = 1;
+        // for param i in 0..<rank do
+        //     div *= shape(i);
+        // for param i in 0..<rank {
+        //     div /= shape(i);
+        //     idx(i) = order / div;
+        //     order %= div;
+        // }
+        // return idx;
 
         // var order = n;
         // var prod = 1;
@@ -362,24 +377,24 @@ module Utilities {
 
         inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone {
             // compilerWarning("Using domain every.");
-            // const shape = this.shape;
-            // var prod = 1;
-            // var divs: rank * int;
-            // for param j in 0..<rank {
-            //     param i = rank - j - 1;
-            //     divs(i) = prod;
-            //     prod *= shape(i);
-            // }
+            const shape = this.shape;
+            var prod = 1;
+            var divs: rank * int;
+            for param j in 0..<rank {
+                param i = rank - j - 1;
+                divs(i) = prod;
+                prod *= shape(i);
+            }
             @assertOnGpu
             forall i in 0..<this.size {
-                yield orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
             }
         }
         inline proc _domain.indexAt(n: int) where rank == 1 {
             return n;
         }
         inline proc _domain.indexAt(n: int) where rank > 1 {
-            return this.orderToIndex(n);
+            return util.indexAt(n,(...this.fastShape)); // this.orderToIndex(n);
             // const shape_ = this.fastShape;
             // var idx: rank * int;
             // var order = n;
@@ -398,7 +413,7 @@ module Utilities {
             var s: rank * int;
             const dms = dims();
             for param i in 0..<rank {
-                s(i) = dms(i).high;
+                s(i) = dms(i).high + 1;
             }
             if rank == 1 then 
                 return s(0);
