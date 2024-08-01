@@ -206,7 +206,7 @@ record expOp : serializable {
         var output = new ndarray(input.array.domain,input.array.eltType);
         ref inDat = input.array.data;
         ref outDat = output.data;
-        @assertOnGpu
+        // @assertOnGpu
         forall i in outDat.domain.every() {
             outDat[i] = exp(inDat[i]);
         }
@@ -235,7 +235,7 @@ record addOp : serializable {
         ref sumData = sum.data;
         ref aData = a.data;
         ref bData = b.data;
-        @assertOnGpu
+        // @assertOnGpu
         forall i in newDom.every() do
             sumData[i] = aData[i] + bData[i];
         // sumData = aData + bData;
@@ -289,7 +289,7 @@ record multOp : serializable {
         BG.reshapeDomain(gDom);
         ref AGR = AG.data;
         ref BGR = BG.data;
-        @assertOnGpu
+        // @assertOnGpu
         forall i in gDom.every() {
             AGR[i] = B[i] * G[i];
             BGR[i] = A[i] * G[i];

@@ -1,5 +1,6 @@
 
 module Utilities {
+    config param loopGpuSupport = false;
 
     module Types {
         type stdRange = range(idxType=int,bounds=boundKind.both,strides=strideKind.one);
@@ -328,9 +329,15 @@ module Utilities {
                 divs(i) = prod;
                 prod *= this(i);
             }
-            @assertOnGpu
-            foreach i in 0..<prod {
-                yield indexAtHelperMultiples(i,(...divs));
+            if loopGpuSupport {
+                @assertOnGpu
+                foreach i in 0..<prod {
+                    yield indexAtHelperMultiples(i,(...divs));
+                }
+            } else {
+                foreach i in 0..<prod {
+                    yield indexAtHelperMultiples(i,(...divs));
+                }
             }
         }
 
@@ -349,18 +356,44 @@ module Utilities {
                 divs(i) = prod;
                 prod *= shape(i);
             }
-            @assertOnGpu
-            foreach i in 0..<prod {
-                yield indexAtHelperMultiples(i,(...divs));
+            if loopGpuSupport {
+                @assertOnGpu
+                foreach i in 0..<prod {
+                    yield indexAtHelperMultiples(i,(...divs));
+                }
+            } else {
+                foreach i in 0..<prod {
+                    yield indexAtHelperMultiples(i,(...divs));
+                }
             }
-            // @assertOnGpu
-            // foreach i in 0..<this.size {
-            //     const idx = this.orderToIndex(i);
-            //     yield idx;
-            // }
         }
 
-        inline iter _domain.every() {
+        inline iter _domain.every() where rank == 1 {
+            if loopGpuSupport {
+                @assertOnGpu
+                foreach i in 0..<size do
+                    yield i;
+            } else {
+                foreach i in 0..<size do
+                    yield i;
+            }
+        }
+
+
+
+        inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone && rank == 1 {
+            if loopGpuSupport {
+                @assertOnGpu
+                forall i in 0..<size do
+                    yield i;
+            } else {
+                forall i in 0..<size do
+                    yield i;
+            }
+        }
+
+
+        inline iter _domain.every() where rank > 1 {
             const shape = this.shape;
             var prod = 1;
             var divs: rank * int;
@@ -369,13 +402,19 @@ module Utilities {
                 divs(i) = prod;
                 prod *= shape(i);
             }
-            @assertOnGpu
-            foreach i in 0..<prod {
-                yield indexAtHelperMultiples(i,(...divs));
+            if loopGpuSupport {
+                @assertOnGpu
+                foreach i in 0..<prod {
+                    yield indexAtHelperMultiples(i,(...divs));
+                }
+            } else {
+                foreach i in 0..<prod {
+                    yield indexAtHelperMultiples(i,(...divs));
+                }
             }
         }
 
-        inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone {
+        inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone && rank > 1 {
             // compilerWarning("Using domain every.");
             const shape = this.shape;
             var prod = 1;
@@ -385,10 +424,17 @@ module Utilities {
                 divs(i) = prod;
                 prod *= shape(i);
             }
-            @assertOnGpu
-            forall i in 0..<this.size {
-                yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+            if loopGpuSupport {
+                @assertOnGpu
+                forall i in 0..<this.size {
+                    yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                }
+            } else {
+                forall i in 0..<this.size {
+                    yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                }
             }
+
         }
         inline proc _domain.indexAt(n: int) where rank == 1 {
             return n;

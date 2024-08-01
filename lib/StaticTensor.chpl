@@ -344,7 +344,7 @@ proc main() {
         // foreach i in tdata.domain do
         //     tdata[i] = tdata[i] + 1.0;
         // tdata = foreach x in tdata do x + 1.0; // causes grained kernel launches 
-        @assertOnGpu
+        // @assertOnGpu
         forall i in tarr.data.domain.every() do
             tdata[i] = tarr.data[i] + 1.0;
     }

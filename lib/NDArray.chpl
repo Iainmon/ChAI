@@ -255,9 +255,8 @@ record ndarray : serializable {
         
         ref expandedData = expanded.data;
         const expandedDataDomain = expandedData.domain;
-        @assertOnGpu
-        forall ind in 0..<expandedDataDomain.size {
-            const idx = expandedDataDomain.indexAt(ind);
+        // @assertOnGpu
+        forall idx in expandedDataDomain.every() {
             var origIdx: rank * int;
             if idx.type == int {
                 origIdx(0) = idx;
@@ -284,9 +283,8 @@ record ndarray : serializable {
         var S = new ndarray(newDomain,eltType);
         ref B = S.data;
         ref A = data;
-        @assertOnGpu
-        forall ind in 0..<newDomain.size {
-            const idx = newDomain.indexAt(ind);
+        // @assertOnGpu
+        forall idx in newDomain.every() {
             var origIdx: newDomain.rank * int;
             if idx.type == int {
                 origIdx(0) = idx;
@@ -413,11 +411,11 @@ record ndarray : serializable {
             var me = new ndarray(1,eltType);
             const s = data.size;
             me.reshapeDomain({0..<s});
-            const dataDomShape = data.domain.shape;
+            const dataDomain = data.domain;
             ref meData = me.data;
-            @assertOnGpu
-            forall i in 0..<me.domain.size {
-                meData[i] = data[util.indexAt(i,(...dataDomShape))];
+            // @assertOnGpu
+            forall i in me.domain.every() {
+                meData[i] = data[dataDomain.indexAt(i)];
             }
             // var j = 0;
             // for i in data.domain {
@@ -513,7 +511,7 @@ record ndarray : serializable {
 
     proc relu() {
         var rl = new ndarray(data);
-        @assertOnGpu
+        // @assertOnGpu
         forall i in rl.domain.every() with (ref rl) {
             const x = rl.data[i];
             rl.data[i] = Math.max(0,x);
@@ -606,7 +604,7 @@ operator +(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
     const dom = a.domain;
     var c: ndarray(rank,eltType) = new ndarray(a.domain,eltType);
     ref cData = c.data;
-    @assertOnGpu
+    // @assertOnGpu
     forall i in dom.every() do
         cData[i] = a.data[i] + b.data[i];
     return c;
@@ -616,7 +614,7 @@ operator *(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
     const dom = a.domain;
     var c: ndarray(rank,eltType) = new ndarray(a.domain,eltType);
     ref cData = c.data;
-    @assertOnGpu
+    // @assertOnGpu
     forall i in dom.every() do
         cData[i] = a.data[i] * b.data[i];
     return c;
@@ -626,7 +624,7 @@ operator -(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
     const dom = a.domain;
     var c: ndarray(rank,eltType) = new ndarray(a.domain,eltType);
     ref cData = c.data;
-    @assertOnGpu
+    // @assertOnGpu
     forall i in dom.every() do
         cData[i] = a.data[i] - b.data[i];
     return c;
@@ -636,7 +634,7 @@ operator /(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
     const dom = a.domain;
     var c: ndarray(rank,eltType) = new ndarray(a.domain,eltType);
     ref cData = c.data;
-    @assertOnGpu
+    // @assertOnGpu
     forall i in dom.every() do
         cData[i] = a.data[i] / b.data[i];
     return c;
@@ -674,9 +672,8 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     ref fet = features.data;
     ref ker = kernel.data;
 
-    @assertOnGpu
-    forall i in 0..<outDom.size {
-        const (f,h_,w_) = outDom.indexAt(i);
+    // @assertOnGpu
+    forall (f,h_,w_) in outDom.every() {
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
         var sum: eltType = 0;
@@ -714,14 +711,13 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     ref ker = kernel.data;
     ref bis = bias.data;
 
-    @assertOnGpu
+    // @assertOnGpu
     forall (f,h_,w_) in outDom.every() {
-        // const (f,h_,w_) = outDom.indexAt(i);// util.indexAt(i,(...outDomShape));
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
         var sum: eltType = 0;
         for j in 0..<kernelChanD.size {
-            const (c,kh,kw) = kernelChanD.indexAt(j); //util.indexAt(j,(...kernelChanShape));
+            const (c,kh,kw) = kernelChanD.indexAt(j);
             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
         }
         dat[f,h_,w_] = sum + bis[f];
@@ -747,7 +743,7 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
     ref dat = pool.data;
     ref fet = features.data;
     const poolDom = {0..#poolSize,0..#poolSize};
-    @assertOnGpu
+    // @assertOnGpu
     forall (c,h,w) in dom.every() {
         var mx: eltType = fet[c,h,w];
         for (ph,pw) in poolDom {
@@ -769,7 +765,7 @@ proc type ndarray.matvecmul(mat: ndarray(2,?eltType),vec: ndarray(1,eltType)): n
     var u = new ndarray(dom,eltType);
     ref matD = mat.data;
     ref vecD = vec.data;
-    @assertOnGpu
+    // @assertOnGpu
     forall i in 0..<m with (ref u) {
         var sum: eltType;
         for j in 0..<n {
@@ -785,7 +781,7 @@ inline proc type ndarray.fromRanges(type eltType = real, rngs: range...?rank): n
     const dom_ = {(...rngs)};
     const dom = util.domainFromShape((...dom_.shape));
     var a = new ndarray(dom,eltType);
-    @assertOnGpu
+    // @assertOnGpu
     forall i in 0..<dom.size with (ref a) {
         const idx = dom.indexAt(i);
         a.data[idx] = i : eltType;
