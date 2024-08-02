@@ -7,6 +7,7 @@ use Reflection;
 import TOML;
 import Time;
 
+config param layerDebug = false;
 
 class CNN : Module(?) {
     var conv1: owned Conv2D(eltType);
@@ -40,92 +41,92 @@ class CNN : Module(?) {
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
         var st = new Time.stopwatch();
-        //writeln("conv1");
-        //st.start();
+        if layerDebug then writeln("conv1");
+        if layerDebug then st.start();
         var x = this.conv1(input);
-        //st.stop();
-        //writeln("conv1 ", //st.elapsed());
-        //st.clear();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("conv1 ", st.elapsed());
+        if layerDebug then st.clear();
  
 
-        //writeln("relu");
-        //st.start();
+        if layerDebug then writeln("relu");
+        if layerDebug then st.start();
         x = x.relu();
-        //st.stop();
-        //writeln("relu ", //st.elapsed());
-        //st.clear();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("relu ", st.elapsed());
+        if layerDebug then st.clear();
         
 
-        //writeln("conv2");
-        //st.start();
+        if layerDebug then writeln("conv2");
+        if layerDebug then st.start();
         x = this.conv2(x);
-        //st.stop();
-        //writeln("conv2 ", //st.elapsed());
-        //st.clear();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("conv2 ", st.elapsed());
+        if layerDebug then st.clear();
 
-        //writeln("relu");
-        //st.start();
+        if layerDebug then writeln("relu");
+        if layerDebug then st.start();
         x = x.relu();
-        //st.stop();
-        //writeln("relu ", //st.elapsed());
-        //st.clear();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("relu ", st.elapsed());
+        if layerDebug then st.clear();
 
-        //writeln("maxpool");
-        //st.start();
+        if layerDebug then writeln("maxpool");
+        if layerDebug then st.start();
         x = x.maxPool(2);
-        //st.stop();
-        //writeln("maxpool ", //st.elapsed());
-        //st.clear();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("maxpool ", st.elapsed());
+        if layerDebug then st.clear();
 
-        //writeln("dropout1");
-        //st.start();
+        if layerDebug then writeln("dropout1");
+        if layerDebug then st.start();
         x = this.dropout1(x);
-        //st.stop();
-        //writeln("dropout ", //st.elapsed());
-        //st.clear();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("dropout ", st.elapsed());
+        if layerDebug then st.clear();
 
-        //writeln("flatten");
-        //st.start();
+        if layerDebug then writeln("flatten");
+        if layerDebug then st.start();
         x = x.flatten();
-        //st.stop();
-        //writeln("flatten ", //st.elapsed());
-        //st.clear();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("flatten ", st.elapsed());
+        if layerDebug then st.clear();
 
-        //writeln("fc1");
-        //st.start();
+        if layerDebug then writeln("fc1");
+        if layerDebug then st.start();
         x = this.fc1(x);
-        //st.stop();
-        //writeln("fc1 ", //st.elapsed());
-        //st.clear();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("fc1 ", st.elapsed());
+        if layerDebug then st.clear();
 
-        //writeln("relu");
-        //st.start();
+        if layerDebug then writeln("relu");
+        if layerDebug then st.start();
         x = x.relu();
-        //st.stop();
-        //writeln("relu ", //st.elapsed());
-        //st.clear();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("relu ", st.elapsed());
+        if layerDebug then st.clear();
 
-        //writeln("dropout2");
-        //st.start();
+        if layerDebug then writeln("dropout2");
+        if layerDebug then st.start();
         x = this.dropout2(x);
-        //st.stop();
-        //writeln("dropout2 ", //st.elapsed());
-        //st.clear();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("dropout2 ", st.elapsed());
+        if layerDebug then st.clear();
         
-        //writeln("fc2");
-        //st.start();
+        if layerDebug then writeln("fc2");
+        if layerDebug then st.start();
         x = this.fc2(x);
-        //st.stop();
-        //writeln("fc2 ", //st.elapsed());
-        //st.clear();
-        //st.start();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("fc2 ", st.elapsed());
+        if layerDebug then st.clear();
+        if layerDebug then st.start();
 
-        //writeln("softmax");
-        //st.start();
+        if layerDebug then writeln("softmax");
+        if layerDebug then st.start();
         var output = x.softmax();
-        //st.stop();
-        //writeln("softmax ", st.elapsed());
-        //st.clear();
+        if layerDebug then st.stop();
+        if layerDebug then writeln("softmax ", st.elapsed());
+        if layerDebug then st.clear();
 
         return output;
     }
