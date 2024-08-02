@@ -1,6 +1,6 @@
 /* Documentation for gputil */
 module ChAI {
-  public import ndarray;
+  public import NDArray;
   public import Network;
   public import Tensor;
 

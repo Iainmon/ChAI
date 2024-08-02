@@ -5,6 +5,7 @@ use Network;
 use Reflection;
 
 import TOML;
+import Time;
 
 
 class CNN : Module(?) {
@@ -18,9 +19,11 @@ class CNN : Module(?) {
 
     proc init(type eltType = real) {
         super.init(eltType);
+        // (1,3,3) x 32
+        this.conv1 = new Conv2D(eltType,channels=1,features=32,kernel=3,stride=1); // (1,X,X) -> (32,Y,Y)
 
-        this.conv1 = new Conv2D(eltType,channels=1,features=32,kernel=3,stride=1);
-        this.conv2 = new Conv2D(eltType,channels=32,features=64,kernel=3,stride=1);
+        // (32,3,3) x 64
+        this.conv2 = new Conv2D(eltType,channels=32,features=64,kernel=3,stride=1); // (32,Y,Y) -> (64,Z,Z)
         this.dropout1 = new Dropout(eltType,0.25);
         this.dropout2 = new Dropout(eltType,0.5);
         this.flatten = new Flatten(eltType);
@@ -33,88 +36,102 @@ class CNN : Module(?) {
         for (n,m) in moduleFields() {
             addModule(n,m);
         }
-
-        // addModule("conv1", new Conv2D(eltType,channels=1,features=32,kernel=3,stride=1));
-        // addModule("conv2", new Conv2D(eltType,channels=32,features=64,kernel=3,stride=1));
-        // addModule("dropout1", new Dropout(eltType,0.25));
-        // addModule("dropout2", new Dropout(eltType,0.5));
-        // addModule("flatten", new Flatten(eltType));
-        // addModule("fc1", new Linear(eltType,9216,128));
-        // addModule("fc2", new Linear(eltType,128,10));
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
-                // writeln("conv1");
-        var x = this["conv1"](input);
+        var st = new Time.stopwatch();
+        //writeln("conv1");
+        //st.start();
+        var x = this.conv1(input);
+        //st.stop();
+        //writeln("conv1 ", //st.elapsed());
+        //st.clear();
+ 
 
-        // writeln("relu");
+        //writeln("relu");
+        //st.start();
         x = x.relu();
+        //st.stop();
+        //writeln("relu ", //st.elapsed());
+        //st.clear();
+        
 
-        // writeln("conv2");
-        x = this["conv2"](x);
+        //writeln("conv2");
+        //st.start();
+        x = this.conv2(x);
+        //st.stop();
+        //writeln("conv2 ", //st.elapsed());
+        //st.clear();
 
-        // writeln("relu");
+        //writeln("relu");
+        //st.start();
         x = x.relu();
+        //st.stop();
+        //writeln("relu ", //st.elapsed());
+        //st.clear();
 
-        // writeln("maxpool");
+        //writeln("maxpool");
+        //st.start();
         x = x.maxPool(2);
+        //st.stop();
+        //writeln("maxpool ", //st.elapsed());
+        //st.clear();
 
-        // writeln("dropout");
-        x = this["dropout1"](x);
+        //writeln("dropout1");
+        //st.start();
+        x = this.dropout1(x);
+        //st.stop();
+        //writeln("dropout ", //st.elapsed());
+        //st.clear();
 
-        // writeln("flatten");
+        //writeln("flatten");
+        //st.start();
         x = x.flatten();
+        //st.stop();
+        //writeln("flatten ", //st.elapsed());
+        //st.clear();
 
-        // writeln("fc1");
-        x = this["fc1"](x);
+        //writeln("fc1");
+        //st.start();
+        x = this.fc1(x);
+        //st.stop();
+        //writeln("fc1 ", //st.elapsed());
+        //st.clear();
 
-        // writeln("relu");
+        //writeln("relu");
+        //st.start();
         x = x.relu();
+        //st.stop();
+        //writeln("relu ", //st.elapsed());
+        //st.clear();
 
-        // writeln("dropout");
-        x = this["dropout1"](x);
+        //writeln("dropout2");
+        //st.start();
+        x = this.dropout2(x);
+        //st.stop();
+        //writeln("dropout2 ", //st.elapsed());
+        //st.clear();
+        
+        //writeln("fc2");
+        //st.start();
+        x = this.fc2(x);
+        //st.stop();
+        //writeln("fc2 ", //st.elapsed());
+        //st.clear();
+        //st.start();
 
-        // writeln("fc2");
-        x = this["fc2"](x);
-        // // writeln("conv1");
-        // var x = mod("conv1")(input);
-
-        // // writeln("relu");
-        // x = x.relu();
-
-        // // writeln("conv2");
-        // x = mod("conv2")(x);
-
-        // // writeln("relu");
-        // x = x.relu();
-
-        // // writeln("maxpool");
-        // x = x.maxPool(2);
-
-        // // writeln("dropout");
-        // x = mod("dropout1")(x);
-
-        // // writeln("flatten");
-        // x = x.flatten();
-
-        // // writeln("fc1");
-        // x = mod("fc1")(x);
-
-        // // writeln("relu");
-        // x = x.relu();
-
-        // // writeln("dropout");
-        // x = mod("dropout1")(x);
-
-        // // writeln("fc2");
-        // x = mod("fc2")(x);
-
-        // writeln("softmax");
+        //writeln("softmax");
+        //st.start();
         var output = x.softmax();
+        //st.stop();
+        //writeln("softmax ", st.elapsed());
+        //st.clear();
+
         return output;
     }
 }
 config const diag = false;
+
 
 if diag {
     use GpuDiagnostics;
@@ -122,6 +139,7 @@ if diag {
     startGpuDiagnostics();
     startVerboseGpu();
 }
+
 
 var cnn = new CNN(real);
 
@@ -142,33 +160,46 @@ const modelPath = "data/models/mnist_cnn/";
 cnn.loadPyTorchDump(modelPath);
 
 
-var output = cnn(img);
+// var output = cnn(img);
 
 // writeln(output);
 
 config const imageCount = 0;
 
-var images = for i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
+var images = forall i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
 var preds: [images.domain] int;
 
-writeln(images[1]);
+config const numTimes = 1;
+var conv1 = new Conv2D(real,channels=1,features=32,kernel=3,stride=1);
+// 1000 : 0.081372
+// 5000 : .4606
 
-forall i in images.domain {
-    var output = cnn(images[i]);
-    var pred = output.argmax();
-    preds[i] = pred;
-    writeln((i, pred));
+var conv2 = new Conv2D(real,channels=32,features=64,kernel=3,stride=1);
+
+
+for i in 0..<numTimes {
+    var st = new Time.stopwatch();
+    st.start();
+    forall (img,pred) in zip(images, preds) {
+        // var x = conv1(img);
+        // x = conv2(x);
+        // var output = x;
+        // pred = output.runtimeRank;
+        var output: Tensor(real) = cnn(img);
+        pred = output.argmax();
+        // writeln((i, pred));
+    }
+    const tm = st.elapsed();
+    st.stop();
+    writeln("Time: ", tm, " seconds.");
 }
 
-config const printResults = true;
+config const printResults = false;
 if printResults {
     for i in images.domain {
         writeln((i, preds[i]));
     }
 }
-
-writeln(cnn.conv1.attributes());
-writeln(cnn.conv1.attributes().prettyPrint());
 
 var cnn2 = new Sequential(real,(
     new Conv2D(real,channels=1,features=32,kernel=3,stride=1)?
@@ -179,35 +210,3 @@ var cnn2 = new Sequential(real,(
     ,new Linear(real,9216,128)?
     ,new Linear(real,128,10)?)
         );
-
-
-
-// import IO;
-// import JSON;
-
-// const tomlFile = IO.open("data/models/mnist_cnn/summary.toml", IO.ioMode.r);
-// const toml = TOML.parseToml(tomlFile);
-// writeln(toml);
-
-// writeln(toml["cnn"]);
-
-// var jsw = IO.stdout.withSerializer(JSON.jsonSerializer);
-// toml.writeJSON(jsw);
-// toml.writeTOML(jsw);
-// toml.writeJSON(IO.stdout);
-
-
-
-// var model = new Sequential(real,new Conv2D(real,channels=1,features=32,kernel=3,stride=1));
-
-// param nf = getNumFields(cnn.type);
-// for param i in 0..<nf {
-//     param name = getFieldName(cnn.type,i);
-//     writeln(name,getField(cnn,name).type:string);
-// }
-// for mn in model.moduleNames() {
-//     writeln(mn);
-// }
-// writeln(model(img));
-
-

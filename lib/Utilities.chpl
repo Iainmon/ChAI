@@ -242,6 +242,8 @@ module Utilities {
     }
 
     module Standard {
+        private use ChplConfig;
+
 
         private use Utilities;
         private import Utilities as util;
@@ -369,6 +371,11 @@ module Utilities {
         }
 
         inline iter _domain.every() where rank == 1 {
+            if CHPL_LOCALE_MODEL != "gpu" {
+                foreach i in this do 
+                    yield i;
+                return;
+            }
             if loopGpuSupport {
                 @assertOnGpu
                 foreach i in 0..<size do
@@ -380,6 +387,11 @@ module Utilities {
         }
 
         inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone && rank == 1 {
+            if CHPL_LOCALE_MODEL != "gpu" {
+                forall i in this do 
+                    yield i;
+                return;
+            }
             if loopGpuSupport {
                 @assertOnGpu
                 forall i in 0..<size do
@@ -391,6 +403,11 @@ module Utilities {
         }
 
         inline iter _domain.every() where rank > 1 {
+            if CHPL_LOCALE_MODEL != "gpu" {
+                foreach i in this do 
+                    yield i;
+                return;
+            }
             const shape = this.fastShape;
             var prod = 1;
             var divs: rank * int;
@@ -412,6 +429,12 @@ module Utilities {
         }
 
         inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone && rank > 1 {
+
+            if CHPL_LOCALE_MODEL != "gpu" {
+                forall i in this do 
+                    yield i;
+                return;
+            }
             // compilerWarning("Using domain every.");
             const shape = this.fastShape;
             var prod = 1;
@@ -435,6 +458,12 @@ module Utilities {
         }
 
         inline iter _domain.everyZip() {
+            // if CHPL_LOCALE_MODEL != "gpu" {
+            //     forall (idx,i) in zip(this,0..<size) {
+            //         yield (i,idx);
+            //     }
+            //     return;
+            // }
             const shape = this.fastShape;
             var prod = 1;
             if rank == 1 {
