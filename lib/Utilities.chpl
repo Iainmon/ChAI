@@ -374,15 +374,16 @@ module Utilities {
             if CHPL_LOCALE_MODEL != "gpu" {
                 foreach i in this do 
                     yield i;
-                return;
-            }
-            if loopGpuSupport {
-                @assertOnGpu
-                foreach i in 0..<size do
-                    yield i;
             } else {
-                foreach i in 0..<size do
-                    yield i;
+                const shape = this.fastShape;
+                if loopGpuSupport {
+                    @assertOnGpu
+                    foreach i in 0..<shape do
+                        yield i;
+                } else {
+                    foreach i in 0..<shape do
+                        yield i;
+                }
             }
         }
 
@@ -390,15 +391,16 @@ module Utilities {
             if CHPL_LOCALE_MODEL != "gpu" {
                 forall i in this do 
                     yield i;
-                return;
-            }
-            if loopGpuSupport {
-                @assertOnGpu
-                forall i in 0..<size do
-                    yield i;
             } else {
-                forall i in 0..<size do
-                    yield i;
+                const shape = this.fastShape;
+                if loopGpuSupport {
+                    @assertOnGpu
+                    forall i in 0..<shape do
+                        yield i;
+                } else {
+                    forall i in 0..<shape do
+                        yield i;
+                }
             }
         }
 
@@ -406,24 +408,24 @@ module Utilities {
             if CHPL_LOCALE_MODEL != "gpu" {
                 foreach i in this do 
                     yield i;
-                return;
-            }
-            const shape = this.fastShape;
-            var prod = 1;
-            var divs: rank * int;
-            for param j in 0..<rank {
-                param i = rank - j - 1;
-                divs(i) = prod;
-                prod *= shape(i);
-            }
-            if loopGpuSupport {
-                @assertOnGpu
-                foreach i in 0..<prod {
-                    yield indexAtHelperMultiples(i,(...divs));
-                }
             } else {
-                foreach i in 0..<prod {
-                    yield indexAtHelperMultiples(i,(...divs));
+                const shape = this.fastShape;
+                var prod = 1;
+                var divs: rank * int;
+                for param j in 0..<rank {
+                    param i = rank - j - 1;
+                    divs(i) = prod;
+                    prod *= shape(i);
+                }
+                if loopGpuSupport {
+                    @assertOnGpu
+                    foreach i in 0..<prod {
+                        yield indexAtHelperMultiples(i,(...divs));
+                    }
+                } else {
+                    foreach i in 0..<prod {
+                        yield indexAtHelperMultiples(i,(...divs));
+                    }
                 }
             }
         }
@@ -433,50 +435,10 @@ module Utilities {
             if CHPL_LOCALE_MODEL != "gpu" {
                 forall i in this do 
                     yield i;
-                return;
-            }
-            // compilerWarning("Using domain every.");
-            const shape = this.fastShape;
-            var prod = 1;
-            var divs: rank * int;
-            for param j in 0..<rank {
-                param i = rank - j - 1;
-                divs(i) = prod;
-                prod *= shape(i);
-            }
-            if loopGpuSupport {
-                @assertOnGpu
-                forall i in 0..<prod {
-                    yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
-                }
             } else {
-                forall i in 0..<prod {
-                    yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
-                }
-            }
-
-        }
-
-        inline iter _domain.everyZip() {
-            // if CHPL_LOCALE_MODEL != "gpu" {
-            //     forall (idx,i) in zip(this,0..<size) {
-            //         yield (i,idx);
-            //     }
-            //     return;
-            // }
-            const shape = this.fastShape;
-            var prod = 1;
-            if rank == 1 {
-                prod = shape;
-                if loopGpuSupport {
-                    @assertOnGpu
-                    foreach i in 0..<prod do 
-                        yield (i,i);
-                } else {
-                    foreach i in 0..<prod do
-                        yield (i,i);
-                }
-            } else {
+                // compilerWarning("Using domain every.");
+                const shape = this.fastShape;
+                var prod = 1;
                 var divs: rank * int;
                 for param j in 0..<rank {
                     param i = rank - j - 1;
@@ -485,12 +447,66 @@ module Utilities {
                 }
                 if loopGpuSupport {
                     @assertOnGpu
-                    foreach i in 0..<prod {
-                        yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                    forall i in 0..<prod {
+                        yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
                     }
                 } else {
-                    foreach i in 0..<prod {
-                        yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                    forall i in 0..<prod {
+                        yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                    }
+                }
+            }
+
+        }
+
+        inline iter _domain.everyZip() {
+            const shape = this.fastShape;
+            if CHPL_LOCALE_MODEL != "gpu" {
+                if rank == 1 {
+                    foreach i in 0..<shape do yield (i,i);
+                } else {
+                    var blks: rank * int;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        if i == rank - 1 then
+                            blks(i) = 1;
+                        else
+                            blks(i) = shape(i) * blks(i + 1);
+                    }
+                    foreach idx in this {
+                        var i: int;
+                        for param k in 0..<rank do
+                            i += idx(k) * blks(k);
+                        yield (i,idx);
+                    }
+                }
+            } else {
+                if rank == 1 {
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        foreach i in 0..<shape do 
+                            yield (i,i);
+                    } else {
+                        foreach i in 0..<shape do
+                            yield (i,i);
+                    }
+                } else {
+                    var prod = 1;
+                    var divs: rank * int;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        divs(i) = prod;
+                        prod *= shape(i);
+                    }
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        foreach i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
+                    } else {
+                        foreach i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
                     }
                 }
             }
@@ -498,32 +514,52 @@ module Utilities {
 
         inline iter _domain.everyZip(param tag: iterKind) where tag == iterKind.standalone {
             const shape = this.fastShape;
-            var prod = 1;
-            if rank == 1 {
-                prod = shape;
-                if loopGpuSupport {
-                    @assertOnGpu
-                    forall i in 0..<prod do 
-                        yield (i,i);
+            if CHPL_LOCALE_MODEL != "gpu" {
+                if rank == 1 {
+                    forall i in 0..<shape do yield (i,i);
                 } else {
-                    forall i in 0..<prod do
-                        yield (i,i);
+                    var blks: rank * int;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        if i == rank - 1 then
+                            blks(i) = 1;
+                        else
+                            blks(i) = shape(i) * blks(i + 1);
+                    }
+                    forall idx in this {
+                        var i: int;
+                        for param k in 0..<rank do
+                            i += idx(k) * blks(k);
+                        yield (i,idx);
+                    }
                 }
             } else {
-                var divs: rank * int;
-                for param j in 0..<rank {
-                    param i = rank - j - 1;
-                    divs(i) = prod;
-                    prod *= shape(i);
-                }
-                if loopGpuSupport {
-                    @assertOnGpu
-                    forall i in 0..<prod {
-                        yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                if rank == 1 {
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        forall i in 0..<shape do 
+                            yield (i,i);
+                    } else {
+                        forall i in 0..<shape do
+                            yield (i,i);
                     }
                 } else {
-                    forall i in 0..<prod {
-                        yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                    var prod = 1;
+                    var divs: rank * int;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        divs(i) = prod;
+                        prod *= shape(i);
+                    }
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        forall i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
+                    } else {
+                        forall i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
                     }
                 }
             }
