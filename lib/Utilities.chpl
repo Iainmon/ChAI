@@ -371,11 +371,11 @@ module Utilities {
         }
 
         inline iter _domain.every() where rank == 1 {
+            const shape = this.fastShape;
             if CHPL_LOCALE_MODEL != "gpu" {
-                foreach i in this do 
+                foreach i in 0..<shape do 
                     yield i;
             } else {
-                const shape = this.fastShape;
                 if loopGpuSupport {
                     @assertOnGpu
                     foreach i in 0..<shape do
@@ -388,11 +388,11 @@ module Utilities {
         }
 
         inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone && rank == 1 {
+            const shape = this.fastShape;
             if CHPL_LOCALE_MODEL != "gpu" {
-                forall i in this do 
+                forall i in 0..<shape do 
                     yield i;
             } else {
-                const shape = this.fastShape;
                 if loopGpuSupport {
                     @assertOnGpu
                     forall i in 0..<shape do
