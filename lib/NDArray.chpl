@@ -702,20 +702,21 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const kernelD = {0..<kernelHeight,0..<kernelWidth};
     const kernelChanD = {0..<channels,0..<kernelHeight,0..<kernelWidth};
     const kernelChanShape = kernelChanD.shape;
-    const outDomShape = outDom.shape;
+    const kernelChanDSize = kernelChanD.size;
 
     ref dat = outFeatures.data;
-    ref fet = features.data;
-    ref ker = kernel.data;
-    ref bis = bias.data;
-
+    const ref fet = features.data;
+    const ref ker = kernel.data;
+    const ref bis = bias.data;
+    
     // @assertOnGpu
     forall (f,h_,w_) in outDom.every() {
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
+        // const ref kerF = ker[f,..,..,..];
+        // const sum = + reduce (fet[..,hi..#kernelHeight,wi..#kernelWidth] * kerF);
         var sum: eltType = 0;
         for (c,kh,kw) in kernelChanD {
-            // const (c,kh,kw) = kernelChanD.indexAt(j);
             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
         }
         dat[f,h_,w_] = sum + bis[f];
