@@ -154,15 +154,19 @@ record ndarray : serializable {
 
     proc reshape(dom: arrayResource._domain.type): ndarray(rank,eltType) {
         var me = new ndarray(dom,eltType);
-        const normalDomain = me.domain;
+        const meDomain = me.domain;
         const selfDomain = data.domain;
         const zero: eltType = 0;
         ref meData = me.data;
         const ref thisData = this.data;
-        forall (i,meIdx) in normalDomain.everyZip() {
+        const inter = meDomain[selfDomain];
+
+        me.data[inter] = thisData[inter];
+        return me;
+        forall (i,meIdx) in meDomain.everyZip() {
             const selfIdx = selfDomain.indexAt(i);
-            const a = if selfDomain.contains(selfIdx) then thisData[selfIdx] else zero;
-            meData[meIdx] = a;
+            // const a = if selfDomain.contains(selfIdx) then thisData[selfIdx] else zero;
+            meData[meIdx] = thisData[selfIdx]; // a;
         }
         return me;
     }
@@ -181,6 +185,12 @@ record ndarray : serializable {
             meData[meIdx] = a;
         }
         return arr;
+    //         proc dsiMember(ind: rank*idxType) {
+    //   for param i in 0..rank-1 do
+    //     if !ranges(i).contains(ind(i)) then
+    //       return false;
+    //   return true;
+    // }
     }
 
 
@@ -712,7 +722,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const (channels,inHeight,inWidth) = features.shape;
     const (filters,channels_,kernelHeight,kernelWidth) = kernel.shape;
     const (filters_,) = bias.shape;
-    if channels != channels_ then halt("Channels must match.");
+    if channels != channels_ then halt("Channels must match. ", features.shape , " ", kernel.shape);
     if filters != filters_ then halt("Bias and filters must match.");
 
     const outHeight: int = ((inHeight - kernelHeight) / stride) + 1;

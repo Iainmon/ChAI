@@ -2,59 +2,47 @@ use Tensor;
 
 use Network;
 
-use JSON;
-
-use Map;
-
-import IO;
+import Time;
 
 
-proc moduleFromSpec_(reader: IO.fileReader(?), ref deserializer: jsonDeserializer) {
-    var des = deserializer.startClass(reader,"cnn");
-    var layerType = des.readField("layer",string);
-    writeln(layerType);
-    var attributes = des.readField("attributes",map(string,string));
-    writeln(attributes);
-    writeln(reader.readString(30));
+// Construct the model from specification. 
+var m: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
 
-    select layerType {
-        when "fail" {
+// Print the model's structure. 
+writeln(m.signature);
 
-        }
-        otherwise {
-            // writeln(reader.readString(30));
+// Load the weights into the model. 
+m.loadPyTorchDump("scripts/models/cnn/");
 
-            var mdes = deserializer.startMap(reader);
-            mdes.readKey(string);
-            // writeln(reader.readString(2));
-            moduleFromSpec_(reader,reader.deserializer);
-        }
+// Load an array of images. 
+config const imageCount = 1;
+var images = forall i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
+
+// Create array of output results. 
+var preds: [images.domain] int;
+
+
+
+config const numTimes = 1;
+var time: real;
+for i in 0..<numTimes {
+    var st = new Time.stopwatch();
+    st.start();
+    forall (img,pred) in zip(images, preds) {
+        var output: Tensor(real) = m(img);
+        pred = output.argmax();
+    }
+    const tm = st.elapsed();
+    st.stop();
+    writeln("Time: ", tm, " seconds.");
+    time = tm;
+}
+
+config const printResults = false;
+if printResults {
+    for i in images.domain {
+        writeln((i, preds[i]));
     }
 }
 
-
-proc modelFromSpec(reader: IO.fileReader(?)) {
-    var ms = reader.read(owned ModuleSpecification);
-    writeln(ms);
-    return moduleFromSpec(ms);
-    return 1;
-}
-var fl = IO.open("scripts/models/cnn/specification.json", IO.ioMode.r);
-var reader = fl.reader(deserializer=new jsonDeserializer());
-var m = modelFromSpec(reader);
-
-writeln(m.moduleNames());
-
-for (n,md) in m.namedModules() {
-    writeln((n,md.moduleName));
-}
-
-writeln(m.signature);
-writeln(m.subModules.order);
-// writeln(m);
-// writeln(m);
-// var ms = reader.deserializer.deserializeType(reader,shared ModuleSpecification);
-// var ms = new shared ModuleSpecification();
-// var ms = new ModuleSpecification();
-// var ms = reader.read(owned ModuleSpecification);
-// writeln(ms);
+writeln("The last inference batch took ", time, " ms.");

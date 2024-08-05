@@ -66,6 +66,9 @@ record moduleChildren {
         childDict.addOrReplace(name,m);
     }
 
+    proc ref ith(i: int): borrowed Module(eltType) do 
+        return childDict(order(i));
+
 }
 
 
@@ -164,6 +167,12 @@ record moduleAttributes : serializable {
         }
     }
 
+    proc init(layerType: string,moduleName: string) {
+        this.layerType = layerType;
+        this.moduleName = moduleName;
+        this.attributes = new dict(string,string);
+    }
+
     proc getInt(name: string): int do
         return attributes[name] : int;
 
@@ -197,7 +206,7 @@ class ModuleSpecification : serializable {
     var subModuleOrder: list(string);
 }
 
-proc moduleFromSpec(ms_: borrowed ModuleSpecification?): owned Module(real){
+proc moduleFromSpec(ms_: borrowed ModuleSpecification?): owned Module(real) {
     var ms = ms_!;
     select ms.layerType {
         when "Conv2d" {
@@ -217,14 +226,21 @@ proc moduleFromSpec(ms_: borrowed ModuleSpecification?): owned Module(real){
         when "ReLU" {
             return new ReLU(real);
         }
+        when "MaxPool2d" {
+            var ma = new moduleAttributes("MaxPool","unknown",ms.attributes);
+            return new MaxPool(real,ma.getInt("kernel_size"));
+        }
+        when "LogSoftmax" {
+            return new Softmax(real);
+        }
         otherwise {
-            var sms: map(string,owned Module(real)?) = new map(string,owned Module(real)?);
+            var sms: dict(string,shared Module(real)) = new dict(string,shared Module(real));
             for k in ms.subModuleOrder {
-                sms[k] = moduleFromSpec(ms.subModules[k]) : owned Module(real)?;
-                // sms[k]!.moduleName = k;
+                const sma = ms.subModules[k];
+                const sm: shared Module(real) = shared.adopt(moduleFromSpec(sma));
+                sms.insert(k,sm);
             }
-            return new Sequential(real,ms.subModuleOrder,sms);
-            // return moduleFromSpec(ms.subModules["conv1"]);
+            return new Sequential(real,sms,overrideName=true,moduleName=ms.layerType);
         }
     }
     var sms: map(string,owned Module(real)?) = new map(string,owned Module(real)?);
@@ -233,6 +249,17 @@ proc moduleFromSpec(ms_: borrowed ModuleSpecification?): owned Module(real){
     }
     return new Sequential(real,ms.subModuleOrder,sms);
     // return moduleFromSpec(ms.subModules["conv1"]);
+}
+
+
+proc modelFromSpecFile(path: string) : owned Module(real) {
+    import IO;
+    import JSON;
+    var fl = IO.open(path, IO.ioMode.r);
+    var reader = fl.reader(deserializer=new JSON.jsonDeserializer());
+    var ms = reader.read(owned ModuleSpecification);
+    fl.close();
+    return moduleFromSpec(ms);
 }
 
 
@@ -341,9 +368,10 @@ class Module {
     // iter modules(): borrowed Module(eltType) {
     //     for (n,m) in this.moduleFields()
     // }
-    proc loadPyTorchDump(modelPath: string) {
-        for m in modules() {
+    proc loadPyTorchDump(modelPath: string, param debug = false) {
+        for (n,m) in namedModules() {
             const name = m.moduleName;
+            if debug then writeln((n,name,m.signature));
             if var p = m : borrowed Parameter(real)? {
                 const paramName = name[(moduleName.size + 1)..];
                 const paramPath = modelPath + paramName + ".chdata";
@@ -389,6 +417,18 @@ class Parameter : Module(?) {
 class Sequential : Module(?) {
     var mds: list(shared Module(eltType));
 
+    proc init(type eltType = real, ms: dict(string,shared Module(eltType)), param overrideName = false, moduleName: string = "") {
+        super.init(eltType);
+        this.mds = new list(shared Module(eltType));
+        init this;
+        if overrideName then
+            this.moduleName = moduleName;
+        for (name,m) in ms {
+            addModule(name,m.borrow());
+            mds.pushBack(m);
+        }
+    }
+
     proc init(type eltType = real, in ms) {
         super.init(eltType);
         this.mds = new list(shared Module(eltType));
@@ -406,11 +446,13 @@ class Sequential : Module(?) {
         this.mds = new list(shared Module(eltType));
         init this;
         this.moduleName = "sequential";
-        for i in 0..<order.size {
-            var m : owned Module(eltType) = owned.adopt(owned.release(ms[order[i]])!);
+        for (i,k) in zip(0..<ms.size,ms.keys()) {
+            // var m : owned Module(eltType) = owned.adopt(owned.release(ms[order[i]])!);
+            var m : shared Module(eltType) = shared.adopt(owned.release(ms[k])!);
             const j = mds.pushBack(m);
             var b = mds[j].borrow();
-            addModule("(" + j: string + ")." + order[i],b);
+            addModule(order[i],b);
+            compilerWarning("Iain you need to fix this after the demo.");
         }
     }
 
@@ -419,8 +461,17 @@ class Sequential : Module(?) {
 
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
+        // for m in mds {
+        //     writeln((m.moduleName, m.signature));
+        // }
+        // return input;
+        // for (n,m) in this.namedModules() {
+        //     writeln((n,m.moduleName,))
+        // }
+        if mds.size < 1 then
+            halt("Sequential must have submodules! moduleName: ", moduleName);
         var x = mds[0](input);
-        for i in 0..<mds.size {
+        for i in 1..<mds.size {
             x = mds[i](x);
         }
         return x;
@@ -569,6 +620,9 @@ class Flatten : Module(?) {
     
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
         return input.flatten();
+    
+    override proc attributes(): moduleAttributes do
+        return new moduleAttributes("Flatten",moduleName);
 }
 
 class ReLU : Module(?) {
@@ -577,6 +631,9 @@ class ReLU : Module(?) {
     
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
         return input.relu();
+
+    override proc attributes(): moduleAttributes do
+        return new moduleAttributes("ReLU",moduleName);
 }
 
 class Softmax : Module(?) {
@@ -585,6 +642,9 @@ class Softmax : Module(?) {
     
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
         return input.softmax();
+
+    override proc attributes(): moduleAttributes do
+        return new moduleAttributes("SoftMax",moduleName);
 }
 
 class Dropout : Module(?) {

@@ -22,6 +22,15 @@
       "subModules": {},
       "subModuleOrder": []
     },
+    "relu1": {
+      "layerType": "ReLU",
+      "attributes": {
+        "training": "true",
+        "inplace": "false"
+      },
+      "subModules": {},
+      "subModuleOrder": []
+    },
     "conv2": {
       "layerType": "Conv2d",
       "attributes": {
@@ -40,11 +49,63 @@
       "subModules": {},
       "subModuleOrder": []
     },
+    "relu2": {
+      "layerType": "ReLU",
+      "attributes": {
+        "training": "true",
+        "inplace": "false"
+      },
+      "subModules": {},
+      "subModuleOrder": []
+    },
+    "maxpool1": {
+      "layerType": "MaxPool2d",
+      "attributes": {
+        "training": "true",
+        "kernel_size": "2",
+        "stride": "2",
+        "padding": "0",
+        "dilation": "1",
+        "return_indices": "false",
+        "ceil_mode": "false"
+      },
+      "subModules": {},
+      "subModuleOrder": []
+    },
     "dropout1": {
       "layerType": "Dropout",
       "attributes": {
         "training": "true",
         "p": "0.25",
+        "inplace": "false"
+      },
+      "subModules": {},
+      "subModuleOrder": []
+    },
+    "flatten": {
+      "layerType": "Flatten",
+      "attributes": {
+        "training": "true",
+        "start_dim": "1",
+        "end_dim": "-1"
+      },
+      "subModules": {},
+      "subModuleOrder": []
+    },
+    "fc1": {
+      "layerType": "Linear",
+      "attributes": {
+        "training": "true",
+        "in_features": "9216",
+        "out_features": "128"
+      },
+      "subModules": {},
+      "subModuleOrder": []
+    },
+    "relu3": {
+      "layerType": "ReLU",
+      "attributes": {
+        "training": "true",
         "inplace": "false"
       },
       "subModules": {},
@@ -60,16 +121,6 @@
       "subModules": {},
       "subModuleOrder": []
     },
-    "fc1": {
-      "layerType": "Linear",
-      "attributes": {
-        "training": "true",
-        "in_features": "9216",
-        "out_features": "128"
-      },
-      "subModules": {},
-      "subModuleOrder": []
-    },
     "fc2": {
       "layerType": "Linear",
       "attributes": {
@@ -79,14 +130,29 @@
       },
       "subModules": {},
       "subModuleOrder": []
+    },
+    "softmax": {
+      "layerType": "LogSoftmax",
+      "attributes": {
+        "training": "true",
+        "dim": "1"
+      },
+      "subModules": {},
+      "subModuleOrder": []
     }
   },
   "subModuleOrder": [
     "conv1",
+    "relu1",
     "conv2",
+    "relu2",
+    "maxpool1",
     "dropout1",
-    "dropout2",
+    "flatten",
     "fc1",
-    "fc2"
+    "relu3",
+    "dropout2",
+    "fc2",
+    "softmax"
   ]
 }
