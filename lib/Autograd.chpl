@@ -36,6 +36,21 @@ class TensorEssence : serializable {
         halt("Not implemented.");
         return -1;
     }
+
+    iter children(): borrowed TensorEssence(eltType) {
+        // halt("Not implemented.");
+    }
+
+    proc treeHeight(): int {
+        import Math.max;
+        // const childs = children();
+        // if childs.domain.size == 0 then
+        //     return 1;
+        var mx = 0;
+        for c in children() do
+            mx = max(mx,c.treeHeight());
+        return mx + 1;
+    }
 }
 
 class ForgetfulTensor : TensorEssence {
@@ -187,6 +202,16 @@ class TensorResource : BaseTensorResource(?), serializable {
         }
     }
 
+    override iter children(): borrowed TensorEssence(eltType) {
+        // import Types;
+
+        const childs = operationData.children;
+        for param i in 0..<childs.size {
+            if isSubtype(childs(i).type,shared TensorEssence(eltType)) then
+                yield childs(i).borrow();
+        }
+    }
+
 }
 
 
@@ -267,6 +292,8 @@ record subOp : serializable {
     var lhs: shared BaseTensorResource(?);
     var rhs: shared BaseTensorResource(?);
 
+    proc children do return (lhs,rhs);
+
     proc forward() do
         return lhs.array - rhs.array;
     
@@ -275,6 +302,8 @@ record subOp : serializable {
 record divOp : serializable {
     var lhs: shared BaseTensorResource(?);
     var rhs: shared BaseTensorResource(?);
+
+    proc children do return (lhs,rhs);
 
     proc forward() {
         return lhs.array / rhs.array;
