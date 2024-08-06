@@ -23,11 +23,10 @@ record tensor : serializable {
         this.resource = new shared TensorResource(rank,eltType,baseValue);
     }
 
-    proc init(resource: shared BaseTensorResource(?eltType,?rank), param strict: bool = false) {
+    proc init(resource: shared BaseTensorResource(?eltType,?rank)) {
         this.rank = rank;
         this.eltType = eltType;
         this.resource = resource;
-        if strict then resource.forward();
     }
 
     proc init(nda: ndarray(?rank,?eltType)) {
@@ -94,14 +93,12 @@ proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType) {
 
 operator +(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
     var ctx = new addOp(rank,eltType,a.meta,b.meta);
-    var newMeta = new shared TensorResource(rank,eltType,ctx);
-    return new tensor(newMeta, strict = true);
+    return tensorFromCtx(rank,eltType,ctx);    
 }
 
 operator -(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
     var ctx = new subOp(a.meta,b.meta);
-    var newMeta = new shared TensorResource(rank,eltType,ctx);
-    return new tensor(newMeta, strict = true);
+    return tensorFromCtx(rank,eltType,ctx); 
 }
 
 operator *(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {

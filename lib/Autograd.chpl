@@ -132,6 +132,7 @@ class TensorResource : BaseTensorResource(?), serializable {
 
     override proc forward() {
         if operationData.type != baseValue {
+
             on dataResource.device {
                 // ref data = dataResource.access().data;
                 // data = operationData.forward();

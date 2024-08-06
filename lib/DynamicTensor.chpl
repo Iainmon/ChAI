@@ -47,9 +47,9 @@ record Tensor : serializable {
             this.meta = u.meta;
             this.runtimeRank = u.meta.runtimeRank;
         } else {
-        this.meta = t.meta;
-        this.runtimeRank = t.meta.runtimeRank;
-    }
+            this.meta = t.meta;
+            this.runtimeRank = t.meta.runtimeRank;
+        }
     }
 
     proc init(a: ndarray(?rank,?eltType)) do
