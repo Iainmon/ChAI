@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remote &mdash; chpldoc 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SimpleDomain" href="SimpleDomain.html" />
+    <link rel="prev" title="OrderedDict" href="OrderedDict.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            chpldoc
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">chpldoc documentation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Autograd.html">Autograd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DynamicTensor.html">DynamicTensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LoadNumpy.html">LoadNumpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NDArray.html">NDArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Network.html">Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OrderedDict.html">OrderedDict</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SimpleDomain.html">SimpleDomain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StaticTensor.html">StaticTensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tensor.html">Tensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Utilities/Standard.html">Standard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Utilities/Types.html">Types</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">chpldoc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Remote</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/modules/lib/Remote.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="remote">
+<span id="module-Remote"></span><h1>Remote<a class="headerlink" href="#remote" title="Link to this heading">¶</a></h1>
+<p><strong>Usage</strong></p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Remote</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">Remote</span><span class="p">;</span>
+</pre></div>
+</div>
+<dl class="chpl data">
+<dt class="sig sig-object chpl" id="Remote.debug">
+<em class="property"><span class="pre">config</span> <span class="pre">const</span> </em><span class="sig-name descname"><span class="pre">debug</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">true</span></em><a class="headerlink" href="#Remote.debug" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl data">
+<dt class="sig sig-object chpl" id="Remote.defaultDevice">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">defaultDevice</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">if</span> <span class="pre">here.gpus.size</span> <span class="pre">&gt;=</span> <span class="pre">1</span> <span class="pre">then</span> <span class="pre">here.gpus[0]</span> <span class="pre">else</span> <span class="pre">here</span></em><a class="headerlink" href="#Remote.defaultDevice" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Remote.Remote">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Remote</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Remote.Remote" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Remote.Remote.eltType">
+<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><a class="headerlink" href="#Remote.Remote.eltType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Remote.Remote.device">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">device</span></span><em class="property"> <span class="pre">:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">defaultDevice</span></em><a class="headerlink" href="#Remote.Remote.device" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Remote.Remote.item">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">item</span></span><em class="property"> <span class="pre">:</span> <span class="pre">_remoteVarWrapper(eltType)</span></em><a class="headerlink" href="#Remote.Remote.item" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.Remote.init">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">item:</span> <span class="pre">?eltType</span></em>, <em class="sig-param"><span class="pre">device:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">defaultDevice</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Remote.Remote.init" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">device:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">defaultDevice</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.Remote.to">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">device_:</span> <span class="pre">locale</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Remote.Remote.to" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.Remote.get">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><a class="headerlink" href="#Remote.Remote.get" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.Remote.serialize">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">writer</span></em>, <em class="sig-param"><span class="pre">serializer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Remote.Remote.serialize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl record">
+<dt class="sig sig-object chpl" id="Remote.remote">
+<em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">remote</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Remote.remote" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Remote.remote.eltType">
+<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><a class="headerlink" href="#Remote.remote.eltType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Remote.remote.remoteResource">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">remoteResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">Remote(eltType)</span></em><a class="headerlink" href="#Remote.remote.remoteResource" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.remote.init">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">device:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">defaultDevice</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Remote.remote.init" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">item:</span> <span class="pre">?eltType</span></em>, <em class="sig-param"><span class="pre">device:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">defaultDevice</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.remote.device">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">device</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><a class="headerlink" href="#Remote.remote.device" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.remote.get">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><a class="headerlink" href="#Remote.remote.get" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.remote.to">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">device_:</span> <span class="pre">locale</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Remote.remote.to" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.remote.copy">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">remote(eltType)</span></em><a class="headerlink" href="#Remote.remote.copy" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.remote.access">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">access</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><a class="headerlink" href="#Remote.remote.access" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.remote.localAccess">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">localAccess</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><a class="headerlink" href="#Remote.remote.localAccess" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.remote.download">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">eltType</span></em><a class="headerlink" href="#Remote.remote.download" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Remote.remote.unload">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">unload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">eltType</span></em><a class="headerlink" href="#Remote.remote.unload" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="OrderedDict.html" class="btn btn-neutral float-left" title="OrderedDict" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SimpleDomain.html" class="btn btn-neutral float-right" title="SimpleDomain" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2015.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+
+
+
+</body>
+</html>

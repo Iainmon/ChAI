@@ -1,0 +1,67 @@
+.. default-domain:: chpl
+
+.. module:: Remote
+
+Remote
+======
+**Usage**
+
+.. code-block:: chapel
+
+   use Remote;
+
+
+or
+
+.. code-block:: chapel
+
+   import Remote;
+
+.. data:: config const debug = true
+
+.. data:: var defaultDevice = if here.gpus.size >= 1 then here.gpus[0] else here
+
+.. class:: Remote : serializable
+
+   .. attribute:: type eltType
+
+   .. attribute:: var device: locale = defaultDevice
+
+   .. attribute:: var item: _remoteVarWrapper(eltType)
+
+   .. method:: proc init(item: ?eltType, device: locale = defaultDevice)
+
+   .. method:: proc init(type eltType, device: locale = defaultDevice)
+
+   .. method:: proc to(device_: locale)
+
+   .. method:: proc ref get() ref
+
+   .. method:: proc serialize(writer, serializer)
+
+.. record:: remote : serializable
+
+   .. attribute:: type eltType
+
+   .. attribute:: var remoteResource: shared Remote(eltType)
+
+   .. method:: proc init(type eltType, device: locale = defaultDevice)
+
+   .. method:: proc init(item: ?eltType, device: locale = defaultDevice)
+
+   .. method:: proc device ref
+
+   .. method:: proc ref get() ref
+
+   .. method:: proc to(device_: locale)
+
+   .. method:: proc copy(): remote(eltType)
+
+   .. method:: proc ref access() ref
+
+   .. method:: proc localAccess() ref
+
+   .. method:: proc download(): eltType
+
+   .. method:: proc ref unload(): eltType
+

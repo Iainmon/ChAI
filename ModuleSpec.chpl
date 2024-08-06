@@ -6,20 +6,20 @@ import Time;
 
 
 // Construct the model from specification. 
-var m: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
+var model: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
 
 // Print the model's structure. 
-writeln(m.signature);
+writeln(model.signature);
 
 // Load the weights into the model. 
-m.loadPyTorchDump("scripts/models/cnn/");
+model.loadPyTorchDump("scripts/models/cnn/");
 
 // Load an array of images. 
-config const imageCount = 1;
-var images = forall i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
+config const numImages = 1;
+var images = forall i in 0..<numImages do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
 
 // Create array of output results. 
-var preds: [images.domain] int;
+var preds: [0..<numImages] int;
 
 
 
@@ -27,16 +27,19 @@ config const numTimes = 1;
 var time: real;
 for i in 0..<numTimes {
     var st = new Time.stopwatch();
+
     st.start();
     forall (img,pred) in zip(images, preds) {
-        var output: Tensor(real) = m(img);
-        pred = output.argmax();
+        pred = model(img).argmax();
     }
-    const tm = st.elapsed();
     st.stop();
+
+    const tm = st.elapsed();
     writeln("Time: ", tm, " seconds.");
-    time = tm;
+    time += tm;
 }
+
+time /= numTimes;
 
 config const printResults = false;
 if printResults {
@@ -45,4 +48,4 @@ if printResults {
     }
 }
 
-writeln("The last inference batch took ", time, " ms.");
+writeln("The average inference time for batch of size ", numImages, " was ", time, " seconds.");

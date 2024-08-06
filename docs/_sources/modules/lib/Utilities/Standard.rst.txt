@@ -1,0 +1,77 @@
+.. default-domain:: chpl
+
+.. module:: Standard
+
+Standard
+========
+**Usage**
+
+.. code-block:: chapel
+
+   use Utilities.Standard;
+
+
+or
+
+.. code-block:: chapel
+
+   import Utilities.Standard;
+
+.. method:: proc _tuple.imageType(f) type
+
+.. method:: proc _tuple.eltType type where isHomogeneousTuple(this)
+
+.. method:: proc _tuple.map(f): this.size*this.imageType(f) where isHomogeneousTuple(this)
+
+.. method:: proc _tuple.slice(param low: int, param high: int): (high-low)*this.eltType where isHomogeneousTuple(this) && low < high && 0 <= low && high <= this.size
+
+.. method:: proc _tuple.removeIdx(param idx: int): (this.size-1)*this.eltType
+
+.. method:: proc _tuple.untuplify()
+
+.. method:: proc _tuple.slice(param start: int, param stop: int, param idx: int = start) param
+
+.. method:: proc _tuple.insertIdx(param idx: int, x: this.eltType): (this.size+1)*this.eltType
+
+.. method:: proc _tuple.indexAt(n: int): this.size*int where isHomogeneousTuple(this) && this(0).type == int
+
+.. itermethod:: iter _tuple.each(n: int): this.size*int where isHomogeneousTuple(this) && this(0).type == int
+
+.. itermethod:: iter _domain.each
+
+.. itermethod:: iter _domain.every() where rank == 1
+
+.. itermethod:: iter _domain.every(param tag: iterKind) where tag == iterKind.standalone && rank == 1
+
+.. itermethod:: iter _domain.every() where rank > 1
+
+.. itermethod:: iter _domain.every(param tag: iterKind) where tag == iterKind.standalone && rank > 1
+
+.. itermethod:: iter _domain.everyZip()
+
+.. itermethod:: iter _domain.everyZip(param tag: iterKind) where tag == iterKind.standalone
+
+.. method:: proc _domain.indexAt(n: int) where rank == 1
+
+.. method:: proc _domain.indexAt(n: int) where rank > 1
+
+.. method:: proc _domain.fastShape
+
+.. method:: proc _domain.myShape
+
+.. method:: proc _domain.normalize: this.type where this.isRectangular()
+
+.. method:: proc _domain.isNormal: bool where this.isRectangular()
+
+.. method:: proc param string.this(param start: int, param stop: int) param
+
+.. method:: proc param string.slice(param start: int, param stop: int, param idx: int = start) param
+
+.. method:: proc param string.take(param count: int) param
+
+.. method:: proc param string.drop(param count: int) param
+
+.. method:: proc param string.countOccurrences(param c: string, param idx: int = 0) param
+
+.. method:: proc param string.takeUntil(param del: string, param idx: int = 0, param keepDel: bool = false) param
+

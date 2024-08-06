@@ -38,6 +38,11 @@ class TensorEssence : serializable {
     }
 }
 
+class ForgetfulTensor : TensorEssence {
+    param rank: int; 
+    
+}
+
 class BaseTensorResource : TensorEssence, serializable{
     param rank: int;
     // type eltType = real(64);
