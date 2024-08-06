@@ -76,11 +76,19 @@ record tensor : serializable {
             dat = devVal;
         }
     }
+
+    proc detach(): tensor(rank,eltType) {
+        if var tr = this.meta : borrowed TensorResource(eltType,rank,baseValue)? then
+            return this;
+        else 
+            return new tensor(new shared TensorResource(this.resource,forget = true));
+    }
 }
 
 proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType) {
     var newMeta = new shared TensorResource(rank,eltType,ctx);
-    return new tensor(newMeta, strict = true);
+    newMeta.forward();
+    return new tensor(newMeta);
 }
 
 

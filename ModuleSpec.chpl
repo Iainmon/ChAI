@@ -4,6 +4,9 @@ use Network;
 
 import Time;
 
+config const detach = true;
+
+Tensor.detachMode(detach);
 
 // Construct the model from specification. 
 var model: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");

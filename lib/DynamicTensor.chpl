@@ -13,6 +13,7 @@ config param maxRank = 6;
 
 import LoadNumpy;
 
+param defaultDetachedMode = false;
 
 record Tensor : serializable {
     type eltType = real;
@@ -39,10 +40,16 @@ record Tensor : serializable {
         this.runtimeRank = meta.runtimeRank;
     }
 
-    proc init(t: tensor(?rank,?eltType)) {
+    proc init(t: tensor(?rank,?eltType), detached: bool = Tensor.detachMode()) {
         this.eltType = eltType;
+        if detached {
+            var u = t.detach();
+            this.meta = u.meta;
+            this.runtimeRank = u.meta.runtimeRank;
+        } else {
         this.meta = t.meta;
         this.runtimeRank = t.meta.runtimeRank;
+    }
     }
 
     proc init(a: ndarray(?rank,?eltType)) do
@@ -74,7 +81,7 @@ record Tensor : serializable {
     }
 
     proc forceRank(param rank: int): tensor(rank,eltType) do
-        return new tensor(meta : shared BaseTensorResource(eltType,rank),strict=false);
+        return new tensor(meta : shared BaseTensorResource(eltType,rank));
 
     proc forceRankMeta(param rank: int): shared BaseTensorResource(eltType,rank) do
         return meta : shared BaseTensorResource(eltType,rank);
@@ -131,13 +138,27 @@ record Tensor : serializable {
     proc toArray(param rank: int) : [] eltType do
         return toNDArray(rank).data;
 
+    proc detach(): Tensor(eltType) {
+        for param rank in 1..maxRank do
+            if checkRank(rank) then
+                return tensorize(rank).detach().eraseRank();
+        halt("Could not identify rank for this: ", this);
+    }
+}
+
+proc type Tensor.detachMode() param : bool {
+    return defaultDetachedMode;
+}
+
+proc type Tensor.detachMode(detachMode: bool) {
+    // defaultDetachedMode = detachMode;
 }
 
 inline proc ndarray.toTensor(): Tensor(eltType) do
     return new Tensor(this);
 
-proc tensor.eraseRank(): Tensor(eltType) do
-    return new Tensor(this);
+proc tensor.eraseRank(detach: bool = Tensor.detachMode()): Tensor(eltType) do
+    return new Tensor(this,detach);
 
 operator :(t: tensor(?rank,?eltType), type T: Tensor(eltType)): Tensor(eltType) do
     return t.eraseRank();

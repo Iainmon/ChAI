@@ -108,6 +108,15 @@ class TensorResource : BaseTensorResource(?), serializable {
         this.operationData = operationData;
     }
 
+    proc init(tr: shared BaseTensorResource(?eltType,?rank),param forget: bool) where forget == true {
+        super.init(eltType,rank,tr.dataResource,new remote(ndarray(rank,eltType)));
+        // super.rank = rank;
+        // super.dataResource = tr.dataResource;
+        // super.gradResource = new remote(ndarray(rank,eltType));
+        this.operation = baseValue;
+        this.operationData = new baseValue();
+    }
+
     // proc init(param rank: int, type eltType, operationData: ?operation, device: locale) {
     //     var res = new remote(ndarray(rank,eltType),device);
     //     this.init(res,operationData,device);
