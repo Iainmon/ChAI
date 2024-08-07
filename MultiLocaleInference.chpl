@@ -34,25 +34,36 @@ var preds: [imagesD] int;
 
 config const numTimes = 1;
 var time: real;
-coforall loc in Locales {
-    writeln("Running from ", (loc,loc.id,loc.hostname));
-    on loc {
-        const myImagesD = imagesD.localSubdomain();
-        var myModel: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
-        myModel.loadPyTorchDump("scripts/models/cnn/");
-        const myImages = images[myImagesD];
-        var st = new Time.stopwatch();
 
-        st.start();
-        forall i in myImagesD {
-            preds[i] = myModel(myImages[i]).argmax();
-        }
-        st.stop();
-        const tm = st.elapsed();
-        writeln("Time: ", tm, " seconds.", (here,here.id,here.hostname));
-        // time += tm;
-    }
+var st = new Time.stopwatch();
+
+st.start();
+forall i in myImagesD {
+    preds[i] = model(images[i]).argmax();
 }
+st.stop();
+const tm = st.elapsed();
+time += tm;
+// writeln("Time: ", tm, " seconds.", (here,here.id,here.hostname));
+// coforall loc in Locales {
+//     writeln("Running from ", (loc,loc.id,loc.hostname));
+//     on loc {
+//         const myImagesD = imagesD.localSubdomain();
+//         var myModel: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
+//         myModel.loadPyTorchDump("scripts/models/cnn/");
+//         const myImages = images[myImagesD];
+//         var st = new Time.stopwatch();
+
+//         st.start();
+//         forall i in myImagesD {
+//             preds[i] = myModel(myImages[i]).argmax();
+//         }
+//         st.stop();
+//         const tm = st.elapsed();
+//         writeln("Time: ", tm, " seconds.", (here,here.id,here.hostname));
+//         // time += tm;
+//     }
+// }
 
 
 time /= numTimes;
