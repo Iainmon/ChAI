@@ -38,13 +38,14 @@ coforall loc in Locales {
     writeln("Running from ", (loc,loc.id,loc.hostname));
     on loc {
         const myImagesD = imagesD.localSubdomain();
-        const myModel = model;
-        
+        var myModel: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
+        myModel.loadPyTorchDump("scripts/models/cnn/");
+        const myImages = images[myImagesD];
         var st = new Time.stopwatch();
 
         st.start();
         coforall i in myImagesD {
-            preds[i] = myModel(images[i]).argmax();
+            preds[i] = myModel(myImages[i]).argmax();
         }
         st.stop();
         const tm = st.elapsed();
