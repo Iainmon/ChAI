@@ -37,7 +37,15 @@ var preds: [imagesD] int;
 config const numTimes = 1;
 var time: real;
 
-var localeModels = forall li in cyclicDist.createDomain(Locales.domain) do moveFrom(model);
+proc makeModel() {
+    var model: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
+
+// Load the weights into the model. 
+model.loadPyTorchDump("scripts/models/cnn/");
+return model;
+}
+
+var localeModels = forall li in cyclicDist.createDomain(Locales.domain) do makeModel();
 
 var st = new Time.stopwatch();
 
