@@ -266,7 +266,7 @@ proc modelFromSpecFile(path: string) : owned Module(real) {
 var moduleInstances = 0;
 
 class Module {
-    type eltType = f64;
+    type eltType = f32;
     var subModules: moduleChildren(eltType);
     var moduleId: int;
     var moduleName: string;
