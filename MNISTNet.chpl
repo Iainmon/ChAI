@@ -18,7 +18,7 @@ class CNN : Module(?) {
     var fc1: owned Linear(eltType);
     var fc2: owned Linear(eltType);
 
-    proc init(type eltType = f32) {
+    proc init(type eltType = f64) {
         super.init(eltType);
         // (1,3,3) x 32
         this.conv1 = new Conv2D(eltType,channels=1,features=32,kernel=3,stride=1); // (1,X,X) -> (32,Y,Y)
@@ -142,7 +142,7 @@ if diag {
 }
 
 
-var cnn = new CNN(f32);
+var cnn = new CNN(f64);
 
 
 for (n,m) in cnn.moduleFields() {
@@ -167,7 +167,7 @@ cnn.loadPyTorchDump(modelPath);
 
 config const imageCount = 0;
 
-var images = forall i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata") : f32;
+var images = forall i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata") : f64;
 var preds: [images.domain] int;
 
 config const numTimes = 1;
@@ -186,7 +186,7 @@ for i in 0..<numTimes {
         // x = conv2(x);
         // var output = x;
         // pred = output.runtimeRank;
-        var output: Tensor(f32) = cnn(img);
+        var output: Tensor(f64) = cnn(img);
         pred = output.argmax();
         // writeln((i, pred));
     }

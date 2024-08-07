@@ -756,16 +756,16 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
         // proc innerHelper() {
         var sum: eltType = 0;
             // @llvm.assertVectorized()
-            // for (c,kh,kw) in kernelChanD {
-            //     sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
-            // }
-        for c in 0..<channels {
-            for param kh in 0..<3 {
-                for param kw in 0..<3 {
-                    sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
-                }
+            for (c,kh,kw) in kernelChanD {
+                sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
             }
-        }
+        // for c in 0..<channels {
+        //     for param kh in 0..<3 {
+        //         for param kw in 0..<3 {
+        //             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+        //         }
+        //     }
+        // }
         //     return sum;
         // }
         // const sum = innerHelper();
