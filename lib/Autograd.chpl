@@ -61,21 +61,16 @@ class ForgetfulTensor : TensorEssence {
 class BaseTensorResource : TensorEssence, serializable{
     param rank: int;
     // type eltType = real(64);
-    var dataResource: remote(ndarray(rank,eltType));
-    var gradResource: remote(ndarray(rank,eltType));
+    var dataResource: ndarray(rank,eltType);
+    var gradResource: ndarray(rank,eltType);
     // forwarding resource only to, access, device;
 
     proc to(device_: locale) {
-        dataResource.to(device_);
-        gradResource.to(device_);
     }
 
     proc device : locale {
-        if dataResource.device != gradResource.device then halt("data resource and grad resource devices do not match. ");
-        return dataResource.device;
+        return this.locale;
     }
-
-
 
     // Tensor resource interface
     proc forward() do halt("Forward function not defined for BaseTensorResource.");
@@ -83,16 +78,14 @@ class BaseTensorResource : TensorEssence, serializable{
     proc backward() where rank == 1 do halt("Backward function not defined for BaseTensorResource.");
 
     proc array ref : ndarray(rank,eltType) do
-        return dataResource.access();
+        return dataResource;
     proc data ref : [] eltType do
-        return dataResource.access().data;
+        return dataResource.data;
     proc grad ref : ndarray(rank,eltType) do
-        return gradResource.access();
-    proc gradData ref : ndarray(rank,eltType) do
-        return gradResource.access().data;
-
-    proc _loc do return device;
-
+        return gradResource;
+    proc gradData ref : [] eltType do
+        return gradResource.data;
+    
     override proc runtimeRank: int do
         return rank;
 }
@@ -114,17 +107,15 @@ class TensorResource : BaseTensorResource(?), serializable {
         this.operationData = operationData;
     }
 
-    proc init(ref resource: remote(ndarray(?rank,?eltType)), operationData: ?operation, device_: locale = defaultDevice) {
-        resource.to(device_);
-        var dataRes = resource;
-        var gradRes = new remote(ndarray(rank,eltType));
+    proc init(dataRes: ndarray(?rank,?eltType), operationData: ?operation, device_: locale = defaultDevice) {
+        var gradRes = new ndarray(rank,eltType);
         super.init(eltType,rank,dataRes,gradRes);
         this.operation = operation;
         this.operationData = operationData;
     }
 
     proc init(tr: shared BaseTensorResource(?eltType,?rank),param forget: bool) where forget == true {
-        super.init(eltType,rank,tr.dataResource,new remote(ndarray(rank,eltType)));
+        super.init(eltType,rank,tr.dataResource,new ndarray(rank,eltType));
         // super.rank = rank;
         // super.dataResource = tr.dataResource;
         // super.gradResource = new remote(ndarray(rank,eltType));
@@ -139,24 +130,22 @@ class TensorResource : BaseTensorResource(?), serializable {
     //     this.forward();
     // }
 
-    proc init(data: ndarray(?rank,?eltType),operationData: ?operation, device_: locale = defaultDevice) {
-        var res = data.toRemote();
-        res.to(device_);
-        this.init(res,operationData,device_);
-    }
+    // proc init(data: ndarray(?rank,?eltType),operationData: ?operation, device_: locale = defaultDevice) {
+    //     // var res = data.toRemote();
+    //     // res.to(device_);
+    //     this.init(data,operationData,device_);
+    // }
 
     override proc forward() {
         if operationData.type != baseValue {
 
-            on dataResource.device {
-                // ref data = dataResource.access().data;
-                // data = operationData.forward();
-                dataResource = operationData.forward();
-                param requiresGrad = false;
-                if requiresGrad {
-                    if gradResource.access().data.size == 0 {
-                        gradResource.access().reshapeDomain(dataResource.access().domain);
-                    }
+            // ref data = dataResource.access().data;
+            // data = operationData.forward();
+            dataResource = operationData.forward();
+            param requiresGrad = false;
+            if requiresGrad {
+                if gradResource.access().data.size == 0 {
+                    gradResource.access().reshapeDomain(dataResource.access().domain);
                 }
             }
 

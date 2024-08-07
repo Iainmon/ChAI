@@ -49,7 +49,7 @@ record ndarray : serializable {
     param rank: int;
     type eltType = real(64);
 
-    var arrayResource: owned NDArrayData(rank,eltType);
+    var arrayResource: shared NDArrayData(rank,eltType);
 
     proc borrowResource() : borrowed NDArrayData(rank,eltType) do
         return arrayResource.borrow();
@@ -70,16 +70,16 @@ record ndarray : serializable {
     proc init(param rank: int, type eltType = real(64)) {
         this.rank = rank;
         this.eltType = eltType;
-        this.arrayResource = new owned NDArrayData(rank,eltType);
+        this.arrayResource = new shared NDArrayData(rank,eltType);
     }
 
     proc init(dom: ?t,type eltType = real(64)) where isDomainType(t) {
         this.rank = dom.rank;
         this.eltType = eltType;
         if dom.isNormal {
-            this.arrayResource = new owned NDArrayData(rank,eltType,dom);
+            this.arrayResource = new shared NDArrayData(rank,eltType,dom);
         } else {
-            this.arrayResource = new owned NDArrayData(rank,eltType,dom.normalize);
+            this.arrayResource = new shared NDArrayData(rank,eltType,dom.normalize);
         }
     }
 
@@ -91,13 +91,13 @@ record ndarray : serializable {
     proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == true {
         this.rank = arr.rank;
         this.eltType = eltType;
-        this.arrayResource = new owned NDArrayData(arr);
+        this.arrayResource = new shared NDArrayData(arr);
     }
 
     proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == false {
         this.rank = arr.rank;
         this.eltType = eltType;
-        this.arrayResource = new owned NDArrayData(rank,eltType,arr.domain.normalize);
+        this.arrayResource = new shared NDArrayData(rank,eltType,arr.domain.normalize);
         init this;
         const lw = arr.domain.low;
         ref thisData = this.data;
@@ -119,7 +119,7 @@ record ndarray : serializable {
         this.rank = rank;
         this.eltType = eltType;
 
-        this.arrayResource = new owned NDArrayData(A.arrayResource);
+        this.arrayResource = A.arrayResource;
     }
 
     proc init(it: _iteratorRecord) {
@@ -135,7 +135,7 @@ record ndarray : serializable {
     proc init=(other: ndarray(?rank,?eltType)) {
         this.rank = rank;
         this.eltType = eltType;
-        this.arrayResource = new owned NDArrayData(other.arrayResource);
+        this.arrayResource = other.arrayResource;
     }
 
     proc init=(other: _iteratorRecord) {
@@ -552,8 +552,7 @@ proc type ndarray.arange(to: int,type eltType = real(64),shape: ?rank*int): ndar
 
 
 operator =(ref lhs: ndarray(?rank,?eltType), rhs: ndarray(rank,eltType)) {
-    lhs.arrayResource._domain = rhs.arrayResource._domain;
-    lhs.arrayResource.data = rhs.arrayResource.data;
+    lhs.arrayResource = rhs.arrayResource;
     // lhs.arrayResource = new owned NDArrayData(rhs.borrowResource()); // Would this be faster?
 }
 
