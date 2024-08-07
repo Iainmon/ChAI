@@ -40,9 +40,9 @@ var time: real;
 proc makeModel() {
     var model: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
 
-// Load the weights into the model. 
-model.loadPyTorchDump("scripts/models/cnn/");
-return model;
+    // Load the weights into the model. 
+    model.loadPyTorchDump("scripts/models/cnn/");
+    return model;
 }
 
 var localeModels = forall li in cyclicDist.createDomain(Locales.domain) do makeModel();
