@@ -38,7 +38,7 @@ var time: real;
 var st = new Time.stopwatch();
 
 st.start();
-forall i in myImagesD {
+forall i in imagesD {
     preds[i] = model(images[i]).argmax();
 }
 st.stop();
