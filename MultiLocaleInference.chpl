@@ -46,7 +46,7 @@ coforall loc in Locales {
         st.stop();
         const tm = st.elapsed();
         writeln("Time: ", tm, " seconds.");
-        time += tm;
+        // time += tm;
     }
 }
 
