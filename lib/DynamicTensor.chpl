@@ -28,13 +28,13 @@ record Tensor : serializable {
         halt("Degenerate initialization of dynamicTensor.");
     }
 
-    proc init(type eltType, meta: shared TensorEssence(eltType)) {
+    proc init(type eltType, in meta: shared TensorEssence(eltType)) {
         this.eltType = eltType;
         this.meta = meta;
         this.runtimeRank = meta.runtimeRank;
     }
 
-    proc init(meta: shared TensorEssence(?eltType)) {
+    proc init(in meta: shared TensorEssence(?eltType)) {
         this.eltType = eltType;
         this.meta = meta;
         this.runtimeRank = meta.runtimeRank;
