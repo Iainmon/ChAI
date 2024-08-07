@@ -32,6 +32,7 @@ var preds: [imagesD] int;
 config const numTimes = 1;
 var time: real;
 coforall loc in Locales {
+    writeln("Running from ", (loc,loc.id,loc.hostname));
     on loc {
         const myImagesD = imagesD.localSubdomain();
         const myModel = model;
