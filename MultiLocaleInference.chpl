@@ -2,11 +2,14 @@ use Tensor;
 
 use Network;
 
-use CyclicDist;
+use BlockCycDist;
 
 import Time;
 
 config const detach = true;
+
+config const tasksPerLocale = 1;
+
 
 Tensor.detachMode(detach);
 
@@ -21,11 +24,12 @@ model.loadPyTorchDump("scripts/models/cnn/");
 
 // Load an array of images. 
 config const numImages = 1;
-const imagesD = cyclicDist.createDomain({0..<numImages});
-var images = forall i in imagesD do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
+const imageSpace = {0..<numImages};
+const imagesD: domain(1) dmapped new blockCycDist(stardIdx=0, blockSize=numImages / Locales.size,dataParTasksPerLocale=tasksPerLocale);
+var images: [imagesD] Tensor(real) = forall i in imagesD do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
 
 // Create array of output results. 
-var preds: [0..<numImages] int;
+var preds: [imagesD] int;
 
 
 
