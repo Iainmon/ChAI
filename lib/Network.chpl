@@ -18,7 +18,7 @@ use Reflection;
 
 
 
-proc helpFindModuleByName(arg, x: string) : borrowed Module(?)? {
+proc helpFindModuleByName(arg, x: string) : borrowed Module(?) {
   param myFields = getNumFields(arg.type);
   for param i in 0..<myFields {
     if !isType(getField(arg, i)) &&
@@ -27,7 +27,7 @@ proc helpFindModuleByName(arg, x: string) : borrowed Module(?)? {
           return getField(arg, i).borrow();
         }
   }
-  return nil;
+  halt("Could not find module with name: ", x);
 }
 
 proc helpFindParamDataByName(arg, x: string) ref : Tensor(?) {
@@ -266,7 +266,7 @@ proc modelFromSpecFile(path: string) : owned Module(real) {
 var moduleInstances = 0;
 
 class Module {
-    type eltType = f32;
+    type eltType;
     var subModules: moduleChildren(eltType);
     var moduleId: int;
     var moduleName: string;
