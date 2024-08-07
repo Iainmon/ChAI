@@ -13,7 +13,7 @@ config const detach = true;
 Tensor.detachMode(detach);
 
 // Construct the model from specification. 
-var model: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
+var model: owned Module(f32) = modelFromSpecFile("scripts/models/cnn/specification.json") : f32;
 
 // Print the model's structure. 
 writeln(model.signature);
@@ -27,7 +27,7 @@ const imagesD = cyclicDist.createDomain({0..<numImages});
 var images = forall i in imagesD do load(i);
 proc load(i) {
     writeln("Loaded image from ", (here,here.id,here.hostname));
-    return Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
+    return Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata") : f32;
 }
 // Create array of output results. 
 var preds: [imagesD] int;
@@ -38,7 +38,7 @@ config const numTimes = 1;
 var time: real;
 
 proc makeModel() {
-    var model: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
+    var model: owned Module(f32) = modelFromSpecFile("scripts/models/cnn/specification.json") : f32;
 
     // Load the weights into the model. 
     model.loadPyTorchDump("scripts/models/cnn/");

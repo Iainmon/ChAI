@@ -84,6 +84,10 @@ record tensor : serializable {
     }
 }
 
+operator :(in t: tensor(?rank,?eltType), type toType): tensor(rank,toType) {
+    return new tensor(t.array : toType);
+}
+
 proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType) {
     var newMeta = new shared TensorResource(rank,eltType,ctx);
     newMeta.forward();

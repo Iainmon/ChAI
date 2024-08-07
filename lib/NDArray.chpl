@@ -6,6 +6,9 @@ import Math;
 
 import Utilities as util;
 use Utilities.Standard;
+use Utilities.Types;
+
+
 
 
 
@@ -305,7 +308,7 @@ record ndarray : serializable {
                 origIdx = idx;
             }
 
-            var sum: real = 0;
+            var sum: eltType = 0;
             for i in 0..<sumAxisSize {
                 origIdx(axis) = i;
                 
@@ -563,6 +566,10 @@ operator =(ref lhs: ndarray(?rank,?eltType),rhs: [?d] eltType) where d.rank == r
 
 operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
     return new ndarray(val);
+}
+
+operator :(in a: ndarray(?rank,?eltType),type toType): ndarray(rank,toType) {
+    return new ndarray(a.data : toType);
 }
 
 // Need help implementtion these. 

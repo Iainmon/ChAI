@@ -5,6 +5,8 @@ module Utilities {
     module Types {
         type stdRange = range(idxType=int,bounds=boundKind.both,strides=strideKind.one);
         // type stdDomain = domain(DefaultRectangularDom(?));
+        type f32 = real(32);
+        type f64 = real(64);
     }
 
     import IO;

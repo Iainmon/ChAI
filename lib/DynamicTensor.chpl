@@ -13,7 +13,7 @@ config param maxRank = 6;
 
 import LoadNumpy;
 
-param defaultDetachedMode = false;
+param defaultDetachedMode = true;
 
 record Tensor : serializable {
     type eltType = real;
@@ -144,6 +144,13 @@ record Tensor : serializable {
                 return tensorize(rank).detach().eraseRank();
         halt("Could not identify rank for this: ", this);
     }
+}
+
+operator :(in t: Tensor(?eltType), type toType): Tensor(toType) {
+    for param rank in 1..maxRank do
+        if t.checkRank(rank) then
+            return (t.tensorize(rank) : toType).eraseRank();
+    halt("Could not identify rank for this: ", t);
 }
 
 proc type Tensor.detachMode() param : bool {

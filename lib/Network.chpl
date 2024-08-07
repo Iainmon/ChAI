@@ -266,7 +266,7 @@ proc modelFromSpecFile(path: string) : owned Module(real) {
 var moduleInstances = 0;
 
 class Module {
-    type eltType = real;
+    type eltType = f32;
     var subModules: moduleChildren(eltType);
     var moduleId: int;
     var moduleName: string;
@@ -372,11 +372,11 @@ class Module {
         for (n,m) in namedModules() {
             const name = m.moduleName;
             if debug then writeln((n,name,m.signature));
-            if var p = m : borrowed Parameter(real)? {
+            if var p = m : borrowed Parameter(eltType)? {
                 const paramName = name[(moduleName.size + 1)..];
                 const paramPath = modelPath + paramName + ".chdata";
                 writeln("Loading ",paramName," from ", paramPath);
-                var loaded = Tensor.load(paramPath);
+                var loaded = Tensor.load(paramPath) : eltType;
                 p!.data = loaded;
             }
         }
@@ -499,8 +499,8 @@ class Linear : Module(?) {
         super.init(eltType);
         this.m = m;
         this.n = n;
-        this.weight = new Parameter(Tensor.arange(n,m));
-        this.bias = new Parameter(Tensor.zeros(m));
+        this.weight = new Parameter(Tensor.arange(n,m) : eltType);
+        this.bias = new Parameter(Tensor.zeros(m) : eltType);
         init this;
 
     }
@@ -536,13 +536,13 @@ class Conv2D : Module(?) {
         super.init(eltType);
         this.kernelShape = (features,channels,kernel,kernel);
         this.stride = stride;
-        this.kernel = new Parameter(Tensor.arange(features,channels,kernel,kernel));
-        this.bias = new Parameter(Tensor.arange(features));
+        this.kernel = new Parameter(Tensor.arange(features,channels,kernel,kernel) : eltType);
+        this.bias = new Parameter(Tensor.arange(features) : eltType);
         init this;
     }
 
     proc init(type eltType = real,ma: moduleAttributes) {
-        this.init(real,
+        this.init(eltType,
                   ma.getInt("in_channels"),
                   ma.getInt("out_channels"),
                   ma.getInt("kernel_size"),
