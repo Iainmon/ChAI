@@ -4,6 +4,8 @@ use Network;
 
 use CyclicDist;
 
+use MemMove;
+
 import Time;
 
 config const detach = true;
@@ -35,11 +37,14 @@ var preds: [imagesD] int;
 config const numTimes = 1;
 var time: real;
 
+var localeModels = forall li in cyclicDist.createDomain(Locales.domain) do moveFrom(model);
+
 var st = new Time.stopwatch();
 
 st.start();
 forall i in imagesD {
-    preds[i] = model(images[i]).argmax();
+    var myModel = localeModels[here.id].borrow();
+    preds[i] = myModel(images[i]).argmax();
 }
 st.stop();
 const tm = st.elapsed();
