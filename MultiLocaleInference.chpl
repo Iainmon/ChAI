@@ -23,8 +23,8 @@ model.loadPyTorchDump("scripts/models/cnn/");
 config const numImages = 1;
 const imagesD = cyclicDist.createDomain({0..<numImages});
 var images: [imagesD] Tensor(real);
-forall img in imagesD {
-    img = Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
+forall i in imagesD {
+    images[i] = Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
     writeln("Loaded image from ", (here,here.id,here.hostname));
 }
 // Create array of output results. 
