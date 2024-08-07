@@ -44,7 +44,7 @@ coforall loc in Locales {
         var st = new Time.stopwatch();
 
         st.start();
-        coforall i in myImagesD {
+        forall i in myImagesD {
             preds[i] = myModel(myImages[i]).argmax();
         }
         st.stop();
