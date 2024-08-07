@@ -2,7 +2,7 @@ use Tensor;
 
 use Network;
 
-use BlockCycDist;
+use CyclicDist;
 
 import Time;
 
@@ -21,9 +21,12 @@ model.loadPyTorchDump("scripts/models/cnn/");
 
 // Load an array of images. 
 config const numImages = 1;
-const imagesD = {0..<numImages};
-var images = forall i in imagesD do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
-
+const imagesD = cyclicDist.createDomain({0..<numImages});
+var images: [imagesD] Tensor(real);
+forall img in imagesD {
+    img = Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
+    writeln("Loaded image from ", (here,here.id,here.hostname));
+}
 // Create array of output results. 
 var preds: [imagesD] int;
 
@@ -41,12 +44,11 @@ coforall loc in Locales {
 
         st.start();
         coforall i in myImagesD {
-
-            preds[i] = model(images[i]).argmax();
+            preds[i] = myModel(images[i]).argmax();
         }
         st.stop();
         const tm = st.elapsed();
-        writeln("Time: ", tm, " seconds.");
+        writeln("Time: ", tm, " seconds.", (here,here.id,here.hostname));
         // time += tm;
     }
 }
