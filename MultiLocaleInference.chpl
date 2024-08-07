@@ -2,7 +2,7 @@ use Tensor;
 
 use Network;
 
-use CyclicDist;
+use BlockDist;
 
 use MemMove;
 
@@ -12,74 +12,53 @@ config const detach = true;
 
 Tensor.detachMode(detach);
 
-// Construct the model from specification. 
-var model: owned Module(f32) = modelFromSpecFile("scripts/models/cnn/specification.json") : f32;
-
-// Print the model's structure. 
-writeln(model.signature);
-
-// Load the weights into the model. 
-model.loadPyTorchDump("scripts/models/cnn/");
+type dtype = f32;
 
 // Load an array of images. 
 config const numImages = 1;
-const imagesD = cyclicDist.createDomain({0..<numImages});
-var images = forall i in imagesD do load(i);
-proc load(i) {
-    writeln("Loaded image from ", (here,here.id,here.hostname));
-    return Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata") : f32;
-}
-// Create array of output results. 
+
+// Create distributed domain for images. 
+const imagesD = blockDist.createDomain({0..<numImages});
+
+// Load distributed array of images.
+var images = forall i in imagesD do 
+    Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata") : dtype;
+
+// Create distributed domain for models. 
+const localeModelsD = blockDist.createDomain(Locales.domain);
+
+// Load distributed array of models. 
+var localeModels = forall li in localeModelsD do 
+    loadModel(specFile="scripts/models/cnn/specification.json",
+              weightsFolder="scripts/models/cnn/",
+              dtype=dtype);
+
+// Create distributed array of output results. 
 var preds: [imagesD] int;
 
 
 
-config const numTimes = 1;
-var time: real;
+config const numTries = 1;
 
-proc makeModel() {
-    var model: owned Module(f32) = modelFromSpecFile("scripts/models/cnn/specification.json") : f32;
+var totalTime: real;
 
-    // Load the weights into the model. 
-    model.loadPyTorchDump("scripts/models/cnn/");
-    return model;
+for i in 0..<numTries {
+
+    var st = new Time.stopwatch();
+    st.start();
+
+    forall (model,pred) in zip(localeModels,preds) do
+        pred = model(images[i]).argmax();
+
+    st.stop();
+    const tm = st.elapsed();
+    totalTime += tm;
+
+    writeln("Trial ", i + 1, " of ", numTries," took ", tm, " seconds for ", numImages, " on ", Locales.size, " nodes.");
 }
 
-var localeModels = forall li in cyclicDist.createDomain(Locales.domain) do makeModel();
+const averageTime = totalTime / numTries;
 
-var st = new Time.stopwatch();
-
-st.start();
-forall i in imagesD {
-    var myModel = localeModels[here.id].borrow();
-    preds[i] = myModel(images[i]).argmax();
-}
-st.stop();
-const tm = st.elapsed();
-time += tm;
-// writeln("Time: ", tm, " seconds.", (here,here.id,here.hostname));
-// coforall loc in Locales {
-//     writeln("Running from ", (loc,loc.id,loc.hostname));
-//     on loc {
-//         const myImagesD = imagesD.localSubdomain();
-//         var myModel: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
-//         myModel.loadPyTorchDump("scripts/models/cnn/");
-//         const myImages = images[myImagesD];
-//         var st = new Time.stopwatch();
-
-//         st.start();
-//         forall i in myImagesD {
-//             preds[i] = myModel(myImages[i]).argmax();
-//         }
-//         st.stop();
-//         const tm = st.elapsed();
-//         writeln("Time: ", tm, " seconds.", (here,here.id,here.hostname));
-//         // time += tm;
-//     }
-// }
-
-
-time /= numTimes;
 
 config const printResults = false;
 if printResults {
@@ -88,4 +67,5 @@ if printResults {
     }
 }
 
-writeln("The average inference time for batch of size ", numImages, " was ", time, " seconds.");
+writeln("The average inference time for batch of size ", numImages, " was ", averageTime, " seconds on ", Locales.size, " nodes.");
+writeln("The total inference time for batch of size ", numImages, " was ", totalTime, " seconds on ", Locales.size, " nodes.");

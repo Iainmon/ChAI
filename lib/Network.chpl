@@ -206,60 +206,61 @@ class ModuleSpecification : serializable {
     var subModuleOrder: list(string);
 }
 
-proc moduleFromSpec(ms_: borrowed ModuleSpecification?): owned Module(real) {
+proc moduleFromSpec(ms_: borrowed ModuleSpecification?,type dtype = real(32)): owned Module(dtype) {
     var ms = ms_!;
     select ms.layerType {
         when "Conv2d" {
-            return new Conv2D(real,new moduleAttributes(ms.layerType,"unknown",ms.attributes));
+            return new Conv2D(dtype,new moduleAttributes(ms.layerType,"unknown",ms.attributes));
         }
         when "Linear" {
             var ma = new moduleAttributes("Linear","unknown",ms.attributes);
-            return new Linear(real,ma.getInt("in_features"),ma.getInt("out_features"));
+            return new Linear(dtype,ma.getInt("in_features"),ma.getInt("out_features"));
         }
         when "Dropout" {
             var ma = new moduleAttributes("Dropout","unknown",ms.attributes);
-            return new Dropout(real,ma["p"] : real);
+            return new Dropout(dtype,ma["p"] : dtype);
         }
         when "Flatten" {
-            return new Flatten(real);
+            return new Flatten(dtype);
         }
         when "ReLU" {
-            return new ReLU(real);
+            return new ReLU(dtype);
         }
         when "MaxPool2d" {
             var ma = new moduleAttributes("MaxPool","unknown",ms.attributes);
-            return new MaxPool(real,ma.getInt("kernel_size"));
+            return new MaxPool(dtype,ma.getInt("kernel_size"));
         }
         when "LogSoftmax" {
-            return new Softmax(real);
+            return new Softmax(dtype);
         }
         otherwise {
-            var sms: dict(string,shared Module(real)) = new dict(string,shared Module(real));
+            var sms: dict(string,shared Module(dtype)) = new dict(string,shared Module(dtype));
             for k in ms.subModuleOrder {
                 const sma = ms.subModules[k];
-                const sm: shared Module(real) = shared.adopt(moduleFromSpec(sma));
+                const sm: shared Module(dtype) = shared.adopt(moduleFromSpec(sma,dtype=dtype));
                 sms.insert(k,sm);
             }
-            return new Sequential(real,sms,overrideName=true,moduleName=ms.layerType);
+            return new Sequential(dtype,sms,overrideName=true,moduleName=ms.layerType);
         }
     }
-    var sms: map(string,owned Module(real)?) = new map(string,owned Module(real)?);
-    for k in ms.subModules {
-        sms[k] = moduleFromSpec(ms.subModules[k]) : owned Module(real)?;
-    }
-    return new Sequential(real,ms.subModuleOrder,sms);
-    // return moduleFromSpec(ms.subModules["conv1"]);
+    halt("This should not happen");
 }
 
 
-proc modelFromSpecFile(path: string) : owned Module(real) {
+proc modelFromSpecFile(path: string, type dtype=real(32)) : owned Module(dtype) {
     import IO;
     import JSON;
     var fl = IO.open(path, IO.ioMode.r);
     var reader = fl.reader(deserializer=new JSON.jsonDeserializer());
     var ms = reader.read(owned ModuleSpecification);
     fl.close();
-    return moduleFromSpec(ms);
+    return moduleFromSpec(ms,dtype);
+}
+
+proc loadModel(specFile: string, weightsFolder: string, type dtype = real(32)): owned Module(dtype) {
+    var model: owned Module(f32) = modelFromSpecFile(specFile, dtype);
+    model.loadPyTorchDump(weightsFolder);
+    return model;
 }
 
 
