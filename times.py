@@ -4,7 +4,7 @@ import argparse
 import subprocess
 import os
 import json
-import scipy.stats
+# import scipy.stats
 
 regex = re.compile(r"Trial (.+) of (.+) took (.+) seconds for (.+) images on (.+) nodes\.")
 
@@ -63,8 +63,8 @@ def compare(args):
     with open(f".timedata/{new}.json", "r") as f:
         new_data = json.loads(f.read())
 
-    _, p = scipy.stats.ttest_ind(old_data["times"], new_data["times"])
-    print(f"Difference between samples is: {old_data['avg'] - new_data['avg']} seconds, confidence that they are different (smaller is better): {p}")
+    # _, p = scipy.stats.ttest_ind(old_data["times"], new_data["times"])
+    print(f"Difference between samples is: {old_data['avg'] - new_data['avg']} seconds, confidence that they are different (smaller is better): ?")
 
 
 parser = argparse.ArgumentParser()
