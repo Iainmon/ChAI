@@ -748,33 +748,68 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const ref ker = kernel.data;
     const ref bis = bias.data;
 
-
-    // @assertOnGpu
-    forall (f,h_,w_) in outDom {
-        const hi: int = h_ * stride;
-        const wi: int = w_ * stride;
-        // proc innerHelper() {
-        var sum: eltType = 0;
-            // @llvm.assertVectorized()
-            // for (c,kh,kw) in kernelChanD {
-            //     sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
-            // }
-        for c in 0..<channels {
-            for param kh in 0..<3 {
-                for param kw in 0..<3 {
-                    sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+    inline proc fastKernel(param kernelSize: int) {
+        forall (f,h_,w_) in outDom {
+            const hi: int = h_ * stride;
+            const wi: int = w_ * stride;
+            var sum: eltType = 0;
+            for c in 0..<channels {
+                for param kh in 0..<3 {
+                    for param kw in 0..<3 {
+                        sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+                    }
                 }
             }
+            dat[f,h_,w_] = sum + bis[f];
         }
-        //     return sum;
-        // }
-        // const sum = innerHelper();
-        // const ref kerF = ker[f,..,..,..];
-        // const sum = + reduce (fet[..,hi..#kernelHeight,wi..#kernelWidth] * kerF);
-
-        // const sum = + reduce (forall (c,kh,kw) in kernelChanD do fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw]);
-        dat[f,h_,w_] = sum + bis[f];
     }
+
+    inline proc slowKernel() {
+        forall (f,h_,w_) in outDom {
+            const hi: int = h_ * stride;
+            const wi: int = w_ * stride;
+            var sum: eltType = 0;
+            for (c,kh,kw) in kernelChanD {
+                sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+            }
+            dat[f,h_,w_] = sum + bis[f];
+        }
+    }
+
+    select (kernelHeight,kernelWidth) {
+        when (3,3) do 
+            fastKernel(3);
+        when (5,5) do
+            fastKernel(5);
+        when (7,7) do
+            fastKernel(7);
+        when (9,9) do
+            fastKernel(9);
+        when (11,11) do
+            fastKernel(11);
+        otherwise do
+            slowKernel();
+    }
+
+    // @assertOnGpu
+    // forall (f,h_,w_) in outDom {
+    //     const hi: int = h_ * stride;
+    //     const wi: int = w_ * stride;
+    //     // proc innerHelper() {
+    //     var sum: eltType = 0;
+    //         // @llvm.assertVectorized()
+    //         // for (c,kh,kw) in kernelChanD {
+    //         //     sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+    //         // }
+    //     for c in 0..<channels {
+    //         for param kh in 0..<3 {
+    //             for param kw in 0..<3 {
+    //                 sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+    //             }
+    //         }
+    //     }
+    //     dat[f,h_,w_] = sum + bis[f];
+    // }
 
     return outFeatures;
 }
