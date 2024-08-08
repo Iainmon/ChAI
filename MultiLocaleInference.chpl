@@ -37,7 +37,6 @@ var localeModels = forall li in localeModelsD do
 var preds: [imagesD] int;
 
 
-
 config const numTries = 1;
 
 var totalTime: real;
@@ -47,9 +46,11 @@ for i in 0..<numTries {
     var st = new Time.stopwatch();
     st.start();
 
-    forall (model,pred) in zip(localeModels,preds) do
-        pred = model(images[i]).argmax();
-
+    forall (image,pred) in zip(images,preds) {
+        var model = localeModels[here.id].borrow();
+        const output: Tensor(dtype) = model(image);
+        pred = output.argmax();
+    }
     st.stop();
     const tm = st.elapsed();
     totalTime += tm;
