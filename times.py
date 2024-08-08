@@ -29,6 +29,7 @@ def measure(args):
                 num_nodes = int(match.group(5))
 
     if len(times) == 0 or (num_images is None) or (num_nodes is None):
+        print(args)
         raise Exception("no time output found!")
 
     avg = sum(times) / len(times)
