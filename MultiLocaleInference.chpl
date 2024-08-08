@@ -55,7 +55,7 @@ for i in 0..<numTries {
     const tm = st.elapsed();
     totalTime += tm;
 
-    writeln("Trial ", i + 1, " of ", numTries," took ", tm, " seconds for ", numImages, " on ", Locales.size, " nodes.");
+    writeln("Trial ", i + 1, " of ", numTries," took ", tm, " seconds for ", numImages, " images on ", Locales.size, " nodes.");
 }
 
 const averageTime = totalTime / numTries;

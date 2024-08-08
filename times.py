@@ -6,7 +6,7 @@ import os
 import json
 import scipy.stats
 
-regex = re.compile(r"Time: (.+) seconds")
+regex = re.compile(r"Trial (.+) of (.+) took (.+) seconds for (.+) images on (.+) nodes\.")
 
 def measure(args):
     command = args.command
@@ -14,16 +14,21 @@ def measure(args):
 
     if not name:
         name = input("Enter a name for this measurement: ")
-
+    
+    num_images = None
+    num_nodes = None
     times = []
     p = subprocess.Popen(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if p.stdout:
         for line in p.stdout:
             line = line.decode("utf-8").strip()
             match = regex.match(line)
-            if match: times.append(float(match.group(1)))
+            if match: 
+                times.append(float(match.group(3)))
+                num_images = int(match.group(4))
+                num_nodes = int(match.group(5))
 
-    if len(times) == 0:
+    if len(times) == 0 or (num_images is None) or (num_nodes is None):
         raise Exception("no time output found!")
 
     avg = sum(times) / len(times)
@@ -32,7 +37,9 @@ def measure(args):
     data = {
         "avg": avg,
         "stddev": stddev,
-        "times": times
+        "times": times,
+        "num_images": num_images,
+        "num_nodes": num_nodes
     }
 
     if not os.path.exists(".timedata"):
