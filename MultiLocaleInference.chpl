@@ -46,9 +46,15 @@ for i in 0..<numTries {
     var st = new Time.stopwatch();
     st.start();
 
+    // coforall loc in Locales {
+    //     on loc {
+    //         const myAD = A.domain.localIndices();
+    //         forall i in myAD;
+    //     }
+    // }
     forall (image,pred) in zip(images,preds) {
-        var model = localeModels[here.id].borrow();
-        pred = model(image).argmax();
+            var model = localeModels[here.id].borrow();
+            pred = model(image).argmax();
     }
     
     st.stop();
