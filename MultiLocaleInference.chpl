@@ -48,9 +48,9 @@ for i in 0..<numTries {
 
     forall (image,pred) in zip(images,preds) {
         var model = localeModels[here.id].borrow();
-        const output: Tensor(dtype) = model(image);
-        pred = output.argmax();
+        pred = model(image).argmax();
     }
+    
     st.stop();
     const tm = st.elapsed();
     totalTime += tm;
