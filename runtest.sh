@@ -1,5 +1,4 @@
 
-zsh
 __mlconfig
 cd ~/projects/gputil
 
