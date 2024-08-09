@@ -26,7 +26,8 @@ class Remote : serializable {
         if this.device == device_ then return;
         this.device = device_;
         on device_ {
-            this.item = chpl__buildRemoteWrapper(device_,__primitive("create thunk",item.get()));
+            compilerError("dont call me on horizon");
+            // this.item = chpl__buildRemoteWrapper(device_,__primitive("create thunk",item.get()));
         }
     }
 
