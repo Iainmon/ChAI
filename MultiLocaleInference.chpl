@@ -4,15 +4,13 @@ use Network;
 
 use BlockDist;
 
-use MemMove;
-
 import Time;
 
 config const detach = true;
 
 Tensor.detachMode(detach);
 
-type dtype = f32;
+type dtype = real(32);
 
 // Load an array of images. 
 config const numImages = 1;
