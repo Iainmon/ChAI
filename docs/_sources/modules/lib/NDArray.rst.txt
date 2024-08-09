@@ -43,7 +43,7 @@ or
 
    .. attribute:: type eltType = real(64)
 
-   .. attribute:: var arrayResource: owned NDArrayData(rank, eltType)
+   .. attribute:: var arrayResource: shared NDArrayData(rank, eltType)
 
    .. method:: proc borrowResource(): borrowed NDArrayData(rank, eltType)
 
@@ -132,6 +132,8 @@ or
 .. function:: operator  = (ref lhs: ndarray(?rank, ?eltType), rhs: [?d] eltType) where d.rank == rank
 
 .. function:: operator :(val: [] ?eltType, type t: ndarray(val.rank, eltType))
+
+.. function:: operator :(in a: ndarray(?rank, ?eltType), type toType): ndarray(rank, toType)
 
 .. method:: proc remote.init(other: ndarray(?rank, ?eltType))
 

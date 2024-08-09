@@ -17,7 +17,7 @@ or
 
    import Network;
 
-.. function:: proc helpFindModuleByName(arg, x: string): borrowed Module(?)?
+.. function:: proc helpFindModuleByName(arg, x: string): borrowed Module(?)
 
 .. function:: proc helpFindParamDataByName(arg, x: string) ref: Tensor(?)
 
@@ -89,15 +89,17 @@ or
 
    .. attribute:: var subModuleOrder: list(string)
 
-.. function:: proc moduleFromSpec(ms_: borrowed ModuleSpecification?): owned Module(real)
+.. function:: proc moduleFromSpec(ms_: borrowed ModuleSpecification?, type dtype = real(32)): owned Module(dtype)
 
-.. function:: proc modelFromSpecFile(path: string): owned Module(real)
+.. function:: proc modelFromSpecFile(path: string, type dtype = real(32)): owned Module(dtype)
+
+.. function:: proc loadModel(specFile: string, weightsFolder: string, type dtype = real(32)): owned Module(dtype)
 
 .. data:: var moduleInstances = 0
 
 .. class:: Module
 
-   .. attribute:: type eltType = real
+   .. attribute:: type eltType
 
    .. attribute:: var subModules: moduleChildren(eltType)
 

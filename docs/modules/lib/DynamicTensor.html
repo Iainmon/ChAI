@@ -103,6 +103,11 @@
 <em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">maxRank</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">6</span></em><a class="headerlink" href="#DynamicTensor.maxRank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="chpl data">
+<dt class="sig sig-object chpl" id="DynamicTensor.defaultDetachedMode">
+<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">defaultDetachedMode</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">true</span></em><a class="headerlink" href="#DynamicTensor.defaultDetachedMode" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="DynamicTensor.Tensor">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">Tensor</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#DynamicTensor.Tensor" title="Link to this definition">¶</a></dt>
@@ -128,17 +133,17 @@
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">meta:</span> <span class="pre">shared</span> <span class="pre">TensorEssence(eltType)</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">in</span> <span class="pre">meta:</span> <span class="pre">shared</span> <span class="pre">TensorEssence(eltType)</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">meta:</span> <span class="pre">shared</span> <span class="pre">TensorEssence(?eltType)</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">in</span> <span class="pre">meta:</span> <span class="pre">shared</span> <span class="pre">TensorEssence(?eltType)</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">t:</span> <span class="pre">tensor(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">t:</span> <span class="pre">tensor(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">detached:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">Tensor.detachMode()</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -221,7 +226,27 @@
 <em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">toArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">[]</span> <span class="pre">eltType</span></em><a class="headerlink" href="#DynamicTensor.Tensor.toArray" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="DynamicTensor.Tensor.detach">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">detach</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">Tensor(eltType)</span></em><a class="headerlink" href="#DynamicTensor.Tensor.detach" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="DynamicTensor.:">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">in</span> <span class="pre">t:</span> <span class="pre">Tensor(?eltType)</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">toType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">Tensor(toType)</span></em><a class="headerlink" href="#DynamicTensor.:" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="DynamicTensor.Tensor.detachMode">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">Tensor.</span></span><span class="sig-name descname"><span class="pre">detachMode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#DynamicTensor.Tensor.detachMode" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">Tensor.</span></span><span class="sig-name descname"><span class="pre">detachMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">detachMode:</span> <span class="pre">bool</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="DynamicTensor.ndarray.toTensor">
@@ -230,12 +255,12 @@
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="DynamicTensor.tensor.eraseRank">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">tensor.</span></span><span class="sig-name descname"><span class="pre">eraseRank</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">Tensor(eltType)</span></em><a class="headerlink" href="#DynamicTensor.tensor.eraseRank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">tensor.</span></span><span class="sig-name descname"><span class="pre">eraseRank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">detach:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">Tensor.detachMode()</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">Tensor(eltType)</span></em><a class="headerlink" href="#DynamicTensor.tensor.eraseRank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl function">
-<dt class="sig sig-object chpl" id="DynamicTensor.:">
-<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">t:</span> <span class="pre">tensor(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">T:</span> <span class="pre">Tensor(eltType)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">Tensor(eltType)</span></em><a class="headerlink" href="#DynamicTensor.:" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">t:</span> <span class="pre">tensor(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">T:</span> <span class="pre">Tensor(eltType)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">Tensor(eltType)</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl function">

@@ -19,6 +19,8 @@ or
 
 .. data:: config param maxRank = 6
 
+.. data:: param defaultDetachedMode = true
+
 .. record:: Tensor : serializable
 
    .. attribute:: type eltType = real
@@ -29,11 +31,11 @@ or
 
    .. method:: proc init(type eltType)
 
-   .. method:: proc init(type eltType, meta: shared TensorEssence(eltType))
+   .. method:: proc init(type eltType, in meta: shared TensorEssence(eltType))
 
-   .. method:: proc init(meta: shared TensorEssence(?eltType))
+   .. method:: proc init(in meta: shared TensorEssence(?eltType))
 
-   .. method:: proc init(t: tensor(?rank, ?eltType))
+   .. method:: proc init(t: tensor(?rank, ?eltType), detached: bool = Tensor.detachMode())
 
    .. method:: proc init(a: ndarray(?rank, ?eltType))
 
@@ -67,9 +69,17 @@ or
 
    .. method:: proc toArray(param rank: int): [] eltType
 
+   .. method:: proc detach(): Tensor(eltType)
+
+.. function:: operator :(in t: Tensor(?eltType), type toType): Tensor(toType)
+
+.. method:: proc type Tensor.detachMode() param: bool
+
+.. method:: proc type Tensor.detachMode(detachMode: bool)
+
 .. method:: proc ndarray.toTensor(): Tensor(eltType)
 
-.. method:: proc tensor.eraseRank(): Tensor(eltType)
+.. method:: proc tensor.eraseRank(detach: bool = Tensor.detachMode()): Tensor(eltType)
 
 .. function:: operator :(t: tensor(?rank, ?eltType), type T: Tensor(eltType)): Tensor(eltType)
 

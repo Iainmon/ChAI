@@ -29,6 +29,10 @@ or
 
    .. method:: proc runtimeRank: int
 
+   .. itermethod:: iter children(): borrowed TensorEssence(eltType)
+
+   .. method:: proc treeHeight(): int
+
 .. class:: ForgetfulTensor : TensorEssence
 
    .. attribute:: param rank: int
@@ -37,9 +41,9 @@ or
 
    .. attribute:: param rank: int
 
-   .. attribute:: var dataResource: remote(ndarray(rank, eltType))
+   .. attribute:: var dataResource: ndarray(rank, eltType)
 
-   .. attribute:: var gradResource: remote(ndarray(rank, eltType))
+   .. attribute:: var gradResource: ndarray(rank, eltType)
 
    .. method:: proc to(device_: locale)
 
@@ -57,9 +61,7 @@ or
 
    .. method:: proc grad ref: ndarray(rank, eltType)
 
-   .. method:: proc gradData ref: ndarray(rank, eltType)
-
-   .. method:: proc _loc
+   .. method:: proc gradData ref: [] eltType
 
    .. method:: override proc runtimeRank: int
 
@@ -73,15 +75,17 @@ or
 
    .. method:: proc init(param rank: int, type eltType, operationData: ?operation)
 
-   .. method:: proc init(ref resource: remote(ndarray(?rank, ?eltType)), operationData: ?operation, device_: locale = defaultDevice)
+   .. method:: proc init(dataRes: ndarray(?rank, ?eltType), operationData: ?operation, device_: locale = defaultDevice)
 
-   .. method:: proc init(data: ndarray(?rank, ?eltType), operationData: ?operation, device_: locale = defaultDevice)
+   .. method:: proc init(tr: shared BaseTensorResource(?eltType, ?rank), param forget: bool) where forget == true
 
    .. method:: override proc forward()
 
    .. method:: override proc backward(grad: remote(ndarray(rank, eltType)), param alreadyPopulated: bool = false)
 
    .. method:: override proc backward() where rank == 1
+
+   .. itermethod:: override iter children(): borrowed TensorEssence(eltType)
 
 .. record:: baseValue : serializable
 
@@ -129,6 +133,8 @@ or
 
    .. attribute:: var rhs: shared BaseTensorResource(?)
 
+   .. method:: proc children
+
    .. method:: proc forward()
 
 .. record:: divOp : serializable
@@ -136,6 +142,8 @@ or
    .. attribute:: var lhs: shared BaseTensorResource(?)
 
    .. attribute:: var rhs: shared BaseTensorResource(?)
+
+   .. method:: proc children
 
    .. method:: proc forward()
 
