@@ -15,6 +15,5 @@ do
         echo "Running on $num_nodes on $(scontrol show hostnames | xargs echo) with "
 
         python3 times.py measure "./MultiLocaleInference -nl $num_nodes --numImages=$num_images --numTries=10 --printResults=false" --name "ml_test_${num_nodes}_${num_images}"
-        exit
     done
 done
