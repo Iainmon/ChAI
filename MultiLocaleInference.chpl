@@ -51,8 +51,8 @@ for i in 0..<numTries {
     //     }
     // }
     forall (image,pred) in zip(images,preds) {
-            var model = localeModels[here.id].borrow();
-            pred = model(image).argmax();
+        var model = localeModels[here.id].borrow();
+        pred = model(image).argmax();
     }
     
     st.stop();

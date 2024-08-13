@@ -151,6 +151,8 @@ for (n,m) in cnn.moduleFields() {
     writeln(n);
 }
 
+var model = Network.loadModel("my/model/path");
+
 
 config const testImgSize = 28;
 
