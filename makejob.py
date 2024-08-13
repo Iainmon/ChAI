@@ -10,8 +10,7 @@ args = parser.parse_args()
 num_images = args.num_images
 num_nodes = args.num_nodes
 
-job_source = f"""
-#!/bin/bash
+job_source = f"""#!/bin/bash
 #SBATCH --job-name=ChAI_perf_test_{num_images}x{num_nodes}
 #SBATCH --nodes={num_nodes}
 #SBATCH --time=03:00:00
