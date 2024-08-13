@@ -13,6 +13,7 @@ num_nodes = args.num_nodes
 job_source = f"""#!/bin/bash
 #SBATCH --job-name=ChAI_perf_test_{num_images}x{num_nodes}
 #SBATCH --nodes={num_nodes}
+#SBATCH --cpus-per-task=72
 #SBATCH --time=03:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=iain.moncrief@hpe.com
