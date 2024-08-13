@@ -14,9 +14,8 @@ do
         # export GASNET_SSH_SERVERS=$(scontrol show hostnames | xargs echo)
 
         echo "Running on $num_nodes nodes with $num_images images."
-        export NUM_IMAGES=$num_images
-        export NUM_NODES=$num_nodes
-        sbatch job.sh
+        python3 makejob.py --num_images=$num_images --num_nodes=$num_nodes
+        sbatch tmp_job.sh
         # python3 times.py measure "./MultiLocaleInference -nl $num_nodes --numImages=$num_images --numTries=10 --printResults=false" --name "ml_test_${num_nodes}_${num_images}"
     done
 done
