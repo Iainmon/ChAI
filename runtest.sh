@@ -3,9 +3,9 @@
 
 # cd ~/projects/gputil
 
-for num_nodes_ in {1..10}
+for num_nodes_ in {1..100}
 do
-    num_nodes=$(( num_nodes_ ** 2 ))
+    num_nodes=$(( num_nodes_ ))
     # for num_images in 1 5 10 50 100 500 1000 5000 10000
     # do
 
