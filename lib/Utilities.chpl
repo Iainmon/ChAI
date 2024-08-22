@@ -379,7 +379,7 @@ module Utilities {
                 foreach i in 0..<shape do 
                     yield i;
             } else {
-                if loopGpuSupport {
+                if loopGpuSupport && here.isGpu() {
                     @assertOnGpu
                     foreach i in 0..<shape do
                         yield i;
@@ -396,7 +396,7 @@ module Utilities {
                 forall i in 0..<shape do 
                     yield i;
             } else {
-                if loopGpuSupport {
+                if loopGpuSupport && here.isGpu() {
                     @assertOnGpu
                     forall i in 0..<shape do
                         yield i;
@@ -420,7 +420,7 @@ module Utilities {
                     divs(i) = prod;
                     prod *= shape(i);
                 }
-                if loopGpuSupport {
+                if loopGpuSupport && here.isGpu() {
                     @assertOnGpu
                     foreach i in 0..<prod {
                         yield indexAtHelperMultiples(i,(...divs));
@@ -448,7 +448,7 @@ module Utilities {
                     divs(i) = prod;
                     prod *= shape(i);
                 }
-                if loopGpuSupport {
+                if loopGpuSupport && here.isGpu() {
                     @assertOnGpu
                     forall i in 0..<prod {
                         yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
