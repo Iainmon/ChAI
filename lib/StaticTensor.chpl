@@ -14,7 +14,7 @@ record tensor : serializable {
     forwarding resource only to, array, grad, device ;//backward;
     proc meta do return this.resource;
 
-    proc _dom do return this.array.domain;
+    proc _dom do return resource.array.domain;
 
     proc init(param rank: int, type eltType = real(64)) {
         this.rank = rank;
@@ -82,7 +82,9 @@ record tensor : serializable {
 }
 
 operator :(in t: tensor(?rank,?eltType), type toType): tensor(rank,toType) {
-    return new tensor(t.array : toType);
+    const a = t.array;
+    const b = a : toType;
+    return new tensor(b);
 }
 
 proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType) {

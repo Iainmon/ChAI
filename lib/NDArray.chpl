@@ -552,7 +552,8 @@ operator :(const val: [] ?eltType, type t: ndarray(val.rank,eltType)) do
     return new ndarray(val);
 
 operator :(const a: ndarray(?rank,?eltType),type toType): ndarray(rank,toType) where toType != eltType {
-    const D = a.data : toType;
+    const A = a.data;
+    const D = A : toType;
     return new ndarray(D);
 }
 
