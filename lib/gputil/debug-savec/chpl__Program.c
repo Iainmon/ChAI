@@ -1,0 +1,186 @@
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+/* ChapelBase.chpl:24 */
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+void chpl__heapAllocateGlobals(void) {
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+  return;
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+}
+
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+/* ChapelBase.chpl:24 */
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+void chpl__init_preInit(int64_t _ln,
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+                        int32_t _fn) {
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+  chpl__init_ChapelStringLiterals_p = UINT8(false);
+#line 25 "/Users/iainmoncrief/Desktop/chapel/modules/standard/HaltWrappers.chpl"
+  chpl__init_HaltWrappers_p = UINT8(false);
+#line 1 "/Users/iainmoncrief/Desktop/chapel/modules/standard/gen/darwin-arm64-gnu/ChapelSysCTypes.chpl"
+  chpl__init_ChapelSysCTypes_p = UINT8(false);
+#line 29 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Reflection.chpl"
+  chpl__init_Reflection_p = UINT8(false);
+#line 83 "/Users/iainmoncrief/Desktop/chapel/modules/standard/AutoMath.chpl"
+  chpl__init_AutoMath_p = UINT8(false);
+#line 183 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Math.chpl"
+  chpl__init_Math_p = UINT8(false);
+#line 46 "/Users/iainmoncrief/Desktop/chapel/modules/standard/OS.chpl"
+  chpl__init_POSIX_p = UINT8(false);
+#line 36 "/Users/iainmoncrief/Desktop/chapel/modules/standard/OS.chpl"
+  chpl__init_OS_p = UINT8(false);
+#line 26 "/Users/iainmoncrief/Desktop/chapel/modules/internal/CString.chpl"
+  chpl__init_CString_p = UINT8(false);
+#line 21 "/Users/iainmoncrief/Desktop/chapel/modules/internal/StringCasts.chpl"
+  chpl__init_StringCasts_p = UINT8(false);
+#line 676 "/Users/iainmoncrief/Desktop/chapel/modules/internal/String.chpl"
+  chpl__init_NVStringFactory_p = UINT8(false);
+#line 43 "/Users/iainmoncrief/Desktop/chapel/modules/internal/String.chpl"
+  chpl__init_String_p = UINT8(false);
+#line 33 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Communication.chpl"
+  chpl__init_Communication_p = UINT8(false);
+#line 21 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ByteBufferHelpers.chpl"
+  chpl__init_ByteBufferHelpers_p = UINT8(false);
+#line 26 "/Users/iainmoncrief/Desktop/chapel/modules/internal/Bytes.chpl"
+  chpl__init_Bytes_p = UINT8(false);
+#line 21 "/Users/iainmoncrief/Desktop/chapel/modules/internal/BytesStringCommon.chpl"
+  chpl__init_BytesStringCommon_p = UINT8(false);
+#line 41 "/Users/iainmoncrief/Desktop/chapel/modules/standard/CTypes.chpl"
+  chpl__init_CTypes_p = UINT8(false);
+#line 23 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelTaskData.chpl"
+  chpl__init_ChapelTaskData_p = UINT8(false);
+#line 1865 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+  chpl__init_currentTask_p = UINT8(false);
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+  chpl__init_ChapelBase_p = UINT8(false);
+#line 22 "/Users/iainmoncrief/Desktop/chapel/modules/internal/OwnedObject.chpl"
+  chpl__init_OwnedObject_p = UINT8(false);
+#line 21 "/Users/iainmoncrief/Desktop/chapel/modules/internal/MemConsistency.chpl"
+  chpl__init_MemConsistency_p = UINT8(false);
+#line 141 "/Users/iainmoncrief/Desktop/chapel/modules/internal/Atomics.chpl"
+  chpl__init_Atomics_p = UINT8(false);
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelLocks.chpl"
+  chpl__init_ChapelLocks_p = UINT8(false);
+#line 34 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Errors.chpl"
+  chpl__init_Errors_p = UINT8(false);
+#line 22 "/Users/iainmoncrief/Desktop/chapel/modules/internal/SharedObject.chpl"
+  chpl__init_SharedObject_p = UINT8(false);
+#line 41 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelIteratorSupport.chpl"
+  chpl__init_ChapelIteratorSupport_p = UINT8(false);
+#line 30 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelThreads.chpl"
+  chpl__init_ChapelThreads_p = UINT8(false);
+#line 1 "/Users/iainmoncrief/Desktop/chapel/modules/dists/DSIUtil.chpl"
+  chpl__init_DSIUtil_p = UINT8(false);
+#line 23 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelTuple.chpl"
+  chpl__init_ChapelTuple_p = UINT8(false);
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelIOStringifyHelper.chpl"
+  chpl__init_ChapelIOStringifyHelper_p = UINT8(false);
+#line 29 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelDebugPrint.chpl"
+  chpl__init_ChapelDebugPrint_p = UINT8(false);
+#line 23 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelRange.chpl"
+  chpl__init_ChapelRange_p = UINT8(false);
+#line 1217 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelSyncvar.chpl"
+  chpl__init_AlignedTSupport_p = UINT8(false);
+#line 23 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelTaskDataHelp.chpl"
+  chpl__init_ChapelTaskDataHelp_p = UINT8(false);
+#line 27 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelLocale.chpl"
+  chpl__init_ChapelLocale_p = UINT8(false);
+#line 21 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelPrivatization.chpl"
+  chpl__init_ChapelPrivatization_p = UINT8(false);
+#line 38 "/Users/iainmoncrief/Desktop/chapel/modules/standard/ChapelIO.chpl"
+  chpl__init_ChapelIO_p = UINT8(false);
+#line 1503 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Regex.chpl"
+  chpl__init_RegexIoSupport_p = UINT8(false);
+#line 338 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Regex.chpl"
+  chpl__init_Regex_p = UINT8(false);
+#line 25 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Types.chpl"
+  chpl__init_Types_p = UINT8(false);
+#line 10414 "/Users/iainmoncrief/Desktop/chapel/modules/standard/IO.chpl"
+  chpl__init_FormattedIO_p = UINT8(false);
+#line 793 "/Users/iainmoncrief/Desktop/chapel/modules/standard/IO.chpl"
+  chpl__init_IO_p = UINT8(false);
+#line 23 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelDomain.chpl"
+  chpl__init_ChapelDomain_p = UINT8(false);
+#line 57 "/Users/iainmoncrief/Desktop/chapel/modules/standard/List.chpl"
+  chpl__init_List_p = UINT8(false);
+#line 803 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Sort.chpl"
+  chpl__init_InsertionSort_p = UINT8(false);
+#line 883 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Sort.chpl"
+  chpl__init_TimSort_p = UINT8(false);
+#line 1006 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Sort.chpl"
+  chpl__init_QuickSort_p = UINT8(false);
+#line 1259 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Sort.chpl"
+  chpl__init_ShellSort_p = UINT8(false);
+#line 1363 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Sort.chpl"
+  chpl__init_RadixSortHelp_p = UINT8(false);
+#line 1579 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Sort.chpl"
+  chpl__init_ShallowCopy_p = UINT8(false);
+#line 1752 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Sort.chpl"
+  chpl__init_TwoArrayPartitioning_p = UINT8(false);
+#line 2894 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Sort.chpl"
+  chpl__init_TwoArrayRadixSort_p = UINT8(false);
+#line 3007 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Sort.chpl"
+  chpl__init_MSBRadixSort_p = UINT8(false);
+#line 254 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Sort.chpl"
+  chpl__init_Sort_p = UINT8(false);
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelArray.chpl"
+  chpl__init_ChapelArray_p = UINT8(false);
+#line 30 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelHashtable.chpl"
+  chpl__init_ChapelHashtable_p = UINT8(false);
+#line 21 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelDistribution.chpl"
+  chpl__init_ChapelDistribution_p = UINT8(false);
+#line 38 "/Users/iainmoncrief/Desktop/chapel/modules/packages/RangeChunk.chpl"
+  chpl__init_RangeChunk_p = UINT8(false);
+#line 29 "/Users/iainmoncrief/Desktop/chapel/modules/packages/Search.chpl"
+  chpl__init_HideDeprecatedReexport_p = UINT8(false);
+#line 23 "/Users/iainmoncrief/Desktop/chapel/modules/packages/Search.chpl"
+  chpl__init_Search_p = UINT8(false);
+#line 26 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ExternalArray.chpl"
+  chpl__init_ExternalArray_p = UINT8(false);
+#line 23 "/Users/iainmoncrief/Desktop/chapel/modules/internal/DefaultRectangular.chpl"
+  chpl__init_DefaultRectangular_p = UINT8(false);
+#line 23 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelNumLocales.chpl"
+  chpl__init_ChapelNumLocales_p = UINT8(false);
+#line 31 "/Users/iainmoncrief/Desktop/chapel/modules/internal/LocaleModelHelpSetup.chpl"
+  chpl__init_LocaleModelHelpSetup_p = UINT8(false);
+#line 30 "/Users/iainmoncrief/Desktop/chapel/modules/internal/LocaleModelHelpRuntime.chpl"
+  chpl__init_LocaleModelHelpRuntime_p = UINT8(false);
+#line 21 "/Users/iainmoncrief/Desktop/chapel/modules/internal/LocaleModelHelpFlat.chpl"
+  chpl__init_LocaleModelHelpFlat_p = UINT8(false);
+#line 30 "/Users/iainmoncrief/Desktop/chapel/modules/internal/LocaleModelHelpMem.chpl"
+  chpl__init_LocaleModelHelpMem_p = UINT8(false);
+#line 30 "/Users/iainmoncrief/Desktop/chapel/modules/internal/localeModels/flat/LocaleModel.chpl"
+  chpl__init_LocaleModel_p = UINT8(false);
+#line 41 "/Users/iainmoncrief/Desktop/chapel/modules/internal/LocalesArray.chpl"
+  chpl__init_LocalesArray_p = UINT8(false);
+#line 23 "/Users/iainmoncrief/Desktop/chapel/modules/internal/tasktable/off/ChapelTaskTable.chpl"
+  chpl__init_ChapelTaskTable_p = UINT8(false);
+#line 23 "/Users/iainmoncrief/Desktop/chapel/modules/internal/MemTracking.chpl"
+  chpl__init_MemTracking_p = UINT8(false);
+#line 25 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelUtil.chpl"
+  chpl__init_ChapelUtil_p = UINT8(false);
+#line 22 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ExportWrappers.chpl"
+  chpl__init_ExportWrappers_p = UINT8(false);
+#line 87 "/Users/iainmoncrief/Desktop/chapel/modules/packages/CopyAggregation.chpl"
+  chpl__init_CopyAggregation_p = UINT8(false);
+#line 357 "/Users/iainmoncrief/Desktop/chapel/modules/packages/CopyAggregation.chpl"
+  chpl__init_AggregationPrimitives_p = UINT8(false);
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelContext.chpl"
+  chpl__init_ChapelContext_p = UINT8(false);
+#line 21 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelStaticVars.chpl"
+  chpl__init_ChapelStaticVars_p = UINT8(false);
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelStandard.chpl"
+  chpl__init_ChapelStandard_p = UINT8(false);
+#line 25 "/Users/iainmoncrief/Desktop/chapel/modules/standard/Debugger.chpl"
+  chpl__init_Debugger_p = UINT8(false);
+#line 1 "Remote.chpl"
+  chpl__init_Remote_p = UINT8(false);
+#line 1 "remoteTest.chpl"
+  chpl__init_remoteTest_p = UINT8(false);
+#line 30 "/Users/iainmoncrief/Desktop/chapel/modules/internal/PrintModuleInitOrder.chpl"
+  chpl__init_PrintModuleInitOrder_p = UINT8(false);
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+  return;
+#line 24 "/Users/iainmoncrief/Desktop/chapel/modules/internal/ChapelBase.chpl"
+}
+
