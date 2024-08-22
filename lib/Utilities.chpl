@@ -88,9 +88,7 @@ module Utilities {
     }
 
     inline proc normalizeDomain(dom: domain(?)): domain(dom.rank,int) /*where dom.strides == strideKind.one*/ {
-        const shape = dom.shape;
-        const normalDom = domainFromShape((...shape));
-        return normalDom;
+        return dom.normalize;
     }
 
     inline proc emptyDomain(param rank: int) : domain(rank,int) {
@@ -607,13 +605,27 @@ module Utilities {
             var s: rank * int;
             const dms = dims();
             for param i in 0..<rank {
-                s(i) = (dms(i).highBound - dms(i).lowBound) + 1;
+                const ref dm = dms(i);
+                s(i) = (dm.highBound - dm.lowBound) + 1;
             }
             if rank == 1 then 
                 return s(0);
             else
                 return s;
         }
+
+        inline proc _domain.fastNormalDims {
+            var s: rank * range;
+            const dms = dims();
+            for param i in 0..<rank {
+                const ref dm = dms(i);
+                const upper = (dm.highBound - dm.lowBound) + 1;
+                s(i) = 0..<upper;
+            }
+            return s;
+        }
+
+
         inline proc _domain.myShape {
             var s: rank * int;
             const dms = dims();
@@ -638,20 +650,9 @@ module Utilities {
         //     return 0..<end;
         // }
 
-        inline proc _domain.normalize : this.type where this.isRectangular() {
-            // if this.strides == strideKind.one {
-            //     const lw: this.fullIdxType;
-            //     if lw == this.low {
-            //         return this;
-            //     }
-            // }
-            if this.isNormal then return this;
-
-            const myShape = shape;
-            var ranges: rank*range;
-            for param i in 0..rank-1 do
-                ranges(i) = 0..<myShape(i);
-            return {(...ranges)};
+        inline proc _domain.normalize where this.isRectangular() {
+            const dms = fastNormalDims;
+            return {(...dms)};
         }
 
         inline proc _domain.isNormal: bool where this.isRectangular() {

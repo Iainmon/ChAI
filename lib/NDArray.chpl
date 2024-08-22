@@ -11,7 +11,7 @@ use Utilities.Types;
 
 
 
-
+@deprecated("Dont use me")
 class NDArrayData : serializable {
     param rank: int;
     type eltType = real(64);
@@ -50,79 +50,71 @@ class NDArrayData : serializable {
 
 record ndarray : serializable {
     param rank: int;
-    type eltType = real(64);
+    type eltType = real(32);
+    var _domain: domain(rank,int);
+    var data: [_domain] eltType = noinit;
 
-    var arrayResource: shared NDArrayData(rank,eltType);
+    forwarding data except shape, _dom;
 
-    proc borrowResource() : borrowed NDArrayData(rank,eltType) do
-        return arrayResource.borrow();
-    
-    proc resource : borrowed NDArrayData(rank,eltType) do
-        return arrayResource.borrow();
-    
+    pragma "no copy return"
+    pragma "return not owned"
+    proc _dom do return _domain;
 
-    proc data ref : [] eltType do 
-        return arrayResource.data;
-    
+    proc shape: rank * int {
+        var s: rank * int;
+        const dms = _domain.dims();
+        for param i in 0..<rank {
+            const ref dm = dms(i);
+            s(i) = (dm.highBound - dm.lowBound) + 1;
+        }
+        return s;
+    }
 
-    forwarding data;
-
-    forwarding resource only _domain;
-
-
-    proc init(param rank: int, type eltType = real(64)) {
+    proc init(param rank: int, type eltType, const dom: domain(rank,int)) {
         this.rank = rank;
         this.eltType = eltType;
-        this.arrayResource = new shared NDArrayData(rank,eltType);
+        this._domain = dom.normalize;
     }
 
-    proc init(dom: ?t,type eltType = real(64)) where isDomainType(t) {
-        this.rank = dom.rank;
-        this.eltType = eltType;
-        if dom.isNormal {
-            this.arrayResource = new shared NDArrayData(rank,eltType,dom);
-        } else {
-            this.arrayResource = new shared NDArrayData(rank,eltType,dom.normalize);
-        }
-    }
-
-    proc init(type eltType = real(64), shape: int ...?rank) {
-        const dom = util.domainFromShape(shape);
-        this.init(dom,eltType);
-    }
-
-    proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == true {
-        this.rank = arr.rank;
-        this.eltType = eltType;
-        this.arrayResource = new shared NDArrayData(arr);
-    }
-
-    proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == false {
-        this.rank = arr.rank;
-        this.eltType = eltType;
-        this.arrayResource = new shared NDArrayData(rank,eltType,arr.domain.normalize);
-        init this;
-        const lw = arr.domain.low;
-        ref thisData = this.data;
-        forall i in arr.domain.every() {
-            const idx = i - lw;
-            thisData[idx] = arr[i];
-        }
-    }
-
-    proc init(arr: [] ?eltType) {
-        if arr.domain.isNormal {
-            this.init(arr,isNormal=true);
-        } else {
-            this.init(arr,isNormal=false);
-        }
-    }
-
-    proc init(A: ndarray(?rank,?eltType)) {
+    proc init(param rank: int, type eltType, const dom: domain(rank,int), const arr: [] eltType) {
         this.rank = rank;
         this.eltType = eltType;
+        this._domain = dom.normalize;
+        this.data = arr;
+    }
 
-        this.arrayResource = A.arrayResource;
+    proc init(type eltType, const shape: ?rank * int) {
+        var ranges: rank*range;
+        for param i in 0..<rank do
+            ranges(i) = 0..<shape(i);
+        this.init(rank,eltType,{(...ranges)});
+    }
+
+    proc init(param rank: int, type eltType = real(32)) {
+        const shape: rank * int;
+        this.init(eltType,shape);
+    }
+
+    proc init(type eltType = real(32), const shape: int ...?rank) do
+        this.init(eltType,shape);
+
+    proc init(const dom: ?t,type eltType = real(32)) where isDomainType(t) {
+        compilerWarning("I am assuming the domains are normal.");
+        this.init(dom.rank,eltType,dom);
+    }
+
+    proc init(const Arr: [] ?eltType) {
+        this.rank = Arr.rank;
+        this.eltType = eltType;
+        this._domain = Arr.domain.normalize;
+        this.data = Arr;
+    }
+    
+    proc init(const A: ndarray(?rank,?eltType)) {
+        this.rank = rank;
+        this.eltType = eltType;
+        this._domain = A._domain;
+        this.data = A.data;
     }
 
     proc init(it: _iteratorRecord) {
@@ -130,32 +122,30 @@ record ndarray : serializable {
         this.init(arr);
     }
 
-
-    proc init=(other: [] ?eltType) {
+    proc init=(const other: [] ?eltType) do
         this.init(other);
-    }
 
-    proc init=(other: ndarray(?rank,?eltType)) {
+    proc init=(const other: ndarray(?rank,?eltType)) {
         this.rank = rank;
         this.eltType = eltType;
-        this.arrayResource = other.arrayResource;
+        this._domain = other._domain;
+        this.data = other.data;
     }
 
-    proc init=(other: _iteratorRecord) {
+    proc init=(other: _iteratorRecord) do
         this.init(other);
-    }
 
     proc ref this(args: int...rank) ref {
         return data.this((...args));
     }
 
-    proc ref setData(arr: [] eltType) where arr.rank == rank do
-        if arr.domain == arrayResource._domain { data = arr; } else { this = arr; }
+    proc ref setData(const arr: [] eltType) where arr.rank == rank do
+        if arr.domain == _domain { data = arr; } else { this = arr; }
 
-    proc ref reshapeDomain(dom: arrayResource._domain.type) do
-        arrayResource._domain = dom;
+    proc ref reshapeDomain(const dom: domain(rank,int)) do
+        _domain = dom;
 
-    proc reshape(dom: arrayResource._domain.type): ndarray(rank,eltType) {
+    proc reshape(dom: domain(rank,int)): ndarray(rank,eltType) {
         var me = new ndarray(dom,eltType);
         const meDomain = me.domain;
         const selfDomain = data.domain;
@@ -188,12 +178,6 @@ record ndarray : serializable {
             meData[meIdx] = a;
         }
         return arr;
-    //         proc dsiMember(ind: rank*idxType) {
-    //   for param i in 0..rank-1 do
-    //     if !ranges(i).contains(ind(i)) then
-    //       return false;
-    //   return true;
-    // }
     }
 
 
@@ -482,7 +466,7 @@ record ndarray : serializable {
         return re;
     }
 
-    proc toRemote():owned Remote(ndarray(rank,eltType)) {
+    proc toRemote(): owned Remote(ndarray(rank,eltType)) {
         var re = new Remote(ndarray(rank,eltType));
         populateRemote(re.borrow());
         return re;
@@ -554,27 +538,30 @@ proc type ndarray.arange(to: int,type eltType = real(64),shape: ?rank*int): ndar
 }
 
 
-operator =(ref lhs: ndarray(?rank,?eltType), rhs: ndarray(rank,eltType)) {
-    // lhs.arrayResource = rhs.arrayResource;
-    // lhs.arrayResource = new owned NDArrayData(rhs.data); // Would this be faster?
-    ref rref = rhs.arrayResource;
-    ref lref = lhs.arrayResource;
-    lref._domain = rref._domain;
-    lref.data = rref.data;
+operator =(ref lhs: ndarray(?rank,?eltType), const rhs: ndarray(rank,eltType)) {
+    lhs._domain = rhs._domain;
+    lhs.data = rhs.data;
 }
 
-operator =(ref lhs: ndarray(?rank,?eltType),rhs: [?d] eltType) where d.rank == rank {
-    lhs.arrayResource._domain = d;
-    lhs.arrayResource.data = rhs;
+operator =(ref lhs: ndarray(?rank,?eltType),const rhs: [] eltType) where rhs.rank == rank {
+    lhs._domain = rhs.domain.normalize;
+    lhs.data = rhs.data;
 }
 
-operator :(val: [] ?eltType, type t: ndarray(val.rank,eltType)) {
+operator :(const val: [] ?eltType, type t: ndarray(val.rank,eltType)) do
     return new ndarray(val);
+
+operator :(const a: ndarray(?rank,?eltType),type toType): ndarray(rank,toType) where toType != eltType {
+    const D = a.data : toType;
+    return new ndarray(D);
 }
 
-operator :(in a: ndarray(?rank,?eltType),type toType): ndarray(rank,toType) {
-    return new ndarray(a.data : toType);
-}
+operator :(const a: ndarray(?rank,?eltType),type toType): ndarray(rank,toType) where toType == eltType do
+    return a;
+
+operator :(it: _iteratorRecord, type t: ndarray(?rank,?eltType)) do
+    return new ndarray(it);
+
 
 // Need help implementtion these. 
 // operator =(ref lhs: ndarray(?rank,?eltType), rhs: _iteratorRecord) {
@@ -635,10 +622,11 @@ proc zipArr(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType),f): ndarray(rank
 
 operator +(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,eltType) {
     const dom = a.domain;
-    var c: ndarray(rank,eltType) = new ndarray(a.domain,eltType);
-    ref cData = c.data;
+
     const ref aData = a.data;
     const ref bData = b.data;
+    var c: ndarray(rank,eltType) = new ndarray(dom,eltType);
+    ref cData = c.data;
     // @assertOnGpu
     forall i in dom.every() do
         cData[i] = aData[i] + bData[i];
@@ -772,7 +760,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
             var sum: eltType = 0;
             if util.targetGpu() then
                 for c in 0..<channels do
-                    for kh in 0..<kernelHight do
+                    for kh in 0..<kernelHeight do
                         for kw in 0..<kernelWidth do
                             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
             else
@@ -839,10 +827,10 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
     const poolDom = {0..#poolSize,0..#poolSize};
     // @assertOnGpu
     forall (c,h,w) in dom.every() {
+        const hs = h * poolSize;
+        const ws = w * poolSize;
         var mx: eltType = fet[c,h,w];
         for (ph,pw) in poolDom {
-            const hs = h * poolSize;
-            const ws = w * poolSize;
             const x: eltType = fet[c,ph + hs,pw + ws];
             mx = Math.max(x,mx);
         }
