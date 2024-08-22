@@ -248,8 +248,10 @@ proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType)
 }
 
 proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), bias: tensor(1,eltType), stride: int): tensor(3,eltType) {
-    return new tensor(ndarray.convolve(features.array,kernel.array,bias.array,stride));
+    on here.gpus[0] var x: shared Remote(ndarray(rank,eltType)) = ndarray.convolve(features.array,kernel.array,bias.array,stride);
+    return new tensor(x);
 }
+
 
 proc type tensor.matvecmulFast(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
     var u = new tensor(1,eltType);
