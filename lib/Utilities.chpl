@@ -3,6 +3,8 @@ module Utilities {
     private use ChplConfig only CHPL_LOCALE_MODEL;
     config param loopGpuSupport = CHPL_LOCALE_MODEL == "gpu";
 
+    proc targetGpu() param : bool do return loopGpuSupport && CHPL_LOCALE_MODEL == "gpu";
+
     module Types {
         type stdRange = range(idxType=int,bounds=boundKind.both,strides=strideKind.one);
         // type stdDomain = domain(DefaultRectangularDom(?));

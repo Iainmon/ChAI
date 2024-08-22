@@ -564,7 +564,7 @@ operator =(ref lhs: ndarray(?rank,?eltType), rhs: ndarray(rank,eltType)) {
 }
 
 operator =(ref lhs: ndarray(?rank,?eltType),rhs: [?d] eltType) where d.rank == rank {
-    lhs.arrayResource._domain = d.normalize;
+    lhs.arrayResource._domain = d;
     lhs.arrayResource.data = rhs;
 }
 
@@ -739,23 +739,20 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const outWidth: int = ((inWidth - kernelWidth) / stride) + 1;
     const outShape = (filters,outHeight,outWidth);
     const outDom = util.domainFromShape((...outShape));
-    var outFeatures = new ndarray(outDom,eltType);
 
-    const chanR = 0..<channels; // don't trust daniel's codemotion.
-    const kernelD = {0..<kernelHeight,0..<kernelWidth};
     const kernelChanD = {0..<channels,0..<kernelHeight,0..<kernelWidth};
-    const kernelChanShape = kernelChanD.shape;
-    const kernelChanDSize = kernelChanD.size;
 
-    ref dat = outFeatures.data;
     const ref fet = features.data;
     const ref ker = kernel.data;
     const ref bis = bias.data;
 
+    var outFeatures = new ndarray(outDom,eltType);
+    ref dat = outFeatures.data;
+
     inline proc fastKernel(param kernelSize: int) {
-        forall (f,h_,w_) in outDom {
-            const hi: int = h_ * stride;
-            const wi: int = w_ * stride;
+        forall (f,h_,w_) in outDom.every() {
+            const hi = h_ * stride;
+            const wi = w_ * stride;
             var sum: eltType = 0;
             for c in 0..<channels {
                 for param kh in 0..<kernelSize {
@@ -769,13 +766,18 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     }
 
     inline proc slowKernel() {
-        forall (f,h_,w_) in outDom {
-            const hi: int = h_ * stride;
-            const wi: int = w_ * stride;
+        forall (f,h_,w_) in outDom.every() {
+            const hi = h_ * stride;
+            const wi = w_ * stride;
             var sum: eltType = 0;
-            for (c,kh,kw) in kernelChanD {
-                sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
-            }
+            if util.targetGpu() then
+                for c in 0..<channels do
+                    for kh in 0..<kernelHight do
+                        for kw in 0..<kernelWidth do
+                            sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+            else
+                for (c,kh,kw) in kernelChanD do
+                    sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
             dat[f,h_,w_] = sum + bis[f];
         }
     }
