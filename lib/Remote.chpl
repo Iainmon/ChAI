@@ -12,13 +12,6 @@ class Remote : serializable {
 
     proc ref get() ref do
         return this;
-    // proc get() : Remote(eltType) do
-    //     return this;
-    // proc get() : borrowed Remote(eltType) do
-    //     return this;
-    
-    // proc ref ptr ref do 
-    //     return value.containedValue;
 
     proc ptr ref do 
         return value.containedValue;
@@ -33,13 +26,13 @@ class Remote : serializable {
     }
 
     proc init(value: ?eltType, device: locale = Remote.defaultDevice) where !isSubtype(eltType,Remote(?)) {
+        compilerWarning("This initializer doesn't offer the best performance. ");
         var v: owned _RemoteVarContainer(eltType)?;
         on device do v = new _RemoteVarContainer(value);
         this.init(try! v : owned _RemoteVarContainer(eltType));
     }
 
-    proc init(type eltType, in tr: ?inType, device: locale = Remote.defaultDevice) {
-        compilerWarning("This can be simplified, use below style.");
+    proc init(type eltType, in tr: _thunkRecord, device: locale = Remote.defaultDevice) {
         var v: owned _RemoteVarContainer(eltType)?;
         on device {
             var val: eltType = tr;
@@ -49,9 +42,12 @@ class Remote : serializable {
     }
 
     proc init(type eltType, device: locale = Remote.defaultDevice) {
-        compilerWarning("This may be error prone, use above style.");
-        on device var value: eltType;
-        this.init(value,device);
+        var v: owned _RemoteVarContainer(eltType)?;
+        on device {
+            var val: eltType;
+            v = new _RemoteVarContainer(val);
+        }
+        this.init(try! v : owned _RemoteVarContainer(eltType));
     }
 
     proc copyContainer(dest: locale = device): owned _RemoteVarContainer(eltType) {
@@ -63,31 +59,26 @@ class Remote : serializable {
         return try! c : owned _RemoteVarContainer(eltType);
     }
 
-    proc copyTo(dest: locale = device): Remote(eltType) do
+    proc copyTo(dest: locale = device): owned Remote(eltType) do
         return new Remote(copyContainer(dest));
 
-    proc copy(): Remote(eltType) do
+    proc copy(): owned Remote(eltType) do
         return copyTo(device);
 
     proc to(dest: locale) {
         if dest == device then return;
         value = copyContainer(dest);
     }
-
-
 }
 
 proc ref (owned Remote(?eltType)).get() ref : owned Remote(eltType) do
     return this;
 
-proc ref (shared Remote(?eltType)).get() ref : shared Remote(eltType) {
-    // var self: shared Remote(eltType) = this;
-    // return self;
+proc ref (shared Remote(?eltType)).get() ref : shared Remote(eltType) do
     return this;
-}
-    
 
-
+proc ref (unmanaged Remote(?eltType)).get() ref : unmanaged Remote(eltType) do
+    return this;
 
 proc type Remote.defaultDevice: locale do
     return if here.gpus.size >= 1 then here.gpus[0] else here;

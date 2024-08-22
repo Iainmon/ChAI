@@ -68,7 +68,7 @@ class BaseTensorResource : TensorEssence, serializable{
     proc init(type eltType, param rank: int) {
         super.init(eltType);
         this.rank = rank;
-        this.dataResource = new shared Remote(new ndarray(rank,eltType));
+        this.dataResource = new shared Remote(ndarray(rank,eltType));
     }
 
     proc init(in dataResource: shared Remote(ndarray(?rank,?eltType)), in gradResource: shared Remote(ndarray(rank,eltType))? = nil) {
@@ -132,7 +132,7 @@ class TensorResource : BaseTensorResource(?), serializable {
 
     // Overwriting history initializer
     proc init(bt: borrowed BaseTensorResource(?eltType,?rank), operationCtx: ?operationType) do
-        this.init(bt.dataResource.copy() : shared,bt.gradResource!.copy() : shared,new baseValue());
+        this.init(shared.adopt(bt.dataResource.copy()),shared.adopt(bt.gradResource!.copy()),new baseValue());
 
 
     override proc detach(copy: bool = true, keepGrad: bool = false): owned TensorResource(eltType,rank,baseValue) {

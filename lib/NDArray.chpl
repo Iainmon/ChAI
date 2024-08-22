@@ -758,8 +758,8 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
             const wi: int = w_ * stride;
             var sum: eltType = 0;
             for c in 0..<channels {
-                for param kh in 0..<3 {
-                    for param kw in 0..<3 {
+                for param kh in 0..<kernelSize {
+                    for param kw in 0..<kernelSize {
                         sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
                     }
                 }
