@@ -148,7 +148,6 @@ class TensorResource : BaseTensorResource(?), serializable {
 
     override proc forward() {
         if operationType == baseValue then return;
-        writeln("forward, ", device, ", ", here);
         on device {
             const ctx = operationCtx;
             ref arrayAddr = array;

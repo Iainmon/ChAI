@@ -738,7 +738,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     var outFeatures = new ndarray(outDom,eltType);
     ref dat = outFeatures.data;
 
-    writeln(here);
+    // writeln(here);
     // halt();
 
     inline proc fastKernel(param kernelSize: int) {
