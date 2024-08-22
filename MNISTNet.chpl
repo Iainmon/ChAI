@@ -151,7 +151,9 @@ for (n,m) in cnn.moduleFields() {
     writeln(n);
 }
 
-var model = Network.loadModel("my/model/path");
+var model = Network.loadModel(specFile="scripts/models/cnn/specification.json",
+              weightsFolder="scripts/models/cnn/",
+              dtype=dtype);
 
 
 config const testImgSize = 28;
@@ -190,7 +192,7 @@ for i in 0..<numTimes {
         // x = conv2(x);
         // var output = x;
         // pred = output.runtimeRank;
-        var output: Tensor(dtype) = cnn(img);
+        var output: Tensor(dtype) = model(img);
         pred = output.argmax();
         // writeln((i, pred));
     }

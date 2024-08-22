@@ -61,7 +61,7 @@ record ndarray : serializable {
         return arrayResource.borrow();
     
 
-    proc data ref : arrayResource.data.type do 
+    proc data ref : [] eltType do 
         return arrayResource.data;
     
 
@@ -474,17 +474,17 @@ record ndarray : serializable {
     }
 
 
-    proc populateRemote(ref re: remote(ndarray(rank,eltType))): remote(ndarray(rank,eltType)) {
+    proc populateRemote(re: borrowed Remote(ndarray(rank,eltType))): borrowed Remote(ndarray(rank,eltType)) {
         on re.device {
-            ref reArr = re.access();
+            ref reArr = re.ptr;
             reArr = this;
         }
         return re;
     }
 
-    proc toRemote(): remote(ndarray(rank,eltType)) {
-        var re = new remote(ndarray(rank,eltType));
-        populateRemote(re);
+    proc toRemote():owned Remote(ndarray(rank,eltType)) {
+        var re = new Remote(ndarray(rank,eltType));
+        populateRemote(re.borrow());
         return re;
     }
 
@@ -555,8 +555,12 @@ proc type ndarray.arange(to: int,type eltType = real(64),shape: ?rank*int): ndar
 
 
 operator =(ref lhs: ndarray(?rank,?eltType), rhs: ndarray(rank,eltType)) {
-    lhs.arrayResource = rhs.arrayResource;
-    // lhs.arrayResource = new owned NDArrayData(rhs.borrowResource()); // Would this be faster?
+    // lhs.arrayResource = rhs.arrayResource;
+    // lhs.arrayResource = new owned NDArrayData(rhs.data); // Would this be faster?
+    ref rref = rhs.arrayResource;
+    ref lref = lhs.arrayResource;
+    lref._domain = rref._domain;
+    lref.data = rref.data;
 }
 
 operator =(ref lhs: ndarray(?rank,?eltType),rhs: [?d] eltType) where d.rank == rank {
@@ -583,40 +587,40 @@ operator :(in a: ndarray(?rank,?eltType),type toType): ndarray(rank,toType) {
 // }
 
 
-// This bunch is problematic.
-proc remote.init(other: ndarray(?rank,?eltType)) {
-    this.init(ndarray(rank,eltType));
-    other.populateRemote(this);
-}
+// // This bunch is problematic.
+// proc remote.init(other: ndarray(?rank,?eltType)) {
+//     this.init(ndarray(rank,eltType));
+//     other.populateRemote(this);
+// }
 
-proc remote.init=(ref other: ndarray(?rank,?eltType)) {
-    this.init(ndarray(rank,eltType));
-    other.populateRemote(this);
-}
+// proc remote.init=(ref other: ndarray(?rank,?eltType)) {
+//     this.init(ndarray(rank,eltType));
+//     other.populateRemote(this);
+// }
 
 
 
-operator =(ref lhs: remote(ndarray(?rank,?eltType)), rhs: ndarray(rank,eltType)) {
-    rhs.populateRemote(lhs);
-}
+// operator =(ref lhs: remote(ndarray(?rank,?eltType)), rhs: ndarray(rank,eltType)) {
+//     rhs.populateRemote(lhs);
+// }
 
-operator :(val: ndarray(?rank,?eltType), type t: remote(ndarray(rank,eltType))) {
-    return val.toRemote();
-}
+// operator :(val: ndarray(?rank,?eltType), type t: remote(ndarray(rank,eltType))) {
+//     return val.toRemote();
+// }
 
-proc remote.init(ref other: remote(ndarray(?rank,?eltType))) {
-    this.eltType = ndarray(rank,eltType);
-    this.remoteResource = other.remoteResource;
-}
+// proc remote.init(ref other: remote(ndarray(?rank,?eltType))) {
+//     this.eltType = ndarray(rank,eltType);
+//     this.remoteResource = other.remoteResource;
+// }
 
-proc remote.init=(ref other: remote(ndarray(?rank,?eltType))) {
-    this.eltType = ndarray(rank,eltType);
-    this.remoteResource = other.remoteResource;
-}
+// proc remote.init=(ref other: remote(ndarray(?rank,?eltType))) {
+//     this.eltType = ndarray(rank,eltType);
+//     this.remoteResource = other.remoteResource;
+// }
 
-operator =(ref lhs: remote(ndarray(?rank,?eltType)), rhs:remote( ndarray(rank,eltType))) {
-    lhs.remoteResource = rhs.remoteResource;
-}
+// operator =(ref lhs: remote(ndarray(?rank,?eltType)), rhs:remote( ndarray(rank,eltType))) {
+//     lhs.remoteResource = rhs.remoteResource;
+// }
 
 // End problemetic bunch.
 
@@ -677,17 +681,17 @@ operator /(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
     return c;
 }
 
-operator +(a: remote(ndarray(?rank,?eltType)),b: remote(ndarray(rank,eltType))): remote(ndarray(rank,eltType)) {
-    const device = a.device;
-    var c = new remote(ndarray(rank,eltType),device);
-    on device {
-        ref A = a.localAccess();
-        ref B = b.localAccess();
-        ref C = c.localAccess();
-        C = a.localAccess() + b.localAccess();
-    }
-    return c;
-}
+// operator +(a: remote(ndarray(?rank,?eltType)),b: remote(ndarray(rank,eltType))): remote(ndarray(rank,eltType)) {
+//     const device = a.device;
+//     var c = new remote(ndarray(rank,eltType),device);
+//     on device {
+//         ref A = a.localAccess();
+//         ref B = b.localAccess();
+//         ref C = c.localAccess();
+//         C = a.localAccess() + b.localAccess();
+//     }
+//     return c;
+// }
 
 
 proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltType), stride: int): ndarray(3,eltType) {

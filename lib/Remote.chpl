@@ -12,8 +12,15 @@ class Remote : serializable {
 
     proc ref get() ref do
         return this;
+    // proc get() : Remote(eltType) do
+    //     return this;
+    // proc get() : borrowed Remote(eltType) do
+    //     return this;
+    
+    // proc ref ptr ref do 
+    //     return value.containedValue;
 
-    proc ref ptr ref do 
+    proc ptr ref do 
         return value.containedValue;
 
     proc device: locale do
@@ -53,17 +60,34 @@ class Remote : serializable {
             var val: eltType = ptr;
             c = new _RemoteVarContainer(val);
         }
-        return try! v : owned _RemoteVarContainer(eltType);
+        return try! c : owned _RemoteVarContainer(eltType);
     }
 
-    proc copyTo(dest: locale = device): owned Remote(eltType) do
+    proc copyTo(dest: locale = device): Remote(eltType) do
         return new Remote(copyContainer(dest));
+
+    proc copy(): Remote(eltType) do
+        return copyTo(device);
 
     proc to(dest: locale) {
         if dest == device then return;
         value = copyContainer(dest);
     }
+
+
 }
+
+proc ref (owned Remote(?eltType)).get() ref : owned Remote(eltType) do
+    return this;
+
+proc ref (shared Remote(?eltType)).get() ref : shared Remote(eltType) {
+    // var self: shared Remote(eltType) = this;
+    // return self;
+    return this;
+}
+    
+
+
 
 proc type Remote.defaultDevice: locale do
     return if here.gpus.size >= 1 then here.gpus[0] else here;
@@ -79,13 +103,21 @@ private inline proc __defaultValue(type t) {
 inline proc chpl__buildRemoteWrapper(loc: locale, type inType: Remote(?eltType)) do
     return chpl__buildRemoteWrapper(loc, inType, __primitive("create thunk", __defaultValue(eltType)));
 
-inline proc chpl__buildRemoteWrapper(loc: locale, type inType: Remote(?eltType), in tr: _thunkRecord)  {
+inline proc chpl__buildRemoteWrapper(loc: locale, type inType: owned Remote(?eltType), in tr: _thunkRecord)  {
     var c: owned _RemoteVarContainer(eltType)?;
     on loc {
         var forced: eltType = __primitive("force thunk", tr);
         c = new _RemoteVarContainer(forced);
     }
     return new owned Remote(try! c : owned _RemoteVarContainer(eltType));
+}
+inline proc chpl__buildRemoteWrapper(loc: locale, type inType: shared Remote(?eltType), in tr: _thunkRecord)  {
+    var c: owned _RemoteVarContainer(eltType)?;
+    on loc {
+        var forced: eltType = __primitive("force thunk", tr);
+        c = new _RemoteVarContainer(forced);
+    }
+    return new shared Remote(try! c : owned _RemoteVarContainer(eltType));
 }
 }
 

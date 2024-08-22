@@ -61,140 +61,143 @@ class ForgetfulTensor : TensorEssence {
 class BaseTensorResource : TensorEssence, serializable{
     param rank: int;
     // type eltType = real(64);
-    var dataResource: ndarray(rank,eltType);
-    var gradResource: ndarray(rank,eltType);
+    var dataResource: shared Remote(ndarray(rank,eltType));
+    var gradResource: shared Remote(ndarray(rank,eltType))?;
     // forwarding resource only to, access, device;
 
-    proc to(device_: locale) {
+    proc init(type eltType, param rank: int) {
+        super.init(eltType);
+        this.rank = rank;
+        this.dataResource = new shared Remote(new ndarray(rank,eltType));
     }
 
-    proc device : locale {
-        return this.locale;
+    proc init(in dataResource: shared Remote(ndarray(?rank,?eltType)), in gradResource: shared Remote(ndarray(rank,eltType))? = nil) {
+        super.init(eltType);
+        this.rank = rank;
+        this.dataResource = dataResource;
+        this.gradResource = gradResource;
     }
+
+    proc init(data: ndarray(?rank,?eltType), device: locale = Remote.defaultDevice) {
+        on device var dataResource: shared Remote(ndarray(rank,eltType)) = data;
+        this.init(dataResource,nil);
+    }
+
+
+    proc to(dest: locale) {
+        dataResource.to(dest);
+        if gradResource then gradResource!.to(dest);
+    }
+
+    proc device : locale do
+        return dataResource.device;
+
+    proc array ref : ndarray(rank,eltType) do
+        return dataResource.ptr;
+    
+    proc grad ref : ndarray(rank,eltType) do
+        return gradResource!.ptr;
 
     // Tensor resource interface
     proc forward() do halt("Forward function not defined for BaseTensorResource.");
     proc backward(grad: remote(ndarray(rank,eltType)), param alreadyPopulated = false) do halt("Backward function not defined for BaseTensorResource.");
     proc backward() where rank == 1 do halt("Backward function not defined for BaseTensorResource.");
 
-    proc array ref : ndarray(rank,eltType) do
-        return dataResource;
-    proc data ref : [] eltType do
-        return dataResource.data;
-    proc grad ref : ndarray(rank,eltType) do
-        return gradResource;
-    proc gradData ref : [] eltType do
-        return gradResource.data;
-    
+    proc detach(copy: bool = true, keepGrad: bool = false): owned TensorResource(eltType,rank,baseValue) do
+        halt("Not implemented.");
+
     override proc runtimeRank: int do
         return rank;
 }
 
 
 class TensorResource : BaseTensorResource(?), serializable {
-    type operation;
+    type operationType;
+    var operationCtx: operationType;
 
-    var operationData: operation;
-
-    proc init(param rank: int, type eltType, type operation) {
+    proc init(type eltType, param rank: int, operationCtx: ?operationType) {
         super.init(eltType,rank);
-        this.operation = operation;
+        this.operationType = operationType;
+        this.operationCtx = operationCtx;
     }
 
-    proc init(param rank: int, type eltType, operationData: ?operation) {
-        super.init(eltType,rank);
-        this.operation = operation;
-        this.operationData = operationData;
+    proc init(in dataResource: shared Remote(ndarray(?rank,?eltType)),in gradResource: shared Remote(ndarray(rank,eltType))? =nil, operationCtx: ?operationType) {
+        super.init(dataResource,gradResource);
+        this.operationType = operationType;
+        this.operationCtx = operationCtx;
     }
 
-    proc init(dataRes: ndarray(?rank,?eltType), operationData: ?operation, device_: locale = defaultDevice) {
-        var gradRes = new ndarray(rank,eltType);
-        super.init(eltType,rank,dataRes,gradRes);
-        this.operation = operation;
-        this.operationData = operationData;
+    proc init(in dataResource: shared Remote(ndarray(?rank,?eltType))) do
+        this.init(dataResource,nil,new baseValue());
+
+    // Overwriting history initializer
+    proc init(bt: borrowed BaseTensorResource(?eltType,?rank), operationCtx: ?operationType) do
+        this.init(bt.dataResource.copy() : shared,bt.gradResource!.copy() : shared,new baseValue());
+
+
+    override proc detach(copy: bool = true, keepGrad: bool = false): owned TensorResource(eltType,rank,baseValue) {
+        var dr: shared Remote(ndarray(rank,eltType))  = dataResource;
+        var gr: shared Remote(ndarray(rank,eltType))? = if keepGrad then gradResource else nil;
+        if copy {
+            dr = shared.adopt(dr.copy());
+            if gr != nil then 
+                gr = shared.adopt(gr!.copy());
+        }
+        return new TensorResource(dr,gr,new baseValue());
     }
-
-    proc init(tr: shared BaseTensorResource(?eltType,?rank),param forget: bool) where forget == true {
-        super.init(eltType,rank,tr.dataResource,new ndarray(rank,eltType));
-        // super.rank = rank;
-        // super.dataResource = tr.dataResource;
-        // super.gradResource = new remote(ndarray(rank,eltType));
-        this.operation = baseValue;
-        this.operationData = new baseValue();
-    }
-
-    // proc init(param rank: int, type eltType, operationData: ?operation, device: locale) {
-    //     var res = new remote(ndarray(rank,eltType),device);
-    //     this.init(res,operationData,device);
-    //     init this;
-    //     this.forward();
-    // }
-
-    // proc init(data: ndarray(?rank,?eltType),operationData: ?operation, device_: locale = defaultDevice) {
-    //     // var res = data.toRemote();
-    //     // res.to(device_);
-    //     this.init(data,operationData,device_);
-    // }
 
     override proc forward() {
-        if operationData.type != baseValue {
-
-            // ref data = dataResource.access().data;
-            // data = operationData.forward();
-            dataResource = operationData.forward();
-            param requiresGrad = false;
-            if requiresGrad {
-                if gradResource.access().data.size == 0 {
-                    gradResource.access().reshapeDomain(dataResource.access().domain);
-                }
-            }
-
-        }
-    }
-
-    override proc backward(grad: remote(ndarray(rank,eltType)), param alreadyPopulated: bool = false) {
-        if operationData.type == baseValue then return;
-
-        var childrenRefs = operationData.children;
-
-        grad.to(device);
+        if operationType == baseValue then return;
         on device {
-            ref myGradData = gradResource.access().data;
-            ref gArrRef = grad.localAccess();
-            // const gArrRef = g;
-            if !alreadyPopulated {
-                ref gData = gArrRef.data;
-                myGradData += gData; // This is likely to fail if there is a shape mismatch.
-            }
-            ref gArr = gradResource.localAccess();
-            const childGrads = operationData.backward(gArr);
-            for param i in 0..<childrenRefs.size do
-                childrenRefs(i).grad = childGrads(i);
-        }
-
-        for param i in 0..<childrenRefs.size do
-            childrenRefs(i).backward(childrenRefs(i).gradResource,alreadyPopulated = true);
-    }
-
-    override proc backward() where rank == 1 {
-        if array.shape.size == 1 {
-            on gradResource.device {
-                gradResource.access().data = 1.0;
-            }
-            // var res = gradResource.copy();
-            // on res.device {
-            //     res.access() = new ndarray([1.0]);
-            // }
-            backward(gradResource,alreadyPopulated = true);
-        } else {
-            halt("Trying to default backpropagate tensor of higher shape than 1.");
+            const ctx = operationCtx;
+            ref arrayAddr = array;
+            arrayAddr = ctx.forward();
         }
     }
+
+    // override proc backward(grad: Remote(ndarray(rank,eltType)), param alreadyPopulated: bool = false) {
+    //     if operationData.type == baseValue then return;
+
+    //     var childrenRefs = operationData.children;
+
+    //     grad.to(device);
+    //     on device {
+    //         ref myGradData = gradResource.access().data;
+    //         ref gArrRef = grad.localAccess();
+    //         // const gArrRef = g;
+    //         if !alreadyPopulated {
+    //             ref gData = gArrRef.data;
+    //             myGradData += gData; // This is likely to fail if there is a shape mismatch.
+    //         }
+    //         ref gArr = gradResource.localAccess();
+    //         const childGrads = operationData.backward(gArr);
+    //         for param i in 0..<childrenRefs.size do
+    //             childrenRefs(i).grad = childGrads(i);
+    //     }
+
+    //     for param i in 0..<childrenRefs.size do
+    //         childrenRefs(i).backward(childrenRefs(i).gradResource,alreadyPopulated = true);
+    // }
+
+    // override proc backward() where rank == 1 {
+    //     if array.shape.size == 1 {
+    //         on gradResource.device {
+    //             gradResource.access().data = 1.0;
+    //         }
+    //         // var res = gradResource.copy();
+    //         // on res.device {
+    //         //     res.access() = new ndarray([1.0]);
+    //         // }
+    //         backward(gradResource,alreadyPopulated = true);
+    //     } else {
+    //         halt("Trying to default backpropagate tensor of higher shape than 1.");
+    //     }
+    // }
 
     override iter children(): borrowed TensorEssence(eltType) {
         // import Types;
 
-        const childs = operationData.children;
+        const childs = operationCtx.children;
         for param i in 0..<childs.size {
             if isSubtype(childs(i).type,shared TensorEssence(eltType)) then
                 yield childs(i).borrow();
@@ -255,20 +258,21 @@ record addOp : serializable {
     // proc forward() do
     //     return new ndarray(lhs.data + rhs.data);
     proc forward(): ndarray(rank,eltType) {
-        var sum = new ndarray(rank,eltType);
-        ref a = lhs.array;
-        ref b = rhs.array;
+        // var sum = new ndarray(rank,eltType);
+        // ref a = lhs.array;
+        // ref b = rhs.array;
 
-        const newDom = a._domain;
-        sum.reshapeDomain(a._domain);
-        ref sumData = sum.data;
-        ref aData = a.data;
-        ref bData = b.data;
-        // @assertOnGpu
-        forall i in newDom.every() do
-            sumData[i] = aData[i] + bData[i];
-        // sumData = aData + bData;
-        return sum;
+        // const newDom = a._domain;
+        // sum.reshapeDomain(a._domain);
+        // ref sumData = sum.data;
+        // ref aData = a.data;
+        // ref bData = b.data;
+        // // @assertOnGpu
+        // forall i in newDom.every() do
+        //     sumData[i] = aData[i] + bData[i];
+        // // sumData = aData + bData;
+        // return sum;
+        return lhs.array + rhs.array;
     }
 
     proc backward(grad: ndarray(rank,eltType)): (ndarray(rank,eltType),ndarray(rank,eltType)) do
