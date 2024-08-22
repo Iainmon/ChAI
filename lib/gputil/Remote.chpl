@@ -1,25 +1,9 @@
 module Remote {
 
-use Debugger;
 
 class _RemoteVarContainer {
     var containedValue;
-    // var device: locale;
-
-    // proc init(containedValue,device: locale) {
-    //     // this.valType = containedValue.type;
-    //     this.containedValue = containedValue;
-    //     this.device = device;
-    // }
-    // proc init(containedValue) {
-    //     this.init(containedValue,here);
-    // }
-}
-// proc\s*(\w+\.)?\s+_loc
-
-
-// proc chpl__buildRemoteWrapper(type eltType: Remote(?valType)...)
-
+} // meow
 
 
 class Remote {
@@ -68,7 +52,6 @@ proc type Remote.defaultDevice: locale do
     return if here.gpus.size >= 1 then here.gpus[0] else here;
 
 
-// module ChapelRemoteVars {
 public use ChapelRemoteVars;
 
 private inline proc __defaultValue(type t) {
@@ -76,19 +59,10 @@ private inline proc __defaultValue(type t) {
     return tmp;
 }
 
-// inline proc chpl__buildRemoteWrapper(loc: locale, type inType) {
-//     compilerWarning("hello 1, but locally.");
-
-//     return chpl__buildRemoteWrapper(loc, inType, __primitive("create thunk", __defaultValueForType(inType)));
-// }
-
-// inline proc chpl__buildRemoteWrapper(loc: locale, type inType) where false {
-//     return chpl__buildRemoteWrapper(loc, inType, __primitive("create thunk", __defaultValueForType(inType)));
-// }
+inline proc chpl__buildRemoteWrapper(loc: locale, type inType: Remote(?eltType)) do
+    return chpl__buildRemoteWrapper(loc, inType, __primitive("create thunk", __defaultValue(eltType)));
 
 inline proc chpl__buildRemoteWrapper(loc: locale, type inType: Remote(?eltType), in tr: _thunkRecord)  {
-    // type eltType = inType.eltType;
-    compilerWarning("You called me, ", inType:string,", ",tr.type:string, ", ", eltType:string);
     var c: owned _RemoteVarContainer(eltType)?;
     on loc {
         var forced: eltType = __primitive("force thunk", tr);
@@ -96,21 +70,5 @@ inline proc chpl__buildRemoteWrapper(loc: locale, type inType: Remote(?eltType),
     }
     return new owned Remote(try! c : owned _RemoteVarContainer(eltType));
 }
-
-
-
-// inline proc chpl__buildRemoteWrapper(loc: locale, type inType: owned Remote(?), in tr: _thunkRecord)  {
-//     // type eltType = inType.eltType;
-//     compilerWarning("You called me, ", inType:string,", ",tr.type:string, ", ", eltType:string);
-//     var c: owned _RemoteVarContainer(eltType)?;
-//     on loc {
-//         var forced: eltType = __primitive("force thunk", tr);
-//         c = new _RemoteVarContainer(forced);
-//     }
-//     return new Remote(try! c : owned _RemoteVarContainer(eltType));
-// }
-// }
-// public use ChapelRemoteVars;
-
 }
 

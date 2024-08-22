@@ -9,6 +9,10 @@ record R { var n: int; }
 
 on dev var x: shared Remote(R) = new R(1);
 
+on dev var y: shared Remote(R);
+
+writeln(y);
+
 writeln(x);
 
 writeln(x.type:string);
