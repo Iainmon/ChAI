@@ -46,6 +46,23 @@ class Remote {
         on device var value: eltType;
         this.init(value,device);
     }
+
+    proc copyContainer(dest: locale = device): owned _RemoteVarContainer(eltType) {
+        var c: owned _RemoteVarContainer(eltType)?;
+        on dest {
+            var val: eltType = ptr;
+            c = new _RemoteVarContainer(val);
+        }
+        return try! v : owned _RemoteVarContainer(eltType);
+    }
+
+    proc copyTo(dest: locale = device): owned Remote(eltType) do
+        return new Remote(copyContainer(dest));
+
+    proc to(dest: locale) {
+        if dest == device then return;
+        value = copyContainer(dest);
+    }
 }
 
 proc type Remote.defaultDevice: locale do
