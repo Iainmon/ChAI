@@ -101,7 +101,11 @@
 <dl class="chpl class">
 <dt class="sig sig-object chpl" id="NDArray.NDArrayData">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">NDArrayData</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#NDArray.NDArrayData" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Dont use me</p>
+</div>
+<dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="NDArray.NDArrayData.rank">
 <em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#NDArray.NDArrayData.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -158,62 +162,67 @@
 
 <dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="NDArray.ndarray.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real(64)</span></em><a class="headerlink" href="#NDArray.ndarray.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real(32)</span></em><a class="headerlink" href="#NDArray.ndarray.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl attribute">
-<dt class="sig sig-object chpl" id="NDArray.ndarray.arrayResource">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">arrayResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">NDArrayData(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#NDArray.ndarray.arrayResource" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object chpl" id="NDArray.ndarray._domain">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">_domain</span></span><em class="property"> <span class="pre">:</span> <span class="pre">domain(rank,</span> <span class="pre">int)</span></em><a class="headerlink" href="#NDArray.ndarray._domain" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="NDArray.ndarray.borrowResource">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">borrowResource</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">borrowed</span> <span class="pre">NDArrayData(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#NDArray.ndarray.borrowResource" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="NDArray.ndarray.resource">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">resource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">borrowed</span> <span class="pre">NDArrayData(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#NDArray.ndarray.resource" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
+<dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="NDArray.ndarray.data">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">data</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">arrayResource.data.type</span></em><a class="headerlink" href="#NDArray.ndarray.data" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">data</span></span><em class="property"> <span class="pre">:</span> <span class="pre">[_domain]</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">noinit</span></em><a class="headerlink" href="#NDArray.ndarray.data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="NDArray.ndarray._dom">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">_dom</span></span><a class="headerlink" href="#NDArray.ndarray._dom" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="NDArray.ndarray.shape">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em><a class="headerlink" href="#NDArray.ndarray.shape" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="NDArray.ndarray.init">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real(64)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.ndarray.init" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">dom:</span> <span class="pre">domain(rank</span></em>, <em class="sig-param"><span class="pre">int)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.ndarray.init" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dom:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real(64)</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">isDomainType(t)</span></em></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">dom:</span> <span class="pre">domain(rank</span></em>, <em class="sig-param"><span class="pre">int)</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">arr:</span> <span class="pre">[]</span> <span class="pre">eltType</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real(64)</span></em>, <em class="sig-param"><span class="pre">shape:</span> <span class="pre">int</span> <span class="pre">...?rank</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">shape:</span> <span class="pre">?rank*int</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">arr:</span> <span class="pre">[]</span> <span class="pre">?eltType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">isNormal:</span> <span class="pre">bool</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">isNormal</span> <span class="pre">==</span> <span class="pre">true</span></em></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real(32)</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">arr:</span> <span class="pre">[]</span> <span class="pre">?eltType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">isNormal:</span> <span class="pre">bool</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">isNormal</span> <span class="pre">==</span> <span class="pre">false</span></em></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real(32)</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">shape:</span> <span class="pre">int</span> <span class="pre">...?rank</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">arr:</span> <span class="pre">[]</span> <span class="pre">?eltType</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">dom:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real(32)</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">isDomainType(t)</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">A:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">Arr:</span> <span class="pre">[]</span> <span class="pre">?eltType</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">A:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -223,12 +232,12 @@
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="NDArray.ndarray.init=">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">other:</span> <span class="pre">[]</span> <span class="pre">?eltType</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.ndarray.init=" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">other:</span> <span class="pre">[]</span> <span class="pre">?eltType</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.ndarray.init=" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">other:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">other:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -243,17 +252,17 @@
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="NDArray.ndarray.setData">
-<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">setData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">arr:</span> <span class="pre">[]</span> <span class="pre">eltType</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">arr.rank</span> <span class="pre">==</span> <span class="pre">rank</span></em><a class="headerlink" href="#NDArray.ndarray.setData" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">setData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">arr:</span> <span class="pre">[]</span> <span class="pre">eltType</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">arr.rank</span> <span class="pre">==</span> <span class="pre">rank</span></em><a class="headerlink" href="#NDArray.ndarray.setData" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="NDArray.ndarray.reshapeDomain">
-<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">reshapeDomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dom:</span> <span class="pre">arrayResource._domain.type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.ndarray.reshapeDomain" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">reshapeDomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">dom:</span> <span class="pre">domain(rank</span></em>, <em class="sig-param"><span class="pre">int)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.ndarray.reshapeDomain" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="NDArray.ndarray.reshape">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">reshape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dom:</span> <span class="pre">arrayResource._domain.type</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#NDArray.ndarray.reshape" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">reshape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dom:</span> <span class="pre">domain(rank</span></em>, <em class="sig-param"><span class="pre">int)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#NDArray.ndarray.reshape" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -333,12 +342,12 @@
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="NDArray.ndarray.populateRemote">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">populateRemote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">re:</span> <span class="pre">remote(ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType))</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">remote(ndarray(rank,</span> <span class="pre">eltType))</span></em><a class="headerlink" href="#NDArray.ndarray.populateRemote" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">populateRemote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">re:</span> <span class="pre">borrowed</span> <span class="pre">Remote(ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType))</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">borrowed</span> <span class="pre">Remote(ndarray(rank,</span> <span class="pre">eltType))</span></em><a class="headerlink" href="#NDArray.ndarray.populateRemote" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="NDArray.ndarray.toRemote">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">toRemote</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">remote(ndarray(rank,</span> <span class="pre">eltType))</span></em><a class="headerlink" href="#NDArray.ndarray.toRemote" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">toRemote</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">owned</span> <span class="pre">Remote(ndarray(rank,</span> <span class="pre">eltType))</span></em><a class="headerlink" href="#NDArray.ndarray.toRemote" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl itermethod">
@@ -375,57 +384,32 @@
 
 <dl class="chpl function">
 <dt class="sig sig-object chpl" id="NDArray.=">
-<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">rhs:</span> <span class="pre">ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.=" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">rhs:</span> <span class="pre">ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.=" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl function">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">rhs:</span> <span class="pre">[?d]</span> <span class="pre">eltType</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">d.rank</span> <span class="pre">==</span> <span class="pre">rank</span></em></dt>
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">rhs:</span> <span class="pre">[]</span> <span class="pre">eltType</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">rhs.rank</span> <span class="pre">==</span> <span class="pre">rank</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl function">
 <dt class="sig sig-object chpl" id="NDArray.:">
-<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">[]</span> <span class="pre">?eltType</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">t:</span> <span class="pre">ndarray(val.rank</span></em>, <em class="sig-param"><span class="pre">eltType)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.:" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">val:</span> <span class="pre">[]</span> <span class="pre">?eltType</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">t:</span> <span class="pre">ndarray(val.rank</span></em>, <em class="sig-param"><span class="pre">eltType)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.:" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl function">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">in</span> <span class="pre">a:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">toType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">toType)</span></em></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="NDArray.remote.init">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">remote.</span></span><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">other:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.remote.init" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="NDArray.remote.init=">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">remote.</span></span><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">other:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#NDArray.remote.init=" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">a:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">toType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">toType)</span></em><em class="property">&#160; <span class="pre">where</span> <span class="pre">toType</span> <span class="pre">!=</span> <span class="pre">eltType</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl function">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em>, <em class="sig-param"><span class="pre">rhs:</span> <span class="pre">ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType)</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">a:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">toType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">toType)</span></em><em class="property">&#160; <span class="pre">where</span> <span class="pre">toType</span> <span class="pre">==</span> <span class="pre">eltType</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl function">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">t:</span> <span class="pre">remote(ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType))</span></em><span class="sig-paren">)</span></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">remote.</span></span><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">other:</span> <span class="pre">remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em><span class="sig-paren">)</span></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">remote.</span></span><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">other:</span> <span class="pre">remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em><span class="sig-paren">)</span></dt>
-<dd></dd></dl>
-
-<dl class="chpl function">
-<dt class="sig sig-object chpl">
-<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em>, <em class="sig-param"><span class="pre">rhs:</span> <span class="pre">remote(ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType))</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">it:</span> <span class="pre">_iteratorRecord</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">t:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl function">
@@ -451,11 +435,6 @@
 <dl class="chpl function">
 <dt class="sig sig-object chpl" id="NDArray./">
 <em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">/</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#NDArray./" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl function">
-<dt class="sig sig-object chpl">
-<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">+</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">remote(ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType))</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">remote(ndarray(rank,</span> <span class="pre">eltType))</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">

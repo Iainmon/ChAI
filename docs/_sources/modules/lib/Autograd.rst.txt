@@ -41,13 +41,23 @@ or
 
    .. attribute:: param rank: int
 
-   .. attribute:: var dataResource: ndarray(rank, eltType)
+   .. attribute:: var dataResource: shared Remote(ndarray(rank, eltType))
 
-   .. attribute:: var gradResource: ndarray(rank, eltType)
+   .. attribute:: var gradResource: shared Remote(ndarray(rank, eltType))?
 
-   .. method:: proc to(device_: locale)
+   .. method:: proc init(type eltType, param rank: int)
+
+   .. method:: proc init(in dataResource: shared Remote(ndarray(?rank, ?eltType)), in gradResource: shared Remote(ndarray(rank, eltType))? = nil)
+
+   .. method:: proc init(data: ndarray(?rank, ?eltType), device: locale = Remote.defaultDevice)
+
+   .. method:: proc to(dest: locale)
 
    .. method:: proc device: locale
+
+   .. method:: proc array ref: ndarray(rank, eltType)
+
+   .. method:: proc grad ref: ndarray(rank, eltType)
 
    .. method:: proc forward()
 
@@ -55,35 +65,27 @@ or
 
    .. method:: proc backward() where rank == 1
 
-   .. method:: proc array ref: ndarray(rank, eltType)
-
-   .. method:: proc data ref: [] eltType
-
-   .. method:: proc grad ref: ndarray(rank, eltType)
-
-   .. method:: proc gradData ref: [] eltType
+   .. method:: proc detach(copy: bool = true, keepGrad: bool = false): owned TensorResource(eltType, rank, baseValue)
 
    .. method:: override proc runtimeRank: int
 
 .. class:: TensorResource : BaseTensorResource(?), serializable
 
-   .. attribute:: type operation
+   .. attribute:: type operationType
 
-   .. attribute:: var operationData: operation
+   .. attribute:: var operationCtx: operationType
 
-   .. method:: proc init(param rank: int, type eltType, type operation)
+   .. method:: proc init(type eltType, param rank: int, operationCtx: ?operationType)
 
-   .. method:: proc init(param rank: int, type eltType, operationData: ?operation)
+   .. method:: proc init(in dataResource: shared Remote(ndarray(?rank, ?eltType)), in gradResource: shared Remote(ndarray(rank, eltType))? = nil, operationCtx: ?operationType)
 
-   .. method:: proc init(dataRes: ndarray(?rank, ?eltType), operationData: ?operation, device_: locale = defaultDevice)
+   .. method:: proc init(in dataResource: shared Remote(ndarray(?rank, ?eltType)))
 
-   .. method:: proc init(tr: shared BaseTensorResource(?eltType, ?rank), param forget: bool) where forget == true
+   .. method:: proc init(bt: borrowed BaseTensorResource(?eltType, ?rank), operationCtx: ?operationType)
+
+   .. method:: override proc detach(copy: bool = true, keepGrad: bool = false): owned TensorResource(eltType, rank, baseValue)
 
    .. method:: override proc forward()
-
-   .. method:: override proc backward(grad: remote(ndarray(rank, eltType)), param alreadyPopulated: bool = false)
-
-   .. method:: override proc backward() where rank == 1
 
    .. itermethod:: override iter children(): borrowed TensorEssence(eltType)
 

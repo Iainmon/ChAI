@@ -31,9 +31,11 @@ or
 
    .. method:: proc init(param rank: int, type eltType = real(64))
 
-   .. method:: proc init(resource: shared BaseTensorResource(?eltType, ?rank))
+   .. method:: proc init(in resource: shared BaseTensorResource(?eltType, ?rank))
 
-   .. method:: proc init(nda: ndarray(?rank, ?eltType))
+   .. method:: proc init(in resource: owned BaseTensorResource(?eltType, ?rank))
+
+   .. method:: proc init(array: ndarray(?rank, ?eltType))
 
    .. method:: proc init(dom: domain(?), type eltType = real)
 
@@ -47,7 +49,7 @@ or
 
    .. method:: proc _setArrayData(value)
 
-   .. method:: proc detach(): tensor(rank, eltType)
+   .. method:: proc detach(copy: bool = true, keepGrad: bool = false): tensor(rank, eltType)
 
 .. function:: operator :(in t: tensor(?rank, ?eltType), type toType): tensor(rank, toType)
 

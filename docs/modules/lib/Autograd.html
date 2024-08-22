@@ -158,22 +158,47 @@
 
 <dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.dataResource">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">dataResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.dataResource" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">dataResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">Remote(ndarray(rank,</span> <span class="pre">eltType))</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.dataResource" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.gradResource">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">gradResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.gradResource" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">gradResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">Remote(ndarray(rank,</span> <span class="pre">eltType))?</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.gradResource" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.init">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.BaseTensorResource.init" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">in</span> <span class="pre">dataResource:</span> <span class="pre">shared</span> <span class="pre">Remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em>, <em class="sig-param"><span class="pre">in</span> <span class="pre">gradResource:</span> <span class="pre">shared</span> <span class="pre">Remote(ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType))?</span> <span class="pre">=</span> <span class="pre">nil</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">device:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">Remote.defaultDevice</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.to">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">device_:</span> <span class="pre">locale</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.BaseTensorResource.to" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dest:</span> <span class="pre">locale</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.BaseTensorResource.to" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.device">
 <em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">device</span></span><em class="property"> <span class="pre">:</span> <span class="pre">locale</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.device" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.array">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">array</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.array" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.grad">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">grad</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.grad" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -192,23 +217,8 @@
 <dd></dd></dl>
 
 <dl class="chpl method">
-<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.array">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">array</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.array" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.data">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">data</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">[]</span> <span class="pre">eltType</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.data" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.grad">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">grad</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.grad" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.gradData">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">gradData</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">[]</span> <span class="pre">eltType</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.gradData" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.detach">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">detach</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">copy:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">true</span></em>, <em class="sig-param"><span class="pre">keepGrad:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">false</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">owned</span> <span class="pre">TensorResource(eltType,</span> <span class="pre">rank,</span> <span class="pre">baseValue)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.detach" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -222,48 +232,43 @@
 <dt class="sig sig-object chpl" id="Autograd.TensorResource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">TensorResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">BaseTensorResource(?),</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.TensorResource" title="Link to this definition">¶</a></dt>
 <dd><dl class="chpl attribute">
-<dt class="sig sig-object chpl" id="Autograd.TensorResource.operation">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">operation</span></span><a class="headerlink" href="#Autograd.TensorResource.operation" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object chpl" id="Autograd.TensorResource.operationType">
+<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">operationType</span></span><a class="headerlink" href="#Autograd.TensorResource.operationType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl attribute">
-<dt class="sig sig-object chpl" id="Autograd.TensorResource.operationData">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">operationData</span></span><em class="property"> <span class="pre">:</span> <span class="pre">operation</span></em><a class="headerlink" href="#Autograd.TensorResource.operationData" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object chpl" id="Autograd.TensorResource.operationCtx">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">operationCtx</span></span><em class="property"> <span class="pre">:</span> <span class="pre">operationType</span></em><a class="headerlink" href="#Autograd.TensorResource.operationCtx" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="Autograd.TensorResource.init">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">operation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.TensorResource.init" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">operationCtx:</span> <span class="pre">?operationType</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.TensorResource.init" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">operationData:</span> <span class="pre">?operation</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">in</span> <span class="pre">dataResource:</span> <span class="pre">shared</span> <span class="pre">Remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em>, <em class="sig-param"><span class="pre">in</span> <span class="pre">gradResource:</span> <span class="pre">shared</span> <span class="pre">Remote(ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType))?</span> <span class="pre">=</span> <span class="pre">nil</span></em>, <em class="sig-param"><span class="pre">operationCtx:</span> <span class="pre">?operationType</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dataRes:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">operationData:</span> <span class="pre">?operation</span></em>, <em class="sig-param"><span class="pre">device_:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">defaultDevice</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">in</span> <span class="pre">dataResource:</span> <span class="pre">shared</span> <span class="pre">Remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tr:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?eltType</span></em>, <em class="sig-param"><span class="pre">?rank)</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">forget:</span> <span class="pre">bool</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">forget</span> <span class="pre">==</span> <span class="pre">true</span></em></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">bt:</span> <span class="pre">borrowed</span> <span class="pre">BaseTensorResource(?eltType</span></em>, <em class="sig-param"><span class="pre">?rank)</span></em>, <em class="sig-param"><span class="pre">operationCtx:</span> <span class="pre">?operationType</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Autograd.TensorResource.detach">
+<em class="property"><span class="pre">override</span> <span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">detach</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">copy:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">true</span></em>, <em class="sig-param"><span class="pre">keepGrad:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">false</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">owned</span> <span class="pre">TensorResource(eltType,</span> <span class="pre">rank,</span> <span class="pre">baseValue)</span></em><a class="headerlink" href="#Autograd.TensorResource.detach" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="Autograd.TensorResource.forward">
 <em class="property"><span class="pre">override</span> <span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.TensorResource.forward" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="Autograd.TensorResource.backward">
-<em class="property"><span class="pre">override</span> <span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">grad:</span> <span class="pre">remote(ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType))</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">alreadyPopulated:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">false</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.TensorResource.backward" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl">
-<em class="property"><span class="pre">override</span> <span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">rank</span> <span class="pre">==</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl itermethod">
