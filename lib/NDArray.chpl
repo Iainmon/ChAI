@@ -739,7 +739,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     ref dat = outFeatures.data;
 
     writeln(here);
-    halt();
+    // halt();
 
     inline proc fastKernel(param kernelSize: int) {
         forall (f,h_,w_) in outDom.every() {
