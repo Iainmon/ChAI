@@ -5,7 +5,7 @@ config const debug = true;
 var defaultDevice = if here.gpus.size >= 1 then here.gpus[0] else here;
 
 
-class Remote : serializable {
+class _Remote : serializable {
     type eltType;
     var device: locale = defaultDevice;
     var item: _remoteVarWrapper(eltType);

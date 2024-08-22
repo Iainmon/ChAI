@@ -1,12 +1,12 @@
 module Remote {
 
 
-class _RemoteVarContainer {
+class _RemoteVarContainer : serializable {
     var containedValue;
 } // meow
 
 
-class Remote {
+class Remote : serializable {
     type eltType;
     var value: owned _RemoteVarContainer(eltType);
 

@@ -5,7 +5,7 @@
 use List;
 use Map;
 
-record dict {
+record dict : serializable {
     type keyType;
     type valType;
 
