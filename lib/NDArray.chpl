@@ -738,6 +738,9 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     var outFeatures = new ndarray(outDom,eltType);
     ref dat = outFeatures.data;
 
+    writeln(here);
+    halt();
+
     inline proc fastKernel(param kernelSize: int) {
         forall (f,h_,w_) in outDom.every() {
             const hi = h_ * stride;
