@@ -148,7 +148,7 @@ class TensorResource : BaseTensorResource(?), serializable {
 
     override proc forward() {
         if operationType == baseValue then return;
-        on device {
+        on here.gpus[0] {
             const ctx = operationCtx;
             ref arrayAddr = array;
             arrayAddr = ctx.forward();
