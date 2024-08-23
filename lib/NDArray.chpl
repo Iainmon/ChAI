@@ -10,44 +10,6 @@ use Utilities.Types;
 
 
 
-
-@deprecated("Dont use me")
-class NDArrayData : serializable {
-    param rank: int;
-    type eltType = real(64);
-    var _domain: domain(rank,int) = util.emptyDomain(rank);
-    var data: [_domain] eltType = noinit;
-
-    proc init(param rank: int, type eltType) {
-        this.rank = rank;
-        this.eltType = eltType;
-    }
-
-    proc init(param rank: int, type eltType, dom: domain(rank,int)) {
-        this.rank = rank;
-        this.eltType = eltType;
-        this._domain = dom;
-    }
-    proc init(param rank: int, type eltType, dom: domain(rank,int),A: [dom] eltType) {
-        this.rank = rank;
-        this.eltType = eltType;
-        this._domain = dom;
-        this.data = A;
-    }
-    proc init(A: [] ?eltType) {
-        this.rank = A.rank;
-        this.eltType = eltType;
-        this._domain = A.domain;
-        this.data = A;
-    }
-    proc init(me: NDArrayData(?rank,?eltType)) {
-        this.rank = rank;
-        this.eltType = eltType;
-        this._domain = me._domain;
-        this.data = me.data;
-    }
-}
-
 record ndarray : serializable {
     param rank: int;
     type eltType = real(32);
