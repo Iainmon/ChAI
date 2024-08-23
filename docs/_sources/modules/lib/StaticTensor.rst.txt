@@ -19,11 +19,11 @@ or
 
 .. record:: tensor : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real(64)
+   .. type:: config type eltType = real(64)
 
-   .. attribute:: var resource: shared BaseTensorResource(eltType, rank)
+   .. data:: config var resource: shared BaseTensorResource(eltType, rank)
 
    .. method:: proc meta
 
@@ -31,9 +31,11 @@ or
 
    .. method:: proc init(param rank: int, type eltType = real(64))
 
-   .. method:: proc init(resource: shared BaseTensorResource(?eltType, ?rank), param strict: bool = false)
+   .. method:: proc init(in resource: shared BaseTensorResource(?eltType, ?rank))
 
-   .. method:: proc init(nda: ndarray(?rank, ?eltType))
+   .. method:: proc init(in resource: owned(BaseTensorResource(?eltType, ?rank)))
+
+   .. method:: proc init(array: ndarray(?rank, ?eltType))
 
    .. method:: proc init(dom: domain(?), type eltType = real)
 
@@ -46,6 +48,10 @@ or
    .. method:: proc reshapeDomain(dom: this._dom.type)
 
    .. method:: proc _setArrayData(value)
+
+   .. method:: proc detach(copy: bool = true, keepGrad: bool = false): tensor(rank, eltType)
+
+.. function:: operator :(in t: tensor(?rank, ?eltType), type toType): tensor(rank, toType)
 
 .. function:: proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank, eltType)
 
@@ -105,7 +111,7 @@ or
 
 .. method:: proc type tensor.arange(shape: int ...?rank): tensor(rank, real)
 
-.. method:: proc type tensor.fromShape(type eltType = real, shape: int ...?rank, value: eltType = 0: eltType): tensor(rank, eltType)
+.. method:: proc type tensor.fromShape(type eltType = real, shape: int ...?rank, value: eltType = 0 : eltType): tensor(rank, eltType)
 
 .. method:: proc type tensor.zeros(shape: int ...?rank): tensor(rank, real)
 
@@ -115,11 +121,11 @@ or
 
 .. method:: proc type tensor.ones(type eltType, shape: int ...?rank): tensor(rank, eltType)
 
-.. data:: config const n = 100
+.. data:: const n = 100
 
-.. data:: config const diag = false
+.. data:: const diag = false
 
-.. data:: config const size = 3
+.. data:: const size = 3
 
 .. function:: proc main()
 

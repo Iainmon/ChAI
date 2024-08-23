@@ -1,148 +1,114 @@
-use ChapelRemoteVars;
+module Remote {
 
-config const debug = true;
 
-var defaultDevice = if here.gpus.size >= 1 then here.gpus[0] else here;
+class _RemoteVarContainer : serializable {
+    var containedValue;
+} // meow
 
 
 class Remote : serializable {
     type eltType;
-    var device: locale = defaultDevice;
-    var item: _remoteVarWrapper(eltType);
+    var value: owned _RemoteVarContainer(eltType);
 
-    proc init(item: ?eltType,device: locale = defaultDevice) {
+    proc ref get() ref do
+        return this;
+
+    proc ptr ref do 
+        return value.containedValue;
+
+    proc device: locale do
+        return ptr.locale;
+
+
+    proc init(in value: owned _RemoteVarContainer(?eltType)) {
         this.eltType = eltType;
-        this.device = device;
-        this.item = chpl__buildRemoteWrapper(device,eltType,item);
+        this.value = value;
     }
 
-    proc init(type eltType,device: locale = defaultDevice) {
-        this.eltType = eltType;
-        this.device = device;
-        this.item = chpl__buildRemoteWrapper(device,eltType);
+    proc init(value: ?eltType, device: locale = Remote.defaultDevice) where !isSubtype(eltType,Remote(?)) {
+        compilerWarning("This initializer doesn't offer the best performance. ");
+        var v: owned _RemoteVarContainer(eltType)?;
+        on device do v = new _RemoteVarContainer(value);
+        this.init(try! v : owned _RemoteVarContainer(eltType));
     }
 
-    proc to(device_: locale) {
-        if this.device == device_ then return;
-        this.device = device_;
-        on device_ {
-            this.item = chpl__buildRemoteWrapper(device_,__primitive("create thunk",item.get()));
-        }
-    }
-
-    proc ref get() ref {
-        return this.item.get();
-    }
-
-    proc serialize(writer,serializer) {
-        var sr = serializer.startClass(writer,"Remote",2);
-        sr.writeField("device",device.id);
-        sr.writeField("item", item);
-        sr.endClass();
-    }
-
-}
-
-record remote : serializable {
-    type eltType;
-    var remoteResource: shared Remote(eltType);
-    // forwarding remoteResource only to, get;
-
-
-    proc init(type eltType,device: locale = defaultDevice) {
-        this.eltType = eltType;
-        this.remoteResource = new shared Remote(eltType,device);
-    } 
-
-    proc init(item: ?eltType,device: locale = defaultDevice) {
-        this.eltType = eltType;
-        this.remoteResource = new shared Remote(item,device);
-    } 
-
-    // proc init(other: remote(?eltType)) {
-    //     this.eltType = eltType;
-    //     this.remoteResource = other.remoteResource;
-    // }
-
-    // proc init=(other: remote(?eltType)) {
-    //     this.eltType = eltType;
-    //     this.remoteResource = other.remoteResource;
-    // }
-
-    proc device ref do return this.remoteResource.device;
-    proc ref get() ref {
-        return this.remoteResource.item.get();
-    }
-    proc to(device_: locale) do this.remoteResource.to(device_);
-
-    proc copy(): remote(eltType) {
-        var rem = new remote(eltType,this.device);
+    proc init(type eltType, in tr: _thunkRecord, device: locale = Remote.defaultDevice) {
+        var v: owned _RemoteVarContainer(eltType)?;
         on device {
-            const data: eltType = remoteResource.item.get();
-            ref reData: eltType = rem.remoteResource.item.get();
-            reData = data;
+            var val: eltType = tr;
+            v = new _RemoteVarContainer(val);
         }
-        return rem;
+        this.init(try! v : owned _RemoteVarContainer(eltType));
     }
 
-
-    proc ref access() ref {
-        // if here != this.device { try! throw new Error("Trying to access memory on wrong device!"); }
-        // if here != this.device {
-        //     this.to(here);
-        //     if debug then writeln("moved " + this.device.name + " -> " + here.name);
-        // }
-        return this.remoteResource.item.get();
-    }
-
-    proc localAccess() ref do return this.remoteResource.item.get();
-
-    proc download(): eltType {
-        var it: eltType;
-        on this.device {
-            const it_: eltType = this.remoteResource.item.get();
-            it = it_;
+    proc init(type eltType, device: locale = Remote.defaultDevice) {
+        var v: owned _RemoteVarContainer(eltType)?;
+        on device {
+            var val: eltType;
+            v = new _RemoteVarContainer(val);
         }
-        return it;
+        this.init(try! v : owned _RemoteVarContainer(eltType));
     }
 
-    proc ref unload(): eltType {
-        return this.remoteResource.get();
+    proc copyContainer(dest: locale = device): owned _RemoteVarContainer(eltType) {
+        var c: owned _RemoteVarContainer(eltType)?;
+        on dest {
+            var val: eltType = ptr;
+            c = new _RemoteVarContainer(val);
+        }
+        return try! c : owned _RemoteVarContainer(eltType);
     }
 
-    // proc ref to(device: locale) {
-    //     on device {
-    //         this.device = device;
-    //         this.item = chpl__buildRemoteWrapper(device,eltType,remoteResource.get());
-    //     }
-    //     // if this.device == device then return;
-    //     // if here != this._parentDevice {
-    //     //     on this.device {
-    //     //         this.to(device);
-    //     //     }
-    //     // } else {
-    //     //     on device var itm = this.item.get();
-    //     //     this.device = device;
-    //     //     this.item = chpl__buildRemoteWrapper(device,eltType,itm);
-    //     // }
-    // }
+    proc copyTo(dest: locale = device): owned Remote(eltType) do
+        return new Remote(copyContainer(dest));
 
-    // proc ref copyTo(device: locale, parentDevice: locale = this._parentDevice) {
-    //     // on device var itemResource: eltType = this.item.get();
-    //     // on device var me: remote(eltType) = new remote(itemResource);
-    //     // var newRemote = 
-    //     // var c: owned _remoteVarContainer(eltType)?;
-    //     // on loc do c = new _remoteVarContainer(value);
-    //     // return new _remoteVarWrapper(try! c : owned _remoteVarContainer(inType));
+    proc copy(): owned Remote(eltType) do
+        return copyTo(device);
 
-    //     var c: owned _remoteVarContainer(eltType)?;
-    //     on device do c = new _remoteVarContainer(this.item.get());
-    //     return new remote(c,device,parentDevice);
-    // }
-
-    
-
+    proc to(dest: locale) {
+        if dest == device then return;
+        value = copyContainer(dest);
+    }
 }
 
+proc ref (owned Remote(?eltType)).get() ref : owned Remote(eltType) do
+    return this;
 
+proc ref (shared Remote(?eltType)).get() ref : shared Remote(eltType) do
+    return this;
+
+proc ref (unmanaged Remote(?eltType)).get() ref : unmanaged Remote(eltType) do
+    return this;
+
+proc type Remote.defaultDevice: locale do
+    return if here.gpus.size >= 1 then here.gpus[0] else here;
+
+
+public use ChapelRemoteVars;
+
+private inline proc __defaultValue(type t) {
+    var tmp: t;
+    return tmp;
+}
+
+inline proc chpl__buildRemoteWrapper(loc: locale, type inType: Remote(?eltType)) do
+    return chpl__buildRemoteWrapper(loc, inType, __primitive("create thunk", __defaultValue(eltType)));
+
+inline proc chpl__buildRemoteWrapper(loc: locale, type inType: owned Remote(?eltType), in tr: _thunkRecord)  {
+    var c: owned _RemoteVarContainer(eltType)?;
+    on loc {
+        var forced: eltType = __primitive("force thunk", tr);
+        c = new _RemoteVarContainer(forced);
+    }
+    return new owned Remote(try! c : owned _RemoteVarContainer(eltType));
+}
+inline proc chpl__buildRemoteWrapper(loc: locale, type inType: shared Remote(?eltType), in tr: _thunkRecord)  {
+    var c: owned _RemoteVarContainer(eltType)?;
+    on loc {
+        var forced: eltType = __primitive("force thunk", tr);
+        c = new _RemoteVarContainer(forced);
+    }
+    return new shared Remote(try! c : owned _RemoteVarContainer(eltType));
+}
+}
 

@@ -17,69 +17,51 @@ or
 
    import NDArray;
 
-.. class:: NDArrayData : serializable
-
-   .. attribute:: param rank: int
-
-   .. attribute:: type eltType = real(64)
-
-   .. attribute:: var _domain: domain(rank, int) = util.emptyDomain(rank)
-
-   .. attribute:: var data: [_domain] eltType = noinit
-
-   .. method:: proc init(param rank: int, type eltType)
-
-   .. method:: proc init(param rank: int, type eltType, dom: domain(rank, int))
-
-   .. method:: proc init(param rank: int, type eltType, dom: domain(rank, int), A: [dom] eltType)
-
-   .. method:: proc init(A: [] ?eltType)
-
-   .. method:: proc init(me: NDArrayData(?rank, ?eltType))
-
 .. record:: ndarray : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real(64)
+   .. type:: config type eltType = real(32)
 
-   .. attribute:: var arrayResource: owned NDArrayData(rank, eltType)
+   .. data:: config var _domain: domain(rank, int)
 
-   .. method:: proc borrowResource(): borrowed NDArrayData(rank, eltType)
+   .. data:: config var data: [_domain] eltType = noinit
 
-   .. method:: proc resource: borrowed NDArrayData(rank, eltType)
+   .. method:: proc _dom
 
-   .. method:: proc data ref: arrayResource.data.type
+   .. method:: proc shape: rank*int
 
-   .. method:: proc init(param rank: int, type eltType = real(64))
+   .. method:: proc init(param rank: int, type eltType, const dom: domain(rank, int))
 
-   .. method:: proc init(dom: ?t, type eltType = real(64)) where isDomainType(t)
+   .. method:: proc init(param rank: int, type eltType, const dom: domain(rank, int), const arr: [] eltType)
 
-   .. method:: proc init(type eltType = real(64), shape: int ...?rank)
+   .. method:: proc init(type eltType, const shape: ?rank*int)
 
-   .. method:: proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == true
+   .. method:: proc init(param rank: int, type eltType = real(32))
 
-   .. method:: proc init(arr: [] ?eltType, param isNormal: bool) where isNormal == false
+   .. method:: proc init(type eltType = real(32), const shape: int ...?rank)
 
-   .. method:: proc init(arr: [] ?eltType)
+   .. method:: proc init(const dom: ?t, type eltType = real(32)) where isDomainType(t)
 
-   .. method:: proc init(A: ndarray(?rank, ?eltType))
+   .. method:: proc init(const Arr: [] ?eltType)
+
+   .. method:: proc init(const A: ndarray(?rank, ?eltType))
 
    .. method:: proc init(it: _iteratorRecord)
 
-   .. method:: proc init=(other: [] ?eltType)
+   .. method:: proc init=(const other: [] ?eltType)
 
-   .. method:: proc init=(other: ndarray(?rank, ?eltType))
+   .. method:: proc init=(const other: ndarray(?rank, ?eltType))
 
    .. method:: proc init=(other: _iteratorRecord)
 
    .. method:: proc ref this(args: int ...rank) ref
 
-   .. method:: proc ref setData(arr: [] eltType) where arr.rank == rank
+   .. method:: proc ref setData(const arr: [] eltType) where arr.rank == rank
 
-   .. method:: proc ref reshapeDomain(dom: arrayResource._domain.type)
+   .. method:: proc ref reshapeDomain(const dom: domain(rank, int))
 
-   .. method:: proc reshape(dom: arrayResource._domain.type): ndarray(rank, eltType)
+   .. method:: proc reshape(dom: domain(rank, int)): ndarray(rank, eltType)
 
    .. method:: proc reshape(dom: ?t): ndarray(dom.rank, eltType) where isDomainType(t) && dom.rank != rank
 
@@ -111,9 +93,9 @@ or
 
    .. method:: proc max(axes: int ...?axesCount): ndarray(rank, eltType)
 
-   .. method:: proc populateRemote(ref re: remote(ndarray(rank, eltType))): remote(ndarray(rank, eltType))
+   .. method:: proc populateRemote(re: borrowed Remote(ndarray(rank, eltType))): borrowed Remote(ndarray(rank, eltType))
 
-   .. method:: proc toRemote(): remote(ndarray(rank, eltType))
+   .. method:: proc toRemote(): owned(Remote(ndarray(rank, eltType)))
 
    .. itermethod:: iter ref batchify(param dim: int = 0) ref where dim < rank
 
@@ -127,25 +109,17 @@ or
 
 .. method:: proc type ndarray.arange(to: int, type eltType = real(64), shape: ?rank*int): ndarray(rank, eltType)
 
-.. function:: operator  = (ref lhs: ndarray(?rank, ?eltType), rhs: ndarray(rank, eltType))
+.. function:: operator =(ref lhs: ndarray(?rank, ?eltType), const rhs: ndarray(rank, eltType))
 
-.. function:: operator  = (ref lhs: ndarray(?rank, ?eltType), rhs: [?d] eltType) where d.rank == rank
+.. function:: operator =(ref lhs: ndarray(?rank, ?eltType), const rhs: [] eltType) where rhs.rank == rank
 
-.. function:: operator :(val: [] ?eltType, type t: ndarray(val.rank, eltType))
+.. function:: operator :(const val: [] ?eltType, type t: ndarray(val.rank, eltType))
 
-.. method:: proc remote.init(other: ndarray(?rank, ?eltType))
+.. function:: operator :(const a: ndarray(?rank, ?eltType), type toType): ndarray(rank, toType) where toType != eltType
 
-.. method:: proc remote.init=(ref other: ndarray(?rank, ?eltType))
+.. function:: operator :(const a: ndarray(?rank, ?eltType), type toType): ndarray(rank, toType) where toType == eltType
 
-.. function:: operator  = (ref lhs: remote(ndarray(?rank, ?eltType)), rhs: ndarray(rank, eltType))
-
-.. function:: operator :(val: ndarray(?rank, ?eltType), type t: remote(ndarray(rank, eltType)))
-
-.. method:: proc remote.init(ref other: remote(ndarray(?rank, ?eltType)))
-
-.. method:: proc remote.init=(ref other: remote(ndarray(?rank, ?eltType)))
-
-.. function:: operator  = (ref lhs: remote(ndarray(?rank, ?eltType)), rhs: remote(ndarray(rank, eltType)))
+.. function:: operator :(it: _iteratorRecord, type t: ndarray(?rank, ?eltType))
 
 .. function:: proc zipArr(a: ndarray(?rank, ?eltType), b: ndarray(rank, eltType), f): ndarray(rank, eltType)
 
@@ -156,8 +130,6 @@ or
 .. function:: operator -(a: ndarray(?rank, ?eltType), b: ndarray(rank, eltType)): ndarray(rank, eltType)
 
 .. function:: operator /(a: ndarray(?rank, ?eltType), b: ndarray(rank, eltType)): ndarray(rank, eltType)
-
-.. function:: operator +(a: remote(ndarray(?rank, ?eltType)), b: remote(ndarray(rank, eltType))): remote(ndarray(rank, eltType))
 
 .. method:: proc type ndarray.convolve(features: ndarray(3, ?eltType), kernel: ndarray(4, eltType), stride: int): ndarray(3, eltType)
 
@@ -177,11 +149,11 @@ or
 
 .. class:: _tensor_resource
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real(64)
+   .. type:: config type eltType = real(64)
 
-   .. attribute:: var data: remote(ndarray(rank, eltType))
+   .. data:: config var data: remote(ndarray(rank, eltType))
 
 .. method:: proc type ndarray.fullOuter(a: ndarray(?rankA, ?eltType), b: ndarray(?rankB, eltType)): ndarray(rankA+rankB, eltType)
 

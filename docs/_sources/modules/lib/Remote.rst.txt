@@ -17,51 +17,43 @@ or
 
    import Remote;
 
-.. data:: config const debug = true
+.. class:: _RemoteVarContainer : serializable
 
-.. data:: var defaultDevice = if here.gpus.size >= 1 then here.gpus[0] else here
+   .. data:: config var containedValue
 
 .. class:: Remote : serializable
 
-   .. attribute:: type eltType
+   .. type:: config type eltType
 
-   .. attribute:: var device: locale = defaultDevice
-
-   .. attribute:: var item: _remoteVarWrapper(eltType)
-
-   .. method:: proc init(item: ?eltType, device: locale = defaultDevice)
-
-   .. method:: proc init(type eltType, device: locale = defaultDevice)
-
-   .. method:: proc to(device_: locale)
+   .. data:: config var value: owned(_RemoteVarContainer(eltType))
 
    .. method:: proc ref get() ref
 
-   .. method:: proc serialize(writer, serializer)
+   .. method:: proc ptr ref
 
-.. record:: remote : serializable
+   .. method:: proc device: locale
 
-   .. attribute:: type eltType
+   .. method:: proc init(in value: owned(_RemoteVarContainer(?eltType)))
 
-   .. attribute:: var remoteResource: shared Remote(eltType)
+   .. method:: proc init(value: ?eltType, device: locale = Remote.defaultDevice) where !isSubtype(eltType, Remote(?))
 
-   .. method:: proc init(type eltType, device: locale = defaultDevice)
+   .. method:: proc init(type eltType, in tr: _thunkRecord, device: locale = Remote.defaultDevice)
 
-   .. method:: proc init(item: ?eltType, device: locale = defaultDevice)
+   .. method:: proc init(type eltType, device: locale = Remote.defaultDevice)
 
-   .. method:: proc device ref
+   .. method:: proc copyContainer(dest: locale = device): owned(_RemoteVarContainer(eltType))
 
-   .. method:: proc ref get() ref
+   .. method:: proc copyTo(dest: locale = device): owned(Remote(eltType))
 
-   .. method:: proc to(device_: locale)
+   .. method:: proc copy(): owned(Remote(eltType))
 
-   .. method:: proc copy(): remote(eltType)
+   .. method:: proc to(dest: locale)
 
-   .. method:: proc ref access() ref
+.. method:: proc ref (owned(Remote(?eltType))).get() ref: owned(Remote(eltType))
 
-   .. method:: proc localAccess() ref
+.. method:: proc ref (shared Remote(?eltType)).get() ref: shared Remote(eltType)
 
-   .. method:: proc download(): eltType
+.. method:: proc ref (unmanaged(Remote(?eltType))).get() ref: unmanaged(Remote(eltType))
 
-   .. method:: proc ref unload(): eltType
+.. method:: proc type Remote.defaultDevice: locale
 

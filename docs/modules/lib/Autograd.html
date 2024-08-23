@@ -116,9 +116,9 @@
 <dl class="chpl class">
 <dt class="sig sig-object chpl" id="Autograd.TensorEssence">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">TensorEssence</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.TensorEssence" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.TensorEssence.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.TensorEssence.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.TensorEssence.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -126,14 +126,24 @@
 <em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">runtimeRank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.TensorEssence.runtimeRank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl" id="Autograd.TensorEssence.children">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-name descname"><span class="pre">children</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">borrowed</span> <span class="pre">TensorEssence(eltType)</span></em><a class="headerlink" href="#Autograd.TensorEssence.children" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Autograd.TensorEssence.treeHeight">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">treeHeight</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.TensorEssence.treeHeight" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="chpl class">
 <dt class="sig sig-object chpl" id="Autograd.ForgetfulTensor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ForgetfulTensor</span></span><em class="property"> <span class="pre">:</span> <span class="pre">TensorEssence</span></em><a class="headerlink" href="#Autograd.ForgetfulTensor" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.ForgetfulTensor.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.ForgetfulTensor.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.ForgetfulTensor.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -141,29 +151,54 @@
 <dl class="chpl class">
 <dt class="sig sig-object chpl" id="Autograd.BaseTensorResource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">BaseTensorResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">TensorEssence,</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.BaseTensorResource" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.dataResource">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">dataResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">remote(ndarray(rank,</span> <span class="pre">eltType))</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.dataResource" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">dataResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">Remote(ndarray(rank,</span> <span class="pre">eltType))</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.dataResource" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.gradResource">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">gradResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">remote(ndarray(rank,</span> <span class="pre">eltType))</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.gradResource" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">gradResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">?Remote(ndarray(rank,</span> <span class="pre">eltType))</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.gradResource" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.init">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.BaseTensorResource.init" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">in</span> <span class="pre">dataResource:</span> <span class="pre">shared</span> <span class="pre">Remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em>, <em class="sig-param"><span class="pre">in</span> <span class="pre">gradResource:</span> <span class="pre">shared</span> <span class="pre">?Remote(ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType))</span> <span class="pre">=</span> <span class="pre">nil</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">device:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">Remote.defaultDevice</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.to">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">device_:</span> <span class="pre">locale</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.BaseTensorResource.to" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dest:</span> <span class="pre">locale</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.BaseTensorResource.to" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.device">
 <em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">device</span></span><em class="property"> <span class="pre">:</span> <span class="pre">locale</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.device" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.array">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">array</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.array" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.grad">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">grad</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.grad" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -182,28 +217,8 @@
 <dd></dd></dl>
 
 <dl class="chpl method">
-<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.array">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">array</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.array" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.data">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">data</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">[]</span> <span class="pre">eltType</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.data" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.grad">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">grad</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.grad" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.gradData">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">gradData</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">ndarray(rank,</span> <span class="pre">eltType)</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.gradData" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource._loc">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">_loc</span></span><a class="headerlink" href="#Autograd.BaseTensorResource._loc" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object chpl" id="Autograd.BaseTensorResource.detach">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">detach</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">copy:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">true</span></em>, <em class="sig-param"><span class="pre">keepGrad:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">false</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">owned(TensorResource(eltType,</span> <span class="pre">rank,</span> <span class="pre">baseValue))</span></em><a class="headerlink" href="#Autograd.BaseTensorResource.detach" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -216,34 +231,39 @@
 <dl class="chpl class">
 <dt class="sig sig-object chpl" id="Autograd.TensorResource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">TensorResource</span></span><em class="property"> <span class="pre">:</span> <span class="pre">BaseTensorResource(?),</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.TensorResource" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
-<dt class="sig sig-object chpl" id="Autograd.TensorResource.operation">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">operation</span></span><a class="headerlink" href="#Autograd.TensorResource.operation" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl type">
+<dt class="sig sig-object chpl" id="Autograd.TensorResource.operationType">
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">operationType</span></span><a class="headerlink" href="#Autograd.TensorResource.operationType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
-<dt class="sig sig-object chpl" id="Autograd.TensorResource.operationData">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">operationData</span></span><em class="property"> <span class="pre">:</span> <span class="pre">operation</span></em><a class="headerlink" href="#Autograd.TensorResource.operationData" title="Link to this definition">¶</a></dt>
+<dl class="chpl data">
+<dt class="sig sig-object chpl" id="Autograd.TensorResource.operationCtx">
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">operationCtx</span></span><em class="property"> <span class="pre">:</span> <span class="pre">operationType</span></em><a class="headerlink" href="#Autograd.TensorResource.operationCtx" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="Autograd.TensorResource.init">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">operation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.TensorResource.init" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">operationCtx:</span> <span class="pre">?operationType</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.TensorResource.init" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">operationData:</span> <span class="pre">?operation</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">in</span> <span class="pre">dataResource:</span> <span class="pre">shared</span> <span class="pre">Remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em>, <em class="sig-param"><span class="pre">in</span> <span class="pre">gradResource:</span> <span class="pre">shared</span> <span class="pre">?Remote(ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType))</span> <span class="pre">=</span> <span class="pre">nil</span></em>, <em class="sig-param"><span class="pre">operationCtx:</span> <span class="pre">?operationType</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">resource:</span> <span class="pre">remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em>, <em class="sig-param"><span class="pre">operationData:</span> <span class="pre">?operation</span></em>, <em class="sig-param"><span class="pre">device_:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">defaultDevice</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">in</span> <span class="pre">dataResource:</span> <span class="pre">shared</span> <span class="pre">Remote(ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType))</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data:</span> <span class="pre">ndarray(?rank</span></em>, <em class="sig-param"><span class="pre">?eltType)</span></em>, <em class="sig-param"><span class="pre">operationData:</span> <span class="pre">?operation</span></em>, <em class="sig-param"><span class="pre">device_:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">defaultDevice</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">bt:</span> <span class="pre">borrowed</span> <span class="pre">BaseTensorResource(?eltType</span></em>, <em class="sig-param"><span class="pre">?rank)</span></em>, <em class="sig-param"><span class="pre">operationCtx:</span> <span class="pre">?operationType</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Autograd.TensorResource.detach">
+<em class="property"><span class="pre">override</span> <span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">detach</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">copy:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">true</span></em>, <em class="sig-param"><span class="pre">keepGrad:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">false</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">owned(TensorResource(eltType,</span> <span class="pre">rank,</span> <span class="pre">baseValue))</span></em><a class="headerlink" href="#Autograd.TensorResource.detach" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -251,14 +271,9 @@
 <em class="property"><span class="pre">override</span> <span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.TensorResource.forward" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl method">
-<dt class="sig sig-object chpl" id="Autograd.TensorResource.backward">
-<em class="property"><span class="pre">override</span> <span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">grad:</span> <span class="pre">remote(ndarray(rank</span></em>, <em class="sig-param"><span class="pre">eltType))</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">alreadyPopulated:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">false</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Autograd.TensorResource.backward" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="chpl method">
-<dt class="sig sig-object chpl">
-<em class="property"><span class="pre">override</span> <span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">rank</span> <span class="pre">==</span> <span class="pre">1</span></em></dt>
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl" id="Autograd.TensorResource.children">
+<em class="property"><span class="pre">override</span> <span class="pre">iter</span> </em><span class="sig-name descname"><span class="pre">children</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">borrowed</span> <span class="pre">TensorEssence(eltType)</span></em><a class="headerlink" href="#Autograd.TensorResource.children" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -281,9 +296,9 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.reluOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">reluOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.reluOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.reluOp.input">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.reluOp.input" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.reluOp.input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -306,9 +321,9 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.expOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">expOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.expOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.expOp.input">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.expOp.input" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.expOp.input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -326,24 +341,24 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.addOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">addOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.addOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.addOp.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.addOp.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.addOp.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.addOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><a class="headerlink" href="#Autograd.addOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><a class="headerlink" href="#Autograd.addOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.addOp.lhs">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">lhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.addOp.lhs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">lhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.addOp.lhs" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.addOp.rhs">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">rhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.addOp.rhs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">rhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.addOp.rhs" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -366,14 +381,19 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.subOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">subOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.subOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.subOp.lhs">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">lhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.subOp.lhs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">lhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.subOp.lhs" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.subOp.rhs">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">rhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.subOp.rhs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">rhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.subOp.rhs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Autograd.subOp.children">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">children</span></span><a class="headerlink" href="#Autograd.subOp.children" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -386,14 +406,19 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.divOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">divOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.divOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.divOp.lhs">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">lhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.divOp.lhs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">lhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.divOp.lhs" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.divOp.rhs">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">rhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.divOp.rhs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">rhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(?)</span></em><a class="headerlink" href="#Autograd.divOp.rhs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Autograd.divOp.children">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">children</span></span><a class="headerlink" href="#Autograd.divOp.children" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -406,24 +431,24 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.multOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">multOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.multOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.multOp.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.multOp.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.multOp.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.multOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><a class="headerlink" href="#Autograd.multOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><a class="headerlink" href="#Autograd.multOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.multOp.lhs">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">lhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.multOp.lhs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">lhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.multOp.lhs" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.multOp.rhs">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">rhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.multOp.rhs" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">rhs</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.multOp.rhs" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -446,29 +471,29 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.reshapeOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">reshapeOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.reshapeOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.reshapeOp.oldRank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">oldRank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.reshapeOp.oldRank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">oldRank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.reshapeOp.oldRank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.reshapeOp.newRank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">newRank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.reshapeOp.newRank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">newRank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.reshapeOp.newRank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.reshapeOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><a class="headerlink" href="#Autograd.reshapeOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><a class="headerlink" href="#Autograd.reshapeOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.reshapeOp.shape">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"> <span class="pre">:</span> <span class="pre">newRank*int</span></em><a class="headerlink" href="#Autograd.reshapeOp.shape" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"> <span class="pre">:</span> <span class="pre">newRank*int</span></em><a class="headerlink" href="#Autograd.reshapeOp.shape" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.reshapeOp.input">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">oldRank)</span></em><a class="headerlink" href="#Autograd.reshapeOp.input" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">oldRank)</span></em><a class="headerlink" href="#Autograd.reshapeOp.input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -491,24 +516,24 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.permuteOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">permuteOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.permuteOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.permuteOp.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.permuteOp.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.permuteOp.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.permuteOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.permuteOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.permuteOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.permuteOp.permutation">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">permutation</span></span><a class="headerlink" href="#Autograd.permuteOp.permutation" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">permutation</span></span><a class="headerlink" href="#Autograd.permuteOp.permutation" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.permuteOp.input">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.permuteOp.input" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.permuteOp.input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -531,24 +556,24 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.expandOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">expandOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.expandOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.expandOp.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.expandOp.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.expandOp.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.expandOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.expandOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.expandOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.expandOp.expandedShape">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">expandedShape</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em><a class="headerlink" href="#Autograd.expandOp.expandedShape" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">expandedShape</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em><a class="headerlink" href="#Autograd.expandOp.expandedShape" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.expandOp.input">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.expandOp.input" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.expandOp.input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -571,29 +596,29 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.padOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">padOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.padOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.padOp.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.padOp.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.padOp.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.padOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.padOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.padOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.padOp.arg">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">arg</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*(2*(int))</span></em><a class="headerlink" href="#Autograd.padOp.arg" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">arg</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*2*int</span></em><a class="headerlink" href="#Autograd.padOp.arg" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.padOp.value">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"> <span class="pre">:</span> <span class="pre">eltType</span></em><a class="headerlink" href="#Autograd.padOp.value" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"> <span class="pre">:</span> <span class="pre">eltType</span></em><a class="headerlink" href="#Autograd.padOp.value" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.padOp.input">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.padOp.input" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.padOp.input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -616,24 +641,24 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.shrinkOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">shrinkOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.shrinkOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.shrinkOp.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.shrinkOp.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.shrinkOp.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.shrinkOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.shrinkOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.shrinkOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.shrinkOp.arg">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">arg</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*(2*(int))</span></em><a class="headerlink" href="#Autograd.shrinkOp.arg" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">arg</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*2*int</span></em><a class="headerlink" href="#Autograd.shrinkOp.arg" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.shrinkOp.input">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.shrinkOp.input" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.shrinkOp.input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -656,24 +681,24 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.sliceOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">sliceOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.sliceOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.sliceOp.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.sliceOp.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.sliceOp.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.sliceOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.sliceOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.sliceOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.sliceOp.dom">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">dom</span></span><em class="property"> <span class="pre">:</span> <span class="pre">domain(rank,</span> <span class="pre">int)</span></em><a class="headerlink" href="#Autograd.sliceOp.dom" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">dom</span></span><em class="property"> <span class="pre">:</span> <span class="pre">domain(rank,</span> <span class="pre">int)</span></em><a class="headerlink" href="#Autograd.sliceOp.dom" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.sliceOp.input">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.sliceOp.input" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.sliceOp.input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -696,29 +721,29 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.layerSliceOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">layerSliceOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.layerSliceOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.layerSliceOp.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.layerSliceOp.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.layerSliceOp.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.layerSliceOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.layerSliceOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.layerSliceOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.layerSliceOp.base">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">base</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.layerSliceOp.base" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">base</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.layerSliceOp.base" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.layerSliceOp.mask">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">mask</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.layerSliceOp.mask" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">mask</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.layerSliceOp.mask" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.layerSliceOp.maskDomain">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">maskDomain</span></span><em class="property"> <span class="pre">:</span> <span class="pre">domain(rank,</span> <span class="pre">int)</span></em><a class="headerlink" href="#Autograd.layerSliceOp.maskDomain" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">maskDomain</span></span><em class="property"> <span class="pre">:</span> <span class="pre">domain(rank,</span> <span class="pre">int)</span></em><a class="headerlink" href="#Autograd.layerSliceOp.maskDomain" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -741,29 +766,29 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.sumOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">sumOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.sumOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.sumOp.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.sumOp.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.sumOp.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.sumOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.sumOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.sumOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.sumOp.sumRank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">sumRank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.sumOp.sumRank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">sumRank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.sumOp.sumRank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.sumOp.axes">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">axes</span></span><em class="property"> <span class="pre">:</span> <span class="pre">sumRank*int</span></em><a class="headerlink" href="#Autograd.sumOp.axes" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">axes</span></span><em class="property"> <span class="pre">:</span> <span class="pre">sumRank*int</span></em><a class="headerlink" href="#Autograd.sumOp.axes" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.sumOp.input">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.sumOp.input" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.sumOp.input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -791,29 +816,29 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.maxOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">maxOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.maxOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.maxOp.rank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.maxOp.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.maxOp.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.maxOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.maxOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.maxOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.maxOp.maxRank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">maxRank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.maxOp.maxRank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">maxRank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.maxOp.maxRank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.maxOp.axes">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">axes</span></span><em class="property"> <span class="pre">:</span> <span class="pre">maxRank*int</span></em><a class="headerlink" href="#Autograd.maxOp.axes" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">axes</span></span><em class="property"> <span class="pre">:</span> <span class="pre">maxRank*int</span></em><a class="headerlink" href="#Autograd.maxOp.axes" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.maxOp.input">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.maxOp.input" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">input</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#Autograd.maxOp.input" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -836,24 +861,24 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="Autograd.conv2DOp">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">conv2DOp</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Autograd.conv2DOp" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl attribute">
+<dd><dl class="chpl type">
 <dt class="sig sig-object chpl" id="Autograd.conv2DOp.eltType">
-<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.conv2DOp.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Autograd.conv2DOp.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.conv2DOp.features">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">features</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">3)</span></em><a class="headerlink" href="#Autograd.conv2DOp.features" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">features</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">3)</span></em><a class="headerlink" href="#Autograd.conv2DOp.features" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.conv2DOp.kernel">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">kernel</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">4)</span></em><a class="headerlink" href="#Autograd.conv2DOp.kernel" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">kernel</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">4)</span></em><a class="headerlink" href="#Autograd.conv2DOp.kernel" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl attribute">
+<dl class="chpl data">
 <dt class="sig sig-object chpl" id="Autograd.conv2DOp.stride">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">stride</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.conv2DOp.stride" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">stride</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Autograd.conv2DOp.stride" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">

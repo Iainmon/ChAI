@@ -1,10 +1,15 @@
 
 module Utilities {
-    config param loopGpuSupport = false;
+    private use ChplConfig only CHPL_LOCALE_MODEL;
+    config param loopGpuSupport = CHPL_LOCALE_MODEL == "gpu";
+
+    proc targetGpu() param : bool do return loopGpuSupport && CHPL_LOCALE_MODEL == "gpu";
 
     module Types {
         type stdRange = range(idxType=int,bounds=boundKind.both,strides=strideKind.one);
         // type stdDomain = domain(DefaultRectangularDom(?));
+        type f32 = real(32);
+        type f64 = real(64);
     }
 
     import IO;
@@ -83,9 +88,7 @@ module Utilities {
     }
 
     inline proc normalizeDomain(dom: domain(?)): domain(dom.rank,int) /*where dom.strides == strideKind.one*/ {
-        const shape = dom.shape;
-        const normalDom = domainFromShape((...shape));
-        return normalDom;
+        return dom.normalize;
     }
 
     inline proc emptyDomain(param rank: int) : domain(rank,int) {
@@ -376,7 +379,7 @@ module Utilities {
                 foreach i in 0..<shape do 
                     yield i;
             } else {
-                if loopGpuSupport {
+                if loopGpuSupport && here.isGpu() {
                     @assertOnGpu
                     foreach i in 0..<shape do
                         yield i;
@@ -393,7 +396,7 @@ module Utilities {
                 forall i in 0..<shape do 
                     yield i;
             } else {
-                if loopGpuSupport {
+                if loopGpuSupport && here.isGpu() {
                     @assertOnGpu
                     forall i in 0..<shape do
                         yield i;
@@ -417,7 +420,7 @@ module Utilities {
                     divs(i) = prod;
                     prod *= shape(i);
                 }
-                if loopGpuSupport {
+                if loopGpuSupport && here.isGpu() {
                     @assertOnGpu
                     foreach i in 0..<prod {
                         yield indexAtHelperMultiples(i,(...divs));
@@ -445,7 +448,7 @@ module Utilities {
                     divs(i) = prod;
                     prod *= shape(i);
                 }
-                if loopGpuSupport {
+                if loopGpuSupport && here.isGpu() {
                     @assertOnGpu
                     forall i in 0..<prod {
                         yield indexAtHelperMultiples(i,(...divs)); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
@@ -602,13 +605,27 @@ module Utilities {
             var s: rank * int;
             const dms = dims();
             for param i in 0..<rank {
-                s(i) = (dms(i).highBound - dms(i).lowBound) + 1;
+                const ref dm = dms(i);
+                s(i) = (dm.highBound - dm.lowBound) + 1;
             }
             if rank == 1 then 
                 return s(0);
             else
                 return s;
         }
+
+        inline proc _domain.fastNormalDims {
+            var s: rank * range;
+            const dms = dims();
+            for param i in 0..<rank {
+                const ref dm = dms(i);
+                const upper = (dm.highBound - dm.lowBound) + 1;
+                s(i) = 0..<upper;
+            }
+            return s;
+        }
+
+
         inline proc _domain.myShape {
             var s: rank * int;
             const dms = dims();
@@ -633,20 +650,9 @@ module Utilities {
         //     return 0..<end;
         // }
 
-        inline proc _domain.normalize : this.type where this.isRectangular() {
-            // if this.strides == strideKind.one {
-            //     const lw: this.fullIdxType;
-            //     if lw == this.low {
-            //         return this;
-            //     }
-            // }
-            if this.isNormal then return this;
-
-            const myShape = shape;
-            var ranges: rank*range;
-            for param i in 0..rank-1 do
-                ranges(i) = 0..<myShape(i);
-            return {(...ranges)};
+        inline proc _domain.normalize where this.isRectangular() {
+            const dms = fastNormalDims;
+            return {(...dms)};
         }
 
         inline proc _domain.isNormal: bool where this.isRectangular() {

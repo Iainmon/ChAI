@@ -11,40 +11,41 @@ record tensor : serializable {
     param rank: int;
     type eltType = real(64);
     var resource: shared BaseTensorResource(eltType,rank);
-    forwarding resource only to, array, grad, device, backward;
-
+    forwarding resource only to, array, grad, device ;//backward;
     proc meta do return this.resource;
 
-    proc _dom do return this.array.domain;
+    proc _dom do return resource.array.domain;
 
     proc init(param rank: int, type eltType = real(64)) {
         this.rank = rank;
         this.eltType = eltType;
-        this.resource = new shared TensorResource(rank,eltType,baseValue);
+        this.resource = new shared TensorResource(eltType,rank,new baseValue());
     }
 
-    proc init(resource: shared BaseTensorResource(?eltType,?rank)) {
+    proc init(in resource: shared BaseTensorResource(?eltType,?rank)) {
         this.rank = rank;
         this.eltType = eltType;
         this.resource = resource;
     }
 
-    proc init(nda: ndarray(?rank,?eltType)) {
+    proc init(in resource: owned BaseTensorResource(?eltType,?rank)) {
+        this.init(shared.adopt(resource));
+    }
+
+    proc init(array: ndarray(?rank,?eltType)) {
         this.rank = rank;
         this.eltType = eltType;
-        this.resource = new shared TensorResource(nda,new baseValue());
+        on Remote.defaultDevice var ar: shared Remote(ndarray(rank,eltType)) = array;
+        this.resource = new shared TensorResource(ar);
     }
 
     proc init(dom: domain(?),type eltType = real) {
         const normal = util.normalizeDomain(dom);
-        this.rank = dom.rank;
+        param rank = normal.rank;
+        on Remote.defaultDevice var ar: shared Remote(ndarray(rank,eltType)) = new ndarray(normal,eltType);
+        this.rank = rank;
         this.eltType = eltType;
-        this.resource = new shared TensorResource(rank,eltType,baseValue);
-        init this;
-        on this.device {
-            this.array.reshapeDomain(normal);
-            // this.grad.reshapeDomain(normal);
-        }
+        this.resource = new shared TensorResource(ar);
     }
 
     proc init(arr: [] ?eltType) do
@@ -64,7 +65,6 @@ record tensor : serializable {
             ref arr = this.array;
             ref gra = this.grad;
             arr.reshapeDomain(dom);
-            // gra.reshapeDomain(dom);
         }
     }
 
@@ -76,16 +76,19 @@ record tensor : serializable {
         }
     }
 
-    proc detach(): tensor(rank,eltType) {
-        if var tr = this.meta : borrowed TensorResource(eltType,rank,baseValue)? then
-            return this;
-        else 
-            return new tensor(new shared TensorResource(this.resource,forget = true));
+    proc detach(copy: bool = true, keepGrad: bool = false): tensor(rank,eltType) {
+        return new tensor(meta.detach(copy,keepGrad));
     }
 }
 
+operator :(in t: tensor(?rank,?eltType), type toType): tensor(rank,toType) {
+    const a = t.array;
+    const b = a : toType;
+    return new tensor(b);
+}
+
 proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType) {
-    var newMeta = new shared TensorResource(rank,eltType,ctx);
+    var newMeta = new owned TensorResource(eltType,rank,ctx);
     newMeta.forward();
     return new tensor(newMeta);
 }
@@ -245,12 +248,15 @@ proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType)
 }
 
 proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), bias: tensor(1,eltType), stride: int): tensor(3,eltType) {
-    var conv = new tensor(3,eltType);
-    on conv.device {
-        conv.array = ndarray.convolve(features.array,kernel.array,bias.array,stride);
+    // on here.gpus[0] var x: shared Remote(ndarray(3,eltType)) = ndarray.convolve(features.array,kernel.array,bias.array,stride);
+
+    var t = new tensor(3,eltType);
+    on t.device {
+        t.array = ndarray.convolve(features.array,kernel.array,bias.array,stride);
     }
-    return conv;
+    return t;
 }
+
 
 proc type tensor.matvecmulFast(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
     var u = new tensor(1,eltType);
@@ -341,7 +347,7 @@ proc main() {
 
     var t = new tensor(2,real);
     t.array.reshapeDomain({0..<3,0..<5});
-    t.to(defaultDevice);
+    t.to(Remote.defaultDevice);
     on t.device {
         ref tarr = t.array;
         ref tdata = tarr.data;

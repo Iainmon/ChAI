@@ -17,17 +17,17 @@ or
 
    import Network;
 
-.. function:: proc helpFindModuleByName(arg, x: string): borrowed Module(?)?
+.. function:: proc helpFindModuleByName(arg, x: string): borrowed Module(?)
 
 .. function:: proc helpFindParamDataByName(arg, x: string) ref: Tensor(?)
 
 .. record:: moduleChildren
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType = real
 
-   .. attribute:: var childDict: map(string, borrowed Module(eltType))
+   .. data:: config var childDict: map(string, borrowed Module(eltType))
 
-   .. attribute:: var order: list(string)
+   .. data:: config var order: list(string)
 
    .. method:: proc init(type eltType = real)
 
@@ -53,11 +53,11 @@ or
 
 .. record:: moduleAttributes : serializable
 
-   .. attribute:: var layerType: string
+   .. data:: config var layerType: string
 
-   .. attribute:: var moduleName: string
+   .. data:: config var moduleName: string
 
-   .. attribute:: var attributes: dict(string, string)
+   .. data:: config var attributes: dict(string, string)
 
    .. method:: proc init(layerType: string, moduleName: string, in attrs: map(string, string, ?))
 
@@ -81,31 +81,33 @@ or
 
 .. class:: ModuleSpecification : serializable
 
-   .. attribute:: var layerType: string
+   .. data:: config var layerType: string
 
-   .. attribute:: var attributes: map(string, string)
+   .. data:: config var attributes: map(string, string)
 
-   .. attribute:: var subModules: map(string, owned ModuleSpecification?)
+   .. data:: config var subModules: map(string, owned(?ModuleSpecification))
 
-   .. attribute:: var subModuleOrder: list(string)
+   .. data:: config var subModuleOrder: list(string)
 
-.. function:: proc moduleFromSpec(ms_: borrowed ModuleSpecification?): owned Module(real)
+.. function:: proc moduleFromSpec(ms_: borrowed ?ModuleSpecification, type dtype = real(32)): owned(Module(dtype))
 
-.. function:: proc modelFromSpecFile(path: string): owned Module(real)
+.. function:: proc modelFromSpecFile(path: string, type dtype = real(32)): owned(Module(dtype))
+
+.. function:: proc loadModel(specFile: string, weightsFolder: string, type dtype = real(32)): owned(Module(dtype))
 
 .. data:: var moduleInstances = 0
 
 .. class:: Module
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType
 
-   .. attribute:: var subModules: moduleChildren(eltType)
+   .. data:: config var subModules: moduleChildren(eltType)
 
-   .. attribute:: var moduleId: int
+   .. data:: config var moduleId: int
 
-   .. attribute:: var moduleName: string
+   .. data:: config var moduleName: string
 
-   .. attribute:: var ownedModules: list(shared Module(eltType))
+   .. data:: config var ownedModules: list(shared Module(eltType))
 
    .. method:: proc init(type eltType = real)
 
@@ -121,7 +123,7 @@ or
 
    .. method:: proc addModule(name: string, m: shared Module(eltType))
 
-   .. method:: proc addModule(name: string, in m: owned Module(eltType))
+   .. method:: proc addModule(name: string, in m: owned(Module(eltType)))
 
    .. method:: proc addParameter(name: string, data: Tensor(eltType))
 
@@ -149,7 +151,7 @@ or
 
 .. class:: Parameter : Module(?)
 
-   .. attribute:: var data: Tensor(eltType)
+   .. data:: config var data: Tensor(eltType)
 
    .. method:: proc init(data: Tensor(?eltType))
 
@@ -157,13 +159,13 @@ or
 
 .. class:: Sequential : Module(?)
 
-   .. attribute:: var mds: list(shared Module(eltType))
+   .. data:: config var mds: list(shared Module(eltType))
 
    .. method:: proc init(type eltType = real, ms: dict(string, shared Module(eltType)), param overrideName = false, moduleName: string = "")
 
    .. method:: proc init(type eltType = real, in ms)
 
-   .. method:: proc init(type eltType = real, order: list(string), in ms: map(string, owned Module(eltType)?))
+   .. method:: proc init(type eltType = real, order: list(string), in ms: map(string, owned(?Module(eltType))))
 
    .. method:: proc init(in ms: owned Module(real)? ...?rank)
 
@@ -173,13 +175,13 @@ or
 
 .. class:: Linear : Module(?)
 
-   .. attribute:: var m: int
+   .. data:: var m: int
 
-   .. attribute:: var n: m.type
+.. data:: var n: m.type
 
-   .. attribute:: var weight: owned Parameter(eltType)
+   .. data:: config var weight: owned(Parameter(eltType))
 
-   .. attribute:: var bias: owned Parameter(eltType)
+   .. data:: config var bias: owned(Parameter(eltType))
 
    .. method:: proc init(type eltType, m: int, n: int)
 
@@ -193,13 +195,13 @@ or
 
 .. class:: Conv2D : Module(?)
 
-   .. attribute:: var kernelShape: 4*(int)
+   .. data:: config var kernelShape: 4*int
 
-   .. attribute:: var stride: int
+   .. data:: config var stride: int
 
-   .. attribute:: var kernel: owned Parameter(eltType)
+   .. data:: config var kernel: owned(Parameter(eltType))
 
-   .. attribute:: var bias: owned Parameter(eltType)
+   .. data:: config var bias: owned(Parameter(eltType))
 
    .. method:: proc init(type eltType = real, channels: int, features: int, kernel: int, stride: int = 1)
 
@@ -215,7 +217,7 @@ or
 
 .. class:: MaxPool : Module(?)
 
-   .. attribute:: var poolSize: int
+   .. data:: config var poolSize: int
 
    .. method:: proc init(type eltType = real, poolSize: int)
 

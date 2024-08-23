@@ -9,6 +9,8 @@ import Time;
 
 config param layerDebug = false;
 
+type dtype = real(32);
+
 class CNN : Module(?) {
     var conv1: owned Conv2D(eltType);
     var conv2: owned Conv2D(eltType);
@@ -18,7 +20,7 @@ class CNN : Module(?) {
     var fc1: owned Linear(eltType);
     var fc2: owned Linear(eltType);
 
-    proc init(type eltType = real) {
+    proc init(type eltType = dtype) {
         super.init(eltType);
         // (1,3,3) x 32
         this.conv1 = new Conv2D(eltType,channels=1,features=32,kernel=3,stride=1); // (1,X,X) -> (32,Y,Y)
@@ -142,12 +144,16 @@ if diag {
 }
 
 
-var cnn = new CNN(real);
+var cnn = new CNN(dtype);
 
 
 for (n,m) in cnn.moduleFields() {
     writeln(n);
 }
+
+var model = Network.loadModel(specFile="scripts/models/cnn/specification.json",
+              weightsFolder="scripts/models/cnn/",
+              dtype=dtype);
 
 
 config const testImgSize = 28;
@@ -167,7 +173,7 @@ cnn.loadPyTorchDump(modelPath);
 
 config const imageCount = 0;
 
-var images = forall i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
+var images = forall i in 0..<imageCount do Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata") : dtype;
 var preds: [images.domain] int;
 
 config const numTimes = 1;
@@ -186,7 +192,7 @@ for i in 0..<numTimes {
         // x = conv2(x);
         // var output = x;
         // pred = output.runtimeRank;
-        var output: Tensor(real) = cnn(img);
+        var output: Tensor(dtype) = model(img);
         pred = output.argmax();
         // writeln((i, pred));
     }
