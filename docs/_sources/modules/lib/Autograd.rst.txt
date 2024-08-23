@@ -25,7 +25,7 @@ or
 
 .. class:: TensorEssence : serializable
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType = real
 
    .. method:: proc runtimeRank: int
 
@@ -35,19 +35,19 @@ or
 
 .. class:: ForgetfulTensor : TensorEssence
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
 .. class:: BaseTensorResource : TensorEssence, serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: var dataResource: shared Remote(ndarray(rank, eltType))
+   .. data:: config var dataResource: shared Remote(ndarray(rank, eltType))
 
-   .. attribute:: var gradResource: shared Remote(ndarray(rank, eltType))?
+   .. data:: config var gradResource: shared ?Remote(ndarray(rank, eltType))
 
    .. method:: proc init(type eltType, param rank: int)
 
-   .. method:: proc init(in dataResource: shared Remote(ndarray(?rank, ?eltType)), in gradResource: shared Remote(ndarray(rank, eltType))? = nil)
+   .. method:: proc init(in dataResource: shared Remote(ndarray(?rank, ?eltType)), in gradResource: shared ?Remote(ndarray(rank, eltType)) = nil)
 
    .. method:: proc init(data: ndarray(?rank, ?eltType), device: locale = Remote.defaultDevice)
 
@@ -65,25 +65,25 @@ or
 
    .. method:: proc backward() where rank == 1
 
-   .. method:: proc detach(copy: bool = true, keepGrad: bool = false): owned TensorResource(eltType, rank, baseValue)
+   .. method:: proc detach(copy: bool = true, keepGrad: bool = false): owned(TensorResource(eltType, rank, baseValue))
 
    .. method:: override proc runtimeRank: int
 
 .. class:: TensorResource : BaseTensorResource(?), serializable
 
-   .. attribute:: type operationType
+   .. type:: config type operationType
 
-   .. attribute:: var operationCtx: operationType
+   .. data:: config var operationCtx: operationType
 
    .. method:: proc init(type eltType, param rank: int, operationCtx: ?operationType)
 
-   .. method:: proc init(in dataResource: shared Remote(ndarray(?rank, ?eltType)), in gradResource: shared Remote(ndarray(rank, eltType))? = nil, operationCtx: ?operationType)
+   .. method:: proc init(in dataResource: shared Remote(ndarray(?rank, ?eltType)), in gradResource: shared ?Remote(ndarray(rank, eltType)) = nil, operationCtx: ?operationType)
 
    .. method:: proc init(in dataResource: shared Remote(ndarray(?rank, ?eltType)))
 
    .. method:: proc init(bt: borrowed BaseTensorResource(?eltType, ?rank), operationCtx: ?operationType)
 
-   .. method:: override proc detach(copy: bool = true, keepGrad: bool = false): owned TensorResource(eltType, rank, baseValue)
+   .. method:: override proc detach(copy: bool = true, keepGrad: bool = false): owned(TensorResource(eltType, rank, baseValue))
 
    .. method:: override proc forward()
 
@@ -97,7 +97,7 @@ or
 
 .. record:: reluOp : serializable
 
-   .. attribute:: var input: shared BaseTensorResource(?)
+   .. data:: config var input: shared BaseTensorResource(?)
 
    .. method:: proc children
 
@@ -107,7 +107,7 @@ or
 
 .. record:: expOp : serializable
 
-   .. attribute:: var input: shared BaseTensorResource(?)
+   .. data:: config var input: shared BaseTensorResource(?)
 
    .. method:: proc children
 
@@ -115,13 +115,13 @@ or
 
 .. record:: addOp : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType
+   .. type:: config type eltType
 
-   .. attribute:: var lhs: shared BaseTensorResource(eltType, rank)
+   .. data:: config var lhs: shared BaseTensorResource(eltType, rank)
 
-   .. attribute:: var rhs: shared BaseTensorResource(eltType, rank)
+   .. data:: config var rhs: shared BaseTensorResource(eltType, rank)
 
    .. method:: proc children
 
@@ -131,9 +131,9 @@ or
 
 .. record:: subOp : serializable
 
-   .. attribute:: var lhs: shared BaseTensorResource(?)
+   .. data:: config var lhs: shared BaseTensorResource(?)
 
-   .. attribute:: var rhs: shared BaseTensorResource(?)
+   .. data:: config var rhs: shared BaseTensorResource(?)
 
    .. method:: proc children
 
@@ -141,9 +141,9 @@ or
 
 .. record:: divOp : serializable
 
-   .. attribute:: var lhs: shared BaseTensorResource(?)
+   .. data:: config var lhs: shared BaseTensorResource(?)
 
-   .. attribute:: var rhs: shared BaseTensorResource(?)
+   .. data:: config var rhs: shared BaseTensorResource(?)
 
    .. method:: proc children
 
@@ -151,13 +151,13 @@ or
 
 .. record:: multOp : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType
+   .. type:: config type eltType
 
-   .. attribute:: var lhs: shared BaseTensorResource(eltType, rank)
+   .. data:: config var lhs: shared BaseTensorResource(eltType, rank)
 
-   .. attribute:: var rhs: shared BaseTensorResource(eltType, rank)
+   .. data:: config var rhs: shared BaseTensorResource(eltType, rank)
 
    .. method:: proc children
 
@@ -167,15 +167,15 @@ or
 
 .. record:: reshapeOp : serializable
 
-   .. attribute:: param oldRank: int
+   .. data:: config param oldRank: int
 
-   .. attribute:: param newRank: int
+   .. data:: config param newRank: int
 
-   .. attribute:: type eltType
+   .. type:: config type eltType
 
-   .. attribute:: var shape: newRank*int
+   .. data:: config var shape: newRank*int
 
-   .. attribute:: var input: shared BaseTensorResource(eltType, oldRank)
+   .. data:: config var input: shared BaseTensorResource(eltType, oldRank)
 
    .. method:: proc children
 
@@ -185,13 +185,13 @@ or
 
 .. record:: permuteOp : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType = real
 
-   .. attribute:: var permutation
+   .. data:: config var permutation
 
-   .. attribute:: var input: shared BaseTensorResource(eltType, rank)
+   .. data:: config var input: shared BaseTensorResource(eltType, rank)
 
    .. method:: proc children
 
@@ -201,13 +201,13 @@ or
 
 .. record:: expandOp : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType = real
 
-   .. attribute:: var expandedShape: rank*int
+   .. data:: config var expandedShape: rank*int
 
-   .. attribute:: var input: shared BaseTensorResource(eltType, rank)
+   .. data:: config var input: shared BaseTensorResource(eltType, rank)
 
    .. method:: proc children
 
@@ -217,15 +217,15 @@ or
 
 .. record:: padOp : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType = real
 
-   .. attribute:: var arg: rank*(2*(int))
+   .. data:: config var arg: rank*2*int
 
-   .. attribute:: var value: eltType
+   .. data:: config var value: eltType
 
-   .. attribute:: var input: shared BaseTensorResource(eltType, rank)
+   .. data:: config var input: shared BaseTensorResource(eltType, rank)
 
    .. method:: proc children
 
@@ -235,13 +235,13 @@ or
 
 .. record:: shrinkOp : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType = real
 
-   .. attribute:: var arg: rank*(2*(int))
+   .. data:: config var arg: rank*2*int
 
-   .. attribute:: var input: shared BaseTensorResource(eltType, rank)
+   .. data:: config var input: shared BaseTensorResource(eltType, rank)
 
    .. method:: proc children
 
@@ -251,13 +251,13 @@ or
 
 .. record:: sliceOp : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType = real
 
-   .. attribute:: var dom: domain(rank, int)
+   .. data:: config var dom: domain(rank, int)
 
-   .. attribute:: var input: shared BaseTensorResource(eltType, rank)
+   .. data:: config var input: shared BaseTensorResource(eltType, rank)
 
    .. method:: proc children
 
@@ -267,15 +267,15 @@ or
 
 .. record:: layerSliceOp : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType = real
 
-   .. attribute:: var base: shared BaseTensorResource(eltType, rank)
+   .. data:: config var base: shared BaseTensorResource(eltType, rank)
 
-   .. attribute:: var mask: shared BaseTensorResource(eltType, rank)
+   .. data:: config var mask: shared BaseTensorResource(eltType, rank)
 
-   .. attribute:: var maskDomain: domain(rank, int)
+   .. data:: config var maskDomain: domain(rank, int)
 
    .. method:: proc children
 
@@ -285,15 +285,15 @@ or
 
 .. record:: sumOp : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType = real
 
-   .. attribute:: param sumRank: int
+   .. data:: config param sumRank: int
 
-   .. attribute:: var axes: sumRank*int
+   .. data:: config var axes: sumRank*int
 
-   .. attribute:: var input: shared BaseTensorResource(eltType, rank)
+   .. data:: config var input: shared BaseTensorResource(eltType, rank)
 
    .. method:: proc children
 
@@ -305,15 +305,15 @@ or
 
 .. record:: maxOp : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType = real
 
-   .. attribute:: param maxRank: int
+   .. data:: config param maxRank: int
 
-   .. attribute:: var axes: maxRank*int
+   .. data:: config var axes: maxRank*int
 
-   .. attribute:: var input: shared BaseTensorResource(eltType, rank)
+   .. data:: config var input: shared BaseTensorResource(eltType, rank)
 
    .. method:: proc children
 
@@ -323,13 +323,13 @@ or
 
 .. record:: conv2DOp : serializable
 
-   .. attribute:: type eltType = real
+   .. type:: config type eltType = real
 
-   .. attribute:: var features: shared BaseTensorResource(eltType, 3)
+   .. data:: config var features: shared BaseTensorResource(eltType, 3)
 
-   .. attribute:: var kernel: shared BaseTensorResource(eltType, 4)
+   .. data:: config var kernel: shared BaseTensorResource(eltType, 4)
 
-   .. attribute:: var stride: int
+   .. data:: config var stride: int
 
    .. method:: proc children
 

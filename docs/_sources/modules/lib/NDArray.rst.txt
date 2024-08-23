@@ -17,39 +17,15 @@ or
 
    import NDArray;
 
-.. class:: NDArrayData : serializable
-
-   .. warning::
-
-      Dont use me
-
-   .. attribute:: param rank: int
-
-   .. attribute:: type eltType = real(64)
-
-   .. attribute:: var _domain: domain(rank, int) = util.emptyDomain(rank)
-
-   .. attribute:: var data: [_domain] eltType = noinit
-
-   .. method:: proc init(param rank: int, type eltType)
-
-   .. method:: proc init(param rank: int, type eltType, dom: domain(rank, int))
-
-   .. method:: proc init(param rank: int, type eltType, dom: domain(rank, int), A: [dom] eltType)
-
-   .. method:: proc init(A: [] ?eltType)
-
-   .. method:: proc init(me: NDArrayData(?rank, ?eltType))
-
 .. record:: ndarray : serializable
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real(32)
+   .. type:: config type eltType = real(32)
 
-   .. attribute:: var _domain: domain(rank, int)
+   .. data:: config var _domain: domain(rank, int)
 
-   .. attribute:: var data: [_domain] eltType = noinit
+   .. data:: config var data: [_domain] eltType = noinit
 
    .. method:: proc _dom
 
@@ -119,7 +95,7 @@ or
 
    .. method:: proc populateRemote(re: borrowed Remote(ndarray(rank, eltType))): borrowed Remote(ndarray(rank, eltType))
 
-   .. method:: proc toRemote(): owned Remote(ndarray(rank, eltType))
+   .. method:: proc toRemote(): owned(Remote(ndarray(rank, eltType)))
 
    .. itermethod:: iter ref batchify(param dim: int = 0) ref where dim < rank
 
@@ -133,9 +109,9 @@ or
 
 .. method:: proc type ndarray.arange(to: int, type eltType = real(64), shape: ?rank*int): ndarray(rank, eltType)
 
-.. function:: operator  = (ref lhs: ndarray(?rank, ?eltType), const rhs: ndarray(rank, eltType))
+.. function:: operator =(ref lhs: ndarray(?rank, ?eltType), const rhs: ndarray(rank, eltType))
 
-.. function:: operator  = (ref lhs: ndarray(?rank, ?eltType), const rhs: [] eltType) where rhs.rank == rank
+.. function:: operator =(ref lhs: ndarray(?rank, ?eltType), const rhs: [] eltType) where rhs.rank == rank
 
 .. function:: operator :(const val: [] ?eltType, type t: ndarray(val.rank, eltType))
 
@@ -173,11 +149,11 @@ or
 
 .. class:: _tensor_resource
 
-   .. attribute:: param rank: int
+   .. data:: config param rank: int
 
-   .. attribute:: type eltType = real(64)
+   .. type:: config type eltType = real(64)
 
-   .. attribute:: var data: remote(ndarray(rank, eltType))
+   .. data:: config var data: remote(ndarray(rank, eltType))
 
 .. method:: proc type ndarray.fullOuter(a: ndarray(?rankA, ?eltType), b: ndarray(?rankB, eltType)): ndarray(rankA+rankB, eltType)
 
