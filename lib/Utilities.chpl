@@ -3,7 +3,18 @@ module Utilities {
     private use ChplConfig only CHPL_LOCALE_MODEL;
     config param loopGpuSupport = CHPL_LOCALE_MODEL == "gpu";
 
-    proc targetGpu() param : bool do return loopGpuSupport && CHPL_LOCALE_MODEL == "gpu";
+    proc targetGpu() param : bool {
+        if loopGpuSupport && CHPL_LOCALE_MODEL == "gpu" {
+            return true;
+        } else if CHPL_LOCALE_MODEL == "gpu" {
+            return true;
+        } else if loopGpuSupport {
+            compilerError("loopGpuSupport should be enabled if CHPL_LOCALE_MODEL is set to 'gpu'.");
+            return false;
+        } else {
+            return false;
+        }
+    }
 
     module Types {
         type stdRange = range(idxType=int,bounds=boundKind.both,strides=strideKind.one);
