@@ -262,6 +262,8 @@ module Utilities {
         private use Utilities;
         private import Utilities as util;
 
+        public use SimpleDomain;
+
         proc _tuple.imageType(f) type {
             type eltType = this.eltType;
             const t0: eltType = this(0);
@@ -363,6 +365,31 @@ module Utilities {
         //         tup(i) = v;
         // }
 
+        inline proc _domain.simple() const : rect(rank) do
+            return new rect(this);
+
+        inline iter _domain.every() {
+            const simple = this.simple();
+            foreach idx in simple do yield idx;
+        }
+        inline iter _domain.every(param tag: iterKind) 
+                where tag == iterKind.standalone {
+            const simple = this.simple();
+            foreach idx in simple do yield idx;
+        }
+
+        inline iter _domain.everyZip() {
+            const simple = this.simple();
+            foreach idx in simple.eachOrder() do yield idx;
+        }
+        inline iter _domain.everyZip(param tag: iterKind) 
+                where tag == iterKind.standalone {
+            const simple = this.simple();
+            foreach idx in simple.eachOrder() do yield idx;
+        }
+
+
+/*
         inline iter _domain.each {
             const shape = this.shape;
             var prod = 1;
@@ -447,7 +474,7 @@ module Utilities {
         inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone && rank > 1 {
 
             if CHPL_LOCALE_MODEL != "gpu" {
-                forall i in this.these(tag) do 
+                forall i in this do 
                     yield i;
             } else {
                 // compilerWarning("Using domain every.");
@@ -540,13 +567,12 @@ module Utilities {
                         else
                             blks(i) = shape(i) * blks(i + 1);
                     }
-                    // forall idx in this {
-                    //     var i: int;
-                    //     for param k in 0..<rank do
-                    //         i += idx(k) * blks(k);
-                    //     yield (i,idx);
-                    // }
-                    forall i in _value.these() do yield i;
+                    forall idx in this {
+                        var i: int;
+                        for param k in 0..<rank do
+                            i += idx(k) * blks(k);
+                        yield (i,idx);
+                    }
 
                 }
             } else {
@@ -685,7 +711,7 @@ module Utilities {
                     }
                 }
             }
-        }
+        }*/
 
         inline proc _domain.indexAt(n: int) where rank == 1 {
             return n;

@@ -1,5 +1,4 @@
 import Utilities as util;
-// use Utilities.Standard;
 private use IO;
 
 
@@ -228,6 +227,10 @@ record rect : serializable {
     }
 
     inline 
+    proc atIndex(const idx: int): int do
+        return idx;
+
+    inline 
     proc atIndex(const idx: rank*int): int {
         if rank == 1 then
             return idx;
@@ -249,6 +252,7 @@ record rect : serializable {
     pragma "order independent yielding loops"
     inline iter these() const : simpleTupleType(rank) do
         if util.targetGpu() then
+            @assertOnGpu
             foreach i in 0..<size do
                 yield indexAt(i);
         else {
@@ -261,6 +265,7 @@ record rect : serializable {
     inline iter these(param tag: iterKind) const : simpleTupleType(rank) 
             where tag == iterKind.standalone do
         if util.targetGpu() then
+            @assertOnGpu
             forall i in 0..<size do
                 yield indexAt(i);
         else {
@@ -272,6 +277,7 @@ record rect : serializable {
     pragma "order independent yielding loops"
     inline iter eachOrder() const : (int,simpleTupleType(rank)) do
         if util.targetGpu() then
+            @assertOnGpu
             foreach i in 0..<size do
                 yield (i,indexAt(i));
         else {
@@ -284,6 +290,7 @@ record rect : serializable {
     inline iter eachOrder(param tag: iterKind) const : (int,simpleTupleType(rank))
             where tag == iterKind.standalone do
         if util.targetGpu() then
+            @assertOnGpu
             forall i in 0..<size do
                 yield (i,indexAt(i));
         else {

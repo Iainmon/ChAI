@@ -151,7 +151,7 @@ for (n,m) in cnn.moduleFields() {
     writeln(n);
 }
 
-var model = Network.loadModel(specFile="scripts/models/cnn/specification.json",
+var model = Network.loadModel(specFile="../scripts/models/cnn/specification.json",
               weightsFolder="scripts/models/cnn/",
               dtype=dtype);
 

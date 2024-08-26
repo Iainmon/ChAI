@@ -9,7 +9,7 @@ config const detach = true;
 Tensor.detachMode(detach);
 
 // Construct the model from specification. 
-var model: owned Module(real) = modelFromSpecFile("scripts/models/cnn/specification.json");
+var model: owned Module(real) = modelFromSpecFile("../scripts/models/cnn/specification.json");
 
 // Print the model's structure. 
 writeln(model.signature);
