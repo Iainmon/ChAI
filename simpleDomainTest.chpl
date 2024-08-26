@@ -41,12 +41,12 @@ proc compare(dom:domain(?),d: rect(?rank)) where dom.rank == rank {
 }
 
 const Dom = {0..<3,0..<4,0..<5};
-const d: rect(3) = Dom;
+const d: rect(3) = new rect(Dom);
 
-compare(Dom,d);
+// compare(Dom,d);
 
-forall i in zip(d,d) do
-    writeln(i);
+// forall i in zip(d,d) do
+//     writeln(i);
 
 writeln(d);
 

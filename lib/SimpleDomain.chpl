@@ -8,7 +8,7 @@ proc isDomain(d: ?dt) param : bool {
     return isDomainType(dt) && d.isRectangular();
 }
 
-inline proc zeroTup(param rank: int) {
+inline proc zeroTup(param rank: int): rank*int {
     const t: rank * int;
     return t;
 }
@@ -19,17 +19,6 @@ proc simpleTupleType(param rank: int, type eltType = int) type do
     else 
         return rank * eltType;
 
-inline proc wrap(x: int): 1 * int do
-    return (x,);
-
-inline proc wrap(tup: ?rank * int): rank * int do
-    return tup;
-
-inline proc unwrap(tup: ?rank * int) do
-    if rank == 1 then 
-        return tup(0);
-    else
-        return tup;
 
 type tuple = _tuple(?);
 
@@ -41,24 +30,15 @@ pragma "reference to const when const this"
 inline proc tuple.last ref do
     return this(this.size - 1);
 
-proc tuple.isHomogeneous param : bool do
-    return isHomogeneousTuple(this.type);
-
 proc tuple.eltType type do
-    if isHomogeneousTuple(this) then
+    if isHomogeneousTuple(this.type) then
         return this(0).type;
-    else {
+    else
         compilerError("Not homogeneous.");
-        return nothing;
-    }
 
 // proc type tuple.eltType type
 //     where isHomogeneousTuple(this) do
 //         return this(0);
-
-proc tuple.homRank param : int
-    where isHomogeneous do
-        return this.first.size;
 
 pragma "reference to const when const this"
 inline proc tuple.uncons ref : (head.type,tail.type) {
@@ -69,55 +49,18 @@ inline proc tuple.uncons ref : (head.type,tail.type) {
 
 pragma "reference to const when const this"
 inline proc tuple.head ref do
-    return first;
+    return this(0);
 
 pragma "reference to const when const this"
-inline proc _tuple.tail {
+inline proc tuple.tail {
     inline proc rest(first, rst...) do
         return rst;
-    if size > 1 then
+    if this.size > 1 then
         return rest((...this));
     else
-        return none;
+        return compilerError("Taking the tail of a tuple must require it to have more than one elements.");
 }
 
-proc homTuples(type t) param : bool do
-    return isTuple(t) 
-        && isHomogeneousTuple(t)
-        && isTuple(t(0)) 
-        && isHomogeneousTuple(t(0));
-
-proc homTuples(tup: ?tuType) param : bool do
-    return homTuples(tuType);
-
-proc rankOfHomTuple(tup: ?tuType) param : int 
-        where isTuple(tuType)
-            && isHomogeneousTuple(tuType) do
-    return tup.size;
-
-proc tupsInTupsRank(tup: ?tuType) param : int 
-        where homTuples(tup) do
-    return rankOfHomTuple(tup.first);
-
-
-inline proc isTupleOfOrder(param order: int, tup: ?tupType) param : bool {
-    if !isTuple(tupType) then
-        return false;
-    inline proc isTupleOfOrderHelp(param level: int,tup: ?tupType) param : bool {
-        if !isTuple(tupType) then
-            return level == 0;
-
-        if !isHomogeneousTuple(tupType) then
-            return isTupleOfOrderHelp(level - 1, tup(0));
-
-        for param i in 0..<tup.size do
-            if !isTupleOfOrderHelp(level - 1, tup(i)) then
-                return false;
-
-        return true;
-    }
-    return isTupleOfOrderHelp(order, tup);
-}
 
 inline proc isTupleOfOrder(type leafType, param order: int, tup: ?tupType) param : bool {
     
@@ -153,17 +96,7 @@ inline proc computeSize(shape: ?rank*int): int {
     return s;
 }
 
-inline proc computeBlocks(shape: ?rank*int): rank*int {
-    var blks: rank * int;
-    for param j in 0..<rank {
-        param i = rank - j - 1;
-        if i == rank - 1 then
-            blks(i) = 1;
-        else
-            blks(i) = shape(i + 1) * blks(i + 1);
-    }
-    return blks;
-}
+
 
 record rect : serializable {
     param rank: int;
@@ -358,7 +291,113 @@ record rect : serializable {
             forall idx in dom do
                 yield (atIndex(idx),idx);
         }
+    
 
+    inline proc originate(const origin: rank * int) do
+        return new rect(shape,origin,size,strides);
+
+    inline proc translate(const change: rank * int) {
+        var off = offset;
+        for param i in 0..<rank do
+            off(i) += change(i);
+        return originate(off);
+    }
+
+    inline proc contains(const rct: rect(rank)): bool do
+        return offset <= rct.offset && rct.shape <= shape;
+
+    inline proc contains(const idx: rank*int): bool {
+        var res: bool = true;
+        for param i in 0..<rank do
+            res &= offset(i) <= idx(i) && idx(i) < shape(i);
+        return res;
+    }
+
+    proc toString() {
+        use IO;
+        use IO.FormattedIO;
+        const dms = dims();
+        var content: string = "";
+        for param i in 0..<rank do
+            content += (if i > 0 then ", %?" else "%?").format(shape(i));
+        if offset != zeroTup(rank) then
+            content = "(%s) + %?".format(content,offset);
+        return "{ " + content + " }"; // + "[%i]}".format(size);
+    }
+
+    proc serialize(writer: IO.stdout.type,ref serializer) {
+            if writer == IO.stdout then
+                writer.write(toString());
+            else
+                halt("This should not happen.");
+    }
+
+    proc serialize(writer: IO.fileWriter(?),ref serializer) {
+            var rh = serializer.startRecord(writer,"rect",5);
+            rh.writeField("rank",rank);
+            rh.writeField("shape",shape);
+            rh.writeField("offset",offset);
+            rh.writeField("strides",strides);
+            rh.writeField("size",size);
+            rh.endRecord();
+    }
+}
+
+operator +(const d: rect(?rank), const offset: rank*int): rect(rank) do
+    return d.translate(offset);
+operator -(const d: rect(?rank), const offset: rank*int): rect(rank) do
+    return d.translate(-offset);
+
+
+// Unused but good functions.
+
+
+// Same as computeStrides.
+inline proc computeBlocks(shape: ?rank*int): rank*int {
+    var blks: rank * int;
+    for param j in 0..<rank {
+        param i = rank - j - 1;
+        if i == rank - 1 then
+            blks(i) = 1;
+        else
+            blks(i) = shape(i + 1) * blks(i + 1);
+    }
+    return blks;
+}
+
+inline proc wrap(x: int): 1 * int do
+    return (x,);
+
+inline proc wrap(tup: ?rank * int): rank * int do
+    return tup;
+
+inline proc unwrap(tup: ?rank * int) do
+    if rank == 1 then 
+        return tup(0);
+    else
+        return tup;
+
+
+inline proc isTupleOfOrder(param order: int, tup: ?tupType) param : bool {
+    if !isTuple(tupType) then
+        return false;
+    inline proc isTupleOfOrderHelp(param level: int,tup: ?tupType) param : bool {
+        if !isTuple(tupType) then
+            return level == 0;
+
+        if !isHomogeneousTuple(tupType) then
+            return isTupleOfOrderHelp(level - 1, tup(0));
+
+        for param i in 0..<tup.size do
+            if !isTupleOfOrderHelp(level - 1, tup(i)) then
+                return false;
+
+        return true;
+    }
+    return isTupleOfOrderHelp(order, tup);
+}
+
+/*careful
     // I don't like working with thses.
         // pragma "reference to const when const this"
     inline iter eachOrder(param tag: iterKind) const : (int,simpleTupleType(rank))
@@ -443,59 +482,4 @@ record rect : serializable {
         foreach idx in rct do
             yield indexAt(rct.atIndex(idx));
     }
-
-    inline proc contains(const idx: rank*int): bool {
-        var res: bool = true;
-        for param i in 0..<rank do
-            res &= offset(i) <= idx(i) && idx(i) < shape(i);
-        return res;
-    }
-
-    inline proc contains(const rct: rect(rank)): bool do
-        return offset <= rct.offset && rct.shape <= shape;
-
-    proc toString() {
-        use IO;
-        use IO.FormattedIO;
-        const dms = dims();
-        var content: string = "";
-        for param i in 0..<rank do
-            content += (if i > 0 then ", %?" else "%?").format(shape(i));
-        if offset != zeroTup(rank) then
-            content = "(%s) + %?".format(content,offset);
-        return "{ " + content + " }"; // + "[%i]}".format(size);
-    }
-
-    proc serialize(writer: IO.stdout.type,ref serializer) {
-            if writer == IO.stdout then
-                writer.write(toString());
-            else
-                halt("This should not happen.");
-    }
-
-    proc serialize(writer: IO.fileWriter(?),ref serializer) {
-            var rh = serializer.startRecord(writer,"rect",5);
-            rh.writeField("rank",rank);
-            rh.writeField("shape",shape);
-            rh.writeField("offset",offset);
-            rh.writeField("strides",strides);
-            rh.writeField("size",size);
-            rh.endRecord();
-    }
-}
-
-    // var chplType: string;
-    // select metadata.dtype {
-    //   when "i4", "<i4" do chplType = "int(32)";
-    //   when "i8", "<i8" do chplType = "int(64)";
-    //   when "f4", "<f4" do chplType = "real(32)";
-    //   when "f8", "<f8" do chplType = "real(64)";
-    //   otherwise {
-    //     throw new Error("Only integer and floating point data types currently supported: %s".format(metadata.dtype));
-    //   }
-    // }
-
-
-// inline proc chpl_computeIteratorShape(arg: rect(?rank)) {
-//     return arg.dims();
-// }
+    */
