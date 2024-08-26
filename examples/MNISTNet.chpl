@@ -152,7 +152,7 @@ for (n,m) in cnn.moduleFields() {
 }
 
 var model = Network.loadModel(specFile="../scripts/models/cnn/specification.json",
-              weightsFolder="scripts/models/cnn/",
+              weightsFolder="../scripts/models/cnn/",
               dtype=dtype);
 
 
