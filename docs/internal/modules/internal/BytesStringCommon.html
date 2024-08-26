@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BytesStringCommon &mdash; chpldoc 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CString" href="CString.html" />
+    <link rel="prev" title="BytesCasts" href="BytesCasts.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            chpldoc
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">chpldoc documentation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ArrayViewRankChange.html">ArrayViewRankChange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ArrayViewReindex.html">ArrayViewReindex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ArrayViewSlice.html">ArrayViewSlice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Atomics.html">Atomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AtomicsCommon.html">AtomicsCommon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ByteBufferHelpers.html">ByteBufferHelpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bytes.html">Bytes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BytesCasts.html">BytesCasts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BytesStringCommon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CString.html">CString</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelArray.html">ChapelArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelArrayViewElision.html">ChapelArrayViewElision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelAutoAggregation.html">ChapelAutoAggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelAutoLocalAccess.html">ChapelAutoLocalAccess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelBase.html">ChapelBase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelBase/currentTask.html">currentTask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelContext.html">ChapelContext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelDebugPrint.html">ChapelDebugPrint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelDistribution.html">ChapelDistribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelDomain.html">ChapelDomain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelGpuSupport.html">ChapelGpuSupport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelHashing.html">ChapelHashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelHashtable.html">ChapelHashtable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelIOSerialize.html">ChapelIOSerialize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelIOStringifyHelper.html">ChapelIOStringifyHelper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelIteratorSupport.html">ChapelIteratorSupport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelLocale.html">ChapelLocale</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelLocks.html">ChapelLocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelNumLocales.html">ChapelNumLocales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelPrivatization.html">ChapelPrivatization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelRange.html">ChapelRange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelReduce.html">ChapelReduce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelRemoteVars.html">ChapelRemoteVars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelSerializedBroadcast.html">ChapelSerializedBroadcast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelShortArrayTransfer.html">ChapelShortArrayTransfer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelStandard.html">ChapelStandard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelStaticVars.html">ChapelStaticVars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelSyncvar.html">ChapelSyncvar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTaskData.html">ChapelTaskData</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTaskDataHelp.html">ChapelTaskDataHelp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTaskID.html">ChapelTaskID</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelThreads.html">ChapelThreads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTuple.html">ChapelTuple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelUtil.html">ChapelUtil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DefaultAssociative.html">DefaultAssociative</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DefaultRectangular.html">DefaultRectangular</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DefaultSparse.html">DefaultSparse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ExportWrappers.html">ExportWrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ExternalArray.html">ExternalArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO_Fortran_binding.html">ISO_Fortran_binding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpAPU.html">LocaleModelHelpAPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpFlat.html">LocaleModelHelpFlat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpGPU.html">LocaleModelHelpGPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpMem.html">LocaleModelHelpMem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpRuntime.html">LocaleModelHelpRuntime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpSetup.html">LocaleModelHelpSetup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocalesArray.html">LocalesArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MemConsistency.html">MemConsistency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MemTracking.html">MemTracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NetworkAtomicTypes.html">NetworkAtomicTypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NetworkAtomics.html">NetworkAtomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OwnedObject.html">OwnedObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PrintModuleInitOrder.html">PrintModuleInitOrder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SharedObject.html">SharedObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="String.html">String</a></li>
+<li class="toctree-l1"><a class="reference internal" href="String/NVStringFactory.html">NVStringFactory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StringCasts.html">StringCasts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="startInitCommDiags.html">startInitCommDiags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stopInitCommDiags.html">stopInitCommDiags</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">chpldoc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BytesStringCommon</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/modules/internal/BytesStringCommon.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bytesstringcommon">
+<h1>BytesStringCommon<a class="headerlink" href="#bytesstringcommon" title="Link to this heading">¶</a></h1>
+<p><strong>Usage</strong></p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">BytesStringCommon</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">BytesStringCommon</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Copyright 2020-2024 Hewlett Packard Enterprise Development LP</p></li>
+<li><p>Copyright 2004-2019 Cray Inc.</p></li>
+<li><p>Other additional copyright holders may be indicated within.</p></li>
+<li></li>
+<li><p>The entirety of this work is licensed under the Apache License,</p></li>
+<li><p>Version 2.0 (the “License”); you may not use this file except</p></li>
+<li><p>in compliance with the License.</p></li>
+<li></li>
+<li><p>You may obtain a copy of the License at</p></li>
+<li></li>
+<li><p><a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p></li>
+<li></li>
+<li><p>Unless required by applicable law or agreed to in writing, software</p></li>
+<li><p>distributed under the License is distributed on an “AS IS” BASIS,</p></li>
+<li><p>WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</p></li>
+<li><p>See the License for the specific language governing permissions and</p></li>
+<li><p>limitations under the License.</p></li>
+</ul>
+<dl class="chpl data">
+<dt class="sig sig-object chpl" id="BytesStringCommon.CHPL_SHORT_STRING_SIZE">
+<em class="property"><span class="pre">const</span> </em><span class="sig-name descname"><span class="pre">CHPL_SHORT_STRING_SIZE</span></span><em class="property"> <span class="pre">:</span> <span class="pre">c_int</span></em><a class="headerlink" href="#BytesStringCommon.CHPL_SHORT_STRING_SIZE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl record">
+<dt class="sig sig-object chpl" id="BytesStringCommon.chpl__inPlaceBuffer">
+<em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">chpl__inPlaceBuffer</span></span><a class="headerlink" href="#BytesStringCommon.chpl__inPlaceBuffer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.chpl__getInPlaceBufferData">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chpl__getInPlaceBufferData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">data:</span> <span class="pre">chpl__inPlaceBuffer</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bufferType</span></em><a class="headerlink" href="#BytesStringCommon.chpl__getInPlaceBufferData" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.chpl__getInPlaceBufferDataForWrite">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chpl__getInPlaceBufferDataForWrite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">data:</span> <span class="pre">chpl__inPlaceBuffer</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bufferType</span></em><a class="headerlink" href="#BytesStringCommon.chpl__getInPlaceBufferDataForWrite" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl record">
+<dt class="sig sig-object chpl" id="BytesStringCommon.__serializeHelper">
+<em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">__serializeHelper</span></span><a class="headerlink" href="#BytesStringCommon.__serializeHelper" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="BytesStringCommon.__serializeHelper.buffLen">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">buffLen</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#BytesStringCommon.__serializeHelper.buffLen" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="BytesStringCommon.__serializeHelper.buff">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">buff</span></span><em class="property"> <span class="pre">:</span> <span class="pre">bufferType</span></em><a class="headerlink" href="#BytesStringCommon.__serializeHelper.buff" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="BytesStringCommon.__serializeHelper.size">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">size</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#BytesStringCommon.__serializeHelper.size" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="BytesStringCommon.__serializeHelper.locale_id">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">locale_id</span></span><em class="property"> <span class="pre">:</span> <span class="pre">chpl_nodeID.type</span></em><a class="headerlink" href="#BytesStringCommon.__serializeHelper.locale_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="BytesStringCommon.__serializeHelper.shortData">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">shortData</span></span><em class="property"> <span class="pre">:</span> <span class="pre">chpl__inPlaceBuffer</span></em><a class="headerlink" href="#BytesStringCommon.__serializeHelper.shortData" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="BytesStringCommon.__serializeHelper.cachedNumCodepoints">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">cachedNumCodepoints</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#BytesStringCommon.__serializeHelper.cachedNumCodepoints" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl enum">
+<dt class="sig sig-object chpl" id="BytesStringCommon.decodePolicy">
+<em class="property"><span class="pre">enum</span> </em><span class="sig-name descname"><span class="pre">decodePolicy</span></span><span class="w"> </span><em class="property"> <span class="pre">{</span> <span class="pre">strict,</span> <span class="pre">replace,</span> <span class="pre">drop,</span> <span class="pre">escape</span> <span class="pre">}</span></em><a class="headerlink" href="#BytesStringCommon.decodePolicy" title="Link to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">decodePolicy</span></code> specifies what happens when there is malformed characters
+when decoding a <code class="xref chpl chpl-mod docutils literal notranslate"><span class="pre">Bytes</span></code> into a UTF-8 <a class="reference internal" href="String.html#String.string" title="String.string"><code class="xref chpl chpl-record docutils literal notranslate"><span class="pre">string</span></code></a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>strict</strong>: default policy; raise error</p></li>
+<li><p><strong>replace</strong>: replace with UTF-8 replacement character</p></li>
+<li><p><strong>drop</strong>: silently drop data</p></li>
+<li><dl class="simple">
+<dt><strong>escape</strong>: escape invalid data by replacing each byte 0xXX with</dt><dd><p>codepoint 0xDCXX</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="chpl enumconstant">
+<dt class="sig sig-object chpl" id="BytesStringCommon.decodePolicy.strict">
+<em class="property"><span class="pre">enum</span> <span class="pre">constant</span> </em><span class="sig-name descname"><span class="pre">strict</span></span><a class="headerlink" href="#BytesStringCommon.decodePolicy.strict" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl enumconstant">
+<dt class="sig sig-object chpl" id="BytesStringCommon.decodePolicy.replace">
+<em class="property"><span class="pre">enum</span> <span class="pre">constant</span> </em><span class="sig-name descname"><span class="pre">replace</span></span><a class="headerlink" href="#BytesStringCommon.decodePolicy.replace" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl enumconstant">
+<dt class="sig sig-object chpl" id="BytesStringCommon.decodePolicy.drop">
+<em class="property"><span class="pre">enum</span> <span class="pre">constant</span> </em><span class="sig-name descname"><span class="pre">drop</span></span><a class="headerlink" href="#BytesStringCommon.decodePolicy.drop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl enumconstant">
+<dt class="sig sig-object chpl" id="BytesStringCommon.decodePolicy.escape">
+<em class="property"><span class="pre">enum</span> <span class="pre">constant</span> </em><span class="sig-name descname"><span class="pre">escape</span></span><a class="headerlink" href="#BytesStringCommon.decodePolicy.escape" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl enum">
+<dt class="sig sig-object chpl" id="BytesStringCommon.encodePolicy">
+<em class="property"><span class="pre">enum</span> </em><span class="sig-name descname"><span class="pre">encodePolicy</span></span><span class="w"> </span><em class="property"> <span class="pre">{</span> <span class="pre">unescape,</span> <span class="pre">pass</span> <span class="pre">}</span></em><a class="headerlink" href="#BytesStringCommon.encodePolicy" title="Link to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">encodePolicy</span></code> specifies what happens when there is escaped non-UTF8
+bytes when encoding a <a class="reference internal" href="String.html#String.string" title="String.string"><code class="xref chpl chpl-record docutils literal notranslate"><span class="pre">string</span></code></a> into a
+<code class="xref chpl chpl-mod docutils literal notranslate"><span class="pre">Bytes</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>pass</strong>: default policy; copy directly</p></li>
+<li><p><strong>unescape</strong>: recover the original data from the escaped data</p></li>
+</ul>
+</div></blockquote>
+<dl class="chpl enumconstant">
+<dt class="sig sig-object chpl" id="BytesStringCommon.encodePolicy.unescape">
+<em class="property"><span class="pre">enum</span> <span class="pre">constant</span> </em><span class="sig-name descname"><span class="pre">unescape</span></span><a class="headerlink" href="#BytesStringCommon.encodePolicy.unescape" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl enumconstant">
+<dt class="sig sig-object chpl" id="BytesStringCommon.encodePolicy.pass">
+<em class="property"><span class="pre">enum</span> <span class="pre">constant</span> </em><span class="sig-name descname"><span class="pre">pass</span></span><a class="headerlink" href="#BytesStringCommon.encodePolicy.pass" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl data">
+<dt class="sig sig-object chpl" id="BytesStringCommon.showStringBytesInitDeprWarnings">
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">showStringBytesInitDeprWarnings</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">true</span></em><a class="headerlink" href="#BytesStringCommon.showStringBytesInitDeprWarnings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl data">
+<dt class="sig sig-object chpl" id="BytesStringCommon.surrogateEscape">
+<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">surrogateEscape</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">0xdc</span></em><em class="property"> <span class="pre">:</span> <span class="pre">byteType</span></em><a class="headerlink" href="#BytesStringCommon.surrogateEscape" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.getCStr">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">getCStr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">c_ptrConst(c_char)</span></em><a class="headerlink" href="#BytesStringCommon.getCStr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.decodeByteBuffer">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">decodeByteBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">buff:</span> <span class="pre">bufferType</span></em>, <em class="sig-param"><span class="pre">length:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">policy:</span> <span class="pre">decodePolicy</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">throws</span></em><a class="headerlink" href="#BytesStringCommon.decodeByteBuffer" title="Link to this definition">¶</a></dt>
+<dd><p>This function is called by <cite>bytes.decode</cite> and string factory functions that
+take a C array as the buffer.</p>
+<p>It iterates over the buffer, trying to decode codepoints out of it. If there
+is an illegal sequence that doesn’t correspond to any valid codepoint, the
+behavior is determined by the <cite>policy</cite> argument. See the <cite>decodePolicy</cite>
+documentation above for the meaning of different policies.</p>
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.decodeHelp">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">decodeHelp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">buff:</span> <span class="pre">c_ptr(uint(8))</span></em>, <em class="sig-param"><span class="pre">buffLen:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">offset:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">allowEsc:</span> <span class="pre">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.decodeHelp" title="Link to this definition">¶</a></dt>
+<dd><p>This function decodeHelp is used to create a wrapper for
+qio_decode_char_buf* and qio_decode_char_buf_esc and return
+the value of errorCode , cp and nBytes.</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">arg buff<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Buffer to decode</p>
+</dd>
+<dt class="field-even">arg buffLen<span class="colon">:</span></dt>
+<dd class="field-even"><p>Size of buffer</p>
+</dd>
+<dt class="field-odd">arg offset<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Starting index of read buffer,</p>
+</dd>
+<dt class="field-even">arg allowEsc<span class="colon">:</span></dt>
+<dd class="field-even"><p>Choice between “qio_decode_char_buf”
+and “qio_decode_char_buf_esc” that allows
+escaped sequences in the string</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple of decodeRet, chr and nBytes
+decodeRet : error code : errorCode
+chr : corresponds to codepoint
+nBytes : number of bytes of corresponding UTF-8 encoding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.initWithBorrowedBuffer">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">initWithBorrowedBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">other:</span> <span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.initWithBorrowedBuffer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">initWithBorrowedBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">other:</span> <span class="pre">bufferType</span></em>, <em class="sig-param"><span class="pre">length:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">size:</span> <span class="pre">int</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.initWithOwnedBuffer">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">initWithOwnedBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">other:</span> <span class="pre">bufferType</span></em>, <em class="sig-param"><span class="pre">length:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">size:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.initWithOwnedBuffer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.initWithNewBuffer">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">initWithNewBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">other:</span> <span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.initWithNewBuffer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">initWithNewBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">other:</span> <span class="pre">bufferType</span></em>, <em class="sig-param"><span class="pre">length:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">size:</span> <span class="pre">int</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.getView">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">getView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">r:</span> <span class="pre">range(?)</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">checkMisaligned</span> <span class="pre">=</span> <span class="pre">true</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">throws</span></em><a class="headerlink" href="#BytesStringCommon.getView" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.getSlice">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">getSlice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">r:</span> <span class="pre">range(?)</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">throws</span></em><a class="headerlink" href="#BytesStringCommon.getSlice" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.getIndexType">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">getIndexType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">t</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">type</span></em><a class="headerlink" href="#BytesStringCommon.getIndexType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doReplace">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doReplace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">needle:</span> <span class="pre">t</span></em>, <em class="sig-param"><span class="pre">replacement:</span> <span class="pre">t</span></em>, <em class="sig-param"><span class="pre">count:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">t</span></em><a class="headerlink" href="#BytesStringCommon.doReplace" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doSplitHelp">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doSplitHelp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">localx:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">localSep:</span> <span class="pre">t</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">maxsplit:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">ignoreEmpty:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">false</span></em>, <em class="sig-param"><span class="pre">ref</span> <span class="pre">start:</span> <span class="pre">getIndexType(t)</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">splitCount:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">t</span></em><a class="headerlink" href="#BytesStringCommon.doSplitHelp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl iterfunction">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doSplit">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-name descname"><span class="pre">doSplit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">sep:</span> <span class="pre">t</span></em>, <em class="sig-param"><span class="pre">maxsplit:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em>, <em class="sig-param"><span class="pre">ignoreEmpty:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">false</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">t</span></em><a class="headerlink" href="#BytesStringCommon.doSplit" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doSplitWSNoEncHelp">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doSplitWSNoEncHelp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">localx:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">maxsplit:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em>, <em class="sig-param"><span class="pre">ref</span> <span class="pre">i:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">splitCount:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">noSplits:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">limitSplits:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">iEnd:</span> <span class="pre">byteIndex</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">t</span></em><a class="headerlink" href="#BytesStringCommon.doSplitWSNoEncHelp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl iterfunction">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doSplitWSNoEnc">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-name descname"><span class="pre">doSplitWSNoEnc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">maxsplit:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">t</span></em><a class="headerlink" href="#BytesStringCommon.doSplitWSNoEnc" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doSearchNoEnc">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doSearchNoEnc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">needle:</span> <span class="pre">t</span></em>, <em class="sig-param"><span class="pre">region:</span> <span class="pre">range(?)</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">count:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">fromLeft:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">true</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.doSearchNoEnc" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.startsEndsWith">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">startsEndsWith</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">needles</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">fromLeft:</span> <span class="pre">bool</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><em class="property">&#160; <span class="pre">where</span> <span class="pre">isHomogeneousTuple(needles)</span> <span class="pre">&amp;&amp;</span> <span class="pre">needles[0].type</span> <span class="pre">==</span> <span class="pre">t</span></em><a class="headerlink" href="#BytesStringCommon.startsEndsWith" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doJoinIterator">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doJoinIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">ir:</span> <span class="pre">_iteratorRecord</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">t</span></em><a class="headerlink" href="#BytesStringCommon.doJoinIterator" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doJoin">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doJoin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">S</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">t</span></em><em class="property">&#160; <span class="pre">where</span> <span class="pre">isTuple(S)</span> <span class="pre">||</span> <span class="pre">isArray(S)</span></em><a class="headerlink" href="#BytesStringCommon.doJoin" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doPartition">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doPartition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">sep:</span> <span class="pre">t</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">3*(t)</span></em><a class="headerlink" href="#BytesStringCommon.doPartition" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doDedent">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doDedent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">columns</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">ignoreFirst</span> <span class="pre">=</span> <span class="pre">true</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">t</span></em><a class="headerlink" href="#BytesStringCommon.doDedent" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.resizeBufferForAppend">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">resizeBufferForAppend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">n:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#BytesStringCommon.resizeBufferForAppend" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doAppend">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doAppend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">rhs:</span> <span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.doAppend" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doAppendSomeBytes">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doAppendSomeBytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">n:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">byteCArr:</span> <span class="pre">c_array(uint(8)</span></em>, <em class="sig-param"><span class="pre">?)</span></em>, <em class="sig-param"><span class="pre">nCodepoints:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.doAppendSomeBytes" title="Link to this definition">¶</a></dt>
+<dd><p>Take n bytes from byteCArr and append it to the string/bytes
+in lhs</p>
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.resizeBuffer">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">resizeBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">buffLen:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.resizeBuffer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.reinitWithNewBuffer">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">reinitWithNewBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">buff:</span> <span class="pre">bufferType</span></em>, <em class="sig-param"><span class="pre">buffLen:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">buffSize:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">numCodepoints:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.reinitWithNewBuffer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.reinitWithOwnedBuffer">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">reinitWithOwnedBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">buff:</span> <span class="pre">bufferType</span></em>, <em class="sig-param"><span class="pre">buffLen:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">buffSize:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">numCodepoints:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.reinitWithOwnedBuffer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doAssign">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doAssign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">rhs:</span> <span class="pre">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.doAssign" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doMultiply">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doMultiply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">n:</span> <span class="pre">integral</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.doMultiply" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doConcat">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doConcat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s0:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">s1:</span> <span class="pre">t</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">t</span></em><a class="headerlink" href="#BytesStringCommon.doConcat" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doStripNoEnc">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doStripNoEnc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em>, <em class="sig-param"><span class="pre">chars:</span> <span class="pre">t</span></em>, <em class="sig-param"><span class="pre">leading:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">trailing:</span> <span class="pre">bool</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">t</span></em><a class="headerlink" href="#BytesStringCommon.doStripNoEnc" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doEq">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doEq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">?t1</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">?t2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.doEq" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doLessThan">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doLessThan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">?t1</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">?t2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.doLessThan" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doGreaterThan">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doGreaterThan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">?t1</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">?t2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.doGreaterThan" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doLessThanOrEq">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doLessThanOrEq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">?t1</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">?t2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.doLessThanOrEq" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.doGreaterThanOrEq">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">doGreaterThanOrEq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">?t1</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">?t2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.doGreaterThanOrEq" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.getHash">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">getHash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">?t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.getHash" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.countNumCodepoints">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">countNumCodepoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">string</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon.countNumCodepoints" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">countNumCodepoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">buff:</span> <span class="pre">bufferType</span></em>, <em class="sig-param"><span class="pre">buffLen:</span> <span class="pre">int</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.isInitialByte">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">isInitialByte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">b:</span> <span class="pre">uint(8)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#BytesStringCommon.isInitialByte" title="Link to this definition">¶</a></dt>
+<dd><p>Returns true if the argument is a valid initial byte of a UTF-8
+encoded multibyte character.</p>
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon._findStartOfNextCodepointFromByte">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">_findStartOfNextCodepointFromByte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">string</span></em>, <em class="sig-param"><span class="pre">i:</span> <span class="pre">byteIndex</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon._findStartOfNextCodepointFromByte" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the byte index of the beginning of the first codepoint starting from
+(and including) i</p>
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon._cleanupForNumericCast">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">_cleanupForNumericCast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">?t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#BytesStringCommon._cleanupForNumericCast" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.byte_isAscii">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">byte_isAscii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">c:</span> <span class="pre">byteType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#BytesStringCommon.byte_isAscii" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.byte_isWhitespace">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">byte_isWhitespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">c:</span> <span class="pre">byteType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#BytesStringCommon.byte_isWhitespace" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.byte_isPrintable">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">byte_isPrintable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">c:</span> <span class="pre">byteType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#BytesStringCommon.byte_isPrintable" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.byte_isAlpha">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">byte_isAlpha</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">c:</span> <span class="pre">byteType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#BytesStringCommon.byte_isAlpha" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.byte_isUpper">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">byte_isUpper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">c:</span> <span class="pre">byteType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#BytesStringCommon.byte_isUpper" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.byte_isLower">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">byte_isLower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">c:</span> <span class="pre">byteType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#BytesStringCommon.byte_isLower" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.byte_isDigit">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">byte_isDigit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">c:</span> <span class="pre">byteType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#BytesStringCommon.byte_isDigit" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.byte_isAlnum">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">byte_isAlnum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">c:</span> <span class="pre">byteType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#BytesStringCommon.byte_isAlnum" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.byte_toUpper">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">byte_toUpper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">c:</span> <span class="pre">byteType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">byteType</span></em><a class="headerlink" href="#BytesStringCommon.byte_toUpper" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="BytesStringCommon.byte_toLower">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">byte_toLower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">c:</span> <span class="pre">byteType</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">byteType</span></em><a class="headerlink" href="#BytesStringCommon.byte_toLower" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="BytesCasts.html" class="btn btn-neutral float-left" title="BytesCasts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CString.html" class="btn btn-neutral float-right" title="CString" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2015.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+
+
+
+</body>
+</html>

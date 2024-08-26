@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atomics &mdash; chpldoc 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="AtomicsCommon" href="AtomicsCommon.html" />
+    <link rel="prev" title="ArrayViewSlice" href="ArrayViewSlice.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            chpldoc
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">chpldoc documentation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ArrayViewRankChange.html">ArrayViewRankChange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ArrayViewReindex.html">ArrayViewReindex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ArrayViewSlice.html">ArrayViewSlice</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Atomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AtomicsCommon.html">AtomicsCommon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ByteBufferHelpers.html">ByteBufferHelpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bytes.html">Bytes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BytesCasts.html">BytesCasts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BytesStringCommon.html">BytesStringCommon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CString.html">CString</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelArray.html">ChapelArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelArrayViewElision.html">ChapelArrayViewElision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelAutoAggregation.html">ChapelAutoAggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelAutoLocalAccess.html">ChapelAutoLocalAccess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelBase.html">ChapelBase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelBase/currentTask.html">currentTask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelContext.html">ChapelContext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelDebugPrint.html">ChapelDebugPrint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelDistribution.html">ChapelDistribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelDomain.html">ChapelDomain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelGpuSupport.html">ChapelGpuSupport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelHashing.html">ChapelHashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelHashtable.html">ChapelHashtable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelIOSerialize.html">ChapelIOSerialize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelIOStringifyHelper.html">ChapelIOStringifyHelper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelIteratorSupport.html">ChapelIteratorSupport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelLocale.html">ChapelLocale</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelLocks.html">ChapelLocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelNumLocales.html">ChapelNumLocales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelPrivatization.html">ChapelPrivatization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelRange.html">ChapelRange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelReduce.html">ChapelReduce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelRemoteVars.html">ChapelRemoteVars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelSerializedBroadcast.html">ChapelSerializedBroadcast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelShortArrayTransfer.html">ChapelShortArrayTransfer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelStandard.html">ChapelStandard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelStaticVars.html">ChapelStaticVars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelSyncvar.html">ChapelSyncvar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTaskData.html">ChapelTaskData</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTaskDataHelp.html">ChapelTaskDataHelp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTaskID.html">ChapelTaskID</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelThreads.html">ChapelThreads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTuple.html">ChapelTuple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelUtil.html">ChapelUtil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DefaultAssociative.html">DefaultAssociative</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DefaultRectangular.html">DefaultRectangular</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DefaultSparse.html">DefaultSparse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ExportWrappers.html">ExportWrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ExternalArray.html">ExternalArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO_Fortran_binding.html">ISO_Fortran_binding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpAPU.html">LocaleModelHelpAPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpFlat.html">LocaleModelHelpFlat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpGPU.html">LocaleModelHelpGPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpMem.html">LocaleModelHelpMem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpRuntime.html">LocaleModelHelpRuntime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpSetup.html">LocaleModelHelpSetup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocalesArray.html">LocalesArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MemConsistency.html">MemConsistency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MemTracking.html">MemTracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NetworkAtomicTypes.html">NetworkAtomicTypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NetworkAtomics.html">NetworkAtomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OwnedObject.html">OwnedObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PrintModuleInitOrder.html">PrintModuleInitOrder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SharedObject.html">SharedObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="String.html">String</a></li>
+<li class="toctree-l1"><a class="reference internal" href="String/NVStringFactory.html">NVStringFactory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StringCasts.html">StringCasts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="startInitCommDiags.html">startInitCommDiags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stopInitCommDiags.html">stopInitCommDiags</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">chpldoc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Atomics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/modules/internal/Atomics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="atomics">
+<h1>Atomics<a class="headerlink" href="#atomics" title="Link to this heading">¶</a></h1>
+<p><strong>Usage</strong></p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Atomics</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">Atomics</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For example, the following code declares an atomic variable <code class="docutils literal notranslate"><span class="pre">x</span></code> that
+stores an <code class="docutils literal notranslate"><span class="pre">int</span></code>:</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">x</span><span class="p">:</span> <span class="k">atomic</span> <span class="kt">int</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Such an atomic variable that is declared without an initialization expression
+will store the default value of the contained type (i.e. <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
+<p>Atomic variables can also be declared with an initial value:</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">y</span><span class="p">:</span> <span class="k">atomic</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Similarly, a temporary <code class="docutils literal notranslate"><span class="pre">atomic</span></code> value can be created by casting to atomic:</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">one</span><span class="p">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="o">..</span><span class="p">.</span> <span class="nx">one</span> <span class="p">:</span> <span class="k">atomic</span> <span class="kt">int</span><span class="o">..</span><span class="p">.</span> <span class="c1">// creates an `atomic int` initialized with 1</span>
+</pre></div>
+</div>
+<p>Assignment is supported between atomic variables as well:</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">x</span><span class="p">:</span> <span class="k">atomic</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span><span class="p">:</span> <span class="k">atomic</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="nx">x</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span> <span class="c1">// equivalent to x.write(y.read())</span>
+</pre></div>
+</div>
+<p>Chapel currently supports atomic operations for bools, all supported sizes of
+signed and unsigned integers, as well as all supported sizes of reals.  Note
+that not all operations are supported for all atomic types. The supported types
+are listed for each operation.</p>
+<blockquote>
+<div><p><em>Rationale</em>.</p>
+<p>The choice of supported atomic variable types as well as the atomic
+operations was strongly influenced by the C11 standard.</p>
+</div></blockquote>
+<p>Most atomic methods accept an optional argument named <code class="docutils literal notranslate"><span class="pre">order</span></code> of type
+<code class="docutils literal notranslate"><span class="pre">memoryOrder</span></code>. The <code class="docutils literal notranslate"><span class="pre">order</span></code> argument is used to specify the ordering
+constraints of atomic operations. The supported memoryOrder values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>memoryOrder.relaxed</p></li>
+<li><p>memoryOrder.acquire</p></li>
+<li><p>memoryOrder.release</p></li>
+<li><p>memoryOrder.acqRel</p></li>
+<li><p>memoryOrder.seqCst</p></li>
+</ul>
+</div></blockquote>
+<p>See also <span class="xref std std-ref">Chapter-Memory_Consistency_Model</span> and in particular
+<span class="xref std std-ref">non_sc_atomics</span> for more information on the meaning of these memory
+orders.</p>
+<p>Unless specified, the default for the memoryOrder parameter is
+memoryOrder.seqCst.</p>
+<blockquote>
+<div><p><em>Implementors’ note</em>.</p>
+<p>Not all architectures or implementations may support all memoryOrder
+values. In these cases, the implementation should default to a more
+conservative ordering than specified.</p>
+</div></blockquote>
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Atomics.chpl_atomic_thread_fence">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chpl_atomic_thread_fence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">order:</span> <span class="pre">memory_order</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.chpl_atomic_thread_fence" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Atomics.atomic_fence">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">atomic_fence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">order:</span> <span class="pre">memory_order</span> <span class="pre">=</span> <span class="pre">memory_order_seq_cst</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.atomic_fence" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Atomics.atomicFence">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">atomicFence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.atomicFence" title="Link to this definition">¶</a></dt>
+<dd><p>An atomic fence that establishes an ordering of non-atomic and relaxed
+atomic operations.</p>
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Atomics.chpl__processorAtomicType">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chpl__processorAtomicType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">valType</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">type</span></em><a class="headerlink" href="#Atomics.chpl__processorAtomicType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Atomics.chpl__atomicType">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chpl__atomicType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">valType</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">type</span></em><a class="headerlink" href="#Atomics.chpl__atomicType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Atomics.chpl_comm_ensure_progress">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chpl_comm_ensure_progress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Atomics.chpl_comm_ensure_progress" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl record">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool">
+<em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">AtomicBool</span></span><em class="property"> <span class="pre">:</span> <span class="pre">writeSerializable</span></em><a class="headerlink" href="#Atomics.AtomicBool" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.valType">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">valType</span></span><span class="w"> </span><em class="property"> <span class="pre">type</span></em><a class="headerlink" href="#Atomics.AtomicBool.valType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">valType</span></span><span class="w"> </span><em class="property"> <span class="pre">type</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool._v">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">_v</span></span><em class="property"> <span class="pre">:</span> <span class="pre">externT(bool)</span></em><a class="headerlink" href="#Atomics.AtomicBool._v" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.init_helper">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">init_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicBool.init_helper" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.init">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicBool.init" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.init=">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">other:</span> <span class="pre">AtomicBool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicBool.init=" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">other:</span> <span class="pre">bool</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.deinit">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">deinit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicBool.deinit" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">const</span> <span class="pre">read(param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst)</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Returns the stored value.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.write">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Atomics.AtomicBool.write" title="Link to this definition">¶</a></dt>
+<dd><p>Stores <cite>val</cite> as the new value.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.exchange">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">exchange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Atomics.AtomicBool.exchange" title="Link to this definition">¶</a></dt>
+<dd><p>Stores <cite>val</cite> as the new value and returns the original value.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.compareExchange">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">compareExchange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">expected:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">desired:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Atomics.AtomicBool.compareExchange" title="Link to this definition">¶</a></dt>
+<dd><p>Stores <cite>desired</cite> as the new value, if and only if the original value is
+equal to <cite>expected</cite>. Returns <cite>true</cite> if <cite>desired</cite> was stored, otherwise
+updates <cite>expected</cite> to the original value.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">compareExchange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">expected:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">desired:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">success:</span> <span class="pre">memoryOrder</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">failure:</span> <span class="pre">memoryOrder</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.compareExchangeWeak">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">compareExchangeWeak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">expected:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">desired:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Atomics.AtomicBool.compareExchangeWeak" title="Link to this definition">¶</a></dt>
+<dd><p>Similar to <a class="reference internal" href="#Atomics.AtomicBool.compareExchange" title="Atomics.AtomicBool.compareExchange"><code class="xref chpl chpl-proc docutils literal notranslate"><span class="pre">compareExchange</span></code></a>, except that this function may
+return <cite>false</cite> even if the original value was equal to <cite>expected</cite>. This
+may happen if the value could not be updated atomically.</p>
+<p>This weak version is allowed to spuriously fail, but when
+compareExchange is already in a loop, it can offer better
+performance on some platforms.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">compareExchangeWeak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">expected:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">desired:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">success:</span> <span class="pre">memoryOrder</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">failure:</span> <span class="pre">memoryOrder</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.compareAndSwap">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">compareAndSwap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">expected:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">desired:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Atomics.AtomicBool.compareAndSwap" title="Link to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>‘compareAndSwap’ is unstable</p>
+</div>
+<p>Stores <cite>desired</cite> as the new value, if and only if the original value is
+equal to <cite>expected</cite>. Returns <cite>true</cite> if <cite>desired</cite> was stored.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.testAndSet">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">testAndSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Atomics.AtomicBool.testAndSet" title="Link to this definition">¶</a></dt>
+<dd><p>Stores <cite>true</cite> as the new value and returns the old value.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.clear">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Atomics.AtomicBool.clear" title="Link to this definition">¶</a></dt>
+<dd><p>Stores <cite>false</cite> as the new value.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">const</span> <span class="pre">waitFor(</span> <span class="pre">val:</span> <span class="pre">bool,</span> <span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst)</span> <span class="pre">:</span> <span class="pre">void</span></span></dt>
+<dd><p>Waits until the stored value is equal to <cite>val</cite>. The implementation may
+yield the running task while waiting.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">const</span> <span class="pre">serialize(</span> <span class="pre">writer,</span> <span class="pre">ref</span> <span class="pre">serializer)</span>&#160; <span class="pre">throws</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Atomics.:">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">rhs:</span> <span class="pre">bool</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">t:</span> <span class="pre">AtomicBool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.:" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl record">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT">
+<em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">AtomicT</span></span><em class="property"> <span class="pre">:</span> <span class="pre">writeSerializable</span></em><a class="headerlink" href="#Atomics.AtomicT" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.valType">
+<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">valType</span></span><a class="headerlink" href="#Atomics.AtomicT.valType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT._v">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">_v</span></span><em class="property"> <span class="pre">:</span> <span class="pre">externT(valType)</span></em><a class="headerlink" href="#Atomics.AtomicT._v" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.init_helper">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">init_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicT.init_helper" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.init">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">valType</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicT.init" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.init=">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">other:</span> <span class="pre">this.type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicT.init=" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">other:</span> <span class="pre">this.type.valType</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.deinit">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">deinit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicT.deinit" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">const</span> <span class="pre">read(param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst)</span> <span class="pre">:</span> <span class="pre">valType</span></span></dt>
+<dd><p>Returns the stored value.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.write">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Atomics.AtomicT.write" title="Link to this definition">¶</a></dt>
+<dd><p>Stores <cite>val</cite> as the new value.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.exchange">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">exchange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">valType</span></em><a class="headerlink" href="#Atomics.AtomicT.exchange" title="Link to this definition">¶</a></dt>
+<dd><p>Stores <cite>val</cite> as the new value and returns the original value.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.compareExchange">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">compareExchange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">expected:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">desired:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Atomics.AtomicT.compareExchange" title="Link to this definition">¶</a></dt>
+<dd><p>Stores <cite>desired</cite> as the new value, if and only if the original value is
+equal to <cite>expected</cite>. Returns <cite>true</cite> if <cite>desired</cite> was stored, otherwise
+updates <cite>expected</cite> to the original value.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">compareExchange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">expected:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">desired:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">success:</span> <span class="pre">memoryOrder</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">failure:</span> <span class="pre">memoryOrder</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.compareExchangeWeak">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">compareExchangeWeak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">expected:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">desired:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Atomics.AtomicT.compareExchangeWeak" title="Link to this definition">¶</a></dt>
+<dd><p>Similar to <a class="reference internal" href="#Atomics.AtomicT.compareExchange" title="Atomics.AtomicT.compareExchange"><code class="xref chpl chpl-proc docutils literal notranslate"><span class="pre">compareExchange</span></code></a>, except that this function may
+return <cite>false</cite> even if the original value was equal to <cite>expected</cite>. This
+may happen if the value could not be updated atomically.</p>
+<p>This weak version is allowed to spuriously fail, but when
+compareExchange is already in a loop, it can offer better
+performance on some platforms.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">compareExchangeWeak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">expected:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">desired:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">success:</span> <span class="pre">memoryOrder</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">failure:</span> <span class="pre">memoryOrder</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.compareAndSwap">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">compareAndSwap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">expected:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">desired:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Atomics.AtomicT.compareAndSwap" title="Link to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>‘compareAndSwap’ is unstable</p>
+</div>
+<p>Stores <cite>desired</cite> as the new value, if and only if the original value is
+equal to <cite>expected</cite>. Returns <cite>true</cite> if <cite>desired</cite> was stored.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.fetchAdd">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">fetchAdd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">valType</span></em><a class="headerlink" href="#Atomics.AtomicT.fetchAdd" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The original value.</p>
+</dd>
+</dl>
+<p>Adds <cite>val</cite> to the original value and stores the result. Defined for
+integer and real atomic types.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.add">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Atomics.AtomicT.add" title="Link to this definition">¶</a></dt>
+<dd><p>Adds <cite>val</cite> to the original value and stores the result. Defined for
+integer and real atomic types.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.fetchSub">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">fetchSub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">valType</span></em><a class="headerlink" href="#Atomics.AtomicT.fetchSub" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The original value.</p>
+</dd>
+</dl>
+<p>Subtracts <cite>val</cite> from the original value and stores the result. Defined
+for integer and real atomic types.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.sub">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">sub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Atomics.AtomicT.sub" title="Link to this definition">¶</a></dt>
+<dd><p>Subtracts <cite>val</cite> from the original value and stores the result. Defined
+for integer and real atomic types.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.fetchOr">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">fetchOr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">valType</span></em><a class="headerlink" href="#Atomics.AtomicT.fetchOr" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The original value.</p>
+</dd>
+</dl>
+<p>Applies the <code class="docutils literal notranslate"><span class="pre">|</span></code> operator to <cite>val</cite> and the original value, then stores
+the result.</p>
+<p>Only defined for integer atomic types.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.or">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">or</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Atomics.AtomicT.or" title="Link to this definition">¶</a></dt>
+<dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">|</span></code> operator to <cite>val</cite> and the original value, then stores
+the result.</p>
+<p>Only defined for integer atomic types.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.fetchAnd">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">fetchAnd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">valType</span></em><a class="headerlink" href="#Atomics.AtomicT.fetchAnd" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The original value.</p>
+</dd>
+</dl>
+<p>Applies the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator to <cite>val</cite> and the original value, then stores
+the result.</p>
+<p>Only defined for integer atomic types.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.and">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">and</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Atomics.AtomicT.and" title="Link to this definition">¶</a></dt>
+<dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator to <cite>val</cite> and the original value, then stores
+the result.</p>
+<p>Only defined for integer atomic types.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.fetchXor">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">fetchXor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">valType</span></em><a class="headerlink" href="#Atomics.AtomicT.fetchXor" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The original value.</p>
+</dd>
+</dl>
+<p>Applies the <code class="docutils literal notranslate"><span class="pre">^</span></code> operator to <cite>val</cite> and the original value, then stores
+the result.</p>
+<p>Only defined for integer atomic types.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.xor">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">xor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">val:</span> <span class="pre">valType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Atomics.AtomicT.xor" title="Link to this definition">¶</a></dt>
+<dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">^</span></code> operator to <cite>val</cite> and the original value, then stores
+the result.</p>
+<p>Only defined for integer atomic types.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">const</span> <span class="pre">waitFor(</span> <span class="pre">val:</span> <span class="pre">valType,</span> <span class="pre">param</span> <span class="pre">order:</span> <span class="pre">memoryOrder</span> <span class="pre">=</span> <span class="pre">memoryOrder.seqCst)</span> <span class="pre">:</span> <span class="pre">void</span></span></dt>
+<dd><p>Waits until the stored value is equal to <cite>val</cite>. The implementation may
+yield the running task while waiting.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">const</span> <span class="pre">serialize(</span> <span class="pre">writer,</span> <span class="pre">ref</span> <span class="pre">serializer)</span>&#160; <span class="pre">throws</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">rhs</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">t:</span> <span class="pre">AtomicT</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">rhs.type</span> <span class="pre">==</span> <span class="pre">t.valType</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicBool.=">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">AtomicBool.</span></span><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">a:</span> <span class="pre">AtomicBool</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">b:</span> <span class="pre">AtomicBool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicBool.=" title="Link to this definition">¶</a></dt>
+<dd><p>Equivalent to <code class="docutils literal notranslate"><span class="pre">a.write(b.read())</span></code></p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">AtomicBool.</span></span><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">a:</span> <span class="pre">AtomicBool</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.=">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">AtomicT.</span></span><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">a:</span> <span class="pre">AtomicT</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">b:</span> <span class="pre">AtomicT</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicT.=" title="Link to this definition">¶</a></dt>
+<dd><p>Equivalent to <code class="docutils literal notranslate"><span class="pre">a.write(b.read())</span></code></p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">AtomicT.</span></span><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">a:</span> <span class="pre">AtomicT</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.+">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">AtomicT.</span></span><span class="sig-name descname"><span class="pre">+</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">AtomicT</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicT.+" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.-">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">AtomicT.</span></span><span class="sig-name descname"><span class="pre">-</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">AtomicT</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicT.-" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.*">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">AtomicT.</span></span><span class="sig-name descname"><span class="pre">*</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">AtomicT</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicT.*" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT./">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">AtomicT.</span></span><span class="sig-name descname"><span class="pre">/</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">AtomicT</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicT./" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Atomics.AtomicT.%">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">AtomicT.</span></span><span class="sig-name descname"><span class="pre">%</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">AtomicT</span></em>, <em class="sig-param"><span class="pre">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Atomics.AtomicT.%" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ArrayViewSlice.html" class="btn btn-neutral float-left" title="ArrayViewSlice" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="AtomicsCommon.html" class="btn btn-neutral float-right" title="AtomicsCommon" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2015.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+
+
+
+</body>
+</html>
