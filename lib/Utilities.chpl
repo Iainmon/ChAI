@@ -447,7 +447,7 @@ module Utilities {
         inline iter _domain.every(param tag: iterKind) where tag == iterKind.standalone && rank > 1 {
 
             if CHPL_LOCALE_MODEL != "gpu" {
-                forall i in this do 
+                forall i in this.these(tag) do 
                     yield i;
             } else {
                 // compilerWarning("Using domain every.");
@@ -485,7 +485,7 @@ module Utilities {
                         if i == rank - 1 then
                             blks(i) = 1;
                         else
-                            blks(i) = shape(i) * blks(i + 1);
+                            blks(i) = shape(i+1) * blks(i + 1);
                     }
                     foreach idx in this {
                         var i: int;
@@ -527,6 +527,114 @@ module Utilities {
         }
 
         inline iter _domain.everyZip(param tag: iterKind) where tag == iterKind.standalone {
+            const shape = this.fastShape;
+            if CHPL_LOCALE_MODEL != "gpu" {
+                if rank == 1 {
+                    forall i in 0..<shape do yield (i,i);
+                } else {
+                    var blks: rank * int;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        if i == rank - 1 then
+                            blks(i) = 1;
+                        else
+                            blks(i) = shape(i) * blks(i + 1);
+                    }
+                    // forall idx in this {
+                    //     var i: int;
+                    //     for param k in 0..<rank do
+                    //         i += idx(k) * blks(k);
+                    //     yield (i,idx);
+                    // }
+                    forall i in _value.these() do yield i;
+
+                }
+            } else {
+                if rank == 1 {
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        forall i in 0..<shape do 
+                            yield (i,i);
+                    } else {
+                        forall i in 0..<shape do
+                            yield (i,i);
+                    }
+                } else {
+                    var prod = 1;
+                    var divs: rank * int;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        divs(i) = prod;
+                        prod *= shape(i);
+                    }
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        forall i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
+                    } else {
+                        forall i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
+                    }
+                }
+            }
+        }
+
+        inline iter _domain.everyZip(param tag: iterKind) where tag == iterKind.leader {
+            const shape = this.fastShape;
+            if CHPL_LOCALE_MODEL != "gpu" {
+                if rank == 1 {
+                    forall i in 0..<shape do yield (i,i);
+                } else {
+                    var blks: rank * int;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        if i == rank - 1 then
+                            blks(i) = 1;
+                        else
+                            blks(i) = shape(i) * blks(i + 1);
+                    }
+                    // forall idx in this {
+                    //     var i: int;
+                    //     for param k in 0..<rank do
+                    //         i += idx(k) * blks(k);
+                    //     yield (i,idx);
+                    // }
+                    forall followThis in _value.these(tag) do yield followThis;
+                }
+            } else {
+                if rank == 1 {
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        forall i in 0..<shape do 
+                            yield (i,i);
+                    } else {
+                        forall i in 0..<shape do
+                            yield (i,i);
+                    }
+                } else {
+                    var prod = 1;
+                    var divs: rank * int;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        divs(i) = prod;
+                        prod *= shape(i);
+                    }
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        forall i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
+                    } else {
+                        forall i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
+                    }
+                }
+            }
+        }
+        inline iter _domain.everyZip(param tag: iterKind,followThis) where tag == iterKind.follower {
             const shape = this.fastShape;
             if CHPL_LOCALE_MODEL != "gpu" {
                 if rank == 1 {

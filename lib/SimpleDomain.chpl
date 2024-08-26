@@ -31,12 +31,96 @@ inline proc unwrap(tup: ?rank * int) do
     else
         return tup;
 
-proc pairOfHomTuples(tup) param : bool do
-    return isHomogeneousTuple(tup) 
-            && isHomogeneousTuple(tup(0))
-            && isTuple(tup(0).type) 
-            && isTuple(tup(1).type)
-            && tup(0).type == tup(1).type;
+type tuple = _tuple(?);
+
+pragma "reference to const when const this"
+inline proc tuple.first ref do 
+    return this(0);
+
+pragma "reference to const when const this"
+inline proc tuple.last ref do
+    return this(this.size - 1);
+
+proc tuple.isHomogeneous param : bool do
+    return isHomogeneousTuple(this.type);
+
+proc tuple.eltType type do
+    if isHomogeneousTuple(this) then
+        return this(0).type;
+    else {
+        compilerError("Not homogeneous.");
+        return nothing;
+    }
+
+// proc type tuple.eltType type
+//     where isHomogeneousTuple(this) do
+//         return this(0);
+
+proc tuple.homRank param : int
+    where isHomogeneous do
+        return this.first.size;
+
+pragma "reference to const when const this"
+inline proc tuple.uncons ref : (head.type,tail.type) {
+    inline proc firstRest(first, rest...) do
+        return (first,rest);
+    return firstRest((...this));
+}
+
+pragma "reference to const when const this"
+inline proc tuple.head ref do
+    return first;
+
+pragma "reference to const when const this"
+inline proc _tuple.tail ref {
+    inline proc rest(first, rst...) do
+        return rst;
+    if size > 1 then
+        return rest((...this));
+    else
+        return nothing;
+}
+
+proc homTuples(type t) param : bool do
+    return isTuple(t) 
+        && isHomogeneousTuple(t)
+        && isTuple(t(0)) 
+        && isHomogeneousTuple(t(0));
+
+proc homTuples(tup: ?tuType) param : bool do
+    return homTuples(tuType);
+
+proc rankOfHomTuple(tup: ?tuType) param : int 
+        where isTuple(tuType)
+            && isHomogeneousTuple(tuType) do
+    return tup.size;
+
+proc tupsInTupsRank(tup: ?tuType) param : int 
+        where homTuples(tup) do
+    return rankOfHomTuple(tup.first);
+
+proc isTupleOfOrder(param order: int, tup: ?tupType) param : bool {
+    if !isTuple(tupType) then
+        return false;
+    proc isTupleOfOrderHelp(param level: int,tup: ?tupType) param : bool {
+        if !isTuple(tupType) then
+            return level == 0;
+        if !isTuple(tup.head.type) then
+            if level > 0 then 
+                return false;
+            else
+                return isTupleOfOrderHelp(level,tup.tail);
+        
+        if isTupleOfOrderHelp(level-1,tup.head) then
+            if tup.size == 1 then
+                return true;
+            else
+                return isTupleOfOrderHelp(level,tup.tail);
+        return false;
+    }
+    return isTupleOfOrderHelp(order, tup);
+}
+
 
 
 inline proc computeStrides(shape: ?rank*int): simpleTupleType(rank) {
@@ -102,7 +186,9 @@ record rect : serializable {
     inline proc init(shape: int ...?rnk) do
         this.init(shape);
 
-    inline proc init(const dom: _domain(?)) where isDomain(dom) {
+    inline proc init(const dom: domain(?)) 
+        where isDomain(dom) 
+            && dom.isRectangular() {
         param rank = dom.rank;
         var shape,offset: rank * int;
         const dms = dom.dims();
@@ -116,26 +202,35 @@ record rect : serializable {
         this.init(shape,offset);
     }
 
+    /*
+        Copy initializes a ``rect`` of rank ``rank`` from a tuple ``shape`` of ``int``s where ``shape.size == rank``.
+    */
     inline proc init=(const shape: ?rank*int) do
         this.init(shape);
 
     inline operator :(const shape: ?rank*int, type toType: rect(rank)): rect(rank) do
         return new rect((...shape));
 
-    inline proc init=(const shapeOffset: 2*(_tuple)) 
-            where pairOfHomTuples(shapeOffset) do
-        this.init(shapeOffset(0),shapeOffset(1));
 
-    inline operator :(const shapeOffset: 2*(_tuple), type toType: rect(?rank))
-            where pairOfHomTuples(shapeOffset) && rank == shapeOffset(0).size do
-        return new rect(shapeOffset(0),shapeOffset(1));
+    inline proc init=(const shapeOffset: 2*(tuple(?))) 
+            where shapeOffset.first.type == shapeOffset.last.type /*shapeOffset.isHomogeneous
+                && isTuple(shapeOffset.eltType)
+                && shapeOffset.first.isHomogeneous */do
+        this.init(shapeOffset.first,shapeOffset.last);
+
+    inline operator :(const shapeOffset: 2*(tuple(?)), type toType: rect(?))
+            where shapeOffset.isHomogeneous
+                && isTuple(shapeOffset.eltType)
+                && shapeOffset.first.isHomogeneous do
+        return new rect(shapeOffset.first,shapeOffset.last);
 
 
-    inline proc init=(const dom: _domain(?)) where isDomain(dom) do
+    inline proc init=(const ref dom: domain(?)) where isDomain(dom) && dom.isRectangular() do
         this.init(dom);
 
-    inline operator :(const dom: _domain(?), type toType: rect(dom.rank)): rect(dom.rank) where isDomain(dom) do
+    inline operator :(const ref dom: domain(?), type toType: rect(dom.rank)): rect(dom.rank) where isDomain(dom) && dom.isRectangular() do
         return new rect(dom);
+
 
     inline proc low: rank * int do
         return offset;
@@ -161,47 +256,164 @@ record rect : serializable {
         var result: rank * int;
         var idx = order;
         for param i in 0..<rank {
-            result(i) = idx / strides(i);
-            idx %= strides(i);
+            const strideI = strides(i);
+            result(i) = idx / strideI;
+            idx %= strideI;
         }
         return result;
     }
 
-    inline proc toDomain(): domain(rank,int) do
+    inline proc atIndex(const idx: rank*int): int {
+        if rank == 1 then
+            return idx;
+        // if rank > 1 do
+        var i: int;
+        for param j in 0..<rank do
+            i += idx(j) * strides(j);
+        return i;
+    }
+
+    inline proc toDomain() const : domain(rank,int) do
         return {(...dims())};
 
-    inline operator :(sd: rect(?rank), type toType: domain(rank,int)) do
+    inline operator :(const in sd: rect(?rank), type toType: domain(rank,int)) do
         return sd.toDomain();
 
-    inline iter eachOrder(): (int,simpleTupleType(rank)) {
+    pragma "order independent yielding loops"
+    // pragma "reference to const when const this"
+    inline iter eachOrder() const : (int,simpleTupleType(rank)) {
         if !util.targetGpu() {
             const dom = toDomain();
-            foreach idx in dom do yield idx;
+            foreach idx in dom do
+                yield (atIndex(idx),idx);
             return;
         }
 
-        if rank == 1 then
-            foreach i in 0..<size do
-                yield (i,i);
-        else
+        foreach i in 0..<size do
+            yield (i,indexAt(i));
+    }
+
+    // pragma "reference to const when const this"
+    inline iter eachOrder(param tag: iterKind) const : (int,simpleTupleType(rank))
+            where tag == iterKind.standalone {
+        if util.targetGpu() then
             foreach i in 0..<size do
                 yield (i,indexAt(i));
+        else {
+            const dom = toDomain();
+            foreach idx in dom.these(tag) do
+                yield (atIndex(idx),idx);
+        }
     }
 
-    inline iter these(): simpleTupleType(rank) {
-        // if !util.targetGpu() {
-        //     const dom = toDomain();
-        //     foreach idx in dom do yield idx;
-        // }
-
-        if rank == 1 then
-            foreach i in 0..<size do
-                yield i;
-        else
-            foreach i in 0..<size do
-                yield indexAt(i);
+        // pragma "reference to const when const this"
+    inline iter eachOrder(param tag: iterKind) const : (int,simpleTupleType(rank))
+            where tag == iterKind.leader {
+        if util.targetGpu() then
+            forall i in 0..<size do
+                yield (i,indexAt(i));
+        else {
+            const dom = toDomain();
+            forall idx in dom.these(tag) do
+                yield (atIndex(idx),idx);
+        }
     }
 
+    inline iter eachOrder(param tag: iterKind,followThis) const : (int,simpleTupleType(rank))
+            where tag == iterKind.follower {
+        if util.targetGpu() then
+            forall i in 0..<size do
+                yield (i,indexAt(i));
+        else {
+            const dom = toDomain();
+            // compilerError(followThis.type:string);
+            foreach idx in dom.these(tag=tag,followThis) do
+                yield (atIndex(idx),idx);
+        }
+    }
+
+    // iter these_help(param d: int) /*where storageOrder == ArrayStorageOrder.RMO*/ {
+    //   if d == rank-1 {
+    //     foreach i in ranges(d) do
+    //       yield i;
+    //   } else if d == rank - 2 {
+    //     foreach i in ranges(d) do
+    //       foreach j in these_help(rank-1) do
+    //         yield (i, j);
+    //   } else {
+    //     foreach i in ranges(d) do
+    //       foreach j in these_help(d+1) do
+    //         yield (i, (...j));
+    //   }
+    // }
+    iter these_help(param d: int, block) /*where storageOrder == ArrayStorageOrder.RMO*/ {
+      if d == block.size-1 {
+        foreach i in block(d) do
+          yield i;
+      } else if d == block.size - 2 {
+        foreach i in block(d) do
+          foreach j in these_help(block.size-1, block) do
+            yield (i, j);
+      } else {
+        foreach i in block(d) do
+          foreach j in these_help(d+1, block) do
+            yield (i, (...j));
+      }
+    }
+
+    // pragma "reference to const when const this"
+    // inline iter eachOrder(param tag: iterKind) ref : (int,simpleTupleType(rank))
+    //         where tag == iterKind.leader {
+    //     if util.targetGpu() then
+    //         forall i in 0..<size do
+    //             yield (i,indexAt(i));
+    //     else {
+    //         const dom = toDomain();
+    //         forall idx in dom.these(tag) do
+    //             yield (atIndex(idx),idx);
+    //     }
+    // }
+
+    pragma "order independent yielding loops"
+    pragma "reference to const when const this"
+    inline iter these() : simpleTupleType(rank) do
+        foreach i in 0..<size do
+            yield indexAt(i);
+
+    pragma "order independent yielding loops"
+    pragma "reference to const when const this"
+    inline iter these(param tag: iterKind) : simpleTupleType(rank) 
+            where tag == iterKind.standalone do
+        forall i in 0..<size do
+            yield indexAt(i);
+
+    pragma "order independent yielding loops"
+    pragma "reference to const when const this"
+    inline iter these(param tag: iterKind)
+            where tag == iterKind.leader do
+        yield this.dims();
+
+    pragma "order independent yielding loops"
+    pragma "reference to const when const this"
+    inline iter these(param tag: iterKind, followThis, param fast: bool = false) : simpleTupleType(rank)
+            where tag == iterKind.follower {
+        const rct = new rect({(...followThis)});
+        if boundsChecking then
+            if !contains(rct) then
+                halt("Cannot have leading window be larger than following domain.");
+        foreach idx in rct do
+            yield indexAt(rct.atIndex(idx));
+    }
+
+    inline proc contains(const idx: rank*int): bool {
+        var res: bool = true;
+        for param i in 0..<rank do
+            res &= offset(i) <= idx(i) && idx(i) < shape(i);
+        return res;
+    }
+
+    inline proc contains(const rct: rect(rank)): bool do
+        return offset <= rct.offset && rct.shape <= shape;
 
     proc toString() {
         use IO;
@@ -243,3 +455,8 @@ record rect : serializable {
     //     throw new Error("Only integer and floating point data types currently supported: %s".format(metadata.dtype));
     //   }
     // }
+
+
+// inline proc chpl_computeIteratorShape(arg: rect(?rank)) {
+//     return arg.dims();
+// }

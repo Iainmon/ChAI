@@ -1,0 +1,88 @@
+NDArray
+
+Usage:
+   use NDArray;
+
+or
+
+   import NDArray;
+
+   Record: ndarray : serializable
+      param rank: int
+      type eltType = real(32)
+      var _domain: domain(rank, int)
+      var data: [_domain] eltType = noinit
+      proc  _dom 
+      proc  shape : rank*int
+      proc  init(param rank: int, type eltType, const dom: domain(rank, int)) 
+      proc  init(param rank: int, type eltType, const dom: domain(rank, int), const arr: [] eltType) 
+      proc  init(type eltType, const shape: ?rank*int) 
+      proc  init(param rank: int, type eltType = real(32)) 
+      proc  init(type eltType = real(32), const shape: int ...?rank) 
+      proc  init(const dom: ?t, type eltType = real(32))  where isDomainType(t)
+      proc  init(const Arr: [] ?eltType) 
+      proc  init(const A: ndarray(?rank, ?eltType)) 
+      proc  init( it: _iteratorRecord) 
+      proc  init=(const other: [] ?eltType) 
+      proc  init=(const other: ndarray(?rank, ?eltType)) 
+      proc  init=( other: _iteratorRecord) 
+      proc ref this(args: int ...rank) ref
+      proc ref setData(const arr: [] eltType)  where arr.rank == rank
+      proc ref reshapeDomain(const dom: domain(rank, int)) 
+      proc  reshape( dom: domain(rank, int)) : ndarray(rank, eltType)
+      proc  reshape( dom: ?t) : ndarray(dom.rank, eltType) where isDomainType(t) && dom.rank != rank
+      proc  reshape(newShape: int ...?newRank) : ndarray(newRank, eltType)
+      proc  slice(args ...) 
+      proc  permute(axes: int ...rank) 
+      proc  expand(axes: int ...rank) 
+      proc ref sumOneAxis( axis: int) : ndarray(rank, eltType)
+      proc  sumAxesMask( withAxesMask: rank*int) : ndarray(rank, eltType)
+      proc  sum(axes: int ...?axesCount) : ndarray(rank, eltType)
+      proc  shrink(narg: 2*int ...rank, param exactBounds = false) : ndarray(rank, eltType)
+      proc  pad(narg: 2*int ...rank,  value: eltType = 0) : ndarray(rank, eltType)
+      proc  dilate( dil: int)  where rank == 2
+      proc  dilate( dil: int)  where rank == 3
+      proc  squeeze(param newRank: int) : ndarray(newRank, eltType) where newRank < rank
+      proc  max() : ndarray(1, eltType)
+      proc  max(axes: int ...?axesCount) : ndarray(rank, eltType)
+      proc  populateRemote( re: borrowed(Remote(ndarray(rank, eltType)))) : borrowed(Remote(ndarray(rank, eltType)))
+      proc  toRemote() : owned(Remote(ndarray(rank, eltType)))
+      iter ref batchify(param dim: int = 0) ref where dim < rank
+      proc  kernelRot() : ndarray(4, eltType) where rank == 4
+      proc  kernelRot() : ndarray(3, eltType) where rank == 3
+      proc  argmax()  where rank == 1
+      proc  relu() 
+   proc type ndarray.arange( to: int, type eltType = real(64),  shape: ?rank*int) : ndarray(rank, eltType)
+   operator  = (ref lhs: ndarray(?rank, ?eltType), const rhs: ndarray(rank, eltType)) 
+   operator  = (ref lhs: ndarray(?rank, ?eltType), const rhs: [] eltType)  where rhs.rank == rank
+   operator :(const val: [] ?eltType, type t: ndarray(val.rank, eltType)) 
+   operator :(const a: ndarray(?rank, ?eltType), type toType) : ndarray(rank, toType) where toType != eltType
+   operator :(const a: ndarray(?rank, ?eltType), type toType) : ndarray(rank, toType) where toType == eltType
+   operator :( it: _iteratorRecord, type t: ndarray(?rank, ?eltType)) 
+   proc zipArr( a: ndarray(?rank, ?eltType),  b: ndarray(rank, eltType),  f) : ndarray(rank, eltType)
+   operator +( a: ndarray(?rank, ?eltType),  b: ndarray(rank, eltType)) : ndarray(rank, eltType)
+   operator *( a: ndarray(?rank, ?eltType),  b: ndarray(rank, eltType)) : ndarray(rank, eltType)
+   operator -( a: ndarray(?rank, ?eltType),  b: ndarray(rank, eltType)) : ndarray(rank, eltType)
+   operator /( a: ndarray(?rank, ?eltType),  b: ndarray(rank, eltType)) : ndarray(rank, eltType)
+   proc type ndarray.convolve( features: ndarray(3, ?eltType),  kernel: ndarray(4, eltType),  stride: int) : ndarray(3, eltType)
+   proc type ndarray.convolve( features: ndarray(3, ?eltType),  kernel: ndarray(4, eltType),  bias: ndarray(1, eltType),  stride: int) : ndarray(3, eltType)
+   proc type ndarray.maxPool( features: ndarray(3, ?eltType),  poolSize: int) : ndarray(3, eltType)
+   proc type ndarray.matvecmul( mat: ndarray(2, ?eltType),  vec: ndarray(1, eltType)) : ndarray(1, eltType)
+   proc type ndarray.fromRanges(type eltType = real, rngs: range ...?rank) : ndarray(rank, eltType)
+   proc  ndarray.serialize( writer: IO.fileWriter(locking = false, IO.defaultSerializer), ref serializer: IO.defaultSerializer) 
+   proc ref ndarray.read( fr: IO.fileReader(?))  throws
+   proc  ndarray.write( fw: IO.fileWriter(?))  throws
+   Class: _tensor_resource
+      param rank: int
+      type eltType = real(64)
+      var data: remote(ndarray(rank, eltType))
+   proc type ndarray.fullOuter( a: ndarray(?rankA, ?eltType),  b: ndarray(?rankB, eltType)) : ndarray(rankA+rankB, eltType)
+   proc type ndarray.contract( a: ndarray(?rankA, ?eltType),  b: ndarray(?rankB, eltType), param axisA: int, param axisB: int) 
+   proc splitAt(param s: string, param del: string, param idx: int = 0) param
+   proc getFirstIdx(param s: string, param del: string, param idx: int = 0) param
+   proc sliceGeneric(type t, param start: int, param stop: int, param s: t, param idx: int = start) param
+   proc slice(param start: int, param stop: int, param s: string, param idx: int = start) param
+   proc take(param count: int, param s: string) param
+   proc drop(param count: int, param s: string) param
+   proc type ndarray.einsum(param subscripts: string,  a: ndarray(?rankA, ?eltType),  b: ndarray(?rankB, eltType)) 
+   proc main() 

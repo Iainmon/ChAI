@@ -1,0 +1,169 @@
+Autograd
+
+Usage:
+   use Autograd;
+
+or
+
+   import Autograd;
+
+   proc checkRank( te: shared(TensorEssence(?eltType)), param rank: int) : bool
+   proc getRank( te: shared(TensorEssence(?eltType))) : int
+   proc forceRank( te: shared(TensorEssence(?eltType)), param rank: int) : shared(BaseTensorResource(eltType, rank))
+   Class: TensorEssence : serializable
+      type eltType = real
+      proc  runtimeRank : int
+      iter  children() : borrowed(TensorEssence(eltType))
+      proc  treeHeight() : int
+   Class: ForgetfulTensor : TensorEssence
+      param rank: int
+   Class: BaseTensorResource : TensorEssence, serializable
+      param rank: int
+      var dataResource: shared(Remote(ndarray(rank, eltType)))
+      var gradResource: shared(Remote(ndarray(rank, eltType))?)
+      proc  init(type eltType, param rank: int) 
+      proc  init(in dataResource: shared(Remote(ndarray(?rank, ?eltType))), in gradResource: shared(Remote(ndarray(rank, eltType))?) = nil) 
+      proc  init( data: ndarray(?rank, ?eltType),  device: locale = Remote.defaultDevice) 
+      proc  to( dest: locale) 
+      proc  device : locale
+      proc  array ref: ndarray(rank, eltType)
+      proc  grad ref: ndarray(rank, eltType)
+      proc  forward() 
+      proc  backward( grad: remote(ndarray(rank, eltType)), param alreadyPopulated = false) 
+      proc  backward()  where rank == 1
+      proc  detach( copy: bool = true,  keepGrad: bool = false) : owned(TensorResource(eltType, rank, baseValue))
+      override proc  runtimeRank : int
+   Class: TensorResource : BaseTensorResource(?), serializable
+      type operationType
+      var operationCtx: operationType
+      proc  init(type eltType, param rank: int,  operationCtx: ?operationType) 
+      proc  init(in dataResource: shared(Remote(ndarray(?rank, ?eltType))), in gradResource: shared(Remote(ndarray(rank, eltType))?) = nil,  operationCtx: ?operationType) 
+      proc  init(in dataResource: shared(Remote(ndarray(?rank, ?eltType)))) 
+      proc  init( bt: borrowed(BaseTensorResource(?eltType, ?rank)),  operationCtx: ?operationType) 
+      override proc  detach( copy: bool = true,  keepGrad: bool = false) : owned(TensorResource(eltType, rank, baseValue))
+      override proc  forward() 
+      override iter  children() : borrowed(TensorEssence(eltType))
+   Record: baseValue : serializable
+      proc  forward() 
+      proc  children 
+   Record: reluOp : serializable
+      var input: shared(BaseTensorResource(?))
+      proc  children 
+      proc  forward() 
+      proc  _relu( x) 
+   Record: expOp : serializable
+      var input: shared(BaseTensorResource(?))
+      proc  children 
+      proc  forward() 
+   Record: addOp : serializable
+      param rank: int
+      type eltType
+      var lhs: shared(BaseTensorResource(eltType, rank))
+      var rhs: shared(BaseTensorResource(eltType, rank))
+      proc  children 
+      proc  forward() : ndarray(rank, eltType)
+      proc  backward( grad: ndarray(rank, eltType)) : (ndarray(rank, eltType), ndarray(rank, eltType))
+   Record: subOp : serializable
+      var lhs: shared(BaseTensorResource(?))
+      var rhs: shared(BaseTensorResource(?))
+      proc  children 
+      proc  forward() 
+   Record: divOp : serializable
+      var lhs: shared(BaseTensorResource(?))
+      var rhs: shared(BaseTensorResource(?))
+      proc  children 
+      proc  forward() 
+   Record: multOp : serializable
+      param rank: int
+      type eltType
+      var lhs: shared(BaseTensorResource(eltType, rank))
+      var rhs: shared(BaseTensorResource(eltType, rank))
+      proc  children 
+      proc  forward() 
+      proc  backward( grad: ndarray(rank, eltType)) : (ndarray(rank, eltType), ndarray(rank, eltType))
+   Record: reshapeOp : serializable
+      param oldRank: int
+      param newRank: int
+      type eltType
+      var shape: newRank*int
+      var input: shared(BaseTensorResource(eltType, oldRank))
+      proc  children 
+      proc  forward() : ndarray(newRank, eltType)
+      proc  backward( grad: ndarray(newRank, eltType)) : (ndarray(oldRank, eltType),)
+   Record: permuteOp : serializable
+      param rank: int
+      type eltType = real
+      var permutation
+      var input: shared(BaseTensorResource(eltType, rank))
+      proc  children 
+      proc  forward() 
+      proc  backward( grad: ndarray(rank, eltType)) : (ndarray(rank, eltType),)
+   Record: expandOp : serializable
+      param rank: int
+      type eltType = real
+      var expandedShape: rank*int
+      var input: shared(BaseTensorResource(eltType, rank))
+      proc  children 
+      proc  forward() 
+      proc  backward( grad: ndarray(rank, eltType)) : (ndarray(rank, eltType),)
+   Record: padOp : serializable
+      param rank: int
+      type eltType = real
+      var arg: rank*(2*(int))
+      var value: eltType
+      var input: shared(BaseTensorResource(eltType, rank))
+      proc  children 
+      proc  forward() : ndarray(rank, eltType)
+      proc  backward( grad: ndarray(rank, eltType)) : (ndarray(rank, eltType),)
+   Record: shrinkOp : serializable
+      param rank: int
+      type eltType = real
+      var arg: rank*(2*(int))
+      var input: shared(BaseTensorResource(eltType, rank))
+      proc  children 
+      proc  forward() : ndarray(rank, eltType)
+      proc  backward( grad: ndarray(rank, eltType)) : (ndarray(rank, eltType),)
+   Record: sliceOp : serializable
+      param rank: int
+      type eltType = real
+      var dom: domain(rank, int)
+      var input: shared(BaseTensorResource(eltType, rank))
+      proc  children 
+      proc  forward() : ndarray(rank, eltType)
+      proc  backward( grad: ndarray(rank, eltType)) : (ndarray(rank, eltType),)
+   Record: layerSliceOp : serializable
+      param rank: int
+      type eltType = real
+      var base: shared(BaseTensorResource(eltType, rank))
+      var mask: shared(BaseTensorResource(eltType, rank))
+      var maskDomain: domain(rank, int)
+      proc  children 
+      proc  forward() : ndarray(rank, eltType)
+      proc  backward( grad: ndarray(rank, eltType)) : (ndarray(rank, eltType), ndarray(rank, eltType))
+   Record: sumOp : serializable
+      param rank: int
+      type eltType = real
+      param sumRank: int
+      var axes: sumRank*int
+      var input: shared(BaseTensorResource(eltType, rank))
+      proc  children 
+      proc  outRank param: int
+      proc  forward() 
+      proc  backward( grad: ndarray(outRank, eltType)) : (ndarray(rank, eltType),)
+   Record: maxOp : serializable
+      param rank: int
+      type eltType = real
+      param maxRank: int
+      var axes: maxRank*int
+      var input: shared(BaseTensorResource(eltType, rank))
+      proc  children 
+      proc  forward() 
+      proc  backward( grad) : (ndarray(rank, eltType),)
+   Record: conv2DOp : serializable
+      type eltType = real
+      var features: shared(BaseTensorResource(eltType, 3))
+      var kernel: shared(BaseTensorResource(eltType, 4))
+      var stride: int
+      proc  children 
+      proc  forward() : ndarray(3, eltType)
+      proc  backward( grad: ndarray(3, eltType)) : (ndarray(3, eltType), ndarray(4, eltType))

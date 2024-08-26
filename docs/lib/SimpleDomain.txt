@@ -1,0 +1,68 @@
+SimpleDomain
+
+Usage:
+   use SimpleDomain;
+
+or
+
+   import SimpleDomain;
+
+   proc isDomain( d: ?dt) param: bool
+   proc zeroTup(param rank: int) 
+   proc simpleTupleType(param rank: int, type eltType = int) type
+   proc wrap( x: int) : 1*(int)
+   proc wrap( tup: ?rank*int) : rank*int
+   proc unwrap( tup: ?rank*int) 
+   type tuple = _tuple(?)
+   proc  tuple.first ref
+   proc  tuple.last ref
+   proc  tuple.isHomogeneous param: bool
+   proc  tuple.eltType type
+   proc  tuple.homRank param: int where isHomogeneous
+   proc  tuple.uncons ref: (head.type, tail.type)
+   proc  tuple.head ref
+   proc  _tuple.tail ref
+   proc homTuples(type t) param: bool
+   proc homTuples( tup: ?tuType) param: bool
+   proc rankOfHomTuple( tup: ?tuType) param: int where isTuple(tuType) && isHomogeneousTuple(tuType)
+   proc tupsInTupsRank( tup: ?tuType) param: int where homTuples(tup)
+   proc isTupleOfOrder(param order: int,  tup: ?tupType) param: bool
+   proc computeStrides( shape: ?rank*int) : simpleTupleType(rank)
+   proc computeSize( shape: ?rank*int) : int
+   proc computeBlocks( shape: ?rank*int) : rank*int
+   Record: rect : serializable
+      param rank: int
+      const shape: rank*int
+      const offset: rank*int
+      const size: int
+      const strides: rank*int
+      proc  init(const shape: ?rank*int, const offset: rank*int, const size: int, const strides: rank*int = computeStrides(shape)) 
+      proc  init(const shape: ?rank*int, const offset: rank*int = zeroTup(rank)) 
+      proc  init(shape: int ...?rnk) 
+      proc  init(const dom: domain(?))  where isDomain(dom) && dom.isRectangular()
+      proc  init=(const shape: ?rank*int) 
+         
+         Copy initializes a ``rect`` of rank ``rank`` from a tuple ``shape`` of ``int``s where ``shape.size == rank``.
+         
+
+      operator  :(const shape: ?rank*int, type toType: rect(rank)) : rect(rank)
+      proc  init=(const shapeOffset: 2*(tuple(?)))  where shapeOffset.first.type == shapeOffset.last.type
+      operator  :(const shapeOffset: 2*(tuple(?)), type toType: rect(?))  where shapeOffset.isHomogeneous && isTuple(shapeOffset.eltType) && shapeOffset.first.isHomogeneous
+      proc  init=(const ref dom: domain(?))  where isDomain(dom) && dom.isRectangular()
+      operator  :(const ref dom: domain(?), type toType: rect(dom.rank)) : rect(dom.rank) where isDomain(dom) && dom.isRectangular()
+      proc  low : rank*int
+      proc  high : rank*int
+      proc  dims() : rank*range
+      proc  indexAt(const order: int) : simpleTupleType(rank)
+      proc  atIndex(const idx: rank*int) : int
+      proc  toDomain() const: domain(rank, int)
+      operator  :(const in sd: rect(?rank), type toType: domain(rank, int)) 
+      iter  eachOrder() ref: (int, simpleTupleType(rank))
+      iter  eachOrder(param tag: iterKind) ref: (int, simpleTupleType(rank)) where tag == iterKind.standalone
+      iter  these() : simpleTupleType(rank)
+      iter  these(param tag: iterKind) : simpleTupleType(rank) where tag == iterKind.standalone
+      iter  these(param tag: iterKind) : simpleTupleType(rank) where tag == iterKind.leader
+      iter  these(param tag: iterKind,  followThis, param fast: bool = false) : simpleTupleType(rank) where tag == iterKind.follower
+      proc  toString() 
+      proc  serialize( writer: IO.stdout.type, ref serializer) 
+      proc  serialize( writer: IO.fileWriter(?), ref serializer) 

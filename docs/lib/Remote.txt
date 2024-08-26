@@ -1,0 +1,32 @@
+Remote
+
+Usage:
+   use Remote;
+
+or
+
+   import Remote;
+
+   Class: _RemoteVarContainer : serializable
+      var containedValue
+   Class: Remote : serializable
+      type eltType
+      var value: owned(_RemoteVarContainer(eltType))
+      proc ref get() ref
+      proc  ptr ref
+      proc  device : locale
+      proc  init(in value: owned(_RemoteVarContainer(?eltType))) 
+      proc  init( value: ?eltType,  device: locale = Remote.defaultDevice)  where !isSubtype(eltType, Remote(?))
+      proc  init(type eltType, in tr: _thunkRecord,  device: locale = Remote.defaultDevice) 
+      proc  init(type eltType,  device: locale = Remote.defaultDevice) 
+      proc  copyContainer( dest: locale = device) : owned(_RemoteVarContainer(eltType))
+      proc  copyTo( dest: locale = device) : owned(Remote(eltType))
+      proc  copy() : owned(Remote(eltType))
+      proc  to( dest: locale) 
+   proc ref (owned(Remote(?eltType))).get() ref: owned(Remote(eltType))
+   proc ref (shared(Remote(?eltType))).get() ref: shared(Remote(eltType))
+   proc ref (unmanaged(Remote(?eltType))).get() ref: unmanaged(Remote(eltType))
+   proc type Remote.defaultDevice : locale
+   proc chpl__buildRemoteWrapper( loc: locale, type inType: Remote(?eltType)) 
+   proc chpl__buildRemoteWrapper( loc: locale, type inType: owned(Remote(?eltType)), in tr: _thunkRecord) 
+   proc chpl__buildRemoteWrapper( loc: locale, type inType: shared(Remote(?eltType)), in tr: _thunkRecord) 

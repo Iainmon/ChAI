@@ -1,0 +1,38 @@
+Utilities
+
+Usage:
+   use Utilities;
+
+or
+
+   import Utilities;
+
+Submodules for this module are located in the Utilities/ directory
+
+   config param loopGpuSupport = CHPL_LOCALE_MODEL == "gpu"
+   proc targetGpu() param: bool
+   param debugPrint = false
+   proc err(args ...?n) 
+   proc debugWrite(args ...?n) 
+   iter cartesian( X,  Y) 
+   iter cartesian(param tag: iterKind,  X,  Y)  where tag == iterKind.standalone
+   iter flatIter( D: domain(?)) 
+   iter flatIter(param tag: iterKind,  D: domain(?))  where tag == iterKind.standalone
+   proc normalizeArray( arr: []) 
+   proc normalizeArray( unknown: ?t)  where !isArrayType(t)
+   proc normalizeDomain( dom: domain(?)) : domain(dom.rank, int)
+   proc emptyDomain(param rank: int) : domain(rank, int)
+   proc domainFromShape(shape: int ...?rank) : domain(rank, int)
+   proc rangeFromBound( high: int) : range
+   proc rangeFromBound( low: int,  high: int) : range
+   proc rangeFromStart( start: int,  count: int) 
+   proc rangesFromBounds(bounds: 2*int ...?rank) : rank*range
+   proc rangesFromShape(shape: int ...?rank) : rank*range
+   proc nbase( bounds: ?rank*int,  n: int) : rank*int
+   proc indexInShape( shape: ?rank*int, in n: int) : rank*int
+   proc indexAtHelperProd( n: int,  prod: int, shape: int ...?rank) : rank*int where rank > 1
+   proc indexAtHelperMultiples( n: int, divs: int ...?rank) : rank*int
+   proc indexAt( n: int,  shape: int) 
+   proc indexAt( n: int, shape: int ...?rank) : rank*int where rank > 1
+   iter fastEach(shape: int ...?rank) : rank*int
+   proc argsort(tup: int ...?rank) 

@@ -1,0 +1,39 @@
+Standard
+
+Usage:
+   use Utilities.Standard;
+
+or
+
+   import Utilities.Standard;
+
+   proc  _tuple.imageType( f) type
+   proc  _tuple.eltType type where isHomogeneousTuple(this)
+   proc  _tuple.map( f) : this.size*this.imageType(f) where isHomogeneousTuple(this)
+   proc  _tuple.slice(param low: int, param high: int) : (high-low)*this.eltType where isHomogeneousTuple(this) && low < high && 0 <= low && high <= this.size
+   proc  _tuple.removeIdx(param idx: int) : (this.size-1)*this.eltType
+   proc  _tuple.untuplify() 
+   proc  _tuple.slice(param start: int, param stop: int, param idx: int = start) param
+   proc  _tuple.insertIdx(param idx: int,  x: this.eltType) : (this.size+1)*this.eltType
+   proc  _tuple.indexAt( n: int) : this.size*int where isHomogeneousTuple(this) && this(0).type == int
+   iter  _tuple.each( n: int) : this.size*int where isHomogeneousTuple(this) && this(0).type == int
+   iter  _domain.each 
+   iter  _domain.every()  where rank == 1
+   iter  _domain.every(param tag: iterKind)  where tag == iterKind.standalone && rank == 1
+   iter  _domain.every()  where rank > 1
+   iter  _domain.every(param tag: iterKind)  where tag == iterKind.standalone && rank > 1
+   iter  _domain.everyZip() 
+   iter  _domain.everyZip(param tag: iterKind)  where tag == iterKind.standalone
+   proc  _domain.indexAt( n: int)  where rank == 1
+   proc  _domain.indexAt( n: int)  where rank > 1
+   proc  _domain.fastShape 
+   proc  _domain.fastNormalDims 
+   proc  _domain.myShape 
+   proc  _domain.normalize  where this.isRectangular()
+   proc  _domain.isNormal : bool where this.isRectangular()
+   proc param string.this(param start: int, param stop: int) param
+   proc param string.slice(param start: int, param stop: int, param idx: int = start) param
+   proc param string.take(param count: int) param
+   proc param string.drop(param count: int) param
+   proc param string.countOccurrences(param c: string, param idx: int = 0) param
+   proc param string.takeUntil(param del: string, param idx: int = 0, param keepDel: bool = false) param
