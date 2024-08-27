@@ -6,8 +6,7 @@ use Autograd;
 import Utilities as util;
 use Utilities.Standard;
 
-
-record tensor : serializable {
+record staticTensor : serializable {
     param rank: int;
     type eltType = real(64);
     var resource: shared BaseTensorResource(eltType,rank);
@@ -76,91 +75,91 @@ record tensor : serializable {
         }
     }
 
-    proc detach(copy: bool = true, keepGrad: bool = false): tensor(rank,eltType) {
-        return new tensor(meta.detach(copy,keepGrad));
+    proc detach(copy: bool = true, keepGrad: bool = false): staticTensor(rank,eltType) {
+        return new staticTensor(meta.detach(copy,keepGrad));
     }
 }
 
-operator :(in t: tensor(?rank,?eltType), type toType): tensor(rank,toType) {
+operator :(in t: staticTensor(?rank,?eltType), type toType): staticTensor(rank,toType) {
     const a = t.array;
     const b = a : toType;
-    return new tensor(b);
+    return new staticTensor(b);
 }
 
-proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank,eltType) {
+proc tensorFromCtx(param rank: int, type eltType, ctx): staticTensor(rank,eltType) {
     var newMeta = new owned TensorResource(eltType,rank,ctx);
     newMeta.forward();
-    return new tensor(newMeta);
+    return new staticTensor(newMeta);
 }
 
 
-operator +(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
+operator +(a: staticTensor(?rank,?eltType), b: staticTensor(rank,eltType)) {
     var ctx = new addOp(rank,eltType,a.meta,b.meta);
     return tensorFromCtx(rank,eltType,ctx);    
 }
 
-operator -(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
+operator -(a: staticTensor(?rank,?eltType), b: staticTensor(rank,eltType)) {
     var ctx = new subOp(a.meta,b.meta);
     return tensorFromCtx(rank,eltType,ctx); 
 }
 
-operator *(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
+operator *(a: staticTensor(?rank,?eltType), b: staticTensor(rank,eltType)) {
     var ctx = new multOp(rank,eltType,a.meta,b.meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-operator /(a: tensor(?rank,?eltType), b: tensor(rank,eltType)) {
+operator /(a: staticTensor(?rank,?eltType), b: staticTensor(rank,eltType)) {
     var ctx = new divOp(a.meta,b.meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.reshape(dom: domain(?)) {
+proc staticTensor.reshape(dom: domain(?)) {
     param newRank = dom.rank;
     var ctx = new reshapeOp(rank,newRank,eltType,dom.shape,meta);
     return tensorFromCtx(newRank,eltType,ctx);
 }
-proc tensor.reshape(newShape: int ...?newRank) {
+proc staticTensor.reshape(newShape: int ...?newRank) {
     var ctx = new reshapeOp(rank,newRank,eltType,newShape,meta);
     return tensorFromCtx(newRank,eltType,ctx);
 }
 
-proc tensor.relu() {
+proc staticTensor.relu() {
     var ctx = new reluOp(meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.permute(axes: int...rank) {
+proc staticTensor.permute(axes: int...rank) {
     var ctx = new permuteOp(rank,eltType,axes,meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.expand(axes: int...rank) {
+proc staticTensor.expand(axes: int...rank) {
     var ctx = new expandOp(rank,eltType,axes,meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.pad(args: (2 * int)...rank, value: eltType = 0.0) {
+proc staticTensor.pad(args: (2 * int)...rank, value: eltType = 0.0) {
     var ctx = new padOp(rank,eltType,args,value,meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.shrink(args: (2*int)...rank) {
+proc staticTensor.shrink(args: (2*int)...rank) {
     var ctx = new shrinkOp(rank,eltType,args,meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.slice(dom: domain(?)) where dom.rank == rank {
+proc staticTensor.slice(dom: domain(?)) where dom.rank == rank {
     var ctx = new sliceOp(rank,eltType,dom,meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.slice(rngs: range...rank) {
+proc staticTensor.slice(rngs: range...rank) {
     const dom = {(...rngs)};
     var ctx = new sliceOp(rank,eltType,dom,meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.sum(axes: int...?r) {
+proc staticTensor.sum(axes: int...?r) {
     if rank - r < 0 {
         compilerError("Cannot sum more axes than rank. ");
     }
@@ -170,7 +169,7 @@ proc tensor.sum(axes: int...?r) {
     return tensorFromCtx(newDim,eltType,ctx);
 }
 
-proc tensor.unsqueeze(dim: int): tensor(rank + 1,eltType) {
+proc staticTensor.unsqueeze(dim: int): staticTensor(rank + 1,eltType) {
     const shape = this.array.domain.shape;
     param newRank: int = rank + 1;
     var offset: int = 0;
@@ -186,19 +185,19 @@ proc tensor.unsqueeze(dim: int): tensor(rank + 1,eltType) {
     return this.reshape((...newShape));
 }
 
-proc tensor.max(): tensor(1,eltType) {
+proc staticTensor.max(): staticTensor(1,eltType) {
     var ctx = new maxOp(rank,eltType,rank,this.array.shape,meta);
     return tensorFromCtx(1,eltType,ctx);
 }
 
-proc tensor.exp(): tensor(rank,eltType) {
+proc staticTensor.exp(): staticTensor(rank,eltType) {
     var ctx = new expOp(meta);
     return tensorFromCtx(rank,eltType,ctx);
 }
 
-proc tensor.softmax(): tensor(rank,eltType) {
+proc staticTensor.softmax(): staticTensor(rank,eltType) {
 
-    const myShape = this.array.domain.shape;
+    const myShape = this.array.data.domain.shape;
 
     var baseShape: rank * int;
     for param i in 0..<rank do
@@ -216,7 +215,7 @@ proc tensor.softmax(): tensor(rank,eltType) {
 }
 
 
-proc matvec(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
+proc matvec(mat: staticTensor(2,?eltType),vec: staticTensor(1,eltType)): staticTensor(1,eltType) {
     const (n,) = vec.array.domain.shape;
     const (m,_n) = mat.array.domain.shape;
     if n != _n then halt("arrays must be same shape" + n : string + " " + _n : string);
@@ -226,7 +225,7 @@ proc matvec(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
     return Mv.sum(1);
 }
 
-proc matvec(mat: tensor(2,?eltType),vec: tensor(2,eltType)): tensor(2,eltType) {
+proc matvec(mat: staticTensor(2,?eltType),vec: staticTensor(2,eltType)): staticTensor(2,eltType) {
     const (b,n) = vec.array.domain.shape;
     const (m,_n) = mat.array.domain.shape;
     if n != _n then halt("arrays must be same shape" + n : string + " " + _n : string);
@@ -238,19 +237,19 @@ proc matvec(mat: tensor(2,?eltType),vec: tensor(2,eltType)): tensor(2,eltType) {
     return Mv.sum(2);
 }
 
-proc type tensor.matvecmul(m,v) {
+proc type staticTensor.matvecmul(m,v) {
     return matvec(m,v);
 }
 
-proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), stride: int): tensor(3,eltType) {
+proc type staticTensor.convolve(features: staticTensor(3,?eltType),kernel: staticTensor(4,eltType), stride: int): staticTensor(3,eltType) {
     var ctx = new conv2DOp(eltType,features.meta,kernel.meta,stride);
     return tensorFromCtx(3,eltType,ctx);
 }
 
-proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType), bias: tensor(1,eltType), stride: int): tensor(3,eltType) {
+proc type staticTensor.convolve(features: staticTensor(3,?eltType),kernel: staticTensor(4,eltType), bias: staticTensor(1,eltType), stride: int): staticTensor(3,eltType) {
     // on here.gpus[0] var x: shared Remote(ndarray(3,eltType)) = ndarray.convolve(features.array,kernel.array,bias.array,stride);
 
-    var t = new tensor(3,eltType);
+    var t = new staticTensor(3,eltType);
     on t.device {
         t.array = ndarray.convolve(features.array,kernel.array,bias.array,stride);
     }
@@ -258,8 +257,8 @@ proc type tensor.convolve(features: tensor(3,?eltType),kernel: tensor(4,eltType)
 }
 
 
-proc type tensor.matvecmulFast(mat: tensor(2,?eltType),vec: tensor(1,eltType)): tensor(1,eltType) {
-    var u = new tensor(1,eltType);
+proc type staticTensor.matvecmulFast(mat: staticTensor(2,?eltType),vec: staticTensor(1,eltType)): staticTensor(1,eltType) {
+    var u = new staticTensor(1,eltType);
     on u.device {
         u.array = ndarray.matvecmul(mat.array,vec.array);
     }
@@ -267,8 +266,8 @@ proc type tensor.matvecmulFast(mat: tensor(2,?eltType),vec: tensor(1,eltType)): 
 }
 
 
-proc tensor.dilate(dil: int): tensor(3,eltType) where this.rank == 3 {
-    var dilated = new tensor(3,eltType);
+proc staticTensor.dilate(dil: int): staticTensor(3,eltType) where this.rank == 3 {
+    var dilated = new staticTensor(3,eltType);
     on this.device {
         ref dat = this.array;
         ref dila = dilated.array;
@@ -279,8 +278,8 @@ proc tensor.dilate(dil: int): tensor(3,eltType) where this.rank == 3 {
     return dilated;
 }
 
-proc tensor.maxPool(poolSize: int): tensor(3,eltType) where this.rank == 3 {
-    var pool = new tensor(3,eltType);
+proc staticTensor.maxPool(poolSize: int): staticTensor(3,eltType) where this.rank == 3 {
+    var pool = new staticTensor(3,eltType);
     on this.device {
         ref dat = this.array;
         ref pl = pool.array;
@@ -291,40 +290,40 @@ proc tensor.maxPool(poolSize: int): tensor(3,eltType) where this.rank == 3 {
     return pool;
 }
 
-proc type tensor.arange(to: int,type eltType = real,shape: ?rank*int): tensor(rank,eltType) {
+proc type staticTensor.arange(to: int,type eltType = real,shape: ?rank*int): staticTensor(rank,eltType) {
     const dom = util.domainFromShape((...shape));
     const A: [dom] eltType = foreach (_,x) in zip(dom,0..<to) do x:eltType;
-    return new tensor(A);
+    return new staticTensor(A);
 }
 
-proc type tensor.arange(shape: int...?rank): tensor(rank,real) {
+proc type staticTensor.arange(shape: int...?rank): staticTensor(rank,real) {
     const _shape: rank * int = shape;
     const dom = util.domainFromShape((..._shape));
     const to = dom.size;
     const A: [dom] real = foreach (_,x) in zip(dom,0..<to) do x:real;
-    return new tensor(A);
+    return new staticTensor(A);
 }
 
 
-proc type tensor.fromShape(type eltType = real,shape: int...?rank,value: eltType = (0:eltType)): tensor(rank,eltType) {
+proc type staticTensor.fromShape(type eltType = real,shape: int...?rank,value: eltType = (0:eltType)): staticTensor(rank,eltType) {
     const v = value;
     const dom = util.domainFromShape((...shape));
     const A: [dom] eltType;
-    var t = new tensor(A);
+    var t = new staticTensor(A);
     return t;
 }
 
-proc type tensor.zeros(shape: int...?rank): tensor(rank,real) do
-    return tensor.fromShape(real,(...shape),0.0);
+proc type staticTensor.zeros(shape: int...?rank): staticTensor(rank,real) do
+    return staticTensor.fromShape(real,(...shape),0.0);
 
-proc type tensor.zeros(type eltType,shape: int...?rank): tensor(rank,eltType) do
-    return tensor.fromShape(eltType,(...shape),0 : eltType);
+proc type staticTensor.zeros(type eltType,shape: int...?rank): staticTensor(rank,eltType) do
+    return staticTensor.fromShape(eltType,(...shape),0 : eltType);
 
-proc type tensor.ones(shape: int...?rank): tensor(rank,real) do
-    return tensor.fromShape(real,(...shape),value=1.0);
+proc type staticTensor.ones(shape: int...?rank): staticTensor(rank,real) do
+    return staticTensor.fromShape(real,(...shape),value=1.0);
 
-proc type tensor.ones(type eltType,shape: int...?rank): tensor(rank,eltType) do
-    return tensor.fromShape(eltType,(...shape),value=1 : eltType);
+proc type staticTensor.ones(type eltType,shape: int...?rank): staticTensor(rank,eltType) do
+    return staticTensor.fromShape(eltType,(...shape),value=1 : eltType);
 
 
 
@@ -345,7 +344,7 @@ proc main() {
 
     // arange(15,real,(3,5));
 
-    var t = new tensor(2,real);
+    var t = new staticTensor(2,real);
     t.array.reshapeDomain({0..<3,0..<5});
     t.to(Remote.defaultDevice);
     on t.device {
@@ -363,9 +362,9 @@ proc main() {
 
     const run1 = false;
     if run1 {
-        var M = tensor.arange(15,real,(5,3));
+        var M = staticTensor.arange(15,real,(5,3));
         writeln(M);
-        var u = tensor.arange(3,real,(1,3));
+        var u = staticTensor.arange(3,real,(1,3));
         writeln(u);
 
         var x = u.expand(5,3);
@@ -378,7 +377,7 @@ proc main() {
         writeln(y);
 
 
-        var u_ = tensor.arange(3,real,(3,));
+        var u_ = staticTensor.arange(3,real,(3,));
         var y_ = matvec(M,u_);
 
         writeln(y_);
@@ -393,10 +392,10 @@ proc main() {
 
 
 
-    var M = tensor.arange(15,real,(5,3));
+    var M = staticTensor.arange(15,real,(5,3));
     writeln(M);
 
-    var x = tensor.arange(9,real,(3,3));
+    var x = staticTensor.arange(9,real,(3,3));
     writeln(x);
 
     var y = matvec(M,x);
@@ -420,7 +419,7 @@ proc main() {
 
     const run3 = false;
     if run3 {
-        var W = tensor.ones(5,3);
+        var W = staticTensor.ones(5,3);
         var Q = W.shrink((1,3),(1,2));
         writeln(Q);
 
@@ -432,19 +431,19 @@ proc main() {
 
         writeln(W.grad);
 
-        writeln(tensor.arange(5,2));
+        writeln(staticTensor.arange(5,2));
 
-        var a = tensor.arange(4);
+        var a = staticTensor.arange(4);
         writeln(a);
         writeln(a.unsqueeze(1));
 
 
-        var img = tensor.arange(3,9,9);
-        var ker = tensor.arange(1,3,3,3);
-        var fet = tensor.convolve(img,ker,2);
+        var img = staticTensor.arange(3,9,9);
+        var ker = staticTensor.arange(1,3,3,3);
+        var fet = staticTensor.convolve(img,ker,2);
         writeln(fet);
 
-        var b = tensor.arange(1,3,3);
+        var b = staticTensor.arange(1,3,3);
 
         writeln(b.dilate(1));
         writeln(b.dilate(1).maxPool(2));
@@ -453,11 +452,11 @@ proc main() {
 
 
 
-    var img: tensor(3,real) = tensor.arange(1,9,9);
+    var img: staticTensor(3,real) = staticTensor.arange(1,9,9);
     writeln(img);
 
-    var ker = tensor.arange(1,1,3,3);
-    var fet = tensor.convolve(img,ker,1);
+    var ker = staticTensor.arange(1,1,3,3);
+    var fet = staticTensor.convolve(img,ker,1);
     writeln("Features:", fet);
     var sm = fet.sum(0).sum(0).sum(0);
     writeln(sm);
@@ -468,7 +467,7 @@ proc main() {
 
     // {
     //     writeln("Begin");
-    //     var x = tensor.arange(3,5);
+    //     var x = staticTensor.arange(3,5);
     //     writeln(x);
     //     // writeln(x.array);
     //     on x.device { x.array = x.array.reshape(5,4);}
@@ -480,7 +479,7 @@ proc main() {
     // }
 
     // {
-    //     var x = tensor.arange(10);
+    //     var x = staticTensor.arange(10);
     //     writeln(x);
     //     var y = x.sum(0);
     //     writeln(y);
@@ -508,9 +507,9 @@ proc main() {
     // foreach (a,b) in D.each do
     //     writeln((a,b));
 
-    // img = tensor.arange(1,9,9);
-    // ker = tensor.arange(1,1,3,3);
-    // fet = tensor.convolve(img,ker,2);
+    // img = staticTensor.arange(1,9,9);
+    // ker = staticTensor.arange(1,1,3,3);
+    // fet = staticTensor.convolve(img,ker,2);
     // sm = fet.sum(0).sum(0).sum(0);
     // writeln(sm);
     // sm.backward();
@@ -525,7 +524,7 @@ proc main() {
     // writeln(x.array.data[1,0]);
 
     // const ar = arange(15,real,(3,5));
-    // var t = new tensor(ar);
+    // var t = new staticTensor(ar);
     // t.to(here.gpus[0]);
     // // writeln(ar.data.locale);
     // // writeln(t.array.data.locale);
@@ -535,8 +534,8 @@ proc main() {
     //     var res = t.meta.dataResource;
     // }
 
-    // var at = new tensor(arange(15,real,(3,5)));
-    // var bt = new tensor(arange(15,real,(3,5)));
+    // var at = new staticTensor(arange(15,real,(3,5)));
+    // var bt = new staticTensor(arange(15,real,(3,5)));
     // // writeln(a.array.data.locale,b.array.data.locale);
     // const ar: ndarray(2,real) = arange(15,real,(3,5));
     // var a = new remote(ar);
@@ -550,11 +549,11 @@ proc main() {
     // var arr1 = new ndarray({0..size,0..size,0..size});
     // var arr2 = new ndarray({0..size,0..size,0..size});
 
-    // var t1 = new tensor(arr1);
-    // var t2 = new tensor(arr2);
+    // var t1 = new staticTensor(arr1);
+    // var t2 = new staticTensor(arr2);
 
-    // var t1 = new tensor(3,real);
-    // var t2 = new tensor(3,real);
+    // var t1 = new staticTensor(3,real);
+    // var t2 = new staticTensor(3,real);
     // t1.array.reshapeDomain({0..size,0..size,0..size});
     // t2.array.reshapeDomain({0..size,0..size,0..size});
     // var t3 = t1 + t2;
@@ -565,7 +564,7 @@ proc main() {
 
     // writeln("-----------------------------");
 
-    // var t = new tensor(2,real);
+    // var t = new staticTensor(2,real);
     // t.array.reshapeDomain({0..<3,0..<5});
     // for (i,n) in zip(t.array.domain,0..<15) do
     //     t.array.data[i] = n;
@@ -597,7 +596,7 @@ proc main() {
     // var z = arange(15,real,(3,5));
     // writeln(z);
 
-    // var T = new tensor(z);
+    // var T = new staticTensor(z);
 
     // var s = (T * T).sum(0,1);
     // writeln(s);
@@ -615,9 +614,9 @@ proc main() {
     // var input2 = new shared TensorResource(arr2,new baseValue());
     // var sum = new shared TensorResource(1,real(64), new addOp(1,real,input1,input2));
 
-    // var t1 = new tensor(input1);
-    // var t2 = new tensor(input2);
-    // var t3 = new tensor(sum);
+    // var t1 = new staticTensor(input1);
+    // var t2 = new staticTensor(input2);
+    // var t3 = new staticTensor(sum);
 
     // writeln(t1);
     // writeln(t2);
@@ -643,7 +642,7 @@ proc main() {
 
     // var matInput = for (i,j) in {0..<2,0..<3} do arr1[i] * arr2[j];
 
-    // var mat = new tensor(new ndarray(matInput));
+    // var mat = new staticTensor(new ndarray(matInput));
     // writeln(mat.array.shape,mat.array);
 
     // var prm = mat.permute(1,0);
@@ -663,13 +662,13 @@ proc main() {
 
 
 
-// proc tensor.serialize(writer: IO.fileWriter(locking=false,?sr1),ref serializer: ?sr2) {
+// proc staticTensor.serialize(writer: IO.fileWriter(locking=false,?sr1),ref serializer: ?sr2) {
 //     serializer.beginRecord()
 // }
 
 import IO;
 // pretty printing
-proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer) {
+proc staticTensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer) {
     // const name = "ndarray(" + rank:string + "," + eltType:string + ")";
     // var ser = serializer.startRecord(writer,name,2);
     // ser.writeField("shape",this.data.shape);
@@ -713,7 +712,7 @@ proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer)
 
 
 // chapel generic one
-proc tensor.serialize(writer: IO.fileWriter(?),ref serializer: ?srt2) where srt2 != IO.defaultSerializer {
+proc staticTensor.serialize(writer: IO.fileWriter(?),ref serializer: ?srt2) where srt2 != IO.defaultSerializer {
 
     const prevDev = this.device;
     this.to(here);
@@ -727,7 +726,7 @@ proc tensor.serialize(writer: IO.fileWriter(?),ref serializer: ?srt2) where srt2
     this.to(prevDev);
 }
 
-proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer,param capitalT: bool) where capitalT == true {
+proc staticTensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer),ref serializer: IO.defaultSerializer,param capitalT: bool) where capitalT == true {
     const prevDev = this.device;
     this.to(here);
 
@@ -761,7 +760,7 @@ proc tensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer)
     this.to(prevDev);
 }
 
-proc ref tensor.read(fr: IO.fileReader(?)) throws {
+proc ref staticTensor.read(fr: IO.fileReader(?)) throws {
     var arr = this.array;
     arr.read(fr);
     on this.device {

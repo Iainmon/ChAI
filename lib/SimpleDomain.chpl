@@ -7,6 +7,11 @@ proc isDomain(d: ?dt) param : bool {
     return isDomainType(dt) && d.isRectangular();
 }
 
+proc isRegularDomain(d: ?dt) param : bool {
+    use Types only isDomainType;
+    return isDomainType(dt) && d.isRectangular();
+}
+
 inline proc zeroTup(param rank: int): rank*int {
     const t: rank * int;
     return t;
@@ -99,11 +104,11 @@ inline proc computeSize(shape: ?rank*int): int {
 
 record rect : serializable {
     param rank: int;
-    const shape: rank * int;
-    const offset: rank * int;
-    const size: int;
+    var shape: rank * int;
+    var offset: rank * int;
+    var size: int;
 
-    const strides: rank * int;
+    var strides: rank * int;
 
     inline
     proc init(const shape: ?rank * int,
@@ -157,6 +162,18 @@ record rect : serializable {
                 && dom.isRectangular() do
         this.init(dom.dims());
 
+    inline
+    proc init(const other: rect(?rank)) do
+        this.init(other.shape,
+                  other.offset,
+                  other.size,
+                  other.strides);
+
+
+    inline
+    proc init=(const other: rect(?rank)) do
+        this.init(other);
+    
     /*
         Copy initializes a ``rect`` of rank ``rank`` from a tuple ``shape`` of ``int``s where ``shape.size == rank``.
     */
@@ -192,7 +209,7 @@ record rect : serializable {
         return new rect(dom);
 
     inline 
-    proc low: rank * int do
+    proc low const : rank * int do
         return offset;
 
     inline 
@@ -202,9 +219,23 @@ record rect : serializable {
             his(i) += shape(i) - 1;
         return his;
     }
+
+    inline proc coords const : 2*(rank*int) {
+        var l,h = offset;
+        for param i in 0..<rank do
+            h(i) += shape(i);
+        return (l,h);
+    }
+
+    inline proc shiftedShape: rank * int {
+        var ss = shape;
+        for param i in 0..<rank do
+            ss(i) += offset(i);
+        return ss;
+    }
     
     inline 
-    proc dims(): rank * range {
+    proc dims() const : rank * range {
         var dms: rank * range;
         for param i in 0..<rank do
             dms(i) = offset(i)..#shape(i);
@@ -248,6 +279,22 @@ record rect : serializable {
     inline 
     operator :(const in sd: rect(?rank), type toType: domain(rank,int)) do
         return sd.toDomain();
+
+    //compilerWarning("Come back to me. Not done with this. ");
+
+    // pragma "suppress lvalue error"
+    // pragma "fn returns iterator"
+    // inline proc every(param tag: iterKind) do  
+    //     return these(tag=tag);
+    
+    // pragma "suppress lvalue error"
+    // pragma "fn returns iterator"
+    // inline proc every() do  
+    //     return these();
+
+    inline iter serialIter() const : simpleTupleType(rank) do
+        for i in 0..<size do
+            yield indexAt(i);
 
     pragma "order independent yielding loops"
     inline iter these() const : simpleTupleType(rank) do
@@ -350,11 +397,25 @@ record rect : serializable {
     }
 }
 
+inline
+operator =(ref me: rect(?rank), const other: rect(rank)) {
+    me.shape   = other.shape;
+    me.offset  = other.offset;
+    me.size    = other.size;
+    me.strides = other.strides;
+}
+
 operator +(const d: rect(?rank), const offset: rank*int): rect(rank) do
     return d.translate(offset);
+
 operator -(const d: rect(?rank), const offset: rank*int): rect(rank) do
     return d.translate(-offset);
 
+operator &(const a: rect(?rank), const b: rect(rank)): rect(rank) {
+    const shape = min(a.shape,b.shape);
+    const offset = max(a.offset,b.offset);
+    return new rect(shape,offset);
+}
 
 // Unused but good functions.
 

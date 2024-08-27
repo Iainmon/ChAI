@@ -8,48 +8,75 @@ import Utilities as util;
 use Utilities.Standard;
 use Utilities.Types;
 
+use SimpleDomain;
+
 
 
 record ndarray : serializable {
     param rank: int;
     type eltType = real(32);
     var _domain: domain(rank,int);
-    var data: [_domain] eltType = noinit;
+    var simpleDomain: rect(rank);
+    var data: [_domain] eltType;
 
     forwarding data except shape, _dom;
 
-    pragma "no copy return"
-    pragma "return not owned"
-    proc _dom do return _domain;
+    // pragma "no copy return"
+    // pragma "return not owned"
+    // proc _dom do return _domain;
 
-    proc shape: rank * int {
-        var s: rank * int;
-        const dms = _domain.dims();
-        for param i in 0..<rank {
-            const ref dm = dms(i);
-            s(i) = (dm.highBound - dm.lowBound) + 1;
+    proc _dom const {
+        if boundsChecking  {
+            compilerWarning("Bounds checking on.");
+            // assert(simpleDomain.toDomain() == _domain);
+            // assert(simpleDomain == _domain.simple());
         }
-        return s;
+        return simpleDomain;
+    }
+
+    proc shape: rank * int do
+        return simpleDomain.shape;
+
+    inline
+    proc init(type eltType, const sd: rect(?rank)) {
+        this.rank = rank;
+        this.eltType = eltType;
+        this._domain = sd.toDomain();
+        this.simpleDomain = sd;
+        this.data = noinit;
+    }
+
+    inline
+    proc init(type eltType, const sd: rect(?rank), const in fill: eltType) {
+        this.rank = rank;
+        this.eltType = eltType;
+        this._domain = sd.toDomain();
+        this.simpleDomain = sd;
+        compilerWarning("Could be a point of performance issues.");
+        this.data = fill; 
     }
 
     proc init(param rank: int, type eltType, const dom: domain(rank,int)) {
         this.rank = rank;
         this.eltType = eltType;
-        this._domain = dom.normalize;
+        const rct = dom.simplify();
+        this._domain = rct.toDomain();
+        this.simpleDomain = rct;
+        this.data = noinit;
     }
 
     proc init(param rank: int, type eltType, const dom: domain(rank,int), const arr: [] eltType) {
         this.rank = rank;
         this.eltType = eltType;
-        this._domain = dom.normalize;
+        const rct = dom.simplify();
+        this._domain = rct;
+        this.simpleDomain = rct.toDomain();
         this.data = arr;
     }
 
     proc init(type eltType, const shape: ?rank * int) {
-        var ranges: rank*range;
-        for param i in 0..<rank do
-            ranges(i) = 0..<shape(i);
-        this.init(rank,eltType,{(...ranges)});
+        const rct: rect(rank) = shape;
+        this.init(eltType,rct);
     }
 
     proc init(param rank: int, type eltType = real(32)) {
@@ -60,15 +87,21 @@ record ndarray : serializable {
     proc init(type eltType = real(32), const shape: int ...?rank) do
         this.init(eltType,shape);
 
-    proc init(const dom: ?t,type eltType = real(32)) where isDomainType(t) {
-        compilerWarning("I am assuming the domains are normal.");
-        this.init(dom.rank,eltType,dom);
+    proc init(const dom: rect(?rank), type eltType) do
+        this.init(eltType,dom);  // This could be optimized by refactoring whole init system. 
+
+    proc init(const dom: ?t,type eltType = real(32)) 
+            where isDomainType(t)
+                && dom.isRectangular() {
+        this.init(eltType,dom.simple());
     }
 
     proc init(const Arr: [] ?eltType) {
         this.rank = Arr.rank;
         this.eltType = eltType;
-        this._domain = Arr.domain.normalize;
+        const rct = Arr.domain.simple();
+        this._domain = rct.toDomain();
+        this.simpleDomain = rct;
         this.data = Arr;
     }
     
@@ -76,6 +109,7 @@ record ndarray : serializable {
         this.rank = rank;
         this.eltType = eltType;
         this._domain = A._domain;
+        this.simpleDomain = A.simpleDomain;
         this.data = A.data;
     }
 
@@ -91,6 +125,7 @@ record ndarray : serializable {
         this.rank = rank;
         this.eltType = eltType;
         this._domain = other._domain;
+        this.simpleDomain = other.simpleDomain;
         this.data = other.data;
     }
 
@@ -101,51 +136,71 @@ record ndarray : serializable {
         return data.this((...args));
     }
 
-    proc ref setData(const arr: [] eltType) where arr.rank == rank do
-        if arr.domain == _domain { data = arr; } else { this = arr; }
+    proc ref setData(const arr: [] eltType) 
+            where arr.rank == rank do
+        if arr.domain.simple() == this.domain then 
+            data = arr;
+        else
+            this = arr;
 
-    proc ref reshapeDomain(const dom: domain(rank,int)) do
+    proc ref reshapeDomain(const dom: domain(rank,int))
+        where isRegularDomain(dom) {
         _domain = dom;
-
-    proc reshape(dom: domain(rank,int)): ndarray(rank,eltType) {
-        var me = new ndarray(dom,eltType);
-        const meDomain = me.domain;
-        const selfDomain = data.domain;
-        const zero: eltType = 0;
-        ref meData = me.data;
-        const ref thisData = this.data;
-        const inter = meDomain[selfDomain];
-
-        me.data[inter] = thisData[inter];
-        return me;
-        forall (i,meIdx) in meDomain.everyZip() {
-            const selfIdx = selfDomain.indexAt(i);
-            // const a = if selfDomain.contains(selfIdx) then thisData[selfIdx] else zero;
-            meData[meIdx] = thisData[selfIdx]; // a;
-        }
-        return me;
+        simpleDomain = dom.simple();
     }
 
-    proc reshape(dom: ?t): ndarray(dom.rank,eltType) where isDomainType(t) && dom.rank != rank {
-        param newRank: int = dom.rank;
-        var arr: ndarray(newRank,eltType) = new ndarray(dom,eltType);
-        const selfDomain = data.domain;
-        const normalDomain = arr.domain;
-        const zero: eltType = 0;
-        ref meData = arr.data;
-        const ref thisData = this.data;
-        forall (i,meIdx) in normalDomain.everyZip() {
-            const selfIdx = selfDomain.indexAt(i);
-            const a = if selfDomain.contains(selfIdx) then thisData[selfIdx] else zero;
-            meData[meIdx] = a;
+    proc ref reshapeDomain(const dom: rect(rank)) {
+        simpleDomain = dom;
+        _domain = dom.toDomain();
+    }
+
+    proc reshape(dom: domain(rank,int)): ndarray(rank,eltType) {
+        var arr = new ndarray(eltType,dom,fill=0:eltType);
+        const arrDom : rect(rank) = arr.domain;
+        const selfDom: rect(rank) = this.domain;
+ 
+        const inter = (arrDom & selfDom).toDomain();
+        arr.data[inter] = data[inter];
+        return arr;
+    }
+
+    proc reshape(const dom: ?t): ndarray(dom.rank,eltType) 
+            where isDomainType(t)
+                && dom.isRectangular()
+                && dom.rank != rank do
+        return reshape(dom.simple());
+
+    proc reshape(const dom: rect(?newRank)): ndarray(newRank,eltType) {
+
+        var arr: ndarray(newRank,eltType) = new ndarray(eltType,dom,fill=0:eltType);
+
+        const selfDom: rect(rank)    = this.domain;
+        const newDom : rect(newRank) = arr.domain;
+        const minSize: int           = min(selfDom.size,newDom.size);
+        const dataDom: rect(1)       = (minSize,);
+        const zeroDom: rect(1)       = ((newDom.size - dataDom.size,),(dataDom.size,));
+
+        ref arrData = arr.data;
+        const ref selfData = data;
+
+        // Fills in intersection. 
+        forall i in dataDom {
+            const arrIdx  = newDom.indexAt(i);
+            const selfIdx = selfDom.indexAt(i);
+            arrData[arrIdx] = selfData[selfIdx];
         }
+
+        const zero: eltType = 0;
+        forall i in zeroDom do
+            arrData[newDom.indexAt(i)] = 0; // should this be `zero` for performance?
+        
         return arr;
     }
 
 
     // This can optimized such that it doesn't use two heavy utility functions...
     proc reshape(newShape: int ...?newRank): ndarray(newRank,eltType) {
-        const dom = util.domainFromShape((...newShape));
+        const dom: rect(newRank) = newShape;
         return this.reshape(dom);
         // const normalDomain = util.domainFromShape((...newShape));
         // var arr = new ndarray(normalDomain, eltType);
@@ -218,7 +273,7 @@ record ndarray : serializable {
         const expandedDataDomain = expandedData.domain;
         const ref thisData = this.data;
         // @assertOnGpu
-        forall idx in expandedDataDomain.every() {
+        forall idx in expandedDataDomain {
             var origIdx: rank * int;
             if idx.type == int {
                 origIdx(0) = idx;
@@ -246,7 +301,7 @@ record ndarray : serializable {
         ref B = S.data;
         ref A = data;
         // @assertOnGpu
-        forall idx in newDomain.every() {
+        forall idx in newDomain {
             var origIdx: newDomain.rank * int;
             if idx.type == int {
                 origIdx(0) = idx;
@@ -340,6 +395,7 @@ record ndarray : serializable {
         ref dat = dilated.data;
         const ref thisData = data;
         const step = dil + 1;
+        const selfDom = this.domain;
         forall (h,w) in data.domain.every() {
             dat[h * step,w * step] = thisData[h,w];
         }
@@ -356,14 +412,14 @@ record ndarray : serializable {
         const newHeight = insertH + height;
         const newWidth = insertW + width;
 
-        const dom = util.domainFromShape(channels,newHeight,newWidth);
+        const dom: rect(3) = (channels,newHeight,newWidth);
         var dilated = new ndarray(dom,eltType);
         ref dat = dilated.data;
         const ref thisData = data;
         const step = dil + 1;
-        forall (c,h,w) in data.domain.every() {
+        forall (c,h,w) in this.domain do
             dat[c,h * step,w * step] = thisData[c,h,w];
-        }
+
         return dilated;
     }
 
@@ -379,7 +435,7 @@ record ndarray : serializable {
             ref meData = me.data;
             const ref thisData = data;
             // @assertOnGpu
-            forall i in me.domain.every() {
+            forall i in me.domain {
                 meData[i] = thisData[dataDomain.indexAt(i)];
             }
             // var j = 0;
@@ -447,7 +503,8 @@ record ndarray : serializable {
         var me = new ndarray(data.domain,eltType);
         ref meData = me.data;
         const ref thisData = data;
-        forall (f,c,h,w) in data.domain.every() {
+        const selfDom = this.domain;
+        forall (f,c,h,w) in selfDom {
             meData[f,c,h,w] = thisData[f,c,height - h - 1,width - w - 1];
         }
         return me;
@@ -458,18 +515,24 @@ record ndarray : serializable {
         var me = new ndarray(data.domain,eltType);
         ref meData = me.data;
         const ref thisData = data;
-        forall (c,h,w) in data.domain.every() {
+        forall (c,h,w) in this.domain {
             meData[c,h,w] = thisData[c,height - h - 1,width - w - 1];
         }
         return me;
     }
 
     proc argmax() where rank == 1 {
+        // const D__________________A______________T____________A = this.data;
+        // const (_,i) = maxloc reduce zip(
+        //     D__________________A______________T____________A,
+        //     D__________________A______________T____________A.domain);
+        // return i;
+        // For some reason this is causing problems.  Keeping this because I am worried the above wont run on gpu.
         var mxi: int = 0;
-        const ref meData = data;
-        var mx: eltType = meData[mxi];
-        for i in meData.domain {
-            const mei = meData[i];
+        const data = this.data;
+        var mx: eltType = data[mxi];
+        for i in data.domain {
+            const mei = data[i];
             if mx < mei {
                 mxi = i;
                 mx = mei;
@@ -484,7 +547,7 @@ record ndarray : serializable {
         var rl = new ndarray(dom,eltType);
         ref rlD = rl.data;
         // @assertOnGpu
-        forall i in dom.every() {
+        forall i in dom {
             const x = thisData[i];
             rlD[i] = Math.max(0,x);
         }
@@ -502,11 +565,14 @@ proc type ndarray.arange(to: int,type eltType = real(64),shape: ?rank*int): ndar
 
 operator =(ref lhs: ndarray(?rank,?eltType), const rhs: ndarray(rank,eltType)) {
     lhs._domain = rhs._domain;
+    lhs.simpleDomain = rhs.simpleDomain;
     lhs.data = rhs.data;
 }
 
 operator =(ref lhs: ndarray(?rank,?eltType),const rhs: [] eltType) where rhs.rank == rank {
-    lhs._domain = rhs.domain.normalize;
+    const rct = rhs.domain.simple();
+    lhs._domain = rct.toDomain();
+    lhs.simpleDomain = rct;
     lhs.data = rhs.data;
 }
 
@@ -578,7 +644,7 @@ proc zipArr(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType),f): ndarray(rank
     const dom = a.domain;
     var c: ndarray(rank,eltType) = new ndarray(a.domain,eltType);
     ref cData = c.data;
-    forall i in dom.every() do
+    forall i in dom do
         cData[i] = f(a.data[i],b.data[i]);
     return c;
 }
@@ -591,7 +657,7 @@ operator +(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
     var c: ndarray(rank,eltType) = new ndarray(dom,eltType);
     ref cData = c.data;
     // @assertOnGpu
-    forall i in dom.every() do
+    forall i in dom do
         cData[i] = aData[i] + bData[i];
     return c;
 }
@@ -603,7 +669,7 @@ operator *(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
     const ref aData = a.data;
     const ref bData = b.data;
     // @assertOnGpu
-    forall i in dom.every() do
+    forall i in dom do
         cData[i] = aData[i] * bData[i];
     return c;
 }
@@ -615,7 +681,7 @@ operator -(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
     const ref aData = a.data;
     const ref bData = b.data;
     // @assertOnGpu
-    forall i in dom.every() do
+    forall i in dom do
         cData[i] = aData[i] - bData[i];
     return c;
 }
@@ -627,7 +693,7 @@ operator /(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
     const ref aData = a.data;
     const ref bData = b.data;
     // @assertOnGpu
-    forall i in dom.every() do
+    forall i in dom do
         cData[i] = aData[i] / bData[i];
     return c;
 }
@@ -653,19 +719,19 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const outHeight: int = ((inHeight - kernelHeight) / stride) + 1;
     const outWidth: int = ((inWidth - kernelWidth) / stride) + 1;
     const outShape = (filters,outHeight,outWidth);
-    const outDom = util.domainFromShape((...outShape));
+    const outDom: rect(3) = outShape;
     var outFeatures = new ndarray(outDom,eltType);
 
     const chanR = 0..<channels; // don't trust daniel's codemotion.
-    const kernelD = {0..<kernelHeight,0..<kernelWidth};
-    const kernelChanD = {0..<channels,0..<kernelHeight,0..<kernelWidth};
+    const kernelD: rect(2) = (kernelHeight,kernelWidth);
+    const kernelChanD: rect(3) = (channels,kernelHeight,kernelWidth);
 
     ref dat = outFeatures.data;
     ref fet = features.data;
     ref ker = kernel.data;
 
     // @assertOnGpu
-    forall (f,h_,w_) in outDom.every() {
+    forall (f,h_,w_) in outDom {
         const hi: int = h_ * stride;
         const wi: int = w_ * stride;
         var sum: eltType = 0;
@@ -689,9 +755,9 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     const outHeight: int = ((inHeight - kernelHeight) / stride) + 1;
     const outWidth: int = ((inWidth - kernelWidth) / stride) + 1;
     const outShape = (filters,outHeight,outWidth);
-    const outDom = util.domainFromShape((...outShape));
+    const outDom: rect(3) = outShape;
 
-    const kernelChanD = {0..<channels,0..<kernelHeight,0..<kernelWidth};
+    const kernelChanD: rect(3) = (channels,kernelHeight,kernelWidth);
 
     const ref fet = features.data;
     const ref ker = kernel.data;
@@ -700,11 +766,8 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     var outFeatures = new ndarray(outDom,eltType);
     ref dat = outFeatures.data;
 
-    // writeln(here);
-    // halt();
-
     inline proc fastKernel(param kernelSize: int) {
-        forall (f,h_,w_) in outDom.every() {
+        forall (f,h_,w_) in outDom {
             const hi = h_ * stride;
             const wi = w_ * stride;
             var sum: eltType = 0;
@@ -720,7 +783,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     }
 
     inline proc slowKernel() {
-        forall (f,h_,w_) in outDom.every() {
+        forall (f,h_,w_) in outDom {
             const hi = h_ * stride;
             const wi = w_ * stride;
             var sum: eltType = 0;
@@ -786,17 +849,17 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
 
     const newHeight: int = height / poolSize;
     const newWidth: int = width / poolSize;
-    const dom = util.domainFromShape(channels,newHeight,newWidth);
+    const dom: rect(3) = (channels,newHeight,newWidth);
     var pool = new ndarray(dom,eltType);
     ref dat = pool.data;
     ref fet = features.data;
-    const poolDom = {0..#poolSize,0..#poolSize};
+    const poolDom: rect(2) = (poolSize,poolSize);
     // @assertOnGpu
-    forall (c,h,w) in dom.every() {
+    forall (c,h,w) in dom {
         const hs = h * poolSize;
         const ws = w * poolSize;
         var mx: eltType = fet[c,h,w];
-        for (ph,pw) in poolDom {
+        for (ph,pw) in poolDom.serialIter() {
             const x: eltType = fet[c,ph + hs,pw + ws];
             mx = Math.max(x,mx);
         }

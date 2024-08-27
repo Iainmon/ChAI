@@ -40,7 +40,7 @@ record Tensor : serializable {
         this.runtimeRank = meta.runtimeRank;
     }
 
-    proc init(t: tensor(?rank,?eltType), detached: bool = Tensor.detachMode()) {
+    proc init(t: staticTensor(?rank,?eltType), detached: bool = Tensor.detachMode()) {
         this.eltType = eltType;
         if detached {
             var u = t.detach();
@@ -53,12 +53,12 @@ record Tensor : serializable {
     }
 
     proc init(a: ndarray(?rank,?eltType)) do
-        this.init(new tensor(a));
+        this.init(new staticTensor(a));
     
     proc init(arr: [] ?eltType) do
-        this.init(new tensor(arr));
+        this.init(new staticTensor(arr));
 
-    // proc init(type eltType t: tensor(?rank,?eltType)) {
+    // proc init(type eltType t: staticTensor(?rank,?eltType)) {
     //     this.eltType = eltType;
     //     this.meta = t.meta;
     // }
@@ -68,7 +68,7 @@ record Tensor : serializable {
     proc this(args...) do
         return this.slice((...args));
 
-    proc tensorize(param rank: int) : tensor(rank,eltType) {
+    proc tensorize(param rank: int) : staticTensor(rank,eltType) {
         if rank != runtimeRank then 
             halt("Cannot cast this Tensor of rank " + runtimeRank: string + " to tensor of rank " + rank : string + ".");
         return forceRank(rank);
@@ -80,8 +80,8 @@ record Tensor : serializable {
         return forceRankMeta(rank);
     }
 
-    proc forceRank(param rank: int): tensor(rank,eltType) do
-        return new tensor(meta : shared BaseTensorResource(eltType,rank));
+    proc forceRank(param rank: int): staticTensor(rank,eltType) do
+        return new staticTensor(meta : shared BaseTensorResource(eltType,rank));
 
     proc forceRankMeta(param rank: int): shared BaseTensorResource(eltType,rank) do
         return meta : shared BaseTensorResource(eltType,rank);
@@ -164,18 +164,18 @@ proc type Tensor.detachMode(detachMode: bool) {
 inline proc ndarray.toTensor(): Tensor(eltType) do
     return new Tensor(this);
 
-proc tensor.eraseRank(detach: bool = Tensor.detachMode()): Tensor(eltType) do
+proc staticTensor.eraseRank(detach: bool = Tensor.detachMode()): Tensor(eltType) do
     return new Tensor(this,detach);
 
-operator :(t: tensor(?rank,?eltType), type T: Tensor(eltType)): Tensor(eltType) do
+operator :(t: staticTensor(?rank,?eltType), type T: Tensor(eltType)): Tensor(eltType) do
     return t.eraseRank();
 
 
 proc zipBinOp(param opName: string, a: Tensor(?eltType), b: Tensor(eltType)): Tensor(eltType) {
     for param rank in 1..maxRank {
         if a.checkRank(rank) && b.checkRank(rank) {
-            const at: tensor(rank,eltType) = a.tensorize(rank);
-            const bt: tensor(rank,eltType) = b.tensorize(rank);
+            const at: staticTensor(rank,eltType) = a.tensorize(rank);
+            const bt: staticTensor(rank,eltType) = b.tensorize(rank);
             select opName {
                 when "+" do
                     return (at + bt).eraseRank();
@@ -197,7 +197,7 @@ proc type Tensor.loadFromNumpy(path: string): Tensor(real) {
     var npa = LoadNumpy.loadNumpyArray(path);
     for param rank in 1..maxRank {
         if const x = npa : owned LoadNumpy.ArrClass(rank)? {
-            const t: tensor(rank,real) = new tensor(x!.data);
+            const t: staticTensor(rank,real) = new staticTensor(x!.data);
             return t.eraseRank();
         }
     }
@@ -305,7 +305,7 @@ proc type Tensor.matvecmul(m: Tensor(?eltType),v: Tensor(eltType)): Tensor(eltTy
         if m.checkRank(rankM) {
             for param rankV in 1..2 {
                 if v.checkRank(rankV) {
-                    return tensor.matvecmul(m.forceRank(rankM),v.forceRank(rankV)).eraseRank();
+                    return staticTensor.matvecmul(m.forceRank(rankM),v.forceRank(rankV)).eraseRank();
                 }
             }
         }
@@ -315,7 +315,7 @@ proc type Tensor.matvecmul(m: Tensor(?eltType),v: Tensor(eltType)): Tensor(eltTy
 }
 
 proc type Tensor.matvecmulFast(m: Tensor(?eltType),v: Tensor(eltType)): Tensor(eltType) {
-    return tensor.matvecmulFast(m.forceRank(2),v.forceRank(1)).eraseRank();
+    return staticTensor.matvecmulFast(m.forceRank(2),v.forceRank(1)).eraseRank();
 }
 
 proc Tensor.argmax(): int {
@@ -326,25 +326,25 @@ proc Tensor.argmax(): int {
 
 // Right now, the supported shapes are (3,4) -> 3
 proc type Tensor.convolve(features: Tensor(?eltType), kernel: Tensor(eltType), stride: int): Tensor(eltType) do
-    return tensor.convolve(features.forceRank(3),kernel.forceRank(4),stride).eraseRank();
+    return staticTensor.convolve(features.forceRank(3),kernel.forceRank(4),stride).eraseRank();
 
 proc type Tensor.convolve(features: Tensor(?eltType), kernel: Tensor(eltType), bias: Tensor(eltType), stride: int): Tensor(eltType) do
-    return tensor.convolve(features.forceRank(3),kernel.forceRank(4),bias.forceRank(1),stride).eraseRank();
+    return staticTensor.convolve(features.forceRank(3),kernel.forceRank(4),bias.forceRank(1),stride).eraseRank();
 
 
 proc type Tensor.arange(args...) do
-    return tensor.arange((...args)).eraseRank();
+    return staticTensor.arange((...args)).eraseRank();
 
 proc type Tensor.ones(args...) do
-    return tensor.ones((...args)).eraseRank();
+    return staticTensor.ones((...args)).eraseRank();
 
 proc type Tensor.zeros(args...) do
-    return tensor.zeros((...args)).eraseRank();
+    return staticTensor.zeros((...args)).eraseRank();
 
 proc main() {
 
     // Just some examples. 
-    const t_: tensor(2,real) = tensor.arange(3,5);
+    const t_: staticTensor(2,real) = staticTensor.arange(3,5);
     writeln(t_);
     const t = new Tensor(t_);
     const t2 = t + t;
@@ -357,7 +357,7 @@ proc main() {
     writeln(t3.reshape(5,3));
 
     var t4 = t3.reshape(5,3);
-    var t4t: tensor(2,real) = t4.tensorize(2);
+    var t4t: staticTensor(2,real) = t4.tensorize(2);
     t4t.array.data[1,1] = 70;
     t4.array(2).data[0,0] = 99;
     t4.data(2)[2,2] = 200;
