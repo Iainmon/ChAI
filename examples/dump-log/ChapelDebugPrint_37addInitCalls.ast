@@ -1,0 +1,31 @@
+AST dump for ChapelDebugPrint after pass addInitCalls.
+Module use list: ChapelStandard CTypes ChapelIOStringifyHelper 
+
+{
+  function chpl__init_ChapelDebugPrint[468417]() : void[4] "fast on" "insert line file info" "local fn" "module init" "resolved"
+  {
+    if chpl__init_ChapelDebugPrint_p[9307367]
+    {
+      goto _exit_chpl__init_ChapelDebugPrint[9307404] _exit_chpl__init_ChapelDebugPrint[9307404]
+    }
+    val modFormatStr[9307375]:chpl_c_string[16] "temp"
+    val modStr[9307376]:chpl_c_string[16] "temp"
+    ref refIndentLevel[9307390]:int(32)[66] "temp"
+    (9307383 'move' modFormatStr[9307375] c"%*s\n")
+    (9307385 'move' modStr[9307376] c"ChapelDebugPrint")
+    (9307388 call printModuleInit[386886] modFormatStr[9307375] modStr[9307376] 16)
+    (9307394 'move' refIndentLevel[9307390](9307393 'addr of' moduleInitLevel[386877]))
+    (9307397 '+=' refIndentLevel[9307390] 1)
+    (9307373 'move' chpl__init_ChapelDebugPrint_p[9307367] 1)
+    {
+      (9305159 call chpl__init_CTypes[468360])
+      (9305161 call chpl__init_ChapelIOStringifyHelper[468414])
+    }
+    (645132 'move' chpl__testParOn[106878] 0)
+    (9307400 '-=' refIndentLevel[9307390] 1)
+    label _endchpl__init_ChapelDebugPrint[9307406]
+    label _exit_chpl__init_ChapelDebugPrint[9307404]
+    (602564 return _void[46])
+  }
+  const-val chpl__testParOn[106878]:bool[19] "dead at end of block" "insert auto destroy"
+}

@@ -1,0 +1,1941 @@
+AST dump for TomlParser after pass readExternC.
+Module use list: 
+
+{
+  (387098 'use' ChapelStandard)
+  (377352 'use' Regex)
+  (377355 'use' Time)
+  { scopeless
+    (377359 'use' Map)
+    (377361 'use' List)
+  }
+  (377369 'import'(377366 call . IO c"fileWriter"))
+  (377376 'use'(377373 call . TOML c"TomlReader"))
+  (377385 'import'(377382 call . TOML c"TomlError"))
+  (377387 'use' Sort)
+  { scopeless
+    const debugTomlParser[377390] "config" "const" 0
+    (377393 'end of statement')
+  }
+  { scopeless
+    const tabSpace[377395] "const" 4
+    (377398 'end of statement')
+  }
+  type Parser[379292] unknown source[377401](377403 call _shared Source) unknown rootTable[377408](377410 call _shared Toml) unknown curTable[377415] string[244] const doubleQuotes[377440] "const" "\"[^,]*\?\"" const singleQuotes[377435] "const" "'[^,]*\?'" const bracket[377430] "const" "\\[|\\]" const digit[377425] "const" "\\d+" const keys[377420] "const" "^\\w+" const Str[377547] "const"(377548 'new'(377550 call regex(377551 call +(377553 call + doubleQuotes "|") singleQuotes))) const kv[377533] "const"(377534 'new'(377536 call regex(377541 call(377538 call . "|" c"join") doubleQuotes singleQuotes digit keys))) const dt[377525] "const"(377526 'new'(377528 call regex "^\\d{4}-\\d{2}-\\d{2}[ T]\\d{2}:\\d{2}:\\d{2}$")) const realNum[377517] "const"(377518 'new'(377520 call regex "\\+\\d*\\.\\d+|\\-\\d*\\.\\d+|\\d*\\.\\d+")) const ld[377509] "const"(377510 'new'(377512 call regex "^\\d{4}-\\d{2}-\\d{2}$")) const ti[377501] "const"(377502 'new'(377504 call regex "^\\d{2}:\\d{2}:\\d{2}(.\\d{6,})\?$")) const ints[377493] "const"(377494 'new'(377496 call regex "(\\d+|\\+\\d+|\\-\\d+)")) const inBrackets[377485] "const"(377486 'new'(377488 call regex "(\\[.*\?\\])")) const corner[377477] "const"(377478 'new'(377480 call regex "(\\[.+\\])")) const brackets[377471] "const"(377472 'new'(377474 call regex "\\[|\\]")) const whitespace[377463] "const"(377464 'new'(377466 call regex "\\s")) const comment[377455] "const"(377456 'new'(377458 call regex "(\\#)")) const comma[377447] "const"(377448 'new'(377450 call regex "(\\,)")) unknown debugCounter[377561] 1 function Parser[379292].parseLoop[377565](arg _mt[377569]:_MT[201], arg this[377567]:Parser[379292]) : _unknown[42] throws "method" "primary method"
+  {
+    Try!
+    {
+      {
+        if(377726 call _cond_test(377719 call !(377725 call(377722 call . source c"isEmpty"))))
+        {
+          {
+            unknown tmp[377694] "temp"
+            (377716 'move' tmp[377694](377712 call _cond_test(377714 call readLine source)))
+            WhileDo[377699]
+            {
+              {
+                { scopeless
+                  unknown token[377582](377584 call top source)
+                  (377587 'end of statement')
+                }
+                if(377677 call _cond_test(377675 call(377672 call . comment c"match") token))
+                {
+                  (377590 call parseComment)
+                }
+                {
+                  { scopeless
+                    if(377666 call _cond_test(377664 call(377661 call . inBrackets c"match") token))
+                    {
+                      (377593 call parseTable)
+                    }
+                    {
+                      { scopeless
+                        if(377655 call _cond_test(377653 call(377650 call . brackets c"match") token))
+                        {
+                          (377596 call parseSubTbl)
+                        }
+                        {
+                          { scopeless
+                            if(377644 call _cond_test(377642 call(377639 call . kv c"match") token))
+                            {
+                              (377599 call parseAssign)
+                            }
+                            {
+                              { scopeless
+                                if(377634 call _cond_test(377630 call == token "\n"))
+                                {
+                                  (377602 call getToken source)
+                                }
+                                {
+                                  (377605 'throw'(377606 'new'(_chpl_manager = _owned[238](?))(377610 call TomlError(377611 call +(377613 call +(377615 call + "Line "(377620 call : debugCounter string[244])) ": Unexpected Token -> ")(377628 call getToken source)))))
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                (377682 call += debugCounter 1)
+                if(377690 call _cond_test debugTomlParser)
+                {
+                  (377688 call debugPrint)
+                }
+              }
+              label _continueLabel[377697]
+              (377707 'move' tmp[377694](377703 call _cond_test(377705 call readLine source)))
+              tmp[377694]
+            }
+            label _breakLabel[377698]
+          }
+        }
+      }
+    }
+    Catch e : TomlError
+    {
+      unknown e[377744]
+      (377734 call writeln(377739 call(377736 call . e c"message")))
+      (377741 call exit 1)
+    }
+    (377748 return rootTable)
+  }
+  { scopeless type
+    (377572 call _shared Toml)
+  } function Parser[379292].parseTable[377753](arg _mt[377757]:_MT[201], arg this[377755]:Parser[379292]) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown toke[377761](377763 call getToken source)
+      (377766 'end of statement')
+    }
+    { scopeless
+      unknown tablename[377768](377773 call(377770 call . toke c"replace") brackets "")
+      (377777 'end of statement')
+    }
+    { scopeless
+      unknown tblD[377779](377781 call chpl__buildDomainRuntimeType defaultDist string[244])
+      (377785 'end of statement')
+    }
+    { scopeless
+      unknown tbl[377787](377795 call chpl__buildArrayRuntimeType(377789 call chpl__ensureDomainExpr tblD)(377792 call _shared(377794 'to nilable class from type' Toml)))
+      (377798 'end of statement')
+    }
+    if(377819 call _cond_test(377809 call !(377817 call(377814 call . rootTable c"pathExists") tablename)))
+    {
+      (377806 call(377803 call . rootTable c"set") tablename tbl)
+    }
+    (377823 call = curTable tablename)
+  } function Parser[379292].parseSubTbl[377829](arg _mt[377833]:_MT[201], arg this[377831]:Parser[379292]) : _unknown[42] "method" "primary method"
+  {
+    (377837 call skipNext source)
+    { scopeless
+      unknown tblname[377840](377842 call getToken source)
+      (377845 'end of statement')
+    }
+    (377847 call skipNext source)
+    { scopeless
+      unknown tblD[377850](377852 call chpl__buildDomainRuntimeType defaultDist string[244])
+      (377856 'end of statement')
+    }
+    { scopeless
+      unknown tbl[377858](377866 call chpl__buildArrayRuntimeType(377860 call chpl__ensureDomainExpr tblD)(377863 call _shared(377865 'to nilable class from type' Toml)))
+      (377869 'end of statement')
+    }
+    { scopeless
+      unknown tmp[377878] "temp"(377876 call splitTblPath tblname)
+      (377885 call _check_tuple_var_decl tmp[377878] 2)
+      unknown tblPath[377871](377879 call tmp[377878] 0)
+      unknown tblLeaf[377873](377882 call tmp[377878] 1)
+      (377890 'end of statement')
+    }
+    if(377903 call _cond_test(377895 call !(377901 call(377898 call . rootTable c"pathExists") tblPath)))
+    {
+      { scopeless
+        (377892 call makePath tblPath)
+      }
+    }
+    (377916 call(377913 call .(377908 call postfix!(377911 call rootTable tblPath)) c"set") tblLeaf tbl)
+    (377919 call = curTable tblname)
+  } function Parser[379292].makePath[377925](arg _mt[377933]:_MT[201], arg this[377927]:Parser[379292], arg tblPath[377930] :
+  string[244]) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown path[377937](377942 call(377939 call . tblPath c"split") ".")
+      (377945 'end of statement')
+    }
+    { scopeless
+      unknown firstIn[377947](377952 call .(377949 call . path c"_dom") c"first")
+      (377956 'end of statement')
+    }
+    { scopeless
+      unknown first[377958] 1
+      (377961 'end of statement')
+    }
+    { scopeless
+      unknown i[377963] 0 int[10]
+      (377967 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[378064] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[378065] "expr temp" "temp"
+      (378074 'move' _iterator[378065](378072 call _getIterator path))
+      Defer
+      {
+        {
+          (378089 call _freeIterator _iterator[378065])
+        }
+      }
+      { scopeless type
+        (378079 'move' _indexOfInterest[378064](378076 call iteratorIndex _iterator[378065]))
+      }
+      ForLoop[378066]
+      {
+        unknown parent[377968] "index var" "insert auto destroy"
+        (378084 'move' parent[377968] _indexOfInterest[378064])
+        {
+          if(378060 call _cond_test first)
+          {
+            { scopeless
+              unknown tblD[377974](377976 call chpl__buildDomainRuntimeType defaultDist string[244])
+              (377980 'end of statement')
+            }
+            { scopeless
+              unknown tbl[377982](377990 call chpl__buildArrayRuntimeType(377984 call chpl__ensureDomainExpr tblD)(377987 call _shared(377989 'to nilable class from type' Toml)))
+              (377993 'end of statement')
+            }
+            (377998 call(377995 call . rootTable c"set") parent tbl)
+            (378001 call = first 0)
+          }
+          {
+            { scopeless
+              unknown tblD[378007](378009 call chpl__buildDomainRuntimeType defaultDist string[244])
+              (378013 'end of statement')
+            }
+            { scopeless
+              unknown tbl[378015](378023 call chpl__buildArrayRuntimeType(378017 call chpl__ensureDomainExpr tblD)(378020 call _shared(378022 'to nilable class from type' Toml)))
+              (378026 'end of statement')
+            }
+            { scopeless
+              unknown grandParent[378028](378033 call(378030 call . "." c"join")(378035 call path(378040 call chpl_build_high_bounded_range(378036 call + firstIn i))))
+              (378043 'end of statement')
+            }
+            (378052 call(378049 call .(378044 call postfix!(378047 call rootTable grandParent)) c"set") parent tbl)
+            (378055 call += i 1)
+          }
+        }
+        label _continueLabel[378069]
+        _indexOfInterest[378064]
+        _iterator[378065]
+      }
+      label _breakLabel[378070]
+    }
+  } function Parser[379292].parseInlineTbl[378098](arg _mt[378106]:_MT[201], arg this[378100]:Parser[379292], arg key[378103] :
+  string[244]) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown tblname[378110] string[244]
+      (378113 'end of statement')
+    }
+    { scopeless
+      unknown tblD[378115](378117 call chpl__buildDomainRuntimeType defaultDist string[244])
+      (378121 'end of statement')
+    }
+    { scopeless
+      unknown tbl[378123](378131 call chpl__buildArrayRuntimeType(378125 call chpl__ensureDomainExpr tblD)(378128 call _shared(378130 'to nilable class from type' Toml)))
+      (378134 'end of statement')
+    }
+    if(378195 call _cond_test(378194 call(378191 call . curTable c"isEmpty")))
+    {
+      (378136 call = tblname key)
+      (378144 call(378141 call . rootTable c"set") key tbl)
+    }
+    {
+      (378148 call = tblname(378155 call(378152 call . "." c"join") curTable key))
+      { scopeless
+        unknown tmp[378166] "temp"(378164 call splitTblPath tblname)
+        (378173 call _check_tuple_var_decl tmp[378166] 2)
+        unknown tblPath[378159](378167 call tmp[378166] 0)
+        unknown tblLeaf[378161](378170 call tmp[378166] 1)
+        (378178 'end of statement')
+      }
+      (378187 call(378184 call .(378179 call postfix!(378182 call rootTable tblPath)) c"set") tblLeaf tbl)
+    }
+    { scopeless
+      unknown temp[378200] curTable
+      (378203 'end of statement')
+    }
+    (378204 call = curTable tblname)
+    {
+      unknown tmp[378231] "temp"
+      (378259 'move' tmp[378231](378252 call _cond_test(378254 call !=(378256 call top source) "}")))
+      WhileDo[378236]
+      {
+        {
+          (378216 call parseAssign)
+          if(378227 call _cond_test(378221 call ==(378224 call top source) ","))
+          {
+            (378219 call skipNext source)
+          }
+        }
+        label _continueLabel[378234]
+        (378247 'move' tmp[378231](378240 call _cond_test(378242 call !=(378244 call top source) "}")))
+        tmp[378231]
+      }
+      label _breakLabel[378235]
+    }
+    (378263 call skipNext source)
+    (378265 call = curTable temp)
+  } function Parser[379292].parseAssign[378271](arg _mt[378275]:_MT[201], arg this[378273]:Parser[379292]) : _unknown[42] "method" "primary method"
+  {
+    Try!
+    {
+      {
+        { scopeless
+          unknown key[378280](378282 call getToken source)
+          (378285 'end of statement')
+        }
+        { scopeless
+          unknown equals[378287](378289 call getToken source)
+          (378292 'end of statement')
+        }
+        if(378342 call _cond_test(378336 call ==(378339 call top source) "{"))
+        {
+          (378295 call skipNext source)
+          (378298 call parseInlineTbl key)
+        }
+        {
+          { scopeless
+            unknown value[378302](378304 call parseValue)
+            (378306 'end of statement')
+          }
+          if(378330 call _cond_test(378329 call(378326 call . curTable c"isEmpty")))
+          {
+            { scopeless
+              (378307 call =(378310 call rootTable key) value)
+            }
+          }
+          {
+            { scopeless
+              (378314 call =(378321 call(378316 call postfix!(378319 call rootTable curTable)) key) value)
+            }
+          }
+        }
+      }
+    }
+    Catch e : TomlError
+    {
+      unknown e[378360]
+      (378350 call writeln(378355 call(378352 call . e c"message")))
+      (378357 call exit 1)
+    }
+  } function Parser[379292].parseComment[378366](arg _mt[378370]:_MT[201], arg this[378368]:Parser[379292]) : _unknown[42] "method" "primary method"
+  {
+    (378374 call skipLine source)
+  } function Parser[379292].splitTblPath[378378](arg _mt[378386]:_MT[201], arg this[378380]:Parser[379292], arg s[378383] :
+  string[244]) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown A[378390](378395 call(378392 call . s c"split") ".")
+      (378398 'end of statement')
+    }
+    { scopeless
+      unknown fIdx[378400](378405 call .(378402 call . A c"_dom") c"first")
+      (378409 'end of statement')
+    }
+    { scopeless
+      unknown leaf[378411](378413 call A(378418 call .(378415 call . A c"_dom") c"last"))
+      (378422 'end of statement')
+    }
+    { scopeless
+      unknown path[378424](378429 call(378426 call . "." c"join")(378431 call A(378442 call chpl_build_high_bounded_range(378432 call -(378438 call .(378435 call . A c"_dom") c"last") 1))))
+      (378445 'end of statement')
+    }
+    if(378460 call _cond_test(378453 call ==(378456 call . A c"size") 1))
+    {
+      { scopeless
+        (378446 call = path(378450 call A fIdx))
+      }
+    }
+    (378465 return(378469 call _build_tuple path leaf))
+  } function Parser[379292].parseValue[378473](arg _mt[378477]:_MT[201], arg this[378475]:Parser[379292]) : _unknown[42] throws "method" "primary method"
+  {
+    { scopeless
+      unknown val[378484] string[244]
+      (378487 'end of statement')
+    }
+    Try!
+    {
+      {
+        (378489 call = val(378493 call top source))
+        if(379210 call _cond_test(379206 call == val "["))
+        {
+          (378497 call skipNext source)
+          { scopeless
+            unknown array[378500](378502 call list(378504 call _shared Toml))
+            (378507 'end of statement')
+          }
+          {
+            unknown tmp[378561] "temp"
+            (378589 'move' tmp[378561](378582 call _cond_test(378584 call !=(378586 call top source) "]")))
+            WhileDo[378566]
+            {
+              {
+                if(378556 call _cond_test(378552 call(378549 call . comma c"match")(378554 call top source)))
+                {
+                  (378517 call skipNext source)
+                }
+                {
+                  { scopeless
+                    if(378544 call _cond_test(378540 call(378537 call . comment c"match")(378542 call top source)))
+                    {
+                      (378521 call skipNext source)
+                    }
+                    {
+                      { scopeless
+                        unknown toParse[378525](378527 call parseValue)
+                        (378529 'end of statement')
+                      }
+                      (378534 call(378531 call . array c"pushBack") toParse)
+                    }
+                  }
+                }
+              }
+              label _continueLabel[378564]
+              (378577 'move' tmp[378561](378570 call _cond_test(378572 call !=(378574 call top source) "]")))
+              tmp[378561]
+            }
+            label _breakLabel[378565]
+          }
+          (378593 call skipNext source)
+          (378595 return(378596 'new'(_chpl_manager = _shared[242](?))(378600 call Toml array)))
+        }
+        {
+          { scopeless
+            if(379201 call _cond_test(379199 call(379196 call . Str c"match") val))
+            {
+              { scopeless
+                unknown toStr[378604] string[244]
+                (378607 'end of statement')
+              }
+              if(378818 call _cond_test(378816 call(378813 call . val c"startsWith") "\"\"\""))
+              {
+                (378609 call += toStr(378618 call(378615 call .(378613 call getToken source) c"strip") "\"\"\"" 1 0))
+                {
+                  unknown tmp[378645] "temp"
+                  (378679 'move' tmp[378645](378669 call _cond_test(378671 call ==(378676 call(378673 call . toStr c"endsWith") "\"\"\"") 0)))
+                  WhileDo[378650]
+                  {
+                    {
+                      (378636 call += toStr(378639 call + " "(378643 call getToken source)))
+                    }
+                    label _continueLabel[378648]
+                    (378664 'move' tmp[378645](378654 call _cond_test(378656 call ==(378661 call(378658 call . toStr c"endsWith") "\"\"\"") 0)))
+                    tmp[378645]
+                  }
+                  label _breakLabel[378649]
+                }
+                (378682 return(378683 'new'(_chpl_manager = _shared[242](?))(378687 call Toml(378692 call(378689 call . toStr c"strip") "\"\"\""))))
+              }
+              {
+                { scopeless
+                  if(378808 call _cond_test(378806 call(378803 call . val c"startsWith") "'''"))
+                  {
+                    (378695 call += toStr(378704 call(378701 call .(378699 call getToken source) c"strip") "'''" 1 0))
+                    {
+                      unknown tmp[378729] "temp"
+                      (378763 'move' tmp[378729](378753 call _cond_test(378755 call ==(378760 call(378757 call . toStr c"endsWith") "'''") 0)))
+                      WhileDo[378734]
+                      {
+                        {
+                          (378720 call += toStr(378723 call + " "(378727 call getToken source)))
+                        }
+                        label _continueLabel[378732]
+                        (378748 'move' tmp[378729](378738 call _cond_test(378740 call ==(378745 call(378742 call . toStr c"endsWith") "'''") 0)))
+                        tmp[378729]
+                      }
+                      label _breakLabel[378733]
+                    }
+                    (378766 return(378767 'new'(_chpl_manager = _shared[242](?))(378771 call Toml(378776 call(378773 call . toStr c"strip") "'''"))))
+                  }
+                  {
+                    (378779 call = toStr(378793 call(378790 call .(378788 call(378785 call .(378783 call getToken source) c"strip") "\"") c"strip") "'"))
+                    (378795 return(378796 'new'(_chpl_manager = _shared[242](?))(378800 call Toml toStr)))
+                  }
+                }
+              }
+            }
+            {
+              { scopeless
+                if(379190 call _cond_test(379188 call(379185 call . dt c"match") val))
+                {
+                  { scopeless
+                    unknown date[378825](378832 call(378829 call . dateTime c"strptime")(378834 call getToken source) "%Y-%m-%dT%H:%M:%SZ")
+                    (378840 'end of statement')
+                  }
+                  (378841 return(378842 'new'(_chpl_manager = _shared[242](?))(378846 call Toml date)))
+                }
+                {
+                  { scopeless
+                    if(379179 call _cond_test(379177 call(379174 call . ld c"match") val))
+                    {
+                      { scopeless
+                        unknown raw[378850](378857 call(378854 call .(378852 call getToken source) c"split") "-")
+                        (378860 'end of statement')
+                      }
+                      { scopeless
+                        unknown d[378862](378863 'new'(378865 call date(378866 call :(378869 call raw 0) int[10])(378872 call :(378875 call raw 1) int[10])(378878 call :(378881 call raw 2) int[10])))
+                        (378885 'end of statement')
+                      }
+                      (378886 return(378887 'new'(_chpl_manager = _shared[242](?))(378891 call Toml d)))
+                    }
+                    {
+                      { scopeless
+                        if(379168 call _cond_test(379166 call(379163 call . ti c"match") val))
+                        {
+                          (378895 'use' IO)
+                          { scopeless
+                            unknown raw[378898](378905 call(378902 call .(378900 call getToken source) c"split") ":")
+                            (378908 'end of statement')
+                          }
+                          { scopeless
+                            unknown sec[378910](378927 call(378924 call .(378917 call(378914 call . "%.6dr" c"format")(378918 call :(378921 call raw 2) real[13])) c"split") ".")
+                            (378930 'end of statement')
+                          }
+                          { scopeless
+                            unknown t[378932] time
+                            (378935 'end of statement')
+                          }
+                          (378936 call = t(378939 'new'(378941 call time(378942 call :(378945 call raw 0) int[10])(378948 call :(378951 call raw 1) int[10])(378954 call :(378957 call sec 0) int[10])(378960 call :(378963 call sec 1) int[10]))))
+                          (378966 return(378967 'new'(_chpl_manager = _shared[242](?))(378971 call Toml t)))
+                        }
+                        {
+                          { scopeless
+                            if(379157 call _cond_test(379155 call(379152 call . realNum c"match") val))
+                            {
+                              { scopeless
+                                unknown token[378975](378977 call getToken source)
+                                (378980 'end of statement')
+                              }
+                              { scopeless
+                                unknown toReal[378982](378983 call : token real[13])
+                                (378988 'end of statement')
+                              }
+                              (378989 return(378990 'new'(_chpl_manager = _shared[242](?))(378994 call Toml toReal)))
+                            }
+                            {
+                              { scopeless
+                                if(379146 call _cond_test(379144 call(379141 call . ints c"match") val))
+                                {
+                                  { scopeless
+                                    unknown token[378998](379000 call getToken source)
+                                    (379003 'end of statement')
+                                  }
+                                  { scopeless
+                                    unknown toInt[379005](379006 call : token int[10])
+                                    (379011 'end of statement')
+                                  }
+                                  (379012 return(379013 'new'(_chpl_manager = _shared[242](?))(379017 call Toml toInt)))
+                                }
+                                {
+                                  { scopeless
+                                    if(379135 call _cond_test(379125 call ||(379127 call == val "true")(379131 call == val "false")))
+                                    {
+                                      { scopeless
+                                        unknown token[379021](379023 call getToken source)
+                                        (379026 'end of statement')
+                                      }
+                                      { scopeless
+                                        unknown toBool[379028](379029 call : token bool)
+                                        (379034 'end of statement')
+                                      }
+                                      (379035 return(379036 'new'(_chpl_manager = _shared[242](?))(379040 call Toml toBool)))
+                                    }
+                                    {
+                                      { scopeless
+                                        if(379120 call _cond_test(379116 call == val "#"))
+                                        {
+                                          (379044 call skipLine source)
+                                          (379046 return(379048 call parseValue))
+                                        }
+                                        {
+                                          { scopeless
+                                            if(379112 call _cond_test(379110 call(379107 call . corner c"match") val))
+                                            {
+                                              { scopeless
+                                                unknown token[379051](379053 call getToken source)
+                                                (379056 'end of statement')
+                                              }
+                                              { scopeless
+                                                unknown value[379058](379063 call(379060 call . token c"strip") bracket)
+                                                (379066 'end of statement')
+                                              }
+                                              { scopeless
+                                                unknown toAdd[379068](379073 call chpl__buildArrayExpr "]" value "[")
+                                                (379076 'end of statement')
+                                              }
+                                              (379078 call addToken source toAdd)
+                                              (379081 return(379083 call parseValue))
+                                            }
+                                            {
+                                              (379085 'throw'(379086 'new'(_chpl_manager = _owned[238](?))(379090 call TomlError(379091 call +(379093 call +(379095 call + "Line "(379098 call : debugCounter string[244])) ": Unexpected Token -> ")(379104 call getToken source)))))
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    Catch e : IllegalArgumentError
+    {
+      unknown e[379239]
+      (379219 call writeln(379220 call +(379222 call +(379224 call + "Line "(379227 call : debugCounter string[244])) ": Illegal Value -> ") val))
+      (379236 call exit 1)
+    }
+    Catch e : TomlError
+    {
+      unknown e[379254]
+      (379244 call writeln(379249 call(379246 call . e c"message")))
+      (379251 call exit 1)
+    }
+  }
+  { scopeless type
+    (378480 call _shared Toml)
+  } function Parser[379292].debugPrint[379261](arg _mt[379265]:_MT[201], arg this[379263]:Parser[379292]) : _unknown[42] "method" "primary method"
+  {
+    (379269 call writeln debugCounter ":")
+    (379273 call writeln rootTable)
+    (379276 call write "->")
+    (379286 call(379283 call . source c"debug"))
+    (379288 call writeln)
+  }
+  type fieldtag[379315] def fieldBool[379295]:fieldtag[379315] def fieldInt[379297]:fieldtag[379315] def fieldArr[379299]:fieldtag[379315] def fieldToml[379301]:fieldtag[379315] def fieldReal[379303]:fieldtag[379315] def fieldString[379305]:fieldtag[379315] def fieldEmpty[379307]:fieldtag[379315] def fieldDate[379309]:fieldtag[379315] def fieldTime[379311]:fieldtag[379315] def fieldDateTime[379313]:fieldtag[379315]
+  (379319 'use' fieldtag)
+  function _unknown[42].=[379321](arg _mt[379337]:_MT[201], arg this[379324] :
+  Toml, ref arg t[379330] :
+  (379328 call _shared Toml), arg s[379334] :
+  string[244]) : _unknown[42] "assignop" "method" "operator"
+  {
+    (379341 call compilerWarning "= overloads for Toml are deprecated")
+    if(379378 call _cond_test(379374 call == t nil[32]))
+    {
+      (379346 call = t(379349 'new'(_chpl_manager = _shared[242](?))(379353 call Toml s)))
+    }
+    {
+      (379356 call =(379361 call . t c"tag") fieldString)
+      (379365 call =(379370 call . t c"s") s)
+    }
+  }
+  function _unknown[42].=[379384](arg _mt[379400]:_MT[201], arg this[379387] :
+  Toml, ref arg t[379393] :
+  (379391 call _shared Toml), arg i[379397] :
+  int[10]) : _unknown[42] "assignop" "method" "operator"
+  {
+    (379404 call compilerWarning "= overloads for Toml are deprecated")
+    if(379435 call _cond_test(379431 call == t nil[32]))
+    {
+      (379407 call = t(379410 'new'(_chpl_manager = _shared[242](?))(379414 call Toml i)))
+    }
+    {
+      (379417 call =(379420 call . t c"tag") fieldInt)
+      (379424 call =(379427 call . t c"i") i)
+    }
+  }
+  function _unknown[42].=[379441](arg _mt[379457]:_MT[201], arg this[379444] :
+  Toml, ref arg t[379450] :
+  (379448 call _shared Toml), arg b[379454] :
+  bool) : _unknown[42] "assignop" "method" "operator"
+  {
+    (379461 call compilerWarning "= overloads for Toml are deprecated")
+    if(379494 call _cond_test(379490 call == t nil[32]))
+    {
+      (379464 call = t(379467 'new'(_chpl_manager = _shared[242](?))(379471 call Toml b)))
+    }
+    {
+      (379474 call =(379477 call . t c"tag") fieldBool)
+      (379481 call =(379486 call . t c"boo") b)
+    }
+  }
+  function _unknown[42].=[379500](arg _mt[379516]:_MT[201], arg this[379503] :
+  Toml, ref arg t[379509] :
+  (379507 call _shared Toml), arg r[379513] :
+  real[13]) : _unknown[42] "assignop" "method" "operator"
+  {
+    (379520 call compilerWarning "= overloads for Toml are deprecated")
+    if(379551 call _cond_test(379547 call == t nil[32]))
+    {
+      (379523 call = t(379526 'new'(_chpl_manager = _shared[242](?))(379530 call Toml r)))
+    }
+    {
+      (379533 call =(379536 call . t c"tag") fieldReal)
+      (379540 call =(379543 call . t c"re") r)
+    }
+  }
+  function _unknown[42].=[379557](arg _mt[379573]:_MT[201], arg this[379560] :
+  Toml, ref arg t[379566] :
+  (379564 call _shared Toml), arg ld[379570] :
+  date) : _unknown[42] "assignop" "method" "operator"
+  {
+    (379577 call compilerWarning "= overloads for Toml are deprecated")
+    if(379610 call _cond_test(379606 call == t nil[32]))
+    {
+      (379580 call = t(379583 'new'(_chpl_manager = _shared[242](?))(379587 call Toml ld)))
+    }
+    {
+      (379590 call =(379593 call . t c"tag") fieldDate)
+      (379597 call =(379602 call . t c"ld") ld)
+    }
+  }
+  function _unknown[42].=[379616](arg _mt[379632]:_MT[201], arg this[379619] :
+  Toml, ref arg t[379625] :
+  (379623 call _shared Toml), arg ti[379629] :
+  time) : _unknown[42] "assignop" "method" "operator"
+  {
+    (379636 call compilerWarning "= overloads for Toml are deprecated")
+    if(379669 call _cond_test(379665 call == t nil[32]))
+    {
+      (379639 call = t(379642 'new'(_chpl_manager = _shared[242](?))(379646 call Toml ti)))
+    }
+    {
+      (379649 call =(379652 call . t c"tag") fieldTime)
+      (379656 call =(379661 call . t c"ti") ti)
+    }
+  }
+  function _unknown[42].=[379675](arg _mt[379691]:_MT[201], arg this[379678] :
+  Toml, ref arg t[379684] :
+  (379682 call _shared Toml), arg dt[379688] :
+  dateTime) : _unknown[42] "assignop" "method" "operator"
+  {
+    (379695 call compilerWarning "= overloads for Toml are deprecated")
+    if(379728 call _cond_test(379724 call == t nil[32]))
+    {
+      (379698 call = t(379701 'new'(_chpl_manager = _shared[242](?))(379705 call Toml dt)))
+    }
+    {
+      (379708 call =(379711 call . t c"tag") fieldDateTime)
+      (379715 call =(379720 call . t c"dt") dt)
+    }
+  }
+  function _unknown[42].=[379734](arg _mt[379756]:_MT[201], arg this[379737] :
+  Toml, ref arg t[379743] :
+  (379741 call _shared Toml), arg A[379753] :
+  (379751 call chpl__buildArrayRuntimeType unknown D[379746](379749 call _shared Toml))) : _unknown[42] "assignop" "method" "operator"
+  {
+    (379765 call compilerWarning "= overloads for Toml are deprecated")
+    (379768 call setupToml t A)
+  }
+  where {
+    (379762 call(379759 call . D c"isAssociative"))
+  }
+  function setupToml[379774](ref arg t[379779] :
+  (379777 call _shared Toml), arg A[379789] :
+  (379787 call chpl__buildArrayRuntimeType unknown D[379782](379785 call _shared Toml))) : _unknown[42]
+  {
+    if(379838 call _cond_test(379834 call == t nil[32]))
+    {
+      (379799 call = t(379802 'new'(_chpl_manager = _shared[242](?))(379806 call Toml A)))
+    }
+    {
+      (379809 call =(379812 call . t c"tag") fieldToml)
+      (379816 call =(379821 call . t c"D") D)
+      (379825 call =(379830 call . t c"A") A)
+    }
+  }
+  where {
+    (379796 call(379793 call . D c"isAssociative"))
+  }
+  function setupToml[379845](ref arg t[379850] :
+  (379848 call _shared Toml), arg arr[379860] :
+  (379858 call chpl__buildArrayRuntimeType unknown dom[379853](379856 call _shared Toml))) : _unknown[42]
+  {
+    if(379907 call _cond_test(379903 call == t nil[32]))
+    {
+      (379872 call = t(379875 'new'(_chpl_manager = _shared[242](?))(379879 call Toml arr)))
+    }
+    {
+      (379882 call =(379885 call . t c"tag") fieldArr)
+      (379889 call =(379892 call . t c"dom") dom)
+      (379896 call =(379899 call . t c"arr") arr)
+    }
+  }
+  where {
+    (379863 call !(379869 call(379866 call . dom c"isAssociative")))
+  }
+  function _unknown[42].=[379914](arg _mt[379936]:_MT[201], arg this[379917] :
+  Toml, ref arg t[379923] :
+  (379921 call _shared Toml), arg arr[379933] :
+  (379931 call chpl__buildArrayRuntimeType unknown dom[379926](379929 call _shared Toml))) : _unknown[42] "assignop" "method" "operator"
+  {
+    (379947 call compilerWarning "= overloads for Toml are deprecated")
+    (379950 call setupToml t arr)
+  }
+  where {
+    (379938 call !(379944 call(379941 call . dom c"isAssociative")))
+  }
+  type Toml[383866] unknown i[380007] int[10] unknown boo[380004] bool unknown re[380001] real[13] unknown s[379998] string[244] unknown ld[379995] date unknown ti[379992] time unknown dt[379989] dateTime unknown dom[379983](379985 call chpl__buildDomainRuntimeType defaultDist 1) unknown arr[379972](379980 call chpl__buildArrayRuntimeType(379974 call chpl__ensureDomainExpr dom)(379977 call _shared(379979 'to nilable class from type' Toml))) unknown A[379962](379964 call map string[244](379967 call _shared(379969 'to nilable class from type' Toml)) 0) unknown tag[379959] fieldtag function Toml[383866].init[380011](arg _mt[380015]:_MT[201], arg this[380013]:Toml[383866]) : _unknown[42] "method" "primary method"
+  {
+    (380018 call =(380021 call . this c"tag") fieldEmpty)
+  } function Toml[383866].init[380027](arg _mt[380035]:_MT[201], arg this[380029]:Toml[383866], arg s[380032] :
+  string[244]) : _unknown[42] "method" "primary method"
+  {
+    (380038 call =(380041 call . this c"s") s)
+    (380045 call =(380048 call . this c"tag") fieldString)
+  } function Toml[383866].init[380054](arg _mt[380068]:_MT[201], arg this[380056]:Toml[383866], arg A[380065] :
+  (380063 call chpl__buildArrayRuntimeType unknown D[380058](380061 call _shared Toml))) : _unknown[42] "method" "primary method"
+  {
+    (380080 call(380077 call . this c"chpl__initThisType"))
+    {
+      unknown _indexOfInterest[380096] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[380097] "expr temp" "temp"
+      (380106 'move' _iterator[380097](380104 call _getIterator D))
+      Defer
+      {
+        {
+          (380121 call _freeIterator _iterator[380097])
+        }
+      }
+      { scopeless type
+        (380111 'move' _indexOfInterest[380096](380108 call iteratorIndex _iterator[380097]))
+      }
+      ForLoop[380098]
+      {
+        unknown i[380081] "index var" "insert auto destroy"
+        (380116 'move' i[380081] _indexOfInterest[380096])
+        { scopeless
+          (380084 call =(380090 call(380087 call . this c"A") i)(380093 call A i))
+        }
+        label _continueLabel[380101]
+        _indexOfInterest[380096]
+        _iterator[380097]
+      }
+      label _breakLabel[380102]
+    }
+    (380128 call =(380131 call . this c"tag") fieldToml)
+  }
+  where {
+    (380074 call(380071 call . D c"isAssociative"))
+  } function Toml[383866].init[380138](arg _mt[380153]:_MT[201], arg this[380140]:Toml[383866], arg A[380150] :
+  (380148 call chpl__buildArrayRuntimeType unknown D[380142](380145 call _shared(380147 'to nilable class from type' Toml)))) : _unknown[42] "method" "primary method"
+  {
+    (380165 call(380162 call . this c"chpl__initThisType"))
+    {
+      unknown _indexOfInterest[380181] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[380182] "expr temp" "temp"
+      (380191 'move' _iterator[380182](380189 call _getIterator D))
+      Defer
+      {
+        {
+          (380206 call _freeIterator _iterator[380182])
+        }
+      }
+      { scopeless type
+        (380196 'move' _indexOfInterest[380181](380193 call iteratorIndex _iterator[380182]))
+      }
+      ForLoop[380183]
+      {
+        unknown i[380166] "index var" "insert auto destroy"
+        (380201 'move' i[380166] _indexOfInterest[380181])
+        { scopeless
+          (380169 call =(380175 call(380172 call . this c"A") i)(380178 call A i))
+        }
+        label _continueLabel[380186]
+        _indexOfInterest[380181]
+        _iterator[380182]
+      }
+      label _breakLabel[380187]
+    }
+    (380213 call =(380216 call . this c"tag") fieldToml)
+  }
+  where {
+    (380159 call(380156 call . D c"isAssociative"))
+  } function Toml[383866].init[380223](arg _mt[380231]:_MT[201], arg this[380225]:Toml[383866], arg ld[380228] :
+  date) : _unknown[42] "method" "primary method"
+  {
+    (380234 call =(380237 call . this c"ld") ld)
+    (380241 call =(380244 call . this c"tag") fieldDate)
+  } function Toml[383866].init[380250](arg _mt[380258]:_MT[201], arg this[380252]:Toml[383866], arg ti[380255] :
+  time) : _unknown[42] "method" "primary method"
+  {
+    (380261 call =(380264 call . this c"ti") ti)
+    (380268 call =(380271 call . this c"tag") fieldTime)
+  } function Toml[383866].init[380277](arg _mt[380285]:_MT[201], arg this[380279]:Toml[383866], arg dt[380282] :
+  dateTime) : _unknown[42] "method" "primary method"
+  {
+    (380288 call =(380291 call . this c"dt") dt)
+    (380295 call =(380298 call . this c"tag") fieldDateTime)
+  } function Toml[383866].init[380304](arg _mt[380312]:_MT[201], arg this[380306]:Toml[383866], arg i[380309] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    (380315 call =(380318 call . this c"i") i)
+    (380322 call =(380325 call . this c"tag") fieldInt)
+  } function Toml[383866].init[380331](arg _mt[380339]:_MT[201], arg this[380333]:Toml[383866], arg boo[380336] :
+  bool) : _unknown[42] "method" "primary method"
+  {
+    (380342 call =(380345 call . this c"boo") boo)
+    (380349 call =(380352 call . this c"tag") fieldBool)
+  } function Toml[383866].init[380358](arg _mt[380366]:_MT[201], arg this[380360]:Toml[383866], arg re[380363] :
+  real[13]) : _unknown[42] "method" "primary method"
+  {
+    (380369 call =(380372 call . this c"re") re)
+    (380376 call =(380379 call . this c"tag") fieldReal)
+  } function Toml[383866].init[380385](arg _mt[380399]:_MT[201], arg this[380387]:Toml[383866], arg arr[380396] :
+  (380394 call chpl__buildArrayRuntimeType unknown dom[380389](380392 call _shared Toml))) : _unknown[42] "method" "primary method"
+  {
+    (380410 call =(380413 call . this c"dom") dom)
+    (380417 call =(380420 call . this c"arr") arr)
+    (380424 call =(380427 call . this c"tag") fieldArr)
+  }
+  where {
+    (380401 call ==(380407 call(380404 call . dom c"isAssociative")) 0)
+  } function Toml[383866].init[380434](arg _mt[380449]:_MT[201], arg this[380436]:Toml[383866], arg arr[380446] :
+  (380444 call chpl__buildArrayRuntimeType unknown dom[380438](380441 call _shared(380443 'to nilable class from type' Toml)))) : _unknown[42] "method" "primary method"
+  {
+    (380460 call =(380463 call . this c"dom") dom)
+    (380467 call =(380470 call . this c"arr") arr)
+    (380474 call =(380477 call . this c"tag") fieldArr)
+  }
+  where {
+    (380451 call ==(380457 call(380454 call . dom c"isAssociative")) 0)
+  } function Toml[383866].init[380484](arg _mt[380496]:_MT[201], arg this[380486]:Toml[383866], arg lst[380493] :
+  (380489 call list(380491 call _shared Toml))) : _unknown[42] "method" "primary method"
+  {
+    (380503 call(380500 call . this c"init")(380510 call(380507 call . lst c"toArray")))
+  } function Toml[383866].init[380513](arg _mt[380526]:_MT[201], arg this[380515]:Toml[383866], arg lst[380523] :
+  (380518 call list(380520 call _shared(380522 'to nilable class from type' Toml)))) : _unknown[42] "method" "primary method"
+  {
+    (380533 call(380530 call . this c"init")(380538 call(380535 call . lst c"toArray")))
+  } function Toml[383866].init[380541](arg _mt[380549]:_MT[201], arg this[380543]:Toml[383866], arg root[380546] :
+  Toml) : _unknown[42] "method" "primary method"
+  {
+    (380556 call(380553 call . this c"chpl__initThisType"))
+    (380557 call =(380560 call . this c"boo")(380564 call . root c"boo"))
+    (380567 call =(380570 call . this c"i")(380574 call . root c"i"))
+    (380577 call =(380580 call . this c"re")(380584 call . root c"re"))
+    (380587 call =(380590 call . this c"dom")(380594 call . root c"dom"))
+    {
+      unknown _indexOfInterest[380626] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[380627] "expr temp" "temp"
+      (380636 'move' _iterator[380627](380634 call _getIterator(380600 call . root c"dom")))
+      Defer
+      {
+        {
+          (380651 call _freeIterator _iterator[380627])
+        }
+      }
+      { scopeless type
+        (380641 'move' _indexOfInterest[380626](380638 call iteratorIndex _iterator[380627]))
+      }
+      ForLoop[380628]
+      {
+        unknown idx[380597] "index var" "insert auto destroy"
+        (380646 'move' idx[380597] _indexOfInterest[380626])
+        { scopeless
+          (380603 call =(380609 call(380606 call . this c"arr") idx)(380611 'new'(_chpl_manager = _shared[242](?))(380624 'to nilable class from type'(380615 call Toml(380616 call postfix!(380622 call(380619 call . root c"arr") idx))))))
+        }
+        label _continueLabel[380631]
+        _indexOfInterest[380626]
+        _iterator[380627]
+      }
+      label _breakLabel[380632]
+    }
+    (380658 call =(380661 call . this c"ld")(380665 call . root c"ld"))
+    (380668 call =(380671 call . this c"ti")(380675 call . root c"ti"))
+    (380678 call =(380681 call . this c"dt")(380685 call . root c"dt"))
+    (380688 call =(380691 call . this c"s")(380695 call . root c"s"))
+    {
+      unknown _indexOfInterest[380731] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[380732] "expr temp" "temp"
+      (380741 'move' _iterator[380732](380739 call _getIterator(380707 call(380704 call .(380701 call . root c"A") c"keys"))))
+      Defer
+      {
+        {
+          (380756 call _freeIterator _iterator[380732])
+        }
+      }
+      { scopeless type
+        (380746 'move' _indexOfInterest[380731](380743 call iteratorIndex _iterator[380732]))
+      }
+      ForLoop[380733]
+      {
+        unknown idx[380698] "index var" "insert auto destroy"
+        (380751 'move' idx[380698] _indexOfInterest[380731])
+        { scopeless
+          (380708 call =(380714 call(380711 call . this c"A") idx)(380716 'new'(_chpl_manager = _shared[242](?))(380729 'to nilable class from type'(380720 call Toml(380721 call postfix!(380727 call(380724 call . root c"A") idx))))))
+        }
+        label _continueLabel[380736]
+        _indexOfInterest[380731]
+        _iterator[380732]
+      }
+      label _breakLabel[380737]
+    }
+    (380763 call =(380766 call . this c"tag")(380770 call . root c"tag"))
+  } function Toml[383866].this[380775](arg _mt[380783]:_MT[201], arg this[380777]:Toml[383866], arg tbl[380780] :
+  string[244]) ref : _unknown[42] throws "method" "primary method"
+  {
+    { scopeless
+      const indx[380791] "const"(380796 call(380793 call . tbl c"split") ".")
+      (380799 'end of statement')
+    }
+    { scopeless
+      unknown top[380801](380806 call .(380803 call . indx c"_dom") c"first")
+      (380810 'end of statement')
+    }
+    if(380887 call _cond_test(380880 call <(380883 call . indx c"size") 2))
+    {
+      (380812 return(380817 call(380814 call . this c"A") tbl))
+    }
+    {
+      { scopeless
+        unknown next[380821](380826 call(380823 call . "." c"join")(380828 call indx(380833 call chpl_build_low_bounded_range(380829 call + top 1))))
+        (380836 'end of statement')
+      }
+      if(380863 call _cond_test(380850 call !(380859 call(380856 call .(380853 call . this c"A") c"contains")(380861 call indx top))))
+      {
+        (380838 'throw'(380839 'new'(_chpl_manager = _owned[238](?))(380843 call TomlError(380844 call + "No index found for " tbl))))
+      }
+      (380867 return(380878 call(380868 call postfix!(380874 call(380871 call . this c"A")(380876 call indx top))) next))
+    }
+  }
+  { scopeless type
+    (380786 call _shared(380788 'to nilable class from type' Toml))
+  } function Toml[383866].pathExists[380894](arg _mt[380902]:_MT[201], arg this[380896]:Toml[383866], arg tblpath[380899] :
+  string[244]) : _unknown[42] "method" "primary method"
+  {
+    Try!
+    {
+      {
+        { scopeless
+          unknown path[380908](380913 call(380910 call . tblpath c"split") ".")
+          (380916 'end of statement')
+        }
+        { scopeless
+          unknown top[380918](380923 call .(380920 call . path c"_dom") c"first")
+          (380927 'end of statement')
+        }
+        if(381011 call _cond_test(381004 call <(381007 call . path c"size") 2))
+        {
+          if(380947 call _cond_test(380935 call ==(380944 call(380941 call .(380938 call . this c"A") c"contains") tblpath) 0))
+          {
+            (380930 return 0)
+          }
+          {
+            (380933 return 1)
+          }
+        }
+        {
+          { scopeless
+            unknown next[380953](380958 call(380955 call . "." c"join")(380960 call path(380965 call chpl_build_low_bounded_range(380961 call + top 1))))
+            (380968 'end of statement')
+          }
+          if(381000 call _cond_test(380996 call(380993 call .(380990 call . this c"A") c"contains")(380998 call path top)))
+          {
+            (380970 return(380984 call(380981 call .(380971 call postfix!(380977 call(380974 call . this c"A")(380979 call path top))) c"pathExists") next))
+          }
+          {
+            (380987 return 0)
+          }
+        }
+      }
+    }
+    Catch e : TomlError
+    {
+      unknown e[381026]
+      (381019 call writeln(381024 call(381021 call . e c"message")))
+    }
+    (381030 return 0)
+  }
+  { scopeless type
+    bool
+  } function Toml[383866].set[381035](arg _mt[381047]:_MT[201], arg this[381037]:Toml[383866], arg tbl[381040] :
+  string[244], arg toml[381044] :
+  Toml) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown t[381051] "ref var"(381053 call this tbl)
+      (381056 'end of statement')
+    }
+    (381057 call = t(381060 'new'(_chpl_manager = _shared[242](?))(381064 call Toml toml)))
+  } function Toml[383866].set[381068](arg _mt[381080]:_MT[201], arg this[381070]:Toml[383866], arg tbl[381073] :
+  string[244], arg s[381077] :
+  string[244]) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown t[381084] "ref var"(381086 call this tbl)
+      (381089 'end of statement')
+    }
+    if(381123 call _cond_test(381119 call == t nil[32]))
+    {
+      (381091 call = t(381094 'new'(_chpl_manager = _shared[242](?))(381098 call Toml s)))
+    }
+    {
+      (381101 call =(381106 call .(381103 call postfix! t) c"tag") fieldString)
+      (381110 call =(381115 call .(381112 call postfix! t) c"s") s)
+    }
+  } function Toml[383866].set[381129](arg _mt[381141]:_MT[201], arg this[381131]:Toml[383866], arg tbl[381134] :
+  string[244], arg i[381138] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown t[381145] "ref var"(381147 call this tbl)
+      (381150 'end of statement')
+    }
+    if(381184 call _cond_test(381180 call == t nil[32]))
+    {
+      (381152 call = t(381155 'new'(_chpl_manager = _shared[242](?))(381159 call Toml i)))
+    }
+    {
+      (381162 call =(381167 call .(381164 call postfix! t) c"tag") fieldInt)
+      (381171 call =(381176 call .(381173 call postfix! t) c"i") i)
+    }
+  } function Toml[383866].set[381190](arg _mt[381202]:_MT[201], arg this[381192]:Toml[383866], arg tbl[381195] :
+  string[244], arg b[381199] :
+  bool) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown t[381206] "ref var"(381208 call this tbl)
+      (381211 'end of statement')
+    }
+    if(381245 call _cond_test(381241 call == t nil[32]))
+    {
+      (381213 call = t(381216 'new'(_chpl_manager = _shared[242](?))(381220 call Toml b)))
+    }
+    {
+      (381223 call =(381228 call .(381225 call postfix! t) c"tag") fieldBool)
+      (381232 call =(381237 call .(381234 call postfix! t) c"boo") b)
+    }
+  } function Toml[383866].set[381251](arg _mt[381263]:_MT[201], arg this[381253]:Toml[383866], arg tbl[381256] :
+  string[244], arg r[381260] :
+  real[13]) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown t[381267] "ref var"(381269 call this tbl)
+      (381272 'end of statement')
+    }
+    if(381306 call _cond_test(381302 call == t nil[32]))
+    {
+      (381274 call = t(381277 'new'(_chpl_manager = _shared[242](?))(381281 call Toml r)))
+    }
+    {
+      (381284 call =(381289 call .(381286 call postfix! t) c"tag") fieldReal)
+      (381293 call =(381298 call .(381295 call postfix! t) c"re") r)
+    }
+  } function Toml[383866].set[381312](arg _mt[381324]:_MT[201], arg this[381314]:Toml[383866], arg tbl[381317] :
+  string[244], arg ld[381321] :
+  date) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown t[381328] "ref var"(381330 call this tbl)
+      (381333 'end of statement')
+    }
+    if(381367 call _cond_test(381363 call == t nil[32]))
+    {
+      (381335 call = t(381338 'new'(_chpl_manager = _shared[242](?))(381342 call Toml ld)))
+    }
+    {
+      (381345 call =(381350 call .(381347 call postfix! t) c"tag") fieldDate)
+      (381354 call =(381359 call .(381356 call postfix! t) c"ld") ld)
+    }
+  } function Toml[383866].set[381373](arg _mt[381385]:_MT[201], arg this[381375]:Toml[383866], arg tbl[381378] :
+  string[244], arg ti[381382] :
+  time) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown t[381389] "ref var"(381391 call this tbl)
+      (381394 'end of statement')
+    }
+    if(381428 call _cond_test(381424 call == t nil[32]))
+    {
+      (381396 call = t(381399 'new'(_chpl_manager = _shared[242](?))(381403 call Toml ti)))
+    }
+    {
+      (381406 call =(381411 call .(381408 call postfix! t) c"tag") fieldTime)
+      (381415 call =(381420 call .(381417 call postfix! t) c"ti") ti)
+    }
+  } function Toml[383866].set[381434](arg _mt[381446]:_MT[201], arg this[381436]:Toml[383866], arg tbl[381439] :
+  string[244], arg dt[381443] :
+  dateTime) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown t[381450] "ref var"(381452 call this tbl)
+      (381455 'end of statement')
+    }
+    if(381489 call _cond_test(381485 call == t nil[32]))
+    {
+      (381457 call = t(381460 'new'(_chpl_manager = _shared[242](?))(381464 call Toml dt)))
+    }
+    {
+      (381467 call =(381472 call .(381469 call postfix! t) c"tag") fieldDateTime)
+      (381476 call =(381481 call .(381478 call postfix! t) c"dt") dt)
+    }
+  } function Toml[383866].set[381495](arg _mt[381514]:_MT[201], arg this[381497]:Toml[383866], arg tbl[381500] :
+  string[244], arg A[381511] :
+  (381509 call chpl__buildArrayRuntimeType unknown D[381503](381506 call _shared(381508 'to nilable class from type' Toml)))) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown t[381523] "ref var"(381525 call this tbl)
+      (381528 'end of statement')
+    }
+    if(381602 call _cond_test(381598 call == t nil[32]))
+    {
+      (381530 call = t(381533 'new'(_chpl_manager = _shared[242](?))(381537 call Toml A)))
+    }
+    {
+      (381540 call =(381545 call .(381542 call postfix! t) c"tag") fieldToml)
+      {
+        unknown _indexOfInterest[381566] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[381567] "expr temp" "temp"
+        (381576 'move' _iterator[381567](381574 call _getIterator D))
+        Defer
+        {
+          {
+            (381591 call _freeIterator _iterator[381567])
+          }
+        }
+        { scopeless type
+          (381581 'move' _indexOfInterest[381566](381578 call iteratorIndex _iterator[381567]))
+        }
+        ForLoop[381568]
+        {
+          unknown i[381549] "index var" "insert auto destroy"
+          (381586 'move' i[381549] _indexOfInterest[381566])
+          { scopeless
+            (381552 call =(381560 call(381557 call .(381554 call postfix! t) c"A") i)(381563 call A i))
+          }
+          label _continueLabel[381571]
+          _indexOfInterest[381566]
+          _iterator[381567]
+        }
+        label _breakLabel[381572]
+      }
+    }
+  }
+  where {
+    (381520 call(381517 call . D c"isAssociative"))
+  } function Toml[383866].set[381609](arg _mt[381628]:_MT[201], arg this[381611]:Toml[383866], arg tbl[381614] :
+  string[244], arg arr[381625] :
+  (381623 call chpl__buildArrayRuntimeType unknown dom[381617](381620 call _shared(381622 'to nilable class from type' Toml)))) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown t[381639] "ref var"(381641 call this tbl)
+      (381644 'end of statement')
+    }
+    if(381687 call _cond_test(381683 call == t nil[32]))
+    {
+      (381646 call = t(381649 'new'(_chpl_manager = _shared[242](?))(381653 call Toml arr)))
+    }
+    {
+      (381656 call =(381661 call .(381658 call postfix! t) c"tag") fieldArr)
+      (381665 call =(381670 call .(381667 call postfix! t) c"dom") dom)
+      (381674 call =(381679 call .(381676 call postfix! t) c"arr") arr)
+    }
+  }
+  where {
+    (381630 call !(381636 call(381633 call . dom c"isAssociative")))
+  } function Toml[383866].serialize[381694](arg _mt[381702]:_MT[201], arg this[381696]:Toml[383866], arg writer[381698]:_any[141](?), ref arg serializer[381700]:_any[141](?)) : _unknown[42] throws "method" "primary method" "method overrides"
+  {
+    (381706 call writeTOML writer)
+  } function Toml[383866].writeTOML[381710](arg _mt[381716]:_MT[201], arg this[381712]:Toml[383866], arg f[381714]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    Try!
+    {
+      {
+        { scopeless
+          unknown flat[381721](381722 'new'(381724 call map string[244](381727 call _shared(381729 'to nilable class from type' Toml))))
+          (381731 'end of statement')
+        }
+        (381736 call(381733 call . this c"flatten") flat)
+        (381739 call printValues f this)
+        (381743 call printTables flat f)
+      }
+    }
+    Catch e : TomlError
+    {
+      unknown e[381757]
+      (381750 call writeln(381755 call(381752 call . e c"message")))
+    }
+  } function Toml[383866].writeJSON[381763](arg _mt[381769]:_MT[201], arg this[381765]:Toml[383866], arg f[381767]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    Try!
+    {
+      {
+        { scopeless
+          unknown flat[381774](381775 'new'(381777 call map string[244](381780 call _shared(381782 'to nilable class from type' Toml))))
+          (381784 'end of statement')
+        }
+        (381789 call(381786 call . this c"flatten") flat)
+        { scopeless
+          unknown indent[381792] 0
+          (381795 'end of statement')
+        }
+        (381800 call(381797 call . f c"writeln") "{")
+        (381802 call += indent tabSpace)
+        (381807 call printValuesJSON f this(indent = indent))
+        if(381837 call _cond_test(381835 call(381832 call . flat c"contains") "root"))
+        {
+          (381814 call printValuesJSON f(381816 call postfix!(381819 call flat "root"))(indent = indent))
+          (381829 call(381826 call . flat c"remove") "root")
+        }
+        {
+          unknown _indexOfInterest[381896] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[381897] "expr temp" "temp"
+          (381906 'move' _iterator[381897](381904 call _getIterator(381844 call sorted(381851 call(381848 call . flat c"keysToArray")))))
+          Defer
+          {
+            {
+              (381921 call _freeIterator _iterator[381897])
+            }
+          }
+          { scopeless type
+            (381911 'move' _indexOfInterest[381896](381908 call iteratorIndex _iterator[381897]))
+          }
+          ForLoop[381898]
+          {
+            unknown k[381841] "index var" "insert auto destroy"
+            (381916 'move' k[381841] _indexOfInterest[381896])
+            {
+              (381857 call(381854 call . f c"writef") "%s\"%s\": {\n"(381861 call * " " indent) k)
+              (381866 call += indent tabSpace)
+              (381871 call printValuesJSON f(381873 call postfix!(381876 call flat k))(indent = indent))
+              (381880 call -= indent tabSpace)
+              (381888 call(381885 call . f c"writef") "%s}\n"(381892 call * " " indent))
+            }
+            label _continueLabel[381901]
+            _indexOfInterest[381896]
+            _iterator[381897]
+          }
+          label _breakLabel[381902]
+        }
+        (381928 call -= indent tabSpace)
+        (381936 call(381933 call . f c"writeln") "}")
+      }
+    }
+    Catch e : TomlError
+    {
+      unknown e[381949]
+      (381942 call writeln(381947 call(381944 call . e c"message")))
+    }
+  } function Toml[383866].flatten[381955](arg _mt[381974]:_MT[201], arg this[381957]:Toml[383866], ref arg flat[381967] :
+  (381960 call map string[244](381963 call _shared(381965 'to nilable class from type' Toml)) 0), arg rootKey[381971] =
+  "") : _unknown[42] "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[382061] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[382062] "expr temp" "temp"
+      (382090 'move' _iterator[382062](382005 call _build_tuple(382078 call _getIterator(382077 call(382071 call .(382073 call . this c"A") c"keys")))(382088 call _getIterator(382087 call(382081 call .(382083 call . this c"A") c"values")))))
+      Defer
+      {
+        {
+          (382118 call _freeIterator _iterator[382062])
+        }
+      }
+      { scopeless type
+        (382095 'move' _indexOfInterest[382061](382092 call iteratorIndex _iterator[382062]))
+      }
+      ForLoop[382063]
+      {
+        (382100 call _check_tuple_var_decl _indexOfInterest[382061] 2)
+        unknown k[381980] "index var" "insert auto destroy"
+        (382107 'move' k[381980](382104 call _indexOfInterest[382061] 0))
+        unknown v[381982] "index var" "insert auto destroy"
+        (382113 'move' v[381982](382110 call _indexOfInterest[382061] 1))
+        {
+          if(382057 call _cond_test(382048 call ==(382053 call .(382050 call postfix! v) c"tag") fieldToml))
+          {
+            { scopeless
+              unknown fullKey[382009] k
+              (382012 'end of statement')
+            }
+            if(382028 call _cond_test(382024 call != rootKey ""))
+            {
+              { scopeless
+                (382013 call = fullKey(382020 call(382017 call . "." c"join") rootKey k))
+              }
+            }
+            (382033 call =(382036 call flat fullKey) v)
+            (382045 call(382042 call .(382039 call postfix! v) c"flatten") flat fullKey)
+          }
+        }
+        label _continueLabel[382066]
+        _indexOfInterest[382061]
+        _iterator[382062]
+      }
+      label _breakLabel[382067]
+    }
+    (382125 return flat)
+  }
+  { scopeless type
+    (381977 'typeof' flat)
+  } function Toml[383866].printTables[382130](arg _mt[382149]:_MT[201], arg this[382132]:Toml[383866], ref arg flat[382142] :
+  (382135 call map string[244](382138 call _shared(382140 'to nilable class from type' Toml)) 0), arg f[382146] :
+  fileWriter) : _unknown[42] "method" "primary method"
+  {
+    if(382181 call _cond_test(382179 call(382176 call . flat c"contains") "root"))
+    {
+      (382157 call(382154 call . f c"writeln") "[root]")
+      (382162 call printValues f(382164 call postfix!(382167 call flat "root")))
+      (382173 call(382170 call . flat c"remove") "root")
+    }
+    {
+      unknown _indexOfInterest[382211] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[382212] "expr temp" "temp"
+      (382221 'move' _iterator[382212](382219 call _getIterator(382188 call sorted(382193 call(382190 call . flat c"keysToArray")))))
+      Defer
+      {
+        {
+          (382236 call _freeIterator _iterator[382212])
+        }
+      }
+      { scopeless type
+        (382226 'move' _indexOfInterest[382211](382223 call iteratorIndex _iterator[382212]))
+      }
+      ForLoop[382213]
+      {
+        unknown k[382185] "index var" "insert auto destroy"
+        (382231 'move' k[382185] _indexOfInterest[382211])
+        {
+          (382199 call(382196 call . f c"writeln") "[" k "]")
+          (382204 call printValues f(382206 call postfix!(382209 call flat k)))
+        }
+        label _continueLabel[382216]
+        _indexOfInterest[382211]
+        _iterator[382212]
+      }
+      label _breakLabel[382217]
+    }
+  } function Toml[383866].printValues[382245](arg _mt[382258]:_MT[201], arg this[382247]:Toml[383866], arg f[382250] :
+  fileWriter, arg v[382255] :
+  (382253 'to borrowed class from unknown' Toml)) : _unknown[42] throws "method" "primary method"
+  {
+    { scopeless
+      unknown keys[382262](382270 call(382267 call .(382264 call . v c"A") c"keysToArray"))
+      (382272 'end of statement')
+    }
+    (382274 call sort keys)
+    {
+      unknown _indexOfInterest[382644] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[382645] "expr temp" "temp"
+      (382654 'move' _iterator[382645](382652 call _getIterator keys))
+      Defer
+      {
+        {
+          (382669 call _freeIterator _iterator[382645])
+        }
+      }
+      { scopeless type
+        (382659 'move' _indexOfInterest[382644](382656 call iteratorIndex _iterator[382645]))
+      }
+      ForLoop[382646]
+      {
+        unknown key[382276] "index var" "insert auto destroy"
+        (382664 'move' key[382276] _indexOfInterest[382644])
+        {
+          { scopeless
+            unknown value[382281](382282 call postfix!(382288 call(382285 call . v c"A") key))
+            (382291 'end of statement')
+          }
+          {
+            unknown tmp[382566] "expr temp" "maybe param" "maybe type" "temp"
+            (382568 'move' tmp[382566](382293 call . value c"tag"))
+            if(382573 call _cond_test(382570 call == tmp[382566] fieldToml))
+            {
+              { scopeless
+                continue nil[32]
+              }
+            }
+            {
+              if(382579 call _cond_test(382576 call == tmp[382566] fieldBool))
+              {
+                (382313 call(382310 call . f c"write") key " = "(382317 call toString value))
+              }
+              {
+                if(382586 call _cond_test(382583 call == tmp[382566] fieldInt))
+                {
+                  (382328 call(382325 call . f c"write") key " = "(382332 call toString value))
+                }
+                {
+                  if(382593 call _cond_test(382590 call == tmp[382566] fieldArr))
+                  {
+                    { scopeless
+                      unknown final[382340] string[244]
+                      (382343 'end of statement')
+                    }
+                    (382348 call(382345 call . f c"write") key " = ")
+                    (382351 call += final "[")
+                    {
+                      unknown _indexOfInterest[382420] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                      unknown _iterator[382421] "expr temp" "temp"
+                      (382430 'move' _iterator[382421](382428 call _getIterator(382358 call . value c"arr")))
+                      Defer
+                      {
+                        {
+                          (382445 call _freeIterator _iterator[382421])
+                        }
+                      }
+                      { scopeless type
+                        (382435 'move' _indexOfInterest[382420](382432 call iteratorIndex _iterator[382421]))
+                      }
+                      ForLoop[382422]
+                      {
+                        unknown k[382355] "index var" "insert auto destroy"
+                        (382440 'move' k[382355] _indexOfInterest[382420])
+                        {
+                          if(382416 call _cond_test(382383 call ||(382385 call ==(382394 call .(382391 call .(382388 call . value c"arr") c"_dom") c"size") 1)(382398 call == k(382405 call(382402 call . value c"arr")(382413 call .(382410 call .(382407 call . value c"arr") c"_dom") c"last")))))
+                          {
+                            (382363 call += final(382367 call toString(382368 call postfix! k)))
+                          }
+                          {
+                            (382372 call += final(382375 call +(382378 call toString(382379 call postfix! k)) ", "))
+                          }
+                        }
+                        label _continueLabel[382425]
+                        _indexOfInterest[382420]
+                        _iterator[382421]
+                      }
+                      label _breakLabel[382426]
+                    }
+                    (382452 call += final "]")
+                    (382460 call(382457 call . f c"write") final)
+                  }
+                  {
+                    if(382600 call _cond_test(382597 call == tmp[382566] fieldReal))
+                    {
+                      (382471 call(382468 call . f c"write") key " = "(382475 call toString value))
+                    }
+                    {
+                      if(382607 call _cond_test(382604 call == tmp[382566] fieldString))
+                      {
+                        (382486 call(382483 call . f c"write") key " = "(382490 call toString value))
+                      }
+                      {
+                        if(382614 call _cond_test(382611 call == tmp[382566] fieldEmpty))
+                        {
+                          (382497 'throw'(382498 'new'(_chpl_manager = _owned[238](?))(382502 call TomlError "Keys must have a value")))
+                        }
+                        {
+                          if(382621 call _cond_test(382618 call == tmp[382566] fieldDate))
+                          {
+                            (382515 call(382512 call . f c"write") key " = "(382519 call toString value))
+                          }
+                          {
+                            if(382628 call _cond_test(382625 call == tmp[382566] fieldTime))
+                            {
+                              (382530 call(382527 call . f c"write") key " = "(382534 call toString value))
+                            }
+                            {
+                              if(382635 call _cond_test(382632 call == tmp[382566] fieldDateTime))
+                              {
+                                (382545 call(382542 call . f c"write") key " = "(382549 call toString value))
+                              }
+                              {
+                                (382555 'throw'(382556 'new'(_chpl_manager = _owned[238](?))(382560 call TomlError "Not yet supported")))
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          (382643 call(382640 call . f c"writeln"))
+        }
+        label _continueLabel[382649]
+        _indexOfInterest[382644]
+        _iterator[382645]
+      }
+      label _breakLabel[382650]
+    }
+    (382680 call(382677 call . f c"writeln"))
+  } function Toml[383866].printValuesJSON[382683](arg _mt[382700]:_MT[201], arg this[382685]:Toml[383866], arg f[382688] :
+  fileWriter, arg v[382693] :
+  (382691 'to borrowed class from unknown' Toml), in arg indent[382697] =
+  0) : _unknown[42] throws "method" "primary method"
+  {
+    { scopeless
+      unknown keys[382704](382712 call(382709 call .(382706 call . v c"A") c"keysToArray"))
+      (382714 'end of statement')
+    }
+    (382716 call sort keys)
+    {
+      unknown _indexOfInterest[383245] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[383246] "expr temp" "temp"
+      (383279 'move' _iterator[383246](382737 call _build_tuple(383255 call _getIterator keys)(383267 call _getIterator(383277 call chpl_direct_range_iter 1(383271 call .(383273 call . v c"A") c"size")))))
+      Defer
+      {
+        {
+          (383307 call _freeIterator _iterator[383246])
+        }
+      }
+      { scopeless type
+        (383284 'move' _indexOfInterest[383245](383281 call iteratorIndex _iterator[383246]))
+      }
+      ForLoop[383247]
+      {
+        (383289 call _check_tuple_var_decl _indexOfInterest[383245] 2)
+        unknown key[382719] "index var" "insert auto destroy"
+        (383296 'move' key[382719](383293 call _indexOfInterest[383245] 0))
+        unknown i[382721] "index var" "insert auto destroy"
+        (383302 'move' i[382721](383299 call _indexOfInterest[383245] 1))
+        {
+          { scopeless
+            unknown value[382740](382741 call postfix!(382747 call(382744 call . v c"A") key))
+            (382750 'end of statement')
+          }
+          {
+            unknown tmp[383145] "expr temp" "maybe param" "maybe type" "temp"
+            (383147 'move' tmp[383145](382752 call . value c"tag"))
+            if(383152 call _cond_test(383149 call == tmp[383145] fieldToml))
+            {
+              { scopeless
+                continue nil[32]
+              }
+            }
+            {
+              if(383158 call _cond_test(383155 call == tmp[383145] fieldBool))
+              {
+                (382772 call(382769 call . f c"writef") "%s\"%s\": {\"type\": \"%s\", \"value\": \"%s\"}"(382776 call * " " indent) key(382784 call . value c"tomlType")(382788 call toString value))
+              }
+              {
+                if(383165 call _cond_test(383162 call == tmp[383145] fieldInt))
+                {
+                  (382799 call(382796 call . f c"writef") "%s\"%s\": {\"type\": \"%s\", \"value\": \"%s\"}"(382801 call * " " indent) key(382807 call . value c"tomlType")(382811 call toString value))
+                }
+                {
+                  if(383172 call _cond_test(383169 call == tmp[383145] fieldArr))
+                  {
+                    (382822 call(382819 call . f c"writef") "%s\"%s\": {\n"(382824 call * " " indent) key)
+                    (382829 call += indent tabSpace)
+                    (382837 call(382834 call . f c"writef") "%s\"%s\": \"type\",\n"(382841 call * " " indent)(382846 call . this c"tomlType"))
+                    (382853 call(382850 call . f c"writef") "%s\"value\": [\n"(382857 call * " " indent))
+                    (382861 call += indent tabSpace)
+                    { scopeless
+                      unknown arrayElements[382866] string[244]
+                      (382869 'end of statement')
+                    }
+                    {
+                      unknown _indexOfInterest[382943] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                      unknown _iterator[382944] "expr temp" "temp"
+                      (382953 'move' _iterator[382944](382951 call _getIterator(382876 call .(382873 call . value c"arr") c"_dom")))
+                      Defer
+                      {
+                        {
+                          (382968 call _freeIterator _iterator[382944])
+                        }
+                      }
+                      { scopeless type
+                        (382958 'move' _indexOfInterest[382943](382955 call iteratorIndex _iterator[382944]))
+                      }
+                      ForLoop[382945]
+                      {
+                        unknown i[382870] "index var" "insert auto destroy"
+                        (382963 'move' i[382870] _indexOfInterest[382943])
+                        {
+                          { scopeless
+                            unknown k[382881] "ref var"(382886 call(382883 call . value c"arr") i)
+                            (382889 'end of statement')
+                          }
+                          (382894 call(382891 call . f c"writef") "%s{\"type\": \"%s\", \"value\": \"%s\"}"(382898 call * " " indent)(382905 call .(382902 call postfix! k) c"tomlType")(382909 call toString(382910 call postfix! k)))
+                          if(382933 call _cond_test(382920 call != i(382930 call .(382927 call .(382924 call . value c"arr") c"_dom") c"last")))
+                          {
+                            (382918 call(382915 call . f c"writef") ",")
+                          }
+                          (382941 call(382938 call . f c"writef") "\n")
+                        }
+                        label _continueLabel[382948]
+                        _indexOfInterest[382943]
+                        _iterator[382944]
+                      }
+                      label _breakLabel[382949]
+                    }
+                    (382975 call -= indent tabSpace)
+                    (382983 call(382980 call . f c"writef") "%s]\n"(382987 call * " " indent))
+                    (382991 call -= indent tabSpace)
+                    (382999 call(382996 call . f c"writef") "%s}\n"(383001 call * " " indent))
+                  }
+                  {
+                    if(383179 call _cond_test(383176 call == tmp[383145] fieldReal))
+                    {
+                      (383014 call(383011 call . f c"writef") "%s\"%s\": {\"type\": \"%s\", \"value\": \"%s\"}"(383016 call * " " indent) key(383022 call . value c"tomlType")(383026 call toString value))
+                    }
+                    {
+                      if(383186 call _cond_test(383183 call == tmp[383145] fieldString))
+                      {
+                        (383037 call(383034 call . f c"writef") "%s\"%s\": {\"type\": \"%s\", \"value\": \"%s\"}"(383039 call * " " indent) key(383045 call . value c"tomlType")(383049 call toString value))
+                      }
+                      {
+                        if(383193 call _cond_test(383190 call == tmp[383145] fieldEmpty))
+                        {
+                          (383056 'throw'(383057 'new'(_chpl_manager = _owned[238](?))(383061 call TomlError "Keys must have a value")))
+                        }
+                        {
+                          if(383200 call _cond_test(383197 call == tmp[383145] fieldDate))
+                          {
+                            (383072 call(383069 call . f c"writef") "%s\"%s\": {\"type\": \"%s\", \"value\": \"%s\"}"(383074 call * " " indent) key(383080 call . value c"tomlType")(383084 call toString value))
+                          }
+                          {
+                            if(383207 call _cond_test(383204 call == tmp[383145] fieldTime))
+                            {
+                              (383095 call(383092 call . f c"writef") "%s\"%s\": {\"type\": \"%s\", \"value\": \"%s\"}"(383097 call * " " indent) key(383103 call . value c"tomlType")(383107 call toString value))
+                            }
+                            {
+                              if(383214 call _cond_test(383211 call == tmp[383145] fieldDateTime))
+                              {
+                                (383118 call(383115 call . f c"writef") "%s\"%s\": {\"type\": \"%s\", \"value\": \"%s\"}"(383120 call * " " indent) key(383126 call . value c"tomlType")(383130 call toString value))
+                              }
+                              {
+                                (383136 'throw'(383137 'new'(_chpl_manager = _owned[238](?))(383141 call TomlError "Not yet supported")))
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          if(383235 call _cond_test(383225 call != i(383232 call .(383229 call . v c"A") c"size")))
+          {
+            (383223 call(383220 call . f c"writef") ",")
+          }
+          (383243 call(383240 call . f c"writef") "\n")
+        }
+        label _continueLabel[383250]
+        _indexOfInterest[383245]
+        _iterator[383246]
+      }
+      label _breakLabel[383251]
+    }
+  } function Toml[383866].toString[383316](arg _mt[383325]:_MT[201], arg this[383318]:Toml[383866], arg val[383322] :
+  (383320 'to borrowed class from unknown' Toml)) : _unknown[42] throws "method" "primary method"
+  {
+    {
+      unknown tmp[383580] "expr temp" "maybe param" "maybe type" "temp"
+      (383582 'move' tmp[383580](383330 call . val c"tag"))
+      if(383587 call _cond_test(383584 call == tmp[383580] fieldBool))
+      {
+        { scopeless
+          (383337 return(383338 call :(383341 call . val c"boo") string[244]))
+        }
+      }
+      {
+        if(383593 call _cond_test(383590 call == tmp[383580] fieldInt))
+        {
+          { scopeless
+            (383351 return(383352 call :(383355 call . val c"i") string[244]))
+          }
+        }
+        {
+          if(383600 call _cond_test(383597 call == tmp[383580] fieldArr))
+          {
+            { scopeless
+              unknown final[383367] string[244]
+              (383370 'end of statement')
+            }
+            (383371 call += final "[")
+            {
+              unknown _indexOfInterest[383440] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[383441] "expr temp" "temp"
+              (383450 'move' _iterator[383441](383448 call _getIterator(383378 call . val c"arr")))
+              Defer
+              {
+                {
+                  (383465 call _freeIterator _iterator[383441])
+                }
+              }
+              { scopeless type
+                (383455 'move' _indexOfInterest[383440](383452 call iteratorIndex _iterator[383441]))
+              }
+              ForLoop[383442]
+              {
+                unknown k[383375] "index var" "insert auto destroy"
+                (383460 'move' k[383375] _indexOfInterest[383440])
+                {
+                  if(383436 call _cond_test(383403 call ||(383405 call ==(383414 call .(383411 call .(383408 call . val c"arr") c"_dom") c"size") 1)(383418 call == k(383425 call(383422 call . val c"arr")(383433 call .(383430 call .(383427 call . val c"arr") c"_dom") c"last")))))
+                  {
+                    (383383 call += final(383387 call toString(383388 call postfix! k)))
+                  }
+                  {
+                    (383392 call += final(383395 call +(383398 call toString(383399 call postfix! k)) ", "))
+                  }
+                }
+                label _continueLabel[383445]
+                _indexOfInterest[383440]
+                _iterator[383441]
+              }
+              label _breakLabel[383446]
+            }
+            (383472 call += final "]")
+            (383476 return final)
+          }
+          {
+            if(383607 call _cond_test(383604 call == tmp[383580] fieldReal))
+            {
+              { scopeless
+                (383482 return(383483 call :(383486 call . val c"re") string[244]))
+              }
+            }
+            {
+              if(383614 call _cond_test(383611 call == tmp[383580] fieldString))
+              {
+                { scopeless
+                  (383496 return(383497 call +(383499 call + "\""(383503 call . val c"s")) "\""))
+                }
+              }
+              {
+                if(383621 call _cond_test(383618 call == tmp[383580] fieldEmpty))
+                {
+                  { scopeless
+                    (383513 return "")
+                  }
+                }
+                {
+                  if(383628 call _cond_test(383625 call == tmp[383580] fieldDate))
+                  {
+                    { scopeless
+                      (383521 return(383522 call :(383525 call . val c"ld") string[244]))
+                    }
+                  }
+                  {
+                    if(383635 call _cond_test(383632 call == tmp[383580] fieldTime))
+                    {
+                      { scopeless
+                        (383535 return(383536 call :(383539 call . val c"ti") string[244]))
+                      }
+                    }
+                    {
+                      if(383642 call _cond_test(383639 call == tmp[383580] fieldDateTime))
+                      {
+                        { scopeless
+                          (383549 return(383550 call :(383553 call . val c"dt") string[244]))
+                        }
+                      }
+                      {
+                        (383563 'throw'(383564 'new'(_chpl_manager = _owned[238](?))(383568 call TomlError(383569 call + "Error in printing "(383575 call . val c"s")))))
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  { scopeless type
+    string[244]
+  } function Toml[383866].toString[383649](arg _mt[383653]:_MT[201], arg this[383651]:Toml[383866]) : _unknown[42] "method" "primary method"
+  {
+    (383657 return(383659 call toString this))
+  }
+  { scopeless type
+    string[244]
+  } function Toml[383866].tomlType[383664](arg _mt[383668]:_MT[201], arg this[383666]:Toml[383866]) : _unknown[42] throws "method" "primary method" "no parens"
+  {
+    {
+      unknown tmp[383789] "expr temp" "maybe param" "maybe type" "temp"
+      (383791 'move' tmp[383789](383673 call . this c"tag"))
+      if(383796 call _cond_test(383793 call == tmp[383789] fieldBool))
+      {
+        { scopeless
+          (383680 return "bool")
+        }
+      }
+      {
+        if(383802 call _cond_test(383799 call == tmp[383789] fieldInt))
+        {
+          { scopeless
+            (383688 return "integer")
+          }
+        }
+        {
+          if(383809 call _cond_test(383806 call == tmp[383789] fieldArr))
+          {
+            { scopeless
+              (383698 return "array")
+            }
+          }
+          {
+            if(383816 call _cond_test(383813 call == tmp[383789] fieldReal))
+            {
+              { scopeless
+                (383708 return "float")
+              }
+            }
+            {
+              if(383823 call _cond_test(383820 call == tmp[383789] fieldString))
+              {
+                { scopeless
+                  (383718 return "string")
+                }
+              }
+              {
+                if(383830 call _cond_test(383827 call == tmp[383789] fieldEmpty))
+                {
+                  { scopeless
+                    (383728 return "empty")
+                  }
+                }
+                {
+                  if(383837 call _cond_test(383834 call == tmp[383789] fieldDate))
+                  {
+                    { scopeless
+                      (383738 return "date")
+                    }
+                  }
+                  {
+                    if(383844 call _cond_test(383841 call == tmp[383789] fieldTime))
+                    {
+                      { scopeless
+                        (383748 return "time")
+                      }
+                    }
+                    {
+                      if(383851 call _cond_test(383848 call == tmp[383789] fieldDateTime))
+                      {
+                        { scopeless
+                          (383758 return "datetime")
+                        }
+                      }
+                      {
+                        if(383858 call _cond_test(383855 call == tmp[383789] fieldToml))
+                        {
+                          { scopeless
+                            (383768 return "toml")
+                          }
+                        }
+                        {
+                          (383778 'throw'(383779 'new'(_chpl_manager = _owned[238](?))(383783 call TomlError "Unknown type")))
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  { scopeless type
+    string[244]
+  } writeSerializable
+}

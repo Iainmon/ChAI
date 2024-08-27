@@ -1,0 +1,167 @@
+AST dump for Communication after pass buildDefaultFunctions.
+Module use list: ChapelStandard CTypes 
+
+{
+  function chpl__init_Communication[468345]() : void[4] "insert line file info" "module init"
+  {
+    { scopeless type extern
+      unknown call_tmp[750997] "expr temp" "maybe param" "maybe type" "temp"
+      (751000 'move' call_tmp[750997](29961 call int(64)[10] 32))
+      (643552 'default init var' chpl_numNodes[29959] call_tmp[750997])
+    }
+    (29964 'end of statement')
+    (595290 return _void[46])
+  }
+  const chpl_numNodes[29959] "dead at end of block" "const" "extern" "insert auto destroy" "private"
+  function get[29965](arg dest[29970] :
+  (29968 call c_ptr[46891](?) void[4]), arg src[29976] :
+  (29974 call c_ptr[46891](?) void[4]), arg srcLocID[29980]:int(64)[10], arg numBytes[29984]:integral[159](?)) : _unknown[42] "inline" "no return value for void"
+  {
+    unknown call_tmp[751002] "expr temp" "maybe param" "maybe type" "temp"
+    (751005 'move' call_tmp[751002](30032 call _cond_test 1))
+    if call_tmp[751002]
+    {
+      unknown tmp[477669] "maybe param" "temp"
+      (477680 'move' tmp[477669](30001 call < srcLocID[29980] 0))
+      unknown call_tmp[751007] "expr temp" "maybe param" "maybe type" "temp"
+      (751010 'move' call_tmp[751007](477682 call _cond_invalid tmp[477669]))
+      if call_tmp[751007]
+      {
+        (477685 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[665709] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[665710] "maybe param" "temp"
+      unknown call_tmp[751012] "expr temp" "maybe param" "maybe type" "temp"
+      (751015 'move' call_tmp[751012](477670 call isTrue tmp[477669]))
+      (665715 'move' tmp[665710](665713 call _cond_test call_tmp[751012]))
+      if tmp[665710]
+      {
+        (665720 'move' tmp[665709](665717 '_paramFoldLogical' tmp[665710] 1))
+      }
+      {
+        unknown tmp[665722] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[751017] "expr temp" "maybe param" "maybe type" "temp"
+        (751020 'move' call_tmp[751017](30005 call >= srcLocID[29980] chpl_numNodes[29959]))
+        (665724 'move' tmp[665722](477674 call isTrue call_tmp[751017]))
+        (665729 'move' tmp[665709](665726 '_paramFoldLogical' tmp[665710] tmp[665722]))
+      }
+      unknown call_tmp[751022] "expr temp" "maybe param" "maybe type" "temp"
+      (751025 'move' call_tmp[751022](30009 call _cond_test tmp[665709]))
+      if call_tmp[751022]
+      {
+        (29991 call halt "The source locale ID (" srcLocID[29980] ") for Communication.get is out of bounds.")
+      }
+      unknown call_tmp[751027] "expr temp" "maybe param" "maybe type" "temp"
+      (751030 'move' call_tmp[751027](30023 call < numBytes[29984] 0))
+      unknown call_tmp[751032] "expr temp" "maybe param" "maybe type" "temp"
+      (751035 'move' call_tmp[751032](30027 call _cond_test call_tmp[751027]))
+      if call_tmp[751032]
+      {
+        (30015 call halt "Number of bytes (" numBytes[29984] ") for Communication.get is negative.")
+      }
+    }
+    unknown destRef[30037] "dead at end of block" "ref var"
+    (643558 'init ref decl' destRef[30037])
+    unknown call_tmp[751037] "expr temp" "maybe param" "maybe type" "temp"
+    (751040 'move' call_tmp[751037](30044 call uint(64)[86] 8))
+    unknown call_tmp[751042] "expr temp" "maybe param" "maybe type" "temp"
+    (751045 'move' call_tmp[751042](30042 call c_ptr[46891](?) call_tmp[751037]))
+    unknown call_tmp[751047] "expr temp" "maybe param" "maybe type" "temp"
+    (751050 'move' call_tmp[751047](30038 call : dest[29970] call_tmp[751042]))
+    unknown call_tmp[751054] "expr temp" "maybe param" "maybe type" "temp"
+    (751057 'move' call_tmp[751054](30051 call(30048 call (partial) deref _mt[203] call_tmp[751047])))
+    (643556 'move' destRef[30037](643555 'addr of' call_tmp[751054]))
+    (30053 'end of statement')
+    const srcRef[30055] "dead at end of block" "const" "ref var"
+    (643563 'init ref decl' srcRef[30055])
+    unknown call_tmp[751059] "expr temp" "maybe param" "maybe type" "temp"
+    (751062 'move' call_tmp[751059](30062 call uint(64)[86] 8))
+    unknown call_tmp[751064] "expr temp" "maybe param" "maybe type" "temp"
+    (751067 'move' call_tmp[751064](30060 call c_ptr[46891](?) call_tmp[751059]))
+    unknown call_tmp[751069] "expr temp" "maybe param" "maybe type" "temp"
+    (751072 'move' call_tmp[751069](30056 call : src[29976] call_tmp[751064]))
+    unknown call_tmp[751076] "expr temp" "maybe param" "maybe type" "temp"
+    (751079 'move' call_tmp[751076](30067 call(30064 call (partial) deref _mt[203] call_tmp[751069])))
+    (643561 'move' srcRef[30055](643560 'addr of' call_tmp[751076]))
+    (30069 'end of statement')
+    (30070 'chpl_comm_get' destRef[30037] srcLocID[29980] srcRef[30055] numBytes[29984])
+    (548160 'end of statement' destRef[30037] srcRef[30055])
+    (595286 return _void[46])
+  }
+  function put[30077](arg dest[30082] :
+  (30080 call c_ptr[46891](?) void[4]), arg src[30088] :
+  (30086 call c_ptr[46891](?) void[4]), arg destLocID[30092]:int(64)[10], arg numBytes[30096]:integral[159](?)) : _unknown[42] "inline" "no return value for void"
+  {
+    unknown call_tmp[751081] "expr temp" "maybe param" "maybe type" "temp"
+    (751084 'move' call_tmp[751081](30142 call _cond_test 1))
+    if call_tmp[751081]
+    {
+      unknown tmp[477690] "maybe param" "temp"
+      (477701 'move' tmp[477690](30113 call < destLocID[30092] 0))
+      unknown call_tmp[751086] "expr temp" "maybe param" "maybe type" "temp"
+      (751089 'move' call_tmp[751086](477703 call _cond_invalid tmp[477690]))
+      if call_tmp[751086]
+      {
+        (477706 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[665736] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[665737] "maybe param" "temp"
+      unknown call_tmp[751091] "expr temp" "maybe param" "maybe type" "temp"
+      (751094 'move' call_tmp[751091](477691 call isTrue tmp[477690]))
+      (665742 'move' tmp[665737](665740 call _cond_test call_tmp[751091]))
+      if tmp[665737]
+      {
+        (665747 'move' tmp[665736](665744 '_paramFoldLogical' tmp[665737] 1))
+      }
+      {
+        unknown tmp[665749] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[751096] "expr temp" "maybe param" "maybe type" "temp"
+        (751099 'move' call_tmp[751096](30117 call >= destLocID[30092] chpl_numNodes[29959]))
+        (665751 'move' tmp[665749](477695 call isTrue call_tmp[751096]))
+        (665756 'move' tmp[665736](665753 '_paramFoldLogical' tmp[665737] tmp[665749]))
+      }
+      unknown call_tmp[751101] "expr temp" "maybe param" "maybe type" "temp"
+      (751104 'move' call_tmp[751101](30121 call _cond_test tmp[665736]))
+      if call_tmp[751101]
+      {
+        (30103 call halt "The destination locale ID (" destLocID[30092] ") for Communication.put is out of bounds.")
+      }
+      unknown call_tmp[751106] "expr temp" "maybe param" "maybe type" "temp"
+      (751109 'move' call_tmp[751106](30133 call < numBytes[30096] 0))
+      unknown call_tmp[751111] "expr temp" "maybe param" "maybe type" "temp"
+      (751114 'move' call_tmp[751111](30137 call _cond_test call_tmp[751106]))
+      if call_tmp[751111]
+      {
+        (30127 call halt "Number of bytes (" numBytes[30096] ") for Communication.put is negative.")
+      }
+    }
+    const srcRef[30147] "dead at end of block" "const" "ref var"
+    (643568 'init ref decl' srcRef[30147])
+    unknown call_tmp[751116] "expr temp" "maybe param" "maybe type" "temp"
+    (751119 'move' call_tmp[751116](30154 call uint(64)[86] 8))
+    unknown call_tmp[751121] "expr temp" "maybe param" "maybe type" "temp"
+    (751124 'move' call_tmp[751121](30152 call c_ptr[46891](?) call_tmp[751116]))
+    unknown call_tmp[751126] "expr temp" "maybe param" "maybe type" "temp"
+    (751129 'move' call_tmp[751126](30148 call : src[30088] call_tmp[751121]))
+    unknown call_tmp[751133] "expr temp" "maybe param" "maybe type" "temp"
+    (751136 'move' call_tmp[751133](30159 call(30156 call (partial) deref _mt[203] call_tmp[751126])))
+    (643566 'move' srcRef[30147](643565 'addr of' call_tmp[751133]))
+    (30161 'end of statement')
+    unknown destRef[30163] "dead at end of block" "ref var"
+    (643573 'init ref decl' destRef[30163])
+    unknown call_tmp[751138] "expr temp" "maybe param" "maybe type" "temp"
+    (751141 'move' call_tmp[751138](30170 call uint(64)[86] 8))
+    unknown call_tmp[751143] "expr temp" "maybe param" "maybe type" "temp"
+    (751146 'move' call_tmp[751143](30168 call c_ptr[46891](?) call_tmp[751138]))
+    unknown call_tmp[751148] "expr temp" "maybe param" "maybe type" "temp"
+    (751151 'move' call_tmp[751148](30164 call : dest[30082] call_tmp[751143]))
+    unknown call_tmp[751155] "expr temp" "maybe param" "maybe type" "temp"
+    (751158 'move' call_tmp[751155](30175 call(30172 call (partial) deref _mt[203] call_tmp[751148])))
+    (643571 'move' destRef[30163](643570 'addr of' call_tmp[751155]))
+    (30177 'end of statement')
+    (30178 'chpl_comm_put' srcRef[30147] destLocID[30092] destRef[30163] numBytes[30096])
+    (548166 'end of statement' srcRef[30147] destRef[30163])
+    (595288 return _void[46])
+  }
+  (395997 'used modules list'(387006 'use' ChapelStandard[315387])(29956 'use' CTypes[51217]))
+}

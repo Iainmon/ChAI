@@ -1,0 +1,56 @@
+AST dump for AtomicsCommon after pass cleanup.
+Module use list: 
+
+{
+  (91842 'use' ChapelStandard)
+  function atomic_refcnt[92033].init[91852](arg _mt[91856]:_MT[201], arg this[91854]:atomic_refcnt[92033]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+  }
+  function atomic_refcnt[92033].init=[91861](arg _mt[91869]:_MT[201], arg this[91863]:atomic_refcnt[92033], arg other[91866] :
+  atomic_refcnt) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (91876 call(91873 call . this c"chpl__initThisType"))
+    (91886 call(91883 call .(91880 call . this c"_cnt") c"init_helper")(91894 call(91891 call .(91888 call . other c"_cnt") c"read")))
+  }
+  function atomic_refcnt[92033].inc[91897](arg _mt[91905]:_MT[201], arg this[91899]:atomic_refcnt[92033], arg cnt[91902] =
+  1) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    if(91928 call _cond_test CHPL_CACHE_REMOTE)
+    {
+      (91912 call(91909 call . _cnt c"add") cnt(order =(91915 call . memoryOrder c"relaxed")))
+    }
+    {
+      (91924 call(91921 call . _cnt c"add") cnt)
+    }
+  }
+  function atomic_refcnt[92033].dec[91936](arg _mt[91940]:_MT[201], arg this[91938]:atomic_refcnt[92033]) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown got[91947](91949 call int[10] 64)
+    (91952 'end of statement')
+    if(92006 call _cond_test CHPL_CACHE_REMOTE)
+    {
+      (91954 call = got(91961 call(91958 call . _cnt c"fetchSub") 1(order =(91964 call . memoryOrder c"release"))))
+      if(91981 call _cond_test(91977 call == got 1))
+      {
+        (91970 call atomicFence(91972 call . memoryOrder c"acquire"))
+        (91975 return 0)
+      }
+      (91985 return(91986 call - got 1))
+    }
+    {
+      (91991 call = got(91998 call(91995 call . _cnt c"fetchSub") 1))
+      (92000 return(92001 call - got 1))
+    }
+  }
+  { scopeless type
+    (91943 call int[10] 64)
+  }
+  function atomic_refcnt[92033].read[92013](arg _mt[92017]:_MT[201], arg this[92015]:atomic_refcnt[92033]) : _unknown[42] "inline" "method" "primary method"
+  {
+    (92023 return(92028 call(92025 call . _cnt c"read")))
+  }
+  { scopeless type
+    (92020 call int[10] 64)
+  }
+  type atomic_refcnt[92033] unknown _cnt[91846](91848 call chpl__processorAtomicType int[10])
+}

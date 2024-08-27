@@ -1,0 +1,644 @@
+AST dump for CommDiagnostics after pass normalize.
+Module use list: ChapelStandard Reflection Math 
+
+{
+  function chpl__init_CommDiagnostics[468369]() : void[4] "insert line file info" "module init"
+  {
+    (644372 'init var' commDiagsStacktrace[77911] 0)
+    (77914 'end of statement')
+    (644374 'init var' commDiagsPrintUnstable[77916] 0)
+    (77919 'end of statement')
+    (644385 'move' commDiagnostics[78236] chpl_commDiagnostics[78233])
+    (1000968 'resolution point' |writeSerializable[475022])
+    (1000970 'end of statement')
+    (644417 'init var' printInitVerboseComm[78985] 0)
+    (78988 'end of statement')
+    (644419 'init var' printInitCommCounts[78990] 0)
+    (78993 'end of statement')
+    (598669 return _void[46])
+  }
+  unknown commDiagsStacktrace[77911] "config" "param"
+  unknown commDiagsPrintUnstable[77916] "config" "param"
+  function chpl_commDiagnostics[78233].serialize[78068](arg _mt[78076]:_MT[201], arg this[78070]:chpl_commDiagnostics[78233], arg writer[78072]:_any[141](?), ref arg serializer[78074]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown first[78083] "dead at end of block" "insert auto destroy"
+    (644376 'init var' first[78083] 1)
+    (78086 'end of statement')
+    (78091 call(78088 call (partial) write _mt[203] writer[78072]) "(")
+    (549903 'end of statement')
+    {
+      unknown i[78093] "dead at end of block" "index var" "insert auto destroy"
+      (644378 'init var' i[78093] 0)
+      (549904 'end of statement')
+      unknown tmp[78172] "maybe param" "temp"
+      unknown call_tmp[766447] "expr temp" "maybe param" "maybe type" "temp"
+      (766450 'move' call_tmp[766447](78097 call getNumFields chpl_commDiagnostics[78233]))
+      unknown call_tmp[766452] "expr temp" "maybe param" "maybe type" "temp"
+      (766455 'move' call_tmp[766452](78099 call chpl__nudgeHighBound call_tmp[766447]))
+      (78184 'move' tmp[78172](78182 call chpl_compute_low_param_loop_bound 0 call_tmp[766452]))
+      unknown tmp[78173] "maybe param" "temp"
+      unknown call_tmp[766457] "expr temp" "maybe param" "maybe type" "temp"
+      (766460 'move' call_tmp[766457](78191 call getNumFields chpl_commDiagnostics[78233]))
+      unknown call_tmp[766462] "expr temp" "maybe param" "maybe type" "temp"
+      (766465 'move' call_tmp[766462](78189 call chpl__nudgeHighBound call_tmp[766457]))
+      (78195 'move' tmp[78173](78193 call chpl_compute_high_param_loop_bound 0 call_tmp[766462]))
+      unknown tmp[78174] "maybe param" "temp"
+      (78198 'move' tmp[78174] 1)
+      ParamForLoop[78200]
+      { i[78093] tmp[78172] tmp[78173] tmp[78174]
+        {
+          unknown call_tmp[766467] "maybe param" "maybe type" "temp"
+          (766470 'move' call_tmp[766467](78107 call getFieldName chpl_commDiagnostics[78233] i[78093]))
+          unknown name[78105] "dead at end of block" "param"
+          (644380 'init var' name[78105] call_tmp[766467])
+          (78111 'end of statement')
+          unknown call_tmp[766472] "maybe param" "maybe type" "temp"
+          (766475 'move' call_tmp[766472](78115 call getField this[78070] i[78093]))
+          const val[78113] "dead at end of block" "const" "insert auto destroy"
+          (644382 'init var' val[78113] call_tmp[766472])
+          (78119 'end of statement' i[78093])
+          unknown call_tmp[766477] "expr temp" "maybe param" "maybe type" "temp"
+          (766480 'move' call_tmp[766477](78164 call != val[78113] 0))
+          unknown call_tmp[766482] "expr temp" "maybe param" "maybe type" "temp"
+          (766485 'move' call_tmp[766482](78168 call _cond_test call_tmp[766477]))
+          if call_tmp[766482]
+          {
+            unknown tmp[481596] "maybe param" "temp"
+            (481607 'move' tmp[481596] commDiagsPrintUnstable[77916])
+            unknown call_tmp[766487] "expr temp" "maybe param" "maybe type" "temp"
+            (766490 'move' call_tmp[766487](481609 call _cond_invalid tmp[481596]))
+            if call_tmp[766487]
+            {
+              (481612 call compilerError "cannot promote short-circuiting || operator")
+            }
+            unknown tmp[668594] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+            unknown tmp[668595] "maybe param" "temp"
+            unknown call_tmp[766492] "expr temp" "maybe param" "maybe type" "temp"
+            (766495 'move' call_tmp[766492](481597 call isTrue tmp[481596]))
+            (668600 'move' tmp[668595](668598 call _cond_test call_tmp[766492]))
+            if tmp[668595]
+            {
+              (668605 'move' tmp[668594](668602 '_paramFoldLogical' tmp[668595] 1))
+            }
+            {
+              unknown tmp[668607] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+              unknown call_tmp[766497] "expr temp" "maybe param" "maybe type" "temp"
+              (766500 'move' call_tmp[766497](78154 call != name[78105] "amo"))
+              (668609 'move' tmp[668607](481601 call isTrue call_tmp[766497]))
+              (668614 'move' tmp[668594](668611 '_paramFoldLogical' tmp[668595] tmp[668607]))
+            }
+            unknown call_tmp[766502] "expr temp" "maybe param" "maybe type" "temp"
+            (766505 'move' call_tmp[766502](78160 call _cond_test tmp[668594]))
+            if call_tmp[766502]
+            {
+              unknown call_tmp[766507] "expr temp" "maybe param" "maybe type" "temp"
+              (766510 'move' call_tmp[766507](78135 call _cond_test first[78083]))
+              if call_tmp[766507]
+              {
+                (78122 call = first[78083] 0)
+                (549907 'end of statement' first[78083])
+              }
+              {
+                (78131 call(78128 call (partial) write _mt[203] writer[78072]) ", ")
+              }
+              (78145 call(78142 call (partial) write _mt[203] writer[78072]) name[78105] " = " val[78113])
+              (549910 'end of statement' val[78113])
+            }
+          }
+        }
+      }
+      label _unused_continueLabel[78176]
+      label _breakLabel[78175]
+    }
+    unknown call_tmp[766516] "expr temp" "maybe param" "maybe type" "temp"
+    (766519 'move' call_tmp[766516](78219 call _cond_test first[78083]))
+    if call_tmp[766516]
+    {
+      (78213 call(78210 call (partial) write _mt[203] writer[78072]) "<no communication>")
+    }
+    (78228 call(78225 call (partial) write _mt[203] writer[78072]) ")")
+    (598619 return _void[46])
+    (396056 'used modules list'(78080 'use' Reflection[1804]))
+  }
+  type chpl_commDiagnostics[78233] val get[77922]:uint(64)[86](77924 call uint(64)[86] 64) val get_nb[77929]:uint(64)[86](77931 call uint(64)[86] 64) val put[77936]:uint(64)[86](77938 call uint(64)[86] 64) val put_nb[77943]:uint(64)[86](77945 call uint(64)[86] 64) val test_nb[77950]:uint(64)[86](77952 call uint(64)[86] 64) val wait_nb[77957]:uint(64)[86](77959 call uint(64)[86] 64) val try_nb[77964]:uint(64)[86](77966 call uint(64)[86] 64) val amo[77971]:uint(64)[86](77973 call uint(64)[86] 64) val execute_on[77978]:uint(64)[86](77980 call uint(64)[86] 64) val execute_on_fast[77985]:uint(64)[86](77987 call uint(64)[86] 64) val execute_on_nb[77992]:uint(64)[86](77994 call uint(64)[86] 64) val cache_get_hits[77999]:uint(64)[86](78001 call uint(64)[86] 64) val cache_get_misses[78006]:uint(64)[86](78008 call uint(64)[86] 64) val cache_put_hits[78013]:uint(64)[86](78015 call uint(64)[86] 64) val cache_put_misses[78020]:uint(64)[86](78022 call uint(64)[86] 64) val cache_num_prefetches[78027]:uint(64)[86](78029 call uint(64)[86] 64) val cache_num_page_readaheads[78034]:uint(64)[86](78036 call uint(64)[86] 64) val cache_prefetch_unused[78041]:uint(64)[86](78043 call uint(64)[86] 64) val cache_prefetch_waited[78048]:uint(64)[86](78050 call uint(64)[86] 64) val cache_readahead_unused[78055]:uint(64)[86](78057 call uint(64)[86] 64) val cache_readahead_waited[78062]:uint(64)[86](78064 call uint(64)[86] 64)
+  unknown commDiagnostics[78236] "dead at end of block" "insert auto destroy" "type variable"
+  function |writeSerializable[475022]() : _unknown[42] "ImplementsStmt wrapper"
+  { writeSerializable[310070] commDiagnostics[78236]
+    {
+    }
+    (598623 return _void[46])
+  }
+  function chpl_comm_startVerbose[78246](arg stacktrace[78249]:bool[19], arg print_unstable[78253]:bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_comm_stopVerbose[78258]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_comm_startVerboseHere[78262](arg stacktrace[78265]:bool[19], arg print_unstable[78269]:bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_comm_stopVerboseHere[78274]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_comm_startDiagnostics[78278](arg print_unstable[78281]:bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_comm_stopDiagnostics[78286]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_comm_startDiagnosticsHere[78290](arg print_unstable[78293]:bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_comm_stopDiagnosticsHere[78298]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_comm_resetDiagnosticsHere[78302]() : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_comm_getDiagnosticsHere[78306](ref arg cd[78309] :
+  commDiagnostics[78236]) : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function startVerboseComm[78314]() : _unknown[42] "no return value for void"
+  {
+    (78318 call chpl_comm_startVerbose commDiagsStacktrace[77911] commDiagsPrintUnstable[77916])
+    (598625 return _void[46])
+  }
+  function stopVerboseComm[78323]() : _unknown[42] "no return value for void"
+  {
+    (78327 call chpl_comm_stopVerbose)
+    (598627 return _void[46])
+  }
+  function startVerboseCommHere[78330]() : _unknown[42] "no return value for void"
+  {
+    (78334 call chpl_comm_startVerboseHere commDiagsStacktrace[77911] commDiagsPrintUnstable[77916])
+    (598629 return _void[46])
+  }
+  function stopVerboseCommHere[78339]() : _unknown[42] "no return value for void"
+  {
+    (78343 call chpl_comm_stopVerboseHere)
+    (598631 return _void[46])
+  }
+  function startCommDiagnostics[78346]() : _unknown[42] "no return value for void"
+  {
+    (78350 call chpl_comm_startDiagnostics commDiagsPrintUnstable[77916])
+    (598633 return _void[46])
+  }
+  function stopCommDiagnostics[78354]() : _unknown[42] "no return value for void"
+  {
+    (78358 call chpl_comm_stopDiagnostics)
+    (598635 return _void[46])
+  }
+  function startCommDiagnosticsHere[78361]() : _unknown[42] "no return value for void"
+  {
+    (78365 call chpl_comm_startDiagnosticsHere commDiagsPrintUnstable[77916])
+    (598637 return _void[46])
+  }
+  function stopCommDiagnosticsHere[78369]() : _unknown[42] "no return value for void"
+  {
+    (78373 call chpl_comm_stopDiagnosticsHere)
+    (598639 return _void[46])
+  }
+  function resetCommDiagnostics[78376]() : _unknown[42] "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[78397] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[78398] "expr temp" "temp"
+      (78407 'move' _iterator[78398](78405 call _getIterator Locales[309572]))
+      Defer
+      {
+        {
+          (78422 call _freeIterator _iterator[78398])
+        }
+      }
+      { scopeless type
+        (78412 'move' _indexOfInterest[78397](78409 call iteratorIndex _iterator[78398]))
+      }
+      ForLoop[78399]
+      {
+        unknown loc[78379] "index var" "insert auto destroy"
+        (549924 'end of statement')
+        (78417 'move' loc[78379] _indexOfInterest[78397])
+        (549925 'end of statement' loc[78379])
+        {
+          const tmp[78389] "const" "temp"
+          unknown call_tmp[766525] "expr temp" "maybe param" "maybe type" "temp"
+          (766528 'move' call_tmp[766525](78386 '_wide_get_locale' loc[78379]))
+          (78390 'move' tmp[78389](78387 'deref' call_tmp[766525]))
+          (78384 call resetCommDiagnosticsHere)
+          (78393 'elided on block' 0 tmp[78389])
+        }
+        label _continueLabel[78402]
+        _indexOfInterest[78397]
+        _iterator[78398]
+      }
+      label _breakLabel[78403]
+    }
+    (598641 return _void[46])
+  }
+  function resetCommDiagnosticsHere[78431]() : _unknown[42] "inline" "no return value for void"
+  {
+    (78435 call chpl_comm_resetDiagnosticsHere)
+    (598643 return _void[46])
+  }
+  function getCommDiagnostics[78438]() : _unknown[42]
+  {
+    unknown ret[598647] "RVV" "temp"
+    unknown D[78442] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[766530] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (766533 'move' call_tmp[766530](78444 call chpl__ensureDomainExpr LocaleSpace[309591]))
+    unknown call_tmp[766535] "expr temp" "maybe param" "maybe type" "temp"
+    (766538 'move' call_tmp[766535](78447 call chpl__buildArrayRuntimeType call_tmp[766530] commDiagnostics[78236]))
+    (644387 'default init var' D[78442] call_tmp[766535])
+    (78450 'end of statement')
+    {
+      unknown _indexOfInterest[78477] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[78478] "expr temp" "temp"
+      (78487 'move' _iterator[78478](78485 call _getIterator Locales[309572]))
+      Defer
+      {
+        {
+          (78502 call _freeIterator _iterator[78478])
+        }
+      }
+      { scopeless type
+        (78492 'move' _indexOfInterest[78477](78489 call iteratorIndex _iterator[78478]))
+      }
+      ForLoop[78479]
+      {
+        unknown loc[78451] "index var" "insert auto destroy"
+        (549930 'end of statement')
+        (78497 'move' loc[78451] _indexOfInterest[78477])
+        (549931 'end of statement' loc[78451])
+        {
+          const tmp[78469] "const" "temp"
+          unknown call_tmp[766540] "expr temp" "maybe param" "maybe type" "temp"
+          (766543 'move' call_tmp[766540](78466 '_wide_get_locale' loc[78451]))
+          (78470 'move' tmp[78469](78467 'deref' call_tmp[766540]))
+          {
+            unknown call_tmp[766547] "expr temp" "maybe param" "maybe type" "temp"
+            (766550 'move' call_tmp[766547](78461 call id _mt[203] loc[78451]))
+            unknown call_tmp[766552] "expr temp" "maybe param" "maybe type" "temp"
+            (766555 'move' call_tmp[766552](78459 call D[78442] call_tmp[766547]))
+            unknown call_tmp[766557] "expr temp" "maybe param" "maybe type" "temp"
+            (766560 'move' call_tmp[766557](78465 call getCommDiagnosticsHere))
+            (78456 call = call_tmp[766552] call_tmp[766557])
+            (549933 'end of statement' D[78442] loc[78451])
+          }
+          (78473 'elided on block' 0 tmp[78469])
+        }
+        label _continueLabel[78482]
+        _indexOfInterest[78477]
+        _iterator[78478]
+      }
+      label _breakLabel[78483]
+    }
+    (598652 'move' ret[598647](598651 'deref' D[78442]))
+    gotoReturn _end_getCommDiagnostics[598645] _end_getCommDiagnostics[598645]
+    (549936 'end of statement' D[78442])
+    label _end_getCommDiagnostics[598645]
+    (598649 return ret[598647])
+  }
+  function getCommDiagnosticsHere[78513]() : _unknown[42]
+  {
+    unknown ret[598658] "RVV" "temp"
+    unknown cd[78517] "dead at end of block" "insert auto destroy"
+    (644389 'default init var' cd[78517] commDiagnostics[78236])
+    (78520 'end of statement')
+    (78522 call chpl_comm_getDiagnosticsHere cd[78517])
+    (549938 'end of statement' cd[78517])
+    (598663 'move' ret[598658](598662 'deref' cd[78517]))
+    gotoReturn _end_getCommDiagnosticsHere[598656] _end_getCommDiagnosticsHere[598656]
+    (549940 'end of statement' cd[78517])
+    label _end_getCommDiagnosticsHere[598656]
+    (598660 return ret[598658])
+  }
+  function printCommDiagnosticsTable[78528](arg printEmptyColumns[78531] :
+  0 =
+  0) : _unknown[42] "no return value for void"
+  {
+    unknown unstable[78541] "dead at end of block" "param"
+    (644391 'init var' unstable[78541] "unstable")
+    (78546 'end of statement')
+    unknown call_tmp[766562] "maybe param" "maybe type" "temp"
+    (766565 'move' call_tmp[766562](78550 call getCommDiagnostics))
+    unknown CommDiags[78548] "dead at end of block" "insert auto destroy"
+    (644393 'init var' CommDiags[78548] call_tmp[766562])
+    (78552 'end of statement')
+    unknown call_tmp[766567] "maybe param" "maybe type" "temp"
+    (766570 'move' call_tmp[766567](78556 call getNumFields chpl_commDiagnostics[78233]))
+    unknown nFields[78554] "dead at end of block" "param"
+    (644395 'init var' nFields[78554] call_tmp[766567])
+    (78559 'end of statement')
+    unknown fieldWidth[78561] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[766572] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (766575 'move' call_tmp[766572](78564 call chpl__nudgeHighBound nFields[78554]))
+    unknown call_tmp[766577] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (766580 'move' call_tmp[766577](78566 call chpl_build_bounded_range 0 call_tmp[766572]))
+    unknown call_tmp[766582] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (766585 'move' call_tmp[766582](78568 call chpl__ensureDomainExpr call_tmp[766577]))
+    unknown call_tmp[766587] "expr temp" "maybe param" "maybe type" "temp"
+    (766590 'move' call_tmp[766587](78571 call chpl__buildArrayRuntimeType call_tmp[766582] int(64)[10]))
+    (644397 'default init var' fieldWidth[78561] call_tmp[766587])
+    (78574 'end of statement')
+    (78576 call writef "| %6s " "locale")
+    (549942 'end of statement')
+    {
+      unknown fieldID[78583] "dead at end of block" "index var" "insert auto destroy"
+      (644399 'init var' fieldID[78583] 0)
+      (549943 'end of statement')
+      unknown tmp[78725] "maybe param" "temp"
+      unknown call_tmp[766592] "expr temp" "maybe param" "maybe type" "temp"
+      (766595 'move' call_tmp[766592](78587 call chpl__nudgeHighBound nFields[78554]))
+      (78737 'move' tmp[78725](78735 call chpl_compute_low_param_loop_bound 0 call_tmp[766592]))
+      unknown tmp[78726] "maybe param" "temp"
+      unknown call_tmp[766597] "expr temp" "maybe param" "maybe type" "temp"
+      (766600 'move' call_tmp[766597](78742 call chpl__nudgeHighBound nFields[78554]))
+      (78746 'move' tmp[78726](78744 call chpl_compute_high_param_loop_bound 0 call_tmp[766597]))
+      unknown tmp[78727] "maybe param" "temp"
+      (78749 'move' tmp[78727] 1)
+      ParamForLoop[78751]
+      { fieldID[78583] tmp[78725] tmp[78726] tmp[78727]
+        {
+          unknown call_tmp[766602] "maybe param" "maybe type" "temp"
+          (766605 'move' call_tmp[766602](78595 call getFieldName chpl_commDiagnostics[78233] fieldID[78583]))
+          unknown name[78593] "dead at end of block" "param"
+          (644401 'init var' name[78593] call_tmp[766602])
+          (78599 'end of statement')
+          unknown maxval[78601] "dead at end of block" "insert auto destroy"
+          (644403 'init var' maxval[78601] 0)
+          (78604 'end of statement' fieldID[78583])
+          {
+            unknown _indexOfInterest[78626] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[78627] "expr temp" "temp"
+            (78636 'move' _iterator[78627](78634 call _getIterator LocaleSpace[309591]))
+            Defer
+            {
+              {
+                (78651 call _freeIterator _iterator[78627])
+              }
+            }
+            { scopeless type
+              (78641 'move' _indexOfInterest[78626](78638 call iteratorIndex _iterator[78627]))
+            }
+            ForLoop[78628]
+            {
+              unknown locID[78605] "index var" "insert auto destroy"
+              (549946 'end of statement')
+              (78646 'move' locID[78605] _indexOfInterest[78626])
+              (549947 'end of statement' locID[78605])
+              unknown call_tmp[766607] "expr temp" "maybe param" "maybe type" "temp"
+              (766610 'move' call_tmp[766607](78617 call CommDiags[78548] locID[78605]))
+              unknown call_tmp[766612] "expr temp" "maybe param" "maybe type" "temp"
+              (766615 'move' call_tmp[766612](78615 call getField call_tmp[766607] fieldID[78583]))
+              unknown call_tmp[766619] "expr temp" "maybe param" "maybe type" "temp"
+              (766622 'move' call_tmp[766619](78623 call(78620 call (partial) safeCast _mt[203] call_tmp[766612]) int(64)[10]))
+              unknown call_tmp[766624] "expr temp" "maybe param" "maybe type" "temp"
+              (766627 'move' call_tmp[766624](78612 call max maxval[78601] call_tmp[766619]))
+              (78608 call = maxval[78601] call_tmp[766624])
+              (549949 'end of statement' maxval[78601] CommDiags[78548] locID[78605] fieldID[78583])
+              label _continueLabel[78631]
+              _indexOfInterest[78626]
+              _iterator[78627]
+            }
+            label _breakLabel[78632]
+          }
+          unknown tmp[481638] "maybe param" "temp"
+          (481649 'move' tmp[481638] printEmptyColumns[78531])
+          unknown call_tmp[766629] "expr temp" "maybe param" "maybe type" "temp"
+          (766632 'move' call_tmp[766629](481651 call _cond_invalid tmp[481638]))
+          if call_tmp[766629]
+          {
+            (481654 call compilerError "cannot promote short-circuiting || operator")
+          }
+          unknown tmp[668621] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+          unknown tmp[668622] "maybe param" "temp"
+          unknown call_tmp[766634] "expr temp" "maybe param" "maybe type" "temp"
+          (766637 'move' call_tmp[766634](481639 call isTrue tmp[481638]))
+          (668627 'move' tmp[668622](668625 call _cond_test call_tmp[766634]))
+          if tmp[668622]
+          {
+            (668632 'move' tmp[668621](668629 '_paramFoldLogical' tmp[668622] 1))
+          }
+          {
+            unknown tmp[668634] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+            unknown call_tmp[766639] "expr temp" "maybe param" "maybe type" "temp"
+            (766642 'move' call_tmp[766639](78717 call != maxval[78601] 0))
+            (668636 'move' tmp[668634](481643 call isTrue call_tmp[766639]))
+            (668641 'move' tmp[668621](668638 '_paramFoldLogical' tmp[668622] tmp[668634]))
+          }
+          unknown call_tmp[766644] "expr temp" "maybe param" "maybe type" "temp"
+          (766647 'move' call_tmp[766644](78721 call _cond_test tmp[668621]))
+          if call_tmp[766644]
+          {
+            unknown tmp[481617] "maybe param" "temp"
+            (481628 'move' tmp[481617](78663 call == commDiagsPrintUnstable[77916] 0))
+            unknown call_tmp[766649] "expr temp" "maybe param" "maybe type" "temp"
+            (766652 'move' call_tmp[766649](481630 call _cond_invalid tmp[481617]))
+            if call_tmp[766649]
+            {
+              (481633 call compilerError "cannot promote short-circuiting && operator")
+            }
+            const width[78660] "dead at end of block" "const" "insert auto destroy"
+            unknown tmp[668648] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+            unknown tmp[668649] "maybe param" "temp"
+            unknown call_tmp[766654] "expr temp" "maybe param" "maybe type" "temp"
+            (766657 'move' call_tmp[766654](481618 call isTrue tmp[481617]))
+            (668654 'move' tmp[668649](668652 call _cond_test call_tmp[766654]))
+            if tmp[668649]
+            {
+              unknown tmp[668656] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+              unknown call_tmp[766659] "expr temp" "maybe param" "maybe type" "temp"
+              (766662 'move' call_tmp[766659](78667 call == name[78593] "amo"))
+              (668658 'move' tmp[668656](481621 call isTrue call_tmp[766659]))
+              (668663 'move' tmp[668648](668660 '_paramFoldLogical' tmp[668649] tmp[668656]))
+            }
+            {
+              (668668 'move' tmp[668648](668665 '_paramFoldLogical' tmp[668649] 0))
+            }
+            unknown tmp[668675] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+            unknown tmp[668676] "maybe param" "temp"
+            (668681 'move' tmp[668676](668679 call _cond_test tmp[668648]))
+            if tmp[668676]
+            {
+              unknown tmp[668683] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+              unknown call_tmp[766666] "expr temp" "maybe param" "maybe type" "temp"
+              (766669 'move' call_tmp[766666](78674 call size _mt[203] unstable[78541]))
+              (668685 'move' tmp[668683](78671 call - call_tmp[766666]))
+              (668690 'move' tmp[668675](668687 '_paramFoldLogical' tmp[668676] tmp[668683]))
+            }
+            {
+              unknown tmp[668692] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+              unknown call_tmp[766673] "expr temp" "maybe param" "maybe type" "temp"
+              (766676 'move' call_tmp[766673](78680 call size _mt[203] name[78593]))
+              unknown call_tmp[766678] "expr temp" "maybe param" "maybe type" "temp"
+              (766681 'move' call_tmp[766678](78689 call + maxval[78601] 1))
+              unknown call_tmp[766683] "expr temp" "maybe param" "maybe type" "temp"
+              (766686 'move' call_tmp[766683](78688 call log10 call_tmp[766678]))
+              unknown call_tmp[766688] "expr temp" "maybe param" "maybe type" "temp"
+              (766691 'move' call_tmp[766688](78686 call ceil call_tmp[766683]))
+              unknown call_tmp[766693] "expr temp" "maybe param" "maybe type" "temp"
+              (766696 'move' call_tmp[766693](78683 call : call_tmp[766688] int(64)[10]))
+              (668694 'move' tmp[668692](78678 call max call_tmp[766673] call_tmp[766693]))
+              (668699 'move' tmp[668675](668696 '_paramFoldLogical' tmp[668676] tmp[668692]))
+            }
+            (644405 'init var' width[78660] tmp[668675])
+            (78698 'end of statement' maxval[78601])
+            unknown call_tmp[766698] "expr temp" "maybe param" "maybe type" "temp"
+            (766701 'move' call_tmp[766698](78702 call fieldWidth[78561] fieldID[78583]))
+            (78699 call = call_tmp[766698] width[78660])
+            (549957 'end of statement' fieldWidth[78561] fieldID[78583] width[78660])
+            unknown call_tmp[766703] "expr temp" "maybe param" "maybe type" "temp"
+            (766706 'move' call_tmp[766703](78711 call abs width[78660]))
+            (78706 call writef "| %*s " call_tmp[766703] name[78593])
+            (549961 'end of statement' width[78660])
+          }
+        }
+      }
+      label _unused_continueLabel[78729]
+      label _breakLabel[78728]
+    }
+    (78761 call writeln "|")
+    (549963 'end of statement')
+    (78766 call writef "| -----: ")
+    (549964 'end of statement')
+    {
+      unknown fieldID[78770] "dead at end of block" "index var" "insert auto destroy"
+      (644407 'init var' fieldID[78770] 0)
+      (549965 'end of statement')
+      unknown tmp[78809] "maybe param" "temp"
+      unknown call_tmp[766708] "expr temp" "maybe param" "maybe type" "temp"
+      (766711 'move' call_tmp[766708](78774 call chpl__nudgeHighBound nFields[78554]))
+      (78821 'move' tmp[78809](78819 call chpl_compute_low_param_loop_bound 0 call_tmp[766708]))
+      unknown tmp[78810] "maybe param" "temp"
+      unknown call_tmp[766713] "expr temp" "maybe param" "maybe type" "temp"
+      (766716 'move' call_tmp[766713](78826 call chpl__nudgeHighBound nFields[78554]))
+      (78830 'move' tmp[78810](78828 call chpl_compute_high_param_loop_bound 0 call_tmp[766713]))
+      unknown tmp[78811] "maybe param" "temp"
+      (78833 'move' tmp[78811] 1)
+      ParamForLoop[78835]
+      { fieldID[78770] tmp[78809] tmp[78810] tmp[78811]
+        {
+          unknown call_tmp[766718] "expr temp" "maybe param" "maybe type" "temp"
+          (766721 'move' call_tmp[766718](78784 call fieldWidth[78561] fieldID[78770]))
+          unknown call_tmp[766723] "maybe param" "maybe type" "temp"
+          (766726 'move' call_tmp[766723](78782 call abs call_tmp[766718]))
+          const width[78780] "dead at end of block" "const" "insert auto destroy"
+          (644409 'init var' width[78780] call_tmp[766723])
+          (78787 'end of statement' fieldWidth[78561] fieldID[78770])
+          unknown call_tmp[766728] "expr temp" "maybe param" "maybe type" "temp"
+          (766731 'move' call_tmp[766728](78801 call != width[78780] 0))
+          unknown call_tmp[766733] "expr temp" "maybe param" "maybe type" "temp"
+          (766736 'move' call_tmp[766733](78805 call _cond_test call_tmp[766728]))
+          if call_tmp[766733]
+          {
+            unknown call_tmp[766738] "expr temp" "maybe param" "maybe type" "temp"
+            (766741 'move' call_tmp[766738](78794 call - width[78780] 1))
+            (78790 call writef "| %.*s: " call_tmp[766738] "------------------")
+            (549968 'end of statement' width[78780])
+          }
+        }
+      }
+      label _unused_continueLabel[78813]
+      label _breakLabel[78812]
+    }
+    (78845 call writeln "|")
+    (549970 'end of statement')
+    {
+      unknown _indexOfInterest[78950] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[78951] "expr temp" "temp"
+      (78960 'move' _iterator[78951](78958 call _getIterator LocaleSpace[309591]))
+      Defer
+      {
+        {
+          (78975 call _freeIterator _iterator[78951])
+        }
+      }
+      { scopeless type
+        (78965 'move' _indexOfInterest[78950](78962 call iteratorIndex _iterator[78951]))
+      }
+      ForLoop[78952]
+      {
+        unknown locID[78847] "index var" "insert auto destroy"
+        (549972 'end of statement')
+        (78970 'move' locID[78847] _indexOfInterest[78950])
+        (549973 'end of statement' locID[78847])
+        {
+          unknown call_tmp[766743] "expr temp" "maybe param" "maybe type" "temp"
+          (766746 'move' call_tmp[766743](78854 call : locID[78847] string[244]))
+          (78852 call writef "| %6s " call_tmp[766743])
+          (549975 'end of statement' locID[78847])
+          {
+            unknown fieldID[78858] "dead at end of block" "index var" "insert auto destroy"
+            (644411 'init var' fieldID[78858] 0)
+            (549977 'end of statement')
+            unknown tmp[78912] "maybe param" "temp"
+            unknown call_tmp[766748] "expr temp" "maybe param" "maybe type" "temp"
+            (766751 'move' call_tmp[766748](78862 call chpl__nudgeHighBound nFields[78554]))
+            (78924 'move' tmp[78912](78922 call chpl_compute_low_param_loop_bound 0 call_tmp[766748]))
+            unknown tmp[78913] "maybe param" "temp"
+            unknown call_tmp[766753] "expr temp" "maybe param" "maybe type" "temp"
+            (766756 'move' call_tmp[766753](78929 call chpl__nudgeHighBound nFields[78554]))
+            (78933 'move' tmp[78913](78931 call chpl_compute_high_param_loop_bound 0 call_tmp[766753]))
+            unknown tmp[78914] "maybe param" "temp"
+            (78936 'move' tmp[78914] 1)
+            ParamForLoop[78938]
+            { fieldID[78858] tmp[78912] tmp[78913] tmp[78914]
+              {
+                unknown call_tmp[766758] "maybe param" "maybe type" "temp"
+                (766761 'move' call_tmp[766758](78870 call fieldWidth[78561] fieldID[78858]))
+                unknown width[78868] "dead at end of block" "insert auto destroy"
+                (644413 'init var' width[78868] call_tmp[766758])
+                (78873 'end of statement')
+                const count[78875] "dead at end of block" "const" "insert auto destroy"
+                unknown tmp[668706] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+                unknown tmp[668707] "maybe param" "temp"
+                unknown call_tmp[766763] "expr temp" "maybe param" "maybe type" "temp"
+                (766766 'move' call_tmp[766763](78876 call < width[78868] 0))
+                (668712 'move' tmp[668707](668710 call _cond_test call_tmp[766763]))
+                if tmp[668707]
+                {
+                  (668717 'move' tmp[668706](668714 '_paramFoldLogical' tmp[668707] unstable[78541]))
+                }
+                {
+                  unknown tmp[668719] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+                  unknown call_tmp[766768] "expr temp" "maybe param" "maybe type" "temp"
+                  (766771 'move' call_tmp[766768](78886 call CommDiags[78548] locID[78847]))
+                  unknown call_tmp[766773] "expr temp" "maybe param" "maybe type" "temp"
+                  (766776 'move' call_tmp[766773](78884 call getField call_tmp[766768] fieldID[78858]))
+                  (668721 'move' tmp[668719](78881 call : call_tmp[766773] string[244]))
+                  (668726 'move' tmp[668706](668723 '_paramFoldLogical' tmp[668707] tmp[668719]))
+                }
+                (644415 'init var' count[78875] tmp[668706])
+                (78894 'end of statement' fieldWidth[78561] fieldID[78858] width[78868] CommDiags[78548] locID[78847] fieldID[78858])
+                unknown call_tmp[766778] "expr temp" "maybe param" "maybe type" "temp"
+                (766781 'move' call_tmp[766778](78903 call != width[78868] 0))
+                unknown call_tmp[766783] "expr temp" "maybe param" "maybe type" "temp"
+                (766786 'move' call_tmp[766783](78907 call _cond_test call_tmp[766778]))
+                if call_tmp[766783]
+                {
+                  unknown call_tmp[766788] "expr temp" "maybe param" "maybe type" "temp"
+                  (766791 'move' call_tmp[766788](78899 call abs width[78868]))
+                  (78896 call writef "| %*s " call_tmp[766788] count[78875])
+                  (549984 'end of statement' width[78868] count[78875])
+                }
+              }
+            }
+            label _unused_continueLabel[78916]
+            label _breakLabel[78915]
+          }
+          (78948 call writeln "|")
+        }
+        label _continueLabel[78955]
+        _indexOfInterest[78950]
+        _iterator[78951]
+      }
+      label _breakLabel[78956]
+    }
+    (598667 return _void[46])
+    (396058 'used modules list'(78537 'use' Reflection[1804])(78539 'use' Math[10521]))
+  }
+  unknown printInitVerboseComm[78985] "config" "param"
+  unknown printInitCommCounts[78990] "config" "param"
+  (396054 'used modules list'(387010 'use' ChapelStandard[315387]))
+}

@@ -1,0 +1,40 @@
+AST dump for ChapelNumLocales after pass codegen.
+Module use list: ChapelBase 
+
+{
+  function chpl__init_ChapelNumLocales[468552](const in arg _ln[9365517]:int(64)[10], in arg _fn[9365519]:int(32)[66]) : void[4] "insert line file info" "module init" "resolved"
+  {
+    if chpl__init_ChapelNumLocales_p[9308953]
+    {
+      goto _exit_chpl__init_ChapelNumLocales[9308990] _exit_chpl__init_ChapelNumLocales[9308990]
+    }
+    ref refIndentLevel[9308976]:_ref(int(32))[1465743] "temp"
+    (9308974 call printModuleInit[386886] c"%*s\n" c"ChapelNumLocales" 16 _ln[9365517] _fn[9365519])
+    (9308980 'move' refIndentLevel[9308976](9308979 'addr of' moduleInitLevel[386877]))
+    (9308983 '+=' refIndentLevel[9308976] 1)
+    (9308959 'move' chpl__init_ChapelNumLocales_p[9308953] 1)
+    {
+      (9305569 call chpl__init_ChapelBase[468297] _ln[9365517] _fn[9365519])
+    }
+    val tmp[653666]:int(64)[10] "dead after last mention" "temp"
+    const-val call_tmp[934889]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (934892 'move' call_tmp[934889](653675 call chpl_config_has_value[52061](1758984 'cast' c_ptrConst(int(8))[1466333] c"numLocales" _ln[9365517] _fn[9365519])(1758992 'cast' c_ptrConst(int(8))[1466333] c"Built-in" _ln[9365517] _fn[9365519])))
+    if(7350018 'u!' call_tmp[934889])
+    {
+      (653694 'move' tmp[653666](305009 call chpl_comm_default_num_locales[305000]))
+    }
+    {
+      val call_tmp[934909]:c_ptrConst(int(8))[1466333] "dead after last mention" "expr temp" "maybe param" "temp"
+      (934912 'move' call_tmp[934909](653685 call chpl_config_get_value[52079](1759003 'cast' c_ptrConst(int(8))[1466333] c"numLocales" _ln[9365517] _fn[9365519])(1759011 'cast' c_ptrConst(int(8))[1466333] c"Built-in" _ln[9365517] _fn[9365519])))
+      (653690 'move' tmp[653666](653688 call _command_line_cast[1759018] call_tmp[934909] _ln[9365517] _fn[9365519]))
+    }
+    (653668 'move' numLocales[305007] tmp[653666])
+    (9308986 '-=' refIndentLevel[9308976] 1)
+    label _exit_chpl__init_ChapelNumLocales[9308990]
+    (630544 return _void[46])
+  }
+  function chpl_comm_default_num_locales[305000]() : int(64)[10] "extern" "local args" "no fn body" "resolved"
+  {
+  }
+  const-val numLocales[305007]:int(64)[10] "config" "const" "insert auto destroy"
+}

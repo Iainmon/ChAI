@@ -1,0 +1,2024 @@
+AST dump for JSON after pass parallel.
+Module use list: ChapelStandard IO CTypes Map List 
+
+{
+  function chpl__init_JSON[468666]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (637985 return _void[46])
+  }
+  function _ref(jsonSerializer)[1921999].init=[1403838](ref arg this[1403842]:_ref(jsonSerializer)[1921999], const  ref arg other[1403843]:jsonSerializer[354544]) : void[4] "compiler generated" "copy initializer" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    (1403847 return _void[46])
+  }
+  function _ref(jsonSerializer)[1921999].deinit[1403849](const  ref arg this[1403853]:_ref(jsonSerializer)[1921999]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method" "resolved"
+  {
+    (1403861 return _void[46])
+  }
+  type jsonSerializer[354544]
+  function qio_channel_skip_json_field[354546](const in arg threadsafe[354549]:int(32)[66], const in arg ch[354553]:c_ptr(qio_channel_t)[1466049]) : errorCode[12828] "extern" "local args" "no fn body" "private" "resolved"
+  {
+  }
+  function outOfOrderHelper[3288493](const  ref arg reader[3288497]:fileReader(false,jsonDeserializer)[3276790], ref arg error_out[5507324]:Error[85511], ref arg _retArg[5588642]:_ref((map(string,int(64),false),int(64)))[3312675]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "private" "resolved"
+  {
+    const-val ret[3288499]:(map(string,int(64),false),int(64))[3312520] "dead after last mention" "RVV" "temp"
+    val m[3288507]:map(string,int(64),false)[3288794] "dead at end of block" "insert auto destroy"
+    val call_tmp[3288509]:map(string,int(64),false)[3288794] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    const-val default_arg_resizeThreshold[3313366]:real(64)[13] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+    (3313370 'move' default_arg_resizeThreshold[3313366](3313368 call init_default_resizeThreshold[3313349]))
+    val default_arg_initialCapacity[3313392]:int(64)[10] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    (3312697 call init[3312704] m[3288507] default_arg_resizeThreshold[3313366] 16)
+    const-val _return_tmp_[5468763]:int(64)[10] "dead after last mention" "temp"
+    val error[5507327]:Error[85511] "error variable" "temp"
+    (5507329 'move' error[5507327] nil[32])
+    (5468765 'move' _return_tmp_[5468763](3288525 call mark[3288983] reader[3288497] error[5507327]))
+    val errorExists[7301504]:bool[19] "temp"
+    (7301509 'move' errorExists[7301504](7301506 '!=' error[5507327] nil[32]))
+    if errorExists[7301504]
+    {
+      (5507333 '=' error_out[5507324] error[5507327])
+      (5632341 call chpl__autoDestroy[4217196] m[3288507])
+      gotoErrorHandlingReturn _end_outOfOrderHelper[3288734] _end_outOfOrderHelper[3288734]
+    }
+    val default_arg_ignoreWhitespace[3289537]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val error[5507342]:Error[85511] "error variable" "temp"
+    (5507344 'move' error[5507342] nil[32])
+    (3288531 call readLiteral[3289473] reader[3288497] "{" 1 error[5507342])
+    val errorExists[7301512]:bool[19] "temp"
+    (7301517 'move' errorExists[7301512](7301514 '!=' error[5507342] nil[32]))
+    if errorExists[7301512]
+    {
+      (5507348 '=' error_out[5507324] error[5507342])
+      (5632344 call chpl__autoDestroy[4217196] m[3288507])
+      gotoErrorHandlingReturn _end_outOfOrderHelper[3288734] _end_outOfOrderHelper[3288734]
+    }
+    val done[3288534]:bool[19] "dead at end of block" "insert auto destroy"
+    (3288536 'move' done[3288534] 0)
+    val call_tmp[3288540]:int(64)[10] "dead after last mention" "maybe param" "maybe type" "temp"
+    val lastPos[3288547]:int(64)[10] "dead at end of block" "insert auto destroy"
+    (3288549 'move' lastPos[3288547] -1)
+    {
+      val tmp[3288554]:bool[19] "dead after last mention" "temp"
+      const-val call_tmp[3288556]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3288558 'move' call_tmp[3288556](3288561 call ![63126] done[3288534]))
+      (3288563 'move' tmp[3288554] call_tmp[3288556])
+      WhileDo[3288568] hazard
+      {
+        {
+          const-val call_tmp[3288571]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+          val default_arg_ignoreWhitespace[3290111]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+          val error[5507357]:Error[85511] "error variable" "temp"
+          (5507359 'move' error[5507357] nil[32])
+          (3288573 'move' call_tmp[3288571](3288579 call matchLiteral[3290040] reader[3288497] "}" 1 error[5507357]))
+          val errorExists[7301520]:bool[19] "temp"
+          (7301525 'move' errorExists[7301520](7301522 '!=' error[5507357] nil[32]))
+          if errorExists[7301520]
+          {
+            (5507363 '=' error_out[5507324] error[5507357])
+            (5632347 call chpl__autoDestroy[4217196] m[3288507])
+            gotoErrorHandlingReturn _end_outOfOrderHelper[3288734] _end_outOfOrderHelper[3288734]
+          }
+          const-val call_tmp[3288581]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+          (3288583 'move' call_tmp[3288581] call_tmp[3288571])
+          if call_tmp[3288581]
+          {
+            const-val call_tmp[3288590]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+            (3288592 'move' call_tmp[3288590](3288598 call offset[3289103] reader[3288497]))
+            const-val call_tmp[3288599]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+            (3288601 'move' call_tmp[3288599](3288604 call -[1487343] call_tmp[3288590]))
+            (3288608 call =[52229] lastPos[3288547] call_tmp[3288599])
+            (3288614 call =[52153] done[3288534] 1)
+            break _breakLabel[3288709] _breakLabel[3288709]
+          }
+          const-val _return_tmp_[5468767]:int(64)[10] "dead after last mention" "temp"
+          val error[5507372]:Error[85511] "error variable" "temp"
+          (5507374 'move' error[5507372] nil[32])
+          (5468769 'move' _return_tmp_[5468767](3288626 call mark[3288983] reader[3288497] error[5507372]))
+          val errorExists[7301528]:bool[19] "temp"
+          (7301533 'move' errorExists[7301528](7301530 '!=' error[5507372] nil[32]))
+          if errorExists[7301528]
+          {
+            (5507378 '=' error_out[5507324] error[5507372])
+            (5632350 call chpl__autoDestroy[4217196] m[3288507])
+            gotoErrorHandlingReturn _end_outOfOrderHelper[3288734] _end_outOfOrderHelper[3288734]
+          }
+          const-val call_tmp[3288628]:string[244] "dead at end of block" "maybe param" "temp"
+          val error[5507387]:Error[85511] "error variable" "temp"
+          (5507389 'move' error[5507387] nil[32])
+          const-val ret_tmp[5588648]:string[244] "temp"
+          (3288636 call read[3290733] reader[3288497] error[5507387] ret_tmp[5588648])
+          (5588651 'move' call_tmp[3288628] ret_tmp[5588648])
+          val errorExists[7301536]:bool[19] "temp"
+          (7301541 'move' errorExists[7301536](7301538 '!=' error[5507387] nil[32]))
+          if errorExists[7301536]
+          {
+            (5507393 '=' error_out[5507324] error[5507387])
+            (5632353 call chpl__autoDestroy[4217196] m[3288507])
+            gotoErrorHandlingReturn _end_outOfOrderHelper[3288734] _end_outOfOrderHelper[3288734]
+          }
+          const-val name[3288638]:string[244] "dead at end of block" "const" "insert auto destroy" "maybe copy elided"
+          (3288640 'move' name[3288638] call_tmp[3288628])
+          val default_arg_ignoreWhitespace[3300812]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+          val error[5507402]:Error[85511] "error variable" "temp"
+          (5507404 'move' error[5507402] nil[32])
+          (3288648 call readLiteral[3289473] reader[3288497] ":" 1 error[5507402])
+          val errorExists[7301544]:bool[19] "temp"
+          (7301549 'move' errorExists[7301544](7301546 '!=' error[5507402] nil[32]))
+          if errorExists[7301544]
+          {
+            (5507408 '=' error_out[5507324] error[5507402])
+            (5632356 call chpl__autoDestroy[3262688] name[3288638])
+            (5632359 call chpl__autoDestroy[4217196] m[3288507])
+            gotoErrorHandlingReturn _end_outOfOrderHelper[3288734] _end_outOfOrderHelper[3288734]
+          }
+          const-val call_tmp[3288651]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+          (3288653 'move' call_tmp[3288651](3288659 call offset[3289103] reader[3288497]))
+          const-val _formal_tmp_in_k[3301079]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+          (5632338 '=' _formal_tmp_in_k[3301079] name[3288638])
+          (3301084 'noop')
+          const-val _return_tmp_[5468771]:bool[19] "dead after last mention" "temp"
+          (5468773 'move' _return_tmp_[5468771](3288664 call add[3300824] m[3288507] _formal_tmp_in_k[3301079] call_tmp[3288651]))
+          (3288674 call revert[3308945] reader[3288497])
+          const-ref call_tmp[3288676]:_ref(c_ptr(qio_channel_t))[1466058] "dead after last mention" "maybe param" "reference to a const" "temp"
+          (3288678 'move' call_tmp[3288676](3288681 call _channel_internal[3282127] reader[3288497]))
+          const-val coerce_tmp[3308980]:int(32)[66] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+          (3308986 'move' coerce_tmp[3308980](3308982 'cast' int(32)[66] 0))
+          val coerce_tmp[3308988]:c_ptr(qio_channel_t)[1466049] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+          (3308992 'move' coerce_tmp[3308988](3308990 'deref' call_tmp[3288676]))
+          const-val _return_tmp_[5468775]:errorCode[12828] "dead after last mention" "temp"
+          (5468777 'move' _return_tmp_[5468775](3288685 call qio_channel_skip_json_field[354546] coerce_tmp[3308980] coerce_tmp[3308988]))
+          val default_arg_ignoreWhitespace[3309000]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+          const-val _return_tmp_[5468779]:bool[19] "dead after last mention" "temp"
+          val error[5507417]:Error[85511] "error variable" "temp"
+          (5507419 'move' error[5507417] nil[32])
+          (5468781 'move' _return_tmp_[5468779](3288693 call matchLiteral[3290040] reader[3288497] "," 1 error[5507417]))
+          val errorExists[7301552]:bool[19] "temp"
+          (7301557 'move' errorExists[7301552](7301554 '!=' error[5507417] nil[32]))
+          if errorExists[7301552]
+          {
+            (5507423 '=' error_out[5507324] error[5507417])
+            (5632362 call chpl__autoDestroy[4217196] m[3288507])
+            gotoErrorHandlingReturn _end_outOfOrderHelper[3288734] _end_outOfOrderHelper[3288734]
+          }
+        }
+        label _continueLabel[3288695]
+        const-val call_tmp[3288697]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (3288699 'move' call_tmp[3288697](3288702 call ![63126] done[3288534]))
+        (3288704 'move' tmp[3288554] call_tmp[3288697])
+        tmp[3288554]
+      }
+      label _breakLabel[3288709]
+    }
+    (3288715 call revert[3308945] reader[3288497])
+    const-val call_tmp[3288717]:(map(string,int(64),false),int(64))[3309055] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    const-val ret_tmp[5588799]:(map(string,int(64),false),int(64))[3309055] "temp"
+    (3288722 call _build_tuple[3309013] m[3288507] lastPos[3288547] ret_tmp[5588799])
+    (5588802 'move' call_tmp[3288717] ret_tmp[5588799])
+    val copy_ret_tmp[3312687]:(map(string,int(64),false),int(64))[3309055] "dead after last mention" "no copy" "temp"
+    (3312688 'move' copy_ret_tmp[3312687] call_tmp[3288717])
+    (3288725 'move' ret[3288499](3312690 call chpl__initCopy[3309130] copy_ret_tmp[3312687] 0))
+    (5632366 call chpl__autoDestroy[4218700] call_tmp[3288717])
+    (5632369 call chpl__autoDestroy[4217196] m[3288507])
+    gotoReturn _end_outOfOrderHelper[3288734] _end_outOfOrderHelper[3288734]
+    label _end_outOfOrderHelper[3288734]
+    (5588644 '=' _retArg[5588642] ret[3288499])
+    (5588646 return _void[46])
+  }
+  function _ref(jsonDeserializer)[1922054].init[354720](ref arg this[354722]:_ref(jsonDeserializer)[1922054]) : void[4] "method" "primary method" "resolved" "no return value for void"
+  {
+    (637705 return _void[46])
+  }
+  function _ref(jsonDeserializer)[1922054]._oldRead[3291994](const  ref arg this[3291998]:_ref(jsonDeserializer)[1922054], const  ref arg ch[3292002]:fileReader(false,jsonDeserializer)[3276790], ref arg val[3292004]:_ref(string)[1466327], ref arg error_out[5507762]:Error[85511]) : void[4] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-val call_tmp[3292012]:defaultDeserializer[173096] "dead at end of block" "maybe param" "temp"
+    const-val initTemp[3292248]:defaultDeserializer[173096] "dead at end of block" "temp"
+    (3292251 call init[1193190] initTemp[3292248])
+    (3292014 'move' call_tmp[3292012] initTemp[3292248])
+    const-val _def[3292018]:defaultDeserializer[173096] "dead at end of block" "insert auto destroy" "maybe copy elided"
+    (3292020 'move' _def[3292018] call_tmp[3292012])
+    const-val call_tmp[3292024]:fileReader(false,defaultDeserializer)[1872106] "dead at end of block" "maybe param" "temp"
+    const-val _formal_tmp_in_deserializer[3292511]:defaultDeserializer[173096] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (5632472 '=' _formal_tmp_in_deserializer[3292511] _def[3292018])
+    (3292516 'noop')
+    const-val ret_tmp[5588708]:fileReader(false,defaultDeserializer)[1872106] "temp"
+    (3292032 call withDeserializer[3292264] ch[3292002] _formal_tmp_in_deserializer[3292511] ret_tmp[5588708])
+    (5588711 'move' call_tmp[3292024] ret_tmp[5588708])
+    const-val dc[3292034]:fileReader(false,defaultDeserializer)[1872106] "dead at end of block" "insert auto destroy"
+    (3292036 'move' dc[3292034] call_tmp[3292024])
+    const-val call_tmp[3292040]:iostyleInternal[164872] "dead at end of block" "maybe param" "temp"
+    (3292042 'move' call_tmp[3292040](3292048 call _styleInternal[3292708] dc[3292034]))
+    val st[3292049]:iostyleInternal[164872] "dead at end of block" "insert auto destroy"
+    (3292051 'move' st[3292049] call_tmp[3292040])
+    const-val orig[3292055]:iostyleInternal[164872] "dead at end of block" "insert auto destroy"
+    (3292057 'move' orig[3292055] st[3292049])
+    ref call_tmp[3292075]:_ref(uint(8))[1466089] "dead after last mention" "maybe param" "temp"
+    (3292077 'move' call_tmp[3292075](3292080 call realfmt[1131891] st[3292049]))
+    const-val coerce_tmp[3292906]:uint(8)[71] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3292912 'move' coerce_tmp[3292906](3292908 'cast' uint(8)[71] 2))
+    (3292084 call =[52249] call_tmp[3292075] coerce_tmp[3292906])
+    ref call_tmp[3292089]:_ref(uint(8))[1466089] "dead after last mention" "maybe param" "temp"
+    (3292091 'move' call_tmp[3292089](3292094 call bytes_prefix[1131421] st[3292049]))
+    const-val coerce_tmp[3292916]:uint(8)[71] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3292922 'move' coerce_tmp[3292916](3292918 'cast' uint(8)[71] 0))
+    (3292098 call =[52249] call_tmp[3292089] coerce_tmp[3292916])
+    ref call_tmp[3292103]:_ref(uint(8))[1466089] "dead after last mention" "maybe param" "temp"
+    (3292105 'move' call_tmp[3292103](3292108 call string_format[1131395] st[3292049]))
+    val call_tmp[3292111]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3292118]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (3292127 call =[52249] call_tmp[3292103] 3)
+    ref call_tmp[3292132]:_ref(uint(8))[1466089] "dead after last mention" "maybe param" "temp"
+    (3292134 'move' call_tmp[3292132](3292137 call aggregate_style[1131971] st[3292049]))
+    val call_tmp[3292140]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    const-val call_tmp[3292147]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3292149 'move' call_tmp[3292147](3292152 call :[1861147] QIO_AGGREGATE_FORMAT_JSON[77225]))
+    (3292156 call =[52249] call_tmp[3292132] call_tmp[3292147])
+    ref call_tmp[3292161]:_ref(uint(8))[1466089] "dead after last mention" "maybe param" "temp"
+    (3292163 'move' call_tmp[3292161](3292166 call array_style[1131945] st[3292049]))
+    val call_tmp[3292169]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    const-val call_tmp[3292176]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3292178 'move' call_tmp[3292176](3292181 call :[1861147] QIO_ARRAY_FORMAT_JSON[77210]))
+    (3292185 call =[52249] call_tmp[3292161] call_tmp[3292176])
+    ref call_tmp[3292190]:_ref(uint(8))[1466089] "dead after last mention" "maybe param" "temp"
+    (3292192 'move' call_tmp[3292190](3292195 call tuple_style[1131997] st[3292049]))
+    val call_tmp[3292198]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    const-val call_tmp[3292205]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3292207 'move' call_tmp[3292205](3292210 call :[1861147] QIO_TUPLE_FORMAT_JSON[77240]))
+    (3292214 call =[52249] call_tmp[3292190] call_tmp[3292205])
+    (3292223 call _set_styleInternal[3292824] dc[3292034] st[3292049])
+    const-val call_tmp[3292228]:locale[234] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    const-val ret_tmp[5543418]:locale[234] "temp"
+    (3292233 call here[135591] ret_tmp[5543418])
+    (5543421 'move' call_tmp[3292228] ret_tmp[5543418])
+    val error[5507767]:Error[85511] "error variable" "temp"
+    (5507769 'move' error[5507767] nil[32])
+    (3292238 call _readOne[3292955] dc[3292034] val[3292004] call_tmp[3292228] error[5507767])
+    val errorExists[7301720]:bool[19] "temp"
+    (7301725 'move' errorExists[7301720](7301722 '!=' error[5507767] nil[32]))
+    if errorExists[7301720]
+    {
+      (5507773 '=' error_out[5507762] error[5507767])
+      (5632475 call chpl__autoDestroy[3885511] call_tmp[3292228])
+      (5632480 call _set_styleInternal[3292824] dc[3292034] orig[3292055])
+      (5632486 call chpl__autoDestroy[4023483] dc[3292034])
+      gotoErrorHandlingReturn _end_oldRead[5507764] _end_oldRead[5507764]
+    }
+    (5632489 call chpl__autoDestroy[3885511] call_tmp[3292228])
+    (5632494 call _set_styleInternal[3292824] dc[3292034] orig[3292055])
+    (5632500 call chpl__autoDestroy[4023483] dc[3292034])
+    label _end_oldRead[5507764]
+    (3292244 return _void[46])
+  }
+  function _ref(jsonDeserializer)[1922054].deserializeType[3285979](const  ref arg this[3285983]:_ref(jsonDeserializer)[1922054], const  ref arg reader[3285987]:fileReader(false,jsonDeserializer)[3276790], ref arg error_out[5507212]:Error[85511], ref arg _retArg[5588618]:_ref(owned ModuleSpecification)[3283920]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479812]:owned ModuleSpecification[3283911] "temp"
+    const-val ret[3285993]:owned ModuleSpecification[3283911] "dead after last mention" "delay instantiation" "RVV" "temp"
+    val tmp[3286003]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3286010]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3286023]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3286025]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3286027]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3286070]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3286095]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3286102]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3286115]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3286117]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3286119]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3286139]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+    val call_tmp[3286141]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3286159]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      val tmp[3286200]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3286207]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val tmp[3286220]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+      val tmp[3286222]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3286224]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val tmp[3286244]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      val call_tmp[3286246]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3286264]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      {
+        val call_tmp[3286298]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[3286305]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        {
+          val tmp[3286364]:bool[19] "dead after last mention" "maybe param" "temp"
+          val call_tmp[3286374]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val tmp[3286387]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+          val tmp[3286389]:bool[19] "dead after last mention" "maybe param" "temp"
+          val call_tmp[3286391]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val tmp[3286411]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+          val call_tmp[3286413]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val call_tmp[3286431]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          {
+            const-val call_tmp[3286461]:owned ModuleSpecification[3283911] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "temp"
+            { scopeless
+              val new_temp[3379649]:ModuleSpecification[360813] "dead after last mention" "temp"
+              (3379651 'move' new_temp[3379649](3288029 call _new[3369617] reader[3285987] this[3285983]))
+            }
+            const-val initTemp[3379658]:owned ModuleSpecification[3283911] "dead after last mention" "delay instantiation" "temp"
+            (3379661 call init[3369722] initTemp[3379658] new_temp[3379649])
+            (3286463 'move' call_tmp[3286461] initTemp[3379658])
+            (3379676 '=' ret[3285993] call_tmp[3286461])
+            gotoReturn _end_deserializeType[3286482] _end_deserializeType[3286482]
+          }
+        }
+      }
+    }
+    label _end_deserializeType[3286482]
+    (5588620 '=' _retArg[5588618] ret[3285993])
+    (5588622 return _void[46])
+  }
+  function _ref(jsonDeserializer)[1922054].deserializeType[3291431](const  ref arg this[3291435]:_ref(jsonDeserializer)[1922054], const  ref arg reader[3291439]:fileReader(false,jsonDeserializer)[3276790], ref arg error_out[5507745]:Error[85511], ref arg _retArg[5588702]:_ref(string)[1466327]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479818]:string[244] "temp"
+    const-val ret[3291445]:string[244] "dead after last mention" "RVV" "temp"
+    val tmp[3291455]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3291462]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3291475]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3291477]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3291479]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3291522]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3291547]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3291554]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3291567]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3291569]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3291571]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3291591]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+    val call_tmp[3291593]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3291611]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      val tmp[3291652]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3291659]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val tmp[3291672]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+      val tmp[3291674]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3291676]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3291716]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      {
+        val tmp[3291725]:string[244] "dead at end of block" "insert auto destroy"
+        (3300799 call init[21321] tmp[3291725])
+        val error[5507748]:Error[85511] "error variable" "temp"
+        (5507750 'move' error[5507748] nil[32])
+        (3291735 call _oldRead[3291994] this[3291435] reader[3291439] tmp[3291725] error[5507748])
+        val errorExists[7301712]:bool[19] "temp"
+        (7301717 'move' errorExists[7301712](7301714 '!=' error[5507748] nil[32]))
+        if errorExists[7301712]
+        {
+          (5507754 '=' error_out[5507745] error[5507748])
+          (5632469 call chpl__autoDestroy[3262688] tmp[3291725])
+          gotoErrorHandlingReturn _end_deserializeType[3291934] _end_deserializeType[3291934]
+        }
+        (3300797 '=' ret[3291445] tmp[3291725])
+        gotoReturn _end_deserializeType[3291934] _end_deserializeType[3291934]
+      }
+    }
+    label _end_deserializeType[3291934]
+    (5588704 '=' _retArg[5588702] ret[3291445])
+    (5588706 return _void[46])
+  }
+  function _ref(jsonDeserializer)[1922054].deserializeType[3337104](const  ref arg this[3337108]:_ref(jsonDeserializer)[1922054], const  ref arg reader[3337112]:fileReader(false,jsonDeserializer)[3276790], ref arg error_out[5509548]:Error[85511], ref arg _retArg[5589224]:_ref(map(string,string,false))[3283395]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479877]:map(string,string,false)[3283386] "temp"
+    const-val ret[3337118]:map(string,string,false)[3283386] "dead after last mention" "delay instantiation" "RVV" "temp"
+    val tmp[3337128]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3337135]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3337148]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3337150]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3337152]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3337195]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3337220]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3337227]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3337240]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3337242]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3337244]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3337264]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+    val call_tmp[3337266]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3337284]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      val tmp[3337325]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3337332]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val tmp[3337345]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+      val tmp[3337347]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3337349]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val tmp[3337369]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      val call_tmp[3337371]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3337389]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      {
+        val call_tmp[3337423]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[3337430]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        {
+          val tmp[3337489]:bool[19] "dead after last mention" "maybe param" "temp"
+          val call_tmp[3337499]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val tmp[3337512]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+          val tmp[3337514]:bool[19] "dead after last mention" "maybe param" "temp"
+          val call_tmp[3337516]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val tmp[3337536]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+          val call_tmp[3337538]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val call_tmp[3337556]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          {
+            const-val call_tmp[3337586]:map(string,string,false)[3283386] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "temp"
+            const-val initTemp[3339093]:map(string,string,false)[3283386] "dead after last mention" "delay instantiation" "temp"
+            val error[5509551]:Error[85511] "error variable" "temp"
+            (5509553 'move' error[5509551] nil[32])
+            (3339096 call init[3339110] initTemp[3339093] reader[3337112] this[3337108] error[5509551])
+            val errorExists[7302552]:bool[19] "temp"
+            (7302557 'move' errorExists[7302552](7302554 '!=' error[5509551] nil[32]))
+            if errorExists[7302552]
+            {
+              (5509557 '=' error_out[5509548] error[5509551])
+              gotoErrorHandlingReturn _end_deserializeType[3337607] _end_deserializeType[3337607]
+            }
+            (3337588 'move' call_tmp[3337586] initTemp[3339093])
+            (3350734 '=' ret[3337118] call_tmp[3337586])
+            gotoReturn _end_deserializeType[3337607] _end_deserializeType[3337607]
+          }
+        }
+      }
+    }
+    label _end_deserializeType[3337607]
+    (5589226 '=' _retArg[5589224] ret[3337118])
+    (5589228 return _void[46])
+  }
+  function _ref(jsonDeserializer)[1922054].deserializeType[3352163](const  ref arg this[3352167]:_ref(jsonDeserializer)[1922054], const  ref arg reader[3352171]:fileReader(false,jsonDeserializer)[3276790], ref arg error_out[5509968]:Error[85511], ref arg _retArg[5589418]:_ref(map(string,owned ModuleSpecification?,false))[3283695]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479920]:map(string,owned ModuleSpecification?,false)[3283686] "temp"
+    const-val ret[3352177]:map(string,owned ModuleSpecification?,false)[3283686] "dead after last mention" "delay instantiation" "RVV" "temp"
+    val tmp[3352187]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3352194]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3352207]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3352209]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3352211]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3352254]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3352279]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3352286]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3352299]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3352301]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3352303]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3352323]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+    val call_tmp[3352325]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3352343]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      val tmp[3352384]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3352391]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val tmp[3352404]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+      val tmp[3352406]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3352408]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val tmp[3352428]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      val call_tmp[3352430]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3352448]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      {
+        val call_tmp[3352482]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[3352489]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        {
+          val tmp[3352548]:bool[19] "dead after last mention" "maybe param" "temp"
+          val call_tmp[3352558]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val tmp[3352571]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+          val tmp[3352573]:bool[19] "dead after last mention" "maybe param" "temp"
+          val call_tmp[3352575]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val tmp[3352595]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+          val call_tmp[3352597]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val call_tmp[3352615]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          {
+            const-val call_tmp[3352645]:map(string,owned ModuleSpecification?,false)[3283686] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "temp"
+            const-val initTemp[3354152]:map(string,owned ModuleSpecification?,false)[3283686] "dead after last mention" "delay instantiation" "temp"
+            val error[5509971]:Error[85511] "error variable" "temp"
+            (5509973 'move' error[5509971] nil[32])
+            (3354155 call init[3354169] initTemp[3354152] reader[3352171] this[3352167] error[5509971])
+            val errorExists[7302752]:bool[19] "temp"
+            (7302757 'move' errorExists[7302752](7302754 '!=' error[5509971] nil[32]))
+            if errorExists[7302752]
+            {
+              (5509977 '=' error_out[5509968] error[5509971])
+              gotoErrorHandlingReturn _end_deserializeType[3352666] _end_deserializeType[3352666]
+            }
+            (3352647 'move' call_tmp[3352645] initTemp[3354152])
+            (3373731 '=' ret[3352177] call_tmp[3352645])
+            gotoReturn _end_deserializeType[3352666] _end_deserializeType[3352666]
+          }
+        }
+      }
+    }
+    label _end_deserializeType[3352666]
+    (5589420 '=' _retArg[5589418] ret[3352177])
+    (5589422 return _void[46])
+  }
+  function _ref(jsonDeserializer)[1922054].deserializeType[3367234](const  ref arg this[3367238]:_ref(jsonDeserializer)[1922054], const  ref arg reader[3367242]:fileReader(false,jsonDeserializer)[3276790], ref arg error_out[5510194]:Error[85511], ref arg _retArg[5589558]:_ref(owned ModuleSpecification?)[3283613]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479961]:owned ModuleSpecification?[3283604] "temp"
+    val ret[3367248]:owned ModuleSpecification?[3283604] "dead after last mention" "RVV" "temp"
+    val tmp[3367258]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3367265]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    const-val tmp[3367278]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    val tmp[3367280]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3367282]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    const-val tmp[3367296]:bool[19] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+    const-val call_tmp[3367298]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    val default_arg_ignoreWhitespace[3367780]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val error[5510197]:Error[85511] "error variable" "temp"
+    (5510199 'move' error[5510197] nil[32])
+    (3367300 'move' call_tmp[3367298](3367306 call matchLiteral[3290040] reader[3367242] "null" 1 error[5510197]))
+    val errorExists[7302864]:bool[19] "temp"
+    (7302869 'move' errorExists[7302864](7302866 '!=' error[5510197] nil[32]))
+    if errorExists[7302864]
+    {
+      (5510203 '=' error_out[5510194] error[5510197])
+      gotoErrorHandlingReturn _end_deserializeType[3367737] _end_deserializeType[3367737]
+    }
+    (3367308 'move' tmp[3367296] call_tmp[3367298])
+    (3367313 'move' tmp[3367278] tmp[3367296])
+    const-val call_tmp[3367325]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3367327 'move' call_tmp[3367325] tmp[3367278])
+    if call_tmp[3367325]
+    {
+      const-val call_tmp[3367334]:owned ModuleSpecification?[3283604] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      const-val ret_tmp[5589564]:owned ModuleSpecification?[3283604] "temp"
+      (3367339 call :[3367791] nil[32] ret_tmp[5589564])
+      (5589567 'move' call_tmp[3367334] ret_tmp[5589564])
+      (3371994 '=' ret[3367248] call_tmp[3367334])
+      gotoReturn _end_deserializeType[3367737] _end_deserializeType[3367737]
+    }
+    val tmp[3367350]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3367357]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3367370]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3367372]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3367374]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3367394]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+    val call_tmp[3367396]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3367414]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      val tmp[3367455]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3367462]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val tmp[3367475]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+      val tmp[3367477]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3367479]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val tmp[3367499]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      val call_tmp[3367501]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3367519]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      {
+        val call_tmp[3367553]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[3367560]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        {
+          val tmp[3367619]:bool[19] "dead after last mention" "maybe param" "temp"
+          val call_tmp[3367629]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val tmp[3367642]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+          val tmp[3367644]:bool[19] "dead after last mention" "maybe param" "temp"
+          val call_tmp[3367646]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val tmp[3367666]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+          val call_tmp[3367668]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val call_tmp[3367686]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          {
+            const-val call_tmp[3367716]:owned ModuleSpecification?[3283604] "dead after last mention" "insert auto destroy for explicit new" "maybe param" "temp"
+            { scopeless
+              val new_temp[3369673]:ModuleSpecification[360813] "dead after last mention" "temp"
+              (3369675 'move' new_temp[3369673](3369602 call _new[3369617] reader[3367242] this[3367238]))
+              const-val new_temp_n[3369680]:owned ModuleSpecification[3283911] "dead after last mention" "delay instantiation" "insert auto destroy" "maybe copy elided" "temp"
+              const-val initTemp[3369701]:owned ModuleSpecification[3283911] "dead after last mention" "delay instantiation" "temp"
+              (3369704 call init[3369722] initTemp[3369701] new_temp[3369673])
+              (3369682 'move' new_temp_n[3369680] initTemp[3369701])
+            }
+            const-val _formal_tmp_in_x[3370696]:owned ModuleSpecification[3283911] "dead after last mention" "expr temp" "no auto destroy" "temp"
+            (5635307 '=' _formal_tmp_in_x[3370696] new_temp_n[3369680])
+            (3370701 'noop')
+            const-val ret_tmp[5589576]:owned ModuleSpecification?[3283604] "temp"
+            (3369684 call :[3370208] _formal_tmp_in_x[3370696] ret_tmp[5589576])
+            (5589579 'move' call_tmp[3367716] ret_tmp[5589576])
+            (3371997 '=' ret[3367248] call_tmp[3367716])
+            gotoReturn _end_deserializeType[3367737] _end_deserializeType[3367737]
+          }
+        }
+      }
+    }
+    label _end_deserializeType[3367737]
+    (5589560 '=' _retArg[5589558] ret[3367248])
+    (5589562 return _void[46])
+  }
+  function _ref(jsonDeserializer)[1922054].deserializeType[3375160](const  ref arg this[3375164]:_ref(jsonDeserializer)[1922054], const  ref arg reader[3375168]:fileReader(false,jsonDeserializer)[3276790], ref arg error_out[5510363]:Error[85511], ref arg _retArg[5589654]:_ref(list(string,false))[1950614]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479981]:list(string,false)[1950598] "temp"
+    const-val ret[3375174]:list(string,false)[1950598] "dead after last mention" "delay instantiation" "RVV" "temp"
+    val tmp[3375184]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3375191]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3375204]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3375206]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3375208]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3375251]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3375276]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3375283]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3375296]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3375298]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3375300]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val tmp[3375320]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+    val call_tmp[3375322]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3375340]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      val tmp[3375381]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3375388]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val tmp[3375401]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+      val tmp[3375403]:bool[19] "dead after last mention" "maybe param" "temp"
+      val call_tmp[3375405]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val tmp[3375425]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      val call_tmp[3375427]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3375445]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      {
+        val call_tmp[3375479]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[3375486]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        {
+          val tmp[3375545]:bool[19] "dead after last mention" "maybe param" "temp"
+          val call_tmp[3375555]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val tmp[3375568]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+          val tmp[3375570]:bool[19] "dead after last mention" "maybe param" "temp"
+          val call_tmp[3375572]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val tmp[3375592]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+          val call_tmp[3375594]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val call_tmp[3375612]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          {
+            const-val call_tmp[3375642]:list(string,false)[1950598] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "temp"
+            const-val initTemp[3377149]:list(string,false)[1950598] "dead after last mention" "delay instantiation" "temp"
+            val error[5510366]:Error[85511] "error variable" "temp"
+            (5510368 'move' error[5510366] nil[32])
+            (3377152 call init[3377164] initTemp[3377149] reader[3375168] this[3375164] error[5510366])
+            val errorExists[7302944]:bool[19] "temp"
+            (7302949 'move' errorExists[7302944](7302946 '!=' error[5510366] nil[32]))
+            if errorExists[7302944]
+            {
+              (5510372 '=' error_out[5510363] error[5510366])
+              gotoErrorHandlingReturn _end_deserializeType[3375663] _end_deserializeType[3375663]
+            }
+            (3375644 'move' call_tmp[3375642] initTemp[3377149])
+            (3379405 '=' ret[3375174] call_tmp[3375642])
+            gotoReturn _end_deserializeType[3375663] _end_deserializeType[3375663]
+          }
+        }
+      }
+    }
+    label _end_deserializeType[3375663]
+    (5589656 '=' _retArg[5589654] ret[3375174])
+    (5589658 return _void[46])
+  }
+  function _ref(jsonDeserializer)[1922054].startClass[3288401](const  ref arg this[3288405]:_ref(jsonDeserializer)[1922054], const  ref arg reader[3288409]:fileReader(false,jsonDeserializer)[3276790], const  ref arg name[3288411]:string[244], ref arg error_out[5507292]:Error[85511], ref arg _retArg[5588630]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    const-val ret[3288413]:AggregateDeserializer(fileReader(false,jsonDeserializer))[3313851] "dead after last mention" "RVV" "temp"
+    const-val call_tmp[3288421]:(map(string,int(64),false),int(64))[3312520] "dead after last mention" "maybe param" "temp"
+    val error[5507295]:Error[85511] "error variable" "temp"
+    (5507297 'move' error[5507295] nil[32])
+    const-val ret_tmp[5588636]:(map(string,int(64),false),int(64))[3312520] "temp"
+    (3288426 call outOfOrderHelper[3288493] reader[3288409] error[5507295] ret_tmp[5588636])
+    (5588639 'move' call_tmp[3288421] ret_tmp[5588636])
+    val errorExists[7301488]:bool[19] "temp"
+    (7301493 'move' errorExists[7301488](7301490 '!=' error[5507295] nil[32]))
+    if errorExists[7301488]
+    {
+      (5507301 '=' error_out[5507292] error[5507295])
+      gotoErrorHandlingReturn _end_startClass[3288488] _end_startClass[3288488]
+    }
+    const-val tmp[3288428]:(map(string,int(64),false),int(64))[3312520] "dead at end of block" "insert auto destroy" "temp"
+    (3288430 'move' tmp[3288428] call_tmp[3288421])
+    1
+    ref call_tmp[3288438]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "insert auto destroy" "maybe param" "temp"
+    (3288440 'move' call_tmp[3288438](3313710 '.' tmp[3288428] x0[3312516]))
+    const-val m[3288445]:map(string,int(64),false)[3288794] "dead at end of block" "insert auto destroy" "maybe copy elided"
+    (3288447 call init=[3309171] m[3288445] call_tmp[3288438])
+    const-ref call_tmp[3288450]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (3288452 'move' call_tmp[3288450](3313718 '.' tmp[3288428] x1[3312518]))
+    const-val last[3288457]:int(64)[10] "dead at end of block" "insert auto destroy"
+    const-val coerce_tmp[3313724]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "maybe copy elided" "temp"
+    (3313728 'move' coerce_tmp[3313724](3313726 'deref' call_tmp[3288450]))
+    (5632326 '=' last[3288457] coerce_tmp[3313724])
+    (3288459 'noop')
+    val default_arg_ignoreWhitespace[3313736]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val error[5507310]:Error[85511] "error variable" "temp"
+    (5507312 'move' error[5507310] nil[32])
+    (3288467 call readLiteral[3289473] reader[3288409] "{" 1 error[5507310])
+    val errorExists[7301496]:bool[19] "temp"
+    (7301501 'move' errorExists[7301496](7301498 '!=' error[5507310] nil[32]))
+    if errorExists[7301496]
+    {
+      (5507316 '=' error_out[5507292] error[5507310])
+      (5632329 call chpl__autoDestroy[4217196] m[3288445])
+      (5632332 call chpl__autoDestroy[4218926] tmp[3288428])
+      gotoErrorHandlingReturn _end_startClass[3288488] _end_startClass[3288488]
+    }
+    const-val call_tmp[3288470]:AggregateDeserializer(fileReader(false,jsonDeserializer))[3313851] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "temp"
+    const-val initTemp[3313748]:AggregateDeserializer(fileReader(false,jsonDeserializer))[3313851] "dead after last mention" "delay instantiation" "temp"
+    const-val _formal_tmp_in_reader[3313886]:fileReader(false,jsonDeserializer)[3276790] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (3313891 'move' _formal_tmp_in_reader[3313886](3313887 call chpl__initCopy[3313894] reader[3288409] 0))
+    const-val _formal_tmp_in__fieldOffsets[3314749]:map(string,int(64),false)[3288794] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (5632323 '=' _formal_tmp_in__fieldOffsets[3314749] m[3288445])
+    (3314754 'noop')
+    const-val default_arg__parent[3314791]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    (3314795 'move' default_arg__parent[3314791](3314793 call init_default__parent[3314759]))
+    (3313751 call init[3313769] initTemp[3313748] _formal_tmp_in_reader[3313886] _formal_tmp_in__fieldOffsets[3314749] last[3288457] default_arg__parent[3314791])
+    (3288472 'move' call_tmp[3288470] initTemp[3313748])
+    (3288479 'move' ret[3288413] call_tmp[3288470])
+    (5632335 call chpl__autoDestroy[4218926] tmp[3288428])
+    gotoReturn _end_startClass[3288488] _end_startClass[3288488]
+    label _end_startClass[3288488]
+    (5588632 '=' _retArg[5588630] ret[3288413])
+    (5588634 return _void[46])
+  }
+  function _ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867].readField[3314808](const  ref arg this[3314812]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867], const  ref arg name[3314814]:string[244], ref arg error_out[5507929]:Error[85511], ref arg _retArg[5588891]:_ref(string)[1466327]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479847]:string[244] "temp"
+    const-val ret[3314820]:string[244] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[3314830]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "maybe param" "temp"
+    (3314832 'move' call_tmp[3314830](3314835 call _fieldOffsets[3315080] this[3314812]))
+    const-val call_tmp[3314838]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3314840 'move' call_tmp[3314838](3314846 call contains[3315108] call_tmp[3314830] name[3314814]))
+    const-val call_tmp[3314848]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3314850 'move' call_tmp[3314848] call_tmp[3314838])
+    if call_tmp[3314848]
+    {
+      const-ref call_tmp[3314857]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3314859 'move' call_tmp[3314857](3314862 call reader[3315229] this[3314812]))
+      const-val _return_tmp_[5468795]:int(64)[10] "dead after last mention" "temp"
+      val error[5507932]:Error[85511] "error variable" "temp"
+      (5507934 'move' error[5507932] nil[32])
+      (5468797 'move' _return_tmp_[5468795](3314869 call mark[3288983] call_tmp[3314857] error[5507932]))
+      val errorExists[7301808]:bool[19] "temp"
+      (7301813 'move' errorExists[7301808](7301810 '!=' error[5507932] nil[32]))
+      if errorExists[7301808]
+      {
+        (5507938 '=' error_out[5507929] error[5507932])
+        gotoErrorHandlingReturn _end_readField[3315075] _end_readField[3315075]
+      }
+      const-ref call_tmp[3314871]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+      const-ref _this_tmp_[3315259]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "temp"
+      (3315261 'move' _this_tmp_[3315259](3314876 call _fieldOffsets[3315080] this[3314812]))
+      val error[5507947]:Error[85511] "error variable" "temp"
+      (5507949 'move' error[5507947] nil[32])
+      (3314873 'move' call_tmp[3314871](3315566 call this[3315376] _this_tmp_[3315259] name[3314814] error[5507947]))
+      val errorExists[7301816]:bool[19] "temp"
+      (7301821 'move' errorExists[7301816](7301818 '!=' error[5507947] nil[32]))
+      if errorExists[7301816]
+      {
+        (5507953 '=' error_out[5507929] error[5507947])
+        gotoErrorHandlingReturn _end_readField[3315075] _end_readField[3315075]
+      }
+      const-ref call_tmp[3314881]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3314883 'move' call_tmp[3314881](3314886 call reader[3315229] this[3314812]))
+      const-val call_tmp[3314889]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3314891 'move' call_tmp[3314889](3314897 call offset[3289103] call_tmp[3314881]))
+      const-val call_tmp[3314898]:int(64)[10] "dead at end of block" "maybe param" "temp"
+      const-val coerce_tmp[3335238]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3335242 'move' coerce_tmp[3335238](3335240 'deref' call_tmp[3314871]))
+      (3314900 'move' call_tmp[3314898](3314903 call -[57305] coerce_tmp[3335238] call_tmp[3314889]))
+      const-val dist[3314906]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+      (3314908 'move' dist[3314906] call_tmp[3314898])
+      const-ref call_tmp[3314912]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3314914 'move' call_tmp[3314912](3314917 call reader[3315229] this[3314812]))
+      val error[5507962]:Error[85511] "error variable" "temp"
+      (5507964 'move' error[5507962] nil[32])
+      (3314924 call advance[3335246] call_tmp[3314912] dist[3314906] error[5507962])
+      val errorExists[7301824]:bool[19] "temp"
+      (7301829 'move' errorExists[7301824](7301826 '!=' error[5507962] nil[32]))
+      if errorExists[7301824]
+      {
+        (5507968 '=' error_out[5507929] error[5507962])
+        gotoErrorHandlingReturn _end_readField[3315075] _end_readField[3315075]
+      }
+    }
+    {
+      const-val call_tmp[3314929]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3314931 'move' call_tmp[3314929](3314937 call isEmpty[25458] name[3314814]))
+      const-val call_tmp[3314938]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3314940 'move' call_tmp[3314938](3314943 call ![63126] call_tmp[3314929]))
+      const-val call_tmp[3314945]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3314947 'move' call_tmp[3314945] call_tmp[3314938])
+      if call_tmp[3314945]
+      {
+        const-val call_tmp[3314954]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        const-val ret_tmp[5540232]:string[244] "temp"
+        (3314959 call +[28065] "field '" name[3314814] ret_tmp[5540232])
+        (5540235 'move' call_tmp[3314954] ret_tmp[5540232])
+        const-val call_tmp[3314962]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        const-val ret_tmp[5540238]:string[244] "temp"
+        (3314967 call +[28065] call_tmp[3314954] "' not found." ret_tmp[5540238])
+        (5540241 'move' call_tmp[3314962] ret_tmp[5540238])
+        const-val call_tmp[3314970]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+        { scopeless
+          val new_temp[3335440]:IllegalArgumentError[85616] "dead after last mention" "temp"
+          (3335442 'move' new_temp[3335440](3335427 call _new[1475209] call_tmp[3314962]))
+        }
+        const-val initTemp[3335449]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+        (3335452 call init[1475364] initTemp[3335449] new_temp[3335440])
+        (3314972 'move' call_tmp[3314970] initTemp[3335449])
+        val call_tmp[3314977]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+        const-val coerce_tmp[3335466]:owned Error[1498203] "dead after last mention" "coerce temp" "no auto destroy" "temp"
+        const-val ret_tmp[5547151]:owned Error[1498203] "temp"
+        (3335468 call :[1498308] call_tmp[3314970] ret_tmp[5547151])
+        (5547154 'move' coerce_tmp[3335466] ret_tmp[5547151])
+        const-val _formal_tmp_in_err[3335685]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+        (3335690 'move' _formal_tmp_in_err[3335685] coerce_tmp[3335466])
+        (3314979 'move' call_tmp[3314977](3314982 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3335685]))
+        {
+          val castedError[5507977]:Error[85511] "temp"
+          (5507983 'move' castedError[5507977] call_tmp[3314977])
+          (5507985 '=' error_out[5507929] castedError[5507977])
+          (5632702 call chpl__autoDestroy[3262688] call_tmp[3314962])
+          (5632705 call chpl__autoDestroy[3262688] call_tmp[3314954])
+          gotoErrorHandlingReturn _end_readField[3315075] _end_readField[3315075]
+        }
+        (5632709 call chpl__autoDestroy[3262688] call_tmp[3314962])
+        (5632712 call chpl__autoDestroy[3262688] call_tmp[3314954])
+      }
+    }
+    const-ref call_tmp[3314988]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3314990 'move' call_tmp[3314988](3314993 call reader[3315229] this[3314812]))
+    const-val call_tmp[3314996]:string[244] "dead at end of block" "maybe param" "temp"
+    val error[5507990]:Error[85511] "error variable" "temp"
+    (5507992 'move' error[5507990] nil[32])
+    const-val ret_tmp[5588654]:string[244] "temp"
+    (3315004 call read[3290733] call_tmp[3314988] error[5507990] ret_tmp[5588654])
+    (5588657 'move' call_tmp[3314996] ret_tmp[5588654])
+    val errorExists[7301832]:bool[19] "temp"
+    (7301837 'move' errorExists[7301832](7301834 '!=' error[5507990] nil[32]))
+    if errorExists[7301832]
+    {
+      (5507996 '=' error_out[5507929] error[5507990])
+      gotoErrorHandlingReturn _end_readField[3315075] _end_readField[3315075]
+    }
+    const-val ret[3315006]:string[244] "dead at end of block" "insert auto destroy"
+    (3315008 'move' ret[3315006] call_tmp[3314996])
+    const-ref call_tmp[3315012]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3315014 'move' call_tmp[3315012](3315017 call reader[3315229] this[3314812]))
+    val default_arg_ignoreWhitespace[3335703]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    const-val _return_tmp_[5468799]:bool[19] "dead after last mention" "temp"
+    val error[5508005]:Error[85511] "error variable" "temp"
+    (5508007 'move' error[5508005] nil[32])
+    (5468801 'move' _return_tmp_[5468799](3315024 call matchLiteral[3290040] call_tmp[3315012] "," 1 error[5508005]))
+    val errorExists[7301840]:bool[19] "temp"
+    (7301845 'move' errorExists[7301840](7301842 '!=' error[5508005] nil[32]))
+    if errorExists[7301840]
+    {
+      (5508011 '=' error_out[5507929] error[5508005])
+      (5632715 call chpl__autoDestroy[3262688] ret[3315006])
+      gotoErrorHandlingReturn _end_readField[3315075] _end_readField[3315075]
+    }
+    const-val call_tmp[3315027]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3315029 'move' call_tmp[3315027](3315035 call isEmpty[25458] name[3314814]))
+    const-val call_tmp[3315036]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3315038 'move' call_tmp[3315036](3315041 call ![63126] call_tmp[3315027]))
+    const-val call_tmp[3315043]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3315045 'move' call_tmp[3315043] call_tmp[3315036])
+    if call_tmp[3315043]
+    {
+      const-ref call_tmp[3315052]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3315054 'move' call_tmp[3315052](3315057 call reader[3315229] this[3314812]))
+      (3315064 call revert[3308945] call_tmp[3315052])
+    }
+    (3335719 '=' ret[3314820] ret[3315006])
+    gotoReturn _end_readField[3315075] _end_readField[3315075]
+    label _end_readField[3315075]
+    (5588893 '=' _retArg[5588891] ret[3314820])
+    (5588895 return _void[46])
+  }
+  function _ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867].readField[3335734](const  ref arg this[3335738]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867], const  ref arg name[3335740]:string[244], ref arg error_out[5509396]:Error[85511], ref arg _retArg[5589188]:_ref(map(string,string,false))[3283395]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479871]:map(string,string,false)[3283386] "temp"
+    const-val ret[3335746]:map(string,string,false)[3283386] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[3335756]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "maybe param" "temp"
+    (3335758 'move' call_tmp[3335756](3335761 call _fieldOffsets[3315080] this[3335738]))
+    const-val call_tmp[3335764]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3335766 'move' call_tmp[3335764](3335772 call contains[3315108] call_tmp[3335756] name[3335740]))
+    const-val call_tmp[3335774]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3335776 'move' call_tmp[3335774] call_tmp[3335764])
+    if call_tmp[3335774]
+    {
+      const-ref call_tmp[3335783]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3335785 'move' call_tmp[3335783](3335788 call reader[3315229] this[3335738]))
+      const-val _return_tmp_[5468811]:int(64)[10] "dead after last mention" "temp"
+      val error[5509399]:Error[85511] "error variable" "temp"
+      (5509401 'move' error[5509399] nil[32])
+      (5468813 'move' _return_tmp_[5468811](3335795 call mark[3288983] call_tmp[3335783] error[5509399]))
+      val errorExists[7302480]:bool[19] "temp"
+      (7302485 'move' errorExists[7302480](7302482 '!=' error[5509399] nil[32]))
+      if errorExists[7302480]
+      {
+        (5509405 '=' error_out[5509396] error[5509399])
+        gotoErrorHandlingReturn _end_readField[3336001] _end_readField[3336001]
+      }
+      const-ref call_tmp[3335797]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+      const-ref _this_tmp_[3336011]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "temp"
+      (3336013 'move' _this_tmp_[3336011](3335802 call _fieldOffsets[3315080] this[3335738]))
+      val error[5509414]:Error[85511] "error variable" "temp"
+      (5509416 'move' error[5509414] nil[32])
+      (3335799 'move' call_tmp[3335797](3336019 call this[3315376] _this_tmp_[3336011] name[3335740] error[5509414]))
+      val errorExists[7302488]:bool[19] "temp"
+      (7302493 'move' errorExists[7302488](7302490 '!=' error[5509414] nil[32]))
+      if errorExists[7302488]
+      {
+        (5509420 '=' error_out[5509396] error[5509414])
+        gotoErrorHandlingReturn _end_readField[3336001] _end_readField[3336001]
+      }
+      const-ref call_tmp[3335807]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3335809 'move' call_tmp[3335807](3335812 call reader[3315229] this[3335738]))
+      const-val call_tmp[3335815]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3335817 'move' call_tmp[3335815](3335823 call offset[3289103] call_tmp[3335807]))
+      const-val call_tmp[3335824]:int(64)[10] "dead at end of block" "maybe param" "temp"
+      const-val coerce_tmp[3336028]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3336032 'move' coerce_tmp[3336028](3336030 'deref' call_tmp[3335797]))
+      (3335826 'move' call_tmp[3335824](3335829 call -[57305] coerce_tmp[3336028] call_tmp[3335815]))
+      const-val dist[3335832]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+      (3335834 'move' dist[3335832] call_tmp[3335824])
+      const-ref call_tmp[3335838]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3335840 'move' call_tmp[3335838](3335843 call reader[3315229] this[3335738]))
+      val error[5509429]:Error[85511] "error variable" "temp"
+      (5509431 'move' error[5509429] nil[32])
+      (3335850 call advance[3335246] call_tmp[3335838] dist[3335832] error[5509429])
+      val errorExists[7302496]:bool[19] "temp"
+      (7302501 'move' errorExists[7302496](7302498 '!=' error[5509429] nil[32]))
+      if errorExists[7302496]
+      {
+        (5509435 '=' error_out[5509396] error[5509429])
+        gotoErrorHandlingReturn _end_readField[3336001] _end_readField[3336001]
+      }
+    }
+    {
+      const-val call_tmp[3335855]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3335857 'move' call_tmp[3335855](3335863 call isEmpty[25458] name[3335740]))
+      const-val call_tmp[3335864]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3335866 'move' call_tmp[3335864](3335869 call ![63126] call_tmp[3335855]))
+      const-val call_tmp[3335871]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3335873 'move' call_tmp[3335871] call_tmp[3335864])
+      if call_tmp[3335871]
+      {
+        const-val call_tmp[3335880]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        const-val ret_tmp[5540310]:string[244] "temp"
+        (3335885 call +[28065] "field '" name[3335740] ret_tmp[5540310])
+        (5540313 'move' call_tmp[3335880] ret_tmp[5540310])
+        const-val call_tmp[3335888]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        const-val ret_tmp[5540316]:string[244] "temp"
+        (3335893 call +[28065] call_tmp[3335880] "' not found." ret_tmp[5540316])
+        (5540319 'move' call_tmp[3335888] ret_tmp[5540316])
+        const-val call_tmp[3335896]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+        { scopeless
+          val new_temp[3336070]:IllegalArgumentError[85616] "dead after last mention" "temp"
+          (3336072 'move' new_temp[3336070](3336057 call _new[1475209] call_tmp[3335888]))
+        }
+        const-val initTemp[3336079]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+        (3336082 call init[1475364] initTemp[3336079] new_temp[3336070])
+        (3335898 'move' call_tmp[3335896] initTemp[3336079])
+        val call_tmp[3335903]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+        const-val coerce_tmp[3336096]:owned Error[1498203] "dead after last mention" "coerce temp" "no auto destroy" "temp"
+        const-val ret_tmp[5547157]:owned Error[1498203] "temp"
+        (3336098 call :[1498308] call_tmp[3335896] ret_tmp[5547157])
+        (5547160 'move' coerce_tmp[3336096] ret_tmp[5547157])
+        const-val _formal_tmp_in_err[3336315]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+        (3336320 'move' _formal_tmp_in_err[3336315] coerce_tmp[3336096])
+        (3335905 'move' call_tmp[3335903](3335908 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3336315]))
+        {
+          val castedError[5509444]:Error[85511] "temp"
+          (5509450 'move' castedError[5509444] call_tmp[3335903])
+          (5509452 '=' error_out[5509396] castedError[5509444])
+          (5634848 call chpl__autoDestroy[3262688] call_tmp[3335888])
+          (5634851 call chpl__autoDestroy[3262688] call_tmp[3335880])
+          gotoErrorHandlingReturn _end_readField[3336001] _end_readField[3336001]
+        }
+        (5634855 call chpl__autoDestroy[3262688] call_tmp[3335888])
+        (5634858 call chpl__autoDestroy[3262688] call_tmp[3335880])
+      }
+    }
+    const-ref call_tmp[3335914]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3335916 'move' call_tmp[3335914](3335919 call reader[3315229] this[3335738]))
+    const-val call_tmp[3335922]:map(string,string,false)[3283386] "dead at end of block" "maybe param" "temp"
+    val error[5509457]:Error[85511] "error variable" "temp"
+    (5509459 'move' error[5509457] nil[32])
+    const-val ret_tmp[5589194]:map(string,string,false)[3283386] "temp"
+    (3335930 call read[3336326] call_tmp[3335914] error[5509457] ret_tmp[5589194])
+    (5589197 'move' call_tmp[3335922] ret_tmp[5589194])
+    val errorExists[7302504]:bool[19] "temp"
+    (7302509 'move' errorExists[7302504](7302506 '!=' error[5509457] nil[32]))
+    if errorExists[7302504]
+    {
+      (5509463 '=' error_out[5509396] error[5509457])
+      gotoErrorHandlingReturn _end_readField[3336001] _end_readField[3336001]
+    }
+    const-val ret[3335932]:map(string,string,false)[3283386] "dead at end of block" "insert auto destroy"
+    (3335934 'move' ret[3335932] call_tmp[3335922])
+    const-ref call_tmp[3335938]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3335940 'move' call_tmp[3335938](3335943 call reader[3315229] this[3335738]))
+    val default_arg_ignoreWhitespace[3350745]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    const-val _return_tmp_[5468815]:bool[19] "dead after last mention" "temp"
+    val error[5509472]:Error[85511] "error variable" "temp"
+    (5509474 'move' error[5509472] nil[32])
+    (5468817 'move' _return_tmp_[5468815](3335950 call matchLiteral[3290040] call_tmp[3335938] "," 1 error[5509472]))
+    val errorExists[7302512]:bool[19] "temp"
+    (7302517 'move' errorExists[7302512](7302514 '!=' error[5509472] nil[32]))
+    if errorExists[7302512]
+    {
+      (5509478 '=' error_out[5509396] error[5509472])
+      (5634861 call chpl__autoDestroy[4211605] ret[3335932])
+      gotoErrorHandlingReturn _end_readField[3336001] _end_readField[3336001]
+    }
+    const-val call_tmp[3335953]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3335955 'move' call_tmp[3335953](3335961 call isEmpty[25458] name[3335740]))
+    const-val call_tmp[3335962]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3335964 'move' call_tmp[3335962](3335967 call ![63126] call_tmp[3335953]))
+    const-val call_tmp[3335969]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3335971 'move' call_tmp[3335969] call_tmp[3335962])
+    if call_tmp[3335969]
+    {
+      const-ref call_tmp[3335978]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3335980 'move' call_tmp[3335978](3335983 call reader[3315229] this[3335738]))
+      (3335990 call revert[3308945] call_tmp[3335978])
+    }
+    (3350761 '=' ret[3335746] ret[3335932])
+    gotoReturn _end_readField[3336001] _end_readField[3336001]
+    label _end_readField[3336001]
+    (5589190 '=' _retArg[5589188] ret[3335746])
+    (5589192 return _void[46])
+  }
+  function _ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867].readField[3350793](const  ref arg this[3350797]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867], const  ref arg name[3350799]:string[244], ref arg error_out[5509816]:Error[85511], ref arg _retArg[5589382]:_ref(map(string,owned ModuleSpecification?,false))[3283695]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479914]:map(string,owned ModuleSpecification?,false)[3283686] "temp"
+    const-val ret[3350805]:map(string,owned ModuleSpecification?,false)[3283686] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[3350815]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "maybe param" "temp"
+    (3350817 'move' call_tmp[3350815](3350820 call _fieldOffsets[3315080] this[3350797]))
+    const-val call_tmp[3350823]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3350825 'move' call_tmp[3350823](3350831 call contains[3315108] call_tmp[3350815] name[3350799]))
+    const-val call_tmp[3350833]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3350835 'move' call_tmp[3350833] call_tmp[3350823])
+    if call_tmp[3350833]
+    {
+      const-ref call_tmp[3350842]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3350844 'move' call_tmp[3350842](3350847 call reader[3315229] this[3350797]))
+      const-val _return_tmp_[5468839]:int(64)[10] "dead after last mention" "temp"
+      val error[5509819]:Error[85511] "error variable" "temp"
+      (5509821 'move' error[5509819] nil[32])
+      (5468841 'move' _return_tmp_[5468839](3350854 call mark[3288983] call_tmp[3350842] error[5509819]))
+      val errorExists[7302680]:bool[19] "temp"
+      (7302685 'move' errorExists[7302680](7302682 '!=' error[5509819] nil[32]))
+      if errorExists[7302680]
+      {
+        (5509825 '=' error_out[5509816] error[5509819])
+        gotoErrorHandlingReturn _end_readField[3351060] _end_readField[3351060]
+      }
+      const-ref call_tmp[3350856]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+      const-ref _this_tmp_[3351070]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "temp"
+      (3351072 'move' _this_tmp_[3351070](3350861 call _fieldOffsets[3315080] this[3350797]))
+      val error[5509834]:Error[85511] "error variable" "temp"
+      (5509836 'move' error[5509834] nil[32])
+      (3350858 'move' call_tmp[3350856](3351078 call this[3315376] _this_tmp_[3351070] name[3350799] error[5509834]))
+      val errorExists[7302688]:bool[19] "temp"
+      (7302693 'move' errorExists[7302688](7302690 '!=' error[5509834] nil[32]))
+      if errorExists[7302688]
+      {
+        (5509840 '=' error_out[5509816] error[5509834])
+        gotoErrorHandlingReturn _end_readField[3351060] _end_readField[3351060]
+      }
+      const-ref call_tmp[3350866]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3350868 'move' call_tmp[3350866](3350871 call reader[3315229] this[3350797]))
+      const-val call_tmp[3350874]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3350876 'move' call_tmp[3350874](3350882 call offset[3289103] call_tmp[3350866]))
+      const-val call_tmp[3350883]:int(64)[10] "dead at end of block" "maybe param" "temp"
+      const-val coerce_tmp[3351087]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3351091 'move' coerce_tmp[3351087](3351089 'deref' call_tmp[3350856]))
+      (3350885 'move' call_tmp[3350883](3350888 call -[57305] coerce_tmp[3351087] call_tmp[3350874]))
+      const-val dist[3350891]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+      (3350893 'move' dist[3350891] call_tmp[3350883])
+      const-ref call_tmp[3350897]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3350899 'move' call_tmp[3350897](3350902 call reader[3315229] this[3350797]))
+      val error[5509849]:Error[85511] "error variable" "temp"
+      (5509851 'move' error[5509849] nil[32])
+      (3350909 call advance[3335246] call_tmp[3350897] dist[3350891] error[5509849])
+      val errorExists[7302696]:bool[19] "temp"
+      (7302701 'move' errorExists[7302696](7302698 '!=' error[5509849] nil[32]))
+      if errorExists[7302696]
+      {
+        (5509855 '=' error_out[5509816] error[5509849])
+        gotoErrorHandlingReturn _end_readField[3351060] _end_readField[3351060]
+      }
+    }
+    {
+      const-val call_tmp[3350914]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3350916 'move' call_tmp[3350914](3350922 call isEmpty[25458] name[3350799]))
+      const-val call_tmp[3350923]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3350925 'move' call_tmp[3350923](3350928 call ![63126] call_tmp[3350914]))
+      const-val call_tmp[3350930]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3350932 'move' call_tmp[3350930] call_tmp[3350923])
+      if call_tmp[3350930]
+      {
+        const-val call_tmp[3350939]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        const-val ret_tmp[5540322]:string[244] "temp"
+        (3350944 call +[28065] "field '" name[3350799] ret_tmp[5540322])
+        (5540325 'move' call_tmp[3350939] ret_tmp[5540322])
+        const-val call_tmp[3350947]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        const-val ret_tmp[5540328]:string[244] "temp"
+        (3350952 call +[28065] call_tmp[3350939] "' not found." ret_tmp[5540328])
+        (5540331 'move' call_tmp[3350947] ret_tmp[5540328])
+        const-val call_tmp[3350955]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+        { scopeless
+          val new_temp[3351129]:IllegalArgumentError[85616] "dead after last mention" "temp"
+          (3351131 'move' new_temp[3351129](3351116 call _new[1475209] call_tmp[3350947]))
+        }
+        const-val initTemp[3351138]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+        (3351141 call init[1475364] initTemp[3351138] new_temp[3351129])
+        (3350957 'move' call_tmp[3350955] initTemp[3351138])
+        val call_tmp[3350962]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+        const-val coerce_tmp[3351155]:owned Error[1498203] "dead after last mention" "coerce temp" "no auto destroy" "temp"
+        const-val ret_tmp[5547163]:owned Error[1498203] "temp"
+        (3351157 call :[1498308] call_tmp[3350955] ret_tmp[5547163])
+        (5547166 'move' coerce_tmp[3351155] ret_tmp[5547163])
+        const-val _formal_tmp_in_err[3351374]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+        (3351379 'move' _formal_tmp_in_err[3351374] coerce_tmp[3351155])
+        (3350964 'move' call_tmp[3350962](3350967 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3351374]))
+        {
+          val castedError[5509864]:Error[85511] "temp"
+          (5509870 'move' castedError[5509864] call_tmp[3350962])
+          (5509872 '=' error_out[5509816] castedError[5509864])
+          (5635100 call chpl__autoDestroy[3262688] call_tmp[3350947])
+          (5635103 call chpl__autoDestroy[3262688] call_tmp[3350939])
+          gotoErrorHandlingReturn _end_readField[3351060] _end_readField[3351060]
+        }
+        (5635107 call chpl__autoDestroy[3262688] call_tmp[3350947])
+        (5635110 call chpl__autoDestroy[3262688] call_tmp[3350939])
+      }
+    }
+    const-ref call_tmp[3350973]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3350975 'move' call_tmp[3350973](3350978 call reader[3315229] this[3350797]))
+    const-val call_tmp[3350981]:map(string,owned ModuleSpecification?,false)[3283686] "dead at end of block" "maybe param" "temp"
+    val error[5509877]:Error[85511] "error variable" "temp"
+    (5509879 'move' error[5509877] nil[32])
+    const-val ret_tmp[5589388]:map(string,owned ModuleSpecification?,false)[3283686] "temp"
+    (3350989 call read[3351385] call_tmp[3350973] error[5509877] ret_tmp[5589388])
+    (5589391 'move' call_tmp[3350981] ret_tmp[5589388])
+    val errorExists[7302704]:bool[19] "temp"
+    (7302709 'move' errorExists[7302704](7302706 '!=' error[5509877] nil[32]))
+    if errorExists[7302704]
+    {
+      (5509883 '=' error_out[5509816] error[5509877])
+      gotoErrorHandlingReturn _end_readField[3351060] _end_readField[3351060]
+    }
+    const-val ret[3350991]:map(string,owned ModuleSpecification?,false)[3283686] "dead at end of block" "insert auto destroy"
+    (3350993 'move' ret[3350991] call_tmp[3350981])
+    const-ref call_tmp[3350997]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3350999 'move' call_tmp[3350997](3351002 call reader[3315229] this[3350797]))
+    val default_arg_ignoreWhitespace[3373742]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    const-val _return_tmp_[5468843]:bool[19] "dead after last mention" "temp"
+    val error[5509892]:Error[85511] "error variable" "temp"
+    (5509894 'move' error[5509892] nil[32])
+    (5468845 'move' _return_tmp_[5468843](3351009 call matchLiteral[3290040] call_tmp[3350997] "," 1 error[5509892]))
+    val errorExists[7302712]:bool[19] "temp"
+    (7302717 'move' errorExists[7302712](7302714 '!=' error[5509892] nil[32]))
+    if errorExists[7302712]
+    {
+      (5509898 '=' error_out[5509816] error[5509892])
+      (5635113 call chpl__autoDestroy[4215179] ret[3350991])
+      gotoErrorHandlingReturn _end_readField[3351060] _end_readField[3351060]
+    }
+    const-val call_tmp[3351012]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3351014 'move' call_tmp[3351012](3351020 call isEmpty[25458] name[3350799]))
+    const-val call_tmp[3351021]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3351023 'move' call_tmp[3351021](3351026 call ![63126] call_tmp[3351012]))
+    const-val call_tmp[3351028]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3351030 'move' call_tmp[3351028] call_tmp[3351021])
+    if call_tmp[3351028]
+    {
+      const-ref call_tmp[3351037]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3351039 'move' call_tmp[3351037](3351042 call reader[3315229] this[3350797]))
+      (3351049 call revert[3308945] call_tmp[3351037])
+    }
+    (3373758 '=' ret[3350805] ret[3350991])
+    gotoReturn _end_readField[3351060] _end_readField[3351060]
+    label _end_readField[3351060]
+    (5589384 '=' _retArg[5589382] ret[3350805])
+    (5589386 return _void[46])
+  }
+  function _ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867].readField[3373790](const  ref arg this[3373794]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867], const  ref arg name[3373796]:string[244], ref arg error_out[5510211]:Error[85511], ref arg _retArg[5589618]:_ref(list(string,false))[1950614]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479975]:list(string,false)[1950598] "temp"
+    const-val ret[3373802]:list(string,false)[1950598] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[3373812]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "maybe param" "temp"
+    (3373814 'move' call_tmp[3373812](3373817 call _fieldOffsets[3315080] this[3373794]))
+    const-val call_tmp[3373820]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3373822 'move' call_tmp[3373820](3373828 call contains[3315108] call_tmp[3373812] name[3373796]))
+    const-val call_tmp[3373830]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3373832 'move' call_tmp[3373830] call_tmp[3373820])
+    if call_tmp[3373830]
+    {
+      const-ref call_tmp[3373839]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3373841 'move' call_tmp[3373839](3373844 call reader[3315229] this[3373794]))
+      const-val _return_tmp_[5468863]:int(64)[10] "dead after last mention" "temp"
+      val error[5510214]:Error[85511] "error variable" "temp"
+      (5510216 'move' error[5510214] nil[32])
+      (5468865 'move' _return_tmp_[5468863](3373851 call mark[3288983] call_tmp[3373839] error[5510214]))
+      val errorExists[7302872]:bool[19] "temp"
+      (7302877 'move' errorExists[7302872](7302874 '!=' error[5510214] nil[32]))
+      if errorExists[7302872]
+      {
+        (5510220 '=' error_out[5510211] error[5510214])
+        gotoErrorHandlingReturn _end_readField[3374057] _end_readField[3374057]
+      }
+      const-ref call_tmp[3373853]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+      const-ref _this_tmp_[3374067]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "temp"
+      (3374069 'move' _this_tmp_[3374067](3373858 call _fieldOffsets[3315080] this[3373794]))
+      val error[5510229]:Error[85511] "error variable" "temp"
+      (5510231 'move' error[5510229] nil[32])
+      (3373855 'move' call_tmp[3373853](3374075 call this[3315376] _this_tmp_[3374067] name[3373796] error[5510229]))
+      val errorExists[7302880]:bool[19] "temp"
+      (7302885 'move' errorExists[7302880](7302882 '!=' error[5510229] nil[32]))
+      if errorExists[7302880]
+      {
+        (5510235 '=' error_out[5510211] error[5510229])
+        gotoErrorHandlingReturn _end_readField[3374057] _end_readField[3374057]
+      }
+      const-ref call_tmp[3373863]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3373865 'move' call_tmp[3373863](3373868 call reader[3315229] this[3373794]))
+      const-val call_tmp[3373871]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3373873 'move' call_tmp[3373871](3373879 call offset[3289103] call_tmp[3373863]))
+      const-val call_tmp[3373880]:int(64)[10] "dead at end of block" "maybe param" "temp"
+      const-val coerce_tmp[3374084]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3374088 'move' coerce_tmp[3374084](3374086 'deref' call_tmp[3373853]))
+      (3373882 'move' call_tmp[3373880](3373885 call -[57305] coerce_tmp[3374084] call_tmp[3373871]))
+      const-val dist[3373888]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+      (3373890 'move' dist[3373888] call_tmp[3373880])
+      const-ref call_tmp[3373894]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3373896 'move' call_tmp[3373894](3373899 call reader[3315229] this[3373794]))
+      val error[5510244]:Error[85511] "error variable" "temp"
+      (5510246 'move' error[5510244] nil[32])
+      (3373906 call advance[3335246] call_tmp[3373894] dist[3373888] error[5510244])
+      val errorExists[7302888]:bool[19] "temp"
+      (7302893 'move' errorExists[7302888](7302890 '!=' error[5510244] nil[32]))
+      if errorExists[7302888]
+      {
+        (5510250 '=' error_out[5510211] error[5510244])
+        gotoErrorHandlingReturn _end_readField[3374057] _end_readField[3374057]
+      }
+    }
+    {
+      const-val call_tmp[3373911]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3373913 'move' call_tmp[3373911](3373919 call isEmpty[25458] name[3373796]))
+      const-val call_tmp[3373920]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3373922 'move' call_tmp[3373920](3373925 call ![63126] call_tmp[3373911]))
+      const-val call_tmp[3373927]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3373929 'move' call_tmp[3373927] call_tmp[3373920])
+      if call_tmp[3373927]
+      {
+        const-val call_tmp[3373936]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        const-val ret_tmp[5540334]:string[244] "temp"
+        (3373941 call +[28065] "field '" name[3373796] ret_tmp[5540334])
+        (5540337 'move' call_tmp[3373936] ret_tmp[5540334])
+        const-val call_tmp[3373944]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        const-val ret_tmp[5540340]:string[244] "temp"
+        (3373949 call +[28065] call_tmp[3373936] "' not found." ret_tmp[5540340])
+        (5540343 'move' call_tmp[3373944] ret_tmp[5540340])
+        const-val call_tmp[3373952]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+        { scopeless
+          val new_temp[3374126]:IllegalArgumentError[85616] "dead after last mention" "temp"
+          (3374128 'move' new_temp[3374126](3374113 call _new[1475209] call_tmp[3373944]))
+        }
+        const-val initTemp[3374135]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+        (3374138 call init[1475364] initTemp[3374135] new_temp[3374126])
+        (3373954 'move' call_tmp[3373952] initTemp[3374135])
+        val call_tmp[3373959]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+        const-val coerce_tmp[3374152]:owned Error[1498203] "dead after last mention" "coerce temp" "no auto destroy" "temp"
+        const-val ret_tmp[5547169]:owned Error[1498203] "temp"
+        (3374154 call :[1498308] call_tmp[3373952] ret_tmp[5547169])
+        (5547172 'move' coerce_tmp[3374152] ret_tmp[5547169])
+        const-val _formal_tmp_in_err[3374371]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+        (3374376 'move' _formal_tmp_in_err[3374371] coerce_tmp[3374152])
+        (3373961 'move' call_tmp[3373959](3373964 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3374371]))
+        {
+          val castedError[5510259]:Error[85511] "temp"
+          (5510265 'move' castedError[5510259] call_tmp[3373959])
+          (5510267 '=' error_out[5510211] castedError[5510259])
+          (5635366 call chpl__autoDestroy[3262688] call_tmp[3373944])
+          (5635369 call chpl__autoDestroy[3262688] call_tmp[3373936])
+          gotoErrorHandlingReturn _end_readField[3374057] _end_readField[3374057]
+        }
+        (5635373 call chpl__autoDestroy[3262688] call_tmp[3373944])
+        (5635376 call chpl__autoDestroy[3262688] call_tmp[3373936])
+      }
+    }
+    const-ref call_tmp[3373970]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3373972 'move' call_tmp[3373970](3373975 call reader[3315229] this[3373794]))
+    const-val call_tmp[3373978]:list(string,false)[1950598] "dead at end of block" "maybe param" "temp"
+    val error[5510272]:Error[85511] "error variable" "temp"
+    (5510274 'move' error[5510272] nil[32])
+    const-val ret_tmp[5589624]:list(string,false)[1950598] "temp"
+    (3373986 call read[3374382] call_tmp[3373970] error[5510272] ret_tmp[5589624])
+    (5589627 'move' call_tmp[3373978] ret_tmp[5589624])
+    val errorExists[7302896]:bool[19] "temp"
+    (7302901 'move' errorExists[7302896](7302898 '!=' error[5510272] nil[32]))
+    if errorExists[7302896]
+    {
+      (5510278 '=' error_out[5510211] error[5510272])
+      gotoErrorHandlingReturn _end_readField[3374057] _end_readField[3374057]
+    }
+    const-val ret[3373988]:list(string,false)[1950598] "dead at end of block" "insert auto destroy"
+    (3373990 'move' ret[3373988] call_tmp[3373978])
+    const-ref call_tmp[3373994]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3373996 'move' call_tmp[3373994](3373999 call reader[3315229] this[3373794]))
+    val default_arg_ignoreWhitespace[3379416]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    const-val _return_tmp_[5468867]:bool[19] "dead after last mention" "temp"
+    val error[5510287]:Error[85511] "error variable" "temp"
+    (5510289 'move' error[5510287] nil[32])
+    (5468869 'move' _return_tmp_[5468867](3374006 call matchLiteral[3290040] call_tmp[3373994] "," 1 error[5510287]))
+    val errorExists[7302904]:bool[19] "temp"
+    (7302909 'move' errorExists[7302904](7302906 '!=' error[5510287] nil[32]))
+    if errorExists[7302904]
+    {
+      (5510293 '=' error_out[5510211] error[5510287])
+      (5635379 call chpl__autoDestroy[4034178] ret[3373988])
+      gotoErrorHandlingReturn _end_readField[3374057] _end_readField[3374057]
+    }
+    const-val call_tmp[3374009]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3374011 'move' call_tmp[3374009](3374017 call isEmpty[25458] name[3373796]))
+    const-val call_tmp[3374018]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3374020 'move' call_tmp[3374018](3374023 call ![63126] call_tmp[3374009]))
+    const-val call_tmp[3374025]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3374027 'move' call_tmp[3374025] call_tmp[3374018])
+    if call_tmp[3374025]
+    {
+      const-ref call_tmp[3374034]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3374036 'move' call_tmp[3374034](3374039 call reader[3315229] this[3373794]))
+      (3374046 call revert[3308945] call_tmp[3374034])
+    }
+    (3379432 '=' ret[3373802] ret[3373988])
+    gotoReturn _end_readField[3374057] _end_readField[3374057]
+    label _end_readField[3374057]
+    (5589620 '=' _retArg[5589618] ret[3373802])
+    (5589622 return _void[46])
+  }
+  function _ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867].endClass[3379444](const  ref arg this[3379448]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867], ref arg error_out[5510608]:Error[85511]) : void[4] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-ref call_tmp[3379454]:_ref(bool)[1466299] "dead after last mention" "maybe param" "temp"
+    (3379456 'move' call_tmp[3379454](3379459 call _parent[3379551] this[3379448]))
+    const-val call_tmp[3379462]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val coerce_tmp[3379579]:bool[19] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3379583 'move' coerce_tmp[3379579](3379581 'deref' call_tmp[3379454]))
+    (3379464 'move' call_tmp[3379462](3379467 call ![63126] coerce_tmp[3379579]))
+    const-val call_tmp[3379469]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3379471 'move' call_tmp[3379469] call_tmp[3379462])
+    if call_tmp[3379469]
+    {
+      const-ref call_tmp[3379478]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+      (3379480 'move' call_tmp[3379478](3379483 call _lastPos[3379586] this[3379448]))
+      const-ref call_tmp[3379486]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3379488 'move' call_tmp[3379486](3379491 call reader[3315229] this[3379448]))
+      const-val call_tmp[3379494]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3379496 'move' call_tmp[3379494](3379502 call offset[3289103] call_tmp[3379486]))
+      const-val call_tmp[3379503]:int(64)[10] "dead at end of block" "maybe param" "temp"
+      const-val coerce_tmp[3379616]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3379620 'move' coerce_tmp[3379616](3379618 'deref' call_tmp[3379478]))
+      (3379505 'move' call_tmp[3379503](3379508 call -[57305] coerce_tmp[3379616] call_tmp[3379494]))
+      const-val dist[3379511]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+      (3379513 'move' dist[3379511] call_tmp[3379503])
+      const-ref call_tmp[3379517]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3379519 'move' call_tmp[3379517](3379522 call reader[3315229] this[3379448]))
+      val error[5510613]:Error[85511] "error variable" "temp"
+      (5510615 'move' error[5510613] nil[32])
+      (3379529 call advance[3335246] call_tmp[3379517] dist[3379511] error[5510613])
+      val errorExists[7303056]:bool[19] "temp"
+      (7303061 'move' errorExists[7303056](7303058 '!=' error[5510613] nil[32]))
+      if errorExists[7303056]
+      {
+        (5510619 '=' error_out[5510608] error[5510613])
+        gotoErrorHandlingReturn _endendClass[5510610] _endendClass[5510610]
+      }
+      const-ref call_tmp[3379533]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3379535 'move' call_tmp[3379533](3379538 call reader[3315229] this[3379448]))
+      val default_arg_ignoreWhitespace[3379631]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+      val error[5510628]:Error[85511] "error variable" "temp"
+      (5510630 'move' error[5510628] nil[32])
+      (3379545 call readLiteral[3289473] call_tmp[3379533] "}" 1 error[5510628])
+      val errorExists[7303064]:bool[19] "temp"
+      (7303069 'move' errorExists[7303064](7303066 '!=' error[5510628] nil[32]))
+      if errorExists[7303064]
+      {
+        (5510634 '=' error_out[5510608] error[5510628])
+        gotoErrorHandlingReturn _endendClass[5510610] _endendClass[5510610]
+      }
+    }
+    label _endendClass[5510610]
+    (3379548 return _void[46])
+  }
+  function _ref(jsonDeserializer)[1922054].startList[3378433](const  ref arg this[3378437]:_ref(jsonDeserializer)[1922054], const  ref arg reader[3378441]:fileReader(false,jsonDeserializer)[3276790], ref arg error_out[5510478]:Error[85511], ref arg _retArg[5589666]:_ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    const-val ret[3378443]:ListDeserializer(fileReader(false,jsonDeserializer))[3378540] "dead after last mention" "RVV" "temp"
+    val default_arg_ignoreWhitespace[3378477]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val error[5510483]:Error[85511] "error variable" "temp"
+    (5510485 'move' error[5510483] nil[32])
+    (3378455 call readLiteral[3289473] reader[3378441] "[" 1 error[5510483])
+    val errorExists[7303000]:bool[19] "temp"
+    (7303005 'move' errorExists[7303000](7303002 '!=' error[5510483] nil[32]))
+    if errorExists[7303000]
+    {
+      (5510489 '=' error_out[5510478] error[5510483])
+      gotoErrorHandlingReturn _endstartList[5510480] _endstartList[5510480]
+    }
+    const-val call_tmp[3378458]:ListDeserializer(fileReader(false,jsonDeserializer))[3378540] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "temp"
+    const-val initTemp[3378489]:ListDeserializer(fileReader(false,jsonDeserializer))[3378540] "dead after last mention" "delay instantiation" "temp"
+    const-val _formal_tmp_in_reader[3378571]:fileReader(false,jsonDeserializer)[3276790] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (3378576 'move' _formal_tmp_in_reader[3378571](3378572 call chpl__initCopy[3313894] reader[3378441] 0))
+    const-val default_arg__first[3378613]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    (3378617 'move' default_arg__first[3378613](3378615 call init_default__first[3378581]))
+    (3378492 call init[3378497] initTemp[3378489] _formal_tmp_in_reader[3378571] default_arg__first[3378613])
+    (3378460 'move' call_tmp[3378458] initTemp[3378489])
+    (3378465 'move' ret[3378443] call_tmp[3378458])
+    label _endstartList[5510480]
+    (5589668 '=' _retArg[5589666] ret[3378443])
+    (5589670 return _void[46])
+  }
+  function _ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556].readElement[3378816](ref arg this[3378820]:_ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556], ref arg error_out[5510529]:Error[85511], ref arg _retArg[5589678]:_ref(string)[1466327]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479987]:string[244] "temp"
+    const-val ret[3378826]:string[244] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[3378836]:_ref(bool)[1466299] "dead after last mention" "maybe param" "temp"
+    (3378838 'move' call_tmp[3378836](3378841 call _first[3378960] this[3378820]))
+    const-val call_tmp[3378844]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val coerce_tmp[3378988]:bool[19] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3378992 'move' coerce_tmp[3378988](3378990 'deref' call_tmp[3378836]))
+    (3378846 'move' call_tmp[3378844](3378849 call ![63126] coerce_tmp[3378988]))
+    const-val call_tmp[3378851]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3378853 'move' call_tmp[3378851] call_tmp[3378844])
+    if call_tmp[3378851]
+    {
+      const-ref call_tmp[3378860]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3378862 'move' call_tmp[3378860](3378865 call reader[3378727] this[3378820]))
+      val default_arg_ignoreWhitespace[3379001]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+      val error[5510532]:Error[85511] "error variable" "temp"
+      (5510534 'move' error[5510532] nil[32])
+      (3378872 call readLiteral[3289473] call_tmp[3378860] "," 1 error[5510532])
+      val errorExists[7303024]:bool[19] "temp"
+      (7303029 'move' errorExists[7303024](7303026 '!=' error[5510532] nil[32]))
+      if errorExists[7303024]
+      {
+        (5510538 '=' error_out[5510529] error[5510532])
+        gotoErrorHandlingReturn _end_readElement[3378955] _end_readElement[3378955]
+      }
+    }
+    {
+      ref call_tmp[3378875]:_ref(bool)[1466299] "dead after last mention" "maybe param" "temp"
+      (3378877 'move' call_tmp[3378875](3378880 call _first[3378960] this[3378820]))
+      (3378884 call =[52153] call_tmp[3378875] 0)
+    }
+    const-val call_tmp[3378888]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    val error[5510547]:Error[85511] "error variable" "temp"
+    (5510549 'move' error[5510547] nil[32])
+    (3378890 'move' call_tmp[3378888](3378896 call hasMore[3378621] this[3378820] error[5510547]))
+    val errorExists[7303032]:bool[19] "temp"
+    (7303037 'move' errorExists[7303032](7303034 '!=' error[5510547] nil[32]))
+    if errorExists[7303032]
+    {
+      (5510553 '=' error_out[5510529] error[5510547])
+      gotoErrorHandlingReturn _end_readElement[3378955] _end_readElement[3378955]
+    }
+    const-val call_tmp[3378897]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3378899 'move' call_tmp[3378897](3378902 call ![63126] call_tmp[3378888]))
+    const-val call_tmp[3378904]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3378906 'move' call_tmp[3378904] call_tmp[3378897])
+    if call_tmp[3378904]
+    {
+      const-val call_tmp[3378913]:owned BadFormatError[1544175] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[3379032]:BadFormatError[15094] "dead after last mention" "temp"
+        val default_arg_details[3379061]:string[244] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+        val default_arg_err_msg[3379088]:string[244] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+        (3379034 'move' new_temp[3379032](3379020 call _new[1543717] "" ""))
+      }
+      const-val initTemp[3379098]:owned BadFormatError[1544175] "dead after last mention" "delay instantiation" "temp"
+      (3379101 call init[1543824] initTemp[3379098] new_temp[3379032])
+      (3378915 'move' call_tmp[3378913] initTemp[3379098])
+      val call_tmp[3378919]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+      const-val coerce_tmp[3379115]:owned Error[1498203] "dead after last mention" "coerce temp" "no auto destroy" "temp"
+      const-val ret_tmp[5589122]:owned Error[1498203] "temp"
+      (3379117 call :[3332383] call_tmp[3378913] ret_tmp[5589122])
+      (5589125 'move' coerce_tmp[3379115] ret_tmp[5589122])
+      const-val _formal_tmp_in_err[3379334]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (3379339 'move' _formal_tmp_in_err[3379334] coerce_tmp[3379115])
+      (3378921 'move' call_tmp[3378919](3378924 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3379334]))
+      {
+        val castedError[5510562]:Error[85511] "temp"
+        (5510568 'move' castedError[5510562] call_tmp[3378919])
+        (5510570 '=' error_out[5510529] castedError[5510562])
+        gotoErrorHandlingReturn _end_readElement[3378955] _end_readElement[3378955]
+      }
+    }
+    {
+      const-ref call_tmp[3378929]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3378931 'move' call_tmp[3378929](3378934 call reader[3378727] this[3378820]))
+      const-val call_tmp[3378937]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      val error[5510575]:Error[85511] "error variable" "temp"
+      (5510577 'move' error[5510575] nil[32])
+      const-val ret_tmp[5588672]:string[244] "temp"
+      (3378945 call read[3290733] call_tmp[3378929] error[5510575] ret_tmp[5588672])
+      (5588675 'move' call_tmp[3378937] ret_tmp[5588672])
+      val errorExists[7303040]:bool[19] "temp"
+      (7303045 'move' errorExists[7303040](7303042 '!=' error[5510575] nil[32]))
+      if errorExists[7303040]
+      {
+        (5510581 '=' error_out[5510529] error[5510575])
+        gotoErrorHandlingReturn _end_readElement[3378955] _end_readElement[3378955]
+      }
+      (3379347 '=' ret[3378826] call_tmp[3378937])
+      gotoReturn _end_readElement[3378955] _end_readElement[3378955]
+    }
+    label _end_readElement[3378955]
+    (5589680 '=' _retArg[5589678] ret[3378826])
+    (5589682 return _void[46])
+  }
+  function _ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556].endList[3379351](const  ref arg this[3379355]:_ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556], ref arg error_out[5510589]:Error[85511]) : void[4] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-ref call_tmp[3379361]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3379363 'move' call_tmp[3379361](3379366 call reader[3378727] this[3379355]))
+    val default_arg_ignoreWhitespace[3379384]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val error[5510594]:Error[85511] "error variable" "temp"
+    (5510596 'move' error[5510594] nil[32])
+    (3379373 call readLiteral[3289473] call_tmp[3379361] "]" 1 error[5510594])
+    val errorExists[7303048]:bool[19] "temp"
+    (7303053 'move' errorExists[7303048](7303050 '!=' error[5510594] nil[32]))
+    if errorExists[7303048]
+    {
+      (5510600 '=' error_out[5510589] error[5510594])
+      gotoErrorHandlingReturn _endendList[5510591] _endendList[5510591]
+    }
+    label _endendList[5510591]
+    (3379375 return _void[46])
+  }
+  function _ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556].hasMore[3378621](const  ref arg this[3378625]:_ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556], ref arg error_out[5510497]:Error[85511]) : bool[19] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val ret[3378629]:bool[19] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[3378637]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3378639 'move' call_tmp[3378637](3378642 call reader[3378727] this[3378625]))
+    const-val _return_tmp_[5468871]:int(64)[10] "dead after last mention" "temp"
+    val error[5510500]:Error[85511] "error variable" "temp"
+    (5510502 'move' error[5510500] nil[32])
+    (5468873 'move' _return_tmp_[5468871](3378649 call mark[3288983] call_tmp[3378637] error[5510500]))
+    val errorExists[7303008]:bool[19] "temp"
+    (7303013 'move' errorExists[7303008](7303010 '!=' error[5510500] nil[32]))
+    if errorExists[7303008]
+    {
+      (5510506 '=' error_out[5510497] error[5510500])
+      gotoErrorHandlingReturn _end_hasMore[3378722] _end_hasMore[3378722]
+    }
+    const-ref call_tmp[3378651]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3378653 'move' call_tmp[3378651](3378656 call reader[3378727] this[3378625]))
+    const-val call_tmp[3378659]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    val default_arg_ignoreWhitespace[3378762]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val error[5510515]:Error[85511] "error variable" "temp"
+    (5510517 'move' error[5510515] nil[32])
+    (3378661 'move' call_tmp[3378659](3378667 call matchLiteral[3290040] call_tmp[3378651] "]" 1 error[5510515]))
+    val errorExists[7303016]:bool[19] "temp"
+    (7303021 'move' errorExists[7303016](7303018 '!=' error[5510515] nil[32]))
+    if errorExists[7303016]
+    {
+      (5510521 '=' error_out[5510497] error[5510515])
+      gotoErrorHandlingReturn _end_hasMore[3378722] _end_hasMore[3378722]
+    }
+    const-val call_tmp[3378669]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3378671 'move' call_tmp[3378669] call_tmp[3378659])
+    if call_tmp[3378669]
+    {
+      const-ref call_tmp[3378678]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3378680 'move' call_tmp[3378678](3378683 call reader[3378727] this[3378625]))
+      (3378690 call revert[3308945] call_tmp[3378678])
+      (3378692 'move' ret[3378629] 0)
+      gotoReturn _end_hasMore[3378722] _end_hasMore[3378722]
+    }
+    {
+      const-ref call_tmp[3378700]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3378702 'move' call_tmp[3378700](3378705 call reader[3378727] this[3378625]))
+      (3378712 call commit[3378778] call_tmp[3378700])
+      (3378714 'move' ret[3378629] 1)
+      gotoReturn _end_hasMore[3378722] _end_hasMore[3378722]
+    }
+    label _end_hasMore[3378722]
+    (3378724 return ret[3378629])
+  }
+  function _ref(jsonDeserializer)[1922054].startMap[3348715](const  ref arg this[3348719]:_ref(jsonDeserializer)[1922054], const  ref arg reader[3348723]:fileReader(false,jsonDeserializer)[3276790], ref arg error_out[5509678]:Error[85511], ref arg _retArg[5589316]:_ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    const-val ret[3348725]:MapDeserializer(fileReader(false,jsonDeserializer))[3348822] "dead after last mention" "RVV" "temp"
+    val default_arg_ignoreWhitespace[3348759]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val error[5509683]:Error[85511] "error variable" "temp"
+    (5509685 'move' error[5509683] nil[32])
+    (3348737 call readLiteral[3289473] reader[3348723] "{" 1 error[5509683])
+    val errorExists[7302616]:bool[19] "temp"
+    (7302621 'move' errorExists[7302616](7302618 '!=' error[5509683] nil[32]))
+    if errorExists[7302616]
+    {
+      (5509689 '=' error_out[5509678] error[5509683])
+      gotoErrorHandlingReturn _endstartMap[5509680] _endstartMap[5509680]
+    }
+    const-val call_tmp[3348740]:MapDeserializer(fileReader(false,jsonDeserializer))[3348822] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "temp"
+    const-val initTemp[3348771]:MapDeserializer(fileReader(false,jsonDeserializer))[3348822] "dead after last mention" "delay instantiation" "temp"
+    const-val _formal_tmp_in_reader[3348853]:fileReader(false,jsonDeserializer)[3276790] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (3348858 'move' _formal_tmp_in_reader[3348853](3348854 call chpl__initCopy[3313894] reader[3348723] 0))
+    const-val default_arg__first[3348895]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    (3348899 'move' default_arg__first[3348895](3348897 call init_default__first[3348863]))
+    (3348774 call init[3348779] initTemp[3348771] _formal_tmp_in_reader[3348853] default_arg__first[3348895])
+    (3348742 'move' call_tmp[3348740] initTemp[3348771])
+    (3348747 'move' ret[3348725] call_tmp[3348740])
+    label _endstartMap[5509680]
+    (5589318 '=' _retArg[5589316] ret[3348725])
+    (5589320 return _void[46])
+  }
+  function _ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838].readKey[3349035](ref arg this[3349039]:_ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838], ref arg error_out[5509731]:Error[85511], ref arg _retArg[5589334]:_ref(string)[1466327]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479910]:string[244] "temp"
+    const-val ret[3349045]:string[244] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[3349055]:_ref(bool)[1466299] "dead after last mention" "maybe param" "temp"
+    (3349057 'move' call_tmp[3349055](3349060 call _first[3349263] this[3349039]))
+    const-val call_tmp[3349063]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val coerce_tmp[3349291]:bool[19] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3349295 'move' coerce_tmp[3349291](3349293 'deref' call_tmp[3349055]))
+    (3349065 'move' call_tmp[3349063](3349068 call ![63126] coerce_tmp[3349291]))
+    const-val call_tmp[3349070]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3349072 'move' call_tmp[3349070] call_tmp[3349063])
+    if call_tmp[3349070]
+    {
+      const-ref call_tmp[3349079]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3349081 'move' call_tmp[3349079](3349084 call reader[3348981] this[3349039]))
+      val default_arg_ignoreWhitespace[3349304]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+      val error[5509734]:Error[85511] "error variable" "temp"
+      (5509736 'move' error[5509734] nil[32])
+      (3349091 call readLiteral[3289473] call_tmp[3349079] "," 1 error[5509734])
+      val errorExists[7302640]:bool[19] "temp"
+      (7302645 'move' errorExists[7302640](7302642 '!=' error[5509734] nil[32]))
+      if errorExists[7302640]
+      {
+        (5509740 '=' error_out[5509731] error[5509734])
+        gotoErrorHandlingReturn _end_readKey[3349258] _end_readKey[3349258]
+      }
+    }
+    {
+      ref call_tmp[3349094]:_ref(bool)[1466299] "dead after last mention" "maybe param" "temp"
+      (3349096 'move' call_tmp[3349094](3349099 call _first[3349263] this[3349039]))
+      (3349103 call =[52153] call_tmp[3349094] 0)
+    }
+    val call_tmp[3349107]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3349115]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      const-ref call_tmp[3349124]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (3349126 'move' call_tmp[3349124](3349129 call reader[3348981] this[3349039]))
+      const-val call_tmp[3349132]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      val error[5509749]:Error[85511] "error variable" "temp"
+      (5509751 'move' error[5509749] nil[32])
+      const-val ret_tmp[5588660]:string[244] "temp"
+      (3349140 call read[3290733] call_tmp[3349124] error[5509749] ret_tmp[5588660])
+      (5588663 'move' call_tmp[3349132] ret_tmp[5588660])
+      val errorExists[7302648]:bool[19] "temp"
+      (7302653 'move' errorExists[7302648](7302650 '!=' error[5509749] nil[32]))
+      if errorExists[7302648]
+      {
+        (5509755 '=' error_out[5509731] error[5509749])
+        gotoErrorHandlingReturn _end_readKey[3349258] _end_readKey[3349258]
+      }
+      (3349323 '=' ret[3349045] call_tmp[3349132])
+      gotoReturn _end_readKey[3349258] _end_readKey[3349258]
+    }
+    label _end_readKey[3349258]
+    (5589336 '=' _retArg[5589334] ret[3349045])
+    (5589338 return _void[46])
+  }
+  function _ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838].readValue[3349327](const  ref arg this[3349331]:_ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838], ref arg error_out[5509763]:Error[85511], ref arg _retArg[5589346]:_ref(string)[1466327]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479912]:string[244] "temp"
+    const-val ret[3349337]:string[244] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[3349347]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3349349 'move' call_tmp[3349347](3349352 call reader[3348981] this[3349331]))
+    val default_arg_ignoreWhitespace[3349394]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val error[5509768]:Error[85511] "error variable" "temp"
+    (5509770 'move' error[5509768] nil[32])
+    (3349359 call readLiteral[3289473] call_tmp[3349347] ":" 1 error[5509768])
+    val errorExists[7302656]:bool[19] "temp"
+    (7302661 'move' errorExists[7302656](7302658 '!=' error[5509768] nil[32]))
+    if errorExists[7302656]
+    {
+      (5509774 '=' error_out[5509763] error[5509768])
+      gotoErrorHandlingReturn _endreadValue[5509765] _endreadValue[5509765]
+    }
+    const-ref call_tmp[3349362]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3349364 'move' call_tmp[3349362](3349367 call reader[3348981] this[3349331]))
+    const-val call_tmp[3349370]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    val error[5509783]:Error[85511] "error variable" "temp"
+    (5509785 'move' error[5509783] nil[32])
+    const-val ret_tmp[5588666]:string[244] "temp"
+    (3349378 call read[3290733] call_tmp[3349362] error[5509783] ret_tmp[5588666])
+    (5588669 'move' call_tmp[3349370] ret_tmp[5588666])
+    val errorExists[7302664]:bool[19] "temp"
+    (7302669 'move' errorExists[7302664](7302666 '!=' error[5509783] nil[32]))
+    if errorExists[7302664]
+    {
+      (5509789 '=' error_out[5509763] error[5509783])
+      gotoErrorHandlingReturn _endreadValue[5509765] _endreadValue[5509765]
+    }
+    (3349408 '=' ret[3349337] call_tmp[3349370])
+    label _endreadValue[5509765]
+    (5589348 '=' _retArg[5589346] ret[3349337])
+    (5589350 return _void[46])
+  }
+  function _ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838].readValue[3366403](const  ref arg this[3366407]:_ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838], ref arg error_out[5510098]:Error[85511], ref arg _retArg[5589522]:_ref(owned ModuleSpecification?)[3283613]) : void[4] throws "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5479955]:owned ModuleSpecification?[3283604] "temp"
+    const-val ret[3366413]:owned ModuleSpecification?[3283604] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[3366423]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3366425 'move' call_tmp[3366423](3366428 call reader[3348981] this[3366407]))
+    val default_arg_ignoreWhitespace[3366470]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val error[5510103]:Error[85511] "error variable" "temp"
+    (5510105 'move' error[5510103] nil[32])
+    (3366435 call readLiteral[3289473] call_tmp[3366423] ":" 1 error[5510103])
+    val errorExists[7302816]:bool[19] "temp"
+    (7302821 'move' errorExists[7302816](7302818 '!=' error[5510103] nil[32]))
+    if errorExists[7302816]
+    {
+      (5510109 '=' error_out[5510098] error[5510103])
+      gotoErrorHandlingReturn _endreadValue[5510100] _endreadValue[5510100]
+    }
+    const-ref call_tmp[3366438]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3366440 'move' call_tmp[3366438](3366443 call reader[3348981] this[3366407]))
+    const-val call_tmp[3366446]:owned ModuleSpecification?[3283604] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    val error[5510118]:Error[85511] "error variable" "temp"
+    (5510120 'move' error[5510118] nil[32])
+    const-val ret_tmp[5589528]:owned ModuleSpecification?[3283604] "temp"
+    (3366454 call read[3366482] call_tmp[3366438] error[5510118] ret_tmp[5589528])
+    (5589531 'move' call_tmp[3366446] ret_tmp[5589528])
+    val errorExists[7302824]:bool[19] "temp"
+    (7302829 'move' errorExists[7302824](7302826 '!=' error[5510118] nil[32]))
+    if errorExists[7302824]
+    {
+      (5510124 '=' error_out[5510098] error[5510118])
+      gotoErrorHandlingReturn _endreadValue[5510100] _endreadValue[5510100]
+    }
+    (3372003 '=' ret[3366413] call_tmp[3366446])
+    label _endreadValue[5510100]
+    (5589524 '=' _retArg[5589522] ret[3366413])
+    (5589526 return _void[46])
+  }
+  function _ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838].endMap[3350681](const  ref arg this[3350685]:_ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838], ref arg error_out[5509797]:Error[85511]) : void[4] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-ref call_tmp[3350691]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3350693 'move' call_tmp[3350691](3350696 call reader[3348981] this[3350685]))
+    val default_arg_ignoreWhitespace[3350714]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val error[5509802]:Error[85511] "error variable" "temp"
+    (5509804 'move' error[5509802] nil[32])
+    (3350703 call readLiteral[3289473] call_tmp[3350691] "}" 1 error[5509802])
+    val errorExists[7302672]:bool[19] "temp"
+    (7302677 'move' errorExists[7302672](7302674 '!=' error[5509802] nil[32]))
+    if errorExists[7302672]
+    {
+      (5509808 '=' error_out[5509797] error[5509802])
+      gotoErrorHandlingReturn _endendMap[5509799] _endendMap[5509799]
+    }
+    label _endendMap[5509799]
+    (3350705 return _void[46])
+  }
+  function _ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838].hasMore[3348903](const  ref arg this[3348907]:_ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838], ref arg error_out[5509697]:Error[85511]) : bool[19] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val ret[3348911]:bool[19] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[3348919]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3348921 'move' call_tmp[3348919](3348924 call reader[3348981] this[3348907]))
+    const-val _return_tmp_[5468835]:int(64)[10] "dead after last mention" "temp"
+    val error[5509702]:Error[85511] "error variable" "temp"
+    (5509704 'move' error[5509702] nil[32])
+    (5468837 'move' _return_tmp_[5468835](3348931 call mark[3288983] call_tmp[3348919] error[5509702]))
+    val errorExists[7302624]:bool[19] "temp"
+    (7302629 'move' errorExists[7302624](7302626 '!=' error[5509702] nil[32]))
+    if errorExists[7302624]
+    {
+      (5509708 '=' error_out[5509697] error[5509702])
+      gotoErrorHandlingReturn _endhasMore[5509699] _endhasMore[5509699]
+    }
+    const-ref call_tmp[3348948]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3348950 'move' call_tmp[3348948](3348953 call reader[3348981] this[3348907]))
+    const-val call_tmp[3348956]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    val default_arg_ignoreWhitespace[3349018]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val error[5509717]:Error[85511] "error variable" "temp"
+    (5509719 'move' error[5509717] nil[32])
+    (3348958 'move' call_tmp[3348956](3348964 call matchLiteral[3290040] call_tmp[3348948] "}" 1 error[5509717]))
+    val errorExists[7302632]:bool[19] "temp"
+    (7302637 'move' errorExists[7302632](7302634 '!=' error[5509717] nil[32]))
+    if errorExists[7302632]
+    {
+      (5509723 '=' error_out[5509697] error[5509717])
+      const-ref call_tmp[5635029]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+      (5635031 'move' call_tmp[5635029](5635034 call reader[3348981] this[3348907]))
+      (5635037 call revert[3308945] call_tmp[5635029])
+      gotoErrorHandlingReturn _endhasMore[5509699] _endhasMore[5509699]
+    }
+    const-val call_tmp[3348966]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3348968 'move' call_tmp[3348966](3348971 call ![63126] call_tmp[3348956]))
+    (3349031 '=' ret[3348911] call_tmp[3348966])
+    const-ref call_tmp[5635040]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (5635042 'move' call_tmp[5635040](5635045 call reader[3348981] this[3348907]))
+    (5635048 call revert[3308945] call_tmp[5635040])
+    label _endhasMore[5509699]
+    (3348978 return ret[3348911])
+  }
+  function _ref(jsonDeserializer)[1922054].init=[1414826](ref arg this[1414830]:_ref(jsonDeserializer)[1922054], const  ref arg other[1414831]:jsonDeserializer[356412]) : void[4] "compiler generated" "copy initializer" "last resort" "method" "primary method" "resolved" "fn synchronization free" "suppress lvalue error"
+  {
+    (1414835 return _void[46])
+  }
+  function _ref(jsonDeserializer)[1922054].deinit[1414837](const  ref arg this[1414841]:_ref(jsonDeserializer)[1922054]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method" "resolved" "fn synchronization free"
+  {
+    (1414849 return _void[46])
+  }
+  type jsonDeserializer[356412]
+  function _ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867].reader[3315229](ref arg this[3315233]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867]) ref : _ref(fileReader(false,jsonDeserializer))[3276799] "field accessor" "inline" "instantiated generic" "invisible fn" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved" "fn synchronization free"
+  {
+    ref ret[3315235]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "RVV" "temp"
+    ref call_tmp[3315243]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3315245 'move' call_tmp[3315243](3315247 '.' this[3315233] reader[3313834]))
+    (3315250 'move' ret[3315235] call_tmp[3315243])
+    (3315254 return ret[3315235])
+  }
+  function _ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867]._fieldOffsets[3315080](ref arg this[3315084]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867]) ref : _ref(map(string,int(64),false))[3288803] "field accessor" "inline" "instantiated generic" "invisible fn" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved" "fn synchronization free"
+  {
+    ref ret[3315086]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "RVV" "temp"
+    ref call_tmp[3315094]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "maybe param" "temp"
+    (3315096 'move' call_tmp[3315094](3315098 '.' this[3315084] _fieldOffsets[3313836]))
+    (3315101 'move' ret[3315086] call_tmp[3315094])
+    (3315105 return ret[3315086])
+  }
+  function _ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867]._lastPos[3379586](ref arg this[3379590]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867]) ref : _ref(int(64))[1465689] "field accessor" "inline" "instantiated generic" "invisible fn" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved" "fn synchronization free"
+  {
+    ref ret[3379592]:_ref(int(64))[1465689] "dead after last mention" "RVV" "temp"
+    ref call_tmp[3379600]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (3379602 'move' call_tmp[3379600](3379604 '.' this[3379590] _lastPos[3313842]))
+    (3379607 'move' ret[3379592] call_tmp[3379600])
+    (3379611 return ret[3379592])
+  }
+  function _ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867]._parent[3379551](ref arg this[3379555]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867]) ref : _ref(bool)[1466299] "field accessor" "inline" "instantiated generic" "invisible fn" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved" "fn synchronization free"
+  {
+    ref ret[3379557]:_ref(bool)[1466299] "dead after last mention" "RVV" "temp"
+    ref call_tmp[3379565]:_ref(bool)[1466299] "dead after last mention" "maybe param" "temp"
+    (3379567 'move' call_tmp[3379565](3379569 '.' this[3379555] _parent[3313847]))
+    (3379572 'move' ret[3379557] call_tmp[3379565])
+    (3379576 return ret[3379557])
+  }
+  function AggregateDeserializer(fileReader(false,jsonDeserializer))[3313851].init[3313769](ref arg this[3313773]:AggregateDeserializer(fileReader(false,jsonDeserializer))[3313851], const  ref arg reader[3313775]:fileReader(false,jsonDeserializer)[3276790], const  ref arg _fieldOffsets[3313781]:map(string,int(64),false)[3288794], in arg _lastPos[3313789]:int(64)[10], in arg _parent[3313795]:bool[19]) : void[4] "compiler generated" "default initializer" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "fn synchronization free" "suppress lvalue error"
+  {
+    val _formal_tmp_reader[3313822]:fileReader(false,jsonDeserializer)[3276790] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (3313826 'move' _formal_tmp_reader[3313822] reader[3313775])
+    val _formal_tmp__fieldOffsets[3313823]:map(string,int(64),false)[3288794] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (3313830 'move' _formal_tmp__fieldOffsets[3313823] _fieldOffsets[3313781])
+    (3313801 '.=' this[3313773] reader[3313834] _formal_tmp_reader[3313822])
+    (3313805 '.=' this[3313773] _fieldOffsets[3313836] _formal_tmp__fieldOffsets[3313823])
+    (3313810 '.=' this[3313773] _lastPos[3313842] _lastPos[3313789])
+    (3313814 '.=' this[3313773] _parent[3313847] _parent[3313795])
+    (3313819 return _void[46])
+  }
+  function init_default__parent[3314759]() : bool[19] "compiler generated" "default actual function" "inline" "invisible fn" "last resort" "lineno ok" "maybe param" "maybe type" "method" "primary method" "resolved" "fn synchronization free" "was compiler generated"
+  {
+    val ret[3314761]:bool[19] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val _parent[3314766]:bool[19] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[3314770]:bool[19] "dead after last mention" "temp"
+    val _formal_type[3314772]:bool[19] "dead after last mention" "temp" "type variable"
+    (3314780 'move' tmp[3314770] 0)
+    (3314783 'move' _parent[3314766] tmp[3314770])
+    (3314788 'move' ret[3314761] _parent[3314766])
+    (3314764 return ret[3314761])
+  }
+  function _ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867].init=[4218973](ref arg this[4218977]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867], ref arg other[4218982]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867]) : void[4] "compiler generated" "copy initializer" "instantiated generic" "invisible fn" "last resort" "leaves arg nil" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    const-ref call_tmp[4218988]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "insert auto destroy" "maybe param" "temp"
+    (4218990 'move' call_tmp[4218988](4218993 call reader[3315229] other[4218982]))
+    val reader[4218996]:fileReader(false,jsonDeserializer)[3276790] "dead after last mention" "temp"
+    (4218998 call init=[3282985] reader[4218996] call_tmp[4218988])
+    (4219001 '.=' this[4218977] reader[3313834] reader[4218996])
+    ref call_tmp[4219006]:_ref(map(string,int(64),false))[3288803] "dead after last mention" "insert auto destroy" "maybe param" "temp"
+    (4219008 'move' call_tmp[4219006](4219011 call _fieldOffsets[3315080] other[4218982]))
+    val call_tmp[4219014]:map(string,int(64),false)[3288794] "dead after last mention" "maybe param" "temp" "type variable"
+    val _fieldOffsets[4219022]:map(string,int(64),false)[3288794] "dead after last mention" "temp"
+    (4219024 call init=[3309171] _fieldOffsets[4219022] call_tmp[4219006])
+    (4219028 '.=' this[4218977] _fieldOffsets[3313836] _fieldOffsets[4219022])
+    const-ref call_tmp[4219033]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (4219035 'move' call_tmp[4219033](4219038 call _lastPos[3379586] other[4218982]))
+    val _lastPos[4219041]:int(64)[10] "dead after last mention" "temp"
+    const-val coerce_tmp[4219096]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "maybe copy elided" "temp"
+    (4219100 'move' coerce_tmp[4219096](4219098 'deref' call_tmp[4219033]))
+    (5644576 '=' _lastPos[4219041] coerce_tmp[4219096])
+    (4219043 'noop')
+    (4219046 '.=' this[4218977] _lastPos[3313842] _lastPos[4219041])
+    const-ref call_tmp[4219051]:_ref(bool)[1466299] "dead after last mention" "maybe param" "temp"
+    (4219053 'move' call_tmp[4219051](4219056 call _parent[3379551] other[4218982]))
+    val _parent[4219059]:bool[19] "dead after last mention" "temp"
+    (4219061 'move' _parent[4219059](4219105 'deref' call_tmp[4219051]))
+    (4219065 '.=' this[4218977] _parent[3313847] _parent[4219059])
+    (4219070 return _void[46])
+  }
+  function _ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867].deinit[4219126](const  ref arg this[4219130]:_ref(AggregateDeserializer(fileReader(false,jsonDeserializer)))[3313867]) : void[4] "compiler generated" "destructor" "inline" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved"
+  {
+    label _enddeinit[5531076]
+    const-ref _field_destructor_tmp_[5531074]:_ref(map(string,int(64),false))[3288803] "temp"
+    (5531081 'move' _field_destructor_tmp_[5531074](5531078 '.' this[4219130] _fieldOffsets[3313836]))
+    (5531083 call deinit[4217177] _field_destructor_tmp_[5531074])
+    ref _field_destructor_tmp_[5531086]:_ref(fileReader(false,jsonDeserializer))[3276799] "temp"
+    (5531091 'move' _field_destructor_tmp_[5531086](5531088 '.' this[4219130] reader[3313834]))
+    (5531093 call deinit[4209365] _field_destructor_tmp_[5531086])
+    (4219136 return _void[46])
+  }
+  type AggregateDeserializer(fileReader(false,jsonDeserializer))[3313851] val reader[3313834]:fileReader(false,jsonDeserializer)[3276790] val _fieldOffsets[3313836]:map(string,int(64),false)[3288794] val _lastPos[3313842]:int(64)[10] val _parent[3313847]:bool[19]
+  function _ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556].reader[3378727](ref arg this[3378731]:_ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556]) ref : _ref(fileReader(false,jsonDeserializer))[3276799] "field accessor" "inline" "instantiated generic" "invisible fn" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved" "fn synchronization free"
+  {
+    ref ret[3378733]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "RVV" "temp"
+    ref call_tmp[3378741]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3378743 'move' call_tmp[3378741](3378745 '.' this[3378731] reader[3378534]))
+    (3378748 'move' ret[3378733] call_tmp[3378741])
+    (3378752 return ret[3378733])
+  }
+  function _ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556]._first[3378960](ref arg this[3378964]:_ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556]) ref : _ref(bool)[1466299] "field accessor" "inline" "instantiated generic" "invisible fn" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved" "fn synchronization free"
+  {
+    ref ret[3378966]:_ref(bool)[1466299] "dead after last mention" "RVV" "temp"
+    ref call_tmp[3378974]:_ref(bool)[1466299] "dead after last mention" "maybe param" "temp"
+    (3378976 'move' call_tmp[3378974](3378978 '.' this[3378964] _first[3378536]))
+    (3378981 'move' ret[3378966] call_tmp[3378974])
+    (3378985 return ret[3378966])
+  }
+  function ListDeserializer(fileReader(false,jsonDeserializer))[3378540].init[3378497](ref arg this[3378501]:ListDeserializer(fileReader(false,jsonDeserializer))[3378540], const  ref arg reader[3378503]:fileReader(false,jsonDeserializer)[3276790], in arg _first[3378509]:bool[19]) : void[4] "compiler generated" "default initializer" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "fn synchronization free" "suppress lvalue error"
+  {
+    val _formal_tmp_reader[3378527]:fileReader(false,jsonDeserializer)[3276790] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (3378530 'move' _formal_tmp_reader[3378527] reader[3378503])
+    (3378515 '.=' this[3378501] reader[3378534] _formal_tmp_reader[3378527])
+    (3378519 '.=' this[3378501] _first[3378536] _first[3378509])
+    (3378524 return _void[46])
+  }
+  function init_default__first[3378581]() : bool[19] "compiler generated" "default actual function" "inline" "invisible fn" "last resort" "lineno ok" "maybe param" "maybe type" "method" "primary method" "resolved" "fn synchronization free" "was compiler generated"
+  {
+    val ret[3378583]:bool[19] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val _first[3378588]:bool[19] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[3378592]:bool[19] "dead after last mention" "temp"
+    val _formal_type[3378594]:bool[19] "dead after last mention" "temp" "type variable"
+    (3378602 'move' tmp[3378592] 1)
+    (3378605 'move' _first[3378588] tmp[3378592])
+    (3378610 'move' ret[3378583] _first[3378588])
+    (3378586 return ret[3378583])
+  }
+  function _ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556].init=[4224872](ref arg this[4224876]:_ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556], const  ref arg other[4224881]:ListDeserializer(fileReader(false,jsonDeserializer))[3378540]) : void[4] "compiler generated" "copy initializer" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    const-ref call_tmp[4224887]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "insert auto destroy" "maybe param" "reference to a const" "temp"
+    (4224889 'move' call_tmp[4224887](4224892 call reader[3378727] other[4224881]))
+    val reader[4224895]:fileReader(false,jsonDeserializer)[3276790] "dead after last mention" "temp"
+    (4224897 call init=[3282985] reader[4224895] call_tmp[4224887])
+    (4224900 '.=' this[4224876] reader[3378534] reader[4224895])
+    const-ref call_tmp[4224905]:_ref(bool)[1466299] "dead after last mention" "maybe param" "reference to a const" "temp"
+    (4224907 'move' call_tmp[4224905](4224910 call _first[3378960] other[4224881]))
+    val _first[4224913]:bool[19] "dead after last mention" "temp"
+    (4224915 'move' _first[4224913](4224933 'deref' call_tmp[4224905]))
+    (4224919 '.=' this[4224876] _first[3378536] _first[4224913])
+    (4224924 return _void[46])
+  }
+  function _ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556].deinit[4224954](const  ref arg this[4224958]:_ref(ListDeserializer(fileReader(false,jsonDeserializer)))[3378556]) : void[4] "compiler generated" "destructor" "inline" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved"
+  {
+    label _enddeinit[5531110]
+    ref _field_destructor_tmp_[5531108]:_ref(fileReader(false,jsonDeserializer))[3276799] "temp"
+    (5531115 'move' _field_destructor_tmp_[5531108](5531112 '.' this[4224958] reader[3378534]))
+    (5531117 call deinit[4209365] _field_destructor_tmp_[5531108])
+    (4224964 return _void[46])
+  }
+  type ListDeserializer(fileReader(false,jsonDeserializer))[3378540] val reader[3378534]:fileReader(false,jsonDeserializer)[3276790] val _first[3378536]:bool[19]
+  function _ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838].reader[3348981](ref arg this[3348985]:_ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838]) ref : _ref(fileReader(false,jsonDeserializer))[3276799] "field accessor" "inline" "instantiated generic" "invisible fn" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved" "fn synchronization free"
+  {
+    ref ret[3348987]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "RVV" "temp"
+    ref call_tmp[3348995]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "maybe param" "temp"
+    (3348997 'move' call_tmp[3348995](3348999 '.' this[3348985] reader[3348816]))
+    (3349002 'move' ret[3348987] call_tmp[3348995])
+    (3349006 return ret[3348987])
+  }
+  function _ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838]._first[3349263](ref arg this[3349267]:_ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838]) ref : _ref(bool)[1466299] "field accessor" "inline" "instantiated generic" "invisible fn" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved" "fn synchronization free"
+  {
+    ref ret[3349269]:_ref(bool)[1466299] "dead after last mention" "RVV" "temp"
+    ref call_tmp[3349277]:_ref(bool)[1466299] "dead after last mention" "maybe param" "temp"
+    (3349279 'move' call_tmp[3349277](3349281 '.' this[3349267] _first[3348818]))
+    (3349284 'move' ret[3349269] call_tmp[3349277])
+    (3349288 return ret[3349269])
+  }
+  function MapDeserializer(fileReader(false,jsonDeserializer))[3348822].init[3348779](ref arg this[3348783]:MapDeserializer(fileReader(false,jsonDeserializer))[3348822], const  ref arg reader[3348785]:fileReader(false,jsonDeserializer)[3276790], in arg _first[3348791]:bool[19]) : void[4] "compiler generated" "default initializer" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "fn synchronization free" "suppress lvalue error"
+  {
+    val _formal_tmp_reader[3348809]:fileReader(false,jsonDeserializer)[3276790] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (3348812 'move' _formal_tmp_reader[3348809] reader[3348785])
+    (3348797 '.=' this[3348783] reader[3348816] _formal_tmp_reader[3348809])
+    (3348801 '.=' this[3348783] _first[3348818] _first[3348791])
+    (3348806 return _void[46])
+  }
+  function init_default__first[3348863]() : bool[19] "compiler generated" "default actual function" "inline" "invisible fn" "last resort" "lineno ok" "maybe param" "maybe type" "method" "primary method" "resolved" "fn synchronization free" "was compiler generated"
+  {
+    val ret[3348865]:bool[19] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val _first[3348870]:bool[19] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[3348874]:bool[19] "dead after last mention" "temp"
+    val _formal_type[3348876]:bool[19] "dead after last mention" "temp" "type variable"
+    (3348884 'move' tmp[3348874] 1)
+    (3348887 'move' _first[3348870] tmp[3348874])
+    (3348892 'move' ret[3348865] _first[3348870])
+    (3348868 return ret[3348865])
+  }
+  function _ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838].init=[4224634](ref arg this[4224638]:_ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838], const  ref arg other[4224643]:MapDeserializer(fileReader(false,jsonDeserializer))[3348822]) : void[4] "compiler generated" "copy initializer" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    const-ref call_tmp[4224649]:_ref(fileReader(false,jsonDeserializer))[3276799] "dead after last mention" "insert auto destroy" "maybe param" "reference to a const" "temp"
+    (4224651 'move' call_tmp[4224649](4224654 call reader[3348981] other[4224643]))
+    val reader[4224657]:fileReader(false,jsonDeserializer)[3276790] "dead after last mention" "temp"
+    (4224659 call init=[3282985] reader[4224657] call_tmp[4224649])
+    (4224662 '.=' this[4224638] reader[3348816] reader[4224657])
+    const-ref call_tmp[4224667]:_ref(bool)[1466299] "dead after last mention" "maybe param" "reference to a const" "temp"
+    (4224669 'move' call_tmp[4224667](4224672 call _first[3349263] other[4224643]))
+    val _first[4224675]:bool[19] "dead after last mention" "temp"
+    (4224677 'move' _first[4224675](4224695 'deref' call_tmp[4224667]))
+    (4224681 '.=' this[4224638] _first[3348818] _first[4224675])
+    (4224686 return _void[46])
+  }
+  function _ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838].deinit[4224716](const  ref arg this[4224720]:_ref(MapDeserializer(fileReader(false,jsonDeserializer)))[3348838]) : void[4] "compiler generated" "destructor" "inline" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved"
+  {
+    label _enddeinit[5531098]
+    ref _field_destructor_tmp_[5531096]:_ref(fileReader(false,jsonDeserializer))[3276799] "temp"
+    (5531103 'move' _field_destructor_tmp_[5531096](5531100 '.' this[4224720] reader[3348816]))
+    (5531105 call deinit[4209365] _field_destructor_tmp_[5531096])
+    (4224726 return _void[46])
+  }
+  type MapDeserializer(fileReader(false,jsonDeserializer))[3348822] val reader[3348816]:fileReader(false,jsonDeserializer)[3276790] val _first[3348818]:bool[19]
+}

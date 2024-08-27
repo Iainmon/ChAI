@@ -1,0 +1,153 @@
+AST dump for ChapelStaticVars after pass normalize.
+Module use list: OwnedObject Atomics ChapelLocale 
+
+{
+  function chpl__init_ChapelStaticVars[468615]() : void[4] "insert line file info" "module init"
+  {
+    (631870 return _void[46])
+  }
+  type sharingKind[314681] def computeOrRetrieve[314677]:sharingKind[314681] def computePerLocale[314679]:sharingKind[314681]
+  type _staticWrapperContainer[314690](?) val super[397730]:RootClass[236] "super class" unknown value[314686]
+  type _staticWrapperContainer?[468181](?)
+  type _staticWrapperContainer[460750](?)
+  function _staticWrapper[314874](?).init[314713](arg _mt[314719]:_MT[201], ref arg this[314715]:_staticWrapper[314874](?), arg valueType[314717]:_any[141](?)) : void[4] "method" "primary method" "no return value for void"
+  {
+    unknown valueType[534037] "temp" "type variable"
+    (534039 'move' valueType[534037] valueType[314717])
+    (534041 'init field' this[314715] c"valueType" valueType[534037])
+    (569261 'end of statement')
+    unknown call_tmp[941231] "expr temp" "maybe param" "maybe type" "temp"
+    (941234 'move' call_tmp[941231](534058 '.v' this[314715] c"valueType"))
+    unknown call_tmp[941236] "expr temp" "maybe param" "maybe type" "temp"
+    (941239 'move' call_tmp[941236](534050 call _staticWrapperContainer?[468181](?) call_tmp[941231]))
+    unknown call_tmp[941241] "maybe param" "maybe type" "temp"
+    (941244 'move' call_tmp[941241](534048 call _owned[238](?) call_tmp[941236]))
+    unknown container[534045] "temp"
+    (534052 'init var' container[534045] nil[32] call_tmp[941241])
+    (534054 'init field' this[314715] c"container" container[534045])
+    (569262 'end of statement')
+    unknown call_tmp[941246] "maybe param" "maybe type" "temp"
+    (941249 'move' call_tmp[941246](534064 call chpl__atomicType int(64)[10]))
+    unknown inited[534061] "temp"
+    (534066 'init var' inited[534061] 0 call_tmp[941246])
+    (534068 'init field' this[314715] c"inited" inited[534061])
+    (569263 'end of statement')
+    (631828 return _void[46])
+  }
+  function _staticWrapper[314874](?).setValue[314751](arg _mt[314759]:_MT[201], ref arg this[314753]:_staticWrapper[314874](?), in arg v[314756] :
+  (460757 call valueType _mt[203] this[314753])) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[941255] "expr temp" "maybe param" "maybe type" "temp"
+    (941258 'move' call_tmp[941255](314765 call container _mt[203] this[314753]))
+    unknown call_tmp[941260] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (941263 'move' call_tmp[941260](1000516 'new' _staticWrapperContainer[460750](?) v[314756]))
+    (314762 call = call_tmp[941255] call_tmp[941260])
+    (569264 'end of statement')
+    unknown call_tmp[941267] "expr temp" "maybe param" "maybe type" "temp"
+    (941270 'move' call_tmp[941267](314773 call inited _mt[203] this[314753]))
+    (314779 call(314776 call (partial) write _mt[203] call_tmp[941267]) 2)
+    (631830 return _void[46])
+  }
+  function _staticWrapper[314874](?).getValue[314783](arg _mt[314787]:_MT[201], ref arg this[314785]:_staticWrapper[314874](?)) ref : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[631834] "RVV" "temp"
+    unknown call_tmp[941276] "expr temp" "maybe param" "maybe type" "temp"
+    (941279 'move' call_tmp[941276](314792 call inited _mt[203] this[314785]))
+    (314798 call(314795 call (partial) waitFor _mt[203] call_tmp[941276]) 2)
+    (569266 'end of statement')
+    unknown call_tmp[941285] "expr temp" "maybe param" "maybe type" "temp"
+    (941288 'move' call_tmp[941285](314804 call container _mt[203] this[314785]))
+    unknown call_tmp[941290] "expr temp" "maybe param" "maybe type" "temp"
+    (941293 'move' call_tmp[941290](314801 call postfix! call_tmp[941285]))
+    unknown call_tmp[941297] "expr temp" "maybe param" "maybe type" "temp"
+    (941300 'move' call_tmp[941297](314807 call value _mt[203] call_tmp[941290]))
+    (631839 'move' ret[631834](631838 'addr of' call_tmp[941297]))
+    (631836 return ret[631834])
+  }
+  { scopeless type
+    (460764 call valueType _mt[203] this[314785])
+  }
+  function _staticWrapper[314874](?).callerShouldComputeValue[314813](arg _mt[314817]:_MT[201], ref arg this[314815]:_staticWrapper[314874](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[631843] "RVV" "temp"
+    unknown call_tmp[941306] "expr temp" "maybe param" "maybe type" "temp"
+    (941309 'move' call_tmp[941306](314826 call inited _mt[203] this[314815]))
+    unknown call_tmp[941313] "expr temp" "maybe param" "maybe type" "temp"
+    (941316 'move' call_tmp[941313](314832 call(314829 call (partial) read _mt[203] call_tmp[941306])))
+    unknown call_tmp[941318] "expr temp" "maybe param" "maybe type" "temp"
+    (941321 'move' call_tmp[941318](314823 call == call_tmp[941313] 2))
+    unknown call_tmp[941323] "expr temp" "maybe param" "maybe type" "temp"
+    (941326 'move' call_tmp[941323](314834 call _cond_test call_tmp[941318]))
+    if call_tmp[941323]
+    {
+      (631848 'move' ret[631843](631847 'deref' 0))
+      gotoReturn _end_callerShouldComputeValue[631841] _end_callerShouldComputeValue[631841]
+    }
+    unknown expected[314840] "dead at end of block" "insert auto destroy"
+    (654251 'init var' expected[314840] 0)
+    (314843 'end of statement')
+    unknown call_tmp[941330] "expr temp" "maybe param" "maybe type" "temp"
+    (941333 'move' call_tmp[941330](314846 call inited _mt[203] this[314815]))
+    unknown call_tmp[941337] "expr temp" "maybe param" "maybe type" "temp"
+    (941340 'move' call_tmp[941337](314852 call(314849 call (partial) compareExchange _mt[203] call_tmp[941330]) expected[314840] 1))
+    (631853 'move' ret[631843](631852 'deref' call_tmp[941337]))
+    gotoReturn _end_callerShouldComputeValue[631841] _end_callerShouldComputeValue[631841]
+    (569269 'end of statement' expected[314840])
+    label _end_callerShouldComputeValue[631841]
+    (631845 return ret[631843])
+  }
+  function _staticWrapper[314874](?).reset[314857](arg _mt[314861]:_MT[201], ref arg this[314859]:_staticWrapper[314874](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[941344] "expr temp" "maybe param" "maybe type" "temp"
+    (941347 'move' call_tmp[941344](314867 call container _mt[203] this[314859]))
+    (314864 call = call_tmp[941344] nil[32])
+    (631857 return _void[46])
+  }
+  type _staticWrapper[314874](?) unknown valueType[314694] "type variable" unknown container[314697](314699 call _owned[238](?)(314701 call _staticWrapperContainer?[468181](?) valueType[314694])) unknown inited[314707](314709 call chpl__atomicType int(64)[10])
+  function chpl__functionStaticVariableWrapperType[314876](arg valueType[314878]:_any[141](?)) type : _unknown[42]
+  {
+    unknown ret[631861] "RVV" "temp" "type variable"
+    unknown call_tmp[941349] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (941352 'move' call_tmp[941349](314883 call _staticWrapper[314874](?) valueType[314878]))
+    (631866 'move' ret[631861](631865 'deref' call_tmp[941349]))
+    (631863 return ret[631861])
+  }
+  function chpl__executeStaticWrapperCleanupEverywhere[314887](arg fn[314894]:_any[141](?)) : _unknown[42] "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[314916] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[314917] "expr temp" "temp"
+      (314926 'move' _iterator[314917](314924 call _getIterator Locales[309572]))
+      Defer
+      {
+        {
+          (314941 call _freeIterator _iterator[314917])
+        }
+      }
+      { scopeless type
+        (314931 'move' _indexOfInterest[314916](314928 call iteratorIndex _iterator[314917]))
+      }
+      ForLoop[314918]
+      {
+        unknown loc[314898] "index var" "insert auto destroy"
+        (569274 'end of statement')
+        (314936 'move' loc[314898] _indexOfInterest[314916])
+        (569275 'end of statement' loc[314898])
+        {
+          const tmp[314908] "const" "temp"
+          unknown call_tmp[941354] "expr temp" "maybe param" "maybe type" "temp"
+          (941357 'move' call_tmp[941354](314905 '_wide_get_locale' loc[314898]))
+          (314909 'move' tmp[314908](314906 'deref' call_tmp[941354]))
+          (314903 call fn[314894])
+          (314912 'elided on block' 0 tmp[314908])
+        }
+        label _continueLabel[314921]
+        _indexOfInterest[314916]
+        _iterator[314917]
+      }
+      label _breakLabel[314922]
+    }
+    (631868 return _void[46])
+  }
+  (397086 'used modules list'(314668 'use' OwnedObject[80948])(314671 'use' Atomics[85230])(314674 'use' ChapelLocale[137388]))
+}

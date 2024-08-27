@@ -1,0 +1,424 @@
+AST dump for TomlReader after pass cleanup.
+Module use list: 
+
+{
+  (387100 'use' ChapelStandard)
+  (383872 'use' List)
+  (383879 'import'(383876 call . TOML c"TomlError"))
+  (383881 'use' Regex)
+  (383884 'use' IO)
+  const debugTomlReader[383887] "config" "const" 0
+  (383890 'end of statement')
+  function top[383891](arg source[383893]:_any[141](?)) : _unknown[42] throws
+  {
+    if(383915 call _cond_test(383906 call !(383914 call(383911 call . source c"nextLine"))))
+    {
+      (383897 'throw'(383898 'new'(_chpl_manager = _owned[238](?))(383902 call TomlError "Reached end of file unexpectedly")))
+    }
+    (383919 return(383928 call(383920 call postfix!(383925 call . source c"currentLine")) 0))
+  }
+  function readLine[383932](arg source[383934]:_any[141](?)) : _unknown[42]
+  {
+    (383937 return(383942 call(383939 call . source c"nextLine")))
+  }
+  function skipNext[383945](arg source[383947]:_any[141](?)) : _unknown[42] "no return value for void"
+  {
+    (383961 call(383958 call .(383950 call postfix!(383953 call . source c"currentLine")) c"skip"))
+  }
+  function addToken[383964](arg source[383966]:_any[141](?), arg tokensToAdd[383973] :
+  (383971 call chpl__buildArrayRuntimeType unknown dom[383968] string[244])) : _unknown[42] "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[383994] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[383995] "expr temp" "temp"
+      (384004 'move' _iterator[383995](384002 call _getIterator tokensToAdd))
+      Defer
+      {
+        {
+          (384019 call _freeIterator _iterator[383995])
+        }
+      }
+      { scopeless type
+        (384009 'move' _indexOfInterest[383994](384006 call iteratorIndex _iterator[383995]))
+      }
+      ForLoop[383996]
+      {
+        unknown toke[383977] "index var" "insert auto destroy"
+        (384014 'move' toke[383977] _indexOfInterest[383994])
+        {
+          (383992 call(383989 call .(383981 call postfix!(383984 call . source c"currentLine")) c"addToke") toke)
+        }
+        label _continueLabel[383999]
+        _indexOfInterest[383994]
+        _iterator[383995]
+      }
+      label _breakLabel[384000]
+    }
+  }
+  function skipLine[384028](arg source[384030]:_any[141](?)) : _unknown[42] "no return value for void"
+  {
+    unknown emptyList[384034](384036 call list string[244])
+    (384039 'end of statement')
+    unknown emptyCurrent[384041](384042 'new'(_chpl_manager = unmanaged[183](?))(384046 call Tokens emptyList))
+    (384049 'end of statement')
+    unknown ptrhold[384051](384053 call . source c"currentLine")
+    (384057 'end of statement')
+    (384058 call =(384061 call . source c"currentLine") emptyCurrent)
+    unknown readNextLine[384066](384068 call readLine source)
+    (384071 'end of statement')
+    (384074 call chpl__delete ptrhold)
+  }
+  function getToken[384079](arg source[384081]:_any[141](?)) : _unknown[42]
+  {
+    Try!
+    {
+      {
+        (384085 return(384092 call(384089 call . source c"nextToke")))
+      }
+    }
+    Catch e : TomlError
+    {
+      unknown tmp[395843] "temp"(395847 'dynamic_cast'(395845 'to nilable class'(395844 'to unmanaged class' TomlError))(395846 'current error'))
+      if(395850 '!=' tmp[395843] nil[32])
+      {
+        unknown e[384107](395860 'new'(395859 call _owned[238](?)(395856 'to non nilable class' tmp[395843])))
+        {
+          (384097 call writeln(384102 call(384099 call . e c"message")))
+          (384104 call exit 1)
+        }
+      }
+      {
+        (395861 'chpl_error')
+      }
+    }
+  }
+  function Source[384870].init[384134](arg _mt[384142]:_MT[201], arg this[384136]:Source[384870], arg tomlStr[384139] :
+  string[244]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (384145 call =(384150 call . this c"tomlStr") tomlStr)
+    (384158 call(384155 call . this c"chpl__initThisType"))
+    (384160 call genTokenlist tomlStr)
+  }
+  function Source[384870].genTokenlist[384164](arg _mt[384172]:_MT[201], arg this[384166]:Source[384870], arg input[384169] :
+  string[244]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[384187] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[384188] "expr temp" "temp"
+      (384197 'move' _iterator[384188](384195 call _getIterator(384181 call(384178 call . input c"split") "\n")))
+      Defer
+      {
+        {
+          (384212 call _freeIterator _iterator[384188])
+        }
+      }
+      { scopeless type
+        (384202 'move' _indexOfInterest[384187](384199 call iteratorIndex _iterator[384188]))
+      }
+      ForLoop[384189]
+      {
+        unknown line[384175] "index var" "insert auto destroy"
+        (384207 'move' line[384175] _indexOfInterest[384187])
+        {
+          (384185 call splitLine line)
+        }
+        label _continueLabel[384192]
+        _indexOfInterest[384187]
+        _iterator[384188]
+      }
+      label _breakLabel[384193]
+    }
+    if(384233 call _cond_test(384226 call !(384232 call(384229 call . this c"isEmpty"))))
+    {
+      (384220 call = currentLine(384224 call tokenlist 0))
+    }
+  }
+  function Source[384870].isEmpty[384239](arg _mt[384243]:_MT[201], arg this[384241]:Source[384870]) : _unknown[42] "method" "primary method"
+  {
+    (384246 return(384247 call ==(384250 call . tokenlist c"size") 0))
+  }
+  function Source[384870].splitLine[384256](arg _mt[384262]:_MT[201], arg this[384258]:Source[384870], arg line[384260]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    unknown idx[384266] 0
+    (384269 'end of statement')
+    unknown linetokens[384271](384273 call list string[244])
+    (384276 'end of statement')
+    unknown nonEmptyChar[384278] 0 bool
+    (384282 'end of statement')
+    const doubleQuotes[384341] "const" "(\"[^,]*\?\")"
+    const singleQuotes[384335] "const" "('[^,]*\?')"
+    const bracketContents[384329] "const" "(\\[\\w+\\])"
+    const brackets[384323] "const" "(\\[)|(\\])"
+    const comments[384319] "const" "(\\#)"
+    const commas[384315] "const" "(\\,)"
+    const equals[384309] "const" "(\\=)"
+    const curly[384303] "const" "(\\{)|(\\})"
+    const dt[384297] "const" "^\\d{4}-\\d{2}-\\d{2}[ T]\\d{2}:\\d{2}:\\d{2}"
+    const ld[384291] "const" "^\\d{4}-\\d{2}-\\d{2}"
+    const ti[384285] "const" "^\\d{2}:\\d{2}:\\d{2}(.\\d{6,})\?"
+    (384346 'end of statement')
+    const pattern[384348] "const"(384349 'new'(384351 call regex(384356 call(384353 call . "|" c"join") doubleQuotes singleQuotes bracketContents brackets commas curly equals dt ti ld)))
+    (384368 'end of statement')
+    {
+      unknown _indexOfInterest[384530] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[384531] "expr temp" "temp"
+      (384540 'move' _iterator[384531](384538 call _getIterator(384375 call(384372 call . pattern c"split") line)))
+      Defer
+      {
+        {
+          (384555 call _freeIterator _iterator[384531])
+        }
+      }
+      { scopeless type
+        (384545 'move' _indexOfInterest[384530](384542 call iteratorIndex _iterator[384531]))
+      }
+      ForLoop[384532]
+      {
+        unknown token[384369] "index var" "insert auto destroy"
+        (384550 'move' token[384369] _indexOfInterest[384530])
+        {
+          (384378 call += idx 1)
+          unknown strippedToken[384383](384388 call(384385 call . token c"strip") " \t")
+          (384393 'end of statement')
+          if(384526 call _cond_test(384519 call !=(384522 call . strippedToken c"size") 0))
+          {
+            if(384405 call _cond_test debugTomlReader)
+            {
+              (384397 call writeln "Tokenized: " "(" strippedToken ")")
+            }
+            (384409 call = nonEmptyChar 1)
+            const toke[384414] "const" strippedToken
+            (384417 'end of statement')
+            const isWhiteSpace[384419] "const"(384420 'new'(384422 call regex "\\s"))
+            (384425 'end of statement')
+            unknown dateTimeToken[384427](384432 call(384429 call . isWhiteSpace c"split") toke)
+            (384435 'end of statement')
+            if(384462 call _cond_test(384459 call .(384457 call(384454 call .(384443 'new'(384445 call regex(384450 call(384447 call . "|" c"join") dt ti ld))) c"match") strippedToken) c"matched"))
+            {
+              (384436 call = strippedToken(384440 call dateTimeToken 0))
+            }
+            unknown isComment[384468](384476 call(384473 call .(384469 'new'(384471 call regex comments)) c"match") strippedToken)
+            (384479 'end of statement')
+            if(384514 call _cond_test(384504 call &&(384507 call . isComment c"matched")(384510 call <= idx 1)))
+            {
+              (384485 call(384482 call . linetokens c"pushBack") strippedToken)
+            }
+            {
+              if(384500 call _cond_test(384494 call !(384497 call . isComment c"matched")))
+              {
+                (384492 call(384489 call . linetokens c"pushBack") strippedToken)
+              }
+            }
+          }
+        }
+        label _continueLabel[384535]
+        _indexOfInterest[384530]
+        _iterator[384531]
+      }
+      label _breakLabel[384536]
+    }
+    if(384573 call _cond_test(384569 call == nonEmptyChar 0))
+    {
+      (384567 call(384564 call . linetokens c"pushBack") "\n")
+    }
+    if(384601 call _cond_test(384594 call !(384600 call(384597 call . linetokens c"isEmpty"))))
+    {
+      unknown tokens[384579](384580 'new'(_chpl_manager = unmanaged[183](?))(384584 call Tokens linetokens))
+      (384587 'end of statement')
+      (384592 call(384589 call . tokenlist c"pushBack") tokens)
+    }
+  }
+  function Source[384870].nextLine[384607](arg _mt[384611]:_MT[201], arg this[384609]:Source[384870]) : _unknown[42] "method" "primary method"
+  {
+    if(384663 call _cond_test(384662 call(384659 call .(384656 call postfix! currentLine) c"isEmpty")))
+    {
+      if(384652 call _cond_test(384645 call ==(384648 call . tokenlist c"size") 1))
+      {
+        (384616 return 0)
+      }
+      {
+        unknown ptrhold[384620] currentLine
+        (384623 'end of statement')
+        (384630 call(384627 call . tokenlist c"getAndRemove") 0)
+        (384632 call = currentLine(384636 call tokenlist 0))
+        (384640 call chpl__delete ptrhold)
+        (384643 return 1)
+      }
+    }
+    (384667 return 1)
+  }
+  function Source[384870].nextToke[384671](arg _mt[384675]:_MT[201], arg this[384673]:Source[384870]) : _unknown[42] throws "method" "primary method"
+  {
+    if(384690 call _cond_test(384686 call !(384689 call nextLine)))
+    {
+      (384679 'throw'(384680 'new'(_chpl_manager = _owned[238](?))(384684 call TomlError "Reached end of file unexpectedly")))
+    }
+    (384694 return(384701 call(384698 call .(384695 call postfix! currentLine) c"next")))
+  }
+  function Source[384870].debug[384704](arg _mt[384708]:_MT[201], arg this[384706]:Source[384870]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[384785] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[384786] "expr temp" "temp"
+      (384795 'move' _iterator[384786](384793 call _getIterator tokenlist))
+      Defer
+      {
+        {
+          (384810 call _freeIterator _iterator[384786])
+        }
+      }
+      { scopeless type
+        (384800 'move' _indexOfInterest[384785](384797 call iteratorIndex _iterator[384786]))
+      }
+      ForLoop[384787]
+      {
+        unknown line[384711] "index var" "insert auto destroy"
+        (384805 'move' line[384711] _indexOfInterest[384785])
+        {
+          if(384781 call _cond_test(384771 call !=(384777 call .(384774 call . line c"A") c"size") 0))
+          {
+            {
+              unknown _indexOfInterest[384737] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[384738] "expr temp" "temp"
+              (384747 'move' _iterator[384738](384745 call _getIterator line))
+              Defer
+              {
+                {
+                  (384762 call _freeIterator _iterator[384738])
+                }
+              }
+              { scopeless type
+                (384752 'move' _indexOfInterest[384737](384749 call iteratorIndex _iterator[384738]))
+              }
+              ForLoop[384739]
+              {
+                unknown token[384716] "index var" "insert auto destroy"
+                (384757 'move' token[384716] _indexOfInterest[384737])
+                {
+                  if(384733 call _cond_test(384726 call !=(384729 call . token c"size") 0))
+                  {
+                    (384722 call write "(" token ")")
+                  }
+                }
+                label _continueLabel[384742]
+                _indexOfInterest[384737]
+                _iterator[384738]
+              }
+              label _breakLabel[384743]
+            }
+            (384770 call writeln)
+          }
+        }
+        label _continueLabel[384790]
+        _indexOfInterest[384785]
+        _iterator[384786]
+      }
+      label _breakLabel[384791]
+    }
+  }
+  function Source[384870].deinit[384819](arg _mt[384823]:_MT[201], arg this[384821]:Source[384870]) : _unknown[42] "destructor" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[384835] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[384836] "expr temp" "temp"
+      (384845 'move' _iterator[384836](384843 call _getIterator tokenlist))
+      Defer
+      {
+        {
+          (384860 call _freeIterator _iterator[384836])
+        }
+      }
+      { scopeless type
+        (384850 'move' _indexOfInterest[384835](384847 call iteratorIndex _iterator[384836]))
+      }
+      ForLoop[384837]
+      {
+        unknown token[384826] "index var" "insert auto destroy"
+        (384855 'move' token[384826] _indexOfInterest[384835])
+        {
+          (384832 call chpl__delete token)
+        }
+        label _continueLabel[384840]
+        _indexOfInterest[384835]
+        _iterator[384836]
+      }
+      label _breakLabel[384841]
+    }
+  }
+  type Source[384870] unknown tomlStr[384115] string[244] unknown tokenlist[384120](384122 call list(384123 'to unmanaged class from unknown' Tokens)) unknown currentLine[384128](384129 'to unmanaged class from unknown'(384131 'to nilable class from type' Tokens))
+  function Tokens[385115].init[384881](arg _mt[384891]:_MT[201], arg this[384883]:Tokens[385115], arg A[384888] :
+  (384886 call list string[244])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (384894 call =(384897 call . this c"A") A)
+  }
+  function Tokens[385115].skip[384903](arg _mt[384907]:_MT[201], arg this[384905]:Tokens[385115]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (384914 call(384911 call . A c"getAndRemove") 0)
+  }
+  function Tokens[385115].next[384918](arg _mt[384922]:_MT[201], arg this[384920]:Tokens[385115]) : _unknown[42] "method" "primary method"
+  {
+    unknown toke[384926](384931 call(384928 call . A c"getAndRemove") 0)
+    (384934 'end of statement')
+    (384935 return toke)
+  }
+  function Tokens[385115].addToke[384939](arg _mt[384947]:_MT[201], arg this[384941]:Tokens[385115], arg toke[384944] :
+  string[244]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (384954 call(384951 call . A c"insert") 0 toke)
+  }
+  function Tokens[385115].isEmpty[384959](arg _mt[384963]:_MT[201], arg this[384961]:Tokens[385115]) : _unknown[42] "method" "primary method"
+  {
+    (384967 return(384975 call(384972 call .(384969 call . this c"A") c"isEmpty")))
+  }
+  { scopeless type
+    bool
+  }
+  function Tokens[385115].this[384979](arg _mt[384985]:_MT[201], arg this[384981]:Tokens[385115], arg idx[384983]:_any[141](?)) ref : _unknown[42] "method" "primary method"
+  {
+    (384988 return(384993 call(384990 call . this c"A") idx))
+  }
+  function Tokens[385115].these[384997](arg _mt[385001]:_MT[201], arg this[384999]:Tokens[385115]) ref : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[385013] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[385014] "expr temp" "temp"
+      (385023 'move' _iterator[385014](385021 call _getIterator(385007 call . this c"A")))
+      Defer
+      {
+        {
+          (385038 call _freeIterator _iterator[385014])
+        }
+      }
+      { scopeless type
+        (385028 'move' _indexOfInterest[385013](385025 call iteratorIndex _iterator[385014]))
+      }
+      ForLoop[385015]
+      {
+        unknown a[385004] "index var" "insert auto destroy"
+        (385033 'move' a[385004] _indexOfInterest[385013])
+        {
+          (385011 yield a)
+        }
+        label _continueLabel[385018]
+        _indexOfInterest[385013]
+        _iterator[385014]
+      }
+      label _breakLabel[385019]
+    }
+  }
+  function Tokens[385115].deserialize[385047](arg _mt[385055]:_MT[201], arg this[385049]:Tokens[385115], arg reader[385051]:_any[141](?), ref arg deserializer[385053]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (385059 call compilerError "Reading a Tokens type is not supported")
+  }
+  function Tokens[385115].init[385065](arg _mt[385075]:_MT[201], arg this[385067]:Tokens[385115], arg reader[385070] :
+  fileReader, ref arg deserializer[385073]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (385082 call(385079 call . this c"chpl__initThisType"))
+    (385084 call compilerError "Reading a Tokens type is not supported")
+  }
+  function Tokens[385115].serialize[385088](arg _mt[385096]:_MT[201], arg this[385090]:Tokens[385115], arg writer[385092]:_any[141](?), ref arg serializer[385094]:_any[141](?)) : _unknown[42] throws "method" "primary method" "method overrides" "no return value for void"
+  {
+    (385103 call(385100 call . writer c"write")(385111 call(385108 call .(385105 call . this c"A") c"toArray")))
+  }
+  type Tokens[385115] unknown A[384875](384877 call list string[244]) serializable
+}

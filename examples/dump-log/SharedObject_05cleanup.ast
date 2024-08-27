@@ -1,0 +1,532 @@
+AST dump for SharedObject after pass cleanup.
+Module use list: 
+
+{
+  (89450 'use' Errors)
+  (89452 'use' Atomics)
+  (89453 'use' ChapelBase)
+  (89455 'use' OwnedObject)
+  (89458 'use' WeakPointer)
+  function ReferenceCount[89646].init[89475](arg _mt[89479]:_MT[201], arg this[89477]:ReferenceCount[89646]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (89486 call(89483 call . this c"chpl__initThisType"))
+    (89491 call(89488 call . strongCount c"write") 1)
+    (89497 call(89494 call . totalCount c"write") 1)
+  }
+  function ReferenceCount[89646].retain[89501](arg _mt[89505]:_MT[201], arg this[89503]:ReferenceCount[89646]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (89512 call(89509 call . strongCount c"add") 1)
+    (89518 call(89515 call . totalCount c"add") 1)
+  }
+  function ReferenceCount[89646].releaseStrong[89522](arg _mt[89526]:_MT[201], arg this[89524]:ReferenceCount[89646]) : _unknown[42] "inline" "method" "primary method"
+  {
+    (89529 return(89530 call -(89538 call(89535 call . strongCount c"fetchSub") 1) 1))
+  }
+  function ReferenceCount[89646].releaseTotal[89543](arg _mt[89547]:_MT[201], arg this[89545]:ReferenceCount[89646]) : _unknown[42] "inline" "method" "primary method"
+  {
+    (89550 return(89551 call -(89557 call(89554 call . totalCount c"fetchSub") 1) 1))
+  }
+  function ReferenceCount[89646].tryRetainWeak[89562](arg _mt[89570]:_MT[201], arg this[89564]:ReferenceCount[89646], ref arg expected[89567] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    const next[89574] "const"(89575 call + expected 1)
+    (89580 'end of statement')
+    if(89600 call _cond_test(89597 call(89594 call . strongCount c"compareExchangeWeak") expected next))
+    {
+      (89586 call(89583 call . totalCount c"add") 1)
+      (89588 return 1)
+    }
+    {
+      (89591 return 0)
+    }
+  }
+  function ReferenceCount[89646].releaseWeak[89606](arg _mt[89610]:_MT[201], arg this[89608]:ReferenceCount[89646]) : _unknown[42] "method" "primary method"
+  {
+    unknown oldValue[89614](89619 call(89616 call . totalCount c"fetchSub") 1)
+    (89622 'end of statement')
+    (89623 return(89624 call - oldValue 1))
+  }
+  function ReferenceCount[89646].incrementWeak[89630](arg _mt[89634]:_MT[201], arg this[89632]:ReferenceCount[89646]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (89641 call(89638 call . totalCount c"add") 1)
+  }
+  type ReferenceCount[89646] unknown strongCount[89462](89464 call chpl__atomicType int[10]) unknown totalCount[89469](89471 call chpl__atomicType int[10])
+  function _shared[242](?).chpl_forwarding_expr1[89661](arg _mt[89666]:_MT[201], arg this[89664]:_shared[242](?)) : _unknown[42] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    (89671 return(89670 call borrow))
+  }
+  type _shared[242](?) unknown chpl_t[89652] "type variable" unknown chpl_p[89655] "owned"(89656 'to nilable class' chpl_t) unknown chpl_pn[89675] "owned"(89676 'to unmanaged class from unknown'(89678 'to nilable class from type' ReferenceCount)) writeSerializable readDeserializable forwarding ( )
+  function _unknown[42].init[89683](arg _mt[89691]:_MT[201], arg this[89686] :
+  _shared, arg chpl_t[89689]:_any[141](?)) : _unknown[42] "leaves this nil" "method" "no return value for void"
+  {
+    if(89705 call _cond_test(89700 call !(89703 call isClass chpl_t)))
+    {
+      (89695 call compilerError "shared only works with classes")
+    }
+    (89710 call =(89713 call . this c"chpl_t")(89717 call _to_borrowed chpl_t))
+    (89719 call =(89722 call . this c"chpl_p") nil[32])
+    (89726 call =(89729 call . this c"chpl_pn") nil[32])
+  }
+  function _unknown[42].init[89735](arg _mt[89745]:_MT[201], arg this[89738] :
+  _shared, arg p[89742] :
+  borrowed) : _unknown[42] "method" "no return value for void"
+  {
+    (89749 call compilerError "cannot initialize shared from a borrow")
+    (89757 call(89754 call . this c"init")(89759 call _to_unmanaged p))
+  }
+  function _unknown[42].init[89763](arg _mt[89773]:_MT[201], arg this[89766] :
+  _shared, arg p[89770] :
+  unmanaged[183](?)) : _unknown[42] "method" "no return value for void"
+  {
+    (89776 call =(89779 call . this c"chpl_t")(89783 call _to_borrowed(89785 'typeof' p)))
+    unknown rc[89787] nil[32](89788 'to unmanaged class from unknown'(89790 'to nilable class from type' ReferenceCount))
+    (89793 'end of statement')
+    if(89807 call _cond_test(89803 call != p nil[32]))
+    {
+      (89794 call = rc(89797 'new'(_chpl_manager = unmanaged[183](?))(89801 call ReferenceCount)))
+    }
+    (89812 call =(89815 call . this c"chpl_p")(89819 call _to_borrowed p))
+    (89821 call =(89824 call . this c"chpl_pn") rc)
+  }
+  function _unknown[42].init[89830](arg _mt[89841]:_MT[201], arg this[89833] :
+  _shared, arg p[89838] :
+  unknown T[89836]) : _unknown[42] "method" "no return value for void"
+  {
+    (89868 call compilerError "shared only works with classes")
+    (89870 call =(89873 call . this c"chpl_t") T)
+    (89877 call =(89880 call . this c"chpl_p") p)
+  }
+  where {
+    (89843 call &&(89845 call &&(89847 call ==(89850 call isClass T) 0)(89853 call ==(394748 'is_subtype' _shared T) 0))(89860 call ==(89863 call isIterator p) 0))
+  }
+  function _unknown[42].init[89887](arg _mt[89897]:_MT[201], arg this[89890] :
+  _shared, in arg take[89894] :
+  _owned) : _unknown[42] "method" "no return value for void"
+  {
+    unknown p[89901](89906 call(89903 call . take c"release"))
+    (89908 'end of statement')
+    (89909 call =(89912 call . this c"chpl_t")(89932 IfExpr (89915 call ==(89919 call .(89918 'typeof' this) c"chpl_t") ?[227]) then
+    { scopeless
+      (89924 call _to_borrowed(89926 'typeof' p))
+    } else
+    { scopeless
+      (89929 call .(89928 'typeof' this) c"chpl_t")
+    } ))
+    if(89944 call _cond_test(89939 call !(89942 call isClass p)))
+    {
+      (89936 call compilerError "shared only works with classes")
+    }
+    unknown rc[89950] nil[32](89951 'to unmanaged class from unknown'(89953 'to nilable class from type' ReferenceCount))
+    (89956 'end of statement')
+    if(89970 call _cond_test(89966 call != p nil[32]))
+    {
+      (89957 call = rc(89960 'new'(_chpl_manager = unmanaged[183](?))(89964 call ReferenceCount)))
+    }
+    (89975 call =(89978 call . this c"chpl_p") p)
+    (89982 call =(89985 call . this c"chpl_pn") rc)
+    (89993 call(89990 call . this c"chpl__initThisType"))
+  }
+  function _unknown[42].init[89996](arg _mt[90012]:_MT[201], arg this[89999] :
+  _shared, arg _private[90003] :
+  bool, arg t[90006]:_any[141](?), ref arg src[90009] :
+  _shared) : _unknown[42] "method" "no return value for void"
+  {
+    (90015 call =(90018 call . this c"chpl_t") t)
+    (90022 call =(90025 call . this c"chpl_p")(90028 call :(90031 call _to_unmanaged(90033 call . src c"chpl_p"))(90037 call _to_nilable(90039 call _to_unmanaged t))))
+    (90041 call =(90044 call . this c"chpl_pn")(90048 call . src c"chpl_pn"))
+    (90051 call =(90054 call . src c"chpl_p") nil[32])
+    (90058 call =(90061 call . src c"chpl_pn") nil[32])
+  }
+  function _unknown[42].init[90067](arg _mt[90083]:_MT[201], arg this[90070] :
+  _shared, arg _private[90074] :
+  bool, arg t[90077]:_any[141](?), arg p[90079]:_any[141](?), arg pn[90081]:_any[141](?)) : _unknown[42] "method" "no return value for void"
+  {
+    unknown ptr[90087](90088 call :(90091 call _to_unmanaged p)(90094 call _to_nilable(90096 call _to_unmanaged t)))
+    (90099 'end of statement')
+    unknown count[90101] pn
+    (90104 'end of statement')
+    if(90124 call _cond_test(90120 call != ptr nil[32]))
+    {
+      (90114 call(90111 call .(90106 call postfix! count) c"retain"))
+    }
+    {
+      (90116 call = count nil[32])
+    }
+    (90128 call =(90131 call . this c"chpl_t") t)
+    (90135 call =(90138 call . this c"chpl_p") ptr)
+    (90142 call =(90145 call . this c"chpl_pn") count)
+  }
+  function _unknown[42].init[90151](arg _mt[90167]:_MT[201], arg this[90154] :
+  _shared, arg _private[90158] :
+  bool, arg p[90162] :
+  unmanaged[183](?), arg pn[90165]:_any[141](?)) : _unknown[42] "method" "no return value for void"
+  {
+    (90170 call =(90173 call . this c"chpl_t")(90177 call _to_borrowed(90179 'typeof' p)))
+    (90180 call =(90183 call . this c"chpl_p") p)
+    (90187 call =(90190 call . this c"chpl_pn") pn)
+  }
+  function _unknown[42].init=[90196](arg _mt[90206]:_MT[201], arg this[90199] :
+  _shared, in arg take[90203] :
+  _owned) : _unknown[42] "method" "no return value for void"
+  {
+    (90210 call compilerError "cannot initialize '"(90212 call :(90215 'typeof' this) string[244]) "' from a '"(90218 call :(90221 'typeof' take) string[244]) "'")
+    (90224 call =(90227 call . this c"chpl_t")(90231 call . take c"chpl_t"))
+    (90234 call =(90237 call . this c"chpl_p") nil[32])
+  }
+  function _unknown[42].init=[90243](arg _mt[90253]:_MT[201], arg this[90246] :
+  _shared, const  ref arg src[90250] :
+  _shared) : _unknown[42] "method" "no return value for void"
+  {
+    (90256 call =(90259 call . this c"chpl_t")(90279 IfExpr (90262 call !=(90266 call .(90265 'typeof' this) c"chpl_t") ?[227]) then
+    { scopeless
+      (90272 call .(90271 'typeof' this) c"chpl_t")
+    } else
+    { scopeless
+      (90276 call _to_borrowed(90278 'typeof' src))
+    } ))
+    if(90312 call _cond_test(90298 call ==(394749 'is_coercible'(90308 call .(90307 'typeof' this) c"chpl_t")(90303 call . src c"chpl_t")) 0))
+    {
+      (90283 call compilerError "cannot initialize '"(90285 call :(90288 'typeof' this) string[244]) "' from a '"(90291 call :(90294 'typeof' src) string[244]) "'")
+    }
+    (90317 call =(90320 call . this c"chpl_p")(90324 call . src c"chpl_p"))
+    (90327 call =(90330 call . this c"chpl_pn")(90334 call . src c"chpl_pn"))
+    (90341 call(90338 call . this c"chpl__initThisType"))
+    if(90360 call _cond_test(90353 call !=(90356 call . this c"chpl_pn") nil[32]))
+    {
+      (90351 call(90348 call .(90342 call postfix!(90345 call . this c"chpl_pn")) c"retain"))
+    }
+    if(90390 call _cond_test(90381 call &&(90384 call isNonNilableClass(90386 'typeof' this))(90388 call isNilableClass src)))
+    {
+      (90366 call compilerError "cannot initialize '"(90368 call :(90371 'typeof' this) string[244]) "' from a '"(90374 call :(90377 'typeof' src) string[244]) "'")
+    }
+  }
+  function _unknown[42].init=[90397](arg _mt[90407]:_MT[201], arg this[90400] :
+  _shared, arg src[90404] :
+  borrowed) : _unknown[42] "method" "no return value for void"
+  {
+    (90411 call compilerError "cannot initialize '"(90413 call :(90416 'typeof' this) string[244]) "' from a '"(90419 call :(90422 'typeof' src) string[244]) "'")
+    (90425 call =(90428 call . this c"chpl_t")(90448 IfExpr (90431 call !=(90435 call .(90434 'typeof' this) c"chpl_t") ?[227]) then
+    { scopeless
+      (90441 call .(90440 'typeof' this) c"chpl_t")
+    } else
+    { scopeless
+      (90445 call _to_borrowed(90447 'typeof' src))
+    } ))
+  }
+  function _unknown[42].init=[90453](arg _mt[90463]:_MT[201], arg this[90456] :
+  _shared, arg src[90460] :
+  unmanaged[183](?)) : _unknown[42] "method" "no return value for void"
+  {
+    (90467 call compilerError "cannot initialize '"(90469 call :(90472 'typeof' this) string[244]) "' from a '"(90475 call :(90478 'typeof' src) string[244]) "'")
+    (90481 call =(90484 call . this c"chpl_t")(90504 IfExpr (90487 call !=(90491 call .(90490 'typeof' this) c"chpl_t") ?[227]) then
+    { scopeless
+      (90497 call .(90496 'typeof' this) c"chpl_t")
+    } else
+    { scopeless
+      (90501 call _to_borrowed(90503 'typeof' src))
+    } ))
+  }
+  function _unknown[42].init=[90509](arg _mt[90519]:_MT[201], arg this[90512] :
+  _shared, arg src[90516] :
+  _nilType) : _unknown[42] "leaves this nil" "method" "no return value for void"
+  {
+    if(90536 call _cond_test(90528 call ==(90532 call .(90531 'typeof' this) c"chpl_t") ?[227]))
+    {
+      (90523 call compilerError "cannot establish type of shared when initializing with 'nil'")
+    }
+    (90545 call(90542 call . this c"init")(90548 call .(90547 'typeof' this) c"chpl_t"))
+    if(90564 call _cond_test(90562 call isNonNilableClass chpl_t))
+    {
+      (90552 call compilerError "cannot initialize '"(90554 call :(90557 'typeof' this) string[244]) "' from 'nil'")
+    }
+  }
+  function _unknown[42].doClear[90571](arg _mt[90577]:_MT[201], ref arg this[90574] :
+  _shared) : _unknown[42] "method" "no return value for void"
+  {
+    if(90647 call _cond_test(90637 call &&(90639 call != chpl_p nil[32])(90643 call != chpl_pn nil[32])))
+    {
+      const sc[90582] "const"(90591 call(90588 call .(90583 call postfix! chpl_pn) c"releaseStrong"))
+      (90593 'end of statement')
+      if(90605 call _cond_test(90601 call == sc 0))
+      {
+        (90598 call chpl__delete(90596 call _to_unmanaged chpl_p))
+      }
+      const tc[90611] "const"(90620 call(90617 call .(90612 call postfix! chpl_pn) c"releaseTotal"))
+      (90622 'end of statement')
+      if(90632 call _cond_test(90628 call == tc 0))
+      {
+        (90625 call chpl__delete chpl_pn)
+      }
+    }
+    (90651 call = chpl_p nil[32])
+    (90655 call = chpl_pn nil[32])
+  }
+  function _unknown[42].adopt[90661](arg _mt[90669]:_MT[201], arg this[90664] :
+  _shared, arg source[90667]:_any[141](?)) : _unknown[42] "method" "no return value for void"
+  {
+    (90673 call compilerError "cannot adopt a "(90675 call :(90678 'typeof' source) string[244]))
+  }
+  function _unknown[42].adopt[90682](arg _mt[90692]:_MT[201], arg this[90685] :
+  _shared, in arg obj[90689] :
+  _owned) : _unknown[42] "inline" "method"
+  {
+    unknown ptr[90696](90701 call(90698 call . _owned c"release") obj)
+    (90704 'end of statement')
+    (90705 return(90710 call(90707 call . _shared c"adopt") ptr))
+  }
+  function _unknown[42].adopt[90714](arg _mt[90724]:_MT[201], arg this[90717] :
+  _shared, in arg obj[90721] :
+  unmanaged[183](?)) : _unknown[42] "inline" "method"
+  {
+    (90727 return(90728 'new'(90730 call _shared obj)))
+  }
+  function _unknown[42].deinit[90734](arg _mt[90740]:_MT[201], ref arg this[90737] :
+  _shared) : _unknown[42] "destructor" "method" "no return value for void"
+  {
+    if(90749 call _cond_test(90747 call isClass chpl_p))
+    {
+      (90745 call doClear)
+    }
+  }
+  function _unknown[42].borrow[90755](arg _mt[90761]:_MT[201], arg this[90758] :
+  _shared) : _unknown[42] "nil from this" "method"
+  {
+    if(90778 call _cond_test(90772 call ==(90775 call _to_nilable chpl_t) chpl_t))
+    {
+      (90765 return chpl_p)
+    }
+    {
+      (90768 return(90769 call postfix! chpl_p))
+    }
+  }
+  function _unknown[42].downgrade[90784](arg _mt[90790]:_MT[201], arg this[90787] :
+  _shared) : _unknown[42] "method" "@unstable"
+  {
+    (90793 return(90794 'new'(90801 call(90798 call . WeakPointer c"weak") this)))
+  }
+  function =[90805](ref arg lhs[90808] :
+  _shared, arg rhs[90812] :
+  _shared) : _unknown[42] "assignop" "operator" "no return value for void"
+  {
+    if(90844 call _cond_test(90837 call !=(90840 call . rhs c"chpl_pn") nil[32]))
+    {
+      (90835 call(90832 call .(90826 call postfix!(90829 call . rhs c"chpl_pn")) c"retain"))
+    }
+    const chpl_p_tmp[90850] "const"(90852 call . rhs c"chpl_p")
+    (90856 'end of statement')
+    const chpl_pn_tmp[90858] "const"(90860 call . rhs c"chpl_pn")
+    (90864 'end of statement')
+    (90869 call(90866 call . lhs c"doClear"))
+    (90870 call =(90873 call . lhs c"chpl_p") chpl_p_tmp)
+    (90877 call =(90880 call . lhs c"chpl_pn") chpl_pn_tmp)
+  }
+  where {
+    (90815 call !(90817 call &&(90820 call isNonNilableClass lhs)(90823 call isNilableClass rhs)))
+  }
+  function =[90887](ref arg lhs[90890] :
+  _shared, in arg rhs[90894] :
+  _owned) : _unknown[42] "assignop" "operator" "no return value for void"
+  {
+    (90899 call compilerError "cannot assign '"(90903 call :(90906 'typeof' rhs) string[244]) "' to a '"(90911 call :(90914 'typeof' lhs) string[244]) "'")
+  }
+  function =[90919](ref arg lhs[90922] :
+  _shared, arg rhs[90926] :
+  _nilType) : _unknown[42] "assignop" "operator" "no return value for void"
+  {
+    (90934 call(90931 call . lhs c"doClear"))
+  }
+  function <=>[90937](ref arg lhs[90940] :
+  _shared, ref arg rhs[90944] :
+  _shared) : _unknown[42] "operator" "no return value for void"
+  {
+    (90948 call <=>(90951 call . lhs c"chpl_pn")(90955 call . rhs c"chpl_pn"))
+    (90958 call <=>(90961 call . lhs c"chpl_p")(90965 call . rhs c"chpl_p"))
+  }
+  function chpl__autoDestroy[90970](ref arg x[90973] :
+  _shared) : _unknown[42] "auto destroy fn" "no return value for void"
+  {
+    (90977 'call destructor'(90978 'deref' x))
+  }
+  function _unknown[42].deserialize[90982](arg _mt[90992]:_MT[201], ref arg this[90985] :
+  _shared, arg reader[90988]:_any[141](?), ref arg deserializer[90990]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    (90996 call _readWriteHelper reader)
+  }
+  function _unknown[42].serialize[91000](arg _mt[91010]:_MT[201], arg this[91003] :
+  _shared, arg writer[91006]:_any[141](?), ref arg serializer[91008]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    (91014 call _readWriteHelper writer)
+  }
+  function _unknown[42]._readWriteHelper[91018](arg _mt[91026]:_MT[201], arg this[91021] :
+  _shared, arg f[91024]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    if(91180 call _cond_test(91175 call isNonNilableClass(91177 call . this c"chpl_t")))
+    {
+      unknown tmp[91031](91032 call :(91034 call postfix!(91037 call . this c"chpl_p"))(91040 'to borrowed class from unknown' class))
+      (91043 'end of statement')
+      if(91066 call _cond_test(91063 call . f c"_writing"))
+      {
+        (91048 call(91045 call . f c"write") tmp)
+      }
+      {
+        (91051 call = tmp(91058 call(91055 call . f c"read")(91060 'typeof' tmp)))
+      }
+      if(91080 call _cond_test(91076 call == tmp nil[32]))
+      {
+        (91073 call halt "internal error - read nil")
+      }
+      if(91096 call _cond_test(91089 call != tmp(91093 call . this c"chpl_p")))
+      {
+        (91086 call halt "internal error - read changed ptr")
+      }
+    }
+    {
+      unknown tmp[91103](91104 call :(91107 call . this c"chpl_p")(91110 'to borrowed class from unknown'(91112 'to nilable class from type' class)))
+      (91114 'end of statement')
+      if(91137 call _cond_test(91134 call . f c"_writing"))
+      {
+        (91119 call(91116 call . f c"write") tmp)
+      }
+      {
+        (91122 call = tmp(91129 call(91126 call . f c"read")(91131 'typeof' tmp)))
+      }
+      if(91154 call _cond_test(91147 call != tmp(91151 call . this c"chpl_p")))
+      {
+        (91144 call halt "internal error - read changed ptr")
+      }
+      if(91169 call _cond_test(91165 call == tmp nil[32]))
+      {
+        (91163 call(91160 call . this c"doClear"))
+      }
+    }
+  }
+  function :[91186](const  ref arg x[91189] :
+  _shared, arg t[91193] :
+  borrowed) : _unknown[42] "inline" "operator"
+  {
+    (91204 return(91209 call(91206 call . x c"borrow")))
+  }
+  where {
+    (394750 'is_subtype'(91200 call . x c"chpl_t") t)
+  }
+  function :[91213](in arg x[91218] :
+  (91216 call _shared class), arg t[91225] :
+  (91222 call _shared(91224 'to nilable class from type' class))) : _unknown[42] "inline" "operator"
+  {
+    (91242 return(91243 'new'(91245 call _shared 1(91248 call _to_nilable(91250 call . t c"chpl_t")) x)))
+  }
+  where {
+    (394751 'is_subtype'(91234 call :(91237 call . t c"chpl_t") class)(91231 call . x c"chpl_t"))
+  }
+  function :[91257](in arg x[91263] :
+  (91260 call _shared(91262 'to nilable class from type' class)), arg t[91270] :
+  (91267 call _shared(91269 'to nilable class from type' class))) : _unknown[42] "inline" "operator"
+  {
+    (91284 return(91285 'new'(91287 call _shared 1(91290 call . t c"chpl_t") x)))
+  }
+  where {
+    (394752 'is_subtype'(91280 call . t c"chpl_t")(91276 call . x c"chpl_t"))
+  }
+  function :[91297](in arg x[91302] :
+  (91300 call _shared class), arg t[91308] :
+  (91306 call _shared class)) : _unknown[42] "inline" "operator"
+  {
+    (91322 return(91323 'new'(91325 call _shared 1(91328 call . t c"chpl_t") x)))
+  }
+  where {
+    (394753 'is_subtype'(91318 call . t c"chpl_t")(91314 call . x c"chpl_t"))
+  }
+  function :[91335](in arg x[91341] :
+  (91338 call _shared(91340 'to nilable class from type' class)), arg t[91347] :
+  (91345 call _shared class)) : _unknown[42] throws "inline" "operator"
+  {
+    if(91378 call _cond_test(91371 call ==(91374 call . x c"chpl_p") nil[32]))
+    {
+      (91365 'throw'(91366 'new'(_chpl_manager = _owned[238](?))(91370 call NilClassError)))
+    }
+    (91382 return(91383 'new'(91385 call _shared 1(91388 call _to_nonnil(91390 call . t c"chpl_t")) x)))
+  }
+  where {
+    (394754 'is_subtype'(91360 call . t c"chpl_t")(91352 call :(91355 call . x c"chpl_t") class))
+  }
+  function :[91397](const  ref arg x[91403] :
+  (91400 call _shared(91402 'to nilable class from type' class)), arg t[91409] :
+  (91407 call _shared class)) : _unknown[42] throws "inline" "operator"
+  {
+    if(91440 call _cond_test(91433 call ==(91436 call . x c"chpl_p") nil[32]))
+    {
+      (91427 'throw'(91428 'new'(_chpl_manager = _owned[238](?))(91432 call NilClassError)))
+    }
+    unknown p[91445](91460 'try-expr'(91446 call :(91449 call . x c"chpl_p")(91453 call _to_nonnil(91455 call _to_unmanaged(91457 call . t c"chpl_t")))))
+    (91462 'end of statement')
+    (91463 return(91464 'new'(91466 call _shared 1(91469 call _to_borrowed(91471 'typeof' p)) p(91474 call . x c"chpl_pn"))))
+  }
+  where {
+    (394755 'is_proper_subtype'(91418 call :(91421 call . x c"chpl_t") class)(91415 call . t c"chpl_t"))
+  }
+  function :[91480](const  ref arg x[91485] :
+  (91483 call _shared class), arg t[91491] :
+  (91489 call _shared class)) : _unknown[42] throws "inline" "operator"
+  {
+    unknown p[91506](91521 'try-expr'(91507 call :(91510 call . x c"chpl_p")(91514 call _to_nonnil(91516 call _to_unmanaged(91518 call . t c"chpl_t")))))
+    (91523 'end of statement')
+    (91524 return(91525 'new'(91527 call _shared 1(91530 call _to_borrowed(91532 'typeof' p)) p(91535 call . x c"chpl_pn"))))
+  }
+  where {
+    (394756 'is_proper_subtype'(91501 call . x c"chpl_t")(91497 call . t c"chpl_t"))
+  }
+  function :[91541](const  ref arg x[91547] :
+  (91544 call _shared(91546 'to nilable class from type' class)), arg t[91554] :
+  (91551 call _shared(91553 'to nilable class from type' class))) : _unknown[42] "inline" "operator"
+  {
+    unknown p[91569](91570 call :(91573 call . x c"chpl_p")(91577 call _to_nilable(91579 call _to_unmanaged(91581 call . t c"chpl_t"))))
+    (91585 'end of statement')
+    (91586 return(91587 'new'(91589 call _shared 1(91592 call _to_borrowed(91594 'typeof' p)) p(91597 call . x c"chpl_pn"))))
+  }
+  where {
+    (394757 'is_proper_subtype'(91564 call . x c"chpl_t")(91560 call . t c"chpl_t"))
+  }
+  function :[91603](const  ref arg x[91608] :
+  (91606 call _shared class), arg t[91615] :
+  (91612 call _shared(91614 'to nilable class from type' class))) : _unknown[42] "inline" "operator"
+  {
+    unknown p[91634](91635 call :(91638 call . x c"chpl_p")(91642 call _to_nilable(91644 call _to_unmanaged(91646 call . t c"chpl_t"))))
+    (91650 'end of statement')
+    (91651 return(91652 'new'(91654 call _shared 1(91657 call _to_borrowed(91659 'typeof' p)) p(91662 call . x c"chpl_pn"))))
+  }
+  where {
+    (394758 'is_proper_subtype'(91624 call :(91627 call . x c"chpl_t")(91631 'to nilable class from type' class))(91621 call . t c"chpl_t"))
+  }
+  function :[91668](arg x[91671] :
+  _nilType, arg t[91675] :
+  _shared) : _unknown[42] "inline" "operator"
+  {
+    if(91691 call _cond_test(91686 call isNonNilableClass(91688 call . t c"chpl_t")))
+    {
+      (91680 call compilerError "Illegal cast from nil to non-nilable shared type")
+    }
+    if(91705 call _cond_test(91703 call isGenericType t))
+    {
+      (91697 call compilerError "illegal cast from nil to a generic shared type")
+    }
+    unknown tmp[91711] t
+    (91714 'end of statement')
+    (91715 return tmp)
+  }
+  function postfix![91719](arg x[91722] :
+  _shared) : _unknown[42] "always propagate line file info" "inline"
+  {
+    (91728 'import' HaltWrappers)
+    if(91769 call _cond_test(91765 call || chpl_checkNilDereferences enablePostfixBangChecks))
+    {
+      if(91761 call _cond_test(91749 call ==(91752 call _to_nilable(91754 call . x c"chpl_t"))(91758 call . x c"chpl_t")))
+      {
+        if(91745 call _cond_test(91738 call ==(91741 call . x c"chpl_p") nil[32]))
+        {
+          (91736 call(91733 call . HaltWrappers c"nilCheckHalt") "argument to ! is nil")
+        }
+      }
+    }
+    (91773 return(91775 call _to_nonnil(91777 call . x c"chpl_p")))
+  }
+}

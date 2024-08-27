@@ -1,0 +1,41 @@
+AST dump for AtomicsCommon after pass cullOverReferences.
+Module use list: ChapelStandard 
+
+{
+  function chpl__init_AtomicsCommon[468399]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (600080 return _void[46])
+  }
+  function _ref(atomic_refcnt)[1478639].init=[91861](ref arg this[91863]:_ref(atomic_refcnt)[1478639], const  ref arg other[91866]:atomic_refcnt[92033]) : void[4] "method" "primary method" "resolved" "no return value for void"
+  {
+    val _cnt[520437]:atomic int(64)[1523042] "dead after last mention" "temp"
+    val call_tmp[773782]:atomic int(64)[1523042] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    (3886306 call init[1525492] _cnt[520437])
+    (520444 '.=' this[91863] _cnt[91846] _cnt[520437])
+    (550533 'end of statement')
+    (520448 'init done')
+    (550534 'end of statement')
+    ref call_tmp[773789]:_ref(atomic int(64))[1523051] "dead after last mention" "maybe param" "temp"
+    (773792 'move' call_tmp[773789](91880 call _cnt[1068860] this[91863]))
+    const-ref call_tmp[773798]:_ref(atomic int(64))[1523051] "dead after last mention" "maybe param" "reference to a const" "temp"
+    (773801 'move' call_tmp[773798](91888 call _cnt[1068860] other[91866]))
+    val call_tmp[773805]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    val default_arg_order[3886292]:memoryOrder[81226] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    (773808 'move' call_tmp[773805](91894 call read[1915765] call_tmp[773798]))
+    (91886 call init_helper[1525569] call_tmp[773789] call_tmp[773805])
+    (600034 return _void[46])
+  }
+  function _ref(atomic_refcnt)[1478639]._cnt[1068860](ref arg this[1068864]:_ref(atomic_refcnt)[1478639]) ref : _ref(atomic int(64))[1523051] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved"
+  {
+    ref ret[1068874]:_ref(atomic int(64))[1523051] "dead after last mention" "RVV" "temp"
+    ref call_tmp[1068881]:_ref(atomic int(64))[1523051] "dead after last mention" "maybe param" "temp"
+    (1068884 'move' call_tmp[1068881](1068868 '.' this[1068864] _cnt[91846]))
+    (1068879 'move' ret[1068874] call_tmp[1068881])
+    (1068876 return ret[1068874])
+  }
+  function _ref(atomic_refcnt)[1478639].deinit[1068886](const  ref arg this[1068890]:_ref(atomic_refcnt)[1478639]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method" "resolved"
+  {
+    (1068898 return _void[46])
+  }
+  type atomic_refcnt[92033] val _cnt[91846]:atomic int(64)[1523042]
+}

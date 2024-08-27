@@ -1,0 +1,170 @@
+AST dump for ChapelRemoteVars after pass normalize.
+Module use list: OwnedObject ChapelIteratorSupport Errors 
+
+{
+  function chpl__init_ChapelRemoteVars[468618]() : void[4] "insert line file info" "module init"
+  {
+    (631927 return _void[46])
+  }
+  type _remoteVarContainer[314968](?) val super[397732]:RootClass[236] "super class" unknown containedValue[314964]
+  type _remoteVarContainer?[468184](?)
+  type _remoteVarContainer[460775](?)
+  function _remoteVarWrapper[315034](?).init[314983](arg _mt[314996]:_MT[201], ref arg this[314985]:_remoteVarWrapper[315034](?), in arg tmp[314993]:_owned[238](?)) : void[4] "compiler added where" "method" "primary method" "no return value for void"
+  {
+    unknown eltType[534089] "temp" "type variable"
+    (534091 'move' eltType[534089](534085 'query' tmp[314993] 1))
+    (534093 'init field' this[314985] c"eltType" eltType[534089])
+    (569278 'end of statement')
+    unknown call_tmp[941359] "expr temp" "maybe param" "maybe type" "temp"
+    (941362 'move' call_tmp[941359](534110 '.v' this[314985] c"eltType"))
+    unknown call_tmp[941364] "expr temp" "maybe param" "maybe type" "temp"
+    (941367 'move' call_tmp[941364](534102 call _remoteVarContainer[460775](?) call_tmp[941359]))
+    unknown call_tmp[941369] "maybe param" "maybe type" "temp"
+    (941372 'move' call_tmp[941369](534100 call _owned[238](?) call_tmp[941364]))
+    unknown tmp[534097] "temp"
+    (534104 'init var' tmp[534097] tmp[314993] call_tmp[941369])
+    (534106 'init field' this[314985] c"tmp" tmp[534097])
+    (569279 'end of statement')
+    (631872 return _void[46])
+  }
+  where {
+    unknown call_tmp[941374] "expr temp" "maybe param" "maybe type" "temp"
+    (941377 'move' call_tmp[941374](534074 'is_instantiation_allow_values' _owned[238](?) tmp[314993]))
+    (534078 call & 1 call_tmp[941374])
+  }
+  function _remoteVarWrapper[315034](?).get[315017](arg _mt[315021]:_MT[201], ref arg this[315019]:_remoteVarWrapper[315034](?)) ref : _unknown[42] "method" "primary method"
+  {
+    unknown ret[631876] "RVV" "temp"
+    unknown call_tmp[941381] "expr temp" "maybe param" "maybe type" "temp"
+    (941384 'move' call_tmp[941381](410645 call tmp _mt[203] this[315019]))
+    unknown call_tmp[941388] "expr temp" "maybe param" "maybe type" "temp"
+    (941391 'move' call_tmp[941388](315028 call containedValue _mt[203] call_tmp[941381]))
+    (631881 'move' ret[631876](631880 'addr of' call_tmp[941388]))
+    (631878 return ret[631876])
+  }
+  type _remoteVarWrapper[315034](?) unknown eltType[314972] "type variable" unknown tmp[314975](314977 call _owned[238](?)(314979 call _remoteVarContainer[460775](?) eltType[314972]))
+  function __defaultValueForType[315036](arg inType[315038]:_any[141](?)) : _unknown[42] "inline"
+  {
+    unknown ret[631885] "RVV" "temp"
+    unknown default[315042] "dead at end of block" "insert auto destroy"
+    (654253 'default init var' default[315042] inType[315038])
+    (315045 'end of statement')
+    (631890 'move' ret[631885](631889 'deref' default[315042]))
+    gotoReturn _end___defaultValueForType[631883] _end___defaultValueForType[631883]
+    (569281 'end of statement' default[315042])
+    label _end___defaultValueForType[631883]
+    (631887 return ret[631885])
+  }
+  function chpl__buildRemoteWrapper[315050](const  ref arg loc[315052]:_any[141](?)) : _unknown[42] "inline" "@unstable" "no return value for void"
+  {
+    (315056 call compilerError "remote variables must have an initializer or type expression")
+    (631894 return _void[46])
+  }
+  function chpl__buildRemoteWrapper[315062](const  ref arg loc[315064]:_any[141](?), arg inType[315066]:_any[141](?)) : _unknown[42] "inline" "@unstable"
+  {
+    unknown ret[631898] "RVV" "temp"
+    function chpl__thunk1[658075]() : _unknown[42] "compiler generated" "thunk builder"
+    {
+      unknown ret[658091] "RVV" "temp"
+      {
+        unknown call_tmp[658095] "maybe param" "maybe type" "temp"
+        (658098 'move' call_tmp[658095](315076 call __defaultValueForType inType[315066]))
+        unknown thunkResult[658078] "no auto destroy" "temp"
+        (658081 'init var' thunkResult[658078] call_tmp[658095])
+        (658087 'end of statement')
+        (658083 'thunk result' thunkResult[658078])
+      }
+      (658093 return ret[658091])
+    }
+    unknown call_tmp[658100] "expr temp" "maybe param" "maybe type" "temp"
+    (658103 'move' call_tmp[658100](658085 call chpl__thunk1[658075]))
+    unknown call_tmp[941393] "expr temp" "maybe param" "maybe type" "temp"
+    (941396 'move' call_tmp[941393](315071 call chpl__buildRemoteWrapper loc[315064] inType[315066] call_tmp[658100]))
+    (631903 'move' ret[631898](631902 'deref' call_tmp[941393]))
+    (631900 return ret[631898])
+  }
+  function chpl__buildRemoteWrapper[315080](const  ref arg loc[315082]:_any[141](?), in arg tr[315085]:_thunkRecord[171](?)) : _unknown[42] "inline" "@unstable"
+  {
+    unknown ret[631907] "RVV" "temp"
+    unknown inType[315090] "dead at end of block" "insert auto destroy" "type variable"
+    unknown call_tmp[941398] "expr temp" "maybe param" "used in type" "maybe type" "temp" "type variable"
+    (941401 'move' call_tmp[941398](654257 'typeof' tr[315085]))
+    (654259 'move' inType[315090](654256 call thunkToReturnType call_tmp[941398]))
+    unknown c[315097] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[941403] "expr temp" "maybe param" "maybe type" "temp"
+    (941406 'move' call_tmp[941403](315101 call _remoteVarContainer?[468184](?) inType[315090]))
+    unknown call_tmp[941408] "expr temp" "maybe param" "maybe type" "temp"
+    (941411 'move' call_tmp[941408](315099 call _owned[238](?) call_tmp[941403]))
+    (654261 'default init var' c[315097] call_tmp[941408])
+    (315105 'end of statement' inType[315090])
+    {
+      const tmp[315119] "const" "temp"
+      unknown call_tmp[941413] "expr temp" "maybe param" "maybe type" "temp"
+      (941416 'move' call_tmp[941413](315116 '_wide_get_locale' loc[315082]))
+      (315120 'move' tmp[315119](315117 'deref' call_tmp[941413]))
+      unknown call_tmp[941418] "expr temp" "maybe param" "maybe type" "temp"
+      (941421 'move' call_tmp[941418](315113 'force thunk' tr[315085]))
+      unknown call_tmp[941423] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (941426 'move' call_tmp[941423](1000517 'new' _remoteVarContainer[460775](?) call_tmp[941418]))
+      (315107 call = c[315097] call_tmp[941423])
+      (569286 'end of statement' c[315097])
+      (315123 'elided on block' 0 tmp[315119])
+    }
+    unknown call_tmp[941428] "expr temp" "maybe param" "maybe type" "temp"
+    (941431 'move' call_tmp[941428](315137 call _remoteVarContainer[460775](?) inType[315090]))
+    unknown call_tmp[941433] "expr temp" "maybe param" "maybe type" "temp"
+    (941436 'move' call_tmp[941433](315135 call _owned[238](?) call_tmp[941428]))
+    unknown call_tmp[941438] "expr temp" "maybe param" "maybe type" "temp"
+    (941441 'move' call_tmp[941438](315131 call : c[315097] call_tmp[941433]))
+    unknown call_tmp[941443] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (941446 'move' call_tmp[941443](1000518 'new' _remoteVarWrapper[315034](?) call_tmp[941438]))
+    (631912 'move' ret[631907](631911 'deref' call_tmp[941443]))
+    gotoReturn _end_chpl__buildRemoteWrapper[631905] _end_chpl__buildRemoteWrapper[631905]
+    (569288 'end of statement' c[315097] inType[315090])
+    label _end_chpl__buildRemoteWrapper[631905]
+    (631909 return ret[631907])
+  }
+  function chpl__buildRemoteWrapper[315142](const  ref arg loc[315144]:_any[141](?), arg inType[315146]:_any[141](?), in arg tr[315149]:_thunkRecord[171](?)) : _unknown[42] "inline" "@unstable"
+  {
+    unknown ret[631918] "RVV" "temp"
+    unknown c[315154] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[941448] "expr temp" "maybe param" "maybe type" "temp"
+    (941451 'move' call_tmp[941448](315158 call _remoteVarContainer?[468184](?) inType[315146]))
+    unknown call_tmp[941453] "expr temp" "maybe param" "maybe type" "temp"
+    (941456 'move' call_tmp[941453](315156 call _owned[238](?) call_tmp[941448]))
+    (654263 'default init var' c[315154] call_tmp[941453])
+    (315162 'end of statement')
+    {
+      const tmp[315182] "const" "temp"
+      unknown call_tmp[941458] "expr temp" "maybe param" "maybe type" "temp"
+      (941461 'move' call_tmp[941458](315179 '_wide_get_locale' loc[315144]))
+      (315183 'move' tmp[315182](315180 'deref' call_tmp[941458]))
+      {
+        unknown call_tmp[941463] "maybe param" "maybe type" "temp"
+        (941466 'move' call_tmp[941463](315168 'force thunk' tr[315149]))
+        unknown forced[315166] "dead at end of block" "insert auto destroy"
+        (654265 'init var' forced[315166] call_tmp[941463] inType[315146])
+        (315171 'end of statement')
+        unknown call_tmp[941468] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+        (941471 'move' call_tmp[941468](1000519 'new' _remoteVarContainer[460775](?) forced[315166]))
+        (315172 call = c[315154] call_tmp[941468])
+        (569291 'end of statement' c[315154] forced[315166])
+      }
+      (315186 'elided on block' 0 tmp[315182])
+    }
+    unknown call_tmp[941473] "expr temp" "maybe param" "maybe type" "temp"
+    (941476 'move' call_tmp[941473](315200 call _remoteVarContainer[460775](?) inType[315146]))
+    unknown call_tmp[941478] "expr temp" "maybe param" "maybe type" "temp"
+    (941481 'move' call_tmp[941478](315198 call _owned[238](?) call_tmp[941473]))
+    unknown call_tmp[941483] "expr temp" "maybe param" "maybe type" "temp"
+    (941486 'move' call_tmp[941483](315194 call : c[315154] call_tmp[941478]))
+    unknown call_tmp[941488] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (941491 'move' call_tmp[941488](1000520 'new' _remoteVarWrapper[315034](?) call_tmp[941483]))
+    (631923 'move' ret[631918](631922 'deref' call_tmp[941488]))
+    gotoReturn _end_chpl__buildRemoteWrapper[631916] _end_chpl__buildRemoteWrapper[631916]
+    (569294 'end of statement' c[315154])
+    label _end_chpl__buildRemoteWrapper[631916]
+    (631920 return ret[631918])
+  }
+  (397090 'used modules list'(314954 'use' OwnedObject[80948])(314957 'use' ChapelIteratorSupport[94309])(314960 'use' Errors[88218]))
+}

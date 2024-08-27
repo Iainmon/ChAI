@@ -1,0 +1,39 @@
+AST dump for ChapelLocks after pass insertLineNumbers.
+Module use list: Atomics ChapelBase MemConsistency currentTask 
+
+{
+  function chpl__init_ChapelLocks[468384](const in arg _ln[9365319]:int(64)[10], in arg _fn[9365321]:int(32)[66]) : void[4] "fast on" "insert line file info" "local fn" "module init" "resolved"
+  {
+    if chpl__init_ChapelLocks_p[9307045]
+    {
+      goto _exit_chpl__init_ChapelLocks[9307082] _exit_chpl__init_ChapelLocks[9307082]
+    }
+    val modFormatStr[9307053]:chpl_c_string[16] "temp"
+    val modStr[9307054]:chpl_c_string[16] "temp"
+    ref refIndentLevel[9307068]:int(32)[66] "temp"
+    (9307061 'move' modFormatStr[9307053] c"%*s\n")
+    (9307063 'move' modStr[9307054] c"ChapelLocks")
+    (9307066 call printModuleInit[386886] modFormatStr[9307053] modStr[9307054] 11 _ln[9365319] _fn[9365321])
+    (9307072 'move' refIndentLevel[9307068](9307071 'addr of' moduleInitLevel[386877]))
+    (9307075 '+=' refIndentLevel[9307068] 1)
+    (9307051 'move' chpl__init_ChapelLocks_p[9307045] 1)
+    {
+      (9305124 call chpl__init_Atomics[468381] _ln[9365319] _fn[9365321])
+      (9305126 call chpl__init_ChapelBase[468297] _ln[9365319] _fn[9365321])
+      (9305128 call chpl__init_MemConsistency[468378] _ln[9365319] _fn[9365321])
+      (9305130 call chpl__init_currentTask[468366] _ln[9365319] _fn[9365321])
+    }
+    (9307078 '-=' refIndentLevel[9307068] 1)
+    label _endchpl__init_ChapelLocks[9307084]
+    label _exit_chpl__init_ChapelLocks[9307082]
+    (599582 return _void[46])
+  }
+  function chpl_LocalSpinlock[85418].init[85249](ref arg this[85251]:chpl_LocalSpinlock[85418]) : void[4] "fast on" "local fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    val l[519339]:atomic bool[83090] "dead after last mention" "temp"
+    (1525074 call init[82124] l[519339])
+    (519346 '.=' this[85251] l[85243] l[519339])
+    (599574 return _void[46])
+  }
+  type chpl_LocalSpinlock[85418] val l[85243]:atomic bool[83090]
+}

@@ -1,0 +1,568 @@
+AST dump for CopyAggregation after pass readExternC.
+Module use list: 
+
+{
+  (387062 'use' ChapelStandard)
+  (312094 'use' ChplConfig)
+  (312097 'use' CTypes)
+  (312100 'use' AggregationPrimitives)
+  { scopeless
+    unknown verboseAggregation[312103] "config" "param" "private" 0
+    (312106 'end of statement')
+  }
+  { scopeless
+    unknown defaultBuffSize[312108] "param" "private"(312129 IfExpr (312109 call == CHPL_TARGET_PLATFORM "hpe-cray-ex") then
+    { scopeless
+      1024
+    } else
+    { scopeless(312126 IfExpr (312116 call == CHPL_COMM "ugni") then
+      { scopeless
+        4096
+      } else
+      { scopeless
+        8192
+      } )
+    } )
+    (312133 'end of statement')
+  }
+  { scopeless
+    const yieldFrequency[312135] "const" "private"(312137 call getEnvInt "CHPL_AGGREGATION_YIELD_FREQUENCY" 1024)
+    (312143 'end of statement')
+  }
+  { scopeless
+    const dstBuffSize[312145] "const" "private"(312147 call getEnvInt "CHPL_AGGREGATION_DST_BUFF_SIZE" defaultBuffSize)
+    (312153 'end of statement')
+  }
+  { scopeless
+    const srcBuffSize[312155] "const" "private"(312157 call getEnvInt "CHPL_AGGREGATION_SRC_BUFF_SIZE" defaultBuffSize)
+    (312163 'end of statement')
+  }
+  { scopeless
+    unknown aggregate[312165] "config" "param" "private"(312166 call != CHPL_COMM "none")
+    (312171 'end of statement')
+  }
+  type DstAggregator[312249](?) unknown elemType[312174] "type variable" unknown agg[312177](312183 IfExpr  aggregate then
+  { scopeless
+    (312180 call DstAggregatorImpl elemType)
+  } else
+  { scopeless
+    nothing
+  } ) function DstAggregator[312249](?).copy[312188](arg _mt[312200]:_MT[201], ref arg this[312190]:DstAggregator[312249](?), ref arg dst[312193] :
+  elemType, const in arg srcVal[312197] :
+  elemType) : _unknown[42] "inline" "method" "primary method"
+  {
+    if(312219 call _cond_test aggregate)
+    {
+      { scopeless
+        (312209 call(312206 call . agg c"copy") dst srcVal)
+      }
+    }
+    {
+      { scopeless
+        (312213 call = dst srcVal)
+      }
+    }
+  } function DstAggregator[312249](?).flush[312227](arg _mt[312231]:_MT[201], arg this[312229]:DstAggregator[312249](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    if(312241 call _cond_test aggregate)
+    {
+      { scopeless
+        (312238 call(312235 call . agg c"flush"))
+      }
+    }
+  }
+  type SrcAggregator[312326](?) unknown elemType[312253] "type variable" unknown agg[312256](312262 IfExpr  aggregate then
+  { scopeless
+    (312259 call SrcAggregatorImpl elemType)
+  } else
+  { scopeless
+    nothing
+  } ) function SrcAggregator[312326](?).copy[312267](arg _mt[312279]:_MT[201], ref arg this[312269]:SrcAggregator[312326](?), ref arg dst[312272] :
+  elemType, const  ref arg src[312276] :
+  elemType) : _unknown[42] "inline" "method" "primary method"
+  {
+    if(312296 call _cond_test aggregate)
+    {
+      { scopeless
+        (312286 call(312283 call . agg c"copy") dst src)
+      }
+    }
+    {
+      { scopeless
+        (312290 call = dst src)
+      }
+    }
+  } function SrcAggregator[312326](?).flush[312304](arg _mt[312308]:_MT[201], arg this[312306]:SrcAggregator[312326](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    if(312318 call _cond_test aggregate)
+    {
+      { scopeless
+        (312315 call(312312 call . agg c"flush"))
+      }
+    }
+  }
+  type DstAggregatorImpl[312895](?) unknown elemType[312330] "type variable" unknown aggType[312333] "type variable"(312339 call _build_tuple(312336 call c_ptr elemType) elemType) const bufferSize[312343] "const" dstBuffSize const myLocaleSpace[312348] "const"(312353 call chpl_build_bounded_range 0(312351 call chpl__nudgeHighBound numLocales)) unknown lastLocale[312358] int[10] unknown opsUntilYield[312363] yieldFrequency unknown lBuffers[312368](312370 call c_ptr(312372 call c_ptr aggType)) unknown rBuffers[312377](312384 call chpl__buildArrayRuntimeType(312379 call chpl__ensureDomainExpr myLocaleSpace)(312382 call remoteBuffer aggType)) unknown bufferIdxs[312389](312391 call c_ptr int[10]) function DstAggregatorImpl[312895](?).postinit[312395](arg _mt[312399]:_MT[201], ref arg this[312397]:DstAggregatorImpl[312895](?)) : _unknown[42] "method" "primary method"
+  {
+    (312402 call = lBuffers(312406 call allocate(312408 call c_ptr aggType) numLocales))
+    (312411 call = bufferIdxs(312415 call bufferIdxAlloc))
+    {
+      unknown _indexOfInterest[312446] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[312447] "expr temp" "temp"
+      (312456 'move' _iterator[312447](312454 call _getIterator myLocaleSpace))
+      Defer
+      {
+        {
+          (312471 call _freeIterator _iterator[312447])
+        }
+      }
+      { scopeless type
+        (312461 'move' _indexOfInterest[312446](312458 call iteratorIndex _iterator[312447]))
+      }
+      ForLoop[312448]
+      {
+        unknown loc[312416] "index var" "insert auto destroy"
+        (312466 'move' loc[312416] _indexOfInterest[312446])
+        {
+          (312420 call =(312423 call lBuffers loc)(312426 call allocate aggType bufferSize))
+          (312429 call =(312432 call bufferIdxs loc) 0)
+          (312435 call =(312438 call rBuffers loc)(312440 'new'(312442 call remoteBuffer aggType bufferSize loc)))
+        }
+        label _continueLabel[312451]
+        _indexOfInterest[312446]
+        _iterator[312447]
+      }
+      label _breakLabel[312452]
+    }
+  } function DstAggregatorImpl[312895](?).deinit[312480](arg _mt[312484]:_MT[201], ref arg this[312482]:DstAggregatorImpl[312895](?)) : _unknown[42] "destructor" "method" "primary method"
+  {
+    (312488 call flush)
+    {
+      unknown _indexOfInterest[312498] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[312499] "expr temp" "temp"
+      (312508 'move' _iterator[312499](312506 call _getIterator myLocaleSpace))
+      Defer
+      {
+        {
+          (312523 call _freeIterator _iterator[312499])
+        }
+      }
+      { scopeless type
+        (312513 'move' _indexOfInterest[312498](312510 call iteratorIndex _iterator[312499]))
+      }
+      ForLoop[312500]
+      {
+        unknown loc[312489] "index var" "insert auto destroy"
+        (312518 'move' loc[312489] _indexOfInterest[312498])
+        {
+          (312494 call deallocate(312496 call lBuffers loc))
+        }
+        label _continueLabel[312503]
+        _indexOfInterest[312498]
+        _iterator[312499]
+      }
+      label _breakLabel[312504]
+    }
+    (312531 call deallocate lBuffers)
+    (312534 call deallocate bufferIdxs)
+  } function DstAggregatorImpl[312895](?).flush[312538](arg _mt[312542]:_MT[201], ref arg this[312540]:DstAggregatorImpl[312895](?)) : _unknown[42] "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[312568] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[312569] "expr temp" "temp"
+      (312578 'move' _iterator[312569](312576 call _getIterator(312547 call + myLocaleSpace lastLocale)))
+      Defer
+      {
+        {
+          (312593 call _freeIterator _iterator[312569])
+        }
+      }
+      { scopeless type
+        (312583 'move' _indexOfInterest[312568](312580 call iteratorIndex _iterator[312569]))
+      }
+      ForLoop[312570]
+      {
+        unknown offsetLoc[312545] "index var" "insert auto destroy"
+        (312588 'move' offsetLoc[312545] _indexOfInterest[312568])
+        {
+          { scopeless
+            const loc[312553] "const"(312554 call % offsetLoc numLocales)
+            (312559 'end of statement')
+          }
+          (312561 call _flushBuffer loc(312564 call bufferIdxs loc)(freeData = 1))
+        }
+        label _continueLabel[312573]
+        _indexOfInterest[312568]
+        _iterator[312569]
+      }
+      label _breakLabel[312574]
+    }
+  } function DstAggregatorImpl[312895](?).copy[312602](arg _mt[312614]:_MT[201], ref arg this[312604]:DstAggregatorImpl[312895](?), ref arg dst[312607] :
+  elemType, const in arg srcVal[312611] :
+  elemType) : _unknown[42] "inline" "method" "primary method"
+  {
+    if(312624 call _cond_test verboseAggregation)
+    {
+      (312619 call writeln "DstAggregator.copy is called")
+    }
+    { scopeless
+      const loc[312629] "const"(312634 '_wide_get_node' dst)
+      (312636 'end of statement')
+    }
+    (312637 call = lastLocale loc)
+    { scopeless
+      const dstAddr[312642] "const"(312644 call getAddr dst)
+      (312647 'end of statement')
+    }
+    { scopeless
+      unknown bufferIdx[312649] "ref var"(312651 call bufferIdxs loc)
+      (312654 'end of statement')
+    }
+    (312655 call =(312660 call(312658 call lBuffers loc) bufferIdx)(312665 call _build_tuple dstAddr srcVal))
+    (312667 call += bufferIdx 1)
+    if(312709 call _cond_test(312705 call == bufferIdx bufferSize))
+    {
+      (312673 call _flushBuffer loc bufferIdx(freeData = 0))
+      (312678 call = opsUntilYield yieldFrequency)
+    }
+    {
+      { scopeless
+        if(312701 call _cond_test(312697 call == opsUntilYield 0))
+        {
+          (312687 call(312684 call . currentTask c"yieldExecution"))
+          (312688 call = opsUntilYield yieldFrequency)
+        }
+        {
+          (312693 call -= opsUntilYield 1)
+        }
+      }
+    }
+  } function DstAggregatorImpl[312895](?)._flushBuffer[312716](arg _mt[312728]:_MT[201], ref arg this[312718]:DstAggregatorImpl[312895](?), arg loc[312721] :
+  int[10], ref arg bufferIdx[312724]:_any[141](?), arg freeData[312726]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      const myBufferIdx[312732] "const" bufferIdx
+      (312735 'end of statement')
+    }
+    if(312742 call _cond_test(312738 call == myBufferIdx 0))
+    {
+      { scopeless
+        (312736 return)
+      }
+    }
+    { scopeless
+      unknown rBuffer[312748] "ref var"(312750 call rBuffers loc)
+      (312753 'end of statement')
+    }
+    { scopeless
+      const remBufferPtr[312755] "const"(312762 call(312759 call . rBuffer c"cachedAlloc"))
+      (312764 'end of statement')
+    }
+    (312771 call(312768 call . rBuffer c"PUT")(312773 call lBuffers loc) myBufferIdx)
+    {
+      const tmp[312867] "const" "temp"
+      (312868 'move' tmp[312867](312865 'deref'(312864 '_wide_get_locale'(312777 call Locales loc))))
+      {
+        {
+          unknown _indexOfInterest[312805] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[312806] "expr temp" "temp"
+          (312815 'move' _iterator[312806](312813 call _getIterator(312793 call(312790 call . rBuffer c"localIter") remBufferPtr myBufferIdx)))
+          Defer
+          {
+            {
+              (312843 call _freeIterator _iterator[312806])
+            }
+          }
+          { scopeless type
+            (312820 'move' _indexOfInterest[312805](312817 call iteratorIndex _iterator[312806]))
+          }
+          ForLoop[312807]
+          {
+            (312825 call _check_tuple_var_decl _indexOfInterest[312805] 2)
+            unknown dstAddr[312781] "index var" "insert auto destroy"
+            (312832 'move' dstAddr[312781](312829 call _indexOfInterest[312805] 0))
+            unknown srcVal[312783] "index var" "insert auto destroy"
+            (312838 'move' srcVal[312783](312835 call _indexOfInterest[312805] 1))
+            {
+              (312797 call =(312803 call(312800 call . dstAddr c"deref")) srcVal)
+            }
+            label _continueLabel[312810]
+            _indexOfInterest[312805]
+            _iterator[312806]
+          }
+          label _breakLabel[312811]
+        }
+        if(312860 call _cond_test freeData)
+        {
+          (312857 call(312854 call . rBuffer c"localFree") remBufferPtr)
+        }
+      }
+      (312871 'elided on block' 0 tmp[312867])
+    }
+    if(312884 call _cond_test freeData)
+    {
+      (312882 call(312879 call . rBuffer c"markFreed"))
+    }
+    (312888 call = bufferIdx 0)
+  }
+  type SrcAggregatorImpl[313660](?) unknown elemType[312899] "type variable" unknown aggType[312902] "type variable"(312904 call c_ptr elemType) const bufferSize[312908] "const" srcBuffSize const myLocaleSpace[312913] "const"(312918 call chpl_build_bounded_range 0(312916 call chpl__nudgeHighBound numLocales)) unknown lastLocale[312923] int[10] unknown opsUntilYield[312928] yieldFrequency unknown dstAddrs[312933](312935 call c_ptr(312937 call c_ptr aggType)) unknown lSrcAddrs[312942](312944 call c_ptr(312946 call c_ptr aggType)) unknown lSrcVals[312951](312966 call chpl__buildArrayRuntimeType(312953 call chpl__ensureDomainExpr myLocaleSpace)(312964 call chpl__buildArrayRuntimeType(312961 call chpl__ensureDomainExpr(312955 call #(312958 call chpl_build_low_bounded_range 0) bufferSize)) elemType)) unknown rSrcAddrs[312971](312978 call chpl__buildArrayRuntimeType(312973 call chpl__ensureDomainExpr myLocaleSpace)(312976 call remoteBuffer aggType)) unknown rSrcVals[312983](312990 call chpl__buildArrayRuntimeType(312985 call chpl__ensureDomainExpr myLocaleSpace)(312988 call remoteBuffer elemType)) unknown bufferIdxs[312995](312997 call c_ptr int[10]) function SrcAggregatorImpl[313660](?).postinit[313001](arg _mt[313005]:_MT[201], ref arg this[313003]:SrcAggregatorImpl[313660](?)) : _unknown[42] "method" "primary method"
+  {
+    (313008 call = dstAddrs(313012 call allocate(313014 call c_ptr aggType) numLocales))
+    (313017 call = lSrcAddrs(313021 call allocate(313023 call c_ptr aggType) numLocales))
+    (313026 call = bufferIdxs(313030 call bufferIdxAlloc))
+    {
+      unknown _indexOfInterest[313081] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[313082] "expr temp" "temp"
+      (313091 'move' _iterator[313082](313089 call _getIterator myLocaleSpace))
+      Defer
+      {
+        {
+          (313106 call _freeIterator _iterator[313082])
+        }
+      }
+      { scopeless type
+        (313096 'move' _indexOfInterest[313081](313093 call iteratorIndex _iterator[313082]))
+      }
+      ForLoop[313083]
+      {
+        unknown loc[313031] "index var" "insert auto destroy"
+        (313101 'move' loc[313031] _indexOfInterest[313081])
+        {
+          (313035 call =(313038 call dstAddrs loc)(313041 call allocate aggType bufferSize))
+          (313044 call =(313047 call lSrcAddrs loc)(313050 call allocate aggType bufferSize))
+          (313053 call =(313056 call bufferIdxs loc) 0)
+          (313059 call =(313062 call rSrcAddrs loc)(313064 'new'(313066 call remoteBuffer aggType bufferSize loc)))
+          (313070 call =(313073 call rSrcVals loc)(313075 'new'(313077 call remoteBuffer elemType bufferSize loc)))
+        }
+        label _continueLabel[313086]
+        _indexOfInterest[313081]
+        _iterator[313082]
+      }
+      label _breakLabel[313087]
+    }
+  } function SrcAggregatorImpl[313660](?).deinit[313115](arg _mt[313119]:_MT[201], ref arg this[313117]:SrcAggregatorImpl[313660](?)) : _unknown[42] "destructor" "method" "primary method"
+  {
+    (313123 call flush)
+    {
+      unknown _indexOfInterest[313138] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[313139] "expr temp" "temp"
+      (313148 'move' _iterator[313139](313146 call _getIterator myLocaleSpace))
+      Defer
+      {
+        {
+          (313163 call _freeIterator _iterator[313139])
+        }
+      }
+      { scopeless type
+        (313153 'move' _indexOfInterest[313138](313150 call iteratorIndex _iterator[313139]))
+      }
+      ForLoop[313140]
+      {
+        unknown loc[313124] "index var" "insert auto destroy"
+        (313158 'move' loc[313124] _indexOfInterest[313138])
+        {
+          (313129 call deallocate(313131 call dstAddrs loc))
+          (313134 call deallocate(313136 call lSrcAddrs loc))
+        }
+        label _continueLabel[313143]
+        _indexOfInterest[313138]
+        _iterator[313139]
+      }
+      label _breakLabel[313144]
+    }
+    (313171 call deallocate dstAddrs)
+    (313174 call deallocate lSrcAddrs)
+    (313177 call deallocate bufferIdxs)
+  } function SrcAggregatorImpl[313660](?).flush[313181](arg _mt[313185]:_MT[201], ref arg this[313183]:SrcAggregatorImpl[313660](?)) : _unknown[42] "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[313211] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[313212] "expr temp" "temp"
+      (313221 'move' _iterator[313212](313219 call _getIterator(313190 call + myLocaleSpace lastLocale)))
+      Defer
+      {
+        {
+          (313236 call _freeIterator _iterator[313212])
+        }
+      }
+      { scopeless type
+        (313226 'move' _indexOfInterest[313211](313223 call iteratorIndex _iterator[313212]))
+      }
+      ForLoop[313213]
+      {
+        unknown offsetLoc[313188] "index var" "insert auto destroy"
+        (313231 'move' offsetLoc[313188] _indexOfInterest[313211])
+        {
+          { scopeless
+            const loc[313196] "const"(313197 call % offsetLoc numLocales)
+            (313202 'end of statement')
+          }
+          (313204 call _flushBuffer loc(313207 call bufferIdxs loc)(freeData = 1))
+        }
+        label _continueLabel[313216]
+        _indexOfInterest[313211]
+        _iterator[313212]
+      }
+      label _breakLabel[313217]
+    }
+  } function SrcAggregatorImpl[313660](?).copy[313245](arg _mt[313257]:_MT[201], ref arg this[313247]:SrcAggregatorImpl[313660](?), ref arg dst[313250] :
+  elemType, const  ref arg src[313254] :
+  elemType) : _unknown[42] "inline" "method" "primary method"
+  {
+    if(313267 call _cond_test verboseAggregation)
+    {
+      (313262 call writeln "SrcAggregator.copy is called")
+    }
+    if(313286 call _cond_test boundsChecking)
+    {
+      (313273 call assert(313274 call ==(313280 '_wide_get_node' dst)(313282 call . here c"id")))
+    }
+    { scopeless
+      const dstAddr[313291] "const"(313293 call getAddr dst)
+      (313296 'end of statement')
+    }
+    { scopeless
+      const loc[313298] "const"(313303 '_wide_get_node' src)
+      (313305 'end of statement')
+    }
+    (313306 call = lastLocale loc)
+    { scopeless
+      const srcAddr[313311] "const"(313313 call getAddr src)
+      (313316 'end of statement')
+    }
+    { scopeless
+      unknown bufferIdx[313318] "ref var"(313320 call bufferIdxs loc)
+      (313323 'end of statement')
+    }
+    (313324 call =(313329 call(313327 call lSrcAddrs loc) bufferIdx) srcAddr)
+    (313332 call =(313337 call(313335 call dstAddrs loc) bufferIdx) dstAddr)
+    (313340 call += bufferIdx 1)
+    if(313382 call _cond_test(313378 call == bufferIdx bufferSize))
+    {
+      (313346 call _flushBuffer loc bufferIdx(freeData = 0))
+      (313351 call = opsUntilYield yieldFrequency)
+    }
+    {
+      { scopeless
+        if(313374 call _cond_test(313370 call == opsUntilYield 0))
+        {
+          (313360 call(313357 call . currentTask c"yieldExecution"))
+          (313361 call = opsUntilYield yieldFrequency)
+        }
+        {
+          (313366 call -= opsUntilYield 1)
+        }
+      }
+    }
+  } function SrcAggregatorImpl[313660](?)._flushBuffer[313389](arg _mt[313401]:_MT[201], ref arg this[313391]:SrcAggregatorImpl[313660](?), arg loc[313394] :
+  int[10], ref arg bufferIdx[313397]:_any[141](?), arg freeData[313399]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      const myBufferIdx[313405] "const" bufferIdx
+      (313408 'end of statement')
+    }
+    if(313415 call _cond_test(313411 call == myBufferIdx 0))
+    {
+      { scopeless
+        (313409 return)
+      }
+    }
+    { scopeless
+      unknown myLSrcVals[313421] "ref var"(313423 call lSrcVals loc)
+      (313426 'end of statement')
+    }
+    { scopeless
+      unknown myRSrcAddrs[313428] "ref var"(313430 call rSrcAddrs loc)
+      (313433 'end of statement')
+    }
+    { scopeless
+      unknown myRSrcVals[313435] "ref var"(313437 call rSrcVals loc)
+      (313440 'end of statement')
+    }
+    { scopeless
+      const rSrcAddrPtr[313442] "const"(313447 call(313444 call . myRSrcAddrs c"cachedAlloc"))
+      (313449 'end of statement')
+    }
+    { scopeless
+      const rSrcValPtr[313451] "const"(313456 call(313453 call . myRSrcVals c"cachedAlloc"))
+      (313458 'end of statement')
+    }
+    (313463 call(313460 call . myRSrcAddrs c"PUT")(313465 call lSrcAddrs loc) myBufferIdx)
+    {
+      const tmp[313546] "const" "temp"
+      (313547 'move' tmp[313546](313544 'deref'(313543 '_wide_get_locale'(313469 call Locales loc))))
+      {
+        {
+          unknown _indexOfInterest[313493] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[313494] "expr temp" "temp"
+          (313503 'move' _iterator[313494](313501 call _getIterator(313509 call chpl_direct_range_iter 0(313507 call chpl__nudgeHighBound myBufferIdx))))
+          Defer
+          {
+            {
+              (313524 call _freeIterator _iterator[313494])
+            }
+          }
+          { scopeless type
+            (313514 'move' _indexOfInterest[313493](313511 call iteratorIndex _iterator[313494]))
+          }
+          ForLoop[313495]
+          {
+            unknown i[313472] "index var" "insert auto destroy"
+            (313519 'move' i[313472] _indexOfInterest[313493])
+            {
+              (313481 call =(313484 call rSrcValPtr i)(313492 call(313489 call .(313487 call rSrcAddrPtr i) c"deref")))
+            }
+            label _continueLabel[313498]
+            _indexOfInterest[313493]
+            _iterator[313494]
+          }
+          label _breakLabel[313499]
+        }
+        if(313539 call _cond_test freeData)
+        {
+          (313536 call(313533 call . myRSrcAddrs c"localFree") rSrcAddrPtr)
+        }
+      }
+      (313550 'elided on block' 0 tmp[313546])
+    }
+    if(313561 call _cond_test freeData)
+    {
+      (313559 call(313556 call . myRSrcAddrs c"markFreed"))
+    }
+    (313571 call(313568 call . myRSrcVals c"GET") myLSrcVals myBufferIdx)
+    { scopeless
+      unknown dstAddrPtr[313575](313577 call c_addrOf(313581 call(313579 call dstAddrs loc) 0))
+      (313584 'end of statement')
+    }
+    { scopeless
+      unknown srcValPtr[313586](313588 call c_addrOf(313590 call myLSrcVals 0))
+      (313593 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[313615] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[313616] "expr temp" "temp"
+      (313625 'move' _iterator[313616](313623 call _getIterator(313631 call chpl_direct_range_iter 0(313629 call chpl__nudgeHighBound myBufferIdx))))
+      Defer
+      {
+        {
+          (313646 call _freeIterator _iterator[313616])
+        }
+      }
+      { scopeless type
+        (313636 'move' _indexOfInterest[313615](313633 call iteratorIndex _iterator[313616]))
+      }
+      ForLoop[313617]
+      {
+        unknown i[313594] "index var" "insert auto destroy"
+        (313641 'move' i[313594] _indexOfInterest[313615])
+        {
+          (313603 call =(313611 call(313608 call .(313606 call dstAddrPtr i) c"deref"))(313613 call srcValPtr i))
+        }
+        label _continueLabel[313620]
+        _indexOfInterest[313615]
+        _iterator[313616]
+      }
+      label _breakLabel[313621]
+    }
+    (313653 call = bufferIdx 0)
+  }
+}

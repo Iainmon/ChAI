@@ -1,0 +1,1661 @@
+AST dump for Regex after pass readExternC.
+Module use list: 
+
+{
+  (387020 'use' ChapelStandard)
+  { scopeless
+    (153599 'use' OS)
+    (153601 'use' CTypes)
+  }
+  { scopeless
+    const initBufferSizeForSlowReplaceAndCount[153603] "const" "private" 16
+    (153606 'end of statement')
+  }
+  type qio_regex_t[153611]
+  type qio_regex_options_t[153655] unknown utf8[153615] bool unknown posix[153620] bool unknown literal[153625] bool unknown nocapture[153630] bool unknown ignorecase[153635] bool unknown multiline[153640] bool unknown dotnl[153645] bool unknown nongreedy[153650] bool
+  function qio_regex_null[153657]() : _unknown[42] "extern" "local args" "no fn body"
+  {
+  }
+  { scopeless type
+    qio_regex_t
+  }
+  function qio_regex_init_default_options[153663](ref arg options[153666] :
+  qio_regex_options_t) : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function qio_regex_create_compile[153671](arg str[153676] :
+  (153674 call c_ptrConst c_char), arg strlen[153682] :
+  (153680 call int[10] 64), const  ref arg options[153686] :
+  qio_regex_options_t, ref arg compiled[153690] :
+  qio_regex_t) : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function qio_regex_create_compile_flags[153695](arg str[153700] :
+  (153698 call c_ptrConst c_char), arg strlen[153706] :
+  (153704 call int[10] 64), arg flags[153712] :
+  (153710 call c_ptrConst c_char), arg flagslen[153718] :
+  (153716 call int[10] 64), arg isUtf8[153722] :
+  bool, ref arg compiled[153726] :
+  qio_regex_t) : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function qio_regex_create_compile_flags_2[153731](arg str[153736] :
+  (153734 call c_ptr void[4]), arg strlen[153742] :
+  (153740 call int[10] 64), arg flags[153748] :
+  (153746 call c_ptr void[4]), arg flagslen[153754] :
+  (153752 call int[10] 64), arg isUtf8[153758] :
+  bool, ref arg compiled[153762] :
+  qio_regex_t) : void[4] "extern" "local args" "no fn body"
+  {
+  }
+  function qio_regex_retain[153767](const  ref arg compiled[153770] :
+  qio_regex_t) : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function qio_regex_release[153775](ref arg compiled[153778] :
+  qio_regex_t) : void[4] "extern" "local args" "no fn body"
+  {
+  }
+  function qio_regex_get_options[153783](const  ref arg regex[153786] :
+  qio_regex_t, ref arg options[153790] :
+  qio_regex_options_t) : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function qio_regex_borrow_pattern[153795](const  ref arg regex[153798] :
+  qio_regex_t, ref arg pattern[153804] :
+  (153802 call c_ptrConst c_char), ref arg len_out[153810] :
+  (153808 call int[10] 64)) : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function qio_regex_get_ncaptures[153815](const  ref arg regex[153818] :
+  qio_regex_t) : _unknown[42] "extern" "local args" "no fn body"
+  {
+  }
+  { scopeless type
+    (153822 call int[10] 64)
+  }
+  function qio_regex_ok[153827](const  ref arg regex[153830] :
+  qio_regex_t) : _unknown[42] "extern" "local args" "no fn body"
+  {
+  }
+  { scopeless type
+    bool
+  }
+  function qio_regex_error[153837](const  ref arg regex[153840] :
+  qio_regex_t) : _unknown[42] "extern" "local args" "no fn body" "private"
+  {
+  }
+  { scopeless type
+    (153844 call c_ptrConst c_char)
+  }
+  { scopeless
+    const QIO_REGEX_ANCHOR_UNANCHORED[153850] "const" "extern" c_int
+    (153853 'end of statement')
+  }
+  { scopeless
+    const QIO_REGEX_ANCHOR_START[153855] "const" "extern" c_int
+    (153858 'end of statement')
+  }
+  { scopeless
+    const QIO_REGEX_ANCHOR_BOTH[153860] "const" "extern" c_int
+    (153863 'end of statement')
+  }
+  type qio_regex_string_piece_t[153880] unknown offset[153866](153868 call int[10] 64) unknown len[153873](153875 call int[10] 64)
+  function qio_regex_string_piece_isnull[153882](ref arg sp[153885] :
+  qio_regex_string_piece_t) : _unknown[42] "extern" "local args" "no fn body" "private"
+  {
+  }
+  { scopeless type
+    bool
+  }
+  function qio_regex_match[153892](const  ref arg re[153895] :
+  qio_regex_t, arg text[153901] :
+  (153899 call c_ptrConst c_char), arg textlen[153907] :
+  (153905 call int[10] 64), arg startpos[153913] :
+  (153911 call int[10] 64), arg endpos[153919] :
+  (153917 call int[10] 64), arg anchor[153923] :
+  c_int, ref arg submatch[153927] :
+  qio_regex_string_piece_t, arg nsubmatch[153933] :
+  (153931 call int[10] 64)) : _unknown[42] "extern" "local args" "no fn body" "private"
+  {
+  }
+  { scopeless type
+    bool
+  }
+  function qio_regex_replace[153940](const  ref arg re[153943] :
+  qio_regex_t, arg repl[153949] :
+  (153947 call c_ptrConst c_char), arg repllen[153955] :
+  (153953 call int[10] 64), arg text[153961] :
+  (153959 call c_ptrConst c_char), arg textlen[153967] :
+  (153965 call int[10] 64), arg maxreplace[153973] :
+  (153971 call int[10] 64), ref arg replaced[153979] :
+  (153977 call c_ptrConst c_char), ref arg replaced_len[153985] :
+  (153983 call int[10] 64)) : _unknown[42] "extern" "local args" "no fn body" "private"
+  {
+  }
+  { scopeless type
+    (153989 call int[10] 64)
+  }
+  type BadRegexError[154035] unknown msg[153997] string[244] function BadRegexError[154035].init[154001](arg _mt[154009]:_MT[201], arg this[154003]:BadRegexError[154035], arg msg[154006] :
+  string[244]) : _unknown[42] "method" "primary method"
+  {
+    (154012 call =(154017 call . this c"msg") msg)
+  } function BadRegexError[154035].message[154023](arg _mt[154027]:_MT[201], arg this[154025]:BadRegexError[154035]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (154030 return msg)
+  } Error
+  type regexMatch[154054] unknown matched[154039] bool unknown byteOffset[154044] byteIndex unknown numBytes[154049] int[10]
+  function reMatch[154056]() type : _unknown[42] "no parens" "do not resolve unless called"
+  {
+    (154060 call compilerWarning "Regex: 'reMatch' is deprecated; please use 'regexMatch' instead")
+    (154064 return regexMatch)
+  }
+  function _to_regexMatch[154068](ref arg p[154071] :
+  qio_regex_string_piece_t) : _unknown[42]
+  {
+    if(154113 call _cond_test(154111 call qio_regex_string_piece_isnull p))
+    {
+      (154077 return(154078 'new'(154080 call regexMatch 0(154082 call :(154084 call - 1) byteIndex) 0)))
+    }
+    {
+      (154090 return(154091 'new'(154093 call regexMatch 1(154095 call :(154100 call . p c"offset") byteIndex)(154107 call . p c"len"))))
+    }
+  }
+  { scopeless type
+    regexMatch
+  }
+  function _unknown[42].![154120](arg _mt[154130]:_MT[201], arg this[154123] :
+  regexMatch, arg m[154127] :
+  regexMatch) : _unknown[42] "inline" "method" "operator"
+  {
+    (154133 return(154134 call !(154139 call . m c"matched")))
+  }
+  function _unknown[42].chpl_cond_test_method[154144](arg _mt[154150]:_MT[201], arg this[154147] :
+  regexMatch) : _unknown[42] "inline" "method"
+  {
+    (154153 return(154155 call . this c"matched"))
+  }
+  function _unknown[42].this[154160](arg _mt[154170]:_MT[201], arg this[154163] :
+  string[244], arg m[154167] :
+  regexMatch) : _unknown[42] "method"
+  {
+    if(154199 call _cond_test(154196 call . m c"matched"))
+    {
+      { scopeless
+        (154173 return(154190 'try!-expr'(154175 call this(154176 call #(154184 call chpl_build_low_bounded_range(154181 call . m c"byteOffset"))(154187 call . m c"numBytes")))))
+      }
+    }
+    {
+      { scopeless
+        (154192 return "")
+      }
+    }
+  }
+  function _unknown[42].this[154207](arg _mt[154217]:_MT[201], arg this[154210] :
+  bytes[232], arg m[154214] :
+  regexMatch) : _unknown[42] "method"
+  {
+    if(154246 call _cond_test(154243 call . m c"matched"))
+    {
+      { scopeless
+        (154220 return(154222 call this(154223 call #(154232 call chpl_build_low_bounded_range(154225 call :(154228 call . m c"byteOffset") int[10]))(154235 call . m c"numBytes"))))
+      }
+    }
+    {
+      { scopeless
+        (154239 return b"")
+      }
+    }
+  }
+  function serializedType[154254](arg exprType[154256]:_any[141](?)) type : _unknown[42] "private"
+  {
+    { scopeless
+      unknown expr[154260] exprType
+      (154263 'end of statement')
+    }
+    (154264 return(154270 'typeof'(154269 call(154266 call . expr c"chpl__serialize"))))
+  }
+  type chpl_serializeHelper[154290](?) unknown exprType[154275] "type variable" unknown pattern[154278](154280 call serializedType exprType) unknown options[154285] qio_regex_options_t
+  (154293 'use' IO)
+  type regex[156365](?) unknown exprType[154298] "type variable" unknown home[154301] here locale[234] unknown _regex[154307](154310 call qio_regex_null) qio_regex_t function regex[156365](?).init[154313](arg _mt[154350]:_MT[201], arg this[154315]:regex[156365](?), arg pattern[154319] :
+  unknown t[154317], arg posix[154323] =
+  0, arg literal[154327] =
+  0, arg noCapture[154331] =
+  0, arg ignoreCase[154335] =
+  0, arg multiLine[154339] =
+  posix, arg dotAll[154343] =
+  0, arg nonGreedy[154347] =
+  0) : _unknown[42] throws "method" "primary method"
+  {
+    (154364 'use' ChplConfig)
+    (154366 call =(154371 call . this c"exprType") t)
+    (154379 call(154376 call . this c"chpl__initThisType"))
+    if(154390 call _cond_test(154386 call == CHPL_RE2 "none"))
+    {
+      (154382 call compilerError "Cannot use Regex with CHPL_RE2=none")
+    }
+    { scopeless
+      unknown opts[154395] qio_regex_options_t
+      (154398 'end of statement')
+    }
+    (154400 call qio_regex_init_default_options opts)
+    (154402 call =(154407 call . opts c"utf8")(154410 call == t string[244]))
+    (154414 call =(154419 call . opts c"posix") posix)
+    (154423 call =(154428 call . opts c"literal") literal)
+    (154432 call =(154437 call . opts c"nocapture") noCapture)
+    (154441 call =(154446 call . opts c"ignorecase") ignoreCase)
+    (154450 call =(154455 call . opts c"multiline") multiLine)
+    (154459 call =(154464 call . opts c"dotnl") dotAll)
+    (154468 call =(154473 call . opts c"nongreedy") nonGreedy)
+    (154478 call qio_regex_create_compile(154487 call(154484 call .(154483 call(154480 call . pattern c"localize")) c"c_str"))(154489 call . pattern c"numBytes") opts(154496 call . this c"_regex"))
+    if(154585 call _cond_test(154577 call !(154580 call qio_regex_ok(154582 call . this c"_regex"))))
+    {
+      { scopeless
+        const patternStr[154501] "const"(154516 IfExpr (154502 call == t string[244]) then
+        { scopeless
+          pattern
+        } else
+        { scopeless
+          (154511 call(154508 call . pattern c"decode")(154513 call . decodePolicy c"replace"))
+        } )
+        (154520 'end of statement')
+      }
+      { scopeless
+        unknown err_str[154522](154524 call qio_regex_error(154526 call . this c"_regex"))
+        (154530 'end of statement')
+      }
+      { scopeless
+        unknown err_msg[154532] string[244]
+        (154535 'end of statement')
+      }
+      Try!
+      {
+        {
+          (154537 call = err_msg(154540 call +(154542 call +(154544 call +(154550 call(154547 call . string[244] c"createAdoptingBuffer") err_str) " when compiling regex '") patternStr) "'"))
+        }
+      }
+      (154561 call errorThrower err_msg)
+      function errorThrower[154563](arg msg[154565]:_any[141](?)) : _unknown[42] throws "inline"
+      {
+        (154568 'throw'(154569 'new'(_chpl_manager = _owned[238](?))(154573 call BadRegexError msg)))
+      }
+    }
+  }
+  where {
+    (154352 call ||(154354 call == t string[244])(154358 call == t bytes[232]))
+  } function regex[156365](?).init=[154592](arg _mt[154602]:_MT[201], arg this[154594]:regex[156365](?), arg x[154599] :
+  (154597 call regex ?[227])) : _unknown[42] "method" "primary method"
+  {
+    (154605 call =(154608 call . this c"exprType")(154612 call . x c"exprType"))
+    (154615 call =(154620 call . this c"home") here)
+    if(154678 call _cond_test(154671 call ==(154674 call . x c"home") here))
+    {
+      (154625 call =(154628 call . this c"_regex")(154632 call . x c"_regex"))
+      (154639 call(154636 call . this c"chpl__initThisType"))
+      (154641 call qio_regex_retain(154643 call . x c"_regex"))
+    }
+    {
+      (154651 call(154648 call . this c"chpl__initThisType"))
+      { scopeless
+        unknown serialized[154653](154660 call(154657 call . x c"_serialize"))
+        (154662 'end of statement')
+      }
+      (154669 call(154666 call . this c"_deserialize") serialized)
+    }
+  } function regex[156365](?).init[154684](arg _mt[154690]:_MT[201], arg this[154686]:regex[156365](?), arg exprType[154688]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    (154693 call =(154696 call . this c"exprType") exprType)
+  } function regex[156365](?)._serialize[154702](arg _mt[154706]:_MT[201], arg this[154704]:regex[156365](?)) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown pattern[154710](154712 call serializedType exprType)
+      (154715 'end of statement')
+    }
+    { scopeless
+      unknown options[154717] qio_regex_options_t
+      (154720 'end of statement')
+    }
+    { scopeless
+      const _regexCopy[154722] "const" _regex
+      (154725 'end of statement')
+    }
+    {
+      const tmp[154782] "const" "temp"
+      (154783 'move' tmp[154782](154780 'deref'(154779 '_wide_get_locale'(154727 call . this c"home"))))
+      {
+        { scopeless
+          unknown patternTemp[154732](154734 call c_ptrConst c_char)
+          (154737 'end of statement')
+        }
+        { scopeless
+          unknown len[154739] int[10]
+          (154742 'end of statement')
+        }
+        (154744 call qio_regex_borrow_pattern _regexCopy patternTemp len)
+        Try!
+        {
+          {
+            (154749 call = pattern(154762 call(154759 call .(154756 call(154753 call . exprType c"createBorrowingBuffer") patternTemp len) c"chpl__serialize")))
+          }
+        }
+        { scopeless
+          unknown localOptions[154767] qio_regex_options_t
+          (154770 'end of statement')
+        }
+        (154772 call qio_regex_get_options _regexCopy localOptions)
+        (154775 call = options localOptions)
+      }
+      (154786 'elided on block' 0 tmp[154782])
+    }
+    (154790 return(154791 'new'(154793 call chpl_serializeHelper exprType pattern options)))
+  } function regex[156365](?)._deserialize[154799](arg _mt[154805]:_MT[201], ref arg this[154801]:regex[156365](?), arg data[154803]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      const pattern[154809] "const"(154814 call(154811 call . exprType c"chpl__deserialize")(154818 call . data c"pattern"))
+      (154822 'end of statement')
+    }
+    (154824 call qio_regex_create_compile(154829 call(154826 call . pattern c"c_str"))(154831 call . pattern c"numBytes")(154837 call . data c"options")(154841 call . this c"_regex"))
+  } function regex[156365](?).chpl__serialize[154846](arg _mt[154850]:_MT[201], arg this[154848]:regex[156365](?)) : _unknown[42] "method" "primary method"
+  {
+    (154853 return(154855 call _serialize))
+  } function regex[156365](?).chpl__deserialize[154858](arg _mt[154864]:_MT[201], arg this[154860]:regex[156365](?), arg data[154862]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown ret[154868](154870 call regex exprType)
+      (154873 'end of statement')
+    }
+    (154878 call(154875 call . ret c"_deserialize") data)
+    (154880 return ret)
+  } function regex[156365](?).deinit[154884](arg _mt[154888]:_MT[201], ref arg this[154886]:regex[156365](?)) : _unknown[42] "destructor" "method" "primary method"
+  {
+    (154892 call qio_regex_release _regex)
+    (154894 call = _regex(154898 call qio_regex_null))
+  } function regex[156365](?)._handle_captures[154901](arg _mt[154919]:_MT[201], arg this[154903]:regex[156365](?), arg text[154906] :
+  exprType, ref arg matches[154914] :
+  (154910 call c_array qio_regex_string_piece_t unknown nmatches[154912]), ref arg captures[154917]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    (154923 call assert(154924 call >= nmatches(154928 call . captures c"size")))
+    {
+      unknown i[154931] "index var" 0
+      unknown tmp[155054] "maybe param" "temp"
+      (155066 'move' tmp[155054](155064 call chpl_compute_low_param_loop_bound 0(154934 call -(154937 call . captures c"size") 1)))
+      unknown tmp[155055] "maybe param" "temp"
+      (155079 'move' tmp[155055](155077 call chpl_compute_high_param_loop_bound 0(155071 call -(155073 call . captures c"size") 1)))
+      unknown tmp[155056] "maybe param" "temp"
+      (155082 'move' tmp[155056] 1)
+      ParamForLoop[155084]
+      { i[154931] tmp[155054] tmp[155055] tmp[155056]
+        {
+          { scopeless
+            unknown m[154945](154947 call _to_regexMatch(154949 call matches(154950 call + i 1)))
+            (154955 'end of statement')
+          }
+          if(155050 call _cond_test(155043 call ==(155048 'typeof'(155046 call captures i)) regexMatch))
+          {
+            (154957 call =(154960 call captures i) m)
+          }
+          {
+            if(155039 call _cond_test(155036 call . m c"matched"))
+            {
+              if(155016 call _cond_test(155009 call ==(155014 'typeof'(155012 call captures i)) exprType))
+              {
+                (154966 call =(154969 call captures i)(154972 call text m))
+              }
+              {
+                Try
+                {
+                  {
+                    (154976 call =(154979 call captures i)(154981 call :(154984 call text m)(154989 'typeof'(154987 call captures i))))
+                  }
+                }
+                Catch
+                {
+                  { scopeless
+                    unknown empty[154993](154997 'typeof'(154995 call captures i))
+                    (154999 'end of statement')
+                  }
+                  (155000 call =(155003 call captures i) empty)
+                }
+              }
+            }
+            {
+              { scopeless
+                unknown empty[155022](155026 'typeof'(155024 call captures i))
+                (155028 'end of statement')
+              }
+              (155029 call =(155032 call captures i) empty)
+            }
+          }
+        }
+      }
+      label _unused_continueLabel[155058]
+      label _breakLabel[155057]
+    }
+  } function regex[156365](?).search[155095](arg _mt[155108]:_MT[201], arg this[155097]:regex[156365](?), arg text[155100] :
+  exprType, ref arg captures[155105]:_any[141](?) ...) : _unknown[42] "method" "primary method"
+  {
+    (155112 return(155114 call _search_match text QIO_REGEX_ANCHOR_UNANCHORED 1 captures))
+  }
+  { scopeless type
+    regexMatch
+  } function regex[156365](?).search[155122](arg _mt[155130]:_MT[201], arg this[155124]:regex[156365](?), arg text[155127] :
+  exprType) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown dummy[155135] int[10]
+      (155138 'end of statement')
+    }
+    (155139 return(155141 call _search_match text QIO_REGEX_ANCHOR_UNANCHORED 0 dummy))
+  }
+  { scopeless type
+    regexMatch
+  } function regex[156365](?).match[155149](arg _mt[155162]:_MT[201], arg this[155151]:regex[156365](?), arg text[155154] :
+  exprType, ref arg captures[155159]:_any[141](?) ...) : _unknown[42] "method" "primary method"
+  {
+    (155166 return(155168 call _search_match text QIO_REGEX_ANCHOR_START 1 captures))
+  }
+  { scopeless type
+    regexMatch
+  } function regex[156365](?).match[155176](arg _mt[155184]:_MT[201], arg this[155178]:regex[156365](?), arg text[155181] :
+  exprType) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown dummy[155189] int[10]
+      (155192 'end of statement')
+    }
+    (155193 return(155195 call _search_match text QIO_REGEX_ANCHOR_START 0 dummy))
+  }
+  { scopeless type
+    regexMatch
+  } function regex[156365](?).fullMatch[155203](arg _mt[155216]:_MT[201], arg this[155205]:regex[156365](?), arg text[155208] :
+  exprType, ref arg captures[155213]:_any[141](?) ...) : _unknown[42] "method" "primary method"
+  {
+    (155220 return(155222 call _search_match text QIO_REGEX_ANCHOR_BOTH 1 captures))
+  }
+  { scopeless type
+    regexMatch
+  } function regex[156365](?).fullMatch[155230](arg _mt[155238]:_MT[201], arg this[155232]:regex[156365](?), arg text[155235] :
+  exprType) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown dummy[155243] int[10]
+      (155246 'end of statement')
+    }
+    (155247 return(155249 call _search_match text QIO_REGEX_ANCHOR_BOTH 0 dummy))
+  }
+  { scopeless type
+    regexMatch
+  } function regex[156365](?)._search_match[155257](arg _mt[155273]:_MT[201], arg this[155259]:regex[156365](?), arg text[155262] :
+  exprType, arg anchor[155266] :
+  c_int, param arg has_captures[155269]:_any[141](?), ref arg captures[155271]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown regexCopy[155278](155280 call regex exprType)
+      (155283 'end of statement')
+    }
+    if(155293 call _cond_test(155289 call != home here))
+    {
+      { scopeless
+        (155284 call = regexCopy this)
+      }
+    }
+    { scopeless
+      const localRegex[155299] "const"(155309 IfExpr (155300 call != home here) then
+      { scopeless
+        (155305 call . regexCopy c"_regex")
+      } else
+      { scopeless
+        _regex
+      } )
+      (155313 'end of statement')
+    }
+    { scopeless
+      unknown ret[155315] regexMatch
+      (155318 'end of statement')
+    }
+    { scopeless
+      unknown pos[155320] byteIndex
+      (155323 'end of statement')
+    }
+    { scopeless
+      unknown endpos[155325] byteIndex
+      (155328 'end of statement')
+    }
+    (155329 call = pos 0)
+    (155333 call = endpos(155336 call + pos(155340 call . text c"numBytes")))
+    { scopeless
+      unknown nmatches[155344] "param"(155354 IfExpr  has_captures then
+      { scopeless
+        (155346 call + 1(155350 call . captures c"size"))
+      } else
+      { scopeless
+        1
+      } )
+      (155358 'end of statement')
+    }
+    { scopeless
+      unknown matches[155360](155362 call c_array qio_regex_string_piece_t nmatches)
+      (155366 'end of statement')
+    }
+    { scopeless
+      unknown got[155368] bool
+      (155371 'end of statement')
+    }
+    (155372 call = got(155376 call qio_regex_match localRegex(155386 call(155383 call .(155382 call(155379 call . text c"localize")) c"c_str"))(155388 call . text c"numBytes")(155391 call : pos int[10])(155395 call : endpos int[10]) anchor(155401 call matches 0) nmatches))
+    if(155411 call _cond_test has_captures)
+    {
+      { scopeless
+        (155405 call _handle_captures text matches captures)
+      }
+    }
+    (155416 call = ret(155419 'new'(155421 call regexMatch got(155423 call :(155428 call .(155426 call matches 0) c"offset") byteIndex)(155435 call .(155433 call matches 0) c"len"))))
+    (155438 return ret)
+  }
+  { scopeless type
+    regexMatch
+  } function regex[156365](?).split[155443](arg _mt[155457]:_MT[201], arg this[155445]:regex[156365](?), arg text[155448] :
+  exprType, arg maxsplit[155453] :
+  int[10] =
+  0) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    { scopeless
+      unknown regexCopy[155461](155463 call regex exprType)
+      (155466 'end of statement')
+    }
+    if(155476 call _cond_test(155472 call != home here))
+    {
+      { scopeless
+        (155467 call = regexCopy this)
+      }
+    }
+    { scopeless
+      const localRegex[155482] "const"(155492 IfExpr (155483 call != home here) then
+      { scopeless
+        (155488 call . regexCopy c"_regex")
+      } else
+      { scopeless
+        _regex
+      } )
+      (155496 'end of statement')
+    }
+    { scopeless
+      unknown ncaptures[155498](155500 call qio_regex_get_ncaptures localRegex)
+      (155503 'end of statement')
+    }
+    { scopeless
+      unknown nmatches[155505](155506 call + 1 ncaptures)
+      (155511 'end of statement')
+    }
+    { scopeless
+      unknown pos[155513] byteIndex
+      (155516 'end of statement')
+    }
+    { scopeless
+      unknown endpos[155518] byteIndex
+      (155521 'end of statement')
+    }
+    { scopeless
+      unknown last[155523] byteIndex
+      (155526 'end of statement')
+    }
+    { scopeless
+      unknown localText[155528](155533 call(155530 call . text c"localize"))
+      (155535 'end of statement')
+    }
+    { scopeless
+      unknown matches[155537](155539 call allocate qio_regex_string_piece_t(155545 call(155542 call . nmatches c"safeCast") c_size_t))
+      (155548 'end of statement')
+    }
+    Defer
+    {
+      { scopeless
+        (155550 call deallocate matches)
+      }
+    }
+    (155555 call = pos 0)
+    (155559 call = endpos(155562 call + pos(155566 call . localText c"numBytes")))
+    (155569 call = last 0)
+    { scopeless
+      unknown splits[155574] 0
+      (155577 'end of statement')
+    }
+    { scopeless
+      unknown maxsplits[155579] maxsplit
+      (155582 'end of statement')
+    }
+    if(155594 call _cond_test(155590 call == maxsplit 0))
+    {
+      { scopeless
+        (155583 call = maxsplits(155587 call max int[10]))
+      }
+    }
+    {
+      unknown tmp[155781] "temp"
+      (155817 'move' tmp[155781](155806 call _cond_test(155808 call &&(155810 call < splits maxsplits)(155814 call <= pos endpos))))
+      WhileDo[155786]
+      {
+        {
+          { scopeless
+            unknown got[155611](155613 call qio_regex_match localRegex(155619 call(155616 call . localText c"c_str"))(155621 call . localText c"numBytes")(155624 call : pos int[10])(155628 call : endpos int[10]) QIO_REGEX_ANCHOR_UNANCHORED(155634 call matches 0) nmatches)
+            (155638 'end of statement')
+          }
+          if(155645 call _cond_test(155642 call ! got))
+          {
+            { scopeless
+              break nil[32]
+            }
+          }
+          (155650 call += splits 1)
+          { scopeless
+            unknown splitstart[155655](155660 call .(155658 call matches 0) c"offset") byteIndex
+            (155664 'end of statement')
+          }
+          Try!
+          {
+            {
+              (155666 yield(155668 call text(155673 call chpl_build_bounded_range last(155671 call chpl__nudgeHighBound splitstart))))
+            }
+          }
+          (155678 call = last(155681 call + splitstart(155687 call .(155685 call matches 0) c"len")))
+          {
+            unknown _indexOfInterest[155725] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[155726] "expr temp" "temp"
+            (155735 'move' _iterator[155726](155733 call _getIterator(155739 call chpl_direct_range_iter 1 ncaptures)))
+            Defer
+            {
+              {
+                (155754 call _freeIterator _iterator[155726])
+              }
+            }
+            { scopeless type
+              (155744 'move' _indexOfInterest[155725](155741 call iteratorIndex _iterator[155726]))
+            }
+            ForLoop[155727]
+            {
+              unknown i[155690] "index var" "insert auto destroy"
+              (155749 'move' i[155690] _indexOfInterest[155725])
+              {
+                (155697 yield(155699 call text(155700 'new'(155702 call regexMatch(155703 call !(155706 call qio_regex_string_piece_isnull(155708 call matches i)))(155710 call :(155715 call .(155713 call matches i) c"offset") byteIndex)(155722 call .(155720 call matches i) c"len")))))
+              }
+              label _continueLabel[155730]
+              _indexOfInterest[155725]
+              _iterator[155726]
+            }
+            label _breakLabel[155731]
+          }
+          (155761 call = pos(155764 call +(155769 call .(155767 call matches 0) c"offset")(155773 call max 1(155778 call .(155776 call matches 0) c"len"))))
+        }
+        label _continueLabel[155784]
+        (155801 'move' tmp[155781](155790 call _cond_test(155792 call &&(155794 call < splits maxsplits)(155798 call <= pos endpos))))
+        tmp[155781]
+      }
+      label _breakLabel[155785]
+    }
+    if(155856 call _cond_test(155852 call <= last endpos))
+    {
+      if(155848 call _cond_test(155841 call >= last(155845 call . text c"numBytes")))
+      {
+        (155822 yield(155823 call : "" exprType))
+      }
+      {
+        Try!
+        {
+          {
+            (155829 yield(155831 call text(155836 call chpl_build_bounded_range last(155834 call chpl__nudgeHighBound endpos))))
+          }
+        }
+      }
+    }
+  } function regex[156365](?).matches[155862](arg _mt[155882]:_MT[201], arg this[155864]:regex[156365](?), arg text[155867] :
+  exprType, param arg numCaptures[155871] =
+  0, arg maxMatches[155878] :
+  int[10] =
+  (155876 call max int[10])) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    { scopeless
+      unknown regexCopy[155886](155888 call regex exprType)
+      (155891 'end of statement')
+    }
+    if(155901 call _cond_test(155897 call != home here))
+    {
+      { scopeless
+        (155892 call = regexCopy this)
+      }
+    }
+    { scopeless
+      const localRegex[155907] "const"(155917 IfExpr (155908 call != home here) then
+      { scopeless
+        (155913 call . regexCopy c"_regex")
+      } else
+      { scopeless
+        _regex
+      } )
+      (155921 'end of statement')
+    }
+    { scopeless
+      unknown nMatches[155923] "param"(155924 call + 1 numCaptures)
+      (155929 'end of statement')
+    }
+    { scopeless
+      unknown matches[155931](155933 call c_array qio_regex_string_piece_t nMatches)
+      (155937 'end of statement')
+    }
+    { scopeless
+      const localText[155939] "const"(155944 call(155941 call . text c"localize"))
+      (155946 'end of statement')
+    }
+    { scopeless
+      const textLength[155948] "const"(155950 call . localText c"numBytes")
+      (155954 'end of statement')
+    }
+    { scopeless
+      const endPos[155956] "const" textLength
+      (155959 'end of statement')
+    }
+    { scopeless
+      unknown nFound[155961] 0
+      (155964 'end of statement')
+    }
+    { scopeless
+      unknown cur[155966] 0
+      (155969 'end of statement')
+    }
+    {
+      unknown tmp[156119] "temp"
+      (156155 'move' tmp[156119](156144 call _cond_test(156146 call &&(156148 call < nFound maxMatches)(156152 call <= cur endPos))))
+      WhileDo[156124]
+      {
+        {
+          { scopeless
+            unknown got[155982](155984 call qio_regex_match localRegex(155990 call(155987 call . localText c"c_str")) textLength(155992 call : cur int[10])(155996 call : endPos int[10]) QIO_REGEX_ANCHOR_UNANCHORED(156002 call matches 0) nMatches)
+            (156006 'end of statement')
+          }
+          if(156013 call _cond_test(156010 call ! got))
+          {
+            { scopeless
+              break nil[32]
+            }
+          }
+          { scopeless
+            unknown ret[156019](156020 call * nMatches regexMatch)
+            (156025 'end of statement')
+          }
+          {
+            unknown _indexOfInterest[156057] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[156058] "expr temp" "temp"
+            (156067 'move' _iterator[156058](156065 call _getIterator(156071 call chpl_direct_range_iter 0 numCaptures)))
+            Defer
+            {
+              {
+                (156086 call _freeIterator _iterator[156058])
+              }
+            }
+            { scopeless type
+              (156076 'move' _indexOfInterest[156057](156073 call iteratorIndex _iterator[156058]))
+            }
+            ForLoop[156059]
+            {
+              unknown i[156026] "index var" "insert auto destroy"
+              (156081 'move' i[156026] _indexOfInterest[156057])
+              {
+                (156033 call =(156036 call ret i)(156038 'new'(156040 call regexMatch got(156042 call :(156047 call .(156045 call matches i) c"offset") byteIndex)(156054 call .(156052 call matches i) c"len"))))
+              }
+              label _continueLabel[156062]
+              _indexOfInterest[156057]
+              _iterator[156058]
+            }
+            label _breakLabel[156063]
+          }
+          (156093 yield ret)
+          (156095 call = cur(156098 call +(156103 call .(156101 call matches 0) c"offset")(156107 call max 1(156112 call .(156110 call matches 0) c"len"))))
+          (156115 call += nFound 1)
+        }
+        label _continueLabel[156122]
+        (156139 'move' tmp[156119](156128 call _cond_test(156130 call &&(156132 call < nFound maxMatches)(156136 call <= cur endPos))))
+        tmp[156119]
+      }
+      label _breakLabel[156123]
+    }
+  } function regex[156365](?).serialize[156160](arg _mt[156168]:_MT[201], arg this[156162]:regex[156365](?), arg writer[156164]:_any[141](?), ref arg serializer[156166]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    { scopeless
+      unknown pattern[156172] exprType
+      (156175 'end of statement')
+    }
+    {
+      const tmp[156218] "const" "temp"
+      (156219 'move' tmp[156218](156216 'deref'(156215 '_wide_get_locale'(156177 call . this c"home"))))
+      {
+        { scopeless
+          unknown patternTemp[156182](156184 call c_ptrConst c_char)
+          (156187 'end of statement')
+        }
+        { scopeless
+          unknown len[156189] int[10]
+          (156192 'end of statement')
+        }
+        (156194 call qio_regex_borrow_pattern(156196 call . this c"_regex") patternTemp len)
+        Try!
+        {
+          {
+            (156202 call = pattern(156209 call(156206 call . exprType c"createCopyingBuffer") patternTemp len))
+          }
+        }
+      }
+      (156222 'elided on block' 0 tmp[156218])
+    }
+    (156230 call(156227 call . writer c"write") "new regex(\"" pattern "\")")
+  } function regex[156365](?).deserialize[156240](arg _mt[156248]:_MT[201], ref arg this[156242]:regex[156365](?), arg reader[156244]:_any[141](?), ref arg deserializer[156246]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    { scopeless
+      unknown pattern[156252] exprType
+      (156255 'end of statement')
+    }
+    if(156327 call _cond_test(156305 call &&(156307 call &&(156313 call(156310 call . reader c"matchLiteral") "new regex(\"")(156319 call(156316 call . reader c"read") pattern))(156325 call(156322 call . reader c"matchLiteral") "\")")))
+    {
+      { scopeless
+        {
+          const tmp[156297] "const" "temp"
+          (156298 'move' tmp[156297](156295 'deref'(156294 '_wide_get_locale'(156257 call . this c"home"))))
+          {
+            { scopeless
+              unknown localPattern[156262](156267 call(156264 call . pattern c"localize"))
+              (156269 'end of statement')
+            }
+            { scopeless
+              unknown opts[156271] qio_regex_options_t
+              (156274 'end of statement')
+            }
+            (156276 call qio_regex_init_default_options opts)
+            (156279 call qio_regex_create_compile(156284 call(156281 call . localPattern c"c_str"))(156286 call . localPattern c"numBytes") opts(156291 call . this c"_regex"))
+          }
+          (156301 'elided on block' 0 tmp[156297])
+        }
+      }
+    }
+  } function regex[156365](?).init[156334](arg _mt[156346]:_MT[201], arg this[156336]:regex[156365](?), arg exprType[156338]:_any[141](?), arg reader[156341] :
+  fileReader, ref arg deserializer[156344]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    (156353 call(156350 call . this c"init") exprType)
+    (156359 call(156356 call . this c"deserialize") reader deserializer)
+  } serializable
+  function _unknown[42].=[156367](arg _mt[156386]:_MT[201], arg this[156370] :
+  regex, ref arg ret[156377] :
+  (156374 call regex unknown t[156375]), arg x[156383] :
+  (156381 call regex t)) : _unknown[42] "assignop" "method" "operator"
+  {
+    if(156476 call _cond_test(156466 call ==(156469 call . x c"home")(156473 call . ret c"home")))
+    {
+      {
+        const tmp[156410] "const" "temp"
+        (156411 'move' tmp[156410](156408 'deref'(156407 '_wide_get_locale'(156391 call . x c"home"))))
+        {
+          (156396 call qio_regex_retain(156398 call . x c"_regex"))
+          (156402 call qio_regex_release(156404 call . ret c"_regex"))
+        }
+        (156414 'elided on block' 0 tmp[156410])
+      }
+      (156418 call =(156421 call . ret c"_regex")(156425 call . x c"_regex"))
+    }
+    {
+      {
+        const tmp[156458] "const" "temp"
+        (156459 'move' tmp[156458](156456 'deref'(156455 '_wide_get_locale'(156430 call . ret c"home"))))
+        {
+          (156435 call qio_regex_release(156437 call . ret c"_regex"))
+          { scopeless
+            unknown serialized[156441](156446 call(156443 call . x c"_serialize"))
+            (156448 'end of statement')
+          }
+          (156453 call(156450 call . ret c"_deserialize") serialized)
+        }
+        (156462 'elided on block' 0 tmp[156458])
+      }
+    }
+  }
+  function :[156482](arg x[156488] :
+  (156485 call regex unknown exprType[156486]), arg t[156492] :
+  exprType) : _unknown[42] "inline" "operator"
+  {
+    { scopeless
+      unknown pattern[156497] t
+      (156500 'end of statement')
+    }
+    {
+      const tmp[156543] "const" "temp"
+      (156544 'move' tmp[156543](156541 'deref'(156540 '_wide_get_locale'(156502 call . x c"home"))))
+      {
+        { scopeless
+          unknown cs[156507](156509 call c_ptrConst c_char)
+          (156512 'end of statement')
+        }
+        { scopeless
+          unknown len[156514] int[10]
+          (156517 'end of statement')
+        }
+        (156519 call qio_regex_borrow_pattern(156521 call . x c"_regex") cs len)
+        Try!
+        {
+          {
+            (156527 call = pattern(156534 call(156531 call . t c"createCopyingBuffer") cs len))
+          }
+        }
+      }
+      (156547 'elided on block' 0 tmp[156543])
+    }
+    (156551 return pattern)
+  }
+  function _unknown[42].find[156555](arg _mt[156567]:_MT[201], arg this[156558] :
+  string[244], arg pattern[156564] :
+  (156562 call regex string[244])) : _unknown[42] "method"
+  {
+    (156571 return(156580 call .(156578 call(156575 call . pattern c"search") this) c"byteOffset"))
+  }
+  { scopeless type
+    byteIndex
+  }
+  function _unknown[42].find[156586](arg _mt[156598]:_MT[201], arg this[156589] :
+  bytes[232], arg pattern[156595] :
+  (156593 call regex bytes[232])) : _unknown[42] "method"
+  {
+    (156602 return(156609 call .(156607 call(156604 call . pattern c"search") this) c"byteOffset"))
+  }
+  { scopeless type
+    byteIndex
+  }
+  function _unknown[42].replace[156615](arg _mt[156637]:_MT[201], arg this[156618] :
+  string[244], arg pattern[156624] :
+  (156622 call regex string[244]), arg replacement[156628] :
+  string[244], arg count[156634] =
+  (156631 call - 1)) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown tmp[156652] "temp"(156647 call doReplaceAndCount this pattern replacement count)
+      (156659 call _check_tuple_var_decl tmp[156652] 2)
+      unknown str[156642](156653 call tmp[156652] 0)
+      unknown dummy[156644](156656 call tmp[156652] 1)
+      (156664 'end of statement')
+    }
+    (156665 return str)
+  }
+  { scopeless type
+    string[244]
+  }
+  function _unknown[42].replace[156670](arg _mt[156692]:_MT[201], arg this[156673] :
+  bytes[232], arg pattern[156679] :
+  (156677 call regex bytes[232]), arg replacement[156683] :
+  bytes[232], arg count[156689] =
+  (156686 call - 1)) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown tmp[156707] "temp"(156702 call doReplaceAndCount this pattern replacement count)
+      (156714 call _check_tuple_var_decl tmp[156707] 2)
+      unknown str[156697](156708 call tmp[156707] 0)
+      unknown dummy[156699](156711 call tmp[156707] 1)
+      (156719 'end of statement')
+    }
+    (156720 return str)
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].replaceAndCount[156725](arg _mt[156747]:_MT[201], arg this[156728] :
+  string[244], arg pattern[156734] :
+  (156732 call regex string[244]), arg replacement[156738] :
+  string[244], arg count[156744] =
+  (156741 call - 1)) : _unknown[42] "method"
+  {
+    (156755 return(156757 call doReplaceAndCount this pattern replacement count))
+  }
+  { scopeless type
+    (156752 call _build_tuple string[244] int[10])
+  }
+  function _unknown[42].replaceAndCount[156765](arg _mt[156787]:_MT[201], arg this[156768] :
+  bytes[232], arg pattern[156774] :
+  (156772 call regex bytes[232]), arg replacement[156778] :
+  bytes[232], arg count[156784] =
+  (156781 call - 1)) : _unknown[42] "method"
+  {
+    (156795 return(156797 call doReplaceAndCount this pattern replacement count))
+  }
+  { scopeless type
+    (156792 call _build_tuple bytes[232] int[10])
+  }
+  function doReplaceAndCount[156805](arg x[156809] :
+  unknown t[156807], arg pattern[156815] :
+  (156813 call regex t), arg replacement[156819] :
+  t, arg count[156825] =
+  (156822 call - 1)) : _unknown[42] "inline" "private"
+  {
+    { scopeless
+      unknown regexCopy[156840](156842 call regex t)
+      (156845 'end of statement')
+    }
+    if(156858 call _cond_test(156851 call !=(156854 call . pattern c"home") here))
+    {
+      { scopeless
+        (156846 call = regexCopy pattern)
+      }
+    }
+    { scopeless
+      const localRegex[156864] "const"(156880 IfExpr (156865 call !=(156868 call . pattern c"home") here) then
+      { scopeless
+        (156873 call . regexCopy c"_regex")
+      } else
+      { scopeless
+        (156877 call . pattern c"_regex")
+      } )
+      (156884 'end of statement')
+    }
+    { scopeless
+      unknown pos[156886] byteIndex
+      (156889 'end of statement')
+    }
+    { scopeless
+      unknown endpos[156891] byteIndex
+      (156894 'end of statement')
+    }
+    (156895 call = pos 0)
+    (156899 call = endpos(156902 call + pos(156906 call . x c"numBytes")))
+    { scopeless
+      unknown replaced[156910](156912 call c_ptrConst c_char)
+      (156915 'end of statement')
+    }
+    { scopeless
+      unknown replaced_len[156917](156919 call int[10] 64)
+      (156922 'end of statement')
+    }
+    { scopeless
+      unknown nreplaced[156924](156927 call qio_regex_replace localRegex(156937 call(156934 call .(156933 call(156930 call . replacement c"localize")) c"c_str"))(156939 call . replacement c"numBytes")(156950 call(156947 call .(156946 call(156943 call . x c"localize")) c"c_str"))(156952 call . x c"numBytes") count replaced replaced_len) int[10]
+      (156959 'end of statement')
+    }
+    { scopeless
+      unknown ret[156961](156969 'try!-expr'(156966 call(156963 call . t c"createAdoptingBuffer") replaced replaced_len))
+      (156971 'end of statement')
+    }
+    (156972 return(156976 call _build_tuple ret nreplaced))
+  }
+  where {
+    (156828 call ||(156830 call == t string[244])(156834 call == t bytes[232]))
+  }
+  function _unknown[42].startsWith[156981](arg _mt[156993]:_MT[201], arg this[156984] :
+  string[244], arg pattern[156990] :
+  (156988 call regex string[244])) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown rm[156998](157005 call(157002 call . pattern c"match") this)
+      (157008 'end of statement')
+    }
+    (157009 return(157010 call ==(157013 call . rm c"byteOffset") 0))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].startsWith[157020](arg _mt[157032]:_MT[201], arg this[157023] :
+  bytes[232], arg pattern[157029] :
+  (157027 call regex bytes[232])) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown rm[157037](157042 call(157039 call . pattern c"match") this)
+      (157045 'end of statement')
+    }
+    (157046 return(157047 call ==(157050 call . rm c"byteOffset") 0))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].split[157057](arg _mt[157075]:_MT[201], arg this[157060] :
+  string[244], arg sep[157066] :
+  (157064 call regex string[244]), arg maxsplit[157071] :
+  int[10] =
+  0) : _unknown[42] "iterator fn" "method"
+  {
+    {
+      unknown _indexOfInterest[157090] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[157091] "expr temp" "temp"
+      (157100 'move' _iterator[157091](157098 call _getIterator(157084 call(157081 call . sep c"split") this maxsplit)))
+      Defer
+      {
+        {
+          (157115 call _freeIterator _iterator[157091])
+        }
+      }
+      { scopeless type
+        (157105 'move' _indexOfInterest[157090](157102 call iteratorIndex _iterator[157091]))
+      }
+      ForLoop[157092]
+      {
+        unknown v[157078] "index var" "insert auto destroy"
+        (157110 'move' v[157078] _indexOfInterest[157090])
+        {
+          (157088 yield v)
+        }
+        label _continueLabel[157095]
+        _indexOfInterest[157090]
+        _iterator[157091]
+      }
+      label _breakLabel[157096]
+    }
+  }
+  function _unknown[42].split[157124](arg _mt[157142]:_MT[201], arg this[157127] :
+  bytes[232], arg sep[157133] :
+  (157131 call regex bytes[232]), arg maxsplit[157138] :
+  int[10] =
+  0) : _unknown[42] "iterator fn" "method"
+  {
+    {
+      unknown _indexOfInterest[157157] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[157158] "expr temp" "temp"
+      (157167 'move' _iterator[157158](157165 call _getIterator(157151 call(157148 call . sep c"split") this maxsplit)))
+      Defer
+      {
+        {
+          (157182 call _freeIterator _iterator[157158])
+        }
+      }
+      { scopeless type
+        (157172 'move' _indexOfInterest[157157](157169 call iteratorIndex _iterator[157158]))
+      }
+      ForLoop[157159]
+      {
+        unknown v[157145] "index var" "insert auto destroy"
+        (157177 'move' v[157145] _indexOfInterest[157157])
+        {
+          (157155 yield v)
+        }
+        label _continueLabel[157162]
+        _indexOfInterest[157157]
+        _iterator[157158]
+      }
+      label _breakLabel[157163]
+    }
+  }
+  function _unknown[42].readThrough[157191](arg _mt[157214]:_MT[201], arg this[157194] :
+  fileReader, arg separator[157201] :
+  (157198 call regex unknown t[157199]), arg maxSize[157207] =
+  (157204 call - 1), arg stripSeparator[157211] =
+  0) : _unknown[42] throws "method"
+  {
+    { scopeless
+      unknown s[157229] t
+      (157232 'end of statement')
+    }
+    if(157263 call _cond_test(157250 call !(157258 call(157255 call . this c"readThrough") separator s maxSize stripSeparator)))
+    {
+      { scopeless
+        (157233 'throw'(157234 'new'(157236 call EofError(157237 call +(157239 call + "reached EOF in readThrough("(157244 call : t string[244])) ")"))))
+      }
+    }
+    (157268 return s)
+  }
+  where {
+    (157217 call ||(157219 call == t string[244])(157223 call == t bytes[232]))
+  }
+  { scopeless type
+    t
+  }
+  function _unknown[42].readThrough[157274](arg _mt[157300]:_MT[201], arg this[157277] :
+  fileReader, arg separator[157283] :
+  (157281 call regex string[244]), ref arg s[157287] :
+  string[244], arg maxSize[157293] =
+  (157290 call - 1), arg stripSeparator[157297] =
+  0) : _unknown[42] throws "method"
+  {
+    (157310 'use'(157307 call . Regex c"RegexIoSupport"))
+    {
+      const tmp[157568] "const" "temp"
+      (157569 'move' tmp[157568](157566 'deref'(157565 '_wide_get_locale'(157315 call . this c"_home"))))
+      {
+        Try
+        {
+          {
+            (157324 call(157321 call . this c"lock"))
+          }
+        }
+        Defer
+        {
+          {
+            (157333 call(157330 call . this c"unlock"))
+          }
+        }
+        { scopeless
+          const tmp[157353] "const" "temp"(157346 call _findSeparator separator(157348 call * 4 maxSize) this)
+          (157366 call _check_tuple_var_decl tmp[157353] 4)
+          const searchErr[157337] "const"(157354 call tmp[157353] 0)
+          const found[157339] "const"(157357 call tmp[157353] 1)
+          const relByteOffset[157341] "const"(157360 call tmp[157353] 2)
+          const match[157343] "const"(157363 call tmp[157353] 3)
+          (157371 'end of statement')
+        }
+        if(157397 call _cond_test(157387 call &&(157389 call != searchErr 0)(157393 call != searchErr EEOF)))
+        {
+          { scopeless
+            Try
+            {
+              {
+                (157379 call(157376 call . this c"_ch_ioerror") searchErr "in readThrough(regex(string))")
+              }
+            }
+          }
+        }
+        if(157416 call _cond_test(157412 call >= maxSize 0))
+        {
+          { scopeless
+            (157403 call qio_channel_mark 0(157408 call . this c"_channel_internal"))
+          }
+        }
+        { scopeless
+          const err[157422] "const"(157424 call readStringBytesData s(157427 call . this c"_channel_internal") relByteOffset(157431 call - 1))
+          (157435 'end of statement')
+        }
+        if(157531 call _cond_test err)
+        {
+          if(157448 call _cond_test(157444 call >= maxSize 0))
+          {
+            { scopeless
+              (157438 call qio_channel_revert_unlocked(157440 call . this c"_channel_internal"))
+            }
+          }
+          Try
+          {
+            {
+              (157458 call(157455 call . this c"_ch_ioerror") err "in readThrough(regex(string))")
+            }
+          }
+        }
+        {
+          if(157525 call _cond_test(157501 call &&(157503 call >= maxSize 0)(157507 call >(157509 call -(157512 call . s c"numCodepoints")(157521 IfExpr  stripSeparator then
+          { scopeless
+            (157517 call . match c"numCodepoints")
+          } else
+          { scopeless
+            0
+          } )) maxSize)))
+          {
+            (157467 call qio_channel_revert_unlocked(157469 call . this c"_channel_internal"))
+            Try
+            {
+              {
+                (157477 call(157474 call . this c"_ch_ioerror")(157478 call : EFORMAT errorCode) "in readThrough(regex(string))")
+              }
+            }
+          }
+          {
+            { scopeless
+              if(157497 call _cond_test(157493 call > maxSize 0))
+              {
+                (157488 call qio_channel_commit_unlocked(157490 call . this c"_channel_internal"))
+              }
+            }
+          }
+        }
+        if(157560 call _cond_test(157556 call && found stripSeparator))
+        {
+          { scopeless
+            (157535 call = s(157539 call s(157553 call chpl_build_bounded_range 0(157551 call chpl__nudgeHighBound(157541 call -(157544 call . s c"size")(157548 call . match c"numCodepoints"))))))
+          }
+        }
+      }
+      (157572 'elided on block' 0 tmp[157568])
+    }
+    (157576 return(157577 call >(157580 call . s c"size") 0))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].readThrough[157587](arg _mt[157613]:_MT[201], arg this[157590] :
+  fileReader, arg separator[157596] :
+  (157594 call regex bytes[232]), ref arg b[157600] :
+  bytes[232], arg maxSize[157606] =
+  (157603 call - 1), arg stripSeparator[157610] =
+  0) : _unknown[42] throws "method"
+  {
+    (157621 'use'(157618 call . Regex c"RegexIoSupport"))
+    {
+      const tmp[157774] "const" "temp"
+      (157775 'move' tmp[157774](157772 'deref'(157771 '_wide_get_locale'(157624 call . this c"_home"))))
+      {
+        Try
+        {
+          {
+            (157633 call(157630 call . this c"lock"))
+          }
+        }
+        Defer
+        {
+          {
+            (157642 call(157639 call . this c"unlock"))
+          }
+        }
+        { scopeless
+          const tmp[157659] "const" "temp"(157655 call _findSeparator separator maxSize this)
+          (157672 call _check_tuple_var_decl tmp[157659] 4)
+          const searchErr[157646] "const"(157660 call tmp[157659] 0)
+          const found[157648] "const"(157663 call tmp[157659] 1)
+          const relByteOffset[157650] "const"(157666 call tmp[157659] 2)
+          const match[157652] "const"(157669 call tmp[157659] 3)
+          (157677 'end of statement')
+        }
+        if(157701 call _cond_test(157691 call &&(157693 call != searchErr 0)(157697 call != searchErr EEOF)))
+        {
+          { scopeless
+            Try
+            {
+              {
+                (157683 call(157680 call . this c"_ch_ioerror") searchErr "in readThrough(regex(bytes))")
+              }
+            }
+          }
+        }
+        { scopeless
+          const err[157707] "const"(157714 call(157711 call . IO c"readStringBytesData") b(157717 call . this c"_channel_internal") relByteOffset 0)
+          (157723 'end of statement')
+        }
+        if(157736 call _cond_test err)
+        {
+          { scopeless
+            Try
+            {
+              {
+                (157729 call(157726 call . this c"_ch_ioerror") err "in readThrough(regex(bytes))")
+              }
+            }
+          }
+        }
+        if(157766 call _cond_test(157762 call && found stripSeparator))
+        {
+          { scopeless
+            (157741 call = b(157745 call b(157759 call chpl_build_bounded_range 0(157757 call chpl__nudgeHighBound(157747 call -(157750 call . b c"size")(157754 call . match c"numBytes"))))))
+          }
+        }
+      }
+      (157778 'elided on block' 0 tmp[157774])
+    }
+    (157782 return(157783 call >(157786 call . b c"size") 0))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].readTo[157793](arg _mt[157812]:_MT[201], arg this[157796] :
+  fileReader, arg separator[157803] :
+  (157800 call regex unknown t[157801]), arg maxSize[157809] =
+  (157806 call - 1)) : _unknown[42] throws "method"
+  {
+    { scopeless
+      unknown s[157827] t
+      (157830 'end of statement')
+    }
+    if(157860 call _cond_test(157848 call !(157856 call(157853 call . this c"readTo") separator s maxSize)))
+    {
+      { scopeless
+        (157831 'throw'(157832 'new'(157834 call EofError(157835 call +(157837 call + "reached EOF in readTo("(157842 call : t string[244])) ")"))))
+      }
+    }
+    (157865 return s)
+  }
+  where {
+    (157815 call ||(157817 call == t string[244])(157821 call == t bytes[232]))
+  }
+  { scopeless type
+    t
+  }
+  function _unknown[42].readTo[157871](arg _mt[157893]:_MT[201], arg this[157874] :
+  fileReader, arg separator[157880] :
+  (157878 call regex string[244]), ref arg s[157884] :
+  string[244], arg maxSize[157890] =
+  (157887 call - 1)) : _unknown[42] throws "method"
+  {
+    (157901 'use'(157898 call . Regex c"RegexIoSupport"))
+    {
+      const tmp[158139] "const" "temp"
+      (158140 'move' tmp[158139](158137 'deref'(158136 '_wide_get_locale'(157904 call . this c"_home"))))
+      {
+        Try
+        {
+          {
+            (157913 call(157910 call . this c"lock"))
+          }
+        }
+        Defer
+        {
+          {
+            (157922 call(157919 call . this c"unlock"))
+          }
+        }
+        { scopeless
+          const tmp[157942] "const" "temp"(157935 call _findSeparator separator(157937 call * 4 maxSize) this)
+          (157955 call _check_tuple_var_decl tmp[157942] 4)
+          const searchErr[157926] "const"(157943 call tmp[157942] 0)
+          const found[157928] "const"(157946 call tmp[157942] 1)
+          const relByteOffset[157930] "const"(157949 call tmp[157942] 2)
+          const match[157932] "const"(157952 call tmp[157942] 3)
+          (157960 'end of statement')
+        }
+        if(157984 call _cond_test(157974 call &&(157976 call != searchErr 0)(157980 call != searchErr EEOF)))
+        {
+          { scopeless
+            Try
+            {
+              {
+                (157966 call(157963 call . this c"_ch_ioerror") searchErr "in readTo(regex(string))")
+              }
+            }
+          }
+        }
+        { scopeless
+          const numBytesToRead[157990] "const"(157991 call - relByteOffset(158000 IfExpr  found then
+          { scopeless
+            (157996 call . match c"numBytes")
+          } else
+          { scopeless
+            0
+          } ))
+          (158004 'end of statement')
+        }
+        if(158017 call _cond_test(158013 call >= maxSize 0))
+        {
+          { scopeless
+            (158006 call qio_channel_mark 0(158009 call . this c"_channel_internal"))
+          }
+        }
+        { scopeless
+          const err[158023] "const"(158025 call readStringBytesData s(158028 call . this c"_channel_internal") numBytesToRead(158032 call - 1))
+          (158036 'end of statement')
+        }
+        if(158132 call _cond_test err)
+        {
+          if(158049 call _cond_test(158045 call >= maxSize 0))
+          {
+            { scopeless
+              (158039 call qio_channel_revert_unlocked(158041 call . this c"_channel_internal"))
+            }
+          }
+          Try
+          {
+            {
+              (158059 call(158056 call . this c"_ch_ioerror") err "in readTo(regex(string))")
+            }
+          }
+        }
+        {
+          if(158126 call _cond_test(158102 call &&(158104 call >= maxSize 0)(158108 call >=(158110 call -(158113 call . s c"numCodepoints")(158122 IfExpr  found then
+          { scopeless
+            (158118 call . match c"numCodepoints")
+          } else
+          { scopeless
+            0
+          } )) maxSize)))
+          {
+            (158068 call qio_channel_revert_unlocked(158070 call . this c"_channel_internal"))
+            Try
+            {
+              {
+                (158078 call(158075 call . this c"_ch_ioerror")(158079 call : EFORMAT errorCode) "in readTo(regex(string))")
+              }
+            }
+          }
+          {
+            { scopeless
+              if(158098 call _cond_test(158094 call > maxSize 0))
+              {
+                (158089 call qio_channel_commit_unlocked(158091 call . this c"_channel_internal"))
+              }
+            }
+          }
+        }
+      }
+      (158143 'elided on block' 0 tmp[158139])
+    }
+    (158147 return(158148 call >(158151 call . s c"size") 0))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].readTo[158158](arg _mt[158180]:_MT[201], arg this[158161] :
+  fileReader, arg separator[158167] :
+  (158165 call regex bytes[232]), ref arg b[158171] :
+  bytes[232], arg maxSize[158177] =
+  (158174 call - 1)) : _unknown[42] throws "method"
+  {
+    (158188 'use'(158185 call . Regex c"RegexIoSupport"))
+    {
+      const tmp[158325] "const" "temp"
+      (158326 'move' tmp[158325](158323 'deref'(158322 '_wide_get_locale'(158191 call . this c"_home"))))
+      {
+        Try
+        {
+          {
+            (158200 call(158197 call . this c"lock"))
+          }
+        }
+        Defer
+        {
+          {
+            (158209 call(158206 call . this c"unlock"))
+          }
+        }
+        { scopeless
+          const tmp[158226] "const" "temp"(158222 call _findSeparator separator maxSize this)
+          (158239 call _check_tuple_var_decl tmp[158226] 4)
+          const searchErr[158213] "const"(158227 call tmp[158226] 0)
+          const found[158215] "const"(158230 call tmp[158226] 1)
+          const relByteOffset[158217] "const"(158233 call tmp[158226] 2)
+          const match[158219] "const"(158236 call tmp[158226] 3)
+          (158244 'end of statement')
+        }
+        if(158268 call _cond_test(158258 call &&(158260 call != searchErr 0)(158264 call != searchErr EEOF)))
+        {
+          { scopeless
+            Try
+            {
+              {
+                (158250 call(158247 call . this c"_ch_ioerror") searchErr "in readTo(regex(bytes))")
+              }
+            }
+          }
+        }
+        { scopeless
+          const numBytesToRead[158274] "const"(158275 call - relByteOffset(158284 IfExpr  found then
+          { scopeless
+            (158280 call . match c"numBytes")
+          } else
+          { scopeless
+            0
+          } ))
+          (158288 'end of statement')
+        }
+        { scopeless
+          const err[158290] "const"(158295 call(158292 call . IO c"readStringBytesData") b(158298 call . this c"_channel_internal") numBytesToRead 0)
+          (158304 'end of statement')
+        }
+        if(158317 call _cond_test err)
+        {
+          { scopeless
+            Try
+            {
+              {
+                (158310 call(158307 call . this c"_ch_ioerror") err "in readTo(regex(bytes))")
+              }
+            }
+          }
+        }
+      }
+      (158329 'elided on block' 0 tmp[158325])
+    }
+    (158333 return(158334 call >(158337 call . b c"size") 0))
+  }
+  { scopeless type
+    bool
+  }
+  function _findSeparator[158344](arg separator[158350] :
+  (158347 call regex unknown t[158348]), arg maxBytes[158356] =
+  (158353 call - 1), arg ch[158359]:_any[141](?)) : _unknown[42] throws "private"
+  {
+    (158373 'use'(158370 call . Regex c"RegexIoSupport"))
+    (158381 call(158378 call . ch c"mark"))
+    { scopeless
+      { scopeless
+        const maxNumBytes[158388] "const"(158397 IfExpr (158389 call < maxBytes 0) then
+        { scopeless
+          (158394 call max int[10])
+        } else
+        { scopeless
+          maxBytes
+        } )
+      }
+      { scopeless
+        const nm[158384] "const" 1
+      }
+      (158401 'end of statement')
+    }
+    { scopeless
+      { scopeless
+        unknown matches[158413](158415 call _ddata_allocate qio_regex_string_piece_t nm)
+      }
+      { scopeless
+        unknown err[158408] 0 errorCode
+      }
+      { scopeless
+        unknown separatorMatch[158404] t
+      }
+      (158419 'end of statement')
+    }
+    (158420 call = err(158424 call qio_regex_channel_match(158426 call . separator c"_regex") 0(158431 call . ch c"_channel_internal") maxNumBytes QIO_REGEX_ANCHOR_UNANCHORED 0 0 1 matches nm))
+    if(158473 call _cond_test(158457 call &&(158459 call &&(158461 call != err 0)(158465 call != err EEOF))(158469 call != err EFORMAT)))
+    {
+      (158448 call(158445 call . ch c"revert"))
+      (158449 return(158455 call _build_tuple err 0 0 separatorMatch))
+    }
+    { scopeless
+      const m[158478] "const"(158481 call _to_regexMatch(158483 call matches 0)) regexMatch
+      (158486 'end of statement')
+    }
+    (158493 call(158490 call . ch c"_extractMatch") m separatorMatch err)
+    if(158527 call _cond_test(158511 call &&(158513 call &&(158515 call != err 0)(158519 call != err EEOF))(158523 call != err EFORMAT)))
+    {
+      (158502 call(158499 call . ch c"revert"))
+      (158503 return(158509 call _build_tuple err 0 0 separatorMatch))
+    }
+    { scopeless
+      const endOffset[158532] "const"(158537 call(158534 call . ch c"offset"))
+      (158539 'end of statement')
+    }
+    (158544 call(158541 call . ch c"revert"))
+    { scopeless
+      const numBytesRead[158546] "const"(158548 call - endOffset(158555 call(158552 call . ch c"offset"))) int[10]
+      (158557 'end of statement')
+    }
+    (158559 call _ddata_free matches nm)
+    if(158577 call _cond_test(158567 call &&(158569 call == err EFORMAT)(158573 call < numBytesRead maxNumBytes)))
+    {
+      { scopeless
+        (158562 call = err 0)
+      }
+    }
+    (158582 return(158591 call _build_tuple err(158586 call . m c"matched") numBytesRead separatorMatch))
+  }
+  { scopeless type
+    (158366 call _build_tuple errorCode bool int[10] t)
+  }
+  def module RegexIoSupport[158722]  
+}

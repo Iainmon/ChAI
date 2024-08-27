@@ -1,0 +1,559 @@
+AST dump for Bytes after pass replaceArrayAccessesWithRefTemps.
+Module use list: ChapelStandard ByteBufferHelpers BytesStringCommon CTypes ChplConfig BytesCasts POSIX 
+
+{
+  function chpl__init_Bytes[468354]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    {
+    }
+    {
+    }
+    {
+    }
+    (1000952 'end of statement')
+    (1000955 'end of statement')
+    (1000958 'end of statement')
+    (596728 return _void[46])
+  }
+  function createBorrowingBuffer[32952](const  ref arg x[32959]:bytes[232]) : bytes[232] "inline" "method" "resolved" "@unstable"
+  {
+    val _formal_type_tmp_[5477918]:bytes[232] "temp"
+    val ret[595645]:bytes[232] "dead after last mention" "RVV" "temp"
+    val ret[32967]:bytes[232] "dead at end of block" "insert auto destroy"
+    (3097943 call init[33649] ret[32967])
+    (32970 'end of statement')
+    (32972 call initWithBorrowedBuffer[3097418] ret[32967] x[32959])
+    (548384 'end of statement' ret[32967])
+    (3097941 '=' ret[595645] ret[32967])
+    gotoReturn _end_createBorrowingBuffer[595643] _end_createBorrowingBuffer[595643]
+    label _end_createBorrowingBuffer[595643]
+    (595647 return ret[595645])
+  }
+  function createBorrowingBuffer[4346531](const in arg x[4346539]:c_ptr(uint(8))[1466369], const in arg length[4346549]:int(64)[10]) : bytes[232] "inline" "instantiated generic" "invisible fn" "method" "resolved" "@unstable"
+  {
+    val _formal_type_tmp_[5480834]:bytes[232] "temp"
+    val ret[4346553]:bytes[232] "dead after last mention" "RVV" "temp"
+    val call_tmp[4346562]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (4346564 'move' call_tmp[4346562] x[4346539])
+    val call_tmp[4346570]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (4346572 'move' call_tmp[4346570](4346575 call +[1471222] length[4346549]))
+    val call_tmp[4346578]:bytes[232] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (4346580 'move' call_tmp[4346578](4346586 call createBorrowingBuffer[3976591] call_tmp[4346562] length[4346549] call_tmp[4346570]))
+    (4346604 '=' ret[4346553] call_tmp[4346578])
+    (4346597 return ret[4346553])
+  }
+  function createBorrowingBuffer[3976514](const in arg x[3976522]:c_ptrConst(int(8))[1466333], const in arg length[3976532]:int(64)[10]) : bytes[232] "inline" "instantiated generic" "invisible fn" "method" "resolved" "@unstable"
+  {
+    val _formal_type_tmp_[5480722]:bytes[232] "temp"
+    val ret[3976536]:bytes[232] "dead after last mention" "RVV" "temp"
+    val call_tmp[3976545]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3976547 'move' call_tmp[3976545](3976550 call :[1501045] x[3976522]))
+    val call_tmp[3976553]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3976555 'move' call_tmp[3976553](3976558 call +[1471222] length[3976532]))
+    val call_tmp[3976561]:bytes[232] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (3976563 'move' call_tmp[3976561](3976569 call createBorrowingBuffer[3976591] call_tmp[3976545] length[3976532] call_tmp[3976553]))
+    (3976894 '=' ret[3976536] call_tmp[3976561])
+    (3976580 return ret[3976536])
+  }
+  function chpl_createBytesWithLiteral[33107](const in arg buffer[33110]:chpl_c_string[16], const in arg offset[33114]:int(64)[10], const in arg x[33118]:chpl_c_string[16], const in arg length[33122]:int(64)[10]) : bytes[232] "resolved"
+  {
+    val ret[595687]:bytes[232] "dead after last mention" "RVV" "temp"
+    val call_tmp[752965]:c_ptr(void)[1465614] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[752970]:c_ptr(void)[1465614] "dead after last mention" "expr temp" "maybe param" "temp"
+    (752973 'move' call_tmp[752970](33130 call :[15860] buffer[33110]))
+    val call_tmp[752975]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[752980]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[752985]:c_ptr(uint(8))[1466369] "dead after last mention" "maybe param" "temp"
+    (752988 'move' call_tmp[752985](33128 call :[1483124] call_tmp[752970]))
+    val buf[33127]:c_ptr(uint(8))[1466369] "dead at end of block" "insert auto destroy"
+    (643724 'move' buf[33127](4346481 call chpl__initCopy[1467227] call_tmp[752985] 0))
+    (33142 'end of statement')
+    val call_tmp[752990]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (752993 'move' call_tmp[752990](33146 call +[1474450] buf[33127] offset[33114]))
+    (33143 call =[1474898] buf[33127] call_tmp[752990])
+    (548391 'end of statement' buf[33127])
+    val call_tmp[752995]:c_ptr(void)[1465614] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[753000]:c_ptr(void)[1465614] "dead after last mention" "expr temp" "maybe param" "temp"
+    (753003 'move' call_tmp[753000](33161 'cast' c_ptr(void)[1465614] buf[33127]))
+    val call_tmp[753005]:c_ptr(void)[1465614] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[753010]:c_ptr(void)[1465614] "dead after last mention" "expr temp" "maybe param" "temp"
+    (753013 'move' call_tmp[753010](33167 call :[15860] x[33118]))
+    val call_tmp[753017]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (753020 'move' call_tmp[753017](33177 call safeCast[1471587] length[33122]))
+    (33160 call memcpy[12667] call_tmp[753000] call_tmp[753010] call_tmp[753017])
+    (548393 'end of statement' buf[33127])
+    ref call_tmp[753022]:_ref(uint(8))[1466089] "dead after last mention" "maybe param" "temp"
+    (753025 'move' call_tmp[753022](33182 call this[1474553] buf[33127] length[33122]))
+    val coerce_tmp[4346522]:uint(8)[71] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (4346528 'move' coerce_tmp[4346522](4346524 'cast' uint(8)[71] 0))
+    (33179 call =[52249] call_tmp[753022] coerce_tmp[4346522])
+    (548395 'end of statement' buf[33127])
+    val call_tmp[753029]:bytes[232] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (753032 'move' call_tmp[753029](33190 call createBorrowingBuffer[4346531] buf[33127] length[33122]))
+    (595692 'move' ret[595687] call_tmp[753029])
+    gotoReturn _end_chpl_createBytesWithLiteral[595685] _end_chpl_createBytesWithLiteral[595685]
+    label _end_chpl_createBytesWithLiteral[595685]
+    (595689 return ret[595687])
+  }
+  function createBorrowingBuffer[3976591](const in arg x[3976599]:c_ptr(uint(8))[1466369], const in arg length[3976601]:int(64)[10], const in arg size[3976603]:int(64)[10]) : bytes[232] "inline" "instantiated generic" "invisible fn" "method" "resolved" "@unstable"
+  {
+    val _formal_type_tmp_[5480724]:bytes[232] "temp"
+    val ret[3976607]:bytes[232] "dead after last mention" "RVV" "temp"
+    val tmp[3976615]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3976617]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3976624]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3976637]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (3976783 'end of statement')
+    val tmp[3976650]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3976652]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3976654]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3976709]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (3976786 'end of statement')
+    val ret[3976738]:bytes[232] "dead at end of block" "insert auto destroy"
+    (3976888 call init[33649] ret[3976738])
+    (3976743 'end of statement')
+    val call_tmp[3976744]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3976746 'move' call_tmp[3976744] x[3976599])
+    (3976753 call initWithBorrowedBuffer[3976788] ret[3976738] call_tmp[3976744] length[3976601] size[3976603])
+    (3976758 'end of statement' ret[3976738])
+    (3976886 '=' ret[3976607] ret[3976738])
+    gotoReturn _end_createBorrowingBuffer[3976769] _end_createBorrowingBuffer[3976769]
+    label _end_createBorrowingBuffer[3976769]
+    (3976771 return ret[3976607])
+  }
+  function createAdoptingBuffer[3276216](const in arg x[3276224]:c_ptr(uint(8))[1466369], const in arg length[3276226]:int(64)[10], const in arg size[3276228]:int(64)[10]) : bytes[232] "inline" "instantiated generic" "invisible fn" "method" "resolved"
+  {
+    val _formal_type_tmp_[5479794]:bytes[232] "temp"
+    val ret[3276232]:bytes[232] "dead after last mention" "RVV" "temp"
+    val tmp[3276240]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3276242]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3276249]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3276262]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (3276400 'end of statement')
+    val tmp[3276275]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3276277]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3276279]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3276334]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (3276403 'end of statement')
+    val ret[3276363]:bytes[232] "dead at end of block" "insert auto destroy"
+    (3276567 call init[33649] ret[3276363])
+    (3276368 'end of statement')
+    (3276370 call initWithOwnedBuffer[3276404] ret[3276363] x[3276224] length[3276226] size[3276228])
+    (3276375 'end of statement' ret[3276363])
+    (3276565 '=' ret[3276232] ret[3276363])
+    gotoReturn _end_createAdoptingBuffer[3276386] _end_createAdoptingBuffer[3276386]
+    label _end_createAdoptingBuffer[3276386]
+    (3276388 return ret[3276232])
+  }
+  function createCopyingBuffer[3275262](const in arg x[3275270]:c_ptr(uint(8))[1466369], const in arg length[3275280]:int(64)[10], const in arg size[3275292]:int(64)[10]) : bytes[232] "inline" "instantiated generic" "invisible fn" "method" "resolved"
+  {
+    val _formal_type_tmp_[5479790]:bytes[232] "temp"
+    val ret[3275296]:bytes[232] "dead after last mention" "RVV" "temp"
+    val tmp[3275306]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3275308]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3275315]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3275328]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (3275516 'end of statement')
+    val tmp[3275341]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[3275343]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[3275345]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[3275400]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (3275519 'end of statement')
+    val ret[3275429]:bytes[232] "dead at end of block" "insert auto destroy"
+    (3275792 call init[33649] ret[3275429])
+    (3275434 'end of statement')
+    (3275436 call initWithNewBuffer[3275520] ret[3275429] x[3275270] length[3275280] size[3275292])
+    (3275441 'end of statement' ret[3275429])
+    (3275790 '=' ret[3275296] ret[3275429])
+    gotoReturn _end_createCopyingBuffer[3275452] _end_createCopyingBuffer[3275452]
+    label _end_createCopyingBuffer[3275452]
+    (3275454 return ret[3275296])
+  }
+  function createCopyingBuffer_default_size[3275468](const in arg length[3275474]:int(64)[10]) : int(64)[10] "compiler generated" "default actual function" "inline" "invisible fn" "lineno ok" "maybe param" "maybe type" "method" "resolved"
+  {
+    val _formal_type_tmp_[5479792]:bytes[232] "temp"
+    val ret[3275476]:int(64)[10] "dead after last mention" "RVV" "maybe param" "temp"
+    val size[3275481]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    (3275488 'move' size[3275481](3275485 call +[1471222] length[3275474]))
+    (3275492 'move' ret[3275476] size[3275481])
+    (3275479 return ret[3275476])
+  }
+  function _ref(bytes)[1466360].init[33649](ref arg this[33651]:_ref(bytes)[1466360]) : void[4] "method" "primary method" "resolved" "no return value for void"
+  {
+    val buffLen[514641]:int(64)[10] "dead after last mention" "temp"
+    (514644 'move' buffLen[514641] 0)
+    (514646 '.=' this[33651] buffLen[33621] buffLen[514641])
+    (548422 'end of statement')
+    val buffSize[514651]:int(64)[10] "dead after last mention" "temp"
+    (514654 'move' buffSize[514651] 0)
+    (514656 '.=' this[33651] buffSize[33627] buffSize[514651])
+    (548423 'end of statement')
+    val buff[514661]:c_ptr(uint(8))[1466369] "dead after last mention" "temp"
+    val init_coerce_tmp[3097956]:c_ptr(uint(8))[1466369] "dead after last mention" "temp"
+    (3097970 '=' init_coerce_tmp[3097956](3097966 'cast' c_ptr(uint(8))[1466369] nil[32]))
+    (514664 'move' buff[514661] init_coerce_tmp[3097956])
+    (514666 '.=' this[33651] buff[33633] buff[514661])
+    (548424 'end of statement')
+    val isOwned[514671]:bool[19] "dead after last mention" "temp"
+    (514674 'move' isOwned[514671] 1)
+    (514676 '.=' this[33651] isOwned[33639] isOwned[514671])
+    (548425 'end of statement')
+    val call_tmp[753278]:int(32)[66] "dead after last mention" "maybe param" "temp"
+    (753281 'move' call_tmp[753278](514681 call chpl_nodeID[305038]))
+    val locale_id[514682]:int(32)[66] "dead after last mention" "temp"
+    (514684 'move' locale_id[514682] call_tmp[753278])
+    (514686 '.=' this[33651] locale_id[33645] locale_id[514682])
+    (548426 'end of statement')
+    (595782 return _void[46])
+  }
+  function _ref(bytes)[1466360].deinit[33658](ref arg this[33660]:_ref(bytes)[1466360]) : void[4] "destructor" "method" "primary method" "resolved" "no return value for void"
+  {
+    ref tmp[477942]:_ref(bool)[1466299] "dead after last mention" "maybe param" "temp"
+    (477953 'move' tmp[477942](416905 call isOwned[1003198] this[33660]))
+    val call_tmp[753285]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (1467043 'end of statement')
+    val tmp[666060]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    val tmp[666061]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[753290]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val tmp[1467044]:bool[19] "dead after last mention" "const" "temp"
+    (1467046 'move' tmp[1467044](1467048 'deref' tmp[477942]))
+    (753293 'move' call_tmp[753290] tmp[1467044])
+    (666066 'move' tmp[666061] call_tmp[753290])
+    if tmp[666061]
+    {
+      val tmp[666068]:bool[19] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+      ref call_tmp[753297]:_ref(c_ptr(uint(8)))[1466378] "dead after last mention" "maybe param" "temp"
+      (753300 'move' call_tmp[753297](33697 call buff[1003172] this[33660]))
+      val call_tmp[753302]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[1467051]:c_ptr(uint(8))[1466369] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1467055 'move' coerce_tmp[1467051](1467053 'deref' call_tmp[753297]))
+      (753305 'move' call_tmp[753302](33694 call !=[1466476] coerce_tmp[1467051] nil[32]))
+      (666070 'move' tmp[666068] call_tmp[753302])
+      (666075 'move' tmp[666060] tmp[666068])
+    }
+    {
+      (666080 'move' tmp[666060] 0)
+    }
+    val call_tmp[753307]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (753310 'move' call_tmp[753307] tmp[666060])
+    if call_tmp[753307]
+    {
+      {
+        const tmp[33683]:chpl_localeID_t[306449] "dead after last mention" "const" "temp"
+        ref call_tmp[753314]:_ref(int(32))[1465743] "dead after last mention" "maybe param" "temp"
+        (753317 'move' call_tmp[753314](33670 call locale_id[1003224] this[33660]))
+        val call_tmp[753319]:chpl_localeID_t[306449] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        val coerce_tmp[1467059]:int(32)[66] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1467063 'move' coerce_tmp[1467059](1467061 'deref' call_tmp[753314]))
+        (753322 'move' call_tmp[753319](33668 call chpl_buildLocaleID[306518] coerce_tmp[1467059] c_sublocid_any[135202]))
+        val call_tmp[753324]:chpl_localeID_t[306449] "dead after last mention" "expr temp" "maybe param" "temp"
+        (753327 'move' call_tmp[753324](33666 'chpl_on_locale_num' call_tmp[753319]))
+        (33684 'move' tmp[33683] call_tmp[753324])
+        {
+          ref call_tmp[753331]:_ref(c_ptr(uint(8)))[1466378] "dead after last mention" "maybe param" "temp"
+          (753334 'move' call_tmp[753331](33678 call buff[1003172] this[33660]))
+          val coerce_tmp[1467067]:c_ptr(uint(8))[1466369] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+          (1467071 'move' coerce_tmp[1467067](1467069 'deref' call_tmp[753331]))
+          val coerce_tmp[1467073]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+          (1467079 'move' coerce_tmp[1467073](1467075 'cast' c_ptr(void)[1465614] coerce_tmp[1467067]))
+          (33676 call chpl_here_free[308686] coerce_tmp[1467073])
+        }
+        (33687 'elided on block' 0 tmp[33683])
+      }
+    }
+    (595784 return _void[46])
+  }
+  function _ref(bytes)[1466360].chpl__serialize[33707](const?  ref arg this[33709]:_ref(bytes)[1466360]) : __serializeHelper[37973] "method" "primary method" "resolved"
+  {
+    val ret[595788]:__serializeHelper[37973] "dead after last mention" "RVV" "temp"
+    val data[33715]:chpl__inPlaceBuffer[37917] "dead at end of block" "insert auto destroy"
+    (3976472 'zero variable' data[33715])
+    (33718 'end of statement')
+    ref call_tmp[753338]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (753341 'move' call_tmp[753338](416927 call buffLen[1003120] this[33709]))
+    val call_tmp[753343]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    val coerce_tmp[3976368]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3976372 'move' coerce_tmp[3976368](3976370 'deref' call_tmp[753338]))
+    val coerce_tmp[3976374]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3976380 'move' coerce_tmp[3976374](3976376 'cast' int(64)[10] CHPL_SHORT_STRING_SIZE[37911]))
+    (753346 'move' call_tmp[753343](33728 call <=[54364] coerce_tmp[3976368] coerce_tmp[3976374]))
+    val call_tmp[753348]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (753351 'move' call_tmp[753348] call_tmp[753343])
+    if call_tmp[753348]
+    {
+      val call_tmp[753353]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+      (753356 'move' call_tmp[753353](33723 call chpl__getInPlaceBufferDataForWrite[37930] data[33715]))
+      ref call_tmp[753360]:_ref(int(32))[1465743] "dead after last mention" "maybe param" "temp"
+      (753363 'move' call_tmp[753360](416912 call locale_id[1003224] this[33709]))
+      ref call_tmp[753367]:_ref(c_ptr(uint(8)))[1466378] "dead after last mention" "maybe param" "temp"
+      (753370 'move' call_tmp[753367](416917 call buff[1003172] this[33709]))
+      ref call_tmp[753374]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+      (753377 'move' call_tmp[753374](416922 call buffLen[1003120] this[33709]))
+      val coerce_tmp[3976387]:int(32)[66] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3976391 'move' coerce_tmp[3976387](3976389 'deref' call_tmp[753360]))
+      val coerce_tmp[3976393]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3976399 'move' coerce_tmp[3976393](3976395 'cast' int(64)[10] coerce_tmp[3976387]))
+      val coerce_tmp[3976401]:c_ptr(uint(8))[1466369] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3976405 'move' coerce_tmp[3976401](3976403 'deref' call_tmp[753367]))
+      val coerce_tmp[3976407]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3976411 'move' coerce_tmp[3976407](3976409 'deref' call_tmp[753374]))
+      (33721 call chpl_string_comm_get[1483330] call_tmp[753353] coerce_tmp[3976393] coerce_tmp[3976401] coerce_tmp[3976407])
+      (548429 'end of statement' data[33715])
+    }
+    ref call_tmp[753381]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (753384 'move' call_tmp[753381](416934 call buffLen[1003120] this[33709]))
+    ref call_tmp[753388]:_ref(c_ptr(uint(8)))[1466378] "dead after last mention" "maybe param" "temp"
+    (753391 'move' call_tmp[753388](416939 call buff[1003172] this[33709]))
+    ref call_tmp[753395]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (753398 'move' call_tmp[753395](416944 call buffSize[1003146] this[33709]))
+    ref call_tmp[753402]:_ref(int(32))[1465743] "dead after last mention" "maybe param" "temp"
+    (753405 'move' call_tmp[753402](416949 call locale_id[1003224] this[33709]))
+    ref call_tmp[753409]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (753412 'move' call_tmp[753409](416955 call buffLen[1003120] this[33709]))
+    val call_tmp[753414]:__serializeHelper[37973] "dead after last mention" "insert auto destroy for explicit new" "maybe param" "temp"
+    val initTemp[3976420]:__serializeHelper[37973] "dead after last mention" "temp"
+    val coerce_tmp[3976441]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3976445 'move' coerce_tmp[3976441](3976443 'deref' call_tmp[753381]))
+    val coerce_tmp[3976447]:c_ptr(uint(8))[1466369] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3976451 'move' coerce_tmp[3976447](3976449 'deref' call_tmp[753388]))
+    val coerce_tmp[3976453]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3976457 'move' coerce_tmp[3976453](3976455 'deref' call_tmp[753395]))
+    val coerce_tmp[3976459]:int(32)[66] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3976463 'move' coerce_tmp[3976459](3976461 'deref' call_tmp[753402]))
+    val coerce_tmp[3976465]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3976469 'move' coerce_tmp[3976465](3976467 'deref' call_tmp[753409]))
+    (3976423 call init[1030317] initTemp[3976420] coerce_tmp[3976441] coerce_tmp[3976447] coerce_tmp[3976453] coerce_tmp[3976459] data[33715] coerce_tmp[3976465])
+    (753417 'move' call_tmp[753414] initTemp[3976420])
+    (595793 'move' ret[595788] call_tmp[753414])
+    gotoReturn _end_chpl__serialize[595786] _end_chpl__serialize[595786]
+    label _end_chpl__serialize[595786]
+    (595790 return ret[595788])
+  }
+  function chpl__deserialize[3977246](const  ref arg data[3977252]:__serializeHelper[37973]) : bytes[232] "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val _formal_type_tmp_[5480728]:bytes[232] "temp"
+    val ret[3977254]:bytes[232] "dead after last mention" "RVV" "temp"
+    ref call_tmp[3977262]:_ref(int(32))[1465743] "dead after last mention" "maybe param" "reference to a const" "temp"
+    (3977264 'move' call_tmp[3977262](3977267 call locale_id[1030239] data[3977252]))
+    val call_tmp[3977270]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3977272 'move' call_tmp[3977270](3977275 call chpl_nodeID[305038]))
+    val call_tmp[3977276]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    val coerce_tmp[3977495]:int(32)[66] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3977499 'move' coerce_tmp[3977495](3977497 'deref' call_tmp[3977262]))
+    (3977278 'move' call_tmp[3977276](3977281 call !=[53199] coerce_tmp[3977495] call_tmp[3977270]))
+    val call_tmp[3977284]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3977286 'move' call_tmp[3977284] call_tmp[3977276])
+    if call_tmp[3977284]
+    {
+      ref call_tmp[3977293]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "reference to a const" "temp"
+      (3977295 'move' call_tmp[3977293](3977298 call buffLen[1030161] data[3977252]))
+      val call_tmp[3977301]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[3977503]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3977507 'move' coerce_tmp[3977503](3977505 'deref' call_tmp[3977293]))
+      val coerce_tmp[3977509]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3977515 'move' coerce_tmp[3977509](3977511 'cast' int(64)[10] CHPL_SHORT_STRING_SIZE[37911]))
+      (3977303 'move' call_tmp[3977301](3977306 call <=[54364] coerce_tmp[3977503] coerce_tmp[3977509]))
+      val call_tmp[3977309]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (3977311 'move' call_tmp[3977309] call_tmp[3977301])
+      if call_tmp[3977309]
+      {
+        ref call_tmp[3977318]:_ref(chpl__inPlaceBuffer)[3885713] "dead after last mention" "maybe param" "reference to a const" "temp"
+        (3977320 'move' call_tmp[3977318](3977323 call shortData[1030265] data[3977252]))
+        val call_tmp[3977326]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+        (3977328 'move' call_tmp[3977326](3977331 call chpl__getInPlaceBufferData[37920] call_tmp[3977318]))
+        ref call_tmp[3977333]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "reference to a const" "temp"
+        (3977335 'move' call_tmp[3977333](3977338 call buffLen[1030161] data[3977252]))
+        ref call_tmp[3977341]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "reference to a const" "temp"
+        (3977343 'move' call_tmp[3977341](3977346 call size[1030213] data[3977252]))
+        val call_tmp[3977349]:bytes[232] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        val coerce_tmp[3977522]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (3977526 'move' coerce_tmp[3977522](3977524 'deref' call_tmp[3977333]))
+        val coerce_tmp[3977528]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (3977532 'move' coerce_tmp[3977528](3977530 'deref' call_tmp[3977341]))
+        (3977351 'move' call_tmp[3977349](3977357 call createCopyingBuffer[3275262] call_tmp[3977326] coerce_tmp[3977522] coerce_tmp[3977528]))
+        (3977361 'move' ret[3977254] call_tmp[3977349])
+        gotoReturn _end_chpl__deserialize[3977488] _end_chpl__deserialize[3977488]
+      }
+      {
+        ref call_tmp[3977368]:_ref(int(32))[1465743] "dead after last mention" "maybe param" "reference to a const" "temp"
+        (3977370 'move' call_tmp[3977368](3977373 call locale_id[1030239] data[3977252]))
+        ref call_tmp[3977376]:_ref(c_ptr(uint(8)))[1466378] "dead after last mention" "maybe param" "reference to a const" "temp"
+        (3977378 'move' call_tmp[3977376](3977381 call buff[1030187] data[3977252]))
+        ref call_tmp[3977384]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "reference to a const" "temp"
+        (3977386 'move' call_tmp[3977384](3977389 call buffLen[1030161] data[3977252]))
+        val call_tmp[3977392]:c_ptr(uint(8))[1466369] "dead after last mention" "maybe param" "temp"
+        val coerce_tmp[3977538]:int(32)[66] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (3977542 'move' coerce_tmp[3977538](3977540 'deref' call_tmp[3977368]))
+        val coerce_tmp[3977544]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (3977550 'move' coerce_tmp[3977544](3977546 'cast' int(64)[10] coerce_tmp[3977538]))
+        val coerce_tmp[3977552]:c_ptr(uint(8))[1466369] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (3977556 'move' coerce_tmp[3977552](3977554 'deref' call_tmp[3977376]))
+        val coerce_tmp[3977558]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (3977562 'move' coerce_tmp[3977558](3977560 'deref' call_tmp[3977384]))
+        (3977394 'move' call_tmp[3977392](3977397 call bufferCopyRemote[30450] coerce_tmp[3977544] coerce_tmp[3977552] coerce_tmp[3977558]))
+        val localBuff[3977401]:c_ptr(uint(8))[1466369] "dead at end of block" "insert auto destroy"
+        (3977403 'move' localBuff[3977401](3977565 call chpl__initCopy[1467227] call_tmp[3977392] 0))
+        (3977406 'end of statement')
+        ref call_tmp[3977407]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "reference to a const" "temp"
+        (3977409 'move' call_tmp[3977407](3977412 call buffLen[1030161] data[3977252]))
+        ref call_tmp[3977415]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "reference to a const" "temp"
+        (3977417 'move' call_tmp[3977415](3977420 call size[1030213] data[3977252]))
+        val call_tmp[3977423]:bytes[232] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        val coerce_tmp[3977571]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (3977575 'move' coerce_tmp[3977571](3977573 'deref' call_tmp[3977407]))
+        val coerce_tmp[3977577]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (3977581 'move' coerce_tmp[3977577](3977579 'deref' call_tmp[3977415]))
+        (3977425 'move' call_tmp[3977423](3977431 call createAdoptingBuffer[3276216] localBuff[3977401] coerce_tmp[3977571] coerce_tmp[3977577]))
+        (3977435 'move' ret[3977254] call_tmp[3977423])
+        gotoReturn _end_chpl__deserialize[3977488] _end_chpl__deserialize[3977488]
+      }
+    }
+    {
+      ref call_tmp[3977445]:_ref(c_ptr(uint(8)))[1466378] "dead after last mention" "maybe param" "reference to a const" "temp"
+      (3977447 'move' call_tmp[3977445](3977450 call buff[1030187] data[3977252]))
+      ref call_tmp[3977453]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "reference to a const" "temp"
+      (3977455 'move' call_tmp[3977453](3977458 call buffLen[1030161] data[3977252]))
+      ref call_tmp[3977461]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "reference to a const" "temp"
+      (3977463 'move' call_tmp[3977461](3977466 call size[1030213] data[3977252]))
+      val call_tmp[3977469]:bytes[232] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      val coerce_tmp[3977587]:c_ptr(uint(8))[1466369] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3977591 'move' coerce_tmp[3977587](3977589 'deref' call_tmp[3977445]))
+      val coerce_tmp[3977593]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3977597 'move' coerce_tmp[3977593](3977595 'deref' call_tmp[3977453]))
+      val coerce_tmp[3977599]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3977603 'move' coerce_tmp[3977599](3977601 'deref' call_tmp[3977461]))
+      (3977471 'move' call_tmp[3977469](3977477 call createBorrowingBuffer[3976591] coerce_tmp[3977587] coerce_tmp[3977593] coerce_tmp[3977599]))
+      (3977481 'move' ret[3977254] call_tmp[3977469])
+      gotoReturn _end_chpl__deserialize[3977488] _end_chpl__deserialize[3977488]
+    }
+    label _end_chpl__deserialize[3977488]
+    (3977490 return ret[3977254])
+  }
+  function _ref(bytes)[1466360].init=[33890](ref arg this[33892]:_ref(bytes)[1466360], const  ref arg b[33895]:bytes[232]) : void[4] "method" "primary method" "resolved" "no return value for void"
+  {
+    val buffLen[514691]:int(64)[10] "dead after last mention" "temp"
+    (514694 'move' buffLen[514691] 0)
+    (514696 '.=' this[33892] buffLen[33621] buffLen[514691])
+    (548439 'end of statement')
+    val buffSize[514701]:int(64)[10] "dead after last mention" "temp"
+    (514704 'move' buffSize[514701] 0)
+    (514706 '.=' this[33892] buffSize[33627] buffSize[514701])
+    (548440 'end of statement')
+    val buff[514711]:c_ptr(uint(8))[1466369] "dead after last mention" "temp"
+    val init_coerce_tmp[3092043]:c_ptr(uint(8))[1466369] "dead after last mention" "temp"
+    (3092680 '=' init_coerce_tmp[3092043](3092676 'cast' c_ptr(uint(8))[1466369] nil[32]))
+    (514714 'move' buff[514711] init_coerce_tmp[3092043])
+    (514716 '.=' this[33892] buff[33633] buff[514711])
+    (548441 'end of statement')
+    val isOwned[514721]:bool[19] "dead after last mention" "temp"
+    (514724 'move' isOwned[514721] 1)
+    (514726 '.=' this[33892] isOwned[33639] isOwned[514721])
+    (548442 'end of statement')
+    val call_tmp[753566]:int(32)[66] "dead after last mention" "maybe param" "temp"
+    (753569 'move' call_tmp[753566](514731 call chpl_nodeID[305038]))
+    val locale_id[514732]:int(32)[66] "dead after last mention" "temp"
+    (514734 'move' locale_id[514732] call_tmp[753566])
+    (514736 '.=' this[33892] locale_id[33645] locale_id[514732])
+    (548443 'end of statement')
+    (514740 'init done')
+    (548444 'end of statement')
+    (33907 call initWithNewBuffer[3092053] this[33892] b[33895])
+    (595822 return _void[46])
+  }
+  function _ref(bytes)[1466360].buffLen[1003120](ref arg this[1003124]:_ref(bytes)[1466360]) ref : _ref(int(64))[1465689] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved"
+  {
+    ref ret[1003134]:_ref(int(64))[1465689] "dead after last mention" "RVV" "temp"
+    ref call_tmp[1003141]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (1003144 'move' call_tmp[1003141](1003128 '.' this[1003124] buffLen[33621]))
+    (1003139 'move' ret[1003134] call_tmp[1003141])
+    (1003136 return ret[1003134])
+  }
+  function _ref(bytes)[1466360].buffSize[1003146](ref arg this[1003150]:_ref(bytes)[1466360]) ref : _ref(int(64))[1465689] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved"
+  {
+    ref ret[1003160]:_ref(int(64))[1465689] "dead after last mention" "RVV" "temp"
+    ref call_tmp[1003167]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (1003170 'move' call_tmp[1003167](1003154 '.' this[1003150] buffSize[33627]))
+    (1003165 'move' ret[1003160] call_tmp[1003167])
+    (1003162 return ret[1003160])
+  }
+  function _ref(bytes)[1466360].buff[1003172](ref arg this[1003176]:_ref(bytes)[1466360]) ref : _ref(c_ptr(uint(8)))[1466378] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved"
+  {
+    ref ret[1003186]:_ref(c_ptr(uint(8)))[1466378] "dead after last mention" "RVV" "temp"
+    ref call_tmp[1003193]:_ref(c_ptr(uint(8)))[1466378] "dead after last mention" "maybe param" "temp"
+    (1003196 'move' call_tmp[1003193](1003180 '.' this[1003176] buff[33633]))
+    (1003191 'move' ret[1003186] call_tmp[1003193])
+    (1003188 return ret[1003186])
+  }
+  function _ref(bytes)[1466360].isOwned[1003198](ref arg this[1003202]:_ref(bytes)[1466360]) ref : _ref(bool)[1466299] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved"
+  {
+    ref ret[1003212]:_ref(bool)[1466299] "dead after last mention" "RVV" "temp"
+    ref call_tmp[1003219]:_ref(bool)[1466299] "dead after last mention" "maybe param" "temp"
+    (1003222 'move' call_tmp[1003219](1003206 '.' this[1003202] isOwned[33639]))
+    (1003217 'move' ret[1003212] call_tmp[1003219])
+    (1003214 return ret[1003212])
+  }
+  function _ref(bytes)[1466360].locale_id[1003224](ref arg this[1003228]:_ref(bytes)[1466360]) ref : _ref(int(32))[1465743] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved"
+  {
+    ref ret[1003238]:_ref(int(32))[1465743] "dead after last mention" "RVV" "temp"
+    ref call_tmp[1003245]:_ref(int(32))[1465743] "dead after last mention" "maybe param" "temp"
+    (1003248 'move' call_tmp[1003245](1003232 '.' this[1003228] locale_id[33645]))
+    (1003243 'move' ret[1003238] call_tmp[1003245])
+    (1003240 return ret[1003238])
+  }
+  type bytes[232] val buffLen[33621]:int(64)[10] val buffSize[33627]:int(64)[10] val buff[33633]:c_ptr(uint(8))[1466369] val isOwned[33639]:bool[19] val locale_id[33645]:int(32)[66]
+  function _ref(bytes)[1466360].numBytes[34428](const?  ref arg this[34431]:_ref(bytes)[1466360]) : int(64)[10] "inline" "method" "no parens" "resolved"
+  {
+    val ret[595972]:int(64)[10] "dead after last mention" "RVV" "temp"
+    ref call_tmp[754002]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (754005 'move' call_tmp[754002](417019 call buffLen[1003120] this[34431]))
+    (1521533 '=' ret[595972](1521531 'deref' call_tmp[754002]))
+    (595974 return ret[595972])
+  }
+  function _ref(bytes)[1466360].localize[34443](const?  ref arg this[34446]:_ref(bytes)[1466360]) : bytes[232] "inline" "method" "resolved" "@unstable"
+  {
+    val ret[595982]:bytes[232] "dead after last mention" "RVV" "temp"
+    val tmp[478047]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[754007]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (3097412 'end of statement')
+    val tmp[666195]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    val tmp[666196]:bool[19] "dead after last mention" "maybe param" "temp"
+    val call_tmp[754012]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (3097414 'end of statement')
+    val call_tmp[754034]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      val call_tmp[754041]:bytes[232] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (754044 'move' call_tmp[754041](34459 call createBorrowingBuffer[32952] this[34446]))
+      (3097973 '=' ret[595982] call_tmp[754041])
+      gotoReturn _end_localize[595980] _end_localize[595980]
+    }
+    label _end_localize[595980]
+    (595984 return ret[595982])
+  }
+  function :[36857](const  ref arg x[36860]:string[244]) : bytes[232] "inline" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5477920]:bytes[232] "temp"
+    val ret[596470]:bytes[232] "dead after last mention" "RVV" "temp"
+    ref call_tmp[755052]:_ref(c_ptr(uint(8)))[1466378] "dead after last mention" "maybe param" "reference to a const" "temp"
+    (755055 'move' call_tmp[755052](36875 call buff[1007567] x[36860]))
+    val call_tmp[755059]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (755062 'move' call_tmp[755059](36879 call numBytes[23502] x[36860]))
+    val call_tmp[755066]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (755069 'move' call_tmp[755066](36886 call numBytes[23502] x[36860]))
+    val call_tmp[755071]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (755074 'move' call_tmp[755071](36883 call +[1471222] call_tmp[755066]))
+    val call_tmp[755076]:bytes[232] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    val coerce_tmp[3328343]:c_ptr(uint(8))[1466369] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3328347 'move' coerce_tmp[3328343](3328345 'deref' call_tmp[755052]))
+    (755079 'move' call_tmp[755076](36873 call createCopyingBuffer[3275262] coerce_tmp[3328343] call_tmp[755059] call_tmp[755071]))
+    (596475 'move' ret[596470] call_tmp[755076])
+    (596472 return ret[596470])
+  }
+  function _ref(bytes)[1466360].hash[37765](const?  ref arg this[37768]:_ref(bytes)[1466360]) : uint(64)[86] "inline" "method" "resolved"
+  {
+    val ret[596706]:uint(64)[86] "dead after last mention" "RVV" "temp"
+    val call_tmp[755449]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (755452 'move' call_tmp[755449](37777 call getHash[1521152] this[37768]))
+    (1521577 '=' ret[596706] call_tmp[755449])
+    (596708 return ret[596706])
+  }
+}

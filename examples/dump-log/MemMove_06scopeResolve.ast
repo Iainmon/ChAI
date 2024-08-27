@@ -1,0 +1,425 @@
+AST dump for MemMove after pass scopeResolve.
+Module use list: ChapelStandard HaltWrappers IO 
+
+{
+  function _move[208306](ref arg dst[208308]:_any[141](?), const  ref arg src[208310]:_any[141](?)) : _unknown[42] "inline" "private" "unsafe" "no return value for void"
+  {
+    (208313 '=' dst[208308] src[208310])
+  }
+  function needsDeinit[208318](arg t[208320]:_any[141](?)) param : _unknown[42] "deprecated"
+  {
+    (208323 return(208324 'needs auto destroy' t[208320]))
+  }
+  function needsDestroy[208328](arg t[208330]:_any[141](?)) param : _unknown[42]
+  {
+    (208334 return(208335 'needs auto destroy' t[208330]))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function explicitDeinit[208340](ref arg arg[208344] :
+  unknown t[208342]) : _unknown[42] "deprecated" "no return value for void"
+  {
+    if(208355 call _cond_test(208353 call needsDeinit t[208342]))
+    {
+      (208349 call chpl__autoDestroy arg[208344])
+    }
+  }
+  function destroy[208362](ref arg obj[208366] :
+  unknown t[208364]) : _unknown[42] "no return value for void"
+  {
+    if(208377 call _cond_test(208375 call needsDestroy t[208364]))
+    {
+      (208371 call chpl__autoDestroy obj[208366])
+    }
+  }
+  function moveInitialize[208384](ref arg lhs[208386]:_any[141](?), in arg rhs[208388]:_any[141](?)) : _unknown[42] "deprecated" "last resort" "no return value for void"
+  {
+    if(208439 call _cond_test(208433 call !=(208435 'static typeof' lhs[208386])(208437 'static typeof' rhs[208388])))
+    {
+      (208393 call compilerError(208394 call +(208396 call +(208398 call +(208400 call + "type mismatch move-initializing an expression of type '"(208405 call :(208408 'typeof' lhs[208386]) string[244])) "' from one of type '")(208413 call :(208416 'typeof' rhs[208388]) string[244])) "'"))
+    }
+    {
+      if(208429 call _cond_test(208424 call !=(208426 'static typeof' lhs[208386]) nothing[7]))
+      {
+        (208421 call _move lhs[208386] rhs[208388])
+      }
+    }
+  }
+  function moveInitialize[208446](ref arg dst[208448]:_any[141](?), in arg src[208450]:_any[141](?)) : _unknown[42] "no return value for void"
+  {
+    if(208497 call _cond_test(208491 call !=(208493 'static typeof' dst[208448])(208495 'static typeof' src[208450])))
+    {
+      (208455 call compilerError(208456 call +(208458 call +(208460 call +(208462 call + "type mismatch move-initializing an expression of type '"(208465 call :(208468 'typeof' dst[208448]) string[244])) "' from one of type '")(208471 call :(208474 'typeof' src[208450]) string[244])) "'"))
+    }
+    {
+      if(208487 call _cond_test(208482 call !=(208484 'static typeof' dst[208448]) nothing[7]))
+      {
+        (208479 call _move dst[208448] src[208450])
+      }
+    }
+  }
+  function moveToValue[208504](const  ref arg arg[208508] :
+  unknown t[208506]) : _unknown[42] "deprecated"
+  {
+    if(208531 call _cond_test(208527 call == t[208506] nothing[7]))
+    {
+      (208513 return none[48])
+    }
+    {
+      unknown result[208517] "no auto destroy" "no copy" "no init" t[208506]
+      (208520 'end of statement')
+      (208522 call _move result[208517] arg[208508])
+      (208525 return result[208517])
+    }
+  }
+  function moveFrom[208537](const  ref arg src[208541] :
+  unknown t[208539]) : _unknown[42]
+  {
+    if(208564 call _cond_test(208560 call == t[208539] nothing[7]))
+    {
+      (208546 return none[48])
+    }
+    {
+      unknown result[208550] "no auto destroy" "no copy" "no init" t[208539]
+      (208553 'end of statement')
+      (208555 call _move result[208550] src[208541])
+      (208558 return result[208550])
+    }
+  }
+  function moveSwap[208570](ref arg lhs[208574] :
+  unknown t[208572], ref arg rhs[208578] :
+  t[208572]) : _unknown[42] "deprecated" "last resort" "no return value for void"
+  {
+    (208583 call moveSwap(x = lhs[208574])(y = rhs[208578]))
+  }
+  function moveSwap[208590](ref arg x[208594] :
+  unknown t[208592], ref arg y[208598] :
+  t[208592]) : _unknown[42] "no return value for void"
+  {
+    if(208624 call _cond_test(208620 call != t[208592] nothing[7]))
+    {
+      unknown temp[208604] "no auto destroy" "no copy" "no init" t[208592]
+      (208607 'end of statement')
+      (208609 call _move temp[208604] x[208594])
+      (208613 call _move x[208594] y[208598])
+      (208617 call _move y[208598] temp[208604])
+    }
+  }
+  function _haltBadIndex[208630](arg a[208632]:_any[141](?), arg idx[208634]:_any[141](?), arg indexName[208637] :
+  string[244]) : _unknown[42] "inline" "private" "no return value for void"
+  {
+    if(208672 call _cond_test(208661 call !(208670 call(208667 call .(208664 call . a[208632] c"_dom") c"contains") idx[208634])))
+    {
+      (208648 call boundsCheckHalt(208649 call +(208651 call + "Cannot move-initialize array because its domain " "does not contain: ") indexName[208637]))
+    }
+    (396790 'used modules list'(208646 'import' HaltWrappers[518].{boundsCheckHalt}))
+  }
+  function _haltBadElementRange[208679](arg a[208681]:_any[141](?), arg idx[208683]:_any[141](?), arg numElements[208686] :
+  int(64)[10]) : _unknown[42] "inline" "private" "no return value for void"
+  {
+    if(208714 call _cond_test(208707 call > numElements[208686](208711 call . a[208681] c"size")))
+    {
+      (208697 call boundsCheckHalt(208698 call + "Cannot move-initialize array because number of " "elements to copy exceeds array size"))
+    }
+    if(208732 call _cond_test(208728 call <= numElements[208686] 0))
+    {
+      (208720 call boundsCheckHalt(208721 call + "Cannot move-initialize array because number of " "elements to copy is <= 0"))
+    }
+    const order[208738] "const"(208746 call(208743 call .(208740 call . a[208681] c"_dom") c"indexOrder") idx[208683])
+    (208749 'end of statement')
+    const hi[208751] "const"(208752 call + order[208738] numElements[208686])
+    (208757 'end of statement')
+    if(208776 call _cond_test(208769 call > hi[208751](208773 call . a[208681] c"size")))
+    {
+      (208759 call boundsCheckHalt(208760 call + "Cannot move-initialize array because one or " "more indices fall outside its domain"))
+    }
+    (396792 'used modules list'(208695 'import' HaltWrappers[518].{boundsCheckHalt}))
+  }
+  function _haltRangeOverlap[208783](arg dstIndex[208785]:_any[141](?), arg srcIndex[208787]:_any[141](?), arg numElements[208789]:_any[141](?)) : _unknown[42] "inline" "private" "no return value for void"
+  {
+    const dstRange[208799] "const"(208800 call #(208803 call chpl_build_low_bounded_range dstIndex[208785]) numElements[208789])
+    (208807 'end of statement')
+    const srcRange[208809] "const"(208810 call #(208813 call chpl_build_low_bounded_range srcIndex[208787]) numElements[208789])
+    (208817 'end of statement')
+    if(208838 call _cond_test(208829 call !=(208834 call .(208832 call dstRange[208799] srcRange[208809]) c"size") 0))
+    {
+      (208819 call boundsCheckHalt(208820 call + "Cannot move-initialize array because source and " "destination ranges intersect"))
+    }
+    (396794 'used modules list'(208797 'import' HaltWrappers[518].{boundsCheckHalt}))
+  }
+  function _errorNot1DRectangularArray[208845](arg a[208847]:_any[141](?)) : _unknown[42] "inline" "private" "no return value for void"
+  {
+    if(208878 call _cond_test(208860 call ||(208862 call !(208870 call(208867 call . a[208847] c"isDefaultRectangular")))(208871 call >(208874 call . a[208847] c"rank") 1)))
+    {
+      (208851 call compilerError "Can only move-initialize one-dimensional " "rectangular arrays" 2)
+    }
+  }
+  function _testArrayAlias[208885](const arg dst[208887]:_any[141](?), const arg dstRegion[208889]:_any[141](?), const arg src[208891]:_any[141](?), const arg srcRegion[208893]:_any[141](?)) : _unknown[42] throws "private" "no return value for void"
+  {
+    const actualDst[208897] "const"(208899 call chpl__getActualArray dst[208887])
+    (208902 'end of statement')
+    const actualSrc[208904] "const"(208906 call chpl__getActualArray src[208891])
+    (208909 'end of statement')
+    if(208985 call _cond_test(208981 call == actualDst[208897] actualSrc[208904]))
+    {
+      unknown overlap[208912] 0
+      (208915 'end of statement')
+      if(208951 call _cond_test(208949 call isRange dstRegion[208889]))
+      {
+        (208916 call = overlap[208912](208919 call ==(208931 call(208928 call .(208926 call(208924 call chpl__buildDomainExpr dstRegion[208889] 1) srcRegion[208893]) c"isEmpty")) 0))
+      }
+      {
+        (208934 call = overlap[208912](208937 call ==(208945 call(208942 call .(208940 call dstRegion[208889] srcRegion[208893]) c"isEmpty")) 0))
+      }
+      if(208977 call _cond_test overlap[208912])
+      {
+        (208961 'throw'(208962 'new'(208964 call IllegalArgumentError[414940](?)(208973 call(208970 call . "Arguments to 'moveArrayElements' alias the same data. Regions are '%\?' and '%\?'" c"format") dstRegion[208889] srcRegion[208893]))))
+        (396796 'used modules list'(208959 'use' IO[208303]))
+      }
+    }
+  }
+  function _checkArgs[208991](const arg dst[208993]:_any[141](?), const arg dstRegion[208995]:_any[141](?), const arg src[208997]:_any[141](?), const arg srcRegion[208999]:_any[141](?)) : _unknown[42] throws "private"
+  {
+    function _checkIsRectangular[209002](arg arg[209004]:_any[141](?), param arg name[209007] :
+    string[244]) : _unknown[42] "no return value for void"
+    {
+      if(209033 call _cond_test(209026 call !(209032 call(209029 call . arg[209004] c"isRectangular"))))
+      {
+        (209012 call compilerError(209013 call +(209015 call + "The '" name[209007]) "' for 'moveArrayElements' must be rectangular") 3)
+      }
+    }
+    function _isDomOrRange[209040](arg arg[209042]:_any[141](?)) param : _unknown[42]
+    {
+      (209046 return(209047 call ||(209050 call isDomain arg[209042])(209053 call isRange arg[209042])))
+    }
+    { scopeless type
+      bool[19]
+    }
+    (209059 call _checkIsRectangular dst[208993] "dst")
+    (209065 call _checkIsRectangular src[208997] "src")
+    if(209089 call _cond_test(209077 call ||(209079 call !(209082 call _isDomOrRange dstRegion[208995]))(209084 call !(209087 call _isDomOrRange srcRegion[208999]))))
+    {
+      (209072 call compilerError "Region arguments to 'moveArrayElements' must be ranges or rectangular domains" 2)
+    }
+    if(209103 call _cond_test(209101 call isDomain dstRegion[208995]))
+    {
+      (209094 call _checkIsRectangular dstRegion[208995] "dstRegion")
+    }
+    if(209118 call _cond_test(209116 call isDomain srcRegion[208999]))
+    {
+      (209109 call _checkIsRectangular srcRegion[208999] "srcRegion")
+    }
+    if(209156 call _cond_test(209130 call ||(209132 call &&(209135 call isRange dstRegion[208995])(209137 call >(209140 call . dst[208993] c"rank") 1))(209144 call &&(209147 call isRange srcRegion[208999])(209149 call >(209152 call . src[208997] c"rank") 1))))
+    {
+      (209124 call compilerError "'moveArrayElements' does not accept range regions for arrays with more than 1 dimension" 2)
+    }
+    if(209200 call _cond_test(209168 call ||(209170 call &&(209173 call isRange dstRegion[208995])(209175 call !=(209178 call . dstRegion[208995] c"bounds") both[107114]))(209185 call &&(209188 call isRange srcRegion[208999])(209190 call !=(209193 call . srcRegion[208999] c"bounds") both[107114]))))
+    {
+      (209162 call compilerError "'moveArrayElements' does not accept unbounded ranges" 2)
+    }
+    function _idxHelper[209205](arg A[209207]:_any[141](?), arg B[209209]:_any[141](?), param arg Aname[209212] :
+    string[244], param arg Bname[209216] :
+    string[244]) : _unknown[42] "no return value for void"
+    {
+      if(209293 call _cond_test(209283 call !=(209286 call . A[209207] c"idxType")(209290 call . B[209209] c"idxType")))
+      {
+        unknown args[209222] "param"(209223 call +(209225 call +(209227 call +(209229 call + "'" Aname[209212]) "' and '") Bname[209216]) "'")
+        (209239 'end of statement')
+        unknown types[209241] "param"(209242 call +(209244 call +(209246 call +(209248 call + "'"(209251 call :(209254 call . A[209207] c"idxType") string[244])) "' vs. '")(209261 call :(209264 call . B[209209] c"idxType") string[244])) "'")
+        (209270 'end of statement')
+        (209272 call compilerError(209273 call +(209275 call + args[209222] " for 'moveArrayElements' must have the same index type: ") types[209241]) 3)
+      }
+    }
+    (209300 call _idxHelper dst[208993] dstRegion[208995] "dst" "dstRegion")
+    (209306 call _idxHelper src[208997] srcRegion[208999] "src" "srcRegion")
+    if(209352 call _cond_test(209342 call !=(209345 call . dstRegion[208995] c"size")(209349 call . srcRegion[208999] c"size")))
+    {
+      (209312 'throw'(209313 'new'(209315 call IllegalArgumentError[414940](?)(209316 call +(209318 call +(209320 call + "Destination and source specify a different number of elements to move: "(209325 call :(209328 call . dstRegion[208995] c"size") string[244])) " vs. ")(209335 call :(209338 call . srcRegion[208999] c"size") string[244])))))
+    }
+    const dstGood[209357] "const"(209365 call(209362 call .(209359 call . dst[208993] c"_dom") c"contains")(209375 IfExpr (209367 call isRange dstRegion[208995]) then
+    { scopeless
+      (209372 call chpl__buildDomainExpr dstRegion[208995] 1)
+    } else
+    { scopeless
+      dstRegion[208995]
+    } ))
+    (209379 'end of statement')
+    const srcGood[209381] "const"(209389 call(209386 call .(209383 call . src[208997] c"_dom") c"contains")(209399 IfExpr (209391 call isRange srcRegion[208999]) then
+    { scopeless
+      (209396 call chpl__buildDomainExpr srcRegion[208999] 1)
+    } else
+    { scopeless
+      srcRegion[208999]
+    } ))
+    (209403 'end of statement')
+    if(209415 call _cond_test(209412 call ! dstGood[209357]))
+    {
+      (209404 'throw'(209405 'new'(209407 call IllegalArgumentError[414940](?) "illegal argument 'dstRegion': region contains invalid indices")))
+    }
+    if(209431 call _cond_test(209428 call ! srcGood[209381]))
+    {
+      (209420 'throw'(209421 'new'(209423 call IllegalArgumentError[414940](?) "illegal argument 'srcRegion': region contains invalid indices")))
+    }
+    (209437 call _testArrayAlias dst[208993] dstRegion[208995] src[208997] srcRegion[208999])
+  }
+  function moveArrayElements[209444](ref arg dst[209451] :
+  (209449 call chpl__buildArrayRuntimeType nil[32] unknown eltType[209447]), const arg dstRegion[209454]:_any[141](?), const  ref arg src[209460] :
+  (209458 call chpl__buildArrayRuntimeType nil[32] eltType[209447]), const arg srcRegion[209463]:_any[141](?)) : _unknown[42] throws "@unstable" "no return value for void"
+  {
+    (209468 call _checkArgs dst[209451] dstRegion[209454] src[209460] srcRegion[209463])
+    Forall[209503] {
+      induction variables:
+        
+        unknown di[209474] "index var" "insert auto destroy"
+        
+        unknown si[209476] "index var" "insert auto destroy"
+      iterated expressions:
+        dstRegion[209454]
+        srcRegion[209463]
+      shadow variables:
+        dst[209486] 'ref' intent outer var dst[209451]
+          init block
+          {
+          }
+          deinit block
+          {
+          }
+      other variables
+        forall body
+      {
+        (209492 call moveInitialize(209494 call dst[209486] di[209474])(209497 call moveFrom(209499 call src[209460] si[209476])))
+      }
+    }
+  }
+  { scopeless type
+    void[4]
+  }
+  function moveArrayElements[209510](ref arg dst[209517] :
+  (209515 call chpl__buildArrayRuntimeType nil[32] unknown eltType[209513]), const  ref arg src[209524] :
+  (209522 call chpl__buildArrayRuntimeType nil[32] eltType[209513])) : _unknown[42] throws "@unstable" "no return value for void"
+  {
+    (209530 call _checkArgs dst[209517](209533 call . dst[209517] c"_dom") src[209524](209538 call . src[209524] c"_dom"))
+    (209542 call moveArrayElements dst[209517](209545 call . dst[209517] c"_dom") src[209524](209550 call . src[209524] c"_dom"))
+  }
+  { scopeless type
+    void[4]
+  }
+  function moveInitializeArrayElements[209556](ref arg a[209562] :
+  (209560 call chpl__buildArrayRuntimeType unknown d[209558]), arg dstStartIndex[209569] :
+  (209566 call . a[209562] c"idxType"), arg srcStartIndex[209576] :
+  (209573 call . a[209562] c"idxType"), arg numElements[209580] :
+  int(64)[10]) : _unknown[42] "deprecated" "no return value for void"
+  {
+    (209585 call _errorNot1DRectangularArray a[209562])
+    if(209613 call _cond_test 1)
+    {
+      (209589 call _haltBadElementRange a[209562] dstStartIndex[209569] numElements[209580])
+      (209594 call _haltBadIndex a[209562] dstStartIndex[209569] "dstStartIndex")
+      (209601 call _haltBadIndex a[209562] srcStartIndex[209576] "srcStartIndex")
+      (209608 call _haltRangeOverlap dstStartIndex[209569] srcStartIndex[209576] numElements[209580])
+    }
+    if(209623 call _cond_test(209619 call == dstStartIndex[209569] srcStartIndex[209576]))
+    {
+      (209617 return _void[46])
+    }
+    const d[209629] "const"(209631 call . a[209562] c"_dom")
+    (209635 'end of statement')
+    const dstLo[209637] "const"(209642 call(209639 call . d[209629] c"indexOrder") dstStartIndex[209569])
+    (209645 'end of statement')
+    const srcLo[209647] "const"(209652 call(209649 call . d[209629] c"indexOrder") srcStartIndex[209576])
+    (209655 'end of statement')
+    Forall[209717] {
+      induction variables:
+        
+        unknown i[209656] "index var" "insert auto destroy"
+      iterated expressions:
+        (209662 call chpl_build_bounded_range 0(209660 call chpl__nudgeHighBound numElements[209580]))
+      shadow variables:
+        a[209666] 'ref' intent outer var a[209562]
+          init block
+          {
+          }
+          deinit block
+          {
+          }
+      other variables
+        forall body
+      {
+        const dstIdx[209672] "const"(209677 call(209674 call . d[209629] c"orderToIndex")(209678 call + dstLo[209637] i[209656]))
+        (209683 'end of statement')
+        const srcIdx[209685] "const"(209690 call(209687 call . d[209629] c"orderToIndex")(209691 call + srcLo[209647] i[209656]))
+        (209696 'end of statement')
+        unknown dst[209698] "ref var"(209700 call a[209666] dstIdx[209672])
+        (209703 'end of statement')
+        const src[209705] "const" "ref var"(209707 call a[209666] srcIdx[209685])
+        (209710 'end of statement')
+        (209712 call _move dst[209698] src[209705])
+      }
+    }
+  }
+  function moveInitializeArrayElements[209722](ref arg dstA[209729] :
+  (209727 call chpl__buildArrayRuntimeType nil[32] unknown t[209725]), arg dstStartIndex[209736] :
+  (209733 call . dstA[209729] c"idxType"), arg srcA[209743] :
+  (209741 call chpl__buildArrayRuntimeType nil[32] t[209725]), arg srcStartIndex[209750] :
+  (209747 call . srcA[209743] c"idxType"), arg numElements[209754] :
+  int(64)[10]) : _unknown[42] "deprecated" "no return value for void"
+  {
+    (209759 call _errorNot1DRectangularArray dstA[209729])
+    (209762 call _errorNot1DRectangularArray srcA[209743])
+    if(209786 call _cond_test 1)
+    {
+      (209766 call _haltBadElementRange dstA[209729] dstStartIndex[209736] numElements[209754])
+      (209771 call _haltBadElementRange srcA[209743] srcStartIndex[209750] numElements[209754])
+      (209776 call _haltBadIndex dstA[209729] dstStartIndex[209736] "dstStartIndex")
+      (209781 call _haltBadIndex srcA[209743] srcStartIndex[209750] "srcStartIndex")
+    }
+    const isSameArray[209791] "const"(209792 call ==(209795 call . dstA[209729] c"_instance")(209799 call . srcA[209743] c"_instance"))
+    (209803 'end of statement')
+    if(209814 call _cond_test(209810 call && 1 isSameArray[209791]))
+    {
+      (209806 call _haltRangeOverlap dstStartIndex[209736] srcStartIndex[209750] numElements[209754])
+    }
+    if(209827 call _cond_test(209820 call && isSameArray[209791](209823 call == dstStartIndex[209736] srcStartIndex[209750])))
+    {
+      (209818 return _void[46])
+    }
+    const dstD[209833] "const"(209835 call . dstA[209729] c"_dom")
+    (209839 'end of statement')
+    const srcD[209841] "const"(209843 call . srcA[209743] c"_dom")
+    (209847 'end of statement')
+    unknown dstLo[209849](209854 call(209851 call . dstD[209833] c"indexOrder") dstStartIndex[209736])
+    (209857 'end of statement')
+    unknown srcLo[209859](209864 call(209861 call . dstD[209833] c"indexOrder") srcStartIndex[209750])
+    (209867 'end of statement')
+    Forall[209929] {
+      induction variables:
+        
+        unknown i[209868] "index var" "insert auto destroy"
+      iterated expressions:
+        (209874 call chpl_build_bounded_range 0(209872 call chpl__nudgeHighBound numElements[209754]))
+      shadow variables:
+        dstA[209878] 'ref' intent outer var dstA[209729]
+          init block
+          {
+          }
+          deinit block
+          {
+          }
+      other variables
+        forall body
+      {
+        const dstIdx[209884] "const"(209889 call(209886 call . dstD[209833] c"orderToIndex")(209890 call + dstLo[209849] i[209868]))
+        (209895 'end of statement')
+        const srcIdx[209897] "const"(209902 call(209899 call . srcD[209841] c"orderToIndex")(209903 call + srcLo[209859] i[209868]))
+        (209908 'end of statement')
+        unknown dst[209910] "ref var"(209912 call dstA[209878] dstIdx[209884])
+        (209915 'end of statement')
+        const src[209917] "const" "ref var"(209919 call srcA[209743] srcIdx[209897])
+        (209922 'end of statement')
+        (209924 call _move dst[209910] src[209917])
+      }
+    }
+  }
+  (396788 'used modules list'(387030 'use' ChapelStandard[315387]))
+}

@@ -1,0 +1,150 @@
+AST dump for TOML after pass normalize.
+Module use list: ChapelStandard List Map TomlParser TomlReader Sort IO 
+
+{
+  function chpl__init_TOML[468684]() : void[4] "insert line file info" "module init"
+  {
+    (640978 return _void[46])
+  }
+  def module TomlParser[383868]  
+  def module TomlReader[385117]  
+  function parseToml[377154](arg input[377157]:file[168704]) : _unknown[42]
+  {
+    unknown ret[640927] "RVV" "temp"
+    unknown tomlStr[377165] "dead at end of block" "insert auto destroy"
+    (657470 'default init var' tomlStr[377165] string[244])
+    (377168 'end of statement')
+    unknown call_tmp[992167] "maybe param" "maybe type" "temp"
+    (992170 'move' call_tmp[992167](377175 call(377172 call (partial) reader _mt[203] input[377157])(locking = 0)))
+    unknown tomlFile[377170] "dead at end of block" "insert auto destroy"
+    (657472 'init var' tomlFile[377170] call_tmp[992167])
+    (377179 'end of statement')
+    (377184 call(377181 call (partial) readAll _mt[203] tomlFile[377170]) tomlStr[377165])
+    (575161 'end of statement' tomlFile[377170] tomlStr[377165])
+    (377190 call(377187 call (partial) close _mt[203] tomlFile[377170]))
+    (575164 'end of statement' tomlFile[377170])
+    unknown call_tmp[992176] "expr temp" "maybe param" "maybe type" "temp"
+    (992179 'move' call_tmp[992176](377193 call parseToml tomlStr[377165]))
+    unknown call_tmp[992181] "expr temp" "maybe param" "maybe type" "temp"
+    (992184 'move' call_tmp[992181](640932 call _shared[242](?) Toml[383866]))
+    (640935 'move' ret[640927](640934 'coerce' call_tmp[992176] call_tmp[992181]))
+    gotoReturn _end_parseToml[640925] _end_parseToml[640925]
+    (575166 'end of statement' tomlStr[377165])
+    label _end_parseToml[640925]
+    (640929 return ret[640927])
+  }
+  { scopeless type
+    (377161 call _shared[242](?) Toml[383866])
+  }
+  function parseToml[377198](arg input[377201]:fileReader[170893](?)) : _unknown[42]
+  {
+    unknown ret[640941] "RVV" "temp"
+    unknown tomlStr[377209] "dead at end of block" "insert auto destroy"
+    (657474 'default init var' tomlStr[377209] string[244])
+    (377212 'end of statement')
+    (377217 call(377214 call (partial) readAll _mt[203] input[377201]) tomlStr[377209])
+    (575168 'end of statement' tomlStr[377209])
+    unknown call_tmp[992188] "expr temp" "maybe param" "maybe type" "temp"
+    (992191 'move' call_tmp[992188](377221 call parseToml tomlStr[377209]))
+    unknown call_tmp[992193] "expr temp" "maybe param" "maybe type" "temp"
+    (992196 'move' call_tmp[992193](640946 call _shared[242](?) Toml[383866]))
+    (640949 'move' ret[640941](640948 'coerce' call_tmp[992188] call_tmp[992193]))
+    gotoReturn _end_parseToml[640939] _end_parseToml[640939]
+    (575170 'end of statement' tomlStr[377209])
+    label _end_parseToml[640939]
+    (640943 return ret[640941])
+  }
+  { scopeless type
+    (377205 call _shared[242](?) Toml[383866])
+  }
+  function parseToml[377226](arg input[377229]:string[244]) : _unknown[42]
+  {
+    unknown ret[640955] "RVV" "temp"
+    unknown D[377237] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[992198] "expr temp" "maybe param" "maybe type" "temp"
+    (992201 'move' call_tmp[992198](377239 call chpl__buildDomainRuntimeType defaultDist[288287] string[244]))
+    (657476 'default init var' D[377237] call_tmp[992198])
+    (377243 'end of statement')
+    unknown table[377245] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[992203] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (992206 'move' call_tmp[992203](377247 call chpl__ensureDomainExpr D[377237]))
+    unknown call_tmp[992208] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (992211 'move' call_tmp[992208](377250 call _shared[242](?) borrowed Toml?[468226]))
+    unknown call_tmp[992213] "expr temp" "maybe param" "maybe type" "temp"
+    (992216 'move' call_tmp[992213](377253 call chpl__buildArrayRuntimeType call_tmp[992203] call_tmp[992208]))
+    (657478 'default init var' table[377245] call_tmp[992213])
+    (377256 'end of statement')
+    unknown call_tmp[992218] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (992221 'move' call_tmp[992218](1000851 'new' Toml[397985](?) table[377245](_chpl_manager = _shared[242](?))))
+    unknown rootTable[377258] "dead at end of block" "insert auto destroy"
+    (657480 'init var' rootTable[377258] call_tmp[992218])
+    (377266 'end of statement')
+    unknown call_tmp[992223] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (992226 'move' call_tmp[992223](1000852 'new' Source[465100](?) input[377229](_chpl_manager = _shared[242](?))))
+    const source[377268] "dead at end of block" "const" "insert auto destroy"
+    (657482 'init var' source[377268] call_tmp[992223])
+    (377276 'end of statement')
+    unknown call_tmp[992228] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (992231 'move' call_tmp[992228](1000853 'new' Parser[465105](?) source[377268] rootTable[377258](_chpl_manager = unmanaged[183](?))))
+    const parser[377278] "dead at end of block" "const" "insert auto destroy"
+    (657484 'init var' parser[377278] call_tmp[992228])
+    (377287 'end of statement')
+    unknown call_tmp[992235] "maybe param" "maybe type" "temp"
+    (992238 'move' call_tmp[992235](377296 call(377293 call (partial) parseLoop _mt[203] parser[377278])))
+    const tomlData[377289] "dead at end of block" "const" "insert auto destroy"
+    (657486 'init var' tomlData[377289] call_tmp[992235])
+    (377298 'end of statement' D[377237] table[377245] source[377268] rootTable[377258] parser[377278])
+    (377301 call chpl__delete parser[377278])
+    (575177 'end of statement' parser[377278])
+    unknown call_tmp[992240] "expr temp" "maybe param" "maybe type" "temp"
+    (992243 'move' call_tmp[992240](640960 call _shared[242](?) Toml[383866]))
+    (640963 'move' ret[640955](640962 'coerce' tomlData[377289] call_tmp[992240]))
+    gotoReturn _end_parseToml[640953] _end_parseToml[640953]
+    (575179 'end of statement' tomlData[377289])
+    label _end_parseToml[640953]
+    (640957 return ret[640955])
+  }
+  { scopeless type
+    (377233 call _shared[242](?) Toml[383866])
+  }
+  function TomlError[377348].init[377316](arg _mt[377324]:_MT[201], arg this[377318]:TomlError[377348], arg msg[377321]:string[244]) : void[4] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown super_tmp[539586] "temporary of super field" "temp"
+    (539594 'move' super_tmp[539586](539587 '.v' this[377318] c"super"))
+    (539590 call init _mt[203] super_tmp[539586])
+    (575181 'end of statement')
+    unknown tmp[539561] "temp" "type variable"
+    { scopeless type
+      unknown call_type_tmp[579309] "expr temp" "maybe type" "temp" "type variable"
+      unknown call_tmp[992245] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (992248 'move' call_tmp[992245](539563 '.v' this[377318] c"super"))
+      (579313 'move' call_type_tmp[579309](539566 'typeof' call_tmp[992245]))
+    }
+    (539567 'move' tmp[539561] call_type_tmp[579309])
+    unknown call_tmp[992250] "maybe param" "maybe type" "temp"
+    (992253 'move' call_tmp[992250](539572 'cast' tmp[539561] this[377318]))
+    unknown chpl__thisAsParent[539569] "dead at end of block" "insert auto destroy" "temp"
+    (657488 'init var' chpl__thisAsParent[539569] call_tmp[992250] tmp[539561])
+    (539575 'setcid' chpl__thisAsParent[539569])
+    (575182 'end of statement')
+    unknown msg[539577] "temp"
+    (539580 'init var' msg[539577] msg[377321] string[244])
+    (539582 'init field' this[377318] c"msg" msg[539577])
+    (575183 'end of statement')
+    (539597 'setcid' this[377318])
+    (640967 return _void[46])
+  }
+  function TomlError[377348].message[377336](arg _mt[377340]:_MT[201], arg this[377338]:TomlError[377348]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[640971] "RVV" "temp"
+    unknown call_tmp[992257] "expr temp" "maybe param" "maybe type" "temp"
+    (992260 'move' call_tmp[992257](465115 call msg _mt[203] this[377338]))
+    (640976 'move' ret[640971](640975 'deref' call_tmp[992257]))
+    (640973 return ret[640971])
+  }
+  type TomlError[377348] val super[397980]:Error[85511] "super class" val msg[377312]:string[244] string[244]
+  type unmanaged TomlError?[468289]
+  type unmanaged TomlError[468286]
+  type TomlError[465178](?)
+  (397234 'used modules list'(387102 'use' ChapelStandard[315387])(377137 'use' List[232161])(377140 'use' Map[352858])(377143 'use' TomlParser[383868])(377146 'use' TomlReader[385117])(377149 'use' Sort[247204])(377152 'use' IO[208303]))
+}

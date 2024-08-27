@@ -1,0 +1,231 @@
+AST dump for GpuDiagnostics after pass scopeResolve.
+Module use list: ChapelStandard ChplConfig 
+
+{
+  unknown gpuDiagsStacktrace[338453] "param" 0
+  (338456 'end of statement')
+  unknown gpuDiagsPrintUnstable[338458] "param" 0
+  (338461 'end of statement')
+  type chpl_gpuDiagnostics[338492] unknown kernel_launch[338464](338466 call uint(64)[86] 64) unknown host_to_device[338471](338473 call uint(64)[86] 64) unknown device_to_host[338478](338480 call uint(64)[86] 64) unknown device_to_device[338485](338487 call uint(64)[86] 64)
+  unknown gpuDiagnostics[338495] "type variable" chpl_gpuDiagnostics[338492]
+  function +=[338498](ref arg lhs[338501] :
+  gpuDiagnostics[338495], arg rhs[338505] :
+  gpuDiagnostics[338495]) : _unknown[42] "assignop" "operator" "private" "no return value for void"
+  {
+    (338509 call +=(338514 call . lhs[338501] c"kernel_launch")(338518 call . rhs[338505] c"kernel_launch"))
+    (338521 call +=(338526 call . lhs[338501] c"host_to_device")(338530 call . rhs[338505] c"host_to_device"))
+    (338533 call +=(338538 call . lhs[338501] c"device_to_host")(338542 call . rhs[338505] c"device_to_host"))
+    (338545 call +=(338550 call . lhs[338501] c"device_to_device")(338554 call . rhs[338505] c"device_to_device"))
+  }
+  function assertGpuDiags[338559](arg kernel_launch[338564] =
+  (338561 call - 1), arg host_to_device[338570] =
+  (338567 call - 1), arg device_to_host[338576] =
+  (338573 call - 1), arg device_to_device[338582] =
+  (338579 call - 1), arg kernel_launch_um[338588] =
+  (338585 call - 1), arg kernel_launch_aod[338594] =
+  (338591 call - 1)) : _unknown[42]
+  {
+    function compare[338598](arg expected[338600]:_any[141](?), arg actual[338602]:_any[141](?), arg name[338604]:_any[141](?)) : _unknown[42]
+    {
+      const res[338608] "const"(338609 call ||(338611 call < expected[338600] 0)(338615 call == actual[338602] expected[338600]))
+      (338620 'end of statement')
+      if(338634 call _cond_test(338630 call == res[338608] 0))
+      {
+        (338623 call writef "Unexpected GPU Diagnostic: observed %i %s instead of %i\n" actual[338602] name[338604] expected[338600])
+      }
+      (338638 return res[338608])
+    }
+    unknown isUm[338646] "param"(338647 call == CHPL_GPU_MEM_STRATEGY[29917] "unified_memory")
+    (338654 'end of statement')
+    unknown isCpu[338656] "param"(338657 call == CHPL_GPU[29929] "cpu")
+    (338664 'end of statement')
+    const expectedLaunch[338666] "const" _gsplitinit[39]
+    (338668 'end of statement')
+    if(338703 call _cond_test(338699 call >= kernel_launch[338564] 0))
+    {
+      (338671 call assert(338672 call &&(338674 call < kernel_launch_um[338588] 0)(338678 call < kernel_launch_aod[338594] 0)) "when kernel_launch is set, kernel_launch* shouldn't be set")
+      (338685 call = expectedLaunch[338666] kernel_launch[338564])
+    }
+    {
+      (338690 call = expectedLaunch[338666](338696 IfExpr  isUm[338646] then
+      { scopeless
+        kernel_launch_um[338588]
+      } else
+      { scopeless
+        kernel_launch_aod[338594]
+      } ))
+    }
+    unknown diags[338708] gpuDiagnostics[338495]
+    (338711 'end of statement')
+    {
+      unknown _indexOfInterest[338721] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[338722] "expr temp" "temp"
+      (338731 'move' _iterator[338722](338729 call _getIterator(338715 call getGpuDiagnostics)))
+      Defer
+      {
+        {
+          (338746 call _freeIterator _iterator[338722])
+        }
+      }
+      { scopeless type
+        (338736 'move' _indexOfInterest[338721](338733 call iteratorIndex _iterator[338722]))
+      }
+      ForLoop[338723]
+      {
+        unknown diag[338712] "index var" "insert auto destroy"
+        (338741 'move' diag[338712] _indexOfInterest[338721])
+        {
+          (338717 call += diags[338708] diag[338712])
+        }
+        label _continueLabel[338726]
+        _indexOfInterest[338721]
+        _iterator[338722]
+      }
+      label _breakLabel[338727]
+    }
+    unknown success[338754](338756 call compare expectedLaunch[338666](338759 call . diags[338708] c"kernel_launch") "launches")
+    (338766 'end of statement')
+    if(338815 call _cond_test(338807 call &&(338809 call ! isUm[338646])(338812 call ! isCpu[338656])))
+    {
+      (338768 call &= success[338754](338772 call compare host_to_device[338570](338775 call . diags[338708] c"host_to_device") "host to device communication calls"))
+      (338781 call &= success[338754](338785 call compare device_to_host[338576](338788 call . diags[338708] c"device_to_host") "device to host communication calls"))
+      (338794 call &= success[338754](338798 call compare device_to_device[338582](338801 call . diags[338708] c"device_to_device") "device to device communication calls"))
+    }
+    (338820 call assert success[338754] "GPU Diagnostics assertion failed")
+    (397142 'used modules list'(338643 'use' ChplConfig[29952]))
+  }
+  function chpl_gpu_startVerbose[338827](arg stacktrace[338830] :
+  bool[19], arg print_unstable[338834] :
+  bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_stopVerbose[338839]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_startVerboseHere[338843](arg stacktrace[338846] :
+  bool[19], arg print_unstable[338850] :
+  bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_stopVerboseHere[338855]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_startDiagnostics[338859](arg print_unstable[338862] :
+  bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_stopDiagnostics[338867]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_startDiagnosticsHere[338871](arg print_unstable[338874] :
+  bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_stopDiagnosticsHere[338879]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_resetDiagnosticsHere[338883]() : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_getDiagnosticsHere[338887](ref arg cd[338890] :
+  gpuDiagnostics[338495]) : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function startVerboseGpu[338895]() : _unknown[42] "no return value for void"
+  {
+    (338899 call chpl_gpu_startVerbose gpuDiagsStacktrace[338453] gpuDiagsPrintUnstable[338458])
+  }
+  function stopVerboseGpu[338904]() : _unknown[42] "no return value for void"
+  {
+    (338908 call chpl_gpu_stopVerbose)
+  }
+  function startGpuDiagnostics[338911]() : _unknown[42] "no return value for void"
+  {
+    (338915 call chpl_gpu_startDiagnostics gpuDiagsPrintUnstable[338458])
+  }
+  function stopGpuDiagnostics[338919]() : _unknown[42] "no return value for void"
+  {
+    (338923 call chpl_gpu_stopDiagnostics)
+  }
+  function resetGpuDiagnostics[338926]() : _unknown[42] "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[338947] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[338948] "expr temp" "temp"
+      (338957 'move' _iterator[338948](338955 call _getIterator Locales[309572]))
+      Defer
+      {
+        {
+          (338972 call _freeIterator _iterator[338948])
+        }
+      }
+      { scopeless type
+        (338962 'move' _indexOfInterest[338947](338959 call iteratorIndex _iterator[338948]))
+      }
+      ForLoop[338949]
+      {
+        unknown loc[338929] "index var" "insert auto destroy"
+        (338967 'move' loc[338929] _indexOfInterest[338947])
+        {
+          const tmp[338939] "const" "temp"
+          (338940 'move' tmp[338939](338937 'deref'(338936 '_wide_get_locale' loc[338929])))
+          (338934 call resetGpuDiagnosticsHere)
+          (338943 'elided on block' 0 tmp[338939])
+        }
+        label _continueLabel[338952]
+        _indexOfInterest[338947]
+        _iterator[338948]
+      }
+      label _breakLabel[338953]
+    }
+  }
+  function getGpuDiagnostics[338981]() : _unknown[42]
+  {
+    unknown D[338985](338990 call chpl__buildArrayRuntimeType(338987 call chpl__ensureDomainExpr LocaleSpace[309591]) gpuDiagnostics[338495])
+    (338993 'end of statement')
+    {
+      unknown _indexOfInterest[339020] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[339021] "expr temp" "temp"
+      (339030 'move' _iterator[339021](339028 call _getIterator Locales[309572]))
+      Defer
+      {
+        {
+          (339045 call _freeIterator _iterator[339021])
+        }
+      }
+      { scopeless type
+        (339035 'move' _indexOfInterest[339020](339032 call iteratorIndex _iterator[339021]))
+      }
+      ForLoop[339022]
+      {
+        unknown loc[338994] "index var" "insert auto destroy"
+        (339040 'move' loc[338994] _indexOfInterest[339020])
+        {
+          const tmp[339012] "const" "temp"
+          (339013 'move' tmp[339012](339010 'deref'(339009 '_wide_get_locale' loc[338994])))
+          {
+            (338999 call =(339002 call D[338985](339004 call . loc[338994] c"id"))(339008 call getGpuDiagnosticsHere))
+          }
+          (339016 'elided on block' 0 tmp[339012])
+        }
+        label _continueLabel[339025]
+        _indexOfInterest[339020]
+        _iterator[339021]
+      }
+      label _breakLabel[339026]
+    }
+    (339052 return D[338985])
+  }
+  function getGpuDiagnosticsHere[339056]() : _unknown[42] "private"
+  {
+    unknown cd[339060] gpuDiagnostics[338495]
+    (339063 'end of statement')
+    (339065 call chpl_gpu_getDiagnosticsHere cd[339060])
+    (339067 return cd[339060])
+  }
+  function resetGpuDiagnosticsHere[339071]() : _unknown[42] "inline" "private" "no return value for void"
+  {
+    (339075 call chpl_gpu_resetDiagnosticsHere)
+  }
+  (397140 'used modules list'(387076 'use' ChapelStandard[315387]))
+}

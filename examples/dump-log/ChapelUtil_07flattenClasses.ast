@@ -1,0 +1,328 @@
+AST dump for ChapelUtil after pass flattenClasses.
+Module use list: ChapelStandard CTypes Regex 
+
+{
+  function safeAdd[310573](arg a[310577] :
+  unknown t[310575], arg b[310581] :
+  t[310575]) : _unknown[42]
+  {
+    if(310594 call _cond_test(310589 call !(310592 call isIntegralType t[310575])))
+    {
+      (310586 call compilerError "Values must be of integral type.")
+    }
+    if(310667 call _cond_test(310663 call < a[310577] 0))
+    {
+      if(310627 call _cond_test(310623 call >= b[310581] 0))
+      {
+        (310601 return 1)
+      }
+      {
+        if(310619 call _cond_test(310610 call < b[310581](310613 call -(310616 call min t[310575]) a[310577])))
+        {
+          (310605 return 0)
+        }
+        {
+          (310608 return 1)
+        }
+      }
+    }
+    {
+      if(310659 call _cond_test(310655 call <= b[310581] 0))
+      {
+        (310633 return 1)
+      }
+      {
+        if(310651 call _cond_test(310642 call > b[310581](310645 call -(310648 call max t[310575]) a[310577])))
+        {
+          (310637 return 0)
+        }
+        {
+          (310640 return 1)
+        }
+      }
+    }
+  }
+  function safeSub[310673](arg a[310677] :
+  unknown t[310675], arg b[310681] :
+  t[310675]) : _unknown[42]
+  {
+    if(310694 call _cond_test(310689 call !(310692 call isIntegralType t[310675])))
+    {
+      (310686 call compilerError "Values must be of integral type.")
+    }
+    if(310823 call _cond_test(310819 call < a[310677] 0))
+    {
+      if(310763 call _cond_test(310759 call <= b[310681] 0))
+      {
+        (310701 return 1)
+      }
+      {
+        if(310755 call _cond_test(310746 call > b[310681](310749 call +(310752 call max t[310675]) a[310677])))
+        {
+          if(310737 call _cond_test(310729 call safeAdd(310730 call +(310733 call max t[310675]) a[310677]) 1))
+          {
+            if(310724 call _cond_test(310712 call > b[310681](310715 call +(310717 call +(310720 call max t[310675]) a[310677]) 1)))
+            {
+              (310707 return 0)
+            }
+            {
+              (310710 return 1)
+            }
+          }
+          (310741 return 0)
+        }
+        {
+          (310744 return 1)
+        }
+      }
+    }
+    {
+      if(310815 call _cond_test(310811 call >= b[310681] 0))
+      {
+        if(310784 call _cond_test(310782 call isUintType t[310675]))
+        {
+          if(310776 call _cond_test(310772 call > b[310681] a[310677]))
+          {
+            (310769 return 0)
+          }
+        }
+        (310789 return 1)
+      }
+      {
+        if(310807 call _cond_test(310798 call <= b[310681](310801 call +(310804 call min t[310675]) a[310677])))
+        {
+          (310793 return 0)
+        }
+        {
+          (310796 return 1)
+        }
+      }
+    }
+  }
+  function safeMul[310829](arg a[310833] :
+  unknown t[310831], arg b[310837] :
+  t[310831]) : _unknown[42]
+  {
+    if(310850 call _cond_test(310845 call !(310848 call isIntegralType t[310831])))
+    {
+      (310842 call compilerError "Values must be of integral type.")
+    }
+    if(310955 call _cond_test(310951 call > a[310833] 0))
+    {
+      if(310896 call _cond_test(310892 call > b[310837] 0))
+      {
+        if(310869 call _cond_test(310860 call > a[310833](310863 call /(310866 call max t[310831]) b[310837])))
+        {
+          (310857 return 0)
+        }
+      }
+      {
+        if(310887 call _cond_test(310878 call < b[310837](310881 call /(310884 call min t[310831]) a[310833])))
+        {
+          (310875 return 0)
+        }
+      }
+    }
+    {
+      if(310947 call _cond_test(310943 call > b[310837] 0))
+      {
+        if(310914 call _cond_test(310905 call < a[310833](310908 call /(310911 call min t[310831]) b[310837])))
+        {
+          (310902 return 0)
+        }
+      }
+      {
+        if(310938 call _cond_test(310923 call &&(310925 call != a[310833] 0)(310929 call < b[310837](310932 call /(310935 call max t[310831]) a[310833]))))
+        {
+          (310920 return 0)
+        }
+      }
+    }
+    (310959 return 1)
+  }
+  function _command_line_cast[310963](param arg s[310966] :
+  chpl_c_string[16], arg t[310969]:_any[141](?), arg x[310974] :
+  (310972 call c_ptrConst[46990](?) c_char[562])) : _unknown[42] "command line setting"
+  {
+    if(310987 call _cond_test(310985 call isSyncType t[310969]))
+    {
+      (310979 call compilerError "config variables of sync type are not supported")
+    }
+    if(311001 call _cond_test(310999 call isAtomicType t[310969]))
+    {
+      (310993 call compilerError "config variables of atomic type are not supported")
+    }
+    Try!
+    {
+      {
+        unknown str[311008](311013 call(311010 call . string[244] c"createCopyingBuffer") x[310974])
+        (311016 'end of statement')
+        if(311060 call _cond_test(311056 call == t[310969] string[244]))
+        {
+          (311018 return str[311008])
+        }
+        {
+          if(311050 call _cond_test(311036 call ||(311038 call == t[310969](311042 call regex[156365](?) string[244]))(311044 call == t[310969](311048 call regex[156365](?) bytes[232]))))
+          {
+            (311024 return(311025 'new'(311027 call regex[156365](?) str[311008])))
+          }
+          {
+            (311030 return(311031 call : str[311008] t[310969]))
+          }
+          (397062 'used modules list'(311022 'use' Regex[158724]))
+        }
+      }
+    }
+  }
+  type chpl_main_argument[311085] unknown argc[311071](311073 call int(64)[10] 64) unknown return_value[311078](311080 call int(64)[10] 32)
+  function chpl_convert_args[311087](arg arg[311090] :
+  chpl_main_argument[311085]) : _unknown[42]
+  {
+    unknown local_arg[311095] arg[311090]
+    (311098 'end of statement')
+    function chpl_get_argument_i[311099](ref arg args[311102] :
+    chpl_main_argument[311085], arg i[311108] :
+    (311106 call int(64)[10] 32)) : _unknown[42] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      (311112 call c_ptrConst[46990](?) c_char[562])
+    }
+    unknown array[311118] "no auto destroy"(311133 call chpl__buildArrayRuntimeType(311130 call chpl__ensureDomainExpr(311119 call #(311122 call chpl_build_low_bounded_range 0)(311127 call . local_arg[311095] c"argc"))) string[244])
+    (311136 'end of statement')
+    {
+      unknown _indexOfInterest[311172] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[311173] "expr temp" "temp"
+      (311182 'move' _iterator[311173](311180 call _getIterator(311192 call chpl_direct_counted_range_iter 0(311188 call . arg[311090] c"argc"))))
+      Defer
+      {
+        {
+          (311207 call _freeIterator _iterator[311173])
+        }
+      }
+      { scopeless type
+        (311197 'move' _indexOfInterest[311172](311194 call iteratorIndex _iterator[311173]))
+      }
+      ForLoop[311174]
+      {
+        unknown i[311137] "index var" "insert auto destroy"
+        (311202 'move' i[311137] _indexOfInterest[311172])
+        {
+          Try!
+          {
+            {
+              (311150 call =(311153 call array[311118] i[311137])(311159 call(311156 call . string[244] c"createCopyingBuffer")(311161 call chpl_get_argument_i local_arg[311095](311163 call : i[311137](311167 call int(64)[10] 32)))))
+            }
+          }
+        }
+        label _continueLabel[311177]
+        _indexOfInterest[311172]
+        _iterator[311173]
+      }
+      label _breakLabel[311178]
+    }
+    (311214 return array[311118])
+  }
+  function chpl_get_mli_connection[311218](arg arg[311221] :
+  chpl_main_argument[311085]) : _unknown[42]
+  {
+    unknown local_arg[311226] arg[311221]
+    (311229 'end of statement')
+    function chpl_get_argument_i[311230](ref arg args[311233] :
+    chpl_main_argument[311085], arg i[311239] :
+    (311237 call int(64)[10] 32)) : _unknown[42] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      (311243 call c_ptrConst[46990](?) c_char[562])
+    }
+    unknown flag[311249](311254 call chpl_get_argument_i local_arg[311226](311256 call :(311258 call -(311261 call . local_arg[311226] c"argc") 2)(311266 call int(64)[10] 32)))(311251 call c_ptrConst[46990](?) c_char[562])
+    (311269 'end of statement')
+    if(311299 call _cond_test(311293 call != flag[311249] "--chpl-mli-socket-loc"))
+    {
+      Try!
+      {
+        {
+          (311273 call halt(311274 call +(311276 call + "chpl_get_mli_connection called with unexpected arguments, missing " "'--chpl-mli-socket-loc <connection>', instead got ")(311288 call(311285 call . string[244] c"createCopyingBuffer") flag[311249])))
+        }
+      }
+    }
+    unknown result[311304](311309 call chpl_get_argument_i local_arg[311226](311311 call :(311313 call -(311316 call . local_arg[311226] c"argc") 1)(311321 call int(64)[10] 32)))(311306 call c_ptrConst[46990](?) c_char[562])
+    (311324 'end of statement')
+    (311325 return result[311304])
+  }
+  function chpl_rt_preUserCodeHook[311329]() : void[4] "extern" "local args" "no fn body"
+  {
+  }
+  function chpl_rt_postUserCodeHook[311333]() : void[4] "extern" "local args" "no fn body"
+  {
+  }
+  function allocate_string_literals_buf[311337](arg s[311340] :
+  int(64)[10]) : _unknown[42] "extern" "local args" "no fn body"
+  {
+  }
+  { scopeless type
+    (311344 call c_ptrConst[46990](?) c_char[562])
+  }
+  function deallocate_string_literals_buf[311349]() : _unknown[42] "extern" "local args" "no fn body"
+  {
+  }
+  { scopeless type
+    void[4]
+  }
+  unknown printModuleDeinitOrder[311356] "config" "param" 0
+  (311359 'end of statement')
+  function chpl_addModule[311360](arg moduleName[311363] :
+  chpl_c_string[16], arg deinitFun[311367] :
+  chpl_c_fn_ptr[123]) : _unknown[42] "no return value for void"
+  {
+    (311371 call = chpl_moduleDeinitFuns[77310](311374 'new'(_chpl_manager = unmanaged[183](?))(311378 call chpl_ModuleDeinit[397398](?) moduleName[311363] deinitFun[311367] chpl_moduleDeinitFuns[77310])))
+  }
+  function chpl_deinitModules[311384]() : _unknown[42] "export" "local args" "no return value for void"
+  {
+    function printf[311387](arg fmt[311392] :
+    (311390 call c_ptrConst[46990](?) c_char[562])) : void[4] "extern" "local args" "no fn body"
+    {
+    }
+    function printf[311397](arg fmt[311402] :
+    (311400 call c_ptrConst[46990](?) c_char[562]), arg arg[311408] :
+    (311406 call c_ptrConst[46990](?) c_char[562])) : void[4] "extern" "local args" "no fn body"
+    {
+    }
+    function chpl_execute_module_deinit[311413](arg deinitFun[311416] :
+    chpl_c_fn_ptr[123]) : void[4] "extern" "local args" "no fn body"
+    {
+    }
+    if(311428 call _cond_test printModuleDeinitOrder[311356])
+    {
+      (311422 call printf "Deinitializing Modules:\n")
+    }
+    unknown prev[311434] chpl_moduleDeinitFuns[77310]
+    (311437 'end of statement')
+    {
+      unknown tmp[311487] "temp"
+      (311505 'move' tmp[311487](311503 call _cond_test prev[311434]))
+      WhileDo[311492]
+      {
+        {
+          const curr[311441] "const"(311442 call postfix! prev[311434])
+          (311446 'end of statement')
+          if(311460 call _cond_test printModuleDeinitOrder[311356])
+          {
+            (311448 call printf "  %s\n"(311455 call . curr[311441] c"moduleName"))
+          }
+          (311466 call chpl_execute_module_deinit(311470 call . curr[311441] c"deinitFun"))
+          (311473 call = prev[311434](311479 call . curr[311441] c"prevModule"))
+          (311484 call chpl__delete curr[311441])
+        }
+        label _continueLabel[311490]
+        (311498 'move' tmp[311487](311496 call _cond_test prev[311434]))
+        tmp[311487]
+      }
+      label _breakLabel[311491]
+    }
+    (311508 call = chpl_moduleDeinitFuns[77310] nil[32])
+    (311513 call deallocate_string_literals_buf)
+  }
+  (397059 'used modules list'(310570 'use' ChapelStandard[315387])(310572 'use' CTypes[51217]))
+}

@@ -1,0 +1,166 @@
+AST dump for Atomics after pass inlineFunctions.
+Module use list: ChapelBase MemConsistency ChplConfig currentTask 
+
+{
+  function chpl__init_Atomics[468381]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (599572 return _void[46])
+  }
+  function chpl_atomic_thread_fence[81479](const in arg order[81482]:memory_order[80955]) : void[4] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_fence[81487](const in arg order[81491]:memory_order[80955]) : void[4] "resolved" "no return value for void"
+  {
+    (81497 call chpl_atomic_thread_fence[81479] order[81491])
+    val call_tmp[768684]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (81500 call chpl_rmem_consist_fence[81448] order[81491])
+    (598989 return _void[46])
+  }
+  type atomic_bool[1523086]
+  type atomic_int_least8_t[1523102]
+  type atomic_int_least16_t[1523118]
+  type atomic_int_least32_t[1523134]
+  type atomic_int_least64_t[1523150]
+  type atomic_uint_least8_t[1523166]
+  type atomic_uint_least16_t[1523182]
+  type atomic_uint_least32_t[1523198]
+  type atomic_uint_least64_t[1523214]
+  type atomic__real64[1523230]
+  type atomic__real32[1523246]
+  type atomic_bool[1524038]
+  type atomic_int_least8_t[1524054]
+  type atomic_int_least16_t[1524070]
+  type atomic_int_least32_t[1524086]
+  type atomic_int_least64_t[1524102]
+  type atomic_uint_least8_t[1524118]
+  type atomic_uint_least16_t[1524134]
+  type atomic_uint_least32_t[1524150]
+  type atomic_uint_least64_t[1524166]
+  type atomic__real64[1524182]
+  type atomic__real32[1524198]
+  function chpl_comm_ensure_progress[82041]() : void[4] "extern" "local args" "no fn body" "resolved"
+  {
+  }
+  function atomic bool[83090].init_helper[82078](ref arg this[82080]:atomic bool[83090], const in arg val[82083]:bool[19]) : void[4] "atomic type" "method" "primary method" "resolved" "no return value for void"
+  {
+    ref call_tmp[769096]:atomic_bool[1524038] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[7527097]:atomic_bool[1524038] "dead after last mention" "maybe param" "temp"
+    (7527099 'move' call_tmp[7527097](7527101 '.' this[82080] _v[82072]))
+    (769099 'move' call_tmp[769096] call_tmp[7527097])
+    (82119 call atomic_init[82089] call_tmp[769096] val[82083])
+    (599155 return _void[46])
+  }
+  function atomic bool[83090].init[82124](ref arg this[82126]:atomic bool[83090]) : void[4] "atomic type" "method" "primary method" "resolved" "no return value for void"
+  {
+    val _v[519233]:atomic_bool[1524038] "dead after last mention" "temp"
+    val call_tmp[769101]:atomic_bool[1524038] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    (1525353 'zero variable' _v[519233])
+    (519240 '.=' this[82126] _v[82072] _v[519233])
+    const-val default[82137]:bool[19] "dead at end of block" "const" "insert auto destroy"
+    (1525356 'move' default[82137] 0)
+    (82142 call init_helper[82078] this[82126] default[82137])
+    (599157 return _void[46])
+  }
+  function atomic bool[83090].deinit[82192](ref arg this[82194]:atomic bool[83090]) : void[4] "atomic type" "destructor" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-val tmp[82232]:chpl_localeID_t[306449] "dead after last mention" "const" "temp"
+    const-val call_tmp[769129]:chpl_localeID_t[306449] "dead after last mention" "expr temp" "maybe param" "temp"
+    (769132 'move' call_tmp[769129](82229 '_wide_get_locale' this[82194]))
+    (82233 'move' tmp[82232] call_tmp[769129])
+    ref call_tmp[769136]:atomic_bool[1524038] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[7527087]:atomic_bool[1524038] "dead after last mention" "maybe param" "temp"
+    (7527089 'move' call_tmp[7527087](7527091 '.' this[82194] _v[82072]))
+    (769139 'move' call_tmp[769136] call_tmp[7527087])
+    (82226 call atomic_destroy[82199] call_tmp[769136])
+    (599163 return _void[46])
+  }
+  type atomic bool[83090] val _v[82072]:atomic_bool[1524038]
+  function atomic int(64)[1523042].init_helper[1525569](ref arg this[1525573]:atomic int(64)[1523042], const in arg val[1525580]:int(64)[10]) : void[4] "atomic type" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    ref call_tmp[1525684]:atomic_int_least64_t[1523150] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[7576275]:atomic_int_least64_t[1523150] "dead after last mention" "maybe param" "temp"
+    (7576277 'move' call_tmp[7576275](7576279 '.' this[1525573] _v[1523037]))
+    (1525686 'move' call_tmp[1525684] call_tmp[7576275])
+    (1525693 call atomic_init[1525640] call_tmp[1525684] val[1525580])
+    (1525696 return _void[46])
+  }
+  function atomic int(64)[1523042].init[1525492](ref arg this[1525496]:atomic int(64)[1523042]) : void[4] "atomic type" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    val _formal_type_tmp_[5478035]:int(64)[10] "temp"
+    val valType[1525504]:int(64)[10] "dead after last mention" "temp" "type variable"
+    val _v[1525514]:atomic_int_least64_t[1523150] "dead after last mention" "temp"
+    val call_tmp[1525516]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1525523]:atomic_int_least64_t[1523150] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    (1526218 'zero variable' _v[1525514])
+    (1525533 '.=' this[1525496] _v[1523037] _v[1525514])
+    const-val default[1525540]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    (1526221 'move' default[1525540] 0)
+    (1525550 call init_helper[1525569] this[1525496] default[1525540])
+    (1525554 return _void[46])
+  }
+  function atomic int(64)[1523042].deinit[3933904](ref arg this[3933908]:atomic int(64)[1523042]) : void[4] "atomic type" "destructor" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-val tmp[3933955]:chpl_localeID_t[306449] "dead after last mention" "const" "temp"
+    const-val call_tmp[3933957]:chpl_localeID_t[306449] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3933959 'move' call_tmp[3933957](3933961 '_wide_get_locale' this[3933908]))
+    (3933963 'move' tmp[3933955] call_tmp[3933957])
+    ref call_tmp[3933967]:atomic_int_least64_t[1523150] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[7576385]:atomic_int_least64_t[1523150] "dead after last mention" "maybe param" "temp"
+    (7576387 'move' call_tmp[7576385](7576389 '.' this[3933908] _v[1523037]))
+    (3933969 'move' call_tmp[3933967] call_tmp[7576385])
+    (3933976 call atomic_destroy[3933914] call_tmp[3933967])
+    (3933978 return _void[46])
+  }
+  type atomic int(64)[1523042] val _v[1523037]:atomic_int_least64_t[1523150]
+  function atomic_init[82089](ref arg obj[82094]:atomic_bool[1524038], const in arg val[82098]:bool[19]) : void[4] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no gpu codegen" "resolved" "fn synchronization free"
+  {
+  }
+  function atomic_destroy[82199](ref arg obj[82204]:atomic_bool[1524038]) : void[4] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function atomic_init[1525640](ref arg obj[1525654]:atomic_int_least64_t[1523150], const in arg val[1525661]:int(64)[10]) : void[4] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no gpu codegen" "resolved" "fn synchronization free"
+  {
+  }
+  function atomic_store[1582689](ref arg obj[1582703]:atomic_int_least64_t[1523150], const in arg val[1582710]:int(64)[10], const in arg order[1582712]:memory_order[80955]) : void[4] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_fetch_add[1584617](ref arg obj[1584631]:atomic_int_least64_t[1523150], const in arg operand[1584638]:int(64)[10], const in arg order[1584640]:memory_order[80955]) : int(64)[10] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_fetch_sub[1585761](ref arg obj[1585775]:atomic_int_least64_t[1523150], const in arg operand[1585782]:int(64)[10], const in arg order[1585784]:memory_order[80955]) : int(64)[10] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_load[1776740](const  ref arg obj[1776746]:atomic_bool[1524038], const in arg order[1776748]:memory_order[80955]) : bool[19] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_exchange[1777524](ref arg obj[1777530]:atomic_bool[1524038], const in arg val[1777532]:bool[19], const in arg order[1777534]:memory_order[80955]) : bool[19] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_store[1779222](ref arg obj[1779228]:atomic_bool[1524038], const in arg val[1779230]:bool[19], const in arg order[1779232]:memory_order[80955]) : void[4] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_load[1796829](const  ref arg obj[1796843]:atomic_int_least64_t[1523150], const in arg order[1796845]:memory_order[80955]) : int(64)[10] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_fetch_add[1799522](ref arg obj[1799536]:atomic_int_least64_t[1523150], const in arg operand[1799543]:int(64)[10], const in arg order[1799545]:memory_order[80955]) : int(64)[10] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_fetch_add[1801247](ref arg obj[1801261]:atomic_int_least64_t[1523150], const in arg operand[1801268]:int(64)[10], const in arg order[1801270]:memory_order[80955]) : int(64)[10] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_fetch_sub[1803084](ref arg obj[1803098]:atomic_int_least64_t[1523150], const in arg operand[1803105]:int(64)[10], const in arg order[1803107]:memory_order[80955]) : int(64)[10] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_fetch_sub[1805423](ref arg obj[1805437]:atomic_int_least64_t[1523150], const in arg operand[1805444]:int(64)[10], const in arg order[1805446]:memory_order[80955]) : int(64)[10] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_load[1915801](const  ref arg obj[1915815]:atomic_int_least64_t[1523150], const in arg order[1915817]:memory_order[80955]) : int(64)[10] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_store[3878009](ref arg obj[3878023]:atomic_int_least64_t[1523150], const in arg val[3878030]:int(64)[10], const in arg order[3878032]:memory_order[80955]) : void[4] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved"
+  {
+  }
+  function atomic_destroy[3933914](ref arg obj[3933928]:atomic_int_least64_t[1523150]) : void[4] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+}

@@ -1,0 +1,101 @@
+AST dump for HaltWrappers after pass normalize.
+Module use list: ChapelStandard CTypes 
+
+{
+  function chpl__init_HaltWrappers[468312]() : void[4] "insert line file info" "module init"
+  {
+    (588039 return _void[46])
+  }
+  function initHalt[291](arg s[294]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (299 call halt s[294])
+    (588011 return _void[46])
+  }
+  function iterHalt[303](arg s[306]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (311 call halt s[306])
+    (588013 return _void[46])
+  }
+  function pureVirtualMethodHalt[315]() : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (319 call halt "pure virtual method called")
+    (588015 return _void[46])
+  }
+  function exhaustiveSelectHalt[325](arg s[328]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (333 call halt s[328])
+    (588017 return _void[46])
+  }
+  function zipLengthHalt[337](arg s[340]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (345 call halt s[340])
+    (588019 return _void[46])
+  }
+  function outOfMemoryHalt[349](arg s[352]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    unknown call_tmp[734293] "expr temp" "maybe param" "maybe type" "temp"
+    (734296 'move' call_tmp[734293](365 call + "Out of memory allocating \"" s[352]))
+    unknown call_tmp[734298] "maybe param" "maybe type" "temp"
+    (734301 'move' call_tmp[734298](363 call + call_tmp[734293] "\""))
+    const err[362] "dead at end of block" "const" "insert auto destroy"
+    (642196 'init var' err[362] call_tmp[734298])
+    (375 'end of statement')
+    unknown call_tmp[734305] "expr temp" "maybe param" "maybe type" "temp"
+    (734308 'move' call_tmp[734305](383 call(380 call (partial) localize _mt[203] err[362])))
+    unknown call_tmp[734312] "expr temp" "maybe param" "maybe type" "temp"
+    (734315 'move' call_tmp[734312](389 call(386 call (partial) c_str _mt[203] call_tmp[734305])))
+    (376 'chpl_error' call_tmp[734312])
+    (546355 'end of statement' err[362])
+    (588021 return _void[46])
+    (395946 'used modules list'(359 'use' CTypes[51217] 'only' c_str))
+  }
+  function nilCheckHalt[392](arg s[395]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (400 call halt s[395])
+    (588023 return _void[46])
+  }
+  function boundsCheckHalt[404](arg s[407]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (412 call halt s[407])
+    (588025 return _void[46])
+  }
+  function formalDomainCheckHalt[416](arg s[419]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (424 call halt s[419])
+    (588027 return _void[46])
+  }
+  function localCheckHalt[428](arg s[431]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (436 call halt s[431])
+    (588029 return _void[46])
+  }
+  function safeCastCheckHalt[440](arg s[443]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (448 call halt s[443])
+    (588031 return _void[46])
+  }
+  function divByZeroCheckHalt[452](arg s[455]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (460 call halt s[455])
+    (588033 return _void[46])
+  }
+  function unimplementedFeatureHalt[464](arg feature[467]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    unknown call_tmp[734317] "expr temp" "maybe param" "maybe type" "temp"
+    (734320 'move' call_tmp[734317](476 call + " is currently not supported\n" "  (please feel encouraged to file a GitHub issue requesting this:\n"))
+    unknown call_tmp[734322] "expr temp" "maybe param" "maybe type" "temp"
+    (734325 'move' call_tmp[734322](474 call + call_tmp[734317] "   https://github.com/chapel-lang/chapel/issues)"))
+    (472 call halt feature[467] call_tmp[734322])
+    (588035 return _void[46])
+  }
+  function unimplementedFeatureHalt[489](arg subject[492]:string[244], arg feature[496]:string[244]) : _unknown[42] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    unknown call_tmp[734327] "expr temp" "maybe param" "maybe type" "temp"
+    (734330 'move' call_tmp[734327](509 call + " yet\n" "  (please feel encouraged to file a GitHub issue requesting this:\n"))
+    unknown call_tmp[734332] "expr temp" "maybe param" "maybe type" "temp"
+    (734335 'move' call_tmp[734332](507 call + call_tmp[734327] "   https://github.com/chapel-lang/chapel/issues)"))
+    (501 call halt subject[492] " doesn't support " feature[496] call_tmp[734332])
+    (588037 return _void[46])
+  }
+  (395944 'used modules list'(386992 'use' ChapelStandard[315387]))
+}

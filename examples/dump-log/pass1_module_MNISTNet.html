@@ -1,0 +1,938 @@
+<CHPLTAG="parseAndConvertUast">
+<HTML>
+<HEAD>
+<TITLE> AST for Module MNISTNet after Pass parseAndConvertUast </TITLE>
+<SCRIPT SRC="https://chapel-lang.org/developer/mktree.js" LANGUAGE="JavaScript"></SCRIPT>
+<LINK REL="stylesheet" HREF="https://chapel-lang.org/developer/mktree.css">
+</HEAD><BODY>
+<A HREF=pass2_module_MNISTNet.html>next pass</A>
+<div style="text-align: center;"><big><big><span style="font-weight: bold;">AST for Module MNISTNet after Pass parseAndConvertUast <br><br></span></big></big>
+<div style="text-align: left;">
+
+<B>module 
+<A NAME="SYM386863"><FONT COLOR="red">MNISTNet</FONT><FONT COLOR="grey">[386863]</FONT></A></B>
+<DL><DD>
+ (387104 'use'  <FONT COLOR="red">ChapelStandard</FONT>)</DD></DL>
+<DL><DD>
+ (385123 'use'  <FONT COLOR="red">Tensor</FONT>)</DD></DL>
+<DL><DD>
+ (385126 'use'  <FONT COLOR="red">Network</FONT>)</DD></DL>
+<DL><DD>
+ (385129 'use'  <FONT COLOR="red">Reflection</FONT>)</DD></DL>
+<DL><DD>
+ (385133 'import'  <FONT COLOR="red">TOML</FONT>)</DD></DL>
+<DL><DD>
+ (385136 'import'  <FONT COLOR="red">Time</FONT>)</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A> <i><FONT COLOR="blue">0</FONT></i></DD></DL>
+<DL><DD>
+ (385141 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM385143"><FONT COLOR="red">dtype</FONT><FONT COLOR="grey">[385143]</FONT></A> (385145 <B>call</B>  <A HREF="pass1_module__root.html#SYM13"><FONT COLOR="green">real</FONT><FONT COLOR="grey">[13]</FONT></A> <i><FONT COLOR="blue">32</FONT></i>)</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><B>type <A NAME="SYM386349"><FONT COLOR="green">CNN</FONT><FONT COLOR="grey">[386349]</FONT></A></B><UL>
+ <B>var </B> <A NAME="SYM385152"><FONT COLOR="red">conv1</FONT><FONT COLOR="grey">[385152]</FONT></A> (385154 <B>call</B>  <FONT COLOR="red">_owned</FONT> (385156 <B>call</B>  <A HREF="pass1_module_Network.html#SYM364808"><FONT COLOR="green">Conv2D</FONT><FONT COLOR="grey">[364808]</FONT></A> <FONT COLOR="red">eltType</FONT>)) <B>var </B> <A NAME="SYM385161"><FONT COLOR="red">conv2</FONT><FONT COLOR="grey">[385161]</FONT></A> (385163 <B>call</B>  <FONT COLOR="red">_owned</FONT> (385165 <B>call</B>  <A HREF="pass1_module_Network.html#SYM364808"><FONT COLOR="green">Conv2D</FONT><FONT COLOR="grey">[364808]</FONT></A> <FONT COLOR="red">eltType</FONT>)) <B>var </B> <A NAME="SYM385170"><FONT COLOR="red">dropout1</FONT><FONT COLOR="grey">[385170]</FONT></A> (385172 <B>call</B>  <FONT COLOR="red">_owned</FONT> (385174 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365329"><FONT COLOR="green">Dropout</FONT><FONT COLOR="grey">[365329]</FONT></A> <FONT COLOR="red">eltType</FONT>)) <B>var </B> <A NAME="SYM385179"><FONT COLOR="red">dropout2</FONT><FONT COLOR="grey">[385179]</FONT></A> (385181 <B>call</B>  <FONT COLOR="red">_owned</FONT> (385183 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365329"><FONT COLOR="green">Dropout</FONT><FONT COLOR="grey">[365329]</FONT></A> <FONT COLOR="red">eltType</FONT>)) <B>var </B> <A NAME="SYM385188"><FONT COLOR="red">flatten</FONT><FONT COLOR="grey">[385188]</FONT></A> (385190 <B>call</B>  <FONT COLOR="red">_owned</FONT> (385192 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365034"><FONT COLOR="green">Flatten</FONT><FONT COLOR="grey">[365034]</FONT></A> <FONT COLOR="red">eltType</FONT>)) <B>var </B> <A NAME="SYM385197"><FONT COLOR="red">fc1</FONT><FONT COLOR="grey">[385197]</FONT></A> (385199 <B>call</B>  <FONT COLOR="red">_owned</FONT> (385201 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365043"><FONT COLOR="green">Linear</FONT><FONT COLOR="grey">[365043]</FONT></A> <FONT COLOR="red">eltType</FONT>)) <B>var </B> <A NAME="SYM385206"><FONT COLOR="red">fc2</FONT><FONT COLOR="grey">[385206]</FONT></A> (385208 <B>call</B>  <FONT COLOR="red">_owned</FONT> (385210 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365043"><FONT COLOR="green">Linear</FONT><FONT COLOR="grey">[365043]</FONT></A> <FONT COLOR="red">eltType</FONT>)) <UL CLASS ="mktree">
+<LI><A HREF="pass2_module_MNISTNet.html#SYM385214">&raquo</A>
+<CHPLTAG="FN385214">
+<B>function <A HREF="pass1_module_MNISTNet.html#SYM386349"><FONT COLOR="green">CNN</FONT><FONT COLOR="grey">[386349]</FONT></A> . <A NAME="SYM385214"><FONT COLOR="blue">init</FONT><FONT COLOR="grey">[385214]</FONT></A> ( <A NAME="SYM385222"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[385222]</FONT></A>:<A HREF="pass1_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A>:<A HREF="pass1_module_MNISTNet.html#SYM386349"><FONT COLOR="green">CNN</FONT><FONT COLOR="grey">[386349]</FONT></A> , <A NAME="SYM385219"><FONT COLOR="red">eltType</FONT><FONT COLOR="grey">[385219]</FONT></A>:<A HREF="pass1_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> )  : <A HREF="pass1_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM385222"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[385222]</FONT></A>:<A HREF="pass1_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A>:<A HREF="pass1_module_MNISTNet.html#SYM386349"><FONT COLOR="green">CNN</FONT><FONT COLOR="grey">[386349]</FONT></A> <B>arg</B> <A NAME="SYM385219"><FONT COLOR="red">eltType</FONT><FONT COLOR="grey">[385219]</FONT></A>:<A HREF="pass1_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+ <A HREF="pass1_module_MNISTNet.html#SYM385143"><FONT COLOR="red">dtype</FONT><FONT COLOR="grey">[385143]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (385232 <B>call</B>  (385229 <B>call</B>  <FONT COLOR="red">.</FONT> (385226 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A> <i><FONT COLOR="blue">c"super"</FONT></i>) <i><FONT COLOR="blue">c"init"</FONT></i>) <A HREF="pass1_module_MNISTNet.html#SYM385219"><FONT COLOR="red">eltType</FONT><FONT COLOR="grey">[385219]</FONT></A>)</DD></DL>
+<DL><DD>
+ (385234 <B>call</B>  <FONT COLOR="red">=</FONT> (385239 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A> <i><FONT COLOR="blue">c"conv1"</FONT></i>) (385242 'new'  (385244 <B>call</B>  <A HREF="pass1_module_Network.html#SYM364808"><FONT COLOR="green">Conv2D</FONT><FONT COLOR="grey">[364808]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM385219"><FONT COLOR="red">eltType</FONT><FONT COLOR="grey">[385219]</FONT></A> (channels =  <i><FONT COLOR="blue">1</FONT></i>) (features =  <i><FONT COLOR="blue">32</FONT></i>) (kernel =  <i><FONT COLOR="blue">3</FONT></i>) (stride =  <i><FONT COLOR="blue">1</FONT></i>))))</DD></DL>
+<DL><DD>
+ (385254 <B>call</B>  <FONT COLOR="red">=</FONT> (385259 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A> <i><FONT COLOR="blue">c"conv2"</FONT></i>) (385262 'new'  (385264 <B>call</B>  <A HREF="pass1_module_Network.html#SYM364808"><FONT COLOR="green">Conv2D</FONT><FONT COLOR="grey">[364808]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM385219"><FONT COLOR="red">eltType</FONT><FONT COLOR="grey">[385219]</FONT></A> (channels =  <i><FONT COLOR="blue">32</FONT></i>) (features =  <i><FONT COLOR="blue">64</FONT></i>) (kernel =  <i><FONT COLOR="blue">3</FONT></i>) (stride =  <i><FONT COLOR="blue">1</FONT></i>))))</DD></DL>
+<DL><DD>
+ (385274 <B>call</B>  <FONT COLOR="red">=</FONT> (385279 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A> <i><FONT COLOR="blue">c"dropout1"</FONT></i>) (385282 'new'  (385284 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365329"><FONT COLOR="green">Dropout</FONT><FONT COLOR="grey">[365329]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM385219"><FONT COLOR="red">eltType</FONT><FONT COLOR="grey">[385219]</FONT></A> <i><FONT COLOR="blue">0.25</FONT></i>)))</DD></DL>
+<DL><DD>
+ (385289 <B>call</B>  <FONT COLOR="red">=</FONT> (385294 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A> <i><FONT COLOR="blue">c"dropout2"</FONT></i>) (385297 'new'  (385299 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365329"><FONT COLOR="green">Dropout</FONT><FONT COLOR="grey">[365329]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM385219"><FONT COLOR="red">eltType</FONT><FONT COLOR="grey">[385219]</FONT></A> <i><FONT COLOR="blue">0.5</FONT></i>)))</DD></DL>
+<DL><DD>
+ (385302 <B>call</B>  <FONT COLOR="red">=</FONT> (385305 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A> <i><FONT COLOR="blue">c"flatten"</FONT></i>) (385308 'new'  (385310 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365034"><FONT COLOR="green">Flatten</FONT><FONT COLOR="grey">[365034]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM385219"><FONT COLOR="red">eltType</FONT><FONT COLOR="grey">[385219]</FONT></A>)))</DD></DL>
+<DL><DD>
+ (385312 <B>call</B>  <FONT COLOR="red">=</FONT> (385317 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A> <i><FONT COLOR="blue">c"fc1"</FONT></i>) (385320 'new'  (385322 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365043"><FONT COLOR="green">Linear</FONT><FONT COLOR="grey">[365043]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM385219"><FONT COLOR="red">eltType</FONT><FONT COLOR="grey">[385219]</FONT></A> <i><FONT COLOR="blue">9216</FONT></i> <i><FONT COLOR="blue">128</FONT></i>)))</DD></DL>
+<DL><DD>
+ (385328 <B>call</B>  <FONT COLOR="red">=</FONT> (385333 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A> <i><FONT COLOR="blue">c"fc2"</FONT></i>) (385336 'new'  (385338 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365043"><FONT COLOR="green">Linear</FONT><FONT COLOR="grey">[365043]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM385219"><FONT COLOR="red">eltType</FONT><FONT COLOR="grey">[385219]</FONT></A> <i><FONT COLOR="blue">128</FONT></i> <i><FONT COLOR="blue">10</FONT></i>)))</DD></DL>
+<DL><DD>
+ (385346 <B>call</B>  (385343 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A> <i><FONT COLOR="blue">c"chpl__initThisType"</FONT></i>))</DD></DL>
+<DL><DD>
+ (385347 <B>call</B>  <FONT COLOR="red">=</FONT> (385350 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A> <i><FONT COLOR="blue">c"moduleName"</FONT></i>) <i><FONT COLOR="blue">"cnn"</FONT></i>)</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM385373"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[385373]</FONT></A></DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM385374"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[385374]</FONT></A></DD></DL>
+<DL><DD>
+ (385383 'move'  <A HREF="pass1_module_MNISTNet.html#SYM385374"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[385374]</FONT></A> (385381 <B>call</B>  <FONT COLOR="red">_getIterator</FONT> (385367 <B>call</B>  (385363 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385216"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385216]</FONT></A> <i><FONT COLOR="blue">c"moduleFields"</FONT></i>))))</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (385411 <B>call</B>  <FONT COLOR="red">_freeIterator</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385374"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[385374]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (385388 'move'  <A HREF="pass1_module_MNISTNet.html#SYM385373"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[385373]</FONT></A> (385385 <B>call</B>  <FONT COLOR="red">iteratorIndex</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385374"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[385374]</FONT></A>))</DD></DL>
+}</DD></DL>
+<DL><DD>
+<B>ForLoop<B> {<DL><DD>
+ (385393 <B>call</B>  <FONT COLOR="red">_check_tuple_var_decl</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385373"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[385373]</FONT></A> <i><FONT COLOR="blue">2</FONT></i>)</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM385357"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[385357]</FONT></A></DD></DL>
+<DL><DD>
+ (385400 'move'  <A HREF="pass1_module_MNISTNet.html#SYM385357"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[385357]</FONT></A> (385397 <B>call</B>  <A HREF="pass1_module_MNISTNet.html#SYM385373"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[385373]</FONT></A> <i><FONT COLOR="blue">0</FONT></i>))</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM385359"><FONT COLOR="red">m</FONT><FONT COLOR="grey">[385359]</FONT></A></DD></DL>
+<DL><DD>
+ (385406 'move'  <A HREF="pass1_module_MNISTNet.html#SYM385359"><FONT COLOR="red">m</FONT><FONT COLOR="grey">[385359]</FONT></A> (385403 <B>call</B>  <A HREF="pass1_module_MNISTNet.html#SYM385373"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[385373]</FONT></A> <i><FONT COLOR="blue">1</FONT></i>))</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (385370 <B>call</B>  <FONT COLOR="red">addModule</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385357"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[385357]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM385359"><FONT COLOR="red">m</FONT><FONT COLOR="grey">[385359]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM385378"><FONT COLOR="red">_continueLabel</FONT><FONT COLOR="grey">[385378]</FONT></A></DD></DL>
+<DL><DD>
+ <A HREF="pass1_module_MNISTNet.html#SYM385373"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[385373]</FONT></A></DD></DL>
+<DL><DD>
+ <A HREF="pass1_module_MNISTNet.html#SYM385374"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[385374]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM385379"><FONT COLOR="red">_breakLabel</FONT><FONT COLOR="grey">[385379]</FONT></A></DD></DL>
+}</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN385214">
+</UL>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass2_module_MNISTNet.html#SYM385420">&raquo</A>
+<CHPLTAG="FN385420">
+<B>function <A HREF="pass1_module_MNISTNet.html#SYM386349"><FONT COLOR="green">CNN</FONT><FONT COLOR="grey">[386349]</FONT></A> . <A NAME="SYM385420"><FONT COLOR="blue">forward</FONT><FONT COLOR="grey">[385420]</FONT></A> ( <A NAME="SYM385433"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[385433]</FONT></A>:<A HREF="pass1_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM385422"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385422]</FONT></A>:<A HREF="pass1_module_MNISTNet.html#SYM386349"><FONT COLOR="green">CNN</FONT><FONT COLOR="grey">[386349]</FONT></A> , <A NAME="SYM385430"><FONT COLOR="red">input</FONT><FONT COLOR="grey">[385430]</FONT></A> )  : <A HREF="pass1_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM385433"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[385433]</FONT></A>:<A HREF="pass1_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM385422"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385422]</FONT></A>:<A HREF="pass1_module_MNISTNet.html#SYM386349"><FONT COLOR="green">CNN</FONT><FONT COLOR="grey">[386349]</FONT></A> <B>arg</B> <A NAME="SYM385430"><FONT COLOR="red">input</FONT><FONT COLOR="grey">[385430]</FONT></A><DL><DD>
+{<DL><DD>
+ (385425 <B>call</B>  <FONT COLOR="red">Tensor</FONT> (385426 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385422"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385422]</FONT></A> <i><FONT COLOR="blue">c"eltType"</FONT></i>))</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> (385444 'new'  (385449 <B>call</B>  <A HREF="pass1_module_Time.html#SYM377049"><FONT COLOR="green">stopwatch</FONT><FONT COLOR="grey">[377049]</FONT></A>))</DD></DL>
+<DL><DD>
+ (385451 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+<B>if</B>  (385457 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385453 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"conv1"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385469 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385466 <B>call</B>  (385463 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> (385480 <B>call</B>  (385477 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385422"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385422]</FONT></A> <i><FONT COLOR="blue">c"conv1"</FONT></i>) <A HREF="pass1_module_MNISTNet.html#SYM385430"><FONT COLOR="red">input</FONT><FONT COLOR="grey">[385430]</FONT></A>)</DD></DL>
+<DL><DD>
+ (385483 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+<B>if</B>  (385493 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385490 <B>call</B>  (385487 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385512 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385499 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"conv1 "</FONT></i> (385509 <B>call</B>  (385506 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385524 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385521 <B>call</B>  (385518 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385536 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385530 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"relu"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385548 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385545 <B>call</B>  (385542 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (385553 <B>call</B>  <FONT COLOR="red">=</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> (385560 <B>call</B>  (385557 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> <i><FONT COLOR="blue">c"relu"</FONT></i>)))</DD></DL>
+<DL><DD>
+<B>if</B>  (385568 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385565 <B>call</B>  (385562 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385585 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385574 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"relu "</FONT></i> (385582 <B>call</B>  (385579 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385597 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385594 <B>call</B>  (385591 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385607 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385603 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"conv2"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385619 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385616 <B>call</B>  (385613 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (385624 <B>call</B>  <FONT COLOR="red">=</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> (385631 <B>call</B>  (385628 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385422"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385422]</FONT></A> <i><FONT COLOR="blue">c"conv2"</FONT></i>) <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A>))</DD></DL>
+<DL><DD>
+<B>if</B>  (385640 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385637 <B>call</B>  (385634 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385657 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385646 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"conv2 "</FONT></i> (385654 <B>call</B>  (385651 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385669 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385666 <B>call</B>  (385663 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385679 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385675 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"relu"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385691 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385688 <B>call</B>  (385685 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (385696 <B>call</B>  <FONT COLOR="red">=</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> (385703 <B>call</B>  (385700 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> <i><FONT COLOR="blue">c"relu"</FONT></i>)))</DD></DL>
+<DL><DD>
+<B>if</B>  (385711 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385708 <B>call</B>  (385705 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385726 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385717 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"relu "</FONT></i> (385723 <B>call</B>  (385720 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385738 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385735 <B>call</B>  (385732 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385750 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385744 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"maxpool"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385762 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385759 <B>call</B>  (385756 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (385767 <B>call</B>  <FONT COLOR="red">=</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> (385774 <B>call</B>  (385771 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> <i><FONT COLOR="blue">c"maxPool"</FONT></i>) <i><FONT COLOR="blue">2</FONT></i>))</DD></DL>
+<DL><DD>
+<B>if</B>  (385783 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385780 <B>call</B>  (385777 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385800 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385789 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"maxpool "</FONT></i> (385797 <B>call</B>  (385794 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385812 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385809 <B>call</B>  (385806 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385824 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385818 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"dropout1"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385836 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385833 <B>call</B>  (385830 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (385841 <B>call</B>  <FONT COLOR="red">=</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> (385848 <B>call</B>  (385845 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385422"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385422]</FONT></A> <i><FONT COLOR="blue">c"dropout1"</FONT></i>) <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A>))</DD></DL>
+<DL><DD>
+<B>if</B>  (385857 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385854 <B>call</B>  (385851 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385874 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385863 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"dropout "</FONT></i> (385871 <B>call</B>  (385868 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385886 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385883 <B>call</B>  (385880 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385898 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385892 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"flatten"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385910 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385907 <B>call</B>  (385904 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (385915 <B>call</B>  <FONT COLOR="red">=</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> (385922 <B>call</B>  (385919 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> <i><FONT COLOR="blue">c"flatten"</FONT></i>)))</DD></DL>
+<DL><DD>
+<B>if</B>  (385930 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385927 <B>call</B>  (385924 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385947 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385936 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"flatten "</FONT></i> (385944 <B>call</B>  (385941 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385959 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385956 <B>call</B>  (385953 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385971 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385965 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"fc1"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (385983 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (385980 <B>call</B>  (385977 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (385988 <B>call</B>  <FONT COLOR="red">=</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> (385995 <B>call</B>  (385992 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385422"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385422]</FONT></A> <i><FONT COLOR="blue">c"fc1"</FONT></i>) <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A>))</DD></DL>
+<DL><DD>
+<B>if</B>  (386004 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386001 <B>call</B>  (385998 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386021 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386010 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"fc1 "</FONT></i> (386018 <B>call</B>  (386015 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386033 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386030 <B>call</B>  (386027 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386043 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386039 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"relu"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386055 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386052 <B>call</B>  (386049 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (386060 <B>call</B>  <FONT COLOR="red">=</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> (386067 <B>call</B>  (386064 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> <i><FONT COLOR="blue">c"relu"</FONT></i>)))</DD></DL>
+<DL><DD>
+<B>if</B>  (386075 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386072 <B>call</B>  (386069 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386090 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386081 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"relu "</FONT></i> (386087 <B>call</B>  (386084 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386102 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386099 <B>call</B>  (386096 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386114 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386108 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"dropout2"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386126 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386123 <B>call</B>  (386120 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (386131 <B>call</B>  <FONT COLOR="red">=</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> (386138 <B>call</B>  (386135 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385422"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385422]</FONT></A> <i><FONT COLOR="blue">c"dropout2"</FONT></i>) <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A>))</DD></DL>
+<DL><DD>
+<B>if</B>  (386147 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386144 <B>call</B>  (386141 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386164 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386153 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"dropout2 "</FONT></i> (386161 <B>call</B>  (386158 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386176 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386173 <B>call</B>  (386170 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386188 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386182 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"fc2"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386200 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386197 <B>call</B>  (386194 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (386205 <B>call</B>  <FONT COLOR="red">=</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> (386212 <B>call</B>  (386209 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385422"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385422]</FONT></A> <i><FONT COLOR="blue">c"fc2"</FONT></i>) <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A>))</DD></DL>
+<DL><DD>
+<B>if</B>  (386221 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386218 <B>call</B>  (386215 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386238 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386227 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"fc2 "</FONT></i> (386235 <B>call</B>  (386232 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386250 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386247 <B>call</B>  (386244 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386262 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386259 <B>call</B>  (386256 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386274 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386268 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"softmax"</FONT></i>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386286 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386283 <B>call</B>  (386280 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386292"><FONT COLOR="red">output</FONT><FONT COLOR="grey">[386292]</FONT></A> (386297 <B>call</B>  (386294 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385475"><FONT COLOR="red">x</FONT><FONT COLOR="grey">[385475]</FONT></A> <i><FONT COLOR="blue">c"softmax"</FONT></i>))</DD></DL>
+<DL><DD>
+ (386299 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+<B>if</B>  (386307 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386304 <B>call</B>  (386301 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386324 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386313 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"softmax "</FONT></i> (386321 <B>call</B>  (386318 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>)))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (386336 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385138"><FONT COLOR="red">layerDebug</FONT><FONT COLOR="grey">[385138]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ (386333 <B>call</B>  (386330 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385443"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[385443]</FONT></A> <i><FONT COLOR="blue">c"clear"</FONT></i>))</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (386341 <B>return</B>  <A HREF="pass1_module_MNISTNet.html#SYM386292"><FONT COLOR="red">output</FONT><FONT COLOR="grey">[386292]</FONT></A>)</DD></DL>
+<DL><DD>
+ (386344 'referenced modules list'  <A HREF="pass1_module_chpl__Program.html#SYM377133"><FONT COLOR="red">Time</FONT><FONT COLOR="grey">[377133]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (385436 <B>call</B>  <FONT COLOR="red">Tensor</FONT> (385437 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385422"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[385422]</FONT></A> <i><FONT COLOR="blue">c"eltType"</FONT></i>))</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN385420">
+</UL>
+ <A HREF="pass1_module_Network.html#SYM362662"><FONT COLOR="green">Module</FONT><FONT COLOR="grey">[362662]</FONT></A></UL>
+</UL>
+</DD></DL>
+<DL><DD>
+ <B>type </B> <A NAME="SYM386373"><FONT COLOR="green">CNN</FONT><FONT COLOR="grey">[386373]</FONT></A></DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386352"><FONT COLOR="red">diag</FONT><FONT COLOR="grey">[386352]</FONT></A> <i><FONT COLOR="blue">0</FONT></i></DD></DL>
+<DL><DD>
+ (386355 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+<B>if</B>  (386365 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386352"><FONT COLOR="red">diag</FONT><FONT COLOR="grey">[386352]</FONT></A>)<DL><DD>
+{<DL><DD>
+ (386358 'use'  <FONT COLOR="red">GpuDiagnostics</FONT>)</DD></DL>
+<DL><DD>
+ (386361 <B>call</B>  <FONT COLOR="red">startGpuDiagnostics</FONT>)</DD></DL>
+<DL><DD>
+ (386363 <B>call</B>  <FONT COLOR="red">startVerboseGpu</FONT>)</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386370"><FONT COLOR="red">cnn</FONT><FONT COLOR="grey">[386370]</FONT></A> (386371 'new'  (386375 <B>call</B>  <A HREF="pass1_module_MNISTNet.html#SYM386373"><FONT COLOR="green">CNN</FONT><FONT COLOR="grey">[386373]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM385143"><FONT COLOR="red">dtype</FONT><FONT COLOR="grey">[385143]</FONT></A>))</DD></DL>
+<DL><DD>
+ (386378 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386395"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386395]</FONT></A></DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM386396"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386396]</FONT></A></DD></DL>
+<DL><DD>
+ (386405 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386396"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386396]</FONT></A> (386403 <B>call</B>  <FONT COLOR="red">_getIterator</FONT> (386390 <B>call</B>  (386387 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386370"><FONT COLOR="red">cnn</FONT><FONT COLOR="grey">[386370]</FONT></A> <i><FONT COLOR="blue">c"moduleFields"</FONT></i>))))</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (386433 <B>call</B>  <FONT COLOR="red">_freeIterator</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386396"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386396]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (386410 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386395"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386395]</FONT></A> (386407 <B>call</B>  <FONT COLOR="red">iteratorIndex</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386396"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386396]</FONT></A>))</DD></DL>
+}</DD></DL>
+<DL><DD>
+<B>ForLoop<B> {<DL><DD>
+ (386415 <B>call</B>  <FONT COLOR="red">_check_tuple_var_decl</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386395"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386395]</FONT></A> <i><FONT COLOR="blue">2</FONT></i>)</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM386380"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[386380]</FONT></A></DD></DL>
+<DL><DD>
+ (386422 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386380"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[386380]</FONT></A> (386419 <B>call</B>  <A HREF="pass1_module_MNISTNet.html#SYM386395"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386395]</FONT></A> <i><FONT COLOR="blue">0</FONT></i>))</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM386382"><FONT COLOR="red">m</FONT><FONT COLOR="grey">[386382]</FONT></A></DD></DL>
+<DL><DD>
+ (386428 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386382"><FONT COLOR="red">m</FONT><FONT COLOR="grey">[386382]</FONT></A> (386425 <B>call</B>  <A HREF="pass1_module_MNISTNet.html#SYM386395"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386395]</FONT></A> <i><FONT COLOR="blue">1</FONT></i>))</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (386393 <B>call</B>  <FONT COLOR="red">writeln</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386380"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[386380]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM386400"><FONT COLOR="red">_continueLabel</FONT><FONT COLOR="grey">[386400]</FONT></A></DD></DL>
+<DL><DD>
+ <A HREF="pass1_module_MNISTNet.html#SYM386395"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386395]</FONT></A></DD></DL>
+<DL><DD>
+ <A HREF="pass1_module_MNISTNet.html#SYM386396"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386396]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM386401"><FONT COLOR="red">_breakLabel</FONT><FONT COLOR="grey">[386401]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386441"><FONT COLOR="red">model</FONT><FONT COLOR="grey">[386441]</FONT></A> (386445 <B>call</B>  <FONT COLOR="red">loadModel</FONT> <A HREF="pass1_module__root.html#SYM222"><FONT COLOR="red">module=</FONT><FONT COLOR="grey">[222]</FONT></A> <A HREF="pass1_module_chpl__Program.html#SYM365327"><FONT COLOR="red">Network</FONT><FONT COLOR="grey">[365327]</FONT></A> (specFile =  <i><FONT COLOR="blue">"../scripts/models/cnn/specification.json"</FONT></i>) (weightsFolder =  <i><FONT COLOR="blue">"../scripts/models/cnn/"</FONT></i>) (dtype =  <A HREF="pass1_module_MNISTNet.html#SYM385143"><FONT COLOR="red">dtype</FONT><FONT COLOR="grey">[385143]</FONT></A>))</DD></DL>
+<DL><DD>
+ (386459 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386461"><FONT COLOR="red">testImgSize</FONT><FONT COLOR="grey">[386461]</FONT></A> <i><FONT COLOR="blue">28</FONT></i></DD></DL>
+<DL><DD>
+ (386464 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386466"><FONT COLOR="red">img</FONT><FONT COLOR="grey">[386466]</FONT></A> (386467 <B>call</B>  <FONT COLOR="red">:</FONT> (386473 <B>call</B>  (386470 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_DynamicTensor.html#SYM345586"><FONT COLOR="green">Tensor</FONT><FONT COLOR="grey">[345586]</FONT></A> <i><FONT COLOR="blue">c"load"</FONT></i>) <i><FONT COLOR="blue">"data/datasets/mnist/image_idx_0_7_7.chdata"</FONT></i>) <A HREF="pass1_module_MNISTNet.html#SYM385143"><FONT COLOR="red">dtype</FONT><FONT COLOR="grey">[385143]</FONT></A>)</DD></DL>
+<DL><DD>
+ (386479 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+ (386481 <B>call</B>  <FONT COLOR="red">writeln</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386466"><FONT COLOR="red">img</FONT><FONT COLOR="grey">[386466]</FONT></A>)</DD></DL>
+<DL><DD>
+ (386484 <B>call</B>  <FONT COLOR="red">writeln</FONT> (386489 <B>call</B>  (386486 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386466"><FONT COLOR="red">img</FONT><FONT COLOR="grey">[386466]</FONT></A> <i><FONT COLOR="blue">c"tensorize"</FONT></i>) <i><FONT COLOR="blue">3</FONT></i>))</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386492"><FONT COLOR="red">modelPath</FONT><FONT COLOR="grey">[386492]</FONT></A> <i><FONT COLOR="blue">"data/models/mnist_cnn/"</FONT></i></DD></DL>
+<DL><DD>
+ (386497 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+ (386502 <B>call</B>  (386499 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386370"><FONT COLOR="red">cnn</FONT><FONT COLOR="grey">[386370]</FONT></A> <i><FONT COLOR="blue">c"loadPyTorchDump"</FONT></i>) <A HREF="pass1_module_MNISTNet.html#SYM386492"><FONT COLOR="red">modelPath</FONT><FONT COLOR="grey">[386492]</FONT></A>)</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386505"><FONT COLOR="red">output</FONT><FONT COLOR="grey">[386505]</FONT></A> (386507 <B>call</B>  <A HREF="pass1_module_MNISTNet.html#SYM386370"><FONT COLOR="red">cnn</FONT><FONT COLOR="grey">[386370]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM386466"><FONT COLOR="red">img</FONT><FONT COLOR="grey">[386466]</FONT></A>)</DD></DL>
+<DL><DD>
+ (386510 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+ (386512 <B>call</B>  <FONT COLOR="red">writeln</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386505"><FONT COLOR="red">output</FONT><FONT COLOR="grey">[386505]</FONT></A>)</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386515"><FONT COLOR="red">imageCount</FONT><FONT COLOR="grey">[386515]</FONT></A> <i><FONT COLOR="blue">0</FONT></i></DD></DL>
+<DL><DD>
+ (386518 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386520"><FONT COLOR="red">images</FONT><FONT COLOR="grey">[386520]</FONT></A>(386549 <B>forall</B>  <B>var </B> <A NAME="SYM386521"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[386521]</FONT></A> <B>in</B>  (386527 <B>call</B>  <FONT COLOR="red">chpl_build_bounded_range</FONT> <i><FONT COLOR="blue">0</FONT></i> (386525 <B>call</B>  <FONT COLOR="red">chpl__nudgeHighBound</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386515"><FONT COLOR="red">imageCount</FONT><FONT COLOR="grey">[386515]</FONT></A>)) <B>do</B><DL><DD>
+{<DL><DD>
+ (386529 <B>call</B>  <FONT COLOR="red">:</FONT> (386535 <B>call</B>  (386532 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_DynamicTensor.html#SYM345586"><FONT COLOR="green">Tensor</FONT><FONT COLOR="grey">[345586]</FONT></A> <i><FONT COLOR="blue">c"load"</FONT></i>) (386536 <B>call</B>  <FONT COLOR="red">+</FONT> (386538 <B>call</B>  <FONT COLOR="red">+</FONT> <i><FONT COLOR="blue">"data/datasets/mnist/image_idx_"</FONT></i> (386543 <B>call</B>  <FONT COLOR="red">:</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386521"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[386521]</FONT></A> <A HREF="pass1_module_String.html#SYM244"><FONT COLOR="green">string</FONT><FONT COLOR="grey">[244]</FONT></A>)) <i><FONT COLOR="blue">".chdata"</FONT></i>)) <A HREF="pass1_module_MNISTNet.html#SYM385143"><FONT COLOR="red">dtype</FONT><FONT COLOR="grey">[385143]</FONT></A>)</DD></DL>
+}</DD></DL>
+)</DD></DL>
+<DL><DD>
+ (386552 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386554"><FONT COLOR="red">preds</FONT><FONT COLOR="grey">[386554]</FONT></A> (386562 <B>call</B>  <FONT COLOR="red">chpl__buildArrayRuntimeType</FONT> (386559 <B>call</B>  <FONT COLOR="red">chpl__ensureDomainExpr</FONT> (386556 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386520"><FONT COLOR="red">images</FONT><FONT COLOR="grey">[386520]</FONT></A> <i><FONT COLOR="blue">c"_dom"</FONT></i>)) <A HREF="pass1_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A>)</DD></DL>
+<DL><DD>
+ (386565 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386567"><FONT COLOR="red">numTimes</FONT><FONT COLOR="grey">[386567]</FONT></A> <i><FONT COLOR="blue">1</FONT></i></DD></DL>
+<DL><DD>
+ (386570 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386698"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386698]</FONT></A></DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM386699"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386699]</FONT></A></DD></DL>
+<DL><DD>
+ (386708 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386699"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386699]</FONT></A> (386706 <B>call</B>  <FONT COLOR="red">_getIterator</FONT> (386714 <B>call</B>  <FONT COLOR="red">chpl_direct_range_iter</FONT> <i><FONT COLOR="blue">0</FONT></i> (386712 <B>call</B>  <FONT COLOR="red">chpl__nudgeHighBound</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386567"><FONT COLOR="red">numTimes</FONT><FONT COLOR="grey">[386567]</FONT></A>))))</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (386729 <B>call</B>  <FONT COLOR="red">_freeIterator</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386699"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386699]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (386719 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386698"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386698]</FONT></A> (386716 <B>call</B>  <FONT COLOR="red">iteratorIndex</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386699"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386699]</FONT></A>))</DD></DL>
+}</DD></DL>
+<DL><DD>
+<B>ForLoop<B> {<DL><DD>
+ <B>var </B> <A NAME="SYM386571"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[386571]</FONT></A></DD></DL>
+<DL><DD>
+ (386724 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386571"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[386571]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM386698"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386698]</FONT></A>)</DD></DL>
+<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386581"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[386581]</FONT></A> (386582 'new'  (386587 <B>call</B>  <A HREF="pass1_module_Time.html#SYM377049"><FONT COLOR="green">stopwatch</FONT><FONT COLOR="grey">[377049]</FONT></A>))</DD></DL>
+<DL><DD>
+ (386589 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+ (386594 <B>call</B>  (386591 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386581"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[386581]</FONT></A> <i><FONT COLOR="blue">c"start"</FONT></i>))</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386625"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386625]</FONT></A></DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM386626"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386626]</FONT></A></DD></DL>
+<DL><DD>
+ (386640 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386626"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386626]</FONT></A> (386605 <B>call</B>  <FONT COLOR="red">_build_tuple</FONT> (386635 <B>call</B>  <FONT COLOR="red">_getIterator</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386520"><FONT COLOR="red">images</FONT><FONT COLOR="grey">[386520]</FONT></A>) (386638 <B>call</B>  <FONT COLOR="red">_getIterator</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386554"><FONT COLOR="red">preds</FONT><FONT COLOR="grey">[386554]</FONT></A>)))</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (386668 <B>call</B>  <FONT COLOR="red">_freeIterator</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386626"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386626]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (386645 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386625"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386625]</FONT></A> (386642 <B>call</B>  <FONT COLOR="red">iteratorIndex</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386626"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386626]</FONT></A>))</DD></DL>
+}</DD></DL>
+<DL><DD>
+<B>ForLoop<B> {<DL><DD>
+ (386650 <B>call</B>  <FONT COLOR="red">_check_tuple_var_decl</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386625"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386625]</FONT></A> <i><FONT COLOR="blue">2</FONT></i>)</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM386596"><FONT COLOR="red">img</FONT><FONT COLOR="grey">[386596]</FONT></A></DD></DL>
+<DL><DD>
+ (386657 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386596"><FONT COLOR="red">img</FONT><FONT COLOR="grey">[386596]</FONT></A> (386654 <B>call</B>  <A HREF="pass1_module_MNISTNet.html#SYM386625"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386625]</FONT></A> <i><FONT COLOR="blue">0</FONT></i>))</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM386598"><FONT COLOR="red">pred</FONT><FONT COLOR="grey">[386598]</FONT></A></DD></DL>
+<DL><DD>
+ (386663 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386598"><FONT COLOR="red">pred</FONT><FONT COLOR="grey">[386598]</FONT></A> (386660 <B>call</B>  <A HREF="pass1_module_MNISTNet.html#SYM386625"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386625]</FONT></A> <i><FONT COLOR="blue">1</FONT></i>))</DD></DL>
+<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386608"><FONT COLOR="red">output</FONT><FONT COLOR="grey">[386608]</FONT></A> (386613 <B>call</B>  <A HREF="pass1_module_MNISTNet.html#SYM386441"><FONT COLOR="red">model</FONT><FONT COLOR="grey">[386441]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM386596"><FONT COLOR="red">img</FONT><FONT COLOR="grey">[386596]</FONT></A>) (386610 <B>call</B>  <FONT COLOR="red">Tensor</FONT> <A HREF="pass1_module_MNISTNet.html#SYM385143"><FONT COLOR="red">dtype</FONT><FONT COLOR="grey">[385143]</FONT></A>)</DD></DL>
+<DL><DD>
+ (386616 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+ (386617 <B>call</B>  <FONT COLOR="red">=</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386598"><FONT COLOR="red">pred</FONT><FONT COLOR="grey">[386598]</FONT></A> (386624 <B>call</B>  (386621 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386608"><FONT COLOR="red">output</FONT><FONT COLOR="grey">[386608]</FONT></A> <i><FONT COLOR="blue">c"argmax"</FONT></i>)))</DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM386630"><FONT COLOR="red">_continueLabel</FONT><FONT COLOR="grey">[386630]</FONT></A></DD></DL>
+<DL><DD>
+ <A HREF="pass1_module_MNISTNet.html#SYM386625"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386625]</FONT></A></DD></DL>
+<DL><DD>
+ <A HREF="pass1_module_MNISTNet.html#SYM386626"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386626]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM386631"><FONT COLOR="red">_breakLabel</FONT><FONT COLOR="grey">[386631]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386676"><FONT COLOR="red">tm</FONT><FONT COLOR="grey">[386676]</FONT></A> (386681 <B>call</B>  (386678 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386581"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[386581]</FONT></A> <i><FONT COLOR="blue">c"elapsed"</FONT></i>))</DD></DL>
+<DL><DD>
+ (386683 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+ (386688 <B>call</B>  (386685 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386581"><FONT COLOR="red">st</FONT><FONT COLOR="grey">[386581]</FONT></A> <i><FONT COLOR="blue">c"stop"</FONT></i>))</DD></DL>
+<DL><DD>
+ (386690 <B>call</B>  <FONT COLOR="red">writeln</FONT> <i><FONT COLOR="blue">"Time: "</FONT></i> <A HREF="pass1_module_MNISTNet.html#SYM386676"><FONT COLOR="red">tm</FONT><FONT COLOR="grey">[386676]</FONT></A> <i><FONT COLOR="blue">" seconds."</FONT></i>)</DD></DL>
+<DL><DD>
+ (386584 'referenced modules list'  <A HREF="pass1_module_chpl__Program.html#SYM377133"><FONT COLOR="red">Time</FONT><FONT COLOR="grey">[377133]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM386703"><FONT COLOR="red">_continueLabel</FONT><FONT COLOR="grey">[386703]</FONT></A></DD></DL>
+<DL><DD>
+ <A HREF="pass1_module_MNISTNet.html#SYM386698"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386698]</FONT></A></DD></DL>
+<DL><DD>
+ <A HREF="pass1_module_MNISTNet.html#SYM386699"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386699]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM386704"><FONT COLOR="red">_breakLabel</FONT><FONT COLOR="grey">[386704]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386737"><FONT COLOR="red">printResults</FONT><FONT COLOR="grey">[386737]</FONT></A> <i><FONT COLOR="blue">0</FONT></i></DD></DL>
+<DL><DD>
+ (386740 'end of statement' )</DD></DL>
+}</DD></DL>
+<DL><DD>
+<B>if</B>  (386791 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386737"><FONT COLOR="red">printResults</FONT><FONT COLOR="grey">[386737]</FONT></A>)<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386758"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386758]</FONT></A></DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM386759"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386759]</FONT></A></DD></DL>
+<DL><DD>
+ (386768 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386759"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386759]</FONT></A> (386766 <B>call</B>  <FONT COLOR="red">_getIterator</FONT> (386745 <B>call</B>  <FONT COLOR="red">.</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386520"><FONT COLOR="red">images</FONT><FONT COLOR="grey">[386520]</FONT></A> <i><FONT COLOR="blue">c"_dom"</FONT></i>)))</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (386783 <B>call</B>  <FONT COLOR="red">_freeIterator</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386759"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386759]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (386773 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386758"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386758]</FONT></A> (386770 <B>call</B>  <FONT COLOR="red">iteratorIndex</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386759"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386759]</FONT></A>))</DD></DL>
+}</DD></DL>
+<DL><DD>
+<B>ForLoop<B> {<DL><DD>
+ <B>var </B> <A NAME="SYM386742"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[386742]</FONT></A></DD></DL>
+<DL><DD>
+ (386778 'move'  <A HREF="pass1_module_MNISTNet.html#SYM386742"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[386742]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM386758"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386758]</FONT></A>)</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (386750 <B>call</B>  <FONT COLOR="red">writeln</FONT> (386756 <B>call</B>  <FONT COLOR="red">_build_tuple</FONT> <A HREF="pass1_module_MNISTNet.html#SYM386742"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[386742]</FONT></A> (386754 <B>call</B>  <A HREF="pass1_module_MNISTNet.html#SYM386554"><FONT COLOR="red">preds</FONT><FONT COLOR="grey">[386554]</FONT></A> <A HREF="pass1_module_MNISTNet.html#SYM386742"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[386742]</FONT></A>)))</DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM386763"><FONT COLOR="red">_continueLabel</FONT><FONT COLOR="grey">[386763]</FONT></A></DD></DL>
+<DL><DD>
+ <A HREF="pass1_module_MNISTNet.html#SYM386758"><FONT COLOR="red">_indexOfInterest</FONT><FONT COLOR="grey">[386758]</FONT></A></DD></DL>
+<DL><DD>
+ <A HREF="pass1_module_MNISTNet.html#SYM386759"><FONT COLOR="red">_iterator</FONT><FONT COLOR="grey">[386759]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM386764"><FONT COLOR="red">_breakLabel</FONT><FONT COLOR="grey">[386764]</FONT></A></DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM386796"><FONT COLOR="red">cnn2</FONT><FONT COLOR="grey">[386796]</FONT></A> (386797 'new'  (386799 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365331"><FONT COLOR="green">Sequential</FONT><FONT COLOR="grey">[365331]</FONT></A> <A HREF="pass1_module__root.html#SYM13"><FONT COLOR="green">real</FONT><FONT COLOR="grey">[13]</FONT></A> (386859 <B>call</B>  <FONT COLOR="red">_build_tuple</FONT> (386802 'new'  (386814 'to nilable class from type'  (386804 <B>call</B>  <A HREF="pass1_module_Network.html#SYM364808"><FONT COLOR="green">Conv2D</FONT><FONT COLOR="grey">[364808]</FONT></A> <A HREF="pass1_module__root.html#SYM13"><FONT COLOR="green">real</FONT><FONT COLOR="grey">[13]</FONT></A> (channels =  <i><FONT COLOR="blue">1</FONT></i>) (features =  <i><FONT COLOR="blue">32</FONT></i>) (kernel =  <i><FONT COLOR="blue">3</FONT></i>) (stride =  <i><FONT COLOR="blue">1</FONT></i>)))) (386815 'new'  (386827 'to nilable class from type'  (386817 <B>call</B>  <A HREF="pass1_module_Network.html#SYM364808"><FONT COLOR="green">Conv2D</FONT><FONT COLOR="grey">[364808]</FONT></A> <A HREF="pass1_module__root.html#SYM13"><FONT COLOR="green">real</FONT><FONT COLOR="grey">[13]</FONT></A> (channels =  <i><FONT COLOR="blue">32</FONT></i>) (features =  <i><FONT COLOR="blue">64</FONT></i>) (kernel =  <i><FONT COLOR="blue">3</FONT></i>) (stride =  <i><FONT COLOR="blue">1</FONT></i>)))) (386828 'new'  (386833 'to nilable class from type'  (386830 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365329"><FONT COLOR="green">Dropout</FONT><FONT COLOR="grey">[365329]</FONT></A> <A HREF="pass1_module__root.html#SYM13"><FONT COLOR="green">real</FONT><FONT COLOR="grey">[13]</FONT></A> <i><FONT COLOR="blue">0.25</FONT></i>))) (386834 'new'  (386839 'to nilable class from type'  (386836 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365329"><FONT COLOR="green">Dropout</FONT><FONT COLOR="grey">[365329]</FONT></A> <A HREF="pass1_module__root.html#SYM13"><FONT COLOR="green">real</FONT><FONT COLOR="grey">[13]</FONT></A> <i><FONT COLOR="blue">0.5</FONT></i>))) (386840 'new'  (386844 'to nilable class from type'  (386842 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365034"><FONT COLOR="green">Flatten</FONT><FONT COLOR="grey">[365034]</FONT></A> <A HREF="pass1_module__root.html#SYM13"><FONT COLOR="green">real</FONT><FONT COLOR="grey">[13]</FONT></A>))) (386845 'new'  (386851 'to nilable class from type'  (386847 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365043"><FONT COLOR="green">Linear</FONT><FONT COLOR="grey">[365043]</FONT></A> <A HREF="pass1_module__root.html#SYM13"><FONT COLOR="green">real</FONT><FONT COLOR="grey">[13]</FONT></A> <i><FONT COLOR="blue">9216</FONT></i> <i><FONT COLOR="blue">128</FONT></i>))) (386852 'new'  (386858 'to nilable class from type'  (386854 <B>call</B>  <A HREF="pass1_module_Network.html#SYM365043"><FONT COLOR="green">Linear</FONT><FONT COLOR="grey">[365043]</FONT></A> <A HREF="pass1_module__root.html#SYM13"><FONT COLOR="green">real</FONT><FONT COLOR="grey">[13]</FONT></A> <i><FONT COLOR="blue">128</FONT></i> <i><FONT COLOR="blue">10</FONT></i>))))))</DD></DL>
+<DL><DD>
+ (386862 'end of statement' )</DD></DL>
+}</DD></DL>
+</BODY></HTML>

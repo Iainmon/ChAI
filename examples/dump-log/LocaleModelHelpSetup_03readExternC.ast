@@ -1,0 +1,461 @@
+AST dump for LocaleModelHelpSetup after pass readExternC.
+Module use list: 
+
+{
+  (305016 'use' ChapelLocale)
+  (305019 'use' DefaultRectangular)
+  (305022 'use' ChapelNumLocales)
+  (305028 'use'(305025 call . OS c"POSIX"))
+  (305031 'use' CTypes)
+  { scopeless
+    unknown debugLocaleModel[305034] "config" "param" 0
+    (305037 'end of statement')
+  }
+  function chpl_nodeID[305038]() : _unknown[42] "extern" "local args" "no fn body" "no parens" "fn synchronization free"
+  {
+  }
+  { scopeless type
+    chpl_nodeID_t
+  }
+  type chpl_root_locale_accum[305326] unknown nPUsPhysAcc[305049](305051 call chpl__atomicType int[10]) unknown nPUsPhysAll[305056](305058 call chpl__atomicType int[10]) unknown nPUsLogAcc[305063](305065 call chpl__atomicType int[10]) unknown nPUsLogAll[305070](305072 call chpl__atomicType int[10]) unknown maxTaskPar[305077](305079 call chpl__atomicType int[10]) function chpl_root_locale_accum[305326].init[305083](arg _mt[305087]:_MT[201], arg this[305085]:chpl_root_locale_accum[305326]) : _unknown[42] "method" "primary method"
+  {
+  } function chpl_root_locale_accum[305326].init=[305092](arg _mt[305100]:_MT[201], arg this[305094]:chpl_root_locale_accum[305326], arg other[305097] :
+  chpl_root_locale_accum) : _unknown[42] "method" "primary method"
+  {
+    (305107 call(305104 call . this c"chpl__initThisType"))
+    (305117 call(305114 call .(305111 call . this c"nPUsPhysAcc") c"write")(305125 call(305122 call .(305119 call . other c"nPUsPhysAcc") c"read")))
+    (305135 call(305132 call .(305129 call . this c"nPUsPhysAll") c"write")(305143 call(305140 call .(305137 call . other c"nPUsPhysAll") c"read")))
+    (305153 call(305150 call .(305147 call . this c"nPUsLogAcc") c"write")(305161 call(305158 call .(305155 call . other c"nPUsLogAcc") c"read")))
+    (305171 call(305168 call .(305165 call . this c"nPUsLogAll") c"write")(305179 call(305176 call .(305173 call . other c"nPUsLogAll") c"read")))
+    (305187 call(305184 call .(305181 call . this c"maxTaskPar") c"write")(305195 call(305192 call .(305189 call . other c"maxTaskPar") c"read")))
+  } function chpl_root_locale_accum[305326].accum[305198](arg _mt[305206]:_MT[201], ref arg this[305200]:chpl_root_locale_accum[305326], arg loc[305203] :
+  locale[234]) : _unknown[42] "method" "primary method"
+  {
+    (305213 call(305210 call . nPUsPhysAcc c"add")(305215 call . loc c"nPUsPhysAcc"))
+    (305222 call(305219 call . nPUsPhysAll c"add")(305224 call . loc c"nPUsPhysAll"))
+    (305231 call(305228 call . nPUsLogAcc c"add")(305233 call . loc c"nPUsLogAcc"))
+    (305240 call(305237 call . nPUsLogAll c"add")(305242 call . loc c"nPUsLogAll"))
+    (305249 call(305246 call . maxTaskPar c"add")(305251 call . loc c"maxTaskPar"))
+  } function chpl_root_locale_accum[305326].setRootLocaleValues[305256](arg _mt[305265]:_MT[201], arg this[305258]:chpl_root_locale_accum[305326], arg dst[305262] :
+  (305260 'to borrowed class from unknown' RootLocale)) : _unknown[42] "method" "primary method"
+  {
+    (305268 call =(305271 call . dst c"nPUsPhysAcc")(305278 call(305275 call . nPUsPhysAcc c"read")))
+    (305279 call =(305282 call . dst c"nPUsPhysAll")(305289 call(305286 call . nPUsPhysAll c"read")))
+    (305290 call =(305293 call . dst c"nPUsLogAcc")(305300 call(305297 call . nPUsLogAcc c"read")))
+    (305301 call =(305304 call . dst c"nPUsLogAll")(305311 call(305308 call . nPUsLogAll c"read")))
+    (305312 call =(305315 call . dst c"maxTaskPar")(305322 call(305319 call . maxTaskPar c"read")))
+  }
+  function helpSetupRootLocaleFlat[305328](arg dst[305332] :
+  (305330 'to borrowed class from unknown' RootLocale)) : _unknown[42]
+  {
+    { scopeless
+      unknown root_accum[305337] chpl_root_locale_accum
+      (305340 'end of statement')
+    }
+    Forall[305394] {
+      induction variables:
+        
+        unknown locIdx[305341] "index var" "insert auto destroy"
+      iterated expressions:
+        (305349 call(305346 call . dst c"chpl_initOnLocales"))
+      shadow variables:
+        root_accum[305352] 'ref' intent
+          init block
+          {
+          }
+          deinit block
+          {
+          }
+      other variables
+        forall body
+      {
+        { scopeless
+          const node[305358] "const"(305359 'new'(305361 call locale[234](305362 'new'(_chpl_manager = unmanaged[183](?))(305366 call LocaleModel(305367 'new'(305369 call locale[234] dst))))))
+          (305372 'end of statement')
+        }
+        (305373 call =(305381 call(305378 call . dst c"myLocales") locIdx) node)
+        (305390 call(305387 call . root_accum c"accum") node)
+      }
+    }
+    (305403 call(305400 call . root_accum c"setRootLocaleValues") dst)
+  }
+  function helpSetupRootLocaleNUMA[305407](arg dst[305411] :
+  (305409 'to borrowed class from unknown' RootLocale)) : _unknown[42]
+  {
+    function chpl_task_setSubloc[305415](arg subloc[305420] :
+    (305418 call int[10] 32)) : void[4] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless
+      unknown root_accum[305426] chpl_root_locale_accum
+      (305429 'end of statement')
+    }
+    Forall[305480] {
+      induction variables:
+        
+        unknown locIdx[305430] "index var" "insert auto destroy"
+      iterated expressions:
+        (305436 call(305433 call . dst c"chpl_initOnLocales"))
+      shadow variables:
+        root_accum[305439] 'ref' intent
+          init block
+          {
+          }
+          deinit block
+          {
+          }
+      other variables
+        forall body
+      {
+        (305445 call chpl_task_setSubloc c_sublocid_any)
+        { scopeless
+          const node[305448] "const"(305449 'new'(305451 call locale[234](305452 'new'(_chpl_manager = unmanaged[183](?))(305456 call LocaleModel(305457 'new'(305459 call locale[234] dst))))))
+          (305462 'end of statement')
+        }
+        (305463 call =(305469 call(305466 call . dst c"myLocales") locIdx) node)
+        (305476 call(305473 call . root_accum c"accum") node)
+      }
+    }
+    (305487 call(305484 call . root_accum c"setRootLocaleValues") dst)
+  }
+  function helpSetupRootLocaleAPU[305491](arg dst[305495] :
+  (305493 'to borrowed class from unknown' RootLocale)) : _unknown[42]
+  {
+    function chpl_task_setSubloc[305499](arg subloc[305504] :
+    (305502 call int[10] 32)) : void[4] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless
+      unknown root_accum[305510] chpl_root_locale_accum
+      (305513 'end of statement')
+    }
+    Forall[305564] {
+      induction variables:
+        
+        unknown locIdx[305514] "index var" "insert auto destroy"
+      iterated expressions:
+        (305520 call(305517 call . dst c"chpl_initOnLocales"))
+      shadow variables:
+        root_accum[305523] 'ref' intent
+          init block
+          {
+          }
+          deinit block
+          {
+          }
+      other variables
+        forall body
+      {
+        (305529 call chpl_task_setSubloc c_sublocid_any)
+        { scopeless
+          const node[305532] "const"(305533 'new'(305535 call locale[234](305536 'new'(_chpl_manager = unmanaged[183](?))(305540 call LocaleModel(305541 'new'(305543 call locale[234] dst))))))
+          (305546 'end of statement')
+        }
+        (305547 call =(305553 call(305550 call . dst c"myLocales") locIdx) node)
+        (305560 call(305557 call . root_accum c"accum") node)
+      }
+    }
+    (305571 call(305568 call . root_accum c"setRootLocaleValues") dst)
+    (305577 call(305574 call . here c"runningTaskCntSet") 0)
+  }
+  function helpSetupRootLocaleGPU[305581](arg dst[305585] :
+  (305583 'to borrowed class from unknown' RootLocale)) : _unknown[42]
+  {
+    function chpl_task_setSubloc[305589](arg subloc[305594] :
+    (305592 call int[10] 32)) : void[4] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless
+      unknown root_accum[305600] chpl_root_locale_accum
+      (305603 'end of statement')
+    }
+    Forall[305654] {
+      induction variables:
+        
+        unknown locIdx[305604] "index var" "insert auto destroy"
+      iterated expressions:
+        (305610 call(305607 call . dst c"chpl_initOnLocales"))
+      shadow variables:
+        root_accum[305613] 'ref' intent
+          init block
+          {
+          }
+          deinit block
+          {
+          }
+      other variables
+        forall body
+      {
+        (305619 call chpl_task_setSubloc c_sublocid_none)
+        { scopeless
+          const node[305622] "const"(305623 'new'(305625 call locale[234](305626 'new'(_chpl_manager = unmanaged[183](?))(305630 call LocaleModel(305631 'new'(305633 call locale[234] dst))))))
+          (305636 'end of statement')
+        }
+        (305637 call =(305643 call(305640 call . dst c"myLocales") locIdx) node)
+        (305650 call(305647 call . root_accum c"accum") node)
+      }
+    }
+    (305661 call(305658 call . root_accum c"setRootLocaleValues") dst)
+  }
+  function localSpawn[305665]() : _unknown[42] "inline" "private"
+  {
+    (305669 'use' ChplConfig)
+    if(305745 call _cond_test(305739 call == CHPL_COMM "gasnet"))
+    {
+      if(305734 call _cond_test(305728 call == CHPL_COMM_SUBSTRATE "udp"))
+      {
+        Try!
+        {
+          {
+            { scopeless
+              const spawnfn[305675] "const"(305677 call getenv "GASNET_SPAWNFN")
+              (305682 'end of statement')
+            }
+            { scopeless
+              const spawnfnS[305684] "const"(305689 call(305686 call . string[244] c"createBorrowingBuffer") spawnfn)
+              (305692 'end of statement')
+            }
+            if(305708 call _cond_test(305696 call &&(305698 call != spawnfn nil[32])(305702 call == spawnfnS "L")))
+            {
+              (305694 return 1)
+            }
+          }
+        }
+      }
+      {
+        { scopeless
+          if(305724 call _cond_test(305718 call == CHPL_COMM_SUBSTRATE "smp"))
+          {
+            (305716 return 1)
+          }
+        }
+      }
+    }
+    (305749 return 0)
+  }
+  function getNodeName[305753]() : _unknown[42] "inline" "private"
+  {
+    function chpl_nodeName[305756]() : _unknown[42] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless type
+      (305759 call c_ptrConst c_char)
+    }
+    { scopeless
+      unknown _node_name[305765] string[244]
+      (305768 'end of statement')
+    }
+    Try!
+    {
+      {
+        (305770 call = _node_name(305777 call(305774 call . string[244] c"createCopyingBuffer")(305779 call chpl_nodeName)))
+      }
+    }
+    { scopeless
+      const _node_id[305784] "const"(305785 call :(305787 call : chpl_nodeID int[10]) string[244])
+      (305793 'end of statement')
+    }
+    (305794 return(305807 IfExpr (305796 call localSpawn) then
+    { scopeless
+      (305797 call +(305799 call + _node_name "-") _node_id)
+    } else
+    { scopeless
+      _node_name
+    } ))
+  }
+  function helpSetupLocaleFlat[305812](arg dst[305816] :
+  (305814 'to borrowed class from unknown' LocaleModel), out arg local_name[305820] :
+  string[244]) : _unknown[42]
+  {
+    (305824 call = local_name(305828 call getNodeName))
+    function chpl_topo_getNumCPUsPhysical[305829](arg accessible_only[305832] :
+    bool) : _unknown[42] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (305839 call =(305842 call . dst c"nPUsPhysAcc")(305846 call chpl_topo_getNumCPUsPhysical 1))
+    (305848 call =(305851 call . dst c"nPUsPhysAll")(305855 call chpl_topo_getNumCPUsPhysical 0))
+    function chpl_topo_getNumCPUsLogical[305857](arg accessible_only[305860] :
+    bool) : _unknown[42] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (305867 call =(305870 call . dst c"nPUsLogAcc")(305874 call chpl_topo_getNumCPUsLogical 1))
+    (305876 call =(305879 call . dst c"nPUsLogAll")(305883 call chpl_topo_getNumCPUsLogical 0))
+    function chpl_task_getMaxPar[305885]() : _unknown[42] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless type
+      (305888 call uint[86] 32)
+    }
+    (305893 call =(305896 call . dst c"maxTaskPar")(305900 call chpl_task_getMaxPar))
+  }
+  function helpSetupLocaleNUMA[305903](arg dst[305907] :
+  (305905 'to borrowed class from unknown' LocaleModel), out arg local_name[305911] :
+  string[244], arg numSublocales[305914]:_any[141](?), arg NumaDomain[305916]:_any[141](?)) : _unknown[42]
+  {
+    (305920 call helpSetupLocaleFlat dst local_name)
+    function chpl_task_getMaxPar[305923]() : _unknown[42] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless type
+      (305926 call uint[86] 32)
+    }
+    if(306128 call _cond_test(306124 call >= numSublocales 1))
+    {
+      { scopeless
+        const nPUsPhysAccPerSubloc[305933] "const"(305934 call /(305937 call . dst c"nPUsPhysAcc") numSublocales)
+        (305942 'end of statement')
+      }
+      { scopeless
+        const nPUsPhysAllPerSubloc[305944] "const"(305945 call /(305948 call . dst c"nPUsPhysAll") numSublocales)
+        (305953 'end of statement')
+      }
+      { scopeless
+        const nPUsLogAccPerSubloc[305955] "const"(305956 call /(305959 call . dst c"nPUsLogAcc") numSublocales)
+        (305964 'end of statement')
+      }
+      { scopeless
+        const nPUsLogAllPerSubloc[305966] "const"(305967 call /(305970 call . dst c"nPUsLogAll") numSublocales)
+        (305975 'end of statement')
+      }
+      { scopeless
+        const maxTaskParPerSubloc[305977] "const"(305978 call /(305981 call chpl_task_getMaxPar) numSublocales)
+        (305984 'end of statement')
+      }
+      { scopeless
+        const origSubloc[305986] "const"(305988 call chpl_task_getRequestedSubloc)
+        (305990 'end of statement')
+      }
+      {
+        unknown _indexOfInterest[306089] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[306090] "expr temp" "temp"
+        (306099 'move' _iterator[306090](306097 call _getIterator(305996 call . dst c"childSpace")))
+        Defer
+        {
+          {
+            (306114 call _freeIterator _iterator[306090])
+          }
+        }
+        { scopeless type
+          (306104 'move' _indexOfInterest[306089](306101 call iteratorIndex _iterator[306090]))
+        }
+        ForLoop[306091]
+        {
+          unknown i[305991] "index var" "insert auto destroy"
+          (306109 'move' i[305991] _indexOfInterest[306089])
+          {
+            (306001 call chpl_task_setSubloc(306002 call : i chpl_sublocID_t))
+            (306006 call =(306014 call(306011 call . dst c"childLocales") i)(306016 'new'(_chpl_manager = unmanaged[183](?))(306020 call NumaDomain(306021 call : i chpl_sublocID_t)(306025 'new'(306027 call locale[234] dst)))))
+            (306029 call =(306037 call .(306035 call(306032 call . dst c"childLocales") i) c"nPUsPhysAcc") nPUsPhysAccPerSubloc)
+            (306041 call =(306049 call .(306047 call(306044 call . dst c"childLocales") i) c"nPUsPhysAll") nPUsPhysAllPerSubloc)
+            (306053 call =(306061 call .(306059 call(306056 call . dst c"childLocales") i) c"nPUsLogAcc") nPUsLogAccPerSubloc)
+            (306065 call =(306073 call .(306071 call(306068 call . dst c"childLocales") i) c"nPUsLogAll") nPUsLogAllPerSubloc)
+            (306077 call =(306085 call .(306083 call(306080 call . dst c"childLocales") i) c"maxTaskPar") maxTaskParPerSubloc)
+          }
+          label _continueLabel[306094]
+          _indexOfInterest[306089]
+          _iterator[306090]
+        }
+        label _breakLabel[306095]
+      }
+      (306122 call chpl_task_setSubloc origSubloc)
+    }
+  }
+  function helpSetupLocaleAPU[306134](arg dst[306138] :
+  (306136 'to borrowed class from unknown' LocaleModel), out arg local_name[306142] :
+  string[244], out arg numSublocales[306145]:_any[141](?), arg CPULocale[306147]:_any[141](?), arg GPULocale[306149]:_any[141](?)) : _unknown[42]
+  {
+    (306153 call helpSetupLocaleFlat dst local_name)
+    function chpl_task_getMaxPar[306156]() : _unknown[42] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless type
+      (306159 call uint[86] 32)
+    }
+    (306164 call = numSublocales 2)
+    { scopeless
+      const origSubloc[306169] "const"(306171 call chpl_task_getRequestedSubloc)
+      (306173 'end of statement')
+    }
+    (306175 call chpl_task_setSubloc(306176 call : 0 chpl_sublocID_t))
+    (306180 call =(306185 call . dst c"CPU")(306188 'new'(_chpl_manager = unmanaged[183](?))(306192 call CPULocale(306193 call : 0 chpl_sublocID_t) dst)))
+    (306199 call chpl_task_setSubloc(306200 call : 1 chpl_sublocID_t))
+    (306204 call =(306209 call . dst c"GPU")(306212 'new'(_chpl_manager = unmanaged[183](?))(306216 call GPULocale(306217 call : 1 chpl_sublocID_t) dst)))
+    (306223 call chpl_task_setSubloc origSubloc)
+  }
+  function helpSetupLocaleGPU[306227](arg dst[306231] :
+  (306229 'to borrowed class from unknown' LocaleModel), out arg local_name[306235] :
+  string[244], arg numSublocales[306239] :
+  int[10], arg GPULocale[306242]:_any[141](?)) : _unknown[42]
+  {
+    (306245 call = local_name(306249 call getNodeName))
+    function chpl_topo_getNumCPUsPhysical[306250](arg accessible_only[306253] :
+    bool) : _unknown[42] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (306260 call =(306263 call . dst c"nPUsPhysAcc")(306267 call chpl_topo_getNumCPUsPhysical 1))
+    (306269 call =(306272 call . dst c"nPUsPhysAll")(306276 call chpl_topo_getNumCPUsPhysical 0))
+    function chpl_topo_getNumCPUsLogical[306278](arg accessible_only[306281] :
+    bool) : _unknown[42] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (306288 call =(306291 call . dst c"nPUsLogAcc")(306295 call chpl_topo_getNumCPUsLogical 1))
+    (306297 call =(306300 call . dst c"nPUsLogAll")(306304 call chpl_topo_getNumCPUsLogical 0))
+    function chpl_task_getMaxPar[306306]() : _unknown[42] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless type
+      (306309 call uint[86] 32)
+    }
+    (306314 call =(306317 call . dst c"maxTaskPar")(306321 call chpl_task_getMaxPar))
+    { scopeless
+      unknown childSpace[306323](306332 call chpl__buildDomainExpr(306325 call #(306328 call chpl_build_low_bounded_range 0) numSublocales) 0)
+      (306336 'end of statement')
+    }
+    { scopeless
+      const origSubloc[306338] "const"(306340 call chpl_task_getRequestedSubloc)
+      (306342 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[306402] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[306403] "expr temp" "temp"
+      (306412 'move' _iterator[306403](306410 call _getIterator childSpace))
+      Defer
+      {
+        {
+          (306427 call _freeIterator _iterator[306403])
+        }
+      }
+      { scopeless type
+        (306417 'move' _indexOfInterest[306402](306414 call iteratorIndex _iterator[306403]))
+      }
+      ForLoop[306404]
+      {
+        unknown i[306343] "index var" "insert auto destroy"
+        (306422 'move' i[306343] _indexOfInterest[306402])
+        {
+          (306348 call chpl_task_setSubloc(306349 call : i chpl_sublocID_t))
+          (306353 call =(306359 call(306356 call . dst c"childLocales") i)(306361 'new'(_chpl_manager = unmanaged[183](?))(306365 call GPULocale(306366 call : i chpl_sublocID_t) dst)))
+          (306371 call =(306379 call .(306377 call(306374 call . dst c"childLocales") i) c"maxTaskPar") 1)
+          (306383 call =(306391 call(306388 call . dst c"gpuSublocales") i)(306393 'new'(306395 call locale[234](306400 call(306397 call . dst c"childLocales") i))))
+        }
+        label _continueLabel[306407]
+        _indexOfInterest[306402]
+        _iterator[306403]
+      }
+      label _breakLabel[306408]
+    }
+    (306435 call chpl_task_setSubloc origSubloc)
+  }
+}

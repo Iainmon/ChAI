@@ -1,0 +1,1301 @@
+AST dump for Map after pass flattenClasses.
+Module use list: ChapelStandard ChapelLocks ChapelHashtable HaltWrappers IO FormattedIO Reflection 
+
+{
+  unknown _lockType[348724] "type variable" chpl_LocalSpinlock[85418]
+  function _LockWrapper[348767].lock[348738](arg _mt[348742]:_MT[201], arg this[348740]:_LockWrapper[348767]) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (348749 call(348746 call .(410672 call . this[348740] c"lockVar") c"lock"))
+  }
+  function _LockWrapper[348767].unlock[348752](arg _mt[348756]:_MT[201], arg this[348754]:_LockWrapper[348767]) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (348763 call(348760 call .(410677 call . this[348754] c"lockVar") c"unlock"))
+  }
+  type _LockWrapper[348767] val super[397908]:RootClass[236] "super class" unknown lockVar[348732](348733 'new'(348735 call _lockType[348724]))
+  type _LockWrapper[461512](?)
+  function _checkKeyAndValType[348769](arg K[348771]:_any[141](?), arg V[348773]:_any[141](?)) : _unknown[42] "private" "no return value for void"
+  {
+    if(348823 call _cond_test(348821 call isGenericType K[348771]))
+    {
+      (348778 call compilerWarning "creating a map with key type "(348782 call : K[348771] string[244]) 2)
+      if(348810 call _cond_test(348797 call &&(348800 call isClassType K[348771])(348802 call !(348805 call isGenericType(348806 call : K[348771] borrowed[174](?))))))
+      {
+        (348789 call compilerWarning "which is a class type with generic " "management" 2)
+      }
+      (348815 call compilerError "map key type cannot currently be generic" 2)
+    }
+    if(348870 call _cond_test(348868 call isGenericType V[348773]))
+    {
+      (348829 call compilerWarning "creating a map with value type "(348833 call : V[348773] string[244]) 2)
+      if(348857 call _cond_test(348844 call &&(348847 call isClassType V[348773])(348849 call !(348852 call isGenericType(348853 call : V[348773] borrowed[174](?))))))
+      {
+        (348840 call compilerWarning "which is a class type with generic " "management" 2)
+      }
+      (348862 call compilerError "map value type cannot currently be generic" 2)
+    }
+  }
+  unknown warnForMapParsafeMismatch[348877] "config" "param" 1
+  (348880 'end of statement')
+  function map[352283](?)._enter[348919](arg _mt[348923]:_MT[201], arg this[348921]:map[352283](?)) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    if(348933 call _cond_test(461518 call . this[348921] c"parSafe"))
+    {
+      (348930 call(348927 call .(410682 call . this[348921] c"_lock") c"lock"))
+    }
+  }
+  function map[352283](?)._leave[348940](arg _mt[348944]:_MT[201], arg this[348942]:map[352283](?)) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    if(348954 call _cond_test(461523 call . this[348942] c"parSafe"))
+    {
+      (348951 call(348948 call .(410687 call . this[348942] c"_lock") c"unlock"))
+    }
+  }
+  function map[352283](?).init[348961](arg _mt[348977]:_MT[201], arg this[348963]:map[352283](?), arg keyType[348965]:_any[141](?), arg valType[348967]:_any[141](?), arg resizeThreshold[348970] =
+  defaultHashTableResizeThreshold[209951], arg initialCapacity[348974] =
+  16) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (348981 call _checkKeyAndValType keyType[348965] valType[348967])
+    (348984 call =(348987 call . this[348963] c"keyType") keyType[348965])
+    (348991 call =(348994 call . this[348963] c"valType") valType[348967])
+    (348998 call =(349001 call . this[348963] c"parSafe") 0)
+    if(349039 call _cond_test(349029 call ||(349031 call <= resizeThreshold[348970] 0)(349035 call >= resizeThreshold[348970] 1)))
+    {
+      (349007 call warning "'resizeThreshold' must be between 0 and 1." " 'resizeThreshold' will be set to 0.5")
+      (349014 call =(349017 call . this[348963] c"resizeThreshold") 0.5)
+    }
+    {
+      (349022 call =(349025 call . this[348963] c"resizeThreshold") resizeThreshold[348970])
+    }
+    (349043 call =(461536 call . this[348963] c"table")(349046 'new'(349048 call chpl__hashtable[267644](?) keyType[348965] valType[348967](349052 call . this[348963] c"resizeThreshold") initialCapacity[348974])))
+  }
+  function map[352283](?).init[349058](arg _mt[349076]:_MT[201], arg this[349060]:map[352283](?), arg keyType[349062]:_any[141](?), arg valType[349064]:_any[141](?), param arg parSafe[349066]:_any[141](?), arg resizeThreshold[349069] =
+  defaultHashTableResizeThreshold[209951], arg initialCapacity[349073] =
+  16) : _unknown[42] "method" "primary method" "@unstable" "no return value for void"
+  {
+    (349080 call _checkKeyAndValType keyType[349062] valType[349064])
+    (349083 call =(349086 call . this[349060] c"keyType") keyType[349062])
+    (349090 call =(349093 call . this[349060] c"valType") valType[349064])
+    (349097 call =(349100 call . this[349060] c"parSafe") parSafe[349066])
+    if(349134 call _cond_test(349124 call ||(349126 call <= resizeThreshold[349069] 0)(349130 call >= resizeThreshold[349069] 1)))
+    {
+      (349106 call warning "'resizeThreshold' must be between 0 and 1." " 'resizeThreshold' will be set to 0.5")
+      (349109 call =(349112 call . this[349060] c"resizeThreshold") 0.5)
+    }
+    {
+      (349117 call =(349120 call . this[349060] c"resizeThreshold") resizeThreshold[349069])
+    }
+    (349138 call =(461554 call . this[349060] c"table")(349141 'new'(349143 call chpl__hashtable[267644](?) keyType[349062] valType[349064](349147 call . this[349060] c"resizeThreshold") initialCapacity[349073])))
+  }
+  function map[352283](?).init=[349153](arg _mt[349168]:_MT[201], arg this[349155]:map[352283](?), ref arg other[349165] :
+  (349158 call map[352283](?) unknown kt[349159] unknown vt[349161] unknown ps[349163])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (349177 call =(349180 call . this[349155] c"keyType")(349197 IfExpr (349183 call !=(349187 call .(349186 'typeof' this[349155]) c"keyType") ?[227]) then
+    { scopeless
+      (349193 call .(349192 'typeof' this[349155]) c"keyType")
+    } else
+    { scopeless
+      kt[349159]
+    } ))
+    (349200 call =(349203 call . this[349155] c"valType")(349220 IfExpr (349206 call !=(349210 call .(349209 'typeof' this[349155]) c"valType") ?[227]) then
+    { scopeless
+      (349216 call .(349215 'typeof' this[349155]) c"valType")
+    } else
+    { scopeless
+      vt[349161]
+    } ))
+    (349223 call =(349226 call . this[349155] c"parSafe")(349243 IfExpr (349229 call !=(349233 call .(349232 'typeof' this[349155]) c"parSafe") ?[227]) then
+    { scopeless
+      (349239 call .(349238 'typeof' this[349155]) c"parSafe")
+    } else
+    { scopeless
+      ps[349163]
+    } ))
+    if(349276 call _cond_test(349263 call &&(349265 call !=(349268 call . this[349155] c"parSafe")(349272 call . other[349165] c"parSafe")) warnForMapParsafeMismatch[348877]))
+    {
+      (349248 call compilerWarning(349249 call +(349251 call +(349253 call + "initializing between two maps with different " "parSafe settings\n") "Note: this warning can be ") "silenced with '-swarnForMapParsafeMismatch=false'"))
+    }
+    (349280 call =(349283 call . this[349155] c"resizeThreshold")(349287 call . other[349165] c"resizeThreshold"))
+    (349290 call =(349293 call . this[349155] c"table")(349296 'new'(349298 call chpl__hashtable[267644](?)(461577 call . this[349155] c"keyType")(461582 call . this[349155] c"valType")(461587 call . this[349155] c"resizeThreshold"))))
+    (349306 call(349303 call . this[349155] c"chpl__initThisType"))
+    if(349530 call _cond_test(349526 call !=(461631 call . this[349155] c"keyType") kt[349159]))
+    {
+      (349309 call compilerError "cannot initialize "(349311 call :(349314 'typeof' this[349155]) string[244]) " from "(349317 call :(349320 'typeof' other[349165]) string[244]) " due to key type mismatch")
+    }
+    {
+      if(349521 call _cond_test(349517 call !=(461625 call . this[349155] c"valType") vt[349161]))
+      {
+        (349327 call compilerError "cannot initialize "(349329 call :(349332 'typeof' this[349155]) string[244]) " from "(349335 call :(349338 'typeof' other[349165]) string[244]) " due to value type mismatch")
+      }
+      {
+        if(349512 call _cond_test(349507 call !(349510 call isCopyableType(461620 call . this[349155] c"keyType"))))
+        {
+          (349345 call compilerError "cannot initialize "(349347 call :(349350 'typeof' this[349155]) string[244]) " from "(349353 call :(349356 'typeof' other[349165]) string[244]) " because key type "(349361 call :(461598 call . this[349155] c"keyType") string[244]) " is not copyable")
+        }
+        {
+          if(349503 call _cond_test(349498 call !(349501 call isCopyableType(461615 call . this[349155] c"valType"))))
+          {
+            (349370 call compilerError "cannot initialize "(349372 call :(349375 'typeof' this[349155]) string[244]) " from "(349378 call :(349381 'typeof' other[349165]) string[244]) " because value type "(349386 call :(461605 call . this[349155] c"valType") string[244]) " is not copyable")
+          }
+          {
+            {
+              unknown _indexOfInterest[349466] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[349467] "expr temp" "temp"
+              (349476 'move' _iterator[349467](349474 call _getIterator(349400 call(349397 call . other[349165] c"keys"))))
+              Defer
+              {
+                {
+                  (349491 call _freeIterator _iterator[349467])
+                }
+              }
+              { scopeless type
+                (349481 'move' _indexOfInterest[349466](349478 call iteratorIndex _iterator[349467]))
+              }
+              ForLoop[349468]
+              {
+                unknown key[349392] "index var" "insert auto destroy"
+                (349486 'move' key[349392] _indexOfInterest[349466])
+                {
+                  const tmp[349413] "const" "temp"(349411 call(349408 call .(410714 call . this[349155] c"table") c"findAvailableSlot") key[349392])
+                  (349417 call _check_tuple_var_decl tmp[349413] 2)
+                  const slot[349405] "const"(349414 call tmp[349413] 1)
+                  (349422 'end of statement')
+                  const tmp[349437] "const" "temp"(349435 call(349432 call .(349429 call . other[349165] c"table") c"findFullSlot") key[349392])
+                  (349441 call _check_tuple_var_decl tmp[349437] 2)
+                  const slot2[349426] "const"(349438 call tmp[349437] 1)
+                  (349446 'end of statement')
+                  (349451 call(349448 call .(410720 call . this[349155] c"table") c"fillSlot") slot[349405] key[349392](349463 call .(349461 call(349458 call .(349455 call . other[349165] c"table") c"table") slot2[349426]) c"val"))
+                }
+                label _continueLabel[349471]
+                _indexOfInterest[349466]
+                _iterator[349467]
+              }
+              label _breakLabel[349472]
+            }
+          }
+        }
+      }
+    }
+  }
+  {
+    (349174 call <(349171 'lifetime_of' this[349155])(349173 'lifetime_of' other[349165]))
+  }
+  function map[352283](?).clear[349538](arg _mt[349542]:_MT[201], ref arg this[349540]:map[352283](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (349546 call(461636 call . this[349540] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (349548 call(461640 call . this[349540] c"_leave"))
+      }
+    }
+    {
+      unknown _indexOfInterest[349589] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[349590] "expr temp" "temp"
+      (349599 'move' _iterator[349590](349597 call _getIterator(349558 call(349555 call .(410726 call . this[349540] c"table") c"allSlots"))))
+      Defer
+      {
+        {
+          (349614 call _freeIterator _iterator[349590])
+        }
+      }
+      { scopeless type
+        (349604 'move' _indexOfInterest[349589](349601 call iteratorIndex _iterator[349590]))
+      }
+      ForLoop[349591]
+      {
+        unknown slot[349552] "index var" "insert auto destroy"
+        (349609 'move' slot[349552] _indexOfInterest[349589])
+        {
+          if(349585 call _cond_test(349583 call(349580 call .(410736 call . this[349540] c"table") c"isSlotFull") slot[349552]))
+          {
+            unknown key[349562](461645 call . this[349540] c"keyType")
+            (349565 'end of statement')
+            unknown val[349567](461650 call . this[349540] c"valType")
+            (349570 'end of statement')
+            (349575 call(349572 call .(410731 call . this[349540] c"table") c"clearSlot") slot[349552] key[349562] val[349567])
+          }
+        }
+        label _continueLabel[349594]
+        _indexOfInterest[349589]
+        _iterator[349590]
+      }
+      label _breakLabel[349595]
+    }
+    (349625 call(349622 call .(410741 call . this[349540] c"table") c"maybeShrinkAfterRemove"))
+  }
+  function map[352283](?).size[349628](arg _mt[349632]:_MT[201], const arg this[349630]:map[352283](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    (349636 call(461658 call . this[349630] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (349638 call(461662 call . this[349630] c"_leave"))
+      }
+    }
+    (349642 return(461666 call . this[349630] c"_size"))
+  }
+  function map[352283](?)._size[349646](arg _mt[349650]:_MT[201], const arg this[349648]:map[352283](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    (349653 return(349655 call .(410746 call . this[349648] c"table") c"tableNumFullSlots"))
+  }
+  function map[352283](?).isEmpty[349660](arg _mt[349664]:_MT[201], const arg this[349662]:map[352283](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    (349668 return(349669 call ==(461671 call . this[349662] c"size") 0))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function map[352283](?).contains[349676](arg _mt[349684]:_MT[201], const arg this[349678]:map[352283](?), const arg k[349681] :
+  (461676 call . this[349678] c"keyType")) : _unknown[42] "method" "primary method"
+  {
+    (349689 call(461681 call . this[349678] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (349691 call(461685 call . this[349678] c"_leave"))
+      }
+    }
+    unknown tmp[349706] "temp"(349704 call(349701 call .(410751 call . this[349678] c"table") c"findFullSlot") k[349681])
+    (349710 call _check_tuple_var_decl tmp[349706] 2)
+    unknown result[349696](349707 call tmp[349706] 0)
+    (349715 'end of statement')
+    (349716 return result[349696])
+  }
+  { scopeless type
+    bool[19]
+  }
+  function map[352283](?).extend[349721](arg _mt[349733]:_MT[201], ref arg this[349723]:map[352283](?), ref arg m[349730] :
+  (349726 call map[352283](?)(461693 call . this[349723] c"keyType")(461698 call . this[349723] c"valType")(461703 call . this[349723] c"parSafe"))) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (349737 call(461707 call . this[349723] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (349739 call(461711 call . this[349723] c"_leave"))
+      }
+    }
+    if(349761 call _cond_test(349749 call ||(349751 call !(349754 call isCopyableType(461716 call . this[349723] c"keyType")))(349756 call !(349759 call isCopyableType(461721 call . this[349723] c"valType")))))
+    {
+      (349744 call compilerError "extending map with non-copyable type")
+    }
+    {
+      unknown _indexOfInterest[349838] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[349839] "expr temp" "temp"
+      (349848 'move' _iterator[349839](349846 call _getIterator(349772 call(349769 call . m[349730] c"keys"))))
+      Defer
+      {
+        {
+          (349863 call _freeIterator _iterator[349839])
+        }
+      }
+      { scopeless type
+        (349853 'move' _indexOfInterest[349838](349850 call iteratorIndex _iterator[349839]))
+      }
+      ForLoop[349840]
+      {
+        unknown key[349766] "index var" "insert auto destroy"
+        (349858 'move' key[349766] _indexOfInterest[349838])
+        {
+          unknown tmp[349785] "temp"(349783 call(349780 call .(410757 call . this[349723] c"table") c"findAvailableSlot") key[349766])
+          (349789 call _check_tuple_var_decl tmp[349785] 2)
+          unknown slot[349777](349786 call tmp[349785] 1)
+          (349794 'end of statement')
+          unknown tmp[349809] "temp"(349807 call(349804 call .(349801 call . m[349730] c"table") c"findAvailableSlot") key[349766])
+          (349813 call _check_tuple_var_decl tmp[349809] 2)
+          unknown slot2[349798](349810 call tmp[349809] 1)
+          (349818 'end of statement')
+          (349823 call(349820 call .(410763 call . this[349723] c"table") c"fillSlot") slot[349777] key[349766](349835 call .(349833 call(349830 call .(349827 call . m[349730] c"table") c"table") slot2[349798]) c"val"))
+        }
+        label _continueLabel[349843]
+        _indexOfInterest[349838]
+        _iterator[349839]
+      }
+      label _breakLabel[349844]
+    }
+  }
+  function map[352283](?).update[349872](arg _mt[349882]:_MT[201], arg this[349874]:map[352283](?), const  ref arg k[349877] :
+  (461731 call . this[349874] c"keyType"), arg updater[349880]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    (349886 call(461735 call . this[349874] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (349888 call(461739 call . this[349874] c"_leave"))
+      }
+    }
+    unknown tmp[349903] "temp"(349901 call(349898 call .(410769 call . this[349874] c"table") c"findFullSlot") k[349877])
+    (349910 call _check_tuple_var_decl tmp[349903] 2)
+    unknown isFull[349893](349904 call tmp[349903] 0)
+    unknown slot[349895](349907 call tmp[349903] 1)
+    (349915 'end of statement')
+    if(349925 call _cond_test(349922 call ! isFull[349893]))
+    {
+      (349916 'throw'(349917 'new'(349919 call KeyNotFoundError[461744](?) k[349877])))
+    }
+    const key[349931] "const" "ref var"(349938 call .(349936 call(349933 call .(410774 call . this[349874] c"table") c"table") slot[349895]) c"key")
+    (349942 'end of statement')
+    unknown val[349944] "ref var"(349951 call .(349949 call(349946 call .(410779 call . this[349874] c"table") c"table") slot[349895]) c"val")
+    (349955 'end of statement')
+    if(350006 call _cond_test(349995 call !(350001 call canResolveMethod module=[222] Reflection[1804] updater[349880] "this" key[349931] val[349944])))
+    {
+      (349960 call compilerError(349961 call +(349963 call +(349965 call +(349967 call +(349969 call +(349971 call + "`map.update()` failed to resolve method "(349976 call :(349979 'typeof' updater[349880]) string[244])) ".this() for arguments (")(349982 call :(349985 'typeof' key[349931]) string[244])) ", ")(349988 call :(349991 'typeof' val[349944]) string[244])) ")"))
+    }
+    (350011 return(350013 call updater[349880] key[349931] val[349944]))
+    (397185 'used modules list'(349958 'import' Reflection[1804]))
+    (410783 'referenced modules list' Reflection[1804])
+  }
+  function map[352283](?)._warnForParSafeIndexing[350018](arg _mt[350022]:_MT[201], arg this[350020]:map[352283](?)) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    if(350036 call _cond_test(461762 call . this[350020] c"parSafe"))
+    {
+      (350026 call compilerError "cannot index into a map initialized with " "`parSafe=true`" 2)
+    }
+  }
+  function map[352283](?).this[350043](arg _mt[350051]:_MT[201], ref arg this[350045]:map[352283](?), arg k[350048] :
+  (461767 call . this[350045] c"keyType")) ref : _unknown[42] "method" "primary method"
+  {
+    (350058 call(461776 call . this[350045] c"_warnForParSafeIndexing"))
+    (350060 call(461780 call . this[350045] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (350062 call(461784 call . this[350045] c"_leave"))
+      }
+    }
+    unknown tmp[350077] "temp"(350075 call(350072 call .(410790 call . this[350045] c"table") c"findAvailableSlot") k[350048])
+    (350081 call _check_tuple_var_decl tmp[350077] 2)
+    unknown slot[350069](350078 call tmp[350077] 1)
+    (350086 'end of statement')
+    if(350109 call _cond_test(350101 call !(350107 call(350104 call .(410800 call . this[350045] c"table") c"isSlotFull") slot[350069])))
+    {
+      unknown val[350089](461790 call . this[350045] c"valType")
+      (350092 'end of statement')
+      (350097 call(350094 call .(410795 call . this[350045] c"table") c"fillSlot") slot[350069] k[350048] val[350089])
+    }
+    (350113 return(350120 call .(350118 call(350115 call .(410805 call . this[350045] c"table") c"table") slot[350069]) c"val"))
+  }
+  where {
+    (350054 call isDefaultInitializable(461772 call . this[350045] c"valType"))
+  }
+  function map[352283](?).this[350126](arg _mt[350134]:_MT[201], ref arg this[350128]:map[352283](?), arg k[350131] :
+  (461800 call . this[350128] c"keyType")) ref : _unknown[42] throws "method" "primary method"
+  {
+    (350138 call(461804 call . this[350128] c"_warnForParSafeIndexing"))
+    (350140 call(461808 call . this[350128] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (350142 call(461812 call . this[350128] c"_leave"))
+      }
+    }
+    unknown tmp[350157] "temp"(350155 call(350152 call .(410810 call . this[350128] c"table") c"findAvailableSlot") k[350131])
+    (350161 call _check_tuple_var_decl tmp[350157] 2)
+    unknown slot[350149](350158 call tmp[350157] 1)
+    (350166 'end of statement')
+    if(350181 call _cond_test(350173 call !(350179 call(350176 call .(410815 call . this[350128] c"table") c"isSlotFull") slot[350149])))
+    {
+      (350168 'throw'(350169 'new'(350171 call KeyNotFoundError[461744](?) k[350131])))
+    }
+    unknown result[350186] "ref var"(350193 call .(350191 call(350188 call .(410820 call . this[350128] c"table") c"table") slot[350149]) c"val")
+    (350197 'end of statement')
+    (350198 return result[350186])
+  }
+  function map[352283](?).this[350202](arg _mt[350210]:_MT[201], const arg this[350204]:map[352283](?), arg k[350207] :
+  (461823 call . this[350204] c"keyType")) const ref : _unknown[42] throws "method" "primary method"
+  {
+    (350214 call(461827 call . this[350204] c"_warnForParSafeIndexing"))
+    (350216 call(461831 call . this[350204] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (350218 call(461835 call . this[350204] c"_leave"))
+      }
+    }
+    unknown tmp[350233] "temp"(350231 call(350228 call .(410825 call . this[350204] c"table") c"findFullSlot") k[350207])
+    (350240 call _check_tuple_var_decl tmp[350233] 2)
+    unknown found[350223](350234 call tmp[350233] 0)
+    unknown slot[350225](350237 call tmp[350233] 1)
+    (350245 'end of statement')
+    if(350255 call _cond_test(350252 call ! found[350223]))
+    {
+      (350246 'throw'(350247 'new'(350249 call KeyNotFoundError[461744](?) k[350207])))
+    }
+    const result[350261] "const" "ref var"(350268 call .(350266 call(350263 call .(410830 call . this[350204] c"table") c"table") slot[350225]) c"val")
+    (350272 'end of statement')
+    (350273 return result[350261])
+  }
+  function map[352283](?).getBorrowed[350277](arg _mt[350285]:_MT[201], arg this[350279]:map[352283](?), arg k[350282] :
+  (461846 call . this[350279] c"keyType")) : _unknown[42] "deprecated" "method" "primary method"
+  {
+    (350292 call(461855 call . this[350279] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (350294 call(461859 call . this[350279] c"_leave"))
+      }
+    }
+    unknown tmp[350309] "temp"(350307 call(350304 call .(410835 call . this[350279] c"table") c"findFullSlot") k[350282])
+    (350316 call _check_tuple_var_decl tmp[350309] 2)
+    unknown found[350299](350310 call tmp[350309] 0)
+    unknown slot[350301](350313 call tmp[350309] 1)
+    (350321 'end of statement')
+    if(350337 call _cond_test(350334 call ! found[350299]))
+    {
+      (350323 call boundsCheckHalt(350332 'try!-expr'(350330 call(350327 call . "map index %\? out of bounds" c"format") k[350282])))
+    }
+    Try!
+    {
+      {
+        unknown result[350344](350357 call(350354 call .(350351 call .(350349 call(350346 call .(410840 call . this[350279] c"table") c"table") slot[350301]) c"val") c"borrow"))
+        (350359 'end of statement')
+        if(350371 call _cond_test(350369 call isNonNilableClass(461870 call . this[350279] c"valType")))
+        {
+          (350361 return(350362 call postfix! result[350344]))
+        }
+        {
+          (350366 return result[350344])
+        }
+      }
+    }
+  }
+  where {
+    (350288 call isClass(461851 call . this[350279] c"valType"))
+  }
+  function map[352283](?).getReference[350381](arg _mt[350389]:_MT[201], arg this[350383]:map[352283](?), arg k[350386] :
+  (461875 call . this[350383] c"keyType")) ref : _unknown[42] "deprecated" "method" "primary method"
+  {
+    if(350402 call _cond_test(461880 call . this[350383] c"parSafe"))
+    {
+      (350393 call compilerError "cannot call `getReference()` on maps initialized " "with `parSafe=true`")
+    }
+    (350408 call(461884 call . this[350383] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (350410 call(461888 call . this[350383] c"_leave"))
+      }
+    }
+    unknown tmp[350425] "temp"(350423 call(350420 call .(410845 call . this[350383] c"table") c"findFullSlot") k[350386])
+    (350432 call _check_tuple_var_decl tmp[350425] 2)
+    unknown found[350415](350426 call tmp[350425] 0)
+    unknown slot[350417](350429 call tmp[350425] 1)
+    (350437 'end of statement')
+    if(350451 call _cond_test(350448 call ! found[350415]))
+    {
+      (350439 call boundsCheckHalt(350446 'try!-expr'(350444 call(350441 call . "map index %\? out of bounds" c"format") k[350386])))
+    }
+    unknown result[350457] "ref var"(350464 call .(350462 call(350459 call .(410850 call . this[350383] c"table") c"table") slot[350417]) c"val")
+    (350468 'end of statement')
+    (350469 return result[350457])
+  }
+  function map[352283](?).getValue[350473](arg _mt[350481]:_MT[201], arg this[350475]:map[352283](?), arg k[350478] :
+  (461898 call . this[350475] c"keyType")) : _unknown[42] throws "deprecated" "method" "primary method"
+  {
+    if(350506 call _cond_test(350501 call !(350504 call isCopyableType(461908 call . this[350475] c"valType"))))
+    {
+      (350485 call compilerError(350486 call +(350488 call + "cannot call `getValue()` for non-copyable " "map value type: ")(350496 call :(461903 call . this[350475] c"valType") string[244])))
+    }
+    (350512 call(461912 call . this[350475] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (350514 call(461916 call . this[350475] c"_leave"))
+      }
+    }
+    unknown tmp[350529] "temp"(350527 call(350524 call .(410855 call . this[350475] c"table") c"findFullSlot") k[350478])
+    (350536 call _check_tuple_var_decl tmp[350529] 2)
+    unknown found[350519](350530 call tmp[350529] 0)
+    unknown slot[350521](350533 call tmp[350529] 1)
+    (350541 'end of statement')
+    if(350551 call _cond_test(350548 call ! found[350519]))
+    {
+      (350542 'throw'(350543 'new'(350545 call KeyNotFoundError[461744](?) k[350478])))
+    }
+    Try!
+    {
+      {
+        const result[350558] "const"(350559 call :(350567 call .(350565 call(350562 call .(410860 call . this[350475] c"table") c"table") slot[350521]) c"val")(461926 call . this[350475] c"valType"))
+        (350572 'end of statement')
+        (350573 return result[350558])
+      }
+    }
+  }
+  function map[352283](?).get[350580](arg _mt[350592]:_MT[201], arg this[350582]:map[352283](?), arg k[350585] :
+  (461932 call . this[350582] c"keyType"), const arg sentinel[350589] :
+  (461937 call . this[350582] c"valType")) : _unknown[42] "method" "primary method"
+  {
+    if(350615 call _cond_test(350610 call !(350613 call isCopyableType(461947 call . this[350582] c"valType"))))
+    {
+      (350596 call compilerError(350597 call +(350599 call + "cannot call `get()` for non-copyable " "map value type: ")(350605 call :(461942 call . this[350582] c"valType") string[244])))
+    }
+    (350621 call(461951 call . this[350582] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (350623 call(461955 call . this[350582] c"_leave"))
+      }
+    }
+    unknown tmp[350638] "temp"(350636 call(350633 call .(410865 call . this[350582] c"table") c"findFullSlot") k[350585])
+    (350645 call _check_tuple_var_decl tmp[350638] 2)
+    unknown found[350628](350639 call tmp[350638] 0)
+    unknown slot[350630](350642 call tmp[350638] 1)
+    (350650 'end of statement')
+    if(350657 call _cond_test(350654 call ! found[350628]))
+    {
+      (350651 return sentinel[350589])
+    }
+    Try!
+    {
+      {
+        const result[350664] "const"(350665 call :(350673 call .(350671 call(350668 call .(410870 call . this[350582] c"table") c"table") slot[350630]) c"val")(461964 call . this[350582] c"valType"))
+        (350678 'end of statement')
+        (350679 return result[350664])
+      }
+    }
+  }
+  function map[352283](?).getValue[350686](arg _mt[350698]:_MT[201], arg this[350688]:map[352283](?), arg k[350691] :
+  (461970 call . this[350688] c"keyType"), const arg sentinel[350695] :
+  (461975 call . this[350688] c"valType")) : _unknown[42] "deprecated" "method" "primary method"
+  {
+    if(350719 call _cond_test(350714 call !(350717 call isCopyableType(461985 call . this[350688] c"valType"))))
+    {
+      (350702 call compilerError(350703 call +(350705 call + "cannot call `getValue()` for non-copyable " "map value type: ")(350709 call :(461980 call . this[350688] c"valType") string[244])))
+    }
+    (350725 call(461989 call . this[350688] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (350727 call(461993 call . this[350688] c"_leave"))
+      }
+    }
+    unknown tmp[350742] "temp"(350740 call(350737 call .(410875 call . this[350688] c"table") c"findFullSlot") k[350691])
+    (350749 call _check_tuple_var_decl tmp[350742] 2)
+    unknown found[350732](350743 call tmp[350742] 0)
+    unknown slot[350734](350746 call tmp[350742] 1)
+    (350754 'end of statement')
+    if(350761 call _cond_test(350758 call ! found[350732]))
+    {
+      (350755 return sentinel[350695])
+    }
+    Try!
+    {
+      {
+        const result[350768] "const"(350769 call :(350777 call .(350775 call(350772 call .(410880 call . this[350688] c"table") c"table") slot[350734]) c"val")(462002 call . this[350688] c"valType"))
+        (350782 'end of statement')
+        (350783 return result[350768])
+      }
+    }
+  }
+  function map[352283](?).getAndRemove[350790](arg _mt[350798]:_MT[201], ref arg this[350792]:map[352283](?), arg k[350795] :
+  (462008 call . this[350792] c"keyType")) : _unknown[42] "method" "primary method"
+  {
+    (350802 call(462012 call . this[350792] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (350804 call(462016 call . this[350792] c"_leave"))
+      }
+    }
+    unknown tmp[350819] "temp"(350817 call(350814 call .(410885 call . this[350792] c"table") c"findFullSlot") k[350795])
+    (350826 call _check_tuple_var_decl tmp[350819] 2)
+    unknown found[350809](350820 call tmp[350819] 0)
+    unknown slot[350811](350823 call tmp[350819] 1)
+    (350831 'end of statement')
+    if(350845 call _cond_test(350842 call ! found[350809]))
+    {
+      (350833 call boundsCheckHalt(350840 'try!-expr'(350838 call(350835 call . "map index %\? out of bounds" c"format") k[350795])))
+    }
+    Try!
+    {
+      {
+        unknown result[350857](462029 call . this[350792] c"valType")
+        unknown key[350853](462024 call . this[350792] c"keyType")
+        (350860 'end of statement')
+        (350865 call(350862 call .(410890 call . this[350792] c"table") c"clearSlot") slot[350811] key[350853] result[350857])
+        (350873 call(350870 call .(410895 call . this[350792] c"table") c"maybeShrinkAfterRemove"))
+        (350874 return(350875 call : result[350857](462038 call . this[350792] c"valType")))
+      }
+    }
+  }
+  function map[352283](?).these[350884](arg _mt[350888]:_MT[201], arg this[350886]:map[352283](?)) const ref : _unknown[42] "deprecated" "iterator fn" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[350901] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[350902] "expr temp" "temp"
+      (350911 'move' _iterator[350902](350909 call _getIterator(350897 call(350894 call . this[350886] c"keys"))))
+      Defer
+      {
+        {
+          (350926 call _freeIterator _iterator[350902])
+        }
+      }
+      { scopeless type
+        (350916 'move' _indexOfInterest[350901](350913 call iteratorIndex _iterator[350902]))
+      }
+      ForLoop[350903]
+      {
+        unknown key[350891] "index var" "insert auto destroy"
+        (350921 'move' key[350891] _indexOfInterest[350901])
+        {
+          (350899 yield key[350891])
+        }
+        label _continueLabel[350906]
+        _indexOfInterest[350901]
+        _iterator[350902]
+      }
+      label _breakLabel[350907]
+    }
+  }
+  function map[352283](?).keys[350935](arg _mt[350939]:_MT[201], arg this[350937]:map[352283](?)) const ref : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[350974] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[350975] "expr temp" "temp"
+      (350984 'move' _iterator[350975](350982 call _getIterator(350948 call(350945 call .(410901 call . this[350937] c"table") c"allSlots"))))
+      Defer
+      {
+        {
+          (350999 call _freeIterator _iterator[350975])
+        }
+      }
+      { scopeless type
+        (350989 'move' _indexOfInterest[350974](350986 call iteratorIndex _iterator[350975]))
+      }
+      ForLoop[350976] order-independent
+      {
+        unknown slot[350942] "index var" "insert auto destroy"
+        (350994 'move' slot[350942] _indexOfInterest[350974])
+        {
+          if(350967 call _cond_test(350965 call(350962 call .(410911 call . this[350937] c"table") c"isSlotFull") slot[350942]))
+          {
+            (350950 yield(350957 call .(350955 call(350952 call .(410906 call . this[350937] c"table") c"table") slot[350942]) c"key"))
+          }
+        }
+        label _continueLabel[350979]
+        _indexOfInterest[350974]
+        _iterator[350975]
+      }
+      label _breakLabel[350980]
+    }
+  }
+  function map[352283](?).items[351008](arg _mt[351012]:_MT[201], arg this[351010]:map[352283](?)) : _unknown[42] "deprecated" "iterator fn" "method" "primary method" "no return value for void"
+  {
+    if(351035 call _cond_test(351030 call !(351033 call isCopyableType(462051 call . this[351010] c"keyType"))))
+    {
+      (351016 call compilerError(351017 call +(351019 call + "in map.items(): map key type "(351024 call :(462046 call . this[351010] c"keyType") string[244])) " is not copyable"))
+    }
+    if(351060 call _cond_test(351055 call !(351058 call isCopyableType(462061 call . this[351010] c"valType"))))
+    {
+      (351041 call compilerError(351042 call +(351044 call + "in map.items(): map value type "(351049 call :(462056 call . this[351010] c"valType") string[244])) " is not copyable"))
+    }
+    {
+      unknown _indexOfInterest[351108] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[351109] "expr temp" "temp"
+      (351118 'move' _iterator[351109](351116 call _getIterator(351071 call(351068 call .(410916 call . this[351010] c"table") c"allSlots"))))
+      Defer
+      {
+        {
+          (351133 call _freeIterator _iterator[351109])
+        }
+      }
+      { scopeless type
+        (351123 'move' _indexOfInterest[351108](351120 call iteratorIndex _iterator[351109]))
+      }
+      ForLoop[351110] order-independent
+      {
+        unknown slot[351065] "index var" "insert auto destroy"
+        (351128 'move' slot[351065] _indexOfInterest[351108])
+        {
+          if(351102 call _cond_test(351100 call(351097 call .(410928 call . this[351010] c"table") c"isSlotFull") slot[351065]))
+          {
+            unknown tabEntry[351075] "ref var"(351080 call(351077 call .(410921 call . this[351010] c"table") c"table") slot[351065])
+            (351083 'end of statement')
+            (351084 yield(351094 call _build_tuple(351087 call . tabEntry[351075] c"key")(351091 call . tabEntry[351075] c"val")))
+          }
+        }
+        label _continueLabel[351113]
+        _indexOfInterest[351108]
+        _iterator[351109]
+      }
+      label _breakLabel[351114]
+    }
+  }
+  function map[352283](?).values[351142](arg _mt[351146]:_MT[201], arg this[351144]:map[352283](?)) ref : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[351181] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[351182] "expr temp" "temp"
+      (351191 'move' _iterator[351182](351189 call _getIterator(351155 call(351152 call .(410933 call . this[351144] c"table") c"allSlots"))))
+      Defer
+      {
+        {
+          (351206 call _freeIterator _iterator[351182])
+        }
+      }
+      { scopeless type
+        (351196 'move' _indexOfInterest[351181](351193 call iteratorIndex _iterator[351182]))
+      }
+      ForLoop[351183] order-independent
+      {
+        unknown slot[351149] "index var" "insert auto destroy"
+        (351201 'move' slot[351149] _indexOfInterest[351181])
+        {
+          if(351174 call _cond_test(351172 call(351169 call .(410943 call . this[351144] c"table") c"isSlotFull") slot[351149]))
+          {
+            (351157 yield(351164 call .(351162 call(351159 call .(410938 call . this[351144] c"table") c"table") slot[351149]) c"val"))
+          }
+        }
+        label _continueLabel[351186]
+        _indexOfInterest[351181]
+        _iterator[351182]
+      }
+      label _breakLabel[351187]
+    }
+  }
+  function map[352283](?)._readHelper[351215](arg _mt[351225]:_MT[201], ref arg this[351217]:map[352283](?), arg r[351220] :
+  fileReader[170893](?), ref arg deserializer[351223]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    if(351263 call _cond_test(351234 call &&(351236 call ==(351239 'typeof' deserializer[351223]) defaultDeserializer[173096])(351241 call ||(351243 call ||(351245 call ||(351247 call ==(462073 call . this[351217] c"keyType") string[244])(351251 call ==(462078 call . this[351217] c"valType") string[244]))(351255 call ==(462083 call . this[351217] c"keyType") bytes[232]))(351259 call ==(462088 call . this[351217] c"valType") bytes[232]))))
+    {
+      (351229 call compilerError "Default IO format for 'map' does not support reading when the key or value type is  'string' or 'bytes'.")
+    }
+    (351272 call(351269 call . this[351217] c"clear"))
+    (351274 call(462092 call . this[351217] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (351276 call(462096 call . this[351217] c"_leave"))
+      }
+    }
+    unknown des[351281](351286 call(351283 call . deserializer[351223] c"startMap") r[351220])
+    (351289 'end of statement')
+    unknown done[351291] 0
+    (351294 'end of statement')
+    {
+      unknown tmp[351315] "temp"
+      (351341 'move' tmp[351315](351335 call _cond_test(351340 call(351337 call . des[351281] c"hasMore"))))
+      WhileDo[351320]
+      {
+        {
+          (351302 call(462101 call . this[351217] c"add")(351307 call(351304 call . des[351281] c"readKey")(462106 call . this[351217] c"keyType"))(351313 call(351310 call . des[351281] c"readValue")(462111 call . this[351217] c"valType")))
+        }
+        label _continueLabel[351318]
+        (351330 'move' tmp[351315](351324 call _cond_test(351329 call(351326 call . des[351281] c"hasMore"))))
+        tmp[351315]
+      }
+      label _breakLabel[351319]
+    }
+    (351348 call(351345 call . des[351281] c"endMap"))
+  }
+  function map[352283](?).deserialize[351351](arg _mt[351361]:_MT[201], ref arg this[351353]:map[352283](?), arg reader[351356] :
+  fileReader[170893](?), ref arg deserializer[351359]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (351365 call(462116 call . this[351353] c"_readHelper") reader[351356] deserializer[351359])
+  }
+  function map[352283](?).init[351370](arg _mt[351384]:_MT[201], arg this[351372]:map[352283](?), arg keyType[351374]:_any[141](?), arg valType[351376]:_any[141](?), arg reader[351379] :
+  fileReader[170893](?), ref arg deserializer[351382]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (351391 call(351388 call . this[351372] c"init") keyType[351374] valType[351376](462126 call . this[351372] c"parSafe"))
+    (351396 call(462130 call . this[351372] c"_readHelper") reader[351379] deserializer[351382])
+  }
+  function map[352283](?).init[351401](arg _mt[351417]:_MT[201], arg this[351403]:map[352283](?), arg keyType[351405]:_any[141](?), arg valType[351407]:_any[141](?), param arg parSafe[351409]:_any[141](?), arg reader[351412] :
+  fileReader[170893](?), ref arg deserializer[351415]:_any[141](?)) : _unknown[42] throws "method" "primary method" "@unstable" "no return value for void"
+  {
+    (351424 call(351421 call . this[351403] c"init") keyType[351405] valType[351407] parSafe[351409])
+    (351429 call(462140 call . this[351403] c"_readHelper") reader[351412] deserializer[351415])
+  }
+  function map[352283](?).serialize[351434](arg _mt[351446]:_MT[201], arg this[351436]:map[352283](?), arg writer[351441] :
+  (351439 call fileWriter[170987](?) ?[227]), ref arg serializer[351444]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (351450 call(462147 call . this[351436] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (351452 call(462151 call . this[351436] c"_leave"))
+      }
+    }
+    unknown ser[351457](351462 call(351459 call . serializer[351444] c"startMap") writer[351441](462156 call . this[351436] c"_size"))
+    (351466 'end of statement')
+    {
+      unknown _indexOfInterest[351514] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[351515] "expr temp" "temp"
+      (351524 'move' _iterator[351515](351522 call _getIterator(351473 call(351470 call .(410958 call . this[351436] c"table") c"allSlots"))))
+      Defer
+      {
+        {
+          (351539 call _freeIterator _iterator[351515])
+        }
+      }
+      { scopeless type
+        (351529 'move' _indexOfInterest[351514](351526 call iteratorIndex _iterator[351515]))
+      }
+      ForLoop[351516]
+      {
+        unknown slot[351467] "index var" "insert auto destroy"
+        (351534 'move' slot[351467] _indexOfInterest[351514])
+        {
+          if(351510 call _cond_test(351508 call(351505 call .(410972 call . this[351436] c"table") c"isSlotFull") slot[351467]))
+          {
+            unknown tabEntry[351477] "ref var"(351482 call(351479 call .(410963 call . this[351436] c"table") c"table") slot[351467])
+            (351485 'end of statement')
+            (351490 call(351487 call . ser[351457] c"writeKey")(351492 call . tabEntry[351477] c"key"))
+            (351499 call(351496 call . ser[351457] c"writeValue")(351501 call . tabEntry[351477] c"val"))
+          }
+        }
+        label _continueLabel[351519]
+        _indexOfInterest[351514]
+        _iterator[351515]
+      }
+      label _breakLabel[351520]
+    }
+    (351550 call(351547 call . ser[351457] c"endMap"))
+  }
+  function map[352283](?).add[351553](arg _mt[351565]:_MT[201], ref arg this[351555]:map[352283](?), in arg k[351558] :
+  (462163 call . this[351555] c"keyType"), in arg v[351562] :
+  (462168 call . this[351555] c"valType")) : _unknown[42] "method" "primary method"
+  {
+    (351576 call(462175 call . this[351555] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (351578 call(462179 call . this[351555] c"_leave"))
+      }
+    }
+    unknown tmp[351593] "temp"(351591 call(351588 call .(410978 call . this[351555] c"table") c"findAvailableSlot") k[351558])
+    (351600 call _check_tuple_var_decl tmp[351593] 2)
+    unknown found[351583](351594 call tmp[351593] 0)
+    unknown slot[351585](351597 call tmp[351593] 1)
+    (351605 'end of statement')
+    if(351610 call _cond_test found[351583])
+    {
+      (351607 return 0)
+    }
+    (351618 call(351615 call .(410983 call . this[351555] c"table") c"fillSlot") slot[351585] k[351558] v[351562])
+    (351622 return 1)
+  }
+  {
+    (351572 call <(351569 'lifetime_of' this[351555])(351571 'lifetime_of' v[351562]))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function map[352283](?).set[351628](arg _mt[351640]:_MT[201], ref arg this[351630]:map[352283](?), arg k[351633] :
+  (462189 call . this[351630] c"keyType"), in arg v[351637] :
+  (462194 call . this[351630] c"valType")) : _unknown[42] "deprecated" "method" "primary method"
+  {
+    (351644 return(351649 call(351646 call . this[351630] c"replace") k[351633] v[351637]))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function map[352283](?).replace[351655](arg _mt[351667]:_MT[201], ref arg this[351657]:map[352283](?), arg k[351660] :
+  (462202 call . this[351657] c"keyType"), in arg v[351664] :
+  (462207 call . this[351657] c"valType")) : _unknown[42] "method" "primary method"
+  {
+    (351672 call(462212 call . this[351657] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (351674 call(462216 call . this[351657] c"_leave"))
+      }
+    }
+    unknown tmp[351689] "temp"(351687 call(351684 call .(410989 call . this[351657] c"table") c"findAvailableSlot") k[351660])
+    (351696 call _check_tuple_var_decl tmp[351689] 2)
+    unknown found[351679](351690 call tmp[351689] 0)
+    unknown slot[351681](351693 call tmp[351689] 1)
+    (351701 'end of statement')
+    if(351708 call _cond_test(351705 call ! found[351679]))
+    {
+      (351703 return 0)
+    }
+    (351716 call(351713 call .(410994 call . this[351657] c"table") c"fillSlot") slot[351681] k[351660] v[351664])
+    (351720 return 1)
+  }
+  { scopeless type
+    bool[19]
+  }
+  function map[352283](?).addOrReplace[351725](arg _mt[351737]:_MT[201], ref arg this[351727]:map[352283](?), in arg k[351730] :
+  (462226 call . this[351727] c"keyType"), in arg v[351734] :
+  (462231 call . this[351727] c"valType")) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (351741 call(462235 call . this[351727] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (351743 call(462239 call . this[351727] c"_leave"))
+      }
+    }
+    unknown tmp[351758] "temp"(351756 call(351753 call .(410999 call . this[351727] c"table") c"findAvailableSlot") k[351730])
+    (351765 call _check_tuple_var_decl tmp[351758] 2)
+    unknown found[351748](351759 call tmp[351758] 0)
+    unknown slot[351750](351762 call tmp[351758] 1)
+    (351770 'end of statement')
+    (351775 call(351772 call .(411004 call . this[351727] c"table") c"fillSlot") slot[351750] k[351730] v[351734])
+  }
+  function map[352283](?).addOrSet[351781](arg _mt[351793]:_MT[201], ref arg this[351783]:map[352283](?), in arg k[351786] :
+  (462248 call . this[351783] c"keyType"), in arg v[351790] :
+  (462253 call . this[351783] c"valType")) : _unknown[42] "deprecated" "method" "primary method" "no return value for void"
+  {
+    (351797 call(462257 call . this[351783] c"addOrReplace") k[351786] v[351790])
+  }
+  function map[352283](?).remove[351802](arg _mt[351810]:_MT[201], ref arg this[351804]:map[352283](?), arg k[351807] :
+  (462264 call . this[351804] c"keyType")) : _unknown[42] "method" "primary method"
+  {
+    (351815 call(462269 call . this[351804] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (351817 call(462273 call . this[351804] c"_leave"))
+      }
+    }
+    unknown tmp[351832] "temp"(351830 call(351827 call .(411009 call . this[351804] c"table") c"findFullSlot") k[351807])
+    (351839 call _check_tuple_var_decl tmp[351832] 2)
+    unknown found[351822](351833 call tmp[351832] 0)
+    unknown slot[351824](351836 call tmp[351832] 1)
+    (351844 'end of statement')
+    if(351851 call _cond_test(351848 call ! found[351822]))
+    {
+      (351846 return 0)
+    }
+    unknown outKey[351861](462285 call . this[351804] c"keyType")
+    unknown outVal[351857](462280 call . this[351804] c"valType")
+    (351864 'end of statement')
+    (351869 call(351866 call .(411014 call . this[351804] c"table") c"clearSlot") slot[351824] outKey[351861] outVal[351857])
+    (351877 call(351874 call .(411019 call . this[351804] c"table") c"maybeShrinkAfterRemove"))
+    (351878 return 1)
+  }
+  { scopeless type
+    bool[19]
+  }
+  function map[352283](?).toArray[351883](arg _mt[351887]:_MT[201], arg this[351885]:map[352283](?)) : _unknown[42] "method" "primary method"
+  {
+    (351899 call(462302 call . this[351885] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (351901 call(462306 call . this[351885] c"_leave"))
+      }
+    }
+    if(351923 call _cond_test(351911 call ||(351913 call !(351916 call isCopyableType(462311 call . this[351885] c"keyType")))(351918 call !(351921 call isCopyableType(462316 call . this[351885] c"valType")))))
+    {
+      (351906 call compilerError "toArray requires copyable key and value types")
+    }
+    unknown A[351929](351943 call chpl__buildArrayRuntimeType(351936 call chpl__ensureDomainExpr(351930 call #(351933 call chpl_build_low_bounded_range 0)(462320 call . this[351885] c"_size")))(351941 call _build_tuple(462325 call . this[351885] c"keyType")(462330 call . this[351885] c"valType")))
+    (351946 'end of statement')
+    {
+      unknown _indexOfInterest[351972] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[351973] "expr temp" "temp"
+      (351992 'move' _iterator[351973](351962 call _build_tuple(351982 call _getIterator A[351929])(351986 call _getIterator(351985 call(462338 call . this[351885] c"keys")))(351990 call _getIterator(351989 call(462342 call . this[351885] c"values")))))
+      Defer
+      {
+        {
+          (352026 call _freeIterator _iterator[351973])
+        }
+      }
+      { scopeless type
+        (351997 'move' _indexOfInterest[351972](351994 call iteratorIndex _iterator[351973]))
+      }
+      ForLoop[351974]
+      {
+        (352002 call _check_tuple_var_decl _indexOfInterest[351972] 3)
+        unknown a[351948] "index var" "insert auto destroy"
+        (352009 'move' a[351948](352006 call _indexOfInterest[351972] 0))
+        unknown k[351950] "index var" "insert auto destroy"
+        (352015 'move' k[351950](352012 call _indexOfInterest[351972] 1))
+        unknown v[351952] "index var" "insert auto destroy"
+        (352021 'move' v[351952](352018 call _indexOfInterest[351972] 2))
+        {
+          (351964 call = a[351948](351970 call _build_tuple k[351950] v[351952]))
+        }
+        label _continueLabel[351977]
+        _indexOfInterest[351972]
+        _iterator[351973]
+      }
+      label _breakLabel[351978]
+    }
+    (352033 return A[351929])
+  }
+  { scopeless type
+    (351895 call chpl__buildArrayRuntimeType nil[32](351893 call _build_tuple(462293 call . this[351885] c"keyType")(462298 call . this[351885] c"valType")))
+  }
+  function map[352283](?).keysToArray[352038](arg _mt[352042]:_MT[201], arg this[352040]:map[352283](?)) : _unknown[42] "method" "primary method"
+  {
+    (352050 call(462352 call . this[352040] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (352052 call(462356 call . this[352040] c"_leave"))
+      }
+    }
+    if(352067 call _cond_test(352062 call !(352065 call isCopyableType(462361 call . this[352040] c"keyType"))))
+    {
+      (352057 call compilerError "keysToArray requires a copyable key type")
+    }
+    unknown A[352073](352083 call chpl__buildArrayRuntimeType(352080 call chpl__ensureDomainExpr(352074 call #(352077 call chpl_build_low_bounded_range 0)(462365 call . this[352040] c"_size")))(462370 call . this[352040] c"keyType"))
+    (352086 'end of statement')
+    {
+      unknown _indexOfInterest[352104] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[352105] "expr temp" "temp"
+      (352120 'move' _iterator[352105](352098 call _build_tuple(352114 call _getIterator A[352073])(352118 call _getIterator(352117 call(462377 call . this[352040] c"keys")))))
+      Defer
+      {
+        {
+          (352148 call _freeIterator _iterator[352105])
+        }
+      }
+      { scopeless type
+        (352125 'move' _indexOfInterest[352104](352122 call iteratorIndex _iterator[352105]))
+      }
+      ForLoop[352106]
+      {
+        (352130 call _check_tuple_var_decl _indexOfInterest[352104] 2)
+        unknown a[352088] "index var" "insert auto destroy"
+        (352137 'move' a[352088](352134 call _indexOfInterest[352104] 0))
+        unknown k[352090] "index var" "insert auto destroy"
+        (352143 'move' k[352090](352140 call _indexOfInterest[352104] 1))
+        {
+          (352100 call = a[352088] k[352090])
+        }
+        label _continueLabel[352109]
+        _indexOfInterest[352104]
+        _iterator[352105]
+      }
+      label _breakLabel[352110]
+    }
+    (352155 return A[352073])
+  }
+  { scopeless type
+    (352046 call chpl__buildArrayRuntimeType nil[32](462348 call . this[352040] c"keyType"))
+  }
+  function map[352283](?).valuesToArray[352160](arg _mt[352164]:_MT[201], arg this[352162]:map[352283](?)) : _unknown[42] "method" "primary method"
+  {
+    (352172 call(462387 call . this[352162] c"_enter"))
+    Defer
+    {
+      { scopeless
+        (352174 call(462391 call . this[352162] c"_leave"))
+      }
+    }
+    if(352189 call _cond_test(352184 call !(352187 call isCopyableType(462396 call . this[352162] c"valType"))))
+    {
+      (352179 call compilerError "valuesToArray requires a copyable value type")
+    }
+    unknown A[352195](352205 call chpl__buildArrayRuntimeType(352202 call chpl__ensureDomainExpr(352196 call #(352199 call chpl_build_low_bounded_range 0)(462400 call . this[352162] c"_size")))(462405 call . this[352162] c"valType"))
+    (352208 'end of statement')
+    {
+      unknown _indexOfInterest[352226] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[352227] "expr temp" "temp"
+      (352242 'move' _iterator[352227](352220 call _build_tuple(352236 call _getIterator A[352195])(352240 call _getIterator(352239 call(462412 call . this[352162] c"values")))))
+      Defer
+      {
+        {
+          (352270 call _freeIterator _iterator[352227])
+        }
+      }
+      { scopeless type
+        (352247 'move' _indexOfInterest[352226](352244 call iteratorIndex _iterator[352227]))
+      }
+      ForLoop[352228]
+      {
+        (352252 call _check_tuple_var_decl _indexOfInterest[352226] 2)
+        unknown a[352210] "index var" "insert auto destroy"
+        (352259 'move' a[352210](352256 call _indexOfInterest[352226] 0))
+        unknown v[352212] "index var" "insert auto destroy"
+        (352265 'move' v[352212](352262 call _indexOfInterest[352226] 1))
+        {
+          (352222 call = a[352210] v[352212])
+        }
+        label _continueLabel[352231]
+        _indexOfInterest[352226]
+        _iterator[352227]
+      }
+      label _breakLabel[352232]
+    }
+    (352277 return A[352195])
+  }
+  { scopeless type
+    (352168 call chpl__buildArrayRuntimeType nil[32](462383 call . this[352162] c"valType"))
+  }
+  type map[352283](?) unknown keyType[348884] "type variable" unknown valType[348887] "type variable" unknown parSafe[348890] "param" "@unstable" 0 const resizeThreshold[348895] "const" defaultHashTableResizeThreshold[209951] unknown table[348900](348902 call chpl__hashtable[267644](?) keyType[348884] valType[348887]) unknown _lock[348908](348914 IfExpr  parSafe[348890] then
+  { scopeless
+    (348910 'new'(348912 call _LockWrapper[461512](?)))
+  } else
+  { scopeless
+    none[48]
+  } )
+  function map[352283](?).=[352285](arg _mt[352309]:_MT[201], arg this[352288]:map[352283](?) :
+  map[352283](?), ref arg lhs[352298] :
+  (352292 call map[352283](?) unknown kt[352293] unknown vt[352295] ?[227]), const  ref arg rhs[352306] :
+  (352302 call map[352283](?) kt[352293] vt[352295] ?[227])) : _unknown[42] "assignop" "method" "operator" "no return value for void"
+  {
+    if(352330 call _cond_test(352318 call ||(352320 call !(352323 call isCopyableType kt[352293]))(352325 call !(352328 call isCopyableType vt[352295]))))
+    {
+      (352313 call compilerError "assigning map with non-copyable type")
+    }
+    (352339 call(352336 call . lhs[352298] c"clear"))
+    Try!
+    {
+      {
+        {
+          unknown _indexOfInterest[352358] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[352359] "expr temp" "temp"
+          (352368 'move' _iterator[352359](352366 call _getIterator(352347 call(352344 call . rhs[352306] c"keys"))))
+          Defer
+          {
+            {
+              (352383 call _freeIterator _iterator[352359])
+            }
+          }
+          { scopeless type
+            (352373 'move' _indexOfInterest[352358](352370 call iteratorIndex _iterator[352359]))
+          }
+          ForLoop[352360]
+          {
+            unknown key[352341] "index var" "insert auto destroy"
+            (352378 'move' key[352341] _indexOfInterest[352358])
+            {
+              (352353 call(352350 call . lhs[352298] c"add") key[352341](352356 call rhs[352306] key[352341]))
+            }
+            label _continueLabel[352363]
+            _indexOfInterest[352358]
+            _iterator[352359]
+          }
+          label _breakLabel[352364]
+        }
+      }
+    }
+  }
+  function map[352283](?).:[352395](arg _mt[352423]:_MT[201], arg this[352398]:map[352283](?) :
+  map[352283](?), arg x[352409] :
+  (352402 call map[352283](?) unknown k1[352403] unknown v1[352405] unknown p1[352407]), arg t[352420] :
+  (352413 call map[352283](?) unknown k2[352414] unknown v2[352416] unknown p2[352418])) : _unknown[42] "method" "operator"
+  {
+    if(352443 call _cond_test(352439 call != k1[352403] k2[352414]))
+    {
+      (352427 call compilerError "Cannot cast to map with different " "key type: "(352434 call : k2[352414] string[244]))
+    }
+    if(352463 call _cond_test(352459 call != v1[352405] v2[352416]))
+    {
+      (352449 call compilerError "Cannot cast to map with different " "value type: "(352454 call : v2[352416] string[244]))
+    }
+    unknown result[352469] x[352409] t[352420]
+    (352473 'end of statement')
+    (352474 return result[352469])
+  }
+  function map[352283](?).==[352478](arg _mt[352496]:_MT[201], arg this[352481]:map[352283](?) :
+  map[352283](?), const  ref arg a[352487] :
+  (352485 call map[352283](?) ?[227]), const  ref arg b[352493] :
+  (352491 call map[352283](?) ?[227])) : _unknown[42] "method" "operator"
+  {
+    if(352528 call _cond_test(352518 call !=(352521 call . a[352487] c"keyType")(352525 call . b[352493] c"keyType")))
+    {
+      (352501 call compilerError "cannot compare maps with different key types: "(352505 call :(352508 call . a[352487] c"keyType") string[244]) " and "(352514 call . b[352493] c"keyType"))
+    }
+    if(352561 call _cond_test(352551 call !=(352554 call . a[352487] c"valType")(352558 call . b[352493] c"valType")))
+    {
+      (352534 call compilerError "cannot compare maps with different value types: "(352538 call :(352541 call . a[352487] c"valType") string[244]) " and "(352547 call . b[352493] c"valType"))
+    }
+    if(352579 call _cond_test(352569 call !=(352572 call . a[352487] c"_size")(352576 call . b[352493] c"_size")))
+    {
+      (352566 return 0)
+    }
+    Try!
+    {
+      {
+        {
+          unknown _indexOfInterest[352619] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[352620] "expr temp" "temp"
+          (352629 'move' _iterator[352620](352627 call _getIterator(352591 call(352588 call . a[352487] c"keys"))))
+          Defer
+          {
+            {
+              (352644 call _freeIterator _iterator[352620])
+            }
+          }
+          { scopeless type
+            (352634 'move' _indexOfInterest[352619](352631 call iteratorIndex _iterator[352620]))
+          }
+          ForLoop[352621]
+          {
+            unknown key[352585] "index var" "insert auto destroy"
+            (352639 'move' key[352585] _indexOfInterest[352619])
+            {
+              if(352614 call _cond_test(352596 call ||(352598 call !(352604 call(352601 call . b[352493] c"contains") key[352585]))(352606 call !=(352609 call a[352487] key[352585])(352612 call b[352493] key[352585]))))
+              {
+                (352593 return 0)
+              }
+            }
+            label _continueLabel[352624]
+            _indexOfInterest[352619]
+            _iterator[352620]
+          }
+          label _breakLabel[352625]
+        }
+        {
+          unknown _indexOfInterest[352685] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[352686] "expr temp" "temp"
+          (352695 'move' _iterator[352686](352693 call _getIterator(352657 call(352654 call . b[352493] c"keys"))))
+          Defer
+          {
+            {
+              (352710 call _freeIterator _iterator[352686])
+            }
+          }
+          { scopeless type
+            (352700 'move' _indexOfInterest[352685](352697 call iteratorIndex _iterator[352686]))
+          }
+          ForLoop[352687]
+          {
+            unknown key[352651] "index var" "insert auto destroy"
+            (352705 'move' key[352651] _indexOfInterest[352685])
+            {
+              if(352680 call _cond_test(352662 call ||(352664 call !(352670 call(352667 call . a[352487] c"contains") key[352651]))(352672 call !=(352675 call a[352487] key[352651])(352678 call b[352493] key[352651]))))
+              {
+                (352659 return 0)
+              }
+            }
+            label _continueLabel[352690]
+            _indexOfInterest[352685]
+            _iterator[352686]
+          }
+          label _breakLabel[352691]
+        }
+      }
+    }
+    (352720 return 1)
+  }
+  { scopeless type
+    bool[19]
+  }
+  function map[352283](?).!=[352725](arg _mt[352743]:_MT[201], arg this[352728]:map[352283](?) :
+  map[352283](?), const  ref arg a[352734] :
+  (352732 call map[352283](?) ?[227]), const  ref arg b[352740] :
+  (352738 call map[352283](?) ?[227])) : _unknown[42] "method" "operator"
+  {
+    if(352773 call _cond_test(352763 call !=(352766 call . a[352734] c"keyType")(352770 call . b[352740] c"keyType")))
+    {
+      (352748 call compilerError "cannot compare maps with different key types: "(352750 call :(352753 call . a[352734] c"keyType") string[244]) " and "(352759 call . b[352740] c"keyType"))
+    }
+    if(352804 call _cond_test(352794 call !=(352797 call . a[352734] c"valType")(352801 call . b[352740] c"valType")))
+    {
+      (352779 call compilerError "cannot compare maps with different value types: "(352781 call :(352784 call . a[352734] c"valType") string[244]) " and "(352790 call . b[352740] c"valType"))
+    }
+    (352809 return(352810 call !(352812 call == a[352734] b[352740])))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function KeyNotFoundError[352856].init[352821](arg _mt[352825]:_MT[201], arg this[352823]:KeyNotFoundError[352856]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+  }
+  function KeyNotFoundError[352856].init[352830](arg _mt[352836]:_MT[201], arg this[352832]:KeyNotFoundError[352856], arg k[352834]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (352843 call(352840 call .(411049 call . this[352832] c"super") c"init")(352852 'try!-expr'(352850 call(352847 call . "key '%\?' not found" c"format") k[352834])))
+  }
+  type KeyNotFoundError[352856] val super[397916]:Error[85511] "super class"
+  type KeyNotFoundError[461744](?) serializable[310094] map[352283](?)
+  {
+  }
+  (397178 'used modules list'(387086 'use' ChapelStandard[315387])(348708 'import' ChapelLocks[85420])(348710 'use' ChapelHashtable[267646])(348713 'use' HaltWrappers[518])(348720 'use' IO[208303])(348722 'use' FormattedIO[208298]))
+  (410667 'referenced modules list' ChapelLocks[85420])
+}

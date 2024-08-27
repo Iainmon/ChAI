@@ -1,0 +1,436 @@
+AST dump for ChapelSerializedBroadcast after pass normalize.
+Module use list: ChapelLocale CTypes 
+
+{
+  function chpl__init_ChapelSerializedBroadcast[468594]() : void[4] "insert line file info" "module init"
+  {
+    (654110 'init var' chpl__enableSerializedGlobals[311526] 1)
+    (311529 'end of statement')
+    (631520 return _void[46])
+  }
+  unknown chpl__enableSerializedGlobals[311526] "config" "param"
+  function chpl_get_global_serialize_table[311530](arg idx[311533]:int(64)[10]) : _unknown[42] "extern" "local args" "no fn body"
+  {
+  }
+  { scopeless type
+    (311537 call c_ptr[46891](?) void[4])
+  }
+  function chpl__broadcastGlobal[311542](ref arg localeZeroGlobal[311546]:_any[141](?), arg id[311550]:int(64)[10]) : _unknown[42] "no return value for void"
+  {
+    unknown tmp[504717] "maybe param" "temp"
+    (504728 'move' tmp[504717](311647 call isArray localeZeroGlobal[311546]))
+    unknown call_tmp[938854] "expr temp" "maybe param" "maybe type" "temp"
+    (938857 'move' call_tmp[938854](504730 call _cond_invalid tmp[504717]))
+    if call_tmp[938854]
+    {
+      (504733 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[707595] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[707596] "maybe param" "temp"
+    unknown call_tmp[938859] "expr temp" "maybe param" "maybe type" "temp"
+    (938862 'move' call_tmp[938859](504718 call isTrue tmp[504717]))
+    (707601 'move' tmp[707596](707599 call _cond_test call_tmp[938859]))
+    if tmp[707596]
+    {
+      unknown tmp[707603] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[938864] "expr temp" "maybe param" "maybe type" "temp"
+      (938867 'move' call_tmp[938864](311650 call chpl__isArrayView localeZeroGlobal[311546]))
+      (707605 'move' tmp[707603](504721 call isTrue call_tmp[938864]))
+      (707610 'move' tmp[707595](707607 '_paramFoldLogical' tmp[707596] tmp[707603]))
+    }
+    {
+      (707615 'move' tmp[707595](707612 '_paramFoldLogical' tmp[707596] 0))
+    }
+    unknown call_tmp[938869] "expr temp" "maybe param" "maybe type" "temp"
+    (938872 'move' call_tmp[938869](311652 call _cond_test tmp[707595]))
+    if call_tmp[938869]
+    {
+      (311557 call halt "internal error: can't broadcast module-scope arrays yet")
+    }
+    {
+      unknown call_tmp[938876] "maybe param" "maybe type" "temp"
+      (938879 'move' call_tmp[938876](311568 call(311565 call (partial) chpl__serialize _mt[203] localeZeroGlobal[311546])))
+      const data[311563] "dead at end of block" "const" "insert auto destroy"
+      (654112 'init var' data[311563] call_tmp[938876])
+      (311570 'end of statement')
+      unknown call_tmp[938881] "expr temp" "maybe param" "maybe type" "temp"
+      (938884 'move' call_tmp[938881](410506 call here[135591]))
+      unknown call_tmp[938888] "maybe param" "maybe type" "temp"
+      (938891 'move' call_tmp[938888](311574 call id _mt[203] call_tmp[938881]))
+      const root[311572] "dead at end of block" "const" "insert auto destroy"
+      (654114 'init var' root[311572] call_tmp[938888])
+      (311578 'end of statement')
+      {
+        unknown tmpIter[394209] "expr temp" "maybe ref" "no copy" "temp"
+        (394212 'move' tmpIter[394209] Locales[309572])
+        unknown isBounded[394409] "maybe param" "temp"
+        (394415 'move' isBounded[394409](394411 call chpl_supportsBoundedCoforall tmpIter[394209] 0))
+        if isBounded[394409]
+        {
+          const _coforallCount[394278] "const" "end count" "temp"
+          (394346 'move' _coforallCount[394278](394343 call _endCountAlloc 1))
+          unknown numTasks[394279] "temp"
+          (394330 'move' numTasks[394279](394326 call chpl_boundedCoforallSize tmpIter[394209] 0))
+          (394321 call _upEndCount _coforallCount[394278] 1 numTasks[394279])
+          (568953 'end of statement')
+          (394318 call chpl_resetTaskSpawn numTasks[394279])
+          (568954 'end of statement')
+          unknown _indexOfInterest[394286] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[394287] "expr temp" "temp"
+          (394296 'move' _iterator[394287](394294 call _getIterator tmpIter[394209]))
+          Defer
+          {
+            {
+              (394311 call _freeIterator _iterator[394287])
+            }
+          }
+          { scopeless type
+            (394301 'move' _indexOfInterest[394286](394298 call iteratorIndex _iterator[394287]))
+          }
+          ForLoop[394288]
+          {
+            unknown loc[394216] "coforall index var" "index var" "insert auto destroy"
+            (568956 'end of statement')
+            (394306 'move' loc[394216] _indexOfInterest[394286])
+            (568957 'end of statement' loc[394216])
+            {
+              {
+                const tmp[394222] "const" "temp"
+                unknown call_tmp[938893] "expr temp" "maybe param" "maybe type" "temp"
+                (938896 'move' call_tmp[938893](394227 '_wide_get_locale' loc[394216]))
+                (394224 'move' tmp[394222](394226 'deref' call_tmp[938893]))
+                {
+                  unknown call_tmp[938898] "expr temp" "maybe param" "maybe type" "temp"
+                  (938901 'move' call_tmp[938898](412890 call here[135591]))
+                  unknown call_tmp[938905] "expr temp" "maybe param" "maybe type" "temp"
+                  (938908 'move' call_tmp[938905](394235 call id _mt[203] call_tmp[938898]))
+                  unknown call_tmp[938910] "expr temp" "maybe param" "maybe type" "temp"
+                  (938913 'move' call_tmp[938910](394233 call != call_tmp[938905] root[311572]))
+                  unknown call_tmp[938915] "expr temp" "maybe param" "maybe type" "temp"
+                  (938918 'move' call_tmp[938915](394231 call _cond_test call_tmp[938910]))
+                  if call_tmp[938915]
+                  {
+                    unknown call_tmp[938920] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+                    (938923 'move' call_tmp[938920](394244 'typeof' localeZeroGlobal[311546]))
+                    unknown call_tmp[938927] "maybe param" "maybe type" "temp"
+                    (938930 'move' call_tmp[938927](394247 call(394243 call (partial) chpl__deserialize _mt[203] call_tmp[938920]) data[311563]))
+                    unknown temp[394241] "dead at end of block" "no auto destroy" "no copy"
+                    (654116 'init var' temp[394241] call_tmp[938927])
+                    (394250 'end of statement')
+                    unknown call_tmp[938932] "maybe param" "maybe type" "temp"
+                    (938935 'move' call_tmp[938932](394254 call chpl_get_global_serialize_table id[311550]))
+                    const destVoidPtr[394252] "dead at end of block" "const" "insert auto destroy"
+                    (654118 'init var' destVoidPtr[394252] call_tmp[938932])
+                    (394257 'end of statement')
+                    unknown call_tmp[938937] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+                    (938940 'move' call_tmp[938937](394265 'typeof' localeZeroGlobal[311546]))
+                    unknown call_tmp[938942] "expr temp" "maybe param" "maybe type" "temp"
+                    (938945 'move' call_tmp[938942](394264 call c_ptr[46891](?) call_tmp[938937]))
+                    unknown call_tmp[938947] "maybe param" "maybe type" "temp"
+                    (938950 'move' call_tmp[938947](394261 call : destVoidPtr[394252] call_tmp[938942]))
+                    const dest[394259] "dead at end of block" "const" "insert auto destroy"
+                    (654120 'init var' dest[394259] call_tmp[938947])
+                    (394268 'end of statement' data[311563] destVoidPtr[394252])
+                    unknown call_tmp[938954] "expr temp" "maybe param" "maybe type" "temp"
+                    (938957 'move' call_tmp[938954](394274 call(394271 call (partial) deref _mt[203] dest[394259])))
+                    (394269 '=' call_tmp[938954] temp[394241])
+                    (568961 'end of statement' dest[394259] temp[394241])
+                  }
+                }
+                (394219 'elided on block' 0 tmp[394222])
+              }
+              (394281 call _downEndCount _coforallCount[394278] nil[32])
+              (394280 'coforall loop')
+            }
+            label _continueLabel[394291]
+            _indexOfInterest[394286]
+            _iterator[394287]
+          }
+          label _breakLabel[394292]
+          Defer
+          {
+            {
+              (394333 call _endCountFree _coforallCount[394278])
+            }
+          }
+          (394338 call _waitEndCount _coforallCount[394278] 1 numTasks[394279])
+        }
+        {
+          const _coforallCount[394350] "const" "end count" "temp"
+          (394406 'move' _coforallCount[394350](394403 call _endCountAlloc 1))
+          unknown _indexOfInterest[394358] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[394359] "expr temp" "temp"
+          (394368 'move' _iterator[394359](394366 call _getIterator tmpIter[394209]))
+          Defer
+          {
+            {
+              (394383 call _freeIterator _iterator[394359])
+            }
+          }
+          { scopeless type
+            (394373 'move' _indexOfInterest[394358](394370 call iteratorIndex _iterator[394359]))
+          }
+          ForLoop[394360]
+          {
+            unknown loc[311579] "coforall index var" "index var" "insert auto destroy"
+            (568968 'end of statement')
+            (394378 'move' loc[311579] _indexOfInterest[394358])
+            (568969 'end of statement' loc[311579])
+            (394390 call _upEndCount _coforallCount[394350] 1)
+            (568971 'end of statement')
+            {
+              {
+                const tmp[311635] "const" "temp"
+                unknown call_tmp[938959] "expr temp" "maybe param" "maybe type" "temp"
+                (938962 'move' call_tmp[938959](311632 '_wide_get_locale' loc[311579]))
+                (311636 'move' tmp[311635](311633 'deref' call_tmp[938959]))
+                {
+                  unknown call_tmp[938964] "expr temp" "maybe param" "maybe type" "temp"
+                  (938967 'move' call_tmp[938964](410509 call here[135591]))
+                  unknown call_tmp[938971] "expr temp" "maybe param" "maybe type" "temp"
+                  (938974 'move' call_tmp[938971](311624 call id _mt[203] call_tmp[938964]))
+                  unknown call_tmp[938976] "expr temp" "maybe param" "maybe type" "temp"
+                  (938979 'move' call_tmp[938976](311621 call != call_tmp[938971] root[311572]))
+                  unknown call_tmp[938981] "expr temp" "maybe param" "maybe type" "temp"
+                  (938984 'move' call_tmp[938981](311628 call _cond_test call_tmp[938976]))
+                  if call_tmp[938981]
+                  {
+                    unknown call_tmp[938986] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+                    (938989 'move' call_tmp[938986](311588 'typeof' localeZeroGlobal[311546]))
+                    unknown call_tmp[938993] "maybe param" "maybe type" "temp"
+                    (938996 'move' call_tmp[938993](311592 call(311589 call (partial) chpl__deserialize _mt[203] call_tmp[938986]) data[311563]))
+                    unknown temp[311586] "dead at end of block" "no auto destroy" "no copy"
+                    (654122 'init var' temp[311586] call_tmp[938993])
+                    (311595 'end of statement')
+                    unknown call_tmp[938998] "maybe param" "maybe type" "temp"
+                    (939001 'move' call_tmp[938998](311599 call chpl_get_global_serialize_table id[311550]))
+                    const destVoidPtr[311597] "dead at end of block" "const" "insert auto destroy"
+                    (654124 'init var' destVoidPtr[311597] call_tmp[938998])
+                    (311602 'end of statement')
+                    unknown call_tmp[939003] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+                    (939006 'move' call_tmp[939003](311611 'typeof' localeZeroGlobal[311546]))
+                    unknown call_tmp[939008] "expr temp" "maybe param" "maybe type" "temp"
+                    (939011 'move' call_tmp[939008](311609 call c_ptr[46891](?) call_tmp[939003]))
+                    unknown call_tmp[939013] "maybe param" "maybe type" "temp"
+                    (939016 'move' call_tmp[939013](311605 call : destVoidPtr[311597] call_tmp[939008]))
+                    const dest[311604] "dead at end of block" "const" "insert auto destroy"
+                    (654126 'init var' dest[311604] call_tmp[939013])
+                    (311613 'end of statement' data[311563] destVoidPtr[311597])
+                    unknown call_tmp[939020] "expr temp" "maybe param" "maybe type" "temp"
+                    (939023 'move' call_tmp[939020](311619 call(311616 call (partial) deref _mt[203] dest[311604])))
+                    (311614 '=' call_tmp[939020] temp[311586])
+                    (568974 'end of statement' dest[311604] temp[311586])
+                  }
+                }
+                (311639 'elided on block' 0 tmp[311635])
+              }
+              (394353 call _downEndCount _coforallCount[394350] nil[32])
+              (394352 'coforall loop')
+            }
+            label _continueLabel[394363]
+            _indexOfInterest[394358]
+            _iterator[394359]
+          }
+          label _breakLabel[394364]
+          Defer
+          {
+            {
+              (394394 call _endCountFree _coforallCount[394350])
+            }
+          }
+          (394399 call _waitEndCount _coforallCount[394350] 1)
+        }
+      }
+    }
+    (631516 return _void[46])
+  }
+  where {
+    (1001294 call chpl_statementLevelSymbol chpl__enableSerializedGlobals[311526])
+  }
+  function chpl__destroyBroadcastedGlobal[311659](ref arg localeZeroGlobal[311661]:_any[141](?), arg id[311664]:int(64)[10]) : _unknown[42] "no return value for void"
+  {
+    unknown globalType[311670] "dead at end of block" "insert auto destroy" "type variable"
+    (654130 'move' globalType[311670](654128 'typeof' localeZeroGlobal[311661]))
+    unknown call_tmp[939025] "expr temp" "maybe param" "maybe type" "temp"
+    (939028 'move' call_tmp[939025](410511 call here[135591]))
+    unknown call_tmp[939032] "maybe param" "maybe type" "temp"
+    (939035 'move' call_tmp[939032](311677 call id _mt[203] call_tmp[939025]))
+    const root[311675] "dead at end of block" "const" "insert auto destroy"
+    (654132 'init var' root[311675] call_tmp[939032])
+    (311681 'end of statement')
+    {
+      unknown tmpIter[394419] "expr temp" "maybe ref" "no copy" "temp"
+      (394422 'move' tmpIter[394419] Locales[309572])
+      unknown isBounded[394612] "maybe param" "temp"
+      (394618 'move' isBounded[394612](394614 call chpl_supportsBoundedCoforall tmpIter[394419] 0))
+      if isBounded[394612]
+      {
+        const _coforallCount[394481] "const" "end count" "temp"
+        (394549 'move' _coforallCount[394481](394546 call _endCountAlloc 1))
+        unknown numTasks[394482] "temp"
+        (394533 'move' numTasks[394482](394529 call chpl_boundedCoforallSize tmpIter[394419] 0))
+        (394524 call _upEndCount _coforallCount[394481] 1 numTasks[394482])
+        (568980 'end of statement')
+        (394521 call chpl_resetTaskSpawn numTasks[394482])
+        (568981 'end of statement')
+        unknown _indexOfInterest[394489] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[394490] "expr temp" "temp"
+        (394499 'move' _iterator[394490](394497 call _getIterator tmpIter[394419]))
+        Defer
+        {
+          {
+            (394514 call _freeIterator _iterator[394490])
+          }
+        }
+        { scopeless type
+          (394504 'move' _indexOfInterest[394489](394501 call iteratorIndex _iterator[394490]))
+        }
+        ForLoop[394491]
+        {
+          unknown loc[394426] "coforall index var" "index var" "insert auto destroy"
+          (568983 'end of statement')
+          (394509 'move' loc[394426] _indexOfInterest[394489])
+          (568984 'end of statement' loc[394426])
+          {
+            {
+              const tmp[394432] "const" "temp"
+              unknown call_tmp[939037] "expr temp" "maybe param" "maybe type" "temp"
+              (939040 'move' call_tmp[939037](394437 '_wide_get_locale' loc[394426]))
+              (394434 'move' tmp[394432](394436 'deref' call_tmp[939037]))
+              {
+                unknown call_tmp[939042] "expr temp" "maybe param" "maybe type" "temp"
+                (939045 'move' call_tmp[939042](412893 call here[135591]))
+                unknown call_tmp[939049] "expr temp" "maybe param" "maybe type" "temp"
+                (939052 'move' call_tmp[939049](394445 call id _mt[203] call_tmp[939042]))
+                unknown call_tmp[939054] "expr temp" "maybe param" "maybe type" "temp"
+                (939057 'move' call_tmp[939054](394443 call != call_tmp[939049] root[311675]))
+                unknown call_tmp[939059] "expr temp" "maybe param" "maybe type" "temp"
+                (939062 'move' call_tmp[939059](394441 call _cond_test call_tmp[939054]))
+                if call_tmp[939059]
+                {
+                  unknown call_tmp[939064] "maybe param" "maybe type" "temp"
+                  (939067 'move' call_tmp[939064](394453 call chpl_get_global_serialize_table id[311664]))
+                  const voidPtr[394451] "dead at end of block" "const" "insert auto destroy"
+                  (654134 'init var' voidPtr[394451] call_tmp[939064])
+                  (394456 'end of statement')
+                  unknown call_tmp[939069] "expr temp" "maybe param" "maybe type" "temp"
+                  (939072 'move' call_tmp[939069](394463 call c_ptr[46891](?) globalType[311670]))
+                  unknown call_tmp[939074] "maybe param" "maybe type" "temp"
+                  (939077 'move' call_tmp[939074](394460 call : voidPtr[394451] call_tmp[939069]))
+                  unknown ptr[394458] "dead at end of block" "insert auto destroy"
+                  (654136 'init var' ptr[394458] call_tmp[939074])
+                  (394466 'end of statement')
+                  unknown call_tmp[939081] "maybe param" "maybe type" "temp"
+                  (939084 'move' call_tmp[939081](394473 call(394470 call (partial) deref _mt[203] ptr[394458])))
+                  unknown temp[394468] "dead at end of block" "no auto destroy" "no copy"
+                  (654138 'init var' temp[394468] call_tmp[939081])
+                  (394475 'end of statement' voidPtr[394451] globalType[311670] ptr[394458])
+                  (394477 call chpl__autoDestroy temp[394468])
+                  (568989 'end of statement' temp[394468])
+                }
+              }
+              (394429 'elided on block' 0 tmp[394432])
+            }
+            (394484 call _downEndCount _coforallCount[394481] nil[32])
+            (394483 'coforall loop')
+          }
+          label _continueLabel[394494]
+          _indexOfInterest[394489]
+          _iterator[394490]
+        }
+        label _breakLabel[394495]
+        Defer
+        {
+          {
+            (394536 call _endCountFree _coforallCount[394481])
+          }
+        }
+        (394541 call _waitEndCount _coforallCount[394481] 1 numTasks[394482])
+      }
+      {
+        const _coforallCount[394553] "const" "end count" "temp"
+        (394609 'move' _coforallCount[394553](394606 call _endCountAlloc 1))
+        unknown _indexOfInterest[394561] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[394562] "expr temp" "temp"
+        (394571 'move' _iterator[394562](394569 call _getIterator tmpIter[394419]))
+        Defer
+        {
+          {
+            (394586 call _freeIterator _iterator[394562])
+          }
+        }
+        { scopeless type
+          (394576 'move' _indexOfInterest[394561](394573 call iteratorIndex _iterator[394562]))
+        }
+        ForLoop[394563]
+        {
+          unknown loc[311682] "coforall index var" "index var" "insert auto destroy"
+          (568995 'end of statement')
+          (394581 'move' loc[311682] _indexOfInterest[394561])
+          (568996 'end of statement' loc[311682])
+          (394593 call _upEndCount _coforallCount[394553] 1)
+          (568998 'end of statement')
+          {
+            {
+              const tmp[311731] "const" "temp"
+              unknown call_tmp[939086] "expr temp" "maybe param" "maybe type" "temp"
+              (939089 'move' call_tmp[939086](311728 '_wide_get_locale' loc[311682]))
+              (311732 'move' tmp[311731](311729 'deref' call_tmp[939086]))
+              {
+                unknown call_tmp[939091] "expr temp" "maybe param" "maybe type" "temp"
+                (939094 'move' call_tmp[939091](410514 call here[135591]))
+                unknown call_tmp[939098] "expr temp" "maybe param" "maybe type" "temp"
+                (939101 'move' call_tmp[939098](311720 call id _mt[203] call_tmp[939091]))
+                unknown call_tmp[939103] "expr temp" "maybe param" "maybe type" "temp"
+                (939106 'move' call_tmp[939103](311717 call != call_tmp[939098] root[311675]))
+                unknown call_tmp[939108] "expr temp" "maybe param" "maybe type" "temp"
+                (939111 'move' call_tmp[939108](311724 call _cond_test call_tmp[939103]))
+                if call_tmp[939108]
+                {
+                  unknown call_tmp[939113] "maybe param" "maybe type" "temp"
+                  (939116 'move' call_tmp[939113](311691 call chpl_get_global_serialize_table id[311664]))
+                  const voidPtr[311689] "dead at end of block" "const" "insert auto destroy"
+                  (654140 'init var' voidPtr[311689] call_tmp[939113])
+                  (311694 'end of statement')
+                  unknown call_tmp[939118] "expr temp" "maybe param" "maybe type" "temp"
+                  (939121 'move' call_tmp[939118](311701 call c_ptr[46891](?) globalType[311670]))
+                  unknown call_tmp[939123] "maybe param" "maybe type" "temp"
+                  (939126 'move' call_tmp[939123](311697 call : voidPtr[311689] call_tmp[939118]))
+                  unknown ptr[311696] "dead at end of block" "insert auto destroy"
+                  (654142 'init var' ptr[311696] call_tmp[939123])
+                  (311704 'end of statement')
+                  unknown call_tmp[939130] "maybe param" "maybe type" "temp"
+                  (939133 'move' call_tmp[939130](311711 call(311708 call (partial) deref _mt[203] ptr[311696])))
+                  unknown temp[311706] "dead at end of block" "no auto destroy" "no copy"
+                  (654144 'init var' temp[311706] call_tmp[939130])
+                  (311713 'end of statement' voidPtr[311689] globalType[311670] ptr[311696])
+                  (311715 call chpl__autoDestroy temp[311706])
+                  (569002 'end of statement' temp[311706])
+                }
+              }
+              (311735 'elided on block' 0 tmp[311731])
+            }
+            (394556 call _downEndCount _coforallCount[394553] nil[32])
+            (394555 'coforall loop')
+          }
+          label _continueLabel[394566]
+          _indexOfInterest[394561]
+          _iterator[394562]
+        }
+        label _breakLabel[394567]
+        Defer
+        {
+          {
+            (394597 call _endCountFree _coforallCount[394553])
+          }
+        }
+        (394602 call _waitEndCount _coforallCount[394553] 1)
+      }
+    }
+    (631518 return _void[46])
+  }
+  where {
+    (1001296 call chpl_statementLevelSymbol chpl__enableSerializedGlobals[311526])
+  }
+  (397064 'used modules list'(311520 'use' ChapelLocale[137388])(311523 'use' CTypes[51217]))
+}

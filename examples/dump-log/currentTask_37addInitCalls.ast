@@ -1,0 +1,31 @@
+AST dump for currentTask after pass addInitCalls.
+Module use list: 
+
+{
+  function chpl__init_currentTask[468366]() : void[4] "fast on" "insert line file info" "local fn" "module init" "resolved"
+  {
+    if chpl__init_currentTask_p[9306817]
+    {
+      goto _exit_chpl__init_currentTask[9306852] _exit_chpl__init_currentTask[9306852]
+    }
+    val modFormatStr[9306825]:chpl_c_string[16] "temp"
+    val modStr[9306826]:chpl_c_string[16] "temp"
+    ref refIndentLevel[9306838]:int(32)[66] "temp"
+    (9306831 'move' modFormatStr[9306825] c"%*s\n")
+    (9306833 'move' modStr[9306826] c"currentTask")
+    (9306836 call printModuleInit[386886] modFormatStr[9306825] modStr[9306826] 11)
+    (9306842 'move' refIndentLevel[9306838](9306841 'addr of' moduleInitLevel[386877]))
+    (9306845 '+=' refIndentLevel[9306838] 1)
+    (9306823 'move' chpl__init_currentTask_p[9306817] 1)
+    {
+      (9305093 call chpl__init_ChapelBase[468297])
+    }
+    (9306848 '-=' refIndentLevel[9306838] 1)
+    label _endchpl__init_currentTask[9306854]
+    label _exit_chpl__init_currentTask[9306852]
+    (587702 return _void[46])
+  }
+  function chpl_task_yield[68741]() : void[4] "extern" "local args" "no fn body" "resolved"
+  {
+  }
+}

@@ -158,18 +158,19 @@ var model = Network.loadModel(specFile="../scripts/models/cnn/specification.json
 
 config const testImgSize = 28;
 
-var img = Tensor.load("data/datasets/mnist/image_idx_0_7_7.chdata");// Tensor.arange(1,testImgSize,testImgSize);
-// writeln(img);
+var img = Tensor.load("data/datasets/mnist/image_idx_0_7_7.chdata") : dtype;// Tensor.arange(1,testImgSize,testImgSize);
+writeln(img);
 // writeln(img.runtimeRank);
+writeln(img.tensorize(3));
 
 const modelPath = "data/models/mnist_cnn/";
 
 cnn.loadPyTorchDump(modelPath);
 
 
-// var output = cnn(img);
+var output = cnn(img);
 
-// writeln(output);
+writeln(output);
 
 config const imageCount = 0;
 
@@ -177,17 +178,11 @@ var images = forall i in 0..<imageCount do Tensor.load("data/datasets/mnist/imag
 var preds: [images.domain] int;
 
 config const numTimes = 1;
-var conv1 = new Conv2D(real,channels=1,features=32,kernel=3,stride=1);
-// 1000 : 0.081372
-// 5000 : .4606
-
-var conv2 = new Conv2D(real,channels=32,features=64,kernel=3,stride=1);
-
 
 for i in 0..<numTimes {
     var st = new Time.stopwatch();
     st.start();
-    forall (img,pred) in zip(images, preds) {
+    for (img,pred) in zip(images, preds) {
         // var x = conv1(img);
         // x = conv2(x);
         // var output = x;

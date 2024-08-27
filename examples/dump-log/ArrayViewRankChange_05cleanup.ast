@@ -1,0 +1,1208 @@
+AST dump for ArrayViewRankChange after pass cleanup.
+Module use list: 
+
+{
+  (138928 'use' ChapelStandard)
+  function ArrayViewRankChangeDist[139219](?).downDist[138949](arg _mt[138953]:_MT[201], arg this[138951]:ArrayViewRankChangeDist[139219](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    if(138969 call _cond_test(138967 call _isPrivatized downDistInst))
+    {
+      (138956 return(138958 call chpl_getPrivatizedCopy(138960 'typeof' downDistInst) downDistPid))
+    }
+    {
+      (138963 return downDistInst)
+    }
+  }
+  function ArrayViewRankChangeDist[139219](?).dsiNewRectangularDom[138977](arg _mt[138989]:_MT[201], arg this[138979]:ArrayViewRankChangeDist[139219](?), param arg rank[138981]:_any[141](?), arg idxType[138983]:_any[141](?), param arg strides[138985]:_any[141](?), arg inds[138987]:_any[141](?)) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown newdom[138993](138994 'new'(_chpl_manager = unmanaged[183](?))(138998 call ArrayViewRankChangeDom(rank = rank)(idxType = idxType)(strides = strides)(collapsedDim = collapsedDim)(idx = idx)(distPid =(139012 call . this c"pid"))(distInst =(139017 call _to_unmanaged this))))
+    (139021 'end of statement')
+    (139028 call(139025 call . newdom c"dsiSetIndices") inds)
+    (139030 return newdom)
+  }
+  function ArrayViewRankChangeDist[139219](?).dsiClone[139034](arg _mt[139038]:_MT[201], arg this[139036]:ArrayViewRankChangeDist[139219](?)) : _unknown[42] "method" "primary method"
+  {
+    (139041 return(139042 'new'(_chpl_manager = unmanaged[183](?))(139046 call ArrayViewRankChangeDist(downDistPid =(139050 call . this c"downDistPid"))(downDistInst =(139057 call . this c"downDistInst"))(collapsedDim = collapsedDim)(idx = idx))))
+  }
+  function ArrayViewRankChangeDist[139219](?).dsiSupportsPrivatization[139067](arg _mt[139071]:_MT[201], arg this[139069]:ArrayViewRankChangeDist[139219](?)) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (139074 return(139079 call(139076 call . downDistInst c"dsiSupportsPrivatization")))
+  }
+  function ArrayViewRankChangeDist[139219](?).dsiGetPrivatizeData[139082](arg _mt[139086]:_MT[201], arg this[139084]:ArrayViewRankChangeDist[139219](?)) : _unknown[42] "method" "primary method"
+  {
+    (139089 return(139095 call _build_tuple downDistPid downDistInst collapsedDim idx))
+  }
+  function ArrayViewRankChangeDist[139219](?).dsiPrivatize[139099](arg _mt[139105]:_MT[201], arg this[139101]:ArrayViewRankChangeDist[139219](?), arg privatizeData[139103]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    (139108 return(139109 'new'(_chpl_manager = unmanaged[183](?))(139113 call ArrayViewRankChangeDist(downDistPid =(139115 call privatizeData 0))(downDistInst =(139119 call privatizeData 1))(collapsedDim =(139123 call privatizeData 2))(idx =(139127 call privatizeData 3)))))
+  }
+  function ArrayViewRankChangeDist[139219](?).dsiDestroyDist[139132](arg _mt[139136]:_MT[201], arg this[139134]:ArrayViewRankChangeDist[139219](?)) : _unknown[42] "method" "primary method" "method overrides" "no return value for void"
+  {
+  }
+  function ArrayViewRankChangeDist[139219](?).dsiIsLayout[139141](arg _mt[139145]:_MT[201], arg this[139143]:ArrayViewRankChangeDist[139219](?)) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (139148 return(139155 call(139152 call . downDistInst c"dsiIsLayout")))
+  }
+  function ArrayViewRankChangeDist[139219](?).dsiEqualDMaps[139158](arg _mt[139168]:_MT[201], arg this[139160]:ArrayViewRankChangeDist[139219](?), arg that[139165] :
+  (139163 call ArrayViewRankChangeDist ?[227])) : _unknown[42] "method" "primary method"
+  {
+    (139171 return(139172 call &&(139174 call &&(139176 call ==(139181 call . this c"collapsedDim")(139185 call . that c"collapsedDim"))(139188 call ==(139193 call . this c"idx")(139197 call . that c"idx")))(139211 call(139208 call .(139203 call . this c"downDist") c"dsiEqualDMaps")(139213 call . that c"downDist"))))
+  }
+  type ArrayViewRankChangeDist[139219](?) unknown downDistPid[138933] int[10] unknown downDistInst[138938] const collapsedDim[138942] "const" const idx[138946] "const" BaseDist
+  function downDomType[139221](param arg rank[139224] :
+  int[10], arg idxType[139227]:_any[141](?), param arg strides[139230] :
+  strideKind, arg dist[139233]:_any[141](?)) type : _unknown[42] "private"
+  {
+    unknown ranges[139237](139238 call * rank(139242 call range idxType(139245 call . boundKind c"both") strides))
+    (139250 'end of statement')
+    unknown a[139252](139260 call(139257 call .(139254 call . dist c"downDist") c"dsiNewRectangularDom") rank idxType strides ranges)
+    (139266 'end of statement')
+    (139267 return(139269 'typeof' a))
+  }
+  function ArrayViewRankChangeDom[141121](?).chpl_forwarding_expr1[139286](arg _mt[139291]:_MT[201], arg this[139289]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    (139298 return upDom)
+  }
+  function ArrayViewRankChangeDom[141121](?).dist[139317](arg _mt[139321]:_MT[201], arg this[139319]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    if(139337 call _cond_test(139335 call _isPrivatized distInst))
+    {
+      (139324 return(139326 call chpl_getPrivatizedCopy(139328 'typeof' distInst) distPid))
+    }
+    {
+      (139331 return distInst)
+    }
+  }
+  function ArrayViewRankChangeDom[141121](?).downrank[139364](arg _mt[139368]:_MT[201], arg this[139366]:ArrayViewRankChangeDom[141121](?)) param : _unknown[42] "method" "primary method" "no parens"
+  {
+    (139371 return(139373 call . collapsedDim c"size"))
+  }
+  function ArrayViewRankChangeDom[141121](?).upDom[139378](arg _mt[139382]:_MT[201], arg this[139380]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    (139389 return(139390 call postfix! upDomInst))
+  }
+  { scopeless type
+    (139387 'typeof'(139384 call postfix! upDomInst))
+  }
+  function ArrayViewRankChangeDom[141121](?).downDom[139396](arg _mt[139400]:_MT[201], arg this[139398]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    if(139426 call _cond_test(139422 call _isPrivatized(139423 call postfix! downDomInst)))
+    {
+      (139407 return(139409 call chpl_getPrivatizedCopy(139413 'typeof'(139410 call postfix! downDomInst)) downDomPid))
+    }
+    {
+      (139416 return(139417 call postfix! downDomInst))
+    }
+  }
+  { scopeless type
+    (139405 'typeof'(139402 call postfix! downDomInst))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiBuildArray[139435](arg _mt[139445]:_MT[201], arg this[139437]:ArrayViewRankChangeDom[141121](?), arg eltType[139439]:_any[141](?), param arg initElts[139442] :
+  bool) : _unknown[42] "method" "primary method"
+  {
+    const downarr[139449] "const" "no auto destroy"(139451 call _newArray(139458 call(139455 call . downDom c"dsiBuildArray") eltType initElts))
+    (139462 'end of statement')
+    (139463 return(139464 'new'(_chpl_manager = unmanaged[183](?))(139468 call ArrayViewRankChangeArr(eltType = eltType)(_DomPid =(139472 call . this c"pid"))(dom =(139477 call _to_unmanaged this))(_ArrPid =(139483 call . downarr c"_pid"))(_ArrInstance =(139488 call . downarr c"_instance"))(collapsedDim = collapsedDim)(idx = idx)(ownsArrInstance = 1))))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiSetIndices[139500](arg _mt[139506]:_MT[201], arg this[139502]:ArrayViewRankChangeDom[141121](?), arg inds[139504]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (139515 call(139512 call . this c"dsiDestroyDom"))
+    unknown upDomRec[139517] "no auto destroy"(139522 call chpl__buildDomainExpr(139520 'expand_tuple' inds) 0)
+    (139526 'end of statement')
+    (139527 call = upDomInst(139531 call . upDomRec c"_value"))
+    unknown ranges[139535](139536 call * downrank(139540 call range idxType(139543 call . boundKind c"both") strides))
+    (139548 'end of statement')
+    unknown downDomClass[139550](139558 call(139555 call .(139552 call . dist c"downDist") c"dsiNewRectangularDom") downrank idxType strides ranges)
+    (139564 'end of statement')
+    unknown downDomLoc[139566] "no auto destroy"(139567 'new'(139569 call _domain downDomClass))
+    (139572 'end of statement')
+    (139573 call = downDomLoc(139577 call chpl_rankChangeConvertDom inds(139580 call . inds c"size") collapsedDim idx))
+    (139585 call =(139593 call .(139588 call . downDomLoc c"_value") c"_free_when_no_arrs") 1)
+    (139597 call = downDomPid(139601 call . downDomLoc c"_pid"))
+    (139604 call = downDomInst(139608 call . downDomLoc c"_instance"))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiAssignDomain[139613](arg _mt[139625]:_MT[201], arg this[139615]:ArrayViewRankChangeDom[141121](?), arg rhs[139618] :
+  _domain, arg lhsPrivate[139622] :
+  bool) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (139629 call chpl_assignDomainWithGetSetIndices this rhs)
+  }
+  function ArrayViewRankChangeDom[141121](?).these[139634](arg _mt[139638]:_MT[201], arg this[139636]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    if(139728 call _cond_test(139726 call chpl__isDROrDRView downDom))
+    {
+      {
+        unknown _indexOfInterest[139650] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[139651] "expr temp" "temp"
+        (139660 'move' _iterator[139651](139658 call _getIterator upDom))
+        Defer
+        {
+          {
+            (139675 call _freeIterator _iterator[139651])
+          }
+        }
+        { scopeless type
+          (139665 'move' _indexOfInterest[139650](139662 call iteratorIndex _iterator[139651]))
+        }
+        ForLoop[139652] order-independent
+        {
+          unknown i[139642] "index var" "insert auto destroy"
+          (139670 'move' i[139642] _indexOfInterest[139650])
+          (139645 yield i)
+          label _continueLabel[139655]
+          _indexOfInterest[139650]
+          _iterator[139651]
+        }
+        label _breakLabel[139656]
+      }
+    }
+    {
+      {
+        unknown _indexOfInterest[139693] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[139694] "expr temp" "temp"
+        (139703 'move' _iterator[139694](139701 call _getIterator downDom))
+        Defer
+        {
+          {
+            (139718 call _freeIterator _iterator[139694])
+          }
+        }
+        { scopeless type
+          (139708 'move' _indexOfInterest[139693](139705 call iteratorIndex _iterator[139694]))
+        }
+        ForLoop[139695] order-independent
+        {
+          unknown i[139683] "index var" "insert auto destroy"
+          (139713 'move' i[139683] _indexOfInterest[139693])
+          (139686 yield(139688 call downIdxToUpIdx i))
+          label _continueLabel[139698]
+          _indexOfInterest[139693]
+          _iterator[139694]
+        }
+        label _breakLabel[139699]
+      }
+    }
+  }
+  function ArrayViewRankChangeDom[141121](?).these[139734](arg _mt[139742]:_MT[201], arg this[139736]:ArrayViewRankChangeDom[141121](?), param arg tag[139739] :
+  iterKind) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    Forall[139779] {
+      induction variables:
+        
+        unknown i[139771] "index var" "insert auto destroy"
+      iterated expressions:
+        upDom
+      shadow variables:
+      other variables
+        forall body
+      {
+        (139774 yield i)
+      }
+    }
+  }
+  where {
+    (139744 call &&(139746 call &&(139748 call &&(139750 call == tag(139754 call . iterKind c"standalone"))(139757 call ! localeModelHasSublocales))(139761 call chpl__isDROrDRView downDom))(139763 'resolves'(139768 call(139765 call . upDom c"these") tag)))
+  }
+  function ArrayViewRankChangeDom[141121](?).these[139785](arg _mt[139793]:_MT[201], arg this[139787]:ArrayViewRankChangeDom[141121](?), param arg tag[139790] :
+  iterKind) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    Forall[139834] {
+      induction variables:
+        
+        unknown i[139824] "index var" "insert auto destroy"
+      iterated expressions:
+        downDom
+      shadow variables:
+      other variables
+        forall body
+      {
+        (139827 yield(139829 call downIdxToUpIdx i))
+      }
+    }
+  }
+  where {
+    (139795 call &&(139797 call &&(139799 call &&(139801 call == tag(139805 call . iterKind c"standalone"))(139808 call ! localeModelHasSublocales))(139811 call !(139814 call chpl__isDROrDRView downDom)))(139816 'resolves'(139821 call(139818 call . downDom c"these") tag)))
+  }
+  function ArrayViewRankChangeDom[141121](?).these[139840](arg _mt[139848]:_MT[201], arg this[139842]:ArrayViewRankChangeDom[141121](?), param arg tag[139845] :
+  iterKind) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    if(139956 call _cond_test(139954 call chpl__isDROrDRView downDom))
+    {
+      {
+        unknown _indexOfInterest[139870] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[139871] "expr temp" "temp"
+        (139880 'move' _iterator[139871](139878 call _getIterator(139865 call(139862 call . upDom c"these") tag)))
+        Defer
+        {
+          {
+            (139895 call _freeIterator _iterator[139871])
+          }
+        }
+        { scopeless type
+          (139885 'move' _indexOfInterest[139870](139882 call iteratorIndex _iterator[139871]))
+        }
+        ForLoop[139872]
+        {
+          unknown followThis[139859] "index var" "insert auto destroy"
+          (139890 'move' followThis[139859] _indexOfInterest[139870])
+          (139867 yield followThis)
+          label _continueLabel[139875]
+          _indexOfInterest[139870]
+          _iterator[139871]
+        }
+        label _breakLabel[139876]
+      }
+    }
+    {
+      {
+        unknown _indexOfInterest[139921] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[139922] "expr temp" "temp"
+        (139931 'move' _iterator[139922](139929 call _getIterator(139909 call(139906 call . downDom c"these") tag)))
+        Defer
+        {
+          {
+            (139946 call _freeIterator _iterator[139922])
+          }
+        }
+        { scopeless type
+          (139936 'move' _indexOfInterest[139921](139933 call iteratorIndex _iterator[139922]))
+        }
+        ForLoop[139923]
+        {
+          unknown followThis[139903] "index var" "insert auto destroy"
+          (139941 'move' followThis[139903] _indexOfInterest[139921])
+          {
+            const followThisLoD[139913] "const"(139915 call chpl_rankChangeConvertHiDTupleToLoD followThis)
+            (139918 'end of statement')
+            (139919 yield followThisLoD)
+          }
+          label _continueLabel[139926]
+          _indexOfInterest[139921]
+          _iterator[139922]
+        }
+        label _breakLabel[139927]
+      }
+    }
+  }
+  where {
+    (139850 call == tag(139854 call . iterKind c"leader"))
+  }
+  function ArrayViewRankChangeDom[141121](?).these[139963](arg _mt[139973]:_MT[201], arg this[139965]:ArrayViewRankChangeDom[141121](?), param arg tag[139968] :
+  iterKind, arg followThis[139971]:_any[141](?)) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    if(140092 call _cond_test(140090 call chpl__isDROrDRView downDom))
+    {
+      {
+        unknown _indexOfInterest[139998] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[139999] "expr temp" "temp"
+        (140008 'move' _iterator[139999](140006 call _getIterator(139990 call(139987 call . upDom c"these") tag followThis)))
+        Defer
+        {
+          {
+            (140023 call _freeIterator _iterator[139999])
+          }
+        }
+        { scopeless type
+          (140013 'move' _indexOfInterest[139998](140010 call iteratorIndex _iterator[139999]))
+        }
+        ForLoop[140000] order-independent
+        {
+          unknown i[139984] "index var" "insert auto destroy"
+          (140018 'move' i[139984] _indexOfInterest[139998])
+          (139993 yield i)
+          label _continueLabel[140003]
+          _indexOfInterest[139998]
+          _iterator[139999]
+        }
+        label _breakLabel[140004]
+      }
+    }
+    {
+      const followThisHiD[140032] "const"(140034 call chpl_rankChangeConvertLoDTupleToHiD followThis)
+      (140037 'end of statement')
+      {
+        unknown _indexOfInterest[140057] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[140058] "expr temp" "temp"
+        (140067 'move' _iterator[140058](140065 call _getIterator(140044 call(140041 call . downDom c"these") tag followThisHiD)))
+        Defer
+        {
+          {
+            (140082 call _freeIterator _iterator[140058])
+          }
+        }
+        { scopeless type
+          (140072 'move' _indexOfInterest[140057](140069 call iteratorIndex _iterator[140058]))
+        }
+        ForLoop[140059] order-independent
+        {
+          unknown i[140038] "index var" "insert auto destroy"
+          (140077 'move' i[140038] _indexOfInterest[140057])
+          {
+            (140048 yield(140050 call chpl_rankChangeConvertIdxHiDToLoD i collapsedDim idx rank))
+          }
+          label _continueLabel[140062]
+          _indexOfInterest[140057]
+          _iterator[140058]
+        }
+        label _breakLabel[140063]
+      }
+    }
+  }
+  where {
+    (139975 call == tag(139979 call . iterKind c"follower"))
+  }
+  function ArrayViewRankChangeDom[141121](?).chpl_rankChangeConvertLoDTupleToHiD[140099](arg _mt[140105]:_MT[201], arg this[140101]:ArrayViewRankChangeDom[141121](?), arg tup[140103]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown tupHiD[140109](140110 call * downrank(140116 'typeof'(140114 call tup 0)))
+    (140118 'end of statement')
+    unknown i[140120] 0
+    (140123 'end of statement')
+    {
+      unknown d[140124] "index var" 0
+      unknown tmp[140164] "maybe param" "temp"
+      (140176 'move' tmp[140164](140174 call chpl_compute_low_param_loop_bound 0(140127 call - downrank 1)))
+      unknown tmp[140165] "maybe param" "temp"
+      (140186 'move' tmp[140165](140184 call chpl_compute_high_param_loop_bound 0(140181 call - downrank 1)))
+      unknown tmp[140166] "maybe param" "temp"
+      (140189 'move' tmp[140166] 1)
+      ParamForLoop[140191]
+      { d[140124] tmp[140164] tmp[140165] tmp[140166]
+        if(140159 call _cond_test(140157 call collapsedDim d))
+        {
+          (140133 call =(140136 call tupHiD d)(140140 call chpl_build_bounded_range 0 0))
+        }
+        {
+          (140144 call =(140147 call tupHiD d)(140150 call tup i))
+          (140152 call += i 1)
+        }
+      }
+      label _unused_continueLabel[140168]
+      label _breakLabel[140167]
+    }
+    (140200 return tupHiD)
+  }
+  function ArrayViewRankChangeDom[141121](?).chpl_rankChangeConvertHiDTupleToLoD[140204](arg _mt[140210]:_MT[201], arg this[140206]:ArrayViewRankChangeDom[141121](?), arg tup[140208]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown tupLoD[140214](140215 call * rank(140221 'typeof'(140219 call tup 0)))
+    (140223 'end of statement')
+    unknown i[140225] 0
+    (140228 'end of statement')
+    {
+      unknown d[140229] "index var" 0
+      unknown tmp[140260] "maybe param" "temp"
+      (140272 'move' tmp[140260](140270 call chpl_compute_low_param_loop_bound 0(140232 call - downrank 1)))
+      unknown tmp[140261] "maybe param" "temp"
+      (140282 'move' tmp[140261](140280 call chpl_compute_high_param_loop_bound 0(140277 call - downrank 1)))
+      unknown tmp[140262] "maybe param" "temp"
+      (140285 'move' tmp[140262] 1)
+      ParamForLoop[140287]
+      { d[140229] tmp[140260] tmp[140261] tmp[140262]
+        if(140256 call _cond_test(140251 call !(140254 call collapsedDim d)))
+        {
+          (140239 call =(140242 call tupLoD i)(140245 call tup d))
+          (140247 call += i 1)
+        }
+      }
+      label _unused_continueLabel[140264]
+      label _breakLabel[140263]
+    }
+    (140296 return tupLoD)
+  }
+  function ArrayViewRankChangeDom[141121](?).downIdxToUpIdx[140300](arg _mt[140306]:_MT[201], arg this[140302]:ArrayViewRankChangeDom[141121](?), arg downIdx[140304]:_any[141](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown upIdx[140310](140311 call * rank idxType)
+    (140316 'end of statement')
+    unknown upDim[140318] 0
+    (140321 'end of statement')
+    {
+      unknown downDim[140322] "index var" 0
+      unknown tmp[140354] "maybe param" "temp"
+      (140366 'move' tmp[140354](140364 call chpl_compute_low_param_loop_bound 0(140325 call - downrank 1)))
+      unknown tmp[140355] "maybe param" "temp"
+      (140376 'move' tmp[140355](140374 call chpl_compute_high_param_loop_bound 0(140371 call - downrank 1)))
+      unknown tmp[140356] "maybe param" "temp"
+      (140379 'move' tmp[140356] 1)
+      ParamForLoop[140381]
+      { downDim[140322] tmp[140354] tmp[140355] tmp[140356]
+        {
+          if(140350 call _cond_test(140345 call !(140348 call collapsedDim downDim)))
+          {
+            (140333 call =(140336 call upIdx upDim)(140339 call downIdx downDim))
+            (140341 call += upDim 1)
+          }
+        }
+      }
+      label _unused_continueLabel[140358]
+      label _breakLabel[140357]
+    }
+    if(140402 call _cond_test(140398 call == rank 1))
+    {
+      (140390 return(140392 call upIdx 0))
+    }
+    {
+      (140395 return upIdx)
+    }
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiSerialWrite[140410](arg _mt[140416]:_MT[201], arg this[140412]:ArrayViewRankChangeDom[141121](?), arg f[140414]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown first[140420] 1
+    (140423 'end of statement')
+    {
+      unknown _indexOfInterest[140482] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[140483] "expr temp" "temp"
+      (140492 'move' _iterator[140483](140490 call _getIterator(140499 call chpl_direct_range_iter 0(140496 call - downrank 1))))
+      Defer
+      {
+        {
+          (140514 call _freeIterator _iterator[140483])
+        }
+      }
+      { scopeless type
+        (140504 'move' _indexOfInterest[140482](140501 call iteratorIndex _iterator[140483]))
+      }
+      ForLoop[140484]
+      {
+        unknown d[140424] "index var" "insert auto destroy"
+        (140509 'move' d[140424] _indexOfInterest[140482])
+        if(140478 call _cond_test(140473 call !(140476 call collapsedDim d)))
+        {
+          if(140455 call _cond_test first)
+          {
+            (140439 call(140436 call . f c"write") "{")
+            (140443 call = first 0)
+          }
+          {
+            (140451 call(140448 call . f c"write") ", ")
+          }
+          (140464 call(140461 call . f c"write")(140471 call(140468 call . downDom c"dsiDim") d))
+        }
+        label _continueLabel[140487]
+        _indexOfInterest[140482]
+        _iterator[140483]
+      }
+      label _breakLabel[140488]
+    }
+    (140525 call(140522 call . f c"write") "}")
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiMyDist[140531](arg _mt[140535]:_MT[201], arg this[140533]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (140538 return dist)
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiTargetLocales[140542](arg _mt[140546]:_MT[201], arg this[140544]:ArrayViewRankChangeDom[141121](?)) const ref : _unknown[42] "method" "primary method"
+  {
+    (140549 return(140554 call(140551 call . downDom c"dsiTargetLocales")))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiHasSingleLocalSubdomain[140557](arg _mt[140561]:_MT[201], arg this[140559]:ArrayViewRankChangeDom[141121](?)) param : _unknown[42] "method" "primary method"
+  {
+    (140564 return(140569 call(140566 call . downDom c"dsiHasSingleLocalSubdomain")))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiLocalSubdomain[140572](arg _mt[140580]:_MT[201], arg this[140574]:ArrayViewRankChangeDom[141121](?), arg loc[140577] :
+  locale[234]) : _unknown[42] "method" "primary method"
+  {
+    const dims[140584] "const"(140594 call(140591 call .(140589 call(140586 call . downDom c"dsiLocalSubdomain") loc) c"dims"))
+    (140596 'end of statement')
+    const empty[140598] "const"(140600 call chpl__buildDomainRuntimeType defaultDist rank idxType(140605 call chpl_strideUnion dims))
+    (140608 'end of statement')
+    {
+      unknown d[140609] "index var" 0
+      unknown tmp[140642] "maybe param" "temp"
+      (140654 'move' tmp[140642](140652 call chpl_compute_low_param_loop_bound 0(140612 call -(140615 call . dims c"size") 1)))
+      unknown tmp[140643] "maybe param" "temp"
+      (140667 'move' tmp[140643](140665 call chpl_compute_high_param_loop_bound 0(140659 call -(140661 call . dims c"size") 1)))
+      unknown tmp[140644] "maybe param" "temp"
+      (140670 'move' tmp[140644] 1)
+      ParamForLoop[140672]
+      { d[140609] tmp[140642] tmp[140643] tmp[140644]
+        {
+          if(140637 call _cond_test(140625 call &&(140628 call collapsedDim d)(140636 call(140633 call .(140631 call dims d) c"isEmpty"))))
+          {
+            (140622 return empty)
+          }
+        }
+      }
+      label _unused_continueLabel[140646]
+      label _breakLabel[140645]
+    }
+    (140681 return(140683 call chpl_rankChangeConvertDownToUp dims rank collapsedDim))
+  }
+  function ArrayViewRankChangeDom[141121](?).isRankChangeDomainView[140689](arg _mt[140693]:_MT[201], arg this[140691]:ArrayViewRankChangeDom[141121](?)) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (140696 return 1)
+  }
+  function ArrayViewRankChangeDom[141121](?)._getActualDomain[140700](arg _mt[140704]:_MT[201], arg this[140702]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method"
+  {
+    if(140722 call _cond_test(140720 call chpl__isDomainView downDom))
+    {
+      (140708 return(140715 call(140712 call . downDom c"_getActualDomain")))
+    }
+    {
+      (140717 return downDom)
+    }
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiDestroyDom[140728](arg _mt[140732]:_MT[201], arg this[140730]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method" "method overrides" "no return value for void"
+  {
+    if(140746 call _cond_test(140742 call != upDomInst nil[32]))
+    {
+      (140736 call _delete_dom(140737 call postfix! upDomInst) 0)
+    }
+    if(140766 call _cond_test(140762 call != downDomInst nil[32]))
+    {
+      (140752 call _delete_dom(140753 call postfix! downDomInst)(140757 call _isPrivatized(140758 call postfix! downDomInst)))
+    }
+  }
+  function ArrayViewRankChangeDom[141121](?).parSafe[140773](arg _mt[140777]:_MT[201], arg this[140775]:ArrayViewRankChangeDom[141121](?)) param : _unknown[42] "method" "primary method" "no parens"
+  {
+    (140780 return(140784 call . upDom c"parSafe"))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiLow[140789](arg _mt[140793]:_MT[201], arg this[140791]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method" "no parens" "method overrides"
+  {
+    (140796 return(140800 call . upDom c"dsiLow"))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiHigh[140805](arg _mt[140809]:_MT[201], arg this[140807]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method" "no parens" "method overrides"
+  {
+    (140812 return(140816 call . upDom c"dsiHigh"))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiStride[140821](arg _mt[140825]:_MT[201], arg this[140823]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method" "no parens" "method overrides"
+  {
+    (140828 return(140832 call . upDom c"dsiStride"))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiAlignment[140837](arg _mt[140841]:_MT[201], arg this[140839]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method" "no parens" "method overrides"
+  {
+    (140844 return(140848 call . upDom c"dsiAlignment"))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiFirst[140853](arg _mt[140857]:_MT[201], arg this[140855]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method" "no parens" "method overrides"
+  {
+    (140860 return(140864 call . upDom c"dsiFirst"))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiLast[140869](arg _mt[140873]:_MT[201], arg this[140871]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method" "no parens" "method overrides"
+  {
+    (140876 return(140880 call . upDom c"dsiLast"))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiAlignedLow[140885](arg _mt[140889]:_MT[201], arg this[140887]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method" "no parens" "method overrides"
+  {
+    (140892 return(140896 call . upDom c"dsiAlignedLow"))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiAlignedHigh[140901](arg _mt[140905]:_MT[201], arg this[140903]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method" "no parens" "method overrides"
+  {
+    (140908 return(140912 call . upDom c"dsiAlignedHigh"))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiIndexOrder[140917](arg _mt[140923]:_MT[201], arg this[140919]:ArrayViewRankChangeDom[141121](?), arg i[140921]:_any[141](?)) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (140926 return(140933 call(140930 call . upDom c"dsiIndexOrder") i))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiCreateIndexBuffer[140937](arg _mt[140943]:_MT[201], arg this[140939]:ArrayViewRankChangeDom[141121](?), arg size[140941]:_any[141](?)) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (140946 return(140953 call(140950 call . upDom c"dsiCreateIndexBuffer") size))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiSupportsPrivatization[140957](arg _mt[140961]:_MT[201], arg this[140959]:ArrayViewRankChangeDom[141121](?)) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (140964 return(140971 call(140968 call .(140965 call postfix! downDomInst) c"dsiSupportsPrivatization")))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiGetPrivatizeData[140974](arg _mt[140978]:_MT[201], arg this[140976]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method"
+  {
+    (140981 return(140990 call _build_tuple upDomInst collapsedDim idx distPid distInst downDomPid downDomInst))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiPrivatize[140994](arg _mt[141000]:_MT[201], arg this[140996]:ArrayViewRankChangeDom[141121](?), arg privatizeData[140998]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    (141003 return(141004 'new'(_chpl_manager = unmanaged[183](?))(141008 call ArrayViewRankChangeDom(rank =(141010 call . this c"rank"))(idxType =(141015 call . this c"idxType"))(strides =(141020 call . this c"strides"))(upDomInst =(141025 call privatizeData 0))(collapsedDim =(141029 call privatizeData 1))(idx =(141033 call privatizeData 2))(distPid =(141037 call privatizeData 3))(distInst =(141041 call privatizeData 4))(downDomPid =(141045 call privatizeData 5))(downDomInst =(141049 call privatizeData 6)))))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiGetReprivatizeData[141054](arg _mt[141058]:_MT[201], arg this[141056]:ArrayViewRankChangeDom[141121](?)) : _unknown[42] "method" "primary method"
+  {
+    (141061 return(141066 call _build_tuple upDomInst downDomPid downDomInst))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiReprivatize[141070](arg _mt[141078]:_MT[201], arg this[141072]:ArrayViewRankChangeDom[141121](?), arg other[141074]:_any[141](?), arg reprivatizeData[141076]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (141081 call = upDomInst(141085 call reprivatizeData 0))
+    (141087 call = downDomPid(141091 call reprivatizeData 1))
+    (141093 call = downDomInst(141097 call reprivatizeData 2))
+  }
+  function ArrayViewRankChangeDom[141121](?).dsiSupportsAutoLocalAccess[141101](arg _mt[141105]:_MT[201], arg this[141103]:ArrayViewRankChangeDom[141121](?)) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (141108 return(141117 call(141114 call .(141109 call postfix! downDomInst) c"dsiSupportsAutoLocalAccess")))
+  }
+  type ArrayViewRankChangeDom[141121](?) unknown upDomInst[139275](139276 'to unmanaged class from unknown'(139282 'to nilable class from type'(139278 call DefaultRectangularDom rank idxType strides))) const collapsedDim[139302] "const" const idx[139306] "const" const distPid[139310] "const" const distInst[139314] "const" unknown downDomPid[139346] int[10] unknown downDomInst[139351](139361 'to nilable class from type'(139353 call downDomType(139355 call . collapsedDim c"size") idxType strides distInst)) BaseRectangularDom forwarding ( )
+  function buildIndexCacheHelper[141123](arg arr[141125]:_any[141](?), arg dom[141127]:_any[141](?), arg collapsedDim[141129]:_any[141](?), arg idx[141131]:_any[141](?)) : _unknown[42] "private"
+  {
+    if(141224 call _cond_test(141222 call chpl__isDROrDRView arr))
+    {
+      if(141214 call _cond_test(141212 call chpl__isArrayView arr))
+      {
+        if(141193 call _cond_test(141177 call &&(141185 call(141182 call . arr c"isSliceArrayView"))(141186 call !(141192 call(141189 call . arr c"_containsRCRE")))))
+        {
+          (141137 return(141160 call(141157 call .(141150 call(141147 call .(141146 call(141143 call .(141142 call(141139 call . arr c"_getActualArray")) c"dsiGetRAD")) c"toSlice")(141152 call . arr c"dom")) c"toRankChange") dom collapsedDim idx))
+        }
+        {
+          (141165 return(141173 call(141170 call .(141167 call . arr c"indexCache") c"toRankChange") dom collapsedDim idx))
+        }
+      }
+      {
+        (141198 return(141207 call(141204 call .(141203 call(141200 call . arr c"dsiGetRAD")) c"toRankChange") dom collapsedDim idx))
+      }
+    }
+    {
+      (141219 return 0)
+    }
+  }
+  function ArrayViewRankChangeArr[142656](?).init[141264](arg _mt[141286]:_MT[201], arg this[141266]:ArrayViewRankChangeArr[142656](?), arg eltType[141268]:_any[141](?), const arg _DomPid[141270]:_any[141](?), const arg dom[141272]:_any[141](?), const arg _ArrPid[141274]:_any[141](?), const arg _ArrInstance[141276]:_any[141](?), const arg collapsedDim[141278]:_any[141](?), const arg idx[141280]:_any[141](?), param arg ownsArrInstance[141283] :
+  bool) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (141293 call(141290 call . super c"init")(eltType = eltType))
+    (141296 call =(141299 call . this c"_DomPid") _DomPid)
+    (141303 call =(141306 call . this c"dom") dom)
+    (141310 call =(141313 call . this c"_ArrPid") _ArrPid)
+    (141317 call =(141320 call . this c"_ArrInstance") _ArrInstance)
+    (141324 call =(141327 call . this c"collapsedDim") collapsedDim)
+    (141331 call =(141334 call . this c"idx") idx)
+    (141338 call =(141341 call . this c"indexCache")(141345 call buildIndexCacheHelper _ArrInstance dom collapsedDim idx))
+    (141350 call =(141355 call . this c"ownsArrInstance") ownsArrInstance)
+    (141363 call(141360 call . this c"chpl__initThisType"))
+    (141364 'set aliasing array on type'(141366 'typeof' this)(141367 call ! ownsArrInstance))
+  }
+  function ArrayViewRankChangeArr[142656](?).chpl_forwarding_expr2[141373](arg _mt[141378]:_MT[201], arg this[141376]:ArrayViewRankChangeArr[142656](?)) : _unknown[42] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    (141390 return arr)
+  }
+  function ArrayViewRankChangeArr[142656](?).idxType[141393](arg _mt[141397]:_MT[201], arg this[141395]:ArrayViewRankChangeArr[142656](?)) type : _unknown[42] "method" "primary method" "no parens"
+  {
+    (141400 return(141402 call . dom c"idxType"))
+  }
+  function ArrayViewRankChangeArr[142656](?).rank[141407](arg _mt[141411]:_MT[201], arg this[141409]:ArrayViewRankChangeArr[142656](?)) param : _unknown[42] "method" "primary method" "no parens"
+  {
+    (141414 return(141416 call . dom c"rank"))
+  }
+  function ArrayViewRankChangeArr[142656](?).isRankChangeArrayView[141421](arg _mt[141425]:_MT[201], arg this[141423]:ArrayViewRankChangeArr[142656](?)) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (141428 return(141429 call ! ownsArrInstance))
+  }
+  function ArrayViewRankChangeArr[142656](?).these[141434](arg _mt[141438]:_MT[201], arg this[141436]:ArrayViewRankChangeArr[142656](?)) ref : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[141450] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[141451] "expr temp" "temp"
+      (141460 'move' _iterator[141451](141458 call _getIterator(141444 call chpl__serialViewIter this privDom)))
+      Defer
+      {
+        {
+          (141475 call _freeIterator _iterator[141451])
+        }
+      }
+      { scopeless type
+        (141465 'move' _indexOfInterest[141450](141462 call iteratorIndex _iterator[141451]))
+      }
+      ForLoop[141452]
+      {
+        unknown elem[141441] "index var" "insert auto destroy"
+        (141470 'move' elem[141441] _indexOfInterest[141450])
+        (141447 yield elem)
+        label _continueLabel[141455]
+        _indexOfInterest[141450]
+        _iterator[141451]
+      }
+      label _breakLabel[141456]
+    }
+  }
+  function ArrayViewRankChangeArr[142656](?).these[141484](arg _mt[141492]:_MT[201], arg this[141486]:ArrayViewRankChangeArr[142656](?), param arg tag[141489] :
+  iterKind) ref : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    Forall[141549] {
+      induction variables:
+        
+        unknown i[141516] "index var" "insert auto destroy"
+      iterated expressions:
+        privDom
+      shadow variables:
+      other variables
+        forall body
+      {
+        (141520 yield(141544 IfExpr (141522 call shouldUseIndexCache) then
+        { scopeless
+          (141527 call(141524 call . indexCache c"getDataElem")(141532 call(141529 call . indexCache c"getDataIndex") i))
+        } else
+        { scopeless
+          (141538 call(141535 call . arr c"dsiAccess")(141540 call chpl_rankChangeConvertIdx i collapsedDim idx))
+        } ))
+      }
+    }
+  }
+  where {
+    (141494 call &&(141496 call &&(141498 call == tag(141502 call . iterKind c"standalone"))(141505 call ! localeModelHasSublocales))(141508 'resolves'(141513 call(141510 call . privDom c"these") tag)))
+  }
+  function ArrayViewRankChangeArr[142656](?).these[141555](arg _mt[141563]:_MT[201], arg this[141557]:ArrayViewRankChangeArr[142656](?), param arg tag[141560] :
+  iterKind) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[141584] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[141585] "expr temp" "temp"
+      (141594 'move' _iterator[141585](141592 call _getIterator(141579 call(141576 call . privDom c"these") tag)))
+      Defer
+      {
+        {
+          (141609 call _freeIterator _iterator[141585])
+        }
+      }
+      { scopeless type
+        (141599 'move' _indexOfInterest[141584](141596 call iteratorIndex _iterator[141585]))
+      }
+      ForLoop[141586]
+      {
+        unknown followThis[141573] "index var" "insert auto destroy"
+        (141604 'move' followThis[141573] _indexOfInterest[141584])
+        {
+          (141582 yield followThis)
+        }
+        label _continueLabel[141589]
+        _indexOfInterest[141584]
+        _iterator[141585]
+      }
+      label _breakLabel[141590]
+    }
+  }
+  where {
+    (141565 call == tag(141569 call . iterKind c"leader"))
+  }
+  function ArrayViewRankChangeArr[142656](?).these[141619](arg _mt[141629]:_MT[201], arg this[141621]:ArrayViewRankChangeArr[142656](?), param arg tag[141624] :
+  iterKind, arg followThis[141627]:_any[141](?)) ref : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[141687] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[141688] "expr temp" "temp"
+      (141697 'move' _iterator[141688](141695 call _getIterator(141645 call(141642 call . privDom c"these") tag followThis)))
+      Defer
+      {
+        {
+          (141712 call _freeIterator _iterator[141688])
+        }
+      }
+      { scopeless type
+        (141702 'move' _indexOfInterest[141687](141699 call iteratorIndex _iterator[141688]))
+      }
+      ForLoop[141689] order-independent
+      {
+        unknown i[141639] "index var" "insert auto destroy"
+        (141707 'move' i[141639] _indexOfInterest[141687])
+        {
+          if(141681 call _cond_test(141680 call shouldUseIndexCache))
+          {
+            const dataIdx[141651] "const"(141656 call(141653 call . indexCache c"getDataIndex") i)
+            (141659 'end of statement')
+            (141660 yield(141665 call(141662 call . indexCache c"getDataElem") dataIdx))
+          }
+          {
+            (141668 yield(141673 call(141670 call . arr c"dsiAccess")(141675 call chpl_rankChangeConvertIdx i collapsedDim idx)))
+          }
+        }
+        label _continueLabel[141692]
+        _indexOfInterest[141687]
+        _iterator[141688]
+      }
+      label _breakLabel[141693]
+    }
+  }
+  where {
+    (141631 call == tag(141635 call . iterKind c"follower"))
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiSerialWrite[141722](arg _mt[141728]:_MT[201], arg this[141724]:ArrayViewRankChangeArr[142656](?), arg f[141726]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (141732 call chpl_serialReadWriteRectangular f this privDom)
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiSerialRead[141738](arg _mt[141744]:_MT[201], arg this[141740]:ArrayViewRankChangeArr[142656](?), arg f[141742]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (141748 call chpl_serialReadWriteRectangular f this privDom)
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiDisplayRepresentation[141754](arg _mt[141758]:_MT[201], arg this[141756]:ArrayViewRankChangeArr[142656](?)) : _unknown[42] "method" "primary method" "method overrides" "no return value for void"
+  {
+    (141762 call writeln "Rank Change view")
+    (141767 call writeln "----------")
+    (141770 call writeln "of domain:")
+    (141776 call(141773 call . privDom c"dsiDisplayRepresentation"))
+    (141778 call writeln "on array:")
+    (141784 call(141781 call . arr c"dsiDisplayRepresentation"))
+    (141786 call writeln "where the dims are collapsed as follows:")
+    (141791 call writeln collapsedDim)
+    (141794 call writeln "and the missing indices are:")
+    (141799 call writeln idx)
+    (141802 call writeln "----------")
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiAccess[141806](arg _mt[141816]:_MT[201], arg this[141808]:ArrayViewRankChangeArr[142656](?), arg i[141812] ... :
+  idxType) ref : _unknown[42] "inline" "method" "primary method"
+  {
+    (141819 return(141821 call dsiAccess i))
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiAccess[141825](arg _mt[141835]:_MT[201], arg this[141827]:ArrayViewRankChangeArr[142656](?), arg i[141831] ... :
+  idxType) : _unknown[42] "inline" "method" "primary method"
+  {
+    (141841 return(141843 call dsiAccess i))
+  }
+  where {
+    (141838 call shouldReturnRvalueByValue eltType)
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiAccess[141848](arg _mt[141858]:_MT[201], arg this[141850]:ArrayViewRankChangeArr[142656](?), arg i[141854] ... :
+  idxType) const ref : _unknown[42] "inline" "method" "primary method"
+  {
+    (141861 return(141863 call dsiAccess i))
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiAccess[141867](arg _mt[141873]:_MT[201], arg this[141869]:ArrayViewRankChangeArr[142656](?), arg i[141871]:_any[141](?)) ref : _unknown[42] "inline" "method" "primary method"
+  {
+    if(141908 call _cond_test(141907 call shouldUseIndexCache))
+    {
+      const dataIdx[141878] "const"(141883 call(141880 call . indexCache c"getDataIndex") i)
+      (141886 'end of statement')
+      (141887 return(141892 call(141889 call . indexCache c"getDataElem") dataIdx))
+    }
+    {
+      (141895 return(141900 call(141897 call . arr c"dsiAccess")(141902 call chpl_rankChangeConvertIdx i collapsedDim idx)))
+    }
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiAccess[141914](arg _mt[141920]:_MT[201], arg this[141916]:ArrayViewRankChangeArr[142656](?), arg i[141918]:_any[141](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    if(141958 call _cond_test(141957 call shouldUseIndexCache))
+    {
+      const dataIdx[141928] "const"(141933 call(141930 call . indexCache c"getDataIndex") i)
+      (141936 'end of statement')
+      (141937 return(141942 call(141939 call . indexCache c"getDataElem") dataIdx))
+    }
+    {
+      (141945 return(141950 call(141947 call . arr c"dsiAccess")(141952 call chpl_rankChangeConvertIdx i collapsedDim idx)))
+    }
+  }
+  where {
+    (141923 call shouldReturnRvalueByValue eltType)
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiAccess[141965](arg _mt[141971]:_MT[201], arg this[141967]:ArrayViewRankChangeArr[142656](?), arg i[141969]:_any[141](?)) const ref : _unknown[42] "inline" "method" "primary method"
+  {
+    if(142006 call _cond_test(142005 call shouldUseIndexCache))
+    {
+      const dataIdx[141976] "const"(141981 call(141978 call . indexCache c"getDataIndex") i)
+      (141984 'end of statement')
+      (141985 return(141990 call(141987 call . indexCache c"getDataElem") dataIdx))
+    }
+    {
+      (141993 return(141998 call(141995 call . arr c"dsiAccess")(142000 call chpl_rankChangeConvertIdx i collapsedDim idx)))
+    }
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiLocalAccess[142012](arg _mt[142018]:_MT[201], arg this[142014]:ArrayViewRankChangeArr[142656](?), arg i[142016]:_any[141](?)) ref : _unknown[42] "inline" "method" "primary method"
+  {
+    (142021 return(142028 call(142025 call . arr c"dsiLocalAccess")(142030 call chpl_rankChangeConvertIdx i collapsedDim idx)))
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiLocalAccess[142036](arg _mt[142042]:_MT[201], arg this[142038]:ArrayViewRankChangeArr[142656](?), arg i[142040]:_any[141](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    (142048 return(142053 call(142050 call . arr c"dsiLocalAccess")(142055 call chpl_rankChangeConvertIdx i collapsedDim idx)))
+  }
+  where {
+    (142045 call shouldReturnRvalueByValue eltType)
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiLocalAccess[142062](arg _mt[142068]:_MT[201], arg this[142064]:ArrayViewRankChangeArr[142656](?), arg i[142066]:_any[141](?)) const ref : _unknown[42] "inline" "method" "primary method"
+  {
+    (142071 return(142076 call(142073 call . arr c"dsiLocalAccess")(142078 call chpl_rankChangeConvertIdx i collapsedDim idx)))
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiBoundsCheck[142084](arg _mt[142090]:_MT[201], arg this[142086]:ArrayViewRankChangeArr[142656](?), arg i[142088]:_any[141](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    (142093 return(142098 call(142095 call . privDom c"dsiMember") i))
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiHasSingleLocalSubdomain[142102](arg _mt[142106]:_MT[201], arg this[142104]:ArrayViewRankChangeArr[142656](?)) param : _unknown[42] "method" "primary method"
+  {
+    (142109 return(142114 call(142111 call . privDom c"dsiHasSingleLocalSubdomain")))
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiLocalSubdomain[142117](arg _mt[142125]:_MT[201], arg this[142119]:ArrayViewRankChangeArr[142656](?), arg loc[142122] :
+  locale[234]) : _unknown[42] "method" "primary method"
+  {
+    (142128 return(142133 call(142130 call . privDom c"dsiLocalSubdomain") loc))
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiSupportsPrivatization[142137](arg _mt[142141]:_MT[201], arg this[142139]:ArrayViewRankChangeArr[142656](?)) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (142144 return(142149 call(142146 call . _ArrInstance c"dsiSupportsPrivatization")))
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiGetPrivatizeData[142152](arg _mt[142156]:_MT[201], arg this[142154]:ArrayViewRankChangeArr[142656](?)) : _unknown[42] "method" "primary method"
+  {
+    (142159 return(142167 call _build_tuple _DomPid dom _ArrPid _ArrInstance collapsedDim idx))
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiPrivatize[142171](arg _mt[142177]:_MT[201], arg this[142173]:ArrayViewRankChangeArr[142656](?), arg privatizeData[142175]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    (142180 return(142181 'new'(_chpl_manager = unmanaged[183](?))(142185 call ArrayViewRankChangeArr(eltType =(142187 call . this c"eltType"))(_DomPid =(142192 call privatizeData 0))(dom =(142196 call privatizeData 1))(_ArrPid =(142200 call privatizeData 2))(_ArrInstance =(142204 call privatizeData 3))(collapsedDim =(142208 call privatizeData 4))(idx =(142212 call privatizeData 5))(ownsArrInstance =(142216 call . this c"ownsArrInstance")))))
+  }
+  function ArrayViewRankChangeArr[142656](?).shouldUseIndexCache[142222](arg _mt[142226]:_MT[201], arg this[142224]:ArrayViewRankChangeArr[142656](?)) param : _unknown[42] "method" "primary method"
+  {
+    (142229 return(142231 call chpl__isDROrDRView _ArrInstance))
+  }
+  function ArrayViewRankChangeArr[142656](?).buildIndexCache[142235](arg _mt[142239]:_MT[201], arg this[142237]:ArrayViewRankChangeArr[142656](?)) : _unknown[42] "method" "primary method"
+  {
+    if(142327 call _cond_test(142326 call shouldUseIndexCache))
+    {
+      if(142318 call _cond_test(142316 call chpl__isArrayView _ArrInstance))
+      {
+        if(142297 call _cond_test(142283 call &&(142289 call(142286 call . _ArrInstance c"isSliceArrayView"))(142290 call !(142296 call(142293 call . _ArrInstance c"_containsRCRE")))))
+        {
+          (142245 return(142266 call(142263 call .(142258 call(142255 call .(142254 call(142251 call .(142250 call(142247 call . _ArrInstance c"_getActualArray")) c"dsiGetRAD")) c"toSlice")(142260 call . _ArrInstance c"dom")) c"toRankChange") dom collapsedDim idx))
+        }
+        {
+          (142271 return(142279 call(142276 call .(142273 call . _ArrInstance c"indexCache") c"toRankChange") dom collapsedDim idx))
+        }
+      }
+      {
+        (142302 return(142311 call(142308 call .(142307 call(142304 call . _ArrInstance c"dsiGetRAD")) c"toRankChange") dom collapsedDim idx))
+      }
+    }
+    {
+      (142323 return 0)
+    }
+  }
+  function ArrayViewRankChangeArr[142656](?).privDom[142333](arg _mt[142337]:_MT[201], arg this[142335]:ArrayViewRankChangeArr[142656](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    if(142355 call _cond_test(142353 call _isPrivatized dom))
+    {
+      (142343 return(142345 call chpl_getPrivatizedCopy(142347 'typeof' dom) _DomPid))
+    }
+    {
+      (142350 return dom)
+    }
+  }
+  { scopeless type
+    (142340 'typeof' dom)
+  }
+  function ArrayViewRankChangeArr[142656](?).arr[142362](arg _mt[142366]:_MT[201], arg this[142364]:ArrayViewRankChangeArr[142656](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    if(142382 call _cond_test(142380 call _isPrivatized _ArrInstance))
+    {
+      (142370 return(142372 call chpl_getPrivatizedCopy(142374 'typeof' _ArrInstance) _ArrPid))
+    }
+    {
+      (142377 return _ArrInstance)
+    }
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiGetBaseDom[142388](arg _mt[142392]:_MT[201], arg this[142390]:ArrayViewRankChangeArr[142656](?)) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (142395 return dom)
+  }
+  function ArrayViewRankChangeArr[142656](?)._getActualArray[142399](arg _mt[142403]:_MT[201], arg this[142401]:ArrayViewRankChangeArr[142656](?)) : _unknown[42] "method" "primary method"
+  {
+    if(142419 call _cond_test(142417 call chpl__isArrayView arr))
+    {
+      (142407 return(142412 call(142409 call . arr c"_getActualArray")))
+    }
+    {
+      (142414 return arr)
+    }
+  }
+  function ArrayViewRankChangeArr[142656](?)._containsRCRE[142425](arg _mt[142429]:_MT[201], arg this[142427]:ArrayViewRankChangeArr[142656](?)) param : _unknown[42] "method" "primary method"
+  {
+    if(142459 call _cond_test(142457 call chpl__isArrayView arr))
+    {
+      (142433 return(142434 call ||(142436 call ||(142442 call(142439 call . arr c"isRankChangeArrayView"))(142447 call(142444 call . arr c"isReindexArrayView")))(142452 call(142449 call . arr c"_containsRCRE"))))
+    }
+    {
+      (142454 return 0)
+    }
+  }
+  function ArrayViewRankChangeArr[142656](?)._getRCREView[142465](arg _mt[142469]:_MT[201], arg this[142467]:ArrayViewRankChangeArr[142656](?)) : _unknown[42] "method" "primary method"
+  {
+    (142472 return this)
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiElementInitializationComplete[142476](arg _mt[142480]:_MT[201], arg this[142478]:ArrayViewRankChangeArr[142656](?)) : _unknown[42] "method" "primary method" "method overrides" "no return value for void"
+  {
+  }
+  function ArrayViewRankChangeArr[142656](?).dsiDestroyArr[142485](arg _mt[142493]:_MT[201], arg this[142487]:ArrayViewRankChangeArr[142656](?), arg deinitElts[142490] :
+  bool) : _unknown[42] "method" "primary method" "method overrides" "no return value for void"
+  {
+    if(142504 call _cond_test ownsArrInstance)
+    {
+      (142498 call _delete_arr _ArrInstance(142501 call _isPrivatized _ArrInstance))
+    }
+  }
+  function ArrayViewRankChangeArr[142656](?).doiCanBulkTransferRankChange[142510](arg _mt[142514]:_MT[201], arg this[142512]:ArrayViewRankChangeArr[142656](?)) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (142517 return(142522 call(142519 call . arr c"doiCanBulkTransferRankChange")))
+  }
+  function ArrayViewRankChangeArr[142656](?).doiBulkTransferFromKnown[142525](arg _mt[142535]:_MT[201], arg this[142527]:ArrayViewRankChangeArr[142656](?), arg destDom[142529]:_any[141](?), arg srcClass[142531]:_any[141](?), arg srcDom[142533]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    const shifted[142548] "const"(142550 call chpl_rankChangeConvertDom(142555 call(142552 call . destDom c"dims"))(142557 call . destDom c"rank")(142564 call .(142561 call . this c"dom") c"collapsedDim")(142571 call .(142568 call . this c"dom") c"idx"))
+    (142575 'end of statement')
+    (142576 return(142578 call chpl__bulkTransferArray(142580 call . this c"arr") shifted srcClass srcDom))
+  }
+  where {
+    (142545 call(142542 call .(142539 call . this c"arr") c"doiCanBulkTransferRankChange"))
+  }
+  { scopeless type
+    bool
+  }
+  function ArrayViewRankChangeArr[142656](?).doiBulkTransferToKnown[142590](arg _mt[142600]:_MT[201], arg this[142592]:ArrayViewRankChangeArr[142656](?), arg srcDom[142594]:_any[141](?), arg destClass[142596]:_any[141](?), arg destDom[142598]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    const shifted[142613] "const"(142615 call chpl_rankChangeConvertDom(142620 call(142617 call . srcDom c"dims"))(142622 call . srcDom c"rank")(142629 call .(142626 call . this c"dom") c"collapsedDim")(142636 call .(142633 call . this c"dom") c"idx"))
+    (142640 'end of statement')
+    (142641 return(142643 call chpl__bulkTransferArray destClass destDom(142647 call . this c"arr") shifted))
+  }
+  where {
+    (142610 call(142607 call .(142604 call . this c"arr") c"doiCanBulkTransferRankChange"))
+  }
+  { scopeless type
+    bool
+  }
+  type ArrayViewRankChangeArr[142656](?) const _DomPid[141233] "const" const dom[141237] "const" const _ArrPid[141241] "const" const _ArrInstance[141245] "const" const collapsedDim[141249] "const" const idx[141253] "const" const indexCache[141257] "const" unknown ownsArrInstance[141261] "param" AbsBaseArr forwarding ( )
+  function chpl_rankChangeConvertIdx[142658](arg i[142661] :
+  integral, arg collapsedDim[142664]:_any[141](?), arg idx[142666]:_any[141](?)) : _unknown[42] "inline"
+  {
+    unknown downrank[142670] "param"(142672 call . collapsedDim c"size")
+    (142676 'end of statement')
+    unknown ind[142678] idx
+    (142681 'end of statement')
+    unknown j[142683] 0
+    (142686 'end of statement')
+    {
+      unknown d[142687] "index var" 0
+      unknown tmp[142717] "maybe param" "temp"
+      (142729 'move' tmp[142717](142727 call chpl_compute_low_param_loop_bound 0(142690 call - downrank 1)))
+      unknown tmp[142718] "maybe param" "temp"
+      (142739 'move' tmp[142718](142737 call chpl_compute_high_param_loop_bound 0(142734 call - downrank 1)))
+      unknown tmp[142719] "maybe param" "temp"
+      (142742 'move' tmp[142719] 1)
+      ParamForLoop[142744]
+      { d[142687] tmp[142717] tmp[142718] tmp[142719]
+        {
+          if(142713 call _cond_test(142708 call !(142711 call collapsedDim d)))
+          {
+            (142698 call =(142701 call ind d) i)
+            (142704 call += j 1)
+          }
+        }
+      }
+      label _unused_continueLabel[142721]
+      label _breakLabel[142720]
+    }
+    (142754 call assert(142755 call == j 1))
+    (142759 return ind)
+  }
+  function chpl_rankChangeConvertIdx[142763](arg i[142765]:_any[141](?), arg collapsedDim[142767]:_any[141](?), arg idx[142769]:_any[141](?)) : _unknown[42] "inline"
+  {
+    unknown downrank[142773] "param"(142775 call . collapsedDim c"size")
+    (142779 'end of statement')
+    unknown ind[142781] idx
+    (142784 'end of statement')
+    unknown j[142786] 0
+    (142789 'end of statement')
+    {
+      unknown d[142790] "index var" 0
+      unknown tmp[142822] "maybe param" "temp"
+      (142834 'move' tmp[142822](142832 call chpl_compute_low_param_loop_bound 0(142793 call - downrank 1)))
+      unknown tmp[142823] "maybe param" "temp"
+      (142844 'move' tmp[142823](142842 call chpl_compute_high_param_loop_bound 0(142839 call - downrank 1)))
+      unknown tmp[142824] "maybe param" "temp"
+      (142847 'move' tmp[142824] 1)
+      ParamForLoop[142849]
+      { d[142790] tmp[142822] tmp[142823] tmp[142824]
+        {
+          if(142818 call _cond_test(142813 call !(142816 call collapsedDim d)))
+          {
+            (142801 call =(142804 call ind d)(142807 call i j))
+            (142809 call += j 1)
+          }
+        }
+      }
+      label _unused_continueLabel[142826]
+      label _breakLabel[142825]
+    }
+    (142858 return ind)
+  }
+  function chpl_rankChangeConvertIdxHiDToLoD[142862](arg i[142864]:_any[141](?), arg collapsedDim[142866]:_any[141](?), arg idx[142868]:_any[141](?), param arg rank[142870]:_any[141](?)) : _unknown[42] "inline"
+  {
+    unknown downrank[142874] "param"(142876 call . collapsedDim c"size")
+    (142880 'end of statement')
+    unknown ind[142882](142883 call * rank(142889 'typeof'(142887 call i 0)))
+    (142891 'end of statement')
+    unknown j[142893] 0
+    (142896 'end of statement')
+    {
+      unknown d[142897] "index var" 0
+      unknown tmp[142929] "maybe param" "temp"
+      (142941 'move' tmp[142929](142939 call chpl_compute_low_param_loop_bound 0(142900 call - downrank 1)))
+      unknown tmp[142930] "maybe param" "temp"
+      (142951 'move' tmp[142930](142949 call chpl_compute_high_param_loop_bound 0(142946 call - downrank 1)))
+      unknown tmp[142931] "maybe param" "temp"
+      (142954 'move' tmp[142931] 1)
+      ParamForLoop[142956]
+      { d[142897] tmp[142929] tmp[142930] tmp[142931]
+        {
+          if(142925 call _cond_test(142920 call !(142923 call collapsedDim d)))
+          {
+            (142908 call =(142911 call ind j)(142914 call i d))
+            (142916 call += j 1)
+          }
+        }
+      }
+      label _unused_continueLabel[142933]
+      label _breakLabel[142932]
+    }
+    if(142977 call _cond_test(142973 call == rank 1))
+    {
+      (142965 return(142967 call ind 0))
+    }
+    {
+      (142970 return ind)
+    }
+  }
+  function chpl_rankChangeConvertDownToUp[142985](arg dims[142987]:_any[141](?), param arg uprank[142989]:_any[141](?), arg collapsedDim[142991]:_any[141](?)) : _unknown[42] "inline"
+  {
+    unknown ranges[142995](142996 call * uprank(143002 'typeof'(143000 call dims 0)))
+    (143004 'end of statement')
+    unknown j[143006] 0
+    (143009 'end of statement')
+    {
+      unknown d[143010] "index var" 0
+      unknown tmp[143045] "maybe param" "temp"
+      (143057 'move' tmp[143045](143055 call chpl_compute_low_param_loop_bound 0(143013 call -(143016 call . dims c"size") 1)))
+      unknown tmp[143046] "maybe param" "temp"
+      (143070 'move' tmp[143046](143068 call chpl_compute_high_param_loop_bound 0(143062 call -(143064 call . dims c"size") 1)))
+      unknown tmp[143047] "maybe param" "temp"
+      (143073 'move' tmp[143047] 1)
+      ParamForLoop[143075]
+      { d[143010] tmp[143045] tmp[143046] tmp[143047]
+        {
+          if(143041 call _cond_test(143036 call !(143039 call collapsedDim d)))
+          {
+            (143024 call =(143027 call ranges j)(143030 call dims d))
+            (143032 call += j 1)
+          }
+        }
+      }
+      label _unused_continueLabel[143049]
+      label _breakLabel[143048]
+    }
+    (143084 return(143089 call chpl__buildDomainExpr(143087 'expand_tuple' ranges) 1))
+  }
+  function chpl_rankChangeConvertDom[143093](arg dims[143095]:_any[141](?), param arg uprank[143097]:_any[141](?), arg collapsedDim[143099]:_any[141](?), arg idx[143101]:_any[141](?)) : _unknown[42] "inline"
+  {
+    unknown downrank[143105] "param"(143107 call . collapsedDim c"size")
+    (143111 'end of statement')
+    if(143139 call _cond_test(143132 call != uprank(143136 call . dims c"size")))
+    {
+      (143113 call compilerError "Called chpl_rankChangeConvertDom with incorrect rank. Got "(143117 call :(143120 call . dims c"size") string[244]) ", expecting "(143127 call : uprank string[244]))
+    }
+    unknown ranges[143145](143146 call * downrank(143152 'typeof'(143150 call dims 0)))
+    (143154 'end of statement')
+    unknown j[143156] 0
+    (143159 'end of statement')
+    {
+      unknown d[143160] "index var" 0
+      unknown tmp[143209] "maybe param" "temp"
+      (143221 'move' tmp[143209](143219 call chpl_compute_low_param_loop_bound 0(143163 call - downrank 1)))
+      unknown tmp[143210] "maybe param" "temp"
+      (143231 'move' tmp[143210](143229 call chpl_compute_high_param_loop_bound 0(143226 call - downrank 1)))
+      unknown tmp[143211] "maybe param" "temp"
+      (143234 'move' tmp[143211] 1)
+      ParamForLoop[143236]
+      { d[143160] tmp[143209] tmp[143210] tmp[143211]
+        {
+          if(143205 call _cond_test(143200 call !(143203 call collapsedDim d)))
+          {
+            (143171 call =(143174 call ranges d)(143177 call dims j))
+            (143179 call += j 1)
+          }
+          {
+            (143184 call =(143187 call ranges d)(143196 call(143193 call .(143192 'typeof'(143190 call ranges d)) c"createWithSingleElement")(143198 call idx d)))
+          }
+        }
+      }
+      label _unused_continueLabel[143213]
+      label _breakLabel[143212]
+    }
+    (143245 return(143250 call chpl__buildDomainExpr(143248 'expand_tuple' ranges) 1))
+  }
+}

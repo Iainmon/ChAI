@@ -1,0 +1,609 @@
+AST dump for LocaleModel after pass normalize.
+Module use list: LocaleModelHelpFlat LocaleModelHelpMem IO 
+
+{
+  function chpl__init_LocaleModel[468570]() : void[4] "insert line file info" "module init"
+  {
+    unknown call_tmp[937056] "expr temp" "maybe param" "maybe type" "temp"
+    (937059 'move' call_tmp[937056](308766 call chpl_build_bounded_range 1 0))
+    unknown call_tmp[937061] "maybe param" "maybe type" "temp"
+    (937064 'move' call_tmp[937061](308769 call chpl__buildDomainExpr call_tmp[937056] 1))
+    unknown call_tmp[937066] "maybe param" "maybe type" "temp"
+    (937069 'move' call_tmp[937066](308760 call chpl__buildDomainRuntimeType defaultDist[288287] 1))
+    (653795 'init var' chpl_emptyLocaleSpace[308758] call_tmp[937061] call_tmp[937066])
+    (308772 'end of statement')
+    unknown call_tmp[937071] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (937074 'move' call_tmp[937071](308776 call chpl__ensureDomainExpr chpl_emptyLocaleSpace[308758]))
+    unknown call_tmp[937076] "expr temp" "maybe param" "maybe type" "temp"
+    (937079 'move' call_tmp[937076](308779 call chpl__buildArrayRuntimeType call_tmp[937071] locale[234]))
+    (653797 'default init var' chpl_emptyLocales[308774] call_tmp[937076])
+    (308782 'end of statement' chpl_emptyLocaleSpace[308758])
+    (1001127 'resolution point' |writeSerializable[475322])
+    (1001129 'end of statement')
+    (631133 return _void[46])
+  }
+  function chpl__deinit_LocaleModel[309514]() : _unknown[42] "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[309529] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[309530] "expr temp" "temp"
+      (309539 'move' _iterator[309530](309537 call _getIterator chpl_emptyLocales[308774]))
+      Defer
+      {
+        {
+          (309554 call _freeIterator _iterator[309530])
+        }
+      }
+      { scopeless type
+        (309544 'move' _indexOfInterest[309529](309541 call iteratorIndex _iterator[309530]))
+      }
+      ForLoop[309531]
+      {
+        unknown l[309517] "index var" "insert auto destroy"
+        (568824 'end of statement')
+        (309549 'move' l[309517] _indexOfInterest[309529])
+        (568825 'end of statement' l[309517])
+        {
+          unknown call_tmp[937362] "expr temp" "maybe param" "maybe type" "temp"
+          (937365 'move' call_tmp[937362](309523 call _instance _mt[203] l[309517]))
+          (309526 call chpl__delete call_tmp[937362])
+          (568827 'end of statement' l[309517])
+        }
+        label _continueLabel[309534]
+        _indexOfInterest[309529]
+        _iterator[309530]
+      }
+      label _breakLabel[309535]
+    }
+    (631135 return _void[46])
+  }
+  function chpl_localeModel_sublocToExecutionSubloc[308731](arg full_subloc[308734] :
+  chpl_sublocID_t[135191]) : _unknown[42] "export" "local args"
+  {
+    unknown ret[630888] "RVV" "temp"
+    (630893 'move' ret[630888](630892 'deref' full_subloc[308734]))
+    (630890 return ret[630888])
+  }
+  function chpl_localeModel_sublocMerge[308742](arg full_subloc[308745] :
+  chpl_sublocID_t[135191], arg execution_subloc[308749] :
+  chpl_sublocID_t[135191]) : _unknown[42] "export" "local args"
+  {
+    unknown ret[630897] "RVV" "temp"
+    (630902 'move' ret[630897](630901 'deref' execution_subloc[308749]))
+    (630899 return ret[630897])
+  }
+  const chpl_emptyLocaleSpace[308758] "dead at end of block" "const" "insert auto destroy"
+  const chpl_emptyLocales[308774] "dead at end of block" "const" "insert auto destroy" "unsafe"
+  function LocaleModel[309075].init[308795](arg _mt[308799]:_MT[201], arg this[308797]:LocaleModel[309075]) : void[4] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown super_tmp[533857] "temporary of super field" "temp"
+    (533865 'move' super_tmp[533857](533858 '.v' this[308797] c"super"))
+    (533861 call init _mt[203] super_tmp[533857])
+    (568743 'end of statement')
+    unknown tmp[533820] "temp" "type variable"
+    { scopeless type
+      unknown call_type_tmp[579015] "expr temp" "maybe type" "temp" "type variable"
+      unknown call_tmp[937081] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (937084 'move' call_tmp[937081](533822 '.v' this[308797] c"super"))
+      (579019 'move' call_type_tmp[579015](533825 'typeof' call_tmp[937081]))
+    }
+    (533826 'move' tmp[533820] call_type_tmp[579015])
+    unknown call_tmp[937086] "maybe param" "maybe type" "temp"
+    (937089 'move' call_tmp[937086](533831 'cast' tmp[533820] this[308797]))
+    unknown chpl__thisAsParent[533828] "dead at end of block" "insert auto destroy" "temp"
+    (653799 'init var' chpl__thisAsParent[533828] call_tmp[937086] tmp[533820])
+    (533834 'setcid' chpl__thisAsParent[533828])
+    (568744 'end of statement')
+    unknown call_tmp[937091] "expr temp" "maybe param" "maybe type" "temp"
+    (937094 'move' call_tmp[937091](308809 call _cond_test rootLocaleInitialized[52042]))
+    if call_tmp[937091]
+    {
+      (308804 call halt "Cannot create additional LocaleModel instances")
+    }
+    unknown call_tmp[937096] "expr temp" "maybe param" "maybe type" "temp"
+    (937099 'move' call_tmp[937096](459561 call chpl_nodeID[305038]))
+    unknown call_tmp[937101] "maybe param" "maybe type" "temp"
+    (937104 'move' call_tmp[937101](308816 call : call_tmp[937096] int(64)[10]))
+    unknown _node_id[533836] "temp"
+    (533839 'init var' _node_id[533836] call_tmp[937101] int(64)[10])
+    (533841 'init field' this[308797] c"_node_id" _node_id[533836])
+    (568746 'end of statement')
+    val local_name[533845]:string[244] "temp"
+    (533848 'default init var' local_name[533845] string[244])
+    (533850 '.=' this[308797] c"local_name" local_name[533845])
+    (568747 'end of statement')
+    (533856 'init done')
+    (568748 'end of statement')
+    (533855 'setcid' this[308797])
+    (568749 'end of statement')
+    (308826 call(459564 call (partial) setup _mt[203] this[308797]))
+    (630904 return _void[46])
+  }
+  function LocaleModel[309075].init[308829](arg _mt[308837]:_MT[201], arg this[308831]:LocaleModel[309075], arg parent_loc[308834]:locale[234]) : void[4] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[937108] "expr temp" "maybe param" "maybe type" "temp"
+    (937111 'move' call_tmp[937108](308845 call _cond_test rootLocaleInitialized[52042]))
+    if call_tmp[937108]
+    {
+      (308842 call halt "Cannot create additional LocaleModel instances")
+    }
+    unknown super_tmp[533869] "temporary of super field" "temp"
+    (533871 'move' super_tmp[533869](533868 '.v' this[308831] c"super"))
+    (308853 call(308850 call (partial) init _mt[203] super_tmp[533869]) parent_loc[308834])
+    (568752 'end of statement')
+    unknown tmp[533874] "temp" "type variable"
+    { scopeless type
+      unknown call_type_tmp[579021] "expr temp" "maybe type" "temp" "type variable"
+      unknown call_tmp[937115] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (937118 'move' call_tmp[937115](533876 '.v' this[308831] c"super"))
+      (579025 'move' call_type_tmp[579021](533879 'typeof' call_tmp[937115]))
+    }
+    (533880 'move' tmp[533874] call_type_tmp[579021])
+    unknown call_tmp[937120] "maybe param" "maybe type" "temp"
+    (937123 'move' call_tmp[937120](533885 'cast' tmp[533874] this[308831]))
+    unknown chpl__thisAsParent[533882] "dead at end of block" "insert auto destroy" "temp"
+    (653801 'init var' chpl__thisAsParent[533882] call_tmp[937120] tmp[533874])
+    (533888 'setcid' chpl__thisAsParent[533882])
+    (568753 'end of statement')
+    unknown call_tmp[937125] "expr temp" "maybe param" "maybe type" "temp"
+    (937128 'move' call_tmp[937125](459574 call chpl_nodeID[305038]))
+    unknown call_tmp[937130] "maybe param" "maybe type" "temp"
+    (937133 'move' call_tmp[937130](308858 call : call_tmp[937125] int(64)[10]))
+    unknown _node_id[533890] "temp"
+    (533893 'init var' _node_id[533890] call_tmp[937130] int(64)[10])
+    (533895 'init field' this[308831] c"_node_id" _node_id[533890])
+    (568754 'end of statement')
+    val local_name[533899]:string[244] "temp"
+    (533902 'default init var' local_name[533899] string[244])
+    (533904 '.=' this[308831] c"local_name" local_name[533899])
+    (568755 'end of statement')
+    (533910 'init done')
+    (568756 'end of statement')
+    (533909 'setcid' this[308831])
+    (568757 'end of statement')
+    (308868 call(459577 call (partial) setup _mt[203] this[308831]))
+    (630906 return _void[46])
+  }
+  function LocaleModel[309075].chpl_id[308871](arg _mt[308875]:_MT[201], arg this[308873]:LocaleModel[309075]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[630910] "RVV" "temp"
+    unknown call_tmp[937139] "expr temp" "maybe param" "maybe type" "temp"
+    (937142 'move' call_tmp[937139](459582 call _node_id _mt[203] this[308873]))
+    (630915 'move' ret[630910](630914 'deref' call_tmp[937139]))
+    (630912 return ret[630910])
+  }
+  function LocaleModel[309075].chpl_localeid[308882](arg _mt[308886]:_MT[201], arg this[308884]:LocaleModel[309075]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[630919] "RVV" "temp"
+    unknown call_tmp[937146] "expr temp" "maybe param" "maybe type" "temp"
+    (937149 'move' call_tmp[937146](459587 call _node_id _mt[203] this[308884]))
+    unknown call_tmp[937151] "expr temp" "maybe param" "maybe type" "temp"
+    (937154 'move' call_tmp[937151](308892 call : call_tmp[937146] chpl_nodeID_t[135185]))
+    unknown call_tmp[937156] "expr temp" "maybe param" "maybe type" "temp"
+    (937159 'move' call_tmp[937156](308891 call chpl_buildLocaleID call_tmp[937151] c_sublocid_any[135202]))
+    (630924 'move' ret[630919](630923 'deref' call_tmp[937156]))
+    (630921 return ret[630919])
+  }
+  function LocaleModel[309075].chpl_name[308899](arg _mt[308903]:_MT[201], arg this[308901]:LocaleModel[309075]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[630928] "RVV" "temp"
+    unknown call_tmp[937163] "expr temp" "maybe param" "maybe type" "temp"
+    (937166 'move' call_tmp[937163](459596 call local_name _mt[203] this[308901]))
+    (630933 'move' ret[630928](630932 'deref' call_tmp[937163]))
+    (630930 return ret[630928])
+  }
+  function LocaleModel[309075].getChildSpace[308910](arg _mt[308914]:_MT[201], arg this[308912]:LocaleModel[309075]) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[630937] "RVV" "temp"
+    (630942 'move' ret[630937](630941 'deref' chpl_emptyLocaleSpace[308758]))
+    (630939 return ret[630937])
+  }
+  function LocaleModel[309075]._getChildCount[308921](arg _mt[308925]:_MT[201], arg this[308923]:LocaleModel[309075]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[630946] "RVV" "temp"
+    (630951 'move' ret[630946](630950 'deref' 0))
+    (630948 return ret[630946])
+  }
+  function LocaleModel[309075].getChildIndices[308932](arg _mt[308936]:_MT[201], arg this[308934]:LocaleModel[309075]) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    unknown ret[630955] "RVV" "temp"
+    {
+      unknown _indexOfInterest[308946] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[308947] "expr temp" "temp"
+      (308956 'move' _iterator[308947](308954 call _getIterator chpl_emptyLocaleSpace[308758]))
+      Defer
+      {
+        {
+          (308971 call _freeIterator _iterator[308947])
+        }
+      }
+      { scopeless type
+        (308961 'move' _indexOfInterest[308946](308958 call iteratorIndex _iterator[308947]))
+      }
+      ForLoop[308948]
+      {
+        unknown idx[308940] "index var" "insert auto destroy"
+        (568765 'end of statement')
+        (308966 'move' idx[308940] _indexOfInterest[308946])
+        (568766 'end of statement' idx[308940])
+        unknown yret[630959] "YVV" "temp"
+        (630963 'move' yret[630959](630962 'coerce' idx[308940] int(64)[10]))
+        (308943 yield yret[630959])
+        (568768 'end of statement' idx[308940])
+        label _continueLabel[308951]
+        _indexOfInterest[308946]
+        _iterator[308947]
+      }
+      label _breakLabel[308952]
+    }
+    (630957 return ret[630955])
+  }
+  { scopeless type
+    int(64)[10]
+  }
+  function LocaleModel[309075]._getChild[308981](arg _mt[308989]:_MT[201], arg this[308983]:LocaleModel[309075], arg idx[308986]:int(64)[10]) : _unknown[42] "method" "primary method" "method overrides" "no return value for void"
+  {
+    unknown ret[630968] "RVV" "temp"
+    (308994 call halt "requesting a child from a flat LocaleModel locale")
+    (630970 return ret[630968])
+  }
+  { scopeless type
+    locale[234]
+  }
+  function LocaleModel[309075].getChildren[309001](arg _mt[309005]:_MT[201], arg this[309003]:LocaleModel[309075]) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    unknown ret[630974] "RVV" "temp"
+    {
+      unknown _indexOfInterest[309015] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[309016] "expr temp" "temp"
+      (309025 'move' _iterator[309016](309023 call _getIterator chpl_emptyLocales[308774]))
+      Defer
+      {
+        {
+          (309040 call _freeIterator _iterator[309016])
+        }
+      }
+      { scopeless type
+        (309030 'move' _indexOfInterest[309015](309027 call iteratorIndex _iterator[309016]))
+      }
+      ForLoop[309017]
+      {
+        unknown loc[309009] "index var" "insert auto destroy"
+        (568772 'end of statement')
+        (309035 'move' loc[309009] _indexOfInterest[309015])
+        (568773 'end of statement' loc[309009])
+        unknown yret[630978] "YVV" "temp"
+        (630982 'move' yret[630978](630981 'coerce' loc[309009] locale[234]))
+        (309012 yield yret[630978])
+        (568775 'end of statement' loc[309009])
+        label _continueLabel[309020]
+        _indexOfInterest[309015]
+        _iterator[309016]
+      }
+      label _breakLabel[309021]
+    }
+    (630976 return ret[630974])
+  }
+  { scopeless type
+    locale[234]
+  }
+  function LocaleModel[309075].getChildArray[309050](arg _mt[309054]:_MT[201], arg this[309052]:LocaleModel[309075]) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[630987] "RVV" "temp"
+    (630992 'move' ret[630987](630991 'deref' chpl_emptyLocales[308774]))
+    (630989 return ret[630987])
+  }
+  function LocaleModel[309075].setup[309061](arg _mt[309065]:_MT[201], arg this[309063]:LocaleModel[309075]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[937170] "expr temp" "maybe param" "maybe type" "temp"
+    (937173 'move' call_tmp[937170](459608 call local_name _mt[203] this[309063]))
+    (309069 call helpSetupLocaleFlat this[309063] call_tmp[937170])
+    (630994 return _void[46])
+  }
+  type LocaleModel[309075] val super[397717]:AbstractLocaleModel[136461] "super class" const-val _node_id[308786]:int(64)[10] "const" int(64)[10] val local_name[308791]:string[244] string[244]
+  type LocaleModel[434105](?)
+  function RootLocale[309500].init[309109](arg _mt[309113]:_MT[201], arg this[309111]:RootLocale[309500]) : void[4] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown super_tmp[533912] "temporary of super field" "temp"
+    (533914 'move' super_tmp[533912](533911 '.v' this[309111] c"super"))
+    (309120 call(309117 call (partial) init _mt[203] super_tmp[533912]) nilLocale[135253])
+    (568779 'end of statement')
+    unknown tmp[533917] "temp" "type variable"
+    { scopeless type
+      unknown call_type_tmp[579027] "expr temp" "maybe type" "temp" "type variable"
+      unknown call_tmp[937177] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (937180 'move' call_tmp[937177](533919 '.v' this[309111] c"super"))
+      (579031 'move' call_type_tmp[579027](533922 'typeof' call_tmp[937177]))
+    }
+    (533923 'move' tmp[533917] call_type_tmp[579027])
+    unknown call_tmp[937182] "maybe param" "maybe type" "temp"
+    (937185 'move' call_tmp[937182](533928 'cast' tmp[533917] this[309111]))
+    unknown chpl__thisAsParent[533925] "dead at end of block" "insert auto destroy" "temp"
+    (653803 'init var' chpl__thisAsParent[533925] call_tmp[937182] tmp[533917])
+    (533931 'setcid' chpl__thisAsParent[533925])
+    (568780 'end of statement')
+    unknown call_tmp[937187] "expr temp" "maybe param" "maybe type" "temp"
+    (937190 'move' call_tmp[937187](459617 '.' this[309111] c"nPUsPhysAcc"))
+    (309122 call = call_tmp[937187] 0)
+    (568781 'end of statement')
+    unknown call_tmp[937192] "expr temp" "maybe param" "maybe type" "temp"
+    (937195 'move' call_tmp[937192](459622 '.' this[309111] c"nPUsPhysAll"))
+    (309126 call = call_tmp[937192] 0)
+    (568782 'end of statement')
+    unknown call_tmp[937197] "expr temp" "maybe param" "maybe type" "temp"
+    (937200 'move' call_tmp[937197](459627 '.' this[309111] c"nPUsLogAcc"))
+    (309130 call = call_tmp[937197] 0)
+    (568783 'end of statement')
+    unknown call_tmp[937202] "expr temp" "maybe param" "maybe type" "temp"
+    (937205 'move' call_tmp[937202](459632 '.' this[309111] c"nPUsLogAll"))
+    (309134 call = call_tmp[937202] 0)
+    (568784 'end of statement')
+    unknown call_tmp[937207] "expr temp" "maybe param" "maybe type" "temp"
+    (937210 'move' call_tmp[937207](459637 '.' this[309111] c"maxTaskPar"))
+    (309138 call = call_tmp[937207] 0)
+    (568785 'end of statement')
+    unknown call_tmp[937212] "expr temp" "maybe param" "maybe type" "temp"
+    (937215 'move' call_tmp[937212](533940 call - numLocales[305007] 1))
+    unknown call_tmp[937217] "expr temp" "maybe param" "maybe type" "temp"
+    (937220 'move' call_tmp[937217](533937 call chpl_build_bounded_range 0 call_tmp[937212]))
+    unknown call_tmp[937222] "maybe param" "maybe type" "temp"
+    (937225 'move' call_tmp[937222](533935 call chpl__buildDomainExpr call_tmp[937217] 1))
+    unknown call_tmp[937227] "maybe param" "maybe type" "temp"
+    (937230 'move' call_tmp[937227](533947 call chpl__buildDomainRuntimeType defaultDist[288287] 1))
+    unknown myLocaleSpace[533944] "temp"
+    (533950 'init var' myLocaleSpace[533944] call_tmp[937222] call_tmp[937227])
+    (533952 'init field' this[309111] c"myLocaleSpace" myLocaleSpace[533944])
+    (568786 'end of statement')
+    unknown myLocales[533956] "temp"
+    unknown call_tmp[937232] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (937235 'move' call_tmp[937232](533970 '.' this[309111] c"myLocaleSpace"))
+    unknown call_tmp[937237] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (937240 'move' call_tmp[937237](533961 call chpl__ensureDomainExpr call_tmp[937232]))
+    unknown call_tmp[937242] "expr temp" "maybe param" "maybe type" "temp"
+    (937245 'move' call_tmp[937242](533959 call chpl__buildArrayRuntimeType call_tmp[937237] locale[234]))
+    (533964 'default init var' myLocales[533956] call_tmp[937242])
+    (533966 '.=' this[309111] c"myLocales" myLocales[533956])
+    (568787 'end of statement')
+    (533973 'setcid' this[309111])
+    (630996 return _void[46])
+  }
+  function RootLocale[309500].setup[309144](arg _mt[309148]:_MT[201], arg this[309146]:RootLocale[309500]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (309152 call helpSetupRootLocaleFlat this[309146])
+    (630998 return _void[46])
+  }
+  function RootLocale[309500].chpl_id[309156](arg _mt[309160]:_MT[201], arg this[309158]:RootLocale[309500]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[631002] "RVV" "temp"
+    (631007 'move' ret[631002](631006 'deref' numLocales[305007]))
+    (631004 return ret[631002])
+  }
+  function RootLocale[309500].chpl_localeid[309167](arg _mt[309171]:_MT[201], arg this[309169]:RootLocale[309500]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[631011] "RVV" "temp"
+    unknown call_tmp[937247] "expr temp" "maybe param" "maybe type" "temp"
+    (937250 'move' call_tmp[937247](309177 call : numLocales[305007] chpl_nodeID_t[135185]))
+    unknown call_tmp[937252] "expr temp" "maybe param" "maybe type" "temp"
+    (937255 'move' call_tmp[937252](309176 call chpl_buildLocaleID call_tmp[937247] c_sublocid_none[135197]))
+    (631016 'move' ret[631011](631015 'deref' call_tmp[937252]))
+    (631013 return ret[631011])
+  }
+  function RootLocale[309500].chpl_name[309184](arg _mt[309188]:_MT[201], arg this[309186]:RootLocale[309500]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[631020] "RVV" "temp"
+    unknown call_tmp[937259] "expr temp" "maybe param" "maybe type" "temp"
+    (937262 'move' call_tmp[937259](309193 call(459646 call (partial) local_name _mt[203] this[309186])))
+    (631025 'move' ret[631020](631024 'deref' call_tmp[937259]))
+    (631022 return ret[631020])
+  }
+  function RootLocale[309500].local_name[309196](arg _mt[309200]:_MT[201], arg this[309198]:RootLocale[309500]) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[631029] "RVV" "temp"
+    (631034 'move' ret[631029](631033 'deref' "rootLocale"))
+    (631031 return ret[631029])
+  }
+  function RootLocale[309500].serialize[309209](arg _mt[309217]:_MT[201], arg this[309211]:RootLocale[309500], arg writer[309213]:_any[141](?), ref arg serializer[309215]:_any[141](?)) : _unknown[42] throws "method" "primary method" "method overrides" "no return value for void"
+  {
+    unknown call_tmp[937268] "expr temp" "maybe param" "maybe type" "temp"
+    (937271 'move' call_tmp[937268](459650 call name _mt[203] this[309211]))
+    (309224 call(309221 call (partial) write _mt[203] writer[309213]) call_tmp[937268])
+    (631036 return _void[46])
+  }
+  function RootLocale[309500]._getChildCount[309228](arg _mt[309232]:_MT[201], arg this[309230]:RootLocale[309500]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[631040] "RVV" "temp"
+    unknown call_tmp[937275] "expr temp" "maybe param" "maybe type" "temp"
+    (937278 'move' call_tmp[937275](309239 call myLocaleSpace _mt[203] this[309230]))
+    unknown call_tmp[937282] "expr temp" "maybe param" "maybe type" "temp"
+    (937285 'move' call_tmp[937282](309242 call size _mt[203] call_tmp[937275]))
+    (631045 'move' ret[631040](631044 'deref' call_tmp[937282]))
+    (631042 return ret[631040])
+  }
+  function RootLocale[309500].getChildSpace[309247](arg _mt[309251]:_MT[201], arg this[309249]:RootLocale[309500]) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[631049] "RVV" "temp"
+    unknown call_tmp[937289] "expr temp" "maybe param" "maybe type" "temp"
+    (937292 'move' call_tmp[937289](309256 call myLocaleSpace _mt[203] this[309249]))
+    (631054 'move' ret[631049](631053 'deref' call_tmp[937289]))
+    (631051 return ret[631049])
+  }
+  function RootLocale[309500].getChildIndices[309261](arg _mt[309265]:_MT[201], arg this[309263]:RootLocale[309500]) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    unknown ret[631058] "RVV" "temp"
+    {
+      unknown _indexOfInterest[309278] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[309279] "expr temp" "temp"
+      unknown call_tmp[937296] "expr temp" "maybe param" "maybe type" "temp"
+      (937299 'move' call_tmp[937296](309272 call myLocaleSpace _mt[203] this[309263]))
+      (309288 'move' _iterator[309279](309286 call _getIterator call_tmp[937296]))
+      Defer
+      {
+        {
+          (309303 call _freeIterator _iterator[309279])
+        }
+      }
+      { scopeless type
+        (309293 'move' _indexOfInterest[309278](309290 call iteratorIndex _iterator[309279]))
+      }
+      ForLoop[309280]
+      {
+        unknown idx[309269] "index var" "insert auto destroy"
+        (568798 'end of statement')
+        (309298 'move' idx[309269] _indexOfInterest[309278])
+        (568799 'end of statement' idx[309269])
+        unknown yret[631062] "YVV" "temp"
+        (631066 'move' yret[631062](631065 'coerce' idx[309269] int(64)[10]))
+        (309275 yield yret[631062])
+        (568801 'end of statement' idx[309269])
+        label _continueLabel[309283]
+        _indexOfInterest[309278]
+        _iterator[309279]
+      }
+      label _breakLabel[309284]
+    }
+    (631060 return ret[631058])
+  }
+  { scopeless type
+    int(64)[10]
+  }
+  function RootLocale[309500]._getChild[309313](arg _mt[309321]:_MT[201], arg this[309315]:RootLocale[309500], arg idx[309318]:int(64)[10]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[631071] "RVV" "temp"
+    unknown call_tmp[937303] "expr temp" "maybe param" "maybe type" "temp"
+    (937306 'move' call_tmp[937303](309329 call(309326 call (partial) myLocales _mt[203] this[309315]) idx[309318]))
+    (631076 'move' ret[631071](631075 'deref' call_tmp[937303]))
+    (631073 return ret[631071])
+  }
+  function RootLocale[309500].getChildren[309333](arg _mt[309337]:_MT[201], arg this[309335]:RootLocale[309500]) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    unknown ret[631080] "RVV" "temp"
+    {
+      unknown _indexOfInterest[309350] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[309351] "expr temp" "temp"
+      unknown call_tmp[937310] "expr temp" "maybe param" "maybe type" "temp"
+      (937313 'move' call_tmp[937310](309344 call myLocales _mt[203] this[309335]))
+      (309360 'move' _iterator[309351](309358 call _getIterator call_tmp[937310]))
+      Defer
+      {
+        {
+          (309375 call _freeIterator _iterator[309351])
+        }
+      }
+      { scopeless type
+        (309365 'move' _indexOfInterest[309350](309362 call iteratorIndex _iterator[309351]))
+      }
+      ForLoop[309352]
+      {
+        unknown loc[309341] "index var" "insert auto destroy"
+        (568805 'end of statement')
+        (309370 'move' loc[309341] _indexOfInterest[309350])
+        (568806 'end of statement' loc[309341])
+        unknown yret[631084] "YVV" "temp"
+        (631088 'move' yret[631084](631087 'coerce' loc[309341] locale[234]))
+        (309347 yield yret[631084])
+        (568808 'end of statement' loc[309341])
+        label _continueLabel[309355]
+        _indexOfInterest[309350]
+        _iterator[309351]
+      }
+      label _breakLabel[309356]
+    }
+    (631082 return ret[631080])
+  }
+  { scopeless type
+    locale[234]
+  }
+  function RootLocale[309500].getDefaultLocaleSpace[309385](arg _mt[309389]:_MT[201], arg this[309387]:RootLocale[309500]) const ref : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[631093] "RVV" "temp"
+    unknown call_tmp[937317] "expr temp" "maybe param" "maybe type" "temp"
+    (937320 'move' call_tmp[937317](309394 call myLocaleSpace _mt[203] this[309387]))
+    (631098 'move' ret[631093](631097 'addr of' call_tmp[937317]))
+    (631095 return ret[631093])
+  }
+  function RootLocale[309500].getDefaultLocaleArray[309399](arg _mt[309403]:_MT[201], arg this[309401]:RootLocale[309500]) const ref : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[631102] "RVV" "temp"
+    unknown call_tmp[937324] "expr temp" "maybe param" "maybe type" "temp"
+    (937327 'move' call_tmp[937324](459658 call myLocales _mt[203] this[309401]))
+    (631107 'move' ret[631102](631106 'addr of' call_tmp[937324]))
+    (631104 return ret[631102])
+  }
+  function RootLocale[309500].localeIDtoLocale[309410](arg _mt[309418]:_MT[201], arg this[309412]:RootLocale[309500], arg id[309415]:chpl_localeID_t[306449]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[631111] "RVV" "temp"
+    unknown call_tmp[937331] "expr temp" "maybe param" "maybe type" "temp"
+    (937334 'move' call_tmp[937331](309425 call chpl_rt_nodeFromLocaleID id[309415]))
+    unknown call_tmp[937336] "expr temp" "maybe param" "maybe type" "temp"
+    (937339 'move' call_tmp[937336](309423 call(459664 call (partial) myLocales _mt[203] this[309412]) call_tmp[937331]))
+    (631116 'move' ret[631111](631115 'deref' call_tmp[937336]))
+    (631113 return ret[631111])
+  }
+  function RootLocale[309500].deinit[309429](arg _mt[309433]:_MT[201], arg this[309431]:RootLocale[309500]) : _unknown[42] "destructor" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[309465] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[309466] "expr temp" "temp"
+      unknown call_tmp[937343] "expr temp" "maybe param" "maybe type" "temp"
+      (937346 'move' call_tmp[937343](459670 call myLocales _mt[203] this[309431]))
+      (309475 'move' _iterator[309466](309473 call _getIterator call_tmp[937343]))
+      Defer
+      {
+        {
+          (309490 call _freeIterator _iterator[309466])
+        }
+      }
+      { scopeless type
+        (309480 'move' _indexOfInterest[309465](309477 call iteratorIndex _iterator[309466]))
+      }
+      ForLoop[309467]
+      {
+        unknown loc[309436] "index var" "insert auto destroy"
+        (568814 'end of statement')
+        (309485 'move' loc[309436] _indexOfInterest[309465])
+        (568815 'end of statement' loc[309436])
+        {
+          {
+            const tmp[309457] "const" "temp"
+            unknown call_tmp[937348] "expr temp" "maybe param" "maybe type" "temp"
+            (937351 'move' call_tmp[937348](309454 '_wide_get_locale' loc[309436]))
+            (309458 'move' tmp[309457](309455 'deref' call_tmp[937348]))
+            {
+              (309442 call = rootLocaleInitialized[52042] 0)
+              (568817 'end of statement')
+              unknown call_tmp[937355] "expr temp" "maybe param" "maybe type" "temp"
+              (937358 'move' call_tmp[937355](309448 call _instance _mt[203] loc[309436]))
+              (309451 call chpl__delete call_tmp[937355])
+              (568818 'end of statement' loc[309436])
+            }
+            (309461 'elided on block' 0 tmp[309457])
+          }
+        }
+        label _continueLabel[309470]
+        _indexOfInterest[309465]
+        _iterator[309466]
+      }
+      label _breakLabel[309471]
+    }
+    (631118 return _void[46])
+  }
+  type RootLocale[309500] val super[397719]:AbstractRootLocale[136746] "super class" const myLocaleSpace[309081] "const"(309095 call chpl__buildDomainExpr(309092 call chpl_build_bounded_range 0(309088 call - numLocales[305007] 1)) 1)(309083 call chpl__buildDomainRuntimeType defaultDist[288287] 1) unknown myLocales[309100] "unsafe"(309105 call chpl__buildArrayRuntimeType(309102 call chpl__ensureDomainExpr myLocaleSpace[309081]) locale[234])
+  type borrowed RootLocale?[468091]
+  type RootLocale?[468088](?)
+  type RootLocale[397722](?)
+  function chpl_getSubloc[309502]() : _unknown[42] "inline"
+  {
+    unknown ret[631122] "RVV" "temp"
+    (309506 call halt "called chpl_getSubloc() in a locale model that lacks sublocales")
+    (568820 'end of statement')
+    (631127 'move' ret[631122](631126 'deref' c_sublocid_none[135197]))
+    (631124 return ret[631122])
+  }
+  function |writeSerializable[475322]() : _unknown[42] "ImplementsStmt wrapper"
+  { writeSerializable[310070] RootLocale[397722](?)
+    {
+    }
+    (631131 return _void[46])
+  }
+  (397044 'used modules list'(308723 'use' LocaleModelHelpFlat[307135])(308726 'use' LocaleModelHelpMem[308719])(308729 'use' IO[208303]))
+}

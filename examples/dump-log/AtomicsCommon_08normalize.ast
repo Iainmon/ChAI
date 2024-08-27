@@ -1,0 +1,134 @@
+AST dump for AtomicsCommon after pass normalize.
+Module use list: ChapelStandard 
+
+{
+  function chpl__init_AtomicsCommon[468399]() : void[4] "insert line file info" "module init"
+  {
+    (600080 return _void[46])
+  }
+  function atomic_refcnt[92033].init[91852](arg _mt[91856]:_MT[201], ref arg this[91854]:atomic_refcnt[92033]) : void[4] "method" "primary method" "no return value for void"
+  {
+    unknown _cnt[520426] "temp"
+    unknown call_tmp[773777] "expr temp" "maybe param" "maybe type" "temp"
+    (773780 'move' call_tmp[773777](520429 call chpl__processorAtomicType int(64)[10]))
+    (520431 'default init var' _cnt[520426] call_tmp[773777])
+    (520433 '.=' this[91854] c"_cnt" _cnt[520426])
+    (550532 'end of statement')
+    (600032 return _void[46])
+  }
+  function atomic_refcnt[92033].init=[91861](arg _mt[91869]:_MT[201], ref arg this[91863]:atomic_refcnt[92033], arg other[91866]:atomic_refcnt[92033]) : void[4] "method" "primary method" "no return value for void"
+  {
+    unknown _cnt[520437] "temp"
+    unknown call_tmp[773782] "expr temp" "maybe param" "maybe type" "temp"
+    (773785 'move' call_tmp[773782](520440 call chpl__processorAtomicType int(64)[10]))
+    (520442 'default init var' _cnt[520437] call_tmp[773782])
+    (520444 '.=' this[91863] c"_cnt" _cnt[520437])
+    (550533 'end of statement')
+    (520448 'init done')
+    (550534 'end of statement')
+    unknown call_tmp[773789] "expr temp" "maybe param" "maybe type" "temp"
+    (773792 'move' call_tmp[773789](91880 call _cnt _mt[203] this[91863]))
+    unknown call_tmp[773798] "expr temp" "maybe param" "maybe type" "temp"
+    (773801 'move' call_tmp[773798](91888 call _cnt _mt[203] other[91866]))
+    unknown call_tmp[773805] "expr temp" "maybe param" "maybe type" "temp"
+    (773808 'move' call_tmp[773805](91894 call(91891 call (partial) read _mt[203] call_tmp[773798])))
+    (91886 call(91883 call (partial) init_helper _mt[203] call_tmp[773789]) call_tmp[773805])
+    (600034 return _void[46])
+  }
+  function atomic_refcnt[92033].inc[91897](arg _mt[91905]:_MT[201], arg this[91899]:atomic_refcnt[92033], arg cnt[91902] :
+  1 =
+  1) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[773810] "expr temp" "maybe param" "maybe type" "temp"
+    (773813 'move' call_tmp[773810](91928 call _cond_test 1))
+    if call_tmp[773810]
+    {
+      unknown call_tmp[773817] "expr temp" "maybe param" "maybe type" "temp"
+      (773820 'move' call_tmp[773817](400735 call _cnt _mt[203] this[91899]))
+      (91912 call(91909 call (partial) add _mt[203] call_tmp[773817]) cnt[91902](order = relaxed[81224]))
+    }
+    {
+      unknown call_tmp[773826] "expr temp" "maybe param" "maybe type" "temp"
+      (773829 'move' call_tmp[773826](400741 call _cnt _mt[203] this[91899]))
+      (91924 call(91921 call (partial) add _mt[203] call_tmp[773826]) cnt[91902])
+    }
+    (600036 return _void[46])
+  }
+  function atomic_refcnt[92033].dec[91936](arg _mt[91940]:_MT[201], arg this[91938]:atomic_refcnt[92033]) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[600040] "RVV" "temp"
+    unknown got[91947] "dead at end of block" "insert auto destroy" "split inited"
+    unknown type_tmp[644587] "maybe param" "maybe type" "temp"
+    (644595 'move' type_tmp[644587](644593 call int(64)[10] 64))
+    (644589 'init var split decl' got[91947] type_tmp[644587])
+    (91952 'end of statement')
+    unknown call_tmp[773833] "expr temp" "maybe param" "maybe type" "temp"
+    (773836 'move' call_tmp[773833](92006 call _cond_test 1))
+    if call_tmp[773833]
+    {
+      unknown call_tmp[773840] "expr temp" "maybe param" "maybe type" "temp"
+      (773843 'move' call_tmp[773840](400746 call _cnt _mt[203] this[91938]))
+      unknown call_tmp[773847] "maybe param" "maybe type" "temp"
+      (773850 'move' call_tmp[773847](91961 call(91958 call (partial) fetchSub _mt[203] call_tmp[773840]) 1(order = release[81220])))
+      (644597 'init var split init' got[91947] call_tmp[773847] type_tmp[644587])
+      (550538 'end of statement' got[91947])
+      unknown call_tmp[773852] "expr temp" "maybe param" "maybe type" "temp"
+      (773855 'move' call_tmp[773852](91977 call == got[91947] 1))
+      unknown call_tmp[773857] "expr temp" "maybe param" "maybe type" "temp"
+      (773860 'move' call_tmp[773857](91981 call _cond_test call_tmp[773852]))
+      if call_tmp[773857]
+      {
+        (91970 call atomicFence acquire[81222])
+        (550540 'end of statement')
+        unknown call_tmp[773862] "expr temp" "maybe param" "maybe type" "temp"
+        (773865 'move' call_tmp[773862](600045 call int(64)[10] 64))
+        (600048 'move' ret[600040](600047 'coerce' 0 call_tmp[773862]))
+        gotoReturn _end_dec[600038] _end_dec[600038]
+      }
+      unknown call_tmp[773867] "expr temp" "maybe param" "maybe type" "temp"
+      (773870 'move' call_tmp[773867](91986 call - got[91947] 1))
+      unknown call_tmp[773872] "expr temp" "maybe param" "maybe type" "temp"
+      (773875 'move' call_tmp[773872](600053 call int(64)[10] 64))
+      (600056 'move' ret[600040](600055 'coerce' call_tmp[773867] call_tmp[773872]))
+      gotoReturn _end_dec[600038] _end_dec[600038]
+      (550542 'end of statement' got[91947])
+    }
+    {
+      unknown call_tmp[773879] "expr temp" "maybe param" "maybe type" "temp"
+      (773882 'move' call_tmp[773879](400753 call _cnt _mt[203] this[91938]))
+      unknown call_tmp[773886] "maybe param" "maybe type" "temp"
+      (773889 'move' call_tmp[773886](91998 call(91995 call (partial) fetchSub _mt[203] call_tmp[773879]) 1))
+      (644600 'init var split init' got[91947] call_tmp[773886] type_tmp[644587])
+      (550544 'end of statement' got[91947])
+      unknown call_tmp[773891] "expr temp" "maybe param" "maybe type" "temp"
+      (773894 'move' call_tmp[773891](92001 call - got[91947] 1))
+      unknown call_tmp[773896] "expr temp" "maybe param" "maybe type" "temp"
+      (773899 'move' call_tmp[773896](600061 call int(64)[10] 64))
+      (600064 'move' ret[600040](600063 'coerce' call_tmp[773891] call_tmp[773896]))
+      gotoReturn _end_dec[600038] _end_dec[600038]
+      (550546 'end of statement' got[91947])
+    }
+    label _end_dec[600038]
+    (600042 return ret[600040])
+  }
+  { scopeless type
+    (91943 call int(64)[10] 64)
+  }
+  function atomic_refcnt[92033].read[92013](arg _mt[92017]:_MT[201], arg this[92015]:atomic_refcnt[92033]) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[600070] "RVV" "temp"
+    unknown call_tmp[773903] "expr temp" "maybe param" "maybe type" "temp"
+    (773906 'move' call_tmp[773903](400758 call _cnt _mt[203] this[92015]))
+    unknown call_tmp[773910] "expr temp" "maybe param" "maybe type" "temp"
+    (773913 'move' call_tmp[773910](92028 call(92025 call (partial) read _mt[203] call_tmp[773903])))
+    unknown call_tmp[773915] "expr temp" "maybe param" "maybe type" "temp"
+    (773918 'move' call_tmp[773915](600075 call int(64)[10] 64))
+    (600078 'move' ret[600070](600077 'coerce' call_tmp[773910] call_tmp[773915]))
+    (600072 return ret[600070])
+  }
+  { scopeless type
+    (92020 call int(64)[10] 64)
+  }
+  type atomic_refcnt[92033] unknown _cnt[91846](91848 call chpl__processorAtomicType int(64)[10])
+  (396099 'used modules list'(91842 'use' ChapelStandard[315387]))
+}

@@ -1,0 +1,811 @@
+AST dump for Standard after pass parseAndConvertUast.
+Module use list: 
+
+{
+  (318079 'use' ChplConfig)
+  (318082 'use' Utilities)
+  (318086 'import' Utilities 'as' util)
+  (318088 'use' SimpleDomain)
+  function _unknown[42].imageType[318090](arg _mt[318098]:_MT[201], arg this[318093] :
+  _tuple, arg f[318096]:_any[141](?)) type : _unknown[42] "method"
+  {
+    unknown eltType[318102] "type variable"(318104 call . this[318093] c"eltType")
+    { scopeless
+      const t0[318109] "const"(318112 call this 0) eltType[318102]
+      (318115 'end of statement')
+    }
+    (318116 return(318120 'typeof'(318118 call f[318096] t0[318109])))
+  }
+  function _unknown[42].eltType[318123](arg _mt[318129]:_MT[201], arg this[318126] :
+  _tuple) type : _unknown[42] "method" "no parens"
+  {
+    (318135 return(318139 'typeof'(318137 call this 0)))
+  }
+  where {
+    (318132 call isHomogeneousTuple this[318126])
+  }
+  function _unknown[42].map[318143](arg _mt[318151]:_MT[201], arg this[318146] :
+  _tuple, arg f[318149]:_any[141](?)) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown rank[318172] "param"(318175 call . this[318146] c"size") int[10]
+      (318179 'end of statement')
+    }
+    unknown eltType[318181] "type variable"(318183 call . this[318146] c"eltType")
+    unknown outType[318188] "type variable"(318193 call(318190 call . this[318146] c"imageType") f[318149])
+    { scopeless
+      unknown imgs[318197](318198 call * rank[318172] outType[318188])
+      (318203 'end of statement')
+    }
+    {
+      unknown i[318204] "index var" 0
+      unknown tmp[318223] "maybe param" "temp"
+      (318235 'move' tmp[318223](318233 call chpl_compute_low_param_loop_bound 0(318208 call chpl__nudgeHighBound rank[318172])))
+      unknown tmp[318224] "maybe param" "temp"
+      (318244 'move' tmp[318224](318242 call chpl_compute_high_param_loop_bound 0(318240 call chpl__nudgeHighBound rank[318172])))
+      unknown tmp[318225] "maybe param" "temp"
+      (318247 'move' tmp[318225] 1)
+      ParamForLoop[318249]
+      { i[318204] tmp[318223] tmp[318224] tmp[318225]
+        { scopeless
+          (318212 call =(318215 call imgs[318197] i[318204])(318218 call f[318149](318220 call this i[318204])))
+        }
+      }
+      label _unused_continueLabel[318227]
+      label _breakLabel[318226]
+    }
+    (318258 return imgs[318197])
+  }
+  where {
+    (318168 call isHomogeneousTuple this[318146])
+  }
+  { scopeless type
+    (318153 call *(318156 call . this[318146] c"size")(318165 call(318162 call . this[318146] c"imageType") f[318149]))
+  }
+  function _unknown[42].slice[318264](arg _mt[318278]:_MT[201], arg this[318267] :
+  _tuple, param arg low[318271] :
+  int[10], param arg high[318275] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown newRank[318316] "param"(318317 call - high[318275] low[318271])
+      (318322 'end of statement')
+    }
+    { scopeless
+      unknown slc[318324](318325 call * newRank[318316](318329 call . this[318267] c"eltType"))
+      (318333 'end of statement')
+    }
+    {
+      unknown i[318334] "index var" 0
+      unknown tmp[318357] "maybe param" "temp"
+      (318369 'move' tmp[318357](318367 call chpl_compute_low_param_loop_bound 0(318341 call chpl__nudgeHighBound(318338 call . slc[318324] c"size"))))
+      unknown tmp[318358] "maybe param" "temp"
+      (318381 'move' tmp[318358](318379 call chpl_compute_high_param_loop_bound 0(318374 call chpl__nudgeHighBound(318376 call . slc[318324] c"size"))))
+      unknown tmp[318359] "maybe param" "temp"
+      (318384 'move' tmp[318359] 1)
+      ParamForLoop[318386]
+      { i[318334] tmp[318357] tmp[318358] tmp[318359]
+        { scopeless
+          (318345 call =(318348 call slc[318324] i[318334])(318351 call this(318352 call + i[318334] low[318271])))
+        }
+      }
+      label _unused_continueLabel[318361]
+      label _breakLabel[318360]
+    }
+    (318395 return slc[318324])
+  }
+  where {
+    (318290 call &&(318292 call &&(318294 call &&(318297 call isHomogeneousTuple this[318267])(318299 call < low[318271] high[318275]))(318303 call <= 0 low[318271]))(318307 call <= high[318275](318311 call . this[318267] c"size")))
+  }
+  { scopeless type
+    (318280 call *(318282 call - high[318275] low[318271])(318287 call . this[318267] c"eltType"))
+  }
+  function _unknown[42].removeIdx[318401](arg _mt[318411]:_MT[201], arg this[318404] :
+  _tuple, param arg idx[318408] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown newRank[318428] "param"(318429 call -(318432 call . this[318404] c"size") 1)
+      (318437 'end of statement')
+    }
+    { scopeless
+      unknown nw[318439](318440 call * newRank[318428](318444 call . this[318404] c"eltType"))
+      (318448 'end of statement')
+    }
+    { scopeless
+      unknown offset[318450] 0
+      (318453 'end of statement')
+    }
+    {
+      unknown i[318454] "index var" 0
+      unknown tmp[318491] "maybe param" "temp"
+      (318503 'move' tmp[318491](318501 call chpl_compute_low_param_loop_bound 0(318461 call chpl__nudgeHighBound(318458 call . this[318404] c"size"))))
+      unknown tmp[318492] "maybe param" "temp"
+      (318515 'move' tmp[318492](318513 call chpl_compute_high_param_loop_bound 0(318508 call chpl__nudgeHighBound(318510 call . this[318404] c"size"))))
+      unknown tmp[318493] "maybe param" "temp"
+      (318518 'move' tmp[318493] 1)
+      ParamForLoop[318520]
+      { i[318454] tmp[318491] tmp[318492] tmp[318493]
+        {
+          if(318487 call _cond_test(318483 call == i[318454] idx[318408]))
+          {
+            (318467 call += offset[318450] 1)
+          }
+          {
+            (318472 call =(318475 call nw[318439](318476 call - i[318454] offset[318450]))(318481 call this i[318454]))
+          }
+        }
+      }
+      label _unused_continueLabel[318495]
+      label _breakLabel[318494]
+    }
+    (318529 return nw[318439])
+  }
+  { scopeless type
+    (318413 call *(318415 call -(318418 call . this[318404] c"size") 1)(318423 call . this[318404] c"eltType"))
+  }
+  function _unknown[42].untuplify[318534](arg _mt[318540]:_MT[201], arg this[318537] :
+  _tuple) : _unknown[42] "method"
+  {
+    if(318558 call _cond_test(318551 call ==(318554 call . this[318537] c"size") 1))
+    {
+      (318544 return(318546 call this 0))
+    }
+    {
+      (318549 return this[318537])
+    }
+  }
+  function _unknown[42].slice[318564](arg _mt[318584]:_MT[201], arg this[318567] :
+  _tuple, param arg start[318571] :
+  int[10], param arg stop[318575] :
+  int[10], param arg idx[318580] :
+  int[10] =
+  start[318571]) param : _unknown[42] "method"
+  {
+    (318588 call compilerAssert(318589 call <= start[318571] stop[318575]))
+    (318594 call compilerAssert(318595 call <= stop[318575](318599 call . this[318567] c"size")))
+    (318603 call compilerAssert(318604 call <= start[318571] idx[318580]))
+    (318609 call compilerAssert(318610 call < idx[318580] stop[318575]))
+    if(318651 call _cond_test(318644 call < idx[318580](318647 call - stop[318575] 1)))
+    {
+      (318615 return(318634 call _build_tuple(318618 call this idx[318580])(318633 'expand_tuple'(318626 call(318623 call . this[318567] c"slice") start[318571] stop[318575](318629 call + idx[318580] 1)))))
+    }
+    {
+      (318637 return(318642 call _build_tuple(318640 call this idx[318580])))
+    }
+  }
+  function _unknown[42].insertIdx[318657](arg _mt[318674]:_MT[201], arg this[318660] :
+  _tuple, param arg idx[318664] :
+  int[10], arg x[318671] :
+  (318668 call . this[318660] c"eltType")) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown newRank[318691] "param"(318692 call +(318695 call . this[318660] c"size") 1)
+      (318700 'end of statement')
+    }
+    { scopeless
+      unknown nw[318702](318703 call * newRank[318691](318707 call . this[318660] c"eltType"))
+      (318711 'end of statement')
+    }
+    { scopeless
+      unknown offset[318713] 0
+      (318716 'end of statement')
+    }
+    {
+      unknown i[318717] "index var" 0
+      unknown tmp[318734] "maybe param" "temp"
+      (318746 'move' tmp[318734](318744 call chpl_compute_low_param_loop_bound 0(318721 call chpl__nudgeHighBound idx[318664])))
+      unknown tmp[318735] "maybe param" "temp"
+      (318755 'move' tmp[318735](318753 call chpl_compute_high_param_loop_bound 0(318751 call chpl__nudgeHighBound idx[318664])))
+      unknown tmp[318736] "maybe param" "temp"
+      (318758 'move' tmp[318736] 1)
+      ParamForLoop[318760]
+      { i[318717] tmp[318734] tmp[318735] tmp[318736]
+        { scopeless
+          (318725 call =(318728 call nw[318702] i[318717])(318731 call this i[318717]))
+        }
+      }
+      label _unused_continueLabel[318738]
+      label _breakLabel[318737]
+    }
+    (318769 call =(318772 call nw[318702] idx[318664]) x[318671])
+    {
+      unknown i[318775] "index var" 0
+      unknown tmp[318798] "maybe param" "temp"
+      (318810 'move' tmp[318798](318808 call chpl_compute_low_param_loop_bound(318777 call + idx[318664] 1)(318782 call chpl__nudgeHighBound newRank[318691])))
+      unknown tmp[318799] "maybe param" "temp"
+      (318822 'move' tmp[318799](318820 call chpl_compute_high_param_loop_bound(318814 call + idx[318664] 1)(318818 call chpl__nudgeHighBound newRank[318691])))
+      unknown tmp[318800] "maybe param" "temp"
+      (318825 'move' tmp[318800] 1)
+      ParamForLoop[318827]
+      { i[318775] tmp[318798] tmp[318799] tmp[318800]
+        { scopeless
+          (318786 call =(318789 call nw[318702] i[318775])(318792 call this(318793 call - i[318775] 1)))
+        }
+      }
+      label _unused_continueLabel[318802]
+      label _breakLabel[318801]
+    }
+    (318836 return nw[318702])
+  }
+  { scopeless type
+    (318676 call *(318678 call +(318681 call . this[318660] c"size") 1)(318686 call . this[318660] c"eltType"))
+  }
+  function _unknown[42].indexAt[318841](arg _mt[318851]:_MT[201], arg this[318844] :
+  _tuple, arg n[318848] :
+  int[10]) : _unknown[42] "inline" "method"
+  {
+    (318873 return(318875 call indexAt n[318848](318878 'expand_tuple' this[318844])))
+  }
+  where {
+    (318860 call &&(318863 call isHomogeneousTuple this[318844])(318865 call ==(318870 'typeof'(318868 call this 0)) int[10]))
+  }
+  { scopeless type
+    (318853 call *(318856 call . this[318844] c"size") int[10])
+  }
+  function _unknown[42].each[318883](arg _mt[318893]:_MT[201], arg this[318886] :
+  _tuple, arg n[318890] :
+  int[10]) : _unknown[42] "inline" "iterator fn" "method"
+  {
+    { scopeless
+      unknown rank[318916] "param"(318918 call . this[318886] c"size")
+      (318922 'end of statement')
+    }
+    { scopeless
+      unknown prod[318924] 1
+      (318927 'end of statement')
+    }
+    { scopeless
+      unknown divs[318929](318930 call * rank[318916] int[10])
+      (318935 'end of statement')
+    }
+    {
+      unknown j[318936] "index var" 0
+      unknown tmp[318968] "maybe param" "temp"
+      (318980 'move' tmp[318968](318978 call chpl_compute_low_param_loop_bound 0(318940 call chpl__nudgeHighBound rank[318916])))
+      unknown tmp[318969] "maybe param" "temp"
+      (318989 'move' tmp[318969](318987 call chpl_compute_high_param_loop_bound 0(318985 call chpl__nudgeHighBound rank[318916])))
+      unknown tmp[318970] "maybe param" "temp"
+      (318992 'move' tmp[318970] 1)
+      ParamForLoop[318994]
+      { j[318936] tmp[318968] tmp[318969] tmp[318970]
+        {
+          { scopeless
+            unknown i[318946] "param"(318947 call -(318949 call - rank[318916] j[318936]) 1)
+            (318955 'end of statement')
+          }
+          (318956 call =(318959 call divs[318929] i[318946]) prod[318924])
+          (318962 call *= prod[318924](318966 call this i[318946]))
+        }
+      }
+      label _unused_continueLabel[318972]
+      label _breakLabel[318971]
+    }
+    if(319118 call _cond_test loopGpuSupport[316236])
+    {
+      {
+        unknown _indexOfInterest[319023] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[319024] "expr temp" "temp"
+        (319033 'move' _iterator[319024](319031 call _getIterator(319039 call chpl_direct_range_iter 0(319037 call chpl__nudgeHighBound prod[318924]))))
+        Defer
+        {
+          {
+            (319054 call _freeIterator _iterator[319024])
+          }
+        }
+        { scopeless type
+          (319044 'move' _indexOfInterest[319023](319041 call iteratorIndex _iterator[319024]))
+        }
+        ForLoop[319025] order-independent
+        {
+          unknown i[319004] "index var" "insert auto destroy"
+          (319049 'move' i[319004] _indexOfInterest[319023])
+          {
+            { scopeless
+              (319020 'gpu primitive block')
+              (319022 'chpl_assert_on_gpu' 1)
+            }
+            (319013 yield(319015 call indexAtHelperMultiples i[319004](319018 'expand_tuple' divs[318929])))
+          }
+          label _continueLabel[319028]
+          _indexOfInterest[319023]
+          _iterator[319024]
+        }
+        label _breakLabel[319029]
+      }
+    }
+    {
+      {
+        unknown _indexOfInterest[319079] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[319080] "expr temp" "temp"
+        (319089 'move' _iterator[319080](319087 call _getIterator(319095 call chpl_direct_range_iter 0(319093 call chpl__nudgeHighBound prod[318924]))))
+        Defer
+        {
+          {
+            (319110 call _freeIterator _iterator[319080])
+          }
+        }
+        { scopeless type
+          (319100 'move' _indexOfInterest[319079](319097 call iteratorIndex _iterator[319080]))
+        }
+        ForLoop[319081] order-independent
+        {
+          unknown i[319062] "index var" "insert auto destroy"
+          (319105 'move' i[319062] _indexOfInterest[319079])
+          {
+            (319071 yield(319073 call indexAtHelperMultiples i[319062](319076 'expand_tuple' divs[318929])))
+          }
+          label _continueLabel[319084]
+          _indexOfInterest[319079]
+          _iterator[319080]
+        }
+        label _breakLabel[319085]
+      }
+    }
+  }
+  where {
+    (318902 call &&(318905 call isHomogeneousTuple this[318886])(318907 call ==(318912 'typeof'(318910 call this 0)) int[10]))
+  }
+  { scopeless type
+    (318895 call *(318898 call . this[318886] c"size") int[10])
+  }
+  function _unknown[42].simple[319126](arg _mt[319132]:_MT[201], arg this[319129] :
+  _domain[225034](?)) : _unknown[42] "inline" "method"
+  {
+    (319142 return(319143 'new'(319146 call rect[323492](?) this[319129])))
+  }
+  { scopeless type
+    (319136 call rect[323492](?)(319137 call . this[319129] c"rank"))
+  }
+  function _unknown[42].every[319151](arg _mt[319157]:_MT[201], arg this[319154] :
+  _domain[225034](?)) : _unknown[42] "inline" "iterator fn" "method"
+  {
+    { scopeless
+      const simple[319161] "const"(319168 call(319165 call . this[319154] c"simple"))
+      (319170 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[319179] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[319180] "expr temp" "temp"
+      (319189 'move' _iterator[319180](319187 call _getIterator simple[319161]))
+      Defer
+      {
+        {
+          (319204 call _freeIterator _iterator[319180])
+        }
+      }
+      { scopeless type
+        (319194 'move' _indexOfInterest[319179](319191 call iteratorIndex _iterator[319180]))
+      }
+      ForLoop[319181] order-independent
+      {
+        unknown idx[319171] "index var" "insert auto destroy"
+        (319199 'move' idx[319171] _indexOfInterest[319179])
+        { scopeless
+          (319174 yield idx[319171])
+        }
+        label _continueLabel[319184]
+        _indexOfInterest[319179]
+        _iterator[319180]
+      }
+      label _breakLabel[319185]
+    }
+  }
+  function _unknown[42].every[319213](arg _mt[319223]:_MT[201], arg this[319216] :
+  _domain[225034](?), param arg tag[319220] :
+  iterKind[52144]) : _unknown[42] "inline" "iterator fn" "method"
+  {
+    { scopeless
+      const simple[319234] "const"(319239 call(319236 call . this[319216] c"simple"))
+      (319241 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[319250] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[319251] "expr temp" "temp"
+      (319260 'move' _iterator[319251](319258 call _getIterator simple[319234]))
+      Defer
+      {
+        {
+          (319275 call _freeIterator _iterator[319251])
+        }
+      }
+      { scopeless type
+        (319265 'move' _indexOfInterest[319250](319262 call iteratorIndex _iterator[319251]))
+      }
+      ForLoop[319252] order-independent
+      {
+        unknown idx[319242] "index var" "insert auto destroy"
+        (319270 'move' idx[319242] _indexOfInterest[319250])
+        { scopeless
+          (319245 yield idx[319242])
+        }
+        label _continueLabel[319255]
+        _indexOfInterest[319250]
+        _iterator[319251]
+      }
+      label _breakLabel[319256]
+    }
+  }
+  where {
+    (319225 call == tag[319220](319229 call . iterKind[52144] c"standalone"))
+  }
+  function _unknown[42].everyZip[319285](arg _mt[319291]:_MT[201], arg this[319288] :
+  _domain[225034](?)) : _unknown[42] "inline" "iterator fn" "method"
+  {
+    { scopeless
+      const simple[319295] "const"(319300 call(319297 call . this[319288] c"simple"))
+      (319302 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[319317] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[319318] "expr temp" "temp"
+      (319327 'move' _iterator[319318](319325 call _getIterator(319311 call(319308 call . simple[319295] c"eachOrder"))))
+      Defer
+      {
+        {
+          (319342 call _freeIterator _iterator[319318])
+        }
+      }
+      { scopeless type
+        (319332 'move' _indexOfInterest[319317](319329 call iteratorIndex _iterator[319318]))
+      }
+      ForLoop[319319] order-independent
+      {
+        unknown idx[319303] "index var" "insert auto destroy"
+        (319337 'move' idx[319303] _indexOfInterest[319317])
+        { scopeless
+          (319312 yield idx[319303])
+        }
+        label _continueLabel[319322]
+        _indexOfInterest[319317]
+        _iterator[319318]
+      }
+      label _breakLabel[319323]
+    }
+  }
+  function _unknown[42].everyZip[319351](arg _mt[319361]:_MT[201], arg this[319354] :
+  _domain[225034](?), param arg tag[319358] :
+  iterKind[52144]) : _unknown[42] "inline" "iterator fn" "method"
+  {
+    { scopeless
+      const simple[319372] "const"(319377 call(319374 call . this[319354] c"simple"))
+      (319379 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[319392] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[319393] "expr temp" "temp"
+      (319402 'move' _iterator[319393](319400 call _getIterator(319386 call(319383 call . simple[319372] c"eachOrder"))))
+      Defer
+      {
+        {
+          (319417 call _freeIterator _iterator[319393])
+        }
+      }
+      { scopeless type
+        (319407 'move' _indexOfInterest[319392](319404 call iteratorIndex _iterator[319393]))
+      }
+      ForLoop[319394] order-independent
+      {
+        unknown idx[319380] "index var" "insert auto destroy"
+        (319412 'move' idx[319380] _indexOfInterest[319392])
+        { scopeless
+          (319387 yield idx[319380])
+        }
+        label _continueLabel[319397]
+        _indexOfInterest[319392]
+        _iterator[319393]
+      }
+      label _breakLabel[319398]
+    }
+  }
+  where {
+    (319363 call == tag[319358](319367 call . iterKind[52144] c"standalone"))
+  }
+  function _unknown[42].indexAt[319427](arg _mt[319437]:_MT[201], arg this[319430] :
+  _domain[225034](?), arg n[319434] :
+  int[10]) : _unknown[42] "inline" "method"
+  {
+    (319447 return n[319434])
+  }
+  where {
+    (319439 call ==(319441 call . this[319430] c"rank") 1)
+  }
+  function _unknown[42].indexAt[319452](arg _mt[319462]:_MT[201], arg this[319455] :
+  _domain[225034](?), arg n[319459] :
+  int[10]) : _unknown[42] "inline" "method"
+  {
+    { scopeless
+      const shape_[319473] "const"(319477 call . this[319455] c"fastShape")
+      (319481 'end of statement')
+    }
+    { scopeless
+      unknown result[319483](319484 call *(319486 call . this[319455] c"rank") int[10])
+      (319492 'end of statement')
+    }
+    { scopeless
+      unknown strides[319494](319495 call *(319497 call . this[319455] c"rank") int[10])
+      (319503 'end of statement')
+    }
+    { scopeless
+      unknown idx[319505] n[319459]
+      (319508 'end of statement')
+    }
+    { scopeless
+      unknown stride[319510] 1
+      (319513 'end of statement')
+    }
+    {
+      unknown i[319514] "index var" 0
+      unknown tmp[319552] "maybe param" "temp"
+      (319564 'move' tmp[319552](319562 call chpl_compute_low_param_loop_bound 0(319521 call chpl__nudgeHighBound(319517 call . this[319455] c"rank"))))
+      unknown tmp[319553] "maybe param" "temp"
+      (319576 'move' tmp[319553](319574 call chpl_compute_high_param_loop_bound 0(319569 call chpl__nudgeHighBound(319571 call . this[319455] c"rank"))))
+      unknown tmp[319554] "maybe param" "temp"
+      (319579 'move' tmp[319554] 1)
+      ParamForLoop[319581]
+      { i[319514] tmp[319552] tmp[319553] tmp[319554]
+        {
+          { scopeless
+            unknown j[319527] "param"(319528 call -(319530 call -(319532 call . this[319455] c"rank") 1) i[319514])
+            (319539 'end of statement')
+          }
+          (319540 call =(319543 call strides j[319527]) stride[319510])
+          (319546 call *= stride[319510](319550 call shape_[319473] j[319527]))
+        }
+      }
+      label _unused_continueLabel[319556]
+      label _breakLabel[319555]
+    }
+    {
+      unknown i[319590] "index var" 0
+      unknown tmp[319619] "maybe param" "temp"
+      (319631 'move' tmp[319619](319629 call chpl_compute_low_param_loop_bound 0(319597 call chpl__nudgeHighBound(319593 call . this[319455] c"rank"))))
+      unknown tmp[319620] "maybe param" "temp"
+      (319643 'move' tmp[319620](319641 call chpl_compute_high_param_loop_bound 0(319636 call chpl__nudgeHighBound(319638 call . this[319455] c"rank"))))
+      unknown tmp[319621] "maybe param" "temp"
+      (319646 'move' tmp[319621] 1)
+      ParamForLoop[319648]
+      { i[319590] tmp[319619] tmp[319620] tmp[319621]
+        {
+          (319602 call =(319605 call result[319483] i[319590])(319607 call / idx[319505](319611 call strides i[319590])))
+          (319613 call %= idx[319505](319617 call strides i[319590]))
+        }
+      }
+      label _unused_continueLabel[319623]
+      label _breakLabel[319622]
+    }
+    (319657 return result[319483])
+  }
+  where {
+    (319464 call >(319466 call . this[319455] c"rank") 1)
+  }
+  function _unknown[42].fastShape[319662](arg _mt[319668]:_MT[201], arg this[319665] :
+  _domain[225034](?)) : _unknown[42] "inline" "method" "no parens"
+  {
+    { scopeless
+      unknown s[319672](319673 call *(319675 call . this[319665] c"rank") int[10])
+      (319681 'end of statement')
+    }
+    { scopeless
+      const dms[319683] "const"(319688 call(319684 call . this[319665] c"dims"))
+      (319690 'end of statement')
+    }
+    {
+      unknown i[319691] "index var" 0
+      unknown tmp[319728] "maybe param" "temp"
+      (319740 'move' tmp[319728](319738 call chpl_compute_low_param_loop_bound 0(319698 call chpl__nudgeHighBound(319694 call . this[319665] c"rank"))))
+      unknown tmp[319729] "maybe param" "temp"
+      (319752 'move' tmp[319729](319750 call chpl_compute_high_param_loop_bound 0(319745 call chpl__nudgeHighBound(319747 call . this[319665] c"rank"))))
+      unknown tmp[319730] "maybe param" "temp"
+      (319755 'move' tmp[319730] 1)
+      ParamForLoop[319757]
+      { i[319691] tmp[319728] tmp[319729] tmp[319730]
+        {
+          { scopeless
+            const dm[319704] "const" "ref var"(319706 call dms[319683] i[319691])
+            (319709 'end of statement')
+          }
+          (319710 call =(319713 call s[319672] i[319691])(319715 call +(319717 call -(319720 call . dm[319704] c"highBound")(319724 call . dm[319704] c"lowBound")) 1))
+        }
+      }
+      label _unused_continueLabel[319732]
+      label _breakLabel[319731]
+    }
+    if(319781 call _cond_test(319774 call ==(319776 call . this[319665] c"rank") 1))
+    {
+      { scopeless
+        (319766 return(319768 call s[319672] 0))
+      }
+    }
+    {
+      { scopeless
+        (319771 return s[319672])
+      }
+    }
+  }
+  function _unknown[42].fastNormalDims[319789](arg _mt[319795]:_MT[201], arg this[319792] :
+  _domain[225034](?)) : _unknown[42] "inline" "method" "no parens"
+  {
+    { scopeless
+      unknown s[319799](319800 call *(319802 call . this[319792] c"rank") range)
+      (319808 'end of statement')
+    }
+    { scopeless
+      const dms[319810] "const"(319815 call(319811 call . this[319792] c"dims"))
+      (319817 'end of statement')
+    }
+    {
+      unknown i[319818] "index var" 0
+      unknown tmp[319865] "maybe param" "temp"
+      (319877 'move' tmp[319865](319875 call chpl_compute_low_param_loop_bound 0(319825 call chpl__nudgeHighBound(319821 call . this[319792] c"rank"))))
+      unknown tmp[319866] "maybe param" "temp"
+      (319889 'move' tmp[319866](319887 call chpl_compute_high_param_loop_bound 0(319882 call chpl__nudgeHighBound(319884 call . this[319792] c"rank"))))
+      unknown tmp[319867] "maybe param" "temp"
+      (319892 'move' tmp[319867] 1)
+      ParamForLoop[319894]
+      { i[319818] tmp[319865] tmp[319866] tmp[319867]
+        {
+          { scopeless
+            const dm[319831] "const" "ref var"(319833 call dms[319810] i[319818])
+            (319836 'end of statement')
+          }
+          { scopeless
+            const upper[319838] "const"(319839 call +(319841 call -(319844 call . dm[319831] c"highBound")(319848 call . dm[319831] c"lowBound")) 1)
+            (319853 'end of statement')
+          }
+          (319854 call =(319857 call s[319799] i[319818])(319863 call chpl_build_bounded_range 0(319861 call chpl__nudgeHighBound upper[319838])))
+        }
+      }
+      label _unused_continueLabel[319869]
+      label _breakLabel[319868]
+    }
+    (319903 return s[319799])
+  }
+  function _unknown[42].myShape[319907](arg _mt[319913]:_MT[201], arg this[319910] :
+  _domain[225034](?)) : _unknown[42] "inline" "method" "no parens"
+  {
+    { scopeless
+      unknown s[319917](319918 call *(319920 call . this[319910] c"rank") int[10])
+      (319926 'end of statement')
+    }
+    { scopeless
+      const dms[319928] "const"(319933 call(319929 call . this[319910] c"dims"))
+      (319935 'end of statement')
+    }
+    {
+      unknown i[319936] "index var" 0
+      unknown tmp[319967] "maybe param" "temp"
+      (319979 'move' tmp[319967](319977 call chpl_compute_low_param_loop_bound 0(319943 call chpl__nudgeHighBound(319939 call . this[319910] c"rank"))))
+      unknown tmp[319968] "maybe param" "temp"
+      (319991 'move' tmp[319968](319989 call chpl_compute_high_param_loop_bound 0(319984 call chpl__nudgeHighBound(319986 call . this[319910] c"rank"))))
+      unknown tmp[319969] "maybe param" "temp"
+      (319994 'move' tmp[319969] 1)
+      ParamForLoop[319996]
+      { i[319936] tmp[319967] tmp[319968] tmp[319969]
+        {
+          (319948 call =(319951 call s[319917] i[319936])(319953 call -(319958 call .(319956 call dms[319928] i[319936]) c"highBound")(319964 call .(319962 call dms[319928] i[319936]) c"lowBound")))
+        }
+      }
+      label _unused_continueLabel[319971]
+      label _breakLabel[319970]
+    }
+    (320005 return s[319917])
+  }
+  function _unknown[42].normalize[320009](arg _mt[320015]:_MT[201], arg this[320012] :
+  _domain[225034](?)) : _unknown[42] "inline" "method" "no parens"
+  {
+    { scopeless
+      const dms[320024] "const" fastNormalDims
+      (320027 'end of statement')
+    }
+    (320028 return(320033 call chpl__buildDomainExpr(320031 'expand_tuple' dms[320024]) 1))
+  }
+  where {
+    (320021 call(320018 call . this[320012] c"isRectangular"))
+  }
+  function _unknown[42].isNormal[320038](arg _mt[320044]:_MT[201], arg this[320041] :
+  _domain[225034](?)) : _unknown[42] "inline" "method" "no parens"
+  {
+    if(320095 call _cond_test(320085 call ==(320088 call . this[320041] c"strides")(320092 call . strideKind[107137] c"one")))
+    {
+      { scopeless
+        const lw[320055] "const"(320057 call . this[320041] c"fullIdxType")
+        (320061 'end of statement')
+      }
+      (320062 return(320063 call &&(320065 call ==(320068 call . this[320041] c"stride")(320071 call + lw[320055] 1))(320075 call == lw[320055](320079 call . this[320041] c"low"))))
+    }
+    {
+      (320083 return 0)
+    }
+  }
+  where {
+    (320051 call(320048 call . this[320041] c"isRectangular"))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function _unknown[42].this[320103](arg _mt[320117]:_MT[201], param arg this[320106] :
+  string[244], param arg start[320110] :
+  int[10], param arg stop[320114] :
+  int[10]) param : _unknown[42] "inline" "method"
+  {
+    (320120 return(320125 call(320122 call . this[320106] c"slice") start[320110] stop[320114]))
+  }
+  function _unknown[42].slice[320130](arg _mt[320150]:_MT[201], param arg this[320133] :
+  string[244], param arg start[320137] :
+  int[10], param arg stop[320141] :
+  int[10], param arg idx[320146] :
+  int[10] =
+  start[320137]) param : _unknown[42] "inline" "method"
+  {
+    (320154 call compilerAssert(320155 call <= start[320137] stop[320141]))
+    (320160 call compilerAssert(320161 call <= stop[320141](320165 call . this[320133] c"size")))
+    if(320196 call _cond_test(320186 call &&(320188 call <= start[320137] idx[320146])(320192 call < idx[320146] stop[320141])))
+    {
+      (320169 return(320170 call +(320173 call this idx[320146])(320176 call slice start[320137] stop[320141](320179 call + idx[320146] 1))))
+    }
+    {
+      (320184 return "")
+    }
+  }
+  function _unknown[42].take[320202](arg _mt[320212]:_MT[201], param arg this[320205] :
+  string[244], param arg count[320209] :
+  int[10]) param : _unknown[42] "inline" "method"
+  {
+    (320215 return(320220 call(320217 call . this[320205] c"slice") 0 count[320209]))
+  }
+  function _unknown[42].drop[320225](arg _mt[320235]:_MT[201], param arg this[320228] :
+  string[244], param arg count[320232] :
+  int[10]) param : _unknown[42] "inline" "method"
+  {
+    (320238 return(320243 call(320240 call . this[320228] c"slice") count[320232](320246 call . this[320228] c"size")))
+  }
+  function _unknown[42].countOccurrences[320251](arg _mt[320267]:_MT[201], param arg this[320254] :
+  string[244], param arg c[320258] :
+  string[244], param arg idx[320263] :
+  int[10] =
+  0) param : _unknown[42] "inline" "method"
+  {
+    if(320316 call _cond_test(320309 call == idx[320263](320313 call . this[320254] c"size")))
+    {
+      (320271 return 0)
+    }
+    {
+      { scopeless
+        if(320305 call _cond_test(320299 call == c[320258](320303 call this idx[320263])))
+        {
+          (320274 return(320275 call + 1(320284 call(320281 call . this[320254] c"countOccurrences") c[320258](320286 call + idx[320263] 1))))
+        }
+        {
+          (320291 return(320293 call countOccurrences c[320258](320295 call + idx[320263] 1)))
+        }
+      }
+    }
+  }
+  function _unknown[42].takeUntil[320323](arg _mt[320345]:_MT[201], param arg this[320326] :
+  string[244], param arg del[320330] :
+  string[244], param arg idx[320335] :
+  int[10] =
+  0, param arg keepDel[320341] :
+  bool[19] =
+  0) param : _unknown[42] "inline" "method"
+  {
+    if(320389 call _cond_test(320383 call ==(320386 call this idx[320335]) del[320330]))
+    {
+      if(320358 call _cond_test keepDel[320341])
+      {
+        { scopeless
+          (320349 return(320351 call this idx[320335]))
+        }
+      }
+      {
+        { scopeless
+          (320354 return "")
+        }
+      }
+    }
+    {
+      (320365 return(320366 call +(320369 call this idx[320335])(320377 call(320374 call . this[320326] c"takeUntil") del[320330](320379 call + idx[320335] 1))))
+    }
+  }
+}

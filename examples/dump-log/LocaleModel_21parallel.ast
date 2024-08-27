@@ -1,0 +1,919 @@
+AST dump for LocaleModel after pass parallel.
+Module use list: LocaleModelHelpFlat LocaleModelHelpMem IO 
+
+{
+  function chpl__init_LocaleModel[468570]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    {
+    }
+    const-val call_tmp[937056]:range(int(64),both,one)[1610039] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    const-val ret_tmp[5551521]:range(int(64),both,one)[1610039] "temp"
+    (308766 call chpl_build_bounded_range[1759352] ret_tmp[5551521])
+    (5551524 'move' call_tmp[937056] ret_tmp[5551521])
+    const-val call_tmp[937061]:domain(1,int(64),one)[1765496] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5551533]:domain(1,int(64),one)[1765496] "temp"
+    (308769 call chpl__buildDomainExpr[1760825] call_tmp[937056] 1 ret_tmp[5551533])
+    (5551536 'move' call_tmp[937061] ret_tmp[5551533])
+    const-val call_tmp[937066]:_RuntimeTypeInfo[1766589] "dead after last mention" "maybe param" "temp"
+    val default_arg_idxType[1766932]:int(64)[10] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp" "type variable"
+    val default_arg_strides[1766959]:strideKind[107137] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    (937069 'move' call_tmp[937066](308760 call chpl__buildDomainRuntimeType[1762345] defaultDist[288287]))
+    const-val init_coerce_tmp[1766968]:domain(1,int(64),one)[1765496] "dead after last mention" "const" "temp"
+    const-val ret_tmp[5554662]:domain(1,int(64),one)[1765496] "temp"
+    (1780660 call chpl__coerceMove[1780667] call_tmp[937066] call_tmp[937061] 1 ret_tmp[5554662])
+    (5554665 'move' init_coerce_tmp[1766968] ret_tmp[5554662])
+    (653795 'move' chpl_emptyLocaleSpace[308758] init_coerce_tmp[1766968])
+    (5611091 call chpl__autoDestroy[1802624] call_tmp[937056])
+    (937074 'move' call_tmp[937071](308776 call chpl__ensureDomainExpr[1766974] chpl_emptyLocaleSpace[308758]))
+    const-val call_tmp[937076]:_RuntimeTypeInfo[1780641] "dead after last mention" "expr temp" "maybe param" "temp"
+    (937079 'move' call_tmp[937076](308779 call chpl__buildArrayRuntimeType[1766993] call_tmp[937071]))
+    const-val _runtime_type_tmp_[1791604]:domain(1,int(64),one)[1765496] "dead after last mention" "temp"
+    (1791609 'move' _runtime_type_tmp_[1791604](5470548 '.v' call_tmp[937076] dom[1780642]))
+    const-val ret_tmp[5554899]:[domain(1,int(64),one)] locale[1780406] "temp"
+    (1791602 call chpl__convertRuntimeTypeToValue[1791617] _runtime_type_tmp_[1791604] 1 ret_tmp[5554899])
+    (5554902 'move' chpl_emptyLocales[308774] ret_tmp[5554899])
+    (631133 return _void[46])
+  }
+  function chpl__deinit_LocaleModel[309514]() : void[4] "resolved" "no return value for void"
+  {
+    {
+      ref _indexOfInterest[309529]:_ref(locale)[1467958] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+      val _iterator[309530]:_ic_these__ref__array_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882687] "dead at end of block" "expr temp" "temp"
+      (309539 'move' _iterator[309530](309537 call _getIterator[1876798] chpl_emptyLocales[308774]))
+      {
+        val ret[5955885]:_ir_these__ref__array_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882693] "dead after last mention" "RVV" "temp"
+        ref _indexOfInterest[5955887]:_ref(locale)[1467958] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        val _iterator[5955889]:_ic_these_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882058] "dead at end of block" "expr temp" "temp"
+        val call_tmp[5955891]:[domain(1,int(64),one)] locale[1769942] "dead at end of block" "expr temp" "maybe param" "temp"
+        const-val this[5956000]:[domain(1,int(64),one)] locale[1780406] "temp"
+        (5956005 'move' this[5956000](5956002 '.v' _iterator[309530] F0_this[6836848]))
+        (5955893 'move' call_tmp[5955891](5955896 call _value[1780461] this[5956000]))
+        const-val call_tmp[5955898]:_ir_these_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882064] "dead at end of block" "maybe param" "temp"
+        val coerce_tmp[5955900]:[domain(1,int(64),one)] locale[1769942] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+        (5955902 'move' coerce_tmp[5955900] call_tmp[5955891])
+        const-val default_arg_tasksPerLocale[5955905]:int(64)[10] "dead at end of block" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+        (5955907 'move' default_arg_tasksPerLocale[5955905](5955910 call these_default_tasksPerLocale[1877068] call_tmp[5955891]))
+        const-val default_arg_ignoreRunning[5955912]:bool[19] "dead at end of block" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+        (5955914 'move' default_arg_ignoreRunning[5955912](5955917 call these_default_ignoreRunning[1877099] coerce_tmp[5955900]))
+        const-val default_arg_minIndicesPerTask[5955919]:int(64)[10] "dead at end of block" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+        (5955921 'move' default_arg_minIndicesPerTask[5955919](5955924 call these_default_minIndicesPerTask[1877130] coerce_tmp[5955900]))
+        const-val ret_tmp[5955926]:_ir_these_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882064] "temp"
+        (5955929 call these[1876952] coerce_tmp[5955900] default_arg_tasksPerLocale[5955905] default_arg_ignoreRunning[5955912] default_arg_minIndicesPerTask[5955919] ret_tmp[5955926])
+        (5955935 'move' call_tmp[5955898] ret_tmp[5955926])
+        (5955938 'move' _iterator[5955889](5955941 call _getIterator[1882073] call_tmp[5955898]))
+        {
+          val ret[6280472]:_ir_these_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882064] "dead after last mention" "RVV" "temp"
+          val call_tmp[6280474]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          ref _indexOfInterest[6280476]:_ref(locale)[1467958] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          val _iterator[6280478]:_ic_chpl__serialViewIter[1881791] "dead at end of block" "expr temp" "temp"
+          const-ref call_tmp[6280480]:_ref(domain(1,int(64),one))[1763621] "dead at end of block" "maybe param" "temp"
+          const-val this[6280729]:[domain(1,int(64),one)] locale[1769942] "temp"
+          (6280734 'move' this[6280729](6280731 '.v' _iterator[5955889] F0_this[6839647]))
+          (6280482 'move' call_tmp[6280480](6280485 call dom[1771473] this[6280729]))
+          const-val call_tmp[6280487]:_ir_chpl__serialViewIter[1881797] "dead at end of block" "maybe param" "temp"
+          val coerce_tmp[6280489]:domain(1,int(64),one)[1763606] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+          (6280491 'move' coerce_tmp[6280489](6280493 'deref' call_tmp[6280480]))
+          const-val ret_tmp[6280495]:_ir_chpl__serialViewIter[1881797] "temp"
+          const-val this[6280736]:[domain(1,int(64),one)] locale[1769942] "temp"
+          (6280741 'move' this[6280736](6280738 '.v' _iterator[5955889] F0_this[6839647]))
+          (6280498 call chpl__serialViewIter[1877164] this[6280736] coerce_tmp[6280489] ret_tmp[6280495])
+          (6280502 'move' call_tmp[6280487] ret_tmp[6280495])
+          (6280505 'move' _iterator[6280478](6280508 call _getIterator[1881806] call_tmp[6280487]))
+          {
+            val ret[6280511]:_ir_chpl__serialViewIter[1881797] "dead after last mention" "RVV" "temp"
+            val tmp[6280513]:bool[19] "dead after last mention" "maybe param" "temp"
+            val call_tmp[6280515]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            val useCache[6280517]:bool[19] "dead at end of block" "param"
+            val tmp[6280519]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+            val tmp[6280521]:bool[19] "dead after last mention" "maybe param" "temp"
+            val call_tmp[6280523]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            val info[6280525]:[domain(1,int(64),one)] locale[1769942] "dead at end of block" "insert auto destroy"
+            val tmp[6280527]:[domain(1,int(64),one)] locale[1769942] "dead after last mention" "expr temp" "insert auto destroy" "maybe copy elided" "maybe param" "temp"
+            val tmp[6280529]:bool[19] "dead after last mention" "maybe param" "temp"
+            val tmp[6280531]:[domain(1,int(64),one)] locale[1769942] "dead after last mention" "expr temp" "maybe param" "temp"
+            val tmp[6280533]:bool[19] "dead after last mention" "maybe param" "temp"
+            val call_tmp[6280535]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            const-val arr[6280537]:[domain(1,int(64),one)] locale[1769942] "temp"
+            (6280539 'move' arr[6280537](6280541 '.v' _iterator[6280478] F0_arr[6842243]))
+            (6280544 'move' tmp[6280531] arr[6280537])
+            const-val arr[6280547]:[domain(1,int(64),one)] locale[1769942] "temp"
+            (6280549 'move' arr[6280547](6280551 '.v' _iterator[6280478] F0_arr[6842243]))
+            (6280554 'move' tmp[6280527] arr[6280547])
+            const-val arr[6280557]:[domain(1,int(64),one)] locale[1769942] "temp"
+            (6280559 'move' arr[6280557](6280561 '.v' _iterator[6280478] F0_arr[6842243]))
+            (6280564 '=' info[6280525] arr[6280557])
+            (6280567 'noop')
+            val call_tmp[6280568]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            val call_tmp[6280570]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            val call_tmp[6280572]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            ref _indexOfInterest[6280574]:_ref(locale)[1467958] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+            val _iterator[6280576]:_ic_chpl__serialViewIter1D[1881524] "dead at end of block" "expr temp" "temp"
+            const-val call_tmp[6280578]:range(int(64),both,one)[1610039] "dead at end of block" "expr temp" "insert auto destroy" "maybe param" "temp"
+            val coerce_tmp[6280580]:domain(1,int(64),one)[1763606] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+            const-val viewDom[6280582]:domain(1,int(64),one)[1763606] "temp"
+            (6280584 'move' viewDom[6280582](6280586 '.v' _iterator[6280478] F1_viewDom[6842247]))
+            (6280589 'move' coerce_tmp[6280580] viewDom[6280582])
+            const-val ret_tmp[6280592]:range(int(64),both,one)[1610039] "temp"
+            const-val viewDom[6280594]:domain(1,int(64),one)[1763606] "temp"
+            (6280596 'move' viewDom[6280594](6280598 '.v' _iterator[6280478] F1_viewDom[6842247]))
+            (6280602 call dsiDim[1771514] viewDom[6280594] ret_tmp[6280592])
+            (6280605 'move' call_tmp[6280578] ret_tmp[6280592])
+            const-val call_tmp[6280608]:_ir_chpl__serialViewIter1D[1881530] "dead at end of block" "maybe param" "temp"
+            const-val ret_tmp[6280610]:_ir_chpl__serialViewIter1D[1881530] "temp"
+            const-val arr[6280612]:[domain(1,int(64),one)] locale[1769942] "temp"
+            (6280614 'move' arr[6280612](6280616 '.v' _iterator[6280478] F0_arr[6842243]))
+            (6280620 call chpl__serialViewIter1D[1878709] arr[6280612] call_tmp[6280578] ret_tmp[6280610])
+            (6280624 'move' call_tmp[6280608] ret_tmp[6280610])
+            (6280627 'move' _iterator[6280576](6280630 call _getIterator[1881539] call_tmp[6280608]))
+            {
+              val ret[6574570]:_ir_chpl__serialViewIter1D[1881530] "dead after last mention" "RVV" "temp"
+              val tmp[6574572]:bool[19] "dead after last mention" "maybe param" "temp"
+              val call_tmp[6574574]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              val useCache[6574576]:bool[19] "dead at end of block" "param"
+              val tmp[6574578]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+              val tmp[6574580]:bool[19] "dead after last mention" "maybe param" "temp"
+              val call_tmp[6574582]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              val info[6574584]:[domain(1,int(64),one)] locale[1769942] "dead at end of block" "insert auto destroy"
+              val tmp[6574586]:[domain(1,int(64),one)] locale[1769942] "dead after last mention" "expr temp" "insert auto destroy" "maybe copy elided" "maybe param" "temp"
+              val tmp[6574588]:bool[19] "dead after last mention" "maybe param" "temp"
+              val tmp[6574590]:[domain(1,int(64),one)] locale[1769942] "dead after last mention" "expr temp" "maybe param" "temp"
+              val tmp[6574592]:bool[19] "dead after last mention" "maybe param" "temp"
+              val call_tmp[6574594]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              const-val arr[6575030]:[domain(1,int(64),one)] locale[1769942] "temp"
+              (6575035 'move' arr[6575030](6575032 '.v' _iterator[6280576] F0_arr[6844501]))
+              (6574596 'move' tmp[6574590] arr[6575030])
+              const-val arr[6575037]:[domain(1,int(64),one)] locale[1769942] "temp"
+              (6575042 'move' arr[6575037](6575039 '.v' _iterator[6280576] F0_arr[6844501]))
+              (6574599 'move' tmp[6574586] arr[6575037])
+              const-val arr[6575044]:[domain(1,int(64),one)] locale[1769942] "temp"
+              (6575049 'move' arr[6575044](6575046 '.v' _iterator[6280576] F0_arr[6844501]))
+              (6574602 '=' info[6574584] arr[6575044])
+              (6574605 'noop')
+              val call_tmp[6574606]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              val call_tmp[6574608]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              const-val call_tmp[6574610]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              const-val viewRange[6575051]:range(int(64),both,one)[1610039] "temp"
+              (6575056 'move' viewRange[6575051](6575053 '.v' _iterator[6280576] F1_viewRange[6844505]))
+              (6574612 'move' call_tmp[6574610](6574615 call low[1650229] viewRange[6575051]))
+              const-val call_tmp[6574617]:int(64)[10] "dead at end of block" "maybe param" "temp"
+              const-val default_arg_getShifted[6574619]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+              const-val arr[6575058]:[domain(1,int(64),one)] locale[1769942] "temp"
+              (6575063 'move' arr[6575058](6575060 '.v' _iterator[6280576] F0_arr[6844501]))
+              (6574621 'move' default_arg_getShifted[6574619](6574624 call getDataIndex_default_getShifted[1879590] arr[6575058]))
+              (6574626 'move' call_tmp[6574617](6574629 call getDataIndex[1879451] info[6574584] call_tmp[6574610]))
+              const-val first[6574632]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+              (6574634 'move' first[6574632] call_tmp[6574617])
+              val call_tmp[6574637]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+              const-val call_tmp[6574639]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              const-val viewRange[6575065]:range(int(64),both,one)[1610039] "temp"
+              (6575070 'move' viewRange[6575065](6575067 '.v' _iterator[6280576] F1_viewRange[6844505]))
+              (6574641 'move' call_tmp[6574639](6574644 call low[1650229] viewRange[6575065]))
+              const-val call_tmp[6574646]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574648 'move' call_tmp[6574646](6574651 call chpl__idxToInt[1577032] call_tmp[6574639]))
+              const-val call_tmp[6574653]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574655 'move' call_tmp[6574653](6574658 call +[1471222] call_tmp[6574646]))
+              const-val call_tmp[6574660]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574662 'move' call_tmp[6574660](6574665 call chpl__intToIdx[1580593] call_tmp[6574653]))
+              const-val call_tmp[6574667]:int(64)[10] "dead at end of block" "maybe param" "temp"
+              const-val default_arg_getShifted[6574669]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+              (6574671 'move' default_arg_getShifted[6574669](6574674 call getDataIndex_default_getShifted[1879590] info[6574584]))
+              (6574676 'move' call_tmp[6574667](6574679 call getDataIndex[1879451] info[6574584] call_tmp[6574660]))
+              const-val second[6574682]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+              (6574684 'move' second[6574682] call_tmp[6574667])
+              const-val call_tmp[6574687]:int(64)[10] "dead at end of block" "maybe param" "temp"
+              (6574689 'move' call_tmp[6574687](6574692 call -[57305] call_tmp[6574667] call_tmp[6574617]))
+              const-val step[6574695]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+              (6574697 'move' step[6574695] call_tmp[6574687])
+              const-val call_tmp[6574700]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              const-val viewRange[6575072]:range(int(64),both,one)[1610039] "temp"
+              (6575077 'move' viewRange[6575072](6575074 '.v' _iterator[6280576] F1_viewRange[6844505]))
+              (6574702 'move' call_tmp[6574700](6574705 call size[1649150] viewRange[6575072]))
+              val call_tmp[6574707]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+              const-val call_tmp[6574709]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574711 'move' call_tmp[6574709] call_tmp[6574700])
+              const-val call_tmp[6574714]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574716 'move' call_tmp[6574714](6574719 call -[1487343] call_tmp[6574700]))
+              const-val call_tmp[6574721]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574723 'move' call_tmp[6574721](6574726 call *[58795] call_tmp[6574714] call_tmp[6574687]))
+              const-val call_tmp[6574729]:int(64)[10] "dead at end of block" "maybe param" "temp"
+              (6574731 'move' call_tmp[6574729](6574734 call +[56587] call_tmp[6574617] call_tmp[6574721]))
+              const-val last[6574737]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+              (6574739 'move' last[6574737] call_tmp[6574729])
+              val _indexOfInterest[6574742]:int(64)[10] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+              val _iterator[6574744]:_ic_chpl_direct_pos_stride_range_iter[1881076] "dead at end of block" "expr temp" "temp"
+              const-val call_tmp[6574746]:_ir_chpl_direct_pos_stride_range_iter[1881082] "dead at end of block" "expr temp" "maybe param" "temp"
+              const-val ret_tmp[6574748]:_ir_chpl_direct_pos_stride_range_iter[1881082] "temp"
+              (6574751 call chpl_direct_pos_stride_range_iter[1880641] call_tmp[6574617] call_tmp[6574729] call_tmp[6574687] ret_tmp[6574748])
+              (6574756 'move' call_tmp[6574746] ret_tmp[6574748])
+              (6574759 'move' _iterator[6574744](6574762 call _getIterator[1881091] call_tmp[6574746]))
+              {
+                val ret[6574765]:_ir_chpl_direct_pos_stride_range_iter[1881082] "dead after last mention" "RVV" "temp"
+                val call_tmp[6574767]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+                val call_tmp[6574769]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+                const-val stride[6574771]:int(64)[10] "temp"
+                (6574773 'move' stride[6574771](6574775 '.v' _iterator[6574744] F2_stride[6846165]))
+                (6574779 call chpl_range_check_stride[1517719] stride[6574771])
+                val call_tmp[6574781]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+                val call_tmp[6574783]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+                const-val default_arg_first[6574785]:int(64)[10] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+                const-val low[6574787]:int(64)[10] "temp"
+                (6574789 'move' low[6574787](6574791 '.v' _iterator[6574744] F0_low[6846157]))
+                (6574794 'move' default_arg_first[6574785](6574797 call chpl_checkIfRangeIterWillOverflow_default_first[1519408] low[6574787]))
+                const-val default_arg_last[6574799]:int(64)[10] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+                const-val high[6574801]:int(64)[10] "temp"
+                (6574803 'move' high[6574801](6574805 '.v' _iterator[6574744] F1_high[6846161]))
+                (6574808 'move' default_arg_last[6574799](6574811 call chpl_checkIfRangeIterWillOverflow_default_last[1519436] high[6574801]))
+                val default_arg_shouldHalt[6574813]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+                const-val _return_tmp_[6574815]:bool[19] "dead after last mention" "temp"
+                const-val low[6574817]:int(64)[10] "temp"
+                (6574819 'move' low[6574817](6574821 '.v' _iterator[6574744] F0_low[6846157]))
+                const-val high[6574824]:int(64)[10] "temp"
+                (6574826 'move' high[6574824](6574828 '.v' _iterator[6574744] F1_high[6846161]))
+                const-val stride[6574831]:int(64)[10] "temp"
+                (6574833 'move' stride[6574831](6574835 '.v' _iterator[6574744] F2_stride[6846165]))
+                (6574838 'move' _return_tmp_[6574815](6574841 call chpl_checkIfRangeIterWillOverflow[1518856] low[6574817] high[6574824] stride[6574831] default_arg_first[6574785] default_arg_last[6574799] 1))
+                val i[6574848]:int(64)[10] "dead at end of block" "insert auto destroy"
+                val call_tmp[6574850]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+                (6574852 'move' i[6574848] 0)
+                CForLoop[6574855] hazard
+                {
+                  const-val yret[6574903]:int(64)[10] "dead after last mention" "YVV" "temp"
+                  (6574905 'move' yret[6574903] i[6574848])
+                  const-val _yieldedIndex[6574908]:int(64)[10] "temp"
+                  (6574910 'move' _yieldedIndex[6574908] i[6574848])
+                  {
+                    const-val i[6574914]:int(64)[10] "const" "index var" "insert auto destroy"
+                    (6574916 'move' i[6574914] _yieldedIndex[6574908])
+                    ref yret[6574919]:_ref(locale)[1467958] "dead after last mention" "YVV" "temp"
+                    ref call_tmp[6574921]:_ref(locale)[1467958] "dead after last mention" "maybe param" "temp"
+                    const-ref _this_tmp_[6574923]:_ref(_ddata(locale))[1768685] "dead after last mention" "temp"
+                    (6574925 'move' _this_tmp_[6574923](6574928 call theData[1881346] info[6574584]))
+                    val coerce_tmp[6574930]:_ddata(locale)[1768676] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+                    (6574932 'move' coerce_tmp[6574930](6574934 'deref' _this_tmp_[6574923]))
+                    (6574936 'move' call_tmp[6574921](6574939 call this[1881485] coerce_tmp[6574930] _yieldedIndex[6574908]))
+                    ref _yieldedIndex[6574964]:_ref(locale)[1467958] "temp"
+                    (6574942 'move' _yieldedIndex[6574964] call_tmp[6574921])
+                    {
+                      ref elem[6574966]:_ref(locale)[1467958] "index var" "insert auto destroy"
+                      (6574968 'move' elem[6574966] _yieldedIndex[6574964])
+                      ref yret[6574971]:_ref(locale)[1467958] "dead after last mention" "YVV" "temp"
+                      ref _yieldedIndex[6574973]:_ref(locale)[1467958] "temp"
+                      (6574975 'move' _yieldedIndex[6574973] elem[6574966])
+                      {
+                        ref elem[6574979]:_ref(locale)[1467958] "index var" "insert auto destroy"
+                        (6574981 'move' elem[6574979] _yieldedIndex[6574973])
+                        ref yret[6574984]:_ref(locale)[1467958] "dead after last mention" "YVV" "temp"
+                        ref _yieldedIndex[6574986]:_ref(locale)[1467958] "temp"
+                        (6574988 'move' _yieldedIndex[6574986] elem[6574979])
+                        {
+                          ref i[6574992]:_ref(locale)[1467958] "index var" "insert auto destroy"
+                          (6574994 'move' i[6574992] _yieldedIndex[6574986])
+                          ref yret[6574997]:_ref(locale)[1467958] "dead after last mention" "YVV" "temp"
+                          ref _yieldedIndex[6574999]:_ref(locale)[1467958] "temp"
+                          (6575001 'move' _yieldedIndex[6574999] i[6574992])
+                          {
+                            ref l[6575005]:_ref(locale)[1467958] "index var" "insert auto destroy"
+                            (6575007 'move' l[6575005] _yieldedIndex[6574999])
+                            {
+                              const-ref call_tmp[6575011]:_ref(BaseLocale)[1531014] "dead after last mention" "maybe param" "temp"
+                              (6575013 'move' call_tmp[6575011](6575016 call _instance[1003250] l[6575005]))
+                              val coerce_tmp[6575018]:BaseLocale[136243] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+                              (6575020 'move' coerce_tmp[6575018](6575022 'deref' call_tmp[6575011]))
+                              (6575025 call chpl__delete[1531880] coerce_tmp[6575018])
+                            }
+                            label _continueLabel[6575027]
+                          }
+                        }
+                      }
+                    }
+                  }
+                  {
+                    const-val low[6574857]:int(64)[10] "temp"
+                    (6574859 'move' low[6574857](6574861 '.v' _iterator[6574744] F0_low[6846157]))
+                    (6574864 '=' i[6574848] low[6574857])
+                  }
+                  {
+                    const-val high[6574868]:int(64)[10] "temp"
+                    (6574870 'move' high[6574868](6574872 '.v' _iterator[6574744] F1_high[6846161]))
+                    (6574875 '<=' i[6574848] high[6574868])
+                  }
+                  {
+                    val call_tmp[6574879]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+                    const-val call_tmp[6574881]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+                    const-val stride[6574883]:int(64)[10] "temp"
+                    (6574885 'move' stride[6574883](6574887 '.v' _iterator[6574744] F2_stride[6846165]))
+                    (6574890 'move' call_tmp[6574881] stride[6574883])
+                    const-val stride[6574893]:int(64)[10] "temp"
+                    (6574895 'move' stride[6574893](6574897 '.v' _iterator[6574744] F2_stride[6846165]))
+                    (6574900 '+=' i[6574848] stride[6574893])
+                  }
+                }
+                label _endchpl_direct_pos_stride_range_iter[6574955]
+              }
+              (6574958 call _freeIterator[1881264] _iterator[6574744])
+              label _endchpl__serialViewIter1D[6574960]
+            }
+            (6280675 call _freeIterator[1881708] _iterator[6280576])
+            (6280678 call chpl__autoDestroy[1802624] call_tmp[6280578])
+            label _endchpl__serialViewIter[6280680]
+          }
+          (6280683 call _freeIterator[1881975] _iterator[6280478])
+          label _endthese[6280685]
+        }
+        (5955967 call _freeIterator[1882604] _iterator[5955889])
+        label _endthese[5955969]
+      }
+      label _breakLabel[309535]
+      (5611024 call _freeIterator[1883368] _iterator[309530])
+    }
+    label _endchpl__deinit_LocaleModel[5658829]
+    (5658834 call chpl__autoDestroy[4018667] chpl_emptyLocales[308774])
+    (5658831 call chpl__autoDestroy[3989014] chpl_emptyLocaleSpace[308758])
+    (631135 return _void[46])
+  }
+  function chpl_localeModel_sublocToExecutionSubloc[308731](const in arg full_subloc[308734]:int(32)[66]) : int(32)[66] "export" "local args" "resolved"
+  {
+    val ret[630888]:int(32)[66] "dead after last mention" "RVV" "temp"
+    (630893 'move' ret[630888] full_subloc[308734])
+    (630890 return ret[630888])
+  }
+  function chpl_localeModel_sublocMerge[308742](const in arg full_subloc[308745]:int(32)[66], const in arg execution_subloc[308749]:int(32)[66]) : int(32)[66] "export" "local args" "resolved"
+  {
+    val ret[630897]:int(32)[66] "dead after last mention" "RVV" "temp"
+    (630902 'move' ret[630897] execution_subloc[308749])
+    (630899 return ret[630897])
+  }
+  const-val chpl_emptyLocaleSpace[308758]:domain(1,int(64),one)[1765496] "dead at end of block" "const" "insert auto destroy"
+  const chpl_emptyLocales[308774]:[domain(1,int(64),one)] locale[1780406] "dead at end of block" "const" "insert auto destroy" "unsafe"
+  function LocaleModel[309075].init[308829](const in arg this[308831]:LocaleModel[309075], const  ref arg parent_loc[308834]:locale[234]) : void[4] "inline" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-val call_tmp[937108]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (937111 'move' call_tmp[937108] rootLocaleInitialized[52042])
+    if call_tmp[937108]
+    {
+      (308842 call halt[88131] "Cannot create additional LocaleModel instances")
+    }
+    val super_tmp[533869]:AbstractLocaleModel[136461] "dead after last mention" "temporary of super field" "temp"
+    (533871 'move' super_tmp[533869](533868 '.v' this[308831] super[397717]))
+    (308853 call init[136432] super_tmp[533869] parent_loc[308834])
+    val tmp[533874]:AbstractLocaleModel[136461] "dead after last mention" "temp" "type variable"
+    val call_tmp[937120]:AbstractLocaleModel[136461] "dead after last mention" "maybe param" "temp"
+    (937123 'move' call_tmp[937120](533885 'cast' AbstractLocaleModel[136461] this[308831]))
+    val chpl__thisAsParent[533882]:AbstractLocaleModel[136461] "dead at end of block" "insert auto destroy" "temp"
+    (653801 'move' chpl__thisAsParent[533882](1914834 call chpl__initCopy[1914837] call_tmp[937120] 0))
+    (533888 'setcid' chpl__thisAsParent[533882])
+    const-val call_tmp[937125]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+    (937128 'move' call_tmp[937125](459574 call chpl_nodeID[305038]))
+    const-val call_tmp[937130]:int(64)[10] "dead after last mention" "maybe param" "temp"
+    (937133 'move' call_tmp[937130](308858 'cast' int(64)[10] call_tmp[937125]))
+    val _node_id[533890]:int(64)[10] "dead after last mention" "temp"
+    (533893 'move' _node_id[533890] call_tmp[937130])
+    (533895 '.=' this[308831] _node_id[308786] _node_id[533890])
+    val local_name[533899]:string[244] "dead after last mention" "temp"
+    (1915328 call init[21321] local_name[533899])
+    (533904 '.=' this[308831] local_name[308791] local_name[533899])
+    (533909 'setcid' this[308831])
+    (308868 call setup[309061] this[308831])
+    (630906 return _void[46])
+  }
+  function LocaleModel[309075]._getChildCount[308921](const in arg this[308923]:LocaleModel[309075]) : int(64)[10] "method" "primary method" "method overrides" "resolved" "virtual"
+  {
+    val ret[630946]:int(64)[10] "dead after last mention" "RVV" "temp"
+    (630951 'move' ret[630946] 0)
+    (630948 return ret[630946])
+  }
+  function LocaleModel[309075]._getChild[308981](const in arg this[308983]:LocaleModel[309075], const in arg idx[308986]:int(64)[10], ref arg _retArg[5609174]:_ref(locale)[1467958]) : void[4] "fn returns via _retArg" "method" "primary method" "method overrides" "resolved" "virtual" "no return value for void"
+  {
+    const-val ret[630968]:locale[234] "dead after last mention" "RVV" "temp"
+    (308994 call halt[88131] "requesting a child from a flat LocaleModel locale")
+    (5609176 '=' _retArg[5609174] ret[630968])
+    (5609178 return _void[46])
+  }
+  function LocaleModel[309075].setup[309061](const in arg this[309063]:LocaleModel[309075]) : void[4] "method" "primary method" "resolved" "no return value for void"
+  {
+    ref call_tmp[937170]:_ref(string)[1466327] "dead after last mention" "maybe param" "temp"
+    (937173 'move' call_tmp[937170](459608 call local_name[1299131] this[309063]))
+    val _formal_tmp_out_local_name[1914863]:string[244] "dead after last mention" "expr temp" "formal temp out callsite" "insert auto destroy" "suppress lvalue error" "temp"
+    (309069 call helpSetupLocaleFlat[305812] this[309063] _formal_tmp_out_local_name[1914863])
+    (1914866 call =[28046] call_tmp[937170] _formal_tmp_out_local_name[1914863])
+    (5611010 call chpl__autoDestroy[3262688] _formal_tmp_out_local_name[1914863])
+    (630994 return _void[46])
+  }
+  function LocaleModel[309075].local_name[1299131](const in arg this[1299135]:LocaleModel[309075]) ref : _ref(string)[1466327] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "resolved" "fn synchronization free"
+  {
+    ref ret[1299145]:_ref(string)[1466327] "dead after last mention" "RVV" "temp"
+    ref call_tmp[1299152]:_ref(string)[1466327] "dead after last mention" "maybe param" "temp"
+    (1299155 'move' call_tmp[1299152](1299139 '.' this[1299135] local_name[308791]))
+    (1299150 'move' ret[1299145] call_tmp[1299152])
+    (1299147 return ret[1299145])
+  }
+  function LocaleModel[309075].deinit[1299157](const in arg this[1299161]:LocaleModel[309075]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method" "resolved" "virtual"
+  {
+    label _enddeinit[5526544]
+    ref _field_destructor_tmp_[5526542]:_ref(string)[1466327] "temp"
+    (5526549 'move' _field_destructor_tmp_[5526542](5526546 '.' this[1299161] local_name[308791]))
+    (5526551 call deinit[21354] _field_destructor_tmp_[5526542])
+    val _parent_destructor_tmp_[5526554]:AbstractLocaleModel[136461] "temp"
+    (5526559 'move' _parent_destructor_tmp_[5526554](5526555 'cast' AbstractLocaleModel[136461] this[1299161]))
+    (5526561 call deinit[1084058] _parent_destructor_tmp_[5526554])
+    (1299169 return _void[46])
+  }
+  function _new[1915339](const  ref arg parent_loc[1915348]:locale[234]) : LocaleModel[309075] "always propagate line file info" "compiler generated" "insert line file info" "last resort" "llvm return noalias" "_new wrapper" "resolved"
+  {
+    val _formal_type_tmp_[5478451]:LocaleModel[309075] "temp"
+    val ret[1915378]:LocaleModel[309075] "dead after last mention" "RVV" "temp"
+    val initTemp[1915341]:LocaleModel[309075] "dead after last mention" "temp"
+    const-val call_tmp[1915385]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1915388 'move' call_tmp[1915385](1915397 'sizeof_bundle' LocaleModel[309075]))
+    val cast_tmp[1915400]:c_ptr(void)[1465614] "dead after last mention" "temp"
+    (1915402 'move' cast_tmp[1915400](1915356 call chpl_here_alloc[308303] call_tmp[1915385] 55))
+    (1915359 'move' initTemp[1915341](1915404 'cast' LocaleModel[309075] cast_tmp[1915400]))
+    (1915342 call init[308829] initTemp[1915341] parent_loc[1915348])
+    val tmp[1915361]:LocaleModel[309075] "dead after last mention" "temp"
+    (1915368 'move' tmp[1915361] initTemp[1915341])
+    (1915383 'move' ret[1915378] tmp[1915361])
+    (1915380 return ret[1915378])
+  }
+  type LocaleModel[309075] val super[397717]:AbstractLocaleModel[136461] "super class" const-val _node_id[308786]:int(64)[10] "const" val local_name[308791]:string[244]
+  function RootLocale[309500].init[309109](const in arg this[309111]:RootLocale[309500]) : void[4] "inline" "method" "primary method" "resolved" "no return value for void"
+  {
+    val super_tmp[533912]:AbstractRootLocale[136746] "dead after last mention" "temporary of super field" "temp"
+    (533914 'move' super_tmp[533912](533911 '.v' this[309111] super[397719]))
+    (309120 call init[136489] super_tmp[533912] nilLocale[135253])
+    val tmp[533917]:AbstractRootLocale[136746] "dead after last mention" "temp" "type variable"
+    val call_tmp[937182]:AbstractRootLocale[136746] "dead after last mention" "maybe param" "temp"
+    (937185 'move' call_tmp[937182](533928 'cast' AbstractRootLocale[136746] this[309111]))
+    val chpl__thisAsParent[533925]:AbstractRootLocale[136746] "dead at end of block" "insert auto destroy" "temp"
+    (653803 'move' chpl__thisAsParent[533925](1883593 call chpl__initCopy[1535314] call_tmp[937182] 0))
+    (533931 'setcid' chpl__thisAsParent[533925])
+    ref call_tmp[937187]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (937190 'move' call_tmp[937187](459617 '.' this[309111] nPUsPhysAcc[135826]))
+    (309122 call =[52229] call_tmp[937187] 0)
+    ref call_tmp[937192]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (937195 'move' call_tmp[937192](459622 '.' this[309111] nPUsPhysAll[135831]))
+    (309126 call =[52229] call_tmp[937192] 0)
+    ref call_tmp[937197]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (937200 'move' call_tmp[937197](459627 '.' this[309111] nPUsLogAcc[135816]))
+    (309130 call =[52229] call_tmp[937197] 0)
+    ref call_tmp[937202]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (937205 'move' call_tmp[937202](459632 '.' this[309111] nPUsLogAll[135821]))
+    (309134 call =[52229] call_tmp[937202] 0)
+    ref call_tmp[937207]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "temp"
+    (937210 'move' call_tmp[937207](459637 '.' this[309111] maxTaskPar[135874]))
+    (309138 call =[52229] call_tmp[937207] 0)
+    const-val call_tmp[937212]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (937215 'move' call_tmp[937212](533940 call -[1487343] numLocales[305007]))
+    const-val call_tmp[937217]:range(int(64),both,one)[1610039] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    const-val ret_tmp[5541704]:range(int(64),both,one)[1610039] "temp"
+    (533937 call chpl_build_bounded_range[108787] 0 call_tmp[937212] ret_tmp[5541704])
+    (5541707 'move' call_tmp[937217] ret_tmp[5541704])
+    const-val call_tmp[937222]:domain(1,int(64),one)[1765496] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5551539]:domain(1,int(64),one)[1765496] "temp"
+    (533935 call chpl__buildDomainExpr[1760825] call_tmp[937217] 1 ret_tmp[5551539])
+    (5551542 'move' call_tmp[937222] ret_tmp[5551539])
+    const-val call_tmp[937227]:_RuntimeTypeInfo[1766589] "dead after last mention" "maybe param" "temp"
+    val default_arg_idxType[1883610]:int(64)[10] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp" "type variable"
+    val default_arg_strides[1883619]:strideKind[107137] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    (937230 'move' call_tmp[937227](533947 call chpl__buildDomainRuntimeType[1762345] defaultDist[288287]))
+    val myLocaleSpace[533944]:domain(1,int(64),one)[1765496] "dead after last mention" "temp"
+    const-val init_coerce_tmp[1883628]:domain(1,int(64),one)[1765496] "dead after last mention" "temp"
+    const-val ret_tmp[5554668]:domain(1,int(64),one)[1765496] "temp"
+    (1883638 call chpl__coerceMove[1780667] call_tmp[937227] call_tmp[937222] 0 ret_tmp[5554668])
+    (5554671 'move' init_coerce_tmp[1883628] ret_tmp[5554668])
+    (533950 'move' myLocaleSpace[533944] init_coerce_tmp[1883628])
+    (533952 '.=' this[309111] myLocaleSpace[309081] myLocaleSpace[533944])
+    const-val myLocaleSpace[1883663]:domain(1,int(64),one)[1765496] "temp" "unsafe"
+    ref _instance[1883670]:_ref(domain(1,int(64),one))[1763621] "temp" "unsafe"
+    ref definedConst[1883677]:_ref(bool)[1466299] "temp" "unsafe"
+    (5611013 call chpl__autoDestroy[1802624] call_tmp[937217])
+    (1883668 'move' myLocaleSpace[1883663](1883665 '.v' this[309111] myLocaleSpace[309081]))
+    (1883675 'move' _instance[1883670](1883672 '.' myLocaleSpace[1883663] _instance[1765490]))
+    (1883682 'move' definedConst[1883677](1883679 '.' _instance[1883670] definedConst[268703]))
+    (1883684 'move' definedConst[1883677] 1)
+    val myLocales[533956]:[domain(1,int(64),one)] locale[1780406] "dead after last mention" "temp"
+    const-ref call_tmp[937232]:_ref(_domain(unmanaged domain(1,int(64),one)))[1765522] "dead at end of block" "maybe param" "used in type" "temp"
+    (937235 'move' call_tmp[937232](533970 '.' this[309111] myLocaleSpace[309081]))
+    const-ref call_tmp[937237]:_ref(_domain(unmanaged domain(1,int(64),one)))[1765522] "dead at end of block" "maybe param" "used in type" "temp"
+    (937240 'move' call_tmp[937237](533961 call chpl__ensureDomainExpr[1766974] call_tmp[937232]))
+    const-val call_tmp[937242]:_RuntimeTypeInfo[1780641] "dead after last mention" "expr temp" "maybe param" "temp"
+    (937245 'move' call_tmp[937242](533959 call chpl__buildArrayRuntimeType[1766993] call_tmp[937237]))
+    const-val _runtime_type_tmp_[1883649]:domain(1,int(64),one)[1765496] "dead after last mention" "temp"
+    (1883654 'move' _runtime_type_tmp_[1883649](5470611 '.v' call_tmp[937242] dom[1780642]))
+    const-val ret_tmp[5554905]:[domain(1,int(64),one)] locale[1780406] "temp"
+    (1883647 call chpl__convertRuntimeTypeToValue[1791617] _runtime_type_tmp_[1883649] 0 ret_tmp[5554905])
+    (5554908 'move' myLocales[533956] ret_tmp[5554905])
+    (533966 '.=' this[309111] myLocales[309100] myLocales[533956])
+    (533973 'setcid' this[309111])
+    (630996 return _void[46])
+  }
+  function RootLocale[309500].setup[309144](const in arg this[309146]:RootLocale[309500]) : void[4] "method" "primary method" "resolved" "no return value for void"
+  {
+    (309152 call helpSetupRootLocaleFlat[305328] this[309146])
+    (630998 return _void[46])
+  }
+  function RootLocale[309500]._getChildCount[309228](const in arg this[309230]:RootLocale[309500]) : int(64)[10] "method" "primary method" "method overrides" "resolved" "virtual"
+  {
+    val ret[631040]:int(64)[10] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[937275]:_ref(_domain(unmanaged domain(1,int(64),one)))[1765522] "dead after last mention" "maybe param" "reference to a const field of 'this'" "reference to a const" "temp"
+    (937278 'move' call_tmp[937275](309239 call myLocaleSpace[1299214] this[309230]))
+    const-val call_tmp[937282]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (937285 'move' call_tmp[937282](309242 call size[2133291] call_tmp[937275]))
+    (631045 'move' ret[631040] call_tmp[937282])
+    (631042 return ret[631040])
+  }
+  function RootLocale[309500]._getChild[309313](const in arg this[309315]:RootLocale[309500], const in arg idx[309318]:int(64)[10], ref arg _retArg[5609267]:_ref(locale)[1467958]) : void[4] "fn returns via _retArg" "method" "primary method" "method overrides" "resolved" "virtual"
+  {
+    const-val ret[631071]:locale[234] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[937303]:_ref(locale)[1467958] "dead after last mention" "maybe param" "temp"
+    const-ref _this_tmp_[4347835]:_ref(_array(unmanaged [domain(1,int(64),one)] locale))[1780432] "dead after last mention" "temp"
+    (4347837 'move' _this_tmp_[4347835](309326 call myLocales[1299240] this[309315]))
+    (937306 'move' call_tmp[937303](4347843 call this[1895603] _this_tmp_[4347835] idx[309318]))
+    (631076 'move' ret[631071](5609272 call chpl__initCopy[2134904] call_tmp[937303] 0))
+    (5609269 '=' _retArg[5609267] ret[631071])
+    (5609274 return _void[46])
+  }
+  function RootLocale[309500].getDefaultLocaleSpace[309385](const in arg this[309387]:RootLocale[309500]) const ref : _ref(_domain(unmanaged domain(1,int(64),one)))[1765522] "method" "primary method" "method overrides" "resolved"
+  {
+    ref ret[631093]:_ref(_domain(unmanaged domain(1,int(64),one)))[1765522] "dead after last mention" "RVV" "temp"
+    ref call_tmp[937317]:_ref(_domain(unmanaged domain(1,int(64),one)))[1765522] "dead after last mention" "maybe param" "reference to a const field of 'this'" "reference to a const" "temp"
+    (937320 'move' call_tmp[937317](309394 call myLocaleSpace[1299214] this[309387]))
+    (631098 'move' ret[631093] call_tmp[937317])
+    (631095 return ret[631093])
+  }
+  function RootLocale[309500].getDefaultLocaleArray[309399](const in arg this[309401]:RootLocale[309500]) const ref : _ref(_array(unmanaged [domain(1,int(64),one)] locale))[1780432] "method" "primary method" "method overrides" "resolved"
+  {
+    ref ret[631102]:_ref(_array(unmanaged [domain(1,int(64),one)] locale))[1780432] "dead after last mention" "RVV" "temp"
+    ref call_tmp[937324]:_ref(_array(unmanaged [domain(1,int(64),one)] locale))[1780432] "dead after last mention" "maybe param" "temp"
+    (937327 'move' call_tmp[937324](459658 call myLocales[1299240] this[309401]))
+    (631107 'move' ret[631102] call_tmp[937324])
+    (631104 return ret[631102])
+  }
+  function RootLocale[309500].localeIDtoLocale[309410](const in arg this[309412]:RootLocale[309500], const  ref arg id[309415]:chpl_localeID_t[306449], ref arg _retArg[5609276]:_ref(locale)[1467958]) : void[4] "fn returns via _retArg" "method" "primary method" "method overrides" "resolved" "virtual"
+  {
+    const-val ret[631111]:locale[234] "dead after last mention" "RVV" "temp"
+    const-val call_tmp[937331]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+    (937334 'move' call_tmp[937331](309425 call chpl_rt_nodeFromLocaleID[306498] id[309415]))
+    const-ref call_tmp[937336]:_ref(locale)[1467958] "dead after last mention" "maybe param" "temp"
+    const-ref _this_tmp_[4347852]:_ref(_array(unmanaged [domain(1,int(64),one)] locale))[1780432] "dead after last mention" "temp"
+    (4347854 'move' _this_tmp_[4347852](459664 call myLocales[1299240] this[309412]))
+    const-val coerce_tmp[4349233]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (4349239 'move' coerce_tmp[4349233](4349235 'cast' int(64)[10] call_tmp[937331]))
+    const-val coerce_tmp[4349241]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (4349247 'move' coerce_tmp[4349241](4349243 'cast' int(64)[10] call_tmp[937331]))
+    (937339 'move' call_tmp[937336](4349229 call this[1895603] _this_tmp_[4347852] coerce_tmp[4349241]))
+    (631116 'move' ret[631111](5609281 call chpl__initCopy[2134904] call_tmp[937336] 0))
+    (5609278 '=' _retArg[5609276] ret[631111])
+    (5609283 return _void[46])
+  }
+  function RootLocale[309500].deinit[309429](const in arg this[309431]:RootLocale[309500]) : void[4] "destructor" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    {
+      ref _indexOfInterest[309465]:_ref(locale)[1467958] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+      val _iterator[309466]:_ic_these__ref__array_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882687] "dead at end of block" "expr temp" "temp"
+      const-ref call_tmp[937343]:_ref(_array(unmanaged [domain(1,int(64),one)] locale))[1780432] "dead at end of block" "maybe param" "temp"
+      (937346 'move' call_tmp[937343](459670 call myLocales[1299240] this[309431]))
+      (309475 'move' _iterator[309466](309473 call _getIterator[1876798] call_tmp[937343]))
+      {
+        val ret[5955738]:_ir_these__ref__array_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882693] "dead after last mention" "RVV" "temp"
+        ref _indexOfInterest[5955740]:_ref(locale)[1467958] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        val _iterator[5955742]:_ic_these_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882058] "dead at end of block" "expr temp" "temp"
+        val call_tmp[5955744]:[domain(1,int(64),one)] locale[1769942] "dead at end of block" "expr temp" "maybe param" "temp"
+        const-val this[5955877]:[domain(1,int(64),one)] locale[1780406] "temp"
+        (5955882 'move' this[5955877](5955879 '.v' _iterator[309466] F0_this[6836848]))
+        (5955746 'move' call_tmp[5955744](5955749 call _value[1780461] this[5955877]))
+        const-val call_tmp[5955751]:_ir_these_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882064] "dead at end of block" "maybe param" "temp"
+        val coerce_tmp[5955753]:[domain(1,int(64),one)] locale[1769942] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+        (5955755 'move' coerce_tmp[5955753] call_tmp[5955744])
+        const-val default_arg_tasksPerLocale[5955758]:int(64)[10] "dead at end of block" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+        (5955760 'move' default_arg_tasksPerLocale[5955758](5955763 call these_default_tasksPerLocale[1877068] call_tmp[5955744]))
+        const-val default_arg_ignoreRunning[5955765]:bool[19] "dead at end of block" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+        (5955767 'move' default_arg_ignoreRunning[5955765](5955770 call these_default_ignoreRunning[1877099] coerce_tmp[5955753]))
+        const-val default_arg_minIndicesPerTask[5955772]:int(64)[10] "dead at end of block" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+        (5955774 'move' default_arg_minIndicesPerTask[5955772](5955777 call these_default_minIndicesPerTask[1877130] coerce_tmp[5955753]))
+        const-val ret_tmp[5955779]:_ir_these_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882064] "temp"
+        (5955782 call these[1876952] coerce_tmp[5955753] default_arg_tasksPerLocale[5955758] default_arg_ignoreRunning[5955765] default_arg_minIndicesPerTask[5955772] ret_tmp[5955779])
+        (5955788 'move' call_tmp[5955751] ret_tmp[5955779])
+        (5955791 'move' _iterator[5955742](5955794 call _getIterator[1882073] call_tmp[5955751]))
+        {
+          val ret[6280176]:_ir_these_DefaultRectangularArr_1_int64_t_one_locale_int64_t[1882064] "dead after last mention" "RVV" "temp"
+          val call_tmp[6280178]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          ref _indexOfInterest[6280180]:_ref(locale)[1467958] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          val _iterator[6280182]:_ic_chpl__serialViewIter[1881791] "dead at end of block" "expr temp" "temp"
+          const-ref call_tmp[6280184]:_ref(domain(1,int(64),one))[1763621] "dead at end of block" "maybe param" "temp"
+          const-val this[6280457]:[domain(1,int(64),one)] locale[1769942] "temp"
+          (6280462 'move' this[6280457](6280459 '.v' _iterator[5955742] F0_this[6839647]))
+          (6280186 'move' call_tmp[6280184](6280189 call dom[1771473] this[6280457]))
+          const-val call_tmp[6280191]:_ir_chpl__serialViewIter[1881797] "dead at end of block" "maybe param" "temp"
+          val coerce_tmp[6280193]:domain(1,int(64),one)[1763606] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+          (6280195 'move' coerce_tmp[6280193](6280197 'deref' call_tmp[6280184]))
+          const-val ret_tmp[6280199]:_ir_chpl__serialViewIter[1881797] "temp"
+          const-val this[6280464]:[domain(1,int(64),one)] locale[1769942] "temp"
+          (6280469 'move' this[6280464](6280466 '.v' _iterator[5955742] F0_this[6839647]))
+          (6280202 call chpl__serialViewIter[1877164] this[6280464] coerce_tmp[6280193] ret_tmp[6280199])
+          (6280206 'move' call_tmp[6280191] ret_tmp[6280199])
+          (6280209 'move' _iterator[6280182](6280212 call _getIterator[1881806] call_tmp[6280191]))
+          {
+            val ret[6280215]:_ir_chpl__serialViewIter[1881797] "dead after last mention" "RVV" "temp"
+            val tmp[6280217]:bool[19] "dead after last mention" "maybe param" "temp"
+            val call_tmp[6280219]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            val useCache[6280221]:bool[19] "dead at end of block" "param"
+            val tmp[6280223]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+            val tmp[6280225]:bool[19] "dead after last mention" "maybe param" "temp"
+            val call_tmp[6280227]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            val info[6280229]:[domain(1,int(64),one)] locale[1769942] "dead at end of block" "insert auto destroy"
+            val tmp[6280231]:[domain(1,int(64),one)] locale[1769942] "dead after last mention" "expr temp" "insert auto destroy" "maybe copy elided" "maybe param" "temp"
+            val tmp[6280233]:bool[19] "dead after last mention" "maybe param" "temp"
+            val tmp[6280235]:[domain(1,int(64),one)] locale[1769942] "dead after last mention" "expr temp" "maybe param" "temp"
+            val tmp[6280237]:bool[19] "dead after last mention" "maybe param" "temp"
+            val call_tmp[6280239]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            const-val arr[6280241]:[domain(1,int(64),one)] locale[1769942] "temp"
+            (6280243 'move' arr[6280241](6280245 '.v' _iterator[6280182] F0_arr[6842243]))
+            (6280248 'move' tmp[6280235] arr[6280241])
+            const-val arr[6280251]:[domain(1,int(64),one)] locale[1769942] "temp"
+            (6280253 'move' arr[6280251](6280255 '.v' _iterator[6280182] F0_arr[6842243]))
+            (6280258 'move' tmp[6280231] arr[6280251])
+            const-val arr[6280261]:[domain(1,int(64),one)] locale[1769942] "temp"
+            (6280263 'move' arr[6280261](6280265 '.v' _iterator[6280182] F0_arr[6842243]))
+            (6280268 '=' info[6280229] arr[6280261])
+            (6280271 'noop')
+            val call_tmp[6280272]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            val call_tmp[6280274]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            val call_tmp[6280276]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            ref _indexOfInterest[6280278]:_ref(locale)[1467958] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+            val _iterator[6280280]:_ic_chpl__serialViewIter1D[1881524] "dead at end of block" "expr temp" "temp"
+            const-val call_tmp[6280282]:range(int(64),both,one)[1610039] "dead at end of block" "expr temp" "insert auto destroy" "maybe param" "temp"
+            val coerce_tmp[6280284]:domain(1,int(64),one)[1763606] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+            const-val viewDom[6280286]:domain(1,int(64),one)[1763606] "temp"
+            (6280288 'move' viewDom[6280286](6280290 '.v' _iterator[6280182] F1_viewDom[6842247]))
+            (6280293 'move' coerce_tmp[6280284] viewDom[6280286])
+            const-val ret_tmp[6280296]:range(int(64),both,one)[1610039] "temp"
+            const-val viewDom[6280298]:domain(1,int(64),one)[1763606] "temp"
+            (6280300 'move' viewDom[6280298](6280302 '.v' _iterator[6280182] F1_viewDom[6842247]))
+            (6280306 call dsiDim[1771514] viewDom[6280298] ret_tmp[6280296])
+            (6280309 'move' call_tmp[6280282] ret_tmp[6280296])
+            const-val call_tmp[6280312]:_ir_chpl__serialViewIter1D[1881530] "dead at end of block" "maybe param" "temp"
+            const-val ret_tmp[6280314]:_ir_chpl__serialViewIter1D[1881530] "temp"
+            const-val arr[6280316]:[domain(1,int(64),one)] locale[1769942] "temp"
+            (6280318 'move' arr[6280316](6280320 '.v' _iterator[6280182] F0_arr[6842243]))
+            (6280324 call chpl__serialViewIter1D[1878709] arr[6280316] call_tmp[6280282] ret_tmp[6280314])
+            (6280328 'move' call_tmp[6280312] ret_tmp[6280314])
+            (6280331 'move' _iterator[6280280](6280334 call _getIterator[1881539] call_tmp[6280312]))
+            {
+              val ret[6574036]:_ir_chpl__serialViewIter1D[1881530] "dead after last mention" "RVV" "temp"
+              val tmp[6574038]:bool[19] "dead after last mention" "maybe param" "temp"
+              val call_tmp[6574040]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              val useCache[6574042]:bool[19] "dead at end of block" "param"
+              val tmp[6574044]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+              val tmp[6574046]:bool[19] "dead after last mention" "maybe param" "temp"
+              val call_tmp[6574048]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              val info[6574050]:[domain(1,int(64),one)] locale[1769942] "dead at end of block" "insert auto destroy"
+              val tmp[6574052]:[domain(1,int(64),one)] locale[1769942] "dead after last mention" "expr temp" "insert auto destroy" "maybe copy elided" "maybe param" "temp"
+              val tmp[6574054]:bool[19] "dead after last mention" "maybe param" "temp"
+              val tmp[6574056]:[domain(1,int(64),one)] locale[1769942] "dead after last mention" "expr temp" "maybe param" "temp"
+              val tmp[6574058]:bool[19] "dead after last mention" "maybe param" "temp"
+              val call_tmp[6574060]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              const-val arr[6574520]:[domain(1,int(64),one)] locale[1769942] "temp"
+              (6574525 'move' arr[6574520](6574522 '.v' _iterator[6280280] F0_arr[6844501]))
+              (6574062 'move' tmp[6574056] arr[6574520])
+              const-val arr[6574527]:[domain(1,int(64),one)] locale[1769942] "temp"
+              (6574532 'move' arr[6574527](6574529 '.v' _iterator[6280280] F0_arr[6844501]))
+              (6574065 'move' tmp[6574052] arr[6574527])
+              const-val arr[6574534]:[domain(1,int(64),one)] locale[1769942] "temp"
+              (6574539 'move' arr[6574534](6574536 '.v' _iterator[6280280] F0_arr[6844501]))
+              (6574068 '=' info[6574050] arr[6574534])
+              (6574071 'noop')
+              val call_tmp[6574072]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              val call_tmp[6574074]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              const-val call_tmp[6574076]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              const-val viewRange[6574541]:range(int(64),both,one)[1610039] "temp"
+              (6574546 'move' viewRange[6574541](6574543 '.v' _iterator[6280280] F1_viewRange[6844505]))
+              (6574078 'move' call_tmp[6574076](6574081 call low[1650229] viewRange[6574541]))
+              const-val call_tmp[6574083]:int(64)[10] "dead at end of block" "maybe param" "temp"
+              const-val default_arg_getShifted[6574085]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+              const-val arr[6574548]:[domain(1,int(64),one)] locale[1769942] "temp"
+              (6574553 'move' arr[6574548](6574550 '.v' _iterator[6280280] F0_arr[6844501]))
+              (6574087 'move' default_arg_getShifted[6574085](6574090 call getDataIndex_default_getShifted[1879590] arr[6574548]))
+              (6574092 'move' call_tmp[6574083](6574095 call getDataIndex[1879451] info[6574050] call_tmp[6574076]))
+              const-val first[6574098]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+              (6574100 'move' first[6574098] call_tmp[6574083])
+              val call_tmp[6574103]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+              const-val call_tmp[6574105]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              const-val viewRange[6574555]:range(int(64),both,one)[1610039] "temp"
+              (6574560 'move' viewRange[6574555](6574557 '.v' _iterator[6280280] F1_viewRange[6844505]))
+              (6574107 'move' call_tmp[6574105](6574110 call low[1650229] viewRange[6574555]))
+              const-val call_tmp[6574112]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574114 'move' call_tmp[6574112](6574117 call chpl__idxToInt[1577032] call_tmp[6574105]))
+              const-val call_tmp[6574119]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574121 'move' call_tmp[6574119](6574124 call +[1471222] call_tmp[6574112]))
+              const-val call_tmp[6574126]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574128 'move' call_tmp[6574126](6574131 call chpl__intToIdx[1580593] call_tmp[6574119]))
+              const-val call_tmp[6574133]:int(64)[10] "dead at end of block" "maybe param" "temp"
+              const-val default_arg_getShifted[6574135]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+              (6574137 'move' default_arg_getShifted[6574135](6574140 call getDataIndex_default_getShifted[1879590] info[6574050]))
+              (6574142 'move' call_tmp[6574133](6574145 call getDataIndex[1879451] info[6574050] call_tmp[6574126]))
+              const-val second[6574148]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+              (6574150 'move' second[6574148] call_tmp[6574133])
+              const-val call_tmp[6574153]:int(64)[10] "dead at end of block" "maybe param" "temp"
+              (6574155 'move' call_tmp[6574153](6574158 call -[57305] call_tmp[6574133] call_tmp[6574083]))
+              const-val step[6574161]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+              (6574163 'move' step[6574161] call_tmp[6574153])
+              const-val call_tmp[6574166]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              const-val viewRange[6574562]:range(int(64),both,one)[1610039] "temp"
+              (6574567 'move' viewRange[6574562](6574564 '.v' _iterator[6280280] F1_viewRange[6844505]))
+              (6574168 'move' call_tmp[6574166](6574171 call size[1649150] viewRange[6574562]))
+              val call_tmp[6574173]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+              const-val call_tmp[6574175]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574177 'move' call_tmp[6574175] call_tmp[6574166])
+              const-val call_tmp[6574180]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574182 'move' call_tmp[6574180](6574185 call -[1487343] call_tmp[6574166]))
+              const-val call_tmp[6574187]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+              (6574189 'move' call_tmp[6574187](6574192 call *[58795] call_tmp[6574180] call_tmp[6574153]))
+              const-val call_tmp[6574195]:int(64)[10] "dead at end of block" "maybe param" "temp"
+              (6574197 'move' call_tmp[6574195](6574200 call +[56587] call_tmp[6574083] call_tmp[6574187]))
+              const-val last[6574203]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+              (6574205 'move' last[6574203] call_tmp[6574195])
+              val _indexOfInterest[6574208]:int(64)[10] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+              val _iterator[6574210]:_ic_chpl_direct_pos_stride_range_iter[1881076] "dead at end of block" "expr temp" "temp"
+              const-val call_tmp[6574212]:_ir_chpl_direct_pos_stride_range_iter[1881082] "dead at end of block" "expr temp" "maybe param" "temp"
+              const-val ret_tmp[6574214]:_ir_chpl_direct_pos_stride_range_iter[1881082] "temp"
+              (6574217 call chpl_direct_pos_stride_range_iter[1880641] call_tmp[6574083] call_tmp[6574195] call_tmp[6574153] ret_tmp[6574214])
+              (6574222 'move' call_tmp[6574212] ret_tmp[6574214])
+              (6574225 'move' _iterator[6574210](6574228 call _getIterator[1881091] call_tmp[6574212]))
+              {
+                val ret[6574231]:_ir_chpl_direct_pos_stride_range_iter[1881082] "dead after last mention" "RVV" "temp"
+                val call_tmp[6574233]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+                val call_tmp[6574235]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+                const-val stride[6574237]:int(64)[10] "temp"
+                (6574239 'move' stride[6574237](6574241 '.v' _iterator[6574210] F2_stride[6846165]))
+                (6574245 call chpl_range_check_stride[1517719] stride[6574237])
+                val call_tmp[6574247]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+                val call_tmp[6574249]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+                const-val default_arg_first[6574251]:int(64)[10] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+                const-val low[6574253]:int(64)[10] "temp"
+                (6574255 'move' low[6574253](6574257 '.v' _iterator[6574210] F0_low[6846157]))
+                (6574260 'move' default_arg_first[6574251](6574263 call chpl_checkIfRangeIterWillOverflow_default_first[1519408] low[6574253]))
+                const-val default_arg_last[6574265]:int(64)[10] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+                const-val high[6574267]:int(64)[10] "temp"
+                (6574269 'move' high[6574267](6574271 '.v' _iterator[6574210] F1_high[6846161]))
+                (6574274 'move' default_arg_last[6574265](6574277 call chpl_checkIfRangeIterWillOverflow_default_last[1519436] high[6574267]))
+                val default_arg_shouldHalt[6574279]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+                const-val _return_tmp_[6574281]:bool[19] "dead after last mention" "temp"
+                const-val low[6574283]:int(64)[10] "temp"
+                (6574285 'move' low[6574283](6574287 '.v' _iterator[6574210] F0_low[6846157]))
+                const-val high[6574290]:int(64)[10] "temp"
+                (6574292 'move' high[6574290](6574294 '.v' _iterator[6574210] F1_high[6846161]))
+                const-val stride[6574297]:int(64)[10] "temp"
+                (6574299 'move' stride[6574297](6574301 '.v' _iterator[6574210] F2_stride[6846165]))
+                (6574304 'move' _return_tmp_[6574281](6574307 call chpl_checkIfRangeIterWillOverflow[1518856] low[6574283] high[6574290] stride[6574297] default_arg_first[6574251] default_arg_last[6574265] 1))
+                val i[6574314]:int(64)[10] "dead at end of block" "insert auto destroy"
+                val call_tmp[6574316]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+                (6574318 'move' i[6574314] 0)
+                CForLoop[6574321] hazard
+                {
+                  const-val yret[6574369]:int(64)[10] "dead after last mention" "YVV" "temp"
+                  (6574371 'move' yret[6574369] i[6574314])
+                  const-val _yieldedIndex[6574374]:int(64)[10] "temp"
+                  (6574376 'move' _yieldedIndex[6574374] i[6574314])
+                  {
+                    const-val i[6574380]:int(64)[10] "const" "index var" "insert auto destroy"
+                    (6574382 'move' i[6574380] _yieldedIndex[6574374])
+                    ref yret[6574385]:_ref(locale)[1467958] "dead after last mention" "YVV" "temp"
+                    ref call_tmp[6574387]:_ref(locale)[1467958] "dead after last mention" "maybe param" "temp"
+                    const-ref _this_tmp_[6574389]:_ref(_ddata(locale))[1768685] "dead after last mention" "temp"
+                    (6574391 'move' _this_tmp_[6574389](6574394 call theData[1881346] info[6574050]))
+                    val coerce_tmp[6574396]:_ddata(locale)[1768676] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+                    (6574398 'move' coerce_tmp[6574396](6574400 'deref' _this_tmp_[6574389]))
+                    (6574402 'move' call_tmp[6574387](6574405 call this[1881485] coerce_tmp[6574396] _yieldedIndex[6574374]))
+                    ref _yieldedIndex[6574430]:_ref(locale)[1467958] "temp"
+                    (6574408 'move' _yieldedIndex[6574430] call_tmp[6574387])
+                    {
+                      ref elem[6574432]:_ref(locale)[1467958] "index var" "insert auto destroy"
+                      (6574434 'move' elem[6574432] _yieldedIndex[6574430])
+                      ref yret[6574437]:_ref(locale)[1467958] "dead after last mention" "YVV" "temp"
+                      ref _yieldedIndex[6574439]:_ref(locale)[1467958] "temp"
+                      (6574441 'move' _yieldedIndex[6574439] elem[6574432])
+                      {
+                        ref elem[6574445]:_ref(locale)[1467958] "index var" "insert auto destroy"
+                        (6574447 'move' elem[6574445] _yieldedIndex[6574439])
+                        ref yret[6574450]:_ref(locale)[1467958] "dead after last mention" "YVV" "temp"
+                        ref _yieldedIndex[6574452]:_ref(locale)[1467958] "temp"
+                        (6574454 'move' _yieldedIndex[6574452] elem[6574445])
+                        {
+                          ref i[6574458]:_ref(locale)[1467958] "index var" "insert auto destroy"
+                          (6574460 'move' i[6574458] _yieldedIndex[6574452])
+                          ref yret[6574463]:_ref(locale)[1467958] "dead after last mention" "YVV" "temp"
+                          ref _yieldedIndex[6574465]:_ref(locale)[1467958] "temp"
+                          (6574467 'move' _yieldedIndex[6574465] i[6574458])
+                          {
+                            ref loc[6574471]:_ref(locale)[1467958] "index var" "insert auto destroy"
+                            (6574473 'move' loc[6574471] _yieldedIndex[6574465])
+                            {
+                              {
+                                const-val tmp[6574478]:chpl_localeID_t[306449] "dead after last mention" "const" "temp"
+                                const-val call_tmp[6574480]:chpl_localeID_t[306449] "dead after last mention" "expr temp" "maybe param" "temp"
+                                val _locale_tmp_[6574482]:BaseLocale[136243] "dead after last mention" "temp"
+                                (6574484 'move' _locale_tmp_[6574482](6574487 call _value[135299] loc[6574471]))
+                                (6574489 'move' call_tmp[6574480](6574491 '_wide_get_locale' _locale_tmp_[6574482]))
+                                (6574493 'move' tmp[6574478] call_tmp[6574480])
+                                {
+                                  (6574498 call =[52153] rootLocaleInitialized[52042] 0)
+                                  const-ref call_tmp[6574501]:_ref(BaseLocale)[1531014] "dead after last mention" "maybe param" "temp"
+                                  (6574503 'move' call_tmp[6574501](6574506 call _instance[1003250] loc[6574471]))
+                                  val coerce_tmp[6574508]:BaseLocale[136243] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+                                  (6574510 'move' coerce_tmp[6574508](6574512 'deref' call_tmp[6574501]))
+                                  (6574515 call chpl__delete[1531880] coerce_tmp[6574508])
+                                }
+                              }
+                            }
+                            label _continueLabel[6574517]
+                          }
+                        }
+                      }
+                    }
+                  }
+                  {
+                    const-val low[6574323]:int(64)[10] "temp"
+                    (6574325 'move' low[6574323](6574327 '.v' _iterator[6574210] F0_low[6846157]))
+                    (6574330 '=' i[6574314] low[6574323])
+                  }
+                  {
+                    const-val high[6574334]:int(64)[10] "temp"
+                    (6574336 'move' high[6574334](6574338 '.v' _iterator[6574210] F1_high[6846161]))
+                    (6574341 '<=' i[6574314] high[6574334])
+                  }
+                  {
+                    val call_tmp[6574345]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+                    const-val call_tmp[6574347]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+                    const-val stride[6574349]:int(64)[10] "temp"
+                    (6574351 'move' stride[6574349](6574353 '.v' _iterator[6574210] F2_stride[6846165]))
+                    (6574356 'move' call_tmp[6574347] stride[6574349])
+                    const-val stride[6574359]:int(64)[10] "temp"
+                    (6574361 'move' stride[6574359](6574363 '.v' _iterator[6574210] F2_stride[6846165]))
+                    (6574366 '+=' i[6574314] stride[6574359])
+                  }
+                }
+                label _endchpl_direct_pos_stride_range_iter[6574421]
+              }
+              (6574424 call _freeIterator[1881264] _iterator[6574210])
+              label _endchpl__serialViewIter1D[6574426]
+            }
+            (6280379 call _freeIterator[1881708] _iterator[6280280])
+            (6280382 call chpl__autoDestroy[1802624] call_tmp[6280282])
+            label _endchpl__serialViewIter[6280384]
+          }
+          (6280387 call _freeIterator[1881975] _iterator[6280182])
+          label _endthese[6280389]
+        }
+        (5955820 call _freeIterator[1882604] _iterator[5955742])
+        label _endthese[5955822]
+      }
+      label _breakLabel[309471]
+      (5611019 call _freeIterator[1883368] _iterator[309466])
+    }
+    label _enddeinit[5525668]
+    const-val _field_destructor_tmp_[5525666]:[domain(1,int(64),one)] locale[1780406] "temp"
+    (5525673 'move' _field_destructor_tmp_[5525666](5525670 '.v' this[309431] myLocales[309100]))
+    (5525675 call chpl__autoDestroy[4018667] _field_destructor_tmp_[5525666])
+    const-val _field_destructor_tmp_[5525678]:domain(1,int(64),one)[1765496] "temp"
+    (5525683 'move' _field_destructor_tmp_[5525678](5525680 '.v' this[309431] myLocaleSpace[309081]))
+    (5525685 call chpl__autoDestroy[3989014] _field_destructor_tmp_[5525678])
+    val _parent_destructor_tmp_[5525688]:AbstractRootLocale[136746] "temp"
+    (5525693 'move' _parent_destructor_tmp_[5525688](5525689 'cast' AbstractRootLocale[136746] this[309431]))
+    (5525695 call deinit[1084141] _parent_destructor_tmp_[5525688])
+    (631118 return _void[46])
+  }
+  function RootLocale[309500].myLocaleSpace[1299214](const in arg this[1299218]:RootLocale[309500]) const ref : _ref(_domain(unmanaged domain(1,int(64),one)))[1765522] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to a const" "resolved"
+  {
+    ref ret[1299228]:_ref(_domain(unmanaged domain(1,int(64),one)))[1765522] "dead after last mention" "RVV" "temp"
+    ref call_tmp[1299235]:_ref(_domain(unmanaged domain(1,int(64),one)))[1765522] "dead after last mention" "maybe param" "temp"
+    (1299238 'move' call_tmp[1299235](1299222 '.' this[1299218] myLocaleSpace[309081]))
+    (1299233 'move' ret[1299228] call_tmp[1299235])
+    (1299230 return ret[1299228])
+  }
+  function RootLocale[309500].myLocales[1299240](const in arg this[1299244]:RootLocale[309500]) ref : _ref(_array(unmanaged [domain(1,int(64),one)] locale))[1780432] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "resolved" "fn synchronization free"
+  {
+    ref ret[1299254]:_ref(_array(unmanaged [domain(1,int(64),one)] locale))[1780432] "dead after last mention" "RVV" "temp"
+    ref call_tmp[1299261]:_ref(_array(unmanaged [domain(1,int(64),one)] locale))[1780432] "dead after last mention" "maybe param" "temp"
+    (1299264 'move' call_tmp[1299261](1299248 '.' this[1299244] myLocales[309100]))
+    (1299259 'move' ret[1299254] call_tmp[1299261])
+    (1299256 return ret[1299254])
+  }
+  function _new[1883693]() : RootLocale[309500] "always propagate line file info" "compiler generated" "insert line file info" "last resort" "llvm return noalias" "_new wrapper" "resolved"
+  {
+    val _formal_type_tmp_[5478432]:RootLocale[309500] "temp"
+    val ret[1883729]:RootLocale[309500] "dead after last mention" "RVV" "temp"
+    val initTemp[1883695]:RootLocale[309500] "dead after last mention" "temp"
+    const-val call_tmp[1883736]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1883739 'move' call_tmp[1883736](1883748 'sizeof_bundle' RootLocale[309500]))
+    val cast_tmp[1883751]:c_ptr(void)[1465614] "dead after last mention" "temp"
+    (1883753 'move' cast_tmp[1883751](1883707 call chpl_here_alloc[308303] call_tmp[1883736] 50))
+    (1883710 'move' initTemp[1883695](1883755 'cast' RootLocale[309500] cast_tmp[1883751]))
+    (1883696 call init[309109] initTemp[1883695])
+    val tmp[1883712]:RootLocale[309500] "dead after last mention" "temp"
+    (1883719 'move' tmp[1883712] initTemp[1883695])
+    (1883734 'move' ret[1883729] tmp[1883712])
+    (1883731 return ret[1883729])
+  }
+  type RootLocale[309500] val super[397719]:AbstractRootLocale[136746] "super class" const myLocaleSpace[309081]:domain(1,int(64),one)[1765496] "const" val myLocales[309100]:[domain(1,int(64),one)] locale[1780406] "unsafe"
+  const-ref call_tmp[937071]:_ref(_domain(unmanaged domain(1,int(64),one)))[1765522] "dead at end of block" "maybe param" "used in type" "reference to a const" "temp"
+}

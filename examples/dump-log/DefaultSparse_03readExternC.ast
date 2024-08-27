@@ -1,0 +1,1647 @@
+AST dump for DefaultSparse after pass readExternC.
+Module use list: 
+
+{
+  (275944 'use' ChapelStandard)
+  (275948 'import' RangeChunk)
+  (275950 'use' DSIUtil)
+  { scopeless
+    unknown debugDefaultSparse[275953] "config" "param" 0
+    (275956 'end of statement')
+  }
+  { scopeless
+    unknown defaultSparseSupportsAutoLocalAccess[275958] "config" "param" 1
+    (275961 'end of statement')
+  }
+  type DefaultSparseDom[278225] unknown dist[275965](275966 'to unmanaged class from unknown' DefaultDist) unknown _nnz[275971] 0 unknown _indices[275976] "local field"(275984 call chpl__buildArrayRuntimeType(275978 call chpl__ensureDomainExpr nnzDom)(275980 call chpl__buildIndexType rank idxType)) function DefaultSparseDom[278225].linksDistribution[275988](arg _mt[275992]:_MT[201], arg this[275990]:DefaultSparseDom[278225]) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (275995 return 0)
+  } function DefaultSparseDom[278225].dsiLinksDistribution[275999](arg _mt[276003]:_MT[201], arg this[276001]:DefaultSparseDom[278225]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (276006 return 0)
+  } function DefaultSparseDom[278225].init[276010](arg _mt[276027]:_MT[201], arg this[276012]:DefaultSparseDom[278225], param arg rank[276014]:_any[141](?), arg idxType[276016]:_any[141](?), arg dist[276020] :
+  (276018 'to unmanaged class from unknown' DefaultDist), arg parentDom[276024] :
+  _domain) : _unknown[42] "method" "primary method"
+  {
+    (276034 call(276031 call . super c"init") rank idxType parentDom)
+    (276038 call =(276041 call . this c"dist") dist)
+  } function DefaultSparseDom[278225].getNNZ[276047](arg _mt[276051]:_MT[201], arg this[276049]:DefaultSparseDom[278225]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (276055 return _nnz)
+  }
+  { scopeless type
+    int[10]
+  } function DefaultSparseDom[278225].dsiBuildArray[276060](arg _mt[276070]:_MT[201], arg this[276062]:DefaultSparseDom[278225], arg eltType[276064]:_any[141](?), param arg initElts[276067] :
+  bool) : _unknown[42] "method" "primary method"
+  {
+    (276073 return(276074 'new'(_chpl_manager = unmanaged[183](?))(276078 call DefaultSparseArr(eltType = eltType)(rank = rank)(idxType = idxType)(dom =(276086 call _to_unmanaged this))(initElts = initElts))))
+  } function DefaultSparseDom[278225].dsiIndsIterSafeForRemoving[276093](arg _mt[276097]:_MT[201], arg this[276095]:DefaultSparseDom[278225]) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[276120] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[276121] "expr temp" "temp"
+      (276130 'move' _iterator[276121](276128 call _getIterator(276102 call chpl_by(276104 call #(276107 call chpl_build_low_bounded_range 0) _nnz)(276110 call - 1))))
+      Defer
+      {
+        {
+          (276154 call _freeIterator _iterator[276121])
+        }
+      }
+      { scopeless type
+        (276144 'move' _indexOfInterest[276120](276141 call iteratorIndex _iterator[276121]))
+      }
+      ForLoop[276122] order-independent
+      {
+        unknown i[276100] "index var" "insert auto destroy"
+        (276149 'move' i[276100] _indexOfInterest[276120])
+        {
+          (276114 yield(276116 call _indices i))
+        }
+        label _continueLabel[276125]
+        _indexOfInterest[276120]
+        _iterator[276121]
+      }
+      label _breakLabel[276126]
+    }
+  } function DefaultSparseDom[278225].these[276163](arg _mt[276167]:_MT[201], arg this[276165]:DefaultSparseDom[278225]) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[276185] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[276186] "expr temp" "temp"
+      (276195 'move' _iterator[276186](276193 call _getIterator(276202 call chpl_direct_counted_range_iter 0 _nnz)))
+      Defer
+      {
+        {
+          (276217 call _freeIterator _iterator[276186])
+        }
+      }
+      { scopeless type
+        (276207 'move' _indexOfInterest[276185](276204 call iteratorIndex _iterator[276186]))
+      }
+      ForLoop[276187] order-independent
+      {
+        unknown i[276170] "index var" "insert auto destroy"
+        (276212 'move' i[276170] _indexOfInterest[276185])
+        {
+          (276179 yield(276181 call _indices i))
+        }
+        label _continueLabel[276190]
+        _indexOfInterest[276185]
+        _iterator[276186]
+      }
+      label _breakLabel[276191]
+    }
+  } function DefaultSparseDom[278225].these[276226](arg _mt[276234]:_MT[201], arg this[276228]:DefaultSparseDom[278225], param arg tag[276231] :
+  iterKind) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    { scopeless
+      const numElems[276245] "const" _nnz
+      (276248 'end of statement')
+    }
+    { scopeless
+      const numChunks[276250] "const"(276251 call :(276254 call _computeNumChunks numElems)(276257 'typeof' numElems))
+      (276259 'end of statement')
+    }
+    if(276275 call _cond_test debugDefaultSparse)
+    {
+      (276262 call writeln "DefaultSparseDom standalone: " numChunks " chunks, " numElems " elems")
+    }
+    if(276399 call _cond_test(276395 call <= numChunks 1))
+    {
+      {
+        unknown _indexOfInterest[276295] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[276296] "expr temp" "temp"
+        (276305 'move' _iterator[276296](276303 call _getIterator(276312 call chpl_direct_counted_range_iter 0 numElems)))
+        Defer
+        {
+          {
+            (276327 call _freeIterator _iterator[276296])
+          }
+        }
+        { scopeless type
+          (276317 'move' _indexOfInterest[276295](276314 call iteratorIndex _iterator[276296]))
+        }
+        ForLoop[276297] order-independent
+        {
+          unknown i[276280] "index var" "insert auto destroy"
+          (276322 'move' i[276280] _indexOfInterest[276295])
+          {
+            (276289 yield(276291 call _indices i))
+          }
+          label _continueLabel[276300]
+          _indexOfInterest[276295]
+          _iterator[276296]
+        }
+        label _breakLabel[276301]
+      }
+    }
+    {
+      {
+        unknown tmpIter[391318] "expr temp" "maybe ref" "no copy" "temp"
+        (391321 'move' tmpIter[391318](276343 call(276340 call . RangeChunk c"chunks")(276344 call #(276347 call chpl_build_low_bounded_range 0) numElems) numChunks))
+        unknown isBounded[391497] "maybe param" "temp"
+        (391503 'move' isBounded[391497](391499 call chpl_supportsBoundedCoforall tmpIter[391318] 0))
+        if isBounded[391497]
+        {
+          const _coforallCount[391366] "const" "end count" "temp"
+          (391434 'move' _coforallCount[391366](391431 call _endCountAlloc 1))
+          unknown numTasks[391367] "temp"
+          (391418 'move' numTasks[391367](391414 call chpl_boundedCoforallSize tmpIter[391318] 0))
+          (391409 call _upEndCount _coforallCount[391366] 1 numTasks[391367])
+          (391406 call chpl_resetTaskSpawn numTasks[391367])
+          unknown _indexOfInterest[391374] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[391375] "expr temp" "temp"
+          (391384 'move' _iterator[391375](391382 call _getIterator tmpIter[391318]))
+          Defer
+          {
+            {
+              (391399 call _freeIterator _iterator[391375])
+            }
+          }
+          { scopeless type
+            (391389 'move' _indexOfInterest[391374](391386 call iteratorIndex _iterator[391375]))
+          }
+          ForLoop[391376]
+          {
+            unknown chunk[391325] "coforall index var" "index var" "insert auto destroy"
+            (391394 'move' chunk[391325] _indexOfInterest[391374])
+            {
+              {
+                unknown _indexOfInterest[391328] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                unknown _iterator[391330] "expr temp" "temp"
+                (391332 'move' _iterator[391330](391335 call _getIterator chunk))
+                Defer
+                {
+                  {
+                    (391339 call _freeIterator _iterator[391330])
+                  }
+                }
+                { scopeless type
+                  (391343 'move' _indexOfInterest[391328](391346 call iteratorIndex _iterator[391330]))
+                }
+                ForLoop[391348] order-independent
+                {
+                  unknown i[391351] "index var" "insert auto destroy"
+                  (391353 'move' i[391351] _indexOfInterest[391328])
+                  { scopeless
+                    (391357 yield(391359 call _indices i))
+                  }
+                  label _continueLabel[391361]
+                  _indexOfInterest[391328]
+                  _iterator[391330]
+                }
+                label _breakLabel[391363]
+              }
+              (391369 call _downEndCount _coforallCount[391366] nil[32])
+              (391368 'coforall loop')
+            }
+            label _continueLabel[391379]
+            _indexOfInterest[391374]
+            _iterator[391375]
+          }
+          label _breakLabel[391380]
+          Defer
+          {
+            {
+              (391421 call _endCountFree _coforallCount[391366])
+            }
+          }
+          (391426 call _waitEndCount _coforallCount[391366] 1 numTasks[391367])
+        }
+        {
+          const _coforallCount[391438] "const" "end count" "temp"
+          (391494 'move' _coforallCount[391438](391491 call _endCountAlloc 1))
+          unknown _indexOfInterest[391446] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[391447] "expr temp" "temp"
+          (391456 'move' _iterator[391447](391454 call _getIterator tmpIter[391318]))
+          Defer
+          {
+            {
+              (391471 call _freeIterator _iterator[391447])
+            }
+          }
+          { scopeless type
+            (391461 'move' _indexOfInterest[391446](391458 call iteratorIndex _iterator[391447]))
+          }
+          ForLoop[391448]
+          {
+            unknown chunk[276335] "coforall index var" "index var" "insert auto destroy"
+            (391466 'move' chunk[276335] _indexOfInterest[391446])
+            (391478 call _upEndCount _coforallCount[391438] 1)
+            {
+              {
+                unknown _indexOfInterest[276362] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                unknown _iterator[276363] "expr temp" "temp"
+                (276372 'move' _iterator[276363](276370 call _getIterator chunk))
+                Defer
+                {
+                  {
+                    (276387 call _freeIterator _iterator[276363])
+                  }
+                }
+                { scopeless type
+                  (276377 'move' _indexOfInterest[276362](276374 call iteratorIndex _iterator[276363]))
+                }
+                ForLoop[276364] order-independent
+                {
+                  unknown i[276352] "index var" "insert auto destroy"
+                  (276382 'move' i[276352] _indexOfInterest[276362])
+                  { scopeless
+                    (276355 yield(276357 call _indices i))
+                  }
+                  label _continueLabel[276367]
+                  _indexOfInterest[276362]
+                  _iterator[276363]
+                }
+                label _breakLabel[276368]
+              }
+              (391441 call _downEndCount _coforallCount[391438] nil[32])
+              (391440 'coforall loop')
+            }
+            label _continueLabel[391451]
+            _indexOfInterest[391446]
+            _iterator[391447]
+          }
+          label _breakLabel[391452]
+          Defer
+          {
+            {
+              (391482 call _endCountFree _coforallCount[391438])
+            }
+          }
+          (391487 call _waitEndCount _coforallCount[391438] 1)
+        }
+      }
+    }
+  }
+  where {
+    (276236 call == tag(276240 call . iterKind c"standalone"))
+  } function DefaultSparseDom[278225].these[276406](arg _mt[276414]:_MT[201], arg this[276408]:DefaultSparseDom[278225], param arg tag[276411] :
+  iterKind) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    { scopeless
+      const numElems[276425] "const" _nnz
+      (276428 'end of statement')
+    }
+    { scopeless
+      const numChunks[276430] "const"(276431 call :(276434 call _computeNumChunks numElems)(276437 'typeof' numElems))
+      (276439 'end of statement')
+    }
+    if(276451 call _cond_test debugDefaultSparse)
+    {
+      { scopeless
+        (276441 call writeln "DefaultSparseDom leader: " numChunks " chunks, " numElems " elems")
+      }
+    }
+    if(276501 call _cond_test(276497 call <= numChunks 1))
+    {
+      { scopeless
+        (276456 yield(276464 call _build_tuple this 0(276460 call - numElems 1)))
+      }
+    }
+    {
+      { scopeless
+        {
+          unknown tmpIter[391507] "expr temp" "maybe ref" "no copy" "temp"
+          (391510 'move' tmpIter[391507](276473 call(276470 call . RangeChunk c"chunks")(276474 call #(276477 call chpl_build_low_bounded_range 0) numElems) numChunks))
+          unknown isBounded[391661] "maybe param" "temp"
+          (391667 'move' isBounded[391661](391663 call chpl_supportsBoundedCoforall tmpIter[391507] 0))
+          if isBounded[391661]
+          {
+            const _coforallCount[391530] "const" "end count" "temp"
+            (391598 'move' _coforallCount[391530](391595 call _endCountAlloc 1))
+            unknown numTasks[391531] "temp"
+            (391582 'move' numTasks[391531](391578 call chpl_boundedCoforallSize tmpIter[391507] 0))
+            (391573 call _upEndCount _coforallCount[391530] 1 numTasks[391531])
+            (391570 call chpl_resetTaskSpawn numTasks[391531])
+            unknown _indexOfInterest[391538] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[391539] "expr temp" "temp"
+            (391548 'move' _iterator[391539](391546 call _getIterator tmpIter[391507]))
+            Defer
+            {
+              {
+                (391563 call _freeIterator _iterator[391539])
+              }
+            }
+            { scopeless type
+              (391553 'move' _indexOfInterest[391538](391550 call iteratorIndex _iterator[391539]))
+            }
+            ForLoop[391540]
+            {
+              unknown chunk[391514] "coforall index var" "index var" "insert auto destroy"
+              (391558 'move' chunk[391514] _indexOfInterest[391538])
+              {
+                { scopeless
+                  (391517 yield(391519 call _build_tuple this(391522 call . chunk c"first")(391526 call . chunk c"last")))
+                }
+                (391533 call _downEndCount _coforallCount[391530] nil[32])
+                (391532 'coforall loop')
+              }
+              label _continueLabel[391543]
+              _indexOfInterest[391538]
+              _iterator[391539]
+            }
+            label _breakLabel[391544]
+            Defer
+            {
+              {
+                (391585 call _endCountFree _coforallCount[391530])
+              }
+            }
+            (391590 call _waitEndCount _coforallCount[391530] 1 numTasks[391531])
+          }
+          {
+            const _coforallCount[391602] "const" "end count" "temp"
+            (391658 'move' _coforallCount[391602](391655 call _endCountAlloc 1))
+            unknown _indexOfInterest[391610] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[391611] "expr temp" "temp"
+            (391620 'move' _iterator[391611](391618 call _getIterator tmpIter[391507]))
+            Defer
+            {
+              {
+                (391635 call _freeIterator _iterator[391611])
+              }
+            }
+            { scopeless type
+              (391625 'move' _indexOfInterest[391610](391622 call iteratorIndex _iterator[391611]))
+            }
+            ForLoop[391612]
+            {
+              unknown chunk[276467] "coforall index var" "index var" "insert auto destroy"
+              (391630 'move' chunk[276467] _indexOfInterest[391610])
+              (391642 call _upEndCount _coforallCount[391602] 1)
+              {
+                { scopeless
+                  (276481 yield(276492 call _build_tuple this(276485 call . chunk c"first")(276489 call . chunk c"last")))
+                }
+                (391605 call _downEndCount _coforallCount[391602] nil[32])
+                (391604 'coforall loop')
+              }
+              label _continueLabel[391615]
+              _indexOfInterest[391610]
+              _iterator[391611]
+            }
+            label _breakLabel[391616]
+            Defer
+            {
+              {
+                (391646 call _endCountFree _coforallCount[391602])
+              }
+            }
+            (391651 call _waitEndCount _coforallCount[391602] 1)
+          }
+        }
+      }
+    }
+  }
+  where {
+    (276416 call == tag(276420 call . iterKind c"leader"))
+  } function DefaultSparseDom[278225].these[276510](arg _mt[276527]:_MT[201], arg this[276512]:DefaultSparseDom[278225], param arg tag[276515] :
+  iterKind, arg followThis[276524] :
+  (276522 call _build_tuple ?[227] ?[227] ?[227])) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    { scopeless
+      unknown tmp[276545] "temp" followThis
+      (276555 call _check_tuple_var_decl tmp[276545] 3)
+      unknown followThisDom[276538](276546 call tmp[276545] 0)
+      unknown startIx[276540](276549 call tmp[276545] 1)
+      unknown endIx[276542](276552 call tmp[276545] 2)
+      (276560 'end of statement')
+    }
+    if(276571 call _cond_test(276567 call != followThisDom this))
+    {
+      { scopeless
+        (276562 call halt "Sparse domains can't be zippered with anything other than themselves and their arrays")
+      }
+    }
+    if(276586 call _cond_test debugDefaultSparse)
+    {
+      { scopeless
+        (276577 call writeln "DefaultSparseDom follower: " startIx ".." endIx)
+      }
+    }
+    {
+      unknown _indexOfInterest[276604] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[276605] "expr temp" "temp"
+      (276614 'move' _iterator[276605](276612 call _getIterator(276618 call chpl_direct_range_iter startIx endIx)))
+      Defer
+      {
+        {
+          (276633 call _freeIterator _iterator[276605])
+        }
+      }
+      { scopeless type
+        (276623 'move' _indexOfInterest[276604](276620 call iteratorIndex _iterator[276605]))
+      }
+      ForLoop[276606] order-independent
+      {
+        unknown i[276591] "index var" "insert auto destroy"
+        (276628 'move' i[276591] _indexOfInterest[276604])
+        { scopeless
+          (276597 yield(276599 call _indices i))
+        }
+        label _continueLabel[276609]
+        _indexOfInterest[276604]
+        _iterator[276605]
+      }
+      label _breakLabel[276610]
+    }
+  }
+  where {
+    (276529 call == tag(276533 call . iterKind c"follower"))
+  } function DefaultSparseDom[278225].these[276643](arg _mt[276653]:_MT[201], arg this[276645]:DefaultSparseDom[278225], param arg tag[276648] :
+  iterKind, arg followThis[276651]:_any[141](?)) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    (276664 call compilerError "Sparse iterators can't yet be zippered with others")
+    { scopeless
+      unknown dummy[276669](276670 call * rank idxType)
+      (276675 'end of statement')
+    }
+    (276676 yield dummy)
+  }
+  where {
+    (276655 call == tag(276659 call . iterKind c"follower"))
+  } function DefaultSparseDom[278225].find[276681](arg _mt[276687]:_MT[201], arg this[276683]:DefaultSparseDom[278225], arg ind[276685]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    (276691 'use' Search)
+    if(276739 call _cond_test(276721 call &&(276723 call &&(276725 call == rank 1)(276730 call isTuple ind))(276732 call ==(276735 call . ind c"size") 1)))
+    {
+      { scopeless
+        (276693 return(276695 call binarySearch _indices(276698 call ind 0)(lo = 0)(hi =(276702 call - _nnz 1))))
+      }
+    }
+    {
+      { scopeless
+        (276708 return(276710 call binarySearch _indices ind(lo = 0)(hi =(276715 call - _nnz 1))))
+      }
+    }
+  } function DefaultSparseDom[278225].dsiMember[276747](arg _mt[276753]:_MT[201], arg this[276749]:DefaultSparseDom[278225], arg ind[276751]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      const tmp[276764] "const" "temp"(276762 call find ind)
+      (276771 call _check_tuple_var_decl tmp[276764] 2)
+      const found[276757] "const"(276765 call tmp[276764] 0)
+      const loc[276759] "const"(276768 call tmp[276764] 1)
+      (276776 'end of statement')
+    }
+    (276777 return found)
+  } function DefaultSparseDom[278225].parSafe[276781](arg _mt[276785]:_MT[201], arg this[276783]:DefaultSparseDom[278225]) param : _unknown[42] "method" "primary method" "no parens"
+  {
+    (276789 call dnsError "parSafe")
+  } function DefaultSparseDom[278225].dsiFirst[276795](arg _mt[276799]:_MT[201], arg this[276797]:DefaultSparseDom[278225]) : _unknown[42] "method" "primary method" "no parens" "method overrides"
+  {
+    if(276816 call _cond_test(276808 call && boundsChecking(276815 call(276812 call . _indices c"isEmpty"))))
+    {
+      { scopeless
+        (276803 call halt "'first' is invoked on an empty sparse domain")
+      }
+    }
+    (276821 return(276823 call _indices(276828 call .(276825 call . _indices c"_dom") c"first")))
+  } function DefaultSparseDom[278225].dsiLast[276833](arg _mt[276837]:_MT[201], arg this[276835]:DefaultSparseDom[278225]) : _unknown[42] "method" "primary method" "no parens" "method overrides"
+  {
+    if(276854 call _cond_test(276846 call && boundsChecking(276853 call(276850 call . _indices c"isEmpty"))))
+    {
+      { scopeless
+        (276841 call halt "'last' is invoked on an empty sparse domain")
+      }
+    }
+    (276859 return(276861 call _indices(276862 call - _nnz 1)))
+  } function DefaultSparseDom[278225].add_help[276868](arg _mt[276874]:_MT[201], arg this[276870]:DefaultSparseDom[278225], arg ind[276872]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      const tmp[276885] "const" "temp"(276883 call find ind)
+      (276892 call _check_tuple_var_decl tmp[276885] 2)
+      const found[276878] "const"(276886 call tmp[276885] 0)
+      const insertPt[276880] "const"(276889 call tmp[276885] 1)
+      (276897 'end of statement')
+    }
+    if(276902 call _cond_test found)
+    {
+      { scopeless
+        (276898 return 0)
+      }
+    }
+    if(276917 call _cond_test boundsChecking)
+    {
+      { scopeless
+        (276913 call(276910 call . this c"boundsCheck") ind)
+      }
+    }
+    (276922 call += _nnz 1)
+    { scopeless
+      const oldNNZDomSize[276927] "const"(276929 call . nnzDom c"size")
+      (276933 'end of statement')
+    }
+    (276935 call _grow _nnz)
+    {
+      unknown _indexOfInterest[276963] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[276964] "expr temp" "temp"
+      (276973 'move' _iterator[276964](276971 call _getIterator(276990 call chpl_direct_strided_range_iter insertPt(276987 call - _nnz 2)(276983 call - 1))))
+      Defer
+      {
+        {
+          (277005 call _freeIterator _iterator[276964])
+        }
+      }
+      { scopeless type
+        (276995 'move' _indexOfInterest[276963](276992 call iteratorIndex _iterator[276964]))
+      }
+      ForLoop[276965]
+      {
+        unknown i[276937] "index var" "insert auto destroy"
+        (277000 'move' i[276937] _indexOfInterest[276963])
+        {
+          (276952 call =(276955 call _indices(276956 call + i 1))(276961 call _indices i))
+        }
+        label _continueLabel[276968]
+        _indexOfInterest[276963]
+        _iterator[276964]
+      }
+      label _breakLabel[276969]
+    }
+    (277012 call =(277015 call _indices insertPt) ind)
+    {
+      unknown _indexOfInterest[277046] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[277047] "expr temp" "temp"
+      (277056 'move' _iterator[277047](277054 call _getIterator _arrs))
+      Defer
+      {
+        {
+          (277071 call _freeIterator _iterator[277047])
+        }
+      }
+      { scopeless type
+        (277061 'move' _indexOfInterest[277046](277058 call iteratorIndex _iterator[277047]))
+      }
+      ForLoop[277048]
+      {
+        unknown a[277018] "index var" "insert auto destroy"
+        (277066 'move' a[277018] _indexOfInterest[277046])
+        {
+          (277028 call(277025 call . a c"sparseShiftArray")(277034 call chpl_build_bounded_range insertPt(277030 call - _nnz 2))(277044 call chpl_build_bounded_range oldNNZDomSize(277037 call -(277040 call . nnzDom c"size") 1)))
+        }
+        label _continueLabel[277051]
+        _indexOfInterest[277046]
+        _iterator[277047]
+      }
+      label _breakLabel[277052]
+    }
+    (277078 return 1)
+  } function DefaultSparseDom[278225].rem_help[277082](arg _mt[277088]:_MT[201], arg this[277084]:DefaultSparseDom[278225], arg ind[277086]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      const tmp[277099] "const" "temp"(277097 call find ind)
+      (277106 call _check_tuple_var_decl tmp[277099] 2)
+      const found[277092] "const"(277100 call tmp[277099] 0)
+      const insertPt[277094] "const"(277103 call tmp[277099] 1)
+      (277111 'end of statement')
+    }
+    if(277122 call _cond_test(277119 call ! found))
+    {
+      { scopeless
+        (277113 call halt "index not in domain: " ind)
+      }
+    }
+    (277127 call -= _nnz 1)
+    {
+      unknown _indexOfInterest[277152] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[277153] "expr temp" "temp"
+      (277162 'move' _iterator[277153](277160 call _getIterator(277169 call chpl_direct_range_iter insertPt(277166 call - _nnz 1))))
+      Defer
+      {
+        {
+          (277184 call _freeIterator _iterator[277153])
+        }
+      }
+      { scopeless type
+        (277174 'move' _indexOfInterest[277152](277171 call iteratorIndex _iterator[277153]))
+      }
+      ForLoop[277154]
+      {
+        unknown i[277131] "index var" "insert auto destroy"
+        (277179 'move' i[277131] _indexOfInterest[277152])
+        {
+          (277141 call =(277144 call _indices i)(277147 call _indices(277148 call + i 1)))
+        }
+        label _continueLabel[277157]
+        _indexOfInterest[277152]
+        _iterator[277153]
+      }
+      label _breakLabel[277158]
+    }
+    {
+      unknown _indexOfInterest[277209] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[277210] "expr temp" "temp"
+      (277219 'move' _iterator[277210](277217 call _getIterator _arrs))
+      Defer
+      {
+        {
+          (277234 call _freeIterator _iterator[277210])
+        }
+      }
+      { scopeless type
+        (277224 'move' _indexOfInterest[277209](277221 call iteratorIndex _iterator[277210]))
+      }
+      ForLoop[277211]
+      {
+        unknown a[277191] "index var" "insert auto destroy"
+        (277229 'move' a[277191] _indexOfInterest[277209])
+        {
+          (277201 call(277198 call . a c"sparseShiftArrayBack")(277207 call chpl_build_bounded_range insertPt(277203 call - _nnz 1)))
+        }
+        label _continueLabel[277214]
+        _indexOfInterest[277209]
+        _iterator[277210]
+      }
+      label _breakLabel[277215]
+    }
+    (277241 return 1)
+  } function DefaultSparseDom[278225].dsiAdd[277245](arg _mt[277253]:_MT[201], arg this[277247]:DefaultSparseDom[278225], arg ind[277250] :
+  idxType) : _unknown[42] "method" "primary method"
+  {
+    (277260 return(277262 call add_help ind))
+  }
+  where {
+    (277255 call == rank 1)
+  } function DefaultSparseDom[278225].dsiRemove[277267](arg _mt[277275]:_MT[201], arg this[277269]:DefaultSparseDom[278225], arg ind[277272] :
+  idxType) : _unknown[42] "method" "primary method"
+  {
+    (277282 return(277284 call rem_help ind))
+  }
+  where {
+    (277277 call == rank 1)
+  } function DefaultSparseDom[278225].dsiAdd[277289](arg _mt[277300]:_MT[201], arg this[277291]:DefaultSparseDom[278225], arg ind[277297] :
+  (277293 call * rank idxType)) : _unknown[42] "method" "primary method"
+  {
+    if(277319 call _cond_test(277315 call == rank 1))
+    {
+      (277304 return(277306 call add_help(277308 call ind 0)))
+    }
+    {
+      (277311 return(277313 call add_help ind))
+    }
+  } function DefaultSparseDom[278225].dsiRemove[277325](arg _mt[277336]:_MT[201], arg this[277327]:DefaultSparseDom[278225], arg ind[277333] :
+  (277329 call * rank idxType)) : _unknown[42] "method" "primary method"
+  {
+    if(277355 call _cond_test(277351 call == rank 1))
+    {
+      (277340 return(277342 call rem_help(277344 call ind 0)))
+    }
+    {
+      (277347 return(277349 call rem_help ind))
+    }
+  } function DefaultSparseDom[278225].bulkAdd_help[277361](arg _mt[277388]:_MT[201], arg this[277363]:DefaultSparseDom[278225], ref arg inds[277373] :
+  (277371 call chpl__buildArrayRuntimeType unknown indsDom[277365](277367 call chpl__buildIndexType rank idxType)), arg dataSorted[277377] =
+  0, arg isUnique[277381] =
+  0, arg addOn[277385] =
+  nilLocale) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (277393 'import' Sort)
+    if(277416 call _cond_test(277412 call != addOn nilLocale))
+    {
+      if(277408 call _cond_test(277401 call != addOn(277406 call chpl_localeID_to_locale(277405 '_wide_get_locale' this))))
+      {
+        (277397 call halt "Bulk index addition is only possible on the locale where the\n              sparse domain is created")
+      }
+    }
+    (277421 call bulkAdd_prepareInds inds dataSorted isUnique(277425 'new'(277430 call(277427 call . Sort c"DefaultComparator"))))
+    if(277583 call _cond_test(277579 call == _nnz 0))
+    {
+      { scopeless
+        const dupCount[277433] "const"(277439 IfExpr  isUnique then
+        { scopeless
+          0
+        } else
+        { scopeless
+          (277437 call _countDuplicates inds)
+        } )
+        (277443 'end of statement')
+      }
+      (277444 call += _nnz(277447 call -(277450 call . inds c"size") dupCount))
+      (277455 call _bulkGrow)
+      { scopeless
+        unknown indIdx[277457](277462 call .(277459 call . _indices c"_dom") c"lowBound")
+        (277466 'end of statement')
+      }
+      { scopeless
+        unknown prevIdx[277468](277469 call -(277472 call . parentDom c"lowBound") 1)
+        (277477 'end of statement')
+      }
+      if(277575 call _cond_test isUnique)
+      {
+        (277479 call =(277482 call _indices(277483 call #(277492 call chpl_build_low_bounded_range(277489 call .(277486 call . _indices c"_dom") c"lowBound"))(277495 call . inds c"size"))) inds)
+        (277499 return(277501 call . inds c"size"))
+      }
+      {
+        {
+          unknown _indexOfInterest[277537] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[277538] "expr temp" "temp"
+          (277547 'move' _iterator[277538](277545 call _getIterator inds))
+          Defer
+          {
+            {
+              (277562 call _freeIterator _iterator[277538])
+            }
+          }
+          { scopeless type
+            (277552 'move' _indexOfInterest[277537](277549 call iteratorIndex _iterator[277538]))
+          }
+          ForLoop[277539]
+          {
+            unknown i[277505] "index var" "insert auto destroy"
+            (277557 'move' i[277505] _indexOfInterest[277537])
+            {
+              if(277521 call _cond_test(277517 call == i prevIdx))
+              {
+                { scopeless
+                  continue nil[32]
+                }
+              }
+              {
+                { scopeless
+                  (277512 call = prevIdx i)
+                }
+              }
+              (277527 call =(277530 call _indices indIdx) i)
+              (277533 call += indIdx 1)
+            }
+            label _continueLabel[277542]
+            _indexOfInterest[277537]
+            _iterator[277538]
+          }
+          label _breakLabel[277543]
+        }
+        (277569 return(277570 call - indIdx 1))
+      }
+    }
+    { scopeless
+      const tmp[277597] "const" "temp"(277593 call __getActualInsertPts this inds isUnique)
+      (277604 call _check_tuple_var_decl tmp[277597] 2)
+      const actualInsertPts[277588] "const"(277598 call tmp[277597] 0)
+      const actualAddCnt[277590] "const"(277601 call tmp[277597] 1)
+      (277609 'end of statement')
+    }
+    { scopeless
+      const oldnnz[277611] "const" _nnz
+      (277614 'end of statement')
+    }
+    (277615 call += _nnz actualAddCnt)
+    (277620 call _bulkGrow)
+    { scopeless
+      unknown newIndIdx[277622](277624 call . indsDom c"highBound")
+      (277628 'end of statement')
+    }
+    { scopeless
+      unknown oldIndIdx[277630](277631 call - oldnnz 1)
+      (277636 'end of statement')
+    }
+    { scopeless
+      unknown newLoc[277638](277640 call actualInsertPts newIndIdx)
+      (277643 'end of statement')
+    }
+    {
+      unknown tmp[277679] "temp"
+      (277707 'move' tmp[277679](277700 call _cond_test(277702 call == newLoc(277705 call - 1))))
+      WhileDo[277684]
+      {
+        {
+          (277651 call -= newIndIdx 1)
+          if(277668 call _cond_test(277658 call == newIndIdx(277661 call -(277664 call . indsDom c"lowBound") 1)))
+          {
+            { scopeless
+              break nil[32]
+            }
+          }
+          (277673 call = newLoc(277677 call actualInsertPts newIndIdx))
+        }
+        label _continueLabel[277682]
+        (277695 'move' tmp[277679](277688 call _cond_test(277690 call == newLoc(277693 call - 1))))
+        tmp[277679]
+      }
+      label _breakLabel[277683]
+    }
+    { scopeless
+      unknown arrShiftMap[277711](277721 call chpl__buildArrayRuntimeType(277718 call chpl__ensureDomainExpr(277712 call #(277715 call chpl_build_low_bounded_range 0) oldnnz)) int[10])
+      (277724 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[277903] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[277904] "expr temp" "temp"
+      (277913 'move' _iterator[277904](277911 call _getIterator(277727 call chpl_by(277729 call #(277732 call chpl_build_low_bounded_range 0) _nnz)(277735 call - 1))))
+      Defer
+      {
+        {
+          (277937 call _freeIterator _iterator[277904])
+        }
+      }
+      { scopeless type
+        (277927 'move' _indexOfInterest[277903](277924 call iteratorIndex _iterator[277904]))
+      }
+      ForLoop[277905]
+      {
+        unknown i[277725] "index var" "insert auto destroy"
+        (277932 'move' i[277725] _indexOfInterest[277903])
+        {
+          if(277898 call _cond_test(277888 call &&(277890 call >= oldIndIdx 0)(277894 call > i newLoc)))
+          {
+            (277740 call =(277743 call _indices i)(277746 call _indices oldIndIdx))
+            (277748 call =(277751 call arrShiftMap oldIndIdx) i)
+            (277754 call -= oldIndIdx 1)
+          }
+          {
+            { scopeless
+              if(277883 call _cond_test(277870 call &&(277872 call >= newIndIdx(277876 call . indsDom c"lowBound"))(277879 call == i newLoc)))
+              {
+                (277759 call =(277762 call _indices i)(277765 call inds newIndIdx))
+                (277767 call -= newIndIdx 1)
+                if(277792 call _cond_test(277785 call >= newIndIdx(277789 call . indsDom c"lowBound")))
+                {
+                  { scopeless
+                    (277771 call = newLoc(277775 call actualInsertPts newIndIdx))
+                  }
+                }
+                {
+                  { scopeless
+                    (277778 call = newLoc(277781 call - 2))
+                  }
+                }
+                {
+                  unknown tmp[277833] "temp"
+                  (277861 'move' tmp[277833](277854 call _cond_test(277856 call == newLoc(277859 call - 1))))
+                  WhileDo[277838]
+                  {
+                    {
+                      (277805 call -= newIndIdx 1)
+                      if(277822 call _cond_test(277812 call == newIndIdx(277815 call -(277818 call . indsDom c"lowBound") 1)))
+                      {
+                        { scopeless
+                          break nil[32]
+                        }
+                      }
+                      (277827 call = newLoc(277831 call actualInsertPts newIndIdx))
+                    }
+                    label _continueLabel[277836]
+                    (277849 'move' tmp[277833](277842 call _cond_test(277844 call == newLoc(277847 call - 1))))
+                    tmp[277833]
+                  }
+                  label _breakLabel[277837]
+                }
+              }
+              {
+                { scopeless
+                  (277865 call halt "Something went wrong")
+                }
+              }
+            }
+          }
+        }
+        label _continueLabel[277908]
+        _indexOfInterest[277903]
+        _iterator[277904]
+      }
+      label _breakLabel[277909]
+    }
+    {
+      unknown _indexOfInterest[277957] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[277958] "expr temp" "temp"
+      (277967 'move' _iterator[277958](277965 call _getIterator _arrs))
+      Defer
+      {
+        {
+          (277982 call _freeIterator _iterator[277958])
+        }
+      }
+      { scopeless type
+        (277972 'move' _indexOfInterest[277957](277969 call iteratorIndex _iterator[277958]))
+      }
+      ForLoop[277959]
+      {
+        unknown a[277944] "index var" "insert auto destroy"
+        (277977 'move' a[277944] _indexOfInterest[277957])
+        { scopeless
+          (277953 call(277950 call . a c"sparseBulkShiftArray") arrShiftMap oldnnz)
+        }
+        label _continueLabel[277962]
+        _indexOfInterest[277957]
+        _iterator[277958]
+      }
+      label _breakLabel[277963]
+    }
+    (277989 return actualAddCnt)
+  } function DefaultSparseDom[278225].dsiMyDist[277993](arg _mt[277997]:_MT[201], arg this[277995]:DefaultSparseDom[278225]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (278002 return dist)
+  }
+  { scopeless type
+    (277999 'to unmanaged class from unknown' BaseDist)
+  } function DefaultSparseDom[278225].dsiClear[278007](arg _mt[278011]:_MT[201], arg this[278009]:DefaultSparseDom[278225]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (278014 call = _nnz 0)
+  } function DefaultSparseDom[278225].dimIter[278020](arg _mt[278028]:_MT[201], arg this[278022]:DefaultSparseDom[278225], param arg d[278024]:_any[141](?), arg ind[278026]:_any[141](?)) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    if(278044 call _cond_test(278037 call != d(278040 call - rank 1)))
+    {
+      (278033 call compilerError "dimIter() not supported on sparse domains for dimensions other than the last")
+    }
+    (278049 call halt "dimIter() not yet implemented for sparse domains")
+    (278053 yield(278055 call _indices 0))
+  } function DefaultSparseDom[278225].dsiAssignDomain[278059](arg _mt[278071]:_MT[201], arg this[278061]:DefaultSparseDom[278225], arg rhs[278064] :
+  _domain, arg lhsPrivate[278068] :
+  bool) : _unknown[42] "method" "primary method"
+  {
+    if(278130 call _cond_test(278114 call &&(278116 call ==(278119 call _to_borrowed(278124 'typeof'(278121 call . rhs c"_instance")))(278126 'typeof' this))(278128 call canDoDirectAssignment rhs)))
+    {
+      (278075 call =(278080 call . this c"_nnz")(278084 call . rhs c"_nnz"))
+      (278087 call =(278090 call . this c"nnzDom")(278094 call . rhs c"nnzDom"))
+      (278097 call =(278102 call . this c"_indices")(278106 call . rhs c"_indices"))
+    }
+    {
+      (278111 call chpl_assignDomainWithIndsIterSafeForRemoving this rhs)
+    }
+  } function DefaultSparseDom[278225].dsiTargetLocales[278136](arg _mt[278140]:_MT[201], arg this[278138]:DefaultSparseDom[278225]) const ref : _unknown[42] "method" "primary method"
+  {
+    (278143 return(278145 call chpl_getSingletonLocaleArray(278148 call chpl_localeID_to_locale(278147 '_wide_get_locale' this))))
+  } function DefaultSparseDom[278225].dsiHasSingleLocalSubdomain[278152](arg _mt[278156]:_MT[201], arg this[278154]:DefaultSparseDom[278225]) param : _unknown[42] "method" "primary method"
+  {
+    (278159 return 1)
+  } function DefaultSparseDom[278225].dsiLocalSubdomain[278163](arg _mt[278171]:_MT[201], arg this[278165]:DefaultSparseDom[278225], arg loc[278168] :
+  locale[234]) : _unknown[42] "method" "primary method"
+  {
+    if(278207 call _cond_test(278200 call ==(278204 call chpl_localeID_to_locale(278203 '_wide_get_locale' this)) loc))
+    {
+      (278175 return(278177 call _getDomain(278179 call _to_unmanaged this)))
+    }
+    {
+      { scopeless
+        const copy[278183] "const"(278184 'new'(_chpl_manager = unmanaged[183](?))(278188 call DefaultSparseDom rank idxType dist parentDom))
+        (278194 'end of statement')
+      }
+      (278195 return(278196 'new'(278198 call _domain copy)))
+    }
+  } function DefaultSparseDom[278225].dsiSupportsAutoLocalAccess[278213](arg _mt[278217]:_MT[201], arg this[278215]:DefaultSparseDom[278225]) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (278220 return defaultSparseSupportsAutoLocalAccess)
+  } BaseSparseDomImpl
+  type DefaultSparseArr[279193] function DefaultSparseArr[279193].init[278229](arg _mt[278247]:_MT[201], arg this[278231]:DefaultSparseArr[279193], arg eltType[278233]:_any[141](?), param arg rank[278236] :
+  int[10], arg idxType[278239]:_any[141](?), arg dom[278241]:_any[141](?), param arg initElts[278244] :
+  bool) : _unknown[42] "method" "primary method"
+  {
+    (278254 call(278251 call . super c"init") eltType rank idxType dom initElts)
+  } function DefaultSparseArr[279193].dsiAccess[278262](arg _mt[278273]:_MT[201], arg this[278264]:DefaultSparseArr[279193], arg ind[278270] :
+  (278266 call * rank idxType)) ref : _unknown[42] "method" "primary method"
+  {
+    if(278310 call _cond_test boundsChecking)
+    {
+      { scopeless
+        if(278304 call _cond_test(278293 call !(278302 call(278299 call .(278296 call . dom c"parentDom") c"contains") ind)))
+        {
+          { scopeless
+            (278277 call halt "array index out of bounds: "(278289 IfExpr (278281 call == rank 1) then
+            { scopeless
+              (278286 call ind 0)
+            } else
+            { scopeless
+              ind
+            } ))
+          }
+        }
+      }
+    }
+    { scopeless
+      const tmp[278326] "const" "temp"(278324 call(278321 call . dom c"find") ind)
+      (278333 call _check_tuple_var_decl tmp[278326] 2)
+      const found[278316] "const"(278327 call tmp[278326] 0)
+      const loc[278318] "const"(278330 call tmp[278326] 1)
+      (278338 'end of statement')
+    }
+    if(278362 call _cond_test found)
+    {
+      { scopeless
+        (278339 return(278341 call data loc))
+      }
+    }
+    {
+      { scopeless
+        (278345 call halt "attempting to assign a 'zero' value in a sparse array at index "(278357 IfExpr (278349 call == rank 1) then
+        { scopeless
+          (278354 call ind 0)
+        } else
+        { scopeless
+          ind
+        } ))
+      }
+    }
+  } function DefaultSparseArr[279193].dsiAccess[278370](arg _mt[278381]:_MT[201], arg this[278372]:DefaultSparseArr[279193], arg ind[278378] :
+  (278374 call * rank idxType)) : _unknown[42] "method" "primary method"
+  {
+    if(278419 call _cond_test boundsChecking)
+    {
+      { scopeless
+        if(278413 call _cond_test(278402 call !(278411 call(278408 call .(278405 call . dom c"parentDom") c"contains") ind)))
+        {
+          { scopeless
+            (278388 call halt "array index out of bounds: "(278398 IfExpr (278390 call == rank 1) then
+            { scopeless
+              (278395 call ind 0)
+            } else
+            { scopeless
+              ind
+            } ))
+          }
+        }
+      }
+    }
+    { scopeless
+      const tmp[278435] "const" "temp"(278433 call(278430 call . dom c"find") ind)
+      (278442 call _check_tuple_var_decl tmp[278435] 2)
+      const found[278425] "const"(278436 call tmp[278435] 0)
+      const loc[278427] "const"(278439 call tmp[278435] 1)
+      (278447 'end of statement')
+    }
+    if(278457 call _cond_test found)
+    {
+      { scopeless
+        (278448 return(278450 call data loc))
+      }
+    }
+    {
+      { scopeless
+        (278453 return irv)
+      }
+    }
+  }
+  where {
+    (278384 call shouldReturnRvalueByValue eltType)
+  } function DefaultSparseArr[279193].dsiAccess[278466](arg _mt[278477]:_MT[201], arg this[278468]:DefaultSparseArr[279193], arg ind[278474] :
+  (278470 call * rank idxType)) const ref : _unknown[42] "method" "primary method"
+  {
+    if(278512 call _cond_test boundsChecking)
+    {
+      { scopeless
+        if(278506 call _cond_test(278495 call !(278504 call(278501 call .(278498 call . dom c"parentDom") c"contains") ind)))
+        {
+          { scopeless
+            (278481 call halt "array index out of bounds: "(278491 IfExpr (278483 call == rank 1) then
+            { scopeless
+              (278488 call ind 0)
+            } else
+            { scopeless
+              ind
+            } ))
+          }
+        }
+      }
+    }
+    { scopeless
+      const tmp[278528] "const" "temp"(278526 call(278523 call . dom c"find") ind)
+      (278535 call _check_tuple_var_decl tmp[278528] 2)
+      const found[278518] "const"(278529 call tmp[278528] 0)
+      const loc[278520] "const"(278532 call tmp[278528] 1)
+      (278540 'end of statement')
+    }
+    if(278550 call _cond_test found)
+    {
+      { scopeless
+        (278541 return(278543 call data loc))
+      }
+    }
+    {
+      { scopeless
+        (278546 return irv)
+      }
+    }
+  } function DefaultSparseArr[279193].these[278558](arg _mt[278562]:_MT[201], arg this[278560]:DefaultSparseArr[279193]) ref : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[278583] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[278584] "expr temp" "temp"
+      (278593 'move' _iterator[278584](278591 call _getIterator(278603 call chpl_direct_counted_range_iter 0(278599 call . dom c"_nnz"))))
+      Defer
+      {
+        {
+          (278618 call _freeIterator _iterator[278584])
+        }
+      }
+      { scopeless type
+        (278608 'move' _indexOfInterest[278583](278605 call iteratorIndex _iterator[278584]))
+      }
+      ForLoop[278585] order-independent
+      {
+        unknown i[278565] "index var" "insert auto destroy"
+        (278613 'move' i[278565] _indexOfInterest[278583])
+        { scopeless
+          (278576 yield(278578 call data i))
+        }
+        label _continueLabel[278588]
+        _indexOfInterest[278583]
+        _iterator[278584]
+      }
+      label _breakLabel[278589]
+    }
+  } function DefaultSparseArr[279193].these[278627](arg _mt[278635]:_MT[201], arg this[278629]:DefaultSparseArr[279193], param arg tag[278632] :
+  iterKind) ref : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    { scopeless
+      const numElems[278646] "const"(278648 call . dom c"_nnz")
+      (278652 'end of statement')
+    }
+    { scopeless
+      const numChunks[278654] "const"(278655 call :(278658 call _computeNumChunks numElems)(278661 'typeof' numElems))
+      (278663 'end of statement')
+    }
+    if(278675 call _cond_test debugDefaultSparse)
+    {
+      (278666 call writeln "DefaultSparseArr standalone: " numChunks " chunks, " numElems " elems")
+    }
+    if(278797 call _cond_test(278793 call <= numChunks 1))
+    {
+      {
+        unknown _indexOfInterest[278695] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[278696] "expr temp" "temp"
+        (278705 'move' _iterator[278696](278703 call _getIterator(278712 call chpl_direct_counted_range_iter 0 numElems)))
+        Defer
+        {
+          {
+            (278727 call _freeIterator _iterator[278696])
+          }
+        }
+        { scopeless type
+          (278717 'move' _indexOfInterest[278695](278714 call iteratorIndex _iterator[278696]))
+        }
+        ForLoop[278697] order-independent
+        {
+          unknown i[278680] "index var" "insert auto destroy"
+          (278722 'move' i[278680] _indexOfInterest[278695])
+          {
+            (278689 yield(278691 call data i))
+          }
+          label _continueLabel[278700]
+          _indexOfInterest[278695]
+          _iterator[278696]
+        }
+        label _breakLabel[278701]
+      }
+    }
+    {
+      {
+        unknown tmpIter[391671] "expr temp" "maybe ref" "no copy" "temp"
+        (391674 'move' tmpIter[391671](278741 call(278738 call . RangeChunk c"chunks")(278742 call #(278745 call chpl_build_low_bounded_range 0) numElems) numChunks))
+        unknown isBounded[391850] "maybe param" "temp"
+        (391856 'move' isBounded[391850](391852 call chpl_supportsBoundedCoforall tmpIter[391671] 0))
+        if isBounded[391850]
+        {
+          const _coforallCount[391719] "const" "end count" "temp"
+          (391787 'move' _coforallCount[391719](391784 call _endCountAlloc 1))
+          unknown numTasks[391720] "temp"
+          (391771 'move' numTasks[391720](391767 call chpl_boundedCoforallSize tmpIter[391671] 0))
+          (391762 call _upEndCount _coforallCount[391719] 1 numTasks[391720])
+          (391759 call chpl_resetTaskSpawn numTasks[391720])
+          unknown _indexOfInterest[391727] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[391728] "expr temp" "temp"
+          (391737 'move' _iterator[391728](391735 call _getIterator tmpIter[391671]))
+          Defer
+          {
+            {
+              (391752 call _freeIterator _iterator[391728])
+            }
+          }
+          { scopeless type
+            (391742 'move' _indexOfInterest[391727](391739 call iteratorIndex _iterator[391728]))
+          }
+          ForLoop[391729]
+          {
+            unknown chunk[391678] "coforall index var" "index var" "insert auto destroy"
+            (391747 'move' chunk[391678] _indexOfInterest[391727])
+            {
+              {
+                unknown _indexOfInterest[391681] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                unknown _iterator[391683] "expr temp" "temp"
+                (391685 'move' _iterator[391683](391688 call _getIterator chunk))
+                Defer
+                {
+                  {
+                    (391692 call _freeIterator _iterator[391683])
+                  }
+                }
+                { scopeless type
+                  (391696 'move' _indexOfInterest[391681](391699 call iteratorIndex _iterator[391683]))
+                }
+                ForLoop[391701] order-independent
+                {
+                  unknown i[391704] "index var" "insert auto destroy"
+                  (391706 'move' i[391704] _indexOfInterest[391681])
+                  { scopeless
+                    (391710 yield(391712 call data i))
+                  }
+                  label _continueLabel[391714]
+                  _indexOfInterest[391681]
+                  _iterator[391683]
+                }
+                label _breakLabel[391716]
+              }
+              (391722 call _downEndCount _coforallCount[391719] nil[32])
+              (391721 'coforall loop')
+            }
+            label _continueLabel[391732]
+            _indexOfInterest[391727]
+            _iterator[391728]
+          }
+          label _breakLabel[391733]
+          Defer
+          {
+            {
+              (391774 call _endCountFree _coforallCount[391719])
+            }
+          }
+          (391779 call _waitEndCount _coforallCount[391719] 1 numTasks[391720])
+        }
+        {
+          const _coforallCount[391791] "const" "end count" "temp"
+          (391847 'move' _coforallCount[391791](391844 call _endCountAlloc 1))
+          unknown _indexOfInterest[391799] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[391800] "expr temp" "temp"
+          (391809 'move' _iterator[391800](391807 call _getIterator tmpIter[391671]))
+          Defer
+          {
+            {
+              (391824 call _freeIterator _iterator[391800])
+            }
+          }
+          { scopeless type
+            (391814 'move' _indexOfInterest[391799](391811 call iteratorIndex _iterator[391800]))
+          }
+          ForLoop[391801]
+          {
+            unknown chunk[278735] "coforall index var" "index var" "insert auto destroy"
+            (391819 'move' chunk[278735] _indexOfInterest[391799])
+            (391831 call _upEndCount _coforallCount[391791] 1)
+            {
+              {
+                unknown _indexOfInterest[278760] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                unknown _iterator[278761] "expr temp" "temp"
+                (278770 'move' _iterator[278761](278768 call _getIterator chunk))
+                Defer
+                {
+                  {
+                    (278785 call _freeIterator _iterator[278761])
+                  }
+                }
+                { scopeless type
+                  (278775 'move' _indexOfInterest[278760](278772 call iteratorIndex _iterator[278761]))
+                }
+                ForLoop[278762] order-independent
+                {
+                  unknown i[278750] "index var" "insert auto destroy"
+                  (278780 'move' i[278750] _indexOfInterest[278760])
+                  { scopeless
+                    (278753 yield(278755 call data i))
+                  }
+                  label _continueLabel[278765]
+                  _indexOfInterest[278760]
+                  _iterator[278761]
+                }
+                label _breakLabel[278766]
+              }
+              (391794 call _downEndCount _coforallCount[391791] nil[32])
+              (391793 'coforall loop')
+            }
+            label _continueLabel[391804]
+            _indexOfInterest[391799]
+            _iterator[391800]
+          }
+          label _breakLabel[391805]
+          Defer
+          {
+            {
+              (391835 call _endCountFree _coforallCount[391791])
+            }
+          }
+          (391840 call _waitEndCount _coforallCount[391791] 1)
+        }
+      }
+    }
+  }
+  where {
+    (278637 call == tag(278641 call . iterKind c"standalone"))
+  } function DefaultSparseArr[279193].these[278804](arg _mt[278812]:_MT[201], arg this[278806]:DefaultSparseArr[279193], param arg tag[278809] :
+  iterKind) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[278833] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[278834] "expr temp" "temp"
+      (278843 'move' _iterator[278834](278841 call _getIterator(278828 call(278825 call . dom c"these") tag)))
+      Defer
+      {
+        {
+          (278858 call _freeIterator _iterator[278834])
+        }
+      }
+      { scopeless type
+        (278848 'move' _indexOfInterest[278833](278845 call iteratorIndex _iterator[278834]))
+      }
+      ForLoop[278835]
+      {
+        unknown followThis[278822] "index var" "insert auto destroy"
+        (278853 'move' followThis[278822] _indexOfInterest[278833])
+        { scopeless
+          (278830 yield followThis)
+        }
+        label _continueLabel[278838]
+        _indexOfInterest[278833]
+        _iterator[278834]
+      }
+      label _breakLabel[278839]
+    }
+  }
+  where {
+    (278814 call == tag(278818 call . iterKind c"leader"))
+  } function DefaultSparseArr[279193].these[278868](arg _mt[278885]:_MT[201], arg this[278870]:DefaultSparseArr[279193], param arg tag[278873] :
+  iterKind, arg followThis[278882] :
+  (278880 call _build_tuple ?[227] ?[227] ?[227])) ref : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    { scopeless
+      unknown tmp[278903] "temp" followThis
+      (278913 call _check_tuple_var_decl tmp[278903] 3)
+      unknown followThisDom[278896](278904 call tmp[278903] 0)
+      unknown startIx[278898](278907 call tmp[278903] 1)
+      unknown endIx[278900](278910 call tmp[278903] 2)
+      (278918 'end of statement')
+    }
+    if(278932 call _cond_test(278925 call != followThisDom(278929 call . this c"dom")))
+    {
+      { scopeless
+        (278920 call halt "Sparse arrays can't be zippered with anything other than their domains and sibling arrays")
+      }
+    }
+    if(278947 call _cond_test debugDefaultSparse)
+    {
+      { scopeless
+        (278938 call writeln "DefaultSparseArr follower: " startIx ".." endIx)
+      }
+    }
+    {
+      unknown _indexOfInterest[278965] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[278966] "expr temp" "temp"
+      (278975 'move' _iterator[278966](278973 call _getIterator(278979 call chpl_direct_range_iter startIx endIx)))
+      Defer
+      {
+        {
+          (278994 call _freeIterator _iterator[278966])
+        }
+      }
+      { scopeless type
+        (278984 'move' _indexOfInterest[278965](278981 call iteratorIndex _iterator[278966]))
+      }
+      ForLoop[278967] order-independent
+      {
+        unknown i[278952] "index var" "insert auto destroy"
+        (278989 'move' i[278952] _indexOfInterest[278965])
+        { scopeless
+          (278958 yield(278960 call data i))
+        }
+        label _continueLabel[278970]
+        _indexOfInterest[278965]
+        _iterator[278966]
+      }
+      label _breakLabel[278971]
+    }
+  }
+  where {
+    (278887 call == tag(278891 call . iterKind c"follower"))
+  } function DefaultSparseArr[279193].these[279004](arg _mt[279014]:_MT[201], arg this[279006]:DefaultSparseArr[279193], param arg tag[279009] :
+  iterKind, arg followThis[279012]:_any[141](?)) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    (279025 call compilerError "Sparse iterators can't yet be zippered with others")
+    (279027 yield 0)
+  }
+  where {
+    (279016 call == tag(279020 call . iterKind c"follower"))
+  } function DefaultSparseArr[279193].dsiTargetLocales[279032](arg _mt[279036]:_MT[201], arg this[279034]:DefaultSparseArr[279193]) const ref : _unknown[42] "method" "primary method"
+  {
+    (279039 return(279041 call chpl_getSingletonLocaleArray(279044 call chpl_localeID_to_locale(279043 '_wide_get_locale' this))))
+  } function DefaultSparseArr[279193].dsiHasSingleLocalSubdomain[279048](arg _mt[279052]:_MT[201], arg this[279050]:DefaultSparseArr[279193]) param : _unknown[42] "method" "primary method"
+  {
+    (279055 return 1)
+  } function DefaultSparseArr[279193].dsiLocalSubdomain[279059](arg _mt[279067]:_MT[201], arg this[279061]:DefaultSparseArr[279193], arg loc[279064] :
+  locale[234]) : _unknown[42] "method" "primary method"
+  {
+    if(279090 call _cond_test(279083 call ==(279087 call chpl_localeID_to_locale(279086 '_wide_get_locale' this)) loc))
+    {
+      (279071 return(279073 call _getDomain dom))
+    }
+    {
+      (279076 return(279081 call(279078 call . dom c"dsiLocalSubdomain") loc))
+    }
+  } function DefaultSparseArr[279193].doiBulkTransferToKnown[279096](arg _mt[279109]:_MT[201], arg this[279098]:DefaultSparseArr[279193], arg srcDom[279100]:_any[141](?), arg destClass[279104] :
+  (279103 'typeof' this), arg destDom[279107]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    if(279137 call _cond_test(279128 call ||(279130 call ! boundsChecking)(279133 call == srcDom destDom)))
+    {
+      (279113 call =(279116 call . destClass c"data")(279120 call . this c"data"))
+      (279123 return 1)
+    }
+    {
+      (279126 return 0)
+    }
+  } function DefaultSparseArr[279193].doiBulkTransferFromKnown[279143](arg _mt[279156]:_MT[201], arg this[279145]:DefaultSparseArr[279193], arg destDom[279147]:_any[141](?), arg srcClass[279151] :
+  (279150 'typeof' this), arg srcDom[279154]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    if(279185 call _cond_test(279176 call ||(279178 call ! boundsChecking)(279181 call == srcDom destDom)))
+    {
+      (279161 call =(279164 call . this c"data")(279168 call . srcClass c"data"))
+      (279171 return 1)
+    }
+    {
+      (279174 return 0)
+    }
+  }
+  { scopeless type
+    bool
+  } BaseSparseArrImpl
+  function _unknown[42].dsiSerialWrite[279195](arg _mt[279207]:_MT[201], arg this[279198] :
+  DefaultSparseDom, arg f[279201]:_any[141](?), arg printBrackets[279204] =
+  1) : _unknown[42] throws "method"
+  {
+    if(279459 call _cond_test(279455 call == rank 1))
+    {
+      if(279219 call _cond_test printBrackets)
+      {
+        { scopeless
+          (279215 call(279212 call . f c"write") "{")
+        }
+      }
+      if(279295 call _cond_test(279291 call >= _nnz 1))
+      {
+        (279229 call(279226 call . f c"write")(279231 call _indices 0))
+        {
+          unknown _indexOfInterest[279252] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[279253] "expr temp" "temp"
+          (279262 'move' _iterator[279253](279260 call _getIterator(279269 call chpl_direct_range_iter 1(279266 call - _nnz 1))))
+          Defer
+          {
+            {
+              (279284 call _freeIterator _iterator[279253])
+            }
+          }
+          { scopeless type
+            (279274 'move' _indexOfInterest[279252](279271 call iteratorIndex _iterator[279253]))
+          }
+          ForLoop[279254]
+          {
+            unknown i[279233] "index var" "insert auto destroy"
+            (279279 'move' i[279233] _indexOfInterest[279252])
+            {
+              (279247 call(279244 call . f c"write") " "(279250 call _indices i))
+            }
+            label _continueLabel[279257]
+            _indexOfInterest[279252]
+            _iterator[279253]
+          }
+          label _breakLabel[279258]
+        }
+      }
+      if(279307 call _cond_test printBrackets)
+      {
+        { scopeless
+          (279303 call(279300 call . f c"write") "}")
+        }
+      }
+    }
+    {
+      if(279323 call _cond_test printBrackets)
+      {
+        { scopeless
+          (279317 call(279314 call . f c"write") "{\n")
+        }
+      }
+      if(279436 call _cond_test(279432 call >= _nnz 1))
+      {
+        { scopeless
+          unknown prevInd[279330](279332 call _indices 0)
+          (279335 'end of statement')
+        }
+        (279340 call(279337 call . f c"write") " " prevInd)
+        {
+          unknown _indexOfInterest[279387] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[279388] "expr temp" "temp"
+          (279397 'move' _iterator[279388](279395 call _getIterator(279404 call chpl_direct_range_iter 1(279401 call - _nnz 1))))
+          Defer
+          {
+            {
+              (279419 call _freeIterator _iterator[279388])
+            }
+          }
+          { scopeless type
+            (279409 'move' _indexOfInterest[279387](279406 call iteratorIndex _iterator[279388]))
+          }
+          ForLoop[279389]
+          {
+            unknown i[279343] "index var" "insert auto destroy"
+            (279414 'move' i[279343] _indexOfInterest[279387])
+            {
+              if(279370 call _cond_test(279360 call !=(279363 call prevInd 0)(279368 call(279366 call _indices i) 0)))
+              {
+                (279358 call(279355 call . f c"write") "\n")
+              }
+              (279374 call = prevInd(279378 call _indices i))
+              (279384 call(279381 call . f c"write") " " prevInd)
+            }
+            label _continueLabel[279392]
+            _indexOfInterest[279387]
+            _iterator[279388]
+          }
+          label _breakLabel[279393]
+        }
+        (279430 call(279427 call . f c"write") "\n")
+      }
+      if(279450 call _cond_test printBrackets)
+      {
+        { scopeless
+          (279444 call(279441 call . f c"write") "}\n")
+        }
+      }
+    }
+  }
+  function _unknown[42].dsiSerialWrite[279465](arg _mt[279473]:_MT[201], arg this[279468] :
+  DefaultSparseArr, arg f[279471]:_any[141](?)) : _unknown[42] throws "method"
+  {
+    if(279705 call _cond_test(279701 call == rank 1))
+    {
+      if(279557 call _cond_test(279550 call >=(279553 call . dom c"_nnz") 1))
+      {
+        (279482 call(279479 call . f c"write")(279484 call data 0))
+        {
+          unknown _indexOfInterest[279508] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[279509] "expr temp" "temp"
+          (279518 'move' _iterator[279509](279516 call _getIterator(279528 call chpl_direct_range_iter 1(279522 call -(279524 call . dom c"_nnz") 1))))
+          Defer
+          {
+            {
+              (279543 call _freeIterator _iterator[279509])
+            }
+          }
+          { scopeless type
+            (279533 'move' _indexOfInterest[279508](279530 call iteratorIndex _iterator[279509]))
+          }
+          ForLoop[279510]
+          {
+            unknown i[279486] "index var" "insert auto destroy"
+            (279538 'move' i[279486] _indexOfInterest[279508])
+            {
+              (279503 call(279500 call . f c"write") " "(279506 call data i))
+            }
+            label _continueLabel[279513]
+            _indexOfInterest[279508]
+            _iterator[279509]
+          }
+          label _breakLabel[279514]
+        }
+      }
+    }
+    {
+      if(279697 call _cond_test(279690 call >=(279693 call . dom c"_nnz") 1))
+      {
+        { scopeless
+          unknown prevInd[279564](279569 call(279566 call . dom c"_indices") 0)
+          (279572 'end of statement')
+        }
+        (279577 call(279574 call . f c"write")(279579 call data 0))
+        {
+          unknown _indexOfInterest[279642] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[279643] "expr temp" "temp"
+          (279652 'move' _iterator[279643](279650 call _getIterator(279662 call chpl_direct_range_iter 1(279656 call -(279658 call . dom c"_nnz") 1))))
+          Defer
+          {
+            {
+              (279677 call _freeIterator _iterator[279643])
+            }
+          }
+          { scopeless type
+            (279667 'move' _indexOfInterest[279642](279664 call iteratorIndex _iterator[279643]))
+          }
+          ForLoop[279644]
+          {
+            unknown i[279581] "index var" "insert auto destroy"
+            (279672 'move' i[279581] _indexOfInterest[279642])
+            {
+              if(279621 call _cond_test(279608 call !=(279611 call prevInd 0)(279619 call(279617 call(279614 call . dom c"_indices") i) 0)))
+              {
+                (279599 call(279596 call . f c"write") "\n")
+              }
+              {
+                (279606 call(279603 call . f c"write") " ")
+              }
+              (279625 call = prevInd(279632 call(279629 call . dom c"_indices") i))
+              (279638 call(279635 call . f c"write")(279640 call data i))
+            }
+            label _continueLabel[279647]
+            _indexOfInterest[279642]
+            _iterator[279643]
+          }
+          label _breakLabel[279648]
+        }
+        (279688 call(279685 call . f c"write") "\n")
+      }
+    }
+  }
+}

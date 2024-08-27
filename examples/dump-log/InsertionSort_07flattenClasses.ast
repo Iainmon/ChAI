@@ -1,0 +1,182 @@
+AST dump for InsertionSort after pass flattenClasses.
+Module use list: ChapelStandard Sort ShallowCopy 
+
+{
+  function insertionSort[234623](ref arg Data[234631] :
+  (234629 call chpl__buildArrayRuntimeType unknown Dom[234625] unknown eltType[234627]), arg comparator[234639] :
+  unknown rec[234634] =
+  (234636 'new'(234638 call DefaultComparator[246408])), arg lo[234648] :
+  int(64)[10] =
+  (234645 call . Dom[234625] c"low"), arg hi[234657] :
+  int(64)[10] =
+  (234654 call . Dom[234625] c"high")) : _unknown[42] "no return value for void"
+  {
+    (234663 call chpl_check_comparator comparator[234639] eltType[234627])
+    if(234679 call _cond_test(234672 call !=(234675 call . Dom[234625] c"rank") 1))
+    {
+      (234668 call compilerError "insertionSort() requires 1-D array")
+    }
+    const low[234698] "const" lo[234648]
+    const high[234694] "const" hi[234657]
+    const stride[234685] "const"(234687 call abs(234689 call . Dom[234625] c"stride"))
+    (234701 'end of statement')
+    {
+      unknown _indexOfInterest[234845] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[234846] "expr temp" "temp"
+      (234855 'move' _iterator[234846](234853 call _getIterator(234864 call chpl_direct_strided_range_iter low[234698] high[234694] stride[234685])))
+      Defer
+      {
+        {
+          (234879 call _freeIterator _iterator[234846])
+        }
+      }
+      { scopeless type
+        (234869 'move' _indexOfInterest[234845](234866 call iteratorIndex _iterator[234846]))
+      }
+      ForLoop[234847]
+      {
+        unknown i[234702] "index var" "insert auto destroy"
+        (234874 'move' i[234702] _indexOfInterest[234845])
+        {
+          unknown ithVal[234713](234715 call Data[234631] i[234702])
+          (234718 'end of statement')
+          unknown inserted[234720] 0
+          (234723 'end of statement')
+          {
+            unknown _indexOfInterest[234782] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[234783] "expr temp" "temp"
+            (234792 'move' _iterator[234783](234790 call _getIterator(234809 call chpl_direct_strided_range_iter low[234698](234806 call - i[234702] stride[234685])(234802 call - stride[234685]))))
+            Defer
+            {
+              {
+                (234824 call _freeIterator _iterator[234783])
+              }
+            }
+            { scopeless type
+              (234814 'move' _indexOfInterest[234782](234811 call iteratorIndex _iterator[234783]))
+            }
+            ForLoop[234784]
+            {
+              unknown j[234724] "index var" "insert auto destroy"
+              (234819 'move' j[234724] _indexOfInterest[234782])
+              {
+                if(234778 call _cond_test(234768 call <(234771 call chpl_compare ithVal[234713](234774 call Data[234631] j[234724]) comparator[234639]) 0))
+                {
+                  (234740 call =(234743 call Data[234631](234744 call + j[234724] stride[234685]))(234749 call Data[234631] j[234724]))
+                }
+                {
+                  (234752 call =(234755 call Data[234631](234756 call + j[234724] stride[234685])) ithVal[234713])
+                  (234761 call = inserted[234720] 1)
+                  break _breakLabel[234788] _breakLabel[234788]
+                }
+              }
+              label _continueLabel[234787]
+              _indexOfInterest[234782]
+              _iterator[234783]
+            }
+            label _breakLabel[234788]
+          }
+          if(234841 call _cond_test(234838 call ! inserted[234720]))
+          {
+            (234832 call =(234835 call Data[234631] low[234698]) ithVal[234713])
+          }
+        }
+        label _continueLabel[234850]
+        _indexOfInterest[234845]
+        _iterator[234846]
+      }
+      label _breakLabel[234851]
+    }
+  }
+  function insertionSortMoveElts[234888](ref arg Data[234896] :
+  (234894 call chpl__buildArrayRuntimeType unknown Dom[234890] unknown eltType[234892]), arg comparator[234904] :
+  unknown rec[234899] =
+  (234901 'new'(234903 call DefaultComparator[246408])), arg lo[234913] :
+  int(64)[10] =
+  (234910 call . Dom[234890] c"low"), arg hi[234922] :
+  int(64)[10] =
+  (234919 call . Dom[234890] c"high")) : _unknown[42] "no return value for void"
+  {
+    (234928 call chpl_check_comparator comparator[234904] eltType[234892])
+    if(234942 call _cond_test(234935 call !=(234938 call . Dom[234890] c"rank") 1))
+    {
+      (234933 call compilerError "insertionSort() requires 1-D array")
+    }
+    const low[234961] "const" lo[234913]
+    const high[234957] "const" hi[234922]
+    const stride[234948] "const"(234950 call abs(234952 call . Dom[234890] c"stride"))
+    (234964 'end of statement')
+    {
+      unknown _indexOfInterest[235126] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[235127] "expr temp" "temp"
+      (235136 'move' _iterator[235127](235134 call _getIterator(235145 call chpl_direct_strided_range_iter low[234961] high[234957] stride[234948])))
+      Defer
+      {
+        {
+          (235160 call _freeIterator _iterator[235127])
+        }
+      }
+      { scopeless type
+        (235150 'move' _indexOfInterest[235126](235147 call iteratorIndex _iterator[235127]))
+      }
+      ForLoop[235128]
+      {
+        unknown i[234965] "index var" "insert auto destroy"
+        (235155 'move' i[234965] _indexOfInterest[235126])
+        {
+          unknown ithVal[234976] "no auto destroy" "no copy"(234983 call shallowCopyInit module=[222] ShallowCopy[240148](234985 call Data[234896] i[234965]))
+          (234988 'end of statement')
+          unknown inserted[234990] 0
+          (234993 'end of statement')
+          {
+            unknown _indexOfInterest[235060] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[235061] "expr temp" "temp"
+            (235070 'move' _iterator[235061](235068 call _getIterator(235087 call chpl_direct_strided_range_iter low[234961](235084 call - i[234965] stride[234948])(235080 call - stride[234948]))))
+            Defer
+            {
+              {
+                (235102 call _freeIterator _iterator[235061])
+              }
+            }
+            { scopeless type
+              (235092 'move' _indexOfInterest[235060](235089 call iteratorIndex _iterator[235061]))
+            }
+            ForLoop[235062]
+            {
+              unknown j[234994] "index var" "insert auto destroy"
+              (235097 'move' j[234994] _indexOfInterest[235060])
+              {
+                if(235056 call _cond_test(235046 call <(235049 call chpl_compare ithVal[234976](235052 call Data[234896] j[234994]) comparator[234904]) 0))
+                {
+                  (235016 call shallowCopy module=[222] ShallowCopy[240148](235018 call Data[234896](235019 call + j[234994] stride[234948]))(235024 call Data[234896] j[234994]))
+                  (407146 'referenced modules list' ShallowCopy[240148])
+                }
+                {
+                  (235031 call shallowCopy module=[222] ShallowCopy[240148](235033 call Data[234896](235034 call + j[234994] stride[234948])) ithVal[234976])
+                  (235039 call = inserted[234990] 1)
+                  break _breakLabel[235066] _breakLabel[235066]
+                  (407152 'referenced modules list' ShallowCopy[240148])
+                }
+              }
+              label _continueLabel[235065]
+              _indexOfInterest[235060]
+              _iterator[235061]
+            }
+            label _breakLabel[235066]
+          }
+          if(235122 call _cond_test(235119 call ! inserted[234990]))
+          {
+            (235114 call shallowCopy module=[222] ShallowCopy[240148](235116 call Data[234896] low[234961]) ithVal[234976])
+            (407158 'referenced modules list' ShallowCopy[240148])
+          }
+          (407140 'referenced modules list' ShallowCopy[240148])
+        }
+        label _continueLabel[235131]
+        _indexOfInterest[235126]
+        _iterator[235127]
+      }
+      label _breakLabel[235132]
+    }
+  }
+  (396838 'used modules list'(387034 'use' ChapelStandard[315387])(234621 'use' Sort[247204]))
+}

@@ -1,0 +1,63 @@
+AST dump for LocalesArray after pass inlineFunctions.
+Module use list: ChapelStandard 
+
+{
+  function chpl__init_LocalesArray[468573]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (309570 call chpl_init_rootLocale[136789])
+    ref i_this[7543206]:locale[234] "temp"
+    (7543210 'move' i_this[7543206](7543208 'set reference' rootLocale[136464]))
+    ref call_tmp[7543213]:BaseLocale[136243] "dead after last mention" "maybe param" "temp"
+    (7543215 'move' call_tmp[7543213](7543217 '.' i_this[7543206] _instance[135293]))
+    (937372 'move' call_tmp[937369] call_tmp[7543213])
+    (1916180 'move' coerce_tmp[1916176](1916178 'deref' call_tmp[937369]))
+    (1916187 'move' coerce_tmp[1916182] coerce_tmp[1916176])
+    val _formal_type_tmp_[7879816]:RootLocale[309500] "temp"
+    val ret[7879818]:RootLocale[309500] "dead after last mention" "RVV" "temp"
+    val coerce_tmp[7879820]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (7879822 'move' coerce_tmp[7879820](7879824 'cast' RootClass[236] coerce_tmp[1916182]))
+    const-val call_tmp[7879827]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7879829 'move' call_tmp[7879827](7879831 '==' coerce_tmp[7879820] nil[32]))
+    if call_tmp[7879827]
+    {
+      (7879836 '=' ret[7879818](7879838 'cast' RootLocale[309500] nil[32]))
+      gotoReturn _end_:[7879854] _end_:[7879854]
+    }
+    val call_tmp[7879844]:RootLocale[309500] "dead after last mention" "maybe param" "temp"
+    (7879846 'move' call_tmp[7879844](7879848 'dynamic_cast' _formal_type_tmp_[7879816] coerce_tmp[1916182]))
+    (7879851 'move' ret[7879818] call_tmp[7879844])
+    label _end_:[7879854]
+    (937377 'move' call_tmp[937374] ret[7879818])
+    val coerce_tmp[7880007]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (7880009 'move' coerce_tmp[7880007](7880011 'cast' RootClass[236] call_tmp[937374]))
+    const-val call_tmp[7880014]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7880016 'move' call_tmp[7880014](7880018 '==' coerce_tmp[7880007] nil[32]))
+    if call_tmp[7880014]
+    {
+      (7880024 call nilCheckHalt[392] "argument to ! is nil")
+    }
+    (937382 'move' call_tmp[937379] call_tmp[937374])
+    (937389 'move' call_tmp[937386](309587 call getDefaultLocaleArray[309399] call_tmp[937379]))
+    (653806 'move' Locales[309572] call_tmp[937386])
+    const-val call_tmp[937393]:domain(1,int(64),one)[1765496] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5556362]:domain(1,int(64),one)[1765496] "temp"
+    (309593 call _dom[1894490] Locales[309572] ret_tmp[5556362])
+    (5556365 'move' call_tmp[937393] ret_tmp[5556362])
+    (653810 'move' LocaleSpace[309591](1916193 call chpl__initCopy[1916196] call_tmp[937393] 1))
+    (631137 return _void[46])
+  }
+  const-ref Locales[309572]:[domain(1,int(64),one)] locale[1780406] "dead at end of block" "const" "locale private" "reference to a const" "ref var"
+  const-val LocaleSpace[309591]:domain(1,int(64),one)[1765496] "dead at end of block" "const" "insert auto destroy"
+  const-ref call_tmp[937369]:BaseLocale[136243] "dead at end of block" "maybe param" "temp"
+  val call_tmp[937374]:RootLocale[309500] "dead at end of block" "expr temp" "maybe param" "temp"
+  val coerce_tmp[1916176]:BaseLocale[136243] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+  val coerce_tmp[1916182]:BaseLocale[136243] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+  val call_tmp[937379]:RootLocale[309500] "dead at end of block" "expr temp" "maybe param" "temp"
+  const-ref call_tmp[937386]:[domain(1,int(64),one)] locale[1780406] "dead at end of block" "maybe param" "reference to a const" "temp"
+  function chpl__deinit_LocalesArray[5658837]() : void[4] "resolved"
+  {
+    label _endchpl__deinit_LocalesArray[5658843]
+    (5658845 call chpl__autoDestroy[3989014] LocaleSpace[309591])
+    (5658840 return _void[46])
+  }
+}

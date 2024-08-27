@@ -1,0 +1,201 @@
+AST dump for TimSort after pass cleanup.
+Module use list: 
+
+{
+  (387036 'use' ChapelStandard)
+  (235173 'use' Sort)
+  function timSort[235175](ref arg x[235180] :
+  (235178 call chpl__buildArrayRuntimeType nil[32]), arg blockSize[235184] =
+  16, arg comparator[235191] :
+  ?[227] =
+  (235188 'new'(235190 call DefaultComparator)), arg region[235204] :
+  (235196 call range ?[227]) =
+  (235202 call(235199 call . x c"dim") 0)) : _unknown[42] "no return value for void"
+  {
+    (235210 call chpl_check_comparator comparator(235213 call . x c"eltType"))
+    if(235229 call _cond_test(235222 call !=(235225 call . x c"rank") 1))
+    {
+      (235218 call compilerError "timSort() requires 1-D array")
+    }
+    (235234 call _TimSort x(235237 call . region c"low")(235241 call . region c"high") blockSize comparator)
+  }
+  function _TimSort[235248](ref arg Data[235254] :
+  (235252 call chpl__buildArrayRuntimeType unknown Dom[235250]), arg lo[235258] :
+  int[10], arg hi[235262] :
+  int[10], arg blockSize[235266] =
+  16, arg comparator[235274] :
+  unknown rec[235269] =
+  (235271 'new'(235273 call DefaultComparator))) : _unknown[42] "private" "no return value for void"
+  {
+    (235286 'import'(235283 call . Sort c"InsertionSort"))
+    const stride[235288] "const"(235289 call :(235292 call abs(235294 call . Dom c"stride"))(235298 call . Dom c"idxType"))
+    (235302 'end of statement')
+    const size[235304] "const"(235305 call +(235307 call /(235309 call - hi lo) stride) 1)
+    (235316 'end of statement')
+    const chunks[235318] "const"(235319 call /(235321 call -(235323 call + size blockSize) 1) blockSize)
+    (235330 'end of statement')
+    Forall[235387] {
+      induction variables:
+        
+        unknown i[235331] "index var" "insert auto destroy"
+      iterated expressions:
+        (235333 call #(235336 call chpl_build_low_bounded_range 0) chunks)
+      shadow variables:
+        Data[235341] 'ref' intent
+          init block
+          {
+          }
+          deinit block
+          {
+          }
+      other variables
+        forall body
+      {
+        (235352 call(235349 call . InsertionSort c"insertionSort") Data(comparator = comparator)(235356 call + lo(235359 call *(235361 call * i blockSize) stride))(235367 call min hi(235369 call -(235371 call + lo(235374 call *(235376 call *(235378 call + i 1) blockSize) stride)) stride)))
+      }
+    }
+    unknown numSize[235391] blockSize
+    (235394 'end of statement')
+    {
+      unknown tmp[235492] "temp"
+      (235516 'move' tmp[235492](235511 call _cond_test(235513 call < numSize size)))
+      WhileDo[235497]
+      {
+        {
+          Forall[235482] {
+            induction variables:
+              
+              unknown i[235400] "index var" "insert auto destroy"
+            iterated expressions:
+              (235402 call chpl_by(235408 call chpl_build_bounded_range 0(235406 call chpl__nudgeHighBound size))(235410 call * 2 numSize))
+            shadow variables:
+              Data[235416] 'ref' intent
+                init block
+                {
+                }
+                deinit block
+                {
+                }
+            other variables
+              forall body
+            {
+              const l[235422] "const"(235423 call + lo(235426 call * i stride))
+              (235431 'end of statement')
+              const mid[235433] "const"(235434 call + lo(235437 call *(235439 call -(235441 call + i numSize) 1) stride))
+              (235448 'end of statement')
+              const r[235450] "const"(235452 call min(235453 call + lo(235456 call *(235458 call -(235460 call + i(235463 call * 2 numSize)) 1) stride)) hi)
+              (235471 'end of statement')
+              (235473 call _Merge Data l mid r(comparator = comparator))
+            }
+          }
+          (235485 call = numSize(235488 call * numSize 2))
+        }
+        label _continueLabel[235495]
+        (235506 'move' tmp[235492](235501 call _cond_test(235503 call < numSize size)))
+        tmp[235492]
+      }
+      label _breakLabel[235496]
+    }
+  }
+  function _Merge[235521](ref arg Dst[235529] :
+  (235527 call chpl__buildArrayRuntimeType unknown Dom[235523] unknown eltType[235525]), arg lo[235533] :
+  int[10], arg mid[235537] :
+  int[10], arg hi[235541] :
+  int[10], arg comparator[235549] :
+  unknown rec[235544] =
+  (235546 'new'(235548 call DefaultComparator))) : _unknown[42] "private" "no return value for void"
+  {
+    if(235560 call _cond_test(235556 call >= mid hi))
+    {
+      (235555 return _void[46])
+    }
+    const stride[235565] "const"(235566 call :(235569 call abs(235571 call . Dom c"stride"))(235575 call . Dom c"idxType"))
+    (235579 'end of statement')
+    const a1range[235581] "const"(235601 IfExpr (235586 call(235583 call . Dom c"hasPosNegUnitStride")) then
+    { scopeless
+      (235589 call chpl_build_bounded_range lo mid)
+    } else
+    { scopeless
+      (235591 call chpl_by(235595 call chpl_build_bounded_range lo mid)(235597 call : stride uint[86]))
+    } )
+    (235605 'end of statement')
+    const a1max[235607] "const" mid
+    (235610 'end of statement')
+    const a2range[235612] "const"(235638 IfExpr (235617 call(235614 call . Dom c"hasPosNegUnitStride")) then
+    { scopeless
+      (235623 call chpl_build_bounded_range(235618 call + mid 1) hi)
+    } else
+    { scopeless
+      (235625 call chpl_by(235632 call chpl_build_bounded_range(235627 call + mid stride) hi)(235634 call : stride uint[86]))
+    } )
+    (235642 'end of statement')
+    const a2max[235644] "const" hi
+    (235647 'end of statement')
+    unknown A1[235649](235651 call Dst a1range)
+    (235654 'end of statement')
+    unknown A2[235656](235658 call Dst a2range)
+    (235661 'end of statement')
+    unknown a1[235663](235665 call . a1range c"first")
+    (235669 'end of statement')
+    unknown a2[235671](235673 call . a2range c"first")
+    (235677 'end of statement')
+    unknown i[235679] lo
+    (235682 'end of statement')
+    {
+      unknown tmp[235744] "temp"
+      (235780 'move' tmp[235744](235769 call _cond_test(235771 call &&(235773 call <= a1 a1max)(235777 call <= a2 a2max))))
+      WhileDo[235749]
+      {
+        {
+          if(235740 call _cond_test(235728 call <=(235731 call chpl_compare(235733 call A1 a1)(235736 call A2 a2) comparator) 0))
+          {
+            (235695 call =(235698 call Dst i)(235701 call A1 a1))
+            (235703 call += a1 stride)
+            (235707 call += i stride)
+          }
+          {
+            (235712 call =(235715 call Dst i)(235718 call A2 a2))
+            (235720 call += a2 stride)
+            (235724 call += i stride)
+          }
+        }
+        label _continueLabel[235747]
+        (235764 'move' tmp[235744](235753 call _cond_test(235755 call &&(235757 call <= a1 a1max)(235761 call <= a2 a2max))))
+        tmp[235744]
+      }
+      label _breakLabel[235748]
+    }
+    {
+      unknown tmp[235804] "temp"
+      (235828 'move' tmp[235804](235823 call _cond_test(235825 call <= a1 a1max)))
+      WhileDo[235809]
+      {
+        {
+          (235788 call =(235791 call Dst i)(235794 call A1 a1))
+          (235796 call += a1 stride)
+          (235800 call += i stride)
+        }
+        label _continueLabel[235807]
+        (235818 'move' tmp[235804](235813 call _cond_test(235815 call <= a1 a1max)))
+        tmp[235804]
+      }
+      label _breakLabel[235808]
+    }
+    {
+      unknown tmp[235852] "temp"
+      (235876 'move' tmp[235852](235871 call _cond_test(235873 call <= a2 a2max)))
+      WhileDo[235857]
+      {
+        {
+          (235836 call =(235839 call Dst i)(235842 call A2 a2))
+          (235844 call += a2 stride)
+          (235848 call += i stride)
+        }
+        label _continueLabel[235855]
+        (235866 'move' tmp[235852](235861 call _cond_test(235863 call <= a2 a2max)))
+        tmp[235852]
+      }
+      label _breakLabel[235856]
+    }
+  }
+}

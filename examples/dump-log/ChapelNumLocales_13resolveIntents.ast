@@ -1,0 +1,40 @@
+AST dump for ChapelNumLocales after pass resolveIntents.
+Module use list: ChapelBase 
+
+{
+  function chpl__init_ChapelNumLocales[468552]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    val tmp[653666]:int(64)[10] "dead after last mention" "temp"
+    val call_tmp[934889]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    val coerce_tmp[1758982]:c_ptrConst(int(8))[1466333] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1758988 'move' coerce_tmp[1758982](1758984 'cast' c_ptrConst(int(8))[1466333] c"numLocales"))
+    val coerce_tmp[1758990]:c_ptrConst(int(8))[1466333] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1758996 'move' coerce_tmp[1758990](1758992 'cast' c_ptrConst(int(8))[1466333] c"Built-in"))
+    (934892 'move' call_tmp[934889](653675 call chpl_config_has_value[52061] coerce_tmp[1758982] coerce_tmp[1758990]))
+    val call_tmp[934894]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (934897 'move' call_tmp[934894](653678 call ![63126] call_tmp[934889]))
+    if call_tmp[934894]
+    {
+      val call_tmp[934899]:int(64)[10] "dead after last mention" "maybe param" "temp"
+      (934902 'move' call_tmp[934899](305009 call chpl_comm_default_num_locales[305000]))
+      (653694 'move' tmp[653666] call_tmp[934899])
+    }
+    {
+      val call_tmp[934904]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+      val call_tmp[934909]:c_ptrConst(int(8))[1466333] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[1759001]:c_ptrConst(int(8))[1466333] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1759007 'move' coerce_tmp[1759001](1759003 'cast' c_ptrConst(int(8))[1466333] c"numLocales"))
+      val coerce_tmp[1759009]:c_ptrConst(int(8))[1466333] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1759015 'move' coerce_tmp[1759009](1759011 'cast' c_ptrConst(int(8))[1466333] c"Built-in"))
+      (934912 'move' call_tmp[934909](653685 call chpl_config_get_value[52079] coerce_tmp[1759001] coerce_tmp[1759009]))
+      (653690 'move' tmp[653666](653688 call _command_line_cast[1759018] call_tmp[934909]))
+    }
+    (653668 'move' numLocales[305007] tmp[653666])
+    (305011 'end of statement')
+    (630544 return _void[46])
+  }
+  function chpl_comm_default_num_locales[305000]() : int(64)[10] "extern" "local args" "no fn body" "resolved"
+  {
+  }
+  const numLocales[305007]:int(64)[10] "config" "const" "insert auto destroy"
+}

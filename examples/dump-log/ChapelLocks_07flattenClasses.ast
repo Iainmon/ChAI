@@ -1,0 +1,41 @@
+AST dump for ChapelLocks after pass flattenClasses.
+Module use list: Atomics ChapelBase MemConsistency currentTask 
+
+{
+  function chpl_LocalSpinlock[85418].init[85249](arg _mt[85253]:_MT[201], arg this[85251]:chpl_LocalSpinlock[85418]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+  }
+  function chpl_LocalSpinlock[85418].init=[85258](arg _mt[85266]:_MT[201], arg this[85260]:chpl_LocalSpinlock[85418], arg other[85263] :
+  chpl_LocalSpinlock[85418]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (85273 call(85270 call . this[85260] c"chpl__initThisType"))
+    (85285 call(85282 call .(85277 call . this[85260] c"l") c"init_helper")(85293 call(85290 call .(85287 call . other[85263] c"l") c"read")))
+  }
+  function chpl_LocalSpinlock[85418].lock[85296](arg _mt[85300]:_MT[201], ref arg this[85298]:chpl_LocalSpinlock[85418]) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    {
+      const tmp[85387] "const" "temp"
+      (85388 'move' tmp[85387](85385 'deref'(85384 '_wide_get_locale' this[85298])))
+      {
+        unknown tmp[85333] "temp"
+        (85381 'move' tmp[85333](85364 call _cond_test(85366 call ||(85371 call(85368 call .(400403 call . this[85298] c"l") c"read"))(85376 call(85373 call .(400408 call . this[85298] c"l") c"testAndSet") acquire[81222]))))
+        WhileDo[85338]
+        {
+          (85331 call yieldExecution)
+          label _continueLabel[85336]
+          (85359 'move' tmp[85333](85342 call _cond_test(85344 call ||(85349 call(85346 call .(400392 call . this[85298] c"l") c"read"))(85354 call(85351 call .(400397 call . this[85298] c"l") c"testAndSet") acquire[81222]))))
+          tmp[85333]
+        }
+        label _breakLabel[85337]
+      }
+      (85391 'elided on block' 0 tmp[85387])
+    }
+    (396081 'used modules list'(85309 'use' currentTask[68749]))
+  }
+  function chpl_LocalSpinlock[85418].unlock[85397](arg _mt[85401]:_MT[201], ref arg this[85399]:chpl_LocalSpinlock[85418]) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (85410 call(85407 call .(400414 call . this[85399] c"l") c"clear") release[81220])
+  }
+  type chpl_LocalSpinlock[85418] unknown l[85243](85245 call chpl__processorAtomicType bool[19])
+  (396077 'used modules list'(85235 'use' Atomics[85230])(85237 'use' ChapelBase[77907])(85239 'use' MemConsistency[81470]))
+}
