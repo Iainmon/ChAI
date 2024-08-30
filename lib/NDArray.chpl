@@ -16,42 +16,28 @@ record ndarray : serializable {
     param rank: int;
     type eltType = real(32);
     var _domain: domain(rank,int);
-    var simpleDomain: rect(rank);
-    var data: [_domain] eltType;
+    var data: [_domain] eltType = noinit;
 
     forwarding data except shape, _dom;
 
     // pragma "no copy return"
     // pragma "return not owned"
-    // proc _dom do return _domain;
+    proc _dom do return _domain;
 
-    proc _dom const {
-        if boundsChecking  {
-            compilerWarning("Bounds checking on.");
-            // assert(simpleDomain.toDomain() == _domain);
-            // assert(simpleDomain == _domain.simple());
-        }
-        return simpleDomain;
-    }
-
-    proc shape: rank * int do
-        return simpleDomain.shape;
+    proc shape do return _domain.fastShape;
 
     inline
-    proc init(type eltType, const sd: rect(?rank)) {
+    proc init(type eltType, dom: domain) {
         this.rank = rank;
         this.eltType = eltType;
-        this._domain = sd.toDomain();
-        this.simpleDomain = sd;
-        this.data = noinit;
+        this._domain = dom;
     }
 
     inline
-    proc init(type eltType, const sd: rect(?rank), const in fill: eltType) {
+    proc init(type eltType, param rank: , const in fill: eltType) {
         this.rank = rank;
         this.eltType = eltType;
         this._domain = sd.toDomain();
-        this.simpleDomain = sd;
         compilerWarning("Could be a point of performance issues.");
         this.data = fill; 
     }

@@ -303,6 +303,7 @@ record rect : serializable {
             foreach i in 0..<size do
                 yield indexAt(i);
         else {
+            compilerError("Iain, you should not be using this.");
             const dom = toDomain();
             foreach idx in dom do
                 yield idx;
