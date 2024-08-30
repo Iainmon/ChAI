@@ -1,5 +1,3 @@
-// watch -d -n 0.1 nvidia-smi
-
 use NDArray;
 use Remote;
 
