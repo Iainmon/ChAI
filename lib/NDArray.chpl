@@ -16,40 +16,52 @@ record ndarray : serializable {
     param rank: int;
     type eltType = real(32);
     var _domain: domain(rank,int);
-    var data: [_domain] eltType;
+    var data: [_domain] eltType = noinit;
 
     forwarding data except shape, _dom;
 
-    // pragma "no copy return"
-    // pragma "return not owned"
-    proc _dom do return _domain;
+    pragma "no copy return"
+    pragma "return not owned"
+    inline proc _dom do return _domain;
 
-    forwarding _domain only shape;
-
-    inline
-    proc init(type eltType, dom: domainType(?)) {
-        this.rank = dom.rank;
-        this.eltType = eltType;
-        this._domain = dom;
-        this.data = noinit;
+    proc shape: rank * int {
+        var s: rank * int;
+        const dms = _domain.dims();
+        for param i in 0..<rank {
+            const ref dm = dms(i);
+            s(i) = (dm.highBound - dm.lowBound) + 1;
+        }
+        return s;
     }
 
     inline
-    proc init(type eltType, dom: domainType(?), const in fill: eltType) {
+    proc init(type eltType, const dom: ?t)
+            where isDomainType(t) {
+        this.rank = dom.rank;
+        this.eltType = eltType;
+        this._domain = dom;
+    }
+
+    inline
+    proc init(type eltType, const dom: ?t, const in fill: eltType) 
+            where isDomainType(t) {
         this.rank = dom.rank;
         this.eltType = eltType;
         this._domain = dom;
         this.data = fill;
     }
 
-    proc init(param rank: int, type eltType, dom: domain(rank,int)) {
+    proc init(param rank: int, type eltType, const dom: ?t) 
+            where isDomainType(t) 
+                && dom.rank == rank {
         this.rank = rank;
         this.eltType = eltType;
         this._domain = dom;
-        this.data = noinit;
     }
 
-    proc init(param rank: int, type eltType, dom: domain(rank,int), const arr: [] eltType) {
+    proc init(param rank: int, type eltType, const dom: ?t, const arr: [] eltType)
+        where isDomainType(t)
+             && dom.rank == rank {
         this.rank = rank;
         this.eltType = eltType;
         this._domain = dom;
@@ -57,14 +69,15 @@ record ndarray : serializable {
     }
 
     proc init(type eltType, shape: ?rank * int) {
-        this.init(eltType,util.domainFromShape((...shape)));
+        var ranges: rank*range;
+        for param i in 0..<rank do
+            ranges(i) = 0..<shape(i);
+        this.init(eltType,{(...ranges)});
     }
 
     proc init(param rank: int, type eltType = real(32)) {
-        this.rank = rank;
-        this.eltType = eltType;
-        this._domain = util.emptyDomain(rank);
-        this.data = noinit;
+        const shape: rank * int;
+        this.init(eltType,shape);
     }
 
     proc init(type eltType = real(32), const shape: int ...?rank) do
@@ -126,19 +139,21 @@ record ndarray : serializable {
         _domain = dom;
     }
 
-    proc reshape(dom: domainType(?)): ndarray(rank,eltType)
-            where dom.rank == rank {
+    proc reshape(const dom: ?t): ndarray(rank,eltType)
+            where isDomainType(t)
+                && dom.rank == rank {
         var arr = new ndarray(eltType,dom);
         const arrDom  = arr.domain;
-        const selfDom = this.domain;
+        const selfDom = _domain;
  
         const inter = selfDom[arrDom];
         arr.data[inter] = data[inter];
         return arr;
     }
 
-    proc reshape(dom: domainType(?)): ndarray(dom.rank,eltType)
-            where dom.rank != rank {
+    proc reshape(const dom: ?t): ndarray(dom.rank,eltType)
+            where isDomainType(t)
+                && dom.rank != rank {
 
         var arr: ndarray(dom.rank,eltType) = new ndarray(eltType,dom);
 
@@ -390,7 +405,7 @@ record ndarray : serializable {
         const newHeight = insertH + height;
         const newWidth = insertW + width;
 
-        const dom: rect(3) = (channels,newHeight,newWidth);
+        const dom = util.domainFromShape(channels,newHeight,newWidth);
         var dilated = new ndarray(dom,eltType);
         ref dat = dilated.data;
         const ref thisData = data;
@@ -698,8 +713,8 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     var outFeatures = new ndarray(outDom,eltType);
 
     const chanR = 0..<channels; // don't trust daniel's codemotion.
-    const kernelD: rect(2) = (kernelHeight,kernelWidth);
-    const kernelChanD: rect(3) = (channels,kernelHeight,kernelWidth);
+    const kernelD = util.domainFromShape(kernelHeight,kernelWidth);
+    const kernelChanD = util.domainFromShape(channels,kernelHeight,kernelWidth);
 
     ref dat = outFeatures.data;
     ref fet = features.data;

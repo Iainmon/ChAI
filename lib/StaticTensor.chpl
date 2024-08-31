@@ -731,7 +731,7 @@ proc staticTensor.serialize(writer: IO.fileWriter(locking=false, IO.defaultSeria
     this.to(here);
 
     writer.write("Tensor(");
-    const shape = this.array.shape;
+    const shape = this.array.data.domain.shape;
     var first: bool = true;
     for (x,i) in zip(this.array.data,0..) {
         const idx = util.nbase(shape,i);

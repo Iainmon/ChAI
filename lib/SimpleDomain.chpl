@@ -272,14 +272,6 @@ record rect : serializable {
         return i;
     }
 
-    inline 
-    proc toDomain() const : domain(rank,int) do
-        return {(...dims())};
-
-    inline 
-    operator :(const in sd: rect(?rank), type toType: domain(rank,int)) do
-        return sd.toDomain();
-
     //compilerWarning("Come back to me. Not done with this. ");
 
     // pragma "suppress lvalue error"

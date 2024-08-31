@@ -510,18 +510,17 @@ module Utilities {
                 if rank == 1 {
                     foreach i in 0..<shape do yield (i,i);
                 } else {
-                    var blks: rank * int;
+                    var strides: rank * int;
+                    var prod = 1;
                     for param j in 0..<rank {
                         param i = rank - j - 1;
-                        if i == rank - 1 then
-                            blks(i) = 1;
-                        else
-                            blks(i) = shape(i+1) * blks(i + 1);
+                        strides(i) = prod;
+                        prod *= shape(i);
                     }
                     foreach idx in this {
                         var i: int;
                         for param k in 0..<rank do
-                            i += idx(k) * blks(k);
+                            i += idx(k) * strides(k);
                         yield (i,idx);
                     }
                 }
@@ -563,18 +562,17 @@ module Utilities {
                 if rank == 1 {
                     forall i in 0..<shape do yield (i,i);
                 } else {
-                    var blks: rank * int;
+                    var strides: rank * int;
+                    var prod = 1;
                     for param j in 0..<rank {
                         param i = rank - j - 1;
-                        if i == rank - 1 then
-                            blks(i) = 1;
-                        else
-                            blks(i) = shape(i) * blks(i + 1);
+                        strides(i) = prod;
+                        prod *= shape(i);
                     }
                     forall idx in this {
                         var i: int;
                         for param k in 0..<rank do
-                            i += idx(k) * blks(k);
+                            i += idx(k) * strides(k);
                         yield (i,idx);
                     }
 
@@ -670,18 +668,17 @@ module Utilities {
                 if rank == 1 {
                     forall i in 0..<shape do yield (i,i);
                 } else {
-                    var blks: rank * int;
+                    var strides: rank * int;
+                    var prod = 1;
                     for param j in 0..<rank {
                         param i = rank - j - 1;
-                        if i == rank - 1 then
-                            blks(i) = 1;
-                        else
-                            blks(i) = shape(i) * blks(i + 1);
+                        strides(i) = prod;
+                        prod *= shape(i);
                     }
                     forall idx in this {
                         var i: int;
                         for param k in 0..<rank do
-                            i += idx(k) * blks(k);
+                            i += idx(k) * strides(k);
                         yield (i,idx);
                     }
                 }
