@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Network &mdash; chpldoc 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="OrderedDict" href="OrderedDict.html" />
+    <link rel="prev" title="NDArray" href="NDArray.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            chpldoc
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">chpldoc documentation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../examples/ConvLayerTest.html">ConvLayerTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/GPUOperations.html">GPUOperations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/MNISTNet.html">MNISTNet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/ModuleSpec.html">ModuleSpec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/MultiLocaleInference.html">MultiLocaleInference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autograd.html">Autograd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DynamicTensor.html">DynamicTensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LoadNumpy.html">LoadNumpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NDArray.html">NDArray</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OrderedDict.html">OrderedDict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Remote.html">Remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SimpleDomain.html">SimpleDomain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StaticTensor.html">StaticTensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tensor.html">Tensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Utilities/Standard.html">Standard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Utilities/Types.html">Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../src/ChAI.html">ChAI</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">chpldoc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Network</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/modules/lib/Network.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="network">
+<span id="module-Network"></span><h1>Network<a class="headerlink" href="#network" title="Link to this heading">¶</a></h1>
+<p><strong>Usage</strong></p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Network</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">Network</span><span class="p">;</span>
+</pre></div>
+</div>
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Network.helpFindModuleByName">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">helpFindModuleByName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">deflt</span> <span class="pre">arg</span></em>, <em class="sig-param"><span class="pre">deflt</span> <span class="pre">x:</span> <span class="pre">string</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">deflt</span></em><em class="property"> <span class="pre">:</span> <span class="pre">borrowed(Module(?))</span></em><a class="headerlink" href="#Network.helpFindModuleByName" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Network.helpFindParamDataByName">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">helpFindParamDataByName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">deflt</span> <span class="pre">arg</span></em>, <em class="sig-param"><span class="pre">deflt</span> <span class="pre">x:</span> <span class="pre">string</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">Tensor(?)</span></em><a class="headerlink" href="#Network.helpFindParamDataByName" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl record">
+<dt class="sig sig-object chpl" id="Network.moduleChildren">
+<em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">moduleChildren</span></span><a class="headerlink" href="#Network.moduleChildren" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.moduleChildren.eltType">
+<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#Network.moduleChildren.eltType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.moduleChildren.childDict">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">childDict</span></span><em class="property"> <span class="pre">:</span> <span class="pre">map(string,</span> <span class="pre">borrowed(Module(eltType)))</span></em><a class="headerlink" href="#Network.moduleChildren.childDict" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.moduleChildren.order">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">order</span></span><em class="property"> <span class="pre">:</span> <span class="pre">list(string)</span></em><a class="headerlink" href="#Network.moduleChildren.order" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl" id="Network.moduleChildren.these">
+<em class="property"><span class="pre">iter</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">these</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">deflt</span></em><em class="property"> <span class="pre">:</span> <span class="pre">borrowed(Module(eltType))</span></em><a class="headerlink" href="#Network.moduleChildren.these" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl" id="Network.moduleChildren.items">
+<em class="property"><span class="pre">iter</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">deflt</span></em><em class="property"> <span class="pre">:</span> <span class="pre">(string,</span> <span class="pre">borrowed(Module(eltType)))</span></em><a class="headerlink" href="#Network.moduleChildren.items" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Network.moduleChildren.add">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">deflt</span> <span class="pre">name:</span> <span class="pre">string</span></em>, <em class="sig-param"><span class="pre">deflt</span> <span class="pre">m:</span> <span class="pre">borrowed(Module(eltType))</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">deflt</span></em><a class="headerlink" href="#Network.moduleChildren.add" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Network.moduleChildren.ith">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">ith</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">deflt</span> <span class="pre">i:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">deflt</span></em><em class="property"> <span class="pre">:</span> <span class="pre">borrowed(Module(eltType))</span></em><a class="headerlink" href="#Network.moduleChildren.ith" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">class.this(deflt</span> <span class="pre">fieldName:</span> <span class="pre">string)</span> <span class="pre">deflt:</span> <span class="pre">borrowed(Module(?))</span> <span class="pre">where</span> <span class="pre">isSubtype(this.type,</span> <span class="pre">Module(?))</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">class.this(deflt</span> <span class="pre">fieldName:</span> <span class="pre">string)</span> <span class="pre">ref:</span> <span class="pre">Tensor(?)</span> <span class="pre">where</span> <span class="pre">isSubtype(this.type,</span> <span class="pre">Parameter(?))</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">iter</span> <span class="pre">deflt</span> <span class="pre">class.moduleFieldNames()</span> <span class="pre">deflt:</span> <span class="pre">string</span> <span class="pre">where</span> <span class="pre">isSubtype(this.type,</span> <span class="pre">Module(?))</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">iter</span> <span class="pre">deflt</span> <span class="pre">class.moduleFields()</span> <span class="pre">deflt:</span> <span class="pre">(string,</span> <span class="pre">borrowed(Module(?)))</span> <span class="pre">where</span> <span class="pre">isSubtype(this.type,</span> <span class="pre">Module(?))</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">class.registerModules()</span> <span class="pre">deflt</span> <span class="pre">where</span> <span class="pre">isSubtype(this.type,</span> <span class="pre">Module(?))</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">class.postinit()</span> <span class="pre">deflt</span> <span class="pre">where</span> <span class="pre">isSubtype(this.type,</span> <span class="pre">Module(?))</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl record">
+<dt class="sig sig-object chpl" id="Network.moduleAttributes">
+<em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">moduleAttributes</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Network.moduleAttributes" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.moduleAttributes.layerType">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">layerType</span></span><em class="property"> <span class="pre">:</span> <span class="pre">string</span></em><a class="headerlink" href="#Network.moduleAttributes.layerType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.moduleAttributes.moduleName">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">moduleName</span></span><em class="property"> <span class="pre">:</span> <span class="pre">string</span></em><a class="headerlink" href="#Network.moduleAttributes.moduleName" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.moduleAttributes.attributes">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">attributes</span></span><em class="property"> <span class="pre">:</span> <span class="pre">dict(string,</span> <span class="pre">string)</span></em><a class="headerlink" href="#Network.moduleAttributes.attributes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(deflt</span> <span class="pre">layerType:</span> <span class="pre">string,</span> <span class="pre">deflt</span> <span class="pre">moduleName:</span> <span class="pre">string,</span> <span class="pre">in</span> <span class="pre">attrs:</span> <span class="pre">map(string,</span> <span class="pre">string,</span> <span class="pre">?))</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(deflt</span> <span class="pre">layerType:</span> <span class="pre">string,</span> <span class="pre">deflt</span> <span class="pre">moduleName:</span> <span class="pre">string,</span> <span class="pre">in</span> <span class="pre">attrs:</span> <span class="pre">dict(string,</span> <span class="pre">?))</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(deflt</span> <span class="pre">layerType:</span> <span class="pre">string,</span> <span class="pre">deflt</span> <span class="pre">moduleName:</span> <span class="pre">string,</span> <span class="pre">in</span> <span class="pre">attrs:</span> <span class="pre">map(string,</span> <span class="pre">?valType,</span> <span class="pre">?))</span> <span class="pre">deflt</span> <span class="pre">where</span> <span class="pre">valType</span> <span class="pre">!=</span> <span class="pre">string</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(deflt</span> <span class="pre">layerType:</span> <span class="pre">string,</span> <span class="pre">deflt</span> <span class="pre">moduleName:</span> <span class="pre">string,</span> <span class="pre">in</span> <span class="pre">attrs:</span> <span class="pre">map(string,</span> <span class="pre">?valType,</span> <span class="pre">?),</span> <span class="pre">deflt</span> <span class="pre">order:</span> <span class="pre">list(string))</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(deflt</span> <span class="pre">layerType:</span> <span class="pre">string,</span> <span class="pre">deflt</span> <span class="pre">moduleName:</span> <span class="pre">string,</span> <span class="pre">attrs</span> <span class="pre">...?n)</span> <span class="pre">deflt</span> <span class="pre">where</span> <span class="pre">attrs(0)(0).type</span> <span class="pre">==</span> <span class="pre">string</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(deflt</span> <span class="pre">layerType:</span> <span class="pre">string,</span> <span class="pre">deflt</span> <span class="pre">moduleName:</span> <span class="pre">string)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">getInt(deflt</span> <span class="pre">name:</span> <span class="pre">string)</span> <span class="pre">deflt:</span> <span class="pre">int</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">prettyPrint()</span> <span class="pre">deflt:</span> <span class="pre">string</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">prettyPrintSpec()</span> <span class="pre">deflt:</span> <span class="pre">string</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">operator</span> <span class="pre">deflt</span> <span class="pre">:(deflt</span> <span class="pre">ma:</span> <span class="pre">moduleAttributes,</span> <span class="pre">type</span> <span class="pre">T:</span> <span class="pre">string)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.ModuleSpecification">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ModuleSpecification</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Network.ModuleSpecification" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.ModuleSpecification.layerType">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">layerType</span></span><em class="property"> <span class="pre">:</span> <span class="pre">string</span></em><a class="headerlink" href="#Network.ModuleSpecification.layerType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.ModuleSpecification.attributes">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">attributes</span></span><em class="property"> <span class="pre">:</span> <span class="pre">map(string,</span> <span class="pre">string)</span></em><a class="headerlink" href="#Network.ModuleSpecification.attributes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.ModuleSpecification.subModules">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">subModules</span></span><em class="property"> <span class="pre">:</span> <span class="pre">map(string,</span> <span class="pre">owned(ModuleSpecification?))</span></em><a class="headerlink" href="#Network.ModuleSpecification.subModules" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.ModuleSpecification.subModuleOrder">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">subModuleOrder</span></span><em class="property"> <span class="pre">:</span> <span class="pre">list(string)</span></em><a class="headerlink" href="#Network.ModuleSpecification.subModuleOrder" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Network.moduleFromSpec">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">moduleFromSpec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">deflt</span> <span class="pre">ms_:</span> <span class="pre">borrowed(ModuleSpecification?)</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">dtype</span> <span class="pre">=</span> <span class="pre">real(32)</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">deflt</span></em><em class="property"> <span class="pre">:</span> <span class="pre">owned(Module(dtype))</span></em><a class="headerlink" href="#Network.moduleFromSpec" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Network.modelFromSpecFile">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">modelFromSpecFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">deflt</span> <span class="pre">path:</span> <span class="pre">string</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">dtype</span> <span class="pre">=</span> <span class="pre">real(32)</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">deflt</span></em><em class="property"> <span class="pre">:</span> <span class="pre">owned(Module(dtype))</span></em><a class="headerlink" href="#Network.modelFromSpecFile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Network.loadModel">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">loadModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">deflt</span> <span class="pre">specFile:</span> <span class="pre">string</span></em>, <em class="sig-param"><span class="pre">deflt</span> <span class="pre">weightsFolder:</span> <span class="pre">string</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">dtype</span> <span class="pre">=</span> <span class="pre">real(32)</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">deflt</span></em><em class="property"> <span class="pre">:</span> <span class="pre">owned(Module(dtype))</span></em><a class="headerlink" href="#Network.loadModel" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl data">
+<dt class="sig sig-object chpl" id="Network.moduleInstances">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">moduleInstances</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#Network.moduleInstances" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.Module">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Module</span></span><a class="headerlink" href="#Network.Module" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Module.eltType">
+<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><a class="headerlink" href="#Network.Module.eltType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Module.subModules">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">subModules</span></span><em class="property"> <span class="pre">:</span> <span class="pre">moduleChildren(eltType)</span></em><a class="headerlink" href="#Network.Module.subModules" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Module.moduleId">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">moduleId</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Network.Module.moduleId" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Module.moduleName">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">moduleName</span></span><em class="property"> <span class="pre">:</span> <span class="pre">string</span></em><a class="headerlink" href="#Network.Module.moduleName" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Module.ownedModules">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">ownedModules</span></span><em class="property"> <span class="pre">:</span> <span class="pre">list(shared(Module(eltType)))</span></em><a class="headerlink" href="#Network.Module.ownedModules" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real,</span> <span class="pre">deflt</span> <span class="pre">ma:</span> <span class="pre">moduleAttributes)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">setup()</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">this(deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">getSubModuleName(deflt</span> <span class="pre">name:</span> <span class="pre">string)</span> <span class="pre">deflt:</span> <span class="pre">string</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">addModule(deflt</span> <span class="pre">name:</span> <span class="pre">string,</span> <span class="pre">deflt</span> <span class="pre">m:</span> <span class="pre">borrowed(Module(eltType)))</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">addModule(deflt</span> <span class="pre">name:</span> <span class="pre">string,</span> <span class="pre">deflt</span> <span class="pre">m:</span> <span class="pre">shared(Module(eltType)))</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">addModule(deflt</span> <span class="pre">name:</span> <span class="pre">string,</span> <span class="pre">in</span> <span class="pre">m:</span> <span class="pre">owned(Module(eltType)))</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">addParameter(deflt</span> <span class="pre">name:</span> <span class="pre">string,</span> <span class="pre">deflt</span> <span class="pre">data:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">forward(deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">par(deflt</span> <span class="pre">paramName:</span> <span class="pre">string)</span> <span class="pre">ref:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">mod(deflt</span> <span class="pre">modName:</span> <span class="pre">string)</span> <span class="pre">deflt:</span> <span class="pre">borrowed(Module(eltType))</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">iter</span> <span class="pre">deflt</span> <span class="pre">parameters()</span> <span class="pre">deflt:</span> <span class="pre">borrowed(Parameter(eltType))</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">iter</span> <span class="pre">deflt</span> <span class="pre">moduleNames()</span> <span class="pre">deflt:</span> <span class="pre">string</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">iter</span> <span class="pre">deflt</span> <span class="pre">parameterNames()</span> <span class="pre">deflt:</span> <span class="pre">string</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">iter</span> <span class="pre">deflt</span> <span class="pre">modules()</span> <span class="pre">deflt:</span> <span class="pre">borrowed(Module(eltType))</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">iter</span> <span class="pre">deflt</span> <span class="pre">namedModules()</span> <span class="pre">deflt:</span> <span class="pre">(string,</span> <span class="pre">borrowed(Module(eltType)))</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">loadPyTorchDump(deflt</span> <span class="pre">modelPath:</span> <span class="pre">string,</span> <span class="pre">param</span> <span class="pre">debug</span> <span class="pre">=</span> <span class="pre">false)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">attributes()</span> <span class="pre">deflt:</span> <span class="pre">moduleAttributes</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">signature</span> <span class="pre">deflt:</span> <span class="pre">string</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.Parameter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Parameter</span></span><em class="property"> <span class="pre">:</span> <span class="pre">Module(?)</span></em><a class="headerlink" href="#Network.Parameter" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Parameter.data">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">data</span></span><em class="property"> <span class="pre">:</span> <span class="pre">Tensor(eltType)</span></em><a class="headerlink" href="#Network.Parameter.data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(deflt</span> <span class="pre">data:</span> <span class="pre">Tensor(?eltType))</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">attributes()</span> <span class="pre">deflt:</span> <span class="pre">moduleAttributes</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.Sequential">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Sequential</span></span><em class="property"> <span class="pre">:</span> <span class="pre">Module(?)</span></em><a class="headerlink" href="#Network.Sequential" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Sequential.mds">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">mds</span></span><em class="property"> <span class="pre">:</span> <span class="pre">list(shared(Module(eltType)))</span></em><a class="headerlink" href="#Network.Sequential.mds" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real,</span> <span class="pre">deflt</span> <span class="pre">ms:</span> <span class="pre">dict(string,</span> <span class="pre">shared(Module(eltType))),</span> <span class="pre">param</span> <span class="pre">overrideName</span> <span class="pre">=</span> <span class="pre">false,</span> <span class="pre">deflt</span> <span class="pre">moduleName:</span> <span class="pre">string</span> <span class="pre">=</span> <span class="pre">&quot;&quot;)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real,</span> <span class="pre">in</span> <span class="pre">ms)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real,</span> <span class="pre">deflt</span> <span class="pre">order:</span> <span class="pre">list(string),</span> <span class="pre">in</span> <span class="pre">ms:</span> <span class="pre">map(string,</span> <span class="pre">owned(Module(eltType)?)))</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(in</span> <span class="pre">ms:</span> <span class="pre">owned</span> <span class="pre">Module(real)?</span> <span class="pre">...?rank)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">forward(deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">attributes()</span> <span class="pre">deflt:</span> <span class="pre">moduleAttributes</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.Linear">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Linear</span></span><em class="property"> <span class="pre">:</span> <span class="pre">Module(?)</span></em><a class="headerlink" href="#Network.Linear" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Linear.m">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">m</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Network.Linear.m" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Linear.n">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">n</span></span><em class="property"> <span class="pre">:</span> <span class="pre">m.type</span></em><a class="headerlink" href="#Network.Linear.n" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Linear.weight">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">weight</span></span><em class="property"> <span class="pre">:</span> <span class="pre">owned(Parameter(eltType))</span></em><a class="headerlink" href="#Network.Linear.weight" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Linear.bias">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">bias</span></span><em class="property"> <span class="pre">:</span> <span class="pre">owned(Parameter(eltType))</span></em><a class="headerlink" href="#Network.Linear.bias" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType,</span> <span class="pre">deflt</span> <span class="pre">m:</span> <span class="pre">int,</span> <span class="pre">deflt</span> <span class="pre">n:</span> <span class="pre">int)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">setup()</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(deflt</span> <span class="pre">m:</span> <span class="pre">int,</span> <span class="pre">deflt</span> <span class="pre">n:</span> <span class="pre">int)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">forward(deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">attributes()</span> <span class="pre">deflt:</span> <span class="pre">moduleAttributes</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.Conv2D">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Conv2D</span></span><em class="property"> <span class="pre">:</span> <span class="pre">Module(?)</span></em><a class="headerlink" href="#Network.Conv2D" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Conv2D.kernelShape">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">kernelShape</span></span><em class="property"> <span class="pre">:</span> <span class="pre">4*(int)</span></em><a class="headerlink" href="#Network.Conv2D.kernelShape" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Conv2D.stride">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">stride</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Network.Conv2D.stride" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Conv2D.kernel">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">kernel</span></span><em class="property"> <span class="pre">:</span> <span class="pre">owned(Parameter(eltType))</span></em><a class="headerlink" href="#Network.Conv2D.kernel" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.Conv2D.bias">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">bias</span></span><em class="property"> <span class="pre">:</span> <span class="pre">owned(Parameter(eltType))</span></em><a class="headerlink" href="#Network.Conv2D.bias" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real,</span> <span class="pre">deflt</span> <span class="pre">channels:</span> <span class="pre">int,</span> <span class="pre">deflt</span> <span class="pre">features:</span> <span class="pre">int,</span> <span class="pre">deflt</span> <span class="pre">kernel:</span> <span class="pre">int,</span> <span class="pre">deflt</span> <span class="pre">stride:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real,</span> <span class="pre">deflt</span> <span class="pre">ma:</span> <span class="pre">moduleAttributes)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">setup()</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(deflt</span> <span class="pre">channels:</span> <span class="pre">int,</span> <span class="pre">deflt</span> <span class="pre">features:</span> <span class="pre">int,</span> <span class="pre">deflt</span> <span class="pre">kernel:</span> <span class="pre">int,</span> <span class="pre">deflt</span> <span class="pre">stride:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">forward(deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">attributes()</span> <span class="pre">deflt:</span> <span class="pre">moduleAttributes</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.MaxPool">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">MaxPool</span></span><em class="property"> <span class="pre">:</span> <span class="pre">Module(?)</span></em><a class="headerlink" href="#Network.MaxPool" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Network.MaxPool.poolSize">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">poolSize</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Network.MaxPool.poolSize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real,</span> <span class="pre">deflt</span> <span class="pre">poolSize:</span> <span class="pre">int)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(deflt</span> <span class="pre">poolSize:</span> <span class="pre">int)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">forward(deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">attributes()</span> <span class="pre">deflt:</span> <span class="pre">moduleAttributes</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.Flatten">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Flatten</span></span><em class="property"> <span class="pre">:</span> <span class="pre">Module(?)</span></em><a class="headerlink" href="#Network.Flatten" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">forward(deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">attributes()</span> <span class="pre">deflt:</span> <span class="pre">moduleAttributes</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.ReLU">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ReLU</span></span><em class="property"> <span class="pre">:</span> <span class="pre">Module(?)</span></em><a class="headerlink" href="#Network.ReLU" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">forward(deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">attributes()</span> <span class="pre">deflt:</span> <span class="pre">moduleAttributes</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.Softmax">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Softmax</span></span><em class="property"> <span class="pre">:</span> <span class="pre">Module(?)</span></em><a class="headerlink" href="#Network.Softmax" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">forward(deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">attributes()</span> <span class="pre">deflt:</span> <span class="pre">moduleAttributes</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.Dropout">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Dropout</span></span><em class="property"> <span class="pre">:</span> <span class="pre">Module(?)</span></em><a class="headerlink" href="#Network.Dropout" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real,</span> <span class="pre">deflt</span> <span class="pre">freq:</span> <span class="pre">real</span> <span class="pre">=</span> <span class="pre">0.5)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">forward(deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">attributes()</span> <span class="pre">deflt:</span> <span class="pre">moduleAttributes</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Network.chain">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">deflt</span> <span class="pre">m:</span> <span class="pre">borrowed(Module(?))</span></em>, <em class="sig-param"><span class="pre">modNames:</span> <span class="pre">string</span> <span class="pre">...?n</span></em>, <em class="sig-param"><span class="pre">deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(?eltType)</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">deflt</span></em><a class="headerlink" href="#Network.chain" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl class">
+<dt class="sig sig-object chpl" id="Network.Net">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Net</span></span><em class="property"> <span class="pre">:</span> <span class="pre">Module(?)</span></em><a class="headerlink" href="#Network.Net" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">init(type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">real)</span> <span class="pre">deflt</span></span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">override</span> <span class="pre">proc</span> <span class="pre">deflt</span> <span class="pre">forward(deflt</span> <span class="pre">input:</span> <span class="pre">Tensor(eltType))</span> <span class="pre">deflt:</span> <span class="pre">Tensor(eltType)</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Network.main">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">deflt</span></em><a class="headerlink" href="#Network.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="NDArray.html" class="btn btn-neutral float-left" title="NDArray" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="OrderedDict.html" class="btn btn-neutral float-right" title="OrderedDict" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2015.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+
+
+
+</body>
+</html>
