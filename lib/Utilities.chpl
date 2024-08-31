@@ -369,7 +369,7 @@ module Utilities {
         //         tup(i) = v;
         // }
 
-        inline proc _domain.simple() const : rect(rank) do
+        /*inline proc _domain.simple() const : rect(rank) do
             return new rect(this);
 
         inline iter _domain.every() {
@@ -390,10 +390,10 @@ module Utilities {
                 where tag == iterKind.standalone {
             const simple = this.simple();
             foreach idx in simple.eachOrder() do yield idx;
-        }
+        }*/
 
 
-/*
+
         inline iter _domain.each {
             const shape = this.shape;
             var prod = 1;
@@ -715,7 +715,7 @@ module Utilities {
                     }
                 }
             }
-        }*/
+        }
 
         inline proc _domain.indexAt(n: int) where rank == 1 {
             return n;

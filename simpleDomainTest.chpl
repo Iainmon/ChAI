@@ -1,6 +1,6 @@
 use SimpleDomain;
 use Utilities.Standard;
-
+import Utilities as util;
 
 proc compare(dom:domain(?),d: rect(?rank)) where dom.rank == rank {
     inline proc compareI(i) do
@@ -86,3 +86,29 @@ fo(1,2,3);
 //     writeln(__primitive("field by num",t,i+1).type:string);
 // }
 
+proc domainType(param rank: int) type do
+    return DefaultRectangularDom(rank,int,strideKind.one);
+
+{
+    const d = util.domainFromShape(2,3,4);
+    writeln(d.type:string);
+    writeln(d._instance.type:string);
+    writeln(d.distribution.type:string);
+    writeln(d._instance.type:string);
+    writeln(d._value.type:string);
+}
+
+{
+    const d = util.domainFromShape(2,3,4);
+    writeln(d._instance.type:string);
+    writeln(domainType(3):string);
+
+    writeln(domainType(3) == d.type);
+    const x: domain(3,int) = util.domainFromShape(2,3,4);
+    writeln(x.type:string);
+    writeln(x.type == d.type);
+
+    const y: _domain(?) = x;
+    writeln(x.type == y.type);
+
+}
