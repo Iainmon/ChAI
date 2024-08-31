@@ -1,0 +1,54 @@
+AST dump for Communication after pass scopeResolve.
+Module use list: ChapelStandard CTypes 
+
+{
+  const chpl_numNodes[29959] "const" "extern" "private"(29961 call int(64)[10] 32)
+  (29964 'end of statement')
+  function get[29965](arg dest[29970] :
+  (29968 call c_ptr[46891](?) void[4]), arg src[29976] :
+  (29974 call c_ptr[46891](?) void[4]), arg srcLocID[29980] :
+  int(64)[10], arg numBytes[29984] :
+  integral[159](?)) : _unknown[42] "inline" "no return value for void"
+  {
+    if(30032 call _cond_test 1)
+    {
+      if(30009 call _cond_test(29999 call ||(30001 call < srcLocID[29980] 0)(30005 call >= srcLocID[29980] chpl_numNodes[29959])))
+      {
+        (29991 call halt "The source locale ID (" srcLocID[29980] ") for Communication.get is out of bounds.")
+      }
+      if(30027 call _cond_test(30023 call < numBytes[29984] 0))
+      {
+        (30015 call halt "Number of bytes (" numBytes[29984] ") for Communication.get is negative.")
+      }
+    }
+    unknown destRef[30037] "ref var"(30051 call(30048 call .(30038 call : dest[29970](30042 call c_ptr[46891](?)(30044 call uint(64)[86] 8))) c"deref"))
+    (30053 'end of statement')
+    const srcRef[30055] "const" "ref var"(30067 call(30064 call .(30056 call : src[29976](30060 call c_ptr[46891](?)(30062 call uint(64)[86] 8))) c"deref"))
+    (30069 'end of statement')
+    (30070 'chpl_comm_get' destRef[30037] srcLocID[29980] srcRef[30055] numBytes[29984])
+  }
+  function put[30077](arg dest[30082] :
+  (30080 call c_ptr[46891](?) void[4]), arg src[30088] :
+  (30086 call c_ptr[46891](?) void[4]), arg destLocID[30092] :
+  int(64)[10], arg numBytes[30096] :
+  integral[159](?)) : _unknown[42] "inline" "no return value for void"
+  {
+    if(30142 call _cond_test 1)
+    {
+      if(30121 call _cond_test(30111 call ||(30113 call < destLocID[30092] 0)(30117 call >= destLocID[30092] chpl_numNodes[29959])))
+      {
+        (30103 call halt "The destination locale ID (" destLocID[30092] ") for Communication.put is out of bounds.")
+      }
+      if(30137 call _cond_test(30133 call < numBytes[30096] 0))
+      {
+        (30127 call halt "Number of bytes (" numBytes[30096] ") for Communication.put is negative.")
+      }
+    }
+    const srcRef[30147] "const" "ref var"(30159 call(30156 call .(30148 call : src[30088](30152 call c_ptr[46891](?)(30154 call uint(64)[86] 8))) c"deref"))
+    (30161 'end of statement')
+    unknown destRef[30163] "ref var"(30175 call(30172 call .(30164 call : dest[30082](30168 call c_ptr[46891](?)(30170 call uint(64)[86] 8))) c"deref"))
+    (30177 'end of statement')
+    (30178 'chpl_comm_put' srcRef[30147] destLocID[30092] destRef[30163] numBytes[30096])
+  }
+  (395997 'used modules list'(387006 'use' ChapelStandard[315387])(29956 'use' CTypes[51217]))
+}

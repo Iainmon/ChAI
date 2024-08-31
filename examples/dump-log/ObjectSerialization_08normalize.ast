@@ -1,0 +1,1463 @@
+AST dump for ObjectSerialization after pass normalize.
+Module use list: ChapelStandard IO CTypes 
+
+{
+  function chpl__init_ObjectSerialization[468669]() : void[4] "insert line file info" "module init"
+  {
+    (638319 return _void[46])
+  }
+  function objectSerializer[357446]._oldWrite[356524](arg _mt[356539]:_MT[201], arg this[356526]:objectSerializer[357446], arg ch[356531]:fileWriter[170987](?), const arg val[356536]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[976713] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (976716 'move' call_tmp[976713](1000681 'new' defaultSerializer[171969]))
+    unknown _def[356543] "dead at end of block" "insert auto destroy"
+    (656810 'init var' _def[356543] call_tmp[976713])
+    (356548 'end of statement')
+    unknown call_tmp[976720] "maybe param" "maybe type" "temp"
+    (976723 'move' call_tmp[976720](356555 call(356552 call (partial) withSerializer _mt[203] ch[356531]) _def[356543]))
+    unknown dc[356550] "dead at end of block" "insert auto destroy"
+    (656812 'init var' dc[356550] call_tmp[976720])
+    (356558 'end of statement')
+    unknown call_tmp[976727] "maybe param" "maybe type" "temp"
+    (976730 'move' call_tmp[976727](356565 call(356562 call (partial) _styleInternal _mt[203] dc[356550])))
+    unknown st[356560] "dead at end of block" "insert auto destroy"
+    (656814 'init var' st[356560] call_tmp[976727])
+    (356567 'end of statement')
+    unknown orig[356569] "dead at end of block" "insert auto destroy"
+    (656816 'init var' orig[356569] st[356560])
+    (356572 'end of statement' _def[356543] dc[356550] st[356560])
+    Defer
+    {
+      {
+        (356578 call(356575 call (partial) _set_styleInternal _mt[203] dc[356550]) orig[356569])
+        (573665 'end of statement' dc[356550] orig[356569])
+      }
+    }
+    unknown call_tmp[976736] "expr temp" "maybe param" "maybe type" "temp"
+    (976739 'move' call_tmp[976736](356585 call binary _mt[203] st[356560]))
+    (356582 call = call_tmp[976736] 1)
+    (573668 'end of statement' st[356560])
+    unknown call_tmp[976743] "expr temp" "maybe param" "maybe type" "temp"
+    (976746 'move' call_tmp[976743](356592 call byteorder _mt[203] st[356560]))
+    unknown call_tmp[976750] "expr temp" "maybe param" "maybe type" "temp"
+    (976753 'move' call_tmp[976750](463080 call endian _mt[203] this[356526]))
+    unknown call_tmp[976755] "expr temp" "maybe param" "maybe type" "temp"
+    (976758 'move' call_tmp[976755](356602 call uint(64)[86] 8))
+    unknown call_tmp[976760] "expr temp" "maybe param" "maybe type" "temp"
+    (976763 'move' call_tmp[976760](356598 call : call_tmp[976750] call_tmp[976755]))
+    unknown call_tmp[976765] "expr temp" "maybe param" "maybe type" "temp"
+    (976768 'move' call_tmp[976765](356595 call + 1 call_tmp[976760]))
+    (356589 call = call_tmp[976743] call_tmp[976765])
+    (573670 'end of statement' st[356560])
+    unknown call_tmp[976772] "expr temp" "maybe param" "maybe type" "temp"
+    (976775 'move' call_tmp[976772](463085 call _structured _mt[203] this[356526]))
+    unknown call_tmp[976777] "expr temp" "maybe param" "maybe type" "temp"
+    (976780 'move' call_tmp[976777](356637 call _cond_test call_tmp[976772]))
+    if call_tmp[976777]
+    {
+      unknown call_tmp[976784] "expr temp" "maybe param" "maybe type" "temp"
+      (976787 'move' call_tmp[976784](356607 call str_style _mt[203] st[356560]))
+      unknown call_tmp[976789] "expr temp" "maybe param" "maybe type" "temp"
+      (976792 'move' call_tmp[976789](356617 call int(64)[10] 64))
+      unknown call_tmp[976794] "expr temp" "maybe param" "maybe type" "temp"
+      (976797 'move' call_tmp[976794](356610 call : lenVb_data[164168] call_tmp[976789]))
+      (356604 call = call_tmp[976784] call_tmp[976794])
+      (573672 'end of statement' st[356560])
+    }
+    {
+      unknown call_tmp[976801] "expr temp" "maybe param" "maybe type" "temp"
+      (976804 'move' call_tmp[976801](356623 call str_style _mt[203] st[356560]))
+      unknown call_tmp[976806] "expr temp" "maybe param" "maybe type" "temp"
+      (976809 'move' call_tmp[976806](356633 call int(64)[10] 64))
+      unknown call_tmp[976811] "expr temp" "maybe param" "maybe type" "temp"
+      (976814 'move' call_tmp[976811](356626 call : data_toeof[164175] call_tmp[976806]))
+      (356620 call = call_tmp[976801] call_tmp[976811])
+      (573674 'end of statement' st[356560])
+    }
+    (356647 call(356644 call (partial) _set_styleInternal _mt[203] dc[356550]) st[356560])
+    (573676 'end of statement' dc[356550] st[356560])
+    unknown call_tmp[976820] "expr temp" "maybe param" "maybe type" "temp"
+    (976823 'move' call_tmp[976820](463090 call here[135591]))
+    (356653 call(356650 call (partial) _writeOne _mt[203] dc[356550]) dynamic[164113] val[356536] call_tmp[976820])
+    (573679 'end of statement' dc[356550])
+    (637987 return _void[46])
+  }
+  function objectSerializer[357446].serializeValue[356662](arg _mt[356681]:_MT[201], ref arg this[356664]:objectSerializer[357446], arg writer[356673]:fileWriter[170987](?), const arg val[356678]:_any[141](?)) : _unknown[42] throws "compiler added where" "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[976825] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (976828 'move' call_tmp[976825](538128 'typeof' val[356678]))
+    unknown call_tmp[976830] "expr temp" "maybe param" "maybe type" "temp"
+    (976833 'move' call_tmp[976830](356875 call isNumericType call_tmp[976825]))
+    unknown call_tmp[976835] "expr temp" "maybe param" "maybe type" "temp"
+    (976838 'move' call_tmp[976835](356877 call _cond_test call_tmp[976830]))
+    if call_tmp[976835]
+    {
+      {
+        unknown tmp[356745] "expr temp" "maybe param" "maybe type" "temp"
+        (356747 'move' tmp[356745](463096 call endian _mt[203] this[356664]))
+        unknown call_tmp[976842] "expr temp" "maybe param" "maybe type" "temp"
+        (976845 'move' call_tmp[976842](356749 call == tmp[356745] native[164129]))
+        unknown call_tmp[976847] "expr temp" "maybe param" "maybe type" "temp"
+        (976850 'move' call_tmp[976847](356752 call _cond_test call_tmp[976842]))
+        if call_tmp[976847]
+        {
+          (356697 call(356694 call (partial) writeBinary _mt[203] writer[356673]) val[356678] native[164129])
+        }
+        {
+          unknown call_tmp[976854] "expr temp" "maybe param" "maybe type" "temp"
+          (976857 'move' call_tmp[976854](356755 call == tmp[356745] little[164135]))
+          unknown call_tmp[976859] "expr temp" "maybe param" "maybe type" "temp"
+          (976862 'move' call_tmp[976859](356758 call _cond_test call_tmp[976854]))
+          if call_tmp[976859]
+          {
+            (356716 call(356713 call (partial) writeBinary _mt[203] writer[356673]) val[356678] little[164135])
+          }
+          {
+            unknown call_tmp[976866] "expr temp" "maybe param" "maybe type" "temp"
+            (976869 'move' call_tmp[976866](356762 call == tmp[356745] big[164132]))
+            unknown call_tmp[976871] "expr temp" "maybe param" "maybe type" "temp"
+            (976874 'move' call_tmp[976871](356765 call _cond_test call_tmp[976866]))
+            if call_tmp[976871]
+            {
+              (356735 call(356732 call (partial) writeBinary _mt[203] writer[356673]) val[356678] big[164132])
+            }
+          }
+        }
+      }
+    }
+    {
+      unknown tmp[505788] "maybe param" "temp"
+      unknown tmp[505809] "maybe param" "temp"
+      unknown tmp[505830] "maybe param" "temp"
+      unknown call_tmp[976878] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (976881 'move' call_tmp[976878](538130 'typeof' val[356678]))
+      (505841 'move' tmp[505830](356855 call == call_tmp[976878] string[244]))
+      unknown call_tmp[976883] "expr temp" "maybe param" "maybe type" "temp"
+      (976886 'move' call_tmp[976883](505843 call _cond_invalid tmp[505830]))
+      if call_tmp[976883]
+      {
+        (505846 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[712158] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[712159] "maybe param" "temp"
+      unknown call_tmp[976888] "expr temp" "maybe param" "maybe type" "temp"
+      (976891 'move' call_tmp[976888](505831 call isTrue tmp[505830]))
+      (712164 'move' tmp[712159](712162 call _cond_test call_tmp[976888]))
+      if tmp[712159]
+      {
+        (712169 'move' tmp[712158](712166 '_paramFoldLogical' tmp[712159] 1))
+      }
+      {
+        unknown tmp[712171] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[976893] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (976896 'move' call_tmp[976893](538132 'typeof' val[356678]))
+        unknown call_tmp[976898] "expr temp" "maybe param" "maybe type" "temp"
+        (976901 'move' call_tmp[976898](356860 call isEnumType call_tmp[976893]))
+        (712173 'move' tmp[712171](505835 call isTrue call_tmp[976898]))
+        (712178 'move' tmp[712158](712175 '_paramFoldLogical' tmp[712159] tmp[712171]))
+      }
+      (505820 'move' tmp[505809] tmp[712158])
+      unknown call_tmp[976903] "expr temp" "maybe param" "maybe type" "temp"
+      (976906 'move' call_tmp[976903](505822 call _cond_invalid tmp[505809]))
+      if call_tmp[976903]
+      {
+        (505825 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[712185] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[712186] "maybe param" "temp"
+      unknown call_tmp[976908] "expr temp" "maybe param" "maybe type" "temp"
+      (976911 'move' call_tmp[976908](505810 call isTrue tmp[505809]))
+      (712191 'move' tmp[712186](712189 call _cond_test call_tmp[976908]))
+      if tmp[712186]
+      {
+        (712196 'move' tmp[712185](712193 '_paramFoldLogical' tmp[712186] 1))
+      }
+      {
+        unknown tmp[712198] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[976913] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (976916 'move' call_tmp[976913](538134 'typeof' val[356678]))
+        unknown call_tmp[976918] "expr temp" "maybe param" "maybe type" "temp"
+        (976921 'move' call_tmp[976918](356862 call == call_tmp[976913] bytes[232]))
+        (712200 'move' tmp[712198](505814 call isTrue call_tmp[976918]))
+        (712205 'move' tmp[712185](712202 '_paramFoldLogical' tmp[712186] tmp[712198]))
+      }
+      (505799 'move' tmp[505788] tmp[712185])
+      unknown call_tmp[976923] "expr temp" "maybe param" "maybe type" "temp"
+      (976926 'move' call_tmp[976923](505801 call _cond_invalid tmp[505788]))
+      if call_tmp[976923]
+      {
+        (505804 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[712212] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[712213] "maybe param" "temp"
+      unknown call_tmp[976928] "expr temp" "maybe param" "maybe type" "temp"
+      (976931 'move' call_tmp[976928](505789 call isTrue tmp[505788]))
+      (712218 'move' tmp[712213](712216 call _cond_test call_tmp[976928]))
+      if tmp[712213]
+      {
+        (712223 'move' tmp[712212](712220 '_paramFoldLogical' tmp[712213] 1))
+      }
+      {
+        unknown tmp[712225] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[976933] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (976936 'move' call_tmp[976933](538136 'typeof' val[356678]))
+        unknown call_tmp[976938] "expr temp" "maybe param" "maybe type" "temp"
+        (976941 'move' call_tmp[976938](356867 call isBoolType call_tmp[976933]))
+        (712227 'move' tmp[712225](505793 call isTrue call_tmp[976938]))
+        (712232 'move' tmp[712212](712229 '_paramFoldLogical' tmp[712213] tmp[712225]))
+      }
+      unknown call_tmp[976943] "expr temp" "maybe param" "maybe type" "temp"
+      (976946 'move' call_tmp[976943](356869 call _cond_test tmp[712212]))
+      if call_tmp[976943]
+      {
+        (356771 call(463103 call (partial) _oldWrite _mt[203] this[356664]) writer[356673] val[356678])
+      }
+      {
+        unknown call_tmp[976950] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (976953 'move' call_tmp[976950](538138 'typeof' val[356678]))
+        unknown call_tmp[976955] "expr temp" "maybe param" "maybe type" "temp"
+        (976958 'move' call_tmp[976955](356840 call == call_tmp[976950] nothing[7]))
+        unknown call_tmp[976960] "expr temp" "maybe param" "maybe type" "temp"
+        (976963 'move' call_tmp[976960](356844 call _cond_test call_tmp[976955]))
+        if call_tmp[976960]
+        {
+        }
+        {
+          unknown call_tmp[976965] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+          (976968 'move' call_tmp[976965](538140 'typeof' val[356678]))
+          unknown call_tmp[976970] "expr temp" "maybe param" "maybe type" "temp"
+          (976973 'move' call_tmp[976970](356834 call isClassType call_tmp[976965]))
+          unknown call_tmp[976975] "expr temp" "maybe param" "maybe type" "temp"
+          (976978 'move' call_tmp[976975](356836 call _cond_test call_tmp[976970]))
+          if call_tmp[976975]
+          {
+            unknown call_tmp[976980] "expr temp" "maybe param" "maybe type" "temp"
+            (976983 'move' call_tmp[976980](356815 call == val[356678] nil[32]))
+            unknown call_tmp[976985] "expr temp" "maybe param" "maybe type" "temp"
+            (976988 'move' call_tmp[976985](356819 call _cond_test call_tmp[976980]))
+            if call_tmp[976985]
+            {
+              unknown call_tmp[976992] "expr temp" "maybe param" "maybe type" "temp"
+              (976995 'move' call_tmp[976992](463110 call _structured _mt[203] this[356664]))
+              unknown call_tmp[976997] "expr temp" "maybe param" "maybe type" "temp"
+              (977000 'move' call_tmp[976997](356785 call _cond_test call_tmp[976992]))
+              if call_tmp[976997]
+              {
+                (356781 call(356778 call (partial) writeByte _mt[203] writer[356673]) 0)
+              }
+            }
+            {
+              unknown call_tmp[977006] "expr temp" "maybe param" "maybe type" "temp"
+              (977009 'move' call_tmp[977006](463115 call _structured _mt[203] this[356664]))
+              unknown call_tmp[977011] "expr temp" "maybe param" "maybe type" "temp"
+              (977014 'move' call_tmp[977011](356799 call _cond_test call_tmp[977006]))
+              if call_tmp[977011]
+              {
+                (356795 call(356792 call (partial) writeByte _mt[203] writer[356673]) 1)
+              }
+              unknown call_tmp[977018] "expr temp" "maybe param" "maybe type" "temp"
+              (977021 'move' call_tmp[977018](356804 call postfix! val[356678]))
+              (356810 call(356807 call (partial) serialize _mt[203] call_tmp[977018])(writer = writer[356673])(serializer = this[356664]))
+            }
+          }
+          {
+            (356828 call(356825 call (partial) serialize _mt[203] val[356678])(writer = writer[356673])(serializer = this[356664]))
+          }
+        }
+      }
+    }
+    (637989 return _void[46])
+  }
+  where {
+    unknown call_tmp[977027] "expr temp" "maybe param" "maybe type" "temp"
+    (977030 'move' call_tmp[977027](538104 'query' writer[356673] c"serializerType"))
+    unknown call_tmp[977032] "expr temp" "maybe param" "maybe type" "temp"
+    (977035 'move' call_tmp[977032](538107 call == objectSerializer[357446] call_tmp[977027]))
+    unknown call_tmp[977037] "expr temp" "maybe param" "maybe type" "temp"
+    (977040 'move' call_tmp[977037](538111 call & 1 call_tmp[977032]))
+    unknown call_tmp[977042] "expr temp" "maybe param" "maybe type" "temp"
+    (977045 'move' call_tmp[977042](538115 'query' writer[356673] c"locking"))
+    unknown call_tmp[977047] "expr temp" "maybe param" "maybe type" "temp"
+    (977050 'move' call_tmp[977047](538118 call == 0 call_tmp[977042]))
+    (538120 call & call_tmp[977037] call_tmp[977047])
+  }
+  function objectSerializer[357446].startClass[356884](arg _mt[356902]:_MT[201], arg this[356886]:objectSerializer[357446], arg writer[356891]:fileWriter[170987](?), arg name[356895]:string[244], arg size[356899]:int(64)[10]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[637993] "RVV" "temp"
+    unknown call_tmp[977052] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977055 'move' call_tmp[977052](1000682 'new' AggregateSerializer[357013] writer[356891]))
+    (637998 'move' ret[637993](637997 'deref' call_tmp[977052]))
+    (637995 return ret[637993])
+  }
+  function objectSerializer[357446].startRecord[356912](arg _mt[356930]:_MT[201], arg this[356914]:objectSerializer[357446], arg writer[356919]:fileWriter[170987](?), arg name[356923]:string[244], arg size[356927]:int(64)[10]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638002] "RVV" "temp"
+    unknown call_tmp[977057] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977060 'move' call_tmp[977057](1000683 'new' AggregateSerializer[357013] writer[356919]))
+    (638007 'move' ret[638002](638006 'deref' call_tmp[977057]))
+    (638004 return ret[638002])
+  }
+  function AggregateSerializer[357013].writeField[356949](arg _mt[356962]:_MT[201], arg this[356951]:AggregateSerializer[357013], arg name[356954]:string[244], const arg field[356959]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977064] "expr temp" "maybe param" "maybe type" "temp"
+    (977067 'move' call_tmp[977064](411586 call writer _mt[203] this[356951]))
+    (356969 call(356966 call (partial) write _mt[203] call_tmp[977064]) field[356959])
+    (638009 return _void[46])
+  }
+  function AggregateSerializer[357013].startClass[356973](arg _mt[356987]:_MT[201], arg this[356975]:AggregateSerializer[357013], arg writer[356977]:_any[141](?), arg name[356980]:string[244], arg size[356984]:int(64)[10]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638013] "RVV" "temp"
+    (638018 'move' ret[638013](638017 'deref' this[356975]))
+    (638015 return ret[638013])
+  }
+  function AggregateSerializer[357013].endClass[356994](arg _mt[356998]:_MT[201], arg this[356996]:AggregateSerializer[357013]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638020 return _void[46])
+  }
+  function AggregateSerializer[357013].endRecord[357003](arg _mt[357007]:_MT[201], arg this[357005]:AggregateSerializer[357013]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638022 return _void[46])
+  }
+  function objectSerializer[357446].startTuple[357015](arg _mt[357029]:_MT[201], arg this[357017]:objectSerializer[357446], arg writer[357022]:fileWriter[170987](?), arg size[357026]:int(64)[10]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638026] "RVV" "temp"
+    unknown call_tmp[977071] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977074 'move' call_tmp[977071](1000684 'new' TupleSerializer[357078] writer[357022]))
+    (638031 'move' ret[638026](638030 'deref' call_tmp[977071]))
+    (638028 return ret[638026])
+  }
+  function TupleSerializer[357078].writeElement[357048](arg _mt[357057]:_MT[201], arg this[357050]:TupleSerializer[357078], const arg element[357054]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977078] "expr temp" "maybe param" "maybe type" "temp"
+    (977081 'move' call_tmp[977078](411591 call writer _mt[203] this[357050]))
+    (357064 call(357061 call (partial) write _mt[203] call_tmp[977078]) element[357054])
+    (638033 return _void[46])
+  }
+  function TupleSerializer[357078].endTuple[357068](arg _mt[357072]:_MT[201], arg this[357070]:TupleSerializer[357078]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638035 return _void[46])
+  }
+  function objectSerializer[357446].startList[357080](arg _mt[357094]:_MT[201], arg this[357082]:objectSerializer[357446], arg writer[357087]:fileWriter[170987](?), arg size[357091]:int(64)[10]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638039] "RVV" "temp"
+    (357101 call(357098 call (partial) write _mt[203] writer[357087]) size[357091])
+    (573698 'end of statement')
+    unknown call_tmp[977087] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977090 'move' call_tmp[977087](1000685 'new' ListSerializer[357148] writer[357087]))
+    (638044 'move' ret[638039](638043 'deref' call_tmp[977087]))
+    (638041 return ret[638039])
+  }
+  function ListSerializer[357148].writeElement[357119](arg _mt[357127]:_MT[201], arg this[357121]:ListSerializer[357148], const arg element[357124]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977094] "expr temp" "maybe param" "maybe type" "temp"
+    (977097 'move' call_tmp[977094](411597 call writer _mt[203] this[357121]))
+    (357134 call(357131 call (partial) write _mt[203] call_tmp[977094]) element[357124])
+    (638046 return _void[46])
+  }
+  function ListSerializer[357148].endList[357138](arg _mt[357142]:_MT[201], arg this[357140]:ListSerializer[357148]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638048 return _void[46])
+  }
+  function objectSerializer[357446].startArray[357150](arg _mt[357164]:_MT[201], arg this[357152]:objectSerializer[357446], arg writer[357157]:fileWriter[170987](?), arg size[357161]:int(64)[10]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638052] "RVV" "temp"
+    unknown call_tmp[977103] "expr temp" "maybe param" "maybe type" "temp"
+    (977106 'move' call_tmp[977103](463170 call endian _mt[203] this[357152]))
+    unknown call_tmp[977108] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977111 'move' call_tmp[977108](1000686 'new' ArraySerializer[357354] writer[357157] call_tmp[977103]))
+    (638057 'move' ret[638052](638056 'deref' call_tmp[977108]))
+    (638054 return ret[638052])
+  }
+  function ArraySerializer[357354].startDim[357189](arg _mt[357197]:_MT[201], arg this[357191]:ArraySerializer[357354], arg size[357194]:int(64)[10]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638059 return _void[46])
+  }
+  function ArraySerializer[357354].endDim[357202](arg _mt[357206]:_MT[201], arg this[357204]:ArraySerializer[357354]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638061 return _void[46])
+  }
+  function ArraySerializer[357354].writeElement[357211](arg _mt[357219]:_MT[201], arg this[357213]:ArraySerializer[357354], const arg element[357216]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977115] "expr temp" "maybe param" "maybe type" "temp"
+    (977118 'move' call_tmp[977115](411602 call writer _mt[203] this[357213]))
+    (357226 call(357223 call (partial) write _mt[203] call_tmp[977115]) element[357216])
+    (638063 return _void[46])
+  }
+  function ArraySerializer[357354].writeBulkElements[357230](arg _mt[357245]:_MT[201], arg this[357232]:ArraySerializer[357354], arg data[357238]:c_ptr[46891](?), arg numElements[357242]:int(64)[10]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977124] "expr temp" "maybe param" "maybe type" "temp"
+    (977127 'move' call_tmp[977124](463187 call endian _mt[203] this[357232]))
+    unknown call_tmp[977129] "expr temp" "maybe param" "maybe type" "temp"
+    (977132 'move' call_tmp[977129](357330 call == call_tmp[977124] native[164129]))
+    unknown call_tmp[977134] "expr temp" "maybe param" "maybe type" "temp"
+    (977137 'move' call_tmp[977134](357337 call _cond_test call_tmp[977129]))
+    if call_tmp[977134]
+    {
+      unknown call_tmp[977139] "expr temp" "maybe param" "maybe type" "temp"
+      (977142 'move' call_tmp[977139](538183 'query' data[357238] 1))
+      unknown call_tmp[977144] "expr temp" "maybe param" "maybe type" "temp"
+      (977147 'move' call_tmp[977144](357257 call c_sizeof call_tmp[977139]))
+      unknown call_tmp[977149] "maybe param" "maybe type" "temp"
+      (977152 'move' call_tmp[977149](357254 call * call_tmp[977144] numElements[357242]))
+      const n[357253] "dead at end of block" "const" "insert auto destroy"
+      (656818 'init var' n[357253] call_tmp[977149])
+      (357261 'end of statement')
+      unknown call_tmp[977156] "expr temp" "maybe param" "maybe type" "temp"
+      (977159 'move' call_tmp[977156](411607 call writer _mt[203] this[357232]))
+      unknown call_tmp[977165] "expr temp" "maybe param" "maybe type" "temp"
+      (977168 'move' call_tmp[977165](357272 call(357269 call (partial) safeCast _mt[203] n[357253]) int(64)[10]))
+      (357266 call(357263 call (partial) writeBinary _mt[203] call_tmp[977156]) data[357238] call_tmp[977165])
+      (573703 'end of statement' n[357253])
+    }
+    {
+      {
+        unknown _indexOfInterest[357292] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[357293] "expr temp" "temp"
+        unknown call_tmp[977170] "expr temp" "maybe param" "maybe type" "temp"
+        (977173 'move' call_tmp[977170](357306 call chpl__nudgeHighBound numElements[357242]))
+        unknown call_tmp[977175] "expr temp" "maybe param" "maybe type" "temp"
+        (977178 'move' call_tmp[977175](357308 call chpl_direct_range_iter 0 call_tmp[977170]))
+        (357302 'move' _iterator[357293](357300 call _getIterator call_tmp[977175]))
+        Defer
+        {
+          {
+            (357323 call _freeIterator _iterator[357293])
+          }
+        }
+        { scopeless type
+          (357313 'move' _indexOfInterest[357292](357310 call iteratorIndex _iterator[357293]))
+        }
+        ForLoop[357294]
+        {
+          unknown i[357275] "index var" "insert auto destroy"
+          (573706 'end of statement')
+          (357318 'move' i[357275] _indexOfInterest[357292])
+          (573707 'end of statement' i[357275])
+          unknown call_tmp[977182] "expr temp" "maybe param" "maybe type" "temp"
+          (977185 'move' call_tmp[977182](411613 call writer _mt[203] this[357232]))
+          unknown call_tmp[977189] "expr temp" "maybe param" "maybe type" "temp"
+          (977192 'move' call_tmp[977189](357289 call data[357238] i[357275]))
+          (357287 call(357284 call (partial) write _mt[203] call_tmp[977182]) call_tmp[977189])
+          (573709 'end of statement' i[357275])
+          label _continueLabel[357297]
+          _indexOfInterest[357292]
+          _iterator[357293]
+        }
+        label _breakLabel[357298]
+      }
+    }
+    (638065 return _void[46])
+  }
+  where {
+    unknown call_tmp[977194] "expr temp" "maybe param" "maybe type" "temp"
+    (977197 'move' call_tmp[977194](538186 'query' data[357238] 1))
+    (357248 call isNumericType call_tmp[977194])
+  }
+  function ArraySerializer[357354].endArray[357344](arg _mt[357348]:_MT[201], arg this[357346]:ArraySerializer[357354]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638067 return _void[46])
+  }
+  function objectSerializer[357446].startMap[357356](arg _mt[357370]:_MT[201], arg this[357358]:objectSerializer[357446], arg writer[357363]:fileWriter[170987](?), arg size[357367]:int(64)[10]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638071] "RVV" "temp"
+    (357377 call(357374 call (partial) write _mt[203] writer[357363]) size[357367])
+    (573711 'end of statement')
+    unknown call_tmp[977201] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977204 'move' call_tmp[977201](1000687 'new' MapSerializer[357443] writer[357363]))
+    (638076 'move' ret[638071](638075 'deref' call_tmp[977201]))
+    (638073 return ret[638071])
+  }
+  function MapSerializer[357443].writeKey[357395](arg _mt[357403]:_MT[201], arg this[357397]:MapSerializer[357443], const arg key[357400]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977208] "expr temp" "maybe param" "maybe type" "temp"
+    (977211 'move' call_tmp[977208](411620 call writer _mt[203] this[357397]))
+    (357410 call(357407 call (partial) write _mt[203] call_tmp[977208]) key[357400])
+    (638078 return _void[46])
+  }
+  function MapSerializer[357443].writeValue[357414](arg _mt[357422]:_MT[201], arg this[357416]:MapSerializer[357443], const arg val[357419]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977217] "expr temp" "maybe param" "maybe type" "temp"
+    (977220 'move' call_tmp[977217](411625 call writer _mt[203] this[357416]))
+    (357429 call(357426 call (partial) write _mt[203] call_tmp[977217]) val[357419])
+    (638080 return _void[46])
+  }
+  function MapSerializer[357443].endMap[357433](arg _mt[357437]:_MT[201], arg this[357435]:MapSerializer[357443]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638082 return _void[46])
+  }
+  type objectSerializer[357446] const-val endian[356511]:endianness[164137] "const" native[164129] endianness[164137] const-val _structured[356520]:bool[19] "const" 1
+  function objectDeserializer[358892].init[357469](arg _mt[357494]:_MT[201], ref arg this[357471]:objectDeserializer[358892], arg endian[357484]:endianness[164137] =
+  native[164129], arg _structured[357490]:bool[19] =
+  1) : void[4] "method" "primary method" "no return value for void"
+  {
+    unknown endian[538197] "temp"
+    (538200 'init var' endian[538197] endian[357484] endianness[164137])
+    (538202 'init field' this[357471] c"endian" endian[538197])
+    (573715 'end of statement')
+    unknown _structured[538206] "temp"
+    (538208 'init var' _structured[538206] _structured[357490])
+    (538210 '.=' this[357471] c"_structured" _structured[538206])
+    (573716 'end of statement')
+    (538214 'init done')
+    (638084 return _void[46])
+  }
+  function objectDeserializer[358892]._oldRead[357518](arg _mt[357533]:_MT[201], arg this[357520]:objectDeserializer[358892], arg ch[357525]:fileReader[170893](?), ref arg val[357530]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977224] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977227 'move' call_tmp[977224](1000688 'new' defaultDeserializer[173096]))
+    unknown _def[357537] "dead at end of block" "insert auto destroy"
+    (656820 'init var' _def[357537] call_tmp[977224])
+    (357542 'end of statement')
+    unknown call_tmp[977231] "maybe param" "maybe type" "temp"
+    (977234 'move' call_tmp[977231](357549 call(357546 call (partial) withDeserializer _mt[203] ch[357525]) _def[357537]))
+    unknown dc[357544] "dead at end of block" "insert auto destroy"
+    (656822 'init var' dc[357544] call_tmp[977231])
+    (357552 'end of statement')
+    unknown call_tmp[977238] "maybe param" "maybe type" "temp"
+    (977241 'move' call_tmp[977238](357559 call(357556 call (partial) _styleInternal _mt[203] dc[357544])))
+    unknown st[357554] "dead at end of block" "insert auto destroy"
+    (656824 'init var' st[357554] call_tmp[977238])
+    (357561 'end of statement')
+    unknown orig[357563] "dead at end of block" "insert auto destroy"
+    (656826 'init var' orig[357563] st[357554])
+    (357566 'end of statement' _def[357537] dc[357544] st[357554])
+    Defer
+    {
+      {
+        (357572 call(357569 call (partial) _set_styleInternal _mt[203] dc[357544]) orig[357563])
+        (573721 'end of statement' dc[357544] orig[357563])
+      }
+    }
+    unknown call_tmp[977247] "expr temp" "maybe param" "maybe type" "temp"
+    (977250 'move' call_tmp[977247](357579 call binary _mt[203] st[357554]))
+    (357576 call = call_tmp[977247] 1)
+    (573724 'end of statement' st[357554])
+    unknown call_tmp[977254] "expr temp" "maybe param" "maybe type" "temp"
+    (977257 'move' call_tmp[977254](357586 call byteorder _mt[203] st[357554]))
+    unknown call_tmp[977261] "expr temp" "maybe param" "maybe type" "temp"
+    (977264 'move' call_tmp[977261](463210 call endian _mt[203] this[357520]))
+    unknown call_tmp[977266] "expr temp" "maybe param" "maybe type" "temp"
+    (977269 'move' call_tmp[977266](357596 call uint(64)[86] 8))
+    unknown call_tmp[977271] "expr temp" "maybe param" "maybe type" "temp"
+    (977274 'move' call_tmp[977271](357592 call : call_tmp[977261] call_tmp[977266]))
+    unknown call_tmp[977276] "expr temp" "maybe param" "maybe type" "temp"
+    (977279 'move' call_tmp[977276](357589 call + 1 call_tmp[977271]))
+    (357583 call = call_tmp[977254] call_tmp[977276])
+    (573726 'end of statement' st[357554])
+    unknown call_tmp[977283] "expr temp" "maybe param" "maybe type" "temp"
+    (977286 'move' call_tmp[977283](463215 call _structured _mt[203] this[357520]))
+    unknown call_tmp[977288] "expr temp" "maybe param" "maybe type" "temp"
+    (977291 'move' call_tmp[977288](357631 call _cond_test call_tmp[977283]))
+    if call_tmp[977288]
+    {
+      unknown call_tmp[977295] "expr temp" "maybe param" "maybe type" "temp"
+      (977298 'move' call_tmp[977295](357601 call str_style _mt[203] st[357554]))
+      unknown call_tmp[977300] "expr temp" "maybe param" "maybe type" "temp"
+      (977303 'move' call_tmp[977300](357611 call int(64)[10] 64))
+      unknown call_tmp[977305] "expr temp" "maybe param" "maybe type" "temp"
+      (977308 'move' call_tmp[977305](357604 call : lenVb_data[164168] call_tmp[977300]))
+      (357598 call = call_tmp[977295] call_tmp[977305])
+      (573728 'end of statement' st[357554])
+    }
+    {
+      unknown call_tmp[977312] "expr temp" "maybe param" "maybe type" "temp"
+      (977315 'move' call_tmp[977312](357617 call str_style _mt[203] st[357554]))
+      unknown call_tmp[977317] "expr temp" "maybe param" "maybe type" "temp"
+      (977320 'move' call_tmp[977317](357627 call int(64)[10] 64))
+      unknown call_tmp[977322] "expr temp" "maybe param" "maybe type" "temp"
+      (977325 'move' call_tmp[977322](357620 call : data_toeof[164175] call_tmp[977317]))
+      (357614 call = call_tmp[977312] call_tmp[977322])
+      (573730 'end of statement' st[357554])
+    }
+    (357641 call(357638 call (partial) _set_styleInternal _mt[203] dc[357544]) st[357554])
+    (573732 'end of statement' dc[357544] st[357554])
+    unknown call_tmp[977331] "expr temp" "maybe param" "maybe type" "temp"
+    (977334 'move' call_tmp[977331](463220 call here[135591]))
+    (357647 call(357644 call (partial) _readOne _mt[203] dc[357544]) dynamic[164113] val[357530] call_tmp[977331])
+    (573735 'end of statement' dc[357544])
+    (638086 return _void[46])
+  }
+  function objectDeserializer[358892]._checkClassNil[357656](arg _mt[357668]:_MT[201], arg this[357658]:objectDeserializer[358892], arg reader[357663]:fileReader[170893](?), arg readType[357666]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638090] "RVV" "temp"
+    const notNil[357673] "dead at end of block" "const" "insert auto destroy"
+    unknown tmp[712239] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[712240] "maybe param" "temp"
+    unknown call_tmp[977338] "expr temp" "maybe param" "maybe type" "temp"
+    (977341 'move' call_tmp[977338](463226 call _structured _mt[203] this[357658]))
+    (712245 'move' tmp[712240](712243 call _cond_test call_tmp[977338]))
+    if tmp[712240]
+    {
+      unknown tmp[712247] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (712249 'move' tmp[712247](357679 call(357676 call (partial) readByte _mt[203] reader[357663])))
+      (712254 'move' tmp[712239](712251 '_paramFoldLogical' tmp[712240] tmp[712247]))
+    }
+    {
+      (712259 'move' tmp[712239](712256 '_paramFoldLogical' tmp[712240] 1))
+    }
+    (656828 'init var' notNil[357673] tmp[712239])
+    (357685 'end of statement')
+    unknown call_tmp[977345] "expr temp" "maybe param" "maybe type" "temp"
+    (977348 'move' call_tmp[977345](357719 call == notNil[357673] 0))
+    unknown call_tmp[977350] "expr temp" "maybe param" "maybe type" "temp"
+    (977353 'move' call_tmp[977350](357723 call _cond_test call_tmp[977345]))
+    if call_tmp[977350]
+    {
+      unknown call_tmp[977355] "expr temp" "maybe param" "maybe type" "temp"
+      (977358 'move' call_tmp[977355](357697 call isNilableClassType readType[357666]))
+      unknown call_tmp[977360] "expr temp" "maybe param" "maybe type" "temp"
+      (977363 'move' call_tmp[977360](357699 call _cond_test call_tmp[977355]))
+      if call_tmp[977360]
+      {
+        (638096 'move' ret[638090](638095 'coerce' 1 bool[19]))
+        gotoReturn _end__checkClassNil[638088] _end__checkClassNil[638088]
+      }
+      {
+        unknown call_tmp[977365] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+        (977368 'move' call_tmp[977365](1000689 'new' BadFormatError[414425](?) "cannot read nil class into non-nilable class"))
+        unknown call_tmp[977370] "expr temp" "maybe param" "maybe type" "temp"
+        (977373 'move' call_tmp[977370](542481 call chpl_fix_thrown_error call_tmp[977365]))
+        (357690 'throw' call_tmp[977370])
+      }
+    }
+    {
+      unknown call_tmp[977375] "expr temp" "maybe param" "maybe type" "temp"
+      (977378 'move' call_tmp[977375](357711 call != notNil[357673] 1))
+      unknown call_tmp[977380] "expr temp" "maybe param" "maybe type" "temp"
+      (977383 'move' call_tmp[977380](357715 call _cond_test call_tmp[977375]))
+      if call_tmp[977380]
+      {
+        unknown call_tmp[977385] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+        (977388 'move' call_tmp[977385](1000690 'new' BadFormatError[414425](?) "invalid binary format found for class nilability"))
+        unknown call_tmp[977390] "expr temp" "maybe param" "maybe type" "temp"
+        (977393 'move' call_tmp[977390](542483 call chpl_fix_thrown_error call_tmp[977385]))
+        (357706 'throw' call_tmp[977390])
+      }
+    }
+    (638102 'move' ret[638090](638101 'coerce' 0 bool[19]))
+    label _end__checkClassNil[638088]
+    (638092 return ret[638090])
+  }
+  { scopeless type
+    bool[19]
+  }
+  function objectDeserializer[358892].deserializeType[357733](arg _mt[357745]:_MT[201], ref arg this[357735]:objectDeserializer[358892], arg reader[357740]:fileReader[170893](?), arg readType[357743]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638106] "RVV" "temp"
+    unknown call_tmp[977395] "expr temp" "maybe param" "maybe type" "temp"
+    (977398 'move' call_tmp[977395](357776 call isClassType readType[357743]))
+    unknown call_tmp[977400] "expr temp" "maybe param" "maybe type" "temp"
+    (977403 'move' call_tmp[977400](357778 call _cond_test call_tmp[977395]))
+    if call_tmp[977400]
+    {
+      unknown call_tmp[977407] "maybe param" "maybe type" "temp"
+      (977410 'move' call_tmp[977407](357753 call(463237 call (partial) _checkClassNil _mt[203] this[357735]) reader[357740] readType[357743]))
+      unknown isNil[357751] "dead at end of block" "insert auto destroy"
+      (656830 'init var' isNil[357751] call_tmp[977407])
+      (357757 'end of statement')
+      unknown tmp[505851] "maybe param" "temp"
+      (505862 'move' tmp[505851](357767 call isNilableClassType readType[357743]))
+      unknown call_tmp[977412] "expr temp" "maybe param" "maybe type" "temp"
+      (977415 'move' call_tmp[977412](505864 call _cond_invalid tmp[505851]))
+      if call_tmp[977412]
+      {
+        (505867 call compilerError "cannot promote short-circuiting && operator")
+      }
+      unknown tmp[712266] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[712267] "maybe param" "temp"
+      unknown call_tmp[977417] "expr temp" "maybe param" "maybe type" "temp"
+      (977420 'move' call_tmp[977417](505852 call isTrue tmp[505851]))
+      (712272 'move' tmp[712267](712270 call _cond_test call_tmp[977417]))
+      if tmp[712267]
+      {
+        unknown tmp[712274] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        (712276 'move' tmp[712274](505855 call isTrue isNil[357751]))
+        (712281 'move' tmp[712266](712278 '_paramFoldLogical' tmp[712267] tmp[712274]))
+      }
+      {
+        (712286 'move' tmp[712266](712283 '_paramFoldLogical' tmp[712267] 0))
+      }
+      unknown call_tmp[977422] "expr temp" "maybe param" "maybe type" "temp"
+      (977425 'move' call_tmp[977422](357770 call _cond_test tmp[712266]))
+      if call_tmp[977422]
+      {
+        unknown call_tmp[977427] "expr temp" "maybe param" "maybe type" "temp"
+        (977430 'move' call_tmp[977427](357759 call : nil[32] readType[357743]))
+        (638112 'move' ret[638106](638111 'coerce' call_tmp[977427] readType[357743]))
+        gotoReturn _end_deserializeType[638104] _end_deserializeType[638104]
+      }
+    }
+    unknown call_tmp[977432] "expr temp" "maybe param" "maybe type" "temp"
+    (977435 'move' call_tmp[977432](357984 call isNumericType readType[357743]))
+    unknown call_tmp[977437] "expr temp" "maybe param" "maybe type" "temp"
+    (977440 'move' call_tmp[977437](357986 call _cond_test call_tmp[977432]))
+    if call_tmp[977437]
+    {
+      unknown x[357784] "dead at end of block" "insert auto destroy"
+      (656832 'default init var' x[357784] readType[357743])
+      (357787 'end of statement')
+      unknown ret[357789] "dead at end of block" "insert auto destroy"
+      (656834 'default init var' ret[357789] bool[19])
+      (357792 'end of statement')
+      {
+        unknown tmp[357862] "expr temp" "maybe param" "maybe type" "temp"
+        (357864 'move' tmp[357862](463250 call endian _mt[203] this[357735]))
+        unknown call_tmp[977444] "expr temp" "maybe param" "maybe type" "temp"
+        (977447 'move' call_tmp[977444](357866 call == tmp[357862] native[164129]))
+        unknown call_tmp[977449] "expr temp" "maybe param" "maybe type" "temp"
+        (977452 'move' call_tmp[977449](357869 call _cond_test call_tmp[977444]))
+        if call_tmp[977449]
+        {
+          unknown call_tmp[977456] "expr temp" "maybe param" "maybe type" "temp"
+          (977459 'move' call_tmp[977456](357808 call(357805 call (partial) readBinary _mt[203] reader[357740]) x[357784] native[164129]))
+          (357801 call = ret[357789] call_tmp[977456])
+          (573743 'end of statement' ret[357789] x[357784])
+        }
+        {
+          unknown call_tmp[977461] "expr temp" "maybe param" "maybe type" "temp"
+          (977464 'move' call_tmp[977461](357872 call == tmp[357862] little[164135]))
+          unknown call_tmp[977466] "expr temp" "maybe param" "maybe type" "temp"
+          (977469 'move' call_tmp[977466](357875 call _cond_test call_tmp[977461]))
+          if call_tmp[977466]
+          {
+            unknown call_tmp[977473] "expr temp" "maybe param" "maybe type" "temp"
+            (977476 'move' call_tmp[977473](357830 call(357827 call (partial) readBinary _mt[203] reader[357740]) x[357784] little[164135]))
+            (357823 call = ret[357789] call_tmp[977473])
+            (573746 'end of statement' ret[357789] x[357784])
+          }
+          {
+            unknown call_tmp[977478] "expr temp" "maybe param" "maybe type" "temp"
+            (977481 'move' call_tmp[977478](357879 call == tmp[357862] big[164132]))
+            unknown call_tmp[977483] "expr temp" "maybe param" "maybe type" "temp"
+            (977486 'move' call_tmp[977483](357882 call _cond_test call_tmp[977478]))
+            if call_tmp[977483]
+            {
+              unknown call_tmp[977490] "expr temp" "maybe param" "maybe type" "temp"
+              (977493 'move' call_tmp[977490](357852 call(357849 call (partial) readBinary _mt[203] reader[357740]) x[357784] big[164132]))
+              (357845 call = ret[357789] call_tmp[977490])
+              (573749 'end of statement' ret[357789] x[357784])
+            }
+          }
+        }
+      }
+      unknown call_tmp[977495] "expr temp" "maybe param" "maybe type" "temp"
+      (977498 'move' call_tmp[977495](357894 call ! ret[357789]))
+      unknown call_tmp[977500] "expr temp" "maybe param" "maybe type" "temp"
+      (977503 'move' call_tmp[977500](357897 call _cond_test call_tmp[977495]))
+      if call_tmp[977500]
+      {
+        unknown call_tmp[977505] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+        (977508 'move' call_tmp[977505](1000691 'new' EofError[414412](?)))
+        unknown call_tmp[977510] "expr temp" "maybe param" "maybe type" "temp"
+        (977513 'move' call_tmp[977510](542485 call chpl_fix_thrown_error call_tmp[977505]))
+        (357886 'throw' call_tmp[977510])
+      }
+      {
+        (638118 'move' ret[638106](638117 'coerce' x[357784] readType[357743]))
+        gotoReturn _end_deserializeType[638104] _end_deserializeType[638104]
+        (573753 'end of statement' x[357784])
+      }
+    }
+    {
+      unknown tmp[505893] "maybe param" "temp"
+      unknown tmp[505914] "maybe param" "temp"
+      unknown tmp[505935] "maybe param" "temp"
+      (505946 'move' tmp[505935](357967 call isBoolType readType[357743]))
+      unknown call_tmp[977515] "expr temp" "maybe param" "maybe type" "temp"
+      (977518 'move' call_tmp[977515](505948 call _cond_invalid tmp[505935]))
+      if call_tmp[977515]
+      {
+        (505951 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[712293] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[712294] "maybe param" "temp"
+      unknown call_tmp[977520] "expr temp" "maybe param" "maybe type" "temp"
+      (977523 'move' call_tmp[977520](505936 call isTrue tmp[505935]))
+      (712299 'move' tmp[712294](712297 call _cond_test call_tmp[977520]))
+      if tmp[712294]
+      {
+        (712304 'move' tmp[712293](712301 '_paramFoldLogical' tmp[712294] 1))
+      }
+      {
+        unknown tmp[712306] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[977525] "expr temp" "maybe param" "maybe type" "temp"
+        (977528 'move' call_tmp[977525](357970 call isEnumType readType[357743]))
+        (712308 'move' tmp[712306](505940 call isTrue call_tmp[977525]))
+        (712313 'move' tmp[712293](712310 '_paramFoldLogical' tmp[712294] tmp[712306]))
+      }
+      (505925 'move' tmp[505914] tmp[712293])
+      unknown call_tmp[977530] "expr temp" "maybe param" "maybe type" "temp"
+      (977533 'move' call_tmp[977530](505927 call _cond_invalid tmp[505914]))
+      if call_tmp[977530]
+      {
+        (505930 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[712320] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[712321] "maybe param" "temp"
+      unknown call_tmp[977535] "expr temp" "maybe param" "maybe type" "temp"
+      (977538 'move' call_tmp[977535](505915 call isTrue tmp[505914]))
+      (712326 'move' tmp[712321](712324 call _cond_test call_tmp[977535]))
+      if tmp[712321]
+      {
+        (712331 'move' tmp[712320](712328 '_paramFoldLogical' tmp[712321] 1))
+      }
+      {
+        unknown tmp[712333] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[977540] "expr temp" "maybe param" "maybe type" "temp"
+        (977543 'move' call_tmp[977540](357973 call isStringType readType[357743]))
+        (712335 'move' tmp[712333](505919 call isTrue call_tmp[977540]))
+        (712340 'move' tmp[712320](712337 '_paramFoldLogical' tmp[712321] tmp[712333]))
+      }
+      (505904 'move' tmp[505893] tmp[712320])
+      unknown call_tmp[977545] "expr temp" "maybe param" "maybe type" "temp"
+      (977548 'move' call_tmp[977545](505906 call _cond_invalid tmp[505893]))
+      if call_tmp[977545]
+      {
+        (505909 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[712347] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[712348] "maybe param" "temp"
+      unknown call_tmp[977550] "expr temp" "maybe param" "maybe type" "temp"
+      (977553 'move' call_tmp[977550](505894 call isTrue tmp[505893]))
+      (712353 'move' tmp[712348](712351 call _cond_test call_tmp[977550]))
+      if tmp[712348]
+      {
+        (712358 'move' tmp[712347](712355 '_paramFoldLogical' tmp[712348] 1))
+      }
+      {
+        unknown tmp[712360] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[977555] "expr temp" "maybe param" "maybe type" "temp"
+        (977558 'move' call_tmp[977555](357976 call isBytesType readType[357743]))
+        (712362 'move' tmp[712360](505898 call isTrue call_tmp[977555]))
+        (712367 'move' tmp[712347](712364 '_paramFoldLogical' tmp[712348] tmp[712360]))
+      }
+      unknown call_tmp[977560] "expr temp" "maybe param" "maybe type" "temp"
+      (977563 'move' call_tmp[977560](357978 call _cond_test tmp[712347]))
+      if call_tmp[977560]
+      {
+        unknown x[357905] "dead at end of block" "insert auto destroy"
+        (656836 'default init var' x[357905] readType[357743])
+        (357908 'end of statement')
+        (357910 call(463264 call (partial) _oldRead _mt[203] this[357735]) reader[357740] x[357905])
+        (573758 'end of statement' x[357905])
+        (638124 'move' ret[638106](638123 'coerce' x[357905] readType[357743]))
+        gotoReturn _end_deserializeType[638104] _end_deserializeType[638104]
+        (573760 'end of statement' x[357905])
+      }
+      {
+        unknown call_tmp[977567] "expr temp" "maybe param" "maybe type" "temp"
+        (977570 'move' call_tmp[977567](357951 call == readType[357743] nothing[7]))
+        unknown call_tmp[977572] "expr temp" "maybe param" "maybe type" "temp"
+        (977575 'move' call_tmp[977572](357955 call _cond_test call_tmp[977567]))
+        if call_tmp[977572]
+        {
+        }
+        {
+          unknown tmp[505872] "maybe param" "temp"
+          (505883 'move' tmp[505872](357939 call canResolveTypeMethod readType[357743] "deserializeFrom" reader[357740] this[357735]))
+          unknown call_tmp[977577] "expr temp" "maybe param" "maybe type" "temp"
+          (977580 'move' call_tmp[977577](505885 call _cond_invalid tmp[505872]))
+          if call_tmp[977577]
+          {
+            (505888 call compilerError "cannot promote short-circuiting || operator")
+          }
+          unknown tmp[712374] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+          unknown tmp[712375] "maybe param" "temp"
+          unknown call_tmp[977582] "expr temp" "maybe param" "maybe type" "temp"
+          (977585 'move' call_tmp[977582](505873 call isTrue tmp[505872]))
+          (712380 'move' tmp[712375](712378 call _cond_test call_tmp[977582]))
+          if tmp[712375]
+          {
+            (712385 'move' tmp[712374](712382 '_paramFoldLogical' tmp[712375] 1))
+          }
+          {
+            unknown tmp[712387] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+            unknown call_tmp[977587] "expr temp" "maybe param" "maybe type" "temp"
+            (977590 'move' call_tmp[977587](357945 call isArrayType readType[357743]))
+            (712389 'move' tmp[712387](505877 call isTrue call_tmp[977587]))
+            (712394 'move' tmp[712374](712391 '_paramFoldLogical' tmp[712375] tmp[712387]))
+          }
+          unknown call_tmp[977592] "expr temp" "maybe param" "maybe type" "temp"
+          (977595 'move' call_tmp[977592](357947 call _cond_test tmp[712374]))
+          if call_tmp[977592]
+          {
+            unknown call_tmp[977599] "expr temp" "maybe param" "maybe type" "temp"
+            (977602 'move' call_tmp[977599](357922 call(357919 call (partial) deserializeFrom _mt[203] readType[357743])(reader = reader[357740])(deserializer = this[357735])))
+            (638130 'move' ret[638106](638129 'coerce' call_tmp[977599] readType[357743]))
+            gotoReturn _end_deserializeType[638104] _end_deserializeType[638104]
+          }
+          {
+            unknown call_tmp[977604] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+            (977607 'move' call_tmp[977604](1000692 'new' readType[357743](reader = reader[357740])(deserializer = this[357735])))
+            (638136 'move' ret[638106](638135 'coerce' call_tmp[977604] readType[357743]))
+            gotoReturn _end_deserializeType[638104] _end_deserializeType[638104]
+          }
+        }
+      }
+    }
+    label _end_deserializeType[638104]
+    (638108 return ret[638106])
+  }
+  { scopeless type
+    readType[357743]
+  }
+  function objectDeserializer[358892].deserializeValue[357994](arg _mt[358009]:_MT[201], ref arg this[357996]:objectDeserializer[358892], arg reader[358001]:fileReader[170893](?), ref arg val[358006]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown ret[638142] "RVV" "temp"
+    unknown call_tmp[977609] "expr temp" "maybe param" "maybe type" "temp"
+    (977612 'move' call_tmp[977609](358078 call canResolveMethod val[358006] "deserialize" reader[358001] this[357996]))
+    unknown call_tmp[977614] "expr temp" "maybe param" "maybe type" "temp"
+    (977617 'move' call_tmp[977614](358083 call _cond_test call_tmp[977609]))
+    if call_tmp[977614]
+    {
+      unknown tmp[505977] "maybe param" "temp"
+      unknown tmp[505998] "maybe param" "temp"
+      unknown call_tmp[977619] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (977622 'move' call_tmp[977619](538243 'typeof' val[358006]))
+      (506009 'move' tmp[505998](358044 call isClassType call_tmp[977619]))
+      unknown call_tmp[977624] "expr temp" "maybe param" "maybe type" "temp"
+      (977627 'move' call_tmp[977624](506011 call _cond_invalid tmp[505998]))
+      if call_tmp[977624]
+      {
+        (506014 call compilerError "cannot promote short-circuiting && operator")
+      }
+      unknown tmp[712401] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[712402] "maybe param" "temp"
+      unknown call_tmp[977629] "expr temp" "maybe param" "maybe type" "temp"
+      (977632 'move' call_tmp[977629](505999 call isTrue tmp[505998]))
+      (712407 'move' tmp[712402](712405 call _cond_test call_tmp[977629]))
+      if tmp[712402]
+      {
+        unknown tmp[712409] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[977634] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (977637 'move' call_tmp[977634](538245 'typeof' val[358006]))
+        unknown call_tmp[977639] "expr temp" "maybe param" "maybe type" "temp"
+        (977642 'move' call_tmp[977639](358049 call isOwnedClassType call_tmp[977634]))
+        unknown call_tmp[977644] "expr temp" "maybe param" "maybe type" "temp"
+        (977647 'move' call_tmp[977644](358046 call ! call_tmp[977639]))
+        (712411 'move' tmp[712409](506002 call isTrue call_tmp[977644]))
+        (712416 'move' tmp[712401](712413 '_paramFoldLogical' tmp[712402] tmp[712409]))
+      }
+      {
+        (712421 'move' tmp[712401](712418 '_paramFoldLogical' tmp[712402] 0))
+      }
+      (505988 'move' tmp[505977] tmp[712401])
+      unknown call_tmp[977649] "expr temp" "maybe param" "maybe type" "temp"
+      (977652 'move' call_tmp[977649](505990 call _cond_invalid tmp[505977]))
+      if call_tmp[977649]
+      {
+        (505993 call compilerError "cannot promote short-circuiting && operator")
+      }
+      unknown tmp[712428] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[712429] "maybe param" "temp"
+      unknown call_tmp[977654] "expr temp" "maybe param" "maybe type" "temp"
+      (977657 'move' call_tmp[977654](505978 call isTrue tmp[505977]))
+      (712434 'move' tmp[712429](712432 call _cond_test call_tmp[977654]))
+      if tmp[712429]
+      {
+        unknown tmp[712436] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[977659] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (977662 'move' call_tmp[977659](538247 'typeof' val[358006]))
+        unknown call_tmp[977664] "expr temp" "maybe param" "maybe type" "temp"
+        (977667 'move' call_tmp[977664](358054 call isSharedClassType call_tmp[977659]))
+        unknown call_tmp[977669] "expr temp" "maybe param" "maybe type" "temp"
+        (977672 'move' call_tmp[977669](358051 call ! call_tmp[977664]))
+        (712438 'move' tmp[712436](505981 call isTrue call_tmp[977669]))
+        (712443 'move' tmp[712428](712440 '_paramFoldLogical' tmp[712429] tmp[712436]))
+      }
+      {
+        (712448 'move' tmp[712428](712445 '_paramFoldLogical' tmp[712429] 0))
+      }
+      unknown call_tmp[977674] "expr temp" "maybe param" "maybe type" "temp"
+      (977677 'move' call_tmp[977674](358056 call _cond_test tmp[712428]))
+      if call_tmp[977674]
+      {
+        unknown call_tmp[977681] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (977684 'move' call_tmp[977681](538249 'typeof' val[358006]))
+        unknown call_tmp[977686] "maybe param" "maybe type" "temp"
+        (977689 'move' call_tmp[977686](358018 call(463288 call (partial) _checkClassNil _mt[203] this[357996]) reader[358001] call_tmp[977681]))
+        unknown isNil[358016] "dead at end of block" "insert auto destroy"
+        (656838 'init var' isNil[358016] call_tmp[977686])
+        (358022 'end of statement')
+        unknown tmp[505956] "maybe param" "temp"
+        unknown call_tmp[977691] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (977694 'move' call_tmp[977691](538251 'typeof' val[358006]))
+        (505967 'move' tmp[505956](358031 call isNilableClassType call_tmp[977691]))
+        unknown call_tmp[977696] "expr temp" "maybe param" "maybe type" "temp"
+        (977699 'move' call_tmp[977696](505969 call _cond_invalid tmp[505956]))
+        if call_tmp[977696]
+        {
+          (505972 call compilerError "cannot promote short-circuiting && operator")
+        }
+        unknown tmp[712455] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+        unknown tmp[712456] "maybe param" "temp"
+        unknown call_tmp[977701] "expr temp" "maybe param" "maybe type" "temp"
+        (977704 'move' call_tmp[977701](505957 call isTrue tmp[505956]))
+        (712461 'move' tmp[712456](712459 call _cond_test call_tmp[977701]))
+        if tmp[712456]
+        {
+          unknown tmp[712463] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+          (712465 'move' tmp[712463](505960 call isTrue isNil[358016]))
+          (712470 'move' tmp[712455](712467 '_paramFoldLogical' tmp[712456] tmp[712463]))
+        }
+        {
+          (712475 'move' tmp[712455](712472 '_paramFoldLogical' tmp[712456] 0))
+        }
+        unknown call_tmp[977706] "expr temp" "maybe param" "maybe type" "temp"
+        (977709 'move' call_tmp[977706](358034 call _cond_test tmp[712455]))
+        if call_tmp[977706]
+        {
+          (358023 call = val[358006] nil[32])
+        }
+      }
+      (358064 call(358061 call (partial) deserialize _mt[203] val[358006])(reader = reader[358001])(deserializer = this[357996]))
+    }
+    {
+      unknown call_tmp[977715] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (977718 'move' call_tmp[977715](538253 'typeof' val[358006]))
+      unknown call_tmp[977720] "expr temp" "maybe param" "maybe type" "temp"
+      (977723 'move' call_tmp[977720](358074 call(463303 call (partial) deserializeType _mt[203] this[357996]) reader[358001] call_tmp[977715]))
+      (358070 call = val[358006] call_tmp[977720])
+    }
+    (638144 return ret[638142])
+  }
+  { scopeless type
+    void[4]
+  }
+  function objectDeserializer[358892].startClass[358090](arg _mt[358104]:_MT[201], arg this[358092]:objectDeserializer[358892], arg reader[358097]:fileReader[170893](?), arg name[358101]:string[244]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638148] "RVV" "temp"
+    unknown call_tmp[977725] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977728 'move' call_tmp[977725](1000693 'new' AggregateDeserializer[358228] reader[358097]))
+    (638153 'move' ret[638148](638152 'deref' call_tmp[977725]))
+    (638150 return ret[638148])
+  }
+  function objectDeserializer[358892].startRecord[358114](arg _mt[358128]:_MT[201], arg this[358116]:objectDeserializer[358892], arg reader[358121]:fileReader[170893](?), arg name[358125]:string[244]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638157] "RVV" "temp"
+    unknown call_tmp[977730] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977733 'move' call_tmp[977730](1000694 'new' AggregateDeserializer[358228] reader[358121]))
+    (638162 'move' ret[638157](638161 'deref' call_tmp[977730]))
+    (638159 return ret[638157])
+  }
+  function AggregateDeserializer[358228].readField[358147](arg _mt[358157]:_MT[201], arg this[358149]:AggregateDeserializer[358228], arg name[358152]:string[244], arg fieldType[358155]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638166] "RVV" "temp"
+    unknown call_tmp[977737] "expr temp" "maybe param" "maybe type" "temp"
+    (977740 'move' call_tmp[977737](411670 call reader _mt[203] this[358149]))
+    unknown call_tmp[977744] "expr temp" "maybe param" "maybe type" "temp"
+    (977747 'move' call_tmp[977744](358166 call(358163 call (partial) read _mt[203] call_tmp[977737]) fieldType[358155]))
+    (638172 'move' ret[638166](638171 'coerce' call_tmp[977744] fieldType[358155]))
+    (638168 return ret[638166])
+  }
+  { scopeless type
+    fieldType[358155]
+  }
+  function AggregateDeserializer[358228].readField[358171](arg _mt[358181]:_MT[201], arg this[358173]:AggregateDeserializer[358228], arg name[358176]:string[244], ref arg field[358179]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977751] "expr temp" "maybe param" "maybe type" "temp"
+    (977754 'move' call_tmp[977751](411675 call reader _mt[203] this[358173]))
+    (358188 call(358185 call (partial) read _mt[203] call_tmp[977751]) field[358179])
+    (638174 return _void[46])
+  }
+  function AggregateDeserializer[358228].startClass[358192](arg _mt[358202]:_MT[201], arg this[358194]:AggregateDeserializer[358228], arg reader[358196]:_any[141](?), arg name[358199]:string[244]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638178] "RVV" "temp"
+    (638183 'move' ret[638178](638182 'deref' this[358194]))
+    (638180 return ret[638178])
+  }
+  function AggregateDeserializer[358228].endClass[358209](arg _mt[358213]:_MT[201], arg this[358211]:AggregateDeserializer[358228]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638185 return _void[46])
+  }
+  function AggregateDeserializer[358228].endRecord[358218](arg _mt[358222]:_MT[201], arg this[358220]:AggregateDeserializer[358228]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638187 return _void[46])
+  }
+  function objectDeserializer[358892].startTuple[358230](arg _mt[358240]:_MT[201], arg this[358232]:objectDeserializer[358892], arg reader[358237]:fileReader[170893](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638191] "RVV" "temp"
+    unknown call_tmp[977758] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977761 'move' call_tmp[977758](1000695 'new' TupleDeserializer[358306] reader[358237]))
+    (638196 'move' ret[638191](638195 'deref' call_tmp[977758]))
+    (638193 return ret[638191])
+  }
+  function TupleDeserializer[358306].readElement[358259](arg _mt[358265]:_MT[201], arg this[358261]:TupleDeserializer[358306], arg eltType[358263]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638200] "RVV" "temp"
+    unknown call_tmp[977765] "expr temp" "maybe param" "maybe type" "temp"
+    (977768 'move' call_tmp[977765](411680 call reader _mt[203] this[358261]))
+    unknown call_tmp[977772] "expr temp" "maybe param" "maybe type" "temp"
+    (977775 'move' call_tmp[977772](358274 call(358271 call (partial) read _mt[203] call_tmp[977765]) eltType[358263]))
+    (638206 'move' ret[638200](638205 'coerce' call_tmp[977772] eltType[358263]))
+    (638202 return ret[638200])
+  }
+  { scopeless type
+    eltType[358263]
+  }
+  function TupleDeserializer[358306].readElement[358279](arg _mt[358285]:_MT[201], arg this[358281]:TupleDeserializer[358306], ref arg element[358283]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977779] "expr temp" "maybe param" "maybe type" "temp"
+    (977782 'move' call_tmp[977779](411685 call reader _mt[203] this[358281]))
+    (358292 call(358289 call (partial) read _mt[203] call_tmp[977779]) element[358283])
+    (638208 return _void[46])
+  }
+  function TupleDeserializer[358306].endTuple[358296](arg _mt[358300]:_MT[201], arg this[358298]:TupleDeserializer[358306]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638210 return _void[46])
+  }
+  function objectDeserializer[358892].startList[358308](arg _mt[358318]:_MT[201], arg this[358310]:objectDeserializer[358892], arg reader[358315]:fileReader[170893](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638214] "RVV" "temp"
+    unknown call_tmp[977788] "expr temp" "maybe param" "maybe type" "temp"
+    (977791 'move' call_tmp[977788](358330 call(358327 call (partial) read _mt[203] reader[358315]) uint(64)[86]))
+    unknown call_tmp[977793] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977796 'move' call_tmp[977793](1000696 'new' ListDeserializer[358464] reader[358315] call_tmp[977788]))
+    (638219 'move' ret[638214](638218 'deref' call_tmp[977793]))
+    (638216 return ret[638214])
+  }
+  function ListDeserializer[358464].readElement[358348](arg _mt[358354]:_MT[201], ref arg this[358350]:ListDeserializer[358464], arg eltType[358352]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638223] "RVV" "temp"
+    unknown call_tmp[977800] "expr temp" "maybe param" "maybe type" "temp"
+    (977803 'move' call_tmp[977800](463348 call _numElements _mt[203] this[358350]))
+    unknown call_tmp[977805] "expr temp" "maybe param" "maybe type" "temp"
+    (977808 'move' call_tmp[977805](358364 call <= call_tmp[977800] 0))
+    unknown call_tmp[977810] "expr temp" "maybe param" "maybe type" "temp"
+    (977813 'move' call_tmp[977810](358368 call _cond_test call_tmp[977805]))
+    if call_tmp[977810]
+    {
+      unknown call_tmp[977815] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (977818 'move' call_tmp[977815](1000697 'new' BadFormatError[414425](?) "no more list elements remain"))
+      unknown call_tmp[977820] "expr temp" "maybe param" "maybe type" "temp"
+      (977823 'move' call_tmp[977820](542487 call chpl_fix_thrown_error call_tmp[977815]))
+      (358358 'throw' call_tmp[977820])
+    }
+    unknown call_tmp[977827] "expr temp" "maybe param" "maybe type" "temp"
+    (977830 'move' call_tmp[977827](463353 call _numElements _mt[203] this[358350]))
+    (358373 call -= call_tmp[977827] 1)
+    (573781 'end of statement')
+    unknown call_tmp[977834] "expr temp" "maybe param" "maybe type" "temp"
+    (977837 'move' call_tmp[977834](411691 call reader _mt[203] this[358350]))
+    unknown call_tmp[977841] "expr temp" "maybe param" "maybe type" "temp"
+    (977844 'move' call_tmp[977841](358382 call(358379 call (partial) read _mt[203] call_tmp[977834]) eltType[358352]))
+    (638229 'move' ret[638223](638228 'coerce' call_tmp[977841] eltType[358352]))
+    (638225 return ret[638223])
+  }
+  { scopeless type
+    eltType[358352]
+  }
+  function ListDeserializer[358464].readElement[358387](arg _mt[358393]:_MT[201], ref arg this[358389]:ListDeserializer[358464], ref arg element[358391]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977848] "expr temp" "maybe param" "maybe type" "temp"
+    (977851 'move' call_tmp[977848](463360 call _numElements _mt[203] this[358389]))
+    unknown call_tmp[977853] "expr temp" "maybe param" "maybe type" "temp"
+    (977856 'move' call_tmp[977853](358402 call <= call_tmp[977848] 0))
+    unknown call_tmp[977858] "expr temp" "maybe param" "maybe type" "temp"
+    (977861 'move' call_tmp[977858](358406 call _cond_test call_tmp[977853]))
+    if call_tmp[977858]
+    {
+      unknown call_tmp[977863] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (977866 'move' call_tmp[977863](1000698 'new' BadFormatError[414425](?) "no more list elements remain"))
+      unknown call_tmp[977868] "expr temp" "maybe param" "maybe type" "temp"
+      (977871 'move' call_tmp[977868](542489 call chpl_fix_thrown_error call_tmp[977863]))
+      (358396 'throw' call_tmp[977868])
+    }
+    unknown call_tmp[977875] "expr temp" "maybe param" "maybe type" "temp"
+    (977878 'move' call_tmp[977875](463365 call _numElements _mt[203] this[358389]))
+    (358411 call -= call_tmp[977875] 1)
+    (573784 'end of statement')
+    unknown call_tmp[977882] "expr temp" "maybe param" "maybe type" "temp"
+    (977885 'move' call_tmp[977882](411696 call reader _mt[203] this[358389]))
+    (358419 call(358416 call (partial) read _mt[203] call_tmp[977882]) element[358391])
+    (638231 return _void[46])
+  }
+  function ListDeserializer[358464].endList[358423](arg _mt[358427]:_MT[201], arg this[358425]:ListDeserializer[358464]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977891] "expr temp" "maybe param" "maybe type" "temp"
+    (977894 'move' call_tmp[977891](463372 call _numElements _mt[203] this[358425]))
+    unknown call_tmp[977896] "expr temp" "maybe param" "maybe type" "temp"
+    (977899 'move' call_tmp[977896](358436 call != call_tmp[977891] 0))
+    unknown call_tmp[977901] "expr temp" "maybe param" "maybe type" "temp"
+    (977904 'move' call_tmp[977901](358440 call _cond_test call_tmp[977896]))
+    if call_tmp[977901]
+    {
+      unknown call_tmp[977906] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (977909 'move' call_tmp[977906](1000699 'new' BadFormatError[414425](?) "read too few elements for list"))
+      unknown call_tmp[977911] "expr temp" "maybe param" "maybe type" "temp"
+      (977914 'move' call_tmp[977911](542491 call chpl_fix_thrown_error call_tmp[977906]))
+      (358430 'throw' call_tmp[977911])
+    }
+    (638233 return _void[46])
+  }
+  function ListDeserializer[358464].hasMore[358447](arg _mt[358451]:_MT[201], arg this[358449]:ListDeserializer[358464]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638237] "RVV" "temp"
+    unknown call_tmp[977918] "expr temp" "maybe param" "maybe type" "temp"
+    (977921 'move' call_tmp[977918](463378 call _numElements _mt[203] this[358449]))
+    unknown call_tmp[977923] "expr temp" "maybe param" "maybe type" "temp"
+    (977926 'move' call_tmp[977923](358456 call > call_tmp[977918] 0))
+    (638243 'move' ret[638237](638242 'coerce' call_tmp[977923] bool[19]))
+    (638239 return ret[638237])
+  }
+  { scopeless type
+    bool[19]
+  }
+  function objectDeserializer[358892].startArray[358466](arg _mt[358476]:_MT[201], arg this[358468]:objectDeserializer[358892], arg reader[358473]:fileReader[170893](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638247] "RVV" "temp"
+    unknown call_tmp[977930] "expr temp" "maybe param" "maybe type" "temp"
+    (977933 'move' call_tmp[977930](463388 call endian _mt[203] this[358468]))
+    unknown call_tmp[977935] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (977938 'move' call_tmp[977935](1000700 'new' ArrayDeserializer[358698] reader[358473] call_tmp[977930]))
+    (638252 'move' ret[638247](638251 'deref' call_tmp[977935]))
+    (638249 return ret[638247])
+  }
+  function ArrayDeserializer[358698].startDim[358501](arg _mt[358505]:_MT[201], arg this[358503]:ArrayDeserializer[358698]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638254 return _void[46])
+  }
+  function ArrayDeserializer[358698].endDim[358510](arg _mt[358514]:_MT[201], arg this[358512]:ArrayDeserializer[358698]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638256 return _void[46])
+  }
+  function ArrayDeserializer[358698].readElement[358519](arg _mt[358525]:_MT[201], arg this[358521]:ArrayDeserializer[358698], arg eltType[358523]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638260] "RVV" "temp"
+    unknown call_tmp[977942] "expr temp" "maybe param" "maybe type" "temp"
+    (977945 'move' call_tmp[977942](411701 call reader _mt[203] this[358521]))
+    unknown call_tmp[977949] "expr temp" "maybe param" "maybe type" "temp"
+    (977952 'move' call_tmp[977949](358534 call(358531 call (partial) read _mt[203] call_tmp[977942]) eltType[358523]))
+    (638266 'move' ret[638260](638265 'coerce' call_tmp[977949] eltType[358523]))
+    (638262 return ret[638260])
+  }
+  { scopeless type
+    eltType[358523]
+  }
+  function ArrayDeserializer[358698].readElement[358539](arg _mt[358545]:_MT[201], arg this[358541]:ArrayDeserializer[358698], ref arg element[358543]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977956] "expr temp" "maybe param" "maybe type" "temp"
+    (977959 'move' call_tmp[977956](411706 call reader _mt[203] this[358541]))
+    (358552 call(358549 call (partial) read _mt[203] call_tmp[977956]) element[358543])
+    (638268 return _void[46])
+  }
+  function ArrayDeserializer[358698].readBulkElements[358556](arg _mt[358571]:_MT[201], arg this[358558]:ArrayDeserializer[358698], arg data[358564]:c_ptr[46891](?), arg numElements[358568]:int(64)[10]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[977965] "expr temp" "maybe param" "maybe type" "temp"
+    (977968 'move' call_tmp[977965](463410 call endian _mt[203] this[358558]))
+    unknown call_tmp[977970] "expr temp" "maybe param" "maybe type" "temp"
+    (977973 'move' call_tmp[977970](358674 call == call_tmp[977965] native[164129]))
+    unknown call_tmp[977975] "expr temp" "maybe param" "maybe type" "temp"
+    (977978 'move' call_tmp[977975](358681 call _cond_test call_tmp[977970]))
+    if call_tmp[977975]
+    {
+      unknown call_tmp[977980] "expr temp" "maybe param" "maybe type" "temp"
+      (977983 'move' call_tmp[977980](538296 'query' data[358564] 1))
+      unknown call_tmp[977985] "expr temp" "maybe param" "maybe type" "temp"
+      (977988 'move' call_tmp[977985](358583 call c_sizeof call_tmp[977980]))
+      unknown call_tmp[977990] "maybe param" "maybe type" "temp"
+      (977993 'move' call_tmp[977990](358580 call * call_tmp[977985] numElements[358568]))
+      const n[358579] "dead at end of block" "const" "insert auto destroy"
+      (656840 'init var' n[358579] call_tmp[977990])
+      (358587 'end of statement')
+      unknown call_tmp[977997] "expr temp" "maybe param" "maybe type" "temp"
+      (978000 'move' call_tmp[977997](411711 call reader _mt[203] this[358558]))
+      unknown call_tmp[978006] "expr temp" "maybe param" "maybe type" "temp"
+      (978009 'move' call_tmp[978006](358600 call(358597 call (partial) safeCast _mt[203] n[358579]) int(64)[10]))
+      unknown call_tmp[978011] "maybe param" "maybe type" "temp"
+      (978014 'move' call_tmp[978011](358594 call(358591 call (partial) readBinary _mt[203] call_tmp[977997]) data[358564] call_tmp[978006]))
+      const got[358589] "dead at end of block" "const" "insert auto destroy"
+      (656842 'init var' got[358589] call_tmp[978011])
+      (358603 'end of statement' n[358579])
+      unknown call_tmp[978016] "expr temp" "maybe param" "maybe type" "temp"
+      (978019 'move' call_tmp[978016](358609 call < got[358589] n[358579]))
+      unknown call_tmp[978021] "expr temp" "maybe param" "maybe type" "temp"
+      (978024 'move' call_tmp[978021](358613 call _cond_test call_tmp[978016]))
+      if call_tmp[978021]
+      {
+        unknown call_tmp[978026] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+        (978029 'move' call_tmp[978026](1000701 'new' EofError[414412](?)))
+        unknown call_tmp[978031] "expr temp" "maybe param" "maybe type" "temp"
+        (978034 'move' call_tmp[978031](542493 call chpl_fix_thrown_error call_tmp[978026]))
+        (358604 'throw' call_tmp[978031])
+      }
+    }
+    {
+      {
+        unknown _indexOfInterest[358636] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[358637] "expr temp" "temp"
+        unknown call_tmp[978036] "expr temp" "maybe param" "maybe type" "temp"
+        (978039 'move' call_tmp[978036](358650 call chpl__nudgeHighBound numElements[358568]))
+        unknown call_tmp[978041] "expr temp" "maybe param" "maybe type" "temp"
+        (978044 'move' call_tmp[978041](358652 call chpl_direct_range_iter 0 call_tmp[978036]))
+        (358646 'move' _iterator[358637](358644 call _getIterator call_tmp[978041]))
+        Defer
+        {
+          {
+            (358667 call _freeIterator _iterator[358637])
+          }
+        }
+        { scopeless type
+          (358657 'move' _indexOfInterest[358636](358654 call iteratorIndex _iterator[358637]))
+        }
+        ForLoop[358638]
+        {
+          unknown i[358619] "index var" "insert auto destroy"
+          (573794 'end of statement')
+          (358662 'move' i[358619] _indexOfInterest[358636])
+          (573795 'end of statement' i[358619])
+          unknown call_tmp[978048] "expr temp" "maybe param" "maybe type" "temp"
+          (978051 'move' call_tmp[978048](411717 call reader _mt[203] this[358558]))
+          unknown call_tmp[978055] "expr temp" "maybe param" "maybe type" "temp"
+          (978058 'move' call_tmp[978055](358633 call data[358564] i[358619]))
+          (358631 call(358628 call (partial) read _mt[203] call_tmp[978048]) call_tmp[978055])
+          (573797 'end of statement' i[358619])
+          label _continueLabel[358641]
+          _indexOfInterest[358636]
+          _iterator[358637]
+        }
+        label _breakLabel[358642]
+      }
+    }
+    (638270 return _void[46])
+  }
+  where {
+    unknown call_tmp[978060] "expr temp" "maybe param" "maybe type" "temp"
+    (978063 'move' call_tmp[978060](538299 'query' data[358564] 1))
+    (358574 call isNumericType call_tmp[978060])
+  }
+  function ArrayDeserializer[358698].endArray[358688](arg _mt[358692]:_MT[201], arg this[358690]:ArrayDeserializer[358698]) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (638272 return _void[46])
+  }
+  function objectDeserializer[358892].startMap[358700](arg _mt[358710]:_MT[201], arg this[358702]:objectDeserializer[358892], arg reader[358707]:fileReader[170893](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638276] "RVV" "temp"
+    unknown call_tmp[978067] "expr temp" "maybe param" "maybe type" "temp"
+    (978070 'move' call_tmp[978067](358722 call(358719 call (partial) read _mt[203] reader[358707]) uint(64)[86]))
+    unknown call_tmp[978072] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (978075 'move' call_tmp[978072](1000702 'new' MapDeserializer[358889](?) reader[358707] call_tmp[978067]))
+    (638281 'move' ret[638276](638280 'deref' call_tmp[978072]))
+    (638278 return ret[638276])
+  }
+  function MapDeserializer[358889](?).readKey[358736](arg _mt[358742]:_MT[201], ref arg this[358738]:MapDeserializer[358889](?), arg keyType[358740]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638285] "RVV" "temp"
+    unknown call_tmp[978079] "expr temp" "maybe param" "maybe type" "temp"
+    (978082 'move' call_tmp[978079](463422 call _numElements _mt[203] this[358738]))
+    unknown call_tmp[978084] "expr temp" "maybe param" "maybe type" "temp"
+    (978087 'move' call_tmp[978084](358752 call <= call_tmp[978079] 0))
+    unknown call_tmp[978089] "expr temp" "maybe param" "maybe type" "temp"
+    (978092 'move' call_tmp[978089](358756 call _cond_test call_tmp[978084]))
+    if call_tmp[978089]
+    {
+      unknown call_tmp[978094] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (978097 'move' call_tmp[978094](1000703 'new' BadFormatError[414425](?) "no more map elements remain!"))
+      unknown call_tmp[978099] "expr temp" "maybe param" "maybe type" "temp"
+      (978102 'move' call_tmp[978099](542495 call chpl_fix_thrown_error call_tmp[978094]))
+      (358746 'throw' call_tmp[978099])
+    }
+    unknown call_tmp[978106] "expr temp" "maybe param" "maybe type" "temp"
+    (978109 'move' call_tmp[978106](463427 call _numElements _mt[203] this[358738]))
+    (358761 call -= call_tmp[978106] 1)
+    (573801 'end of statement')
+    unknown call_tmp[978113] "expr temp" "maybe param" "maybe type" "temp"
+    (978116 'move' call_tmp[978113](411724 call reader _mt[203] this[358738]))
+    unknown call_tmp[978120] "expr temp" "maybe param" "maybe type" "temp"
+    (978123 'move' call_tmp[978120](358770 call(358767 call (partial) read _mt[203] call_tmp[978113]) keyType[358740]))
+    (638291 'move' ret[638285](638290 'coerce' call_tmp[978120] keyType[358740]))
+    (638287 return ret[638285])
+  }
+  { scopeless type
+    keyType[358740]
+  }
+  function MapDeserializer[358889](?).readKey[358775](arg _mt[358781]:_MT[201], ref arg this[358777]:MapDeserializer[358889](?), ref arg key[358779]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[978127] "expr temp" "maybe param" "maybe type" "temp"
+    (978130 'move' call_tmp[978127](463434 call _numElements _mt[203] this[358777]))
+    unknown call_tmp[978132] "expr temp" "maybe param" "maybe type" "temp"
+    (978135 'move' call_tmp[978132](358790 call <= call_tmp[978127] 0))
+    unknown call_tmp[978137] "expr temp" "maybe param" "maybe type" "temp"
+    (978140 'move' call_tmp[978137](358794 call _cond_test call_tmp[978132]))
+    if call_tmp[978137]
+    {
+      unknown call_tmp[978142] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (978145 'move' call_tmp[978142](1000704 'new' BadFormatError[414425](?) "no more map elements remain!"))
+      unknown call_tmp[978147] "expr temp" "maybe param" "maybe type" "temp"
+      (978150 'move' call_tmp[978147](542497 call chpl_fix_thrown_error call_tmp[978142]))
+      (358784 'throw' call_tmp[978147])
+    }
+    unknown call_tmp[978154] "expr temp" "maybe param" "maybe type" "temp"
+    (978157 'move' call_tmp[978154](463439 call _numElements _mt[203] this[358777]))
+    (358799 call -= call_tmp[978154] 1)
+    (573804 'end of statement')
+    unknown call_tmp[978161] "expr temp" "maybe param" "maybe type" "temp"
+    (978164 'move' call_tmp[978161](411729 call reader _mt[203] this[358777]))
+    (358807 call(358804 call (partial) read _mt[203] call_tmp[978161]) key[358779])
+    (638293 return _void[46])
+  }
+  function MapDeserializer[358889](?).readValue[358811](arg _mt[358817]:_MT[201], arg this[358813]:MapDeserializer[358889](?), arg valType[358815]:_any[141](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638297] "RVV" "temp"
+    unknown call_tmp[978170] "expr temp" "maybe param" "maybe type" "temp"
+    (978173 'move' call_tmp[978170](411734 call reader _mt[203] this[358813]))
+    unknown call_tmp[978177] "expr temp" "maybe param" "maybe type" "temp"
+    (978180 'move' call_tmp[978177](358826 call(358823 call (partial) read _mt[203] call_tmp[978170]) valType[358815]))
+    (638303 'move' ret[638297](638302 'coerce' call_tmp[978177] valType[358815]))
+    (638299 return ret[638297])
+  }
+  { scopeless type
+    valType[358815]
+  }
+  function MapDeserializer[358889](?).readValue[358831](arg _mt[358837]:_MT[201], arg this[358833]:MapDeserializer[358889](?), ref arg value[358835]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[978184] "expr temp" "maybe param" "maybe type" "temp"
+    (978187 'move' call_tmp[978184](411739 call reader _mt[203] this[358833]))
+    (358844 call(358841 call (partial) read _mt[203] call_tmp[978184]) value[358835])
+    (638305 return _void[46])
+  }
+  function MapDeserializer[358889](?).endMap[358848](arg _mt[358852]:_MT[201], arg this[358850]:MapDeserializer[358889](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[978193] "expr temp" "maybe param" "maybe type" "temp"
+    (978196 'move' call_tmp[978193](463449 call _numElements _mt[203] this[358850]))
+    unknown call_tmp[978198] "expr temp" "maybe param" "maybe type" "temp"
+    (978201 'move' call_tmp[978198](358861 call != call_tmp[978193] 0))
+    unknown call_tmp[978203] "expr temp" "maybe param" "maybe type" "temp"
+    (978206 'move' call_tmp[978203](358865 call _cond_test call_tmp[978198]))
+    if call_tmp[978203]
+    {
+      unknown call_tmp[978208] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (978211 'move' call_tmp[978208](1000705 'new' BadFormatError[414425](?) "failed to read all expected elements in map"))
+      unknown call_tmp[978213] "expr temp" "maybe param" "maybe type" "temp"
+      (978216 'move' call_tmp[978213](542499 call chpl_fix_thrown_error call_tmp[978208]))
+      (358855 'throw' call_tmp[978213])
+    }
+    (638307 return _void[46])
+  }
+  function MapDeserializer[358889](?).hasMore[358872](arg _mt[358876]:_MT[201], arg this[358874]:MapDeserializer[358889](?)) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[638311] "RVV" "temp"
+    unknown call_tmp[978220] "expr temp" "maybe param" "maybe type" "temp"
+    (978223 'move' call_tmp[978220](463455 call _numElements _mt[203] this[358874]))
+    unknown call_tmp[978225] "expr temp" "maybe param" "maybe type" "temp"
+    (978228 'move' call_tmp[978225](358881 call > call_tmp[978220] 0))
+    (638317 'move' ret[638311](638316 'coerce' call_tmp[978225] bool[19]))
+    (638313 return ret[638311])
+  }
+  { scopeless type
+    bool[19]
+  }
+  type objectDeserializer[358892] const-val endian[357450]:endianness[164137] "const" native[164129] endianness[164137] val _structured[357465]:bool[19] 1
+  type AggregateSerializer[357013] unknown writer[356942](356944 call fileWriter[170987](?) 0 objectSerializer[357446])
+  type TupleSerializer[357078] unknown writer[357041](357043 call fileWriter[170987](?) 0 objectSerializer[357446])
+  type ListSerializer[357148] unknown writer[357112](357114 call fileWriter[170987](?) 0 objectSerializer[357446])
+  type ArraySerializer[357354] unknown writer[357177](357179 call fileWriter[170987](?) 0 objectSerializer[357446]) const-val endian[357185]:endianness[164137] "const" endianness[164137]
+  type MapSerializer[357443] unknown writer[357388](357390 call fileWriter[170987](?) 0 objectSerializer[357446])
+  type AggregateDeserializer[358228] unknown reader[358140](358142 call fileReader[170893](?) 0 objectDeserializer[358892])
+  type TupleDeserializer[358306] unknown reader[358252](358254 call fileReader[170893](?) 0 objectDeserializer[358892])
+  type ListDeserializer[358464] unknown reader[358336](358338 call fileReader[170893](?) 0 objectDeserializer[358892]) val _numElements[358344]:uint(64)[86] uint(64)[86]
+  type ArrayDeserializer[358698] unknown reader[358489](358491 call fileReader[170893](?) 0 objectDeserializer[358892]) const-val endian[358497]:endianness[164137] "const" endianness[164137]
+  type MapDeserializer[358889](?) unknown reader[358728] val _numElements[358732]:uint(64)[86] uint(64)[86]
+  (397197 'used modules list'(387092 'use' ChapelStandard[315387])(356504 'use' IO[208303])(356507 'use' CTypes[51217]))
+  (411629 'referenced modules list' IO[208303] IO[208303] IO[208303] IO[208303])
+}

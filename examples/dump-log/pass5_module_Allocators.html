@@ -1,0 +1,711 @@
+<CHPLTAG="cleanup">
+<HTML>
+<HEAD>
+<TITLE> AST for Module Allocators after Pass cleanup </TITLE>
+<SCRIPT SRC="https://chapel-lang.org/developer/mktree.js" LANGUAGE="JavaScript"></SCRIPT>
+<LINK REL="stylesheet" HREF="https://chapel-lang.org/developer/mktree.css">
+</HEAD><BODY>
+<A HREF=pass4_module_Allocators.html>previous pass</A> &nbsp;
+<A HREF=pass6_module_Allocators.html>next pass</A>
+<div style="text-align: center;"><big><big><span style="font-weight: bold;">AST for Module Allocators after Pass cleanup <br><br></span></big></big>
+<div style="text-align: left;">
+
+<B>module 
+<A NAME="SYM308289"><FONT COLOR="red">Allocators</FONT><FONT COLOR="grey">[308289]</FONT></A></B>
+<DL><DD>
+ (387060 'use'  <FONT COLOR="red">ChapelStandard</FONT>)</DD></DL>
+<DL><DD>
+ (307139 'use'  <FONT COLOR="red">CTypes</FONT>)</DD></DL>
+<DL><DD>
+ (307142 'use'  <FONT COLOR="red">Reflection</FONT>)</DD></DL>
+<DL><DD>
+ (307146 'import'  <FONT COLOR="red">ChapelLocks</FONT>)</DD></DL>
+<DL><DD>
+ (307148 'use'  <FONT COLOR="red">ChplConfig</FONT>)</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307150">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307150">&raquo</A>
+<CHPLTAG="FN307150">
+<B>function <A NAME="SYM307150"><FONT COLOR="blue">alignup</FONT><FONT COLOR="grey">[307150]</FONT></A> ( <A NAME="SYM307155"><FONT COLOR="red">ptr</FONT><FONT COLOR="grey">[307155]</FONT></A> , <A NAME="SYM307158"><FONT COLOR="red">alignment</FONT><FONT COLOR="grey">[307158]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM307155"><FONT COLOR="red">ptr</FONT><FONT COLOR="grey">[307155]</FONT></A><DL><DD>
+{<DL><DD>
+ (307153 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> <A HREF="pass5_module__root.html#SYM4"><FONT COLOR="green">void</FONT><FONT COLOR="grey">[4]</FONT></A>)</DD></DL>
+}</DD></DL>
+ <B>param</B> <B>arg</B> <A NAME="SYM307158"><FONT COLOR="red">alignment</FONT><FONT COLOR="grey">[307158]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM307181"><FONT COLOR="red">mask</FONT><FONT COLOR="grey">[307181]</FONT></A> (307182 <B>call</B>  <FONT COLOR="red">-</FONT> <FONT COLOR="red">alignment</FONT> <i><FONT COLOR="blue">1</FONT></i>)</DD></DL>
+<DL><DD>
+ (307187 'end of statement' )</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM307189"><FONT COLOR="red">iptr</FONT><FONT COLOR="grey">[307189]</FONT></A> (307190 <B>call</B>  <FONT COLOR="red">:</FONT> <FONT COLOR="red">ptr</FONT> <FONT COLOR="red">c_intptr</FONT>)</DD></DL>
+<DL><DD>
+ (307195 'end of statement' )</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM307197"><FONT COLOR="red">alignedPtr</FONT><FONT COLOR="grey">[307197]</FONT></A> (307198 <B>call</B>  <FONT COLOR="red">&</FONT> (307200 <B>call</B>  <FONT COLOR="red">+</FONT> <FONT COLOR="red">iptr</FONT> <FONT COLOR="red">mask</FONT>) (307204 <B>call</B>  <FONT COLOR="red">~</FONT> <FONT COLOR="red">mask</FONT>))</DD></DL>
+<DL><DD>
+ (307208 'end of statement' )</DD></DL>
+<DL><DD>
+ (307209 <B>return</B>  (307210 <B>call</B>  <FONT COLOR="red">:</FONT> <FONT COLOR="red">alignedPtr</FONT> (307214 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> <A HREF="pass5_module__root.html#SYM4"><FONT COLOR="green">void</FONT><FONT COLOR="grey">[4]</FONT></A>)))</DD></DL>
+}</DD></DL>
+<DL><DD>
+<B>where</B>
+{<DL><DD>
+ (307163 <B>call</B>  <FONT COLOR="red">&&</FONT> (307165 <B>call</B>  <FONT COLOR="red">></FONT> <FONT COLOR="red">alignment</FONT> <i><FONT COLOR="blue">0</FONT></i>) (307169 <B>call</B>  <FONT COLOR="red">==</FONT> (307171 <B>call</B>  <FONT COLOR="red">&</FONT> <FONT COLOR="red">alignment</FONT> (307174 <B>call</B>  <FONT COLOR="red">-</FONT> <FONT COLOR="red">alignment</FONT> <i><FONT COLOR="blue">1</FONT></i>)) <i><FONT COLOR="blue">0</FONT></i>))</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (307161 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> <A HREF="pass5_module__root.html#SYM4"><FONT COLOR="green">void</FONT><FONT COLOR="grey">[4]</FONT></A>)</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307150">
+</UL>
+</DD></DL>
+<DL><DD>
+ <B>def</B> <A NAME="SYM307259"><FONT COLOR="red">allocator</FONT><FONT COLOR="grey">[307259]</FONT></A> <B>type </B> <A NAME="SYM307257"><FONT COLOR="green">Self</FONT><FONT COLOR="grey">[307257]</FONT></A><DL><DD>
+{<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307222">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307222">&raquo</A>
+<CHPLTAG="FN307222">
+<B>function <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A> . <A NAME="SYM307222"><FONT COLOR="blue">allocate</FONT><FONT COLOR="grey">[307222]</FONT></A> ( <A NAME="SYM307232"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307232]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM307225"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307225]</FONT></A> , <A NAME="SYM307229"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[307229]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM307232"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307232]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>ref</B> <B>arg</B> <A NAME="SYM307225"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307225]</FONT></A><DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">Self</FONT></DD></DL>
+}</DD></DL>
+ <B>arg</B> <A NAME="SYM307229"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[307229]</FONT></A><DL><DD>
+{<DL><DD>
+ <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (307235 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> <A HREF="pass5_module__root.html#SYM4"><FONT COLOR="green">void</FONT><FONT COLOR="grey">[4]</FONT></A>)</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307222">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307240">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307240">&raquo</A>
+<CHPLTAG="FN307240">
+<B>function <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A> . <A NAME="SYM307240"><FONT COLOR="blue">deallocate</FONT><FONT COLOR="grey">[307240]</FONT></A> ( <A NAME="SYM307252"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307252]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM307243"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307243]</FONT></A> , <A NAME="SYM307249"><FONT COLOR="red">p</FONT><FONT COLOR="grey">[307249]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM307252"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307252]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>ref</B> <B>arg</B> <A NAME="SYM307243"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307243]</FONT></A><DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">Self</FONT></DD></DL>
+}</DD></DL>
+ <B>arg</B> <A NAME="SYM307249"><FONT COLOR="red">p</FONT><FONT COLOR="grey">[307249]</FONT></A><DL><DD>
+{<DL><DD>
+ (307247 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> <A HREF="pass5_module__root.html#SYM4"><FONT COLOR="green">void</FONT><FONT COLOR="grey">[4]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+{}</DD></DL>
+</UL>
+<CHPLTAG="FN307240">
+</UL>
+</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307262">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307262">&raquo</A>
+<CHPLTAG="FN307262">
+<B>function <A NAME="SYM307262"><FONT COLOR="blue">newTypeCheckHelper</FONT><FONT COLOR="grey">[307262]</FONT></A> ( <A NAME="SYM307264"><FONT COLOR="red">T</FONT><FONT COLOR="grey">[307264]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> ) <b>param</b>  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM307264"><FONT COLOR="red">T</FONT><FONT COLOR="grey">[307264]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+<B>if</B>  (307285 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (307280 <B>call</B>  <FONT COLOR="red">!</FONT> (307283 <B>call</B>  <FONT COLOR="red">isClassType</FONT> <FONT COLOR="red">T</FONT>)))<DL><DD>
+{<DL><DD>
+ (307268 <B>call</B>  <FONT COLOR="red">compilerError</FONT> (307269 <B>call</B>  <FONT COLOR="red">+</FONT> (307271 <B>call</B>  <FONT COLOR="red">:</FONT> <FONT COLOR="red">T</FONT> <A HREF="pass5_module_String.html#SYM244"><FONT COLOR="green">string</FONT><FONT COLOR="grey">[244]</FONT></A>) <i><FONT COLOR="blue">" is not a class"</FONT></i>) <i><FONT COLOR="blue">2</FONT></i>)</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (307308 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (307303 <B>call</B>  <FONT COLOR="red">!</FONT> (307306 <B>call</B>  <FONT COLOR="red">isUnmanagedClassType</FONT> <FONT COLOR="red">T</FONT>)))<DL><DD>
+{<DL><DD>
+ (307291 <B>call</B>  <FONT COLOR="red">compilerError</FONT> (307292 <B>call</B>  <FONT COLOR="red">+</FONT> (307294 <B>call</B>  <FONT COLOR="red">:</FONT> <FONT COLOR="red">T</FONT> <A HREF="pass5_module_String.html#SYM244"><FONT COLOR="green">string</FONT><FONT COLOR="grey">[244]</FONT></A>) <i><FONT COLOR="blue">" is not unmanaged"</FONT></i>) <i><FONT COLOR="blue">2</FONT></i>)</DD></DL>
+}</DD></DL>
+</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307262">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307315">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307315">&raquo</A>
+<CHPLTAG="FN307315">
+<B>function <A NAME="SYM307315"><FONT COLOR="blue">checkInterfaceHelper</FONT><FONT COLOR="grey">[307315]</FONT></A> ( <A NAME="SYM307317"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307317]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> ) <b>param</b>  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM307317"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307317]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+<B>if</B>  (307340 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (307334 <B>call</B>  <FONT COLOR="red">==</FONT> (307336 'implements interface'  <FONT COLOR="red">alloc</FONT> <FONT COLOR="red">allocator</FONT>) <i><FONT COLOR="blue">2</FONT></i>))<DL><DD>
+{<DL><DD>
+ (307322 <B>call</B>  <FONT COLOR="red">compilerError</FONT> (307323 <B>call</B>  <FONT COLOR="red">+</FONT> (307325 <B>call</B>  <FONT COLOR="red">:</FONT> (307328 'typeof'  <FONT COLOR="red">alloc</FONT>) <A HREF="pass5_module_String.html#SYM244"><FONT COLOR="green">string</FONT><FONT COLOR="grey">[244]</FONT></A>) <i><FONT COLOR="blue">" does not implement 'allocator'"</FONT></i>) <i><FONT COLOR="blue">2</FONT></i>)</DD></DL>
+}</DD></DL>
+</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307315">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307368">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307368">&raquo</A>
+<CHPLTAG="FN307368">
+<B>function <A NAME="SYM307368"><FONT COLOR="blue">newWithAllocator</FONT><FONT COLOR="grey">[307368]</FONT></A> ( <A NAME="SYM307371"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307371]</FONT></A> , <A NAME="SYM307374"><FONT COLOR="red">T</FONT><FONT COLOR="grey">[307374]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>ref</B> <B>arg</B> <A NAME="SYM307371"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307371]</FONT></A><DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">record</FONT></DD></DL>
+}</DD></DL>
+ <B>arg</B> <A NAME="SYM307374"><FONT COLOR="red">T</FONT><FONT COLOR="grey">[307374]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+ (307379 <B>call</B>  <FONT COLOR="red">checkInterfaceHelper</FONT> <FONT COLOR="red">alloc</FONT>)</DD></DL>
+<DL><DD>
+ (307382 <B>call</B>  <FONT COLOR="red">newTypeCheckHelper</FONT> <FONT COLOR="red">T</FONT>)</DD></DL>
+<DL><DD>
+ (307384 <B>return</B>  (307385 'new with allocator'  <FONT COLOR="red">alloc</FONT> <FONT COLOR="red">T</FONT>))</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">T</FONT></DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307368">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307391">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307391">&raquo</A>
+<CHPLTAG="FN307391">
+<B>function <A NAME="SYM307391"><FONT COLOR="blue">newWithAllocator</FONT><FONT COLOR="grey">[307391]</FONT></A> ( <A NAME="SYM307394"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307394]</FONT></A> , <A NAME="SYM307397"><FONT COLOR="red">T</FONT><FONT COLOR="grey">[307397]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>const ref</B> <B>arg</B> <A NAME="SYM307394"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307394]</FONT></A><DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">class</FONT></DD></DL>
+}</DD></DL>
+ <B>arg</B> <A NAME="SYM307397"><FONT COLOR="red">T</FONT><FONT COLOR="grey">[307397]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+ (307402 <B>call</B>  <FONT COLOR="red">checkInterfaceHelper</FONT> <FONT COLOR="red">alloc</FONT>)</DD></DL>
+<DL><DD>
+ (307405 <B>call</B>  <FONT COLOR="red">newTypeCheckHelper</FONT> <FONT COLOR="red">T</FONT>)</DD></DL>
+<DL><DD>
+ (307407 <B>return</B>  (307408 'new with allocator'  <FONT COLOR="red">alloc</FONT> <FONT COLOR="red">T</FONT>))</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">T</FONT></DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307391">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307414">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307414">&raquo</A>
+<CHPLTAG="FN307414">
+<B>function <A NAME="SYM307414"><FONT COLOR="blue">newWithAllocator</FONT><FONT COLOR="grey">[307414]</FONT></A> ( <A NAME="SYM307417"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307417]</FONT></A> , <A NAME="SYM307420"><FONT COLOR="red">T</FONT><FONT COLOR="grey">[307420]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> , <A NAME="SYM307423"><FONT COLOR="red">args</FONT><FONT COLOR="grey">[307423]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>ref</B> <B>arg</B> <A NAME="SYM307417"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307417]</FONT></A><DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">record</FONT></DD></DL>
+}</DD></DL>
+ <B>arg</B> <A NAME="SYM307420"><FONT COLOR="red">T</FONT><FONT COLOR="grey">[307420]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> <B>arg</B> <A NAME="SYM307423"><FONT COLOR="red">args</FONT><FONT COLOR="grey">[307423]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+ <A HREF="pass5_module__root.html#SYM227"><FONT COLOR="red">?</FONT><FONT COLOR="grey">[227]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (307429 <B>call</B>  <FONT COLOR="red">checkInterfaceHelper</FONT> <FONT COLOR="red">alloc</FONT>)</DD></DL>
+<DL><DD>
+ (307432 <B>call</B>  <FONT COLOR="red">newTypeCheckHelper</FONT> <FONT COLOR="red">T</FONT>)</DD></DL>
+<DL><DD>
+ (307434 <B>return</B>  (307435 'new with allocator'  <FONT COLOR="red">alloc</FONT> <FONT COLOR="red">T</FONT> (307439 'expand_tuple'  <FONT COLOR="red">args</FONT>)))</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">T</FONT></DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307414">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307443">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307443">&raquo</A>
+<CHPLTAG="FN307443">
+<B>function <A NAME="SYM307443"><FONT COLOR="blue">newWithAllocator</FONT><FONT COLOR="grey">[307443]</FONT></A> ( <A NAME="SYM307446"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307446]</FONT></A> , <A NAME="SYM307449"><FONT COLOR="red">T</FONT><FONT COLOR="grey">[307449]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> , <A NAME="SYM307452"><FONT COLOR="red">args</FONT><FONT COLOR="grey">[307452]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>const ref</B> <B>arg</B> <A NAME="SYM307446"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307446]</FONT></A><DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">class</FONT></DD></DL>
+}</DD></DL>
+ <B>arg</B> <A NAME="SYM307449"><FONT COLOR="red">T</FONT><FONT COLOR="grey">[307449]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> <B>arg</B> <A NAME="SYM307452"><FONT COLOR="red">args</FONT><FONT COLOR="grey">[307452]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+ <A HREF="pass5_module__root.html#SYM227"><FONT COLOR="red">?</FONT><FONT COLOR="grey">[227]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (307458 <B>call</B>  <FONT COLOR="red">checkInterfaceHelper</FONT> <FONT COLOR="red">alloc</FONT>)</DD></DL>
+<DL><DD>
+ (307461 <B>call</B>  <FONT COLOR="red">newTypeCheckHelper</FONT> <FONT COLOR="red">T</FONT>)</DD></DL>
+<DL><DD>
+ (307463 <B>return</B>  (307464 'new with allocator'  <FONT COLOR="red">alloc</FONT> <FONT COLOR="red">T</FONT> (307468 'expand_tuple'  <FONT COLOR="red">args</FONT>)))</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">T</FONT></DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307443">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307490">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307490">&raquo</A>
+<CHPLTAG="FN307490">
+<B>function <A NAME="SYM307490"><FONT COLOR="blue">deleteWithAllocator</FONT><FONT COLOR="grey">[307490]</FONT></A> ( <A NAME="SYM307493"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307493]</FONT></A> , <A NAME="SYM307498"><FONT COLOR="red">objects</FONT><FONT COLOR="grey">[307498]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>ref</B> <B>arg</B> <A NAME="SYM307493"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307493]</FONT></A><DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">record</FONT></DD></DL>
+}</DD></DL>
+ <B>arg</B> <A NAME="SYM307498"><FONT COLOR="red">objects</FONT><FONT COLOR="grey">[307498]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM307496"><FONT COLOR="red">k</FONT><FONT COLOR="grey">[307496]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (307503 <B>call</B>  <FONT COLOR="red">checkInterfaceHelper</FONT> <FONT COLOR="red">alloc</FONT>)</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM307505"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[307505]</FONT></A> <i><FONT COLOR="blue">0</FONT></i></DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM307555"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307555]</FONT></A></DD></DL>
+<DL><DD>
+ (307572 'move'  <A HREF="pass5_module_Allocators.html#SYM307555"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307555]</FONT></A> (307570 <B>call</B>  <FONT COLOR="red">chpl_compute_low_param_loop_bound</FONT> <i><FONT COLOR="blue">0</FONT></i> (307565 <B>call</B>  <FONT COLOR="red">chpl_high_bound_count_for_param_loop</FONT> <i><FONT COLOR="blue">0</FONT></i> (307562 <B>call</B>  <FONT COLOR="red">chpl_compute_count_param_loop</FONT> <FONT COLOR="red">k</FONT>))))</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM307556"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307556]</FONT></A></DD></DL>
+<DL><DD>
+ (307584 'move'  <A HREF="pass5_module_Allocators.html#SYM307556"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307556]</FONT></A> (307582 <B>call</B>  <FONT COLOR="red">chpl_compute_high_param_loop_bound</FONT> <i><FONT COLOR="blue">0</FONT></i> (307577 <B>call</B>  <FONT COLOR="red">chpl_high_bound_count_for_param_loop</FONT> <i><FONT COLOR="blue">0</FONT></i> (307580 <B>call</B>  <FONT COLOR="red">chpl_compute_count_param_loop</FONT> <FONT COLOR="red">k</FONT>))))</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM307557"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307557]</FONT></A></DD></DL>
+<DL><DD>
+ (307587 'move'  <A HREF="pass5_module_Allocators.html#SYM307557"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307557]</FONT></A> <i><FONT COLOR="blue">1</FONT></i>)</DD></DL>
+<DL><DD>
+<B>ParamForLoop<B> { <A HREF="pass5_module_Allocators.html#SYM307505"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[307505]</FONT></A> <A HREF="pass5_module_Allocators.html#SYM307555"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307555]</FONT></A> <A HREF="pass5_module_Allocators.html#SYM307556"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307556]</FONT></A> <A HREF="pass5_module_Allocators.html#SYM307557"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307557]</FONT></A><DL><DD>
+{<DL><DD>
+ (307515 <B>call</B>  <FONT COLOR="red">newTypeCheckHelper</FONT> (307519 'typeof'  (307517 <B>call</B>  <FONT COLOR="red">objects</FONT> <FONT COLOR="red">i</FONT>)))</DD></DL>
+<DL><DD>
+<B>if</B>  (307551 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (307550 <B>call</B>  <FONT COLOR="red">compiledForSingleLocale</FONT>))<DL><DD>
+{<DL><DD>
+ (307522 <B>call</B>  <FONT COLOR="red">chpl__deleteWithAllocator</FONT> <FONT COLOR="red">alloc</FONT> (307525 <B>call</B>  <FONT COLOR="red">objects</FONT> <FONT COLOR="red">i</FONT>))</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM307541"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307541]</FONT></A></DD></DL>
+<DL><DD>
+ (307542 'move'  <A HREF="pass5_module_Allocators.html#SYM307541"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307541]</FONT></A> (307539 'deref'  (307538 '_wide_get_locale'  (307529 <B>call</B>  <FONT COLOR="red">objects</FONT> <FONT COLOR="red">i</FONT>))))</DD></DL>
+<DL><DD>
+ (307532 <B>call</B>  <FONT COLOR="red">chpl__deleteWithAllocator</FONT> <FONT COLOR="red">alloc</FONT> (307535 <B>call</B>  <FONT COLOR="red">objects</FONT> <FONT COLOR="red">i</FONT>))</DD></DL>
+<DL><DD>
+ (307545 'elided on block'  <i><FONT COLOR="blue">0</FONT></i> <A HREF="pass5_module_Allocators.html#SYM307541"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307541]</FONT></A>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+}</DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM307559"><FONT COLOR="red">_unused_continueLabel</FONT><FONT COLOR="grey">[307559]</FONT></A></DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM307558"><FONT COLOR="red">_breakLabel</FONT><FONT COLOR="grey">[307558]</FONT></A></DD></DL>
+}</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307490">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307600">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307600">&raquo</A>
+<CHPLTAG="FN307600">
+<B>function <A NAME="SYM307600"><FONT COLOR="blue">deleteWithAllocator</FONT><FONT COLOR="grey">[307600]</FONT></A> ( <A NAME="SYM307603"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307603]</FONT></A> , <A NAME="SYM307608"><FONT COLOR="red">objects</FONT><FONT COLOR="grey">[307608]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>const ref</B> <B>arg</B> <A NAME="SYM307603"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307603]</FONT></A><DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">class</FONT></DD></DL>
+}</DD></DL>
+ <B>arg</B> <A NAME="SYM307608"><FONT COLOR="red">objects</FONT><FONT COLOR="grey">[307608]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM307606"><FONT COLOR="red">k</FONT><FONT COLOR="grey">[307606]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (307613 <B>call</B>  <FONT COLOR="red">checkInterfaceHelper</FONT> <FONT COLOR="red">alloc</FONT>)</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM307615"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[307615]</FONT></A> <i><FONT COLOR="blue">0</FONT></i></DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM307665"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307665]</FONT></A></DD></DL>
+<DL><DD>
+ (307682 'move'  <A HREF="pass5_module_Allocators.html#SYM307665"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307665]</FONT></A> (307680 <B>call</B>  <FONT COLOR="red">chpl_compute_low_param_loop_bound</FONT> <i><FONT COLOR="blue">0</FONT></i> (307675 <B>call</B>  <FONT COLOR="red">chpl_high_bound_count_for_param_loop</FONT> <i><FONT COLOR="blue">0</FONT></i> (307672 <B>call</B>  <FONT COLOR="red">chpl_compute_count_param_loop</FONT> <FONT COLOR="red">k</FONT>))))</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM307666"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307666]</FONT></A></DD></DL>
+<DL><DD>
+ (307694 'move'  <A HREF="pass5_module_Allocators.html#SYM307666"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307666]</FONT></A> (307692 <B>call</B>  <FONT COLOR="red">chpl_compute_high_param_loop_bound</FONT> <i><FONT COLOR="blue">0</FONT></i> (307687 <B>call</B>  <FONT COLOR="red">chpl_high_bound_count_for_param_loop</FONT> <i><FONT COLOR="blue">0</FONT></i> (307690 <B>call</B>  <FONT COLOR="red">chpl_compute_count_param_loop</FONT> <FONT COLOR="red">k</FONT>))))</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM307667"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307667]</FONT></A></DD></DL>
+<DL><DD>
+ (307697 'move'  <A HREF="pass5_module_Allocators.html#SYM307667"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307667]</FONT></A> <i><FONT COLOR="blue">1</FONT></i>)</DD></DL>
+<DL><DD>
+<B>ParamForLoop<B> { <A HREF="pass5_module_Allocators.html#SYM307615"><FONT COLOR="red">i</FONT><FONT COLOR="grey">[307615]</FONT></A> <A HREF="pass5_module_Allocators.html#SYM307665"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307665]</FONT></A> <A HREF="pass5_module_Allocators.html#SYM307666"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307666]</FONT></A> <A HREF="pass5_module_Allocators.html#SYM307667"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307667]</FONT></A><DL><DD>
+{<DL><DD>
+ (307625 <B>call</B>  <FONT COLOR="red">newTypeCheckHelper</FONT> (307629 'typeof'  (307627 <B>call</B>  <FONT COLOR="red">objects</FONT> <FONT COLOR="red">i</FONT>)))</DD></DL>
+<DL><DD>
+<B>if</B>  (307661 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (307660 <B>call</B>  <FONT COLOR="red">compiledForSingleLocale</FONT>))<DL><DD>
+{<DL><DD>
+ (307632 <B>call</B>  <FONT COLOR="red">chpl__deleteWithAllocator</FONT> <FONT COLOR="red">alloc</FONT> (307635 <B>call</B>  <FONT COLOR="red">objects</FONT> <FONT COLOR="red">i</FONT>))</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM307651"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307651]</FONT></A></DD></DL>
+<DL><DD>
+ (307652 'move'  <A HREF="pass5_module_Allocators.html#SYM307651"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307651]</FONT></A> (307649 'deref'  (307648 '_wide_get_locale'  (307639 <B>call</B>  <FONT COLOR="red">objects</FONT> <FONT COLOR="red">i</FONT>))))</DD></DL>
+<DL><DD>
+ (307642 <B>call</B>  <FONT COLOR="red">chpl__deleteWithAllocator</FONT> <FONT COLOR="red">alloc</FONT> (307645 <B>call</B>  <FONT COLOR="red">objects</FONT> <FONT COLOR="red">i</FONT>))</DD></DL>
+<DL><DD>
+ (307655 'elided on block'  <i><FONT COLOR="blue">0</FONT></i> <A HREF="pass5_module_Allocators.html#SYM307651"><FONT COLOR="red">tmp</FONT><FONT COLOR="grey">[307651]</FONT></A>)</DD></DL>
+}</DD></DL>
+}</DD></DL>
+</DD></DL>
+}</DD></DL>
+}</DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM307669"><FONT COLOR="red">_unused_continueLabel</FONT><FONT COLOR="grey">[307669]</FONT></A></DD></DL>
+<DL><DD>
+ <B>label</B> <A NAME="SYM307668"><FONT COLOR="red">_breakLabel</FONT><FONT COLOR="grey">[307668]</FONT></A></DD></DL>
+}</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307600">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307710">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307710">&raquo</A>
+<CHPLTAG="FN307710">
+<B>function <A NAME="SYM307710"><FONT COLOR="blue">chpl__deleteWithAllocator</FONT><FONT COLOR="grey">[307710]</FONT></A> ( <A NAME="SYM307713"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307713]</FONT></A> , <A NAME="SYM307716"><FONT COLOR="red">obj</FONT><FONT COLOR="grey">[307716]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>const ref</B> <B>arg</B> <A NAME="SYM307713"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307713]</FONT></A><DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">class</FONT></DD></DL>
+}</DD></DL>
+ <B>const</B> <B>arg</B> <A NAME="SYM307716"><FONT COLOR="red">obj</FONT><FONT COLOR="grey">[307716]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM307720"><FONT COLOR="red">p</FONT><FONT COLOR="grey">[307720]</FONT></A> (307722 <B>call</B>  <FONT COLOR="red">c_ptrTo</FONT> <FONT COLOR="red">obj</FONT>)</DD></DL>
+<DL><DD>
+ (307725 'end of statement' )</DD></DL>
+<DL><DD>
+<B>if</B>  (307738 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (307734 <B>call</B>  <FONT COLOR="red">!=</FONT> <FONT COLOR="red">obj</FONT> <A HREF="pass5_module__root.html#SYM32"><FONT COLOR="red">nil</FONT><FONT COLOR="grey">[32]</FONT></A>))<DL><DD>
+{<DL><DD>
+ (307732 <B>call</B>  (307729 <B>call</B>  <FONT COLOR="red">.</FONT> (307726 <B>call</B>  <FONT COLOR="red">postfix!</FONT> <FONT COLOR="red">obj</FONT>) <i><FONT COLOR="blue">c"deinit"</FONT></i>))</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (307749 <B>call</B>  (307746 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">alloc</FONT> <i><FONT COLOR="blue">c"deallocate"</FONT></i>) <FONT COLOR="red">p</FONT>)</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307710">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307753">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307753">&raquo</A>
+<CHPLTAG="FN307753">
+<B>function <A NAME="SYM307753"><FONT COLOR="blue">chpl__deleteWithAllocator</FONT><FONT COLOR="grey">[307753]</FONT></A> ( <A NAME="SYM307756"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307756]</FONT></A> , <A NAME="SYM307759"><FONT COLOR="red">obj</FONT><FONT COLOR="grey">[307759]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>ref</B> <B>arg</B> <A NAME="SYM307756"><FONT COLOR="red">alloc</FONT><FONT COLOR="grey">[307756]</FONT></A><DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">record</FONT></DD></DL>
+}</DD></DL>
+ <B>const</B> <B>arg</B> <A NAME="SYM307759"><FONT COLOR="red">obj</FONT><FONT COLOR="grey">[307759]</FONT></A>:<A HREF="pass5_module__root.html#SYM141"><FONT COLOR="green">_any</FONT><FONT COLOR="grey">[141]</FONT></A><DL><DD>
+{<DL><DD>
+ <B>var </B> <A NAME="SYM307763"><FONT COLOR="red">p</FONT><FONT COLOR="grey">[307763]</FONT></A> (307765 <B>call</B>  <FONT COLOR="red">c_ptrTo</FONT> <FONT COLOR="red">obj</FONT>)</DD></DL>
+<DL><DD>
+ (307768 'end of statement' )</DD></DL>
+<DL><DD>
+<B>if</B>  (307781 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (307777 <B>call</B>  <FONT COLOR="red">!=</FONT> <FONT COLOR="red">obj</FONT> <A HREF="pass5_module__root.html#SYM32"><FONT COLOR="red">nil</FONT><FONT COLOR="grey">[32]</FONT></A>))<DL><DD>
+{<DL><DD>
+ (307775 <B>call</B>  (307772 <B>call</B>  <FONT COLOR="red">.</FONT> (307769 <B>call</B>  <FONT COLOR="red">postfix!</FONT> <FONT COLOR="red">obj</FONT>) <i><FONT COLOR="blue">c"deinit"</FONT></i>))</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (307790 <B>call</B>  (307787 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">alloc</FONT> <i><FONT COLOR="blue">c"deallocate"</FONT></i>) <FONT COLOR="red">p</FONT>)</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307753">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307809">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307809">&raquo</A>
+<CHPLTAG="FN307809">
+<B>function <A HREF="pass5_module_Allocators.html#SYM307838"><FONT COLOR="green">_LockWrapper</FONT><FONT COLOR="grey">[307838]</FONT></A> . <A NAME="SYM307809"><FONT COLOR="blue">lock</FONT><FONT COLOR="grey">[307809]</FONT></A> ( <A NAME="SYM307813"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307813]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM307811"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307811]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM307838"><FONT COLOR="green">_LockWrapper</FONT><FONT COLOR="grey">[307838]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM307813"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307813]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM307811"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307811]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM307838"><FONT COLOR="green">_LockWrapper</FONT><FONT COLOR="grey">[307838]</FONT></A><DL><DD>
+{<DL><DD>
+ (307820 <B>call</B>  (307817 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">lockVar</FONT> <i><FONT COLOR="blue">c"lock"</FONT></i>))</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307809">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307823">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307823">&raquo</A>
+<CHPLTAG="FN307823">
+<B>function <A HREF="pass5_module_Allocators.html#SYM307838"><FONT COLOR="green">_LockWrapper</FONT><FONT COLOR="grey">[307838]</FONT></A> . <A NAME="SYM307823"><FONT COLOR="blue">unlock</FONT><FONT COLOR="grey">[307823]</FONT></A> ( <A NAME="SYM307827"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307827]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM307825"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307825]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM307838"><FONT COLOR="green">_LockWrapper</FONT><FONT COLOR="grey">[307838]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM307827"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307827]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM307825"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307825]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM307838"><FONT COLOR="green">_LockWrapper</FONT><FONT COLOR="grey">[307838]</FONT></A><DL><DD>
+{<DL><DD>
+ (307834 <B>call</B>  (307831 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">lockVar</FONT> <i><FONT COLOR="blue">c"unlock"</FONT></i>))</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307823">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><B>type <A NAME="SYM307838"><FONT COLOR="green">_LockWrapper</FONT><FONT COLOR="grey">[307838]</FONT></A></B><UL>
+ <B>var </B> <A NAME="SYM307796"><FONT COLOR="red">lockType</FONT><FONT COLOR="grey">[307796]</FONT></A> (307798 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">ChapelLocks</FONT> <i><FONT COLOR="blue">c"chpl_LocalSpinlock"</FONT></i>) <B>var </B> <A NAME="SYM307803"><FONT COLOR="red">lockVar</FONT><FONT COLOR="grey">[307803]</FONT></A> (307804 'new'  (307806 <B>call</B>  <FONT COLOR="red">lockType</FONT>))</UL>
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307842">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307842">&raquo</A>
+<CHPLTAG="FN307842">
+<B>function <A HREF="pass5_module_Allocators.html#SYM307898"><FONT COLOR="green">mallocWrapper</FONT><FONT COLOR="grey">[307898]</FONT></A> . <A NAME="SYM307842"><FONT COLOR="blue">allocate</FONT><FONT COLOR="grey">[307842]</FONT></A> ( <A NAME="SYM307850"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307850]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM307844"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307844]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM307898"><FONT COLOR="green">mallocWrapper</FONT><FONT COLOR="grey">[307898]</FONT></A> , <A NAME="SYM307847"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[307847]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM307850"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307850]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM307844"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307844]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM307898"><FONT COLOR="green">mallocWrapper</FONT><FONT COLOR="grey">[307898]</FONT></A> <B>arg</B> <A NAME="SYM307847"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[307847]</FONT></A><DL><DD>
+{<DL><DD>
+ <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (307856 <B>return</B>  (307863 <B>call</B>  (307860 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">CTypes</FONT> <i><FONT COLOR="blue">c"allocate"</FONT></i>) (307865 <B>call</B>  <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A> <i><FONT COLOR="blue">8</FONT></i>) (307871 <B>call</B>  (307868 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">n</FONT> <i><FONT COLOR="blue">c"safeCast"</FONT></i>) <FONT COLOR="red">c_size_t</FONT>)))</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (307853 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> <A HREF="pass5_module__root.html#SYM4"><FONT COLOR="green">void</FONT><FONT COLOR="grey">[4]</FONT></A>)</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307842">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307876">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307876">&raquo</A>
+<CHPLTAG="FN307876">
+<B>function <A HREF="pass5_module_Allocators.html#SYM307898"><FONT COLOR="green">mallocWrapper</FONT><FONT COLOR="grey">[307898]</FONT></A> . <A NAME="SYM307876"><FONT COLOR="blue">deallocate</FONT><FONT COLOR="grey">[307876]</FONT></A> ( <A NAME="SYM307886"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307886]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM307878"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307878]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM307898"><FONT COLOR="green">mallocWrapper</FONT><FONT COLOR="grey">[307898]</FONT></A> , <A NAME="SYM307883"><FONT COLOR="red">p</FONT><FONT COLOR="grey">[307883]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM307886"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307886]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM307878"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307878]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM307898"><FONT COLOR="green">mallocWrapper</FONT><FONT COLOR="grey">[307898]</FONT></A> <B>arg</B> <A NAME="SYM307883"><FONT COLOR="red">p</FONT><FONT COLOR="grey">[307883]</FONT></A><DL><DD>
+{<DL><DD>
+ (307881 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> <A HREF="pass5_module__root.html#SYM4"><FONT COLOR="green">void</FONT><FONT COLOR="grey">[4]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (307893 <B>call</B>  (307890 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">CTypes</FONT> <i><FONT COLOR="blue">c"deallocate"</FONT></i>) <FONT COLOR="red">p</FONT>)</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307876">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><B>type <A NAME="SYM307898"><FONT COLOR="green">mallocWrapper</FONT><FONT COLOR="grey">[307898]</FONT></A></B><UL>
+ <FONT COLOR="red">allocator</FONT></UL>
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM307951">&laquo</A><A HREF="pass6_module_Allocators.html#SYM307951">&raquo</A>
+<CHPLTAG="FN307951">
+<B>function <A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> . <A NAME="SYM307951"><FONT COLOR="blue">init</FONT><FONT COLOR="grey">[307951]</FONT></A> ( <A NAME="SYM307973"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307973]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM307953"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307953]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> , <A NAME="SYM307958"><FONT COLOR="red">size</FONT><FONT COLOR="grey">[307958]</FONT></A> , <A NAME="SYM307963"><FONT COLOR="red">parSafe</FONT><FONT COLOR="grey">[307963]</FONT></A> , <A NAME="SYM307969"><FONT COLOR="red">alignment</FONT><FONT COLOR="grey">[307969]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM307973"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[307973]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM307953"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[307953]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> <B>arg</B> <A NAME="SYM307958"><FONT COLOR="red">size</FONT><FONT COLOR="grey">[307958]</FONT></A><DL><DD>
+{<DL><DD>
+ (307956 <B>call</B>  <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A> <i><FONT COLOR="blue">64</FONT></i>)</DD></DL>
+}</DD></DL>
+ <B>param</B> <B>arg</B> <A NAME="SYM307963"><FONT COLOR="red">parSafe</FONT><FONT COLOR="grey">[307963]</FONT></A><DL><DD>
+{<DL><DD>
+ <FONT COLOR="red">bool</FONT></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <i><FONT COLOR="blue">0</FONT></i></DD></DL>
+}</DD></DL>
+ <B>param</B> <B>arg</B> <A NAME="SYM307969"><FONT COLOR="red">alignment</FONT><FONT COLOR="grey">[307969]</FONT></A><DL><DD>
+{<DL><DD>
+ <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ <i><FONT COLOR="blue">16</FONT></i></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (307976 <B>call</B>  <FONT COLOR="red">=</FONT> (307979 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">this</FONT> <i><FONT COLOR="blue">c"parSafe"</FONT></i>) <FONT COLOR="red">parSafe</FONT>)</DD></DL>
+<DL><DD>
+ (307983 <B>call</B>  <FONT COLOR="red">=</FONT> (307986 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">this</FONT> <i><FONT COLOR="blue">c"alignment"</FONT></i>) <FONT COLOR="red">alignment</FONT>)</DD></DL>
+<DL><DD>
+<B>if</B>  (308003 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (307996 <B>call</B>  <FONT COLOR="red"><</FONT> (307999 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">this</FONT> <i><FONT COLOR="blue">c"alignment"</FONT></i>) <i><FONT COLOR="blue">0</FONT></i>))<DL><DD>
+{<DL><DD>
+ (307991 <B>call</B>  <FONT COLOR="red">compilerError</FONT> <i><FONT COLOR="blue">"alignment must be non-negative"</FONT></i>)</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (308030 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (308014 <B>call</B>  <FONT COLOR="red">!=</FONT> (308016 <B>call</B>  <FONT COLOR="red">&</FONT> (308019 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">this</FONT> <i><FONT COLOR="blue">c"alignment"</FONT></i>) (308022 <B>call</B>  <FONT COLOR="red">-</FONT> (308025 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">this</FONT> <i><FONT COLOR="blue">c"alignment"</FONT></i>) <i><FONT COLOR="blue">1</FONT></i>)) <i><FONT COLOR="blue">0</FONT></i>))<DL><DD>
+{<DL><DD>
+ (308009 <B>call</B>  <FONT COLOR="red">compilerError</FONT> <i><FONT COLOR="blue">"alignment must be a power of 2"</FONT></i>)</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (308035 <B>call</B>  <FONT COLOR="red">=</FONT> (308038 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">this</FONT> <i><FONT COLOR="blue">c"size"</FONT></i>) <FONT COLOR="red">size</FONT>)</DD></DL>
+<DL><DD>
+<B>if</B>  (308061 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <FONT COLOR="red">boundsChecking</FONT>)<DL><DD>
+{<DL><DD>
+<B>if</B>  (308056 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (308049 <B>call</B>  <FONT COLOR="red"><=</FONT> (308052 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">this</FONT> <i><FONT COLOR="blue">c"size"</FONT></i>) <i><FONT COLOR="blue">0</FONT></i>))<DL><DD>
+{<DL><DD>
+ (308045 <B>call</B>  <FONT COLOR="red">halt</FONT> <i><FONT COLOR="blue">"size must be positive"</FONT></i>)</DD></DL>
+}</DD></DL>
+</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ (308065 <B>call</B>  <FONT COLOR="red">=</FONT> <FONT COLOR="red">basePtr</FONT> (308072 <B>call</B>  (308069 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">CTypes</FONT> <i><FONT COLOR="blue">c"allocate"</FONT></i>) (308074 <B>call</B>  <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A> <i><FONT COLOR="blue">8</FONT></i>) (308083 <B>call</B>  (308080 <B>call</B>  <FONT COLOR="red">.</FONT> (308077 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">this</FONT> <i><FONT COLOR="blue">c"size"</FONT></i>) <i><FONT COLOR="blue">c"safeCast"</FONT></i>) <FONT COLOR="red">c_size_t</FONT>)))</DD></DL>
+<DL><DD>
+ (308085 <B>call</B>  <FONT COLOR="red">=</FONT> <FONT COLOR="red">ptr</FONT> <FONT COLOR="red">basePtr</FONT>)</DD></DL>
+<DL><DD>
+ (308093 <B>call</B>  (308090 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">this</FONT> <i><FONT COLOR="blue">c"chpl__initThisType"</FONT></i>))</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN307951">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM308096">&laquo</A><A HREF="pass6_module_Allocators.html#SYM308096">&raquo</A>
+<CHPLTAG="FN308096">
+<B>function <A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> . <A NAME="SYM308096"><FONT COLOR="blue">deinit</FONT><FONT COLOR="grey">[308096]</FONT></A> ( <A NAME="SYM308100"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[308100]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM308098"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[308098]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM308100"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[308100]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM308098"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[308098]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A><DL><DD>
+{<DL><DD>
+<B>if</B>  (308111 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <FONT COLOR="red">basePtr</FONT>)<DL><DD>
+{<DL><DD>
+ (308107 <B>call</B>  (308104 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">CTypes</FONT> <i><FONT COLOR="blue">c"deallocate"</FONT></i>) <FONT COLOR="red">basePtr</FONT>)</DD></DL>
+}</DD></DL>
+</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN308096">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM308118">&laquo</A><A HREF="pass6_module_Allocators.html#SYM308118">&raquo</A>
+<CHPLTAG="FN308118">
+<B>function <A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> . <A NAME="SYM308118"><FONT COLOR="blue">_lock</FONT><FONT COLOR="grey">[308118]</FONT></A> ( <A NAME="SYM308122"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[308122]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM308120"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[308120]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM308122"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[308122]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM308120"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[308120]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A><DL><DD>
+{<DL><DD>
+<B>if</B>  (308132 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <FONT COLOR="red">parSafe</FONT>)<DL><DD>
+{<DL><DD>
+ (308129 <B>call</B>  (308126 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">lock_</FONT> <i><FONT COLOR="blue">c"lock"</FONT></i>))</DD></DL>
+}</DD></DL>
+</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN308118">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM308139">&laquo</A><A HREF="pass6_module_Allocators.html#SYM308139">&raquo</A>
+<CHPLTAG="FN308139">
+<B>function <A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> . <A NAME="SYM308139"><FONT COLOR="blue">_unlock</FONT><FONT COLOR="grey">[308139]</FONT></A> ( <A NAME="SYM308143"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[308143]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM308141"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[308141]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM308143"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[308143]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM308141"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[308141]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A><DL><DD>
+{<DL><DD>
+<B>if</B>  (308153 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <FONT COLOR="red">parSafe</FONT>)<DL><DD>
+{<DL><DD>
+ (308150 <B>call</B>  (308147 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">lock_</FONT> <i><FONT COLOR="blue">c"unlock"</FONT></i>))</DD></DL>
+}</DD></DL>
+</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN308139">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM308160">&laquo</A><A HREF="pass6_module_Allocators.html#SYM308160">&raquo</A>
+<CHPLTAG="FN308160">
+<B>function <A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> . <A NAME="SYM308160"><FONT COLOR="blue">allocate</FONT><FONT COLOR="grey">[308160]</FONT></A> ( <A NAME="SYM308168"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[308168]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM308162"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[308162]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> , <A NAME="SYM308165"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[308165]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM308168"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[308168]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM308162"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[308162]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> <B>arg</B> <A NAME="SYM308165"><FONT COLOR="red">n</FONT><FONT COLOR="grey">[308165]</FONT></A><DL><DD>
+{<DL><DD>
+ <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A></DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (308175 <B>call</B>  <FONT COLOR="red">_lock</FONT>)</DD></DL>
+<DL><DD>
+<B>if</B>  (308192 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <FONT COLOR="red">boundsChecking</FONT>)<DL><DD>
+{<DL><DD>
+<B>if</B>  (308187 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (308183 <B>call</B>  <FONT COLOR="red"><=</FONT> <FONT COLOR="red">n</FONT> <i><FONT COLOR="blue">0</FONT></i>))<DL><DD>
+{<DL><DD>
+ (308179 <B>call</B>  <FONT COLOR="red">halt</FONT> <i><FONT COLOR="blue">"n must be positive"</FONT></i>)</DD></DL>
+}</DD></DL>
+</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (308218 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (308214 <B>call</B>  <FONT COLOR="red">></FONT> <FONT COLOR="red">alignment</FONT> <i><FONT COLOR="blue">0</FONT></i>))<DL><DD>
+{<DL><DD>
+ (308196 <B>call</B>  <FONT COLOR="red">=</FONT> <FONT COLOR="red">ptr</FONT> (308199 <B>call</B>  <FONT COLOR="red">:</FONT> (308202 <B>call</B>  <FONT COLOR="red">alignup</FONT> <FONT COLOR="red">ptr</FONT> (308205 <B>call</B>  <FONT COLOR="red">.</FONT> <FONT COLOR="red">this</FONT> <i><FONT COLOR="blue">c"alignment"</FONT></i>)) (308209 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> (308211 <B>call</B>  <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A> <i><FONT COLOR="blue">8</FONT></i>))))</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+<B>if</B>  (308251 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> <FONT COLOR="red">boundsChecking</FONT>)<DL><DD>
+{<DL><DD>
+<B>if</B>  (308246 <B>call</B>  <FONT COLOR="red">_cond_test</FONT> (308230 <B>call</B>  <FONT COLOR="red">></FONT> (308232 <B>call</B>  <FONT COLOR="red">:</FONT> (308234 <B>call</B>  <FONT COLOR="red">+</FONT> <FONT COLOR="red">ptr</FONT> <FONT COLOR="red">n</FONT>) <FONT COLOR="red">c_intptr</FONT>) (308239 <B>call</B>  <FONT COLOR="red">:</FONT> (308241 <B>call</B>  <FONT COLOR="red">+</FONT> <FONT COLOR="red">basePtr</FONT> <FONT COLOR="red">size</FONT>) <FONT COLOR="red">c_intptr</FONT>)))<DL><DD>
+{<DL><DD>
+ (308226 <B>call</B>  <FONT COLOR="red">halt</FONT> <i><FONT COLOR="blue">"out of memory"</FONT></i>)</DD></DL>
+}</DD></DL>
+</DD></DL>
+}</DD></DL>
+</DD></DL>
+<DL><DD>
+ <B>var </B> <A NAME="SYM308256"><FONT COLOR="red">p</FONT><FONT COLOR="grey">[308256]</FONT></A> <FONT COLOR="red">ptr</FONT></DD></DL>
+<DL><DD>
+ (308259 'end of statement' )</DD></DL>
+<DL><DD>
+ (308260 <B>call</B>  <FONT COLOR="red">+=</FONT> <FONT COLOR="red">ptr</FONT> <FONT COLOR="red">n</FONT>)</DD></DL>
+<DL><DD>
+ (308265 <B>call</B>  <FONT COLOR="red">_unlock</FONT>)</DD></DL>
+<DL><DD>
+ (308266 <B>return</B>  <FONT COLOR="red">p</FONT>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+{<DL><DD>
+ (308171 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> <A HREF="pass5_module__root.html#SYM4"><FONT COLOR="green">void</FONT><FONT COLOR="grey">[4]</FONT></A>)</DD></DL>
+}</DD></DL>
+</UL>
+<CHPLTAG="FN308160">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><A HREF="pass4_module_Allocators.html#SYM308271">&laquo</A><A HREF="pass6_module_Allocators.html#SYM308271">&raquo</A>
+<CHPLTAG="FN308271">
+<B>function <A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> . <A NAME="SYM308271"><FONT COLOR="blue">deallocate</FONT><FONT COLOR="grey">[308271]</FONT></A> ( <A NAME="SYM308281"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[308281]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> , <A NAME="SYM308273"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[308273]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> , <A NAME="SYM308278"><FONT COLOR="red">p</FONT><FONT COLOR="grey">[308278]</FONT></A> )  : <A HREF="pass5_module__root.html#SYM42"><FONT COLOR="green">_unknown</FONT><FONT COLOR="grey">[42]</FONT></A></B><UL>
+ <B>arg</B> <A NAME="SYM308281"><FONT COLOR="red">_mt</FONT><FONT COLOR="grey">[308281]</FONT></A>:<A HREF="pass5_module__root.html#SYM201"><FONT COLOR="green">_MT</FONT><FONT COLOR="grey">[201]</FONT></A> <B>arg</B> <A NAME="SYM308273"><FONT COLOR="red">this</FONT><FONT COLOR="grey">[308273]</FONT></A>:<A HREF="pass5_module_Allocators.html#SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A> <B>arg</B> <A NAME="SYM308278"><FONT COLOR="red">p</FONT><FONT COLOR="grey">[308278]</FONT></A><DL><DD>
+{<DL><DD>
+ (308276 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> <A HREF="pass5_module__root.html#SYM4"><FONT COLOR="green">void</FONT><FONT COLOR="grey">[4]</FONT></A>)</DD></DL>
+}</DD></DL>
+<DL><DD>
+{}</DD></DL>
+</UL>
+<CHPLTAG="FN308271">
+</UL>
+</DD></DL>
+<DL><DD>
+ <UL CLASS ="mktree">
+<LI><B>type <A NAME="SYM308287"><FONT COLOR="green">bumpPtrMemPool</FONT><FONT COLOR="grey">[308287]</FONT></A></B><UL>
+ <B>var </B> <A NAME="SYM307903"><FONT COLOR="red">parSafe</FONT><FONT COLOR="grey">[307903]</FONT></A> <i><FONT COLOR="blue">0</FONT></i> <FONT COLOR="red">bool</FONT> <B>var </B> <A NAME="SYM307909"><FONT COLOR="red">alignment</FONT><FONT COLOR="grey">[307909]</FONT></A> <i><FONT COLOR="blue">16</FONT></i> <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A> <B>var </B> <A NAME="SYM307915"><FONT COLOR="red">size</FONT><FONT COLOR="grey">[307915]</FONT></A> (307917 <B>call</B>  <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A> <i><FONT COLOR="blue">64</FONT></i>) <B>var </B> <A NAME="SYM307922"><FONT COLOR="red">basePtr</FONT><FONT COLOR="grey">[307922]</FONT></A> (307924 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> (307926 <B>call</B>  <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A> <i><FONT COLOR="blue">8</FONT></i>)) <B>var </B> <A NAME="SYM307931"><FONT COLOR="red">ptr</FONT><FONT COLOR="grey">[307931]</FONT></A> (307933 <B>call</B>  <FONT COLOR="red">c_ptr</FONT> (307935 <B>call</B>  <A HREF="pass5_module__root.html#SYM10"><FONT COLOR="green">int</FONT><FONT COLOR="grey">[10]</FONT></A> <i><FONT COLOR="blue">8</FONT></i>)) <B>var </B> <A NAME="SYM307940"><FONT COLOR="red">lock_</FONT><FONT COLOR="grey">[307940]</FONT></A> <FONT COLOR="red">allocator</FONT></UL>
+</UL>
+</DD></DL>
+</BODY></HTML>

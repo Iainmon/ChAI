@@ -1,0 +1,1665 @@
+AST dump for ChapelIteratorSupport after pass buildDefaultFunctions.
+Module use list: ChapelStandard Reflection CTypes 
+
+{
+  function chpl__init_ChapelIteratorSupport[468402]() : void[4] "insert line file info" "module init"
+  {
+    (600891 return _void[46])
+  }
+  function iteratorIndex[92049](arg ic[92052]:_iteratorClass[168](?)) : _unknown[42] "allow ref" "fn returns iterator"
+  {
+    unknown ret[600084] "RVV" "temp"
+    (92062 call(92059 call (partial) advance _mt[203] ic[92052]))
+    (550549 'end of statement')
+    (600088 'move' ret[600084](92070 call(92067 call (partial) getValue _mt[203] ic[92052])))
+    (600086 return ret[600084])
+  }
+  function iteratorIndex[92073](arg t[92076]:_tuple[246](?)) : _unknown[42] "expand tuples with values" "fn returns iterator"
+  {
+    unknown ret[600106] "RVV" "temp"
+    function iteratorIndexHelp[92080](arg t[92083]:_tuple[246](?), param arg dim[92087]:int(64)[10]) : _unknown[42] "expand tuples with values"
+    {
+      unknown ret[600092] "RVV" "temp"
+      unknown call_tmp[773926] "expr temp" "maybe param" "maybe type" "temp"
+      (773929 'move' call_tmp[773926](92123 call size _mt[203] t[92083]))
+      unknown call_tmp[773931] "expr temp" "maybe param" "maybe type" "temp"
+      (773934 'move' call_tmp[773931](92120 call - call_tmp[773926] 1))
+      unknown call_tmp[773936] "expr temp" "maybe param" "maybe type" "temp"
+      (773939 'move' call_tmp[773936](92117 call == dim[92087] call_tmp[773931]))
+      unknown call_tmp[773941] "expr temp" "maybe param" "maybe type" "temp"
+      (773944 'move' call_tmp[773941](92127 call _cond_test call_tmp[773936]))
+      if call_tmp[773941]
+      {
+        unknown call_tmp[773946] "expr temp" "maybe param" "maybe type" "temp"
+        (773949 'move' call_tmp[773946](92097 call t[92083] dim[92087]))
+        unknown call_tmp[773951] "expr temp" "maybe param" "maybe type" "temp"
+        (773954 'move' call_tmp[773951](92095 call iteratorIndex call_tmp[773946]))
+        (600096 'move' ret[600092](92093 call _build_tuple_always_allow_ref call_tmp[773951]))
+        gotoReturn _end_iteratorIndexHelp[600090] _end_iteratorIndexHelp[600090]
+      }
+      {
+        unknown call_tmp[773956] "expr temp" "maybe param" "maybe type" "temp"
+        (773959 'move' call_tmp[773956](92106 call t[92083] dim[92087]))
+        unknown call_tmp[773961] "expr temp" "maybe param" "maybe type" "temp"
+        (773964 'move' call_tmp[773961](92104 call iteratorIndex call_tmp[773956]))
+        unknown call_tmp[773966] "expr temp" "maybe param" "maybe type" "temp"
+        (773969 'move' call_tmp[773966](92111 call + dim[92087] 1))
+        unknown call_tmp[773971] "expr temp" "maybe param" "maybe type" "temp"
+        (773974 'move' call_tmp[773971](92109 call iteratorIndexHelp t[92083] call_tmp[773966]))
+        (600100 'move' ret[600092](92102 call _build_tuple_always_allow_ref call_tmp[773961](92115 'expand_tuple' call_tmp[773971])))
+        gotoReturn _end_iteratorIndexHelp[600090] _end_iteratorIndexHelp[600090]
+      }
+      label _end_iteratorIndexHelp[600090]
+      (600094 return ret[600092])
+    }
+    (600110 'move' ret[600106](92137 call iteratorIndexHelp t[92076] 0))
+    (600108 return ret[600106])
+  }
+  function iteratorIndexType[92142](arg x[92144]:_any[141](?)) type : _unknown[42]
+  {
+    unknown ret[600114] "RVV" "temp" "type variable"
+    unknown call_tmp[773976] "expr temp" "maybe param" "maybe type" "temp"
+    (773979 'move' call_tmp[773976](92234 call isArray x[92144]))
+    unknown call_tmp[773981] "expr temp" "maybe param" "maybe type" "temp"
+    (773984 'move' call_tmp[773981](92236 call _cond_test call_tmp[773976]))
+    if call_tmp[773981]
+    {
+      unknown call_tmp[773988] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (773991 'move' call_tmp[773988](92150 call eltType _mt[203] x[92144]))
+      (600119 'move' ret[600114](600118 'deref' call_tmp[773988]))
+      gotoReturn _end_iteratorIndexType[600112] _end_iteratorIndexType[600112]
+    }
+    {
+      unknown call_tmp[773993] "expr temp" "maybe param" "maybe type" "temp"
+      (773996 'move' call_tmp[773993](92227 call isDomain x[92144]))
+      unknown call_tmp[773998] "expr temp" "maybe param" "maybe type" "temp"
+      (774001 'move' call_tmp[773998](92229 call _cond_test call_tmp[773993]))
+      if call_tmp[773998]
+      {
+        unknown tmp[669525] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+        unknown tmp[669526] "maybe param" "temp"
+        unknown call_tmp[774005] "expr temp" "maybe param" "maybe type" "temp"
+        (774008 'move' call_tmp[774005](92160 call rank _mt[203] x[92144]))
+        unknown call_tmp[774010] "expr temp" "maybe param" "maybe type" "temp"
+        (774013 'move' call_tmp[774010](92155 call == call_tmp[774005] 1))
+        (669531 'move' tmp[669526](669529 call _cond_test call_tmp[774010]))
+        if tmp[669526]
+        {
+          unknown tmp[669533] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+          (669535 'move' tmp[669533](92165 call idxType _mt[203] x[92144]))
+          (669540 'move' tmp[669525](669537 '_paramFoldLogical' tmp[669526] tmp[669533]))
+        }
+        {
+          unknown tmp[669542] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+          unknown call_tmp[774019] "expr temp" "maybe param" "maybe type" "temp"
+          (774022 'move' call_tmp[774019](92171 call rank _mt[203] x[92144]))
+          unknown call_tmp[774026] "expr temp" "maybe param" "maybe type" "temp"
+          (774029 'move' call_tmp[774026](92175 call idxType _mt[203] x[92144]))
+          (669544 'move' tmp[669542](92168 call * call_tmp[774019] call_tmp[774026]))
+          (669549 'move' tmp[669525](669546 '_paramFoldLogical' tmp[669526] tmp[669542]))
+        }
+        (600124 'move' ret[600114](600123 'deref' tmp[669525]))
+        gotoReturn _end_iteratorIndexType[600112] _end_iteratorIndexType[600112]
+      }
+      {
+        {
+          unknown _indexOfInterest[92189] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[92190] "expr temp" "temp"
+          (92199 'move' _iterator[92190](92197 call _getIterator x[92144]))
+          Defer
+          {
+            {
+              (92214 call _freeIterator _iterator[92190])
+            }
+          }
+          { scopeless type
+            (92204 'move' _indexOfInterest[92189](92201 call iteratorIndex _iterator[92190]))
+          }
+          ForLoop[92191]
+          {
+            unknown i[92182] "index var" "insert auto destroy"
+            (550557 'end of statement')
+            (92209 'move' i[92182] _indexOfInterest[92189])
+            (550558 'end of statement' i[92182])
+            unknown call_tmp[774031] "expr temp" "maybe param" "used in type" "maybe type" "temp" "type variable"
+            (774034 'move' call_tmp[774031](92187 'typeof' i[92182]))
+            (600129 'move' ret[600114](600128 'deref' call_tmp[774031]))
+            gotoReturn _end_iteratorIndexType[600112] _end_iteratorIndexType[600112]
+            (550560 'end of statement' i[92182])
+            label _continueLabel[92194]
+            _indexOfInterest[92189]
+            _iterator[92190]
+          }
+          label _breakLabel[92195]
+        }
+        (92222 call halt "the iterator yields no elements, cannot determine its index type")
+      }
+    }
+    label _end_iteratorIndexType[600112]
+    (600116 return ret[600114])
+  }
+  function iteratorIndexTypeZip[92243](arg xs[92246]:_any[141](?) ...) type : _unknown[42]
+  {
+    unknown ret[600151] "RVV" "temp" "type variable"
+    function iteratorIndexTypeZipHelp[92250](param arg dim[92252]:_any[141](?)) type : _unknown[42]
+    {
+      unknown ret[600135] "RVV" "temp" "type variable"
+      unknown call_tmp[774038] "expr temp" "maybe param" "maybe type" "temp"
+      (774041 'move' call_tmp[774038](92288 call size _mt[203] xs[92246]))
+      unknown call_tmp[774043] "expr temp" "maybe param" "maybe type" "temp"
+      (774046 'move' call_tmp[774043](92285 call - call_tmp[774038] 1))
+      unknown call_tmp[774048] "expr temp" "maybe param" "maybe type" "temp"
+      (774051 'move' call_tmp[774048](92282 call == dim[92252] call_tmp[774043]))
+      unknown call_tmp[774053] "expr temp" "maybe param" "maybe type" "temp"
+      (774056 'move' call_tmp[774053](92292 call _cond_test call_tmp[774048]))
+      if call_tmp[774053]
+      {
+        unknown call_tmp[774058] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774061 'move' call_tmp[774058](92260 call xs[92246] dim[92252]))
+        unknown call_tmp[774063] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774066 'move' call_tmp[774063](92258 call iteratorIndexType call_tmp[774058]))
+        unknown call_tmp[774068] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774071 'move' call_tmp[774068](92262 call _build_tuple call_tmp[774063]))
+        (600140 'move' ret[600135](600139 'deref' call_tmp[774068]))
+        gotoReturn _end_iteratorIndexTypeZipHelp[600133] _end_iteratorIndexTypeZipHelp[600133]
+      }
+      {
+        unknown call_tmp[774073] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774076 'move' call_tmp[774073](92270 call xs[92246] dim[92252]))
+        unknown call_tmp[774078] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774081 'move' call_tmp[774078](92268 call iteratorIndexType call_tmp[774073]))
+        unknown call_tmp[774083] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774086 'move' call_tmp[774083](92274 call + dim[92252] 1))
+        unknown call_tmp[774088] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774091 'move' call_tmp[774088](92273 call iteratorIndexTypeZipHelp call_tmp[774083]))
+        unknown call_tmp[774093] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774096 'move' call_tmp[774093](92279 call _build_tuple call_tmp[774078](92278 'expand_tuple' call_tmp[774088])))
+        (600145 'move' ret[600135](600144 'deref' call_tmp[774093]))
+        gotoReturn _end_iteratorIndexTypeZipHelp[600133] _end_iteratorIndexTypeZipHelp[600133]
+      }
+      label _end_iteratorIndexTypeZipHelp[600133]
+      (600137 return ret[600135])
+    }
+    unknown call_tmp[774098] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774101 'move' call_tmp[774098](92302 call iteratorIndexTypeZipHelp 0))
+    (600156 'move' ret[600151](600155 'deref' call_tmp[774098]))
+    (600153 return ret[600151])
+  }
+  function iteratorToArrayElementType[92306](arg t[92309]:_iteratorRecord[165](?)) type : _unknown[42]
+  {
+    unknown ret[600160] "RVV" "temp" "type variable"
+    unknown call_tmp[774103] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774106 'move' call_tmp[774103](92318 'scalar promotion type' t[92309]))
+    unknown call_tmp[774108] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774111 'move' call_tmp[774108](92317 call chpl_buildStandInRTT call_tmp[774103]))
+    unknown call_tmp[774113] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774116 'move' call_tmp[774113](92315 call chpl__unref call_tmp[774108]))
+    (600165 'move' ret[600160](600164 'deref' call_tmp[774113]))
+    (600162 return ret[600160])
+  }
+  function thunkToReturnType[92322](arg t[92325]:_thunkRecord[171](?)) type : _unknown[42]
+  {
+    unknown ret[600169] "RVV" "temp" "type variable"
+    unknown call_tmp[774118] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774121 'move' call_tmp[774118](92334 'thunk result type' t[92325]))
+    unknown call_tmp[774123] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774126 'move' call_tmp[774123](92333 call chpl_buildStandInRTT call_tmp[774118]))
+    unknown call_tmp[774128] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774131 'move' call_tmp[774128](92331 call chpl__unref call_tmp[774123]))
+    (600174 'move' ret[600169](600173 'deref' call_tmp[774128]))
+    (600171 return ret[600169])
+  }
+  function chpl_elemTypeForReducingIterables[92338](arg x[92340]:_any[141](?)) type : _unknown[42]
+  {
+    unknown ret[600178] "RVV" "temp" "type variable"
+    {
+      unknown _indexOfInterest[92426] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[92427] "expr temp" "temp"
+      (92436 'move' _iterator[92427](92434 call _getIterator x[92340]))
+      Defer
+      {
+        {
+          (92451 call _freeIterator _iterator[92427])
+        }
+      }
+      { scopeless type
+        (92441 'move' _indexOfInterest[92426](92438 call iteratorIndex _iterator[92427]))
+      }
+      ForLoop[92428]
+      {
+        unknown i[92343] "index var" "insert auto destroy"
+        (550569 'end of statement')
+        (92446 'move' i[92343] _indexOfInterest[92426])
+        (550570 'end of statement' i[92343])
+        {
+          unknown call_tmp[774133] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+          (774136 'move' call_tmp[774133](92352 'typeof' i[92343]))
+          unknown call_tmp[774138] "expr temp" "maybe param" "maybe type" "temp"
+          (774141 'move' call_tmp[774138](394759 'is_subtype' _iteratorRecord[165](?) call_tmp[774133]))
+          (92348 call compilerAssert call_tmp[774138])
+          (550572 'end of statement' i[92343])
+          unknown call_tmp[774143] "expr temp" "maybe param" "maybe type" "temp"
+          (774146 'move' call_tmp[774143](92366 call chpl_iteratorHasDomainShape i[92343]))
+          unknown call_tmp[774148] "expr temp" "maybe param" "maybe type" "temp"
+          (774151 'move' call_tmp[774148](92363 call ! call_tmp[774143]))
+          unknown call_tmp[774153] "expr temp" "maybe param" "maybe type" "temp"
+          (774156 'move' call_tmp[774153](92368 call _cond_test call_tmp[774148]))
+          if call_tmp[774153]
+          {
+            (92355 call compilerError "unsupported elements of the expression being reduced " "-- they are iterable expressions without a domain shape")
+          }
+          unknown call_tmp[774160] "expr temp" "maybe param" "maybe type" "temp"
+          (774163 'move' call_tmp[774160](92381 call _shape_ _mt[203] i[92343]))
+          unknown call_tmp[774165] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+          (774168 'move' call_tmp[774165](1000047 'new' _domain[225034](?) call_tmp[774160]))
+          unknown shape[92374] "dead at end of block" "insert auto destroy"
+          (644603 'init var' shape[92374] call_tmp[774165])
+          (92385 'end of statement' i[92343])
+          unknown call_tmp[774172] "expr temp" "maybe param" "maybe type" "temp"
+          (774175 'move' call_tmp[774172](92391 call _unowned _mt[203] shape[92374]))
+          (92386 call = call_tmp[774172] 1)
+          (550576 'end of statement' shape[92374])
+          unknown arrElt[92396] "dead at end of block" "insert auto destroy" "type variable"
+          (644608 'move' arrElt[92396](644606 call iteratorIndexType i[92343]))
+          (550578 'end of statement' i[92343])
+          unknown tmp[482142] "maybe param" "temp"
+          (482153 'move' tmp[482142](92411 call isArray arrElt[92396]))
+          unknown call_tmp[774177] "expr temp" "maybe param" "maybe type" "temp"
+          (774180 'move' call_tmp[774177](482155 call _cond_invalid tmp[482142]))
+          if call_tmp[774177]
+          {
+            (482158 call compilerError "cannot promote short-circuiting || operator")
+          }
+          unknown tmp[669556] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+          unknown tmp[669557] "maybe param" "temp"
+          unknown call_tmp[774182] "expr temp" "maybe param" "maybe type" "temp"
+          (774185 'move' call_tmp[774182](482143 call isTrue tmp[482142]))
+          (669562 'move' tmp[669557](669560 call _cond_test call_tmp[774182]))
+          if tmp[669557]
+          {
+            (669567 'move' tmp[669556](669564 '_paramFoldLogical' tmp[669557] 1))
+          }
+          {
+            unknown tmp[669569] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+            unknown call_tmp[774187] "expr temp" "maybe param" "maybe type" "temp"
+            (774190 'move' call_tmp[774187](92414 call isDomain arrElt[92396]))
+            (669571 'move' tmp[669569](482147 call isTrue call_tmp[774187]))
+            (669576 'move' tmp[669556](669573 '_paramFoldLogical' tmp[669557] tmp[669569]))
+          }
+          unknown call_tmp[774192] "expr temp" "maybe param" "maybe type" "temp"
+          (774195 'move' call_tmp[774192](92416 call _cond_test tmp[669556]))
+          if call_tmp[774192]
+          {
+            (92402 call compilerError "unsupported elements of the expression being reduced " "-- they are iterable expressions consisting of arrays or domains")
+          }
+          unknown call_tmp[774197] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+          (774200 'move' call_tmp[774197](92423 call chpl__buildArrayRuntimeType shape[92374] arrElt[92396]))
+          (600183 'move' ret[600178](600182 'deref' call_tmp[774197]))
+          gotoReturn _end_chpl_elemTypeForReducingIterables[600176] _end_chpl_elemTypeForReducingIterables[600176]
+          (550582 'end of statement' shape[92374] arrElt[92396])
+        }
+        label _continueLabel[92431]
+        _indexOfInterest[92426]
+        _iterator[92427]
+      }
+      label _breakLabel[92432]
+    }
+    (92459 call halt "the expression being reduced contains no elements," " which is currently not supported")
+    label _end_chpl_elemTypeForReducingIterables[600176]
+    (600180 return ret[600178])
+  }
+  function chpl_buildStandInRTT[92468](arg domType[92471]:_domain[225034](?)) type : _unknown[42] "unsafe"
+  {
+    unknown ret[600189] "RVV" "temp" "type variable"
+    unknown instanceObj[92476] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[774202] "expr temp" "maybe param" "maybe type" "temp"
+    (774205 'move' call_tmp[774202](92477 'static field type' domType[92471] "_instance"))
+    (644610 'default init var' instanceObj[92476] call_tmp[774202])
+    (92483 'end of statement')
+    unknown call_tmp[774207] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774210 'move' call_tmp[774207](92486 call chpl_buildStandInRTT instanceObj[92476]))
+    (600194 'move' ret[600189](600193 'deref' call_tmp[774207]))
+    gotoReturn _end_chpl_buildStandInRTT[600187] _end_chpl_buildStandInRTT[600187]
+    (550586 'end of statement' instanceObj[92476])
+    label _end_chpl_buildStandInRTT[600187]
+    (600191 return ret[600189])
+  }
+  function chpl_buildStandInRTT[92490](arg arrType[92495]:_array[255540](?)) type : _unknown[42] "unsafe"
+  {
+    unknown ret[600200] "RVV" "temp" "type variable"
+    unknown arrInstType[92500] "dead at end of block" "insert auto destroy" "type variable"
+    (644615 'move' arrInstType[92500](644612 'static field type' arrType[92495] "_instance"))
+    unknown domInstType[92506] "dead at end of block" "insert auto destroy" "type variable"
+    (644620 'move' domInstType[92506](644617 'static field type' arrInstType[92500] "dom"))
+    unknown domInstance[92514] "dead at end of block" "insert auto destroy"
+    (644622 'default init var' domInstance[92514] domInstType[92506])
+    (92517 'end of statement')
+    unknown standinDomain[92519] "dead at end of block" "no auto destroy"
+    unknown call_tmp[774212] "expr temp" "maybe param" "maybe type" "temp"
+    (774215 'move' call_tmp[774212](92521 call chpl_buildStandInRTT domInstance[92514]))
+    (644624 'default init var' standinDomain[92519] call_tmp[774212])
+    (92524 'end of statement')
+    unknown instanceObj[92526] "dead at end of block" "insert auto destroy"
+    (644626 'default init var' instanceObj[92526] arrInstType[92500])
+    (92529 'end of statement' arrInstType[92500] domInstType[92506] domInstance[92514])
+    unknown instanceEltType[92531] "dead at end of block" "insert auto destroy" "type variable"
+    (644633 'move' instanceEltType[92531](644628 'static typeof'(644630 call . instanceObj[92526] c"eltType")))
+    (550591 'end of statement' instanceObj[92526])
+    unknown call_tmp[774217] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774220 'move' call_tmp[774217](92543 call chpl_buildStandInRTT instanceEltType[92531]))
+    unknown call_tmp[774222] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774225 'move' call_tmp[774222](92540 call chpl__buildArrayRuntimeType standinDomain[92519] call_tmp[774217]))
+    (600205 'move' ret[600200](600204 'deref' call_tmp[774222]))
+    gotoReturn _end_chpl_buildStandInRTT[600198] _end_chpl_buildStandInRTT[600198]
+    (550593 'end of statement' standinDomain[92519] instanceEltType[92531])
+    label _end_chpl_buildStandInRTT[600198]
+    (600202 return ret[600200])
+  }
+  function chpl_buildStandInRTT[92547](arg irType[92550]:_iteratorRecord[165](?)) type : _unknown[42]
+  {
+    unknown ret[600232] "RVV" "temp" "type variable"
+    unknown shapeType[92555] "dead at end of block" "insert auto destroy" "type variable"
+    (644638 'move' shapeType[92555](644636 call chpl_iteratorShapeStaticTypeOrNothing irType[92550]))
+    function standinType[92560]() type : _unknown[42] "unsafe"
+    {
+      unknown ret[600211] "RVV" "temp" "type variable"
+      unknown call_tmp[774227] "expr temp" "maybe param" "maybe type" "temp"
+      (774230 'move' call_tmp[774227](92606 call == shapeType[92555] nothing[7]))
+      unknown call_tmp[774232] "expr temp" "maybe param" "maybe type" "temp"
+      (774235 'move' call_tmp[774232](92610 call _cond_test call_tmp[774227]))
+      if call_tmp[774232]
+      {
+        unknown call_tmp[774237] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774240 'move' call_tmp[774237](92566 call chpl__buildDomainRuntimeType defaultDist[288287] 1))
+        (600216 'move' ret[600211](600215 'deref' call_tmp[774237]))
+        gotoReturn _end_standinType[600209] _end_standinType[600209]
+      }
+      {
+        unknown call_tmp[774242] "expr temp" "maybe param" "maybe type" "temp"
+        (774245 'move' call_tmp[774242](92600 call isRange shapeType[92555]))
+        unknown call_tmp[774247] "expr temp" "maybe param" "maybe type" "temp"
+        (774250 'move' call_tmp[774247](92602 call _cond_test call_tmp[774242]))
+        if call_tmp[774247]
+        {
+          unknown call_tmp[774252] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+          (774255 'move' call_tmp[774252](92572 call chpl__buildDomainRuntimeType defaultDist[288287] 1))
+          (600221 'move' ret[600211](600220 'deref' call_tmp[774252]))
+          gotoReturn _end_standinType[600209] _end_standinType[600209]
+        }
+        {
+          unknown domInstance[92577] "dead at end of block" "insert auto destroy"
+          (644640 'default init var' domInstance[92577] shapeType[92555])
+          (92580 'end of statement')
+          unknown tmp[482163] "maybe param" "temp"
+          unknown call_tmp[774257] "expr temp" "maybe param" "maybe type" "temp"
+          (774260 'move' call_tmp[774257](92588 call isDomain domInstance[92577]))
+          (482174 'move' tmp[482163](92585 call ! call_tmp[774257]))
+          unknown call_tmp[774262] "expr temp" "maybe param" "maybe type" "temp"
+          (774265 'move' call_tmp[774262](482176 call _cond_invalid tmp[482163]))
+          if call_tmp[774262]
+          {
+            (482179 call compilerError "cannot promote short-circuiting && operator")
+          }
+          unknown tmp[669583] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+          unknown tmp[669584] "maybe param" "temp"
+          unknown call_tmp[774267] "expr temp" "maybe param" "maybe type" "temp"
+          (774270 'move' call_tmp[774267](482164 call isTrue tmp[482163]))
+          (669589 'move' tmp[669584](669587 call _cond_test call_tmp[774267]))
+          if tmp[669584]
+          {
+            unknown tmp[669591] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+            unknown call_tmp[774272] "expr temp" "maybe param" "maybe type" "temp"
+            (774275 'move' call_tmp[774272](92593 call isArray domInstance[92577]))
+            unknown call_tmp[774277] "expr temp" "maybe param" "maybe type" "temp"
+            (774280 'move' call_tmp[774277](92590 call ! call_tmp[774272]))
+            (669593 'move' tmp[669591](482167 call isTrue call_tmp[774277]))
+            (669598 'move' tmp[669583](669595 '_paramFoldLogical' tmp[669584] tmp[669591]))
+          }
+          {
+            (669603 'move' tmp[669583](669600 '_paramFoldLogical' tmp[669584] 0))
+          }
+          (92582 call compilerAssert tmp[669583])
+          (550599 'end of statement' domInstance[92577])
+          unknown call_tmp[774282] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+          (774285 'move' call_tmp[774282](92597 call chpl_buildStandInRTT domInstance[92577]))
+          (600226 'move' ret[600211](600225 'deref' call_tmp[774282]))
+          gotoReturn _end_standinType[600209] _end_standinType[600209]
+          (550601 'end of statement' domInstance[92577])
+        }
+      }
+      label _end_standinType[600209]
+      (600213 return ret[600211])
+    }
+    unknown standinDomain[92618] "dead at end of block" "no auto destroy"
+    unknown call_tmp[774287] "expr temp" "maybe param" "maybe type" "temp"
+    (774290 'move' call_tmp[774287](92620 call standinType))
+    (644642 'default init var' standinDomain[92618] call_tmp[774287])
+    (92622 'end of statement')
+    unknown call_tmp[774292] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774295 'move' call_tmp[774292](92629 'scalar promotion type' irType[92550]))
+    unknown call_tmp[774297] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774300 'move' call_tmp[774297](92628 call chpl_buildStandInRTT call_tmp[774292]))
+    unknown call_tmp[774302] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774305 'move' call_tmp[774302](92625 call chpl__buildArrayRuntimeType standinDomain[92618] call_tmp[774297]))
+    (600237 'move' ret[600232](600236 'deref' call_tmp[774302]))
+    gotoReturn _end_chpl_buildStandInRTT[600230] _end_chpl_buildStandInRTT[600230]
+    (550603 'end of statement' standinDomain[92618])
+    label _end_chpl_buildStandInRTT[600230]
+    (600234 return ret[600232])
+  }
+  function chpl_buildStandInRTT[92633](arg nonRTtype[92635]:_any[141](?)) type : _unknown[42]
+  {
+    unknown ret[600243] "RVV" "temp" "type variable"
+    (600248 'move' ret[600243](600247 'deref' nonRTtype[92635]))
+    (600245 return ret[600243])
+  }
+  function chpl_buildStandInRTT[92642](arg domInst[92644]:_any[141](?)) type : _unknown[42]
+  {
+    unknown ret[600252] "RVV" "temp" "type variable"
+    unknown call_tmp[774309] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774312 'move' call_tmp[774309](92658 call rank _mt[203] domInst[92644]))
+    unknown call_tmp[774316] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774319 'move' call_tmp[774316](92662 call idxType _mt[203] domInst[92644]))
+    unknown call_tmp[774323] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774326 'move' call_tmp[774323](92666 call strides _mt[203] domInst[92644]))
+    unknown call_tmp[774328] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (774331 'move' call_tmp[774328](92655 call chpl__buildDomainRuntimeType defaultDist[288287] call_tmp[774309] call_tmp[774316] call_tmp[774323]))
+    (600257 'move' ret[600252](600256 'deref' call_tmp[774328]))
+    (600254 return ret[600252])
+  }
+  where {
+    unknown call_tmp[774333] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (774336 'move' call_tmp[774333](92649 'typeof' domInst[92644]))
+    (394760 'is_subtype' unmanaged DefaultRectangularDom[468058](?) call_tmp[774333])
+  }
+  function chpl_buildStandInRTT[92672](arg domInst[92674]:_any[141](?)) type : _unknown[42] "no return value for void"
+  {
+    unknown call_tmp[774338] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (774341 'move' call_tmp[774338](92700 'typeof' domInst[92674]))
+    unknown call_tmp[774343] "expr temp" "maybe param" "maybe type" "temp"
+    (774346 'move' call_tmp[774343](394761 'is_subtype' unmanaged BaseDom[468061] call_tmp[774338]))
+    unknown call_tmp[774348] "expr temp" "maybe param" "maybe type" "temp"
+    (774351 'move' call_tmp[774348](92703 call _cond_test call_tmp[774343]))
+    if call_tmp[774348]
+    {
+      (92678 call compilerError "for/forall/promoted expressions are not implemented when the elements are or contain non-DefaultRectangular domains or arrays")
+    }
+    {
+      unknown call_tmp[774353] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (774356 'move' call_tmp[774353](92691 'typeof' domInst[92674]))
+      unknown call_tmp[774358] "expr temp" "maybe param" "maybe type" "temp"
+      (774361 'move' call_tmp[774358](92688 call : call_tmp[774353] string[244]))
+      (92684 call compilerError "unexpected argument of type " call_tmp[774358] " for chpl_buildStandInRTT()")
+    }
+    (600259 return _void[46])
+  }
+  function chpl_trivialLeader[92711]() : _unknown[42] "iterator fn" "no return value for void"
+  {
+    unknown ret[600263] "RVV" "temp"
+    unknown yret[600267] "YVV" "temp"
+    (600270 'move' yret[600267](600269 'deref' 0))
+    (92714 yield yret[600267])
+    (600265 return ret[600263])
+  }
+  function chpl_computeIteratorShape[92718](arg arg[92723]:_array[255540](?)) : _unknown[42] "inline"
+  {
+    unknown ret[600275] "RVV" "temp"
+    unknown call_tmp[774365] "expr temp" "maybe param" "maybe type" "temp"
+    (774368 'move' call_tmp[774365](92731 call _dom _mt[203] arg[92723]))
+    unknown call_tmp[774370] "expr temp" "maybe param" "maybe type" "temp"
+    (774373 'move' call_tmp[774370](92729 call chpl_computeIteratorShape call_tmp[774365]))
+    (600280 'move' ret[600275](600279 'deref' call_tmp[774370]))
+    (600277 return ret[600275])
+  }
+  function chpl_computeIteratorShape[92736](arg arg[92739]:_domain[225034](?)) : _unknown[42] "inline"
+  {
+    unknown ret[600284] "RVV" "temp"
+    unknown call_tmp[774377] "expr temp" "maybe param" "maybe type" "temp"
+    (774380 'move' call_tmp[774377](92747 call _instance _mt[203] arg[92739]))
+    (600289 'move' ret[600284](600288 'deref' call_tmp[774377]))
+    (600286 return ret[600284])
+  }
+  function chpl_computeIteratorShape[92752](arg arg[92757]:range[240](?)) : _unknown[42] "inline"
+  {
+    unknown ret[600293] "RVV" "temp"
+    (600298 'move' ret[600293](600297 'deref' arg[92757]))
+    (600295 return ret[600293])
+  }
+  function chpl_computeIteratorShape[92765](arg arg[92768]:_iteratorRecord[165](?)) : _unknown[42] "inline"
+  {
+    unknown ret[600302] "RVV" "temp"
+    unknown call_tmp[774382] "expr temp" "maybe param" "maybe type" "temp"
+    (774385 'move' call_tmp[774382](92782 call chpl_iteratorHasShape arg[92768]))
+    unknown call_tmp[774387] "expr temp" "maybe param" "maybe type" "temp"
+    (774390 'move' call_tmp[774387](92784 call _cond_test call_tmp[774382]))
+    if call_tmp[774387]
+    {
+      unknown call_tmp[774394] "expr temp" "maybe param" "maybe type" "temp"
+      (774397 'move' call_tmp[774394](92774 call _shape_ _mt[203] arg[92768]))
+      (600307 'move' ret[600302](600306 'deref' call_tmp[774394]))
+      gotoReturn _end_chpl_computeIteratorShape[600300] _end_chpl_computeIteratorShape[600300]
+    }
+    {
+      (600312 'move' ret[600302](600311 'deref' none[48]))
+      gotoReturn _end_chpl_computeIteratorShape[600300] _end_chpl_computeIteratorShape[600300]
+    }
+    label _end_chpl_computeIteratorShape[600300]
+    (600304 return ret[600302])
+  }
+  function chpl_computeIteratorShape[92792](arg arg[92794]:_any[141](?)) : _unknown[42] "inline"
+  {
+    unknown ret[600318] "RVV" "temp"
+    (600323 'move' ret[600318](600322 'deref' none[48]))
+    (600320 return ret[600318])
+  }
+  function chpl_iteratorHasShape[92801](arg ir[92804]:_iteratorRecord[165](?)) param : _unknown[42]
+  {
+    unknown ret[600327] "RVV" "param" "temp"
+    unknown call_tmp[774399] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (774402 'move' call_tmp[774399](92824 'typeof' ir[92804]))
+    unknown call_tmp[774404] "expr temp" "maybe param" "maybe type" "temp"
+    (774407 'move' call_tmp[774404](92822 call hasField call_tmp[774399] "_shape_"))
+    unknown call_tmp[774409] "expr temp" "maybe param" "maybe type" "temp"
+    (774412 'move' call_tmp[774409](92828 call _cond_test call_tmp[774404]))
+    if call_tmp[774409]
+    {
+      { scopeless type
+        unknown call_type_tmp[577111] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[774416] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774419 'move' call_tmp[774416](92812 call _shape_ _mt[203] ir[92804]))
+        (577115 'move' call_type_tmp[577111](92815 'typeof' call_tmp[774416]))
+      }
+      unknown call_tmp[774421] "expr temp" "maybe param" "maybe type" "temp"
+      (774424 'move' call_tmp[774421](92809 call != call_type_tmp[577111] void[4]))
+      (600332 'move' ret[600327](600331 'deref' call_tmp[774421]))
+      gotoReturn _end_chpl_iteratorHasShape[600325] _end_chpl_iteratorHasShape[600325]
+    }
+    {
+      (600337 'move' ret[600327](600336 'deref' 0))
+      gotoReturn _end_chpl_iteratorHasShape[600325] _end_chpl_iteratorHasShape[600325]
+    }
+    label _end_chpl_iteratorHasShape[600325]
+    (600329 return ret[600327])
+  }
+  function chpl_iteratorHasDomainShape[92836](arg ir[92839]:_iteratorRecord[165](?)) param : _unknown[42] "inline"
+  {
+    unknown ret[600343] "RVV" "param" "temp"
+    unknown call_tmp[774426] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (774429 'move' call_tmp[774426](92859 'typeof' ir[92839]))
+    unknown call_tmp[774431] "expr temp" "maybe param" "maybe type" "temp"
+    (774434 'move' call_tmp[774431](92857 call hasField call_tmp[774426] "_shape_"))
+    unknown call_tmp[774436] "expr temp" "maybe param" "maybe type" "temp"
+    (774439 'move' call_tmp[774436](92861 call _cond_test call_tmp[774431]))
+    if call_tmp[774436]
+    {
+      { scopeless type
+        unknown call_type_tmp[577117] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[774443] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774446 'move' call_tmp[774443](92847 call _shape_ _mt[203] ir[92839]))
+        (577121 'move' call_type_tmp[577117](92850 'typeof' call_tmp[774443]))
+      }
+      unknown call_tmp[774448] "expr temp" "maybe param" "maybe type" "temp"
+      (774451 'move' call_tmp[774448](394762 'is_subtype' BaseDom[424169](?) call_type_tmp[577117]))
+      (600348 'move' ret[600343](600347 'deref' call_tmp[774448]))
+      gotoReturn _end_chpl_iteratorHasDomainShape[600341] _end_chpl_iteratorHasDomainShape[600341]
+    }
+    {
+      (600353 'move' ret[600343](600352 'deref' 0))
+      gotoReturn _end_chpl_iteratorHasDomainShape[600341] _end_chpl_iteratorHasDomainShape[600341]
+    }
+    label _end_chpl_iteratorHasDomainShape[600341]
+    (600345 return ret[600343])
+  }
+  function chpl_iteratorHasRangeShape[92869](arg ir[92872]:_iteratorRecord[165](?)) param : _unknown[42] "inline"
+  {
+    unknown ret[600359] "RVV" "param" "temp"
+    unknown call_tmp[774453] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (774456 'move' call_tmp[774453](92891 'typeof' ir[92872]))
+    unknown call_tmp[774458] "expr temp" "maybe param" "maybe type" "temp"
+    (774461 'move' call_tmp[774458](92889 call hasField call_tmp[774453] "_shape_"))
+    unknown call_tmp[774463] "expr temp" "maybe param" "maybe type" "temp"
+    (774466 'move' call_tmp[774463](92893 call _cond_test call_tmp[774458]))
+    if call_tmp[774463]
+    {
+      { scopeless type
+        unknown call_type_tmp[577123] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[774470] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (774473 'move' call_tmp[774470](92880 call _shape_ _mt[203] ir[92872]))
+        (577127 'move' call_type_tmp[577123](92883 'typeof' call_tmp[774470]))
+      }
+      unknown call_tmp[774475] "expr temp" "maybe param" "maybe type" "temp"
+      (774478 'move' call_tmp[774475](92878 call isRange call_type_tmp[577123]))
+      (600364 'move' ret[600359](600363 'deref' call_tmp[774475]))
+      gotoReturn _end_chpl_iteratorHasRangeShape[600357] _end_chpl_iteratorHasRangeShape[600357]
+    }
+    {
+      (600369 'move' ret[600359](600368 'deref' 0))
+      gotoReturn _end_chpl_iteratorHasRangeShape[600357] _end_chpl_iteratorHasRangeShape[600357]
+    }
+    label _end_chpl_iteratorHasRangeShape[600357]
+    (600361 return ret[600359])
+  }
+  function chpl_iteratorShapeStaticTypeOrNothing[92901](arg ir[92904]:_iteratorRecord[165](?)) type : _unknown[42]
+  {
+    unknown ret[600375] "RVV" "temp" "type variable"
+    unknown call_tmp[774480] "expr temp" "maybe param" "maybe type" "temp"
+    (774483 'move' call_tmp[774480](92917 call hasField ir[92904] "_shape_"))
+    unknown call_tmp[774485] "expr temp" "maybe param" "maybe type" "temp"
+    (774488 'move' call_tmp[774485](92920 call _cond_test call_tmp[774480]))
+    if call_tmp[774485]
+    {
+      unknown call_tmp[774490] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (774493 'move' call_tmp[774490](92909 'static field type' ir[92904] "_shape_"))
+      (600380 'move' ret[600375](600379 'deref' call_tmp[774490]))
+      gotoReturn _end_chpl_iteratorShapeStaticTypeOrNothing[600373] _end_chpl_iteratorShapeStaticTypeOrNothing[600373]
+    }
+    {
+      (600385 'move' ret[600375](600384 'deref' nothing[7]))
+      gotoReturn _end_chpl_iteratorShapeStaticTypeOrNothing[600373] _end_chpl_iteratorShapeStaticTypeOrNothing[600373]
+    }
+    label _end_chpl_iteratorShapeStaticTypeOrNothing[600373]
+    (600377 return ret[600375])
+  }
+  function chpl_iteratorFromForExpr[92928](arg ir[92931]:_iteratorRecord[165](?)) param : _unknown[42]
+  {
+    unknown ret[600391] "RVV" "param" "temp"
+    unknown call_tmp[774495] "expr temp" "maybe param" "maybe type" "temp"
+    (774498 'move' call_tmp[774495](92952 call canResolveMethod module=[222] Reflection[1804] ir[92931] "_fromForExpr_"))
+    unknown call_tmp[774500] "expr temp" "maybe param" "maybe type" "temp"
+    (774503 'move' call_tmp[774500](92957 call _cond_test call_tmp[774495]))
+    if call_tmp[774500]
+    {
+      unknown call_tmp[774507] "expr temp" "maybe param" "maybe type" "temp"
+      (774510 'move' call_tmp[774507](92939 call _fromForExpr_ _mt[203] ir[92931]))
+      (600396 'move' ret[600391](600395 'deref' call_tmp[774507]))
+      gotoReturn _end_chpl_iteratorFromForExpr[600389] _end_chpl_iteratorFromForExpr[600389]
+    }
+    {
+      (600401 'move' ret[600391](600400 'deref' 0))
+      gotoReturn _end_chpl_iteratorFromForExpr[600389] _end_chpl_iteratorFromForExpr[600389]
+    }
+    label _end_chpl_iteratorFromForExpr[600389]
+    (600393 return ret[600391])
+    (400784 'referenced modules list' Reflection[1804])
+  }
+  function chpl_iteratorFromForExpr[92965](arg arg[92967]:_any[141](?)) param : _unknown[42]
+  {
+    unknown ret[600407] "RVV" "param" "temp"
+    (600412 'move' ret[600407](600411 'deref' 0))
+    (600409 return ret[600407])
+  }
+  function chpl_iteratorFromForeachExpr[92974](arg ir[92977]:_iteratorRecord[165](?)) param : _unknown[42]
+  {
+    unknown ret[600416] "RVV" "param" "temp"
+    unknown call_tmp[774512] "expr temp" "maybe param" "maybe type" "temp"
+    (774515 'move' call_tmp[774512](92996 call canResolveMethod module=[222] Reflection[1804] ir[92977] "_fromForeachExpr_"))
+    unknown call_tmp[774517] "expr temp" "maybe param" "maybe type" "temp"
+    (774520 'move' call_tmp[774517](93001 call _cond_test call_tmp[774512]))
+    if call_tmp[774517]
+    {
+      unknown call_tmp[774524] "expr temp" "maybe param" "maybe type" "temp"
+      (774527 'move' call_tmp[774524](92985 call _fromForeachExpr_ _mt[203] ir[92977]))
+      (600421 'move' ret[600416](600420 'deref' call_tmp[774524]))
+      gotoReturn _end_chpl_iteratorFromForeachExpr[600414] _end_chpl_iteratorFromForeachExpr[600414]
+    }
+    {
+      (600426 'move' ret[600416](600425 'deref' 0))
+      gotoReturn _end_chpl_iteratorFromForeachExpr[600414] _end_chpl_iteratorFromForeachExpr[600414]
+    }
+    label _end_chpl_iteratorFromForeachExpr[600414]
+    (600418 return ret[600416])
+    (400791 'referenced modules list' Reflection[1804])
+  }
+  function chpl_iteratorFromForeachExpr[93009](arg arg[93011]:_any[141](?)) param : _unknown[42]
+  {
+    unknown ret[600432] "RVV" "param" "temp"
+    (600437 'move' ret[600432](600436 'deref' 0))
+    (600434 return ret[600432])
+  }
+  function =[93018](ref arg ic[93021]:_iteratorRecord[165](?), arg xs[93024]:_any[141](?)) : _unknown[42] "assignop" "operator" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[93043] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[93044] "expr temp" "temp"
+      unknown call_tmp[774529] "expr temp" "maybe param" "maybe type" "temp"
+      (774532 'move' call_tmp[774529](93053 call _getIterator ic[93021]))
+      unknown call_tmp[774534] "expr temp" "maybe param" "maybe type" "temp"
+      (774537 'move' call_tmp[774534](93056 call _getIterator xs[93024]))
+      (93058 'move' _iterator[93044](93037 call _build_tuple call_tmp[774529] call_tmp[774534]))
+      Defer
+      {
+        {
+          (93086 call _freeIterator _iterator[93044])
+        }
+      }
+      { scopeless type
+        (93063 'move' _indexOfInterest[93043](93060 call iteratorIndex _iterator[93044]))
+      }
+      ForLoop[93045]
+      {
+        (93068 call _check_tuple_var_decl _indexOfInterest[93043] 2)
+        (550631 'end of statement')
+        unknown e[93028] "index var" "insert auto destroy"
+        (550632 'end of statement')
+        (93075 'move' e[93028](93072 call _indexOfInterest[93043] 0))
+        (550633 'end of statement' e[93028])
+        unknown x[93030] "index var" "insert auto destroy"
+        (550635 'end of statement')
+        (93081 'move' x[93030](93078 call _indexOfInterest[93043] 1))
+        (550636 'end of statement' x[93030])
+        (93038 call = e[93028] x[93030])
+        (550638 'end of statement' e[93028] x[93030])
+        label _continueLabel[93048]
+        _indexOfInterest[93043]
+        _iterator[93044]
+      }
+      label _breakLabel[93049]
+    }
+    (600439 return _void[46])
+  }
+  function =[93095](ref arg ic[93098]:_iteratorRecord[165](?), arg x[93104] :
+  (93102 call iteratorIndexType ic[93098])) : _unknown[42] "assignop" "operator" "suppress lvalue error" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[93116] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[93117] "expr temp" "temp"
+      (93126 'move' _iterator[93117](93124 call _getIterator ic[93098]))
+      Defer
+      {
+        {
+          (93141 call _freeIterator _iterator[93117])
+        }
+      }
+      { scopeless type
+        (93131 'move' _indexOfInterest[93116](93128 call iteratorIndex _iterator[93117]))
+      }
+      ForLoop[93118]
+      {
+        unknown e[93108] "index var" "insert auto destroy"
+        (550642 'end of statement')
+        (93136 'move' e[93108] _indexOfInterest[93116])
+        (550643 'end of statement' e[93108])
+        (93111 call = e[93108] x[93104])
+        (550645 'end of statement' e[93108])
+        label _continueLabel[93121]
+        _indexOfInterest[93116]
+        _iterator[93117]
+      }
+      label _breakLabel[93122]
+    }
+    (600441 return _void[46])
+  }
+  function _getIterator[93150](const  ref arg x[93152]:_any[141](?)) : _unknown[42] "inline" "no borrow convert" "suppress lvalue error"
+  {
+    unknown ret[600445] "RVV" "temp"
+    unknown call_tmp[774541] "expr temp" "maybe param" "maybe type" "temp"
+    (774544 'move' call_tmp[774541](93164 call(93161 call (partial) these _mt[203] x[93152])))
+    unknown call_tmp[774546] "expr temp" "maybe param" "maybe type" "temp"
+    (774549 'move' call_tmp[774546](93157 call _getIterator call_tmp[774541]))
+    (600450 'move' ret[600445](600449 'deref' call_tmp[774546]))
+    (600447 return ret[600445])
+  }
+  function _getIterator[93167](arg t[93169]:_any[141](?)) : _unknown[42] "inline"
+  {
+    unknown ret[600454] "RVV" "temp"
+    unknown call_tmp[774553] "expr temp" "maybe param" "maybe type" "temp"
+    (774556 'move' call_tmp[774553](93179 call(93176 call (partial) these _mt[203] t[93169])))
+    unknown call_tmp[774558] "expr temp" "maybe param" "maybe type" "temp"
+    (774561 'move' call_tmp[774558](93174 call _getIterator call_tmp[774553]))
+    (600459 'move' ret[600454](600458 'deref' call_tmp[774558]))
+    (600456 return ret[600454])
+  }
+  function _getIteratorZip[93182](arg x[93184]:_any[141](?)) : _unknown[42] "inline"
+  {
+    unknown ret[600463] "RVV" "temp"
+    unknown call_tmp[774563] "expr temp" "maybe param" "maybe type" "temp"
+    (774566 'move' call_tmp[774563](93189 call _getIterator x[93184]))
+    (600468 'move' ret[600463](600467 'deref' call_tmp[774563]))
+    (600465 return ret[600463])
+  }
+  function _getIteratorZip[93193](arg t[93195]:_any[141](?)) : _unknown[42] "inline"
+  {
+    unknown ret[600472] "RVV" "temp"
+    unknown call_tmp[774568] "expr temp" "maybe param" "maybe type" "temp"
+    (774571 'move' call_tmp[774568](93200 call _getIterator t[93195]))
+    (600477 'move' ret[600472](600476 'deref' call_tmp[774568]))
+    (600474 return ret[600472])
+  }
+  function _getIteratorZip[93204](arg x[93207]:_tuple[246](?)) : _unknown[42] "inline"
+  {
+    unknown ret[600497] "RVV" "temp"
+    function _getIteratorZipInternal[93211](arg x[93214]:_tuple[246](?), param arg dim[93218]:int(64)[10]) : _unknown[42] "inline"
+    {
+      unknown ret[600481] "RVV" "temp"
+      unknown tmp[482184] "maybe param" "temp"
+      unknown call_tmp[774573] "expr temp" "maybe param" "maybe type" "temp"
+      (774576 'move' call_tmp[774573](93233 call x[93214] dim[93218]))
+      (482195 'move' tmp[482184](93231 call isTuple call_tmp[774573]))
+      unknown call_tmp[774578] "expr temp" "maybe param" "maybe type" "temp"
+      (774581 'move' call_tmp[774578](482197 call _cond_invalid tmp[482184]))
+      if call_tmp[774578]
+      {
+        (482200 call compilerError "cannot promote short-circuiting && operator")
+      }
+      unknown tmp[669610] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[669611] "maybe param" "temp"
+      unknown call_tmp[774583] "expr temp" "maybe param" "maybe type" "temp"
+      (774586 'move' call_tmp[774583](482185 call isTrue tmp[482184]))
+      (669616 'move' tmp[669611](669614 call _cond_test call_tmp[774583]))
+      if tmp[669611]
+      {
+        unknown tmp[669618] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[774588] "expr temp" "maybe param" "maybe type" "temp"
+        (774591 'move' call_tmp[774588](93240 call x[93214] dim[93218]))
+        unknown call_tmp[774593] "expr temp" "maybe param" "maybe type" "temp"
+        (774596 'move' call_tmp[774593](93238 call isHomogeneousTuple call_tmp[774588]))
+        unknown call_tmp[774598] "expr temp" "maybe param" "maybe type" "temp"
+        (774601 'move' call_tmp[774598](93235 call ! call_tmp[774593]))
+        (669620 'move' tmp[669618](482188 call isTrue call_tmp[774598]))
+        (669625 'move' tmp[669610](669622 '_paramFoldLogical' tmp[669611] tmp[669618]))
+      }
+      {
+        (669630 'move' tmp[669610](669627 '_paramFoldLogical' tmp[669611] 0))
+      }
+      unknown call_tmp[774603] "expr temp" "maybe param" "maybe type" "temp"
+      (774606 'move' call_tmp[774603](93242 call _cond_test tmp[669610]))
+      if call_tmp[774603]
+      {
+        (93223 call compilerError "Heterogeneous tuples don't support zippered iteration yet")
+      }
+      unknown call_tmp[774610] "expr temp" "maybe param" "maybe type" "temp"
+      (774613 'move' call_tmp[774610](93281 call size _mt[203] x[93214]))
+      unknown call_tmp[774615] "expr temp" "maybe param" "maybe type" "temp"
+      (774618 'move' call_tmp[774615](93278 call - call_tmp[774610] 1))
+      unknown call_tmp[774620] "expr temp" "maybe param" "maybe type" "temp"
+      (774623 'move' call_tmp[774620](93275 call == dim[93218] call_tmp[774615]))
+      unknown call_tmp[774625] "expr temp" "maybe param" "maybe type" "temp"
+      (774628 'move' call_tmp[774625](93285 call _cond_test call_tmp[774620]))
+      if call_tmp[774625]
+      {
+        unknown call_tmp[774630] "expr temp" "maybe param" "maybe type" "temp"
+        (774633 'move' call_tmp[774630](93252 call x[93214] dim[93218]))
+        unknown call_tmp[774635] "expr temp" "maybe param" "maybe type" "temp"
+        (774638 'move' call_tmp[774635](93250 call _getIterator call_tmp[774630]))
+        unknown call_tmp[774640] "expr temp" "maybe param" "maybe type" "temp"
+        (774643 'move' call_tmp[774640](93254 call _build_tuple call_tmp[774635]))
+        (600486 'move' ret[600481](600485 'deref' call_tmp[774640]))
+        gotoReturn _end__getIteratorZipInternal[600479] _end__getIteratorZipInternal[600479]
+      }
+      {
+        unknown call_tmp[774645] "expr temp" "maybe param" "maybe type" "temp"
+        (774648 'move' call_tmp[774645](93262 call x[93214] dim[93218]))
+        unknown call_tmp[774650] "expr temp" "maybe param" "maybe type" "temp"
+        (774653 'move' call_tmp[774650](93260 call _getIterator call_tmp[774645]))
+        unknown call_tmp[774655] "expr temp" "maybe param" "maybe type" "temp"
+        (774658 'move' call_tmp[774655](93267 call + dim[93218] 1))
+        unknown call_tmp[774660] "expr temp" "maybe param" "maybe type" "temp"
+        (774663 'move' call_tmp[774660](93265 call _getIteratorZipInternal x[93214] call_tmp[774655]))
+        unknown call_tmp[774665] "expr temp" "maybe param" "maybe type" "temp"
+        (774668 'move' call_tmp[774665](93272 call _build_tuple call_tmp[774650](93271 'expand_tuple' call_tmp[774660])))
+        (600491 'move' ret[600481](600490 'deref' call_tmp[774665]))
+        gotoReturn _end__getIteratorZipInternal[600479] _end__getIteratorZipInternal[600479]
+      }
+      label _end__getIteratorZipInternal[600479]
+      (600483 return ret[600481])
+    }
+    unknown call_tmp[774672] "expr temp" "maybe param" "maybe type" "temp"
+    (774675 'move' call_tmp[774672](93309 call size _mt[203] x[93207]))
+    unknown call_tmp[774677] "expr temp" "maybe param" "maybe type" "temp"
+    (774680 'move' call_tmp[774677](93306 call == call_tmp[774672] 1))
+    unknown call_tmp[774682] "expr temp" "maybe param" "maybe type" "temp"
+    (774685 'move' call_tmp[774682](93313 call _cond_test call_tmp[774677]))
+    if call_tmp[774682]
+    {
+      unknown call_tmp[774687] "expr temp" "maybe param" "maybe type" "temp"
+      (774690 'move' call_tmp[774687](93297 call x[93207] 0))
+      unknown call_tmp[774692] "expr temp" "maybe param" "maybe type" "temp"
+      (774695 'move' call_tmp[774692](93295 call _getIterator call_tmp[774687]))
+      (600502 'move' ret[600497](600501 'deref' call_tmp[774692]))
+      gotoReturn _end__getIteratorZip[600495] _end__getIteratorZip[600495]
+    }
+    {
+      unknown call_tmp[774697] "expr temp" "maybe param" "maybe type" "temp"
+      (774700 'move' call_tmp[774697](93302 call _getIteratorZipInternal x[93207] 0))
+      (600507 'move' ret[600497](600506 'deref' call_tmp[774697]))
+      gotoReturn _end__getIteratorZip[600495] _end__getIteratorZip[600495]
+    }
+    label _end__getIteratorZip[600495]
+    (600499 return ret[600497])
+  }
+  function _getIteratorZip[93321](arg t[93324]:_tuple[246](?)) : _unknown[42] "inline"
+  {
+    unknown ret[600529] "RVV" "temp"
+    function _getIteratorZipInternal[93328](arg t[93331]:_tuple[246](?), param arg dim[93335]:int(64)[10]) : _unknown[42] "inline"
+    {
+      unknown ret[600513] "RVV" "temp"
+      unknown call_tmp[774704] "expr temp" "maybe param" "maybe type" "temp"
+      (774707 'move' call_tmp[774704](93373 call size _mt[203] t[93331]))
+      unknown call_tmp[774709] "expr temp" "maybe param" "maybe type" "temp"
+      (774712 'move' call_tmp[774709](93370 call - call_tmp[774704] 1))
+      unknown call_tmp[774714] "expr temp" "maybe param" "maybe type" "temp"
+      (774717 'move' call_tmp[774714](93367 call == dim[93335] call_tmp[774709]))
+      unknown call_tmp[774719] "expr temp" "maybe param" "maybe type" "temp"
+      (774722 'move' call_tmp[774719](93377 call _cond_test call_tmp[774714]))
+      if call_tmp[774719]
+      {
+        unknown call_tmp[774724] "expr temp" "maybe param" "maybe type" "temp"
+        (774727 'move' call_tmp[774724](93344 call t[93331] dim[93335]))
+        unknown call_tmp[774729] "expr temp" "maybe param" "maybe type" "temp"
+        (774732 'move' call_tmp[774729](93342 call _getIterator call_tmp[774724]))
+        unknown call_tmp[774734] "expr temp" "maybe param" "maybe type" "temp"
+        (774737 'move' call_tmp[774734](93346 call _build_tuple call_tmp[774729]))
+        (600518 'move' ret[600513](600517 'deref' call_tmp[774734]))
+        gotoReturn _end__getIteratorZipInternal[600511] _end__getIteratorZipInternal[600511]
+      }
+      {
+        unknown call_tmp[774739] "expr temp" "maybe param" "maybe type" "temp"
+        (774742 'move' call_tmp[774739](93354 call t[93331] dim[93335]))
+        unknown call_tmp[774744] "expr temp" "maybe param" "maybe type" "temp"
+        (774747 'move' call_tmp[774744](93352 call _getIterator call_tmp[774739]))
+        unknown call_tmp[774749] "expr temp" "maybe param" "maybe type" "temp"
+        (774752 'move' call_tmp[774749](93359 call + dim[93335] 1))
+        unknown call_tmp[774754] "expr temp" "maybe param" "maybe type" "temp"
+        (774757 'move' call_tmp[774754](93357 call _getIteratorZipInternal t[93331] call_tmp[774749]))
+        unknown call_tmp[774759] "expr temp" "maybe param" "maybe type" "temp"
+        (774762 'move' call_tmp[774759](93364 call _build_tuple call_tmp[774744](93363 'expand_tuple' call_tmp[774754])))
+        (600523 'move' ret[600513](600522 'deref' call_tmp[774759]))
+        gotoReturn _end__getIteratorZipInternal[600511] _end__getIteratorZipInternal[600511]
+      }
+      label _end__getIteratorZipInternal[600511]
+      (600515 return ret[600513])
+    }
+    unknown call_tmp[774766] "expr temp" "maybe param" "maybe type" "temp"
+    (774769 'move' call_tmp[774766](93401 call size _mt[203] t[93324]))
+    unknown call_tmp[774771] "expr temp" "maybe param" "maybe type" "temp"
+    (774774 'move' call_tmp[774771](93398 call == call_tmp[774766] 1))
+    unknown call_tmp[774776] "expr temp" "maybe param" "maybe type" "temp"
+    (774779 'move' call_tmp[774776](93405 call _cond_test call_tmp[774771]))
+    if call_tmp[774776]
+    {
+      unknown call_tmp[774781] "expr temp" "maybe param" "maybe type" "temp"
+      (774784 'move' call_tmp[774781](93389 call t[93324] 0))
+      unknown call_tmp[774786] "expr temp" "maybe param" "maybe type" "temp"
+      (774789 'move' call_tmp[774786](93387 call _getIterator call_tmp[774781]))
+      (600534 'move' ret[600529](600533 'deref' call_tmp[774786]))
+      gotoReturn _end__getIteratorZip[600527] _end__getIteratorZip[600527]
+    }
+    {
+      unknown call_tmp[774791] "expr temp" "maybe param" "maybe type" "temp"
+      (774794 'move' call_tmp[774791](93394 call _getIteratorZipInternal t[93324] 0))
+      (600539 'move' ret[600529](600538 'deref' call_tmp[774791]))
+      gotoReturn _end__getIteratorZip[600527] _end__getIteratorZip[600527]
+    }
+    label _end__getIteratorZip[600527]
+    (600531 return ret[600529])
+  }
+  function _freeIterator[93413](arg ic[93416]:_iteratorClass[168](?)) : _unknown[42] "inline" "no return value for void"
+  {
+    unknown call_tmp[774796] "expr temp" "maybe param" "maybe type" "temp"
+    (774799 'move' call_tmp[774796](93424 call c_ptr[46891](?) void[4]))
+    unknown call_tmp[774801] "expr temp" "maybe param" "maybe type" "temp"
+    (774804 'move' call_tmp[774801](93422 'cast' call_tmp[774796] ic[93416]))
+    (93421 call chpl_here_free call_tmp[774801])
+    (600543 return _void[46])
+  }
+  function _freeIterator[93429](arg x[93432]:_tuple[246](?)) : _unknown[42] "inline" "no return value for void"
+  {
+    {
+      unknown i[93436] "dead at end of block" "index var" "insert auto destroy"
+      (644644 'init var' i[93436] 0)
+      (550662 'end of statement')
+      unknown tmp[93454] "maybe param" "temp"
+      unknown call_tmp[774808] "expr temp" "maybe param" "maybe type" "temp"
+      (774811 'move' call_tmp[774808](93442 call size _mt[203] x[93432]))
+      unknown call_tmp[774813] "expr temp" "maybe param" "maybe type" "temp"
+      (774816 'move' call_tmp[774813](93439 call - call_tmp[774808] 1))
+      (93466 'move' tmp[93454](93464 call chpl_compute_low_param_loop_bound 0 call_tmp[774813]))
+      unknown tmp[93455] "maybe param" "temp"
+      unknown call_tmp[774820] "expr temp" "maybe param" "maybe type" "temp"
+      (774823 'move' call_tmp[774820](93473 call size _mt[203] x[93432]))
+      unknown call_tmp[774825] "expr temp" "maybe param" "maybe type" "temp"
+      (774828 'move' call_tmp[774825](93471 call - call_tmp[774820] 1))
+      (93479 'move' tmp[93455](93477 call chpl_compute_high_param_loop_bound 0 call_tmp[774825]))
+      unknown tmp[93456] "maybe param" "temp"
+      (93482 'move' tmp[93456] 1)
+      ParamForLoop[93484]
+      { i[93436] tmp[93454] tmp[93455] tmp[93456]
+        unknown call_tmp[774830] "expr temp" "maybe param" "maybe type" "temp"
+        (774833 'move' call_tmp[774830](93451 call x[93432] i[93436]))
+        (93449 call _freeIterator call_tmp[774830])
+        (550663 'end of statement' i[93436])
+      }
+      label _unused_continueLabel[93458]
+      label _breakLabel[93457]
+    }
+    (600545 return _void[46])
+  }
+  function _toLeader[93495](const arg ir[93498]:_iteratorRecord[165](?)) : _unknown[42] "inline" "no implicit copy" "fn returns iterator"
+  {
+    unknown ret[600549] "RVV" "temp"
+    unknown call_tmp[774835] "expr temp" "maybe param" "maybe type" "temp"
+    (774838 'move' call_tmp[774835](93507 'to leader' ir[93498]))
+    unknown call_tmp[774840] "expr temp" "maybe param" "maybe type" "temp"
+    (774843 'move' call_tmp[774840](93506 call chpl__autoCopy call_tmp[774835](definedConst = 0)))
+    (600554 'move' ret[600549](600553 'deref' call_tmp[774840]))
+    (600551 return ret[600549])
+  }
+  where {
+    (93501 'has leader' ir[93498])
+  }
+  function _toLeader[93514](const arg x[93516]:_any[141](?)) : _unknown[42] "inline" "fn returns iterator" "suppress lvalue error"
+  {
+    unknown ret[600558] "RVV" "temp"
+    unknown call_tmp[774847] "expr temp" "maybe param" "maybe type" "temp"
+    (774850 'move' call_tmp[774847](93541 call(93538 call (partial) these _mt[203] x[93516])))
+    unknown call_tmp[774852] "expr temp" "maybe param" "maybe type" "temp"
+    (774855 'move' call_tmp[774852](93536 call _toLeader call_tmp[774847]))
+    (600563 'move' ret[600558](600562 'deref' call_tmp[774852]))
+    (600560 return ret[600558])
+  }
+  where {
+    unknown tmp[482205] "maybe param" "temp"
+    unknown call_tmp[774857] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (774860 'move' call_tmp[774857](93525 'typeof' x[93516]))
+    unknown call_tmp[774862] "expr temp" "maybe param" "maybe type" "temp"
+    (774865 'move' call_tmp[774862](394763 'is_subtype' _iteratorRecord[165](?) call_tmp[774857]))
+    (482216 'move' tmp[482205](93520 call ! call_tmp[774862]))
+    unknown call_tmp[774867] "expr temp" "maybe param" "maybe type" "temp"
+    (774870 'move' call_tmp[774867](482218 call _cond_invalid tmp[482205]))
+    if call_tmp[774867]
+    {
+      (482221 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[669637] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669638] "maybe param" "temp"
+    unknown call_tmp[774872] "expr temp" "maybe param" "maybe type" "temp"
+    (774875 'move' call_tmp[774872](482206 call isTrue tmp[482205]))
+    (669643 'move' tmp[669638](669641 call _cond_test call_tmp[774872]))
+    if tmp[669638]
+    {
+      unknown tmp[669645] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[774879] "expr temp" "maybe param" "maybe type" "temp"
+      (774882 'move' call_tmp[774879](93532 call(93529 call (partial) these _mt[203] x[93516])))
+      unknown call_tmp[774884] "expr temp" "maybe param" "maybe type" "temp"
+      (774887 'move' call_tmp[774884](93527 'has leader' call_tmp[774879]))
+      (669647 'move' tmp[669645](482209 call isTrue call_tmp[774884]))
+      (669652 'move' tmp[669637](669649 '_paramFoldLogical' tmp[669638] tmp[669645]))
+    }
+    {
+      (669657 'move' tmp[669637](669654 '_paramFoldLogical' tmp[669638] 0))
+    }
+    (1001356 call chpl_statementLevelSymbol tmp[669637])
+  }
+  function _toLeaderZip[93545](arg x[93547]:_any[141](?)) : _unknown[42] "inline" "fn returns iterator"
+  {
+    unknown ret[600567] "RVV" "temp"
+    unknown call_tmp[774889] "expr temp" "maybe param" "maybe type" "temp"
+    (774892 'move' call_tmp[774889](93570 call _toLeader x[93547]))
+    (600572 'move' ret[600567](600571 'deref' call_tmp[774889]))
+    (600569 return ret[600567])
+  }
+  where {
+    unknown tmp[482226] "maybe param" "temp"
+    unknown call_tmp[774894] "expr temp" "maybe param" "maybe type" "temp"
+    (774897 'move' call_tmp[774894](93554 call isTuple x[93547]))
+    (482237 'move' tmp[482226](93551 call ! call_tmp[774894]))
+    unknown call_tmp[774899] "expr temp" "maybe param" "maybe type" "temp"
+    (774902 'move' call_tmp[774899](482239 call _cond_invalid tmp[482226]))
+    if call_tmp[774899]
+    {
+      (482242 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[669664] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669665] "maybe param" "temp"
+    unknown call_tmp[774904] "expr temp" "maybe param" "maybe type" "temp"
+    (774907 'move' call_tmp[774904](482227 call isTrue tmp[482226]))
+    (669670 'move' tmp[669665](669668 call _cond_test call_tmp[774904]))
+    if tmp[669665]
+    {
+      unknown tmp[669672] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[774909] "expr temp" "maybe param" "maybe type" "temp"
+      (774912 'move' call_tmp[774909](93562 call canResolve module=[222] Reflection[1804] "_toLeader" x[93547]))
+      (669674 'move' tmp[669672](482230 call isTrue call_tmp[774909]))
+      (669679 'move' tmp[669664](669676 '_paramFoldLogical' tmp[669665] tmp[669672]))
+    }
+    {
+      (669684 'move' tmp[669664](669681 '_paramFoldLogical' tmp[669665] 0))
+    }
+    (1001358 call chpl_statementLevelSymbol tmp[669664])
+    (400807 'referenced modules list' Reflection[1804])
+  }
+  function _toLeaderZip[93575](arg x[93578]:_tuple[246](?)) : _unknown[42] "inline" "fn returns iterator"
+  {
+    unknown ret[600576] "RVV" "temp"
+    unknown call_tmp[774914] "expr temp" "maybe param" "maybe type" "temp"
+    (774917 'move' call_tmp[774914](93595 call x[93578] 0))
+    unknown call_tmp[774919] "expr temp" "maybe param" "maybe type" "temp"
+    (774922 'move' call_tmp[774919](93593 call _toLeader call_tmp[774914]))
+    (600581 'move' ret[600576](600580 'deref' call_tmp[774919]))
+    (600578 return ret[600576])
+  }
+  where {
+    unknown call_tmp[774924] "expr temp" "maybe param" "maybe type" "temp"
+    (774927 'move' call_tmp[774924](93588 call x[93578] 0))
+    (93585 call canResolve module=[222] Reflection[1804] "_toLeader" call_tmp[774924])
+    (400813 'referenced modules list' Reflection[1804])
+  }
+  function _toStandalone[93600](arg iterator[93603]:_iteratorClass[168](?)) : _unknown[42] "inline" "no implicit copy" "fn returns iterator"
+  {
+    unknown ret[600585] "RVV" "temp"
+    unknown call_tmp[774929] "expr temp" "maybe param" "maybe type" "temp"
+    (774932 'move' call_tmp[774929](93610 'to standalone' iterator[93603]))
+    unknown call_tmp[774934] "expr temp" "maybe param" "maybe type" "temp"
+    (774937 'move' call_tmp[774934](93609 call chpl__autoCopy call_tmp[774929](definedConst = 0)))
+    (600590 'move' ret[600585](600589 'deref' call_tmp[774934]))
+    (600587 return ret[600585])
+  }
+  function _toStandalone[93616](arg ir[93619]:_iteratorRecord[165](?)) : _unknown[42] "inline" "fn returns iterator"
+  {
+    unknown ret[600594] "RVV" "temp"
+    unknown call_tmp[774939] "maybe param" "maybe type" "temp"
+    (774942 'move' call_tmp[774939](93626 call _getIterator ir[93619]))
+    unknown ic[93624] "dead at end of block" "insert auto destroy" "no copy"
+    (644646 'init var' ic[93624] call_tmp[774939])
+    (93629 'end of statement')
+    unknown call_tmp[774944] "maybe param" "maybe type" "temp"
+    (774947 'move' call_tmp[774944](93633 call _toStandalone ic[93624]))
+    unknown standalone[93631] "dead at end of block" "insert auto destroy" "no copy"
+    (644648 'init var' standalone[93631] call_tmp[774944])
+    (93636 'end of statement' ic[93624])
+    (93638 call _freeIterator ic[93624])
+    (550671 'end of statement' ic[93624])
+    (600599 'move' ret[600594](600598 'deref' standalone[93631]))
+    gotoReturn _end__toStandalone[600592] _end__toStandalone[600592]
+    (550673 'end of statement' standalone[93631])
+    label _end__toStandalone[600592]
+    (600596 return ret[600594])
+  }
+  function _toStandalone[93644](arg x[93646]:_any[141](?)) : _unknown[42] "inline" "fn returns iterator" "suppress lvalue error"
+  {
+    unknown ret[600605] "RVV" "temp"
+    unknown call_tmp[774951] "expr temp" "maybe param" "maybe type" "temp"
+    (774954 'move' call_tmp[774951](93656 call(93653 call (partial) these _mt[203] x[93646])))
+    unknown call_tmp[774956] "expr temp" "maybe param" "maybe type" "temp"
+    (774959 'move' call_tmp[774956](93651 call _toStandalone call_tmp[774951]))
+    (600610 'move' ret[600605](600609 'deref' call_tmp[774956]))
+    (600607 return ret[600605])
+  }
+  function _toLeader[93659](arg ir[93662]:_iteratorRecord[165](?), arg args[93666]:_any[141](?) ...) : _unknown[42] "expand tuples with values" "inline" "no implicit copy" "fn returns iterator"
+  {
+    unknown ret[600614] "RVV" "temp"
+    unknown call_tmp[774961] "expr temp" "maybe param" "maybe type" "temp"
+    (774964 'move' call_tmp[774961](93673 'to leader' ir[93662](93676 'expand_tuple' args[93666])))
+    unknown call_tmp[774966] "expr temp" "maybe param" "maybe type" "temp"
+    (774969 'move' call_tmp[774966](93672 call chpl__autoCopy call_tmp[774961](definedConst = 0)))
+    (600619 'move' ret[600614](600618 'deref' call_tmp[774966]))
+    (600616 return ret[600614])
+  }
+  function _toLeader[93681](arg x[93683]:_any[141](?), arg args[93686]:_any[141](?) ...) : _unknown[42] "expand tuples with values" "inline" "fn returns iterator" "suppress lvalue error"
+  {
+    unknown ret[600623] "RVV" "temp"
+    unknown call_tmp[774973] "expr temp" "maybe param" "maybe type" "temp"
+    (774976 'move' call_tmp[774973](93697 call(93694 call (partial) these _mt[203] x[93683])))
+    unknown call_tmp[774978] "expr temp" "maybe param" "maybe type" "temp"
+    (774981 'move' call_tmp[774978](93692 call _toLeader call_tmp[774973](93699 'expand_tuple' args[93686])))
+    (600628 'move' ret[600623](600627 'deref' call_tmp[774978]))
+    (600625 return ret[600623])
+  }
+  function _toLeaderZip[93702](arg x[93704]:_any[141](?), arg args[93707]:_any[141](?) ...) : _unknown[42] "expand tuples with values" "inline" "fn returns iterator"
+  {
+    unknown ret[600632] "RVV" "temp"
+    unknown call_tmp[774983] "expr temp" "maybe param" "maybe type" "temp"
+    (774986 'move' call_tmp[774983](93713 call _toLeader x[93704](93716 'expand_tuple' args[93707])))
+    (600637 'move' ret[600632](600636 'deref' call_tmp[774983]))
+    (600634 return ret[600632])
+  }
+  function _toLeaderZip[93719](arg x[93722]:_tuple[246](?), arg args[93726]:_any[141](?) ...) : _unknown[42] "expand tuples with values" "inline" "fn returns iterator"
+  {
+    unknown ret[600641] "RVV" "temp"
+    unknown call_tmp[774988] "expr temp" "maybe param" "maybe type" "temp"
+    (774991 'move' call_tmp[774988](93734 call x[93722] 0))
+    unknown call_tmp[774993] "expr temp" "maybe param" "maybe type" "temp"
+    (774996 'move' call_tmp[774993](93732 call _toLeader call_tmp[774988](93737 'expand_tuple' args[93726])))
+    (600646 'move' ret[600641](600645 'deref' call_tmp[774993]))
+    (600643 return ret[600641])
+  }
+  function _toStandalone[93740](arg iterator[93743]:_iteratorClass[168](?), arg args[93747]:_any[141](?) ...) : _unknown[42] "expand tuples with values" "inline" "no implicit copy" "fn returns iterator"
+  {
+    unknown ret[600650] "RVV" "temp"
+    unknown call_tmp[774998] "expr temp" "maybe param" "maybe type" "temp"
+    (775001 'move' call_tmp[774998](93754 'to standalone' iterator[93743](93757 'expand_tuple' args[93747])))
+    unknown call_tmp[775003] "expr temp" "maybe param" "maybe type" "temp"
+    (775006 'move' call_tmp[775003](93753 call chpl__autoCopy call_tmp[774998](definedConst = 0)))
+    (600655 'move' ret[600650](600654 'deref' call_tmp[775003]))
+    (600652 return ret[600650])
+  }
+  function _toStandalone[93762](arg ir[93765]:_iteratorRecord[165](?), arg args[93769]:_any[141](?) ...) : _unknown[42] "expand tuples with values" "inline" "fn returns iterator"
+  {
+    unknown ret[600659] "RVV" "temp"
+    unknown call_tmp[775008] "maybe param" "maybe type" "temp"
+    (775011 'move' call_tmp[775008](93776 call _getIterator ir[93765]))
+    unknown ic[93774] "dead at end of block" "insert auto destroy" "no copy"
+    (644650 'init var' ic[93774] call_tmp[775008])
+    (93779 'end of statement')
+    unknown call_tmp[775013] "maybe param" "maybe type" "temp"
+    (775016 'move' call_tmp[775013](93783 call _toStandalone ic[93774](93786 'expand_tuple' args[93769])))
+    unknown standalone[93781] "dead at end of block" "insert auto destroy" "no copy"
+    (644652 'init var' standalone[93781] call_tmp[775013])
+    (93788 'end of statement' ic[93774])
+    (93790 call _freeIterator ic[93774])
+    (550682 'end of statement' ic[93774])
+    (600664 'move' ret[600659](600663 'deref' standalone[93781]))
+    gotoReturn _end__toStandalone[600657] _end__toStandalone[600657]
+    (550684 'end of statement' standalone[93781])
+    label _end__toStandalone[600657]
+    (600661 return ret[600659])
+  }
+  function _toStandalone[93796](arg x[93798]:_any[141](?), arg args[93801]:_any[141](?) ...) : _unknown[42] "expand tuples with values" "inline" "fn returns iterator" "suppress lvalue error"
+  {
+    unknown ret[600670] "RVV" "temp"
+    unknown call_tmp[775020] "expr temp" "maybe param" "maybe type" "temp"
+    (775023 'move' call_tmp[775020](93812 call(93809 call (partial) these _mt[203] x[93798])))
+    unknown call_tmp[775025] "expr temp" "maybe param" "maybe type" "temp"
+    (775028 'move' call_tmp[775025](93807 call _toStandalone call_tmp[775020](93814 'expand_tuple' args[93801])))
+    (600675 'move' ret[600670](600674 'deref' call_tmp[775025]))
+    (600672 return ret[600670])
+  }
+  function chpl__canHaveFastFollowers[93817](arg x[93819]:_any[141](?)) param : _unknown[42]
+  {
+    unknown ret[600679] "RVV" "param" "temp"
+    unknown call_tmp[775030] "expr temp" "maybe param" "maybe type" "temp"
+    (775033 'move' call_tmp[775030](93824 call isArray x[93819]))
+    (600684 'move' ret[600679](600683 'deref' call_tmp[775030]))
+    (600681 return ret[600679])
+  }
+  function chpl__canLeadFastFollowers[93828](arg x[93830]:_any[141](?)) param : _unknown[42]
+  {
+    unknown ret[600688] "RVV" "param" "temp"
+    unknown tmp[482247] "maybe param" "temp"
+    (482258 'move' tmp[482247](93837 call isDomain x[93830]))
+    unknown call_tmp[775035] "expr temp" "maybe param" "maybe type" "temp"
+    (775038 'move' call_tmp[775035](482260 call _cond_invalid tmp[482247]))
+    if call_tmp[775035]
+    {
+      (482263 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[669691] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669692] "maybe param" "temp"
+    unknown call_tmp[775040] "expr temp" "maybe param" "maybe type" "temp"
+    (775043 'move' call_tmp[775040](482248 call isTrue tmp[482247]))
+    (669697 'move' tmp[669692](669695 call _cond_test call_tmp[775040]))
+    if tmp[669692]
+    {
+      (669702 'move' tmp[669691](669699 '_paramFoldLogical' tmp[669692] 1))
+    }
+    {
+      unknown tmp[669704] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[775045] "expr temp" "maybe param" "maybe type" "temp"
+      (775048 'move' call_tmp[775045](93840 call isArray x[93830]))
+      (669706 'move' tmp[669704](482252 call isTrue call_tmp[775045]))
+      (669711 'move' tmp[669691](669708 '_paramFoldLogical' tmp[669692] tmp[669704]))
+    }
+    (600693 'move' ret[600688](600692 'deref' tmp[669691]))
+    (600690 return ret[600688])
+  }
+  function chpl__staticFastFollowCheck[93844](arg x[93846]:_any[141](?)) param : _unknown[42]
+  {
+    unknown ret[600697] "RVV" "param" "temp"
+    const lead[93850] "dead at end of block" "const" "insert auto destroy" "no copy"
+    (644654 'init var' lead[93850] x[93846])
+    (93853 'end of statement')
+    unknown call_tmp[775050] "expr temp" "maybe param" "maybe type" "temp"
+    (775053 'move' call_tmp[775050](93864 call chpl__canHaveFastFollowers lead[93850]))
+    unknown call_tmp[775055] "expr temp" "maybe param" "maybe type" "temp"
+    (775058 'move' call_tmp[775055](93866 call _cond_test call_tmp[775050]))
+    if call_tmp[775055]
+    {
+      unknown call_tmp[775060] "expr temp" "maybe param" "maybe type" "temp"
+      (775063 'move' call_tmp[775060](93857 call chpl__staticFastFollowCheck x[93846] lead[93850]))
+      (600702 'move' ret[600697](600701 'deref' call_tmp[775060]))
+      gotoReturn _end_chpl__staticFastFollowCheck[600695] _end_chpl__staticFastFollowCheck[600695]
+      (550690 'end of statement' lead[93850])
+    }
+    {
+      (600707 'move' ret[600697](600706 'deref' 0))
+      gotoReturn _end_chpl__staticFastFollowCheck[600695] _end_chpl__staticFastFollowCheck[600695]
+    }
+    label _end_chpl__staticFastFollowCheck[600695]
+    (600699 return ret[600697])
+  }
+  function chpl__staticFastFollowCheck[93872](arg x[93874]:_any[141](?), arg lead[93876]:_any[141](?)) param : _unknown[42]
+  {
+    unknown ret[600713] "RVV" "param" "temp"
+    unknown call_tmp[775065] "expr temp" "maybe param" "maybe type" "temp"
+    (775068 'move' call_tmp[775065](93911 call chpl__canLeadFastFollowers lead[93876]))
+    unknown call_tmp[775070] "expr temp" "maybe param" "maybe type" "temp"
+    (775073 'move' call_tmp[775070](93913 call _cond_test call_tmp[775065]))
+    if call_tmp[775070]
+    {
+      unknown call_tmp[775075] "expr temp" "maybe param" "maybe type" "temp"
+      (775078 'move' call_tmp[775075](93901 call isArray x[93874]))
+      unknown call_tmp[775080] "expr temp" "maybe param" "maybe type" "temp"
+      (775083 'move' call_tmp[775080](93903 call _cond_test call_tmp[775075]))
+      if call_tmp[775080]
+      {
+        { scopeless type
+          unknown call_type_tmp[577129] "expr temp" "maybe type" "temp" "type variable"
+          unknown call_tmp[775087] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+          (775090 'move' call_tmp[775087](93893 call _value _mt[203] lead[93876]))
+          (577133 'move' call_type_tmp[577129](93896 'typeof' call_tmp[775087]))
+        }
+        unknown call_tmp[775094] "expr temp" "maybe param" "maybe type" "temp"
+        (775097 'move' call_tmp[775094](93883 call _value _mt[203] x[93874]))
+        unknown call_tmp[775101] "expr temp" "maybe param" "maybe type" "temp"
+        (775104 'move' call_tmp[775101](93891 call(93888 call (partial) dsiStaticFastFollowCheck _mt[203] call_tmp[775094]) call_type_tmp[577129]))
+        (600718 'move' ret[600713](600717 'deref' call_tmp[775101]))
+        gotoReturn _end_chpl__staticFastFollowCheck[600711] _end_chpl__staticFastFollowCheck[600711]
+      }
+      {
+        (600723 'move' ret[600713](600722 'deref' 1))
+        gotoReturn _end_chpl__staticFastFollowCheck[600711] _end_chpl__staticFastFollowCheck[600711]
+      }
+    }
+    {
+      (600728 'move' ret[600713](600727 'deref' 0))
+      gotoReturn _end_chpl__staticFastFollowCheck[600711] _end_chpl__staticFastFollowCheck[600711]
+    }
+    label _end_chpl__staticFastFollowCheck[600711]
+    (600715 return ret[600713])
+  }
+  function chpl__dynamicFastFollowCheck[93919](arg x[93921]:_any[141](?)) : _unknown[42]
+  {
+    unknown ret[600734] "RVV" "temp"
+    unknown call_tmp[775106] "expr temp" "maybe param" "maybe type" "temp"
+    (775109 'move' call_tmp[775106](93934 call chpl__canHaveFastFollowers x[93921]))
+    unknown call_tmp[775111] "expr temp" "maybe param" "maybe type" "temp"
+    (775114 'move' call_tmp[775111](93936 call _cond_test call_tmp[775106]))
+    if call_tmp[775111]
+    {
+      unknown call_tmp[775116] "expr temp" "maybe param" "maybe type" "temp"
+      (775119 'move' call_tmp[775116](93927 call chpl__dynamicFastFollowCheck x[93921] x[93921]))
+      (600739 'move' ret[600734](600738 'deref' call_tmp[775116]))
+      gotoReturn _end_chpl__dynamicFastFollowCheck[600732] _end_chpl__dynamicFastFollowCheck[600732]
+    }
+    {
+      (600744 'move' ret[600734](600743 'deref' 0))
+      gotoReturn _end_chpl__dynamicFastFollowCheck[600732] _end_chpl__dynamicFastFollowCheck[600732]
+    }
+    label _end_chpl__dynamicFastFollowCheck[600732]
+    (600736 return ret[600734])
+  }
+  function chpl__dynamicFastFollowCheck[93942](arg x[93944]:_any[141](?), arg lead[93946]:_any[141](?)) : _unknown[42]
+  {
+    unknown ret[600750] "RVV" "temp"
+    unknown call_tmp[775121] "expr temp" "maybe param" "maybe type" "temp"
+    (775124 'move' call_tmp[775121](93989 call chpl__canLeadFastFollowers lead[93946]))
+    unknown call_tmp[775126] "expr temp" "maybe param" "maybe type" "temp"
+    (775129 'move' call_tmp[775126](93991 call _cond_test call_tmp[775121]))
+    if call_tmp[775126]
+    {
+      unknown call_tmp[775131] "expr temp" "maybe param" "maybe type" "temp"
+      (775134 'move' call_tmp[775131](93979 call isArray x[93944]))
+      unknown call_tmp[775136] "expr temp" "maybe param" "maybe type" "temp"
+      (775139 'move' call_tmp[775136](93981 call _cond_test call_tmp[775131]))
+      if call_tmp[775136]
+      {
+        unknown call_tmp[775141] "expr temp" "maybe param" "maybe type" "temp"
+        (775144 'move' call_tmp[775141](93968 call chpl__staticFastFollowCheck x[93944] lead[93946]))
+        unknown call_tmp[775146] "expr temp" "maybe param" "maybe type" "temp"
+        (775149 'move' call_tmp[775146](93971 call _cond_test call_tmp[775141]))
+        if call_tmp[775146]
+        {
+          unknown call_tmp[775153] "expr temp" "maybe param" "maybe type" "temp"
+          (775156 'move' call_tmp[775153](93954 call _value _mt[203] x[93944]))
+          unknown call_tmp[775160] "expr temp" "maybe param" "maybe type" "temp"
+          (775163 'move' call_tmp[775160](93962 call(93959 call (partial) dsiDynamicFastFollowCheck _mt[203] call_tmp[775153]) lead[93946]))
+          (600755 'move' ret[600750](600754 'deref' call_tmp[775160]))
+          gotoReturn _end_chpl__dynamicFastFollowCheck[600748] _end_chpl__dynamicFastFollowCheck[600748]
+        }
+        {
+          (600760 'move' ret[600750](600759 'deref' 0))
+          gotoReturn _end_chpl__dynamicFastFollowCheck[600748] _end_chpl__dynamicFastFollowCheck[600748]
+        }
+      }
+      {
+        (600765 'move' ret[600750](600764 'deref' 1))
+        gotoReturn _end_chpl__dynamicFastFollowCheck[600748] _end_chpl__dynamicFastFollowCheck[600748]
+      }
+    }
+    {
+      (600770 'move' ret[600750](600769 'deref' 0))
+      gotoReturn _end_chpl__dynamicFastFollowCheck[600748] _end_chpl__dynamicFastFollowCheck[600748]
+    }
+    label _end_chpl__dynamicFastFollowCheck[600748]
+    (600752 return ret[600750])
+  }
+  function _toFollower[93997](arg iterator[94000]:_iteratorClass[168](?), arg leaderIndex[94003]:_any[141](?)) : _unknown[42] "inline" "no implicit copy" "fn returns iterator"
+  {
+    unknown ret[600776] "RVV" "temp"
+    unknown call_tmp[775165] "expr temp" "maybe param" "maybe type" "temp"
+    (775168 'move' call_tmp[775165](94009 'to follower' iterator[94000] leaderIndex[94003]))
+    unknown call_tmp[775170] "expr temp" "maybe param" "maybe type" "temp"
+    (775173 'move' call_tmp[775170](94008 call chpl__autoCopy call_tmp[775165](definedConst = 0)))
+    (600781 'move' ret[600776](600780 'deref' call_tmp[775170]))
+    (600778 return ret[600776])
+  }
+  function _toFollower[94016](arg ir[94019]:_iteratorRecord[165](?), arg leaderIndex[94022]:_any[141](?)) : _unknown[42] "inline" "fn returns iterator"
+  {
+    unknown ret[600785] "RVV" "temp"
+    unknown call_tmp[775175] "maybe param" "maybe type" "temp"
+    (775178 'move' call_tmp[775175](94028 call _getIterator ir[94019]))
+    unknown ic[94026] "dead at end of block" "insert auto destroy" "no copy"
+    (644656 'init var' ic[94026] call_tmp[775175])
+    (94031 'end of statement')
+    unknown call_tmp[775180] "maybe param" "maybe type" "temp"
+    (775183 'move' call_tmp[775180](94035 call _toFollower ic[94026] leaderIndex[94022]))
+    unknown follower[94033] "dead at end of block" "insert auto destroy" "no copy"
+    (644658 'init var' follower[94033] call_tmp[775180])
+    (94039 'end of statement' ic[94026])
+    (94041 call _freeIterator ic[94026])
+    (550704 'end of statement' ic[94026])
+    (600790 'move' ret[600785](600789 'deref' follower[94033]))
+    gotoReturn _end__toFollower[600783] _end__toFollower[600783]
+    (550706 'end of statement' follower[94033])
+    label _end__toFollower[600783]
+    (600787 return ret[600785])
+  }
+  function _toFollower[94047](const  ref arg x[94049]:_any[141](?), arg leaderIndex[94051]:_any[141](?)) : _unknown[42] "inline" "fn returns iterator" "suppress lvalue error"
+  {
+    unknown ret[600796] "RVV" "temp"
+    unknown call_tmp[775187] "expr temp" "maybe param" "maybe type" "temp"
+    (775190 'move' call_tmp[775187](94061 call(94058 call (partial) these _mt[203] x[94049])))
+    unknown call_tmp[775192] "expr temp" "maybe param" "maybe type" "temp"
+    (775195 'move' call_tmp[775192](94056 call _toFollower call_tmp[775187] leaderIndex[94051]))
+    (600801 'move' ret[600796](600800 'deref' call_tmp[775192]))
+    (600798 return ret[600796])
+  }
+  function _toFollowerZip[94065](arg x[94067]:_any[141](?), arg leaderIndex[94069]:_any[141](?)) : _unknown[42] "inline" "fn returns iterator"
+  {
+    unknown ret[600805] "RVV" "temp"
+    unknown call_tmp[775197] "expr temp" "maybe param" "maybe type" "temp"
+    (775200 'move' call_tmp[775197](94074 call _toFollower x[94067] leaderIndex[94069]))
+    (600810 'move' ret[600805](600809 'deref' call_tmp[775197]))
+    (600807 return ret[600805])
+  }
+  function _toFollowerZip[94079](arg x[94082]:_tuple[246](?), arg leaderIndex[94085]:_any[141](?)) : _unknown[42] "inline" "fn returns iterator"
+  {
+    unknown ret[600814] "RVV" "temp"
+    unknown call_tmp[775202] "expr temp" "maybe param" "maybe type" "temp"
+    (775205 'move' call_tmp[775202](94090 call _toFollowerZipInternal x[94082] leaderIndex[94085] 0))
+    (600819 'move' ret[600814](600818 'deref' call_tmp[775202]))
+    (600816 return ret[600814])
+  }
+  function _toFollowerZipInternal[94096](arg x[94099]:_tuple[246](?), arg leaderIndex[94102]:_any[141](?), param arg dim[94105]:int(64)[10]) : _unknown[42] "inline" "fn returns iterator"
+  {
+    unknown ret[600823] "RVV" "temp"
+    unknown call_tmp[775209] "expr temp" "maybe param" "maybe type" "temp"
+    (775212 'move' call_tmp[775209](94146 call size _mt[203] x[94099]))
+    unknown call_tmp[775214] "expr temp" "maybe param" "maybe type" "temp"
+    (775217 'move' call_tmp[775214](94143 call - call_tmp[775209] 1))
+    unknown call_tmp[775219] "expr temp" "maybe param" "maybe type" "temp"
+    (775222 'move' call_tmp[775219](94140 call == dim[94105] call_tmp[775214]))
+    unknown call_tmp[775224] "expr temp" "maybe param" "maybe type" "temp"
+    (775227 'move' call_tmp[775224](94150 call _cond_test call_tmp[775219]))
+    if call_tmp[775224]
+    {
+      unknown call_tmp[775229] "expr temp" "maybe param" "maybe type" "temp"
+      (775232 'move' call_tmp[775229](94114 call x[94099] dim[94105]))
+      unknown call_tmp[775234] "expr temp" "maybe param" "maybe type" "temp"
+      (775237 'move' call_tmp[775234](94112 call _toFollower call_tmp[775229] leaderIndex[94102]))
+      unknown call_tmp[775239] "expr temp" "maybe param" "maybe type" "temp"
+      (775242 'move' call_tmp[775239](94117 call _build_tuple call_tmp[775234]))
+      (600828 'move' ret[600823](600827 'deref' call_tmp[775239]))
+      gotoReturn _end__toFollowerZipInternal[600821] _end__toFollowerZipInternal[600821]
+    }
+    {
+      unknown call_tmp[775244] "expr temp" "maybe param" "maybe type" "temp"
+      (775247 'move' call_tmp[775244](94125 call x[94099] dim[94105]))
+      unknown call_tmp[775249] "expr temp" "maybe param" "maybe type" "temp"
+      (775252 'move' call_tmp[775249](94123 call _toFollower call_tmp[775244] leaderIndex[94102]))
+      unknown call_tmp[775254] "expr temp" "maybe param" "maybe type" "temp"
+      (775257 'move' call_tmp[775254](94132 call + dim[94105] 1))
+      unknown call_tmp[775259] "expr temp" "maybe param" "maybe type" "temp"
+      (775262 'move' call_tmp[775259](94129 call _toFollowerZipInternal x[94099] leaderIndex[94102] call_tmp[775254]))
+      unknown call_tmp[775264] "expr temp" "maybe param" "maybe type" "temp"
+      (775267 'move' call_tmp[775264](94137 call _build_tuple call_tmp[775249](94136 'expand_tuple' call_tmp[775259])))
+      (600833 'move' ret[600823](600832 'deref' call_tmp[775264]))
+      gotoReturn _end__toFollowerZipInternal[600821] _end__toFollowerZipInternal[600821]
+    }
+    label _end__toFollowerZipInternal[600821]
+    (600825 return ret[600823])
+  }
+  function _toFastFollower[94158](arg iterator[94161]:_iteratorClass[168](?), arg leaderIndex[94164]:_any[141](?), arg fast[94167]:bool[19]) : _unknown[42] "inline" "no implicit copy" "fn returns iterator"
+  {
+    unknown ret[600839] "RVV" "temp"
+    unknown call_tmp[775269] "expr temp" "maybe param" "maybe type" "temp"
+    (775272 'move' call_tmp[775269](94174 'to follower' iterator[94161] leaderIndex[94164] 1))
+    unknown call_tmp[775274] "expr temp" "maybe param" "maybe type" "temp"
+    (775277 'move' call_tmp[775274](94173 call chpl__autoCopy call_tmp[775269](definedConst = 0)))
+    (600844 'move' ret[600839](600843 'deref' call_tmp[775274]))
+    (600841 return ret[600839])
+  }
+  function _toFastFollower[94182](arg ir[94185]:_iteratorRecord[165](?), arg leaderIndex[94188]:_any[141](?), arg fast[94191]:bool[19]) : _unknown[42] "inline" "fn returns iterator"
+  {
+    unknown ret[600848] "RVV" "temp"
+    unknown call_tmp[775279] "maybe param" "maybe type" "temp"
+    (775282 'move' call_tmp[775279](94198 call _getIterator ir[94185]))
+    unknown ic[94196] "dead at end of block" "insert auto destroy" "no copy"
+    (644660 'init var' ic[94196] call_tmp[775279])
+    (94201 'end of statement')
+    unknown call_tmp[775284] "maybe param" "maybe type" "temp"
+    (775287 'move' call_tmp[775284](94205 call _toFastFollower ic[94196] leaderIndex[94188](fast = 1)))
+    unknown follower[94203] "dead at end of block" "insert auto destroy" "no copy"
+    (644662 'init var' follower[94203] call_tmp[775284])
+    (94211 'end of statement' ic[94196])
+    (94213 call _freeIterator ic[94196])
+    (550715 'end of statement' ic[94196])
+    (600853 'move' ret[600848](600852 'deref' follower[94203]))
+    gotoReturn _end__toFastFollower[600846] _end__toFastFollower[600846]
+    (550717 'end of statement' follower[94203])
+    label _end__toFastFollower[600846]
+    (600850 return ret[600848])
+  }
+  function _toFastFollower[94219](arg x[94221]:_any[141](?), arg leaderIndex[94223]:_any[141](?)) : _unknown[42] "inline" "fn returns iterator"
+  {
+    unknown ret[600859] "RVV" "temp"
+    unknown call_tmp[775289] "expr temp" "maybe param" "maybe type" "temp"
+    (775292 'move' call_tmp[775289](94245 call chpl__canHaveFastFollowers x[94221]))
+    unknown call_tmp[775294] "expr temp" "maybe param" "maybe type" "temp"
+    (775297 'move' call_tmp[775294](94247 call _cond_test call_tmp[775289]))
+    if call_tmp[775294]
+    {
+      unknown call_tmp[775299] "expr temp" "maybe param" "maybe type" "temp"
+      (775302 'move' call_tmp[775299](94230 call _getIterator x[94221]))
+      unknown call_tmp[775304] "expr temp" "maybe param" "maybe type" "temp"
+      (775307 'move' call_tmp[775304](94228 call _toFastFollower call_tmp[775299] leaderIndex[94223](fast = 1)))
+      (600864 'move' ret[600859](600863 'deref' call_tmp[775304]))
+      gotoReturn _end__toFastFollower[600857] _end__toFastFollower[600857]
+    }
+    {
+      unknown call_tmp[775309] "expr temp" "maybe param" "maybe type" "temp"
+      (775312 'move' call_tmp[775309](94240 call _getIterator x[94221]))
+      unknown call_tmp[775314] "expr temp" "maybe param" "maybe type" "temp"
+      (775317 'move' call_tmp[775314](94238 call _toFollower call_tmp[775309] leaderIndex[94223]))
+      (600869 'move' ret[600859](600868 'deref' call_tmp[775314]))
+      gotoReturn _end__toFastFollower[600857] _end__toFastFollower[600857]
+    }
+    label _end__toFastFollower[600857]
+    (600861 return ret[600859])
+  }
+  function singleValIter[94255](arg iterables[94258]:_tuple[246](?)) param : _unknown[42]
+  {
+    unknown ret[600875] "RVV" "param" "temp"
+    unknown tmp[482268] "maybe param" "temp"
+    unknown call_tmp[775321] "expr temp" "maybe param" "maybe type" "temp"
+    (775324 'move' call_tmp[775321](94268 call size _mt[203] iterables[94258]))
+    (482279 'move' tmp[482268](94265 call == call_tmp[775321] 1))
+    unknown call_tmp[775326] "expr temp" "maybe param" "maybe type" "temp"
+    (775329 'move' call_tmp[775326](482281 call _cond_invalid tmp[482268]))
+    if call_tmp[775326]
+    {
+      (482284 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[669718] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669719] "maybe param" "temp"
+    unknown call_tmp[775331] "expr temp" "maybe param" "maybe type" "temp"
+    (775334 'move' call_tmp[775331](482269 call isTrue tmp[482268]))
+    (669724 'move' tmp[669719](669722 call _cond_test call_tmp[775331]))
+    if tmp[669719]
+    {
+      unknown tmp[669726] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[775336] "expr temp" "maybe param" "maybe type" "temp"
+      (775339 'move' call_tmp[775336](94279 call iterables[94258] 0))
+      unknown call_tmp[775341] "expr temp" "maybe param" "maybe type" "temp"
+      (775344 'move' call_tmp[775341](94277 call _getIterator call_tmp[775336]))
+      unknown call_tmp[775346] "expr temp" "maybe param" "maybe type" "temp"
+      (775349 'move' call_tmp[775346](94275 call isRefIter call_tmp[775341]))
+      unknown call_tmp[775351] "expr temp" "maybe param" "maybe type" "temp"
+      (775354 'move' call_tmp[775351](94272 call ! call_tmp[775346]))
+      (669728 'move' tmp[669726](482272 call isTrue call_tmp[775351]))
+      (669733 'move' tmp[669718](669730 '_paramFoldLogical' tmp[669719] tmp[669726]))
+    }
+    {
+      (669738 'move' tmp[669718](669735 '_paramFoldLogical' tmp[669719] 0))
+    }
+    (600880 'move' ret[600875](600879 'deref' tmp[669718]))
+    (600877 return ret[600875])
+  }
+  function singleRefIter[94283](arg iterables[94286]:_tuple[246](?)) param : _unknown[42]
+  {
+    unknown ret[600884] "RVV" "param" "temp"
+    unknown tmp[482289] "maybe param" "temp"
+    unknown call_tmp[775358] "expr temp" "maybe param" "maybe type" "temp"
+    (775361 'move' call_tmp[775358](94296 call size _mt[203] iterables[94286]))
+    (482300 'move' tmp[482289](94293 call == call_tmp[775358] 1))
+    unknown call_tmp[775363] "expr temp" "maybe param" "maybe type" "temp"
+    (775366 'move' call_tmp[775363](482302 call _cond_invalid tmp[482289]))
+    if call_tmp[775363]
+    {
+      (482305 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[669745] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669746] "maybe param" "temp"
+    unknown call_tmp[775368] "expr temp" "maybe param" "maybe type" "temp"
+    (775371 'move' call_tmp[775368](482290 call isTrue tmp[482289]))
+    (669751 'move' tmp[669746](669749 call _cond_test call_tmp[775368]))
+    if tmp[669746]
+    {
+      unknown tmp[669753] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[775373] "expr temp" "maybe param" "maybe type" "temp"
+      (775376 'move' call_tmp[775373](94305 call iterables[94286] 0))
+      unknown call_tmp[775378] "expr temp" "maybe param" "maybe type" "temp"
+      (775381 'move' call_tmp[775378](94303 call _getIterator call_tmp[775373]))
+      unknown call_tmp[775383] "expr temp" "maybe param" "maybe type" "temp"
+      (775386 'move' call_tmp[775383](94301 call isRefIter call_tmp[775378]))
+      (669755 'move' tmp[669753](482293 call isTrue call_tmp[775383]))
+      (669760 'move' tmp[669745](669757 '_paramFoldLogical' tmp[669746] tmp[669753]))
+    }
+    {
+      (669765 'move' tmp[669745](669762 '_paramFoldLogical' tmp[669746] 0))
+    }
+    (600889 'move' ret[600884](600888 'deref' tmp[669745]))
+    (600886 return ret[600884])
+  }
+  (396101 'used modules list'(92039 'use' ChapelStandard[315387])(92042 'use' Reflection[1804])(92047 'use' CTypes[51217] 'only' c_ptr))
+}

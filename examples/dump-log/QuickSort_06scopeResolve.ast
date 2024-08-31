@@ -1,0 +1,326 @@
+AST dump for QuickSort after pass scopeResolve.
+Module use list: ChapelStandard Sort ShallowCopy InsertionSort 
+
+{
+  function partition[235895](ref arg Data[235903] :
+  (235901 call chpl__buildArrayRuntimeType unknown Dom[235897] unknown eltType[235899]), arg lo[235907] :
+  int(64)[10], arg pivIdx[235911] :
+  int(64)[10], arg hi[235915] :
+  int(64)[10], arg comparator[235918]:_any[141](?)) : _unknown[42]
+  {
+    unknown a[235922] lo[235907]
+    (235925 'end of statement')
+    unknown b[235927] lo[235907]
+    (235930 'end of statement')
+    unknown c[235932] hi[235915]
+    (235935 'end of statement')
+    unknown d[235937] hi[235915]
+    (235940 'end of statement')
+    if(235959 call _cond_test(235955 call != lo[235907] pivIdx[235911]))
+    {
+      (235947 call shallowSwap module=[222] ShallowCopy[240148](235949 call Data[235903] lo[235907])(235952 call Data[235903] pivIdx[235911]))
+      (407183 'referenced modules list' ShallowCopy[240148])
+    }
+    (235964 call += a[235922] 1)
+    (235968 call += b[235927] 1)
+    unknown piv[235973] "no auto destroy" "no copy"(235979 call shallowCopyInit module=[222] ShallowCopy[240148](235981 call Data[235903] lo[235907])) eltType[235899]
+    (235984 'end of statement')
+    {
+      unknown tmp[236193] "temp"
+      (236211 'move' tmp[236193](236209 call _cond_test 1))
+      WhileDo[236198]
+      {
+        {
+          {
+            unknown tmp[236052] "temp"
+            (236076 'move' tmp[236052](236071 call _cond_test(236073 call <= b[235927] c[235932])))
+            WhileDo[236057]
+            {
+              {
+                unknown cmp[235993](235995 call chpl_compare(235997 call Data[235903] b[235927]) piv[235973] comparator[235918])
+                (236002 'end of statement')
+                if(236010 call _cond_test(236006 call > cmp[235993] 0))
+                {
+                  break _breakLabel[236056] _breakLabel[236056]
+                }
+                if(236044 call _cond_test(236040 call == cmp[235993] 0))
+                {
+                  if(236032 call _cond_test(236028 call != a[235922] b[235927]))
+                  {
+                    (236021 call shallowSwap module=[222] ShallowCopy[240148](236023 call Data[235903] a[235922])(236026 call Data[235903] b[235927]))
+                    (407195 'referenced modules list' ShallowCopy[240148])
+                  }
+                  (236036 call += a[235922] 1)
+                }
+                (236048 call += b[235927] 1)
+              }
+              label _continueLabel[236055]
+              (236066 'move' tmp[236052](236061 call _cond_test(236063 call <= b[235927] c[235932])))
+              tmp[236052]
+            }
+            label _breakLabel[236056]
+          }
+          {
+            unknown tmp[236135] "temp"
+            (236159 'move' tmp[236135](236154 call _cond_test(236156 call >= c[235932] b[235927])))
+            WhileDo[236140]
+            {
+              {
+                unknown cmp[236085](236087 call chpl_compare(236089 call Data[235903] c[235932]) piv[235973] comparator[235918])
+                (236094 'end of statement')
+                if(236102 call _cond_test(236098 call < cmp[236085] 0))
+                {
+                  break _breakLabel[236139] _breakLabel[236139]
+                }
+                if(236127 call _cond_test(236123 call == cmp[236085] 0))
+                {
+                  (236112 call shallowSwap module=[222] ShallowCopy[240148](236114 call Data[235903] d[235937])(236117 call Data[235903] c[235932]))
+                  (236119 call -= d[235937] 1)
+                  (407201 'referenced modules list' ShallowCopy[240148])
+                }
+                (236131 call -= c[235932] 1)
+              }
+              label _continueLabel[236138]
+              (236149 'move' tmp[236135](236144 call _cond_test(236146 call >= c[235932] b[235927])))
+              tmp[236135]
+            }
+            label _breakLabel[236139]
+          }
+          if(236169 call _cond_test(236165 call > b[235927] c[235932]))
+          {
+            break _breakLabel[236197] _breakLabel[236197]
+          }
+          (236178 call shallowSwap module=[222] ShallowCopy[240148](236180 call Data[235903] b[235927])(236183 call Data[235903] c[235932]))
+          (236185 call += b[235927] 1)
+          (236189 call -= c[235932] 1)
+          (407207 'referenced modules list' ShallowCopy[240148])
+        }
+        label _continueLabel[236196]
+        (236204 'move' tmp[236193](236202 call _cond_test 1))
+        tmp[236193]
+      }
+      label _breakLabel[236197]
+    }
+    (236218 call shallowCopy module=[222] ShallowCopy[240148](236220 call Data[235903] lo[235907]) piv[235973])
+    unknown type_tmp[236230] "temp" "type variable" int(64)[10]
+    unknown s[236236] type_tmp[236230]
+    unknown l[236229] type_tmp[236230]
+    unknown h[236225] type_tmp[236230]
+    (236239 'end of statement')
+    (236240 call = s[236236](236244 call min(236245 call - a[235922] lo[235907])(236249 call - b[235927] a[235922])))
+    (236253 call = l[236229] lo[235907])
+    (236257 call = h[236225](236260 call - b[235927] s[236236]))
+    {
+      unknown tmp[236292] "temp"
+      (236316 'move' tmp[236292](236311 call _cond_test(236313 call > s[236236] 0)))
+      WhileDo[236297]
+      {
+        {
+          (236273 call shallowSwap module=[222] ShallowCopy[240148](236275 call Data[235903] l[236229])(236278 call Data[235903] h[236225]))
+          (236280 call += l[236229] 1)
+          (236284 call += h[236225] 1)
+          (236288 call -= s[236236] 1)
+          (407218 'referenced modules list' ShallowCopy[240148])
+        }
+        label _continueLabel[236295]
+        (236306 'move' tmp[236292](236301 call _cond_test(236303 call > s[236236] 0)))
+        tmp[236292]
+      }
+      label _breakLabel[236296]
+    }
+    unknown n[236320](236321 call + hi[235915] 1)
+    (236326 'end of statement')
+    (236327 call = s[236236](236331 call min(236332 call - d[235937] c[235932])(236336 call - hi[235915] d[235937])))
+    (236340 call = l[236229] b[235927])
+    (236344 call = h[236225](236347 call - n[236320] s[236236]))
+    {
+      unknown tmp[236379] "temp"
+      (236403 'move' tmp[236379](236398 call _cond_test(236400 call > s[236236] 0)))
+      WhileDo[236384]
+      {
+        {
+          (236360 call shallowSwap module=[222] ShallowCopy[240148](236362 call Data[235903] l[236229])(236365 call Data[235903] h[236225]))
+          (236367 call += l[236229] 1)
+          (236371 call += h[236225] 1)
+          (236375 call -= s[236236] 1)
+          (407224 'referenced modules list' ShallowCopy[240148])
+        }
+        label _continueLabel[236382]
+        (236393 'move' tmp[236379](236388 call _cond_test(236390 call > s[236236] 0)))
+        tmp[236379]
+      }
+      label _breakLabel[236383]
+    }
+    unknown eqStart[236407](236408 call +(236410 call - b[235927] a[235922]) lo[235907])
+    (236416 'end of statement')
+    unknown eqEnd[236418](236419 call - hi[235915](236422 call - d[235937] c[235932]))
+    (236427 'end of statement')
+    (236428 return(236432 call _build_tuple eqStart[236407] eqEnd[236418]))
+    (407189 'referenced modules list' ShallowCopy[240148] ShallowCopy[240148])
+  }
+  function order3[236436](arg Data[236444] :
+  (236442 call chpl__buildArrayRuntimeType unknown Dom[236438] unknown eltType[236440]), arg lo[236448] :
+  int(64)[10], arg mid[236452] :
+  int(64)[10], arg hi[236456] :
+  int(64)[10], arg comparator[236459]:_any[141](?)) : _unknown[42]
+  {
+    if(236561 call _cond_test(236549 call <(236552 call chpl_compare(236554 call Data[236444] lo[236448])(236557 call Data[236444] mid[236452]) comparator[236459]) 0))
+    {
+      if(236501 call _cond_test(236489 call <(236492 call chpl_compare(236494 call Data[236444] hi[236456])(236497 call Data[236444] lo[236448]) comparator[236459]) 0))
+      {
+        (236465 return lo[236448])
+      }
+      {
+        if(236485 call _cond_test(236473 call <(236476 call chpl_compare(236478 call Data[236444] mid[236452])(236481 call Data[236444] hi[236456]) comparator[236459]) 0))
+        {
+          (236468 return mid[236452])
+        }
+        {
+          (236471 return hi[236456])
+        }
+      }
+    }
+    {
+      if(236544 call _cond_test(236532 call <(236535 call chpl_compare(236537 call Data[236444] lo[236448])(236540 call Data[236444] hi[236456]) comparator[236459]) 0))
+      {
+        (236508 return lo[236448])
+      }
+      {
+        if(236528 call _cond_test(236516 call <(236519 call chpl_compare(236521 call Data[236444] hi[236456])(236524 call Data[236444] mid[236452]) comparator[236459]) 0))
+        {
+          (236511 return mid[236452])
+        }
+        {
+          (236514 return hi[236456])
+        }
+      }
+    }
+  }
+  { scopeless type
+    int(64)[10]
+  }
+  function quickSort[236568](ref arg Data[236576] :
+  (236574 call chpl__buildArrayRuntimeType unknown Dom[236570] unknown eltType[236572]), arg minlen[236580] =
+  16, arg comparator[236588] :
+  unknown rec[236583] =
+  (236585 'new'(236587 call DefaultComparator[246408])), arg region[236604] :
+  (236593 call range[240](?) ?[227]) =
+  (236602 call(236599 call .(236596 call . Data[236576] c"_dom") c"dim") 0)) : _unknown[42] "no return value for void"
+  {
+    (236610 call chpl_check_comparator comparator[236588] eltType[236572])
+    if(236626 call _cond_test(236619 call !=(236622 call . Dom[236570] c"rank") 1))
+    {
+      (236615 call compilerError "quickSort() requires 1-D array")
+    }
+    if(236691 call _cond_test(236672 call &&(236674 call !=(236677 call . region[236604] c"strides") one[107127])(236684 call !=(236687 call . region[236604] c"stride") 1)))
+    {
+      unknown reindexed[236632] "ref var"(236639 call(236636 call . Data[236576] c"reindex")(236640 call #(236646 call chpl_build_low_bounded_range(236643 call . region[236604] c"low"))(236649 call . region[236604] c"size")))
+      (236653 'end of statement')
+      (236655 call assert(236656 call ==(236662 call .(236659 call . reindexed[236632] c"_dom") c"stride") 1))
+      (236667 call quickSortImpl reindexed[236632] minlen[236580] comparator[236588])
+      (236671 return _void[46])
+    }
+    (236696 call assert(236697 call ==(236700 call . Dom[236570] c"stride") 1))
+    (236705 call quickSortImpl Data[236576] minlen[236580] comparator[236588](start =(236710 call . region[236604] c"low"))(end =(236715 call . region[236604] c"high")))
+  }
+  function quickSortImpl[236721](ref arg Data[236729] :
+  (236727 call chpl__buildArrayRuntimeType unknown Dom[236723] unknown eltType[236725]), arg minlen[236733] =
+  16, arg comparator[236741] :
+  unknown rec[236736] =
+  (236738 'new'(236740 call DefaultComparator[246408])), arg start[236750] :
+  int(64)[10] =
+  (236747 call . Dom[236723] c"low"), arg end[236759] :
+  int(64)[10] =
+  (236756 call . Dom[236723] c"high")) : _unknown[42] "no return value for void"
+  {
+    unknown lo[236776] start[236750]
+    unknown hi[236772] end[236759]
+    (236779 'end of statement')
+    {
+      unknown tmp[237093] "temp"
+      (237117 'move' tmp[237093](237112 call _cond_test(237114 call < lo[236776] hi[236772])))
+      WhileDo[237098]
+      {
+        {
+          unknown mid[236786](236787 call + lo[236776](236790 call /(236792 call +(236794 call - hi[236772] lo[236776]) 1) 2))
+          (236801 'end of statement')
+          unknown piv[236803] mid[236786]
+          (236806 'end of statement')
+          if(236838 call _cond_test(236831 call <(236833 call - hi[236772] lo[236776]) minlen[236733]))
+          {
+            (236814 call insertionSortMoveElts module=[222] InsertionSort[235169] Data[236729](comparator = comparator[236741]) lo[236776] hi[236772])
+            (236820 return _void[46])
+            (407244 'referenced modules list' InsertionSort[235169])
+          }
+          {
+            if(236827 call _cond_test(236823 call <= hi[236772] lo[236776]))
+            {
+              (236822 return _void[46])
+            }
+          }
+          if(236925 call _cond_test(236916 call <(236918 call - hi[236772] lo[236776]) 100))
+          {
+            (236844 call = piv[236803](236848 call order3 Data[236729] lo[236776] mid[236786] hi[236772] comparator[236741]))
+          }
+          {
+            const medLo[236856] "const"(236858 call order3 Data[236729] lo[236776](236861 call + lo[236776] 1)(236865 call + lo[236776] 2) comparator[236741])
+            (236871 'end of statement')
+            const medMid[236873] "const"(236875 call order3 Data[236729](236877 call - mid[236786] 1) mid[236786](236882 call + mid[236786] 1) comparator[236741])
+            (236888 'end of statement')
+            const medHi[236890] "const"(236892 call order3 Data[236729](236894 call - hi[236772] 2)(236898 call - hi[236772] 1) hi[236772] comparator[236741])
+            (236905 'end of statement')
+            (236906 call = piv[236803](236910 call order3 Data[236729] medLo[236856] medMid[236873] medHi[236890] comparator[236741]))
+          }
+          unknown tmp[236941] "temp"(236935 call partition Data[236729] lo[236776] piv[236803] hi[236772] comparator[236741])
+          (236948 call _check_tuple_var_decl tmp[236941] 2)
+          unknown eqStart[236930](236942 call tmp[236941] 0)
+          unknown eqEnd[236932](236945 call tmp[236941] 1)
+          (236953 'end of statement')
+          if(237089 call _cond_test(237064 call ||(237066 call <(237068 call - hi[236772] lo[236776]) 300)(237075 call >(237081 call(237078 call .(407249 call here[135591]) c"runningTasks"))(237086 call(237083 call .(407251 call here[135591]) c"numPUs")(logical = 1)))))
+          {
+            if(237001 call _cond_test(236991 call >(236993 call - eqStart[236930] lo[236776])(236997 call - hi[236772] eqEnd[236932])))
+            {
+              (236957 call quickSortImpl Data[236729] minlen[236733] comparator[236741](236961 call + eqEnd[236932] 1) hi[236772])
+              (236966 call = hi[236772](236969 call - eqStart[236930] 1))
+            }
+            {
+              (236975 call quickSortImpl Data[236729] minlen[236733] comparator[236741] lo[236776](236980 call - eqStart[236930] 1))
+              (236984 call = lo[236776](236987 call + eqEnd[236932] 1))
+            }
+          }
+          {
+            {
+              const _cobeginCount[237027] "const" "end count" "temp"
+              (237048 'move' _cobeginCount[237027](237045 call _endCountAlloc 1))
+              (237040 call _upEndCount _cobeginCount[237027] 1 2)
+              {
+                (237008 call quickSortImpl Data[236729] minlen[236733] comparator[236741] lo[236776](237013 call - eqStart[236930] 1))
+                (237030 call _downEndCount _cobeginCount[237027] nil[32])
+                (237029 'cobegin block')
+              }
+              {
+                (237018 call quickSortImpl Data[236729] minlen[236733] comparator[236741](237022 call + eqEnd[236932] 1) hi[236772])
+                (237036 call _downEndCount _cobeginCount[237027] nil[32])
+                (237035 'cobegin block')
+              }
+              Defer
+              {
+                {
+                  (237051 call _endCountFree _cobeginCount[237027])
+                }
+              }
+              (237056 call _waitEndCount _cobeginCount[237027] 1 2)
+            }
+            break _breakLabel[237097] _breakLabel[237097]
+          }
+        }
+        label _continueLabel[237096]
+        (237107 'move' tmp[237093](237102 call _cond_test(237104 call < lo[236776] hi[236772])))
+        tmp[237093]
+      }
+      label _breakLabel[237097]
+    }
+    (396850 'used modules list'(236769 'import' InsertionSort[235169]))
+  }
+  (396846 'used modules list'(387038 'use' ChapelStandard[315387])(235885 'use' Sort[247204])(235893 'use' ShallowCopy[240148]))
+}

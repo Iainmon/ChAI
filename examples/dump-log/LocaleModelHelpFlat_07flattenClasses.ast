@@ -1,0 +1,92 @@
+AST dump for LocaleModelHelpFlat after pass flattenClasses.
+Module use list: LocaleModelHelpSetup LocaleModelHelpRuntime CTypes 
+
+{
+  unknown localeModelHasSublocales[306867] "param" 0
+  (306870 'end of statement')
+  unknown localeModelPartitionsIterationOnSublocales[306872] "param" 0
+  (306875 'end of statement')
+  function chpl_doDirectExecuteOn[306885](in arg loc[306888] :
+  chpl_localeID_t[306449]) : _unknown[42] "export" "local args"
+  {
+    const node[306894] "const"(306896 call chpl_nodeFromLocaleID loc[306888])
+    (306899 'end of statement')
+    (306900 return(306901 call == node[306894](459210 call chpl_nodeID[305038])))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function chpl_executeOn[306908](in arg loc[306911] :
+  chpl_localeID_t[306449], arg fn[306915] :
+  int(64)[10], arg args[306919] :
+  chpl_comm_on_bundle_p[306466], arg args_size[306923] :
+  c_size_t[614]) : _unknown[42] "export" "insert line file info" "local args" "no return value for void"
+  {
+    const node[306928] "const"(306930 call chpl_nodeFromLocaleID loc[306911])
+    (306933 'end of statement')
+    if(306965 call _cond_test(306961 call == node[306928](459226 call chpl_nodeID[305038])))
+    {
+      (306936 call chpl_ftable_call fn[306915] args[306919])
+    }
+    {
+      unknown tls[306941](306943 call chpl_task_getInfoChapel)
+      (306945 'end of statement')
+      (306947 call chpl_task_data_setup(306949 call chpl_comm_on_bundle_task_bundle args[306919]) tls[306941])
+      (306953 call chpl_comm_execute_on node[306928](306956 call chpl_sublocFromLocaleID loc[306911]) fn[306915] args[306919] args_size[306923])
+    }
+  }
+  function chpl_executeOnFast[306971](in arg loc[306974] :
+  chpl_localeID_t[306449], arg fn[306978] :
+  int(64)[10], arg args[306982] :
+  chpl_comm_on_bundle_p[306466], arg args_size[306986] :
+  c_size_t[614]) : _unknown[42] "export" "insert line file info" "local args" "no return value for void"
+  {
+    const node[306991] "const"(306993 call chpl_nodeFromLocaleID loc[306974])
+    (306996 'end of statement')
+    if(307028 call _cond_test(307024 call == node[306991](459242 call chpl_nodeID[305038])))
+    {
+      (306999 call chpl_ftable_call fn[306978] args[306982])
+    }
+    {
+      unknown tls[307004](307006 call chpl_task_getInfoChapel)
+      (307008 'end of statement')
+      (307010 call chpl_task_data_setup(307012 call chpl_comm_on_bundle_task_bundle args[306982]) tls[307004])
+      (307016 call chpl_comm_execute_on_fast node[306991](307019 call chpl_sublocFromLocaleID loc[306974]) fn[306978] args[306982] args_size[306986])
+    }
+  }
+  function chpl_executeOnNB[307034](in arg loc[307037] :
+  chpl_localeID_t[306449], arg fn[307041] :
+  int(64)[10], arg args[307045] :
+  chpl_comm_on_bundle_p[306466], arg args_size[307049] :
+  c_size_t[614]) : _unknown[42] "export" "insert line file info" "local args" "no return value for void"
+  {
+    const node[307054] "const"(307056 call chpl_nodeFromLocaleID loc[307037])
+    (307059 'end of statement')
+    unknown tls[307061](307063 call chpl_task_getInfoChapel)
+    (307065 'end of statement')
+    unknown isSerial[307067](307069 call chpl_task_data_getSerial tls[307061])
+    (307072 'end of statement')
+    if(307129 call _cond_test(307125 call == node[307054](459272 call chpl_nodeID[305038])))
+    {
+      if(307093 call _cond_test isSerial[307067])
+      {
+        (307076 call chpl_ftable_call fn[307041] args[307045])
+      }
+      {
+        (307081 call chpl_task_data_setup(307083 call chpl_comm_on_bundle_task_bundle args[307045]) tls[307061])
+        (307087 call chpl_comm_taskCallFTable fn[307041] args[307045] args_size[307049] c_sublocid_any[135202])
+      }
+    }
+    {
+      (307099 call chpl_task_data_setup(307101 call chpl_comm_on_bundle_task_bundle args[307045]) tls[307061])
+      if(307121 call _cond_test isSerial[307067])
+      {
+        (307106 call chpl_comm_execute_on node[307054] c_sublocid_any[135202] fn[307041] args[307045] args_size[307049])
+      }
+      {
+        (307114 call chpl_comm_execute_on_nb node[307054] c_sublocid_any[135202] fn[307041] args[307045] args_size[307049])
+      }
+    }
+  }
+  (397030 'used modules list'(306877 'use' LocaleModelHelpSetup[306439])(306880 'use' LocaleModelHelpRuntime[306863])(306883 'use' CTypes[51217]))
+}

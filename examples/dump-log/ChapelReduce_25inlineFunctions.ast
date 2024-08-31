@@ -1,0 +1,340 @@
+AST dump for ChapelReduce after pass inlineFunctions.
+Module use list: ChapelStandard ChapelLocks Reflection 
+
+{
+  function chpl__init_ChapelReduce[468423]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (607544 return _void[46])
+  }
+  function chpl__reduceCombine[4715253](const in arg globalOp[4715255]:MaxReduceScanOp(real(32))[4714442], const in arg localOp[4715257]:MaxReduceScanOp(real(32))[4714442]) : void[4] "instantiated generic" "invisible fn" "resolved" "no return value for void"
+  {
+    const-val tmp[4715269]:chpl_localeID_t[306449] "dead after last mention" "const" "temp"
+    const-val call_tmp[4715271]:chpl_localeID_t[306449] "dead after last mention" "expr temp" "maybe param" "temp"
+    (4715273 'move' call_tmp[4715271](4715275 '_wide_get_locale' globalOp[4715255]))
+    (4715277 'move' tmp[4715269] call_tmp[4715271])
+    ref call_tmp[4715282]:chpl_LocalSpinlock[85418] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[4715319]:ReduceScanOp[130334] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (4715324 'move' coerce_tmp[4715319](4715321 'cast' ReduceScanOp[130334] globalOp[4715255]))
+    ref call_tmp[7632380]:chpl_LocalSpinlock[85418] "dead after last mention" "maybe param" "temp"
+    (7632382 'move' call_tmp[7632380](7632384 '.' coerce_tmp[4715319] l[130329]))
+    (4715284 'move' call_tmp[4715282] call_tmp[7632380])
+    val tmp[7528425]:bool[19] "dead after last mention" "temp"
+    ref call_tmp[7528427]:atomic bool[83090] "dead after last mention" "maybe param" "temp"
+    (7528429 'move' call_tmp[7528427](7528431 '.' call_tmp[4715282] l[85243]))
+    (7528435 call chpl_rmem_consist_maybe_release[1582822])
+    ref call_tmp[7528436]:atomic_bool[1524038] "dead after last mention" "maybe param" "temp"
+    (7528438 'move' call_tmp[7528436](7528440 '.' call_tmp[7528427] _v[82072]))
+    val ret[7528443]:memory_order[80955] "dead after last mention" "RVV" "temp"
+    (7528445 'move' ret[7528443] memory_order_seq_cst[81211])
+    const-val call_tmp[7528448]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7528450 'move' call_tmp[7528448](7528453 call atomic_load[1776740] call_tmp[7528436] ret[7528443]))
+    val tmp[7528456]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[7528448]
+    {
+      (7528460 'move' tmp[7528456] 1)
+    }
+    {
+      ref call_tmp[7528464]:atomic bool[83090] "dead after last mention" "maybe param" "temp"
+      (7528466 'move' call_tmp[7528464](7528468 '.' call_tmp[4715282] l[85243]))
+      (7528472 call chpl_rmem_consist_maybe_release[1777215])
+      (7528474 call chpl_rmem_consist_maybe_release[1777215])
+      ref call_tmp[7528475]:atomic_bool[1524038] "dead after last mention" "maybe param" "temp"
+      (7528477 'move' call_tmp[7528475](7528479 '.' call_tmp[7528464] _v[82072]))
+      val ret[7528482]:memory_order[80955] "dead after last mention" "RVV" "temp"
+      (7528484 'move' ret[7528482] memory_order_acquire[81196])
+      const-val call_tmp[7528487]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7528489 'move' call_tmp[7528487](7528492 call atomic_exchange[1777524] call_tmp[7528475] 1 ret[7528482]))
+      (7528497 call chpl_rmem_consist_maybe_acquire[1777919])
+      (7528498 'move' tmp[7528456] call_tmp[7528487])
+    }
+    (7528502 'move' tmp[7528425] tmp[7528456])
+    WhileDo[7528505]
+    {
+      (7528508 call chpl_task_yield[68741])
+      ref call_tmp[7528509]:atomic bool[83090] "dead after last mention" "maybe param" "temp"
+      (7528511 'move' call_tmp[7528509](7528513 '.' call_tmp[4715282] l[85243]))
+      (7528517 call chpl_rmem_consist_maybe_release[1582822])
+      ref call_tmp[7528518]:atomic_bool[1524038] "dead after last mention" "maybe param" "temp"
+      (7528520 'move' call_tmp[7528518](7528522 '.' call_tmp[7528509] _v[82072]))
+      val ret[7528525]:memory_order[80955] "dead after last mention" "RVV" "temp"
+      (7528527 'move' ret[7528525] memory_order_seq_cst[81211])
+      const-val call_tmp[7528530]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7528532 'move' call_tmp[7528530](7528535 call atomic_load[1776740] call_tmp[7528518] ret[7528525]))
+      val tmp[7528538]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+      if call_tmp[7528530]
+      {
+        (7528542 'move' tmp[7528538] 1)
+      }
+      {
+        ref call_tmp[7528546]:atomic bool[83090] "dead after last mention" "maybe param" "temp"
+        (7528548 'move' call_tmp[7528546](7528550 '.' call_tmp[4715282] l[85243]))
+        (7528554 call chpl_rmem_consist_maybe_release[1777215])
+        (7528556 call chpl_rmem_consist_maybe_release[1777215])
+        ref call_tmp[7528557]:atomic_bool[1524038] "dead after last mention" "maybe param" "temp"
+        (7528559 'move' call_tmp[7528557](7528561 '.' call_tmp[7528546] _v[82072]))
+        val ret[7528564]:memory_order[80955] "dead after last mention" "RVV" "temp"
+        (7528566 'move' ret[7528564] memory_order_acquire[81196])
+        const-val call_tmp[7528569]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (7528571 'move' call_tmp[7528569](7528574 call atomic_exchange[1777524] call_tmp[7528557] 1 ret[7528564]))
+        (7528579 call chpl_rmem_consist_maybe_acquire[1777919])
+        (7528580 'move' tmp[7528538] call_tmp[7528569])
+      }
+      (7528584 'move' tmp[7528425] tmp[7528538])
+      tmp[7528425]
+    }
+    val coerce_tmp[4715380]:MaxReduceScanOp(real(32))[4714442] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (4715385 'move' coerce_tmp[4715380] globalOp[4715255])
+    (4715300 call combine[4715328] coerce_tmp[4715380] localOp[4715257])
+    ref call_tmp[4715303]:chpl_LocalSpinlock[85418] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[4715412]:ReduceScanOp[130334] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (4715417 'move' coerce_tmp[4715412](4715414 'cast' ReduceScanOp[130334] globalOp[4715255]))
+    ref call_tmp[7632390]:chpl_LocalSpinlock[85418] "dead after last mention" "maybe param" "temp"
+    (7632392 'move' call_tmp[7632390](7632394 '.' coerce_tmp[4715412] l[130329]))
+    (4715305 'move' call_tmp[4715303] call_tmp[7632390])
+    ref call_tmp[7528919]:atomic bool[83090] "dead after last mention" "maybe param" "temp"
+    (7528921 'move' call_tmp[7528919](7528923 '.' call_tmp[4715303] l[85243]))
+    (7528927 call chpl_rmem_consist_maybe_release[1778818])
+    (7528929 call chpl_rmem_consist_maybe_release[1778818])
+    ref call_tmp[7528930]:atomic_bool[1524038] "dead after last mention" "maybe param" "temp"
+    (7528932 'move' call_tmp[7528930](7528934 '.' call_tmp[7528919] _v[82072]))
+    val ret[7528937]:memory_order[80955] "dead after last mention" "RVV" "temp"
+    (7528939 'move' ret[7528937] memory_order_release[81201])
+    (7528943 call atomic_store[1779222] call_tmp[7528930] 0 ret[7528937])
+    (7528948 call chpl_rmem_consist_maybe_acquire[1779504])
+    (7528950 call chpl_rmem_consist_maybe_acquire[1779504])
+    (4715316 return _void[46])
+  }
+  function ReduceScanOp[130334].deinit[1075129](const in arg this[1075133]:ReduceScanOp[130334]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method" "resolved" "virtual"
+  {
+    label _enddeinit[5526200]
+    const-ref _field_destructor_tmp_[5526198]:chpl_LocalSpinlock[85418] "temp"
+    (5526205 'move' _field_destructor_tmp_[5526198](5526202 '.' this[1075133] l[130329]))
+    ref _field_destructor_tmp_[7631637]:atomic bool[83090] "temp"
+    (7631639 'move' _field_destructor_tmp_[7631637](7631641 '.' _field_destructor_tmp_[5526198] l[85243]))
+    (7631645 call deinit[82192] _field_destructor_tmp_[7631637])
+    (1075141 return _void[46])
+  }
+  type ReduceScanOp[130334] val super[397462]:RootClass[236] "super class" val l[130329]:chpl_LocalSpinlock[85418]
+  function MaxReduceScanOp(real(32))[4714442].identity[4714702](const in arg this[4714706]:MaxReduceScanOp(real(32))[4714442]) : real(32)[91] "instantiated generic" "invisible fn" "method" "primary method" "no parens" "resolved"
+  {
+    val ret[4714708]:real(32)[91] "dead after last mention" "RVV" "temp"
+    val call_tmp[4714716]:real(32)[91] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    const-val call_tmp[4714724]:real(32)[91] "dead after last mention" "expr temp" "maybe param" "temp"
+    (4714726 'move' call_tmp[4714724](4714729 call min[4714175]))
+    (4714731 'move' ret[4714708] call_tmp[4714724])
+    (4714735 return ret[4714708])
+  }
+  function MaxReduceScanOp(real(32))[4714442].accumulate[4715163](const in arg this[4715167]:MaxReduceScanOp(real(32))[4714442], const in arg x[4715169]:real(32)[91]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    ref call_tmp[4715177]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[8866750]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    (8866752 'move' call_tmp[8866750](8866754 '.' this[4715167] value[4714437]))
+    (4715179 'move' call_tmp[4715177] call_tmp[8866750])
+    const-ref call_tmp[4715185]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[8866760]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    (8866762 'move' call_tmp[8866760](8866764 '.' this[4715167] value[4714437]))
+    (4715187 'move' call_tmp[4715185] call_tmp[8866760])
+    const-val call_tmp[4715193]:real(32)[91] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val coerce_tmp[4715244]:real(32)[91] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (4715248 'move' coerce_tmp[4715244](4715246 'deref' call_tmp[4715185]))
+    const-val call_tmp[7318608]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7318610 'move' call_tmp[7318608](7318612 '>' x[4715169] coerce_tmp[4715244]))
+    val tmp[7318615]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[7318608]
+    {
+      (7318619 'move' tmp[7318615] 1)
+    }
+    {
+      const-val call_tmp[7318623]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7318625 'move' call_tmp[7318623](7318628 call chpl_macro_float_isnan[1873] x[4715169]))
+      const-val call_tmp[7318630]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7318632 'move' call_tmp[7318630](7318634 'cast' bool[19] call_tmp[7318623]))
+      (7318637 'move' tmp[7318615] call_tmp[7318630])
+    }
+    val tmp[7318641]:real(32)[91] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if tmp[7318615]
+    {
+      (7318645 'move' tmp[7318641] x[4715169])
+    }
+    {
+      (7318649 'move' tmp[7318641] coerce_tmp[4715244])
+    }
+    (4715195 'move' call_tmp[4715193] tmp[7318641])
+    (7490904 '=' call_tmp[4715177] call_tmp[4715193])
+    (4715205 return _void[46])
+  }
+  function MaxReduceScanOp(real(32))[4714442].accumulateOntoState[4716501](const in arg this[4716505]:MaxReduceScanOp(real(32))[4714442], ref arg state[4716507]:real(32)[91], const in arg x[4716509]:real(32)[91]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "fn synchronization free" "no return value for void"
+  {
+    const-val call_tmp[4716519]:real(32)[91] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val coerce_tmp[4716547]:real(32)[91] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (4716551 'move' coerce_tmp[4716547](4716549 'deref' state[4716507]))
+    const-val call_tmp[7318704]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7318706 'move' call_tmp[7318704](7318708 '>' coerce_tmp[4716547] x[4716509]))
+    val tmp[7318711]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[7318704]
+    {
+      (7318715 'move' tmp[7318711] 1)
+    }
+    {
+      const-val call_tmp[7318719]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7318721 'move' call_tmp[7318719](7318724 call chpl_macro_float_isnan[1873] coerce_tmp[4716547]))
+      const-val call_tmp[7318726]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7318728 'move' call_tmp[7318726](7318730 'cast' bool[19] call_tmp[7318719]))
+      (7318733 'move' tmp[7318711] call_tmp[7318726])
+    }
+    val tmp[7318737]:real(32)[91] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if tmp[7318711]
+    {
+      (7318741 'move' tmp[7318737] coerce_tmp[4716547])
+    }
+    {
+      (7318745 'move' tmp[7318737] x[4716509])
+    }
+    (4716521 'move' call_tmp[4716519] tmp[7318737])
+    (7490916 '=' state[4716507] call_tmp[4716519])
+    (4716531 return _void[46])
+  }
+  function MaxReduceScanOp(real(32))[4714442].combine[4715328](const in arg this[4715332]:MaxReduceScanOp(real(32))[4714442], const in arg x[4715334]:MaxReduceScanOp(real(32))[4714442]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    ref call_tmp[4715342]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[8866770]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    (8866772 'move' call_tmp[8866770](8866774 '.' this[4715332] value[4714437]))
+    (4715344 'move' call_tmp[4715342] call_tmp[8866770])
+    const-ref call_tmp[4715350]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[8866780]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    (8866782 'move' call_tmp[8866780](8866784 '.' this[4715332] value[4714437]))
+    (4715352 'move' call_tmp[4715350] call_tmp[8866780])
+    const-ref call_tmp[4715358]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[4715390]:MaxReduceScanOp(real(32))[4714442] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (4715395 'move' coerce_tmp[4715390] x[4715334])
+    ref call_tmp[8866790]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    (8866792 'move' call_tmp[8866790](8866794 '.' coerce_tmp[4715390] value[4714437]))
+    (4715360 'move' call_tmp[4715358] call_tmp[8866790])
+    const-val call_tmp[4715366]:real(32)[91] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val coerce_tmp[4715398]:real(32)[91] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (4715402 'move' coerce_tmp[4715398](4715400 'deref' call_tmp[4715350]))
+    const-val coerce_tmp[4715404]:real(32)[91] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (4715408 'move' coerce_tmp[4715404](4715406 'deref' call_tmp[4715358]))
+    const-val call_tmp[7318656]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7318658 'move' call_tmp[7318656](7318660 '>' coerce_tmp[4715398] coerce_tmp[4715404]))
+    val tmp[7318663]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[7318656]
+    {
+      (7318667 'move' tmp[7318663] 1)
+    }
+    {
+      const-val call_tmp[7318671]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7318673 'move' call_tmp[7318671](7318676 call chpl_macro_float_isnan[1873] coerce_tmp[4715398]))
+      const-val call_tmp[7318678]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7318680 'move' call_tmp[7318678](7318682 'cast' bool[19] call_tmp[7318671]))
+      (7318685 'move' tmp[7318663] call_tmp[7318678])
+    }
+    val tmp[7318689]:real(32)[91] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if tmp[7318663]
+    {
+      (7318693 'move' tmp[7318689] coerce_tmp[4715398])
+    }
+    {
+      (7318697 'move' tmp[7318689] coerce_tmp[4715404])
+    }
+    (4715368 'move' call_tmp[4715366] tmp[7318689])
+    (7490910 '=' call_tmp[4715342] call_tmp[4715366])
+    (4715378 return _void[46])
+  }
+  function MaxReduceScanOp(real(32))[4714442].generate[4716564](const in arg this[4716568]:MaxReduceScanOp(real(32))[4714442]) : real(32)[91] "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val ret[4716570]:real(32)[91] "dead after last mention" "RVV" "temp"
+    const-ref call_tmp[4716578]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[8866800]:real(32)[91] "dead after last mention" "maybe param" "temp"
+    (8866802 'move' call_tmp[8866800](8866804 '.' this[4716568] value[4714437]))
+    (4716580 'move' call_tmp[4716578] call_tmp[8866800])
+    (4716586 'move' ret[4716570](4716588 'deref' call_tmp[4716578]))
+    (4716590 return ret[4716570])
+  }
+  function MaxReduceScanOp(real(32))[4714442].clone[4715038](const in arg this[4715042]:MaxReduceScanOp(real(32))[4714442]) : MaxReduceScanOp(real(32))[4714442] "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    val ret[4715044]:MaxReduceScanOp(real(32))[4714442] "dead after last mention" "RVV" "temp"
+    val call_tmp[4715052]:real(32)[91] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[4715060]:MaxReduceScanOp(real(32))[4714442] "dead after last mention" "insert auto destroy for explicit new" "maybe param" "temp"
+    val new_temp[4715104]:MaxReduceScanOp(real(32))[4714442] "dead after last mention" "temp"
+    const-val default_arg_l[4715114]:chpl_LocalSpinlock[85418] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret_tmp[5603402]:chpl_LocalSpinlock[85418] "temp"
+    ref i__retArg[8866550]:chpl_LocalSpinlock[85418] "temp"
+    (8866554 'move' i__retArg[8866550](8866552 'set reference' ret_tmp[5603402]))
+    const-val ret[8866557]:chpl_LocalSpinlock[85418] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val l[8866559]:chpl_LocalSpinlock[85418] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    (8866562 call init[85249] l[8866559])
+    (8866564 'move' ret[8866557] l[8866559])
+    (8866567 '=' i__retArg[8866550] ret[8866557])
+    (5603405 'move' default_arg_l[4715114] ret_tmp[5603402])
+    const-val default_arg_value[4715122]:real(32)[91] "dead after last mention" "default actual temp" "expr temp" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val value[8866692]:real(32)[91] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    (8866694 'move' value[8866692](8866697 call min[4714175]))
+    (4715127 'move' default_arg_value[4715122] value[8866692])
+    (4715106 'move' new_temp[4715104](4715090 call _new[4714468] default_arg_l[4715114] default_arg_value[4715122]))
+    (4715062 'move' call_tmp[4715060] new_temp[4715104])
+    (4715070 'move' ret[4715044] call_tmp[4715060])
+    (4715074 return ret[4715044])
+  }
+  function MaxReduceScanOp(real(32))[4714442].init[4713955](const in arg this[4713959]:MaxReduceScanOp(real(32))[4714442], const  ref arg l[4713963]:chpl_LocalSpinlock[85418], in arg value[4713975]:real(32)[91]) : void[4] "compiler generated" "default initializer" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    val _formal_type_tmp_[5481360]:real(32)[91] "temp"
+    const-val _formal_tmp_l[4714352]:chpl_LocalSpinlock[85418] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (4714355 'move' _formal_tmp_l[4714352] l[4713963])
+    val super_tmp[4714289]:ReduceScanOp[130334] "dead after last mention" "temporary of super field" "temp"
+    (4714291 'move' super_tmp[4714289](4714293 '.v' this[4713959] super[4714433]))
+    ref i_l[7632399]:chpl_LocalSpinlock[85418] "temp"
+    (7632403 'move' i_l[7632399](7632401 'set reference' _formal_tmp_l[4714352]))
+    val _formal_tmp_l[7632406]:chpl_LocalSpinlock[85418] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (7632408 'move' _formal_tmp_l[7632406] i_l[7632399])
+    val super_tmp[7632411]:RootClass[236] "dead after last mention" "temporary of super field" "temp"
+    (7632413 'move' super_tmp[7632411](7632415 '.v' super_tmp[4714289] super[397462]))
+    (7632418 'setcid' super_tmp[7632411])
+    val call_tmp[7632420]:RootClass[236] "dead after last mention" "maybe param" "temp"
+    (7632422 'move' call_tmp[7632420](7632424 'cast' RootClass[236] super_tmp[4714289]))
+    (7632427 'setcid' call_tmp[7632420])
+    (7632429 '.=' super_tmp[4714289] l[130329] _formal_tmp_l[7632406])
+    (7632433 'setcid' super_tmp[4714289])
+    val tmp[4714303]:ReduceScanOp[130334] "dead after last mention" "temp" "type variable"
+    val call_tmp[4714322]:ReduceScanOp[130334] "dead after last mention" "maybe param" "temp"
+    (4714324 'move' call_tmp[4714322](4714326 'cast' ReduceScanOp[130334] this[4713959]))
+    val chpl__thisAsParent[4714329]:ReduceScanOp[130334] "dead at end of block" "insert auto destroy" "temp"
+    (4714331 'move' chpl__thisAsParent[4714329] call_tmp[4714322])
+    (4714335 'setcid' chpl__thisAsParent[4714329])
+    (4714342 '.=' this[4713959] value[4714437] value[4713975])
+    (4714347 'setcid' this[4713959])
+    (4714349 return _void[46])
+  }
+  function MaxReduceScanOp(real(32))[4714442].deinit[4716442](const in arg this[4716446]:MaxReduceScanOp(real(32))[4714442]) : void[4] "compiler generated" "destructor" "inline" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "virtual"
+  {
+    label _enddeinit[5533643]
+    val _parent_destructor_tmp_[5533638]:ReduceScanOp[130334] "temp"
+    (5533645 'move' _parent_destructor_tmp_[5533638](5533639 'cast' ReduceScanOp[130334] this[4716446]))
+    const-ref _field_destructor_tmp_[7632440]:chpl_LocalSpinlock[85418] "temp"
+    (7632442 'move' _field_destructor_tmp_[7632440](7632444 '.' _parent_destructor_tmp_[5533638] l[130329]))
+    ref _field_destructor_tmp_[7632447]:atomic bool[83090] "temp"
+    (7632449 'move' _field_destructor_tmp_[7632447](7632451 '.' _field_destructor_tmp_[7632440] l[85243]))
+    (7632455 call deinit[82192] _field_destructor_tmp_[7632447])
+    (4716452 return _void[46])
+  }
+  function _new[4714468](const  ref arg l[4714479]:chpl_LocalSpinlock[85418], const in arg value[4714495]:real(32)[91]) : MaxReduceScanOp(real(32))[4714442] "always propagate line file info" "compiler generated" "insert line file info" "last resort" "llvm return noalias" "_new wrapper" "resolved" "suppress lvalue error"
+  {
+    val _formal_type_tmp_[5481366]:real(32)[91] "temp"
+    val _formal_type_tmp_[5481364]:MaxReduceScanOp(real(32))[4714442] "temp"
+    const-val _formal_tmp_l[4714609]:chpl_LocalSpinlock[85418] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (4714612 'move' _formal_tmp_l[4714609] l[4714479])
+    val ret[4714525]:MaxReduceScanOp(real(32))[4714442] "dead after last mention" "RVV" "temp"
+    val initTemp[4714470]:MaxReduceScanOp(real(32))[4714442] "dead after last mention" "temp"
+    const-val call_tmp[4714532]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (4714535 'move' call_tmp[4714532](4714615 'sizeof_bundle' MaxReduceScanOp(real(32))[4714442]))
+    val cast_tmp[4714618]:c_ptr(void)[1465614] "dead after last mention" "temp"
+    (4714620 'move' cast_tmp[4714618](4714503 call chpl_here_alloc[308303] call_tmp[4714532] 468))
+    (4714506 'move' initTemp[4714470](4714622 'cast' MaxReduceScanOp(real(32))[4714442] cast_tmp[4714618]))
+    (4714471 call init[4713955] initTemp[4714470] _formal_tmp_l[4714609] value[4714495])
+    val tmp[4714508]:MaxReduceScanOp(real(32))[4714442] "dead after last mention" "temp"
+    (4714515 'move' tmp[4714508] initTemp[4714470])
+    (4714530 'move' ret[4714525] tmp[4714508])
+    (4714527 return ret[4714525])
+  }
+  type MaxReduceScanOp(real(32))[4714442] val super[4714433]:ReduceScanOp[130334] "super class" val value[4714437]:real(32)[91]
+}

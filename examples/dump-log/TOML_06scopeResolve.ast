@@ -1,0 +1,67 @@
+AST dump for TOML after pass scopeResolve.
+Module use list: ChapelStandard List Map TomlParser TomlReader Sort IO 
+
+{
+  function parseToml[377154](arg input[377157] :
+  file[168704]) : _unknown[42]
+  {
+    unknown tomlStr[377165] string[244]
+    (377168 'end of statement')
+    unknown tomlFile[377170](377175 call(377172 call . input[377157] c"reader")(locking = 0))
+    (377179 'end of statement')
+    (377184 call(377181 call . tomlFile[377170] c"readAll") tomlStr[377165])
+    (377190 call(377187 call . tomlFile[377170] c"close"))
+    (377191 return(377193 call parseToml tomlStr[377165]))
+  }
+  { scopeless type
+    (377161 call _shared[242](?) Toml[383866])
+  }
+  function parseToml[377198](arg input[377201] :
+  fileReader[170893](?)) : _unknown[42]
+  {
+    unknown tomlStr[377209] string[244]
+    (377212 'end of statement')
+    (377217 call(377214 call . input[377201] c"readAll") tomlStr[377209])
+    (377219 return(377221 call parseToml tomlStr[377209]))
+  }
+  { scopeless type
+    (377205 call _shared[242](?) Toml[383866])
+  }
+  function parseToml[377226](arg input[377229] :
+  string[244]) : _unknown[42]
+  {
+    unknown D[377237](377239 call chpl__buildDomainRuntimeType defaultDist[288287] string[244])
+    (377243 'end of statement')
+    unknown table[377245](377253 call chpl__buildArrayRuntimeType(377247 call chpl__ensureDomainExpr D[377237])(377250 call _shared[242](?) borrowed Toml?[468226]))
+    (377256 'end of statement')
+    unknown rootTable[377258](377259 'new'(_chpl_manager = _shared[242](?))(377263 call Toml[397985](?) table[377245]))
+    (377266 'end of statement')
+    const source[377268] "const"(377269 'new'(_chpl_manager = _shared[242](?))(377273 call Source[465100](?) input[377229]))
+    (377276 'end of statement')
+    const parser[377278] "const"(377279 'new'(_chpl_manager = unmanaged[183](?))(377283 call Parser[465105](?) source[377268] rootTable[377258]))
+    (377287 'end of statement')
+    const tomlData[377289] "const"(377296 call(377293 call . parser[377278] c"parseLoop"))
+    (377298 'end of statement')
+    (377301 call chpl__delete parser[377278])
+    (377304 return tomlData[377289])
+  }
+  { scopeless type
+    (377233 call _shared[242](?) Toml[383866])
+  }
+  function TomlError[377348].init[377316](arg _mt[377324]:_MT[201], arg this[377318]:TomlError[377348], arg msg[377321] :
+  string[244]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (377327 call =(377330 call . this[377318] c"msg") msg[377321])
+  }
+  function TomlError[377348].message[377336](arg _mt[377340]:_MT[201], arg this[377338]:TomlError[377348]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (377343 return(465115 call . this[377338] c"msg"))
+  }
+  type TomlError[377348] val super[397980]:Error[85511] "super class" unknown msg[377312] string[244]
+  type unmanaged TomlError?[468289]
+  type unmanaged TomlError[468286]
+  type TomlError[465178](?)
+  def module TomlParser[383868]  
+  def module TomlReader[385117]  
+  (397234 'used modules list'(387102 'use' ChapelStandard[315387])(377137 'use' List[232161])(377140 'use' Map[352858])(377143 'use' TomlParser[383868])(377146 'use' TomlReader[385117])(377149 'use' Sort[247204])(377152 'use' IO[208303]))
+}

@@ -1,0 +1,63 @@
+AST dump for ChapelAutoAggregation after pass scopeResolve.
+Module use list: CopyAggregation 
+
+{
+  function chpl_srcAggregatorFor[314398](arg arr[314403] :
+  (314401 call chpl__buildArrayRuntimeType nil[32])) : _unknown[42] "aggregator generator"
+  {
+    (314407 return(314408 'new'(314410 call SrcAggregatorImpl[313660](?)(314412 call . arr[314403] c"eltType"))))
+  }
+  function chpl_srcAggregatorFor[314417](arg dom[314419]:_any[141](?)) : _unknown[42] "aggregator generator"
+  {
+    (314425 return(314426 'new'(314428 call SrcAggregatorImpl[313660](?)(314430 call . dom[314419] c"idxType"))))
+  }
+  where {
+    (314422 call isDomain dom[314419])
+  }
+  function chpl_srcAggregatorFor[314436](arg arr[314438]:_any[141](?)) : _unknown[42] "aggregator generator"
+  {
+    (314441 return nil[32])
+  }
+  function chpl_dstAggregatorFor[314445](arg arr[314450] :
+  (314448 call chpl__buildArrayRuntimeType nil[32])) : _unknown[42] "aggregator generator"
+  {
+    (314454 return(314455 'new'(314457 call DstAggregatorImpl[312895](?)(314459 call . arr[314450] c"eltType"))))
+  }
+  function chpl_dstAggregatorFor[314464](arg dom[314466]:_any[141](?)) : _unknown[42] "aggregator generator"
+  {
+    (314472 return nil[32])
+  }
+  where {
+    (314469 call isDomain dom[314466])
+  }
+  function chpl_dstAggregatorFor[314477](arg arr[314479]:_any[141](?)) : _unknown[42] "aggregator generator"
+  {
+    (314482 return nil[32])
+  }
+  function elemTypeSupportsAggregation[314486](arg t[314488]:_any[141](?)) param : _unknown[42] "private"
+  {
+    (314491 return(314493 call isPODType t[314488]))
+  }
+  function chpl__arrayIteratorYieldsLocalElements[314497](arg x[314499]:_any[141](?)) param : _unknown[42]
+  {
+    if(314539 call _cond_test(314537 call isArray x[314499]))
+    {
+      if(314518 call _cond_test(314513 call elemTypeSupportsAggregation(314515 call . x[314499] c"eltType")))
+      {
+        (314504 return(314511 call(314508 call . x[314499] c"iteratorYieldsLocalElements")))
+      }
+    }
+    {
+      if(314532 call _cond_test(314530 call isDomain x[314499]))
+      {
+        (314523 return(314528 call(314525 call . x[314499] c"iteratorYieldsLocalElements")))
+      }
+    }
+    (314544 return 0)
+  }
+  function chpl__arrayIteratorYieldsLocalElements[314548](arg a[314550]:_any[141](?)) param : _unknown[42]
+  {
+    (314553 return 0)
+  }
+  (397081 'used modules list'(314396 'use' CopyAggregation[313662]))
+}

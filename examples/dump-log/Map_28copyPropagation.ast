@@ -1,0 +1,1705 @@
+AST dump for Map after pass copyPropagation.
+Module use list: ChapelStandard ChapelLocks ChapelHashtable HaltWrappers IO FormattedIO Reflection 
+
+{
+  function chpl__init_Map[468660]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (637521 return _void[46])
+  }
+  function _checkKeyAndValType[1935939]() : void[4] "instantiated generic" "invisible fn" "private" "resolved" "fn synchronization free" "no return value for void"
+  {
+    (1936209 return _void[46])
+  }
+  function _checkKeyAndValType[3312968]() : void[4] "instantiated generic" "invisible fn" "private" "resolved" "fn synchronization free" "no return value for void"
+  {
+    (3313238 return _void[46])
+  }
+  function _checkKeyAndValType[3339425]() : void[4] "instantiated generic" "invisible fn" "private" "resolved" "fn synchronization free" "no return value for void"
+  {
+    (3339695 return _void[46])
+  }
+  function _checkKeyAndValType[3354484]() : void[4] "instantiated generic" "invisible fn" "private" "resolved" "fn synchronization free" "no return value for void"
+  {
+    (3354754 return _void[46])
+  }
+  function _checkKeyAndValType[3391494]() : void[4] "instantiated generic" "invisible fn" "private" "resolved" "fn synchronization free" "no return value for void"
+  {
+    (3391764 return _void[46])
+  }
+  function _checkKeyAndValType[3828211]() : void[4] "instantiated generic" "invisible fn" "private" "resolved" "no return value for void"
+  {
+    (3828481 return _void[46])
+  }
+  function map(string,Module(real(32)),false)[1936356].init[1935675](ref arg this[1935679]:map(string,Module(real(32)),false)[1936356], const in arg resizeThreshold[1935689]:real(64)[13], const in arg initialCapacity[1935695]:int(64)[10]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    (1935704 call _checkKeyAndValType[1935939])
+    const-val coerce_tmp[1936365]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1936371 'move' coerce_tmp[1936365](1936367 'cast' real(64)[13] 0))
+    const-val call_tmp[7498157]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7498159 'move' call_tmp[7498157](7498161 '<=' resizeThreshold[1935689] coerce_tmp[1936365]))
+    val tmp[1935759]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[7498157]
+    {
+      (1935777 'move' tmp[1935759] 1)
+    }
+    {
+      const-val coerce_tmp[1936377]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1936383 'move' coerce_tmp[1936377](1936379 'cast' real(64)[13] 1))
+      const-val call_tmp[7498287]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7498289 'move' call_tmp[7498287](7498291 '>=' resizeThreshold[1935689] coerce_tmp[1936377]))
+      (1935798 'move' tmp[1935759] call_tmp[7498287])
+    }
+    if tmp[1935759]
+    {
+      (1935814 call warning[1936426] "'resizeThreshold' must be between 0 and 1." " 'resizeThreshold' will be set to 0.5")
+      (1935823 '.=' this[1935679] resizeThreshold[1936338] 0.5)
+    }
+    {
+      (1935834 '.=' this[1935679] resizeThreshold[1936338] resizeThreshold[1935689])
+    }
+    const-val call_tmp[1935847]:chpl__hashtable(string,Module(real(32)))[1941492] "dead after last mention" "delay instantiation" "maybe param" "temp"
+    const-val initTemp[1941023]:chpl__hashtable(string,Module(real(32)))[1941492] "dead after last mention" "delay instantiation" "temp"
+    const-val coerce_tmp[1949594]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1949598 'move' coerce_tmp[1949594](9201126 '.v' this[1935679] resizeThreshold[1936338]))
+    const-val default_arg_rehashHelpers[1950019]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret_tmp[5557827]:owned chpl__rehashHelpers?[1941081] "temp"
+    ref i__retArg[7892814]:owned chpl__rehashHelpers?[1941081] "temp"
+    (7892818 'move' i__retArg[7892814](7892816 'set reference' ret_tmp[5557827]))
+    const-val ret[7892821]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val rehashHelpers[7892823]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[7892825]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "temp"
+    (7892828 call init=[1949636] tmp[7892825] nil[32])
+    (7892831 'move' rehashHelpers[7892823] tmp[7892825])
+    (7892834 'move' ret[7892821] rehashHelpers[7892823])
+    (7892837 '=' i__retArg[7892814] ret[7892821])
+    (5557830 'move' default_arg_rehashHelpers[1950019] ret_tmp[5557827])
+    (1941026 call init[1941108] initTemp[1941023] coerce_tmp[1949594] initialCapacity[1935695] default_arg_rehashHelpers[1950019])
+    (1935849 'move' call_tmp[1935847] initTemp[1941023])
+    val table[1935879]:chpl__hashtable(string,Module(real(32)))[1941492] "dead after last mention" "delay instantiation" "temp"
+    (1935881 'move' table[1935879] call_tmp[1935847])
+    (1935885 '.=' this[1935679] table[1936341] table[1935879])
+    (1935936 return _void[46])
+  }
+  function map(string,int(64),false)[3288794].init[3312704](ref arg this[3312708]:map(string,int(64),false)[3288794], const in arg resizeThreshold[3312718]:real(64)[13], const in arg initialCapacity[3312724]:int(64)[10]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    (3312733 call _checkKeyAndValType[3312968])
+    const-val coerce_tmp[3313258]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3313264 'move' coerce_tmp[3313258](3313260 'cast' real(64)[13] 0))
+    const-val call_tmp[7498167]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7498169 'move' call_tmp[7498167](7498171 '<=' resizeThreshold[3312718] coerce_tmp[3313258]))
+    val tmp[3312788]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[7498167]
+    {
+      (3312806 'move' tmp[3312788] 1)
+    }
+    {
+      const-val coerce_tmp[3313270]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3313276 'move' coerce_tmp[3313270](3313272 'cast' real(64)[13] 1))
+      const-val call_tmp[7498297]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7498299 'move' call_tmp[7498297](7498301 '>=' resizeThreshold[3312718] coerce_tmp[3313270]))
+      (3312827 'move' tmp[3312788] call_tmp[7498297])
+    }
+    if tmp[3312788]
+    {
+      (3312843 call warning[1936426] "'resizeThreshold' must be between 0 and 1." " 'resizeThreshold' will be set to 0.5")
+      (3312852 '.=' this[3312708] resizeThreshold[3288776] 0.5)
+    }
+    {
+      (3312863 '.=' this[3312708] resizeThreshold[3288776] resizeThreshold[3312718])
+    }
+    const-val call_tmp[3312876]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "delay instantiation" "maybe param" "temp"
+    const-val initTemp[3313283]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "delay instantiation" "temp"
+    const-val coerce_tmp[3313309]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3313313 'move' coerce_tmp[3313309](9219407 '.v' this[3312708] resizeThreshold[3288776]))
+    const-val default_arg_rehashHelpers[3313316]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret_tmp[5588829]:owned chpl__rehashHelpers?[1941081] "temp"
+    ref i__retArg[8454279]:owned chpl__rehashHelpers?[1941081] "temp"
+    (8454283 'move' i__retArg[8454279](8454281 'set reference' ret_tmp[5588829]))
+    const-val ret[8454286]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val rehashHelpers[8454288]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[8454290]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "temp"
+    (8454293 call init=[1949636] tmp[8454290] nil[32])
+    (8454296 'move' rehashHelpers[8454288] tmp[8454290])
+    (8454299 'move' ret[8454286] rehashHelpers[8454288])
+    (8454302 '=' i__retArg[8454279] ret[8454286])
+    (5588832 'move' default_arg_rehashHelpers[3313316] ret_tmp[5588829])
+    (3313286 call init[3310554] initTemp[3313283] coerce_tmp[3313309] initialCapacity[3312724] default_arg_rehashHelpers[3313316])
+    (3312878 'move' call_tmp[3312876] initTemp[3313283])
+    val table[3312908]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "delay instantiation" "temp"
+    (3312910 'move' table[3312908] call_tmp[3312876])
+    (3312914 '.=' this[3312708] table[3288779] table[3312908])
+    (3312965 return _void[46])
+  }
+  function map(string,shared Module(real(32)),false)[3391831].init[3391230](ref arg this[3391234]:map(string,shared Module(real(32)),false)[3391831], const in arg resizeThreshold[3391244]:real(64)[13], const in arg initialCapacity[3391250]:int(64)[10]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    (3391259 call _checkKeyAndValType[3391494])
+    const-val coerce_tmp[3391840]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3391846 'move' coerce_tmp[3391840](3391842 'cast' real(64)[13] 0))
+    const-val call_tmp[7498197]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7498199 'move' call_tmp[7498197](7498201 '<=' resizeThreshold[3391244] coerce_tmp[3391840]))
+    val tmp[3391314]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[7498197]
+    {
+      (3391332 'move' tmp[3391314] 1)
+    }
+    {
+      const-val coerce_tmp[3391852]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3391858 'move' coerce_tmp[3391852](3391854 'cast' real(64)[13] 1))
+      const-val call_tmp[7498327]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7498329 'move' call_tmp[7498327](7498331 '>=' resizeThreshold[3391244] coerce_tmp[3391852]))
+      (3391353 'move' tmp[3391314] call_tmp[7498327])
+    }
+    if tmp[3391314]
+    {
+      (3391369 call warning[1936426] "'resizeThreshold' must be between 0 and 1." " 'resizeThreshold' will be set to 0.5")
+      (3391378 '.=' this[3391234] resizeThreshold[3391813] 0.5)
+    }
+    {
+      (3391389 '.=' this[3391234] resizeThreshold[3391813] resizeThreshold[3391244])
+    }
+    const-val call_tmp[3391402]:chpl__hashtable(string,shared Module(real(32)))[3392205] "dead after last mention" "delay instantiation" "maybe param" "temp"
+    const-val initTemp[3391875]:chpl__hashtable(string,shared Module(real(32)))[3392205] "dead after last mention" "delay instantiation" "temp"
+    const-val coerce_tmp[3395921]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3395925 'move' coerce_tmp[3395921](9221577 '.v' this[3391234] resizeThreshold[3391813]))
+    const-val default_arg_rehashHelpers[3395965]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret_tmp[5589746]:owned chpl__rehashHelpers?[1941081] "temp"
+    ref i__retArg[8463345]:owned chpl__rehashHelpers?[1941081] "temp"
+    (8463349 'move' i__retArg[8463345](8463347 'set reference' ret_tmp[5589746]))
+    const-val ret[8463352]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val rehashHelpers[8463354]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[8463356]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "temp"
+    (8463359 call init=[1949636] tmp[8463356] nil[32])
+    (8463362 'move' rehashHelpers[8463354] tmp[8463356])
+    (8463365 'move' ret[8463352] rehashHelpers[8463354])
+    (8463368 '=' i__retArg[8463345] ret[8463352])
+    (5589749 'move' default_arg_rehashHelpers[3395965] ret_tmp[5589746])
+    (3391878 call init[3391886] initTemp[3391875] coerce_tmp[3395921] initialCapacity[3391250] default_arg_rehashHelpers[3395965])
+    (3391404 'move' call_tmp[3391402] initTemp[3391875])
+    val table[3391434]:chpl__hashtable(string,shared Module(real(32)))[3392205] "dead after last mention" "delay instantiation" "temp"
+    (3391436 'move' table[3391434] call_tmp[3391402])
+    (3391440 '.=' this[3391234] table[3391816] table[3391434])
+    (3391491 return _void[46])
+  }
+  function map(string,Module(real(64)),false)[3405184].init[3827947](ref arg this[3827951]:map(string,Module(real(64)),false)[3405184], const in arg resizeThreshold[3827961]:real(64)[13], const in arg initialCapacity[3827967]:int(64)[10]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    (3827976 call _checkKeyAndValType[3828211])
+    const-val coerce_tmp[3828527]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3828533 'move' coerce_tmp[3828527](3828529 'cast' real(64)[13] 0))
+    const-val call_tmp[7498207]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7498209 'move' call_tmp[7498207](7498211 '<=' resizeThreshold[3827961] coerce_tmp[3828527]))
+    val tmp[3828031]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[7498207]
+    {
+      (3828049 'move' tmp[3828031] 1)
+    }
+    {
+      const-val coerce_tmp[3828539]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3828545 'move' coerce_tmp[3828539](3828541 'cast' real(64)[13] 1))
+      const-val call_tmp[7498337]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7498339 'move' call_tmp[7498337](7498341 '>=' resizeThreshold[3827961] coerce_tmp[3828539]))
+      (3828070 'move' tmp[3828031] call_tmp[7498337])
+    }
+    if tmp[3828031]
+    {
+      (3828086 call warning[1936426] "'resizeThreshold' must be between 0 and 1." " 'resizeThreshold' will be set to 0.5")
+      (3828095 '.=' this[3827951] resizeThreshold[3405166] 0.5)
+    }
+    {
+      (3828106 '.=' this[3827951] resizeThreshold[3405166] resizeThreshold[3827961])
+    }
+    const-val call_tmp[3828119]:chpl__hashtable(string,Module(real(64)))[3405239] "dead after last mention" "delay instantiation" "maybe param" "temp"
+    const-val initTemp[3828552]:chpl__hashtable(string,Module(real(64)))[3405239] "dead after last mention" "delay instantiation" "temp"
+    const-val coerce_tmp[3832514]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3832518 'move' coerce_tmp[3832514](9231188 '.v' this[3827951] resizeThreshold[3405166]))
+    const-val default_arg_rehashHelpers[3832558]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret_tmp[5595767]:owned chpl__rehashHelpers?[1941081] "temp"
+    ref i__retArg[8573843]:owned chpl__rehashHelpers?[1941081] "temp"
+    (8573847 'move' i__retArg[8573843](8573845 'set reference' ret_tmp[5595767]))
+    const-val ret[8573850]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val rehashHelpers[8573852]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[8573854]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "temp"
+    (8573857 call init=[1949636] tmp[8573854] nil[32])
+    (8573860 'move' rehashHelpers[8573852] tmp[8573854])
+    (8573863 'move' ret[8573850] rehashHelpers[8573852])
+    (8573866 '=' i__retArg[8573843] ret[8573850])
+    (5595770 'move' default_arg_rehashHelpers[3832558] ret_tmp[5595767])
+    (3828555 call init[3828563] initTemp[3828552] coerce_tmp[3832514] initialCapacity[3827967] default_arg_rehashHelpers[3832558])
+    (3828121 'move' call_tmp[3828119] initTemp[3828552])
+    val table[3828151]:chpl__hashtable(string,Module(real(64)))[3405239] "dead after last mention" "delay instantiation" "temp"
+    (3828153 'move' table[3828151] call_tmp[3828119])
+    (3828157 '.=' this[3827951] table[3405169] table[3828151])
+    (3828208 return _void[46])
+  }
+  function map(string,string,false)[3283386].init[3339157](ref arg this[3339161]:map(string,string,false)[3283386], const in arg resizeThreshold[3339173]:real(64)[13], const in arg initialCapacity[3339179]:int(64)[10]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "@unstable" "no return value for void"
+  {
+    (3339190 call _checkKeyAndValType[3339425])
+    const-val coerce_tmp[3339715]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3339721 'move' coerce_tmp[3339715](3339717 'cast' real(64)[13] 0))
+    const-val call_tmp[7498177]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7498179 'move' call_tmp[7498177](7498181 '<=' resizeThreshold[3339173] coerce_tmp[3339715]))
+    val tmp[3339245]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[7498177]
+    {
+      (3339263 'move' tmp[3339245] 1)
+    }
+    {
+      const-val coerce_tmp[3339727]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3339733 'move' coerce_tmp[3339727](3339729 'cast' real(64)[13] 1))
+      const-val call_tmp[7498307]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7498309 'move' call_tmp[7498307](7498311 '>=' resizeThreshold[3339173] coerce_tmp[3339727]))
+      (3339284 'move' tmp[3339245] call_tmp[7498307])
+    }
+    if tmp[3339245]
+    {
+      (3339300 call warning[1936426] "'resizeThreshold' must be between 0 and 1." " 'resizeThreshold' will be set to 0.5")
+      (3339309 '.=' this[3339161] resizeThreshold[3283368] 0.5)
+    }
+    {
+      (3339320 '.=' this[3339161] resizeThreshold[3283368] resizeThreshold[3339173])
+    }
+    const-val call_tmp[3339333]:chpl__hashtable(string,string)[3283441] "dead after last mention" "delay instantiation" "maybe param" "temp"
+    const-val initTemp[3339740]:chpl__hashtable(string,string)[3283441] "dead after last mention" "delay instantiation" "temp"
+    const-val coerce_tmp[3343702]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3343706 'move' coerce_tmp[3343702](9219856 '.v' this[3339161] resizeThreshold[3283368]))
+    const-val default_arg_rehashHelpers[3343746]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret_tmp[5589230]:owned chpl__rehashHelpers?[1941081] "temp"
+    ref i__retArg[8458041]:owned chpl__rehashHelpers?[1941081] "temp"
+    (8458045 'move' i__retArg[8458041](8458043 'set reference' ret_tmp[5589230]))
+    const-val ret[8458048]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val rehashHelpers[8458050]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[8458052]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "temp"
+    (8458055 call init=[1949636] tmp[8458052] nil[32])
+    (8458058 'move' rehashHelpers[8458050] tmp[8458052])
+    (8458061 'move' ret[8458048] rehashHelpers[8458050])
+    (8458064 '=' i__retArg[8458041] ret[8458048])
+    (5589233 'move' default_arg_rehashHelpers[3343746] ret_tmp[5589230])
+    (3339743 call init[3339751] initTemp[3339740] coerce_tmp[3343702] initialCapacity[3339179] default_arg_rehashHelpers[3343746])
+    (3339335 'move' call_tmp[3339333] initTemp[3339740])
+    val table[3339365]:chpl__hashtable(string,string)[3283441] "dead after last mention" "delay instantiation" "temp"
+    (3339367 'move' table[3339365] call_tmp[3339333])
+    (3339371 '.=' this[3339161] table[3283371] table[3339365])
+    (3339422 return _void[46])
+  }
+  function map(string,owned ModuleSpecification?,false)[3283686].init[3354216](ref arg this[3354220]:map(string,owned ModuleSpecification?,false)[3283686], const in arg resizeThreshold[3354232]:real(64)[13], const in arg initialCapacity[3354238]:int(64)[10]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "@unstable" "no return value for void"
+  {
+    (3354249 call _checkKeyAndValType[3354484])
+    const-val coerce_tmp[3354800]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3354806 'move' coerce_tmp[3354800](3354802 'cast' real(64)[13] 0))
+    const-val call_tmp[7498187]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7498189 'move' call_tmp[7498187](7498191 '<=' resizeThreshold[3354232] coerce_tmp[3354800]))
+    val tmp[3354304]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[7498187]
+    {
+      (3354322 'move' tmp[3354304] 1)
+    }
+    {
+      const-val coerce_tmp[3354812]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3354818 'move' coerce_tmp[3354812](3354814 'cast' real(64)[13] 1))
+      const-val call_tmp[7498317]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7498319 'move' call_tmp[7498317](7498321 '>=' resizeThreshold[3354232] coerce_tmp[3354812]))
+      (3354343 'move' tmp[3354304] call_tmp[7498317])
+    }
+    if tmp[3354304]
+    {
+      (3354359 call warning[1936426] "'resizeThreshold' must be between 0 and 1." " 'resizeThreshold' will be set to 0.5")
+      (3354368 '.=' this[3354220] resizeThreshold[3283668] 0.5)
+    }
+    {
+      (3354379 '.=' this[3354220] resizeThreshold[3283668] resizeThreshold[3354232])
+    }
+    const-val call_tmp[3354392]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "delay instantiation" "maybe param" "temp"
+    const-val initTemp[3354825]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "delay instantiation" "temp"
+    const-val coerce_tmp[3358787]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3358791 'move' coerce_tmp[3358787](9220497 '.v' this[3354220] resizeThreshold[3283668]))
+    const-val default_arg_rehashHelpers[3358831]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret_tmp[5589424]:owned chpl__rehashHelpers?[1941081] "temp"
+    ref i__retArg[8460310]:owned chpl__rehashHelpers?[1941081] "temp"
+    (8460314 'move' i__retArg[8460310](8460312 'set reference' ret_tmp[5589424]))
+    const-val ret[8460317]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val rehashHelpers[8460319]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[8460321]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "temp"
+    (8460324 call init=[1949636] tmp[8460321] nil[32])
+    (8460327 'move' rehashHelpers[8460319] tmp[8460321])
+    (8460330 'move' ret[8460317] rehashHelpers[8460319])
+    (8460333 '=' i__retArg[8460310] ret[8460317])
+    (5589427 'move' default_arg_rehashHelpers[3358831] ret_tmp[5589424])
+    (3354828 call init[3354836] initTemp[3354825] coerce_tmp[3358787] initialCapacity[3354238] default_arg_rehashHelpers[3358831])
+    (3354394 'move' call_tmp[3354392] initTemp[3354825])
+    val table[3354424]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "delay instantiation" "temp"
+    (3354426 'move' table[3354424] call_tmp[3354392])
+    (3354430 '.=' this[3354220] table[3283671] table[3354424])
+    (3354481 return _void[46])
+  }
+  function map(string,int(64),false)[3288794].init=[3309171](ref arg this[3309175]:map(string,int(64),false)[3288794], ref arg other[3309177]:map(string,int(64),false)[3288794]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-val coerce_tmp[3310533]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "maybe copy elided" "temp"
+    (3310537 'move' coerce_tmp[3310533](9219348 '.v' other[3309177] resizeThreshold[3288776]))
+    (3309540 'noop')
+    (3309543 '.=' this[3309175] resizeThreshold[3288776] coerce_tmp[3310533])
+    const-val call_tmp[3309569]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "delay instantiation" "maybe param" "temp"
+    const-val initTemp[3310544]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "delay instantiation" "temp"
+    const-val coerce_tmp[3310924]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3310928 'move' coerce_tmp[3310924](9219351 '.v' this[3309175] resizeThreshold[3288776]))
+    const-val default_arg_rehashHelpers[3310995]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret_tmp[5588823]:owned chpl__rehashHelpers?[1941081] "temp"
+    ref i__retArg[8454251]:owned chpl__rehashHelpers?[1941081] "temp"
+    (8454255 'move' i__retArg[8454251](8454253 'set reference' ret_tmp[5588823]))
+    const-val ret[8454258]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val rehashHelpers[8454260]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[8454262]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "temp"
+    (8454265 call init=[1949636] tmp[8454262] nil[32])
+    (8454268 'move' rehashHelpers[8454260] tmp[8454262])
+    (8454271 'move' ret[8454258] rehashHelpers[8454260])
+    (8454274 '=' i__retArg[8454251] ret[8454258])
+    (5588826 'move' default_arg_rehashHelpers[3310995] ret_tmp[5588823])
+    (3310547 call init[3310554] initTemp[3310544] coerce_tmp[3310924] 16 default_arg_rehashHelpers[3310995])
+    (3309571 'move' call_tmp[3309569] initTemp[3310544])
+    val table[3309600]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "delay instantiation" "temp"
+    (3309602 'move' table[3309600] call_tmp[3309569])
+    (3309606 '.=' this[3309175] table[3288779] table[3309600])
+    ref call_tmp[8452510]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "maybe param" "temp"
+    (8452512 'move' call_tmp[8452510](8452514 '.' other[3309177] table[3288779]))
+    ref call_tmp[8452520]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "maybe param" "temp"
+    (8452522 'move' call_tmp[8452520](8452524 '.' other[3309177] table[3288779]))
+    const-val coerce_tmp[6384818]:int(64)[10] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (6384820 'move' coerce_tmp[6384818](9219357 '.v' call_tmp[8452510] tableSize[3288824]))
+    const-val tmp[7322103]:bool[19] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+    (7322105 'move' tmp[7322103](7322107 '<' coerce_tmp[6384818] 0))
+    if tmp[7322103]
+    {
+      (6653937 call boundsCheckHalt[404] "With a negative count, the range must have a last index.")
+    }
+    val tmp[6653947]:int(64)[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    const-val call_tmp[7391039]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7391041 'move' call_tmp[7391039](7391043 '==' coerce_tmp[6384818] 0))
+    if call_tmp[7391039]
+    {
+      const-val call_tmp[6653966]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+      (6653968 'move' call_tmp[6653966](6653970 'cast' uint(64)[86] 0))
+      const-val call_tmp[7443468]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7443470 'move' call_tmp[7443468](7443472 '-' call_tmp[6653966] 1))
+      const-val call_tmp[7444698]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7444700 'move' call_tmp[7444698](7444702 'cast' int(64)[10] call_tmp[7443468]))
+      (6653994 'move' tmp[6653947] call_tmp[7444698])
+    }
+    {
+      const-val call_tmp[7447738]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7447740 'move' call_tmp[7447738](7447742 '-' coerce_tmp[6384818] 1))
+      const-val call_tmp[7375135]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7375137 'move' call_tmp[7375135](7375139 '+' 0 call_tmp[7447738]))
+      (6654027 'move' tmp[6653947] call_tmp[7375135])
+    }
+    const-val _ic__F1_high[9019122]:int(64)[10] "temp"
+    (7460396 'move' _ic__F1_high[9019122] tmp[6653947])
+    val i[6654064]:int(64)[10] "dead at end of block" "insert auto destroy"
+    (6654068 'move' i[6654064] 0)
+    (6654128 call chpl_checkIfRangeIterWillOverflow[1518856] 0 tmp[6653947] 1 0 tmp[6653947] 1)
+    CForLoop[6654135] hazard
+    {
+      const-val call_tmp[6654261]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "expr temp" "maybe param" "temp"
+      (6654263 'move' call_tmp[6654261] call_tmp[8452520])
+      ref i_this[8454423]:chpl__hashtable(string,int(64))[3288849] "temp"
+      (8454427 'move' i_this[8454423](8454425 'set reference' call_tmp[6654261]))
+      val coerce_tmp[8454430]:_ddata(chpl_TableEntry(string,int(64)))[3288904] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8454432 'move' coerce_tmp[8454430](8454434 '.v' i_this[8454423] table[3288827]))
+      ref call_tmp[8454437]:chpl_TableEntry(string,int(64))[3288881] "dead after last mention" "maybe param" "temp"
+      (8454439 'move' call_tmp[8454437](8454441 'array_get' coerce_tmp[8454430] i[6654064]))
+      const-val coerce_tmp[8454444]:chpl__hash_status[264678] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8454446 'move' coerce_tmp[8454444](8454448 '.v' call_tmp[8454437] status[3288873]))
+      const-val call_tmp[8454451]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8454453 'move' call_tmp[8454451](8454455 '==' coerce_tmp[8454444] full[264674]))
+      if call_tmp[8454451]
+      {
+        val call_tmp[6654283]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "expr temp" "maybe param" "temp"
+        (6654285 'move' call_tmp[6654283] call_tmp[8452520])
+        ref i_this[8453037]:chpl__hashtable(string,int(64))[3288849] "temp"
+        (8453041 'move' i_this[8453037](8453039 'set reference' call_tmp[6654283]))
+        val coerce_tmp[6654297]:_ddata(chpl_TableEntry(string,int(64)))[3288904] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (6654299 'move' coerce_tmp[6654297](9219363 '.v' i_this[8453037] table[3288827]))
+        ref call_tmp[8453323]:chpl_TableEntry(string,int(64))[3288881] "dead after last mention" "maybe param" "temp"
+        (8453325 'move' call_tmp[8453323](8453327 'array_get' coerce_tmp[6654297] i[6654064]))
+        ref call_tmp[8453672]:string[244] "dead after last mention" "maybe param" "temp"
+        (8453674 'move' call_tmp[8453672](8453676 '.' call_tmp[8453323] key[3288877]))
+        ref call_tmp[8452530]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "maybe param" "temp"
+        (8452532 'move' call_tmp[8452530](8452534 '.' this[3309175] table[3288779]))
+        const-val call_tmp[6654335]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+        const-val ret_tmp[6654337]:(bool,int(64))[3257010] "temp"
+        (6654340 call findAvailableSlot[3301272] call_tmp[8452530] call_tmp[8453672] ret_tmp[6654337])
+        (6654344 'move' call_tmp[6654335] ret_tmp[6654337])
+        val tmp_x1[9107838]:int(64)[10] "temp"
+        (9107849 'move' tmp_x1[9107838](9107847 '.v' call_tmp[6654335] x1[3257008]))
+        1
+        (6654371 'noop')
+        ref call_tmp[8452540]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "maybe param" "temp"
+        (8452542 'move' call_tmp[8452540](8452544 '.' other[3309177] table[3288779]))
+        const-val call_tmp[6654379]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+        const-val ret_tmp[6654381]:(bool,int(64))[3257010] "temp"
+        (6654384 call findFullSlot[3312245] call_tmp[8452540] call_tmp[8453672] ret_tmp[6654381])
+        (6654388 'move' call_tmp[6654379] ret_tmp[6654381])
+        val tmp_x1[9107854]:int(64)[10] "temp"
+        (9107865 'move' tmp_x1[9107854](9107863 '.v' call_tmp[6654379] x1[3257008]))
+        1
+        (6654415 'noop')
+        ref call_tmp[8452550]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "maybe param" "temp"
+        (8452552 'move' call_tmp[8452550](8452554 '.' this[3309175] table[3288779]))
+        ref call_tmp[8452560]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "maybe param" "temp"
+        (8452562 'move' call_tmp[8452560](8452564 '.' other[3309177] table[3288779]))
+        val coerce_tmp[6654439]:_ddata(chpl_TableEntry(string,int(64)))[3288904] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (6654441 'move' coerce_tmp[6654439](9219380 '.v' call_tmp[8452560] table[3288827]))
+        ref call_tmp[8453333]:chpl_TableEntry(string,int(64))[3288881] "dead after last mention" "maybe param" "temp"
+        (8453335 'move' call_tmp[8453333](8453337 'array_get' coerce_tmp[6654439] tmp_x1[9107854]))
+        const-val _formal_tmp_in_key[6654458]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+        val ret[7613009]:string[244] "dead after last mention" "RVV" "temp"
+        const-val tmp[7613011]:string[244] "dead after last mention" "temp"
+        (7613014 call init=[21330] tmp[7613011] call_tmp[8453672])
+        (7613017 'move' ret[7613009] tmp[7613011])
+        (6654460 'move' _formal_tmp_in_key[6654458] ret[7613009])
+        const-val coerce_tmp[6654466]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (6654468 'move' coerce_tmp[6654466](9219386 '.v' call_tmp[8453333] val[3288879]))
+        (6654473 call fillSlot[3308541] call_tmp[8452550] tmp_x1[9107838] _formal_tmp_in_key[6654458] coerce_tmp[6654466])
+      }
+      {
+        (6654144 '=' i[6654064] 0)
+      }
+      {
+        (6654155 '<=' i[6654064] _ic__F1_high[9019122])
+      }
+      {
+        (6654163 '+=' i[6654064] 1)
+      }
+    }
+    label _endchpl_direct_param_stride_range_iter[6654197]
+    label _endchpl_direct_counted_range_iter_helper[6654202]
+    label _endchpl_direct_counted_range_iter[6384985]
+    label _end_allSlots[6384990]
+    label _endallSlots[6384995]
+    label _endkeys[6055362]
+    (3310143 return _void[46])
+  }
+  function map(string,string,false)[3283386].init=[3381988](ref arg this[3381992]:map(string,string,false)[3283386], ref arg other[3381994]:map(string,string,false)[3283386]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-val coerce_tmp[3383183]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "maybe copy elided" "temp"
+    (3383187 'move' coerce_tmp[3383183](9221505 '.v' other[3381994] resizeThreshold[3283368]))
+    (3382357 'noop')
+    (3382360 '.=' this[3381992] resizeThreshold[3283368] coerce_tmp[3383183])
+    const-val call_tmp[3382386]:chpl__hashtable(string,string)[3283441] "dead after last mention" "delay instantiation" "maybe param" "temp"
+    const-val initTemp[3383194]:chpl__hashtable(string,string)[3283441] "dead after last mention" "delay instantiation" "temp"
+    const-val coerce_tmp[3383219]:real(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3383223 'move' coerce_tmp[3383219](9221508 '.v' this[3381992] resizeThreshold[3283368]))
+    const-val default_arg_rehashHelpers[3383253]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret_tmp[5589236]:owned chpl__rehashHelpers?[1941081] "temp"
+    ref i__retArg[8458069]:owned chpl__rehashHelpers?[1941081] "temp"
+    (8458073 'move' i__retArg[8458069](8458071 'set reference' ret_tmp[5589236]))
+    const-val ret[8458076]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val rehashHelpers[8458078]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[8458080]:owned chpl__rehashHelpers?[1941081] "dead after last mention" "temp"
+    (8458083 call init=[1949636] tmp[8458080] nil[32])
+    (8458086 'move' rehashHelpers[8458078] tmp[8458080])
+    (8458089 'move' ret[8458076] rehashHelpers[8458078])
+    (8458092 '=' i__retArg[8458069] ret[8458076])
+    (5589239 'move' default_arg_rehashHelpers[3383253] ret_tmp[5589236])
+    (3383197 call init[3339751] initTemp[3383194] coerce_tmp[3383219] 16 default_arg_rehashHelpers[3383253])
+    (3382388 'move' call_tmp[3382386] initTemp[3383194])
+    val table[3382417]:chpl__hashtable(string,string)[3283441] "dead after last mention" "delay instantiation" "temp"
+    (3382419 'move' table[3382417] call_tmp[3382386])
+    (3382423 '.=' this[3381992] table[3283371] table[3382417])
+    ref call_tmp[8458235]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+    (8458237 'move' call_tmp[8458235](8458239 '.' other[3381994] table[3283371]))
+    ref call_tmp[8458245]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+    (8458247 'move' call_tmp[8458245](8458249 '.' other[3381994] table[3283371]))
+    const-val coerce_tmp[6060851]:int(64)[10] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (6060853 'move' coerce_tmp[6060851](9221514 '.v' call_tmp[8458235] tableSize[3283416]))
+    const-val tmp[7321893]:bool[19] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+    (7321895 'move' tmp[7321893](7321897 '<' coerce_tmp[6060851] 0))
+    if tmp[7321893]
+    {
+      (6393902 call boundsCheckHalt[404] "With a negative count, the range must have a last index.")
+    }
+    val tmp[6393912]:int(64)[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    const-val call_tmp[7390649]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7390651 'move' call_tmp[7390649](7390653 '==' coerce_tmp[6060851] 0))
+    if call_tmp[7390649]
+    {
+      const-val call_tmp[6393931]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+      (6393933 'move' call_tmp[6393931](6393935 'cast' uint(64)[86] 0))
+      const-val call_tmp[7443348]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7443350 'move' call_tmp[7443348](7443352 '-' call_tmp[6393931] 1))
+      const-val call_tmp[7444558]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7444560 'move' call_tmp[7444558](7444562 'cast' int(64)[10] call_tmp[7443348]))
+      (6393959 'move' tmp[6393912] call_tmp[7444558])
+    }
+    {
+      const-val call_tmp[7447588]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7447590 'move' call_tmp[7447588](7447592 '-' coerce_tmp[6060851] 1))
+      const-val call_tmp[7374985]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7374987 'move' call_tmp[7374985](7374989 '+' 0 call_tmp[7447588]))
+      (6393992 'move' tmp[6393912] call_tmp[7374985])
+    }
+    const-val _ic__F1_high[9018799]:int(64)[10] "temp"
+    (7459262 'move' _ic__F1_high[9018799] tmp[6393912])
+    val i[6394029]:int(64)[10] "dead at end of block" "insert auto destroy"
+    (6394033 'move' i[6394029] 0)
+    (6394093 call chpl_checkIfRangeIterWillOverflow[1518856] 0 tmp[6393912] 1 0 tmp[6393912] 1)
+    CForLoop[6394100] hazard
+    {
+      const-val call_tmp[6394226]:chpl__hashtable(string,string)[3283441] "dead after last mention" "expr temp" "maybe param" "temp"
+      (6394228 'move' call_tmp[6394226] call_tmp[8458245])
+      ref i_this[8458740]:chpl__hashtable(string,string)[3283441] "temp"
+      (8458744 'move' i_this[8458740](8458742 'set reference' call_tmp[6394226]))
+      val coerce_tmp[8458747]:_ddata(chpl_TableEntry(string,string))[3283496] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8458749 'move' coerce_tmp[8458747](8458751 '.v' i_this[8458740] table[3283419]))
+      ref call_tmp[8458754]:chpl_TableEntry(string,string)[3283473] "dead after last mention" "maybe param" "temp"
+      (8458756 'move' call_tmp[8458754](8458758 'array_get' coerce_tmp[8458747] i[6394029]))
+      const-val coerce_tmp[8458761]:chpl__hash_status[264678] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8458763 'move' coerce_tmp[8458761](8458765 '.v' call_tmp[8458754] status[3283465]))
+      const-val call_tmp[8458768]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8458770 'move' call_tmp[8458768](8458772 '==' coerce_tmp[8458761] full[264674]))
+      if call_tmp[8458768]
+      {
+        val call_tmp[6394248]:chpl__hashtable(string,string)[3283441] "dead after last mention" "expr temp" "maybe param" "temp"
+        (6394250 'move' call_tmp[6394248] call_tmp[8458245])
+        ref i_this[8457372]:chpl__hashtable(string,string)[3283441] "temp"
+        (8457376 'move' i_this[8457372](8457374 'set reference' call_tmp[6394248]))
+        val coerce_tmp[6394262]:_ddata(chpl_TableEntry(string,string))[3283496] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (6394264 'move' coerce_tmp[6394262](9221520 '.v' i_this[8457372] table[3283419]))
+        ref call_tmp[8457922]:chpl_TableEntry(string,string)[3283473] "dead after last mention" "maybe param" "temp"
+        (8457924 'move' call_tmp[8457922](8457926 'array_get' coerce_tmp[6394262] i[6394029]))
+        ref call_tmp[8458862]:string[244] "dead after last mention" "maybe param" "temp"
+        (8458864 'move' call_tmp[8458862](8458866 '.' call_tmp[8457922] key[3283469]))
+        ref call_tmp[8458275]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+        (8458277 'move' call_tmp[8458275](8458279 '.' this[3381992] table[3283371]))
+        const-val call_tmp[6394300]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+        const-val ret_tmp[6394302]:(bool,int(64))[3257010] "temp"
+        (6394305 call findAvailableSlot[3349576] call_tmp[8458275] call_tmp[8458862] ret_tmp[6394302])
+        (6394309 'move' call_tmp[6394300] ret_tmp[6394302])
+        val tmp_x1[9107770]:int(64)[10] "temp"
+        (9107781 'move' tmp_x1[9107770](9107779 '.v' call_tmp[6394300] x1[3257008]))
+        1
+        (6394336 'noop')
+        ref call_tmp[8458285]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+        (8458287 'move' call_tmp[8458285](8458289 '.' other[3381994] table[3283371]))
+        const-val call_tmp[6394344]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+        const-val ret_tmp[6394346]:(bool,int(64))[3257010] "temp"
+        (6394349 call findFullSlot[3383343] call_tmp[8458285] call_tmp[8458862] ret_tmp[6394346])
+        (6394353 'move' call_tmp[6394344] ret_tmp[6394346])
+        val tmp_x1[9107786]:int(64)[10] "temp"
+        (9107797 'move' tmp_x1[9107786](9107795 '.v' call_tmp[6394344] x1[3257008]))
+        1
+        (6394380 'noop')
+        ref call_tmp[8458295]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+        (8458297 'move' call_tmp[8458295](8458299 '.' this[3381992] table[3283371]))
+        ref call_tmp[8458305]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+        (8458307 'move' call_tmp[8458305](8458309 '.' other[3381994] table[3283371]))
+        val coerce_tmp[6394404]:_ddata(chpl_TableEntry(string,string))[3283496] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (6394406 'move' coerce_tmp[6394404](9221537 '.v' call_tmp[8458305] table[3283419]))
+        ref call_tmp[8457932]:chpl_TableEntry(string,string)[3283473] "dead after last mention" "maybe param" "temp"
+        (8457934 'move' call_tmp[8457932](8457936 'array_get' coerce_tmp[6394404] tmp_x1[9107786]))
+        ref call_tmp[8458936]:string[244] "dead after last mention" "maybe param" "temp"
+        (8458938 'move' call_tmp[8458936](8458940 '.' call_tmp[8457932] val[3283471]))
+        const-val _formal_tmp_in_key[6394423]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+        val ret[7612971]:string[244] "dead after last mention" "RVV" "temp"
+        const-val tmp[7612973]:string[244] "dead after last mention" "temp"
+        (7612976 call init=[21330] tmp[7612973] call_tmp[8458862])
+        (7612979 'move' ret[7612971] tmp[7612973])
+        (6394425 'move' _formal_tmp_in_key[6394423] ret[7612971])
+        const-val _formal_tmp_in_val[6394431]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+        val ret[7612990]:string[244] "dead after last mention" "RVV" "temp"
+        const-val tmp[7612992]:string[244] "dead after last mention" "temp"
+        (7612995 call init=[21330] tmp[7612992] call_tmp[8458936])
+        (7612998 'move' ret[7612990] tmp[7612992])
+        (6394433 'move' _formal_tmp_in_val[6394431] ret[7612990])
+        (6394440 call fillSlot[3350263] call_tmp[8458295] tmp_x1[9107770] _formal_tmp_in_key[6394423] _formal_tmp_in_val[6394431])
+      }
+      {
+        (6394109 '=' i[6394029] 0)
+      }
+      {
+        (6394120 '<=' i[6394029] _ic__F1_high[9018799])
+      }
+      {
+        (6394128 '+=' i[6394029] 1)
+      }
+    }
+    label _endchpl_direct_param_stride_range_iter[6394162]
+    label _endchpl_direct_counted_range_iter_helper[6394167]
+    label _endchpl_direct_counted_range_iter[6061091]
+    label _end_allSlots[6061096]
+    label _endallSlots[6061101]
+    label _endkeys[6061106]
+    (3382960 return _void[46])
+  }
+  function map(string,string,false)[3283386].clear[3344292](ref arg this[3344296]:map(string,string,false)[3283386]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    ref call_tmp[8458155]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+    (8458157 'move' call_tmp[8458155](8458159 '.' this[3344296] table[3283371]))
+    const-val coerce_tmp[6056288]:int(64)[10] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (6056290 'move' coerce_tmp[6056288](9219905 '.v' call_tmp[8458155] tableSize[3283416]))
+    const-val tmp[7321758]:bool[19] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+    (7321760 'move' tmp[7321758](7321762 '<' coerce_tmp[6056288] 0))
+    if tmp[7321758]
+    {
+      (6386884 call boundsCheckHalt[404] "With a negative count, the range must have a last index.")
+    }
+    val tmp[6386901]:int(64)[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    const-val call_tmp[7390484]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7390486 'move' call_tmp[7390484](7390488 '==' coerce_tmp[6056288] 0))
+    if call_tmp[7390484]
+    {
+      const-val call_tmp[6386927]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+      (6386936 'move' call_tmp[6386927](6386938 'cast' uint(64)[86] 0))
+      const-val call_tmp[7443278]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7443280 'move' call_tmp[7443278](7443282 '-' call_tmp[6386927] 1))
+      const-val call_tmp[7444468]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7444470 'move' call_tmp[7444468](7444472 'cast' int(64)[10] call_tmp[7443278]))
+      (6386962 'move' tmp[6386901] call_tmp[7444468])
+    }
+    {
+      const-val call_tmp[7447518]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7447520 'move' call_tmp[7447518](7447522 '-' coerce_tmp[6056288] 1))
+      const-val call_tmp[7374915]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7374917 'move' call_tmp[7374915](7374919 '+' 0 call_tmp[7447518]))
+      (6387016 'move' tmp[6386901] call_tmp[7374915])
+    }
+    const-val _ic__F1_high[9018628]:int(64)[10] "temp"
+    (7458695 'move' _ic__F1_high[9018628] tmp[6386901])
+    val i[6387053]:int(64)[10] "dead at end of block" "insert auto destroy"
+    (6387057 'move' i[6387053] 0)
+    (6387117 call chpl_checkIfRangeIterWillOverflow[1518856] 0 tmp[6386901] 1 0 tmp[6386901] 1)
+    CForLoop[6387124]
+    {
+      ref call_tmp[8458255]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+      (8458257 'move' call_tmp[8458255](8458259 '.' this[3344296] table[3283371]))
+      val coerce_tmp[8458673]:_ddata(chpl_TableEntry(string,string))[3283496] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8458675 'move' coerce_tmp[8458673](8458677 '.v' call_tmp[8458255] table[3283419]))
+      ref call_tmp[8458680]:chpl_TableEntry(string,string)[3283473] "dead after last mention" "maybe param" "temp"
+      (8458682 'move' call_tmp[8458680](8458684 'array_get' coerce_tmp[8458673] i[6387053]))
+      const-val coerce_tmp[8458687]:chpl__hash_status[264678] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8458689 'move' coerce_tmp[8458687](8458691 '.v' call_tmp[8458680] status[3283465]))
+      const-val call_tmp[8458694]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8458696 'move' call_tmp[8458694](8458698 '==' coerce_tmp[8458687] full[264674]))
+      if call_tmp[8458694]
+      {
+        const-val key[6387289]:string[244] "dead at end of block" "insert auto destroy" "split inited"
+        const-val val[6387293]:string[244] "dead at end of block" "insert auto destroy" "split inited"
+        ref call_tmp[8458265]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+        (8458267 'move' call_tmp[8458265](8458269 '.' this[3344296] table[3283371]))
+        val _formal_tmp_out_key[6387304]:string[244] "dead after last mention" "expr temp" "formal temp out callsite" "insert auto destroy" "no auto destroy" "suppress lvalue error" "temp"
+        val _formal_tmp_out_val[6387306]:string[244] "dead after last mention" "expr temp" "formal temp out callsite" "insert auto destroy" "no auto destroy" "suppress lvalue error" "temp"
+        (6387309 call clearSlot[3345500] call_tmp[8458265] i[6387053] _formal_tmp_out_key[6387304] _formal_tmp_out_val[6387306])
+        (6387314 'move' key[6387289] _formal_tmp_out_key[6387304])
+        (6387317 'move' val[6387293] _formal_tmp_out_val[6387306])
+        ref i_x[7347046]:string[244] "temp"
+        (7347050 'move' i_x[7347046](7347048 'set reference' val[6387293]))
+        (7347054 call deinit[21354] i_x[7347046])
+        ref i_x[7347058]:string[244] "temp"
+        (7347062 'move' i_x[7347058](7347060 'set reference' key[6387289]))
+        (7347066 call deinit[21354] i_x[7347058])
+      }
+      {
+        (6387133 '=' i[6387053] 0)
+      }
+      {
+        (6387144 '<=' i[6387053] _ic__F1_high[9018628])
+      }
+      {
+        (6387152 '+=' i[6387053] 1)
+      }
+    }
+    label _endchpl_direct_param_stride_range_iter[6387224]
+    label _endchpl_direct_counted_range_iter_helper[6387229]
+    label _endchpl_direct_counted_range_iter[6387234]
+    label _end_allSlots[6387239]
+    label _endallSlots[6056334]
+    ref call_tmp[8458165]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+    (8458167 'move' call_tmp[8458165](8458169 '.' this[3344296] table[3283371]))
+    (3344457 call maybeShrinkAfterRemove[3345869] call_tmp[8458165])
+    (3344458 return _void[46])
+  }
+  function map(string,owned ModuleSpecification?,false)[3283686].clear[3359377](ref arg this[3359381]:map(string,owned ModuleSpecification?,false)[3283686]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    ref call_tmp[8460393]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "maybe param" "temp"
+    (8460395 'move' call_tmp[8460393](8460397 '.' this[3359381] table[3283671]))
+    const-val coerce_tmp[6057933]:int(64)[10] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (6057935 'move' coerce_tmp[6057933](9220546 '.v' call_tmp[8460393] tableSize[3283716]))
+    const-val tmp[7321818]:bool[19] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+    (7321820 'move' tmp[7321818](7321822 '<' coerce_tmp[6057933] 0))
+    if tmp[7321818]
+    {
+      (6389576 call boundsCheckHalt[404] "With a negative count, the range must have a last index.")
+    }
+    val tmp[6389593]:int(64)[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    const-val call_tmp[7390559]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7390561 'move' call_tmp[7390559](7390563 '==' coerce_tmp[6057933] 0))
+    if call_tmp[7390559]
+    {
+      const-val call_tmp[6389619]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+      (6389628 'move' call_tmp[6389619](6389630 'cast' uint(64)[86] 0))
+      const-val call_tmp[7443308]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7443310 'move' call_tmp[7443308](7443312 '-' call_tmp[6389619] 1))
+      const-val call_tmp[7444508]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7444510 'move' call_tmp[7444508](7444512 'cast' int(64)[10] call_tmp[7443308]))
+      (6389654 'move' tmp[6389593] call_tmp[7444508])
+    }
+    {
+      const-val call_tmp[7447548]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7447550 'move' call_tmp[7447548](7447552 '-' coerce_tmp[6057933] 1))
+      const-val call_tmp[7374945]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (7374947 'move' call_tmp[7374945](7374949 '+' 0 call_tmp[7447548]))
+      (6389708 'move' tmp[6389593] call_tmp[7374945])
+    }
+    const-val _ic__F1_high[9018704]:int(64)[10] "temp"
+    (7458947 'move' _ic__F1_high[9018704] tmp[6389593])
+    val i[6389745]:int(64)[10] "dead at end of block" "insert auto destroy"
+    (6389749 'move' i[6389745] 0)
+    (6389809 call chpl_checkIfRangeIterWillOverflow[1518856] 0 tmp[6389593] 1 0 tmp[6389593] 1)
+    CForLoop[6389816] hazard
+    {
+      ref call_tmp[8460473]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "maybe param" "temp"
+      (8460475 'move' call_tmp[8460473](8460477 '.' this[3359381] table[3283671]))
+      val coerce_tmp[8460716]:_ddata(chpl_TableEntry(string,owned ModuleSpecification?))[3283796] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8460718 'move' coerce_tmp[8460716](8460720 '.v' call_tmp[8460473] table[3283719]))
+      ref call_tmp[8460723]:chpl_TableEntry(string,owned ModuleSpecification?)[3283773] "dead after last mention" "maybe param" "temp"
+      (8460725 'move' call_tmp[8460723](8460727 'array_get' coerce_tmp[8460716] i[6389745]))
+      const-val coerce_tmp[8460730]:chpl__hash_status[264678] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8460732 'move' coerce_tmp[8460730](8460734 '.v' call_tmp[8460723] status[3283765]))
+      const-val call_tmp[8460737]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8460739 'move' call_tmp[8460737](8460741 '==' coerce_tmp[8460730] full[264674]))
+      if call_tmp[8460737]
+      {
+        const-val key[6389981]:string[244] "dead at end of block" "insert auto destroy" "split inited"
+        const-val val[6389985]:owned ModuleSpecification?[3283604] "dead at end of block" "insert auto destroy" "split inited"
+        ref call_tmp[8460483]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "maybe param" "temp"
+        (8460485 'move' call_tmp[8460483](8460487 '.' this[3359381] table[3283671]))
+        val _formal_tmp_out_key[6389996]:string[244] "dead after last mention" "expr temp" "formal temp out callsite" "insert auto destroy" "no auto destroy" "suppress lvalue error" "temp"
+        val _formal_tmp_out_val[6389998]:owned ModuleSpecification?[3283604] "dead after last mention" "expr temp" "formal temp out callsite" "insert auto destroy" "no auto destroy" "suppress lvalue error" "temp"
+        (6390001 call clearSlot[3360585] call_tmp[8460483] i[6389745] _formal_tmp_out_key[6389996] _formal_tmp_out_val[6389998])
+        (6390006 'move' key[6389981] _formal_tmp_out_key[6389996])
+        (6390009 'move' val[6389985] _formal_tmp_out_val[6389998])
+        (6390013 call chpl__autoDestroy[3373663] val[6389985])
+        ref i_x[7347070]:string[244] "temp"
+        (7347074 'move' i_x[7347070](7347072 'set reference' key[6389981]))
+        (7347078 call deinit[21354] i_x[7347070])
+      }
+      {
+        (6389825 '=' i[6389745] 0)
+      }
+      {
+        (6389836 '<=' i[6389745] _ic__F1_high[9018704])
+      }
+      {
+        (6389844 '+=' i[6389745] 1)
+      }
+    }
+    label _endchpl_direct_param_stride_range_iter[6389916]
+    label _endchpl_direct_counted_range_iter_helper[6389921]
+    label _endchpl_direct_counted_range_iter[6389926]
+    label _end_allSlots[6389931]
+    label _endallSlots[6057979]
+    ref call_tmp[8460403]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "maybe param" "temp"
+    (8460405 'move' call_tmp[8460403](8460407 '.' this[3359381] table[3283671]))
+    (3359542 call maybeShrinkAfterRemove[3363395] call_tmp[8460403])
+    (3359543 return _void[46])
+  }
+  function map(string,int(64),false)[3288794].contains[3315108](const  ref arg this[3315112]:map(string,int(64),false)[3288794], const  ref arg k[3315119]:string[244]) : bool[19] "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    ref call_tmp[8452480]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "maybe param" "temp"
+    (8452482 'move' call_tmp[8452480](8452484 '.' this[3315112] table[3288779]))
+    const-val call_tmp[3315154]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5588867]:(bool,int(64))[3257010] "temp"
+    (3315162 call findFullSlot[3312245] call_tmp[8452480] k[3315119] ret_tmp[5588867])
+    (5588870 'move' call_tmp[3315154] ret_tmp[5588867])
+    val tmp_x0[9107342]:bool[19] "temp"
+    (9107350 'move' tmp_x0[9107342](9107348 '.v' call_tmp[3315154] x0[3257006]))
+    1
+    (3315183 'noop')
+    label _end_contains[3315196]
+    (3315198 return tmp_x0[9107342])
+  }
+  function map(string,owned ModuleSpecification?,false)[3283686].this[3396146](ref arg this[3396150]:map(string,owned ModuleSpecification?,false)[3283686], const  ref arg k[3396157]:string[244]) ref : _ref(owned ModuleSpecification?)[3283613] "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    ref call_tmp[8460433]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "maybe param" "temp"
+    (8460435 'move' call_tmp[8460433](8460437 '.' this[3396150] table[3283671]))
+    const-val call_tmp[3396306]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5589594]:(bool,int(64))[3257010] "temp"
+    (3396314 call findAvailableSlot[3372171] call_tmp[8460433] k[3396157] ret_tmp[5589594])
+    (5589597 'move' call_tmp[3396306] ret_tmp[5589594])
+    val tmp_x1[9107522]:int(64)[10] "temp"
+    (9107533 'move' tmp_x1[9107522](9107531 '.v' call_tmp[3396306] x1[3257008]))
+    1
+    (3396335 'noop')
+    ref call_tmp[8460443]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "maybe param" "temp"
+    (8460445 'move' call_tmp[8460443](8460447 '.' this[3396150] table[3283671]))
+    val coerce_tmp[8460685]:_ddata(chpl_TableEntry(string,owned ModuleSpecification?))[3283796] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (8460687 'move' coerce_tmp[8460685](8460689 '.v' call_tmp[8460443] table[3283719]))
+    ref call_tmp[8460692]:chpl_TableEntry(string,owned ModuleSpecification?)[3283773] "dead after last mention" "maybe param" "temp"
+    (8460694 'move' call_tmp[8460692](8460696 'array_get' coerce_tmp[8460685] tmp_x1[9107522]))
+    const-val coerce_tmp[8460699]:chpl__hash_status[264678] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (8460701 'move' coerce_tmp[8460699](8460703 '.v' call_tmp[8460692] status[3283765]))
+    const-val call_tmp[8460706]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (8460708 'move' call_tmp[8460706](8460710 '==' coerce_tmp[8460699] full[264674]))
+    const-val call_tmp[7351481]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7351483 'move' call_tmp[7351481](7351485 'u!' call_tmp[8460706]))
+    if call_tmp[7351481]
+    {
+      const-val val[3396373]:owned ModuleSpecification?[3283604] "dead at end of block" "insert auto destroy" "maybe copy elided"
+      (3397245 call init[3367941] val[3396373])
+      ref call_tmp[8460453]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "maybe param" "temp"
+      (8460455 'move' call_tmp[8460453](8460457 '.' this[3396150] table[3283671]))
+      const-val _formal_tmp_in_key[3397207]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      val ret[7610719]:string[244] "dead after last mention" "RVV" "temp"
+      const-val tmp[7610721]:string[244] "dead after last mention" "temp"
+      (7610724 call init=[21330] tmp[7610721] k[3396157])
+      (7610727 'move' ret[7610719] tmp[7610721])
+      (3397212 'move' _formal_tmp_in_key[3397207] ret[7610719])
+      const-val _formal_tmp_in_val[3397216]:owned ModuleSpecification?[3283604] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (5635628 '=' _formal_tmp_in_val[3397216] val[3396373])
+      (3397221 'noop')
+      (3396399 call fillSlot[3372858] call_tmp[8460453] tmp_x1[9107522] _formal_tmp_in_key[3397207] _formal_tmp_in_val[3397216])
+    }
+    ref call_tmp[8460463]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "maybe param" "temp"
+    (8460465 'move' call_tmp[8460463](8460467 '.' this[3396150] table[3283671]))
+    val coerce_tmp[3397235]:_ddata(chpl_TableEntry(string,owned ModuleSpecification?))[3283796] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3397239 'move' coerce_tmp[3397235](9221615 '.v' call_tmp[8460463] table[3283719]))
+    ref call_tmp[8460121]:chpl_TableEntry(string,owned ModuleSpecification?)[3283773] "dead after last mention" "maybe param" "temp"
+    (8460123 'move' call_tmp[8460121](8460125 'array_get' coerce_tmp[3397235] tmp_x1[9107522]))
+    ref call_tmp[8460852]:owned ModuleSpecification?[3283604] "dead after last mention" "maybe param" "temp"
+    (8460854 'move' call_tmp[8460852](8460856 '.' call_tmp[8460121] val[3283771]))
+    label _end_this[3396441]
+    (3396443 return call_tmp[8460852])
+  }
+  function map(string,shared Module(real(32)),false)[3391831].this[3406518](ref arg this[3406522]:map(string,shared Module(real(32)),false)[3391831], const  ref arg k[3406529]:string[244], ref arg error_out[5510739]:Error[85511]) ref : _ref(shared Module(real(32)))[1955047] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    ref call_tmp[8463940]:chpl__hashtable(string,shared Module(real(32)))[3392205] "dead after last mention" "maybe param" "temp"
+    (8463942 'move' call_tmp[8463940](8463944 '.' this[3406522] table[3391816]))
+    const-val call_tmp[3406588]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5589812]:(bool,int(64))[3257010] "temp"
+    (3406596 call findAvailableSlot[3400815] call_tmp[8463940] k[3406529] ret_tmp[5589812])
+    (5589815 'move' call_tmp[3406588] ret_tmp[5589812])
+    val tmp_x1[9107592]:int(64)[10] "temp"
+    (9107603 'move' tmp_x1[9107592](9107601 '.v' call_tmp[3406588] x1[3257008]))
+    1
+    (3406617 'noop')
+    ref call_tmp[8463950]:chpl__hashtable(string,shared Module(real(32)))[3392205] "dead after last mention" "maybe param" "temp"
+    (8463952 'move' call_tmp[8463950](8463954 '.' this[3406522] table[3391816]))
+    val coerce_tmp[8464790]:_ddata(chpl_TableEntry(string,shared Module(real(32))))[3392261] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (8464792 'move' coerce_tmp[8464790](8464794 '.v' call_tmp[8463950] table[3392183]))
+    ref call_tmp[8464797]:chpl_TableEntry(string,shared Module(real(32)))[3392238] "dead after last mention" "maybe param" "temp"
+    (8464799 'move' call_tmp[8464797](8464801 'array_get' coerce_tmp[8464790] tmp_x1[9107592]))
+    const-val coerce_tmp[8464804]:chpl__hash_status[264678] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (8464806 'move' coerce_tmp[8464804](8464808 '.v' call_tmp[8464797] status[3392230]))
+    const-val call_tmp[8464811]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (8464813 'move' call_tmp[8464811](8464815 '==' coerce_tmp[8464804] full[264674]))
+    const-val call_tmp[7351499]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7351501 'move' call_tmp[7351499](7351503 'u!' call_tmp[8464811]))
+    if call_tmp[7351499]
+    {
+      const-val call_tmp[3406655]:owned KeyNotFoundError[3334157] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      val new_temp[3407573]:KeyNotFoundError[352856] "dead after last mention" "temp"
+      (3407575 'move' new_temp[3407573](3407560 call _new[3333701] k[3406529]))
+      const-val initTemp[3407582]:owned KeyNotFoundError[3334157] "dead after last mention" "delay instantiation" "temp"
+      (3407585 call init[3333806] initTemp[3407582] new_temp[3407573])
+      (3406657 'move' call_tmp[3406655] initTemp[3407582])
+      val call_tmp[3406662]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+      const-val coerce_tmp[3407599]:owned Error[1498203] "dead after last mention" "coerce temp" "no auto destroy" "temp"
+      const-val ret_tmp[5589158]:owned Error[1498203] "temp"
+      ref i_x[8457010]:owned KeyNotFoundError[3334157] "temp"
+      (8457014 'move' i_x[8457010](8457012 'set reference' call_tmp[3406655]))
+      ref i__retArg[8457016]:owned Error[1498203] "temp"
+      (8457020 'move' i__retArg[8457016](8457018 'set reference' ret_tmp[5589158]))
+      val _formal_tmp_x[8457023]:owned KeyNotFoundError[3334157] "dead at end of block" "insert auto destroy" "no copy" "temp"
+      (8457025 'move' _formal_tmp_x[8457023] i_x[8457010])
+      const-val ret[8457028]:owned Error[1498203] "dead after last mention" "RVV" "temp"
+      ref i_this[8457030]:owned KeyNotFoundError[3334157] "temp"
+      (8457032 'move' i_this[8457030](8457034 'set reference' _formal_tmp_x[8457023]))
+      val coerce_tmp[8457036]:KeyNotFoundError[352856] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8457038 'move' coerce_tmp[8457036](8457040 '.v' i_this[8457030] chpl_p[3334152]))
+      val call_tmp[8457043]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8457045 'move' call_tmp[8457043](8457047 'cast' Error[85511] coerce_tmp[8457036]))
+      ref i_this[8457055]:owned KeyNotFoundError[3334157] "temp"
+      (8457057 'move' i_this[8457055](8457059 'set reference' _formal_tmp_x[8457023]))
+      val tmp[8457061]:KeyNotFoundError[352856] "temp"
+      (8457063 'move' tmp[8457061](8457065 'cast' KeyNotFoundError[352856] nil[32]))
+      (8457068 '.=' i_this[8457055] chpl_p[3334152] tmp[8457061])
+      val coerce_tmp[8457072]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8457074 'move' coerce_tmp[8457072](8457076 'cast' RootClass[236] call_tmp[8457043]))
+      const-val call_tmp[8457079]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8457081 'move' call_tmp[8457079](8457083 '==' coerce_tmp[8457072] nil[32]))
+      if call_tmp[8457079]
+      {
+        (8457089 call nilCheckHalt[392] "argument to ! is nil")
+      }
+      const-val call_tmp[8457092]:owned Error[1498203] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "temp"
+      const-val initTemp[8457094]:owned Error[1498203] "dead after last mention" "delay instantiation" "temp"
+      (8457097 call init[1499358] initTemp[8457094] call_tmp[8457043])
+      (8457100 'move' call_tmp[8457092] initTemp[8457094])
+      (8457103 'move' ret[8457028] call_tmp[8457092])
+      (8457107 call chpl__autoDestroy[4223706] _formal_tmp_x[8457023])
+      (8457111 '=' i__retArg[8457016] ret[8457028])
+      (5589161 'move' coerce_tmp[3407599] ret_tmp[5589158])
+      const-val _formal_tmp_in_err[3407818]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (3407823 'move' _formal_tmp_in_err[3407818] coerce_tmp[3407599])
+      (3406664 'move' call_tmp[3406662](3406667 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3407818]))
+      (5510750 '=' error_out[5510739] call_tmp[3406662])
+      gotoErrorHandlingReturn _end_this[3406716] _end_this[3406716]
+    }
+    ref call_tmp[8463960]:chpl__hashtable(string,shared Module(real(32)))[3392205] "dead after last mention" "maybe param" "temp"
+    (8463962 'move' call_tmp[8463960](8463964 '.' this[3406522] table[3391816]))
+    val coerce_tmp[3407837]:_ddata(chpl_TableEntry(string,shared Module(real(32))))[3392261] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (3407841 'move' coerce_tmp[3407837](9222146 '.v' call_tmp[8463960] table[3392183]))
+    ref call_tmp[8463156]:chpl_TableEntry(string,shared Module(real(32)))[3392238] "dead after last mention" "maybe param" "temp"
+    (8463158 'move' call_tmp[8463156](8463160 'array_get' coerce_tmp[3407837] tmp_x1[9107592]))
+    ref call_tmp[8464530]:shared Module(real(32))[1955038] "dead after last mention" "maybe param" "temp"
+    (8464532 'move' call_tmp[8464530](8464534 '.' call_tmp[8463156] val[3392236]))
+    label _end_this[3406716]
+    (3406718 return call_tmp[8464530])
+  }
+  function map(string,int(64),false)[3288794].this[3315376](const  ref arg this[3315380]:map(string,int(64),false)[3288794], const  ref arg k[3315387]:string[244], ref arg error_out[5508019]:Error[85511]) const ref : _ref(int(64))[1465689] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    ref call_tmp[8452490]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "maybe param" "temp"
+    (8452492 'move' call_tmp[8452490](8452494 '.' this[3315380] table[3288779]))
+    const-val call_tmp[3315600]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5588873]:(bool,int(64))[3257010] "temp"
+    (3315608 call findFullSlot[3312245] call_tmp[8452490] k[3315387] ret_tmp[5588873])
+    (5588876 'move' call_tmp[3315600] ret_tmp[5588873])
+    val tmp_x0[9107358]:bool[19] "temp"
+    val tmp_x1[9107360]:int(64)[10] "temp"
+    (9107366 'move' tmp_x0[9107358](9107364 '.v' call_tmp[3315600] x0[3257006]))
+    (9107371 'move' tmp_x1[9107360](9107369 '.v' call_tmp[3315600] x1[3257008]))
+    1
+    (3315629 'noop')
+    (3315641 'noop')
+    const-val call_tmp[7351148]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7351150 'move' call_tmp[7351148](7351152 'u!' tmp_x0[9107358]))
+    if call_tmp[7351148]
+    {
+      const-val call_tmp[3315661]:owned KeyNotFoundError[3334157] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      val new_temp[3333755]:KeyNotFoundError[352856] "dead after last mention" "temp"
+      (3333757 'move' new_temp[3333755](3315849 call _new[3333701] k[3315387]))
+      const-val initTemp[3333785]:owned KeyNotFoundError[3334157] "dead after last mention" "delay instantiation" "temp"
+      (3333788 call init[3333806] initTemp[3333785] new_temp[3333755])
+      (3315663 'move' call_tmp[3315661] initTemp[3333785])
+      val call_tmp[3315668]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+      const-val coerce_tmp[3334275]:owned Error[1498203] "dead after last mention" "coerce temp" "no auto destroy" "temp"
+      const-val ret_tmp[5589134]:owned Error[1498203] "temp"
+      ref i_x[8456798]:owned KeyNotFoundError[3334157] "temp"
+      (8456802 'move' i_x[8456798](8456800 'set reference' call_tmp[3315661]))
+      ref i__retArg[8456804]:owned Error[1498203] "temp"
+      (8456808 'move' i__retArg[8456804](8456806 'set reference' ret_tmp[5589134]))
+      val _formal_tmp_x[8456811]:owned KeyNotFoundError[3334157] "dead at end of block" "insert auto destroy" "no copy" "temp"
+      (8456813 'move' _formal_tmp_x[8456811] i_x[8456798])
+      const-val ret[8456816]:owned Error[1498203] "dead after last mention" "RVV" "temp"
+      ref i_this[8456818]:owned KeyNotFoundError[3334157] "temp"
+      (8456820 'move' i_this[8456818](8456822 'set reference' _formal_tmp_x[8456811]))
+      val coerce_tmp[8456824]:KeyNotFoundError[352856] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8456826 'move' coerce_tmp[8456824](8456828 '.v' i_this[8456818] chpl_p[3334152]))
+      val call_tmp[8456831]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8456833 'move' call_tmp[8456831](8456835 'cast' Error[85511] coerce_tmp[8456824]))
+      ref i_this[8456843]:owned KeyNotFoundError[3334157] "temp"
+      (8456845 'move' i_this[8456843](8456847 'set reference' _formal_tmp_x[8456811]))
+      val tmp[8456849]:KeyNotFoundError[352856] "temp"
+      (8456851 'move' tmp[8456849](8456853 'cast' KeyNotFoundError[352856] nil[32]))
+      (8456856 '.=' i_this[8456843] chpl_p[3334152] tmp[8456849])
+      val coerce_tmp[8456860]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8456862 'move' coerce_tmp[8456860](8456864 'cast' RootClass[236] call_tmp[8456831]))
+      const-val call_tmp[8456867]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8456869 'move' call_tmp[8456867](8456871 '==' coerce_tmp[8456860] nil[32]))
+      if call_tmp[8456867]
+      {
+        (8456877 call nilCheckHalt[392] "argument to ! is nil")
+      }
+      const-val call_tmp[8456880]:owned Error[1498203] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "temp"
+      const-val initTemp[8456882]:owned Error[1498203] "dead after last mention" "delay instantiation" "temp"
+      (8456885 call init[1499358] initTemp[8456882] call_tmp[8456831])
+      (8456888 'move' call_tmp[8456880] initTemp[8456882])
+      (8456891 'move' ret[8456816] call_tmp[8456880])
+      (8456895 call chpl__autoDestroy[4223706] _formal_tmp_x[8456811])
+      (8456899 '=' i__retArg[8456804] ret[8456816])
+      (5589137 'move' coerce_tmp[3334275] ret_tmp[5589134])
+      const-val _formal_tmp_in_err[3335146]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (3335151 'move' _formal_tmp_in_err[3335146] coerce_tmp[3334275])
+      (3315670 'move' call_tmp[3315668](3315673 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3335146]))
+      (5508030 '=' error_out[5508019] call_tmp[3315668])
+      gotoErrorHandlingReturn _end_this[3315722] _end_this[3315722]
+    }
+    ref call_tmp[8452500]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "maybe param" "temp"
+    (8452502 'move' call_tmp[8452500](8452504 '.' this[3315380] table[3288779]))
+    val coerce_tmp[3335165]:_ddata(chpl_TableEntry(string,int(64)))[3288904] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (3335169 'move' coerce_tmp[3335165](9219488 '.v' call_tmp[8452500] table[3288827]))
+    ref call_tmp[8453223]:chpl_TableEntry(string,int(64))[3288881] "dead after last mention" "maybe param" "temp"
+    (8453225 'move' call_tmp[8453223](8453227 'array_get' coerce_tmp[3335165] tmp_x1[9107360]))
+    ref call_tmp[8453853]:int(64)[10] "dead after last mention" "maybe param" "temp"
+    (8453855 'move' call_tmp[8453853](8453857 '.' call_tmp[8453223] val[3288879]))
+    label _end_this[3315722]
+    (3315724 return call_tmp[8453853])
+  }
+  function map(string,string,false)[3283386].this[3386412](const  ref arg this[3386416]:map(string,string,false)[3283386], const  ref arg k[3386423]:string[244], ref arg error_out[5510668]:Error[85511]) const ref : _ref(string)[1466327] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    ref call_tmp[8458195]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+    (8458197 'move' call_tmp[8458195](8458199 '.' this[3386416] table[3283371]))
+    const-val call_tmp[3386636]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5589724]:(bool,int(64))[3257010] "temp"
+    (3386644 call findFullSlot[3383343] call_tmp[8458195] k[3386423] ret_tmp[5589724])
+    (5589727 'move' call_tmp[3386636] ret_tmp[5589724])
+    val tmp_x0[9107502]:bool[19] "temp"
+    val tmp_x1[9107504]:int(64)[10] "temp"
+    (9107510 'move' tmp_x0[9107502](9107508 '.v' call_tmp[3386636] x0[3257006]))
+    (9107515 'move' tmp_x1[9107504](9107513 '.v' call_tmp[3386636] x1[3257008]))
+    1
+    (3386665 'noop')
+    (3386677 'noop')
+    const-val call_tmp[7351463]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7351465 'move' call_tmp[7351463](7351467 'u!' tmp_x0[9107502]))
+    if call_tmp[7351463]
+    {
+      const-val call_tmp[3386697]:owned KeyNotFoundError[3334157] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      val new_temp[3386880]:KeyNotFoundError[352856] "dead after last mention" "temp"
+      (3386882 'move' new_temp[3386880](3386867 call _new[3333701] k[3386423]))
+      const-val initTemp[3386889]:owned KeyNotFoundError[3334157] "dead after last mention" "delay instantiation" "temp"
+      (3386892 call init[3333806] initTemp[3386889] new_temp[3386880])
+      (3386699 'move' call_tmp[3386697] initTemp[3386889])
+      val call_tmp[3386704]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+      const-val coerce_tmp[3386906]:owned Error[1498203] "dead after last mention" "coerce temp" "no auto destroy" "temp"
+      const-val ret_tmp[5589140]:owned Error[1498203] "temp"
+      ref i_x[8456904]:owned KeyNotFoundError[3334157] "temp"
+      (8456908 'move' i_x[8456904](8456906 'set reference' call_tmp[3386697]))
+      ref i__retArg[8456910]:owned Error[1498203] "temp"
+      (8456914 'move' i__retArg[8456910](8456912 'set reference' ret_tmp[5589140]))
+      val _formal_tmp_x[8456917]:owned KeyNotFoundError[3334157] "dead at end of block" "insert auto destroy" "no copy" "temp"
+      (8456919 'move' _formal_tmp_x[8456917] i_x[8456904])
+      const-val ret[8456922]:owned Error[1498203] "dead after last mention" "RVV" "temp"
+      ref i_this[8456924]:owned KeyNotFoundError[3334157] "temp"
+      (8456926 'move' i_this[8456924](8456928 'set reference' _formal_tmp_x[8456917]))
+      val coerce_tmp[8456930]:KeyNotFoundError[352856] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8456932 'move' coerce_tmp[8456930](8456934 '.v' i_this[8456924] chpl_p[3334152]))
+      val call_tmp[8456937]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8456939 'move' call_tmp[8456937](8456941 'cast' Error[85511] coerce_tmp[8456930]))
+      ref i_this[8456949]:owned KeyNotFoundError[3334157] "temp"
+      (8456951 'move' i_this[8456949](8456953 'set reference' _formal_tmp_x[8456917]))
+      val tmp[8456955]:KeyNotFoundError[352856] "temp"
+      (8456957 'move' tmp[8456955](8456959 'cast' KeyNotFoundError[352856] nil[32]))
+      (8456962 '.=' i_this[8456949] chpl_p[3334152] tmp[8456955])
+      val coerce_tmp[8456966]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8456968 'move' coerce_tmp[8456966](8456970 'cast' RootClass[236] call_tmp[8456937]))
+      const-val call_tmp[8456973]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8456975 'move' call_tmp[8456973](8456977 '==' coerce_tmp[8456966] nil[32]))
+      if call_tmp[8456973]
+      {
+        (8456983 call nilCheckHalt[392] "argument to ! is nil")
+      }
+      const-val call_tmp[8456986]:owned Error[1498203] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "temp"
+      const-val initTemp[8456988]:owned Error[1498203] "dead after last mention" "delay instantiation" "temp"
+      (8456991 call init[1499358] initTemp[8456988] call_tmp[8456937])
+      (8456994 'move' call_tmp[8456986] initTemp[8456988])
+      (8456997 'move' ret[8456922] call_tmp[8456986])
+      (8457001 call chpl__autoDestroy[4223706] _formal_tmp_x[8456917])
+      (8457005 '=' i__retArg[8456910] ret[8456922])
+      (5589143 'move' coerce_tmp[3386906] ret_tmp[5589140])
+      const-val _formal_tmp_in_err[3387125]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (3387130 'move' _formal_tmp_in_err[3387125] coerce_tmp[3386906])
+      (3386706 'move' call_tmp[3386704](3386709 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3387125]))
+      (5510679 '=' error_out[5510668] call_tmp[3386704])
+      gotoErrorHandlingReturn _end_this[3386758] _end_this[3386758]
+    }
+    ref call_tmp[8458205]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+    (8458207 'move' call_tmp[8458205](8458209 '.' this[3386416] table[3283371]))
+    val coerce_tmp[3387144]:_ddata(chpl_TableEntry(string,string))[3283496] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (3387148 'move' coerce_tmp[3387144](9221562 '.v' call_tmp[8458205] table[3283419]))
+    ref call_tmp[8457822]:chpl_TableEntry(string,string)[3283473] "dead after last mention" "maybe param" "temp"
+    (8457824 'move' call_tmp[8457822](8457826 'array_get' coerce_tmp[3387144] tmp_x1[9107504]))
+    ref call_tmp[8458906]:string[244] "dead after last mention" "maybe param" "temp"
+    (8458908 'move' call_tmp[8458906](8458910 '.' call_tmp[8457822] val[3283471]))
+    label _end_this[3386758]
+    (3386760 return call_tmp[8458906])
+  }
+  function map(string,Module(real(32)),false)[1936356].this[3420987](const  ref arg this[3420991]:map(string,Module(real(32)),false)[1936356], const  ref arg k[3420998]:string[244], ref arg error_out[5510797]:Error[85511]) const ref : _ref(Module(real(32)))[1935660] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    ref call_tmp[8418671]:chpl__hashtable(string,Module(real(32)))[1941492] "dead after last mention" "maybe param" "temp"
+    (8418673 'move' call_tmp[8418671](8418675 '.' this[3420991] table[1936341]))
+    const-val call_tmp[3421204]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5589960]:(bool,int(64))[3257010] "temp"
+    (3421212 call findFullSlot[3421376] call_tmp[8418671] k[3420998] ret_tmp[5589960])
+    (5589963 'move' call_tmp[3421204] ret_tmp[5589960])
+    val tmp_x0[9107606]:bool[19] "temp"
+    val tmp_x1[9107608]:int(64)[10] "temp"
+    (9107614 'move' tmp_x0[9107606](9107612 '.v' call_tmp[3421204] x0[3257006]))
+    (9107619 'move' tmp_x1[9107608](9107617 '.v' call_tmp[3421204] x1[3257008]))
+    1
+    (3421233 'noop')
+    (3421245 'noop')
+    const-val call_tmp[7351517]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7351519 'move' call_tmp[7351517](7351521 'u!' tmp_x0[9107606]))
+    if call_tmp[7351517]
+    {
+      const-val call_tmp[3421265]:owned KeyNotFoundError[3334157] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      val new_temp[3421627]:KeyNotFoundError[352856] "dead after last mention" "temp"
+      (3421629 'move' new_temp[3421627](3421614 call _new[3333701] k[3420998]))
+      const-val initTemp[3421636]:owned KeyNotFoundError[3334157] "dead after last mention" "delay instantiation" "temp"
+      (3421639 call init[3333806] initTemp[3421636] new_temp[3421627])
+      (3421267 'move' call_tmp[3421265] initTemp[3421636])
+      val call_tmp[3421272]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+      const-val coerce_tmp[3421653]:owned Error[1498203] "dead after last mention" "coerce temp" "no auto destroy" "temp"
+      const-val ret_tmp[5589164]:owned Error[1498203] "temp"
+      ref i_x[8457116]:owned KeyNotFoundError[3334157] "temp"
+      (8457120 'move' i_x[8457116](8457118 'set reference' call_tmp[3421265]))
+      ref i__retArg[8457122]:owned Error[1498203] "temp"
+      (8457126 'move' i__retArg[8457122](8457124 'set reference' ret_tmp[5589164]))
+      val _formal_tmp_x[8457129]:owned KeyNotFoundError[3334157] "dead at end of block" "insert auto destroy" "no copy" "temp"
+      (8457131 'move' _formal_tmp_x[8457129] i_x[8457116])
+      const-val ret[8457134]:owned Error[1498203] "dead after last mention" "RVV" "temp"
+      ref i_this[8457136]:owned KeyNotFoundError[3334157] "temp"
+      (8457138 'move' i_this[8457136](8457140 'set reference' _formal_tmp_x[8457129]))
+      val coerce_tmp[8457142]:KeyNotFoundError[352856] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8457144 'move' coerce_tmp[8457142](8457146 '.v' i_this[8457136] chpl_p[3334152]))
+      val call_tmp[8457149]:Error[85511] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8457151 'move' call_tmp[8457149](8457153 'cast' Error[85511] coerce_tmp[8457142]))
+      ref i_this[8457161]:owned KeyNotFoundError[3334157] "temp"
+      (8457163 'move' i_this[8457161](8457165 'set reference' _formal_tmp_x[8457129]))
+      val tmp[8457167]:KeyNotFoundError[352856] "temp"
+      (8457169 'move' tmp[8457167](8457171 'cast' KeyNotFoundError[352856] nil[32]))
+      (8457174 '.=' i_this[8457161] chpl_p[3334152] tmp[8457167])
+      val coerce_tmp[8457178]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (8457180 'move' coerce_tmp[8457178](8457182 'cast' RootClass[236] call_tmp[8457149]))
+      const-val call_tmp[8457185]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8457187 'move' call_tmp[8457185](8457189 '==' coerce_tmp[8457178] nil[32]))
+      if call_tmp[8457185]
+      {
+        (8457195 call nilCheckHalt[392] "argument to ! is nil")
+      }
+      const-val call_tmp[8457198]:owned Error[1498203] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "temp"
+      const-val initTemp[8457200]:owned Error[1498203] "dead after last mention" "delay instantiation" "temp"
+      (8457203 call init[1499358] initTemp[8457200] call_tmp[8457149])
+      (8457206 'move' call_tmp[8457198] initTemp[8457200])
+      (8457209 'move' ret[8457134] call_tmp[8457198])
+      (8457213 call chpl__autoDestroy[4223706] _formal_tmp_x[8457129])
+      (8457217 '=' i__retArg[8457122] ret[8457134])
+      (5589167 'move' coerce_tmp[3421653] ret_tmp[5589164])
+      const-val _formal_tmp_in_err[3421872]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (3421877 'move' _formal_tmp_in_err[3421872] coerce_tmp[3421653])
+      (3421274 'move' call_tmp[3421272](3421277 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3421872]))
+      (5510808 '=' error_out[5510797] call_tmp[3421272])
+      gotoErrorHandlingReturn _end_this[3421326] _end_this[3421326]
+    }
+    ref call_tmp[8418681]:chpl__hashtable(string,Module(real(32)))[1941492] "dead after last mention" "maybe param" "temp"
+    (8418683 'move' call_tmp[8418681](8418685 '.' this[3420991] table[1936341]))
+    val coerce_tmp[3421891]:_ddata(chpl_TableEntry(string,Module(real(32))))[1941559] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (3421895 'move' coerce_tmp[3421891](9222313 '.v' call_tmp[8418681] table[1941470]))
+    ref call_tmp[7891221]:chpl_TableEntry(string,Module(real(32)))[1941536] "dead after last mention" "maybe param" "temp"
+    (7891223 'move' call_tmp[7891221](7891225 'array_get' coerce_tmp[3421891] tmp_x1[9107608]))
+    ref call_tmp[8421745]:Module(real(32))[1935500] "dead after last mention" "maybe param" "temp"
+    (8421747 'move' call_tmp[8421745](8421749 '.' call_tmp[7891221] val[1941534]))
+    label _end_this[3421326]
+    (3421328 return call_tmp[8421745])
+  }
+  type _ic_keys__ref_map_string_int64_t_F[3311955] val super[3311956]:RootClass[236] "super class" val more[3311958]:int(64)[10] const-ref F0_this[7079744]:map(string,int(64),false)[3288794] val F1__iterator[7079748]:_ic_allSlots__ref_chpl__hashtable_string_int64_t[3311344] const-ref F2_table_ref[7079750]:chpl__hashtable(string,int(64))[3288849] val F3__iterator[7079752]:_ic__allSlots[1946131] val F4__iterator[7079754]:_ic_chpl_direct_counted_range_iter[1520064] val F5__iterator[7079756]:_ic_chpl_direct_counted_range_iter_helper[1519797] val F6__iterator[7079758]:_ic_chpl_direct_param_stride_range_iter[1519526] val F7_i[7079760]:int(64)[10] const-ref value[7079762]:string[244]
+  type _ir_keys__ref_map_string_int64_t_F[3311961] const-ref F0_this[7079746]:map(string,int(64),false)[3288794]
+  type _ic_keys__ref_map_string_string_F[3381529] val super[3381530]:RootClass[236] "super class" val more[3381532]:int(64)[10] const-ref F0_this[7087442]:map(string,string,false)[3283386] val F1__iterator[7087446]:_ic_allSlots__ref_chpl__hashtable_string_string[3344729] const-ref F2_table_ref[7087448]:chpl__hashtable(string,string)[3283441] val F3__iterator[7087450]:_ic__allSlots[1946131] val F4__iterator[7087452]:_ic_chpl_direct_counted_range_iter[1520064] val F5__iterator[7087454]:_ic_chpl_direct_counted_range_iter_helper[1519797] val F6__iterator[7087456]:_ic_chpl_direct_param_stride_range_iter[1519526] val F7_i[7087458]:int(64)[10] const-ref value[7087460]:string[244]
+  type _ir_keys__ref_map_string_string_F[3381535] const-ref F0_this[7087444]:map(string,string,false)[3283386]
+  function map(string,string,false)[3283386]._readHelper[3343832](ref arg this[3343836]:map(string,string,false)[3283386], const  ref arg r[3343838]:fileReader(false,jsonDeserializer)[3276790], const  ref arg deserializer[3343840]:jsonDeserializer[356412], ref arg error_out[5509584]:Error[85511]) : void[4] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    (3344155 call clear[3344292] this[3343836])
+    const-val call_tmp[3344170]:MapDeserializer(fileReader(false,jsonDeserializer))[3348822] "dead at end of block" "maybe param" "temp"
+    val error[5509589]:Error[85511] "error variable" "temp"
+    (5509591 'move' error[5509589] nil[32])
+    const-val ret_tmp[5589304]:MapDeserializer(fileReader(false,jsonDeserializer))[3348822] "temp"
+    (3344178 call startMap[3348715] deserializer[3343840] r[3343838] error[5509589] ret_tmp[5589304])
+    (5589307 'move' call_tmp[3344170] ret_tmp[5589304])
+    val errorExists[7302568]:bool[19] "temp"
+    (7302573 'move' errorExists[7302568](7302570 '!=' error[5509589] nil[32]))
+    if errorExists[7302568]
+    {
+      (5509595 '=' error_out[5509584] error[5509589])
+      gotoErrorHandlingReturn _end_readHelper[5509586] _end_readHelper[5509586]
+    }
+    val des[3344180]:MapDeserializer(fileReader(false,jsonDeserializer))[3348822] "dead at end of block" "insert auto destroy"
+    (3344182 'move' des[3344180] call_tmp[3344170])
+    val tmp[3344193]:bool[19] "dead after last mention" "temp"
+    const-val call_tmp[3344195]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    val error[5509604]:Error[85511] "error variable" "temp"
+    (5509606 'move' error[5509604] nil[32])
+    (3344197 'move' call_tmp[3344195](3344203 call hasMore[3348903] des[3344180] error[5509604]))
+    val errorExists[7302576]:bool[19] "temp"
+    (7302581 'move' errorExists[7302576](7302578 '!=' error[5509604] nil[32]))
+    if errorExists[7302576]
+    {
+      (5509610 '=' error_out[5509584] error[5509604])
+      ref _field_destructor_tmp_[8622380]:fileReader(false,jsonDeserializer)[3276790] "temp"
+      (8622382 'move' _field_destructor_tmp_[8622380](8622384 '.' des[3344180] reader[3348816]))
+      (8622388 call deinit[4209365] _field_destructor_tmp_[8622380])
+      gotoErrorHandlingReturn _end_readHelper[5509586] _end_readHelper[5509586]
+    }
+    (3344204 'move' tmp[3344193] call_tmp[3344195])
+    WhileDo[3344209] hazard
+    {
+      const-val call_tmp[3344220]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "temp"
+      val error[5509619]:Error[85511] "error variable" "temp"
+      (5509621 'move' error[5509619] nil[32])
+      const-val ret_tmp[5589322]:string[244] "temp"
+      (3344228 call readKey[3349035] des[3344180] error[5509619] ret_tmp[5589322])
+      (5589325 'move' call_tmp[3344220] ret_tmp[5589322])
+      val errorExists[7302584]:bool[19] "temp"
+      (7302589 'move' errorExists[7302584](7302586 '!=' error[5509619] nil[32]))
+      if errorExists[7302584]
+      {
+        (5509625 '=' error_out[5509584] error[5509619])
+        ref _field_destructor_tmp_[8622399]:fileReader(false,jsonDeserializer)[3276790] "temp"
+        (8622401 'move' _field_destructor_tmp_[8622399](8622403 '.' des[3344180] reader[3348816]))
+        (8622407 call deinit[4209365] _field_destructor_tmp_[8622399])
+        gotoErrorHandlingReturn _end_readHelper[5509586] _end_readHelper[5509586]
+      }
+      const-val call_tmp[3344238]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "temp"
+      val error[5509634]:Error[85511] "error variable" "temp"
+      (5509636 'move' error[5509634] nil[32])
+      const-val ret_tmp[5589340]:string[244] "temp"
+      (3344246 call readValue[3349327] des[3344180] error[5509634] ret_tmp[5589340])
+      (5589343 'move' call_tmp[3344238] ret_tmp[5589340])
+      val errorExists[7302592]:bool[19] "temp"
+      (7302597 'move' errorExists[7302592](7302594 '!=' error[5509634] nil[32]))
+      if errorExists[7302592]
+      {
+        (5509640 '=' error_out[5509584] error[5509634])
+        ref _field_destructor_tmp_[8622418]:fileReader(false,jsonDeserializer)[3276790] "temp"
+        (8622420 'move' _field_destructor_tmp_[8622418](8622422 '.' des[3344180] reader[3348816]))
+        (8622426 call deinit[4209365] _field_destructor_tmp_[8622418])
+        gotoErrorHandlingReturn _end_readHelper[5509586] _end_readHelper[5509586]
+      }
+      (3344252 call add[3349410] this[3343836] call_tmp[3344220] call_tmp[3344238])
+      const-val call_tmp[3344259]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      val error[5509649]:Error[85511] "error variable" "temp"
+      (5509651 'move' error[5509649] nil[32])
+      (3344261 'move' call_tmp[3344259](3344267 call hasMore[3348903] des[3344180] error[5509649]))
+      val errorExists[7302600]:bool[19] "temp"
+      (7302605 'move' errorExists[7302600](7302602 '!=' error[5509649] nil[32]))
+      if errorExists[7302600]
+      {
+        (5509655 '=' error_out[5509584] error[5509649])
+        ref _field_destructor_tmp_[8622437]:fileReader(false,jsonDeserializer)[3276790] "temp"
+        (8622439 'move' _field_destructor_tmp_[8622437](8622441 '.' des[3344180] reader[3348816]))
+        (8622445 call deinit[4209365] _field_destructor_tmp_[8622437])
+        gotoErrorHandlingReturn _end_readHelper[5509586] _end_readHelper[5509586]
+      }
+      (3344268 'move' tmp[3344193] call_tmp[3344259])
+      tmp[3344193]
+    }
+    val error[5509664]:Error[85511] "error variable" "temp"
+    (5509666 'move' error[5509664] nil[32])
+    (3344279 call endMap[3350681] des[3344180] error[5509664])
+    val errorExists[7302608]:bool[19] "temp"
+    (7302613 'move' errorExists[7302608](7302610 '!=' error[5509664] nil[32]))
+    if errorExists[7302608]
+    {
+      (5509670 '=' error_out[5509584] error[5509664])
+      ref _field_destructor_tmp_[8622456]:fileReader(false,jsonDeserializer)[3276790] "temp"
+      (8622458 'move' _field_destructor_tmp_[8622456](8622460 '.' des[3344180] reader[3348816]))
+      (8622464 call deinit[4209365] _field_destructor_tmp_[8622456])
+      gotoErrorHandlingReturn _end_readHelper[5509586] _end_readHelper[5509586]
+    }
+    ref _field_destructor_tmp_[8622475]:fileReader(false,jsonDeserializer)[3276790] "temp"
+    (8622477 'move' _field_destructor_tmp_[8622475](8622479 '.' des[3344180] reader[3348816]))
+    (8622483 call deinit[4209365] _field_destructor_tmp_[8622475])
+    label _end_readHelper[5509586]
+    (3344282 return _void[46])
+  }
+  function map(string,owned ModuleSpecification?,false)[3283686]._readHelper[3358917](ref arg this[3358921]:map(string,owned ModuleSpecification?,false)[3283686], const  ref arg r[3358923]:fileReader(false,jsonDeserializer)[3276790], const  ref arg deserializer[3358925]:jsonDeserializer[356412], ref arg error_out[5510004]:Error[85511]) : void[4] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    (3359240 call clear[3359377] this[3358921])
+    const-val call_tmp[3359255]:MapDeserializer(fileReader(false,jsonDeserializer))[3348822] "dead at end of block" "maybe param" "temp"
+    val error[5510009]:Error[85511] "error variable" "temp"
+    (5510011 'move' error[5510009] nil[32])
+    const-val ret_tmp[5589310]:MapDeserializer(fileReader(false,jsonDeserializer))[3348822] "temp"
+    (3359263 call startMap[3348715] deserializer[3358925] r[3358923] error[5510009] ret_tmp[5589310])
+    (5589313 'move' call_tmp[3359255] ret_tmp[5589310])
+    val errorExists[7302768]:bool[19] "temp"
+    (7302773 'move' errorExists[7302768](7302770 '!=' error[5510009] nil[32]))
+    if errorExists[7302768]
+    {
+      (5510015 '=' error_out[5510004] error[5510009])
+      gotoErrorHandlingReturn _end_readHelper[5510006] _end_readHelper[5510006]
+    }
+    val des[3359265]:MapDeserializer(fileReader(false,jsonDeserializer))[3348822] "dead at end of block" "insert auto destroy"
+    (3359267 'move' des[3359265] call_tmp[3359255])
+    val tmp[3359278]:bool[19] "dead after last mention" "temp"
+    const-val call_tmp[3359280]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    val error[5510024]:Error[85511] "error variable" "temp"
+    (5510026 'move' error[5510024] nil[32])
+    (3359282 'move' call_tmp[3359280](3359288 call hasMore[3348903] des[3359265] error[5510024]))
+    val errorExists[7302776]:bool[19] "temp"
+    (7302781 'move' errorExists[7302776](7302778 '!=' error[5510024] nil[32]))
+    if errorExists[7302776]
+    {
+      (5510030 '=' error_out[5510004] error[5510024])
+      ref _field_destructor_tmp_[8622494]:fileReader(false,jsonDeserializer)[3276790] "temp"
+      (8622496 'move' _field_destructor_tmp_[8622494](8622498 '.' des[3359265] reader[3348816]))
+      (8622502 call deinit[4209365] _field_destructor_tmp_[8622494])
+      gotoErrorHandlingReturn _end_readHelper[5510006] _end_readHelper[5510006]
+    }
+    (3359289 'move' tmp[3359278] call_tmp[3359280])
+    WhileDo[3359294] hazard
+    {
+      const-val call_tmp[3359305]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "temp"
+      val error[5510039]:Error[85511] "error variable" "temp"
+      (5510041 'move' error[5510039] nil[32])
+      const-val ret_tmp[5589328]:string[244] "temp"
+      (3359313 call readKey[3349035] des[3359265] error[5510039] ret_tmp[5589328])
+      (5589331 'move' call_tmp[3359305] ret_tmp[5589328])
+      val errorExists[7302784]:bool[19] "temp"
+      (7302789 'move' errorExists[7302784](7302786 '!=' error[5510039] nil[32]))
+      if errorExists[7302784]
+      {
+        (5510045 '=' error_out[5510004] error[5510039])
+        ref _field_destructor_tmp_[8622513]:fileReader(false,jsonDeserializer)[3276790] "temp"
+        (8622515 'move' _field_destructor_tmp_[8622513](8622517 '.' des[3359265] reader[3348816]))
+        (8622521 call deinit[4209365] _field_destructor_tmp_[8622513])
+        gotoErrorHandlingReturn _end_readHelper[5510006] _end_readHelper[5510006]
+      }
+      const-val call_tmp[3359323]:owned ModuleSpecification?[3283604] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "temp"
+      val error[5510054]:Error[85511] "error variable" "temp"
+      (5510056 'move' error[5510054] nil[32])
+      const-val ret_tmp[5589516]:owned ModuleSpecification?[3283604] "temp"
+      (3359331 call readValue[3366403] des[3359265] error[5510054] ret_tmp[5589516])
+      (5589519 'move' call_tmp[3359323] ret_tmp[5589516])
+      val errorExists[7302792]:bool[19] "temp"
+      (7302797 'move' errorExists[7302792](7302794 '!=' error[5510054] nil[32]))
+      if errorExists[7302792]
+      {
+        (5510060 '=' error_out[5510004] error[5510054])
+        ref _field_destructor_tmp_[8622532]:fileReader(false,jsonDeserializer)[3276790] "temp"
+        (8622534 'move' _field_destructor_tmp_[8622532](8622536 '.' des[3359265] reader[3348816]))
+        (8622540 call deinit[4209365] _field_destructor_tmp_[8622532])
+        gotoErrorHandlingReturn _end_readHelper[5510006] _end_readHelper[5510006]
+      }
+      (3359337 call add[3372005] this[3358921] call_tmp[3359305] call_tmp[3359323])
+      const-val call_tmp[3359344]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      val error[5510069]:Error[85511] "error variable" "temp"
+      (5510071 'move' error[5510069] nil[32])
+      (3359346 'move' call_tmp[3359344](3359352 call hasMore[3348903] des[3359265] error[5510069]))
+      val errorExists[7302800]:bool[19] "temp"
+      (7302805 'move' errorExists[7302800](7302802 '!=' error[5510069] nil[32]))
+      if errorExists[7302800]
+      {
+        (5510075 '=' error_out[5510004] error[5510069])
+        ref _field_destructor_tmp_[8622551]:fileReader(false,jsonDeserializer)[3276790] "temp"
+        (8622553 'move' _field_destructor_tmp_[8622551](8622555 '.' des[3359265] reader[3348816]))
+        (8622559 call deinit[4209365] _field_destructor_tmp_[8622551])
+        gotoErrorHandlingReturn _end_readHelper[5510006] _end_readHelper[5510006]
+      }
+      (3359353 'move' tmp[3359278] call_tmp[3359344])
+      tmp[3359278]
+    }
+    val error[5510084]:Error[85511] "error variable" "temp"
+    (5510086 'move' error[5510084] nil[32])
+    (3359364 call endMap[3350681] des[3359265] error[5510084])
+    val errorExists[7302808]:bool[19] "temp"
+    (7302813 'move' errorExists[7302808](7302810 '!=' error[5510084] nil[32]))
+    if errorExists[7302808]
+    {
+      (5510090 '=' error_out[5510004] error[5510084])
+      ref _field_destructor_tmp_[8622570]:fileReader(false,jsonDeserializer)[3276790] "temp"
+      (8622572 'move' _field_destructor_tmp_[8622570](8622574 '.' des[3359265] reader[3348816]))
+      (8622578 call deinit[4209365] _field_destructor_tmp_[8622570])
+      gotoErrorHandlingReturn _end_readHelper[5510006] _end_readHelper[5510006]
+    }
+    ref _field_destructor_tmp_[8622589]:fileReader(false,jsonDeserializer)[3276790] "temp"
+    (8622591 'move' _field_destructor_tmp_[8622589](8622593 '.' des[3359265] reader[3348816]))
+    (8622597 call deinit[4209365] _field_destructor_tmp_[8622589])
+    label _end_readHelper[5510006]
+    (3359367 return _void[46])
+  }
+  function map(string,string,false)[3283386].init[3339110](ref arg this[3339114]:map(string,string,false)[3283386], const  ref arg reader[3339122]:fileReader(false,jsonDeserializer)[3276790], const  ref arg deserializer[3339124]:jsonDeserializer[356412], ref arg error_out[5509565]:Error[85511]) : void[4] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved" "@unstable" "no return value for void"
+  {
+    const-val resizeThreshold[8458098]:real(64)[13] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    (8458100 'move' resizeThreshold[8458098] defaultHashTableResizeThreshold[209951])
+    (3339142 call init[3339157] this[3339114] resizeThreshold[8458098] 16)
+    val error[5509570]:Error[85511] "error variable" "temp"
+    (5509572 'move' error[5509570] nil[32])
+    (3339151 call _readHelper[3343832] this[3339114] reader[3339122] deserializer[3339124] error[5509570])
+    val errorExists[7302560]:bool[19] "temp"
+    (7302565 'move' errorExists[7302560](7302562 '!=' error[5509570] nil[32]))
+    if errorExists[7302560]
+    {
+      (5509576 '=' error_out[5509565] error[5509570])
+      gotoErrorHandlingReturn _endinit[5509567] _endinit[5509567]
+    }
+    label _endinit[5509567]
+    (3339154 return _void[46])
+  }
+  function map(string,owned ModuleSpecification?,false)[3283686].init[3354169](ref arg this[3354173]:map(string,owned ModuleSpecification?,false)[3283686], const  ref arg reader[3354181]:fileReader(false,jsonDeserializer)[3276790], const  ref arg deserializer[3354183]:jsonDeserializer[356412], ref arg error_out[5509985]:Error[85511]) : void[4] throws "instantiated generic" "invisible fn" "method" "primary method" "resolved" "@unstable" "no return value for void"
+  {
+    const-val resizeThreshold[8460339]:real(64)[13] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    (8460341 'move' resizeThreshold[8460339] defaultHashTableResizeThreshold[209951])
+    (3354201 call init[3354216] this[3354173] resizeThreshold[8460339] 16)
+    val error[5509990]:Error[85511] "error variable" "temp"
+    (5509992 'move' error[5509990] nil[32])
+    (3354210 call _readHelper[3358917] this[3354173] reader[3354181] deserializer[3354183] error[5509990])
+    val errorExists[7302760]:bool[19] "temp"
+    (7302765 'move' errorExists[7302760](7302762 '!=' error[5509990] nil[32]))
+    if errorExists[7302760]
+    {
+      (5509996 '=' error_out[5509985] error[5509990])
+      gotoErrorHandlingReturn _endinit[5509987] _endinit[5509987]
+    }
+    label _endinit[5509987]
+    (3354213 return _void[46])
+  }
+  function map(string,int(64),false)[3288794].add[3300824](ref arg this[3300828]:map(string,int(64),false)[3288794], const  ref arg k[3300835]:string[244], const in arg v[3300842]:int(64)[10]) : bool[19] "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    const-val _formal_tmp_k[3301089]:string[244] "dead at end of block" "insert auto destroy" "maybe copy elided" "no copy" "temp"
+    (3301092 'move' _formal_tmp_k[3301089] k[3300835])
+    val ret[3300853]:bool[19] "dead after last mention" "RVV" "temp"
+    ref call_tmp[8452460]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "maybe param" "temp"
+    (8452462 'move' call_tmp[8452460](8452464 '.' this[3300828] table[3288779]))
+    const-val call_tmp[3300990]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5588735]:(bool,int(64))[3257010] "temp"
+    (3300998 call findAvailableSlot[3301272] call_tmp[8452460] _formal_tmp_k[3301089] ret_tmp[5588735])
+    (5588738 'move' call_tmp[3300990] ret_tmp[5588735])
+    val tmp_x0[9107270]:bool[19] "temp"
+    val tmp_x1[9107272]:int(64)[10] "temp"
+    (9107278 'move' tmp_x0[9107270](9107276 '.v' call_tmp[3300990] x0[3257006]))
+    (9107283 'move' tmp_x1[9107272](9107281 '.v' call_tmp[3300990] x1[3257008]))
+    1
+    (3301019 'noop')
+    (3301031 'noop')
+    if tmp_x0[9107270]
+    {
+      (3301044 'move' ret[3300853] 0)
+      ref i_x[7342174]:string[244] "temp"
+      (7342178 'move' i_x[7342174](7342176 'set reference' _formal_tmp_k[3301089]))
+      (7342182 call deinit[21354] i_x[7342174])
+      gotoReturn _end_add[3301075] _end_add[3301075]
+    }
+    ref call_tmp[8452470]:chpl__hashtable(string,int(64))[3288849] "dead after last mention" "maybe param" "temp"
+    (8452472 'move' call_tmp[8452470](8452474 '.' this[3300828] table[3288779]))
+    const-val _formal_tmp_in_key[3308602]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (5632553 '=' _formal_tmp_in_key[3308602] _formal_tmp_k[3301089])
+    (3308607 'noop')
+    (3301064 call fillSlot[3308541] call_tmp[8452470] tmp_x1[9107272] _formal_tmp_in_key[3308602] v[3300842])
+    (3301070 'move' ret[3300853] 1)
+    label _end_add[3301075]
+    (3301077 return ret[3300853])
+  }
+  function map(string,string,false)[3283386].add[3349410](ref arg this[3349414]:map(string,string,false)[3283386], const  ref arg k[3349421]:string[244], const  ref arg v[3349428]:string[244]) : bool[19] "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    const-val _formal_tmp_k[3349562]:string[244] "dead at end of block" "insert auto destroy" "maybe copy elided" "no copy" "temp"
+    (3349566 'move' _formal_tmp_k[3349562] k[3349421])
+    const-val _formal_tmp_v[3349563]:string[244] "dead at end of block" "insert auto destroy" "maybe copy elided" "no copy" "temp"
+    (3349570 'move' _formal_tmp_v[3349563] v[3349428])
+    val ret[3349439]:bool[19] "dead after last mention" "RVV" "temp"
+    ref call_tmp[8458175]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+    (8458177 'move' call_tmp[8458175](8458179 '.' this[3349414] table[3283371]))
+    const-val call_tmp[3349472]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5589352]:(bool,int(64))[3257010] "temp"
+    (3349480 call findAvailableSlot[3349576] call_tmp[8458175] _formal_tmp_k[3349562] ret_tmp[5589352])
+    (5589355 'move' call_tmp[3349472] ret_tmp[5589352])
+    val tmp_x0[9107376]:bool[19] "temp"
+    val tmp_x1[9107378]:int(64)[10] "temp"
+    (9107384 'move' tmp_x0[9107376](9107382 '.v' call_tmp[3349472] x0[3257006]))
+    (9107389 'move' tmp_x1[9107378](9107387 '.v' call_tmp[3349472] x1[3257008]))
+    1
+    (3349501 'noop')
+    (3349513 'noop')
+    if tmp_x0[9107376]
+    {
+      (3349526 'move' ret[3349439] 0)
+      ref i_x[7342726]:string[244] "temp"
+      (7342730 'move' i_x[7342726](7342728 'set reference' _formal_tmp_v[3349563]))
+      (7342734 call deinit[21354] i_x[7342726])
+      ref i_x[7342738]:string[244] "temp"
+      (7342742 'move' i_x[7342738](7342740 'set reference' _formal_tmp_k[3349562]))
+      (7342746 call deinit[21354] i_x[7342738])
+      gotoReturn _end_add[3349557] _end_add[3349557]
+    }
+    ref call_tmp[8458185]:chpl__hashtable(string,string)[3283441] "dead after last mention" "maybe param" "temp"
+    (8458187 'move' call_tmp[8458185](8458189 '.' this[3349414] table[3283371]))
+    const-val _formal_tmp_in_key[3350324]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (5635050 '=' _formal_tmp_in_key[3350324] _formal_tmp_k[3349562])
+    (3350329 'noop')
+    const-val _formal_tmp_in_val[3350333]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (5635053 '=' _formal_tmp_in_val[3350333] _formal_tmp_v[3349563])
+    (3350338 'noop')
+    (3349546 call fillSlot[3350263] call_tmp[8458185] tmp_x1[9107378] _formal_tmp_in_key[3350324] _formal_tmp_in_val[3350333])
+    (3349552 'move' ret[3349439] 1)
+    label _end_add[3349557]
+    (3349559 return ret[3349439])
+  }
+  function map(string,owned ModuleSpecification?,false)[3283686].add[3372005](ref arg this[3372009]:map(string,owned ModuleSpecification?,false)[3283686], const  ref arg k[3372016]:string[244], const  ref arg v[3372023]:owned ModuleSpecification?[3283604]) : bool[19] "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    const-val _formal_tmp_k[3372157]:string[244] "dead at end of block" "insert auto destroy" "maybe copy elided" "no copy" "temp"
+    (3372161 'move' _formal_tmp_k[3372157] k[3372016])
+    const-val _formal_tmp_v[3372158]:owned ModuleSpecification?[3283604] "dead at end of block" "insert auto destroy" "maybe copy elided" "no copy" "temp"
+    (3372165 'move' _formal_tmp_v[3372158] v[3372023])
+    val ret[3372034]:bool[19] "dead after last mention" "RVV" "temp"
+    ref call_tmp[8460413]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "maybe param" "temp"
+    (8460415 'move' call_tmp[8460413](8460417 '.' this[3372009] table[3283671]))
+    const-val call_tmp[3372067]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5589588]:(bool,int(64))[3257010] "temp"
+    (3372075 call findAvailableSlot[3372171] call_tmp[8460413] _formal_tmp_k[3372157] ret_tmp[5589588])
+    (5589591 'move' call_tmp[3372067] ret_tmp[5589588])
+    val tmp_x0[9107430]:bool[19] "temp"
+    val tmp_x1[9107432]:int(64)[10] "temp"
+    (9107438 'move' tmp_x0[9107430](9107436 '.v' call_tmp[3372067] x0[3257006]))
+    (9107443 'move' tmp_x1[9107432](9107441 '.v' call_tmp[3372067] x1[3257008]))
+    1
+    (3372096 'noop')
+    (3372108 'noop')
+    if tmp_x0[9107430]
+    {
+      (3372121 'move' ret[3372034] 0)
+      (5635335 call chpl__autoDestroy[3373663] _formal_tmp_v[3372158])
+      ref i_x[7342798]:string[244] "temp"
+      (7342802 'move' i_x[7342798](7342800 'set reference' _formal_tmp_k[3372157]))
+      (7342806 call deinit[21354] i_x[7342798])
+      gotoReturn _end_add[3372152] _end_add[3372152]
+    }
+    ref call_tmp[8460423]:chpl__hashtable(string,owned ModuleSpecification?)[3283741] "dead after last mention" "maybe param" "temp"
+    (8460425 'move' call_tmp[8460423](8460427 '.' this[3372009] table[3283671]))
+    const-val _formal_tmp_in_key[3372919]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (5635316 '=' _formal_tmp_in_key[3372919] _formal_tmp_k[3372157])
+    (3372924 'noop')
+    const-val _formal_tmp_in_val[3372928]:owned ModuleSpecification?[3283604] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (5635319 '=' _formal_tmp_in_val[3372928] _formal_tmp_v[3372158])
+    (3372933 'noop')
+    (3372141 call fillSlot[3372858] call_tmp[8460423] tmp_x1[9107432] _formal_tmp_in_key[3372919] _formal_tmp_in_val[3372928])
+    (3372147 'move' ret[3372034] 1)
+    label _end_add[3372152]
+    (3372154 return ret[3372034])
+  }
+  function map(string,Module(real(32)),false)[1936356].addOrReplace[3256564](ref arg this[3256568]:map(string,Module(real(32)),false)[1936356], const  ref arg k[3256575]:string[244], in arg v[3256582]:Module(real(32))[1935500]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-val _formal_tmp_k[3256792]:string[244] "dead at end of block" "insert auto destroy" "maybe copy elided" "no copy" "temp"
+    (3256795 'move' _formal_tmp_k[3256792] k[3256575])
+    ref call_tmp[8418651]:chpl__hashtable(string,Module(real(32)))[1941492] "dead after last mention" "maybe param" "temp"
+    (8418653 'move' call_tmp[8418651](8418655 '.' this[3256568] table[1936341]))
+    const-val call_tmp[3256717]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5587913]:(bool,int(64))[3257010] "temp"
+    (3256725 call findAvailableSlot[3256975] call_tmp[8418651] _formal_tmp_k[3256792] ret_tmp[5587913])
+    (5587916 'move' call_tmp[3256717] ret_tmp[5587913])
+    val tmp_x1[9107218]:int(64)[10] "temp"
+    (9107229 'move' tmp_x1[9107218](9107227 '.v' call_tmp[3256717] x1[3257008]))
+    1
+    (3256746 'noop')
+    (3256758 'noop')
+    ref call_tmp[8418661]:chpl__hashtable(string,Module(real(32)))[1941492] "dead after last mention" "maybe param" "temp"
+    (8418663 'move' call_tmp[8418661](8418665 '.' this[3256568] table[1936341]))
+    const-val _formal_tmp_in_key[3262372]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (5632013 '=' _formal_tmp_in_key[3262372] _formal_tmp_k[3256792])
+    (3262377 'noop')
+    (3256774 call fillSlot[3262311] call_tmp[8418661] tmp_x1[9107218] _formal_tmp_in_key[3262372] v[3256582])
+    (3256780 return _void[46])
+  }
+  function map(string,shared Module(real(32)),false)[3391831].addOrReplace[3400390](ref arg this[3400394]:map(string,shared Module(real(32)),false)[3391831], const  ref arg k[3400401]:string[244], const  ref arg v[3400408]:shared Module(real(32))[1955038]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-val _formal_tmp_k[3400627]:string[244] "dead at end of block" "insert auto destroy" "maybe copy elided" "no copy" "temp"
+    (3400631 'move' _formal_tmp_k[3400627] k[3400401])
+    const-val _formal_tmp_v[3400628]:shared Module(real(32))[1955038] "dead at end of block" "insert auto destroy" "maybe copy elided" "no copy" "temp"
+    (3400635 'move' _formal_tmp_v[3400628] v[3400408])
+    ref call_tmp[8463920]:chpl__hashtable(string,shared Module(real(32)))[3392205] "dead after last mention" "maybe param" "temp"
+    (8463922 'move' call_tmp[8463920](8463924 '.' this[3400394] table[3391816]))
+    const-val call_tmp[3400543]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5589806]:(bool,int(64))[3257010] "temp"
+    (3400551 call findAvailableSlot[3400815] call_tmp[8463920] _formal_tmp_k[3400627] ret_tmp[5589806])
+    (5589809 'move' call_tmp[3400543] ret_tmp[5589806])
+    val tmp_x1[9107538]:int(64)[10] "temp"
+    (9107549 'move' tmp_x1[9107538](9107547 '.v' call_tmp[3400543] x1[3257008]))
+    1
+    (3400572 'noop')
+    (3400584 'noop')
+    ref call_tmp[8463930]:chpl__hashtable(string,shared Module(real(32)))[3392205] "dead after last mention" "maybe param" "temp"
+    (8463932 'move' call_tmp[8463930](8463934 '.' this[3400394] table[3391816]))
+    const-val _formal_tmp_in_key[3404564]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (5635688 '=' _formal_tmp_in_key[3404564] _formal_tmp_k[3400627])
+    (3404569 'noop')
+    const-val _formal_tmp_in_val[3404573]:shared Module(real(32))[1955038] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (5635691 '=' _formal_tmp_in_val[3404573] _formal_tmp_v[3400628])
+    (3404578 'noop')
+    (3400600 call fillSlot[3404503] call_tmp[8463930] tmp_x1[9107538] _formal_tmp_in_key[3404564] _formal_tmp_in_val[3404573])
+    (3400606 return _void[46])
+  }
+  function map(string,Module(real(64)),false)[3405184].addOrReplace[3859953](ref arg this[3859957]:map(string,Module(real(64)),false)[3405184], const  ref arg k[3859964]:string[244], in arg v[3859971]:Module(real(64))[3405063]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  {
+    const-val _formal_tmp_k[3860181]:string[244] "dead at end of block" "insert auto destroy" "maybe copy elided" "no copy" "temp"
+    (3860184 'move' _formal_tmp_k[3860181] k[3859964])
+    ref call_tmp[8577705]:chpl__hashtable(string,Module(real(64)))[3405239] "dead after last mention" "maybe param" "temp"
+    (8577707 'move' call_tmp[8577705](8577709 '.' this[3859957] table[3405169]))
+    const-val call_tmp[3860106]:(bool,int(64))[3257010] "dead after last mention" "maybe param" "temp"
+    const-val ret_tmp[5596133]:(bool,int(64))[3257010] "temp"
+    (3860114 call findAvailableSlot[3860364] call_tmp[8577705] _formal_tmp_k[3860181] ret_tmp[5596133])
+    (5596136 'move' call_tmp[3860106] ret_tmp[5596133])
+    val tmp_x1[9107644]:int(64)[10] "temp"
+    (9107655 'move' tmp_x1[9107644](9107653 '.v' call_tmp[3860106] x1[3257008]))
+    1
+    (3860135 'noop')
+    (3860147 'noop')
+    ref call_tmp[8577715]:chpl__hashtable(string,Module(real(64)))[3405239] "dead after last mention" "maybe param" "temp"
+    (8577717 'move' call_tmp[8577715](8577719 '.' this[3859957] table[3405169]))
+    const-val _formal_tmp_in_key[3864113]:string[244] "dead after last mention" "expr temp" "no auto destroy" "temp"
+    (5642098 '=' _formal_tmp_in_key[3864113] _formal_tmp_k[3860181])
+    (3864118 'noop')
+    (3860163 call fillSlot[3864052] call_tmp[8577715] tmp_x1[9107644] _formal_tmp_in_key[3864113] v[3859971])
+    (3860169 return _void[46])
+  }
+  type map(string,Module(real(32)),false)[1936356] const resizeThreshold[1936338]:real(64)[13] "const" val table[1936341]:chpl__hashtable(string,Module(real(32)))[1941492]
+  type map(string,string,false)[3283386] const resizeThreshold[3283368]:real(64)[13] "const" val table[3283371]:chpl__hashtable(string,string)[3283441]
+  type map(string,owned ModuleSpecification?,false)[3283686] const resizeThreshold[3283668]:real(64)[13] "const" val table[3283671]:chpl__hashtable(string,owned ModuleSpecification?)[3283741]
+  type map(string,int(64),false)[3288794] const resizeThreshold[3288776]:real(64)[13] "const" val table[3288779]:chpl__hashtable(string,int(64))[3288849]
+  type map(string,shared Module(real(32)),false)[3391831] const resizeThreshold[3391813]:real(64)[13] "const" val table[3391816]:chpl__hashtable(string,shared Module(real(32)))[3392205]
+  type map(string,Module(real(64)),false)[3405184] const resizeThreshold[3405166]:real(64)[13] "const" val table[3405169]:chpl__hashtable(string,Module(real(64)))[3405239]
+  function KeyNotFoundError[352856].deinit[1390661](const in arg this[1390665]:KeyNotFoundError[352856]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method" "resolved" "fn synchronization free" "virtual"
+  {
+    label _enddeinit[5526569]
+    val _parent_destructor_tmp_[5526564]:Error[85511] "temp"
+    (5526571 'move' _parent_destructor_tmp_[5526564](5526565 'cast' Error[85511] this[1390665]))
+    ref _field_destructor_tmp_[7630155]:string[244] "temp"
+    (7630157 'move' _field_destructor_tmp_[7630155](7630159 '.' _parent_destructor_tmp_[5526564] _msg[85454]))
+    (7630163 call deinit[21354] _field_destructor_tmp_[7630155])
+    (1390673 return _void[46])
+  }
+  function _new[3333701](const  ref arg k[3333712]:string[244]) : KeyNotFoundError[352856] "always propagate line file info" "compiler generated" "insert line file info" "last resort" "llvm return noalias" "_new wrapper" "resolved"
+  {
+    val initTemp[3333703]:KeyNotFoundError[352856] "dead after last mention" "temp"
+    const-val call_tmp[3333749]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3333752 'move' call_tmp[3333749](3333763 'sizeof_bundle' KeyNotFoundError[352856]))
+    val cast_tmp[3333766]:c_ptr(void)[1465614] "dead after last mention" "temp"
+    (3333768 'move' cast_tmp[3333766](3333720 call chpl_here_alloc[308303] call_tmp[3333749] 327))
+    (3333723 'move' initTemp[3333703](3333770 'cast' KeyNotFoundError[352856] cast_tmp[3333766]))
+    val super_tmp[8454974]:Error[85511] "dead after last mention" "temporary of super field" "temp"
+    (8454976 'move' super_tmp[8454974](8454978 '.v' initTemp[3333703] super[397916]))
+    const-val call_tmp[8454981]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    val error[8454983]:Error[85511] "error variable" "temp"
+    (8454985 'move' error[8454983] nil[32])
+    const-val ret_tmp[8454988]:string[244] "temp"
+    (8454991 call format[3316409] "key '%\?' not found" k[3333712] error[8454983] ret_tmp[8454988])
+    (8454996 'move' call_tmp[8454981] ret_tmp[8454988])
+    val errorExists[8454999]:bool[19] "temp"
+    (8455001 'move' errorExists[8454999](8455003 '!=' error[8454983] nil[32]))
+    if errorExists[8454999]
+    {
+      (8455009 call chpl_uncaught_error[87456] error[8454983])
+    }
+    ref i_msg[8455012]:string[244] "temp"
+    (8455014 'move' i_msg[8455012](8455016 'set reference' call_tmp[8454981]))
+    val super_tmp[8455018]:RootClass[236] "dead after last mention" "temporary of super field" "temp"
+    (8455020 'move' super_tmp[8455018](8455022 '.v' super_tmp[8454974] super[397311]))
+    (8455025 'setcid' super_tmp[8455018])
+    val call_tmp[8455027]:RootClass[236] "dead after last mention" "maybe param" "temp"
+    (8455029 'move' call_tmp[8455027](8455031 'cast' RootClass[236] super_tmp[8454974]))
+    (8455034 'setcid' call_tmp[8455027])
+    val init_coerce_tmp[8455036]:Error[85511] "dead after last mention" "temp"
+    (8455038 '=' init_coerce_tmp[8455036](8455040 'cast' Error[85511] nil[32]))
+    (8455043 '.=' super_tmp[8454974] _next[85434] init_coerce_tmp[8455036])
+    (8455047 '.=' super_tmp[8454974] thrownLine[85442] 0)
+    (8455051 '.=' super_tmp[8454974] thrownFileId[85447] 0)
+    val _msg[8455055]:string[244] "dead after last mention" "temp"
+    (8455058 call init=[21330] _msg[8455055] i_msg[8455012])
+    (8455061 '.=' super_tmp[8454974] _msg[85454] _msg[8455055])
+    (8455065 '.=' super_tmp[8454974] _hasThrowInfo[85459] 0)
+    (8455069 'setcid' super_tmp[8454974])
+    ref i_x[8455071]:string[244] "temp"
+    (8455073 'move' i_x[8455071](8455075 'set reference' call_tmp[8454981]))
+    (8455078 call deinit[21354] i_x[8455071])
+    val call_tmp[8455080]:Error[85511] "dead after last mention" "maybe param" "temp"
+    (8455082 'move' call_tmp[8455080](8455084 'cast' Error[85511] initTemp[3333703]))
+    (8455087 'setcid' call_tmp[8455080])
+    (8455089 'setcid' initTemp[3333703])
+    (3333744 return initTemp[3333703])
+  }
+  type KeyNotFoundError[352856] val super[397916]:Error[85511] "super class"
+}

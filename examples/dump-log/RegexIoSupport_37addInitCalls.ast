@@ -1,0 +1,31 @@
+AST dump for RegexIoSupport after pass addInitCalls.
+Module use list: ChapelStandard CTypes IO Regex 
+
+{
+  function chpl__init_RegexIoSupport[468459]() : void[4] "fast on" "insert line file info" "local fn" "module init" "resolved"
+  {
+    if chpl__init_RegexIoSupport_p[9307733]
+    {
+      goto _exit_chpl__init_RegexIoSupport[9307768] _exit_chpl__init_RegexIoSupport[9307768]
+    }
+    val modFormatStr[9307741]:chpl_c_string[16] "temp"
+    val modStr[9307742]:chpl_c_string[16] "temp"
+    ref refIndentLevel[9307754]:int(32)[66] "temp"
+    (9307747 'move' modFormatStr[9307741] c"%*s\n")
+    (9307749 'move' modStr[9307742] c"RegexIoSupport")
+    (9307752 call printModuleInit[386886] modFormatStr[9307741] modStr[9307742] 14)
+    (9307758 'move' refIndentLevel[9307754](9307757 'addr of' moduleInitLevel[386877]))
+    (9307761 '+=' refIndentLevel[9307754] 1)
+    (9307739 'move' chpl__init_RegexIoSupport_p[9307733] 1)
+    {
+      (9305218 call chpl__init_Regex[468462])
+      (9305220 call chpl__init_CTypes[468360])
+      (9305222 call chpl__init_IO[468474])
+      (9305224 call chpl__init_Regex[468462])
+    }
+    (9307764 '-=' refIndentLevel[9307754] 1)
+    label _endchpl__init_RegexIoSupport[9307770]
+    label _exit_chpl__init_RegexIoSupport[9307768]
+    (612211 return _void[46])
+  }
+}

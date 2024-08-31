@@ -1,0 +1,1295 @@
+AST dump for MNISTNet after pass buildDefaultFunctions.
+Module use list: ChapelStandard Time Network Tensor Reflection TOML GpuDiagnostics 
+
+{
+  function chpl__init_MNISTNet[468687]() : void[4] "insert line file info" "module init"
+  {
+    (657888 'init var' layerDebug[385138] 0)
+    (385141 'end of statement')
+    (657893 'move' dtype[385143](657891 call real(64)[13] 32))
+    unknown tmp[657903] "temp"
+    unknown call_tmp[999649] "expr temp" "maybe param" "maybe type" "temp"
+    (999652 'move' call_tmp[999649](657912 call chpl_config_has_value c"diag" c"MNISTNet"))
+    unknown call_tmp[999654] "expr temp" "maybe param" "maybe type" "temp"
+    (999657 'move' call_tmp[999654](657915 call ! call_tmp[999649]))
+    if call_tmp[999654]
+    {
+      (657908 'noop')
+      (657931 'init var' tmp[657903] 0)
+    }
+    {
+      unknown call_tmp[999659] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (999662 'move' call_tmp[999659](657919 'typeof' tmp[657903]))
+      unknown call_tmp[999664] "expr temp" "maybe param" "maybe type" "temp"
+      (999667 'move' call_tmp[999664](657922 call chpl_config_get_value c"diag" c"MNISTNet"))
+      (657927 'move' tmp[657903](657925 call _command_line_cast c"diag" call_tmp[999659] call_tmp[999664]))
+    }
+    (657905 'move' diag[386352] tmp[657903])
+    (386355 'end of statement')
+    unknown call_tmp[999669] "expr temp" "maybe param" "maybe type" "temp"
+    (999672 'move' call_tmp[999669](386365 call _cond_test diag[386352]))
+    if call_tmp[999669]
+    {
+      (386361 call startGpuDiagnostics)
+      (576219 'end of statement')
+      (386363 call startVerboseGpu)
+      (397268 'used modules list'(386358 'use' GpuDiagnostics[339078]))
+    }
+    unknown call_tmp[999674] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999677 'move' call_tmp[999674](1000922 'new' CNN[386373](?) dtype[385143]))
+    (657933 'init var' cnn[386370] call_tmp[999674])
+    (386378 'end of statement')
+    {
+      unknown _indexOfInterest[386395] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[386396] "expr temp" "temp"
+      unknown call_tmp[999681] "expr temp" "maybe param" "maybe type" "temp"
+      (999684 'move' call_tmp[999681](386390 call(386387 call (partial) moduleFields _mt[203] cnn[386370])))
+      (386405 'move' _iterator[386396](386403 call _getIterator call_tmp[999681]))
+      Defer
+      {
+        {
+          (386433 call _freeIterator _iterator[386396])
+        }
+      }
+      { scopeless type
+        (386410 'move' _indexOfInterest[386395](386407 call iteratorIndex _iterator[386396]))
+      }
+      ForLoop[386397]
+      {
+        (386415 call _check_tuple_var_decl _indexOfInterest[386395] 2)
+        (576223 'end of statement')
+        unknown n[386380] "index var" "insert auto destroy"
+        (576224 'end of statement')
+        (386422 'move' n[386380](386419 call _indexOfInterest[386395] 0))
+        (576225 'end of statement' n[386380])
+        unknown m[386382] "index var" "insert auto destroy"
+        (576227 'end of statement')
+        (386428 'move' m[386382](386425 call _indexOfInterest[386395] 1))
+        (576228 'end of statement' m[386382])
+        {
+          (386393 call writeln n[386380])
+          (576230 'end of statement' n[386380])
+        }
+        label _continueLabel[386400]
+        _indexOfInterest[386395]
+        _iterator[386396]
+      }
+      label _breakLabel[386401]
+    }
+    unknown call_tmp[999686] "maybe param" "maybe type" "temp"
+    (999689 'move' call_tmp[999686](386445 call loadModel module=[222] Network[365327](specFile = "../scripts/models/cnn/specification.json")(weightsFolder = "../scripts/models/cnn/")(dtype = dtype[385143])))
+    (657935 'init var' model[386441] call_tmp[999686])
+    (386459 'end of statement')
+    unknown tmp[657937] "temp"
+    unknown call_tmp[999691] "expr temp" "maybe param" "maybe type" "temp"
+    (999694 'move' call_tmp[999691](657946 call chpl_config_has_value c"testImgSize" c"MNISTNet"))
+    unknown call_tmp[999696] "expr temp" "maybe param" "maybe type" "temp"
+    (999699 'move' call_tmp[999696](657949 call ! call_tmp[999691]))
+    if call_tmp[999696]
+    {
+      (657942 'noop')
+      (657965 'init var' tmp[657937] 28)
+    }
+    {
+      unknown call_tmp[999701] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (999704 'move' call_tmp[999701](657953 'typeof' tmp[657937]))
+      unknown call_tmp[999706] "expr temp" "maybe param" "maybe type" "temp"
+      (999709 'move' call_tmp[999706](657956 call chpl_config_get_value c"testImgSize" c"MNISTNet"))
+      (657961 'move' tmp[657937](657959 call _command_line_cast c"testImgSize" call_tmp[999701] call_tmp[999706]))
+    }
+    (657939 'move' testImgSize[386461] tmp[657937])
+    (386464 'end of statement')
+    unknown call_tmp[999713] "expr temp" "maybe param" "maybe type" "temp"
+    (999716 'move' call_tmp[999713](386473 call(386470 call (partial) load _mt[203] Tensor[345586](?)) "data/datasets/mnist/image_idx_0_7_7.chdata"))
+    unknown call_tmp[999718] "maybe param" "maybe type" "temp"
+    (999721 'move' call_tmp[999718](386467 call : call_tmp[999713] dtype[385143]))
+    (657967 'init var' img[386466] call_tmp[999718])
+    (386479 'end of statement')
+    (386481 call writeln img[386466])
+    (576232 'end of statement' img[386466])
+    unknown call_tmp[999725] "expr temp" "maybe param" "maybe type" "temp"
+    (999728 'move' call_tmp[999725](386489 call(386486 call (partial) tensorize _mt[203] img[386466]) 3))
+    (386484 call writeln call_tmp[999725])
+    (576234 'end of statement' img[386466])
+    (657969 'init var' modelPath[386492] "data/models/mnist_cnn/")
+    (386497 'end of statement')
+    (386502 call(386499 call (partial) loadPyTorchDump _mt[203] cnn[386370]) modelPath[386492])
+    (576236 'end of statement' cnn[386370] modelPath[386492])
+    unknown call_tmp[999732] "maybe param" "maybe type" "temp"
+    (999735 'move' call_tmp[999732](386507 call cnn[386370] img[386466]))
+    (657971 'init var' output[386505] call_tmp[999732])
+    (386510 'end of statement')
+    (386512 call writeln output[386505])
+    (576241 'end of statement' output[386505])
+    unknown tmp[657973] "temp"
+    unknown call_tmp[999737] "expr temp" "maybe param" "maybe type" "temp"
+    (999740 'move' call_tmp[999737](657982 call chpl_config_has_value c"imageCount" c"MNISTNet"))
+    unknown call_tmp[999742] "expr temp" "maybe param" "maybe type" "temp"
+    (999745 'move' call_tmp[999742](657985 call ! call_tmp[999737]))
+    if call_tmp[999742]
+    {
+      (657978 'noop')
+      (658001 'init var' tmp[657973] 0)
+    }
+    {
+      unknown call_tmp[999747] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (999750 'move' call_tmp[999747](657989 'typeof' tmp[657973]))
+      unknown call_tmp[999752] "expr temp" "maybe param" "maybe type" "temp"
+      (999755 'move' call_tmp[999752](657992 call chpl_config_get_value c"imageCount" c"MNISTNet"))
+      (657997 'move' tmp[657973](657995 call _command_line_cast c"imageCount" call_tmp[999747] call_tmp[999752]))
+    }
+    (657975 'move' imageCount[386515] tmp[657973])
+    (386518 'end of statement')
+    unknown call_tmp[718902] "expr temp" "maybe param" "maybe type" "temp"
+    (718905 'move' call_tmp[718902](386525 call chpl__nudgeHighBound imageCount[386515]))
+    unknown call_tmp[718907] "expr temp" "maybe param" "maybe type" "temp"
+    (718910 'move' call_tmp[718907](386527 call chpl_build_bounded_range 0 call_tmp[718902]))
+    unknown call_tmp[718912] "maybe param" "maybe type" "temp"
+    (718915 'move' call_tmp[718912](718563 call chpl__forallexpr18 call_tmp[718907]))
+    (718919 'iterator record set shape' call_tmp[718912] call_tmp[718907] 2)
+    (658003 'init var' images[386520] call_tmp[718912])
+    (386552 'end of statement')
+    unknown call_tmp[999759] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (999762 'move' call_tmp[999759](386556 call _dom _mt[203] images[386520]))
+    unknown call_tmp[999764] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (999767 'move' call_tmp[999764](386559 call chpl__ensureDomainExpr call_tmp[999759]))
+    unknown call_tmp[999769] "expr temp" "maybe param" "maybe type" "temp"
+    (999772 'move' call_tmp[999769](386562 call chpl__buildArrayRuntimeType call_tmp[999764] int(64)[10]))
+    (658005 'default init var' preds[386554] call_tmp[999769])
+    (386565 'end of statement')
+    unknown tmp[658007] "temp"
+    unknown call_tmp[999774] "expr temp" "maybe param" "maybe type" "temp"
+    (999777 'move' call_tmp[999774](658016 call chpl_config_has_value c"numTimes" c"MNISTNet"))
+    unknown call_tmp[999779] "expr temp" "maybe param" "maybe type" "temp"
+    (999782 'move' call_tmp[999779](658019 call ! call_tmp[999774]))
+    if call_tmp[999779]
+    {
+      (658012 'noop')
+      (658035 'init var' tmp[658007] 1)
+    }
+    {
+      unknown call_tmp[999784] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (999787 'move' call_tmp[999784](658023 'typeof' tmp[658007]))
+      unknown call_tmp[999789] "expr temp" "maybe param" "maybe type" "temp"
+      (999792 'move' call_tmp[999789](658026 call chpl_config_get_value c"numTimes" c"MNISTNet"))
+      (658031 'move' tmp[658007](658029 call _command_line_cast c"numTimes" call_tmp[999784] call_tmp[999789]))
+    }
+    (658009 'move' numTimes[386567] tmp[658007])
+    (386570 'end of statement')
+    {
+      unknown _indexOfInterest[386698] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[386699] "expr temp" "temp"
+      unknown call_tmp[999794] "expr temp" "maybe param" "maybe type" "temp"
+      (999797 'move' call_tmp[999794](386712 call chpl__nudgeHighBound numTimes[386567]))
+      unknown call_tmp[999799] "expr temp" "maybe param" "maybe type" "temp"
+      (999802 'move' call_tmp[999799](386714 call chpl_direct_range_iter 0 call_tmp[999794]))
+      (386708 'move' _iterator[386699](386706 call _getIterator call_tmp[999799]))
+      Defer
+      {
+        {
+          (386729 call _freeIterator _iterator[386699])
+        }
+      }
+      { scopeless type
+        (386719 'move' _indexOfInterest[386698](386716 call iteratorIndex _iterator[386699]))
+      }
+      ForLoop[386700]
+      {
+        unknown i[386571] "index var" "insert auto destroy"
+        (576246 'end of statement')
+        (386724 'move' i[386571] _indexOfInterest[386698])
+        (576247 'end of statement' i[386571])
+        {
+          unknown call_tmp[999804] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+          (999807 'move' call_tmp[999804](1000923 'new' stopwatch[377049]))
+          unknown st[386581] "dead at end of block" "insert auto destroy"
+          (658037 'init var' st[386581] call_tmp[999804])
+          (386589 'end of statement')
+          (386594 call(386591 call (partial) start _mt[203] st[386581]))
+          (576249 'end of statement' st[386581])
+          {
+            unknown _indexOfInterest[386625] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[386626] "expr temp" "temp"
+            unknown call_tmp[999811] "expr temp" "maybe param" "maybe type" "temp"
+            (999814 'move' call_tmp[999811](386635 call _getIterator images[386520]))
+            unknown call_tmp[999816] "expr temp" "maybe param" "maybe type" "temp"
+            (999819 'move' call_tmp[999816](386638 call _getIterator preds[386554]))
+            (386640 'move' _iterator[386626](386605 call _build_tuple call_tmp[999811] call_tmp[999816]))
+            Defer
+            {
+              {
+                (386668 call _freeIterator _iterator[386626])
+              }
+            }
+            { scopeless type
+              (386645 'move' _indexOfInterest[386625](386642 call iteratorIndex _iterator[386626]))
+            }
+            ForLoop[386627]
+            {
+              (386650 call _check_tuple_var_decl _indexOfInterest[386625] 2)
+              (576252 'end of statement')
+              unknown img[386596] "index var" "insert auto destroy"
+              (576253 'end of statement')
+              (386657 'move' img[386596](386654 call _indexOfInterest[386625] 0))
+              (576254 'end of statement' img[386596])
+              unknown pred[386598] "index var" "insert auto destroy"
+              (576256 'end of statement')
+              (386663 'move' pred[386598](386660 call _indexOfInterest[386625] 1))
+              (576257 'end of statement' pred[386598])
+              {
+                unknown call_tmp[999821] "maybe param" "maybe type" "temp"
+                (999824 'move' call_tmp[999821](386613 call model[386441] img[386596]))
+                unknown call_tmp[999826] "maybe param" "maybe type" "temp"
+                (999829 'move' call_tmp[999826](386610 call Tensor[345586](?) dtype[385143]))
+                unknown output[386608] "dead at end of block" "insert auto destroy"
+                (658039 'init var' output[386608] call_tmp[999821] call_tmp[999826])
+                (386616 'end of statement' model[386441] img[386596] dtype[385143])
+                unknown call_tmp[999833] "expr temp" "maybe param" "maybe type" "temp"
+                (999836 'move' call_tmp[999833](386624 call(386621 call (partial) argmax _mt[203] output[386608])))
+                (386617 call = pred[386598] call_tmp[999833])
+                (576262 'end of statement' pred[386598] output[386608])
+              }
+              label _continueLabel[386630]
+              _indexOfInterest[386625]
+              _iterator[386626]
+            }
+            label _breakLabel[386631]
+          }
+          unknown call_tmp[999840] "maybe param" "maybe type" "temp"
+          (999843 'move' call_tmp[999840](386681 call(386678 call (partial) elapsed _mt[203] st[386581])))
+          const tm[386676] "dead at end of block" "const" "insert auto destroy"
+          (658041 'init var' tm[386676] call_tmp[999840])
+          (386683 'end of statement' st[386581])
+          (386688 call(386685 call (partial) stop _mt[203] st[386581]))
+          (576266 'end of statement' st[386581])
+          (386690 call writeln "Time: " tm[386676] " seconds.")
+          (576268 'end of statement' tm[386676])
+          (386584 'referenced modules list' Time[377133])
+        }
+        label _continueLabel[386703]
+        _indexOfInterest[386698]
+        _iterator[386699]
+      }
+      label _breakLabel[386704]
+    }
+    unknown tmp[658043] "temp"
+    unknown call_tmp[999847] "expr temp" "maybe param" "maybe type" "temp"
+    (999850 'move' call_tmp[999847](658052 call chpl_config_has_value c"printResults" c"MNISTNet"))
+    unknown call_tmp[999852] "expr temp" "maybe param" "maybe type" "temp"
+    (999855 'move' call_tmp[999852](658055 call ! call_tmp[999847]))
+    if call_tmp[999852]
+    {
+      (658048 'noop')
+      (658071 'init var' tmp[658043] 0)
+    }
+    {
+      unknown call_tmp[999857] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (999860 'move' call_tmp[999857](658059 'typeof' tmp[658043]))
+      unknown call_tmp[999862] "expr temp" "maybe param" "maybe type" "temp"
+      (999865 'move' call_tmp[999862](658062 call chpl_config_get_value c"printResults" c"MNISTNet"))
+      (658067 'move' tmp[658043](658065 call _command_line_cast c"printResults" call_tmp[999857] call_tmp[999862]))
+    }
+    (658045 'move' printResults[386737] tmp[658043])
+    (386740 'end of statement')
+    unknown call_tmp[999867] "expr temp" "maybe param" "maybe type" "temp"
+    (999870 'move' call_tmp[999867](386791 call _cond_test printResults[386737]))
+    if call_tmp[999867]
+    {
+      {
+        unknown _indexOfInterest[386758] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[386759] "expr temp" "temp"
+        unknown call_tmp[999874] "expr temp" "maybe param" "maybe type" "temp"
+        (999877 'move' call_tmp[999874](386745 call _dom _mt[203] images[386520]))
+        (386768 'move' _iterator[386759](386766 call _getIterator call_tmp[999874]))
+        Defer
+        {
+          {
+            (386783 call _freeIterator _iterator[386759])
+          }
+        }
+        { scopeless type
+          (386773 'move' _indexOfInterest[386758](386770 call iteratorIndex _iterator[386759]))
+        }
+        ForLoop[386760]
+        {
+          unknown i[386742] "index var" "insert auto destroy"
+          (576271 'end of statement')
+          (386778 'move' i[386742] _indexOfInterest[386758])
+          (576272 'end of statement' i[386742])
+          {
+            unknown call_tmp[999879] "expr temp" "maybe param" "maybe type" "temp"
+            (999882 'move' call_tmp[999879](386754 call preds[386554] i[386742]))
+            unknown call_tmp[999884] "expr temp" "maybe param" "maybe type" "temp"
+            (999887 'move' call_tmp[999884](386756 call _build_tuple i[386742] call_tmp[999879]))
+            (386750 call writeln call_tmp[999884])
+            (576274 'end of statement' i[386742] preds[386554])
+          }
+          label _continueLabel[386763]
+          _indexOfInterest[386758]
+          _iterator[386759]
+        }
+        label _breakLabel[386764]
+      }
+    }
+    unknown call_tmp[999889] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999892 'move' call_tmp[999889](1000924 'new' Conv2D?[468238](?) real(64)[13](channels = 1)(features = 32)(kernel = 3)(stride = 1)))
+    unknown call_tmp[999894] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999897 'move' call_tmp[999894](1000925 'new' Conv2D?[468238](?) real(64)[13](channels = 32)(features = 64)(kernel = 3)(stride = 1)))
+    unknown call_tmp[999899] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999902 'move' call_tmp[999899](1000926 'new' Dropout?[468241](?) real(64)[13] 0.25))
+    unknown call_tmp[999904] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999907 'move' call_tmp[999904](1000927 'new' Dropout?[468241](?) real(64)[13] 0.5))
+    unknown call_tmp[999909] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999912 'move' call_tmp[999909](1000928 'new' Flatten?[468244](?) real(64)[13]))
+    unknown call_tmp[999914] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999917 'move' call_tmp[999914](1000929 'new' Linear?[468247](?) real(64)[13] 9216 128))
+    unknown call_tmp[999919] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999922 'move' call_tmp[999919](1000930 'new' Linear?[468247](?) real(64)[13] 128 10))
+    unknown call_tmp[999924] "expr temp" "maybe param" "maybe type" "temp"
+    (999927 'move' call_tmp[999924](386859 call _build_tuple call_tmp[999889] call_tmp[999894] call_tmp[999899] call_tmp[999904] call_tmp[999909] call_tmp[999914] call_tmp[999919]))
+    unknown call_tmp[999929] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999932 'move' call_tmp[999929](1000931 'new' Sequential[365331](?) real(64)[13] call_tmp[999924]))
+    (658073 'init var' cnn2[386796] call_tmp[999929])
+    (386862 'end of statement' dtype[385143] cnn[386370] img[386466] imageCount[386515] images[386520])
+    (641567 return _void[46])
+  }
+  unknown layerDebug[385138] "config" "param"
+  unknown dtype[385143] "dead at end of block" "insert auto destroy" "type variable"
+  function CNN[386349](?).init[385214](arg _mt[385222]:_MT[201], arg this[385216]:CNN[386349](?), arg eltType[385219]:_any[141](?) =
+  dtype[385143]) : void[4] "method" "primary method" "no return value for void"
+  {
+    unknown super_tmp[542005] "temporary of super field" "temp"
+    (542007 'move' super_tmp[542005](542004 '.v' this[385216] c"super"))
+    (385232 call(385229 call (partial) init _mt[203] super_tmp[542005]) eltType[385219])
+    (576063 'end of statement')
+    unknown tmp[542010] "temp" "type variable"
+    { scopeless type
+      unknown call_type_tmp[579411] "expr temp" "maybe type" "temp" "type variable"
+      unknown call_tmp[998905] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (998908 'move' call_tmp[998905](542012 '.v' this[385216] c"super"))
+      (579415 'move' call_type_tmp[579411](542015 'typeof' call_tmp[998905]))
+    }
+    (542016 'move' tmp[542010] call_type_tmp[579411])
+    unknown call_tmp[998910] "maybe param" "maybe type" "temp"
+    (998913 'move' call_tmp[998910](542021 'cast' tmp[542010] this[385216]))
+    unknown chpl__thisAsParent[542018] "dead at end of block" "insert auto destroy" "temp"
+    (657895 'init var' chpl__thisAsParent[542018] call_tmp[998910] tmp[542010])
+    (542024 'setcid' chpl__thisAsParent[542018])
+    (576064 'end of statement')
+    unknown call_tmp[998915] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (998918 'move' call_tmp[998915](1000914 'new' Conv2D[364808](?) eltType[385219](channels = 1)(features = 32)(kernel = 3)(stride = 1)))
+    unknown call_tmp[998920] "expr temp" "maybe param" "maybe type" "temp"
+    (998923 'move' call_tmp[998920](542039 '.v' this[385216] c"eltType"))
+    unknown call_tmp[998925] "expr temp" "maybe param" "maybe type" "temp"
+    (998928 'move' call_tmp[998925](542031 call Conv2D[364808](?) call_tmp[998920]))
+    unknown call_tmp[998930] "maybe param" "maybe type" "temp"
+    (998933 'move' call_tmp[998930](542029 call _owned[238](?) call_tmp[998925]))
+    unknown conv1[542026] "temp"
+    (542033 'init var' conv1[542026] call_tmp[998915] call_tmp[998930])
+    (542035 'init field' this[385216] c"conv1" conv1[542026])
+    (576065 'end of statement')
+    unknown call_tmp[998935] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (998938 'move' call_tmp[998935](1000915 'new' Conv2D[364808](?) eltType[385219](channels = 32)(features = 64)(kernel = 3)(stride = 1)))
+    unknown call_tmp[998940] "expr temp" "maybe param" "maybe type" "temp"
+    (998943 'move' call_tmp[998940](542055 '.v' this[385216] c"eltType"))
+    unknown call_tmp[998945] "expr temp" "maybe param" "maybe type" "temp"
+    (998948 'move' call_tmp[998945](542047 call Conv2D[364808](?) call_tmp[998940]))
+    unknown call_tmp[998950] "maybe param" "maybe type" "temp"
+    (998953 'move' call_tmp[998950](542045 call _owned[238](?) call_tmp[998945]))
+    unknown conv2[542042] "temp"
+    (542049 'init var' conv2[542042] call_tmp[998935] call_tmp[998950])
+    (542051 'init field' this[385216] c"conv2" conv2[542042])
+    (576066 'end of statement')
+    unknown call_tmp[998955] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (998958 'move' call_tmp[998955](1000916 'new' Dropout[365329](?) eltType[385219] 0.25))
+    unknown call_tmp[998960] "expr temp" "maybe param" "maybe type" "temp"
+    (998963 'move' call_tmp[998960](542071 '.v' this[385216] c"eltType"))
+    unknown call_tmp[998965] "expr temp" "maybe param" "maybe type" "temp"
+    (998968 'move' call_tmp[998965](542063 call Dropout[365329](?) call_tmp[998960]))
+    unknown call_tmp[998970] "maybe param" "maybe type" "temp"
+    (998973 'move' call_tmp[998970](542061 call _owned[238](?) call_tmp[998965]))
+    unknown dropout1[542058] "temp"
+    (542065 'init var' dropout1[542058] call_tmp[998955] call_tmp[998970])
+    (542067 'init field' this[385216] c"dropout1" dropout1[542058])
+    (576067 'end of statement')
+    unknown call_tmp[998975] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (998978 'move' call_tmp[998975](1000917 'new' Dropout[365329](?) eltType[385219] 0.5))
+    unknown call_tmp[998980] "expr temp" "maybe param" "maybe type" "temp"
+    (998983 'move' call_tmp[998980](542087 '.v' this[385216] c"eltType"))
+    unknown call_tmp[998985] "expr temp" "maybe param" "maybe type" "temp"
+    (998988 'move' call_tmp[998985](542079 call Dropout[365329](?) call_tmp[998980]))
+    unknown call_tmp[998990] "maybe param" "maybe type" "temp"
+    (998993 'move' call_tmp[998990](542077 call _owned[238](?) call_tmp[998985]))
+    unknown dropout2[542074] "temp"
+    (542081 'init var' dropout2[542074] call_tmp[998975] call_tmp[998990])
+    (542083 'init field' this[385216] c"dropout2" dropout2[542074])
+    (576068 'end of statement')
+    unknown call_tmp[998995] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (998998 'move' call_tmp[998995](1000918 'new' Flatten[365034](?) eltType[385219]))
+    unknown call_tmp[999000] "expr temp" "maybe param" "maybe type" "temp"
+    (999003 'move' call_tmp[999000](542103 '.v' this[385216] c"eltType"))
+    unknown call_tmp[999005] "expr temp" "maybe param" "maybe type" "temp"
+    (999008 'move' call_tmp[999005](542095 call Flatten[365034](?) call_tmp[999000]))
+    unknown call_tmp[999010] "maybe param" "maybe type" "temp"
+    (999013 'move' call_tmp[999010](542093 call _owned[238](?) call_tmp[999005]))
+    unknown flatten[542090] "temp"
+    (542097 'init var' flatten[542090] call_tmp[998995] call_tmp[999010])
+    (542099 'init field' this[385216] c"flatten" flatten[542090])
+    (576069 'end of statement')
+    unknown call_tmp[999015] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999018 'move' call_tmp[999015](1000919 'new' Linear[365043](?) eltType[385219] 9216 128))
+    unknown call_tmp[999020] "expr temp" "maybe param" "maybe type" "temp"
+    (999023 'move' call_tmp[999020](542119 '.v' this[385216] c"eltType"))
+    unknown call_tmp[999025] "expr temp" "maybe param" "maybe type" "temp"
+    (999028 'move' call_tmp[999025](542111 call Linear[365043](?) call_tmp[999020]))
+    unknown call_tmp[999030] "maybe param" "maybe type" "temp"
+    (999033 'move' call_tmp[999030](542109 call _owned[238](?) call_tmp[999025]))
+    unknown fc1[542106] "temp"
+    (542113 'init var' fc1[542106] call_tmp[999015] call_tmp[999030])
+    (542115 'init field' this[385216] c"fc1" fc1[542106])
+    (576070 'end of statement')
+    unknown call_tmp[999035] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999038 'move' call_tmp[999035](1000920 'new' Linear[365043](?) eltType[385219] 128 10))
+    unknown call_tmp[999040] "expr temp" "maybe param" "maybe type" "temp"
+    (999043 'move' call_tmp[999040](542135 '.v' this[385216] c"eltType"))
+    unknown call_tmp[999045] "expr temp" "maybe param" "maybe type" "temp"
+    (999048 'move' call_tmp[999045](542127 call Linear[365043](?) call_tmp[999040]))
+    unknown call_tmp[999050] "maybe param" "maybe type" "temp"
+    (999053 'move' call_tmp[999050](542125 call _owned[238](?) call_tmp[999045]))
+    unknown fc2[542122] "temp"
+    (542129 'init var' fc2[542122] call_tmp[999035] call_tmp[999050])
+    (542131 'init field' this[385216] c"fc2" fc2[542122])
+    (576071 'end of statement')
+    (542140 'init done')
+    (576072 'end of statement')
+    (542139 'setcid' this[385216])
+    (576073 'end of statement')
+    unknown call_tmp[999057] "expr temp" "maybe param" "maybe type" "temp"
+    (999060 'move' call_tmp[999057](385350 call moduleName _mt[203] this[385216]))
+    (385347 call = call_tmp[999057] "cnn")
+    (576074 'end of statement')
+    {
+      unknown _indexOfInterest[385373] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[385374] "expr temp" "temp"
+      unknown call_tmp[999064] "expr temp" "maybe param" "maybe type" "temp"
+      (999067 'move' call_tmp[999064](385367 call(385363 call (partial) moduleFields _mt[203] this[385216])))
+      (385383 'move' _iterator[385374](385381 call _getIterator call_tmp[999064]))
+      Defer
+      {
+        {
+          (385411 call _freeIterator _iterator[385374])
+        }
+      }
+      { scopeless type
+        (385388 'move' _indexOfInterest[385373](385385 call iteratorIndex _iterator[385374]))
+      }
+      ForLoop[385375]
+      {
+        (385393 call _check_tuple_var_decl _indexOfInterest[385373] 2)
+        (576076 'end of statement')
+        unknown n[385357] "index var" "insert auto destroy"
+        (576077 'end of statement')
+        (385400 'move' n[385357](385397 call _indexOfInterest[385373] 0))
+        (576078 'end of statement' n[385357])
+        unknown m[385359] "index var" "insert auto destroy"
+        (576080 'end of statement')
+        (385406 'move' m[385359](385403 call _indexOfInterest[385373] 1))
+        (576081 'end of statement' m[385359])
+        {
+          (385370 call(466433 call (partial) addModule _mt[203] this[385216]) n[385357] m[385359])
+          (576083 'end of statement' n[385357] m[385359])
+        }
+        label _continueLabel[385378]
+        _indexOfInterest[385373]
+        _iterator[385374]
+      }
+      label _breakLabel[385379]
+    }
+    (641548 return _void[46])
+  }
+  function CNN[386349](?).forward[385420](arg _mt[385433]:_MT[201], arg this[385422]:CNN[386349](?), arg input[385430] :
+  unknown call_tmp[999073] "expr temp" "maybe param" "maybe type" "temp") : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[641552] "RVV" "temp"
+    unknown call_tmp[999078] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (999081 'move' call_tmp[999078](1000921 'new' stopwatch[377049]))
+    unknown st[385443] "dead at end of block" "insert auto destroy"
+    (657897 'init var' st[385443] call_tmp[999078])
+    (385451 'end of statement')
+    unknown call_tmp[999083] "expr temp" "maybe param" "maybe type" "temp"
+    (999086 'move' call_tmp[999083](385457 call _cond_test layerDebug[385138]))
+    if call_tmp[999083]
+    {
+      (385453 call writeln "conv1")
+    }
+    unknown call_tmp[999088] "expr temp" "maybe param" "maybe type" "temp"
+    (999091 'move' call_tmp[999088](385469 call _cond_test layerDebug[385138]))
+    if call_tmp[999088]
+    {
+      (385466 call(385463 call (partial) start _mt[203] st[385443]))
+      (576087 'end of statement' st[385443])
+    }
+    unknown call_tmp[999097] "maybe param" "maybe type" "temp"
+    (999100 'move' call_tmp[999097](385480 call(385477 call (partial) conv1 _mt[203] this[385422]) input[385430]))
+    unknown x[385475] "dead at end of block" "insert auto destroy"
+    (657899 'init var' x[385475] call_tmp[999097])
+    (385483 'end of statement')
+    unknown call_tmp[999102] "expr temp" "maybe param" "maybe type" "temp"
+    (999105 'move' call_tmp[999102](385493 call _cond_test layerDebug[385138]))
+    if call_tmp[999102]
+    {
+      (385490 call(385487 call (partial) stop _mt[203] st[385443]))
+      (576089 'end of statement' st[385443])
+    }
+    unknown call_tmp[999109] "expr temp" "maybe param" "maybe type" "temp"
+    (999112 'move' call_tmp[999109](385512 call _cond_test layerDebug[385138]))
+    if call_tmp[999109]
+    {
+      unknown call_tmp[999116] "expr temp" "maybe param" "maybe type" "temp"
+      (999119 'move' call_tmp[999116](385509 call(385506 call (partial) elapsed _mt[203] st[385443])))
+      (385499 call writeln "conv1 " call_tmp[999116])
+      (576091 'end of statement' st[385443])
+    }
+    unknown call_tmp[999121] "expr temp" "maybe param" "maybe type" "temp"
+    (999124 'move' call_tmp[999121](385524 call _cond_test layerDebug[385138]))
+    if call_tmp[999121]
+    {
+      (385521 call(385518 call (partial) clear _mt[203] st[385443]))
+      (576093 'end of statement' st[385443])
+    }
+    unknown call_tmp[999128] "expr temp" "maybe param" "maybe type" "temp"
+    (999131 'move' call_tmp[999128](385536 call _cond_test layerDebug[385138]))
+    if call_tmp[999128]
+    {
+      (385530 call writeln "relu")
+    }
+    unknown call_tmp[999133] "expr temp" "maybe param" "maybe type" "temp"
+    (999136 'move' call_tmp[999133](385548 call _cond_test layerDebug[385138]))
+    if call_tmp[999133]
+    {
+      (385545 call(385542 call (partial) start _mt[203] st[385443]))
+      (576096 'end of statement' st[385443])
+    }
+    unknown call_tmp[999142] "expr temp" "maybe param" "maybe type" "temp"
+    (999145 'move' call_tmp[999142](385560 call(385557 call (partial) relu _mt[203] x[385475])))
+    (385553 call = x[385475] call_tmp[999142])
+    (576098 'end of statement' x[385475])
+    unknown call_tmp[999147] "expr temp" "maybe param" "maybe type" "temp"
+    (999150 'move' call_tmp[999147](385568 call _cond_test layerDebug[385138]))
+    if call_tmp[999147]
+    {
+      (385565 call(385562 call (partial) stop _mt[203] st[385443]))
+      (576100 'end of statement' st[385443])
+    }
+    unknown call_tmp[999154] "expr temp" "maybe param" "maybe type" "temp"
+    (999157 'move' call_tmp[999154](385585 call _cond_test layerDebug[385138]))
+    if call_tmp[999154]
+    {
+      unknown call_tmp[999161] "expr temp" "maybe param" "maybe type" "temp"
+      (999164 'move' call_tmp[999161](385582 call(385579 call (partial) elapsed _mt[203] st[385443])))
+      (385574 call writeln "relu " call_tmp[999161])
+      (576102 'end of statement' st[385443])
+    }
+    unknown call_tmp[999166] "expr temp" "maybe param" "maybe type" "temp"
+    (999169 'move' call_tmp[999166](385597 call _cond_test layerDebug[385138]))
+    if call_tmp[999166]
+    {
+      (385594 call(385591 call (partial) clear _mt[203] st[385443]))
+      (576104 'end of statement' st[385443])
+    }
+    unknown call_tmp[999173] "expr temp" "maybe param" "maybe type" "temp"
+    (999176 'move' call_tmp[999173](385607 call _cond_test layerDebug[385138]))
+    if call_tmp[999173]
+    {
+      (385603 call writeln "conv2")
+    }
+    unknown call_tmp[999178] "expr temp" "maybe param" "maybe type" "temp"
+    (999181 'move' call_tmp[999178](385619 call _cond_test layerDebug[385138]))
+    if call_tmp[999178]
+    {
+      (385616 call(385613 call (partial) start _mt[203] st[385443]))
+      (576107 'end of statement' st[385443])
+    }
+    unknown call_tmp[999187] "expr temp" "maybe param" "maybe type" "temp"
+    (999190 'move' call_tmp[999187](385631 call(385628 call (partial) conv2 _mt[203] this[385422]) x[385475]))
+    (385624 call = x[385475] call_tmp[999187])
+    (576109 'end of statement' x[385475])
+    unknown call_tmp[999192] "expr temp" "maybe param" "maybe type" "temp"
+    (999195 'move' call_tmp[999192](385640 call _cond_test layerDebug[385138]))
+    if call_tmp[999192]
+    {
+      (385637 call(385634 call (partial) stop _mt[203] st[385443]))
+      (576111 'end of statement' st[385443])
+    }
+    unknown call_tmp[999199] "expr temp" "maybe param" "maybe type" "temp"
+    (999202 'move' call_tmp[999199](385657 call _cond_test layerDebug[385138]))
+    if call_tmp[999199]
+    {
+      unknown call_tmp[999206] "expr temp" "maybe param" "maybe type" "temp"
+      (999209 'move' call_tmp[999206](385654 call(385651 call (partial) elapsed _mt[203] st[385443])))
+      (385646 call writeln "conv2 " call_tmp[999206])
+      (576113 'end of statement' st[385443])
+    }
+    unknown call_tmp[999211] "expr temp" "maybe param" "maybe type" "temp"
+    (999214 'move' call_tmp[999211](385669 call _cond_test layerDebug[385138]))
+    if call_tmp[999211]
+    {
+      (385666 call(385663 call (partial) clear _mt[203] st[385443]))
+      (576115 'end of statement' st[385443])
+    }
+    unknown call_tmp[999218] "expr temp" "maybe param" "maybe type" "temp"
+    (999221 'move' call_tmp[999218](385679 call _cond_test layerDebug[385138]))
+    if call_tmp[999218]
+    {
+      (385675 call writeln "relu")
+    }
+    unknown call_tmp[999223] "expr temp" "maybe param" "maybe type" "temp"
+    (999226 'move' call_tmp[999223](385691 call _cond_test layerDebug[385138]))
+    if call_tmp[999223]
+    {
+      (385688 call(385685 call (partial) start _mt[203] st[385443]))
+      (576118 'end of statement' st[385443])
+    }
+    unknown call_tmp[999232] "expr temp" "maybe param" "maybe type" "temp"
+    (999235 'move' call_tmp[999232](385703 call(385700 call (partial) relu _mt[203] x[385475])))
+    (385696 call = x[385475] call_tmp[999232])
+    (576120 'end of statement' x[385475])
+    unknown call_tmp[999237] "expr temp" "maybe param" "maybe type" "temp"
+    (999240 'move' call_tmp[999237](385711 call _cond_test layerDebug[385138]))
+    if call_tmp[999237]
+    {
+      (385708 call(385705 call (partial) stop _mt[203] st[385443]))
+      (576122 'end of statement' st[385443])
+    }
+    unknown call_tmp[999244] "expr temp" "maybe param" "maybe type" "temp"
+    (999247 'move' call_tmp[999244](385726 call _cond_test layerDebug[385138]))
+    if call_tmp[999244]
+    {
+      unknown call_tmp[999251] "expr temp" "maybe param" "maybe type" "temp"
+      (999254 'move' call_tmp[999251](385723 call(385720 call (partial) elapsed _mt[203] st[385443])))
+      (385717 call writeln "relu " call_tmp[999251])
+      (576124 'end of statement' st[385443])
+    }
+    unknown call_tmp[999256] "expr temp" "maybe param" "maybe type" "temp"
+    (999259 'move' call_tmp[999256](385738 call _cond_test layerDebug[385138]))
+    if call_tmp[999256]
+    {
+      (385735 call(385732 call (partial) clear _mt[203] st[385443]))
+      (576126 'end of statement' st[385443])
+    }
+    unknown call_tmp[999263] "expr temp" "maybe param" "maybe type" "temp"
+    (999266 'move' call_tmp[999263](385750 call _cond_test layerDebug[385138]))
+    if call_tmp[999263]
+    {
+      (385744 call writeln "maxpool")
+    }
+    unknown call_tmp[999268] "expr temp" "maybe param" "maybe type" "temp"
+    (999271 'move' call_tmp[999268](385762 call _cond_test layerDebug[385138]))
+    if call_tmp[999268]
+    {
+      (385759 call(385756 call (partial) start _mt[203] st[385443]))
+      (576129 'end of statement' st[385443])
+    }
+    unknown call_tmp[999277] "expr temp" "maybe param" "maybe type" "temp"
+    (999280 'move' call_tmp[999277](385774 call(385771 call (partial) maxPool _mt[203] x[385475]) 2))
+    (385767 call = x[385475] call_tmp[999277])
+    (576131 'end of statement' x[385475])
+    unknown call_tmp[999282] "expr temp" "maybe param" "maybe type" "temp"
+    (999285 'move' call_tmp[999282](385783 call _cond_test layerDebug[385138]))
+    if call_tmp[999282]
+    {
+      (385780 call(385777 call (partial) stop _mt[203] st[385443]))
+      (576133 'end of statement' st[385443])
+    }
+    unknown call_tmp[999289] "expr temp" "maybe param" "maybe type" "temp"
+    (999292 'move' call_tmp[999289](385800 call _cond_test layerDebug[385138]))
+    if call_tmp[999289]
+    {
+      unknown call_tmp[999296] "expr temp" "maybe param" "maybe type" "temp"
+      (999299 'move' call_tmp[999296](385797 call(385794 call (partial) elapsed _mt[203] st[385443])))
+      (385789 call writeln "maxpool " call_tmp[999296])
+      (576135 'end of statement' st[385443])
+    }
+    unknown call_tmp[999301] "expr temp" "maybe param" "maybe type" "temp"
+    (999304 'move' call_tmp[999301](385812 call _cond_test layerDebug[385138]))
+    if call_tmp[999301]
+    {
+      (385809 call(385806 call (partial) clear _mt[203] st[385443]))
+      (576137 'end of statement' st[385443])
+    }
+    unknown call_tmp[999308] "expr temp" "maybe param" "maybe type" "temp"
+    (999311 'move' call_tmp[999308](385824 call _cond_test layerDebug[385138]))
+    if call_tmp[999308]
+    {
+      (385818 call writeln "dropout1")
+    }
+    unknown call_tmp[999313] "expr temp" "maybe param" "maybe type" "temp"
+    (999316 'move' call_tmp[999313](385836 call _cond_test layerDebug[385138]))
+    if call_tmp[999313]
+    {
+      (385833 call(385830 call (partial) start _mt[203] st[385443]))
+      (576140 'end of statement' st[385443])
+    }
+    unknown call_tmp[999322] "expr temp" "maybe param" "maybe type" "temp"
+    (999325 'move' call_tmp[999322](385848 call(385845 call (partial) dropout1 _mt[203] this[385422]) x[385475]))
+    (385841 call = x[385475] call_tmp[999322])
+    (576142 'end of statement' x[385475])
+    unknown call_tmp[999327] "expr temp" "maybe param" "maybe type" "temp"
+    (999330 'move' call_tmp[999327](385857 call _cond_test layerDebug[385138]))
+    if call_tmp[999327]
+    {
+      (385854 call(385851 call (partial) stop _mt[203] st[385443]))
+      (576144 'end of statement' st[385443])
+    }
+    unknown call_tmp[999334] "expr temp" "maybe param" "maybe type" "temp"
+    (999337 'move' call_tmp[999334](385874 call _cond_test layerDebug[385138]))
+    if call_tmp[999334]
+    {
+      unknown call_tmp[999341] "expr temp" "maybe param" "maybe type" "temp"
+      (999344 'move' call_tmp[999341](385871 call(385868 call (partial) elapsed _mt[203] st[385443])))
+      (385863 call writeln "dropout " call_tmp[999341])
+      (576146 'end of statement' st[385443])
+    }
+    unknown call_tmp[999346] "expr temp" "maybe param" "maybe type" "temp"
+    (999349 'move' call_tmp[999346](385886 call _cond_test layerDebug[385138]))
+    if call_tmp[999346]
+    {
+      (385883 call(385880 call (partial) clear _mt[203] st[385443]))
+      (576148 'end of statement' st[385443])
+    }
+    unknown call_tmp[999353] "expr temp" "maybe param" "maybe type" "temp"
+    (999356 'move' call_tmp[999353](385898 call _cond_test layerDebug[385138]))
+    if call_tmp[999353]
+    {
+      (385892 call writeln "flatten")
+    }
+    unknown call_tmp[999358] "expr temp" "maybe param" "maybe type" "temp"
+    (999361 'move' call_tmp[999358](385910 call _cond_test layerDebug[385138]))
+    if call_tmp[999358]
+    {
+      (385907 call(385904 call (partial) start _mt[203] st[385443]))
+      (576151 'end of statement' st[385443])
+    }
+    unknown call_tmp[999367] "expr temp" "maybe param" "maybe type" "temp"
+    (999370 'move' call_tmp[999367](385922 call(385919 call (partial) flatten _mt[203] x[385475])))
+    (385915 call = x[385475] call_tmp[999367])
+    (576153 'end of statement' x[385475])
+    unknown call_tmp[999372] "expr temp" "maybe param" "maybe type" "temp"
+    (999375 'move' call_tmp[999372](385930 call _cond_test layerDebug[385138]))
+    if call_tmp[999372]
+    {
+      (385927 call(385924 call (partial) stop _mt[203] st[385443]))
+      (576155 'end of statement' st[385443])
+    }
+    unknown call_tmp[999379] "expr temp" "maybe param" "maybe type" "temp"
+    (999382 'move' call_tmp[999379](385947 call _cond_test layerDebug[385138]))
+    if call_tmp[999379]
+    {
+      unknown call_tmp[999386] "expr temp" "maybe param" "maybe type" "temp"
+      (999389 'move' call_tmp[999386](385944 call(385941 call (partial) elapsed _mt[203] st[385443])))
+      (385936 call writeln "flatten " call_tmp[999386])
+      (576157 'end of statement' st[385443])
+    }
+    unknown call_tmp[999391] "expr temp" "maybe param" "maybe type" "temp"
+    (999394 'move' call_tmp[999391](385959 call _cond_test layerDebug[385138]))
+    if call_tmp[999391]
+    {
+      (385956 call(385953 call (partial) clear _mt[203] st[385443]))
+      (576159 'end of statement' st[385443])
+    }
+    unknown call_tmp[999398] "expr temp" "maybe param" "maybe type" "temp"
+    (999401 'move' call_tmp[999398](385971 call _cond_test layerDebug[385138]))
+    if call_tmp[999398]
+    {
+      (385965 call writeln "fc1")
+    }
+    unknown call_tmp[999403] "expr temp" "maybe param" "maybe type" "temp"
+    (999406 'move' call_tmp[999403](385983 call _cond_test layerDebug[385138]))
+    if call_tmp[999403]
+    {
+      (385980 call(385977 call (partial) start _mt[203] st[385443]))
+      (576162 'end of statement' st[385443])
+    }
+    unknown call_tmp[999412] "expr temp" "maybe param" "maybe type" "temp"
+    (999415 'move' call_tmp[999412](385995 call(385992 call (partial) fc1 _mt[203] this[385422]) x[385475]))
+    (385988 call = x[385475] call_tmp[999412])
+    (576164 'end of statement' x[385475])
+    unknown call_tmp[999417] "expr temp" "maybe param" "maybe type" "temp"
+    (999420 'move' call_tmp[999417](386004 call _cond_test layerDebug[385138]))
+    if call_tmp[999417]
+    {
+      (386001 call(385998 call (partial) stop _mt[203] st[385443]))
+      (576166 'end of statement' st[385443])
+    }
+    unknown call_tmp[999424] "expr temp" "maybe param" "maybe type" "temp"
+    (999427 'move' call_tmp[999424](386021 call _cond_test layerDebug[385138]))
+    if call_tmp[999424]
+    {
+      unknown call_tmp[999431] "expr temp" "maybe param" "maybe type" "temp"
+      (999434 'move' call_tmp[999431](386018 call(386015 call (partial) elapsed _mt[203] st[385443])))
+      (386010 call writeln "fc1 " call_tmp[999431])
+      (576168 'end of statement' st[385443])
+    }
+    unknown call_tmp[999436] "expr temp" "maybe param" "maybe type" "temp"
+    (999439 'move' call_tmp[999436](386033 call _cond_test layerDebug[385138]))
+    if call_tmp[999436]
+    {
+      (386030 call(386027 call (partial) clear _mt[203] st[385443]))
+      (576170 'end of statement' st[385443])
+    }
+    unknown call_tmp[999443] "expr temp" "maybe param" "maybe type" "temp"
+    (999446 'move' call_tmp[999443](386043 call _cond_test layerDebug[385138]))
+    if call_tmp[999443]
+    {
+      (386039 call writeln "relu")
+    }
+    unknown call_tmp[999448] "expr temp" "maybe param" "maybe type" "temp"
+    (999451 'move' call_tmp[999448](386055 call _cond_test layerDebug[385138]))
+    if call_tmp[999448]
+    {
+      (386052 call(386049 call (partial) start _mt[203] st[385443]))
+      (576173 'end of statement' st[385443])
+    }
+    unknown call_tmp[999457] "expr temp" "maybe param" "maybe type" "temp"
+    (999460 'move' call_tmp[999457](386067 call(386064 call (partial) relu _mt[203] x[385475])))
+    (386060 call = x[385475] call_tmp[999457])
+    (576175 'end of statement' x[385475])
+    unknown call_tmp[999462] "expr temp" "maybe param" "maybe type" "temp"
+    (999465 'move' call_tmp[999462](386075 call _cond_test layerDebug[385138]))
+    if call_tmp[999462]
+    {
+      (386072 call(386069 call (partial) stop _mt[203] st[385443]))
+      (576177 'end of statement' st[385443])
+    }
+    unknown call_tmp[999469] "expr temp" "maybe param" "maybe type" "temp"
+    (999472 'move' call_tmp[999469](386090 call _cond_test layerDebug[385138]))
+    if call_tmp[999469]
+    {
+      unknown call_tmp[999476] "expr temp" "maybe param" "maybe type" "temp"
+      (999479 'move' call_tmp[999476](386087 call(386084 call (partial) elapsed _mt[203] st[385443])))
+      (386081 call writeln "relu " call_tmp[999476])
+      (576179 'end of statement' st[385443])
+    }
+    unknown call_tmp[999481] "expr temp" "maybe param" "maybe type" "temp"
+    (999484 'move' call_tmp[999481](386102 call _cond_test layerDebug[385138]))
+    if call_tmp[999481]
+    {
+      (386099 call(386096 call (partial) clear _mt[203] st[385443]))
+      (576181 'end of statement' st[385443])
+    }
+    unknown call_tmp[999488] "expr temp" "maybe param" "maybe type" "temp"
+    (999491 'move' call_tmp[999488](386114 call _cond_test layerDebug[385138]))
+    if call_tmp[999488]
+    {
+      (386108 call writeln "dropout2")
+    }
+    unknown call_tmp[999493] "expr temp" "maybe param" "maybe type" "temp"
+    (999496 'move' call_tmp[999493](386126 call _cond_test layerDebug[385138]))
+    if call_tmp[999493]
+    {
+      (386123 call(386120 call (partial) start _mt[203] st[385443]))
+      (576184 'end of statement' st[385443])
+    }
+    unknown call_tmp[999502] "expr temp" "maybe param" "maybe type" "temp"
+    (999505 'move' call_tmp[999502](386138 call(386135 call (partial) dropout2 _mt[203] this[385422]) x[385475]))
+    (386131 call = x[385475] call_tmp[999502])
+    (576186 'end of statement' x[385475])
+    unknown call_tmp[999507] "expr temp" "maybe param" "maybe type" "temp"
+    (999510 'move' call_tmp[999507](386147 call _cond_test layerDebug[385138]))
+    if call_tmp[999507]
+    {
+      (386144 call(386141 call (partial) stop _mt[203] st[385443]))
+      (576188 'end of statement' st[385443])
+    }
+    unknown call_tmp[999514] "expr temp" "maybe param" "maybe type" "temp"
+    (999517 'move' call_tmp[999514](386164 call _cond_test layerDebug[385138]))
+    if call_tmp[999514]
+    {
+      unknown call_tmp[999521] "expr temp" "maybe param" "maybe type" "temp"
+      (999524 'move' call_tmp[999521](386161 call(386158 call (partial) elapsed _mt[203] st[385443])))
+      (386153 call writeln "dropout2 " call_tmp[999521])
+      (576190 'end of statement' st[385443])
+    }
+    unknown call_tmp[999526] "expr temp" "maybe param" "maybe type" "temp"
+    (999529 'move' call_tmp[999526](386176 call _cond_test layerDebug[385138]))
+    if call_tmp[999526]
+    {
+      (386173 call(386170 call (partial) clear _mt[203] st[385443]))
+      (576192 'end of statement' st[385443])
+    }
+    unknown call_tmp[999533] "expr temp" "maybe param" "maybe type" "temp"
+    (999536 'move' call_tmp[999533](386188 call _cond_test layerDebug[385138]))
+    if call_tmp[999533]
+    {
+      (386182 call writeln "fc2")
+    }
+    unknown call_tmp[999538] "expr temp" "maybe param" "maybe type" "temp"
+    (999541 'move' call_tmp[999538](386200 call _cond_test layerDebug[385138]))
+    if call_tmp[999538]
+    {
+      (386197 call(386194 call (partial) start _mt[203] st[385443]))
+      (576195 'end of statement' st[385443])
+    }
+    unknown call_tmp[999547] "expr temp" "maybe param" "maybe type" "temp"
+    (999550 'move' call_tmp[999547](386212 call(386209 call (partial) fc2 _mt[203] this[385422]) x[385475]))
+    (386205 call = x[385475] call_tmp[999547])
+    (576197 'end of statement' x[385475])
+    unknown call_tmp[999552] "expr temp" "maybe param" "maybe type" "temp"
+    (999555 'move' call_tmp[999552](386221 call _cond_test layerDebug[385138]))
+    if call_tmp[999552]
+    {
+      (386218 call(386215 call (partial) stop _mt[203] st[385443]))
+      (576199 'end of statement' st[385443])
+    }
+    unknown call_tmp[999559] "expr temp" "maybe param" "maybe type" "temp"
+    (999562 'move' call_tmp[999559](386238 call _cond_test layerDebug[385138]))
+    if call_tmp[999559]
+    {
+      unknown call_tmp[999566] "expr temp" "maybe param" "maybe type" "temp"
+      (999569 'move' call_tmp[999566](386235 call(386232 call (partial) elapsed _mt[203] st[385443])))
+      (386227 call writeln "fc2 " call_tmp[999566])
+      (576201 'end of statement' st[385443])
+    }
+    unknown call_tmp[999571] "expr temp" "maybe param" "maybe type" "temp"
+    (999574 'move' call_tmp[999571](386250 call _cond_test layerDebug[385138]))
+    if call_tmp[999571]
+    {
+      (386247 call(386244 call (partial) clear _mt[203] st[385443]))
+      (576203 'end of statement' st[385443])
+    }
+    unknown call_tmp[999578] "expr temp" "maybe param" "maybe type" "temp"
+    (999581 'move' call_tmp[999578](386262 call _cond_test layerDebug[385138]))
+    if call_tmp[999578]
+    {
+      (386259 call(386256 call (partial) start _mt[203] st[385443]))
+      (576205 'end of statement' st[385443])
+    }
+    unknown call_tmp[999585] "expr temp" "maybe param" "maybe type" "temp"
+    (999588 'move' call_tmp[999585](386274 call _cond_test layerDebug[385138]))
+    if call_tmp[999585]
+    {
+      (386268 call writeln "softmax")
+    }
+    unknown call_tmp[999590] "expr temp" "maybe param" "maybe type" "temp"
+    (999593 'move' call_tmp[999590](386286 call _cond_test layerDebug[385138]))
+    if call_tmp[999590]
+    {
+      (386283 call(386280 call (partial) start _mt[203] st[385443]))
+      (576208 'end of statement' st[385443])
+    }
+    unknown call_tmp[999599] "maybe param" "maybe type" "temp"
+    (999602 'move' call_tmp[999599](386297 call(386294 call (partial) softmax _mt[203] x[385475])))
+    unknown output[386292] "dead at end of block" "insert auto destroy"
+    (657901 'init var' output[386292] call_tmp[999599])
+    (386299 'end of statement' x[385475])
+    unknown call_tmp[999604] "expr temp" "maybe param" "maybe type" "temp"
+    (999607 'move' call_tmp[999604](386307 call _cond_test layerDebug[385138]))
+    if call_tmp[999604]
+    {
+      (386304 call(386301 call (partial) stop _mt[203] st[385443]))
+      (576211 'end of statement' st[385443])
+    }
+    unknown call_tmp[999611] "expr temp" "maybe param" "maybe type" "temp"
+    (999614 'move' call_tmp[999611](386324 call _cond_test layerDebug[385138]))
+    if call_tmp[999611]
+    {
+      unknown call_tmp[999618] "expr temp" "maybe param" "maybe type" "temp"
+      (999621 'move' call_tmp[999618](386321 call(386318 call (partial) elapsed _mt[203] st[385443])))
+      (386313 call writeln "softmax " call_tmp[999618])
+      (576213 'end of statement' st[385443])
+    }
+    unknown call_tmp[999623] "expr temp" "maybe param" "maybe type" "temp"
+    (999626 'move' call_tmp[999623](386336 call _cond_test layerDebug[385138]))
+    if call_tmp[999623]
+    {
+      (386333 call(386330 call (partial) clear _mt[203] st[385443]))
+      (576215 'end of statement' st[385443])
+    }
+    unknown call_tmp[999632] "expr temp" "maybe param" "maybe type" "temp"
+    (999635 'move' call_tmp[999632](641559 call eltType _mt[203] this[385422]))
+    unknown call_tmp[999637] "expr temp" "maybe param" "maybe type" "temp"
+    (999640 'move' call_tmp[999637](641557 call Tensor[345586](?) call_tmp[999632]))
+    (641563 'move' ret[641552](641562 'coerce' output[386292] call_tmp[999637]))
+    gotoReturn _end_forward[641550] _end_forward[641550]
+    (576217 'end of statement' output[386292])
+    label _end_forward[641550]
+    (641554 return ret[641552])
+    (386344 'referenced modules list' Time[377133])
+  }
+  { scopeless type
+    unknown call_tmp[999644] "expr temp" "maybe param" "maybe type" "temp"
+    (999647 'move' call_tmp[999644](385437 call eltType _mt[203] this[385422]))
+    (385436 call Tensor[345586](?) call_tmp[999644])
+  }
+  function CNN[386349](?).super[1464029](arg _mt[1464031]:_MT[201], arg this[1464033]:CNN[386349](?)) : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1464043] "RVV" "temp"
+    unknown call_tmp[1464050] "expr temp" "maybe param" "maybe type" "temp"
+    (1464053 'move' call_tmp[1464050](1464037 '.v' this[1464033] c"super"))
+    (1464048 'move' ret[1464043](1464047 'deref' call_tmp[1464050]))
+    (1464045 return ret[1464043])
+  }
+  function CNN[386349](?).conv1[1464055](arg _mt[1464057]:_MT[201], arg this[1464059]:CNN[386349](?)) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1464069] "RVV" "temp"
+    unknown call_tmp[1464076] "expr temp" "maybe param" "maybe type" "temp"
+    (1464079 'move' call_tmp[1464076](1464063 '.' this[1464059] c"conv1"))
+    (1464074 'move' ret[1464069](1464073 'addr of' call_tmp[1464076]))
+    (1464071 return ret[1464069])
+  }
+  function CNN[386349](?).conv2[1464081](arg _mt[1464083]:_MT[201], arg this[1464085]:CNN[386349](?)) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1464095] "RVV" "temp"
+    unknown call_tmp[1464102] "expr temp" "maybe param" "maybe type" "temp"
+    (1464105 'move' call_tmp[1464102](1464089 '.' this[1464085] c"conv2"))
+    (1464100 'move' ret[1464095](1464099 'addr of' call_tmp[1464102]))
+    (1464097 return ret[1464095])
+  }
+  function CNN[386349](?).dropout1[1464107](arg _mt[1464109]:_MT[201], arg this[1464111]:CNN[386349](?)) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1464121] "RVV" "temp"
+    unknown call_tmp[1464128] "expr temp" "maybe param" "maybe type" "temp"
+    (1464131 'move' call_tmp[1464128](1464115 '.' this[1464111] c"dropout1"))
+    (1464126 'move' ret[1464121](1464125 'addr of' call_tmp[1464128]))
+    (1464123 return ret[1464121])
+  }
+  function CNN[386349](?).dropout2[1464133](arg _mt[1464135]:_MT[201], arg this[1464137]:CNN[386349](?)) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1464147] "RVV" "temp"
+    unknown call_tmp[1464154] "expr temp" "maybe param" "maybe type" "temp"
+    (1464157 'move' call_tmp[1464154](1464141 '.' this[1464137] c"dropout2"))
+    (1464152 'move' ret[1464147](1464151 'addr of' call_tmp[1464154]))
+    (1464149 return ret[1464147])
+  }
+  function CNN[386349](?).flatten[1464159](arg _mt[1464161]:_MT[201], arg this[1464163]:CNN[386349](?)) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1464173] "RVV" "temp"
+    unknown call_tmp[1464180] "expr temp" "maybe param" "maybe type" "temp"
+    (1464183 'move' call_tmp[1464180](1464167 '.' this[1464163] c"flatten"))
+    (1464178 'move' ret[1464173](1464177 'addr of' call_tmp[1464180]))
+    (1464175 return ret[1464173])
+  }
+  function CNN[386349](?).fc1[1464185](arg _mt[1464187]:_MT[201], arg this[1464189]:CNN[386349](?)) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1464199] "RVV" "temp"
+    unknown call_tmp[1464206] "expr temp" "maybe param" "maybe type" "temp"
+    (1464209 'move' call_tmp[1464206](1464193 '.' this[1464189] c"fc1"))
+    (1464204 'move' ret[1464199](1464203 'addr of' call_tmp[1464206]))
+    (1464201 return ret[1464199])
+  }
+  function CNN[386349](?).fc2[1464211](arg _mt[1464213]:_MT[201], arg this[1464215]:CNN[386349](?)) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1464225] "RVV" "temp"
+    unknown call_tmp[1464232] "expr temp" "maybe param" "maybe type" "temp"
+    (1464235 'move' call_tmp[1464232](1464219 '.' this[1464215] c"fc2"))
+    (1464230 'move' ret[1464225](1464229 'addr of' call_tmp[1464232]))
+    (1464227 return ret[1464225])
+  }
+  function CNN[386349](?).deinit[1464237](arg _mt[1464239]:_MT[201], arg this[1464241]:CNN[386349](?)) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method"
+  {
+    (1464249 return _void[46])
+  }
+  function CNN[386349](?).serialize[1464251](arg _mt[1464255]:_MT[201], arg this[1464253]:CNN[386349](?), arg writer[1464254]:_any[141](?), ref arg serializer[1464259]:_any[141](?)) : void[4] throws "compiler generated" "last resort" "method" "primary method" "method overrides"
+  {
+    (1464262 call serializeDefaultImpl writer[1464254] serializer[1464259] this[1464253])
+    (1464268 return _void[46])
+  }
+  function CNN[386349](?).deserialize[1464270](arg _mt[1464274]:_MT[201], arg this[1464272]:CNN[386349](?), arg reader[1464273]:_any[141](?), ref arg deserializer[1464279]:_any[141](?)) : void[4] throws "compiler generated" "last resort" "method" "primary method" "method overrides"
+  {
+    unknown _deser_temp[1464281] "temp"
+    (1464283 'move' _deser_temp[1464281] this[1464272])
+    (1464286 call deserializeDefaultImpl reader[1464273] deserializer[1464279] _deser_temp[1464281])
+    (1464292 return _void[46])
+  }
+  type CNN[386349](?) val super[398008]:Module[362659](?) "delay instantiation" "super class" unknown conv1[385152](385154 call _owned[238](?)(385156 call Conv2D[364808](?) eltType[361353])) unknown conv2[385161](385163 call _owned[238](?)(385165 call Conv2D[364808](?) eltType[361353])) unknown dropout1[385170](385172 call _owned[238](?)(385174 call Dropout[365329](?) eltType[361353])) unknown dropout2[385179](385181 call _owned[238](?)(385183 call Dropout[365329](?) eltType[361353])) unknown flatten[385188](385190 call _owned[238](?)(385192 call Flatten[365034](?) eltType[361353])) unknown fc1[385197](385199 call _owned[238](?)(385201 call Linear[365043](?) eltType[361353])) unknown fc2[385206](385208 call _owned[238](?)(385210 call Linear[365043](?) eltType[361353]))
+  type CNN[386373](?)
+  const diag[386352] "config" "const" "insert auto destroy"
+  unknown cnn[386370] "dead at end of block" "insert auto destroy"
+  unknown model[386441] "dead at end of block" "insert auto destroy"
+  const testImgSize[386461] "config" "const" "insert auto destroy"
+  unknown img[386466] "dead at end of block" "insert auto destroy"
+  const modelPath[386492] "dead at end of block" "const" "insert auto destroy"
+  unknown output[386505] "dead at end of block" "insert auto destroy"
+  const imageCount[386515] "config" "const" "insert auto destroy"
+  unknown images[386520] "dead at end of block" "insert auto destroy"
+  function chpl__loopexpr_iter18[718576](arg iterator[718578]:_any[141](?)) : _unknown[42] "do not unref for yields" "compiler generated" "iterator fn"
+  {
+    unknown ret[718730] "RVV" "temp"
+    {
+      unknown _indexOfInterest[718583] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[718584] "expr temp" "temp"
+      (718593 'move' _iterator[718584](718591 call _getIterator iterator[718578]))
+      Defer
+      {
+        {
+          (718608 call _freeIterator _iterator[718584])
+        }
+      }
+      { scopeless type
+        (718598 'move' _indexOfInterest[718583](718595 call iteratorIndex _iterator[718584]))
+      }
+      ForLoop[718585] for-expr
+      {
+        unknown i[386521] "index var" "insert auto destroy"
+        (718723 'end of statement')
+        (718603 'move' i[386521] _indexOfInterest[718583])
+        (718724 'end of statement' i[386521])
+        {
+          {
+            unknown yret[718734] "YVV" "temp"
+            unknown call_tmp[718742] "expr temp" "maybe param" "maybe type" "temp"
+            (718745 'move' call_tmp[718742](386543 call : i[386521] string[244]))
+            unknown call_tmp[718747] "expr temp" "maybe param" "maybe type" "temp"
+            (718750 'move' call_tmp[718747](386538 call + "data/datasets/mnist/image_idx_" call_tmp[718742]))
+            unknown call_tmp[718752] "expr temp" "maybe param" "maybe type" "temp"
+            (718755 'move' call_tmp[718752](386536 call + call_tmp[718747] ".chdata"))
+            unknown call_tmp[718757] "expr temp" "maybe param" "maybe type" "temp"
+            (718760 'move' call_tmp[718757](386535 call(386532 call (partial) load _mt[203] Tensor[345586](?)) call_tmp[718752]))
+            unknown call_tmp[718762] "expr temp" "maybe param" "maybe type" "temp"
+            (718765 'move' call_tmp[718762](386529 call : call_tmp[718757] dtype[385143]))
+            (718737 'move' yret[718734](718736 'deref' call_tmp[718762]))
+            (718580 yield yret[718734])
+            (718726 'end of statement' i[386521])
+          }
+        }
+        label _continueLabel[718588]
+        _indexOfInterest[718583]
+        _iterator[718584]
+      }
+      label _breakLabel[718589]
+    }
+    (718732 return ret[718730])
+  }
+  function chpl__loopexpr_iter18[718615](param arg tag[718619]:iterKind[52144], arg iterator[718622]:_any[141](?)) : _unknown[42] "compiler generated" "fn returns iterator"
+  {
+    unknown ret[718792] "RVV" "temp"
+    const _leaderIterator[718634] "const" "expr temp" "temp"
+    (718639 'move' _leaderIterator[718634](718636 call _toLeader iterator[718622]))
+    (718797 'move' ret[718792](718796 'deref' _leaderIterator[718634]))
+    (718794 return ret[718792])
+  }
+  where {
+    unknown tmp[718768] "maybe param" "temp"
+    (718779 'move' tmp[718768](718624 call == tag[718619] leader[52138]))
+    unknown call_tmp[718826] "expr temp" "maybe param" "maybe type" "temp"
+    (718829 'move' call_tmp[718826](718781 call _cond_invalid tmp[718768]))
+    if call_tmp[718826]
+    {
+      (718784 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[718799] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[718800] "maybe param" "temp"
+    unknown call_tmp[718831] "expr temp" "maybe param" "maybe type" "temp"
+    (718834 'move' call_tmp[718831](718769 call isTrue tmp[718768]))
+    (718805 'move' tmp[718800](718803 call _cond_test call_tmp[718831]))
+    if tmp[718800]
+    {
+      unknown tmp[718807] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[718836] "expr temp" "maybe param" "maybe type" "temp"
+      (718839 'move' call_tmp[718836](718628 'call resolves' "_toLeader" iterator[718622]))
+      (718809 'move' tmp[718807](718772 call isTrue call_tmp[718836]))
+      (718814 'move' tmp[718799](718811 '_paramFoldLogical' tmp[718800] tmp[718807]))
+    }
+    {
+      (718819 'move' tmp[718799](718816 '_paramFoldLogical' tmp[718800] 0))
+    }
+    (1001696 call chpl_statementLevelSymbol tmp[718799])
+  }
+  function chpl__loopexpr_iter18[718643](param arg tag[718647]:iterKind[52144], arg followThis[718650]:_any[141](?), arg iterator[718652]:_any[141](?)) : _unknown[42] "do not unref for yields" "compiler generated" "iterator fn"
+  {
+    unknown ret[718850] "RVV" "temp"
+    const _followerIterator[718659] "const" "expr temp" "temp"
+    (718665 'move' _followerIterator[718659](718661 call _toFollower iterator[718652] followThis[718650]))
+    {
+      unknown _indexOfInterest[718689] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[718690] "expr temp" "temp"
+      (718699 'move' _iterator[718690](718697 call _getIterator _followerIterator[718659]))
+      Defer
+      {
+        {
+          (718714 call _freeIterator _iterator[718690])
+        }
+      }
+      { scopeless type
+        (718704 'move' _indexOfInterest[718689](718701 call iteratorIndex _iterator[718690]))
+      }
+      ForLoop[718691] order-independent lowered-forall for-expr
+      {
+        unknown i[718574] "index var" "insert auto destroy"
+        (718843 'end of statement')
+        (718709 'move' i[718574] _indexOfInterest[718689])
+        (718844 'end of statement' i[718574])
+        {
+          {
+            unknown yret[718854] "YVV" "temp"
+            unknown call_tmp[718862] "expr temp" "maybe param" "maybe type" "temp"
+            (718865 'move' call_tmp[718862](718682 call : i[718574] string[244]))
+            unknown call_tmp[718867] "expr temp" "maybe param" "maybe type" "temp"
+            (718870 'move' call_tmp[718867](718679 call + "data/datasets/mnist/image_idx_" call_tmp[718862]))
+            unknown call_tmp[718872] "expr temp" "maybe param" "maybe type" "temp"
+            (718875 'move' call_tmp[718872](718677 call + call_tmp[718867] ".chdata"))
+            unknown call_tmp[718877] "expr temp" "maybe param" "maybe type" "temp"
+            (718880 'move' call_tmp[718877](718675 call(718672 call (partial) load _mt[203] Tensor[345586](?)) call_tmp[718872]))
+            unknown call_tmp[718882] "expr temp" "maybe param" "maybe type" "temp"
+            (718885 'move' call_tmp[718882](718670 call : call_tmp[718877] dtype[385143]))
+            (718857 'move' yret[718854](718856 'deref' call_tmp[718882]))
+            (718668 yield yret[718854])
+            (718846 'end of statement' i[718574])
+          }
+        }
+        label _continueLabel[718694]
+        _indexOfInterest[718689]
+        _iterator[718690]
+      }
+      label _breakLabel[718695]
+    }
+    (718852 return ret[718850])
+  }
+  where {
+    (718655 call == tag[718647] follower[52140])
+  }
+  function chpl__forallexpr18[718558](arg iterExpr[718561]:_any[141](?)) : _unknown[42] "compiler generated" "compiler nested function" "maybe array type" "fn returns iterator"
+  {
+    unknown ret[718890] "RVV" "temp"
+    unknown _iterator[718565] "expr temp" "maybe ref" "temp"
+    (718567 'move' _iterator[718565] iterExpr[718561])
+    unknown call_tmp[718897] "expr temp" "maybe param" "maybe type" "temp"
+    (718900 'move' call_tmp[718897](718570 call chpl__loopexpr_iter18 _iterator[718565]))
+    (718895 'move' ret[718890](718894 'deref' call_tmp[718897]))
+    (718892 return ret[718890])
+  }
+  unknown preds[386554] "dead at end of block" "insert auto destroy"
+  const numTimes[386567] "config" "const" "insert auto destroy"
+  const printResults[386737] "config" "const" "insert auto destroy"
+  unknown cnn2[386796] "dead at end of block" "insert auto destroy"
+  function main[1003064]() : void[4]
+  {
+    (1003067 return _void[46])
+  }
+  function chpl_gen_main[1003070](const  ref arg _arg[1003069]:chpl_main_argument[311085]) : int(64)[10] "compiler generated" "export" "generated main" "local args"
+  {
+    val ret[1003113]:int(64)[10] "RVV" "temp"
+    val _main_ret[1003074]:int(64)[10] "temp"
+    unknown _endCount[1003076] "temp"
+    (1003081 'move' _endCount[1003076](1003078 call _endCountAlloc 0))
+    (1003083 'set dynamic end count' _endCount[1003076])
+    (1003103 'end of statement')
+    (1003085 call chpl_rt_preUserCodeHook)
+    (1003104 'end of statement')
+    (1003087 call chpl__init_MNISTNet[468687])
+    (1003105 'end of statement')
+    (1003089 call main)
+    (1003106 'end of statement')
+    (1003091 'move' _main_ret[1003074] 0)
+    (1003094 call chpl_rt_postUserCodeHook)
+    (1003107 'end of statement')
+    (1003096 call _waitEndCount _endCount[1003076])
+    (1003108 'end of statement')
+    (1003099 call chpl_deinitModules)
+    (1003109 'end of statement')
+    (1003118 'move' ret[1003113](1003117 'deref' _main_ret[1003074]))
+    (1003115 return ret[1003113])
+  }
+  (397261 'used modules list'(387104 'use' ChapelStandard[315387])(385123 'use' Tensor[348703])(385126 'use' Network[365327])(385129 'use' Reflection[1804])(385133 'import' TOML[385119])(385136 'import' Time[377133]))
+  (386442 'referenced modules list' Network[365327])
+}

@@ -49,6 +49,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">chpldoc documentation</a></li>
 </ul>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../examples/ConvLayerTest.html">ConvLayerTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/MNISTNet.html">MNISTNet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/ModuleSpec.html">ModuleSpec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/MultiLocaleInference.html">MultiLocaleInference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Autograd.html">Autograd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DynamicTensor.html">DynamicTensor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LoadNumpy.html">LoadNumpy</a></li>
@@ -62,6 +66,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Utilities.html">Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Utilities/Standard.html">Standard</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Utilities/Types.html">Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../src/ChAI.html">ChAI</a></li>
 </ul>
 
         </div>
@@ -101,9 +106,9 @@
 <dl class="chpl class">
 <dt class="sig sig-object chpl" id="Remote._RemoteVarContainer">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">_RemoteVarContainer</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Remote._RemoteVarContainer" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl data">
+<dd><dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="Remote._RemoteVarContainer.containedValue">
-<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">containedValue</span></span><a class="headerlink" href="#Remote._RemoteVarContainer.containedValue" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">containedValue</span></span><a class="headerlink" href="#Remote._RemoteVarContainer.containedValue" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -111,14 +116,14 @@
 <dl class="chpl class">
 <dt class="sig sig-object chpl" id="Remote.Remote">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Remote</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#Remote.Remote" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl type">
+<dd><dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="Remote.Remote.eltType">
-<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><a class="headerlink" href="#Remote.Remote.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><a class="headerlink" href="#Remote.Remote.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl data">
+<dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="Remote.Remote.value">
-<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"> <span class="pre">:</span> <span class="pre">owned(_RemoteVarContainer(eltType))</span></em><a class="headerlink" href="#Remote.Remote.value" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"> <span class="pre">:</span> <span class="pre">owned(_RemoteVarContainer(eltType))</span></em><a class="headerlink" href="#Remote.Remote.value" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -143,7 +148,7 @@
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">value:</span> <span class="pre">?eltType</span></em>, <em class="sig-param"><span class="pre">device:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">Remote.defaultDevice</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">!isSubtype(eltType,</span> <span class="pre">Remote(?))</span></em></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">value:</span> <span class="pre">?eltType</span></em>, <em class="sig-param"><span class="pre">device:</span> <span class="pre">locale</span> <span class="pre">=</span> <span class="pre">Remote.defaultDevice</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">!isSubtype(eltType,</span> <span class="pre">Remote(?))</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -185,7 +190,7 @@
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shared</span> <span class="pre">Remote(?eltType)).get(</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">Remote(eltType)</span></em></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shared(Remote(?eltType))).get(</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">shared(Remote(eltType))</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -196,6 +201,21 @@
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="Remote.Remote.defaultDevice">
 <em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">Remote.</span></span><span class="sig-name descname"><span class="pre">defaultDevice</span></span><em class="property"> <span class="pre">:</span> <span class="pre">locale</span></em><a class="headerlink" href="#Remote.Remote.defaultDevice" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Remote.chpl__buildRemoteWrapper">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chpl__buildRemoteWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">loc:</span> <span class="pre">locale</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">inType:</span> <span class="pre">Remote(?eltType)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Remote.chpl__buildRemoteWrapper" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chpl__buildRemoteWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">loc:</span> <span class="pre">locale</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">inType:</span> <span class="pre">owned(Remote(?eltType))</span></em>, <em class="sig-param"><span class="pre">in</span> <span class="pre">tr:</span> <span class="pre">_thunkRecord</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chpl__buildRemoteWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">loc:</span> <span class="pre">locale</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">inType:</span> <span class="pre">shared(Remote(?eltType))</span></em>, <em class="sig-param"><span class="pre">in</span> <span class="pre">tr:</span> <span class="pre">_thunkRecord</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 </section>

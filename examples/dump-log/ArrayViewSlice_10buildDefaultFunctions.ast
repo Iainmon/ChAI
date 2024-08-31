@@ -1,0 +1,1337 @@
+AST dump for ArrayViewSlice after pass buildDefaultFunctions.
+Module use list: ChapelStandard Reflection CTypes 
+
+{
+  function chpl__init_ArrayViewSlice[468441]() : void[4] "insert line file info" "module init"
+  {
+    (645983 'init var' chpl_debugSerializeSlice[137400] 0)
+    (645985 'init var' chpl_serializeSlices[137396] 0)
+    (137403 'end of statement')
+    (608920 return _void[46])
+  }
+  unknown chpl_debugSerializeSlice[137400] "config" "param"
+  unknown chpl_serializeSlices[137396] "config" "param"
+  function buildIndexCacheHelper[137404](arg arr[137406]:_any[141](?), arg dom[137408]:_any[141](?)) : _unknown[42] "private"
+  {
+    unknown ret[608468] "RVV" "temp"
+    unknown tmp[487875] "maybe param" "temp"
+    unknown tmp[487896] "maybe param" "temp"
+    (487907 'move' tmp[487896](137423 call(137420 call (partial) isRankChangeArrayView _mt[203] arr[137406])))
+    unknown call_tmp[809356] "expr temp" "maybe param" "maybe type" "temp"
+    (809359 'move' call_tmp[809356](487909 call _cond_invalid tmp[487896]))
+    if call_tmp[809356]
+    {
+      (487912 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[679986] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[679987] "maybe param" "temp"
+    unknown call_tmp[809361] "expr temp" "maybe param" "maybe type" "temp"
+    (809364 'move' call_tmp[809361](487897 call isTrue tmp[487896]))
+    (679992 'move' tmp[679987](679990 call _cond_test call_tmp[809361]))
+    if tmp[679987]
+    {
+      (679997 'move' tmp[679986](679994 '_paramFoldLogical' tmp[679987] 1))
+    }
+    {
+      unknown tmp[679999] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[809368] "expr temp" "maybe param" "maybe type" "temp"
+      (809371 'move' call_tmp[809368](137430 call(137427 call (partial) isReindexArrayView _mt[203] arr[137406])))
+      (680001 'move' tmp[679999](487901 call isTrue call_tmp[809368]))
+      (680006 'move' tmp[679986](680003 '_paramFoldLogical' tmp[679987] tmp[679999]))
+    }
+    (487886 'move' tmp[487875] tmp[679986])
+    unknown call_tmp[809373] "expr temp" "maybe param" "maybe type" "temp"
+    (809376 'move' call_tmp[809373](487888 call _cond_invalid tmp[487875]))
+    if call_tmp[809373]
+    {
+      (487891 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown isRankChangeReindex[137412] "dead at end of block" "param"
+    unknown tmp[680040] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[680041] "maybe param" "temp"
+    unknown call_tmp[809378] "expr temp" "maybe param" "maybe type" "temp"
+    (809381 'move' call_tmp[809378](487876 call isTrue tmp[487875]))
+    (680046 'move' tmp[680041](680044 call _cond_test call_tmp[809378]))
+    if tmp[680041]
+    {
+      (680051 'move' tmp[680040](680048 '_paramFoldLogical' tmp[680041] 1))
+    }
+    {
+      unknown tmp[487917] "maybe param" "temp"
+      (487928 'move' tmp[487917](137434 call chpl__isArrayView arr[137406]))
+      unknown call_tmp[809383] "expr temp" "maybe param" "maybe type" "temp"
+      (809386 'move' call_tmp[809383](487930 call _cond_invalid tmp[487917]))
+      if call_tmp[809383]
+      {
+        (487933 call compilerError "cannot promote short-circuiting && operator")
+      }
+      unknown tmp[680013] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[680014] "maybe param" "temp"
+      unknown call_tmp[809388] "expr temp" "maybe param" "maybe type" "temp"
+      (809391 'move' call_tmp[809388](487918 call isTrue tmp[487917]))
+      (680019 'move' tmp[680014](680017 call _cond_test call_tmp[809388]))
+      if tmp[680014]
+      {
+        unknown tmp[680021] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[809395] "expr temp" "maybe param" "maybe type" "temp"
+        (809398 'move' call_tmp[809395](137442 call(137439 call (partial) _containsRCRE _mt[203] arr[137406])))
+        (680023 'move' tmp[680021](487921 call isTrue call_tmp[809395]))
+        (680028 'move' tmp[680013](680025 '_paramFoldLogical' tmp[680014] tmp[680021]))
+      }
+      {
+        (680033 'move' tmp[680013](680030 '_paramFoldLogical' tmp[680014] 0))
+      }
+      unknown tmp[680053] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (680055 'move' tmp[680053](487880 call isTrue tmp[680013]))
+      (680060 'move' tmp[680040](680057 '_paramFoldLogical' tmp[680041] tmp[680053]))
+    }
+    (645987 'init var' isRankChangeReindex[137412] tmp[680040])
+    (137444 'end of statement')
+    unknown tmp[487938] "maybe param" "temp"
+    (487949 'move' tmp[487938](137490 call chpl__isDROrDRView arr[137406]))
+    unknown call_tmp[809400] "expr temp" "maybe param" "maybe type" "temp"
+    (809403 'move' call_tmp[809400](487951 call _cond_invalid tmp[487938]))
+    if call_tmp[809400]
+    {
+      (487954 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[680067] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[680068] "maybe param" "temp"
+    unknown call_tmp[809405] "expr temp" "maybe param" "maybe type" "temp"
+    (809408 'move' call_tmp[809405](487939 call isTrue tmp[487938]))
+    (680073 'move' tmp[680068](680071 call _cond_test call_tmp[809405]))
+    if tmp[680068]
+    {
+      unknown tmp[680075] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (680077 'move' tmp[680075](487942 call isTrue isRankChangeReindex[137412]))
+      (680082 'move' tmp[680067](680079 '_paramFoldLogical' tmp[680068] tmp[680075]))
+    }
+    {
+      (680087 'move' tmp[680067](680084 '_paramFoldLogical' tmp[680068] 0))
+    }
+    unknown call_tmp[809410] "expr temp" "maybe param" "maybe type" "temp"
+    (809413 'move' call_tmp[809410](137493 call _cond_test tmp[680067]))
+    if call_tmp[809410]
+    {
+      unknown call_tmp[809415] "expr temp" "maybe param" "maybe type" "temp"
+      (809418 'move' call_tmp[809415](137476 call chpl__isArrayView arr[137406]))
+      unknown call_tmp[809420] "expr temp" "maybe param" "maybe type" "temp"
+      (809423 'move' call_tmp[809420](137478 call _cond_test call_tmp[809415]))
+      if call_tmp[809420]
+      {
+        unknown call_tmp[809427] "expr temp" "maybe param" "maybe type" "temp"
+        (809430 'move' call_tmp[809427](137450 call indexCache _mt[203] arr[137406]))
+        unknown call_tmp[809434] "expr temp" "maybe param" "maybe type" "temp"
+        (809437 'move' call_tmp[809434](137458 call(137455 call (partial) toSlice _mt[203] call_tmp[809427]) dom[137408]))
+        (608473 'move' ret[608468](608472 'deref' call_tmp[809434]))
+        gotoReturn _end_buildIndexCacheHelper[608466] _end_buildIndexCacheHelper[608466]
+      }
+      {
+        unknown call_tmp[809441] "expr temp" "maybe param" "maybe type" "temp"
+        (809444 'move' call_tmp[809441](137468 call(137465 call (partial) dsiGetRAD _mt[203] arr[137406])))
+        unknown call_tmp[809448] "expr temp" "maybe param" "maybe type" "temp"
+        (809451 'move' call_tmp[809448](137472 call(137469 call (partial) toSlice _mt[203] call_tmp[809441]) dom[137408]))
+        (608478 'move' ret[608468](608477 'deref' call_tmp[809448]))
+        gotoReturn _end_buildIndexCacheHelper[608466] _end_buildIndexCacheHelper[608466]
+      }
+    }
+    {
+      (608483 'move' ret[608468](608482 'deref' 0))
+      gotoReturn _end_buildIndexCacheHelper[608466] _end_buildIndexCacheHelper[608466]
+    }
+    label _end_buildIndexCacheHelper[608466]
+    (608470 return ret[608468])
+  }
+  function ArrayViewSliceArr[138922](?).init[137521](arg _mt[137535]:_MT[201], arg this[137523]:ArrayViewSliceArr[138922](?), arg eltType[137525]:_any[141](?), const arg _DomPid[137527]:_any[141](?), const arg dom[137529]:_any[141](?), const arg _ArrPid[137531]:_any[141](?), const arg _ArrInstance[137533]:_any[141](?)) : void[4] "method" "primary method" "no return value for void"
+  {
+    unknown super_tmp[525707] "temporary of super field" "temp"
+    (525709 'move' super_tmp[525707](525706 '.v' this[137523] c"super"))
+    (137542 call(137539 call (partial) init _mt[203] super_tmp[525707])(eltType = eltType[137525]))
+    (554192 'end of statement')
+    unknown tmp[525712] "temp" "type variable"
+    { scopeless type
+      unknown call_type_tmp[577635] "expr temp" "maybe type" "temp" "type variable"
+      unknown call_tmp[809455] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (809458 'move' call_tmp[809455](525714 '.v' this[137523] c"super"))
+      (577639 'move' call_type_tmp[577635](525717 'typeof' call_tmp[809455]))
+    }
+    (525718 'move' tmp[525712] call_type_tmp[577635])
+    unknown call_tmp[809460] "maybe param" "maybe type" "temp"
+    (809463 'move' call_tmp[809460](525723 'cast' tmp[525712] this[137523]))
+    unknown chpl__thisAsParent[525720] "dead at end of block" "insert auto destroy" "temp"
+    (645989 'init var' chpl__thisAsParent[525720] call_tmp[809460] tmp[525712])
+    (525726 'setcid' chpl__thisAsParent[525720])
+    (554193 'end of statement')
+    const _DomPid[525728] "const" "temp"
+    (525730 'init var' _DomPid[525728] _DomPid[137527])
+    (525732 'init field' this[137523] c"_DomPid" _DomPid[525728])
+    (554194 'end of statement')
+    unknown dom[525736] "temp"
+    (525738 'init var' dom[525736] dom[137529])
+    (525740 'init field' this[137523] c"dom" dom[525736])
+    (554195 'end of statement')
+    const _ArrPid[525744] "const" "temp"
+    (525746 'init var' _ArrPid[525744] _ArrPid[137531])
+    (525748 'init field' this[137523] c"_ArrPid" _ArrPid[525744])
+    (554196 'end of statement')
+    const _ArrInstance[525752] "const" "temp"
+    (525754 'init var' _ArrInstance[525752] _ArrInstance[137533])
+    (525756 'init field' this[137523] c"_ArrInstance" _ArrInstance[525752])
+    (554197 'end of statement')
+    unknown call_tmp[809465] "maybe param" "maybe type" "temp"
+    (809468 'move' call_tmp[809465](137586 call buildIndexCacheHelper _ArrInstance[137533] dom[137529]))
+    const indexCache[525760] "const" "temp"
+    (525762 'init var' indexCache[525760] call_tmp[809465])
+    (525764 'init field' this[137523] c"indexCache" indexCache[525760])
+    (554198 'end of statement')
+    (525768 'setcid' this[137523])
+    (608487 return _void[46])
+  }
+  function ArrayViewSliceArr[138922](?).chpl_forwarding_expr1[137592](arg _mt[137597]:_MT[201], arg this[137595]:ArrayViewSliceArr[138922](?)) : _unknown[42] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    unknown ret[608491] "RVV" "temp"
+    (608495 'move' ret[608491](430977 call arr _mt[203] this[137595]))
+    (608493 return ret[608491])
+  }
+  function ArrayViewSliceArr[138922](?).chpl__rvfMe[137611](arg _mt[137615]:_MT[201], arg this[137613]:ArrayViewSliceArr[138922](?)) param : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608499] "RVV" "param" "temp"
+    unknown call_tmp[809472] "expr temp" "maybe param" "maybe type" "temp"
+    (809475 'move' call_tmp[809472](137624 call == chpl_serializeSlices[137396] 0))
+    unknown call_tmp[809477] "expr temp" "maybe param" "maybe type" "temp"
+    (809480 'move' call_tmp[809477](137628 call _cond_test call_tmp[809472]))
+    if call_tmp[809477]
+    {
+      (608504 'move' ret[608499](608503 'deref' 0))
+      gotoReturn _end_chpl__rvfMe[608497] _end_chpl__rvfMe[608497]
+    }
+    unknown tmp[487959] "maybe param" "temp"
+    unknown tmp[487980] "maybe param" "temp"
+    unknown tmp[488001] "maybe param" "temp"
+    unknown call_tmp[809484] "expr temp" "maybe param" "maybe type" "temp"
+    (809487 'move' call_tmp[809484](402587 call dom _mt[203] this[137613]))
+    (488012 'move' tmp[488001](137651 call(137648 call (partial) dsiSupportsPrivatization _mt[203] call_tmp[809484])))
+    unknown call_tmp[809491] "expr temp" "maybe param" "maybe type" "temp"
+    (809494 'move' call_tmp[809491](488014 call _cond_invalid tmp[488001]))
+    if call_tmp[809491]
+    {
+      (488017 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[680094] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[680095] "maybe param" "temp"
+    unknown call_tmp[809496] "expr temp" "maybe param" "maybe type" "temp"
+    (809499 'move' call_tmp[809496](488002 call isTrue tmp[488001]))
+    (680100 'move' tmp[680095](680098 call _cond_test call_tmp[809496]))
+    if tmp[680095]
+    {
+      unknown tmp[680102] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[809503] "expr temp" "maybe param" "maybe type" "temp"
+      (809506 'move' call_tmp[809503](402591 call arr _mt[203] this[137613]))
+      unknown call_tmp[809510] "expr temp" "maybe param" "maybe type" "temp"
+      (809513 'move' call_tmp[809510](137656 call(137653 call (partial) dsiSupportsPrivatization _mt[203] call_tmp[809503])))
+      (680104 'move' tmp[680102](488005 call isTrue call_tmp[809510]))
+      (680109 'move' tmp[680094](680106 '_paramFoldLogical' tmp[680095] tmp[680102]))
+    }
+    {
+      (680114 'move' tmp[680094](680111 '_paramFoldLogical' tmp[680095] 0))
+    }
+    (487991 'move' tmp[487980] tmp[680094])
+    unknown call_tmp[809515] "expr temp" "maybe param" "maybe type" "temp"
+    (809518 'move' call_tmp[809515](487993 call _cond_invalid tmp[487980]))
+    if call_tmp[809515]
+    {
+      (487996 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[680121] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[680122] "maybe param" "temp"
+    unknown call_tmp[809520] "expr temp" "maybe param" "maybe type" "temp"
+    (809523 'move' call_tmp[809520](487981 call isTrue tmp[487980]))
+    (680127 'move' tmp[680122](680125 call _cond_test call_tmp[809520]))
+    if tmp[680122]
+    {
+      unknown tmp[680129] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[809527] "expr temp" "maybe param" "maybe type" "temp"
+      (809530 'move' call_tmp[809527](430983 call dom _mt[203] this[137613]))
+      unknown call_tmp[809532] "expr temp" "maybe param" "maybe type" "temp"
+      (809535 'move' call_tmp[809532](137658 call canResolveMethod call_tmp[809527] "chpl__serialize"))
+      (680131 'move' tmp[680129](487984 call isTrue call_tmp[809532]))
+      (680136 'move' tmp[680121](680133 '_paramFoldLogical' tmp[680122] tmp[680129]))
+    }
+    {
+      (680141 'move' tmp[680121](680138 '_paramFoldLogical' tmp[680122] 0))
+    }
+    (487970 'move' tmp[487959] tmp[680121])
+    unknown call_tmp[809537] "expr temp" "maybe param" "maybe type" "temp"
+    (809540 'move' call_tmp[809537](487972 call _cond_invalid tmp[487959]))
+    if call_tmp[809537]
+    {
+      (487975 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[680148] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[680149] "maybe param" "temp"
+    unknown call_tmp[809542] "expr temp" "maybe param" "maybe type" "temp"
+    (809545 'move' call_tmp[809542](487960 call isTrue tmp[487959]))
+    (680154 'move' tmp[680149](680152 call _cond_test call_tmp[809542]))
+    if tmp[680149]
+    {
+      unknown tmp[680156] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[809549] "expr temp" "maybe param" "maybe type" "temp"
+      (809552 'move' call_tmp[809549](430987 call arr _mt[203] this[137613]))
+      unknown call_tmp[809554] "expr temp" "maybe param" "maybe type" "temp"
+      (809557 'move' call_tmp[809554](137664 call canResolveMethod call_tmp[809549] "chpl__serialize"))
+      (680158 'move' tmp[680156](487963 call isTrue call_tmp[809554]))
+      (680163 'move' tmp[680148](680160 '_paramFoldLogical' tmp[680149] tmp[680156]))
+    }
+    {
+      (680168 'move' tmp[680148](680165 '_paramFoldLogical' tmp[680149] 0))
+    }
+    unknown call_tmp[809559] "expr temp" "maybe param" "maybe type" "temp"
+    (809562 'move' call_tmp[809559](137667 call _cond_test tmp[680148]))
+    if call_tmp[809559]
+    {
+      (608509 'move' ret[608499](608508 'deref' 1))
+      gotoReturn _end_chpl__rvfMe[608497] _end_chpl__rvfMe[608497]
+    }
+    {
+      (608514 'move' ret[608499](608513 'deref' 0))
+      gotoReturn _end_chpl__rvfMe[608497] _end_chpl__rvfMe[608497]
+    }
+    label _end_chpl__rvfMe[608497]
+    (608501 return ret[608499])
+    (396162 'used modules list'(137619 'use' Reflection[1804]))
+  }
+  function ArrayViewSliceArr[138922](?).chpl__serialize[137673](arg _mt[137677]:_MT[201], arg this[137675]:ArrayViewSliceArr[138922](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608520] "RVV" "temp"
+    unknown call_tmp[809564] "expr temp" "maybe param" "maybe type" "temp"
+    (809567 'move' call_tmp[809564](137707 call _cond_test chpl_debugSerializeSlice[137400]))
+    if call_tmp[809564]
+    {
+      function printf[137686](arg x[137689]:_any[141](?) ...) : void[4] "extern" "local args" "no fn body"
+      {
+      }
+      unknown call_tmp[809569] "expr temp" "maybe param" "maybe type" "temp"
+      (809572 'move' call_tmp[809569](402594 call here[135591]))
+      unknown call_tmp[809576] "expr temp" "maybe param" "maybe type" "temp"
+      (809579 'move' call_tmp[809576](137702 call id _mt[203] call_tmp[809569]))
+      unknown call_tmp[809581] "expr temp" "maybe param" "maybe type" "temp"
+      (809584 'move' call_tmp[809581](137699 call : call_tmp[809576] c_int[522]))
+      (137695 call printf "%d serializing a slice\n" call_tmp[809581])
+    }
+    unknown call_tmp[809588] "expr temp" "maybe param" "maybe type" "temp"
+    (809591 'move' call_tmp[809588](430998 call dom _mt[203] this[137675]))
+    unknown call_tmp[809593] "expr temp" "maybe param" "maybe type" "temp"
+    (809596 'move' call_tmp[809593](137714 call _to_borrowed call_tmp[809588]))
+    unknown call_tmp[809600] "expr temp" "maybe param" "maybe type" "temp"
+    (809603 'move' call_tmp[809600](137721 call(137718 call (partial) chpl__serialize _mt[203] call_tmp[809593])))
+    unknown call_tmp[809607] "expr temp" "maybe param" "maybe type" "temp"
+    (809610 'move' call_tmp[809607](431002 call arr _mt[203] this[137675]))
+    unknown call_tmp[809612] "expr temp" "maybe param" "maybe type" "temp"
+    (809615 'move' call_tmp[809612](137723 call _to_borrowed call_tmp[809607]))
+    unknown call_tmp[809619] "expr temp" "maybe param" "maybe type" "temp"
+    (809622 'move' call_tmp[809619](137728 call(137725 call (partial) chpl__serialize _mt[203] call_tmp[809612])))
+    unknown call_tmp[809624] "expr temp" "maybe param" "maybe type" "temp"
+    (809627 'move' call_tmp[809624](137729 call _build_tuple call_tmp[809600] call_tmp[809619]))
+    (608525 'move' ret[608520](608524 'deref' call_tmp[809624]))
+    (608522 return ret[608520])
+    (396164 'used modules list'(137683 'use' CTypes[51217]))
+  }
+  where {
+    (137680 call(430991 call (partial) chpl__rvfMe _mt[203] this[137675]))
+  }
+  function ArrayViewSliceArr[467882](?).chpl__deserialize[137734](arg _mt[137740]:_MT[201], arg this[137736]:ArrayViewSliceArr[467882](?), arg data[137738]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608529] "RVV" "temp"
+    unknown domType[137744] "dead at end of block" "insert auto destroy" "type variable"
+    (645994 'move' domType[137744](645991 'static field type' this[137736] "dom"))
+    unknown arrType[137750] "dead at end of block" "insert auto destroy" "type variable"
+    (645999 'move' arrType[137750](645996 'static field type' this[137736] "_ArrInstance"))
+    unknown call_tmp[809631] "expr temp" "maybe param" "maybe type" "temp"
+    (809634 'move' call_tmp[809631](137760 call _to_borrowed domType[137744]))
+    unknown call_tmp[809638] "expr temp" "maybe param" "maybe type" "temp"
+    (809641 'move' call_tmp[809638](137769 call data[137738] 0))
+    unknown call_tmp[809643] "maybe param" "maybe type" "temp"
+    (809646 'move' call_tmp[809643](137767 call(137764 call (partial) chpl__deserialize _mt[203] call_tmp[809631]) call_tmp[809638]))
+    const dom[137758] "dead at end of block" "const" "insert auto destroy"
+    (646001 'init var' dom[137758] call_tmp[809643])
+    (137772 'end of statement')
+    unknown call_tmp[809648] "expr temp" "maybe param" "maybe type" "temp"
+    (809651 'move' call_tmp[809648](137776 call _to_borrowed arrType[137750]))
+    unknown call_tmp[809655] "expr temp" "maybe param" "maybe type" "temp"
+    (809658 'move' call_tmp[809655](137783 call data[137738] 1))
+    unknown call_tmp[809660] "maybe param" "maybe type" "temp"
+    (809663 'move' call_tmp[809660](137781 call(137778 call (partial) chpl__deserialize _mt[203] call_tmp[809648]) call_tmp[809655]))
+    const arr[137774] "dead at end of block" "const" "insert auto destroy"
+    (646003 'init var' arr[137774] call_tmp[809660])
+    (137786 'end of statement' domType[137744] arrType[137750])
+    unknown call_tmp[809667] "expr temp" "maybe param" "maybe type" "temp"
+    (809670 'move' call_tmp[809667](137794 call eltType _mt[203] arr[137774]))
+    unknown call_tmp[809672] "expr temp" "maybe param" "maybe type" "temp"
+    (809675 'move' call_tmp[809672](137799 call data[137738] 0))
+    unknown call_tmp[809677] "expr temp" "maybe param" "maybe type" "temp"
+    (809680 'move' call_tmp[809677](137805 call data[137738] 1))
+    unknown call_tmp[809682] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (809685 'move' call_tmp[809682](1000127 'new' ArrayViewSliceArr[431012](?)(eltType = call_tmp[809667])(_DomPid = call_tmp[809672])(dom = dom[137758])(_ArrPid = call_tmp[809677])(_ArrInstance = arr[137774])(_chpl_manager = unmanaged[183](?))))
+    (608534 'move' ret[608529](608533 'deref' call_tmp[809682]))
+    gotoReturn _end_chpl__deserialize[608527] _end_chpl__deserialize[608527]
+    (554210 'end of statement' arr[137774] dom[137758])
+    label _end_chpl__deserialize[608527]
+    (608531 return ret[608529])
+  }
+  function ArrayViewSliceArr[467882](?).idxType[137812](arg _mt[137816]:_MT[201], arg this[137814]:ArrayViewSliceArr[467882](?)) type : _unknown[42] "method" "primary method" "no parens"
+  {
+    unknown ret[608540] "RVV" "temp" "type variable"
+    unknown call_tmp[809689] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (809692 'move' call_tmp[809689](402599 call dom _mt[203] this[137814]))
+    unknown call_tmp[809696] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (809699 'move' call_tmp[809696](137821 call idxType _mt[203] call_tmp[809689]))
+    (608545 'move' ret[608540](608544 'deref' call_tmp[809696]))
+    (608542 return ret[608540])
+  }
+  function ArrayViewSliceArr[467882](?).rank[137826](arg _mt[137830]:_MT[201], arg this[137828]:ArrayViewSliceArr[467882](?)) param : _unknown[42] "method" "primary method" "no parens"
+  {
+    unknown ret[608549] "RVV" "param" "temp"
+    unknown call_tmp[809703] "expr temp" "maybe param" "maybe type" "temp"
+    (809706 'move' call_tmp[809703](402603 call arr _mt[203] this[137828]))
+    unknown call_tmp[809710] "expr temp" "maybe param" "maybe type" "temp"
+    (809713 'move' call_tmp[809710](137835 call rank _mt[203] call_tmp[809703]))
+    (608554 'move' ret[608549](608553 'deref' call_tmp[809710]))
+    (608551 return ret[608549])
+  }
+  function ArrayViewSliceArr[138922](?).isSliceArrayView[137840](arg _mt[137844]:_MT[201], arg this[137842]:ArrayViewSliceArr[138922](?)) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[608558] "RVV" "param" "temp"
+    (608563 'move' ret[608558](608562 'deref' 1))
+    (608560 return ret[608558])
+  }
+  function ArrayViewSliceArr[138922](?).these[137851](arg _mt[137855]:_MT[201], arg this[137853]:ArrayViewSliceArr[138922](?)) ref : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    unknown ret[608567] "RVV" "temp"
+    {
+      unknown _indexOfInterest[137867] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[137868] "expr temp" "temp"
+      unknown call_tmp[809717] "expr temp" "maybe param" "maybe type" "temp"
+      (809720 'move' call_tmp[809717](431021 call privDom _mt[203] this[137853]))
+      unknown call_tmp[809722] "expr temp" "maybe param" "maybe type" "temp"
+      (809725 'move' call_tmp[809722](137861 call chpl__serialViewIter this[137853] call_tmp[809717]))
+      (137877 'move' _iterator[137868](137875 call _getIterator call_tmp[809722]))
+      Defer
+      {
+        {
+          (137892 call _freeIterator _iterator[137868])
+        }
+      }
+      { scopeless type
+        (137882 'move' _indexOfInterest[137867](137879 call iteratorIndex _iterator[137868]))
+      }
+      ForLoop[137869]
+      {
+        unknown elem[137858] "index var" "insert auto destroy"
+        (554217 'end of statement')
+        (137887 'move' elem[137858] _indexOfInterest[137867])
+        (554218 'end of statement' elem[137858])
+        ref yret[608571] "YVV" "temp"
+        (608574 'move' yret[608571](608573 'addr of' elem[137858]))
+        (137864 yield yret[608571])
+        (554220 'end of statement' elem[137858])
+        label _continueLabel[137872]
+        _indexOfInterest[137867]
+        _iterator[137868]
+      }
+      label _breakLabel[137873]
+    }
+    (608569 return ret[608567])
+  }
+  function ArrayViewSliceArr[138922](?).these[137901](arg _mt[137909]:_MT[201], arg this[137903]:ArrayViewSliceArr[138922](?), param arg tag[137906]:iterKind[52144]) ref : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    unknown ret[608579] "RVV" "temp"
+    const myarr[137934] "dead at end of block" "const" "ref var"
+    (646008 'init ref decl' myarr[137934])
+    unknown call_tmp[809729] "expr temp" "maybe param" "maybe type" "temp"
+    (809732 'move' call_tmp[809729](431030 call arr _mt[203] this[137903]))
+    (646006 'move' myarr[137934](646005 'addr of' call_tmp[809729]))
+    (137937 'end of statement')
+    unknown call_tmp[469198] "expr temp" "maybe param" "maybe type" "temp"
+    (469201 'move' call_tmp[469198](431034 call privDom _mt[203] this[137903]))
+    Forall[137953] {
+      induction variables:
+        
+        unknown i[137938] "index var" "insert auto destroy"
+      iterated expressions:
+        call_tmp[469198]
+      shadow variables:
+      other variables
+        forall body
+      {
+        ref yret[608583] "YVV" "temp"
+        unknown call_tmp[809738] "expr temp" "maybe param" "maybe type" "temp"
+        (809741 'move' call_tmp[809738](137948 call(137945 call (partial) dsiAccess _mt[203] myarr[137934]) i[137938]))
+        (608586 'move' yret[608583](608585 'addr of' call_tmp[809738]))
+        (137941 yield yret[608583])
+        (554222 'end of statement' myarr[137934] i[137938])
+      }
+    }
+    (608581 return ret[608579])
+  }
+  where {
+    unknown tmp[488022] "maybe param" "temp"
+    unknown tmp[488043] "maybe param" "temp"
+    (488054 'move' tmp[488043](137915 call == tag[137906] standalone[52142]))
+    unknown call_tmp[809743] "expr temp" "maybe param" "maybe type" "temp"
+    (809746 'move' call_tmp[809743](488056 call _cond_invalid tmp[488043]))
+    if call_tmp[809743]
+    {
+      (488059 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[680175] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[680176] "maybe param" "temp"
+    unknown call_tmp[809748] "expr temp" "maybe param" "maybe type" "temp"
+    (809751 'move' call_tmp[809748](488044 call isTrue tmp[488043]))
+    (680181 'move' tmp[680176](680179 call _cond_test call_tmp[809748]))
+    if tmp[680176]
+    {
+      unknown tmp[680183] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[809753] "expr temp" "maybe param" "maybe type" "temp"
+      (809756 'move' call_tmp[809753](137922 call ! localeModelHasSublocales[306867]))
+      (680185 'move' tmp[680183](488047 call isTrue call_tmp[809753]))
+      (680190 'move' tmp[680175](680187 '_paramFoldLogical' tmp[680176] tmp[680183]))
+    }
+    {
+      (680195 'move' tmp[680175](680192 '_paramFoldLogical' tmp[680176] 0))
+    }
+    (488033 'move' tmp[488022] tmp[680175])
+    unknown call_tmp[809758] "expr temp" "maybe param" "maybe type" "temp"
+    (809761 'move' call_tmp[809758](488035 call _cond_invalid tmp[488022]))
+    if call_tmp[809758]
+    {
+      (488038 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[680202] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[680203] "maybe param" "temp"
+    unknown call_tmp[809763] "expr temp" "maybe param" "maybe type" "temp"
+    (809766 'move' call_tmp[809763](488023 call isTrue tmp[488022]))
+    (680208 'move' tmp[680203](680206 call _cond_test call_tmp[809763]))
+    if tmp[680203]
+    {
+      unknown tmp[680210] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[809768] "expr temp" "maybe param" "maybe type" "temp"
+      (809771 'move' call_tmp[809768](137925 'resolves'(137930 call(137927 call .(402610 call . this[137903] c"privDom") c"these") tag[137906])))
+      (680212 'move' tmp[680210](488026 call isTrue call_tmp[809768]))
+      (680217 'move' tmp[680202](680214 '_paramFoldLogical' tmp[680203] tmp[680210]))
+    }
+    {
+      (680222 'move' tmp[680202](680219 '_paramFoldLogical' tmp[680203] 0))
+    }
+    (1001430 call chpl_statementLevelSymbol tmp[680202])
+  }
+  function ArrayViewSliceArr[138922](?).these[137959](arg _mt[137967]:_MT[201], arg this[137961]:ArrayViewSliceArr[138922](?), param arg tag[137964]:iterKind[52144]) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    unknown ret[608591] "RVV" "temp"
+    {
+      unknown _indexOfInterest[137988] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[137989] "expr temp" "temp"
+      unknown call_tmp[809775] "expr temp" "maybe param" "maybe type" "temp"
+      (809778 'move' call_tmp[809775](402616 call privDom _mt[203] this[137961]))
+      unknown call_tmp[809782] "expr temp" "maybe param" "maybe type" "temp"
+      (809785 'move' call_tmp[809782](137983 call(137980 call (partial) these _mt[203] call_tmp[809775]) tag[137964]))
+      (137998 'move' _iterator[137989](137996 call _getIterator call_tmp[809782]))
+      Defer
+      {
+        {
+          (138013 call _freeIterator _iterator[137989])
+        }
+      }
+      { scopeless type
+        (138003 'move' _indexOfInterest[137988](138000 call iteratorIndex _iterator[137989]))
+      }
+      ForLoop[137990]
+      {
+        unknown followThis[137977] "index var" "insert auto destroy"
+        (554226 'end of statement')
+        (138008 'move' followThis[137977] _indexOfInterest[137988])
+        (554227 'end of statement' followThis[137977])
+        {
+          unknown yret[608595] "YVV" "temp"
+          (608598 'move' yret[608595](608597 'deref' followThis[137977]))
+          (137986 yield yret[608595])
+          (554229 'end of statement' followThis[137977])
+        }
+        label _continueLabel[137993]
+        _indexOfInterest[137988]
+        _iterator[137989]
+      }
+      label _breakLabel[137994]
+    }
+    (608593 return ret[608591])
+  }
+  where {
+    (137969 call == tag[137964] leader[52138])
+  }
+  function ArrayViewSliceArr[138922](?).these[138023](arg _mt[138033]:_MT[201], arg this[138025]:ArrayViewSliceArr[138922](?), param arg tag[138028]:iterKind[52144], arg followThis[138031]:_any[141](?)) ref : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    unknown ret[608603] "RVV" "temp"
+    const myarr[138044] "dead at end of block" "const" "ref var"
+    (646013 'init ref decl' myarr[138044])
+    unknown call_tmp[809789] "expr temp" "maybe param" "maybe type" "temp"
+    (809792 'move' call_tmp[809789](431045 call arr _mt[203] this[138025]))
+    (646011 'move' myarr[138044](646010 'addr of' call_tmp[809789]))
+    (138047 'end of statement')
+    {
+      unknown _indexOfInterest[138067] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[138068] "expr temp" "temp"
+      unknown call_tmp[809796] "expr temp" "maybe param" "maybe type" "temp"
+      (809799 'move' call_tmp[809796](402621 call privDom _mt[203] this[138025]))
+      unknown call_tmp[809803] "expr temp" "maybe param" "maybe type" "temp"
+      (809806 'move' call_tmp[809803](138054 call(138051 call (partial) these _mt[203] call_tmp[809796]) tag[138028] followThis[138031]))
+      (138077 'move' _iterator[138068](138075 call _getIterator call_tmp[809803]))
+      Defer
+      {
+        {
+          (138092 call _freeIterator _iterator[138068])
+        }
+      }
+      { scopeless type
+        (138082 'move' _indexOfInterest[138067](138079 call iteratorIndex _iterator[138068]))
+      }
+      ForLoop[138069] order-independent
+      {
+        unknown i[138048] "index var" "insert auto destroy"
+        (554232 'end of statement')
+        (138087 'move' i[138048] _indexOfInterest[138067])
+        (554233 'end of statement' i[138048])
+        {
+          ref yret[608607] "YVV" "temp"
+          unknown call_tmp[809810] "expr temp" "maybe param" "maybe type" "temp"
+          (809813 'move' call_tmp[809810](138063 call(138060 call (partial) dsiAccess _mt[203] myarr[138044]) i[138048]))
+          (608610 'move' yret[608607](608609 'addr of' call_tmp[809810]))
+          (138058 yield yret[608607])
+          (554235 'end of statement' myarr[138044] i[138048])
+        }
+        label _continueLabel[138072]
+        _indexOfInterest[138067]
+        _iterator[138068]
+      }
+      label _breakLabel[138073]
+    }
+    (608605 return ret[608603])
+  }
+  where {
+    (138035 call == tag[138028] follower[52140])
+  }
+  function ArrayViewSliceArr[138922](?).dsiSerialWrite[138102](arg _mt[138108]:_MT[201], arg this[138104]:ArrayViewSliceArr[138922](?), arg f[138106]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[809817] "expr temp" "maybe param" "maybe type" "temp"
+    (809820 'move' call_tmp[809817](431070 call privDom _mt[203] this[138104]))
+    unknown call_tmp[809822] "expr temp" "maybe param" "maybe type" "temp"
+    (809825 'move' call_tmp[809822](138124 call chpl_isAssociativeDomClass call_tmp[809817]))
+    unknown call_tmp[809827] "expr temp" "maybe param" "maybe type" "temp"
+    (809830 'move' call_tmp[809827](138126 call _cond_test call_tmp[809822]))
+    if call_tmp[809827]
+    {
+      unknown call_tmp[809834] "expr temp" "maybe param" "maybe type" "temp"
+      (809837 'move' call_tmp[809834](431053 call arr _mt[203] this[138104]))
+      unknown call_tmp[809841] "expr temp" "maybe param" "maybe type" "temp"
+      (809844 'move' call_tmp[809841](431057 call privDom _mt[203] this[138104]))
+      (138112 call chpl_serialReadWriteAssociativeHelper f[138106] call_tmp[809834] call_tmp[809841])
+    }
+    {
+      unknown call_tmp[809848] "expr temp" "maybe param" "maybe type" "temp"
+      (809851 'move' call_tmp[809848](431062 call arr _mt[203] this[138104]))
+      unknown call_tmp[809855] "expr temp" "maybe param" "maybe type" "temp"
+      (809858 'move' call_tmp[809855](431066 call privDom _mt[203] this[138104]))
+      (138118 call chpl_serialReadWriteRectangular f[138106] call_tmp[809848] call_tmp[809855])
+    }
+    (608613 return _void[46])
+  }
+  function ArrayViewSliceArr[138922](?).dsiSerialRead[138134](arg _mt[138140]:_MT[201], arg this[138136]:ArrayViewSliceArr[138922](?), arg f[138138]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[809862] "expr temp" "maybe param" "maybe type" "temp"
+    (809865 'move' call_tmp[809862](431092 call privDom _mt[203] this[138136]))
+    unknown call_tmp[809867] "expr temp" "maybe param" "maybe type" "temp"
+    (809870 'move' call_tmp[809867](138156 call chpl_isAssociativeDomClass call_tmp[809862]))
+    unknown call_tmp[809872] "expr temp" "maybe param" "maybe type" "temp"
+    (809875 'move' call_tmp[809872](138158 call _cond_test call_tmp[809867]))
+    if call_tmp[809872]
+    {
+      unknown call_tmp[809879] "expr temp" "maybe param" "maybe type" "temp"
+      (809882 'move' call_tmp[809879](431075 call arr _mt[203] this[138136]))
+      unknown call_tmp[809886] "expr temp" "maybe param" "maybe type" "temp"
+      (809889 'move' call_tmp[809886](431079 call privDom _mt[203] this[138136]))
+      (138144 call chpl_serialReadWriteAssociativeHelper f[138138] call_tmp[809879] call_tmp[809886])
+    }
+    {
+      unknown call_tmp[809893] "expr temp" "maybe param" "maybe type" "temp"
+      (809896 'move' call_tmp[809893](431084 call arr _mt[203] this[138136]))
+      unknown call_tmp[809900] "expr temp" "maybe param" "maybe type" "temp"
+      (809903 'move' call_tmp[809900](431088 call privDom _mt[203] this[138136]))
+      (138150 call chpl_serialReadWriteRectangular f[138138] call_tmp[809893] call_tmp[809900])
+    }
+    (608615 return _void[46])
+  }
+  function ArrayViewSliceArr[138922](?).dsiDisplayRepresentation[138166](arg _mt[138170]:_MT[201], arg this[138168]:ArrayViewSliceArr[138922](?)) : _unknown[42] "method" "primary method" "method overrides" "no return value for void"
+  {
+    (138174 call writeln "Slice view")
+    (554242 'end of statement')
+    (138179 call writeln "----------")
+    (554243 'end of statement')
+    (138184 call writeln "of domain:")
+    (554244 'end of statement')
+    unknown call_tmp[809907] "expr temp" "maybe param" "maybe type" "temp"
+    (809910 'move' call_tmp[809907](402626 call privDom _mt[203] this[138168]))
+    (138192 call(138189 call (partial) dsiDisplayRepresentation _mt[203] call_tmp[809907]))
+    (554245 'end of statement')
+    (138194 call writeln "on array:")
+    (554246 'end of statement')
+    unknown call_tmp[809916] "expr temp" "maybe param" "maybe type" "temp"
+    (809919 'move' call_tmp[809916](402630 call arr _mt[203] this[138168]))
+    (138202 call(138199 call (partial) dsiDisplayRepresentation _mt[203] call_tmp[809916]))
+    (554247 'end of statement')
+    (138204 call writeln "----------")
+    (608617 return _void[46])
+  }
+  function ArrayViewSliceArr[138922](?).dsiAccess[138208](arg _mt[138218]:_MT[201], arg this[138210]:ArrayViewSliceArr[138922](?), arg i[138214] ... :
+  (431096 call idxType _mt[203] this[138210])) ref : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[608621] "RVV" "temp"
+    unknown call_tmp[809929] "expr temp" "maybe param" "maybe type" "temp"
+    (809932 'move' call_tmp[809929](138223 call(431104 call (partial) dsiAccess _mt[203] this[138210]) i[138214]))
+    (608626 'move' ret[608621](608625 'addr of' call_tmp[809929]))
+    (608623 return ret[608621])
+  }
+  function ArrayViewSliceArr[138922](?).dsiAccess[138227](arg _mt[138237]:_MT[201], arg this[138229]:ArrayViewSliceArr[138922](?), arg i[138233] ... :
+  (431109 call idxType _mt[203] this[138229])) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[608630] "RVV" "temp"
+    unknown call_tmp[809940] "expr temp" "maybe param" "maybe type" "temp"
+    (809943 'move' call_tmp[809940](138245 call(431122 call (partial) dsiAccess _mt[203] this[138229]) i[138233]))
+    (608635 'move' ret[608630](608634 'deref' call_tmp[809940]))
+    (608632 return ret[608630])
+  }
+  where {
+    unknown call_tmp[809947] "expr temp" "maybe param" "maybe type" "temp"
+    (809950 'move' call_tmp[809947](431118 call eltType _mt[203] this[138229]))
+    (138240 call shouldReturnRvalueByValue call_tmp[809947])
+  }
+  function ArrayViewSliceArr[138922](?).dsiAccess[138250](arg _mt[138260]:_MT[201], arg this[138252]:ArrayViewSliceArr[138922](?), arg i[138256] ... :
+  (431127 call idxType _mt[203] this[138252])) const ref : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[608639] "RVV" "temp"
+    unknown call_tmp[809958] "expr temp" "maybe param" "maybe type" "temp"
+    (809961 'move' call_tmp[809958](138265 call(431135 call (partial) dsiAccess _mt[203] this[138252]) i[138256]))
+    (608644 'move' ret[608639](608643 'addr of' call_tmp[809958]))
+    (608641 return ret[608639])
+  }
+  function ArrayViewSliceArr[138922](?).dsiAccess[138269](arg _mt[138275]:_MT[201], arg this[138271]:ArrayViewSliceArr[138922](?), arg i[138273]:_any[141](?)) ref : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[608648] "RVV" "temp"
+    unknown call_tmp[809965] "expr temp" "maybe param" "maybe type" "temp"
+    (809968 'move' call_tmp[809965](138309 call(431143 call (partial) shouldUseIndexCache _mt[203] this[138271])))
+    unknown call_tmp[809970] "expr temp" "maybe param" "maybe type" "temp"
+    (809973 'move' call_tmp[809970](138310 call _cond_test call_tmp[809965]))
+    if call_tmp[809970]
+    {
+      unknown call_tmp[809977] "expr temp" "maybe param" "maybe type" "temp"
+      (809980 'move' call_tmp[809977](402635 call indexCache _mt[203] this[138271]))
+      unknown call_tmp[809984] "maybe param" "maybe type" "temp"
+      (809987 'move' call_tmp[809984](138287 call(138284 call (partial) getDataIndex _mt[203] call_tmp[809977]) i[138273]))
+      const dataIdx[138280] "dead at end of block" "const" "insert auto destroy"
+      (646015 'init var' dataIdx[138280] call_tmp[809984])
+      (138290 'end of statement')
+      unknown call_tmp[809991] "expr temp" "maybe param" "maybe type" "temp"
+      (809994 'move' call_tmp[809991](402640 call indexCache _mt[203] this[138271]))
+      unknown call_tmp[809998] "expr temp" "maybe param" "maybe type" "temp"
+      (810001 'move' call_tmp[809998](138298 call(138295 call (partial) getDataElem _mt[203] call_tmp[809991]) dataIdx[138280]))
+      (608653 'move' ret[608648](608652 'addr of' call_tmp[809998]))
+      gotoReturn _end_dsiAccess[608646] _end_dsiAccess[608646]
+      (554252 'end of statement' dataIdx[138280])
+    }
+    {
+      unknown call_tmp[810005] "expr temp" "maybe param" "maybe type" "temp"
+      (810008 'move' call_tmp[810005](402644 call arr _mt[203] this[138271]))
+      unknown call_tmp[810012] "expr temp" "maybe param" "maybe type" "temp"
+      (810015 'move' call_tmp[810012](138306 call(138303 call (partial) dsiAccess _mt[203] call_tmp[810005]) i[138273]))
+      (608658 'move' ret[608648](608657 'addr of' call_tmp[810012]))
+      gotoReturn _end_dsiAccess[608646] _end_dsiAccess[608646]
+    }
+    label _end_dsiAccess[608646]
+    (608650 return ret[608648])
+  }
+  function ArrayViewSliceArr[138922](?).dsiAccess[138316](arg _mt[138322]:_MT[201], arg this[138318]:ArrayViewSliceArr[138922](?), arg i[138320]:_any[141](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[608664] "RVV" "temp"
+    unknown call_tmp[810019] "expr temp" "maybe param" "maybe type" "temp"
+    (810022 'move' call_tmp[810019](138355 call(431155 call (partial) shouldUseIndexCache _mt[203] this[138318])))
+    unknown call_tmp[810024] "expr temp" "maybe param" "maybe type" "temp"
+    (810027 'move' call_tmp[810024](138356 call _cond_test call_tmp[810019]))
+    if call_tmp[810024]
+    {
+      unknown call_tmp[810031] "expr temp" "maybe param" "maybe type" "temp"
+      (810034 'move' call_tmp[810031](402649 call indexCache _mt[203] this[138318]))
+      unknown call_tmp[810038] "maybe param" "maybe type" "temp"
+      (810041 'move' call_tmp[810038](138335 call(138332 call (partial) getDataIndex _mt[203] call_tmp[810031]) i[138320]))
+      const dataIdx[138330] "dead at end of block" "const" "insert auto destroy"
+      (646017 'init var' dataIdx[138330] call_tmp[810038])
+      (138338 'end of statement')
+      unknown call_tmp[810045] "expr temp" "maybe param" "maybe type" "temp"
+      (810048 'move' call_tmp[810045](402654 call indexCache _mt[203] this[138318]))
+      unknown call_tmp[810052] "expr temp" "maybe param" "maybe type" "temp"
+      (810055 'move' call_tmp[810052](138344 call(138341 call (partial) getDataElem _mt[203] call_tmp[810045]) dataIdx[138330]))
+      (608669 'move' ret[608664](608668 'deref' call_tmp[810052]))
+      gotoReturn _end_dsiAccess[608662] _end_dsiAccess[608662]
+      (554255 'end of statement' dataIdx[138330])
+    }
+    {
+      unknown call_tmp[810059] "expr temp" "maybe param" "maybe type" "temp"
+      (810062 'move' call_tmp[810059](402658 call arr _mt[203] this[138318]))
+      unknown call_tmp[810066] "expr temp" "maybe param" "maybe type" "temp"
+      (810069 'move' call_tmp[810066](138352 call(138349 call (partial) dsiAccess _mt[203] call_tmp[810059]) i[138320]))
+      (608674 'move' ret[608664](608673 'deref' call_tmp[810066]))
+      gotoReturn _end_dsiAccess[608662] _end_dsiAccess[608662]
+    }
+    label _end_dsiAccess[608662]
+    (608666 return ret[608664])
+  }
+  where {
+    unknown call_tmp[810073] "expr temp" "maybe param" "maybe type" "temp"
+    (810076 'move' call_tmp[810073](431148 call eltType _mt[203] this[138318]))
+    (138325 call shouldReturnRvalueByValue call_tmp[810073])
+  }
+  function ArrayViewSliceArr[138922](?).dsiAccess[138363](arg _mt[138369]:_MT[201], arg this[138365]:ArrayViewSliceArr[138922](?), arg i[138367]:_any[141](?)) const ref : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[608680] "RVV" "temp"
+    unknown call_tmp[810080] "expr temp" "maybe param" "maybe type" "temp"
+    (810083 'move' call_tmp[810080](138399 call(431162 call (partial) shouldUseIndexCache _mt[203] this[138365])))
+    unknown call_tmp[810085] "expr temp" "maybe param" "maybe type" "temp"
+    (810088 'move' call_tmp[810085](138400 call _cond_test call_tmp[810080]))
+    if call_tmp[810085]
+    {
+      unknown call_tmp[810092] "expr temp" "maybe param" "maybe type" "temp"
+      (810095 'move' call_tmp[810092](402663 call indexCache _mt[203] this[138365]))
+      unknown call_tmp[810099] "maybe param" "maybe type" "temp"
+      (810102 'move' call_tmp[810099](138379 call(138376 call (partial) getDataIndex _mt[203] call_tmp[810092]) i[138367]))
+      const dataIdx[138374] "dead at end of block" "const" "insert auto destroy"
+      (646019 'init var' dataIdx[138374] call_tmp[810099])
+      (138382 'end of statement')
+      unknown call_tmp[810106] "expr temp" "maybe param" "maybe type" "temp"
+      (810109 'move' call_tmp[810106](402668 call indexCache _mt[203] this[138365]))
+      unknown call_tmp[810113] "expr temp" "maybe param" "maybe type" "temp"
+      (810116 'move' call_tmp[810113](138388 call(138385 call (partial) getDataElem _mt[203] call_tmp[810106]) dataIdx[138374]))
+      (608685 'move' ret[608680](608684 'addr of' call_tmp[810113]))
+      gotoReturn _end_dsiAccess[608678] _end_dsiAccess[608678]
+      (554258 'end of statement' dataIdx[138374])
+    }
+    {
+      unknown call_tmp[810120] "expr temp" "maybe param" "maybe type" "temp"
+      (810123 'move' call_tmp[810120](402672 call arr _mt[203] this[138365]))
+      unknown call_tmp[810127] "expr temp" "maybe param" "maybe type" "temp"
+      (810130 'move' call_tmp[810127](138396 call(138393 call (partial) dsiAccess _mt[203] call_tmp[810120]) i[138367]))
+      (608690 'move' ret[608680](608689 'addr of' call_tmp[810127]))
+      gotoReturn _end_dsiAccess[608678] _end_dsiAccess[608678]
+    }
+    label _end_dsiAccess[608678]
+    (608682 return ret[608680])
+  }
+  function ArrayViewSliceArr[138922](?).dsiBoundsCheck[138406](arg _mt[138412]:_MT[201], arg this[138408]:ArrayViewSliceArr[138922](?), arg i[138410]:_any[141](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[608696] "RVV" "temp"
+    unknown call_tmp[810134] "expr temp" "maybe param" "maybe type" "temp"
+    (810137 'move' call_tmp[810134](402676 call privDom _mt[203] this[138408]))
+    unknown call_tmp[810141] "expr temp" "maybe param" "maybe type" "temp"
+    (810144 'move' call_tmp[810141](138422 call(138419 call (partial) dsiMember _mt[203] call_tmp[810134]) i[138410]))
+    (608701 'move' ret[608696](608700 'deref' call_tmp[810141]))
+    (608698 return ret[608696])
+  }
+  function ArrayViewSliceArr[138922](?).dsiHasSingleLocalSubdomain[138426](arg _mt[138430]:_MT[201], arg this[138428]:ArrayViewSliceArr[138922](?)) param : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608705] "RVV" "param" "temp"
+    unknown call_tmp[810148] "expr temp" "maybe param" "maybe type" "temp"
+    (810151 'move' call_tmp[810148](402680 call privDom _mt[203] this[138428]))
+    unknown call_tmp[810155] "expr temp" "maybe param" "maybe type" "temp"
+    (810158 'move' call_tmp[810155](138440 call(138437 call (partial) dsiHasSingleLocalSubdomain _mt[203] call_tmp[810148])))
+    (608710 'move' ret[608705](608709 'deref' call_tmp[810155]))
+    (608707 return ret[608705])
+  }
+  function ArrayViewSliceArr[138922](?).dsiLocalSubdomain[138443](arg _mt[138451]:_MT[201], arg this[138445]:ArrayViewSliceArr[138922](?), arg loc[138448]:locale[234]) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608714] "RVV" "temp"
+    unknown call_tmp[810162] "expr temp" "maybe param" "maybe type" "temp"
+    (810165 'move' call_tmp[810162](402684 call privDom _mt[203] this[138445]))
+    unknown call_tmp[810169] "expr temp" "maybe param" "maybe type" "temp"
+    (810172 'move' call_tmp[810169](138461 call(138458 call (partial) dsiLocalSubdomain _mt[203] call_tmp[810162]) loc[138448]))
+    (608719 'move' ret[608714](608718 'deref' call_tmp[810169]))
+    (608716 return ret[608714])
+  }
+  function ArrayViewSliceArr[138922](?).dsiLocalSubdomains[138465](arg _mt[138473]:_MT[201], arg this[138467]:ArrayViewSliceArr[138922](?), arg loc[138470]:locale[234]) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    unknown ret[608723] "RVV" "temp"
+    {
+      unknown _indexOfInterest[138489] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[138490] "expr temp" "temp"
+      unknown call_tmp[810176] "expr temp" "maybe param" "maybe type" "temp"
+      (810179 'move' call_tmp[810176](402688 call privDom _mt[203] this[138467]))
+      unknown call_tmp[810183] "expr temp" "maybe param" "maybe type" "temp"
+      (810186 'move' call_tmp[810183](138484 call(138481 call (partial) dsiLocalSubdomains _mt[203] call_tmp[810176]) loc[138470]))
+      (138499 'move' _iterator[138490](138497 call _getIterator call_tmp[810183]))
+      Defer
+      {
+        {
+          (138514 call _freeIterator _iterator[138490])
+        }
+      }
+      { scopeless type
+        (138504 'move' _indexOfInterest[138489](138501 call iteratorIndex _iterator[138490]))
+      }
+      ForLoop[138491]
+      {
+        unknown l[138476] "index var" "insert auto destroy"
+        (554265 'end of statement')
+        (138509 'move' l[138476] _indexOfInterest[138489])
+        (554266 'end of statement' l[138476])
+        unknown yret[608727] "YVV" "temp"
+        (608730 'move' yret[608727](608729 'deref' l[138476]))
+        (138486 yield yret[608727])
+        (554268 'end of statement' l[138476])
+        label _continueLabel[138494]
+        _indexOfInterest[138489]
+        _iterator[138490]
+      }
+      label _breakLabel[138495]
+    }
+    (608725 return ret[608723])
+  }
+  function ArrayViewSliceArr[138922](?).dsiSupportsPrivatization[138523](arg _mt[138527]:_MT[201], arg this[138525]:ArrayViewSliceArr[138922](?)) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[608735] "RVV" "param" "temp"
+    unknown call_tmp[810188] "expr temp" "maybe param" "maybe type" "temp"
+    (810191 'move' call_tmp[810188](138534 call _cond_test chpl_serializeSlices[137396]))
+    if call_tmp[810188]
+    {
+      (608740 'move' ret[608735](608739 'deref' 0))
+      gotoReturn _end_dsiSupportsPrivatization[608733] _end_dsiSupportsPrivatization[608733]
+    }
+    unknown call_tmp[810195] "expr temp" "maybe param" "maybe type" "temp"
+    (810198 'move' call_tmp[810195](402693 call _ArrInstance _mt[203] this[138525]))
+    unknown call_tmp[810202] "expr temp" "maybe param" "maybe type" "temp"
+    (810205 'move' call_tmp[810202](138544 call(138541 call (partial) dsiSupportsPrivatization _mt[203] call_tmp[810195])))
+    (608745 'move' ret[608735](608744 'deref' call_tmp[810202]))
+    label _end_dsiSupportsPrivatization[608733]
+    (608737 return ret[608735])
+  }
+  function ArrayViewSliceArr[138922](?).dsiGetPrivatizeData[138547](arg _mt[138551]:_MT[201], arg this[138549]:ArrayViewSliceArr[138922](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608749] "RVV" "temp"
+    unknown call_tmp[810209] "expr temp" "maybe param" "maybe type" "temp"
+    (810212 'move' call_tmp[810209](431172 call _DomPid _mt[203] this[138549]))
+    unknown call_tmp[810216] "expr temp" "maybe param" "maybe type" "temp"
+    (810219 'move' call_tmp[810216](431177 call dom _mt[203] this[138549]))
+    unknown call_tmp[810223] "expr temp" "maybe param" "maybe type" "temp"
+    (810226 'move' call_tmp[810223](431182 call _ArrPid _mt[203] this[138549]))
+    unknown call_tmp[810230] "expr temp" "maybe param" "maybe type" "temp"
+    (810233 'move' call_tmp[810230](431187 call _ArrInstance _mt[203] this[138549]))
+    unknown call_tmp[810235] "expr temp" "maybe param" "maybe type" "temp"
+    (810238 'move' call_tmp[810235](138560 call _build_tuple call_tmp[810209] call_tmp[810216] call_tmp[810223] call_tmp[810230]))
+    (608754 'move' ret[608749](608753 'deref' call_tmp[810235]))
+    (608751 return ret[608749])
+  }
+  function ArrayViewSliceArr[138922](?).dsiPrivatize[138564](arg _mt[138570]:_MT[201], arg this[138566]:ArrayViewSliceArr[138922](?), arg privatizeData[138568]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608758] "RVV" "temp"
+    unknown call_tmp[810242] "expr temp" "maybe param" "maybe type" "temp"
+    (810245 'move' call_tmp[810242](138580 call eltType _mt[203] this[138566]))
+    unknown call_tmp[810247] "expr temp" "maybe param" "maybe type" "temp"
+    (810250 'move' call_tmp[810247](138585 call privatizeData[138568] 0))
+    unknown call_tmp[810252] "expr temp" "maybe param" "maybe type" "temp"
+    (810255 'move' call_tmp[810252](138589 call privatizeData[138568] 1))
+    unknown call_tmp[810257] "expr temp" "maybe param" "maybe type" "temp"
+    (810260 'move' call_tmp[810257](138593 call privatizeData[138568] 2))
+    unknown call_tmp[810262] "expr temp" "maybe param" "maybe type" "temp"
+    (810265 'move' call_tmp[810262](138597 call privatizeData[138568] 3))
+    unknown call_tmp[810267] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (810270 'move' call_tmp[810267](1000128 'new' ArrayViewSliceArr[431012](?)(eltType = call_tmp[810242])(_DomPid = call_tmp[810247])(dom = call_tmp[810252])(_ArrPid = call_tmp[810257])(_ArrInstance = call_tmp[810262])(_chpl_manager = unmanaged[183](?))))
+    (608763 'move' ret[608758](608762 'deref' call_tmp[810267]))
+    (608760 return ret[608758])
+  }
+  function ArrayViewSliceArr[138922](?).shouldUseIndexCache[138602](arg _mt[138606]:_MT[201], arg this[138604]:ArrayViewSliceArr[138922](?)) param : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608767] "RVV" "param" "temp"
+    unknown tmp[488064] "maybe param" "temp"
+    unknown call_tmp[810274] "expr temp" "maybe param" "maybe type" "temp"
+    (810277 'move' call_tmp[810274](431197 call _ArrInstance _mt[203] this[138604]))
+    (488075 'move' tmp[488064](138613 call chpl__isDROrDRView call_tmp[810274]))
+    unknown call_tmp[810279] "expr temp" "maybe param" "maybe type" "temp"
+    (810282 'move' call_tmp[810279](488077 call _cond_invalid tmp[488064]))
+    if call_tmp[810279]
+    {
+      (488080 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[680229] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[680230] "maybe param" "temp"
+    unknown call_tmp[810284] "expr temp" "maybe param" "maybe type" "temp"
+    (810287 'move' call_tmp[810284](488065 call isTrue tmp[488064]))
+    (680235 'move' tmp[680230](680233 call _cond_test call_tmp[810284]))
+    if tmp[680230]
+    {
+      unknown tmp[680237] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[810291] "expr temp" "maybe param" "maybe type" "temp"
+      (810294 'move' call_tmp[810291](138616 call(431201 call (partial) _containsRCRE _mt[203] this[138604])))
+      (680239 'move' tmp[680237](488068 call isTrue call_tmp[810291]))
+      (680244 'move' tmp[680229](680241 '_paramFoldLogical' tmp[680230] tmp[680237]))
+    }
+    {
+      (680249 'move' tmp[680229](680246 '_paramFoldLogical' tmp[680230] 0))
+    }
+    (608772 'move' ret[608767](608771 'deref' tmp[680229]))
+    (608769 return ret[608767])
+  }
+  function ArrayViewSliceArr[138922](?).buildIndexCache[138619](arg _mt[138623]:_MT[201], arg this[138621]:ArrayViewSliceArr[138922](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608776] "RVV" "temp"
+    unknown call_tmp[810298] "expr temp" "maybe param" "maybe type" "temp"
+    (810301 'move' call_tmp[810298](138661 call(431220 call (partial) shouldUseIndexCache _mt[203] this[138621])))
+    unknown call_tmp[810303] "expr temp" "maybe param" "maybe type" "temp"
+    (810306 'move' call_tmp[810303](138662 call _cond_test call_tmp[810298]))
+    if call_tmp[810303]
+    {
+      unknown call_tmp[810310] "expr temp" "maybe param" "maybe type" "temp"
+      (810313 'move' call_tmp[810310](431216 call _ArrInstance _mt[203] this[138621]))
+      unknown call_tmp[810315] "expr temp" "maybe param" "maybe type" "temp"
+      (810318 'move' call_tmp[810315](138651 call chpl__isArrayView call_tmp[810310]))
+      unknown call_tmp[810320] "expr temp" "maybe param" "maybe type" "temp"
+      (810323 'move' call_tmp[810320](138653 call _cond_test call_tmp[810315]))
+      if call_tmp[810320]
+      {
+        unknown call_tmp[810327] "expr temp" "maybe param" "maybe type" "temp"
+        (810330 'move' call_tmp[810327](402699 call _ArrInstance _mt[203] this[138621]))
+        unknown call_tmp[810334] "expr temp" "maybe param" "maybe type" "temp"
+        (810337 'move' call_tmp[810334](138630 call indexCache _mt[203] call_tmp[810327]))
+        unknown call_tmp[810343] "expr temp" "maybe param" "maybe type" "temp"
+        (810346 'move' call_tmp[810343](431206 call dom _mt[203] this[138621]))
+        unknown call_tmp[810348] "expr temp" "maybe param" "maybe type" "temp"
+        (810351 'move' call_tmp[810348](138636 call(138633 call (partial) toSlice _mt[203] call_tmp[810334]) call_tmp[810343]))
+        (608781 'move' ret[608776](608780 'deref' call_tmp[810348]))
+        gotoReturn _end_buildIndexCache[608774] _end_buildIndexCache[608774]
+      }
+      {
+        unknown call_tmp[810355] "expr temp" "maybe param" "maybe type" "temp"
+        (810358 'move' call_tmp[810355](402704 call _ArrInstance _mt[203] this[138621]))
+        unknown call_tmp[810362] "expr temp" "maybe param" "maybe type" "temp"
+        (810365 'move' call_tmp[810362](138644 call(138641 call (partial) dsiGetRAD _mt[203] call_tmp[810355])))
+        unknown call_tmp[810371] "expr temp" "maybe param" "maybe type" "temp"
+        (810374 'move' call_tmp[810371](431211 call dom _mt[203] this[138621]))
+        unknown call_tmp[810376] "expr temp" "maybe param" "maybe type" "temp"
+        (810379 'move' call_tmp[810376](138648 call(138645 call (partial) toSlice _mt[203] call_tmp[810362]) call_tmp[810371]))
+        (608786 'move' ret[608776](608785 'deref' call_tmp[810376]))
+        gotoReturn _end_buildIndexCache[608774] _end_buildIndexCache[608774]
+      }
+    }
+    {
+      (608791 'move' ret[608776](608790 'deref' 0))
+      gotoReturn _end_buildIndexCache[608774] _end_buildIndexCache[608774]
+    }
+    label _end_buildIndexCache[608774]
+    (608778 return ret[608776])
+  }
+  function ArrayViewSliceArr[138922](?).privDom[138668](arg _mt[138672]:_MT[201], arg this[138670]:ArrayViewSliceArr[138922](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    unknown ret[608797] "RVV" "temp"
+    unknown call_tmp[810383] "expr temp" "maybe param" "maybe type" "temp"
+    (810386 'move' call_tmp[810383](431245 call dom _mt[203] this[138670]))
+    unknown call_tmp[810388] "expr temp" "maybe param" "maybe type" "temp"
+    (810391 'move' call_tmp[810388](138688 call _isPrivatized call_tmp[810383]))
+    unknown call_tmp[810393] "expr temp" "maybe param" "maybe type" "temp"
+    (810396 'move' call_tmp[810393](138690 call _cond_test call_tmp[810388]))
+    if call_tmp[810393]
+    {
+      { scopeless type
+        unknown call_type_tmp[577641] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[810400] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (810403 'move' call_tmp[810400](431230 call dom _mt[203] this[138670]))
+        (577645 'move' call_type_tmp[577641](138682 'typeof' call_tmp[810400]))
+      }
+      unknown call_tmp[810407] "expr temp" "maybe param" "maybe type" "temp"
+      (810410 'move' call_tmp[810407](431235 call _DomPid _mt[203] this[138670]))
+      unknown call_tmp[810412] "expr temp" "maybe param" "maybe type" "temp"
+      (810415 'move' call_tmp[810412](138680 call chpl_getPrivatizedCopy call_type_tmp[577641] call_tmp[810407]))
+      unknown call_tmp[810419] "expr temp" "maybe param" "maybe type" "temp"
+      (810422 'move' call_tmp[810419](608803 call dom _mt[203] this[138670]))
+      unknown call_tmp[810424] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (810427 'move' call_tmp[810424](608801 'typeof' call_tmp[810419]))
+      (608807 'move' ret[608797](608806 'coerce' call_tmp[810412] call_tmp[810424]))
+      gotoReturn _end_privDom[608795] _end_privDom[608795]
+    }
+    {
+      unknown call_tmp[810431] "expr temp" "maybe param" "maybe type" "temp"
+      (810434 'move' call_tmp[810431](431240 call dom _mt[203] this[138670]))
+      unknown call_tmp[810438] "expr temp" "maybe param" "maybe type" "temp"
+      (810441 'move' call_tmp[810438](608813 call dom _mt[203] this[138670]))
+      unknown call_tmp[810443] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (810446 'move' call_tmp[810443](608811 'typeof' call_tmp[810438]))
+      (608817 'move' ret[608797](608816 'coerce' call_tmp[810431] call_tmp[810443]))
+      gotoReturn _end_privDom[608795] _end_privDom[608795]
+    }
+    label _end_privDom[608795]
+    (608799 return ret[608797])
+  }
+  { scopeless type
+    unknown call_tmp[810450] "expr temp" "maybe param" "maybe type" "temp"
+    (810453 'move' call_tmp[810450](431225 call dom _mt[203] this[138670]))
+    (138675 'typeof' call_tmp[810450])
+  }
+  function ArrayViewSliceArr[138922](?).arr[138697](arg _mt[138701]:_MT[201], arg this[138699]:ArrayViewSliceArr[138922](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    unknown ret[608823] "RVV" "temp"
+    unknown call_tmp[810457] "expr temp" "maybe param" "maybe type" "temp"
+    (810460 'move' call_tmp[810457](431265 call _ArrInstance _mt[203] this[138699]))
+    unknown call_tmp[810462] "expr temp" "maybe param" "maybe type" "temp"
+    (810465 'move' call_tmp[810462](138715 call _isPrivatized call_tmp[810457]))
+    unknown call_tmp[810467] "expr temp" "maybe param" "maybe type" "temp"
+    (810470 'move' call_tmp[810467](138717 call _cond_test call_tmp[810462]))
+    if call_tmp[810467]
+    {
+      { scopeless type
+        unknown call_type_tmp[577647] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[810474] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (810477 'move' call_tmp[810474](431250 call _ArrInstance _mt[203] this[138699]))
+        (577651 'move' call_type_tmp[577647](138709 'typeof' call_tmp[810474]))
+      }
+      unknown call_tmp[810481] "expr temp" "maybe param" "maybe type" "temp"
+      (810484 'move' call_tmp[810481](431255 call _ArrPid _mt[203] this[138699]))
+      unknown call_tmp[810486] "expr temp" "maybe param" "maybe type" "temp"
+      (810489 'move' call_tmp[810486](138707 call chpl_getPrivatizedCopy call_type_tmp[577647] call_tmp[810481]))
+      (608828 'move' ret[608823](608827 'deref' call_tmp[810486]))
+      gotoReturn _end_arr[608821] _end_arr[608821]
+    }
+    {
+      unknown call_tmp[810493] "expr temp" "maybe param" "maybe type" "temp"
+      (810496 'move' call_tmp[810493](431260 call _ArrInstance _mt[203] this[138699]))
+      (608833 'move' ret[608823](608832 'deref' call_tmp[810493]))
+      gotoReturn _end_arr[608821] _end_arr[608821]
+    }
+    label _end_arr[608821]
+    (608825 return ret[608823])
+  }
+  function ArrayViewSliceArr[138922](?).dsiGetBaseDom[138723](arg _mt[138727]:_MT[201], arg this[138725]:ArrayViewSliceArr[138922](?)) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[608839] "RVV" "temp"
+    unknown call_tmp[810500] "expr temp" "maybe param" "maybe type" "temp"
+    (810503 'move' call_tmp[810500](431270 call dom _mt[203] this[138725]))
+    (608844 'move' ret[608839](608843 'deref' call_tmp[810500]))
+    (608841 return ret[608839])
+  }
+  function ArrayViewSliceArr[138922](?)._getActualArray[138734](arg _mt[138738]:_MT[201], arg this[138736]:ArrayViewSliceArr[138922](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608848] "RVV" "temp"
+    unknown call_tmp[810507] "expr temp" "maybe param" "maybe type" "temp"
+    (810510 'move' call_tmp[810507](431278 call arr _mt[203] this[138736]))
+    unknown call_tmp[810512] "expr temp" "maybe param" "maybe type" "temp"
+    (810515 'move' call_tmp[810512](138754 call chpl__isArrayView call_tmp[810507]))
+    unknown call_tmp[810517] "expr temp" "maybe param" "maybe type" "temp"
+    (810520 'move' call_tmp[810517](138756 call _cond_test call_tmp[810512]))
+    if call_tmp[810517]
+    {
+      unknown call_tmp[810524] "expr temp" "maybe param" "maybe type" "temp"
+      (810527 'move' call_tmp[810524](402708 call arr _mt[203] this[138736]))
+      unknown call_tmp[810531] "expr temp" "maybe param" "maybe type" "temp"
+      (810534 'move' call_tmp[810531](138749 call(138746 call (partial) _getActualArray _mt[203] call_tmp[810524])))
+      (608853 'move' ret[608848](608852 'deref' call_tmp[810531]))
+      gotoReturn _end__getActualArray[608846] _end__getActualArray[608846]
+    }
+    {
+      unknown call_tmp[810538] "expr temp" "maybe param" "maybe type" "temp"
+      (810541 'move' call_tmp[810538](431274 call arr _mt[203] this[138736]))
+      (608858 'move' ret[608848](608857 'deref' call_tmp[810538]))
+      gotoReturn _end__getActualArray[608846] _end__getActualArray[608846]
+    }
+    label _end__getActualArray[608846]
+    (608850 return ret[608848])
+  }
+  function ArrayViewSliceArr[138922](?)._containsRCRE[138762](arg _mt[138766]:_MT[201], arg this[138764]:ArrayViewSliceArr[138922](?)) param : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608864] "RVV" "param" "temp"
+    unknown call_tmp[810545] "expr temp" "maybe param" "maybe type" "temp"
+    (810548 'move' call_tmp[810545](431282 call arr _mt[203] this[138764]))
+    unknown call_tmp[810550] "expr temp" "maybe param" "maybe type" "temp"
+    (810553 'move' call_tmp[810550](138794 call chpl__isArrayView call_tmp[810545]))
+    unknown call_tmp[810555] "expr temp" "maybe param" "maybe type" "temp"
+    (810558 'move' call_tmp[810555](138796 call _cond_test call_tmp[810550]))
+    if call_tmp[810555]
+    {
+      unknown tmp[488085] "maybe param" "temp"
+      unknown tmp[488106] "maybe param" "temp"
+      unknown call_tmp[810562] "expr temp" "maybe param" "maybe type" "temp"
+      (810565 'move' call_tmp[810562](402712 call arr _mt[203] this[138764]))
+      (488117 'move' tmp[488106](138779 call(138776 call (partial) isRankChangeArrayView _mt[203] call_tmp[810562])))
+      unknown call_tmp[810569] "expr temp" "maybe param" "maybe type" "temp"
+      (810572 'move' call_tmp[810569](488119 call _cond_invalid tmp[488106]))
+      if call_tmp[810569]
+      {
+        (488122 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[680256] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[680257] "maybe param" "temp"
+      unknown call_tmp[810574] "expr temp" "maybe param" "maybe type" "temp"
+      (810577 'move' call_tmp[810574](488107 call isTrue tmp[488106]))
+      (680262 'move' tmp[680257](680260 call _cond_test call_tmp[810574]))
+      if tmp[680257]
+      {
+        (680267 'move' tmp[680256](680264 '_paramFoldLogical' tmp[680257] 1))
+      }
+      {
+        unknown tmp[680269] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[810581] "expr temp" "maybe param" "maybe type" "temp"
+        (810584 'move' call_tmp[810581](402716 call arr _mt[203] this[138764]))
+        unknown call_tmp[810588] "expr temp" "maybe param" "maybe type" "temp"
+        (810591 'move' call_tmp[810588](138784 call(138781 call (partial) isReindexArrayView _mt[203] call_tmp[810581])))
+        (680271 'move' tmp[680269](488111 call isTrue call_tmp[810588]))
+        (680276 'move' tmp[680256](680273 '_paramFoldLogical' tmp[680257] tmp[680269]))
+      }
+      (488096 'move' tmp[488085] tmp[680256])
+      unknown call_tmp[810593] "expr temp" "maybe param" "maybe type" "temp"
+      (810596 'move' call_tmp[810593](488098 call _cond_invalid tmp[488085]))
+      if call_tmp[810593]
+      {
+        (488101 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[680283] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[680284] "maybe param" "temp"
+      unknown call_tmp[810598] "expr temp" "maybe param" "maybe type" "temp"
+      (810601 'move' call_tmp[810598](488086 call isTrue tmp[488085]))
+      (680289 'move' tmp[680284](680287 call _cond_test call_tmp[810598]))
+      if tmp[680284]
+      {
+        (680294 'move' tmp[680283](680291 '_paramFoldLogical' tmp[680284] 1))
+      }
+      {
+        unknown tmp[680296] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[810605] "expr temp" "maybe param" "maybe type" "temp"
+        (810608 'move' call_tmp[810605](402720 call arr _mt[203] this[138764]))
+        unknown call_tmp[810612] "expr temp" "maybe param" "maybe type" "temp"
+        (810615 'move' call_tmp[810612](138789 call(138786 call (partial) _containsRCRE _mt[203] call_tmp[810605])))
+        (680298 'move' tmp[680296](488090 call isTrue call_tmp[810612]))
+        (680303 'move' tmp[680283](680300 '_paramFoldLogical' tmp[680284] tmp[680296]))
+      }
+      (608869 'move' ret[608864](608868 'deref' tmp[680283]))
+      gotoReturn _end__containsRCRE[608862] _end__containsRCRE[608862]
+    }
+    {
+      (608874 'move' ret[608864](608873 'deref' 0))
+      gotoReturn _end__containsRCRE[608862] _end__containsRCRE[608862]
+    }
+    label _end__containsRCRE[608862]
+    (608866 return ret[608864])
+  }
+  function ArrayViewSliceArr[138922](?)._getRCREView[138802](arg _mt[138806]:_MT[201], arg this[138804]:ArrayViewSliceArr[138922](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608880] "RVV" "temp"
+    unknown call_tmp[810619] "expr temp" "maybe param" "maybe type" "temp"
+    (810622 'move' call_tmp[810619](138815 call(138812 call (partial) _containsRCRE _mt[203] this[138804])))
+    (138810 call compilerAssert call_tmp[810619])
+    (554290 'end of statement')
+    unknown call_tmp[810626] "expr temp" "maybe param" "maybe type" "temp"
+    (810629 'move' call_tmp[810626](402725 call arr _mt[203] this[138804]))
+    unknown call_tmp[810633] "expr temp" "maybe param" "maybe type" "temp"
+    (810636 'move' call_tmp[810633](138823 call(138820 call (partial) _getRCREView _mt[203] call_tmp[810626])))
+    (608885 'move' ret[608880](608884 'deref' call_tmp[810633]))
+    (608882 return ret[608880])
+  }
+  function ArrayViewSliceArr[138922](?).dsiElementInitializationComplete[138826](arg _mt[138830]:_MT[201], arg this[138828]:ArrayViewSliceArr[138922](?)) : _unknown[42] "method" "primary method" "method overrides" "no return value for void"
+  {
+    (608887 return _void[46])
+  }
+  function ArrayViewSliceArr[138922](?).dsiDestroyArr[138835](arg _mt[138843]:_MT[201], arg this[138837]:ArrayViewSliceArr[138922](?), arg deinitElts[138840]:bool[19]) : _unknown[42] "method" "primary method" "method overrides" "no return value for void"
+  {
+    (608889 return _void[46])
+  }
+  function ArrayViewSliceArr[138922](?).doiCanBulkTransferRankChange[138848](arg _mt[138852]:_MT[201], arg this[138850]:ArrayViewSliceArr[138922](?)) param : _unknown[42] "method" "primary method" "method overrides"
+  {
+    unknown ret[608893] "RVV" "param" "temp"
+    unknown call_tmp[810640] "expr temp" "maybe param" "maybe type" "temp"
+    (810643 'move' call_tmp[810640](402729 call arr _mt[203] this[138850]))
+    unknown call_tmp[810647] "expr temp" "maybe param" "maybe type" "temp"
+    (810650 'move' call_tmp[810647](138862 call(138859 call (partial) doiCanBulkTransferRankChange _mt[203] call_tmp[810640])))
+    (608898 'move' ret[608893](608897 'deref' call_tmp[810647]))
+    (608895 return ret[608893])
+  }
+  function ArrayViewSliceArr[138922](?).doiBulkTransferFromKnown[138865](arg _mt[138875]:_MT[201], arg this[138867]:ArrayViewSliceArr[138922](?), arg destDom[138869]:_any[141](?), arg srcClass[138871]:_any[141](?), arg srcDom[138873]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608902] "RVV" "temp"
+    unknown call_tmp[810654] "expr temp" "maybe param" "maybe type" "temp"
+    (810657 'move' call_tmp[810654](138885 call arr _mt[203] this[138867]))
+    unknown call_tmp[810659] "expr temp" "maybe param" "maybe type" "temp"
+    (810662 'move' call_tmp[810659](138881 call chpl__bulkTransferArray call_tmp[810654] destDom[138869] srcClass[138871] srcDom[138873]))
+    (608908 'move' ret[608902](608907 'coerce' call_tmp[810659] bool[19]))
+    (608904 return ret[608902])
+  }
+  { scopeless type
+    bool[19]
+  }
+  function ArrayViewSliceArr[138922](?).doiBulkTransferToKnown[138894](arg _mt[138904]:_MT[201], arg this[138896]:ArrayViewSliceArr[138922](?), arg srcDom[138898]:_any[141](?), arg destClass[138900]:_any[141](?), arg destDom[138902]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[608912] "RVV" "temp"
+    unknown call_tmp[810666] "expr temp" "maybe param" "maybe type" "temp"
+    (810669 'move' call_tmp[810666](138914 call arr _mt[203] this[138896]))
+    unknown call_tmp[810671] "expr temp" "maybe param" "maybe type" "temp"
+    (810674 'move' call_tmp[810671](138910 call chpl__bulkTransferArray destClass[138900] destDom[138902] call_tmp[810666] srcDom[138898]))
+    (608918 'move' ret[608912](608917 'coerce' call_tmp[810671] bool[19]))
+    (608914 return ret[608912])
+  }
+  { scopeless type
+    bool[19]
+  }
+  function ArrayViewSliceArr[138922](?).super[1084198](arg _mt[1084200]:_MT[201], arg this[1084202]:ArrayViewSliceArr[138922](?)) : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1084212] "RVV" "temp"
+    unknown call_tmp[1084219] "expr temp" "maybe param" "maybe type" "temp"
+    (1084222 'move' call_tmp[1084219](1084206 '.v' this[1084202] c"super"))
+    (1084217 'move' ret[1084212](1084216 'deref' call_tmp[1084219]))
+    (1084214 return ret[1084212])
+  }
+  function ArrayViewSliceArr[138922](?)._DomPid[1084224](arg _mt[1084226]:_MT[201], arg this[1084228]:ArrayViewSliceArr[138922](?)) const ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to a const"
+  {
+    unknown ret[1084238] "RVV" "temp"
+    unknown call_tmp[1084245] "expr temp" "maybe param" "maybe type" "temp"
+    (1084248 'move' call_tmp[1084245](1084232 '.' this[1084228] c"_DomPid"))
+    (1084243 'move' ret[1084238](1084242 'addr of' call_tmp[1084245]))
+    (1084240 return ret[1084238])
+  }
+  function ArrayViewSliceArr[138922](?).dom[1084250](arg _mt[1084252]:_MT[201], arg this[1084254]:ArrayViewSliceArr[138922](?)) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1084264] "RVV" "temp"
+    unknown call_tmp[1084271] "expr temp" "maybe param" "maybe type" "temp"
+    (1084274 'move' call_tmp[1084271](1084258 '.' this[1084254] c"dom"))
+    (1084269 'move' ret[1084264](1084268 'addr of' call_tmp[1084271]))
+    (1084266 return ret[1084264])
+  }
+  function ArrayViewSliceArr[138922](?)._ArrPid[1084276](arg _mt[1084278]:_MT[201], arg this[1084280]:ArrayViewSliceArr[138922](?)) const ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to a const"
+  {
+    unknown ret[1084290] "RVV" "temp"
+    unknown call_tmp[1084297] "expr temp" "maybe param" "maybe type" "temp"
+    (1084300 'move' call_tmp[1084297](1084284 '.' this[1084280] c"_ArrPid"))
+    (1084295 'move' ret[1084290](1084294 'addr of' call_tmp[1084297]))
+    (1084292 return ret[1084290])
+  }
+  function ArrayViewSliceArr[138922](?)._ArrInstance[1084302](arg _mt[1084304]:_MT[201], arg this[1084306]:ArrayViewSliceArr[138922](?)) const ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to a const"
+  {
+    unknown ret[1084316] "RVV" "temp"
+    unknown call_tmp[1084323] "expr temp" "maybe param" "maybe type" "temp"
+    (1084326 'move' call_tmp[1084323](1084310 '.' this[1084306] c"_ArrInstance"))
+    (1084321 'move' ret[1084316](1084320 'addr of' call_tmp[1084323]))
+    (1084318 return ret[1084316])
+  }
+  function ArrayViewSliceArr[138922](?).indexCache[1084328](arg _mt[1084330]:_MT[201], arg this[1084332]:ArrayViewSliceArr[138922](?)) const ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to a const"
+  {
+    unknown ret[1084342] "RVV" "temp"
+    unknown call_tmp[1084349] "expr temp" "maybe param" "maybe type" "temp"
+    (1084352 'move' call_tmp[1084349](1084336 '.' this[1084332] c"indexCache"))
+    (1084347 'move' ret[1084342](1084346 'addr of' call_tmp[1084349]))
+    (1084344 return ret[1084342])
+  }
+  function ArrayViewSliceArr[138922](?).deinit[1084354](arg _mt[1084356]:_MT[201], arg this[1084358]:ArrayViewSliceArr[138922](?)) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method"
+  {
+    (1084366 return _void[46])
+  }
+  type ArrayViewSliceArr[138922](?) val super[397525]:AbsBaseArr[272253](?) "delay instantiation" "super class" const _DomPid[137502] "const" unknown dom[137506] const _ArrPid[137510] "const" const _ArrInstance[137514] "const" const indexCache[137518] "const" forwarding ( )
+  type ArrayViewSliceArr[467882](?)
+  type ArrayViewSliceArr[431012](?)
+  (396160 'used modules list'(137392 'use' ChapelStandard[315387]))
+}

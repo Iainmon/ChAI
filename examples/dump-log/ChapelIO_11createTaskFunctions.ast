@@ -1,0 +1,3084 @@
+AST dump for ChapelIO after pass createTaskFunctions.
+Module use list: ChapelStandard ChapelBase ChapelLocale IO CTypes 
+
+{
+  function chpl__init_ChapelIO[468456]() : void[4] "insert line file info" "module init"
+  {
+    (1001010 'resolution point' |writeSerializable[475027])
+    (1001012 'end of statement')
+    (1001013 'resolution point' |writeSerializable[475032])
+    (1001015 'end of statement')
+    (1001016 'resolution point' |readDeserializable[475037])
+    (1001018 'end of statement')
+    (1001019 'resolution point' |writeSerializable[475042])
+    (1001021 'end of statement')
+    (1001022 'resolution point' |writeSerializable[475047])
+    (1001024 'end of statement')
+    (1001025 'resolution point' |readDeserializable[475052])
+    (1001027 'end of statement')
+    (1001028 'resolution point' |initDeserializable[475057])
+    (1001030 'end of statement')
+    (1001031 'resolution point' |writeSerializable[475062])
+    (1001033 'end of statement')
+    (1001034 'resolution point' |writeSerializable[475067])
+    (1001036 'end of statement')
+    (611660 return _void[46])
+  }
+  function _isNilObject[149525](arg val[149527]:_any[141](?)) : _unknown[42]
+  {
+    unknown ret[611406] "RVV" "temp"
+    function helper[149530](arg o[149534]:RootClass[236]) : _unknown[42]
+    {
+      unknown ret[611388] "RVV" "temp"
+      unknown call_tmp[820365] "expr temp" "maybe param" "maybe type" "temp"
+      (820368 'move' call_tmp[820365](149539 call == o[149534] nil[32]))
+      (611393 'move' ret[611388](611392 'deref' call_tmp[820365]))
+      (611390 return ret[611388])
+    }
+    function helper[149545](arg o[149547]:_any[141](?)) : _unknown[42]
+    {
+      unknown ret[611397] "RVV" "temp"
+      (611402 'move' ret[611397](611401 'deref' 0))
+      (611399 return ret[611397])
+    }
+    unknown call_tmp[820370] "expr temp" "maybe param" "maybe type" "temp"
+    (820373 'move' call_tmp[820370](149556 call helper val[149527]))
+    (611411 'move' ret[611406](611410 'deref' call_tmp[820370]))
+    (611408 return ret[611406])
+  }
+  function chpl_macro_int_EEOF[149567]() : _unknown[42] "extern" "local args" "no fn body" "private"
+  {
+  }
+  { scopeless type
+    c_int[522]
+  }
+  function chpl_macro_int_ESHORT[149573]() : _unknown[42] "extern" "local args" "no fn body" "private"
+  {
+  }
+  { scopeless type
+    c_int[522]
+  }
+  function chpl_macro_int_EFORMAT[149579]() : _unknown[42] "extern" "local args" "no fn body" "private"
+  {
+  }
+  { scopeless type
+    c_int[522]
+  }
+  function EEOF[149585]() : _unknown[42] "inline" "no parens" "private"
+  {
+    unknown ret[611415] "RVV" "temp"
+    unknown call_tmp[820375] "expr temp" "maybe param" "maybe type" "temp"
+    (820378 'move' call_tmp[820375](149592 call chpl_macro_int_EEOF))
+    unknown call_tmp[820380] "expr temp" "maybe param" "maybe type" "temp"
+    (820383 'move' call_tmp[820380](149589 call : call_tmp[820375] c_int[522]))
+    (611420 'move' ret[611415](611419 'deref' call_tmp[820380]))
+    (611417 return ret[611415])
+  }
+  function ESHORT[149596]() : _unknown[42] "inline" "no parens" "private"
+  {
+    unknown ret[611424] "RVV" "temp"
+    unknown call_tmp[820385] "expr temp" "maybe param" "maybe type" "temp"
+    (820388 'move' call_tmp[820385](149603 call chpl_macro_int_ESHORT))
+    unknown call_tmp[820390] "expr temp" "maybe param" "maybe type" "temp"
+    (820393 'move' call_tmp[820390](149600 call : call_tmp[820385] c_int[522]))
+    (611429 'move' ret[611424](611428 'deref' call_tmp[820390]))
+    (611426 return ret[611424])
+  }
+  function EFORMAT[149607]() : _unknown[42] "inline" "no parens" "private"
+  {
+    unknown ret[611433] "RVV" "temp"
+    unknown call_tmp[820395] "expr temp" "maybe param" "maybe type" "temp"
+    (820398 'move' call_tmp[820395](149614 call chpl_macro_int_EFORMAT))
+    unknown call_tmp[820400] "expr temp" "maybe param" "maybe type" "temp"
+    (820403 'move' call_tmp[820400](149611 call : call_tmp[820395] c_int[522]))
+    (611438 'move' ret[611433](611437 'deref' call_tmp[820400]))
+    (611435 return ret[611433])
+  }
+  function isIoField[149618](arg x[149620]:_any[141](?), param arg i[149622]:_any[141](?)) param : _unknown[42] "private"
+  {
+    unknown ret[611442] "RVV" "param" "temp"
+    unknown tmp[489030] "maybe param" "temp"
+    unknown tmp[489051] "maybe param" "temp"
+    unknown call_tmp[820405] "expr temp" "maybe param" "maybe type" "temp"
+    (820408 'move' call_tmp[820405](149637 'field by num' x[149620] i[149622]))
+    (489062 'move' tmp[489051](149636 call isType call_tmp[820405]))
+    unknown call_tmp[820410] "expr temp" "maybe param" "maybe type" "temp"
+    (820413 'move' call_tmp[820410](489064 call _cond_invalid tmp[489051]))
+    if call_tmp[820410]
+    {
+      (489067 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[681502] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[681503] "maybe param" "temp"
+    unknown call_tmp[820415] "expr temp" "maybe param" "maybe type" "temp"
+    (820418 'move' call_tmp[820415](489052 call isTrue tmp[489051]))
+    (681508 'move' tmp[681503](681506 call _cond_test call_tmp[820415]))
+    if tmp[681503]
+    {
+      (681513 'move' tmp[681502](681510 '_paramFoldLogical' tmp[681503] 1))
+    }
+    {
+      unknown tmp[681515] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[820420] "expr temp" "maybe param" "maybe type" "temp"
+      (820423 'move' call_tmp[820420](149642 'field by num' x[149620] i[149622]))
+      unknown call_tmp[820425] "expr temp" "maybe param" "maybe type" "temp"
+      (820428 'move' call_tmp[820425](149641 call isParam call_tmp[820420]))
+      (681517 'move' tmp[681515](489056 call isTrue call_tmp[820425]))
+      (681522 'move' tmp[681502](681519 '_paramFoldLogical' tmp[681503] tmp[681515]))
+    }
+    (489041 'move' tmp[489030] tmp[681502])
+    unknown call_tmp[820430] "expr temp" "maybe param" "maybe type" "temp"
+    (820433 'move' call_tmp[820430](489043 call _cond_invalid tmp[489030]))
+    if call_tmp[820430]
+    {
+      (489046 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[681529] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[681530] "maybe param" "temp"
+    unknown call_tmp[820435] "expr temp" "maybe param" "maybe type" "temp"
+    (820438 'move' call_tmp[820435](489031 call isTrue tmp[489030]))
+    (681535 'move' tmp[681530](681533 call _cond_test call_tmp[820435]))
+    if tmp[681530]
+    {
+      (681540 'move' tmp[681529](681537 '_paramFoldLogical' tmp[681530] 1))
+    }
+    {
+      { scopeless type
+        unknown call_type_tmp[577773] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[820440] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (820443 'move' call_tmp[820440](149647 'field by num' x[149620] i[149622]))
+        (577777 'move' call_type_tmp[577773](149650 'typeof' call_tmp[820440]))
+      }
+      unknown tmp[681542] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[820445] "expr temp" "maybe param" "maybe type" "temp"
+      (820448 'move' call_tmp[820445](149645 call == call_type_tmp[577773] nothing[7]))
+      (681544 'move' tmp[681542](489035 call isTrue call_tmp[820445]))
+      (681549 'move' tmp[681529](681546 '_paramFoldLogical' tmp[681530] tmp[681542]))
+    }
+    unknown call_tmp[820450] "expr temp" "maybe param" "maybe type" "temp"
+    (820453 'move' call_tmp[820450](149652 call _cond_test tmp[681529]))
+    if call_tmp[820450]
+    {
+      (611447 'move' ret[611442](611446 'deref' 0))
+      gotoReturn _end_isIoField[611440] _end_isIoField[611440]
+    }
+    {
+      (611452 'move' ret[611442](611451 'deref' 1))
+      gotoReturn _end_isIoField[611440] _end_isIoField[611440]
+    }
+    label _end_isIoField[611440]
+    (611444 return ret[611442])
+  }
+  function ioFieldNameEqLiteral[149658](arg ch[149660]:_any[141](?), arg t[149662]:_any[141](?), param arg i[149664]:_any[141](?)) : _unknown[42] "private"
+  {
+    unknown ret[611458] "RVV" "temp"
+    unknown call_tmp[820457] "maybe param" "maybe type" "temp"
+    (820460 'move' call_tmp[820457](149675 call(149672 call (partial) styleElement _mt[203] ch[149660]) QIO_STYLE_ELEMENT_AGGREGATE[77175]))
+    const st[149668] "dead at end of block" "const" "insert auto destroy"
+    (646256 'init var' st[149668] call_tmp[820457])
+    (149678 'end of statement')
+    unknown call_tmp[820462] "expr temp" "maybe param" "maybe type" "temp"
+    (820465 'move' call_tmp[820462](149700 call == st[149668] QIO_AGGREGATE_FORMAT_JSON[77225]))
+    unknown call_tmp[820467] "expr temp" "maybe param" "maybe type" "temp"
+    (820470 'move' call_tmp[820467](149704 call _cond_test call_tmp[820462]))
+    if call_tmp[820467]
+    {
+      unknown call_tmp[820472] "expr temp" "maybe param" "maybe type" "temp"
+      (820475 'move' call_tmp[820472](149686 'field num to name' t[149662] i[149664]))
+      unknown call_tmp[820477] "expr temp" "maybe param" "maybe type" "temp"
+      (820480 'move' call_tmp[820477](149683 call + "\"" call_tmp[820472]))
+      unknown call_tmp[820482] "expr temp" "maybe param" "maybe type" "temp"
+      (820485 'move' call_tmp[820482](149681 call + call_tmp[820477] "\":"))
+      (611463 'move' ret[611458](611462 'deref' call_tmp[820482]))
+      gotoReturn _end_ioFieldNameEqLiteral[611456] _end_ioFieldNameEqLiteral[611456]
+    }
+    {
+      unknown call_tmp[820487] "expr temp" "maybe param" "maybe type" "temp"
+      (820490 'move' call_tmp[820487](149696 'field num to name' t[149662] i[149664]))
+      unknown call_tmp[820492] "expr temp" "maybe param" "maybe type" "temp"
+      (820495 'move' call_tmp[820492](149694 call + call_tmp[820487] " = "))
+      (611468 'move' ret[611458](611467 'deref' call_tmp[820492]))
+      gotoReturn _end_ioFieldNameEqLiteral[611456] _end_ioFieldNameEqLiteral[611456]
+    }
+    label _end_ioFieldNameEqLiteral[611456]
+    (611460 return ret[611458])
+  }
+  function ioFieldNameLiteral[149710](arg ch[149712]:_any[141](?), arg t[149714]:_any[141](?), param arg i[149716]:_any[141](?)) : _unknown[42] "private"
+  {
+    unknown ret[611474] "RVV" "temp"
+    unknown call_tmp[820499] "maybe param" "maybe type" "temp"
+    (820502 'move' call_tmp[820499](149725 call(149722 call (partial) styleElement _mt[203] ch[149712]) QIO_STYLE_ELEMENT_AGGREGATE[77175]))
+    const st[149720] "dead at end of block" "const" "insert auto destroy"
+    (646258 'init var' st[149720] call_tmp[820499])
+    (149728 'end of statement')
+    unknown call_tmp[820504] "expr temp" "maybe param" "maybe type" "temp"
+    (820507 'move' call_tmp[820504](149745 call == st[149720] QIO_AGGREGATE_FORMAT_JSON[77225]))
+    unknown call_tmp[820509] "expr temp" "maybe param" "maybe type" "temp"
+    (820512 'move' call_tmp[820509](149749 call _cond_test call_tmp[820504]))
+    if call_tmp[820509]
+    {
+      unknown call_tmp[820514] "expr temp" "maybe param" "maybe type" "temp"
+      (820517 'move' call_tmp[820514](149736 'field num to name' t[149714] i[149716]))
+      unknown call_tmp[820519] "expr temp" "maybe param" "maybe type" "temp"
+      (820522 'move' call_tmp[820519](149733 call + "\"" call_tmp[820514]))
+      unknown call_tmp[820524] "expr temp" "maybe param" "maybe type" "temp"
+      (820527 'move' call_tmp[820524](149731 call + call_tmp[820519] "\""))
+      (611479 'move' ret[611474](611478 'deref' call_tmp[820524]))
+      gotoReturn _end_ioFieldNameLiteral[611472] _end_ioFieldNameLiteral[611472]
+    }
+    {
+      unknown call_tmp[820529] "expr temp" "maybe param" "maybe type" "temp"
+      (820532 'move' call_tmp[820529](149742 'field num to name' t[149714] i[149716]))
+      (611484 'move' ret[611474](611483 'deref' call_tmp[820529]))
+      gotoReturn _end_ioFieldNameLiteral[611472] _end_ioFieldNameLiteral[611472]
+    }
+    label _end_ioFieldNameLiteral[611472]
+    (611476 return ret[611474])
+  }
+  function writeThisFieldsDefaultImpl[149755](arg writer[149757]:_any[141](?), arg x[149761]:_any[141](?), inout arg first[149765]:bool[19]) : _unknown[42] throws "no return value for void"
+  {
+    unknown call_tmp[820534] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820537 'move' call_tmp[820534](526187 'typeof' x[149761]))
+    unknown call_tmp[820539] "maybe param" "maybe type" "temp"
+    (820542 'move' call_tmp[820539](149771 'num fields' call_tmp[820534]))
+    unknown num_fields[149770] "dead at end of block" "param"
+    (646260 'init var' num_fields[149770] call_tmp[820539])
+    (149774 'end of statement')
+    unknown call_tmp[820546] "maybe param" "maybe type" "temp"
+    (820549 'move' call_tmp[820546](149783 call(149780 call (partial) _binary _mt[203] writer[149757])))
+    unknown isBinary[149776] "dead at end of block" "insert auto destroy"
+    (646262 'init var' isBinary[149776] call_tmp[820546])
+    (149785 'end of statement')
+    unknown call_tmp[820551] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820554 'move' call_tmp[820551](526189 'typeof' x[149761]))
+    unknown call_tmp[820556] "expr temp" "maybe param" "maybe type" "temp"
+    (820559 'move' call_tmp[820556](149810 call isClassType call_tmp[820551]))
+    unknown call_tmp[820561] "expr temp" "maybe param" "maybe type" "temp"
+    (820564 'move' call_tmp[820561](149812 call _cond_test call_tmp[820556]))
+    if call_tmp[820561]
+    {
+      unknown call_tmp[820566] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (820569 'move' call_tmp[820566](526191 'typeof' x[149761]))
+      unknown call_tmp[820571] "expr temp" "maybe param" "maybe type" "temp"
+      (820574 'move' call_tmp[820571](149801 call _to_borrowed call_tmp[820566]))
+      unknown call_tmp[820576] "expr temp" "maybe param" "maybe type" "temp"
+      (820579 'move' call_tmp[820576](149798 call != call_tmp[820571] RootClass[236]))
+      unknown call_tmp[820581] "expr temp" "maybe param" "maybe type" "temp"
+      (820584 'move' call_tmp[820581](149805 call _cond_test call_tmp[820576]))
+      if call_tmp[820581]
+      {
+        unknown call_tmp[820588] "expr temp" "maybe param" "maybe type" "temp"
+        (820591 'move' call_tmp[820588](149794 call super _mt[203] x[149761]))
+        (149789 call writeThisFieldsDefaultImpl writer[149757] call_tmp[820588] first[149765])
+      }
+    }
+    unknown call_tmp[820593] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820596 'move' call_tmp[820593](526193 'typeof' x[149761]))
+    unknown call_tmp[820598] "expr temp" "maybe param" "maybe type" "temp"
+    (820601 'move' call_tmp[820598](150027 call isExternUnionType call_tmp[820593]))
+    unknown call_tmp[820603] "expr temp" "maybe param" "maybe type" "temp"
+    (820606 'move' call_tmp[820603](150029 call _cond_test call_tmp[820598]))
+    if call_tmp[820603]
+    {
+      (149818 call compilerError "Cannot write extern union")
+    }
+    {
+      unknown call_tmp[820608] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (820611 'move' call_tmp[820608](526195 'typeof' x[149761]))
+      unknown call_tmp[820613] "expr temp" "maybe param" "maybe type" "temp"
+      (820616 'move' call_tmp[820613](150020 call isUnionType call_tmp[820608]))
+      unknown call_tmp[820618] "expr temp" "maybe param" "maybe type" "temp"
+      (820621 'move' call_tmp[820618](150017 call ! call_tmp[820613]))
+      unknown call_tmp[820623] "expr temp" "maybe param" "maybe type" "temp"
+      (820626 'move' call_tmp[820623](150022 call _cond_test call_tmp[820618]))
+      if call_tmp[820623]
+      {
+        {
+          unknown i[149823] "dead at end of block" "index var" "insert auto destroy"
+          (646264 'init var' i[149823] 0)
+          (555059 'end of statement')
+          unknown tmp[149889] "maybe param" "temp"
+          (149901 'move' tmp[149889](149899 call chpl_compute_low_param_loop_bound 1 num_fields[149770]))
+          unknown tmp[149890] "maybe param" "temp"
+          (149908 'move' tmp[149890](149906 call chpl_compute_high_param_loop_bound 1 num_fields[149770]))
+          unknown tmp[149891] "maybe param" "temp"
+          (149911 'move' tmp[149891] 1)
+          ParamForLoop[149913]
+          { i[149823] tmp[149889] tmp[149890] tmp[149891]
+            {
+              unknown call_tmp[820628] "expr temp" "maybe param" "maybe type" "temp"
+              (820631 'move' call_tmp[820628](149882 call isIoField x[149761] i[149823]))
+              unknown call_tmp[820633] "expr temp" "maybe param" "maybe type" "temp"
+              (820636 'move' call_tmp[820633](149885 call _cond_test call_tmp[820628]))
+              if call_tmp[820633]
+              {
+                unknown call_tmp[820638] "expr temp" "maybe param" "maybe type" "temp"
+                (820641 'move' call_tmp[820638](149862 call ! isBinary[149776]))
+                unknown call_tmp[820643] "expr temp" "maybe param" "maybe type" "temp"
+                (820646 'move' call_tmp[820643](149865 call _cond_test call_tmp[820638]))
+                if call_tmp[820643]
+                {
+                  unknown call_tmp[820648] "expr temp" "maybe param" "maybe type" "temp"
+                  (820651 'move' call_tmp[820648](149839 call ! first[149765]))
+                  unknown call_tmp[820653] "expr temp" "maybe param" "maybe type" "temp"
+                  (820656 'move' call_tmp[820653](149842 call _cond_test call_tmp[820648]))
+                  if call_tmp[820653]
+                  {
+                    (149836 call(149833 call (partial) writeLiteral _mt[203] writer[149757]) ", ")
+                  }
+                  unknown call_tmp[820660] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+                  (820663 'move' call_tmp[820660](526197 'typeof' x[149761]))
+                  unknown call_tmp[820665] "maybe param" "maybe type" "temp"
+                  (820668 'move' call_tmp[820665](149850 call ioFieldNameEqLiteral writer[149757] call_tmp[820660] i[149823]))
+                  const eq[149848] "dead at end of block" "const" "insert auto destroy"
+                  (646266 'init var' eq[149848] call_tmp[820665])
+                  (149855 'end of statement' i[149823])
+                  (149860 call(149857 call (partial) writeLiteral _mt[203] writer[149757]) eq[149848])
+                  (555062 'end of statement' eq[149848])
+                }
+                unknown call_tmp[820674] "expr temp" "maybe param" "maybe type" "temp"
+                (820677 'move' call_tmp[820674](149874 'field by num' x[149761] i[149823]))
+                (149873 call(149870 call (partial) write _mt[203] writer[149757]) call_tmp[820674])
+                (555064 'end of statement' i[149823])
+                (149877 call = first[149765] 0)
+              }
+            }
+          }
+          label _unused_continueLabel[149893]
+          label _breakLabel[149892]
+        }
+      }
+      {
+        unknown call_tmp[820679] "maybe param" "maybe type" "temp"
+        (820682 'move' call_tmp[820679](149925 'get_union_id' x[149761]))
+        unknown id[149924] "dead at end of block" "insert auto destroy"
+        (646268 'init var' id[149924] call_tmp[820679])
+        (149928 'end of statement')
+        {
+          unknown i[149929] "dead at end of block" "index var" "insert auto destroy"
+          (646270 'init var' i[149929] 0)
+          (555067 'end of statement')
+          unknown tmp[149984] "maybe param" "temp"
+          (149996 'move' tmp[149984](149994 call chpl_compute_low_param_loop_bound 1 num_fields[149770]))
+          unknown tmp[149985] "maybe param" "temp"
+          (150003 'move' tmp[149985](150001 call chpl_compute_high_param_loop_bound 1 num_fields[149770]))
+          unknown tmp[149986] "maybe param" "temp"
+          (150006 'move' tmp[149986] 1)
+          ParamForLoop[150008]
+          { i[149929] tmp[149984] tmp[149985] tmp[149986]
+            {
+              unknown tmp[489072] "maybe param" "temp"
+              (489083 'move' tmp[489072](149973 call isIoField x[149761] i[149929]))
+              unknown call_tmp[820684] "expr temp" "maybe param" "maybe type" "temp"
+              (820687 'move' call_tmp[820684](489085 call _cond_invalid tmp[489072]))
+              if call_tmp[820684]
+              {
+                (489088 call compilerError "cannot promote short-circuiting && operator")
+              }
+              unknown tmp[681556] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+              unknown tmp[681557] "maybe param" "temp"
+              unknown call_tmp[820689] "expr temp" "maybe param" "maybe type" "temp"
+              (820692 'move' call_tmp[820689](489073 call isTrue tmp[489072]))
+              (681562 'move' tmp[681557](681560 call _cond_test call_tmp[820689]))
+              if tmp[681557]
+              {
+                unknown tmp[681564] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+                unknown call_tmp[820694] "expr temp" "maybe param" "maybe type" "temp"
+                (820697 'move' call_tmp[820694](149976 call == i[149929] id[149924]))
+                (681566 'move' tmp[681564](489076 call isTrue call_tmp[820694]))
+                (681571 'move' tmp[681556](681568 '_paramFoldLogical' tmp[681557] tmp[681564]))
+              }
+              {
+                (681576 'move' tmp[681556](681573 '_paramFoldLogical' tmp[681557] 0))
+              }
+              unknown call_tmp[820699] "expr temp" "maybe param" "maybe type" "temp"
+              (820702 'move' call_tmp[820699](149980 call _cond_test tmp[681556]))
+              if call_tmp[820699]
+              {
+                unknown call_tmp[820704] "expr temp" "maybe param" "maybe type" "temp"
+                (820707 'move' call_tmp[820704](149958 call _cond_test isBinary[149776]))
+                if call_tmp[820704]
+                {
+                  (149939 call write id[149924])
+                  (555069 'end of statement' id[149924])
+                }
+                {
+                  unknown call_tmp[820709] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+                  (820712 'move' call_tmp[820709](526199 'typeof' x[149761]))
+                  unknown call_tmp[820714] "maybe param" "maybe type" "temp"
+                  (820717 'move' call_tmp[820714](149945 call ioFieldNameEqLiteral writer[149757] call_tmp[820709] i[149929]))
+                  const eq[149943] "dead at end of block" "const" "insert auto destroy"
+                  (646272 'init var' eq[149943] call_tmp[820714])
+                  (149950 'end of statement' i[149929])
+                  (149955 call(149952 call (partial) writeLiteral _mt[203] writer[149757]) eq[149943])
+                  (555072 'end of statement' eq[149943])
+                }
+                unknown call_tmp[820723] "expr temp" "maybe param" "maybe type" "temp"
+                (820726 'move' call_tmp[820723](149967 'field by num' x[149761] i[149929]))
+                (149966 call(149963 call (partial) write _mt[203] writer[149757]) call_tmp[820723])
+                (555074 'end of statement' i[149929])
+              }
+            }
+          }
+          label _unused_continueLabel[149988]
+          label _breakLabel[149987]
+        }
+      }
+    }
+    (611488 return _void[46])
+  }
+  function writeThisDefaultImpl[150036](arg writer[150038]:_any[141](?), arg x[150042]:_any[141](?)) : _unknown[42] throws "no return value for void"
+  {
+    unknown call_tmp[820730] "maybe param" "maybe type" "temp"
+    (820733 'move' call_tmp[820730](150052 call(150049 call (partial) styleElement _mt[203] writer[150038]) QIO_STYLE_ELEMENT_AGGREGATE[77175]))
+    const st[150047] "dead at end of block" "const" "insert auto destroy"
+    (646274 'init var' st[150047] call_tmp[820730])
+    (150055 'end of statement')
+    unknown call_tmp[820735] "maybe param" "maybe type" "temp"
+    (820738 'move' call_tmp[820735](150058 call == st[150047] QIO_AGGREGATE_FORMAT_JSON[77225]))
+    const isJson[150057] "dead at end of block" "const" "insert auto destroy"
+    (646276 'init var' isJson[150057] call_tmp[820735])
+    (150063 'end of statement')
+    unknown call_tmp[820742] "expr temp" "maybe param" "maybe type" "temp"
+    (820745 'move' call_tmp[820742](150113 call(150110 call (partial) _binary _mt[203] writer[150038])))
+    unknown call_tmp[820747] "expr temp" "maybe param" "maybe type" "temp"
+    (820750 'move' call_tmp[820747](150107 call ! call_tmp[820742]))
+    unknown call_tmp[820752] "expr temp" "maybe param" "maybe type" "temp"
+    (820755 'move' call_tmp[820752](150114 call _cond_test call_tmp[820747]))
+    if call_tmp[820752]
+    {
+      const start[150066] "dead at end of block" "const" "insert auto destroy"
+      unknown tmp[681633] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[681634] "maybe param" "temp"
+      (681639 'move' tmp[681634](681637 call _cond_test isJson[150057]))
+      if tmp[681634]
+      {
+        (681644 'move' tmp[681633](681641 '_paramFoldLogical' tmp[681634] "{"))
+      }
+      {
+        unknown tmp[681606] "expr temp" "if-expr result" "maybe type" "temp"
+        unknown tmp[681607] "maybe param" "temp"
+        unknown call_tmp[820757] "expr temp" "maybe param" "maybe type" "temp"
+        (820760 'move' call_tmp[820757](150069 call == st[150047] QIO_AGGREGATE_FORMAT_CHPL[77220]))
+        (681612 'move' tmp[681607](681610 call _cond_test call_tmp[820757]))
+        if tmp[681607]
+        {
+          unknown tmp[681614] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+          unknown call_tmp[820762] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+          (820765 'move' call_tmp[820762](526201 'typeof' x[150042]))
+          unknown call_tmp[820767] "expr temp" "maybe param" "maybe type" "temp"
+          (820770 'move' call_tmp[820767](150080 call : call_tmp[820762] string[244]))
+          unknown call_tmp[820772] "expr temp" "maybe param" "maybe type" "temp"
+          (820775 'move' call_tmp[820772](150075 call + "new " call_tmp[820767]))
+          (681616 'move' tmp[681614](150073 call + call_tmp[820772] "("))
+          (681621 'move' tmp[681606](681618 '_paramFoldLogical' tmp[681607] tmp[681614]))
+        }
+        {
+          unknown tmp[681583] "expr temp" "if-expr result" "maybe type" "temp"
+          unknown tmp[681584] "maybe param" "temp"
+          unknown call_tmp[820777] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+          (820780 'move' call_tmp[820777](526203 'typeof' x[150042]))
+          unknown call_tmp[820782] "expr temp" "maybe param" "maybe type" "temp"
+          (820785 'move' call_tmp[820782](150086 call isClassType call_tmp[820777]))
+          (681589 'move' tmp[681584](681587 call _cond_test call_tmp[820782]))
+          if tmp[681584]
+          {
+            (681594 'move' tmp[681583](681591 '_paramFoldLogical' tmp[681584] "{"))
+          }
+          {
+            (681599 'move' tmp[681583](681596 '_paramFoldLogical' tmp[681584] "("))
+          }
+          (681626 'move' tmp[681606](681623 '_paramFoldLogical' tmp[681607] tmp[681583]))
+        }
+        (681649 'move' tmp[681633](681646 '_paramFoldLogical' tmp[681634] tmp[681606]))
+      }
+      (646278 'init var' start[150066] tmp[681633])
+      (150100 'end of statement' isJson[150057] st[150047])
+      (150105 call(150102 call (partial) writeLiteral _mt[203] writer[150038]) start[150066])
+      (555079 'end of statement' start[150066])
+    }
+    unknown first[150119] "dead at end of block" "insert auto destroy"
+    (646280 'init var' first[150119] 1)
+    (150122 'end of statement' st[150047])
+    (150124 call writeThisFieldsDefaultImpl writer[150038] x[150042] first[150119])
+    (555081 'end of statement' first[150119])
+    unknown call_tmp[820791] "expr temp" "maybe param" "maybe type" "temp"
+    (820794 'move' call_tmp[820791](150166 call(150163 call (partial) _binary _mt[203] writer[150038])))
+    unknown call_tmp[820796] "expr temp" "maybe param" "maybe type" "temp"
+    (820799 'move' call_tmp[820796](150160 call ! call_tmp[820791]))
+    unknown call_tmp[820801] "expr temp" "maybe param" "maybe type" "temp"
+    (820804 'move' call_tmp[820801](150167 call _cond_test call_tmp[820796]))
+    if call_tmp[820801]
+    {
+      const end[150130] "dead at end of block" "const" "insert auto destroy"
+      unknown tmp[681702] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[681703] "maybe param" "temp"
+      (681708 'move' tmp[681703](681706 call _cond_test isJson[150057]))
+      if tmp[681703]
+      {
+        (681713 'move' tmp[681702](681710 '_paramFoldLogical' tmp[681703] "}"))
+      }
+      {
+        unknown tmp[681679] "expr temp" "if-expr result" "maybe type" "temp"
+        unknown tmp[681680] "maybe param" "temp"
+        unknown call_tmp[820806] "expr temp" "maybe param" "maybe type" "temp"
+        (820809 'move' call_tmp[820806](150133 call == st[150047] QIO_AGGREGATE_FORMAT_CHPL[77220]))
+        (681685 'move' tmp[681680](681683 call _cond_test call_tmp[820806]))
+        if tmp[681680]
+        {
+          (681690 'move' tmp[681679](681687 '_paramFoldLogical' tmp[681680] ")"))
+        }
+        {
+          unknown tmp[681656] "expr temp" "if-expr result" "maybe type" "temp"
+          unknown tmp[681657] "maybe param" "temp"
+          unknown call_tmp[820811] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+          (820814 'move' call_tmp[820811](526205 'typeof' x[150042]))
+          unknown call_tmp[820816] "expr temp" "maybe param" "maybe type" "temp"
+          (820819 'move' call_tmp[820816](150139 call isClassType call_tmp[820811]))
+          (681662 'move' tmp[681657](681660 call _cond_test call_tmp[820816]))
+          if tmp[681657]
+          {
+            (681667 'move' tmp[681656](681664 '_paramFoldLogical' tmp[681657] "}"))
+          }
+          {
+            (681672 'move' tmp[681656](681669 '_paramFoldLogical' tmp[681657] ")"))
+          }
+          (681695 'move' tmp[681679](681692 '_paramFoldLogical' tmp[681680] tmp[681656]))
+        }
+        (681718 'move' tmp[681702](681715 '_paramFoldLogical' tmp[681703] tmp[681679]))
+      }
+      (646282 'init var' end[150130] tmp[681702])
+      (150153 'end of statement' isJson[150057] st[150047])
+      (150158 call(150155 call (partial) writeLiteral _mt[203] writer[150038]) end[150130])
+      (555085 'end of statement' end[150130])
+    }
+    (611490 return _void[46])
+  }
+  function __numIOFields[150173](arg t[150175]:_any[141](?)) : _unknown[42] "private"
+  {
+    unknown ret[611494] "RVV" "temp"
+    unknown call_tmp[820823] "maybe param" "maybe type" "temp"
+    (820826 'move' call_tmp[820823](150181 'num fields' t[150175]))
+    unknown n[150180] "dead at end of block" "param"
+    (646284 'init var' n[150180] call_tmp[820823])
+    (150184 'end of statement')
+    unknown ret[150186] "dead at end of block" "insert auto destroy"
+    (646286 'init var' ret[150186] 0)
+    (150189 'end of statement')
+    unknown dummy[150191] "dead at end of block" "insert auto destroy" "no init"
+    (646288 'default init var' dummy[150191] t[150175])
+    (150194 'end of statement')
+    {
+      unknown i[150195] "dead at end of block" "index var" "insert auto destroy"
+      (646290 'init var' i[150195] 0)
+      (555087 'end of statement')
+      unknown tmp[150216] "maybe param" "temp"
+      (150228 'move' tmp[150216](150226 call chpl_compute_low_param_loop_bound 1 n[150180]))
+      unknown tmp[150217] "maybe param" "temp"
+      (150235 'move' tmp[150217](150233 call chpl_compute_high_param_loop_bound 1 n[150180]))
+      unknown tmp[150218] "maybe param" "temp"
+      (150238 'move' tmp[150218] 1)
+      ParamForLoop[150240]
+      { i[150195] tmp[150216] tmp[150217] tmp[150218]
+        {
+          unknown call_tmp[820828] "expr temp" "maybe param" "maybe type" "temp"
+          (820831 'move' call_tmp[820828](150208 call isIoField dummy[150191] i[150195]))
+          unknown call_tmp[820833] "expr temp" "maybe param" "maybe type" "temp"
+          (820836 'move' call_tmp[820833](150211 call _cond_test call_tmp[820828]))
+          if call_tmp[820833]
+          {
+            (150202 call += ret[150186] 1)
+            (555088 'end of statement' ret[150186])
+          }
+        }
+      }
+      label _unused_continueLabel[150220]
+      label _breakLabel[150219]
+    }
+    (611500 'move' ret[611494](611499 'coerce' ret[150186] int(64)[10]))
+    gotoReturn _end___numIOFields[611492] _end___numIOFields[611492]
+    (555090 'end of statement' ret[150186])
+    label _end___numIOFields[611492]
+    (611496 return ret[611494])
+  }
+  { scopeless type
+    int(64)[10]
+  }
+  function serializeDefaultImpl[150254](arg writer[150257]:fileWriter[170987](?), ref arg serializer[150260]:_any[141](?), const arg x[150264]:_any[141](?)) : _unknown[42] throws "no return value for void"
+  {
+    unknown call_tmp[820838] "maybe param" "maybe type" "temp"
+    (820841 'move' call_tmp[820838](150270 'simple type name' x[150264]))
+    const name[150269] "dead at end of block" "const" "insert auto destroy"
+    (646292 'init var' name[150269] call_tmp[820838])
+    (150273 'end of statement')
+    unknown call_tmp[820843] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820846 'move' call_tmp[820843](526207 'typeof' x[150264]))
+    unknown call_tmp[820848] "maybe param" "maybe type" "temp"
+    (820851 'move' call_tmp[820848](150277 call __numIOFields call_tmp[820843]))
+    const numIO[150275] "dead at end of block" "const" "insert auto destroy"
+    (646294 'init var' numIO[150275] call_tmp[820848])
+    (150280 'end of statement')
+    unknown ser[150282] "dead at end of block" "insert auto destroy"
+    unknown tmp[681725] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[681726] "maybe param" "temp"
+    unknown call_tmp[820853] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820856 'move' call_tmp[820853](526209 'typeof' x[150264]))
+    unknown call_tmp[820858] "expr temp" "maybe param" "maybe type" "temp"
+    (820861 'move' call_tmp[820858](150284 call isClassType call_tmp[820853]))
+    (681731 'move' tmp[681726](681729 call _cond_test call_tmp[820858]))
+    if tmp[681726]
+    {
+      unknown tmp[681733] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (681735 'move' tmp[681733](150292 call(150289 call (partial) startClass _mt[203] serializer[150260]) writer[150257] name[150269] numIO[150275]))
+      (681740 'move' tmp[681725](681737 '_paramFoldLogical' tmp[681726] tmp[681733]))
+    }
+    {
+      unknown tmp[681742] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (681744 'move' tmp[681742](150302 call(150299 call (partial) startRecord _mt[203] serializer[150260]) writer[150257] name[150269] numIO[150275]))
+      (681749 'move' tmp[681725](681746 '_paramFoldLogical' tmp[681726] tmp[681742]))
+    }
+    (646296 'init var' ser[150282] tmp[681725])
+    (150310 'end of statement')
+    unknown tmp[489093] "maybe param" "temp"
+    unknown call_tmp[820867] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820870 'move' call_tmp[820867](526211 'typeof' x[150264]))
+    (489104 'move' tmp[489093](150340 call isClassType call_tmp[820867]))
+    unknown call_tmp[820872] "expr temp" "maybe param" "maybe type" "temp"
+    (820875 'move' call_tmp[820872](489106 call _cond_invalid tmp[489093]))
+    if call_tmp[820872]
+    {
+      (489109 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[681756] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[681757] "maybe param" "temp"
+    unknown call_tmp[820877] "expr temp" "maybe param" "maybe type" "temp"
+    (820880 'move' call_tmp[820877](489094 call isTrue tmp[489093]))
+    (681762 'move' tmp[681757](681760 call _cond_test call_tmp[820877]))
+    if tmp[681757]
+    {
+      unknown tmp[681764] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[820882] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (820885 'move' call_tmp[820882](526213 'typeof' x[150264]))
+      unknown call_tmp[820887] "expr temp" "maybe param" "maybe type" "temp"
+      (820890 'move' call_tmp[820887](150345 call _to_borrowed call_tmp[820882]))
+      unknown call_tmp[820892] "expr temp" "maybe param" "maybe type" "temp"
+      (820895 'move' call_tmp[820892](150342 call != call_tmp[820887] RootClass[236]))
+      (681766 'move' tmp[681764](489097 call isTrue call_tmp[820892]))
+      (681771 'move' tmp[681756](681768 '_paramFoldLogical' tmp[681757] tmp[681764]))
+    }
+    {
+      (681776 'move' tmp[681756](681773 '_paramFoldLogical' tmp[681757] 0))
+    }
+    unknown call_tmp[820897] "expr temp" "maybe param" "maybe type" "temp"
+    (820900 'move' call_tmp[820897](150349 call _cond_test tmp[681756]))
+    if call_tmp[820897]
+    {
+      { scopeless type
+        unknown call_type_tmp[577779] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[820904] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (820907 'move' call_tmp[820904](150326 call super _mt[203] x[150264]))
+        (577783 'move' call_type_tmp[577779](150329 'typeof' call_tmp[820904]))
+      }
+      unknown call_tmp[820909] "expr temp" "maybe param" "maybe type" "temp"
+      (820912 'move' call_tmp[820909](150323 call != call_type_tmp[577779] RootClass[236]))
+      unknown call_tmp[820914] "expr temp" "maybe param" "maybe type" "temp"
+      (820917 'move' call_tmp[820914](150332 call _cond_test call_tmp[820909]))
+      if call_tmp[820914]
+      {
+        unknown call_tmp[820921] "expr temp" "maybe param" "maybe type" "temporary of super field" "temp"
+        (820924 'move' call_tmp[820921](150313 call super _mt[203] x[150264]))
+        (150319 call(150316 call (partial) serialize _mt[203] call_tmp[820921]) writer[150257] ser[150282])
+        (555095 'end of statement' ser[150282])
+      }
+    }
+    unknown call_tmp[820928] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820931 'move' call_tmp[820928](526215 'typeof' x[150264]))
+    unknown call_tmp[820933] "maybe param" "maybe type" "temp"
+    (820936 'move' call_tmp[820933](150355 'num fields' call_tmp[820928]))
+    unknown num_fields[150354] "dead at end of block" "param"
+    (646298 'init var' num_fields[150354] call_tmp[820933])
+    (150358 'end of statement' name[150269] numIO[150275])
+    {
+      unknown i[150359] "dead at end of block" "index var" "insert auto destroy"
+      (646300 'init var' i[150359] 0)
+      (555097 'end of statement')
+      unknown tmp[150394] "maybe param" "temp"
+      (150406 'move' tmp[150394](150404 call chpl_compute_low_param_loop_bound 1 num_fields[150354]))
+      unknown tmp[150395] "maybe param" "temp"
+      (150413 'move' tmp[150395](150411 call chpl_compute_high_param_loop_bound 1 num_fields[150354]))
+      unknown tmp[150396] "maybe param" "temp"
+      (150416 'move' tmp[150396] 1)
+      ParamForLoop[150418]
+      { i[150359] tmp[150394] tmp[150395] tmp[150396]
+        {
+          unknown call_tmp[820938] "expr temp" "maybe param" "maybe type" "temp"
+          (820941 'move' call_tmp[820938](150387 call isIoField x[150264] i[150359]))
+          unknown call_tmp[820943] "expr temp" "maybe param" "maybe type" "temp"
+          (820946 'move' call_tmp[820943](150390 call _cond_test call_tmp[820938]))
+          if call_tmp[820943]
+          {
+            unknown call_tmp[820948] "maybe param" "maybe type" "temp"
+            (820951 'move' call_tmp[820948](150370 'field num to name' x[150264] i[150359]))
+            unknown name[150368] "dead at end of block" "param"
+            (646302 'init var' name[150368] call_tmp[820948] string[244])
+            (150374 'end of statement' i[150359])
+            unknown call_tmp[820955] "expr temp" "maybe param" "maybe type" "temp"
+            (820958 'move' call_tmp[820955](150383 'field by num' x[150264] i[150359]))
+            (150381 call(150378 call (partial) writeField _mt[203] ser[150282]) name[150368] call_tmp[820955])
+            (555099 'end of statement' ser[150282] i[150359])
+          }
+        }
+      }
+      label _unused_continueLabel[150398]
+      label _breakLabel[150397]
+    }
+    unknown call_tmp[820960] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820963 'move' call_tmp[820960](526217 'typeof' x[150264]))
+    unknown call_tmp[820965] "expr temp" "maybe param" "maybe type" "temp"
+    (820968 'move' call_tmp[820965](150444 call isClassType call_tmp[820960]))
+    unknown call_tmp[820970] "expr temp" "maybe param" "maybe type" "temp"
+    (820973 'move' call_tmp[820970](150446 call _cond_test call_tmp[820965]))
+    if call_tmp[820970]
+    {
+      (150433 call(150430 call (partial) endClass _mt[203] ser[150282]))
+      (555102 'end of statement' ser[150282])
+    }
+    {
+      (150441 call(150438 call (partial) endRecord _mt[203] ser[150282]))
+      (555104 'end of statement' ser[150282])
+    }
+    (611504 return _void[46])
+  }
+  function deserializeDefaultImpl[150454](arg reader[150457]:fileReader[170893](?), ref arg deserializer[150460]:_any[141](?), ref arg x[150464]:_any[141](?)) : _unknown[42] throws "no return value for void"
+  {
+    unknown call_tmp[820979] "expr temp" "maybe param" "maybe type" "temp"
+    (820982 'move' call_tmp[820979](150472 'simple type name' x[150464]))
+    unknown call_tmp[820984] "maybe param" "maybe type" "temp"
+    (820987 'move' call_tmp[820984](150470 call : call_tmp[820979] string[244]))
+    const name[150469] "dead at end of block" "const" "insert auto destroy"
+    (646304 'init var' name[150469] call_tmp[820984])
+    (150476 'end of statement')
+    unknown des[150478] "dead at end of block" "insert auto destroy"
+    unknown tmp[681783] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[681784] "maybe param" "temp"
+    unknown call_tmp[820989] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820992 'move' call_tmp[820989](526219 'typeof' x[150464]))
+    unknown call_tmp[820994] "expr temp" "maybe param" "maybe type" "temp"
+    (820997 'move' call_tmp[820994](150480 call isClassType call_tmp[820989]))
+    (681789 'move' tmp[681784](681787 call _cond_test call_tmp[820994]))
+    if tmp[681784]
+    {
+      unknown tmp[681791] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (681793 'move' tmp[681791](150486 call(150483 call (partial) startClass _mt[203] deserializer[150460]) reader[150457] name[150469]))
+      (681798 'move' tmp[681783](681795 '_paramFoldLogical' tmp[681784] tmp[681791]))
+    }
+    {
+      unknown tmp[681800] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (681802 'move' tmp[681800](150493 call(150490 call (partial) startRecord _mt[203] deserializer[150460]) reader[150457] name[150469]))
+      (681807 'move' tmp[681783](681804 '_paramFoldLogical' tmp[681784] tmp[681800]))
+    }
+    (646306 'init var' des[150478] tmp[681783])
+    (150500 'end of statement')
+    unknown tmp[489114] "maybe param" "temp"
+    unknown call_tmp[821003] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821006 'move' call_tmp[821003](526221 'typeof' x[150464]))
+    (489125 'move' tmp[489114](150530 call isClassType call_tmp[821003]))
+    unknown call_tmp[821008] "expr temp" "maybe param" "maybe type" "temp"
+    (821011 'move' call_tmp[821008](489127 call _cond_invalid tmp[489114]))
+    if call_tmp[821008]
+    {
+      (489130 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[681814] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[681815] "maybe param" "temp"
+    unknown call_tmp[821013] "expr temp" "maybe param" "maybe type" "temp"
+    (821016 'move' call_tmp[821013](489115 call isTrue tmp[489114]))
+    (681820 'move' tmp[681815](681818 call _cond_test call_tmp[821013]))
+    if tmp[681815]
+    {
+      unknown tmp[681822] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[821018] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (821021 'move' call_tmp[821018](526223 'typeof' x[150464]))
+      unknown call_tmp[821023] "expr temp" "maybe param" "maybe type" "temp"
+      (821026 'move' call_tmp[821023](150535 call _to_borrowed call_tmp[821018]))
+      unknown call_tmp[821028] "expr temp" "maybe param" "maybe type" "temp"
+      (821031 'move' call_tmp[821028](150532 call != call_tmp[821023] RootClass[236]))
+      (681824 'move' tmp[681822](489118 call isTrue call_tmp[821028]))
+      (681829 'move' tmp[681814](681826 '_paramFoldLogical' tmp[681815] tmp[681822]))
+    }
+    {
+      (681834 'move' tmp[681814](681831 '_paramFoldLogical' tmp[681815] 0))
+    }
+    unknown call_tmp[821033] "expr temp" "maybe param" "maybe type" "temp"
+    (821036 'move' call_tmp[821033](150539 call _cond_test tmp[681814]))
+    if call_tmp[821033]
+    {
+      { scopeless type
+        unknown call_type_tmp[577785] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[821040] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (821043 'move' call_tmp[821040](150516 call super _mt[203] x[150464]))
+        (577789 'move' call_type_tmp[577785](150519 'typeof' call_tmp[821040]))
+      }
+      unknown call_tmp[821045] "expr temp" "maybe param" "maybe type" "temp"
+      (821048 'move' call_tmp[821045](150513 call != call_type_tmp[577785] RootClass[236]))
+      unknown call_tmp[821050] "expr temp" "maybe param" "maybe type" "temp"
+      (821053 'move' call_tmp[821050](150522 call _cond_test call_tmp[821045]))
+      if call_tmp[821050]
+      {
+        unknown call_tmp[821057] "expr temp" "maybe param" "maybe type" "temporary of super field" "temp"
+        (821060 'move' call_tmp[821057](150503 call super _mt[203] x[150464]))
+        (150509 call(150506 call (partial) deserialize _mt[203] call_tmp[821057]) reader[150457] des[150478])
+        (555108 'end of statement' des[150478])
+      }
+    }
+    unknown call_tmp[821064] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821067 'move' call_tmp[821064](526225 'typeof' x[150464]))
+    unknown call_tmp[821069] "maybe param" "maybe type" "temp"
+    (821072 'move' call_tmp[821069](150545 'num fields' call_tmp[821064]))
+    unknown num_fields[150544] "dead at end of block" "param"
+    (646308 'init var' num_fields[150544] call_tmp[821069])
+    (150548 'end of statement' name[150469])
+    {
+      unknown i[150549] "dead at end of block" "index var" "insert auto destroy"
+      (646310 'init var' i[150549] 0)
+      (555110 'end of statement')
+      unknown tmp[150589] "maybe param" "temp"
+      (150601 'move' tmp[150589](150599 call chpl_compute_low_param_loop_bound 1 num_fields[150544]))
+      unknown tmp[150590] "maybe param" "temp"
+      (150608 'move' tmp[150590](150606 call chpl_compute_high_param_loop_bound 1 num_fields[150544]))
+      unknown tmp[150591] "maybe param" "temp"
+      (150611 'move' tmp[150591] 1)
+      ParamForLoop[150613]
+      { i[150549] tmp[150589] tmp[150590] tmp[150591]
+        {
+          unknown call_tmp[821074] "expr temp" "maybe param" "maybe type" "temp"
+          (821077 'move' call_tmp[821074](150582 call isIoField x[150464] i[150549]))
+          unknown call_tmp[821079] "expr temp" "maybe param" "maybe type" "temp"
+          (821082 'move' call_tmp[821079](150585 call _cond_test call_tmp[821074]))
+          if call_tmp[821079]
+          {
+            unknown call_tmp[821084] "maybe param" "maybe type" "temp"
+            (821087 'move' call_tmp[821084](150560 'field num to name' x[150464] i[150549]))
+            unknown name[150558] "dead at end of block" "param"
+            (646312 'init var' name[150558] call_tmp[821084] string[244])
+            (150564 'end of statement')
+            unknown field[150566] "dead at end of block" "ref var"
+            (646317 'init ref decl' field[150566])
+            unknown call_tmp[821089] "expr temp" "maybe param" "maybe type" "temp"
+            (821092 'move' call_tmp[821089](150567 'field by num' x[150464] i[150549]))
+            (646315 'move' field[150566](646314 'addr of' call_tmp[821089]))
+            (150571 'end of statement' i[150549])
+            (150578 call(150575 call (partial) readField _mt[203] des[150478]) name[150558] field[150566])
+            (555112 'end of statement' des[150478] field[150566])
+          }
+        }
+      }
+      label _unused_continueLabel[150593]
+      label _breakLabel[150592]
+    }
+    unknown call_tmp[821096] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821099 'move' call_tmp[821096](526227 'typeof' x[150464]))
+    unknown call_tmp[821101] "expr temp" "maybe param" "maybe type" "temp"
+    (821104 'move' call_tmp[821101](150635 call isClassType call_tmp[821096]))
+    unknown call_tmp[821106] "expr temp" "maybe param" "maybe type" "temp"
+    (821109 'move' call_tmp[821106](150637 call _cond_test call_tmp[821101]))
+    if call_tmp[821106]
+    {
+      (150626 call(150623 call (partial) endClass _mt[203] des[150478]))
+      (555115 'end of statement' des[150478])
+    }
+    {
+      (150632 call(150629 call (partial) endRecord _mt[203] des[150478]))
+      (555117 'end of statement' des[150478])
+    }
+    (611506 return _void[46])
+  }
+  function chpl__isFileReader[150645](arg T[150647]:_any[141](?)) param : _unknown[42]
+  {
+    unknown ret[611510] "RVV" "param" "temp"
+    unknown call_tmp[821115] "expr temp" "marked generic" "maybe param" "maybe type" "temp"
+    (821118 'move' call_tmp[821115](150656 call fileReader[170893](?) ?[227]))
+    unknown call_tmp[821120] "expr temp" "marked generic" "maybe param" "maybe type" "temp"
+    (821123 'move' call_tmp[821120](394786 'is_subtype' call_tmp[821115] T[150647]))
+    (611516 'move' ret[611510](611515 'coerce' call_tmp[821120] bool[19]))
+    (611512 return ret[611510])
+  }
+  { scopeless type
+    bool[19]
+  }
+  function skipFieldsAtEnd[150661](arg reader[150663]:_any[141](?), inout arg needsComma[150666]:bool[19]) : _unknown[42] throws "private" "no return value for void"
+  {
+    unknown call_tmp[821127] "maybe param" "maybe type" "temp"
+    (821130 'move' call_tmp[821127](150676 call(150673 call (partial) styleElement _mt[203] reader[150663]) QIO_STYLE_ELEMENT_AGGREGATE[77175]))
+    const qioFmt[150671] "dead at end of block" "const" "insert auto destroy"
+    (646319 'init var' qioFmt[150671] call_tmp[821127])
+    (150679 'end of statement')
+    unknown call_tmp[821132] "maybe param" "maybe type" "temp"
+    (821135 'move' call_tmp[821132](150682 call == qioFmt[150671] QIO_AGGREGATE_FORMAT_JSON[77225]))
+    const isJson[150681] "dead at end of block" "const" "insert auto destroy"
+    (646321 'init var' isJson[150681] call_tmp[821132])
+    (150687 'end of statement')
+    const qioSkipUnknown[150689] "dead at end of block" "const" "insert auto destroy"
+    (646323 'init var' qioSkipUnknown[150689] QIO_STYLE_ELEMENT_SKIP_UNKNOWN_FIELDS[77195])
+    (150692 'end of statement')
+    unknown call_tmp[821139] "expr temp" "maybe param" "maybe type" "temp"
+    (821142 'move' call_tmp[821139](150701 call(150698 call (partial) styleElement _mt[203] reader[150663]) qioSkipUnknown[150689]))
+    unknown call_tmp[821144] "maybe param" "maybe type" "temp"
+    (821147 'move' call_tmp[821144](150695 call != call_tmp[821139] 0))
+    const isSkipUnknown[150694] "dead at end of block" "const" "insert auto destroy"
+    (646325 'init var' isSkipUnknown[150694] call_tmp[821144])
+    (150705 'end of statement' qioFmt[150671] qioSkipUnknown[150689])
+    unknown tmp[489135] "maybe param" "temp"
+    (489146 'move' tmp[489135](150710 call ! isSkipUnknown[150694]))
+    unknown call_tmp[821149] "expr temp" "maybe param" "maybe type" "temp"
+    (821152 'move' call_tmp[821149](489148 call _cond_invalid tmp[489135]))
+    if call_tmp[821149]
+    {
+      (489151 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[681841] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[681842] "maybe param" "temp"
+    unknown call_tmp[821154] "expr temp" "maybe param" "maybe type" "temp"
+    (821157 'move' call_tmp[821154](489136 call isTrue tmp[489135]))
+    (681847 'move' tmp[681842](681845 call _cond_test call_tmp[821154]))
+    if tmp[681842]
+    {
+      (681852 'move' tmp[681841](681849 '_paramFoldLogical' tmp[681842] 1))
+    }
+    {
+      unknown tmp[681854] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[821159] "expr temp" "maybe param" "maybe type" "temp"
+      (821162 'move' call_tmp[821159](150713 call ! isJson[150681]))
+      (681856 'move' tmp[681854](489140 call isTrue call_tmp[821159]))
+      (681861 'move' tmp[681841](681858 '_paramFoldLogical' tmp[681842] tmp[681854]))
+    }
+    unknown call_tmp[821164] "expr temp" "maybe param" "maybe type" "temp"
+    (821167 'move' call_tmp[821164](150716 call _cond_test tmp[681841]))
+    if call_tmp[821164]
+    {
+      gotoReturn _end_skipFieldsAtEnd[611518] _end_skipFieldsAtEnd[611518]
+    }
+    {
+      unknown tmp[150769] "temp"
+      (150787 'move' tmp[150769](150785 call _cond_test 1))
+      WhileDo[150774]
+      {
+        {
+          unknown call_tmp[821169] "expr temp" "maybe param" "maybe type" "temp"
+          (821172 'move' call_tmp[821169](150750 call _cond_test needsComma[150666]))
+          if call_tmp[821169]
+          {
+            Try
+            {
+              {
+                (150731 call(150728 call (partial) readLiteral _mt[203] reader[150663]) "," 1)
+                (555124 'end of statement')
+                (150734 call = needsComma[150666] 0)
+              }
+            }
+            Catch err : BadFormatError
+            {
+              unknown call_tmp[821176] "expr temp" "maybe param" "maybe type" "temp"
+              (821179 'move' call_tmp[821176](394792 'current error'))
+              unknown call_tmp[821181] "maybe param" "maybe type" "temp"
+              (821184 'move' call_tmp[821181](394793 'dynamic_cast' unmanaged BadFormatError?[468259] call_tmp[821176]))
+              unknown tmp[394789] "dead at end of block" "insert auto destroy" "temp"
+              (646327 'init var' tmp[394789] call_tmp[821181])
+              unknown call_tmp[821186] "expr temp" "maybe param" "maybe type" "temp"
+              (821189 'move' call_tmp[821186](394796 '!=' tmp[394789] nil[32]))
+              if call_tmp[821186]
+              {
+                unknown call_tmp[821191] "expr temp" "maybe param" "maybe type" "temp"
+                (821194 'move' call_tmp[821191](394802 'to non nilable class' tmp[394789]))
+                unknown call_tmp[821196] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+                (821199 'move' call_tmp[821196](1000149 'new' _owned[238](?) call_tmp[821191]))
+                unknown err[150745] "dead at end of block" "insert auto destroy"
+                (646329 'init var' err[150745] call_tmp[821196])
+                (555126 'end of statement')
+                {
+                  break _breakLabel[150773] _breakLabel[150773]
+                }
+              }
+              {
+              }
+            }
+          }
+          Try
+          {
+            {
+              (150761 call(150758 call (partial) _skipField _mt[203] reader[150663]))
+            }
+          }
+          (150765 call = needsComma[150666] 1)
+        }
+        label _continueLabel[150772]
+        (150780 'move' tmp[150769](150778 call _cond_test 1))
+        tmp[150769]
+      }
+      label _breakLabel[150773]
+    }
+    label _end_skipFieldsAtEnd[611518]
+    (611520 return _void[46])
+  }
+  function readThisFieldsDefaultImpl[150792](arg reader[150794]:_any[141](?), arg t[150796]:_any[141](?), ref arg x[150798]:_any[141](?), inout arg needsComma[150801]:bool[19]) : _unknown[42] throws "no return value for void"
+  {
+    unknown call_tmp[821203] "maybe param" "maybe type" "temp"
+    (821206 'move' call_tmp[821203](150812 'num fields' t[150796]))
+    unknown numFields[150811] "dead at end of block" "param"
+    (646331 'init var' numFields[150811] call_tmp[821203])
+    (150815 'end of statement')
+    unknown call_tmp[821210] "maybe param" "maybe type" "temp"
+    (821213 'move' call_tmp[821210](150822 call(150819 call (partial) _binary _mt[203] reader[150794])))
+    unknown isBinary[150817] "dead at end of block" "insert auto destroy"
+    (646333 'init var' isBinary[150817] call_tmp[821210])
+    (150824 'end of statement')
+    unknown tmp[489156] "maybe param" "temp"
+    (489167 'move' tmp[489156](150859 call isClassType t[150796]))
+    unknown call_tmp[821215] "expr temp" "maybe param" "maybe type" "temp"
+    (821218 'move' call_tmp[821215](489169 call _cond_invalid tmp[489156]))
+    if call_tmp[821215]
+    {
+      (489172 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[681868] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[681869] "maybe param" "temp"
+    unknown call_tmp[821220] "expr temp" "maybe param" "maybe type" "temp"
+    (821223 'move' call_tmp[821220](489157 call isTrue tmp[489156]))
+    (681874 'move' tmp[681869](681872 call _cond_test call_tmp[821220]))
+    if tmp[681869]
+    {
+      unknown tmp[681876] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[821225] "expr temp" "maybe param" "maybe type" "temp"
+      (821228 'move' call_tmp[821225](150864 call _to_borrowed t[150796]))
+      unknown call_tmp[821230] "expr temp" "maybe param" "maybe type" "temp"
+      (821233 'move' call_tmp[821230](150861 call != call_tmp[821225] RootClass[236]))
+      (681878 'move' tmp[681876](489160 call isTrue call_tmp[821230]))
+      (681883 'move' tmp[681868](681880 '_paramFoldLogical' tmp[681869] tmp[681876]))
+    }
+    {
+      (681888 'move' tmp[681868](681885 '_paramFoldLogical' tmp[681869] 0))
+    }
+    unknown call_tmp[821235] "expr temp" "maybe param" "maybe type" "temp"
+    (821238 'move' call_tmp[821235](150868 call _cond_test tmp[681868]))
+    if call_tmp[821235]
+    {
+      { scopeless type
+        unknown call_type_tmp[577791] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[821242] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (821245 'move' call_tmp[821242](150829 call super _mt[203] x[150798]))
+        (577795 'move' call_type_tmp[577791](150832 'typeof' call_tmp[821242]))
+      }
+      unknown superType[150827] "dead at end of block" "insert auto destroy" "type variable"
+      (646336 'move' superType[150827] call_type_tmp[577791])
+      unknown castTmp[150835] "dead at end of block" "insert auto destroy"
+      (646338 'init var' castTmp[150835] x[150798] superType[150827])
+      (150839 'end of statement' superType[150827])
+      Try
+      {
+        {
+          (150842 call readThisFieldsDefaultImpl reader[150794] superType[150827] castTmp[150835] needsComma[150801])
+          (555131 'end of statement' superType[150827] castTmp[150835])
+        }
+      }
+      Catch err
+      {
+        unknown call_tmp[821247] "maybe param" "maybe type" "temp"
+        (821250 'move' call_tmp[821247](394811 'current error'))
+        unknown tmp[394808] "dead at end of block" "insert auto destroy" "temp"
+        (646340 'init var' tmp[394808] call_tmp[821247])
+        unknown call_tmp[821252] "expr temp" "maybe param" "maybe type" "temp"
+        (821255 'move' call_tmp[821252](394814 'to non nilable class' tmp[394808]))
+        unknown call_tmp[821257] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+        (821260 'move' call_tmp[821257](1000150 'new' _owned[238](?) call_tmp[821252]))
+        unknown err[150852] "dead at end of block" "insert auto destroy"
+        (646342 'init var' err[150852] call_tmp[821257])
+        (555134 'end of statement')
+        {
+          unknown call_tmp[821262] "expr temp" "maybe param" "maybe type" "temp"
+          (821265 'move' call_tmp[821262](542253 call chpl_fix_thrown_error err[150852]))
+          (150849 'throw' call_tmp[821262])
+          (555135 'end of statement' err[150852])
+        }
+      }
+    }
+    unknown call_tmp[821267] "expr temp" "maybe param" "maybe type" "temp"
+    (821270 'move' call_tmp[821267](151386 call _cond_test isBinary[150817]))
+    if call_tmp[821267]
+    {
+      {
+        unknown i[150873] "dead at end of block" "index var" "insert auto destroy"
+        (646344 'init var' i[150873] 0)
+        (555137 'end of statement')
+        unknown tmp[150902] "maybe param" "temp"
+        (150914 'move' tmp[150902](150912 call chpl_compute_low_param_loop_bound 1 numFields[150811]))
+        unknown tmp[150903] "maybe param" "temp"
+        (150921 'move' tmp[150903](150919 call chpl_compute_high_param_loop_bound 1 numFields[150811]))
+        unknown tmp[150904] "maybe param" "temp"
+        (150924 'move' tmp[150904] 1)
+        ParamForLoop[150926]
+        { i[150873] tmp[150902] tmp[150903] tmp[150904]
+          unknown call_tmp[821272] "expr temp" "maybe param" "maybe type" "temp"
+          (821275 'move' call_tmp[821272](150894 call isIoField x[150798] i[150873]))
+          unknown call_tmp[821277] "expr temp" "maybe param" "maybe type" "temp"
+          (821280 'move' call_tmp[821277](150897 call _cond_test call_tmp[821272]))
+          if call_tmp[821277]
+          {
+            Try
+            {
+              {
+                unknown call_tmp[821284] "expr temp" "maybe param" "maybe type" "temp"
+                (821287 'move' call_tmp[821284](150887 'field by num' x[150798] i[150873]))
+                (150886 call(150883 call (partial) readIt _mt[203] reader[150794]) call_tmp[821284])
+                (555138 'end of statement' i[150873])
+              }
+            }
+          }
+        }
+        label _unused_continueLabel[150906]
+        label _breakLabel[150905]
+      }
+    }
+    {
+      unknown call_tmp[821289] "expr temp" "maybe param" "maybe type" "temp"
+      (821292 'move' call_tmp[821289](151377 call > numFields[150811] 0))
+      unknown call_tmp[821294] "expr temp" "maybe param" "maybe type" "temp"
+      (821297 'move' call_tmp[821294](151381 call _cond_test call_tmp[821289]))
+      if call_tmp[821294]
+      {
+        unknown readField[150937] "dead at end of block" "insert auto destroy"
+        unknown call_tmp[821299] "expr temp" "maybe param" "maybe type" "temp"
+        (821302 'move' call_tmp[821299](150938 call * numFields[150811] bool[19]))
+        (646346 'default init var' readField[150937] call_tmp[821299])
+        (150943 'end of statement')
+        unknown numToRead[150945] "dead at end of block" "insert auto destroy"
+        (646348 'init var' numToRead[150945] 0)
+        (150948 'end of statement')
+        unknown numRead[150950] "dead at end of block" "insert auto destroy"
+        (646350 'init var' numRead[150950] 0)
+        (150953 'end of statement')
+        {
+          unknown i[150954] "dead at end of block" "index var" "insert auto destroy"
+          (646352 'init var' i[150954] 0)
+          (555140 'end of statement')
+          unknown tmp[150974] "maybe param" "temp"
+          (150986 'move' tmp[150974](150984 call chpl_compute_low_param_loop_bound 1 numFields[150811]))
+          unknown tmp[150975] "maybe param" "temp"
+          (150993 'move' tmp[150975](150991 call chpl_compute_high_param_loop_bound 1 numFields[150811]))
+          unknown tmp[150976] "maybe param" "temp"
+          (150996 'move' tmp[150976] 1)
+          ParamForLoop[150998]
+          { i[150954] tmp[150974] tmp[150975] tmp[150976]
+            unknown call_tmp[821304] "expr temp" "maybe param" "maybe type" "temp"
+            (821307 'move' call_tmp[821304](150966 call isIoField x[150798] i[150954]))
+            unknown call_tmp[821309] "expr temp" "maybe param" "maybe type" "temp"
+            (821312 'move' call_tmp[821309](150969 call _cond_test call_tmp[821304]))
+            if call_tmp[821309]
+            {
+              (150960 call += numToRead[150945] 1)
+              (555141 'end of statement' numToRead[150945])
+            }
+          }
+          label _unused_continueLabel[150978]
+          label _breakLabel[150977]
+        }
+        {
+          unknown tmp[151276] "temp"
+          unknown call_tmp[821314] "expr temp" "maybe param" "maybe type" "temp"
+          (821317 'move' call_tmp[821314](151297 call < numRead[150950] numToRead[150945]))
+          (151300 'move' tmp[151276](151295 call _cond_test call_tmp[821314]))
+          WhileDo[151281]
+          {
+            {
+              unknown call_tmp[821319] "expr temp" "maybe param" "maybe type" "temp"
+              (821322 'move' call_tmp[821319](151036 call _cond_test needsComma[150801]))
+              if call_tmp[821319]
+              {
+                Try
+                {
+                  {
+                    (151017 call(151014 call (partial) readLiteral _mt[203] reader[150794]) "," 1)
+                    (555143 'end of statement')
+                    (151020 call = needsComma[150801] 0)
+                  }
+                }
+                Catch err : BadFormatError
+                {
+                  unknown call_tmp[821326] "expr temp" "maybe param" "maybe type" "temp"
+                  (821329 'move' call_tmp[821326](394823 'current error'))
+                  unknown call_tmp[821331] "maybe param" "maybe type" "temp"
+                  (821334 'move' call_tmp[821331](394824 'dynamic_cast' unmanaged BadFormatError?[468259] call_tmp[821326]))
+                  unknown tmp[394820] "dead at end of block" "insert auto destroy" "temp"
+                  (646354 'init var' tmp[394820] call_tmp[821331])
+                  unknown call_tmp[821336] "expr temp" "maybe param" "maybe type" "temp"
+                  (821339 'move' call_tmp[821336](394827 '!=' tmp[394820] nil[32]))
+                  if call_tmp[821336]
+                  {
+                    unknown call_tmp[821341] "expr temp" "maybe param" "maybe type" "temp"
+                    (821344 'move' call_tmp[821341](394833 'to non nilable class' tmp[394820]))
+                    unknown call_tmp[821346] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+                    (821349 'move' call_tmp[821346](1000151 'new' _owned[238](?) call_tmp[821341]))
+                    unknown err[151031] "dead at end of block" "insert auto destroy"
+                    (646356 'init var' err[151031] call_tmp[821346])
+                    (555145 'end of statement')
+                    {
+                      break _breakLabel[151280] _breakLabel[151280]
+                    }
+                  }
+                  {
+                  }
+                }
+              }
+              unknown call_tmp[821353] "maybe param" "maybe type" "temp"
+              (821356 'move' call_tmp[821353](151047 call(151044 call (partial) styleElement _mt[203] reader[150794]) QIO_STYLE_ELEMENT_AGGREGATE[77175]))
+              unknown st[151042] "dead at end of block" "insert auto destroy"
+              (646358 'init var' st[151042] call_tmp[821353])
+              (151050 'end of statement')
+              const qioSkipUnknown[151052] "dead at end of block" "const" "insert auto destroy"
+              (646360 'init var' qioSkipUnknown[151052] QIO_STYLE_ELEMENT_SKIP_UNKNOWN_FIELDS[77195])
+              (151055 'end of statement')
+              unknown call_tmp[821360] "expr temp" "maybe param" "maybe type" "temp"
+              (821363 'move' call_tmp[821360](151064 call(151061 call (partial) styleElement _mt[203] reader[150794]) qioSkipUnknown[151052]))
+              unknown call_tmp[821365] "maybe param" "maybe type" "temp"
+              (821368 'move' call_tmp[821365](151058 call != call_tmp[821360] 0))
+              unknown isSkipUnknown[151057] "dead at end of block" "insert auto destroy"
+              (646362 'init var' isSkipUnknown[151057] call_tmp[821365])
+              (151068 'end of statement')
+              unknown hasReadFieldName[151070] "dead at end of block" "insert auto destroy"
+              (646364 'init var' hasReadFieldName[151070] 0)
+              (151073 'end of statement')
+              unknown call_tmp[821370] "maybe param" "maybe type" "temp"
+              (821373 'move' call_tmp[821370](151076 call == st[151042] QIO_AGGREGATE_FORMAT_JSON[77225]))
+              const isJson[151075] "dead at end of block" "const" "insert auto destroy"
+              (646366 'init var' isJson[151075] call_tmp[821370])
+              (151081 'end of statement' qioSkipUnknown[151052] st[151042])
+              {
+                unknown i[151082] "dead at end of block" "index var" "insert auto destroy"
+                (646368 'init var' i[151082] 0)
+                (555148 'end of statement')
+                unknown tmp[151203] "maybe param" "temp"
+                (151215 'move' tmp[151203](151213 call chpl_compute_low_param_loop_bound 1 numFields[150811]))
+                unknown tmp[151204] "maybe param" "temp"
+                (151222 'move' tmp[151204](151220 call chpl_compute_high_param_loop_bound 1 numFields[150811]))
+                unknown tmp[151205] "maybe param" "temp"
+                (151225 'move' tmp[151205] 1)
+                ParamForLoop[151227]
+                { i[151082] tmp[151203] tmp[151204] tmp[151205]
+                  {
+                    unknown tmp[489177] "maybe param" "temp"
+                    unknown tmp[489198] "maybe param" "temp"
+                    unknown call_tmp[821375] "expr temp" "maybe param" "maybe type" "temp"
+                    (821378 'move' call_tmp[821375](151099 call isIoField x[150798] i[151082]))
+                    (489209 'move' tmp[489198](151096 call ! call_tmp[821375]))
+                    unknown call_tmp[821380] "expr temp" "maybe param" "maybe type" "temp"
+                    (821383 'move' call_tmp[821380](489211 call _cond_invalid tmp[489198]))
+                    if call_tmp[821380]
+                    {
+                      (489214 call compilerError "cannot promote short-circuiting || operator")
+                    }
+                    unknown tmp[681895] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+                    unknown tmp[681896] "maybe param" "temp"
+                    unknown call_tmp[821385] "expr temp" "maybe param" "maybe type" "temp"
+                    (821388 'move' call_tmp[821385](489199 call isTrue tmp[489198]))
+                    (681901 'move' tmp[681896](681899 call _cond_test call_tmp[821385]))
+                    if tmp[681896]
+                    {
+                      (681906 'move' tmp[681895](681903 '_paramFoldLogical' tmp[681896] 1))
+                    }
+                    {
+                      unknown tmp[681908] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+                      (681910 'move' tmp[681908](489203 call isTrue hasReadFieldName[151070]))
+                      (681915 'move' tmp[681895](681912 '_paramFoldLogical' tmp[681896] tmp[681908]))
+                    }
+                    (489188 'move' tmp[489177] tmp[681895])
+                    unknown call_tmp[821390] "expr temp" "maybe param" "maybe type" "temp"
+                    (821393 'move' call_tmp[821390](489190 call _cond_invalid tmp[489177]))
+                    if call_tmp[821390]
+                    {
+                      (489193 call compilerError "cannot promote short-circuiting || operator")
+                    }
+                    unknown tmp[681922] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+                    unknown tmp[681923] "maybe param" "temp"
+                    unknown call_tmp[821395] "expr temp" "maybe param" "maybe type" "temp"
+                    (821398 'move' call_tmp[821395](489178 call isTrue tmp[489177]))
+                    (681928 'move' tmp[681923](681926 call _cond_test call_tmp[821395]))
+                    if tmp[681923]
+                    {
+                      (681933 'move' tmp[681922](681930 '_paramFoldLogical' tmp[681923] 1))
+                    }
+                    {
+                      unknown tmp[681935] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+                      unknown call_tmp[821400] "expr temp" "maybe param" "maybe type" "temp"
+                      (821403 'move' call_tmp[821400](151105 call - i[151082] 1))
+                      unknown call_tmp[821405] "expr temp" "maybe param" "maybe type" "temp"
+                      (821408 'move' call_tmp[821405](151104 call readField[150937] call_tmp[821400]))
+                      (681937 'move' tmp[681935](489182 call isTrue call_tmp[821405]))
+                      (681942 'move' tmp[681922](681939 '_paramFoldLogical' tmp[681923] tmp[681935]))
+                    }
+                    unknown call_tmp[821410] "expr temp" "maybe param" "maybe type" "temp"
+                    (821413 'move' call_tmp[821410](151109 call _cond_test tmp[681922]))
+                    if call_tmp[821410]
+                    {
+                      continue _unused_continueLabel[151207] _unused_continueLabel[151207]
+                    }
+                    Try
+                    {
+                      {
+                        unknown call_tmp[821415] "maybe param" "maybe type" "temp"
+                        (821418 'move' call_tmp[821415](151118 call ioFieldNameLiteral reader[150794] t[150796] i[151082]))
+                        const fieldName[151116] "dead at end of block" "const" "insert auto destroy"
+                        (646370 'init var' fieldName[151116] call_tmp[821415])
+                        (151123 'end of statement' i[151082])
+                        (151128 call(151125 call (partial) readLiteral _mt[203] reader[150794]) fieldName[151116])
+                        (555152 'end of statement' fieldName[151116])
+                      }
+                    }
+                    Catch e : BadFormatError
+                    {
+                      unknown call_tmp[821422] "expr temp" "maybe param" "maybe type" "temp"
+                      (821425 'move' call_tmp[821422](394842 'current error'))
+                      unknown call_tmp[821427] "maybe param" "maybe type" "temp"
+                      (821430 'move' call_tmp[821427](394843 'dynamic_cast' unmanaged BadFormatError?[468259] call_tmp[821422]))
+                      unknown tmp[394839] "dead at end of block" "insert auto destroy" "temp"
+                      (646372 'init var' tmp[394839] call_tmp[821427])
+                      unknown call_tmp[821432] "expr temp" "maybe param" "maybe type" "temp"
+                      (821435 'move' call_tmp[821432](394846 '!=' tmp[394839] nil[32]))
+                      if call_tmp[821432]
+                      {
+                        unknown call_tmp[821437] "expr temp" "maybe param" "maybe type" "temp"
+                        (821440 'move' call_tmp[821437](394852 'to non nilable class' tmp[394839]))
+                        unknown call_tmp[821442] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+                        (821445 'move' call_tmp[821442](1000152 'new' _owned[238](?) call_tmp[821437]))
+                        unknown e[151137] "dead at end of block" "insert auto destroy"
+                        (646374 'init var' e[151137] call_tmp[821442])
+                        (555154 'end of statement')
+                        {
+                          continue _unused_continueLabel[151207] _unused_continueLabel[151207]
+                        }
+                      }
+                      {
+                      }
+                    }
+                    Catch e : EofError
+                    {
+                      unknown call_tmp[821447] "expr temp" "maybe param" "maybe type" "temp"
+                      (821450 'move' call_tmp[821447](394861 'current error'))
+                      unknown call_tmp[821452] "maybe param" "maybe type" "temp"
+                      (821455 'move' call_tmp[821452](394862 'dynamic_cast' unmanaged EofError?[468265] call_tmp[821447]))
+                      unknown tmp[394858] "dead at end of block" "insert auto destroy" "temp"
+                      (646376 'init var' tmp[394858] call_tmp[821452])
+                      unknown call_tmp[821457] "expr temp" "maybe param" "maybe type" "temp"
+                      (821460 'move' call_tmp[821457](394865 '!=' tmp[394858] nil[32]))
+                      if call_tmp[821457]
+                      {
+                        unknown call_tmp[821462] "expr temp" "maybe param" "maybe type" "temp"
+                        (821465 'move' call_tmp[821462](394871 'to non nilable class' tmp[394858]))
+                        unknown call_tmp[821467] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+                        (821470 'move' call_tmp[821467](1000153 'new' _owned[238](?) call_tmp[821462]))
+                        unknown e[151145] "dead at end of block" "insert auto destroy"
+                        (646378 'init var' e[151145] call_tmp[821467])
+                        (555155 'end of statement')
+                        {
+                          continue _unused_continueLabel[151207] _unused_continueLabel[151207]
+                        }
+                      }
+                      {
+                      }
+                    }
+                    (151149 call = hasReadFieldName[151070] 1)
+                    (555156 'end of statement' hasReadFieldName[151070])
+                    (151153 call = needsComma[150801] 1)
+                    (555158 'end of statement')
+                    const equalSign[151158] "dead at end of block" "const" "insert auto destroy"
+                    unknown tmp[681949] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+                    unknown tmp[681950] "maybe param" "temp"
+                    (681955 'move' tmp[681950](681953 call _cond_test isJson[151075]))
+                    if tmp[681950]
+                    {
+                      (681960 'move' tmp[681949](681957 '_paramFoldLogical' tmp[681950] ":"))
+                    }
+                    {
+                      (681965 'move' tmp[681949](681962 '_paramFoldLogical' tmp[681950] "="))
+                    }
+                    (646380 'init var' equalSign[151158] tmp[681949])
+                    (151166 'end of statement' isJson[151075])
+                    Try
+                    {
+                      {
+                        (151172 call(151169 call (partial) readLiteral _mt[203] reader[150794]) equalSign[151158] 1)
+                        (555160 'end of statement' equalSign[151158])
+                      }
+                    }
+                    Try
+                    {
+                      {
+                        unknown call_tmp[821476] "expr temp" "maybe param" "maybe type" "temp"
+                        (821479 'move' call_tmp[821476](151184 'field by num' x[150798] i[151082]))
+                        (151183 call(151180 call (partial) readIt _mt[203] reader[150794]) call_tmp[821476])
+                        (555162 'end of statement' i[151082])
+                      }
+                    }
+                    unknown call_tmp[821481] "expr temp" "maybe param" "maybe type" "temp"
+                    (821484 'move' call_tmp[821481](151194 call - i[151082] 1))
+                    unknown call_tmp[821486] "expr temp" "maybe param" "maybe type" "temp"
+                    (821489 'move' call_tmp[821486](151193 call readField[150937] call_tmp[821481]))
+                    (151190 call = call_tmp[821486] 1)
+                    (555164 'end of statement' readField[150937] i[151082])
+                    (151199 call += numRead[150950] 1)
+                    (555167 'end of statement' numRead[150950])
+                  }
+                }
+                label _unused_continueLabel[151207]
+                label _breakLabel[151206]
+              }
+              unknown call_tmp[821491] "expr temp" "maybe param" "maybe type" "temp"
+              (821494 'move' call_tmp[821491](151268 call ! hasReadFieldName[151070]))
+              unknown call_tmp[821496] "expr temp" "maybe param" "maybe type" "temp"
+              (821499 'move' call_tmp[821496](151271 call _cond_test call_tmp[821491]))
+              if call_tmp[821496]
+              {
+                unknown tmp[489219] "maybe param" "temp"
+                (489230 'move' tmp[489219] isSkipUnknown[151057])
+                unknown call_tmp[821501] "expr temp" "maybe param" "maybe type" "temp"
+                (821504 'move' call_tmp[821501](489232 call _cond_invalid tmp[489219]))
+                if call_tmp[821501]
+                {
+                  (489235 call compilerError "cannot promote short-circuiting && operator")
+                }
+                unknown tmp[681972] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+                unknown tmp[681973] "maybe param" "temp"
+                unknown call_tmp[821506] "expr temp" "maybe param" "maybe type" "temp"
+                (821509 'move' call_tmp[821506](489220 call isTrue tmp[489219]))
+                (681978 'move' tmp[681973](681976 call _cond_test call_tmp[821506]))
+                if tmp[681973]
+                {
+                  unknown tmp[681980] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+                  (681982 'move' tmp[681980](489223 call isTrue isJson[151075]))
+                  (681987 'move' tmp[681972](681984 '_paramFoldLogical' tmp[681973] tmp[681980]))
+                }
+                {
+                  (681992 'move' tmp[681972](681989 '_paramFoldLogical' tmp[681973] 0))
+                }
+                unknown call_tmp[821511] "expr temp" "maybe param" "maybe type" "temp"
+                (821514 'move' call_tmp[821511](151264 call _cond_test tmp[681972]))
+                if call_tmp[821511]
+                {
+                  Try
+                  {
+                    {
+                      (151242 call(151239 call (partial) _skipField _mt[203] reader[150794]))
+                    }
+                  }
+                  (151246 call = needsComma[150801] 1)
+                }
+                {
+                  unknown call_tmp[821518] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+                  (821521 'move' call_tmp[821518](1000154 'new' BadFormatError[414425](?) "Failed to read field, could not skip"(_chpl_manager = _owned[238](?))))
+                  unknown call_tmp[821523] "expr temp" "maybe param" "maybe type" "temp"
+                  (821526 'move' call_tmp[821523](542255 call chpl_fix_thrown_error call_tmp[821518]))
+                  (151251 'throw' call_tmp[821523])
+                }
+              }
+            }
+            label _continueLabel[151279]
+            unknown call_tmp[821528] "expr temp" "maybe param" "maybe type" "temp"
+            (821531 'move' call_tmp[821528](151287 call < numRead[150950] numToRead[150945]))
+            (151290 'move' tmp[151276](151285 call _cond_test call_tmp[821528]))
+            tmp[151276]
+          }
+          label _breakLabel[151280]
+        }
+        unknown call_tmp[821533] "expr temp" "maybe param" "maybe type" "temp"
+        (821536 'move' call_tmp[821533](151369 call == numRead[150950] numToRead[150945]))
+        unknown call_tmp[821538] "expr temp" "maybe param" "maybe type" "temp"
+        (821541 'move' call_tmp[821538](151373 call _cond_test call_tmp[821533]))
+        if call_tmp[821538]
+        {
+        }
+        {
+          unknown tag[151306] "dead at end of block" "param"
+          unknown tmp[681999] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+          unknown tmp[682000] "maybe param" "temp"
+          unknown call_tmp[821543] "expr temp" "maybe param" "maybe type" "temp"
+          (821546 'move' call_tmp[821543](151308 call isClassType t[150796]))
+          (682005 'move' tmp[682000](682003 call _cond_test call_tmp[821543]))
+          if tmp[682000]
+          {
+            (682010 'move' tmp[681999](682007 '_paramFoldLogical' tmp[682000] "class"))
+          }
+          {
+            (682015 'move' tmp[681999](682012 '_paramFoldLogical' tmp[682000] "record"))
+          }
+          (646382 'init var' tag[151306] tmp[681999])
+          (151320 'end of statement')
+          unknown call_tmp[821548] "expr temp" "maybe param" "maybe type" "temp"
+          (821551 'move' call_tmp[821548](151340 call : numRead[150950] string[244]))
+          unknown call_tmp[821553] "expr temp" "maybe param" "maybe type" "temp"
+          (821556 'move' call_tmp[821553](151335 call + "Read only " call_tmp[821548]))
+          unknown call_tmp[821558] "expr temp" "maybe param" "maybe type" "temp"
+          (821561 'move' call_tmp[821558](151333 call + call_tmp[821553] " out of "))
+          unknown call_tmp[821563] "expr temp" "maybe param" "maybe type" "temp"
+          (821566 'move' call_tmp[821563](151347 call : numToRead[150945] string[244]))
+          unknown call_tmp[821568] "expr temp" "maybe param" "maybe type" "temp"
+          (821571 'move' call_tmp[821568](151331 call + call_tmp[821558] call_tmp[821563]))
+          unknown call_tmp[821573] "expr temp" "maybe param" "maybe type" "temp"
+          (821576 'move' call_tmp[821573](151329 call + call_tmp[821568] " fields of "))
+          unknown call_tmp[821578] "expr temp" "maybe param" "maybe type" "temp"
+          (821581 'move' call_tmp[821578](151327 call + call_tmp[821573] tag[151306]))
+          unknown call_tmp[821583] "expr temp" "maybe param" "maybe type" "temp"
+          (821586 'move' call_tmp[821583](151325 call + call_tmp[821578] " "))
+          unknown call_tmp[821588] "expr temp" "maybe param" "maybe type" "temp"
+          (821591 'move' call_tmp[821588](151356 call : t[150796] string[244]))
+          unknown call_tmp[821593] "maybe param" "maybe type" "temp"
+          (821596 'move' call_tmp[821593](151323 call + call_tmp[821583] call_tmp[821588]))
+          const msg[151322] "dead at end of block" "const" "insert auto destroy"
+          (646384 'init var' msg[151322] call_tmp[821593])
+          (151361 'end of statement' numRead[150950] numToRead[150945])
+          unknown call_tmp[821598] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+          (821601 'move' call_tmp[821598](1000155 'new' BadFormatError[414425](?) msg[151322](_chpl_manager = _owned[238](?))))
+          unknown call_tmp[821603] "expr temp" "maybe param" "maybe type" "temp"
+          (821606 'move' call_tmp[821603](542257 call chpl_fix_thrown_error call_tmp[821598]))
+          (151362 'throw' call_tmp[821603])
+          (555175 'end of statement' msg[151322])
+        }
+      }
+    }
+    (611524 return _void[46])
+  }
+  where {
+    unknown call_tmp[821608] "expr temp" "maybe param" "maybe type" "temp"
+    (821611 'move' call_tmp[821608](150807 call isUnionType t[150796]))
+    (150804 call ! call_tmp[821608])
+  }
+  function readThisFieldsDefaultImpl[151394](arg reader[151396]:_any[141](?), arg t[151398]:_any[141](?), ref arg x[151400]:_any[141](?), inout arg needsComma[151403]:bool[19]) : _unknown[42] throws "no return value for void"
+  {
+    unknown call_tmp[821613] "maybe param" "maybe type" "temp"
+    (821616 'move' call_tmp[821613](151419 'num fields' t[151398]))
+    unknown numFields[151418] "dead at end of block" "param"
+    (646386 'init var' numFields[151418] call_tmp[821613])
+    (151422 'end of statement')
+    unknown call_tmp[821620] "maybe param" "maybe type" "temp"
+    (821623 'move' call_tmp[821620](151429 call(151426 call (partial) _binary _mt[203] reader[151396])))
+    unknown isBinary[151424] "dead at end of block" "insert auto destroy"
+    (646388 'init var' isBinary[151424] call_tmp[821620])
+    (151431 'end of statement')
+    unknown call_tmp[821625] "expr temp" "maybe param" "maybe type" "temp"
+    (821628 'move' call_tmp[821625](151687 call _cond_test isBinary[151424]))
+    if call_tmp[821625]
+    {
+      unknown call_tmp[821630] "maybe param" "maybe type" "temp"
+      (821633 'move' call_tmp[821630](151435 'get_union_id' x[151400]))
+      unknown id[151434] "dead at end of block" "insert auto destroy"
+      (646390 'init var' id[151434] call_tmp[821630])
+      (151438 'end of statement')
+      Try
+      {
+        {
+          (151444 call(151441 call (partial) readIt _mt[203] reader[151396]) id[151434])
+          (555177 'end of statement' id[151434])
+        }
+      }
+      {
+        unknown i[151449] "dead at end of block" "index var" "insert auto destroy"
+        (646392 'init var' i[151449] 0)
+        (555179 'end of statement')
+        unknown tmp[151482] "maybe param" "temp"
+        (151494 'move' tmp[151482](151492 call chpl_compute_low_param_loop_bound 1 numFields[151418]))
+        unknown tmp[151483] "maybe param" "temp"
+        (151501 'move' tmp[151483](151499 call chpl_compute_high_param_loop_bound 1 numFields[151418]))
+        unknown tmp[151484] "maybe param" "temp"
+        (151504 'move' tmp[151484] 1)
+        ParamForLoop[151506]
+        { i[151449] tmp[151482] tmp[151483] tmp[151484]
+          unknown tmp[489261] "maybe param" "temp"
+          (489272 'move' tmp[489261](151470 call isIoField x[151400] i[151449]))
+          unknown call_tmp[821637] "expr temp" "maybe param" "maybe type" "temp"
+          (821640 'move' call_tmp[821637](489274 call _cond_invalid tmp[489261]))
+          if call_tmp[821637]
+          {
+            (489277 call compilerError "cannot promote short-circuiting && operator")
+          }
+          unknown tmp[682022] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+          unknown tmp[682023] "maybe param" "temp"
+          unknown call_tmp[821642] "expr temp" "maybe param" "maybe type" "temp"
+          (821645 'move' call_tmp[821642](489262 call isTrue tmp[489261]))
+          (682028 'move' tmp[682023](682026 call _cond_test call_tmp[821642]))
+          if tmp[682023]
+          {
+            unknown tmp[682030] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+            unknown call_tmp[821647] "expr temp" "maybe param" "maybe type" "temp"
+            (821650 'move' call_tmp[821647](151473 call == i[151449] id[151434]))
+            (682032 'move' tmp[682030](489265 call isTrue call_tmp[821647]))
+            (682037 'move' tmp[682022](682034 '_paramFoldLogical' tmp[682023] tmp[682030]))
+          }
+          {
+            (682042 'move' tmp[682022](682039 '_paramFoldLogical' tmp[682023] 0))
+          }
+          unknown call_tmp[821652] "expr temp" "maybe param" "maybe type" "temp"
+          (821655 'move' call_tmp[821652](151477 call _cond_test tmp[682022]))
+          if call_tmp[821652]
+          {
+            Try
+            {
+              {
+                unknown call_tmp[821659] "expr temp" "maybe param" "maybe type" "temp"
+                (821662 'move' call_tmp[821659](151461 'field by num' x[151400] i[151449]))
+                (151460 call(151457 call (partial) readIt _mt[203] reader[151396]) call_tmp[821659])
+                (555181 'end of statement' i[151449])
+              }
+            }
+          }
+        }
+        label _unused_continueLabel[151486]
+        label _breakLabel[151485]
+      }
+    }
+    {
+      unknown hasFoundAtLeastOneField[151517] "dead at end of block" "insert auto destroy"
+      (646394 'init var' hasFoundAtLeastOneField[151517] 0)
+      (151520 'end of statement')
+      {
+        unknown i[151521] "dead at end of block" "index var" "insert auto destroy"
+        (646396 'init var' i[151521] 0)
+        (555183 'end of statement')
+        unknown tmp[151635] "maybe param" "temp"
+        (151647 'move' tmp[151635](151645 call chpl_compute_low_param_loop_bound 1 numFields[151418]))
+        unknown tmp[151636] "maybe param" "temp"
+        (151654 'move' tmp[151636](151652 call chpl_compute_high_param_loop_bound 1 numFields[151418]))
+        unknown tmp[151637] "maybe param" "temp"
+        (151657 'move' tmp[151637] 1)
+        ParamForLoop[151659]
+        { i[151521] tmp[151635] tmp[151636] tmp[151637]
+          {
+            unknown call_tmp[821664] "expr temp" "maybe param" "maybe type" "temp"
+            (821667 'move' call_tmp[821664](151534 call isIoField x[151400] i[151521]))
+            unknown call_tmp[821669] "expr temp" "maybe param" "maybe type" "temp"
+            (821672 'move' call_tmp[821669](151531 call ! call_tmp[821664]))
+            unknown call_tmp[821674] "expr temp" "maybe param" "maybe type" "temp"
+            (821677 'move' call_tmp[821674](151537 call _cond_test call_tmp[821669]))
+            if call_tmp[821674]
+            {
+              continue _unused_continueLabel[151639] _unused_continueLabel[151639]
+            }
+            Try
+            {
+              {
+                unknown call_tmp[821679] "maybe param" "maybe type" "temp"
+                (821682 'move' call_tmp[821679](151546 call ioFieldNameLiteral reader[151396] t[151398] i[151521]))
+                const fieldName[151544] "dead at end of block" "const" "insert auto destroy"
+                (646398 'init var' fieldName[151544] call_tmp[821679])
+                (151551 'end of statement' i[151521])
+                (151556 call(151553 call (partial) readLiteral _mt[203] reader[151396]) fieldName[151544])
+                (555185 'end of statement' fieldName[151544])
+              }
+            }
+            Catch e : BadFormatError
+            {
+              unknown call_tmp[821686] "expr temp" "maybe param" "maybe type" "temp"
+              (821689 'move' call_tmp[821686](394880 'current error'))
+              unknown call_tmp[821691] "maybe param" "maybe type" "temp"
+              (821694 'move' call_tmp[821691](394881 'dynamic_cast' unmanaged BadFormatError?[468259] call_tmp[821686]))
+              unknown tmp[394877] "dead at end of block" "insert auto destroy" "temp"
+              (646400 'init var' tmp[394877] call_tmp[821691])
+              unknown call_tmp[821696] "expr temp" "maybe param" "maybe type" "temp"
+              (821699 'move' call_tmp[821696](394884 '!=' tmp[394877] nil[32]))
+              if call_tmp[821696]
+              {
+                unknown call_tmp[821701] "expr temp" "maybe param" "maybe type" "temp"
+                (821704 'move' call_tmp[821701](394890 'to non nilable class' tmp[394877]))
+                unknown call_tmp[821706] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+                (821709 'move' call_tmp[821706](1000156 'new' _owned[238](?) call_tmp[821701]))
+                unknown e[151565] "dead at end of block" "insert auto destroy"
+                (646402 'init var' e[151565] call_tmp[821706])
+                (555187 'end of statement')
+                {
+                  continue _unused_continueLabel[151639] _unused_continueLabel[151639]
+                }
+              }
+              {
+              }
+            }
+            Catch e : EofError
+            {
+              unknown call_tmp[821711] "expr temp" "maybe param" "maybe type" "temp"
+              (821714 'move' call_tmp[821711](394899 'current error'))
+              unknown call_tmp[821716] "maybe param" "maybe type" "temp"
+              (821719 'move' call_tmp[821716](394900 'dynamic_cast' unmanaged EofError?[468265] call_tmp[821711]))
+              unknown tmp[394896] "dead at end of block" "insert auto destroy" "temp"
+              (646404 'init var' tmp[394896] call_tmp[821716])
+              unknown call_tmp[821721] "expr temp" "maybe param" "maybe type" "temp"
+              (821724 'move' call_tmp[821721](394903 '!=' tmp[394896] nil[32]))
+              if call_tmp[821721]
+              {
+                unknown call_tmp[821726] "expr temp" "maybe param" "maybe type" "temp"
+                (821729 'move' call_tmp[821726](394909 'to non nilable class' tmp[394896]))
+                unknown call_tmp[821731] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+                (821734 'move' call_tmp[821731](1000157 'new' _owned[238](?) call_tmp[821726]))
+                unknown e[151573] "dead at end of block" "insert auto destroy"
+                (646406 'init var' e[151573] call_tmp[821731])
+                (555188 'end of statement')
+                {
+                  continue _unused_continueLabel[151639] _unused_continueLabel[151639]
+                }
+              }
+              {
+              }
+            }
+            (151577 call = hasFoundAtLeastOneField[151517] 1)
+            (555189 'end of statement' hasFoundAtLeastOneField[151517])
+            unknown call_tmp[821738] "maybe param" "maybe type" "temp"
+            (821741 'move' call_tmp[821738](151587 call(151584 call (partial) styleElement _mt[203] reader[151396]) QIO_STYLE_ELEMENT_AGGREGATE[77175]))
+            const st[151582] "dead at end of block" "const" "insert auto destroy"
+            (646408 'init var' st[151582] call_tmp[821738])
+            (151590 'end of statement')
+            unknown call_tmp[821743] "maybe param" "maybe type" "temp"
+            (821746 'move' call_tmp[821743](151593 call == st[151582] QIO_AGGREGATE_FORMAT_JSON[77225]))
+            const isJson[151592] "dead at end of block" "const" "insert auto destroy"
+            (646410 'init var' isJson[151592] call_tmp[821743])
+            (151598 'end of statement')
+            const eq[151600] "dead at end of block" "const" "insert auto destroy"
+            unknown tmp[682049] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+            unknown tmp[682050] "maybe param" "temp"
+            (682055 'move' tmp[682050](682053 call _cond_test isJson[151592]))
+            if tmp[682050]
+            {
+              (682060 'move' tmp[682049](682057 '_paramFoldLogical' tmp[682050] ":"))
+            }
+            {
+              (682065 'move' tmp[682049](682062 '_paramFoldLogical' tmp[682050] "="))
+            }
+            (646412 'init var' eq[151600] tmp[682049])
+            (151608 'end of statement' st[151582] isJson[151592])
+            Try
+            {
+              {
+                (151614 call(151611 call (partial) readLiteral _mt[203] reader[151396]) eq[151600] 1)
+                (555193 'end of statement' eq[151600])
+              }
+            }
+            (151620 'set_union_id' x[151400] i[151521])
+            (555195 'end of statement' i[151521])
+            Try
+            {
+              {
+                unknown call_tmp[821752] "expr temp" "maybe param" "maybe type" "temp"
+                (821755 'move' call_tmp[821752](151629 'field by num' x[151400] i[151521]))
+                (151628 call(151625 call (partial) readIt _mt[203] reader[151396]) call_tmp[821752])
+                (555197 'end of statement' i[151521])
+              }
+            }
+          }
+        }
+        label _unused_continueLabel[151639]
+        label _breakLabel[151638]
+      }
+      unknown call_tmp[821757] "expr temp" "maybe param" "maybe type" "temp"
+      (821760 'move' call_tmp[821757](151678 call ! hasFoundAtLeastOneField[151517]))
+      unknown call_tmp[821762] "expr temp" "maybe param" "maybe type" "temp"
+      (821765 'move' call_tmp[821762](151681 call _cond_test call_tmp[821757]))
+      if call_tmp[821762]
+      {
+        unknown call_tmp[821767] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+        (821770 'move' call_tmp[821767](1000158 'new' BadFormatError[414425](?) "Failed to find any union fields"(_chpl_manager = _owned[238](?))))
+        unknown call_tmp[821772] "expr temp" "maybe param" "maybe type" "temp"
+        (821775 'move' call_tmp[821772](542259 call chpl_fix_thrown_error call_tmp[821767]))
+        (151668 'throw' call_tmp[821772])
+      }
+    }
+    (611526 return _void[46])
+  }
+  where {
+    unknown tmp[489240] "maybe param" "temp"
+    (489251 'move' tmp[489240](151409 call isUnionType t[151398]))
+    unknown call_tmp[821777] "expr temp" "maybe param" "maybe type" "temp"
+    (821780 'move' call_tmp[821777](489253 call _cond_invalid tmp[489240]))
+    if call_tmp[821777]
+    {
+      (489256 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[682072] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[682073] "maybe param" "temp"
+    unknown call_tmp[821782] "expr temp" "maybe param" "maybe type" "temp"
+    (821785 'move' call_tmp[821782](489241 call isTrue tmp[489240]))
+    (682078 'move' tmp[682073](682076 call _cond_test call_tmp[821782]))
+    if tmp[682073]
+    {
+      unknown tmp[682080] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[821787] "expr temp" "maybe param" "maybe type" "temp"
+      (821790 'move' call_tmp[821787](151414 call isExternUnionType t[151398]))
+      unknown call_tmp[821792] "expr temp" "maybe param" "maybe type" "temp"
+      (821795 'move' call_tmp[821792](151411 call ! call_tmp[821787]))
+      (682082 'move' tmp[682080](489244 call isTrue call_tmp[821792]))
+      (682087 'move' tmp[682072](682084 '_paramFoldLogical' tmp[682073] tmp[682080]))
+    }
+    {
+      (682092 'move' tmp[682072](682089 '_paramFoldLogical' tmp[682073] 0))
+    }
+    (1001448 call chpl_statementLevelSymbol tmp[682072])
+  }
+  function readThisDefaultImpl[151694](arg reader[151696]:_any[141](?), arg x[151700]:_any[141](?)) : _unknown[42] throws "no return value for void"
+  {
+    unknown call_tmp[821799] "maybe param" "maybe type" "temp"
+    (821802 'move' call_tmp[821799](151713 call(151710 call (partial) styleElement _mt[203] reader[151696]) QIO_STYLE_ELEMENT_AGGREGATE[77175]))
+    const st[151708] "dead at end of block" "const" "insert auto destroy"
+    (646414 'init var' st[151708] call_tmp[821799])
+    (151716 'end of statement')
+    unknown call_tmp[821806] "expr temp" "maybe param" "maybe type" "temp"
+    (821809 'move' call_tmp[821806](151756 call(151753 call (partial) _binary _mt[203] reader[151696])))
+    unknown call_tmp[821811] "expr temp" "maybe param" "maybe type" "temp"
+    (821814 'move' call_tmp[821811](151750 call ! call_tmp[821806]))
+    unknown call_tmp[821816] "expr temp" "maybe param" "maybe type" "temp"
+    (821819 'move' call_tmp[821816](151757 call _cond_test call_tmp[821811]))
+    if call_tmp[821816]
+    {
+      const start[151719] "dead at end of block" "const" "insert auto destroy"
+      unknown tmp[682099] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[682100] "maybe param" "temp"
+      unknown call_tmp[821821] "expr temp" "maybe param" "maybe type" "temp"
+      (821824 'move' call_tmp[821821](151720 call == st[151708] QIO_AGGREGATE_FORMAT_CHPL[77220]))
+      (682105 'move' tmp[682100](682103 call _cond_test call_tmp[821821]))
+      if tmp[682100]
+      {
+        unknown tmp[682107] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[821826] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (821829 'move' call_tmp[821826](526229 'typeof' x[151700]))
+        unknown call_tmp[821831] "expr temp" "maybe param" "maybe type" "temp"
+        (821834 'move' call_tmp[821831](151729 call : call_tmp[821826] string[244]))
+        unknown call_tmp[821836] "expr temp" "maybe param" "maybe type" "temp"
+        (821839 'move' call_tmp[821836](151726 call + "new " call_tmp[821831]))
+        (682109 'move' tmp[682107](151724 call + call_tmp[821836] "("))
+        (682114 'move' tmp[682099](682111 '_paramFoldLogical' tmp[682100] tmp[682107]))
+      }
+      {
+        (682119 'move' tmp[682099](682116 '_paramFoldLogical' tmp[682100] "{"))
+      }
+      (646416 'init var' start[151719] tmp[682099])
+      (151739 'end of statement' st[151708])
+      Try
+      {
+        {
+          (151745 call(151742 call (partial) readLiteral _mt[203] reader[151696]) start[151719])
+          (555201 'end of statement' start[151719])
+        }
+      }
+    }
+    unknown needsComma[151762] "dead at end of block" "insert auto destroy"
+    (646418 'init var' needsComma[151762] 0)
+    (151765 'end of statement')
+    unknown obj[151767] "dead at end of block" "insert auto destroy"
+    (646420 'init var' obj[151767] x[151700])
+    (151770 'end of statement')
+    Try
+    {
+      {
+        unknown call_tmp[821843] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (821846 'move' call_tmp[821843](526231 'typeof' x[151700]))
+        (151773 call readThisFieldsDefaultImpl reader[151696] call_tmp[821843] obj[151767] needsComma[151762])
+        (555203 'end of statement' obj[151767] needsComma[151762])
+      }
+    }
+    Try
+    {
+      {
+        (151783 call skipFieldsAtEnd reader[151696] needsComma[151762])
+        (555206 'end of statement' needsComma[151762])
+      }
+    }
+    unknown call_tmp[821850] "expr temp" "maybe param" "maybe type" "temp"
+    (821853 'move' call_tmp[821850](151819 call(151816 call (partial) _binary _mt[203] reader[151696])))
+    unknown call_tmp[821855] "expr temp" "maybe param" "maybe type" "temp"
+    (821858 'move' call_tmp[821855](151813 call ! call_tmp[821850]))
+    unknown call_tmp[821860] "expr temp" "maybe param" "maybe type" "temp"
+    (821863 'move' call_tmp[821860](151820 call _cond_test call_tmp[821855]))
+    if call_tmp[821860]
+    {
+      const end[151791] "dead at end of block" "const" "insert auto destroy"
+      unknown tmp[682126] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[682127] "maybe param" "temp"
+      unknown call_tmp[821865] "expr temp" "maybe param" "maybe type" "temp"
+      (821868 'move' call_tmp[821865](151792 call == st[151708] QIO_AGGREGATE_FORMAT_CHPL[77220]))
+      (682132 'move' tmp[682127](682130 call _cond_test call_tmp[821865]))
+      if tmp[682127]
+      {
+        (682137 'move' tmp[682126](682134 '_paramFoldLogical' tmp[682127] ")"))
+      }
+      {
+        (682142 'move' tmp[682126](682139 '_paramFoldLogical' tmp[682127] "}"))
+      }
+      (646422 'init var' end[151791] tmp[682126])
+      (151802 'end of statement' st[151708])
+      Try
+      {
+        {
+          (151808 call(151805 call (partial) readLiteral _mt[203] reader[151696]) end[151791])
+          (555209 'end of statement' end[151791])
+        }
+      }
+    }
+    (611528 return _void[46])
+  }
+  where {
+    unknown call_tmp[821872] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821875 'move' call_tmp[821872](526233 'typeof' x[151700]))
+    (151704 call isClassType call_tmp[821872])
+  }
+  function readThisDefaultImpl[151827](arg reader[151829]:_any[141](?), ref arg x[151833]:_any[141](?)) : _unknown[42] throws "no return value for void"
+  {
+    unknown call_tmp[821879] "maybe param" "maybe type" "temp"
+    (821882 'move' call_tmp[821879](151848 call(151845 call (partial) styleElement _mt[203] reader[151829]) QIO_STYLE_ELEMENT_AGGREGATE[77175]))
+    const st[151843] "dead at end of block" "const" "insert auto destroy"
+    (646424 'init var' st[151843] call_tmp[821879])
+    (151851 'end of statement')
+    unknown call_tmp[821884] "maybe param" "maybe type" "temp"
+    (821887 'move' call_tmp[821884](151854 call == st[151843] QIO_AGGREGATE_FORMAT_JSON[77225]))
+    const isJson[151853] "dead at end of block" "const" "insert auto destroy"
+    (646426 'init var' isJson[151853] call_tmp[821884])
+    (151859 'end of statement')
+    unknown call_tmp[821891] "expr temp" "maybe param" "maybe type" "temp"
+    (821894 'move' call_tmp[821891](151904 call(151901 call (partial) _binary _mt[203] reader[151829])))
+    unknown call_tmp[821896] "expr temp" "maybe param" "maybe type" "temp"
+    (821899 'move' call_tmp[821896](151898 call ! call_tmp[821891]))
+    unknown call_tmp[821901] "expr temp" "maybe param" "maybe type" "temp"
+    (821904 'move' call_tmp[821901](151905 call _cond_test call_tmp[821896]))
+    if call_tmp[821901]
+    {
+      const start[151862] "dead at end of block" "const" "insert auto destroy"
+      unknown tmp[682172] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[682173] "maybe param" "temp"
+      unknown call_tmp[821906] "expr temp" "maybe param" "maybe type" "temp"
+      (821909 'move' call_tmp[821906](151863 call == st[151843] QIO_AGGREGATE_FORMAT_CHPL[77220]))
+      (682178 'move' tmp[682173](682176 call _cond_test call_tmp[821906]))
+      if tmp[682173]
+      {
+        unknown tmp[682180] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[821911] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (821914 'move' call_tmp[821911](526235 'typeof' x[151833]))
+        unknown call_tmp[821916] "expr temp" "maybe param" "maybe type" "temp"
+        (821919 'move' call_tmp[821916](151872 call : call_tmp[821911] string[244]))
+        unknown call_tmp[821921] "expr temp" "maybe param" "maybe type" "temp"
+        (821924 'move' call_tmp[821921](151869 call + "new " call_tmp[821916]))
+        (682182 'move' tmp[682180](151867 call + call_tmp[821921] "("))
+        (682187 'move' tmp[682172](682184 '_paramFoldLogical' tmp[682173] tmp[682180]))
+      }
+      {
+        unknown tmp[682149] "expr temp" "if-expr result" "maybe type" "temp"
+        unknown tmp[682150] "maybe param" "temp"
+        (682155 'move' tmp[682150](682153 call _cond_test isJson[151853]))
+        if tmp[682150]
+        {
+          (682160 'move' tmp[682149](682157 '_paramFoldLogical' tmp[682150] "{"))
+        }
+        {
+          (682165 'move' tmp[682149](682162 '_paramFoldLogical' tmp[682150] "("))
+        }
+        (682192 'move' tmp[682172](682189 '_paramFoldLogical' tmp[682173] tmp[682149]))
+      }
+      (646428 'init var' start[151862] tmp[682172])
+      (151887 'end of statement' st[151843] isJson[151853])
+      Try
+      {
+        {
+          (151893 call(151890 call (partial) readLiteral _mt[203] reader[151829]) start[151862])
+          (555214 'end of statement' start[151862])
+        }
+      }
+    }
+    unknown needsComma[151910] "dead at end of block" "insert auto destroy"
+    (646430 'init var' needsComma[151910] 0)
+    (151913 'end of statement' st[151843])
+    Try
+    {
+      {
+        unknown call_tmp[821928] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (821931 'move' call_tmp[821928](526237 'typeof' x[151833]))
+        (151916 call readThisFieldsDefaultImpl reader[151829] call_tmp[821928] x[151833] needsComma[151910])
+        (555216 'end of statement' needsComma[151910])
+      }
+    }
+    Try
+    {
+      {
+        (151926 call skipFieldsAtEnd reader[151829] needsComma[151910])
+        (555218 'end of statement' needsComma[151910])
+      }
+    }
+    unknown call_tmp[821935] "expr temp" "maybe param" "maybe type" "temp"
+    (821938 'move' call_tmp[821935](151959 call(151956 call (partial) _binary _mt[203] reader[151829])))
+    unknown call_tmp[821940] "expr temp" "maybe param" "maybe type" "temp"
+    (821943 'move' call_tmp[821940](151953 call ! call_tmp[821935]))
+    unknown call_tmp[821945] "expr temp" "maybe param" "maybe type" "temp"
+    (821948 'move' call_tmp[821945](151960 call _cond_test call_tmp[821940]))
+    if call_tmp[821945]
+    {
+      const end[151934] "dead at end of block" "const" "insert auto destroy"
+      unknown tmp[682199] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[682200] "maybe param" "temp"
+      (682205 'move' tmp[682200](682203 call _cond_test isJson[151853]))
+      if tmp[682200]
+      {
+        (682210 'move' tmp[682199](682207 '_paramFoldLogical' tmp[682200] "}"))
+      }
+      {
+        (682215 'move' tmp[682199](682212 '_paramFoldLogical' tmp[682200] ")"))
+      }
+      (646432 'init var' end[151934] tmp[682199])
+      (151942 'end of statement' isJson[151853])
+      Try
+      {
+        {
+          (151948 call(151945 call (partial) readLiteral _mt[203] reader[151829]) end[151934])
+          (555221 'end of statement' end[151934])
+        }
+      }
+    }
+    (611530 return _void[46])
+  }
+  where {
+    unknown call_tmp[821952] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821955 'move' call_tmp[821952](526239 'typeof' x[151833]))
+    unknown call_tmp[821957] "expr temp" "maybe param" "maybe type" "temp"
+    (821960 'move' call_tmp[821957](151839 call isClassType call_tmp[821952]))
+    (151836 call ! call_tmp[821957])
+  }
+  function locale[234].serialize[151967](arg _mt[151977]:_MT[201], arg this[151970]:locale[234] :
+  locale[234], arg writer[151973]:_any[141](?), ref arg serializer[151975]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[821966] "expr temp" "maybe param" "maybe type" "temp"
+    (821969 'move' call_tmp[821966](151986 call _instance _mt[203] this[151970]))
+    (151984 call(151981 call (partial) write _mt[203] writer[151973]) call_tmp[821966])
+    (611532 return _void[46])
+  }
+  function |writeSerializable[475027]() : _unknown[42] "ImplementsStmt wrapper"
+  { writeSerializable[310070] locale[234]
+    {
+    }
+    (611536 return _void[46])
+  }
+  function _ddata[67573](?).serialize[151998](arg _mt[152008]:_MT[201], arg this[152001]:_ddata[67573](?) :
+  _ddata[67573](?), arg writer[152004]:_any[141](?), ref arg serializer[152006]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    (152012 call compilerWarning "printing _ddata class")
+    (555225 'end of statement')
+    (152020 call(152017 call (partial) write _mt[203] writer[152004]) "<_ddata class cannot be printed>")
+    (611538 return _void[46])
+  }
+  function |writeSerializable[475032]() : _unknown[42] "ImplementsStmt wrapper"
+  { writeSerializable[310070] _ddata[67573](?)
+    {
+    }
+    (611542 return _void[46])
+  }
+  function chpl_taskID_t[131].serialize[152034](arg _mt[152044]:_MT[201], arg this[152037]:chpl_taskID_t[131] :
+  chpl_taskID_t[131], arg writer[152040]:_any[141](?), ref arg serializer[152042]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[821975] "expr temp" "maybe param" "maybe type" "temp"
+    (821978 'move' call_tmp[821975](152056 call uint(64)[86] 64))
+    unknown call_tmp[821980] "expr temp" "maybe param" "maybe type" "temp"
+    (821983 'move' call_tmp[821980](152052 call : this[152037] call_tmp[821975]))
+    (152051 call(152048 call (partial) write _mt[203] writer[152040]) call_tmp[821980])
+    (611544 return _void[46])
+  }
+  function chpl_taskID_t[131].deserialize[152060](arg _mt[152070]:_MT[201], ref arg this[152063]:chpl_taskID_t[131] :
+  chpl_taskID_t[131], arg reader[152066]:_any[141](?), ref arg deserializer[152068]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[821987] "expr temp" "maybe param" "maybe type" "temp"
+    (821990 'move' call_tmp[821987](152084 call uint(64)[86] 64))
+    unknown call_tmp[821992] "expr temp" "maybe param" "maybe type" "temp"
+    (821995 'move' call_tmp[821992](152082 call(152079 call (partial) read _mt[203] reader[152066]) call_tmp[821987]))
+    unknown call_tmp[821997] "expr temp" "maybe param" "maybe type" "temp"
+    (822000 'move' call_tmp[821997](152076 call : call_tmp[821992] chpl_taskID_t[131]))
+    (152073 call = this[152063] call_tmp[821997])
+    (611546 return _void[46])
+  }
+  function chpl_taskID_t[131].deserializeFrom[152089](arg _mt[152099]:_MT[201], arg this[152092]:chpl_taskID_t[131] :
+  chpl_taskID_t[131], arg reader[152095]:_any[141](?), ref arg deserializer[152097]:_any[141](?)) : _unknown[42] throws "method"
+  {
+    unknown ret[611550] "RVV" "temp"
+    unknown ret[152103] "dead at end of block" "insert auto destroy"
+    (646434 'default init var' ret[152103] chpl_taskID_t[131])
+    (152106 'end of statement')
+    (152111 call(152108 call (partial) deserialize _mt[203] ret[152103]) reader[152095] deserializer[152097])
+    (555230 'end of statement' ret[152103])
+    (611555 'move' ret[611550](611554 'deref' ret[152103]))
+    gotoReturn _end_deserializeFrom[611548] _end_deserializeFrom[611548]
+    (555232 'end of statement' ret[152103])
+    label _end_deserializeFrom[611548]
+    (611552 return ret[611550])
+  }
+  function nothing[7].serialize[152118](arg _mt[152128]:_MT[201], arg this[152121]:nothing[7] :
+  nothing[7], arg writer[152124]:_any[141](?), ref arg serializer[152126]:_any[141](?)) : _unknown[42] "method" "no return value for void"
+  {
+    (611559 return _void[46])
+  }
+  function _tuple[246](?).deserializeFrom[152133](arg _mt[152143]:_MT[201], arg this[152136]:_tuple[246](?) :
+  _tuple[246](?), arg reader[152139]:_any[141](?), ref arg deserializer[152141]:_any[141](?)) : _unknown[42] throws "method"
+  {
+    unknown ret[611563] "RVV" "temp"
+    unknown ret[152147] "dead at end of block" "insert auto destroy" "no init"
+    (646436 'default init var' ret[152147] this[152136])
+    (152150 'end of statement')
+    (152155 call(152152 call (partial) deserialize _mt[203] ret[152147]) reader[152139] deserializer[152141])
+    (555234 'end of statement' ret[152147])
+    (611568 'move' ret[611563](611567 'deref' ret[152147]))
+    gotoReturn _end_deserializeFrom[611561] _end_deserializeFrom[611561]
+    (555236 'end of statement' ret[152147])
+    label _end_deserializeFrom[611561]
+    (611565 return ret[611563])
+  }
+  function _tuple[246](?).deserialize[152162](arg _mt[152172]:_MT[201], ref arg this[152165]:_tuple[246](?) :
+  _tuple[246](?), arg reader[152168]:_any[141](?), ref arg deserializer[152170]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[822008] "maybe param" "maybe type" "temp"
+    (822011 'move' call_tmp[822008](152183 call(152180 call (partial) startTuple _mt[203] deserializer[152170]) reader[152168]))
+    unknown des[152176] "dead at end of block" "insert auto destroy"
+    (646438 'init var' des[152176] call_tmp[822008])
+    (152186 'end of statement')
+    {
+      unknown i[152187] "dead at end of block" "index var" "insert auto destroy"
+      (646440 'init var' i[152187] 0)
+      (555238 'end of statement')
+      unknown tmp[152219] "maybe param" "temp"
+      unknown call_tmp[822015] "expr temp" "maybe param" "maybe type" "temp"
+      (822018 'move' call_tmp[822015](152191 call size _mt[203] this[152165]))
+      unknown call_tmp[822020] "expr temp" "maybe param" "maybe type" "temp"
+      (822023 'move' call_tmp[822020](152194 call chpl__nudgeHighBound call_tmp[822015]))
+      (152231 'move' tmp[152219](152229 call chpl_compute_low_param_loop_bound 0 call_tmp[822020]))
+      unknown tmp[152220] "maybe param" "temp"
+      unknown call_tmp[822027] "expr temp" "maybe param" "maybe type" "temp"
+      (822030 'move' call_tmp[822027](152238 call size _mt[203] this[152165]))
+      unknown call_tmp[822032] "expr temp" "maybe param" "maybe type" "temp"
+      (822035 'move' call_tmp[822032](152236 call chpl__nudgeHighBound call_tmp[822027]))
+      (152243 'move' tmp[152220](152241 call chpl_compute_high_param_loop_bound 0 call_tmp[822032]))
+      unknown tmp[152221] "maybe param" "temp"
+      (152246 'move' tmp[152221] 1)
+      ParamForLoop[152248]
+      { i[152187] tmp[152219] tmp[152220] tmp[152221]
+        {
+          { scopeless type
+            unknown call_type_tmp[577797] "expr temp" "maybe type" "temp" "type variable"
+            unknown call_tmp[822037] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+            (822040 'move' call_tmp[822037](152209 call this[152165] i[152187]))
+            (577801 'move' call_type_tmp[577797](152211 'typeof' call_tmp[822037]))
+          }
+          unknown call_tmp[822044] "maybe param" "maybe type" "temp"
+          (822047 'move' call_tmp[822044](152207 call(152204 call (partial) readElement _mt[203] des[152176]) call_type_tmp[577797]))
+          unknown elt[152200] "dead at end of block" "no auto destroy"
+          (646442 'init var' elt[152200] call_tmp[822044])
+          (152213 'end of statement' des[152176] i[152187])
+          unknown call_tmp[822049] "expr temp" "maybe param" "maybe type" "temp"
+          (822052 'move' call_tmp[822049](152216 call this[152165] i[152187]))
+          (152214 '=' call_tmp[822049] elt[152200])
+          (555241 'end of statement' i[152187] elt[152200])
+        }
+      }
+      label _unused_continueLabel[152223]
+      label _breakLabel[152222]
+    }
+    (152263 call(152260 call (partial) endTuple _mt[203] des[152176]))
+    (555244 'end of statement' des[152176])
+    (611572 return _void[46])
+  }
+  function |readDeserializable[475037]() : _unknown[42] "ImplementsStmt wrapper"
+  { readDeserializable[310078] _tuple[246](?)
+    {
+    }
+    (611576 return _void[46])
+  }
+  function _tuple[246](?).serialize[152274](arg _mt[152284]:_MT[201], const arg this[152277]:_tuple[246](?) :
+  _tuple[246](?), arg writer[152280]:_any[141](?), ref arg serializer[152282]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[822060] "expr temp" "maybe param" "maybe type" "temp"
+    (822063 'move' call_tmp[822060](152296 call size _mt[203] this[152277]))
+    unknown call_tmp[822065] "maybe param" "maybe type" "temp"
+    (822068 'move' call_tmp[822065](152293 call(152290 call (partial) startTuple _mt[203] serializer[152282]) writer[152280] call_tmp[822060]))
+    unknown ser[152288] "dead at end of block" "insert auto destroy"
+    (646444 'init var' ser[152288] call_tmp[822065])
+    (152300 'end of statement')
+    {
+      unknown i[152301] "dead at end of block" "index var" "insert auto destroy"
+      (646446 'init var' i[152301] 0)
+      (555247 'end of statement')
+      unknown tmp[152325] "maybe param" "temp"
+      unknown call_tmp[822072] "expr temp" "maybe param" "maybe type" "temp"
+      (822075 'move' call_tmp[822072](433881 call size _mt[203] this[152277]))
+      unknown call_tmp[822077] "expr temp" "maybe param" "maybe type" "temp"
+      (822080 'move' call_tmp[822077](152305 call chpl__nudgeHighBound call_tmp[822072]))
+      (152337 'move' tmp[152325](152335 call chpl_compute_low_param_loop_bound 0 call_tmp[822077]))
+      unknown tmp[152326] "maybe param" "temp"
+      unknown call_tmp[822084] "expr temp" "maybe param" "maybe type" "temp"
+      (822087 'move' call_tmp[822084](433889 call size _mt[203] this[152277]))
+      unknown call_tmp[822089] "expr temp" "maybe param" "maybe type" "temp"
+      (822092 'move' call_tmp[822089](152342 call chpl__nudgeHighBound call_tmp[822084]))
+      (152346 'move' tmp[152326](152344 call chpl_compute_high_param_loop_bound 0 call_tmp[822089]))
+      unknown tmp[152327] "maybe param" "temp"
+      (152349 'move' tmp[152327] 1)
+      ParamForLoop[152351]
+      { i[152301] tmp[152325] tmp[152326] tmp[152327]
+        {
+          const elt[152311] "dead at end of block" "const" "ref var"
+          (646451 'init ref decl' elt[152311])
+          unknown call_tmp[822094] "expr temp" "maybe param" "maybe type" "temp"
+          (822097 'move' call_tmp[822094](152313 call this[152277] i[152301]))
+          (646449 'move' elt[152311](646448 'addr of' call_tmp[822094]))
+          (152316 'end of statement' i[152301])
+          (152323 call(152320 call (partial) writeElement _mt[203] ser[152288]) elt[152311])
+          (555249 'end of statement' ser[152288] elt[152311])
+        }
+      }
+      label _unused_continueLabel[152329]
+      label _breakLabel[152328]
+    }
+    (152364 call(152361 call (partial) endTuple _mt[203] ser[152288]))
+    (555252 'end of statement' ser[152288])
+    (611578 return _void[46])
+  }
+  function |writeSerializable[475042]() : _unknown[42] "ImplementsStmt wrapper"
+  { writeSerializable[310070] _tuple[246](?)
+    {
+    }
+    (611582 return _void[46])
+  }
+  function _iteratorRecord[165](?)._defaultWriteHelper[152375](arg _mt[152383]:_MT[201], arg this[152378]:_iteratorRecord[165](?) :
+  _iteratorRecord[165](?), arg f[152381]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown first[152387] "dead at end of block" "insert auto destroy"
+    (646453 'init var' first[152387] 1 bool[19])
+    (152391 'end of statement')
+    {
+      unknown _indexOfInterest[152423] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[152424] "expr temp" "temp"
+      (152433 'move' _iterator[152424](152431 call _getIterator this[152378]))
+      Defer
+      {
+        {
+          (152448 call _freeIterator _iterator[152424])
+        }
+      }
+      { scopeless type
+        (152438 'move' _indexOfInterest[152423](152435 call iteratorIndex _iterator[152424]))
+      }
+      ForLoop[152425]
+      {
+        unknown e[152392] "index var" "insert auto destroy"
+        (555256 'end of statement')
+        (152443 'move' e[152392] _indexOfInterest[152423])
+        (555257 'end of statement' e[152392])
+        {
+          unknown call_tmp[822103] "expr temp" "maybe param" "maybe type" "temp"
+          (822106 'move' call_tmp[822103](152408 call ! first[152387]))
+          unknown call_tmp[822108] "expr temp" "maybe param" "maybe type" "temp"
+          (822111 'move' call_tmp[822108](152411 call _cond_test call_tmp[822103]))
+          if call_tmp[822108]
+          {
+            (152400 call(152397 call (partial) write _mt[203] f[152381]) " ")
+          }
+          {
+            (152403 call = first[152387] 0)
+            (555260 'end of statement' first[152387])
+          }
+          (152421 call(152418 call (partial) write _mt[203] f[152381]) e[152392])
+          (555262 'end of statement' e[152392])
+        }
+        label _continueLabel[152428]
+        _indexOfInterest[152423]
+        _iterator[152424]
+      }
+      label _breakLabel[152429]
+    }
+    (611584 return _void[46])
+  }
+  function _iteratorRecord[165](?).serialize[152457](arg _mt[152467]:_MT[201], arg this[152460]:_iteratorRecord[165](?) :
+  _iteratorRecord[165](?), arg writer[152463]:_any[141](?), ref arg serializer[152465]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[822117] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (822120 'move' call_tmp[822117](152554 'typeof' serializer[152465]))
+    unknown call_tmp[822122] "expr temp" "maybe param" "maybe type" "temp"
+    (822125 'move' call_tmp[822122](152552 call isDefaultSerializerType call_tmp[822117]))
+    unknown call_tmp[822127] "expr temp" "maybe param" "maybe type" "temp"
+    (822130 'move' call_tmp[822127](152555 call _cond_test call_tmp[822122]))
+    if call_tmp[822127]
+    {
+      (152472 call(433902 call (partial) _defaultWriteHelper _mt[203] this[152460]) writer[152463])
+    }
+    {
+      unknown call_tmp[822134] "expr temp" "maybe param" "maybe type" "temp"
+      (822137 'move' call_tmp[822134](152482 call _cond_test 0))
+      if call_tmp[822134]
+      {
+        (152476 call compilerWarning "Serialization of iterators with non-default Serializer is unstable, and may change in the future")
+      }
+      unknown call_tmp[822141] "expr temp" "maybe param" "maybe type" "temp"
+      (822144 'move' call_tmp[822141](152497 call - 1))
+      unknown call_tmp[822146] "maybe param" "maybe type" "temp"
+      (822149 'move' call_tmp[822146](152495 call(152492 call (partial) startList _mt[203] serializer[152465]) writer[152463] call_tmp[822141]))
+      unknown ser[152488] "dead at end of block" "insert auto destroy"
+      (646455 'init var' ser[152488] call_tmp[822146])
+      (152501 'end of statement')
+      {
+        unknown _indexOfInterest[152512] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[152513] "expr temp" "temp"
+        (152522 'move' _iterator[152513](152520 call _getIterator this[152460]))
+        Defer
+        {
+          {
+            (152537 call _freeIterator _iterator[152513])
+          }
+        }
+        { scopeless type
+          (152527 'move' _indexOfInterest[152512](152524 call iteratorIndex _iterator[152513]))
+        }
+        ForLoop[152514]
+        {
+          unknown e[152502] "index var" "insert auto destroy"
+          (555267 'end of statement')
+          (152532 'move' e[152502] _indexOfInterest[152512])
+          (555268 'end of statement' e[152502])
+          (152509 call(152506 call (partial) writeElement _mt[203] ser[152488]) e[152502])
+          (555270 'end of statement' ser[152488] e[152502])
+          label _continueLabel[152517]
+          _indexOfInterest[152512]
+          _iterator[152513]
+        }
+        label _breakLabel[152518]
+      }
+      (152550 call(152547 call (partial) endList _mt[203] ser[152488]))
+      (555273 'end of statement' ser[152488])
+    }
+    (611586 return _void[46])
+  }
+  function range[240](?)._defaultWriteHelper[152561](arg _mt[152569]:_MT[201], arg this[152564]:range[240](?) :
+  range[240](?), arg f[152567]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[822157] "expr temp" "maybe param" "maybe type" "temp"
+    (822160 'move' call_tmp[822157](152580 call(433916 call (partial) hasLowBound _mt[203] this[152564])))
+    unknown call_tmp[822162] "expr temp" "maybe param" "maybe type" "temp"
+    (822165 'move' call_tmp[822162](152581 call _cond_test call_tmp[822157]))
+    if call_tmp[822162]
+    {
+      unknown call_tmp[822171] "expr temp" "maybe param" "maybe type" "temp"
+      (822174 'move' call_tmp[822171](433912 call lowBound _mt[203] this[152564]))
+      (152576 call(152573 call (partial) write _mt[203] f[152567]) call_tmp[822171])
+    }
+    (152590 call(152587 call (partial) writeLiteral _mt[203] f[152567]) "..")
+    (555276 'end of statement')
+    unknown call_tmp[822180] "expr temp" "maybe param" "maybe type" "temp"
+    (822183 'move' call_tmp[822180](152636 call(433928 call (partial) hasHighBound _mt[203] this[152564])))
+    unknown call_tmp[822185] "expr temp" "maybe param" "maybe type" "temp"
+    (822188 'move' call_tmp[822185](152637 call _cond_test call_tmp[822180]))
+    if call_tmp[822185]
+    {
+      unknown tmp[489282] "maybe param" "temp"
+      unknown call_tmp[822192] "expr temp" "maybe param" "maybe type" "temp"
+      (822195 'move' call_tmp[822192](152618 call idxType _mt[203] this[152564]))
+      (489293 'move' tmp[489282](152616 call chpl__singleValIdxType call_tmp[822192]))
+      unknown call_tmp[822197] "expr temp" "maybe param" "maybe type" "temp"
+      (822200 'move' call_tmp[822197](489295 call _cond_invalid tmp[489282]))
+      if call_tmp[822197]
+      {
+        (489298 call compilerError "cannot promote short-circuiting && operator")
+      }
+      unknown tmp[682222] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[682223] "maybe param" "temp"
+      unknown call_tmp[822202] "expr temp" "maybe param" "maybe type" "temp"
+      (822205 'move' call_tmp[822202](489283 call isTrue tmp[489282]))
+      (682228 'move' tmp[682223](682226 call _cond_test call_tmp[822202]))
+      if tmp[682223]
+      {
+        unknown tmp[682230] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[822209] "expr temp" "maybe param" "maybe type" "temp"
+        (822212 'move' call_tmp[822209](152624 call _low _mt[203] this[152564]))
+        unknown call_tmp[822216] "expr temp" "maybe param" "maybe type" "temp"
+        (822219 'move' call_tmp[822216](152628 call _high _mt[203] this[152564]))
+        unknown call_tmp[822221] "expr temp" "maybe param" "maybe type" "temp"
+        (822224 'move' call_tmp[822221](152621 call != call_tmp[822209] call_tmp[822216]))
+        (682232 'move' tmp[682230](489286 call isTrue call_tmp[822221]))
+        (682237 'move' tmp[682222](682234 '_paramFoldLogical' tmp[682223] tmp[682230]))
+      }
+      {
+        (682242 'move' tmp[682222](682239 '_paramFoldLogical' tmp[682223] 0))
+      }
+      unknown call_tmp[822226] "expr temp" "maybe param" "maybe type" "temp"
+      (822229 'move' call_tmp[822226](152631 call _cond_test tmp[682222]))
+      if call_tmp[822226]
+      {
+        (152598 call(152595 call (partial) writeLiteral _mt[203] f[152567]) "<")
+        (555278 'end of statement')
+        unknown call_tmp[822237] "expr temp" "maybe param" "maybe type" "temp"
+        (822240 'move' call_tmp[822237](433920 call lowBound _mt[203] this[152564]))
+        (152604 call(152601 call (partial) write _mt[203] f[152567]) call_tmp[822237])
+      }
+      {
+        unknown call_tmp[822246] "expr temp" "maybe param" "maybe type" "temp"
+        (822249 'move' call_tmp[822246](433924 call highBound _mt[203] this[152564]))
+        (152611 call(152608 call (partial) write _mt[203] f[152567]) call_tmp[822246])
+      }
+    }
+    unknown call_tmp[822253] "expr temp" "maybe param" "maybe type" "temp"
+    (822256 'move' call_tmp[822253](433952 call stride _mt[203] this[152564]))
+    unknown call_tmp[822258] "expr temp" "maybe param" "maybe type" "temp"
+    (822261 'move' call_tmp[822258](152687 call != call_tmp[822253] 1))
+    unknown call_tmp[822263] "expr temp" "maybe param" "maybe type" "temp"
+    (822266 'move' call_tmp[822263](152691 call _cond_test call_tmp[822258]))
+    if call_tmp[822263]
+    {
+      (152646 call(152643 call (partial) writeLiteral _mt[203] f[152567]) " by ")
+      (555281 'end of statement')
+      unknown call_tmp[822274] "expr temp" "maybe param" "maybe type" "temp"
+      (822277 'move' call_tmp[822274](433932 call stride _mt[203] this[152564]))
+      (152652 call(152649 call (partial) write _mt[203] f[152567]) call_tmp[822274])
+      (555282 'end of statement')
+      unknown tmp[489303] "maybe param" "temp"
+      unknown tmp[489324] "maybe param" "temp"
+      unknown call_tmp[822281] "expr temp" "maybe param" "maybe type" "temp"
+      (822284 'move' call_tmp[822281](433940 call stride _mt[203] this[152564]))
+      unknown call_tmp[822286] "expr temp" "maybe param" "maybe type" "temp"
+      (822289 'move' call_tmp[822286](152674 call - 1))
+      (489335 'move' tmp[489324](152671 call != call_tmp[822281] call_tmp[822286]))
+      unknown call_tmp[822291] "expr temp" "maybe param" "maybe type" "temp"
+      (822294 'move' call_tmp[822291](489337 call _cond_invalid tmp[489324]))
+      if call_tmp[822291]
+      {
+        (489340 call compilerError "cannot promote short-circuiting && operator")
+      }
+      unknown tmp[682249] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[682250] "maybe param" "temp"
+      unknown call_tmp[822296] "expr temp" "maybe param" "maybe type" "temp"
+      (822299 'move' call_tmp[822296](489325 call isTrue tmp[489324]))
+      (682255 'move' tmp[682250](682253 call _cond_test call_tmp[822296]))
+      if tmp[682250]
+      {
+        unknown tmp[682257] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[822303] "expr temp" "maybe param" "maybe type" "temp"
+        (822306 'move' call_tmp[822303](152678 call(433944 call (partial) isAligned _mt[203] this[152564])))
+        (682259 'move' tmp[682257](489328 call isTrue call_tmp[822303]))
+        (682264 'move' tmp[682249](682261 '_paramFoldLogical' tmp[682250] tmp[682257]))
+      }
+      {
+        (682269 'move' tmp[682249](682266 '_paramFoldLogical' tmp[682250] 0))
+      }
+      (489314 'move' tmp[489303] tmp[682249])
+      unknown call_tmp[822308] "expr temp" "maybe param" "maybe type" "temp"
+      (822311 'move' call_tmp[822308](489316 call _cond_invalid tmp[489303]))
+      if call_tmp[822308]
+      {
+        (489319 call compilerError "cannot promote short-circuiting && operator")
+      }
+      unknown tmp[682276] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[682277] "maybe param" "temp"
+      unknown call_tmp[822313] "expr temp" "maybe param" "maybe type" "temp"
+      (822316 'move' call_tmp[822313](489304 call isTrue tmp[489303]))
+      (682282 'move' tmp[682277](682280 call _cond_test call_tmp[822313]))
+      if tmp[682277]
+      {
+        unknown tmp[682284] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[822320] "expr temp" "maybe param" "maybe type" "temp"
+        (822323 'move' call_tmp[822320](152682 call(433948 call (partial) chpl_isNaturallyAligned _mt[203] this[152564])))
+        unknown call_tmp[822325] "expr temp" "maybe param" "maybe type" "temp"
+        (822328 'move' call_tmp[822325](152679 call ! call_tmp[822320]))
+        (682286 'move' tmp[682284](489307 call isTrue call_tmp[822325]))
+        (682291 'move' tmp[682276](682288 '_paramFoldLogical' tmp[682277] tmp[682284]))
+      }
+      {
+        (682296 'move' tmp[682276](682293 '_paramFoldLogical' tmp[682277] 0))
+      }
+      unknown call_tmp[822330] "expr temp" "maybe param" "maybe type" "temp"
+      (822333 'move' call_tmp[822330](152683 call _cond_test tmp[682276]))
+      if call_tmp[822330]
+      {
+        (152659 call(152656 call (partial) writeLiteral _mt[203] f[152567]) " align ")
+        (555285 'end of statement')
+        unknown call_tmp[822341] "expr temp" "maybe param" "maybe type" "temp"
+        (822344 'move' call_tmp[822341](433936 call alignment _mt[203] this[152564]))
+        (152665 call(152662 call (partial) write _mt[203] f[152567]) call_tmp[822341])
+      }
+    }
+    (611588 return _void[46])
+  }
+  function range[240](?).serialize[152697](arg _mt[152707]:_MT[201], arg this[152700]:range[240](?) :
+  range[240](?), arg writer[152703]:_any[141](?), ref arg serializer[152705]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[822346] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (822349 'move' call_tmp[822346](152774 'typeof' serializer[152705]))
+    unknown call_tmp[822351] "expr temp" "maybe param" "maybe type" "temp"
+    (822354 'move' call_tmp[822351](152772 call isDefaultSerializerType call_tmp[822346]))
+    unknown call_tmp[822356] "expr temp" "maybe param" "maybe type" "temp"
+    (822359 'move' call_tmp[822356](152775 call _cond_test call_tmp[822351]))
+    if call_tmp[822356]
+    {
+      (152712 call(433956 call (partial) _defaultWriteHelper _mt[203] this[152700]) writer[152703])
+    }
+    {
+      unknown call_tmp[822363] "expr temp" "maybe param" "maybe type" "temp"
+      (822366 'move' call_tmp[822363](152722 call _cond_test 0))
+      if call_tmp[822363]
+      {
+        (152716 call compilerWarning "Serialization of ranges with non-default Serializer is unstable, and may change in the future")
+      }
+      unknown call_tmp[822368] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (822371 'move' call_tmp[822368](152765 'typeof' serializer[152705]))
+      unknown call_tmp[822373] "expr temp" "maybe param" "maybe type" "temp"
+      (822376 'move' call_tmp[822373](152762 call == call_tmp[822368] binarySerializer[174153]))
+      unknown call_tmp[822378] "expr temp" "maybe param" "maybe type" "temp"
+      (822381 'move' call_tmp[822378](152767 call _cond_test call_tmp[822373]))
+      if call_tmp[822378]
+      {
+        unknown call_tmp[822387] "expr temp" "maybe param" "maybe type" "temp"
+        (822390 'move' call_tmp[822387](152735 call low _mt[203] this[152700]))
+        unknown call_tmp[822394] "expr temp" "maybe param" "maybe type" "temp"
+        (822397 'move' call_tmp[822394](152739 call high _mt[203] this[152700]))
+        unknown call_tmp[822401] "expr temp" "maybe param" "maybe type" "temp"
+        (822404 'move' call_tmp[822401](152743 call stride _mt[203] this[152700]))
+        unknown call_tmp[822408] "expr temp" "maybe param" "maybe type" "temp"
+        (822411 'move' call_tmp[822408](152747 call alignment _mt[203] this[152700]))
+        unknown call_tmp[822413] "expr temp" "maybe param" "maybe type" "temp"
+        (822416 'move' call_tmp[822413](152750 call _build_tuple call_tmp[822387] call_tmp[822394] call_tmp[822401] call_tmp[822408]))
+        (152732 call(152729 call (partial) write _mt[203] writer[152703]) call_tmp[822413])
+      }
+      {
+        unknown call_tmp[822420] "expr temp" "maybe param" "maybe type" "temp"
+        (822423 'move' call_tmp[822420](152758 call : this[152700] string[244]))
+        (152757 call(152754 call (partial) write _mt[203] writer[152703]) call_tmp[822420])
+      }
+    }
+    (611590 return _void[46])
+  }
+  function |writeSerializable[475047]() : _unknown[42] "ImplementsStmt wrapper"
+  { writeSerializable[310070] range[240](?)
+    {
+    }
+    (611594 return _void[46])
+  }
+  function range[240](?)._defaultReadHelper[152789](arg _mt[152797]:_MT[201], ref arg this[152792]:range[240](?) :
+  range[240](?), arg f[152795]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[822427] "expr temp" "maybe param" "maybe type" "temp"
+    (822430 'move' call_tmp[822427](152812 call(433978 call (partial) hasLowBound _mt[203] this[152792])))
+    unknown call_tmp[822432] "expr temp" "maybe param" "maybe type" "temp"
+    (822435 'move' call_tmp[822432](152813 call _cond_test call_tmp[822427]))
+    if call_tmp[822432]
+    {
+      { scopeless type
+        unknown call_type_tmp[577803] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[822439] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (822442 'move' call_tmp[822439](433974 call _low _mt[203] this[152792]))
+        (577807 'move' call_type_tmp[577803](152809 'typeof' call_tmp[822439]))
+      }
+      unknown call_tmp[822446] "expr temp" "maybe param" "maybe type" "temp"
+      (822449 'move' call_tmp[822446](433969 call _low _mt[203] this[152792]))
+      unknown call_tmp[822453] "expr temp" "maybe param" "maybe type" "temp"
+      (822456 'move' call_tmp[822453](152807 call(152804 call (partial) read _mt[203] f[152795]) call_type_tmp[577803]))
+      (152800 call = call_tmp[822446] call_tmp[822453])
+    }
+    (152822 call(152819 call (partial) readLiteral _mt[203] f[152795]) "..")
+    (555293 'end of statement')
+    unknown call_tmp[822462] "expr temp" "maybe param" "maybe type" "temp"
+    (822465 'move' call_tmp[822462](152836 call(433992 call (partial) hasHighBound _mt[203] this[152792])))
+    unknown call_tmp[822467] "expr temp" "maybe param" "maybe type" "temp"
+    (822470 'move' call_tmp[822467](152837 call _cond_test call_tmp[822462]))
+    if call_tmp[822467]
+    {
+      { scopeless type
+        unknown call_type_tmp[577809] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[822474] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+        (822477 'move' call_tmp[822474](433988 call _high _mt[203] this[152792]))
+        (577813 'move' call_type_tmp[577809](152833 'typeof' call_tmp[822474]))
+      }
+      unknown call_tmp[822481] "expr temp" "maybe param" "maybe type" "temp"
+      (822484 'move' call_tmp[822481](433983 call _high _mt[203] this[152792]))
+      unknown call_tmp[822488] "expr temp" "maybe param" "maybe type" "temp"
+      (822491 'move' call_tmp[822488](152831 call(152828 call (partial) read _mt[203] f[152795]) call_type_tmp[577809]))
+      (152824 call = call_tmp[822481] call_tmp[822488])
+    }
+    unknown call_tmp[822495] "expr temp" "maybe param" "maybe type" "temp"
+    (822498 'move' call_tmp[822495](153078 call(153075 call (partial) matchLiteral _mt[203] f[152795]) " by "))
+    unknown call_tmp[822500] "expr temp" "maybe param" "maybe type" "temp"
+    (822503 'move' call_tmp[822500](153080 call _cond_test call_tmp[822495]))
+    if call_tmp[822500]
+    {
+      unknown call_tmp[822509] "expr temp" "maybe param" "maybe type" "temp"
+      (822512 'move' call_tmp[822509](433996 call strType _mt[203] this[152792]))
+      unknown call_tmp[822514] "maybe param" "maybe type" "temp"
+      (822517 'move' call_tmp[822514](152849 call(152846 call (partial) read _mt[203] f[152795]) call_tmp[822509]))
+      const strideVal[152844] "dead at end of block" "const" "insert auto destroy"
+      (646457 'init var' strideVal[152844] call_tmp[822514])
+      (152852 'end of statement')
+      unknown expectedStride[152854] "dead at end of block" "insert auto destroy"
+      (646459 'init var' expectedStride[152854] "")
+      (152857 'end of statement')
+      {
+        unknown tmp[152955] "expr temp" "maybe param" "maybe type" "temp"
+        (152957 'move' tmp[152955](434001 call strides _mt[203] this[152792]))
+        unknown call_tmp[822521] "expr temp" "maybe param" "maybe type" "temp"
+        (822524 'move' call_tmp[822521](152959 call == tmp[152955] one[107127]))
+        unknown call_tmp[822526] "expr temp" "maybe param" "maybe type" "temp"
+        (822529 'move' call_tmp[822526](152962 call _cond_test call_tmp[822521]))
+        if call_tmp[822526]
+        {
+          unknown call_tmp[822531] "expr temp" "maybe param" "maybe type" "temp"
+          (822534 'move' call_tmp[822531](152873 call != strideVal[152844] 1))
+          unknown call_tmp[822536] "expr temp" "maybe param" "maybe type" "temp"
+          (822539 'move' call_tmp[822536](152877 call _cond_test call_tmp[822531]))
+          if call_tmp[822536]
+          {
+            (152866 call = expectedStride[152854] "stride 1")
+            (555295 'end of statement' expectedStride[152854])
+          }
+        }
+        {
+          unknown call_tmp[822541] "expr temp" "maybe param" "maybe type" "temp"
+          (822544 'move' call_tmp[822541](152965 call == tmp[152955] negOne[107129]))
+          unknown call_tmp[822546] "expr temp" "maybe param" "maybe type" "temp"
+          (822549 'move' call_tmp[822546](152968 call _cond_test call_tmp[822541]))
+          if call_tmp[822546]
+          {
+            unknown call_tmp[822551] "expr temp" "maybe param" "maybe type" "temp"
+            (822554 'move' call_tmp[822551](152897 call - 1))
+            unknown call_tmp[822556] "expr temp" "maybe param" "maybe type" "temp"
+            (822559 'move' call_tmp[822556](152894 call != strideVal[152844] call_tmp[822551]))
+            unknown call_tmp[822561] "expr temp" "maybe param" "maybe type" "temp"
+            (822564 'move' call_tmp[822561](152900 call _cond_test call_tmp[822556]))
+            if call_tmp[822561]
+            {
+              (152887 call = expectedStride[152854] "stride -1")
+              (555297 'end of statement' expectedStride[152854])
+            }
+          }
+          {
+            unknown call_tmp[822566] "expr temp" "maybe param" "maybe type" "temp"
+            (822569 'move' call_tmp[822566](152972 call == tmp[152955] positive[107131]))
+            unknown call_tmp[822571] "expr temp" "maybe param" "maybe type" "temp"
+            (822574 'move' call_tmp[822571](152975 call _cond_test call_tmp[822566]))
+            if call_tmp[822571]
+            {
+              unknown call_tmp[822576] "expr temp" "maybe param" "maybe type" "temp"
+              (822579 'move' call_tmp[822576](152917 call < strideVal[152844] 0))
+              unknown call_tmp[822581] "expr temp" "maybe param" "maybe type" "temp"
+              (822584 'move' call_tmp[822581](152921 call _cond_test call_tmp[822576]))
+              if call_tmp[822581]
+              {
+                (152910 call = expectedStride[152854] "a positive")
+                (555299 'end of statement' expectedStride[152854])
+              }
+            }
+            {
+              unknown call_tmp[822586] "expr temp" "maybe param" "maybe type" "temp"
+              (822589 'move' call_tmp[822586](152979 call == tmp[152955] negative[107133]))
+              unknown call_tmp[822591] "expr temp" "maybe param" "maybe type" "temp"
+              (822594 'move' call_tmp[822591](152982 call _cond_test call_tmp[822586]))
+              if call_tmp[822591]
+              {
+                unknown call_tmp[822596] "expr temp" "maybe param" "maybe type" "temp"
+                (822599 'move' call_tmp[822596](152938 call > strideVal[152844] 0))
+                unknown call_tmp[822601] "expr temp" "maybe param" "maybe type" "temp"
+                (822604 'move' call_tmp[822601](152942 call _cond_test call_tmp[822596]))
+                if call_tmp[822601]
+                {
+                  (152931 call = expectedStride[152854] "a negative")
+                  (555301 'end of statement' expectedStride[152854])
+                }
+              }
+              {
+                unknown call_tmp[822606] "expr temp" "maybe param" "maybe type" "temp"
+                (822609 'move' call_tmp[822606](152986 call == tmp[152955] any[107135]))
+                unknown call_tmp[822611] "expr temp" "maybe param" "maybe type" "temp"
+                (822614 'move' call_tmp[822611](152989 call _cond_test call_tmp[822606]))
+                if call_tmp[822611]
+                {
+                }
+              }
+            }
+          }
+        }
+      }
+      unknown call_tmp[822616] "expr temp" "maybe param" "maybe type" "temp"
+      (822619 'move' call_tmp[822616](153042 call != expectedStride[152854] ""))
+      unknown call_tmp[822621] "expr temp" "maybe param" "maybe type" "temp"
+      (822624 'move' call_tmp[822621](153046 call _cond_test call_tmp[822616]))
+      if call_tmp[822621]
+      {
+        unknown tmp[682303] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+        unknown tmp[682304] "maybe param" "temp"
+        unknown call_tmp[822628] "expr temp" "maybe param" "maybe type" "temp"
+        (822631 'move' call_tmp[822628](153020 call size _mt[203] expectedStride[152854]))
+        unknown call_tmp[822633] "expr temp" "maybe param" "maybe type" "temp"
+        (822636 'move' call_tmp[822633](153017 call > call_tmp[822628] 2))
+        (682309 'move' tmp[682304](682307 call _cond_test call_tmp[822633]))
+        if tmp[682304]
+        {
+          unknown tmp[682311] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+          (682313 'move' tmp[682311](153024 call + expectedStride[152854] " stride"))
+          (682318 'move' tmp[682303](682315 '_paramFoldLogical' tmp[682304] tmp[682311]))
+        }
+        {
+          (682323 'move' tmp[682303](682320 '_paramFoldLogical' tmp[682304] expectedStride[152854]))
+        }
+        unknown call_tmp[822640] "expr temp" "maybe param" "maybe type" "temp"
+        (822643 'move' call_tmp[822640](434020 call strides _mt[203] this[152792]))
+        unknown call_tmp[822645] "expr temp" "maybe param" "maybe type" "temp"
+        (822648 'move' call_tmp[822645](153010 call : call_tmp[822640] string[244]))
+        unknown call_tmp[822650] "expr temp" "maybe param" "maybe type" "temp"
+        (822653 'move' call_tmp[822650](153005 call + "for a range with strides=" call_tmp[822645]))
+        unknown call_tmp[822655] "expr temp" "maybe param" "maybe type" "temp"
+        (822658 'move' call_tmp[822655](153003 call + call_tmp[822650] ", expected "))
+        unknown call_tmp[822660] "expr temp" "maybe param" "maybe type" "temp"
+        (822663 'move' call_tmp[822660](153001 call + call_tmp[822655] tmp[682303]))
+        unknown call_tmp[822665] "expr temp" "maybe param" "maybe type" "temp"
+        (822668 'move' call_tmp[822665](152999 call + call_tmp[822660] ", got stride "))
+        unknown call_tmp[822670] "expr temp" "maybe param" "maybe type" "temp"
+        (822673 'move' call_tmp[822670](153037 call : strideVal[152844] string[244]))
+        unknown call_tmp[822675] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+        (822678 'move' call_tmp[822675](1000159 'new' BadFormatError[414425](?) call_tmp[822665] call_tmp[822670](_chpl_manager = _owned[238](?))))
+        unknown call_tmp[822680] "expr temp" "maybe param" "maybe type" "temp"
+        (822683 'move' call_tmp[822680](542261 call chpl_fix_thrown_error call_tmp[822675]))
+        (152993 'throw' call_tmp[822680])
+        (555303 'end of statement' expectedStride[152854] strideVal[152844])
+      }
+      unknown call_tmp[822687] "expr temp" "maybe param" "maybe type" "temp"
+      (822690 'move' call_tmp[822687](153066 call(434032 call (partial) hasParamStride _mt[203] this[152792])))
+      unknown call_tmp[822692] "expr temp" "maybe param" "maybe type" "temp"
+      (822695 'move' call_tmp[822692](153063 call ! call_tmp[822687]))
+      unknown call_tmp[822697] "expr temp" "maybe param" "maybe type" "temp"
+      (822700 'move' call_tmp[822697](153067 call _cond_test call_tmp[822692]))
+      if call_tmp[822697]
+      {
+        unknown call_tmp[822702] "expr temp" "maybe param" "maybe type" "temp"
+        (822705 'move' call_tmp[822702](153056 call chpl_by this[152792] strideVal[152844]))
+        unknown call_tmp[822707] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (822710 'move' call_tmp[822707](153061 'typeof' this[152792]))
+        unknown call_tmp[822712] "expr temp" "maybe param" "maybe type" "temp"
+        (822715 'move' call_tmp[822712](153054 call : call_tmp[822702] call_tmp[822707]))
+        (153051 call = this[152792] call_tmp[822712])
+        (555306 'end of statement' strideVal[152844])
+      }
+      (396726 'used modules list'(152859 'use' strideKind[107137]))
+    }
+    unknown call_tmp[822719] "expr temp" "maybe param" "maybe type" "temp"
+    (822722 'move' call_tmp[822719](153118 call(153115 call (partial) matchLiteral _mt[203] f[152795]) " align "))
+    unknown call_tmp[822724] "expr temp" "maybe param" "maybe type" "temp"
+    (822727 'move' call_tmp[822724](153120 call _cond_test call_tmp[822719]))
+    if call_tmp[822724]
+    {
+      unknown call_tmp[822733] "expr temp" "maybe param" "maybe type" "temp"
+      (822736 'move' call_tmp[822733](434036 call chpl_integralIdxType _mt[203] this[152792]))
+      unknown call_tmp[822738] "maybe param" "maybe type" "temp"
+      (822741 'move' call_tmp[822738](153091 call(153088 call (partial) read _mt[203] f[152795]) call_tmp[822733]))
+      const alignVal[153086] "dead at end of block" "const" "insert auto destroy"
+      (646461 'init var' alignVal[153086] call_tmp[822738])
+      (153094 'end of statement')
+      unknown call_tmp[822745] "expr temp" "maybe param" "maybe type" "temp"
+      (822748 'move' call_tmp[822745](153109 call(434044 call (partial) hasParamStrideAltvalAld _mt[203] this[152792])))
+      unknown call_tmp[822750] "expr temp" "maybe param" "maybe type" "temp"
+      (822753 'move' call_tmp[822750](153110 call _cond_test call_tmp[822745]))
+      if call_tmp[822750]
+      {
+      }
+      {
+        unknown call_tmp[822755] "expr temp" "maybe param" "maybe type" "temp"
+        (822758 'move' call_tmp[822755](153102 call chpl_align this[152792] alignVal[153086]))
+        unknown call_tmp[822760] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (822763 'move' call_tmp[822760](153107 'typeof' this[152792]))
+        unknown call_tmp[822765] "expr temp" "maybe param" "maybe type" "temp"
+        (822768 'move' call_tmp[822765](153100 call : call_tmp[822755] call_tmp[822760]))
+        (153097 call = this[152792] call_tmp[822765])
+        (555308 'end of statement' alignVal[153086])
+      }
+    }
+    (611596 return _void[46])
+  }
+  function range[240](?).deserialize[153126](arg _mt[153136]:_MT[201], ref arg this[153129]:range[240](?) :
+  range[240](?), arg reader[153132]:_any[141](?), ref arg deserializer[153134]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[822770] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (822773 'move' call_tmp[822770](153268 'typeof' deserializer[153134]))
+    unknown call_tmp[822775] "expr temp" "maybe param" "maybe type" "temp"
+    (822778 'move' call_tmp[822775](153265 call == call_tmp[822770] defaultDeserializer[173096]))
+    unknown call_tmp[822780] "expr temp" "maybe param" "maybe type" "temp"
+    (822783 'move' call_tmp[822780](153275 call _cond_test call_tmp[822775]))
+    if call_tmp[822780]
+    {
+      (153141 call(434050 call (partial) _defaultReadHelper _mt[203] this[153129]) reader[153132])
+    }
+    {
+      unknown call_tmp[822787] "expr temp" "maybe param" "maybe type" "temp"
+      (822790 'move' call_tmp[822787](153151 call _cond_test 0))
+      if call_tmp[822787]
+      {
+        (153145 call compilerWarning "Deserialization of ranges with non-default Deserializer is unstable, and may change in the future")
+      }
+      unknown call_tmp[822792] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (822795 'move' call_tmp[822792](153259 'typeof' deserializer[153134]))
+      unknown call_tmp[822797] "expr temp" "maybe param" "maybe type" "temp"
+      (822800 'move' call_tmp[822797](153256 call == call_tmp[822792] binaryDeserializer[175632]))
+      unknown call_tmp[822802] "expr temp" "maybe param" "maybe type" "temp"
+      (822805 'move' call_tmp[822802](153261 call _cond_test call_tmp[822797]))
+      if call_tmp[822802]
+      {
+        unknown call_tmp[822811] "expr temp" "maybe param" "maybe type" "temp"
+        (822814 'move' call_tmp[822811](434057 call idxType _mt[203] this[153129]))
+        unknown call_tmp[822818] "expr temp" "maybe param" "maybe type" "temp"
+        (822821 'move' call_tmp[822818](434062 call idxType _mt[203] this[153129]))
+        unknown call_tmp[822825] "expr temp" "maybe param" "maybe type" "temp"
+        (822828 'move' call_tmp[822825](434066 call strType _mt[203] this[153129]))
+        unknown call_tmp[822832] "expr temp" "maybe param" "maybe type" "temp"
+        (822835 'move' call_tmp[822832](434071 call idxType _mt[203] this[153129]))
+        unknown call_tmp[822837] "expr temp" "maybe param" "maybe type" "temp"
+        (822840 'move' call_tmp[822837](153176 call _build_tuple call_tmp[822811] call_tmp[822818] call_tmp[822825] call_tmp[822832]))
+        unknown call_tmp[822842] "maybe param" "maybe type" "temp"
+        (822845 'move' call_tmp[822842](153170 call(153167 call (partial) read _mt[203] reader[153132]) call_tmp[822837]))
+        unknown tmp[153178] "dead at end of block" "insert auto destroy" "temp"
+        (646463 'init var' tmp[153178] call_tmp[822842])
+        (153191 call _check_tuple_var_decl tmp[153178] 4)
+        (555312 'end of statement')
+        unknown call_tmp[822847] "maybe param" "maybe type" "temp"
+        (822850 'move' call_tmp[822847](153179 call tmp[153178] 0))
+        unknown lo[153158] "dead at end of block" "insert auto destroy"
+        (646465 'init var' lo[153158] call_tmp[822847])
+        unknown call_tmp[822852] "maybe param" "maybe type" "temp"
+        (822855 'move' call_tmp[822852](153182 call tmp[153178] 1))
+        unknown hi[153160] "dead at end of block" "insert auto destroy"
+        (646467 'init var' hi[153160] call_tmp[822852])
+        unknown call_tmp[822857] "maybe param" "maybe type" "temp"
+        (822860 'move' call_tmp[822857](153185 call tmp[153178] 2))
+        unknown str[153162] "dead at end of block" "insert auto destroy"
+        (646469 'init var' str[153162] call_tmp[822857])
+        unknown call_tmp[822862] "maybe param" "maybe type" "temp"
+        (822865 'move' call_tmp[822862](153188 call tmp[153178] 3))
+        unknown al[153164] "dead at end of block" "insert auto destroy"
+        (646471 'init var' al[153164] call_tmp[822862])
+        (153196 'end of statement')
+        unknown call_tmp[822867] "expr temp" "maybe param" "maybe type" "temp"
+        (822870 'move' call_tmp[822867](153208 call chpl_build_bounded_range lo[153158] hi[153160]))
+        unknown call_tmp[822872] "expr temp" "maybe param" "maybe type" "temp"
+        (822875 'move' call_tmp[822872](153204 call chpl_by call_tmp[822867] str[153162]))
+        unknown call_tmp[822877] "expr temp" "maybe param" "maybe type" "temp"
+        (822880 'move' call_tmp[822877](153202 call chpl_align call_tmp[822872] al[153164]))
+        unknown call_tmp[822882] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (822885 'move' call_tmp[822882](153213 'typeof' this[153129]))
+        unknown call_tmp[822887] "expr temp" "maybe param" "maybe type" "temp"
+        (822890 'move' call_tmp[822887](153200 call : call_tmp[822877] call_tmp[822882]))
+        (153197 call = this[153129] call_tmp[822887])
+        (555313 'end of statement' lo[153158] hi[153160] str[153162] al[153164])
+      }
+      {
+        unknown call_tmp[822894] "maybe param" "maybe type" "temp"
+        (822897 'move' call_tmp[822894](153221 call(153218 call (partial) read _mt[203] reader[153132]) string[244]))
+        const data[153216] "dead at end of block" "const" "insert auto destroy"
+        (646473 'init var' data[153216] call_tmp[822894])
+        (153224 'end of statement')
+        unknown call_tmp[822899] "maybe param" "maybe type" "temp"
+        (822902 'move' call_tmp[822899](153228 call openMemFile))
+        unknown f[153226] "dead at end of block" "insert auto destroy"
+        (646475 'init var' f[153226] call_tmp[822899])
+        (153230 'end of statement')
+        unknown call_tmp[822906] "expr temp" "maybe param" "maybe type" "temp"
+        (822909 'move' call_tmp[822906](153237 call(153234 call (partial) writer _mt[203] f[153226])(locking = 0)))
+        (153243 call(153240 call (partial) write _mt[203] call_tmp[822906]) data[153216])
+        (555318 'end of statement' f[153226] data[153216])
+        unknown call_tmp[822917] "expr temp" "maybe param" "maybe type" "temp"
+        (822920 'move' call_tmp[822917](153253 call(153250 call (partial) reader _mt[203] f[153226])(locking = 0)))
+        (153246 call(434082 call (partial) _defaultReadHelper _mt[203] this[153129]) call_tmp[822917])
+        (555321 'end of statement' f[153226])
+      }
+    }
+    (611598 return _void[46])
+    (403842 'referenced modules list' IO[208303])
+  }
+  function |readDeserializable[475052]() : _unknown[42] "ImplementsStmt wrapper"
+  { readDeserializable[310078] range[240](?)
+    {
+    }
+    (611602 return _void[46])
+  }
+  function range[240](?).init[153289](arg _mt[153325]:_MT[201], ref arg this[153292]:range[240](?) :
+  range[240](?), arg idxType[153296]:_any[141](?) =
+  int(64)[10], param arg bounds[153304]:boundKind[107122] =
+  both[107114], param arg strides[153313]:strideKind[107137] =
+  one[107127], arg reader[153320]:fileReader[170893](?), ref arg deserializer[153323]:_any[141](?)) : void[4] throws "method" "no return value for void"
+  {
+    (153332 call(153329 call (partial) init _mt[203] this[153292]) idxType[153296] bounds[153304] strides[153313])
+    (555324 'end of statement')
+    (153340 call(153337 call (partial) deserialize _mt[203] this[153292]) reader[153320] deserializer[153323])
+    (611604 return _void[46])
+  }
+  function |initDeserializable[475057]() : _unknown[42] "ImplementsStmt wrapper"
+  { initDeserializable[310086] range[240](?)
+    {
+    }
+    (611608 return _void[46])
+  }
+  function LocaleModel[309075].serialize[153353](arg _mt[153363]:_MT[201], arg this[153356]:LocaleModel[309075] :
+  LocaleModel[309075], arg writer[153359]:_any[141](?), ref arg serializer[153361]:_any[141](?)) : _unknown[42] throws "method" "method overrides" "no return value for void"
+  {
+    (153370 call(153367 call (partial) writeLiteral _mt[203] writer[153359]) "LOCALE")
+    (555327 'end of statement')
+    unknown call_tmp[822932] "expr temp" "maybe param" "maybe type" "temp"
+    (822935 'move' call_tmp[822932](153380 call(434101 call (partial) chpl_id _mt[203] this[153356])))
+    (153378 call(153375 call (partial) write _mt[203] writer[153359]) call_tmp[822932])
+    (611610 return _void[46])
+  }
+  function |writeSerializable[475062]() : _unknown[42] "ImplementsStmt wrapper"
+  { writeSerializable[310070] LocaleModel[434105](?)
+    {
+    }
+    (611614 return _void[46])
+  }
+  function Error[85511].serialize[153390](arg _mt[153400]:_MT[201], arg this[153393]:Error[85511] :
+  Error[85511], arg writer[153396]:_any[141](?), ref arg serializer[153398]:_any[141](?)) : _unknown[42] throws "method" "method overrides" "no return value for void"
+  {
+    unknown call_tmp[822939] "expr temp" "maybe param" "maybe type" "temp"
+    (822942 'move' call_tmp[822939](153409 call chpl_describe_error this[153393]))
+    (153407 call(153404 call (partial) write _mt[203] writer[153396]) call_tmp[822939])
+    (611616 return _void[46])
+  }
+  function |writeSerializable[475067]() : _unknown[42] "ImplementsStmt wrapper"
+  { writeSerializable[310070] Error[316409](?)
+    {
+    }
+    (611620 return _void[46])
+  }
+  function write[153420](const arg args[153424]:_any[141](?) ...) : _unknown[42] "no return value for void"
+  {
+    Try!
+    {
+      {
+        (153433 call(153430 call (partial) write _mt[203] stdout[196765])(153435 'expand_tuple' args[153424]))
+      }
+    }
+    (611622 return _void[46])
+  }
+  function writeln[153441](const arg args[153445]:_any[141](?) ...) : _unknown[42] "no return value for void"
+  {
+    Try!
+    {
+      {
+        (153456 call(153453 call (partial) writeln _mt[203] stdout[196765])(153458 'expand_tuple' args[153445]))
+      }
+    }
+    (611624 return _void[46])
+  }
+  function writeln[153464]() : _unknown[42] "no return value for void"
+  {
+    Try!
+    {
+      {
+        (153472 call(153469 call (partial) writeln _mt[203] stdout[196765]))
+      }
+    }
+    (611626 return _void[46])
+  }
+  function writef[153478](arg fmt[153482]:_any[141](?), const arg args[153487]:_any[141](?) ...) : _unknown[42] "no return value for void"
+  {
+    Try!
+    {
+      {
+        (153504 call(153501 call (partial) writef _mt[203] stdout[196765]) fmt[153482](153507 'expand_tuple' args[153487]))
+      }
+    }
+    (611628 return _void[46])
+  }
+  where {
+    unknown tmp[489345] "maybe param" "temp"
+    unknown call_tmp[822952] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (822955 'move' call_tmp[822952](526248 'typeof' fmt[153482]))
+    (489356 'move' tmp[489345](153493 call isStringType call_tmp[822952]))
+    unknown call_tmp[822957] "expr temp" "maybe param" "maybe type" "temp"
+    (822960 'move' call_tmp[822957](489358 call _cond_invalid tmp[489345]))
+    if call_tmp[822957]
+    {
+      (489361 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[682330] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[682331] "maybe param" "temp"
+    unknown call_tmp[822962] "expr temp" "maybe param" "maybe type" "temp"
+    (822965 'move' call_tmp[822962](489346 call isTrue tmp[489345]))
+    (682336 'move' tmp[682331](682334 call _cond_test call_tmp[822962]))
+    if tmp[682331]
+    {
+      (682341 'move' tmp[682330](682338 '_paramFoldLogical' tmp[682331] 1))
+    }
+    {
+      unknown tmp[682343] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[822967] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (822970 'move' call_tmp[822967](526250 'typeof' fmt[153482]))
+      unknown call_tmp[822972] "expr temp" "maybe param" "maybe type" "temp"
+      (822975 'move' call_tmp[822972](153496 call isBytesType call_tmp[822967]))
+      (682345 'move' tmp[682343](489350 call isTrue call_tmp[822972]))
+      (682350 'move' tmp[682330](682347 '_paramFoldLogical' tmp[682331] tmp[682343]))
+    }
+    (1001450 call chpl_statementLevelSymbol tmp[682330])
+  }
+  function writef[153514](arg fmt[153518]:_any[141](?)) : _unknown[42] "no return value for void"
+  {
+    Try!
+    {
+      {
+        (153535 call(153532 call (partial) writef _mt[203] stdout[196765]) fmt[153518])
+      }
+    }
+    (611630 return _void[46])
+  }
+  where {
+    unknown tmp[489366] "maybe param" "temp"
+    unknown call_tmp[822979] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (822982 'move' call_tmp[822979](526252 'typeof' fmt[153518]))
+    (489377 'move' tmp[489366](153524 call isStringType call_tmp[822979]))
+    unknown call_tmp[822984] "expr temp" "maybe param" "maybe type" "temp"
+    (822987 'move' call_tmp[822984](489379 call _cond_invalid tmp[489366]))
+    if call_tmp[822984]
+    {
+      (489382 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[682357] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[682358] "maybe param" "temp"
+    unknown call_tmp[822989] "expr temp" "maybe param" "maybe type" "temp"
+    (822992 'move' call_tmp[822989](489367 call isTrue tmp[489366]))
+    (682363 'move' tmp[682358](682361 call _cond_test call_tmp[822989]))
+    if tmp[682358]
+    {
+      (682368 'move' tmp[682357](682365 '_paramFoldLogical' tmp[682358] 1))
+    }
+    {
+      unknown tmp[682370] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[822994] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (822997 'move' call_tmp[822994](526254 'typeof' fmt[153518]))
+      unknown call_tmp[822999] "expr temp" "maybe param" "maybe type" "temp"
+      (823002 'move' call_tmp[822999](153527 call isBytesType call_tmp[822994]))
+      (682372 'move' tmp[682370](489371 call isTrue call_tmp[822999]))
+      (682377 'move' tmp[682357](682374 '_paramFoldLogical' tmp[682358] tmp[682370]))
+    }
+    (1001452 call chpl_statementLevelSymbol tmp[682357])
+  }
+  function chpl_stringify_wrapper[153543](const arg args[153546]:_any[141](?) ...) : _unknown[42]
+  {
+    unknown ret[611634] "RVV" "temp"
+    unknown call_tmp[823004] "expr temp" "maybe param" "maybe type" "temp"
+    (823007 'move' call_tmp[823004](153558 call chpl_stringify(153560 'expand_tuple' args[153546])))
+    (611640 'move' ret[611634](611639 'coerce' call_tmp[823004] string[244]))
+    (611636 return ret[611634])
+    (396728 'used modules list'(153554 'use' IO[208303] 'only' chpl_stringify))
+  }
+  { scopeless type
+    string[244]
+  }
+  function isFcfType[153564](arg t[153566]:_any[141](?)) param : _unknown[42]
+  {
+    unknown ret[611644] "RVV" "param" "temp"
+    unknown call_tmp[823009] "expr temp" "maybe param" "maybe type" "temp"
+    (823012 'move' call_tmp[823009](153570 'is fcf type' t[153566]))
+    (611649 'move' ret[611644](611648 'deref' call_tmp[823009]))
+    (611646 return ret[611644])
+  }
+  function :[153574](arg x[153576]:_any[141](?), arg t[153579]:string[244]) : _unknown[42] "operator"
+  {
+    unknown ret[611653] "RVV" "temp"
+    unknown call_tmp[823014] "expr temp" "maybe param" "maybe type" "temp"
+    (823017 'move' call_tmp[823014](153589 call chpl_stringify_wrapper x[153576]))
+    (611658 'move' ret[611653](611657 'deref' call_tmp[823014]))
+    (611655 return ret[611653])
+  }
+  where {
+    unknown call_tmp[823019] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (823022 'move' call_tmp[823019](153585 'typeof' x[153576]))
+    (153583 call isFcfType call_tmp[823019])
+  }
+  (396720 'used modules list'(387016 'use' ChapelStandard[315387])(149520 'use' ChapelBase[77907])(149523 'use' ChapelLocale[137388])(149561 'use' IO[208303])(149566 'import' CTypes[51217].{c_int}))
+}

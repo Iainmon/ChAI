@@ -1,0 +1,1052 @@
+AST dump for SimpleDomain after pass cleanup.
+Module use list: Utilities IO 
+
+{
+  (387070 'use' ChapelStandard)
+  (320402 'import' Utilities 'as' util)
+  (320404 'use' IO)
+  function isDomain[320406](arg d[320410] :
+  unknown dt[320408]) param : _unknown[42]
+  {
+    (320418 'use' Types 'only' isDomainType)
+    (320420 return(320421 call &&(320424 call isDomainType dt[320408])(320430 call(320427 call . d[320410] c"isRectangular"))))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function isRegularDomain[320434](arg d[320438] :
+  unknown dt[320436]) param : _unknown[42]
+  {
+    (320446 'use' Types 'only' isDomainType)
+    (320448 return(320449 call &&(320452 call isDomainType dt[320436])(320458 call(320455 call . d[320438] c"isRectangular"))))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function zeroTup[320462](param arg rank[320465] :
+  int[10]) : _unknown[42] "inline"
+  {
+    const t[320474] "const"(320475 call * rank[320465] int[10])
+    (320480 'end of statement')
+    (320481 return t[320474])
+  }
+  { scopeless type
+    (320468 call * rank[320465] int[10])
+  }
+  function simpleTupleType[320486](param arg rank[320489] :
+  int[10], arg eltType[320493]:_any[141](?) =
+  int[10]) type : _unknown[42]
+  {
+    if(320510 call _cond_test(320506 call == rank[320489] 1))
+    {
+      (320497 return eltType[320493])
+    }
+    {
+      (320500 return(320501 call * rank[320489] eltType[320493]))
+    }
+  }
+  unknown tuple[320519] "type variable"(320521 call _tuple ?[227])
+  function _unknown[42].first[320524](arg _mt[320530]:_MT[201], arg this[320527] :
+  tuple[320519]) ref : _unknown[42] "inline" "method" "no parens" "reference to const when const this"
+  {
+    (320533 return(320535 call this 0))
+  }
+  function _unknown[42].last[320539](arg _mt[320545]:_MT[201], arg this[320542] :
+  tuple[320519]) ref : _unknown[42] "inline" "method" "no parens" "reference to const when const this"
+  {
+    (320548 return(320550 call this(320551 call -(320554 call . this[320542] c"size") 1)))
+  }
+  function _unknown[42].eltType[320560](arg _mt[320566]:_MT[201], arg this[320563] :
+  tuple[320519]) type : _unknown[42] "method" "no parens"
+  {
+    if(320585 call _cond_test(320582 call isHomogeneousTuple(320584 'typeof' this[320563])))
+    {
+      (320569 return(320573 'typeof'(320571 call this 0)))
+    }
+    {
+      (320576 call compilerError "Not homogeneous.")
+    }
+  }
+  function _unknown[42].uncons[320593](arg _mt[320599]:_MT[201], arg this[320596] :
+  tuple[320519]) ref : _unknown[42] "inline" "method" "no parens" "reference to const when const this"
+  {
+    function firstRest[320619](arg first[320621]:_any[141](?), arg rest[320624]:_any[141](?) ...) : _unknown[42] "inline"
+    {
+      (320628 return(320632 call _build_tuple first[320621] rest[320624]))
+    }
+    (320636 return(320638 call firstRest(320640 'expand_tuple' this[320596])))
+  }
+  { scopeless type
+    (320616 call _build_tuple(320608 'typeof'(320604 call . this[320596] c"head"))(320615 'typeof'(320611 call . this[320596] c"tail")))
+  }
+  function _unknown[42].head[320644](arg _mt[320650]:_MT[201], arg this[320647] :
+  tuple[320519]) ref : _unknown[42] "inline" "method" "no parens" "reference to const when const this"
+  {
+    (320653 return(320655 call this 0))
+  }
+  function _unknown[42].tail[320659](arg _mt[320665]:_MT[201], arg this[320662] :
+  tuple[320519]) : _unknown[42] "inline" "method" "no parens" "reference to const when const this"
+  {
+    function rest[320668](arg first[320670]:_any[141](?), arg rst[320673]:_any[141](?) ...) : _unknown[42] "inline"
+    {
+      (320677 return rst[320673])
+    }
+    if(320701 call _cond_test(320694 call >(320697 call . this[320662] c"size") 1))
+    {
+      (320681 return(320683 call rest(320685 'expand_tuple' this[320662])))
+    }
+    {
+      (320687 return(320689 call compilerError "Taking the tail of a tuple must require it to have more than one elements."))
+    }
+  }
+  function isTupleOfOrder[320709](arg leafType[320711]:_any[141](?), param arg order[320714] :
+  int[10], arg tup[320719] :
+  unknown tupType[320717]) param : _unknown[42] "inline"
+  {
+    function isTupleOfOrderHelp[320724](param arg level[320727] :
+    int[10], arg tup[320732] :
+    unknown tupType[320730]) param : _unknown[42] "inline"
+    {
+      if(320754 call _cond_test(320749 call !(320752 call isTuple tupType[320730])))
+      {
+        (320737 return(320738 call &&(320740 call == tupType[320730] leafType[320711])(320744 call == level[320727] 0)))
+      }
+      if(320767 call _cond_test(320762 call !(320765 call isHomogeneousTuple tupType[320730])))
+      {
+        (320759 return 0)
+      }
+      (320772 return(320774 call isTupleOfOrderHelp(320775 call - level[320727] 1)(320780 call tup 0)))
+    }
+    { scopeless type
+      bool[19]
+    }
+    (320785 return(320787 call isTupleOfOrderHelp order[320714] tup[320719]))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function computeStrides[320793](arg shape[320800] :
+  (320795 call * unknown rank[320797] int[10])) : _unknown[42] "inline"
+  {
+    unknown strides[320808](320809 call * rank[320797] int[10])
+    (320814 'end of statement')
+    unknown prod[320816] 1
+    (320819 'end of statement')
+    {
+      unknown j[320820] "index var" 0
+      unknown tmp[320852] "maybe param" "temp"
+      (320864 'move' tmp[320852](320862 call chpl_compute_low_param_loop_bound 0(320824 call chpl__nudgeHighBound rank[320797])))
+      unknown tmp[320853] "maybe param" "temp"
+      (320873 'move' tmp[320853](320871 call chpl_compute_high_param_loop_bound 0(320869 call chpl__nudgeHighBound rank[320797])))
+      unknown tmp[320854] "maybe param" "temp"
+      (320876 'move' tmp[320854] 1)
+      ParamForLoop[320878]
+      { j[320820] tmp[320852] tmp[320853] tmp[320854]
+        {
+          unknown i[320830] "param"(320831 call -(320833 call - rank[320797] j[320820]) 1)
+          (320839 'end of statement')
+          (320840 call =(320843 call strides[320808] i[320830]) prod[320816])
+          (320846 call *= prod[320816](320850 call shape[320800] i[320830]))
+        }
+      }
+      label _unused_continueLabel[320856]
+      label _breakLabel[320855]
+    }
+    (320887 return strides[320808])
+  }
+  { scopeless type
+    (320804 call simpleTupleType rank[320797])
+  }
+  function computeSize[320892](arg shape[320899] :
+  (320894 call * unknown rank[320896] int[10])) : _unknown[42] "inline"
+  {
+    unknown s[320905] 1 int[10]
+    (320909 'end of statement')
+    {
+      unknown i[320910] "index var" 0
+      unknown tmp[320925] "maybe param" "temp"
+      (320937 'move' tmp[320925](320935 call chpl_compute_low_param_loop_bound 0(320914 call chpl__nudgeHighBound rank[320896])))
+      unknown tmp[320926] "maybe param" "temp"
+      (320946 'move' tmp[320926](320944 call chpl_compute_high_param_loop_bound 0(320942 call chpl__nudgeHighBound rank[320896])))
+      unknown tmp[320927] "maybe param" "temp"
+      (320949 'move' tmp[320927] 1)
+      ParamForLoop[320951]
+      { i[320910] tmp[320925] tmp[320926] tmp[320927]
+        (320918 call *= s[320905](320922 call shape[320899] i[320910]))
+      }
+      label _unused_continueLabel[320929]
+      label _breakLabel[320928]
+    }
+    (320960 return s[320905])
+  }
+  { scopeless type
+    int[10]
+  }
+  function rect[323492](?).init[321002](arg _mt[321036]:_MT[201], arg this[321004]:rect[323492](?), const arg shape[321011] :
+  (321006 call * unknown rank[321008] int[10]), const arg offset[321018] :
+  (321014 call * rank[321008] int[10]), const arg size[321022] :
+  int[10], const arg strides[321032] :
+  (321025 call * rank[321008] int[10]) =
+  (321030 call computeStrides shape[321011])) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (321039 call =(321042 call . this[321004] c"rank") rank[321008])
+    (321046 call =(321049 call . this[321004] c"shape") shape[321011])
+    (321053 call =(321056 call . this[321004] c"offset") offset[321018])
+    (321060 call =(321063 call . this[321004] c"size") size[321022])
+    (321067 call =(321070 call . this[321004] c"strides") strides[321032])
+  }
+  function rect[323492](?).init[321076](arg _mt[321099]:_MT[201], arg this[321078]:rect[323492](?), const arg shape[321085] :
+  (321080 call * unknown rank[321082] int[10]), const arg offset[321095] :
+  (321088 call * rank[321082] int[10]) =
+  (321093 call zeroTup rank[321082])) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown strides[321103](321104 call * rank[321082] int[10])
+    (321109 'end of statement')
+    unknown size[321111] 1
+    (321114 'end of statement')
+    {
+      unknown j[321115] "index var" 0
+      unknown tmp[321147] "maybe param" "temp"
+      (321159 'move' tmp[321147](321157 call chpl_compute_low_param_loop_bound 0(321119 call chpl__nudgeHighBound rank[321082])))
+      unknown tmp[321148] "maybe param" "temp"
+      (321168 'move' tmp[321148](321166 call chpl_compute_high_param_loop_bound 0(321164 call chpl__nudgeHighBound rank[321082])))
+      unknown tmp[321149] "maybe param" "temp"
+      (321171 'move' tmp[321149] 1)
+      ParamForLoop[321173]
+      { j[321115] tmp[321147] tmp[321148] tmp[321149]
+        {
+          unknown i[321125] "param"(321126 call -(321128 call - rank[321082] j[321115]) 1)
+          (321134 'end of statement')
+          (321135 call =(321138 call strides i[321125]) size[321111])
+          (321141 call *= size[321111](321145 call shape i[321125]))
+        }
+      }
+      label _unused_continueLabel[321151]
+      label _breakLabel[321150]
+    }
+    (321186 call(321183 call . this[321078] c"init") shape[321085] offset[321095] size[321111] strides[321103])
+  }
+  function rect[323492](?).init[321193](arg _mt[321204]:_MT[201], arg this[321195]:rect[323492](?), const arg shape[321200] ... :
+  int[10]) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (321211 call(321208 call . this[321195] c"init") shape[321200])
+  }
+  function rect[323492](?).init[321215](arg _mt[321227]:_MT[201], arg this[321217]:rect[323492](?), const arg ranges[321224] :
+  (321219 call * unknown rank[321221] range)) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown type_tmp[321240] "temp" "type variable"(321233 call * rank[321221] int[10])
+    unknown shape[321239] type_tmp[321240]
+    unknown offset[321232] type_tmp[321240]
+    (321245 'end of statement')
+    {
+      unknown i[321246] "index var" 0
+      unknown tmp[321296] "maybe param" "temp"
+      (321308 'move' tmp[321296](321306 call chpl_compute_low_param_loop_bound 0(321250 call chpl__nudgeHighBound rank[321221])))
+      unknown tmp[321297] "maybe param" "temp"
+      (321317 'move' tmp[321297](321315 call chpl_compute_high_param_loop_bound 0(321313 call chpl__nudgeHighBound rank[321221])))
+      unknown tmp[321298] "maybe param" "temp"
+      (321320 'move' tmp[321298] 1)
+      ParamForLoop[321322]
+      { i[321246] tmp[321296] tmp[321297] tmp[321298]
+        {
+          const dm[321256] "const" "ref var"(321258 call ranges[321224] i[321246])
+          (321261 'end of statement')
+          const hb[321263] "const"(321265 call . dm[321256] c"highBound")
+          (321269 'end of statement')
+          const lb[321271] "const"(321273 call . dm[321256] c"lowBound")
+          (321277 'end of statement')
+          (321278 call =(321281 call offset i[321246]) lb[321271])
+          (321284 call =(321287 call shape i[321246])(321289 call +(321291 call - hb[321263] lb[321271]) 1))
+        }
+      }
+      label _unused_continueLabel[321300]
+      label _breakLabel[321299]
+    }
+    (321335 call(321332 call . this[321217] c"init") shape[321239] offset[321232])
+  }
+  function rect[323492](?).init[321340](arg _mt[321353]:_MT[201], arg this[321342]:rect[323492](?), const arg ranges[321349] ... :
+  (321345 call range ?[227])) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (321360 call(321357 call . this[321342] c"init") ranges[321349])
+  }
+  function rect[323492](?).init[321364](arg _mt[321374]:_MT[201], arg this[321366]:rect[323492](?), const arg dom[321371] :
+  (321369 call _domain ?[227])) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (321391 call(321388 call . this[321366] c"init")(321396 call(321393 call . dom[321371] c"dims")))
+  }
+  where {
+    (321376 call &&(321379 call isDomain dom[321371])(321385 call(321382 call . dom[321371] c"isRectangular")))
+  }
+  function rect[323492](?).init[321400](arg _mt[321412]:_MT[201], arg this[321402]:rect[323492](?), const arg other[321409] :
+  (321406 call rect[323492](?) unknown rank[321407])) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (321419 call(321416 call . this[321402] c"init")(321421 call . other[321409] c"shape")(321425 call . other[321409] c"offset")(321429 call . other[321409] c"size")(321433 call . other[321409] c"strides"))
+  }
+  function rect[323492](?).init=[321438](arg _mt[321450]:_MT[201], arg this[321440]:rect[323492](?), const arg other[321447] :
+  (321444 call rect[323492](?) unknown rank[321445])) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (321457 call(321454 call . this[321440] c"init") other[321447])
+  }
+  function rect[323492](?).init=[321461](arg _mt[321473]:_MT[201], arg this[321463]:rect[323492](?), const arg shape[321470] :
+  (321465 call * unknown rank[321467] int[10])) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (321480 call(321477 call . this[321463] c"init") shape[321470])
+  }
+  function rect[323492](?).:[321484](arg _mt[321503]:_MT[201], arg this[321486]:rect[323492](?), const arg shape[321493] :
+  (321488 call * unknown rank[321490] int[10]), arg toType[321500] :
+  (321498 call rect[323492](?) rank[321490])) : _unknown[42] "inline" "method" "primary method" "operator"
+  {
+    (321510 return(321511 'new'(321514 call rect[323492](?) shape[321493])))
+  }
+  { scopeless type
+    (321507 call rect[323492](?) rank[321490])
+  }
+  function rect[323492](?).init=[321519](arg _mt[321532]:_MT[201], arg this[321521]:rect[323492](?), const arg shapeOffset[321529] :
+  (321523 call * 2(321527 call tuple[320519] ?[227]))) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (321544 call(321541 call . this[321521] c"init")(321546 'expand_tuple' shapeOffset[321529]))
+  }
+  where {
+    (321535 call isTupleOfOrder int[10] 2 shapeOffset[321529])
+  }
+  function rect[323492](?).:[321550](arg _mt[321570]:_MT[201], arg this[321552]:rect[323492](?), const arg shapeOffset[321560] :
+  (321554 call * 2(321558 call tuple[320519] ?[227])), arg toType[321567] :
+  (321565 call rect[323492](?) ?[227])) : _unknown[42] "inline" "method" "primary method" "operator"
+  {
+    (321578 return(321579 'new'(321582 call rect[323492](?)(321584 'expand_tuple' shapeOffset[321560]))))
+  }
+  where {
+    (321573 call isTupleOfOrder int[10] 2 shapeOffset[321560])
+  }
+  function rect[323492](?).init=[321588](arg _mt[321598]:_MT[201], arg this[321590]:rect[323492](?), const  ref arg dom[321595] :
+  (321593 call _domain ?[227])) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (321615 call(321612 call . this[321590] c"init") dom[321595])
+  }
+  where {
+    (321600 call &&(321603 call isDomain dom[321595])(321609 call(321606 call . dom[321595] c"isRectangular")))
+  }
+  function rect[323492](?).:[321620](arg _mt[321637]:_MT[201], arg this[321622]:rect[323492](?), const  ref arg dom[321627] :
+  (321625 call _domain ?[227]), arg toType[321634] :
+  (321632 call rect[323492](?) ?[227])) : _unknown[42] "inline" "method" "primary method" "operator"
+  {
+    (321650 return(321651 'new'(321654 call rect[323492](?) dom[321627])))
+  }
+  where {
+    (321639 call &&(321642 call isDomain dom[321627])(321648 call(321645 call . dom[321627] c"isRectangular")))
+  }
+  function rect[323492](?).low[321659](arg _mt[321663]:_MT[201], arg this[321661]:rect[323492](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    (321673 return offset)
+  }
+  { scopeless type
+    (321665 call *(321667 call . this[321661] c"rank") int[10])
+  }
+  function rect[323492](?).high[321678](arg _mt[321682]:_MT[201], arg this[321680]:rect[323492](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    unknown his[321693](321694 call . this[321680] c"offset")
+    (321699 'end of statement')
+    {
+      unknown i[321700] "index var" 0
+      unknown tmp[321726] "maybe param" "temp"
+      (321738 'move' tmp[321726](321736 call chpl_compute_low_param_loop_bound 0(321707 call chpl__nudgeHighBound(321703 call . this[321680] c"rank"))))
+      unknown tmp[321727] "maybe param" "temp"
+      (321750 'move' tmp[321727](321748 call chpl_compute_high_param_loop_bound 0(321743 call chpl__nudgeHighBound(321745 call . this[321680] c"rank"))))
+      unknown tmp[321728] "maybe param" "temp"
+      (321753 'move' tmp[321728] 1)
+      ParamForLoop[321755]
+      { i[321700] tmp[321726] tmp[321727] tmp[321728]
+        (321711 call +=(321714 call his[321693] i[321700])(321716 call -(321722 call(321718 call . this[321680] c"shape") i[321700]) 1))
+      }
+      label _unused_continueLabel[321730]
+      label _breakLabel[321729]
+    }
+    (321764 return his[321693])
+  }
+  { scopeless type
+    (321684 call *(321686 call . this[321680] c"rank") int[10])
+  }
+  function rect[323492](?).coords[321769](arg _mt[321773]:_MT[201], arg this[321771]:rect[323492](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    unknown l[321795](321789 call . this[321771] c"offset")
+    unknown h[321788] l[321795]
+    (321798 'end of statement')
+    {
+      unknown i[321799] "index var" 0
+      unknown tmp[321822] "maybe param" "temp"
+      (321834 'move' tmp[321822](321832 call chpl_compute_low_param_loop_bound 0(321806 call chpl__nudgeHighBound(321802 call . this[321771] c"rank"))))
+      unknown tmp[321823] "maybe param" "temp"
+      (321846 'move' tmp[321823](321844 call chpl_compute_high_param_loop_bound 0(321839 call chpl__nudgeHighBound(321841 call . this[321771] c"rank"))))
+      unknown tmp[321824] "maybe param" "temp"
+      (321849 'move' tmp[321824] 1)
+      ParamForLoop[321851]
+      { i[321799] tmp[321822] tmp[321823] tmp[321824]
+        (321810 call +=(321813 call h[321788] i[321799])(321819 call(321815 call . this[321771] c"shape") i[321799]))
+      }
+      label _unused_continueLabel[321826]
+      label _breakLabel[321825]
+    }
+    (321860 return(321864 call _build_tuple l[321795] h[321788]))
+  }
+  { scopeless type
+    (321775 call * 2(321778 call *(321780 call . this[321771] c"rank") int[10]))
+  }
+  function rect[323492](?).shiftedShape[321869](arg _mt[321873]:_MT[201], arg this[321871]:rect[323492](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    unknown ss[321884](321885 call . this[321871] c"shape")
+    (321890 'end of statement')
+    {
+      unknown i[321891] "index var" 0
+      unknown tmp[321911] "maybe param" "temp"
+      (321923 'move' tmp[321911](321921 call chpl_compute_low_param_loop_bound 0(321898 call chpl__nudgeHighBound(321894 call . this[321871] c"rank"))))
+      unknown tmp[321912] "maybe param" "temp"
+      (321935 'move' tmp[321912](321933 call chpl_compute_high_param_loop_bound 0(321928 call chpl__nudgeHighBound(321930 call . this[321871] c"rank"))))
+      unknown tmp[321913] "maybe param" "temp"
+      (321938 'move' tmp[321913] 1)
+      ParamForLoop[321940]
+      { i[321891] tmp[321911] tmp[321912] tmp[321913]
+        (321902 call +=(321905 call ss[321884] i[321891])(321908 call offset i[321891]))
+      }
+      label _unused_continueLabel[321915]
+      label _breakLabel[321914]
+    }
+    (321949 return ss[321884])
+  }
+  { scopeless type
+    (321875 call *(321877 call . this[321871] c"rank") int[10])
+  }
+  function rect[323492](?).dims[321954](arg _mt[321958]:_MT[201], arg this[321956]:rect[323492](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown dms[321969](321970 call *(321972 call . this[321956] c"rank") range)
+    (321978 'end of statement')
+    {
+      unknown i[321979] "index var" 0
+      unknown tmp[322009] "maybe param" "temp"
+      (322021 'move' tmp[322009](322019 call chpl_compute_low_param_loop_bound 0(321986 call chpl__nudgeHighBound(321982 call . this[321956] c"rank"))))
+      unknown tmp[322010] "maybe param" "temp"
+      (322033 'move' tmp[322010](322031 call chpl_compute_high_param_loop_bound 0(322026 call chpl__nudgeHighBound(322028 call . this[321956] c"rank"))))
+      unknown tmp[322011] "maybe param" "temp"
+      (322036 'move' tmp[322011] 1)
+      ParamForLoop[322038]
+      { i[321979] tmp[322009] tmp[322010] tmp[322011]
+        (321990 call =(321993 call dms[321969] i[321979])(321995 call #(322000 call chpl_build_low_bounded_range(321998 call offset i[321979]))(322006 call(322002 call . this[321956] c"shape") i[321979])))
+      }
+      label _unused_continueLabel[322013]
+      label _breakLabel[322012]
+    }
+    (322047 return dms[321969])
+  }
+  { scopeless type
+    (321960 call *(321962 call . this[321956] c"rank") range)
+  }
+  function rect[323492](?).indexAt[322052](arg _mt[322060]:_MT[201], arg this[322054]:rect[323492](?), const arg order[322057] :
+  int[10]) : _unknown[42] "inline" "method" "primary method"
+  {
+    if(322079 call _cond_test(322072 call ==(322074 call . this[322054] c"rank") 1))
+    {
+      (322069 return order[322057])
+    }
+    unknown result[322085](322086 call *(322088 call . this[322054] c"rank") int[10])
+    (322094 'end of statement')
+    unknown idx[322096] order[322057]
+    (322099 'end of statement')
+    {
+      unknown i[322100] "index var" 0
+      unknown tmp[322140] "maybe param" "temp"
+      (322152 'move' tmp[322140](322150 call chpl_compute_low_param_loop_bound 0(322107 call chpl__nudgeHighBound(322103 call . this[322054] c"rank"))))
+      unknown tmp[322141] "maybe param" "temp"
+      (322164 'move' tmp[322141](322162 call chpl_compute_high_param_loop_bound 0(322157 call chpl__nudgeHighBound(322159 call . this[322054] c"rank"))))
+      unknown tmp[322142] "maybe param" "temp"
+      (322167 'move' tmp[322142] 1)
+      ParamForLoop[322169]
+      { i[322100] tmp[322140] tmp[322141] tmp[322142]
+        {
+          const strideI[322113] "const"(322118 call(322114 call . this[322054] c"strides") i[322100])
+          (322121 'end of statement')
+          (322122 call =(322125 call result[322085] i[322100])(322127 call +(322129 call / idx[322096] strideI[322113])(322134 call offset i[322100])))
+          (322136 call %= idx[322096] strideI[322113])
+        }
+      }
+      label _unused_continueLabel[322144]
+      label _breakLabel[322143]
+    }
+    (322178 return result[322085])
+  }
+  { scopeless type
+    (322063 call simpleTupleType(322064 call . this[322054] c"rank"))
+  }
+  function rect[323492](?).atIndex[322183](arg _mt[322191]:_MT[201], arg this[322185]:rect[323492](?), const arg idx[322188] :
+  int[10]) : _unknown[42] "inline" "method" "primary method"
+  {
+    (322195 return idx[322188])
+  }
+  { scopeless type
+    int[10]
+  }
+  function rect[323492](?).atIndex[322200](arg _mt[322214]:_MT[201], arg this[322202]:rect[323492](?), const arg idx[322211] :
+  (322204 call *(322206 call . this[322202] c"rank") int[10])) : _unknown[42] "inline" "method" "primary method"
+  {
+    if(322228 call _cond_test(322221 call ==(322223 call . this[322202] c"rank") 1))
+    {
+      (322218 return idx[322211])
+    }
+    unknown i[322234] int[10]
+    (322237 'end of statement')
+    {
+      unknown j[322238] "index var" 0
+      unknown tmp[322269] "maybe param" "temp"
+      (322281 'move' tmp[322269](322279 call chpl_compute_low_param_loop_bound 0(322245 call chpl__nudgeHighBound(322241 call . this[322202] c"rank"))))
+      unknown tmp[322270] "maybe param" "temp"
+      (322293 'move' tmp[322270](322291 call chpl_compute_high_param_loop_bound 0(322286 call chpl__nudgeHighBound(322288 call . this[322202] c"rank"))))
+      unknown tmp[322271] "maybe param" "temp"
+      (322296 'move' tmp[322271] 1)
+      ParamForLoop[322298]
+      { j[322238] tmp[322269] tmp[322270] tmp[322271]
+        (322249 call += i[322234](322252 call *(322254 call -(322257 call idx[322211] j[322238])(322260 call offset j[322238]))(322266 call(322262 call . this[322202] c"strides") j[322238])))
+      }
+      label _unused_continueLabel[322273]
+      label _breakLabel[322272]
+    }
+    (322307 return i[322234])
+  }
+  { scopeless type
+    int[10]
+  }
+  function rect[323492](?).toDomain[322312](arg _mt[322316]:_MT[201], arg this[322314]:rect[323492](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    (322327 return(322336 call chpl__buildDomainExpr(322334 'expand_tuple'(322333 call(322329 call . this[322314] c"dims"))) 1))
+  }
+  { scopeless type
+    (322319 call chpl__buildDomainRuntimeType defaultDist(322321 call . this[322314] c"rank") int[10])
+  }
+  function rect[323492](?).:[322341](arg _mt[322361]:_MT[201], arg this[322343]:rect[323492](?), const in arg sd[322350] :
+  (322347 call rect[323492](?) unknown rank[322348]), arg toType[322358] :
+  (322354 call chpl__buildDomainRuntimeType defaultDist rank[322348] int[10])) : _unknown[42] "inline" "method" "primary method" "operator"
+  {
+    (322364 return(322371 call(322368 call . sd[322350] c"toDomain")))
+  }
+  function rect[323492](?).serialIter[322374](arg _mt[322378]:_MT[201], arg this[322376]:rect[323492](?)) : _unknown[42] "inline" "iterator fn" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[322405] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[322406] "expr temp" "temp"
+      (322415 'move' _iterator[322406](322413 call _getIterator(322421 call chpl_direct_range_iter 0(322419 call chpl__nudgeHighBound size))))
+      Defer
+      {
+        {
+          (322436 call _freeIterator _iterator[322406])
+        }
+      }
+      { scopeless type
+        (322426 'move' _indexOfInterest[322405](322423 call iteratorIndex _iterator[322406]))
+      }
+      ForLoop[322407]
+      {
+        unknown i[322387] "index var" "insert auto destroy"
+        (322431 'move' i[322387] _indexOfInterest[322405])
+        (322395 yield(322402 call(322398 call . this[322376] c"indexAt") i[322387]))
+        label _continueLabel[322410]
+        _indexOfInterest[322405]
+        _iterator[322406]
+      }
+      label _breakLabel[322411]
+    }
+  }
+  { scopeless type
+    (322381 call simpleTupleType(322382 call . this[322376] c"rank"))
+  }
+  function rect[323492](?).these[322446](arg _mt[322450]:_MT[201], arg this[322448]:rect[323492](?)) : _unknown[42] "inline" "iterator fn" "method" "primary method" "order independent yielding loops" "no return value for void"
+  {
+    if(322573 call _cond_test(322570 call targetGpu module=[222] Utilities[320397]))
+    {
+      unknown _indexOfInterest[322479] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[322480] "expr temp" "temp"
+      (322489 'move' _iterator[322480](322487 call _getIterator(322495 call chpl_direct_range_iter 0(322493 call chpl__nudgeHighBound size))))
+      Defer
+      {
+        {
+          (322510 call _freeIterator _iterator[322480])
+        }
+      }
+      { scopeless type
+        (322500 'move' _indexOfInterest[322479](322497 call iteratorIndex _iterator[322480]))
+      }
+      ForLoop[322481] order-independent
+      {
+        unknown i[322459] "index var" "insert auto destroy"
+        (322505 'move' i[322459] _indexOfInterest[322479])
+        { scopeless
+          (322476 'gpu primitive block')
+          (322478 'chpl_assert_on_gpu' 1)
+        }
+        (322467 yield(322472 call(322468 call . this[322448] c"indexAt") i[322459]))
+        label _continueLabel[322484]
+        _indexOfInterest[322479]
+        _iterator[322480]
+      }
+      label _breakLabel[322485]
+    }
+    {
+      const dom[322519] "const"(322524 call(322520 call . this[322448] c"toDomain"))
+      (322526 'end of statement')
+      {
+        unknown _indexOfInterest[322535] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[322536] "expr temp" "temp"
+        (322545 'move' _iterator[322536](322543 call _getIterator dom[322519]))
+        Defer
+        {
+          {
+            (322560 call _freeIterator _iterator[322536])
+          }
+        }
+        { scopeless type
+          (322550 'move' _indexOfInterest[322535](322547 call iteratorIndex _iterator[322536]))
+        }
+        ForLoop[322537] order-independent
+        {
+          unknown idx[322527] "index var" "insert auto destroy"
+          (322555 'move' idx[322527] _indexOfInterest[322535])
+          (322530 yield idx[322527])
+          label _continueLabel[322540]
+          _indexOfInterest[322535]
+          _iterator[322536]
+        }
+        label _breakLabel[322541]
+      }
+    }
+    (322578 'referenced modules list' Utilities[320397])
+  }
+  { scopeless type
+    (322453 call simpleTupleType(322454 call . this[322448] c"rank"))
+  }
+  function rect[323492](?).these[322582](arg _mt[322590]:_MT[201], arg this[322584]:rect[323492](?), param arg tag[322587] :
+  iterKind[52144]) : _unknown[42] "inline" "iterator fn" "method" "primary method" "order independent yielding loops" "no return value for void"
+  {
+    if(322656 call _cond_test(322653 call targetGpu module=[222] Utilities[320397]))
+    {
+      Forall[322626] {
+        induction variables:
+          
+          unknown i[322606] "index var" "insert auto destroy"
+        iterated expressions:
+          (322612 call chpl_build_bounded_range 0(322610 call chpl__nudgeHighBound size))
+        shadow variables:
+        other variables
+          forall body
+        {
+          { scopeless
+            (322623 'gpu primitive block')
+            (322625 'chpl_assert_on_gpu' 1)
+          }
+          (322614 yield(322619 call(322615 call . this[322584] c"indexAt") i[322606]))
+        }
+      }
+    }
+    {
+      const dom[322631] "const"(322636 call(322632 call . this[322584] c"toDomain"))
+      (322638 'end of statement')
+      Forall[322647] {
+        induction variables:
+          
+          unknown idx[322639] "index var" "insert auto destroy"
+        iterated expressions:
+          dom[322631]
+        shadow variables:
+        other variables
+          forall body
+        {
+          (322642 yield idx[322639])
+        }
+      }
+    }
+    (322663 'referenced modules list' Utilities[320397])
+  }
+  where {
+    (322598 call == tag[322587](322602 call . iterKind[52144] c"standalone"))
+  }
+  { scopeless type
+    (322593 call simpleTupleType(322594 call . this[322584] c"rank"))
+  }
+  function rect[323492](?).eachOrder[322667](arg _mt[322671]:_MT[201], arg this[322669]:rect[323492](?)) : _unknown[42] "inline" "iterator fn" "method" "primary method" "order independent yielding loops" "no return value for void"
+  {
+    if(322808 call _cond_test(322805 call targetGpu module=[222] Utilities[320397]))
+    {
+      unknown _indexOfInterest[322708] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[322709] "expr temp" "temp"
+      (322718 'move' _iterator[322709](322716 call _getIterator(322724 call chpl_direct_range_iter 0(322722 call chpl__nudgeHighBound size))))
+      Defer
+      {
+        {
+          (322739 call _freeIterator _iterator[322709])
+        }
+      }
+      { scopeless type
+        (322729 'move' _indexOfInterest[322708](322726 call iteratorIndex _iterator[322709]))
+      }
+      ForLoop[322710] order-independent
+      {
+        unknown i[322684] "index var" "insert auto destroy"
+        (322734 'move' i[322684] _indexOfInterest[322708])
+        { scopeless
+          (322705 'gpu primitive block')
+          (322707 'chpl_assert_on_gpu' 1)
+        }
+        (322692 yield(322701 call _build_tuple i[322684](322699 call(322695 call . this[322669] c"indexAt") i[322684])))
+        label _continueLabel[322713]
+        _indexOfInterest[322708]
+        _iterator[322709]
+      }
+      label _breakLabel[322714]
+    }
+    {
+      const dom[322748] "const"(322753 call(322749 call . this[322669] c"toDomain"))
+      (322755 'end of statement')
+      {
+        unknown _indexOfInterest[322770] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[322771] "expr temp" "temp"
+        (322780 'move' _iterator[322771](322778 call _getIterator dom[322748]))
+        Defer
+        {
+          {
+            (322795 call _freeIterator _iterator[322771])
+          }
+        }
+        { scopeless type
+          (322785 'move' _indexOfInterest[322770](322782 call iteratorIndex _iterator[322771]))
+        }
+        ForLoop[322772] order-independent
+        {
+          unknown idx[322756] "index var" "insert auto destroy"
+          (322790 'move' idx[322756] _indexOfInterest[322770])
+          (322759 yield(322765 call _build_tuple(322762 call atIndex idx[322756]) idx[322756]))
+          label _continueLabel[322775]
+          _indexOfInterest[322770]
+          _iterator[322771]
+        }
+        label _breakLabel[322776]
+      }
+    }
+    (322813 'referenced modules list' Utilities[320397])
+  }
+  { scopeless type
+    (322681 call _build_tuple int[10](322676 call simpleTupleType(322677 call . this[322669] c"rank")))
+  }
+  function rect[323492](?).eachOrder[322817](arg _mt[322825]:_MT[201], arg this[322819]:rect[323492](?), param arg tag[322822] :
+  iterKind[52144]) : _unknown[42] "inline" "iterator fn" "method" "primary method" "order independent yielding loops" "no return value for void"
+  {
+    if(322905 call _cond_test(322902 call targetGpu module=[222] Utilities[320397]))
+    {
+      Forall[322869] {
+        induction variables:
+          
+          unknown i[322845] "index var" "insert auto destroy"
+        iterated expressions:
+          (322851 call chpl_build_bounded_range 0(322849 call chpl__nudgeHighBound size))
+        shadow variables:
+        other variables
+          forall body
+        {
+          { scopeless
+            (322866 'gpu primitive block')
+            (322868 'chpl_assert_on_gpu' 1)
+          }
+          (322853 yield(322862 call _build_tuple i[322845](322860 call(322856 call . this[322819] c"indexAt") i[322845])))
+        }
+      }
+    }
+    {
+      const dom[322874] "const"(322879 call(322875 call . this[322819] c"toDomain"))
+      (322881 'end of statement')
+      Forall[322896] {
+        induction variables:
+          
+          unknown idx[322882] "index var" "insert auto destroy"
+        iterated expressions:
+          dom[322874]
+        shadow variables:
+        other variables
+          forall body
+        {
+          (322885 yield(322891 call _build_tuple(322888 call atIndex idx[322882]) idx[322882]))
+        }
+      }
+    }
+    (322912 'referenced modules list' Utilities[320397])
+  }
+  where {
+    (322837 call == tag[322822](322841 call . iterKind[52144] c"standalone"))
+  }
+  { scopeless type
+    (322835 call _build_tuple int[10](322830 call simpleTupleType(322831 call . this[322819] c"rank")))
+  }
+  function rect[323492](?).originate[322916](arg _mt[322930]:_MT[201], arg this[322918]:rect[323492](?), const arg origin[322927] :
+  (322920 call *(322922 call . this[322918] c"rank") int[10])) : _unknown[42] "inline" "method" "primary method"
+  {
+    (322933 return(322934 'new'(322937 call rect[323492](?)(322938 call . this[322918] c"shape") origin[322927] size(322944 call . this[322918] c"strides"))))
+  }
+  function rect[323492](?).translate[322950](arg _mt[322964]:_MT[201], arg this[322952]:rect[323492](?), const arg change[322961] :
+  (322954 call *(322956 call . this[322952] c"rank") int[10])) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown off[322968](322969 call . this[322952] c"offset")
+    (322974 'end of statement')
+    {
+      unknown i[322975] "index var" 0
+      unknown tmp[322995] "maybe param" "temp"
+      (323007 'move' tmp[322995](323005 call chpl_compute_low_param_loop_bound 0(322982 call chpl__nudgeHighBound(322978 call . this[322952] c"rank"))))
+      unknown tmp[322996] "maybe param" "temp"
+      (323019 'move' tmp[322996](323017 call chpl_compute_high_param_loop_bound 0(323012 call chpl__nudgeHighBound(323014 call . this[322952] c"rank"))))
+      unknown tmp[322997] "maybe param" "temp"
+      (323022 'move' tmp[322997] 1)
+      ParamForLoop[323024]
+      { i[322975] tmp[322995] tmp[322996] tmp[322997]
+        (322986 call +=(322989 call off[322968] i[322975])(322992 call change[322961] i[322975]))
+      }
+      label _unused_continueLabel[322999]
+      label _breakLabel[322998]
+    }
+    (323033 return(323040 call(323036 call . this[322952] c"originate") off[322968]))
+  }
+  function rect[323492](?).contains[323044](arg _mt[323058]:_MT[201], arg this[323046]:rect[323492](?), const arg rct[323055] :
+  (323050 call rect[323492](?)(323051 call . this[323046] c"rank"))) : _unknown[42] "inline" "method" "primary method"
+  {
+    (323062 return(323063 call &&(323065 call <= offset(323069 call . rct[323055] c"offset"))(323072 call <=(323075 call . rct[323055] c"shape")(323078 call . this[323046] c"shape"))))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function rect[323492](?).contains[323085](arg _mt[323099]:_MT[201], arg this[323087]:rect[323492](?), const arg idx[323096] :
+  (323089 call *(323091 call . this[323087] c"rank") int[10])) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown res[323104] 1 bool[19]
+    (323108 'end of statement')
+    {
+      unknown i[323109] "index var" 0
+      unknown tmp[323145] "maybe param" "temp"
+      (323157 'move' tmp[323145](323155 call chpl_compute_low_param_loop_bound 0(323116 call chpl__nudgeHighBound(323112 call . this[323087] c"rank"))))
+      unknown tmp[323146] "maybe param" "temp"
+      (323169 'move' tmp[323146](323167 call chpl_compute_high_param_loop_bound 0(323162 call chpl__nudgeHighBound(323164 call . this[323087] c"rank"))))
+      unknown tmp[323147] "maybe param" "temp"
+      (323172 'move' tmp[323147] 1)
+      ParamForLoop[323174]
+      { i[323109] tmp[323145] tmp[323146] tmp[323147]
+        (323120 call &= res[323104](323123 call &&(323125 call <=(323128 call offset i[323109])(323131 call idx[323096] i[323109]))(323133 call <(323136 call idx[323096] i[323109])(323142 call(323138 call . this[323087] c"shape") i[323109]))))
+      }
+      label _unused_continueLabel[323149]
+      label _breakLabel[323148]
+    }
+    (323183 return res[323104])
+  }
+  { scopeless type
+    bool[19]
+  }
+  function rect[323492](?).toString[323188](arg _mt[323192]:_MT[201], arg this[323190]:rect[323492](?)) : _unknown[42] "method" "primary method"
+  {
+    (323196 'use' IO)
+    (323202 'use'(323199 call . IO c"FormattedIO"))
+    const dms[323205] "const"(323210 call(323206 call . this[323190] c"dims"))
+    (323212 'end of statement')
+    unknown content[323214] "" string[244]
+    (323218 'end of statement')
+    {
+      unknown i[323219] "index var" 0
+      unknown tmp[323255] "maybe param" "temp"
+      (323267 'move' tmp[323255](323265 call chpl_compute_low_param_loop_bound 0(323226 call chpl__nudgeHighBound(323222 call . this[323190] c"rank"))))
+      unknown tmp[323256] "maybe param" "temp"
+      (323279 'move' tmp[323256](323277 call chpl_compute_high_param_loop_bound 0(323272 call chpl__nudgeHighBound(323274 call . this[323190] c"rank"))))
+      unknown tmp[323257] "maybe param" "temp"
+      (323282 'move' tmp[323257] 1)
+      ParamForLoop[323284]
+      { i[323219] tmp[323255] tmp[323256] tmp[323257]
+        (323230 call += content[323214](323247 call(323244 call .(323241 IfExpr (323233 call > i[323219] 0) then
+        { scopeless
+          ", %\?"
+        } else
+        { scopeless
+          "%\?"
+        } ) c"format")(323252 call(323248 call . this[323190] c"shape") i[323219])))
+      }
+      label _unused_continueLabel[323259]
+      label _breakLabel[323258]
+    }
+    if(323321 call _cond_test(323309 call !=(323311 call . this[323190] c"offset")(323316 call zeroTup(323317 call . this[323190] c"rank"))))
+    {
+      (323293 call = content[323214](323302 call(323299 call . "(%s) + %\?" c"format") content[323214](323304 call . this[323190] c"offset")))
+    }
+    (323326 return(323327 call +(323329 call + "{ " content[323214]) " }"))
+  }
+  function rect[323492](?).serialize[323340](arg _mt[323354]:_MT[201], arg this[323342]:rect[323492](?), arg writer[323349] :
+  (323348 'typeof' stdout[196765]), ref arg serializer[323352]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    if(323383 call _cond_test(323376 call == writer[323349] stdout[196765]))
+    {
+      (323361 call(323358 call . writer[323349] c"write")(323368 call(323364 call . this[323342] c"toString")))
+    }
+    {
+      (323371 call halt "This should not happen.")
+    }
+    (323389 'referenced modules list' IO[208303])
+  }
+  function rect[323492](?).serialize[323393](arg _mt[323407]:_MT[201], arg this[323395]:rect[323492](?), arg writer[323402] :
+  (323400 call fileWriter[170987](?) ?[227]), ref arg serializer[323405]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    unknown rh[323411](323416 call(323413 call . serializer[323405] c"startRecord") writer[323402] "rect" 5)
+    (323423 'end of statement')
+    (323428 call(323425 call . rh[323411] c"writeField") "rank"(323432 call . this[323395] c"rank"))
+    (323440 call(323437 call . rh[323411] c"writeField") "shape"(323444 call . this[323395] c"shape"))
+    (323452 call(323449 call . rh[323411] c"writeField") "offset"(323456 call . this[323395] c"offset"))
+    (323464 call(323461 call . rh[323411] c"writeField") "strides"(323468 call . this[323395] c"strides"))
+    (323476 call(323473 call . rh[323411] c"writeField") "size"(323480 call . this[323395] c"size"))
+    (323488 call(323485 call . rh[323411] c"endRecord"))
+  }
+  type rect[323492](?) unknown rank[320969] "param" int[10] unknown shape[320974](320975 call * rank[320969] int[10]) unknown offset[320982](320983 call * rank[320969] int[10]) unknown size[320990] int[10] unknown strides[320995](320996 call * rank[320969] int[10]) serializable[310094]
+  function =[323494](ref arg me[323500] :
+  (323497 call rect[323492](?) unknown rank[323498]), const arg other[323506] :
+  (323504 call rect[323492](?) rank[323498])) : _unknown[42] "assignop" "inline" "operator" "no return value for void"
+  {
+    (323510 call =(323513 call . me[323500] c"shape")(323517 call . other[323506] c"shape"))
+    (323520 call =(323523 call . me[323500] c"offset")(323527 call . other[323506] c"offset"))
+    (323530 call =(323533 call . me[323500] c"size")(323537 call . other[323506] c"size"))
+    (323540 call =(323543 call . me[323500] c"strides")(323547 call . other[323506] c"strides"))
+  }
+  function +[323552](const arg d[323558] :
+  (323555 call rect[323492](?) unknown rank[323556]), const arg offset[323565] :
+  (323561 call * rank[323556] int[10])) : _unknown[42] "operator"
+  {
+    (323572 return(323577 call(323574 call . d[323558] c"translate") offset[323565]))
+  }
+  { scopeless type
+    (323569 call rect[323492](?) rank[323556])
+  }
+  function -[323582](const arg d[323588] :
+  (323585 call rect[323492](?) unknown rank[323586]), const arg offset[323595] :
+  (323591 call * rank[323586] int[10])) : _unknown[42] "operator"
+  {
+    (323602 return(323607 call(323604 call . d[323588] c"translate")(323608 call - offset[323595])))
+  }
+  { scopeless type
+    (323599 call rect[323492](?) rank[323586])
+  }
+  function &[323614](const arg a[323620] :
+  (323617 call rect[323492](?) unknown rank[323618]), const arg b[323626] :
+  (323624 call rect[323492](?) rank[323618])) : _unknown[42] "operator"
+  {
+    const shape[323634] "const"(323636 call min(323638 call . a[323620] c"shape")(323642 call . b[323626] c"shape"))
+    (323646 'end of statement')
+    const offset[323648] "const"(323650 call max(323652 call . a[323620] c"offset")(323656 call . b[323626] c"offset"))
+    (323660 'end of statement')
+    (323661 return(323662 'new'(323664 call rect[323492](?) shape[323634] offset[323648])))
+  }
+  { scopeless type
+    (323630 call rect[323492](?) rank[323618])
+  }
+  function computeBlocks[323670](arg shape[323677] :
+  (323672 call * unknown rank[323674] int[10])) : _unknown[42] "inline"
+  {
+    unknown blks[323686](323687 call * rank[323674] int[10])
+    (323692 'end of statement')
+    {
+      unknown j[323693] "index var" 0
+      unknown tmp[323753] "maybe param" "temp"
+      (323765 'move' tmp[323753](323763 call chpl_compute_low_param_loop_bound 0(323697 call chpl__nudgeHighBound rank[323674])))
+      unknown tmp[323754] "maybe param" "temp"
+      (323774 'move' tmp[323754](323772 call chpl_compute_high_param_loop_bound 0(323770 call chpl__nudgeHighBound rank[323674])))
+      unknown tmp[323755] "maybe param" "temp"
+      (323777 'move' tmp[323755] 1)
+      ParamForLoop[323779]
+      { j[323693] tmp[323753] tmp[323754] tmp[323755]
+        {
+          unknown i[323703] "param"(323704 call -(323706 call - rank[323674] j[323693]) 1)
+          (323712 'end of statement')
+          if(323747 call _cond_test(323740 call == i[323703](323743 call - rank[323674] 1)))
+          {
+            (323713 call =(323716 call blks[323686] i[323703]) 1)
+          }
+          {
+            (323720 call =(323723 call blks[323686] i[323703])(323725 call *(323728 call shape[323677](323729 call + i[323703] 1))(323734 call blks[323686](323735 call + i[323703] 1))))
+          }
+        }
+      }
+      label _unused_continueLabel[323757]
+      label _breakLabel[323756]
+    }
+    (323788 return blks[323686])
+  }
+  { scopeless type
+    (323680 call * rank[323674] int[10])
+  }
+  function wrap[323793](arg x[323796] :
+  int[10]) : _unknown[42] "inline"
+  {
+    (323804 return(323807 call _build_tuple x[323796]))
+  }
+  { scopeless type
+    (323799 call * 1 int[10])
+  }
+  function wrap[323812](arg tup[323819] :
+  (323814 call * unknown rank[323816] int[10])) : _unknown[42] "inline"
+  {
+    (323827 return tup[323819])
+  }
+  { scopeless type
+    (323822 call * rank[323816] int[10])
+  }
+  function unwrap[323832](arg tup[323839] :
+  (323834 call * unknown rank[323836] int[10])) : _unknown[42] "inline"
+  {
+    if(323855 call _cond_test(323851 call == rank[323836] 1))
+    {
+      (323843 return(323845 call tup[323839] 0))
+    }
+    {
+      (323848 return tup[323839])
+    }
+  }
+  function isTupleOfOrder[323863](param arg order[323866] :
+  int[10], arg tup[323871] :
+  unknown tupType[323869]) param : _unknown[42] "inline"
+  {
+    if(323884 call _cond_test(323879 call !(323882 call isTuple tupType[323869])))
+    {
+      (323876 return 0)
+    }
+    function isTupleOfOrderHelp[323889](param arg level[323892] :
+    int[10], arg tup[323897] :
+    unknown tupType[323895]) param : _unknown[42] "inline"
+    {
+      if(323913 call _cond_test(323908 call !(323911 call isTuple tupType[323895])))
+      {
+        (323902 return(323903 call == level[323892] 0))
+      }
+      if(323934 call _cond_test(323929 call !(323932 call isHomogeneousTuple tupType[323895])))
+      {
+        (323918 return(323920 call isTupleOfOrderHelp(323921 call - level[323892] 1)(323926 call tup 0)))
+      }
+      {
+        unknown i[323939] "index var" 0
+        unknown tmp[323969] "maybe param" "temp"
+        (323981 'move' tmp[323969](323979 call chpl_compute_low_param_loop_bound 0(323946 call chpl__nudgeHighBound(323943 call . tup[323897] c"size"))))
+        unknown tmp[323970] "maybe param" "temp"
+        (323993 'move' tmp[323970](323991 call chpl_compute_high_param_loop_bound 0(323986 call chpl__nudgeHighBound(323988 call . tup[323897] c"size"))))
+        unknown tmp[323971] "maybe param" "temp"
+        (323996 'move' tmp[323971] 1)
+        ParamForLoop[323998]
+        { i[323939] tmp[323969] tmp[323970] tmp[323971]
+          if(323964 call _cond_test(323953 call !(323956 call isTupleOfOrderHelp(323957 call - level[323892] 1)(323962 call tup i[323939]))))
+          {
+            (323950 return 0)
+          }
+        }
+        label _unused_continueLabel[323973]
+        label _breakLabel[323972]
+      }
+      (324007 return 1)
+    }
+    { scopeless type
+      bool[19]
+    }
+    (324012 return(324014 call isTupleOfOrderHelp order[323866] tup[323871]))
+  }
+  { scopeless type
+    bool[19]
+  }
+}

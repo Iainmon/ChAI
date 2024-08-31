@@ -1,0 +1,296 @@
+AST dump for MemConsistency after pass buildDefaultFunctions.
+Module use list: HaltWrappers 
+
+{
+  function chpl__init_MemConsistency[468378]() : void[4] "insert line file info" "module init"
+  {
+    { scopeless type extern
+      (644459 'default init var' memory_order_relaxed[81186] memory_order[80955])
+    }
+    (81189 'end of statement')
+    { scopeless type extern
+      (644462 'default init var' memory_order_consume[81191] memory_order[80955])
+    }
+    (81194 'end of statement')
+    { scopeless type extern
+      (644465 'default init var' memory_order_acquire[81196] memory_order[80955])
+    }
+    (81199 'end of statement')
+    { scopeless type extern
+      (644468 'default init var' memory_order_release[81201] memory_order[80955])
+    }
+    (81204 'end of statement')
+    { scopeless type extern
+      (644471 'default init var' memory_order_acq_rel[81206] memory_order[80955])
+    }
+    (81209 'end of statement')
+    { scopeless type extern
+      (644474 'default init var' memory_order_seq_cst[81211] memory_order[80955])
+    }
+    (81214 'end of statement')
+    (598987 return _void[46])
+  }
+  type memory_order[80955]
+  function _defaultOf[80957](arg t[80960]:memory_order[80955]) : _unknown[42] "inline" "last resort"
+  {
+    unknown ret[598903] "RVV" "temp"
+    function _defaultOfMemoryOrder[80964]() : _unknown[42] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless type
+      memory_order[80955]
+    }
+    unknown call_tmp[768510] "expr temp" "maybe param" "maybe type" "temp"
+    (768513 'move' call_tmp[768510](80972 call _defaultOfMemoryOrder))
+    (598908 'move' ret[598903](598907 'deref' call_tmp[768510]))
+    (598905 return ret[598903])
+  }
+  function memory_order[80955].==[80975](arg _mt[80989]:_MT[201], arg this[80978]:memory_order[80955] :
+  memory_order[80955], arg a[80982]:memory_order[80955], arg b[80986]:memory_order[80955]) : _unknown[42] "method" "operator"
+  {
+    unknown ret[598912] "RVV" "temp"
+    unknown call_tmp[768515] "expr temp" "maybe param" "maybe type" "temp"
+    (768518 'move' call_tmp[768515](80994 '==' a[80982] b[80986]))
+    (598918 'move' ret[598912](598917 'coerce' call_tmp[768515] bool[19]))
+    (598914 return ret[598912])
+  }
+  { scopeless type
+    bool[19]
+  }
+  function memory_order[80955].!=[81000](arg _mt[81014]:_MT[201], arg this[81003]:memory_order[80955] :
+  memory_order[80955], arg a[81007]:memory_order[80955], arg b[81011]:memory_order[80955]) : _unknown[42] "method" "operator"
+  {
+    unknown ret[598922] "RVV" "temp"
+    unknown call_tmp[768520] "expr temp" "maybe param" "maybe type" "temp"
+    (768523 'move' call_tmp[768520](81019 '!=' a[81007] b[81011]))
+    (598928 'move' ret[598922](598927 'coerce' call_tmp[768520] bool[19]))
+    (598924 return ret[598922])
+  }
+  { scopeless type
+    bool[19]
+  }
+  function memory_order[80955].=[81025](arg _mt[81039]:_MT[201], arg this[81028]:memory_order[80955] :
+  memory_order[80955], ref arg lhs[81032]:memory_order[80955], arg rhs[81036]:memory_order[80955]) : _unknown[42] "assignop" "method" "operator" "no return value for void"
+  {
+    (81042 '=' lhs[81032] rhs[81036])
+    (598930 return _void[46])
+  }
+  function memory_order[80955].serialize[81047](arg _mt[81057]:_MT[201], arg this[81050]:memory_order[80955] :
+  memory_order[80955], arg writer[81053]:_any[141](?), ref arg serializer[81055]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[768525] "expr temp" "maybe param" "maybe type" "temp"
+    (768528 'move' call_tmp[768525](81173 call == this[81050] memory_order_relaxed[81186]))
+    unknown call_tmp[768530] "expr temp" "maybe param" "maybe type" "temp"
+    (768533 'move' call_tmp[768530](81177 call _cond_test call_tmp[768525]))
+    if call_tmp[768530]
+    {
+      (81064 call(81061 call (partial) write _mt[203] writer[81053]) "memory_order_relaxed")
+    }
+    {
+      unknown call_tmp[768537] "expr temp" "maybe param" "maybe type" "temp"
+      (768540 'move' call_tmp[768537](81163 call == this[81050] memory_order_consume[81191]))
+      unknown call_tmp[768542] "expr temp" "maybe param" "maybe type" "temp"
+      (768545 'move' call_tmp[768542](81167 call _cond_test call_tmp[768537]))
+      if call_tmp[768542]
+      {
+        (81073 call(81070 call (partial) write _mt[203] writer[81053]) "memory_order_consume")
+      }
+      {
+        unknown call_tmp[768549] "expr temp" "maybe param" "maybe type" "temp"
+        (768552 'move' call_tmp[768549](81153 call == this[81050] memory_order_acquire[81196]))
+        unknown call_tmp[768554] "expr temp" "maybe param" "maybe type" "temp"
+        (768557 'move' call_tmp[768554](81157 call _cond_test call_tmp[768549]))
+        if call_tmp[768554]
+        {
+          (81082 call(81079 call (partial) write _mt[203] writer[81053]) "memory_order_acquire")
+        }
+        {
+          unknown call_tmp[768561] "expr temp" "maybe param" "maybe type" "temp"
+          (768564 'move' call_tmp[768561](81143 call == this[81050] memory_order_release[81201]))
+          unknown call_tmp[768566] "expr temp" "maybe param" "maybe type" "temp"
+          (768569 'move' call_tmp[768566](81147 call _cond_test call_tmp[768561]))
+          if call_tmp[768566]
+          {
+            (81091 call(81088 call (partial) write _mt[203] writer[81053]) "memory_order_release")
+          }
+          {
+            unknown call_tmp[768573] "expr temp" "maybe param" "maybe type" "temp"
+            (768576 'move' call_tmp[768573](81133 call == this[81050] memory_order_acq_rel[81206]))
+            unknown call_tmp[768578] "expr temp" "maybe param" "maybe type" "temp"
+            (768581 'move' call_tmp[768578](81137 call _cond_test call_tmp[768573]))
+            if call_tmp[768578]
+            {
+              (81100 call(81097 call (partial) write _mt[203] writer[81053]) "memory_order_acq_rel")
+            }
+            {
+              unknown call_tmp[768585] "expr temp" "maybe param" "maybe type" "temp"
+              (768588 'move' call_tmp[768585](81123 call == this[81050] memory_order_seq_cst[81211]))
+              unknown call_tmp[768590] "expr temp" "maybe param" "maybe type" "temp"
+              (768593 'move' call_tmp[768590](81127 call _cond_test call_tmp[768585]))
+              if call_tmp[768590]
+              {
+                (81109 call(81106 call (partial) write _mt[203] writer[81053]) "memory_order_seq_cst")
+              }
+              {
+                (81118 call(81115 call (partial) write _mt[203] writer[81053]) "memory_order_unknown")
+              }
+            }
+          }
+        }
+      }
+    }
+    (598932 return _void[46])
+  }
+  const memory_order_relaxed[81186] "dead at end of block" "const" "extern" "insert auto destroy"
+  const memory_order_consume[81191] "dead at end of block" "const" "extern" "insert auto destroy"
+  const memory_order_acquire[81196] "dead at end of block" "const" "extern" "insert auto destroy"
+  const memory_order_release[81201] "dead at end of block" "const" "extern" "insert auto destroy"
+  const memory_order_acq_rel[81206] "dead at end of block" "const" "extern" "insert auto destroy"
+  const memory_order_seq_cst[81211] "dead at end of block" "const" "extern" "insert auto destroy"
+  type memoryOrder[81226] def seqCst[81216]:memoryOrder[81226] def acqRel[81218]:memoryOrder[81226] def release[81220]:memoryOrder[81226] def acquire[81222]:memoryOrder[81226] def relaxed[81224]:memoryOrder[81226]
+  function readableOrder[81229](param arg order[81232]:memoryOrder[81226]) param : _unknown[42]
+  {
+    unknown ret[598936] "RVV" "param" "temp"
+    unknown tmp[481785] "maybe param" "temp"
+    (481796 'move' tmp[481785](81247 call == order[81232] release[81220]))
+    unknown call_tmp[768599] "expr temp" "maybe param" "maybe type" "temp"
+    (768602 'move' call_tmp[768599](481798 call _cond_invalid tmp[481785]))
+    if call_tmp[768599]
+    {
+      (481801 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[669050] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669051] "maybe param" "temp"
+    unknown call_tmp[768604] "expr temp" "maybe param" "maybe type" "temp"
+    (768607 'move' call_tmp[768604](481786 call isTrue tmp[481785]))
+    (669056 'move' tmp[669051](669054 call _cond_test call_tmp[768604]))
+    if tmp[669051]
+    {
+      (669061 'move' tmp[669050](669058 '_paramFoldLogical' tmp[669051] 1))
+    }
+    {
+      unknown tmp[669063] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[768609] "expr temp" "maybe param" "maybe type" "temp"
+      (768612 'move' call_tmp[768609](81254 call == order[81232] acqRel[81218]))
+      (669065 'move' tmp[669063](481790 call isTrue call_tmp[768609]))
+      (669070 'move' tmp[669050](669067 '_paramFoldLogical' tmp[669051] tmp[669063]))
+    }
+    unknown call_tmp[768614] "expr temp" "maybe param" "maybe type" "temp"
+    (768617 'move' call_tmp[768614](81263 call _cond_test tmp[669050]))
+    if call_tmp[768614]
+    {
+      (598941 'move' ret[598936](598940 'deref' acquire[81222]))
+      gotoReturn _end_readableOrder[598934] _end_readableOrder[598934]
+    }
+    {
+      (598946 'move' ret[598936](598945 'deref' order[81232]))
+      gotoReturn _end_readableOrder[598934] _end_readableOrder[598934]
+    }
+    label _end_readableOrder[598934]
+    (598938 return ret[598936])
+  }
+  function c_memory_order[81269](param arg order[81272]:memoryOrder[81226]) : _unknown[42] "inline"
+  {
+    unknown ret[598952] "RVV" "temp"
+    {
+      unknown tmp[81356] "expr temp" "maybe param" "maybe type" "temp"
+      (81358 'move' tmp[81356] order[81272])
+      unknown call_tmp[768619] "expr temp" "maybe param" "maybe type" "temp"
+      (768622 'move' call_tmp[768619](81360 call == tmp[81356] relaxed[81224]))
+      unknown call_tmp[768624] "expr temp" "maybe param" "maybe type" "temp"
+      (768627 'move' call_tmp[768624](81363 call _cond_test call_tmp[768619]))
+      if call_tmp[768624]
+      {
+        (598957 'move' ret[598952](598956 'deref' memory_order_relaxed[81186]))
+        gotoReturn _end_c_memory_order[598950] _end_c_memory_order[598950]
+      }
+      {
+        unknown call_tmp[768629] "expr temp" "maybe param" "maybe type" "temp"
+        (768632 'move' call_tmp[768629](81366 call == tmp[81356] acquire[81222]))
+        unknown call_tmp[768634] "expr temp" "maybe param" "maybe type" "temp"
+        (768637 'move' call_tmp[768634](81369 call _cond_test call_tmp[768629]))
+        if call_tmp[768634]
+        {
+          (598962 'move' ret[598952](598961 'deref' memory_order_acquire[81196]))
+          gotoReturn _end_c_memory_order[598950] _end_c_memory_order[598950]
+        }
+        {
+          unknown call_tmp[768639] "expr temp" "maybe param" "maybe type" "temp"
+          (768642 'move' call_tmp[768639](81373 call == tmp[81356] release[81220]))
+          unknown call_tmp[768644] "expr temp" "maybe param" "maybe type" "temp"
+          (768647 'move' call_tmp[768644](81376 call _cond_test call_tmp[768639]))
+          if call_tmp[768644]
+          {
+            (598967 'move' ret[598952](598966 'deref' memory_order_release[81201]))
+            gotoReturn _end_c_memory_order[598950] _end_c_memory_order[598950]
+          }
+          {
+            unknown call_tmp[768649] "expr temp" "maybe param" "maybe type" "temp"
+            (768652 'move' call_tmp[768649](81380 call == tmp[81356] acqRel[81218]))
+            unknown call_tmp[768654] "expr temp" "maybe param" "maybe type" "temp"
+            (768657 'move' call_tmp[768654](81383 call _cond_test call_tmp[768649]))
+            if call_tmp[768654]
+            {
+              (598972 'move' ret[598952](598971 'deref' memory_order_acq_rel[81206]))
+              gotoReturn _end_c_memory_order[598950] _end_c_memory_order[598950]
+            }
+            {
+              unknown call_tmp[768659] "expr temp" "maybe param" "maybe type" "temp"
+              (768662 'move' call_tmp[768659](81387 call == tmp[81356] seqCst[81216]))
+              unknown call_tmp[768664] "expr temp" "maybe param" "maybe type" "temp"
+              (768667 'move' call_tmp[768664](81390 call _cond_test call_tmp[768659]))
+              if call_tmp[768664]
+              {
+                (598977 'move' ret[598952](598976 'deref' memory_order_seq_cst[81211]))
+                gotoReturn _end_c_memory_order[598950] _end_c_memory_order[598950]
+              }
+              {
+                (81348 call exhaustiveSelectHalt module=[222] HaltWrappers[518] "Invalid memoryOrder")
+                (400310 'referenced modules list' HaltWrappers[518])
+              }
+            }
+          }
+        }
+      }
+    }
+    label _end_c_memory_order[598950]
+    (598954 return ret[598952])
+    (396070 'used modules list'(81278 'import' HaltWrappers[518]))
+  }
+  function chpl_rmem_consist_release[81396]() : void[4] "extern" "insert line file info" "local args" "no fn body" "compiler added remote fence"
+  {
+  }
+  function chpl_rmem_consist_acquire[81400]() : void[4] "extern" "insert line file info" "local args" "no fn body" "compiler added remote fence"
+  {
+  }
+  function chpl_rmem_consist_maybe_release[81404](arg order[81407]:memory_order[80955]) : void[4] "extern" "insert line file info" "local args" "no fn body" "compiler added remote fence"
+  {
+  }
+  function chpl_rmem_consist_maybe_release[81412](param arg order[81415]:memoryOrder[81226]) : _unknown[42] "compiler added remote fence" "no return value for void"
+  {
+    unknown call_tmp[768669] "expr temp" "maybe param" "maybe type" "temp"
+    (768672 'move' call_tmp[768669](81422 call c_memory_order order[81415]))
+    (81420 call chpl_rmem_consist_maybe_release call_tmp[768669])
+    (598981 return _void[46])
+  }
+  function chpl_rmem_consist_maybe_acquire[81426](arg order[81429]:memory_order[80955]) : void[4] "extern" "insert line file info" "local args" "no fn body" "compiler added remote fence"
+  {
+  }
+  function chpl_rmem_consist_maybe_acquire[81434](param arg order[81437]:memoryOrder[81226]) : _unknown[42] "compiler added remote fence" "no return value for void"
+  {
+    unknown call_tmp[768674] "expr temp" "maybe param" "maybe type" "temp"
+    (768677 'move' call_tmp[768674](81444 call c_memory_order order[81437]))
+    (81442 call chpl_rmem_consist_maybe_acquire call_tmp[768674])
+    (598983 return _void[46])
+  }
+  function chpl_rmem_consist_fence[81448](arg order[81451]:memory_order[80955]) : void[4] "extern" "insert line file info" "local args" "no fn body"
+  {
+  }
+  function chpl_rmem_consist_fence[81456](param arg order[81459]:memoryOrder[81226]) : _unknown[42] "no return value for void"
+  {
+    unknown call_tmp[768679] "expr temp" "maybe param" "maybe type" "temp"
+    (768682 'move' call_tmp[768679](81466 call c_memory_order order[81459]))
+    (81464 call chpl_rmem_consist_fence call_tmp[768679])
+    (598985 return _void[46])
+  }
+}

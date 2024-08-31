@@ -1,0 +1,117 @@
+AST dump for ExportWrappers after pass cleanup.
+Module use list: 
+
+{
+  (311747 'use' ChapelStandard)
+  (311750 'use' CTypes)
+  function _initDynamicEndCount[311752]() : _unknown[42] "private" "no return value for void"
+  {
+    unknown endCount[311756](311758 call _endCountAlloc(forceLocalTypes = 0))
+    (311762 'end of statement')
+    (311764 call chpl_task_setDynamicEndCount endCount)
+  }
+  function _destroyDynamicEndCount[311768]() : _unknown[42] "private" "no return value for void"
+  {
+    unknown endCount[311772](311774 call chpl_task_getDynamicEndCount)
+    (311776 'end of statement')
+    (311778 call _waitEndCount endCount)
+    (311781 call _endCountFree endCount)
+  }
+  function chpl_libraryModuleLevelSetup[311785]() : _unknown[42] "export" "local args" "no return value for void"
+  {
+    (311790 call _initDynamicEndCount)
+  }
+  { scopeless type
+    void[4]
+  }
+  function chpl_libraryModuleLevelCleanup[311794]() : _unknown[42] "export" "local args" "no return value for void"
+  {
+    (311799 call _destroyDynamicEndCount)
+  }
+  { scopeless type
+    void[4]
+  }
+  type chpl_byte_buffer[311826] unknown isOwned[311805](311807 call int[10] 8) unknown data[311812](311814 call c_ptr c_char) unknown size[311819](311821 call uint[86] 64)
+  function chpl_byte_buffer_free[311828](arg cb[311831] :
+  chpl_byte_buffer) : void[4] "extern" "local args" "no fn body"
+  {
+  }
+  unknown chpl__exportTypeChplByteBuffer[311837] "type variable" chpl_byte_buffer
+  function chpl__exportRetStringOrBytes[311840](ref arg val[311842]:_any[141](?)) : _unknown[42]
+  {
+    unknown result[311847] chpl_byte_buffer
+    (311850 'end of statement')
+    (311851 call =(311854 call . result c"isOwned")(311857 call :(311860 call . val c"isOwned")(311864 call int[10] 8)))
+    (311866 call =(311869 call . result c"data")(311872 call :(311875 call . val c"buff")(311879 call c_ptr c_char)))
+    (311881 call =(311884 call . result c"size")(311887 call :(311890 call . val c"numBytes")(311894 call uint[86] 64)))
+    (311896 call =(311899 call . val c"isOwned") 0)
+    (311903 return result)
+  }
+  { scopeless type
+    chpl_byte_buffer
+  }
+  function chpl__exportRet[311908](ref arg val[311911] :
+  string[244], arg rt[311915] :
+  chpl_byte_buffer) : _unknown[42]
+  {
+    (311920 return(311922 call chpl__exportRetStringOrBytes val))
+  }
+  { scopeless type
+    rt
+  }
+  function chpl__exportRet[311927](ref arg val[311930] :
+  bytes[232], arg rt[311934] :
+  chpl_byte_buffer) : _unknown[42]
+  {
+    (311939 return(311941 call chpl__exportRetStringOrBytes val))
+  }
+  { scopeless type
+    rt
+  }
+  function chpl__exportArg[311946](arg cp[311949] :
+  bool, arg val[311953] :
+  chpl_byte_buffer, arg rt[311957] :
+  string[244]) : _unknown[42]
+  {
+    unknown data[311963](311964 call :(311967 call . val c"data")(311971 call c_ptrConst c_char))
+    (311974 'end of statement')
+    unknown size[311976](311984 call(311981 call .(311978 call . val c"size") c"safeCast") int[10])
+    (311987 'end of statement')
+    Try!
+    {
+      {
+        if(311999 call _cond_test cp)
+        {
+          (311989 return(311994 call(311991 call . string[244] c"createCopyingBuffer") data size))
+        }
+        (312004 return(312009 call(312006 call . string[244] c"createBorrowingBuffer") data size))
+      }
+    }
+  }
+  { scopeless type
+    rt
+  }
+  function chpl__exportArg[312018](arg cp[312021] :
+  bool, arg val[312025] :
+  chpl_byte_buffer, arg rt[312029] :
+  bytes[232]) : _unknown[42]
+  {
+    unknown data[312035](312036 call :(312039 call . val c"data")(312043 call c_ptrConst c_char))
+    (312046 'end of statement')
+    unknown size[312048](312056 call(312053 call .(312050 call . val c"size") c"safeCast") int[10])
+    (312059 'end of statement')
+    Try!
+    {
+      {
+        if(312071 call _cond_test cp)
+        {
+          (312061 return(312066 call(312063 call . bytes[232] c"createCopyingBuffer") data size))
+        }
+        (312076 return(312081 call(312078 call . bytes[232] c"createBorrowingBuffer") data size))
+      }
+    }
+  }
+  { scopeless type
+    rt
+  }
+}

@@ -1,0 +1,427 @@
+AST dump for GpuDiagnostics after pass normalize.
+Module use list: ChapelStandard ChplConfig 
+
+{
+  function chpl__init_GpuDiagnostics[468645]() : void[4] "insert line file info" "module init"
+  {
+    (655957 'init var' gpuDiagsStacktrace[338453] 0)
+    (338456 'end of statement')
+    (655959 'init var' gpuDiagsPrintUnstable[338458] 0)
+    (338461 'end of statement')
+    (655962 'move' gpuDiagnostics[338495] chpl_gpuDiagnostics[338492])
+    (572262 'end of statement')
+    (635614 return _void[46])
+  }
+  unknown gpuDiagsStacktrace[338453] "dead at end of block" "param"
+  unknown gpuDiagsPrintUnstable[338458] "dead at end of block" "param"
+  type chpl_gpuDiagnostics[338492] val kernel_launch[338464]:uint(64)[86](338466 call uint(64)[86] 64) val host_to_device[338471]:uint(64)[86](338473 call uint(64)[86] 64) val device_to_host[338478]:uint(64)[86](338480 call uint(64)[86] 64) val device_to_device[338485]:uint(64)[86](338487 call uint(64)[86] 64)
+  unknown gpuDiagnostics[338495] "dead at end of block" "insert auto destroy" "type variable"
+  function +=[338498](ref arg lhs[338501] :
+  gpuDiagnostics[338495], arg rhs[338505] :
+  gpuDiagnostics[338495]) : _unknown[42] "assignop" "operator" "private" "no return value for void"
+  {
+    unknown call_tmp[962639] "expr temp" "maybe param" "maybe type" "temp"
+    (962642 'move' call_tmp[962639](338514 call kernel_launch _mt[203] lhs[338501]))
+    unknown call_tmp[962646] "expr temp" "maybe param" "maybe type" "temp"
+    (962649 'move' call_tmp[962646](338518 call kernel_launch _mt[203] rhs[338505]))
+    (338509 call += call_tmp[962639] call_tmp[962646])
+    (572263 'end of statement')
+    unknown call_tmp[962653] "expr temp" "maybe param" "maybe type" "temp"
+    (962656 'move' call_tmp[962653](338526 call host_to_device _mt[203] lhs[338501]))
+    unknown call_tmp[962660] "expr temp" "maybe param" "maybe type" "temp"
+    (962663 'move' call_tmp[962660](338530 call host_to_device _mt[203] rhs[338505]))
+    (338521 call += call_tmp[962653] call_tmp[962660])
+    (572264 'end of statement')
+    unknown call_tmp[962667] "expr temp" "maybe param" "maybe type" "temp"
+    (962670 'move' call_tmp[962667](338538 call device_to_host _mt[203] lhs[338501]))
+    unknown call_tmp[962674] "expr temp" "maybe param" "maybe type" "temp"
+    (962677 'move' call_tmp[962674](338542 call device_to_host _mt[203] rhs[338505]))
+    (338533 call += call_tmp[962667] call_tmp[962674])
+    (572265 'end of statement')
+    unknown call_tmp[962681] "expr temp" "maybe param" "maybe type" "temp"
+    (962684 'move' call_tmp[962681](338550 call device_to_device _mt[203] lhs[338501]))
+    unknown call_tmp[962688] "expr temp" "maybe param" "maybe type" "temp"
+    (962691 'move' call_tmp[962688](338554 call device_to_device _mt[203] rhs[338505]))
+    (338545 call += call_tmp[962681] call_tmp[962688])
+    (635565 return _void[46])
+  }
+  function assertGpuDiags[338559](arg kernel_launch[338564] :
+  (1002917 call - 1) =
+  (338561 call - 1), arg host_to_device[338570] :
+  (1002921 call - 1) =
+  (338567 call - 1), arg device_to_host[338576] :
+  (1002925 call - 1) =
+  (338573 call - 1), arg device_to_device[338582] :
+  (1002929 call - 1) =
+  (338579 call - 1), arg kernel_launch_um[338588] :
+  (1002933 call - 1) =
+  (338585 call - 1), arg kernel_launch_aod[338594] :
+  (1002937 call - 1) =
+  (338591 call - 1)) : _unknown[42]
+  {
+    function compare[338598](arg expected[338600]:_any[141](?), arg actual[338602]:_any[141](?), arg name[338604]:_any[141](?)) : _unknown[42]
+    {
+      unknown ret[635569] "RVV" "temp"
+      unknown tmp[505221] "maybe param" "temp"
+      (505232 'move' tmp[505221](338611 call < expected[338600] 0))
+      unknown call_tmp[962693] "expr temp" "maybe param" "maybe type" "temp"
+      (962696 'move' call_tmp[962693](505234 call _cond_invalid tmp[505221]))
+      if call_tmp[962693]
+      {
+        (505237 call compilerError "cannot promote short-circuiting || operator")
+      }
+      const res[338608] "dead at end of block" "const" "insert auto destroy"
+      unknown tmp[711151] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[711152] "maybe param" "temp"
+      unknown call_tmp[962698] "expr temp" "maybe param" "maybe type" "temp"
+      (962701 'move' call_tmp[962698](505222 call isTrue tmp[505221]))
+      (711157 'move' tmp[711152](711155 call _cond_test call_tmp[962698]))
+      if tmp[711152]
+      {
+        (711162 'move' tmp[711151](711159 '_paramFoldLogical' tmp[711152] 1))
+      }
+      {
+        unknown tmp[711164] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[962703] "expr temp" "maybe param" "maybe type" "temp"
+        (962706 'move' call_tmp[962703](338615 call == actual[338602] expected[338600]))
+        (711166 'move' tmp[711164](505226 call isTrue call_tmp[962703]))
+        (711171 'move' tmp[711151](711168 '_paramFoldLogical' tmp[711152] tmp[711164]))
+      }
+      (655964 'init var' res[338608] tmp[711151])
+      (338620 'end of statement')
+      unknown call_tmp[962708] "expr temp" "maybe param" "maybe type" "temp"
+      (962711 'move' call_tmp[962708](338630 call == res[338608] 0))
+      unknown call_tmp[962713] "expr temp" "maybe param" "maybe type" "temp"
+      (962716 'move' call_tmp[962713](338634 call _cond_test call_tmp[962708]))
+      if call_tmp[962713]
+      {
+        (338623 call writef "Unexpected GPU Diagnostic: observed %i %s instead of %i\n" actual[338602] name[338604] expected[338600])
+      }
+      (635574 'move' ret[635569](635573 'deref' res[338608]))
+      gotoReturn _end_compare[635567] _end_compare[635567]
+      (572269 'end of statement' res[338608])
+      label _end_compare[635567]
+      (635571 return ret[635569])
+    }
+    unknown call_tmp[962718] "maybe param" "maybe type" "temp"
+    (962721 'move' call_tmp[962718](338647 call == CHPL_GPU_MEM_STRATEGY[29917] "unified_memory"))
+    unknown isUm[338646] "dead at end of block" "param"
+    (655966 'init var' isUm[338646] call_tmp[962718])
+    (338654 'end of statement')
+    unknown call_tmp[962723] "maybe param" "maybe type" "temp"
+    (962726 'move' call_tmp[962723](338657 call == CHPL_GPU[29929] "cpu"))
+    unknown isCpu[338656] "dead at end of block" "param"
+    (655968 'init var' isCpu[338656] call_tmp[962723])
+    (338664 'end of statement')
+    const expectedLaunch[338666] "dead at end of block" "const" "insert auto destroy" "split inited"
+    (655970 'init var split decl' expectedLaunch[338666])
+    (338668 'end of statement')
+    unknown call_tmp[962728] "expr temp" "maybe param" "maybe type" "temp"
+    (962731 'move' call_tmp[962728](338699 call >= kernel_launch[338564] 0))
+    unknown call_tmp[962733] "expr temp" "maybe param" "maybe type" "temp"
+    (962736 'move' call_tmp[962733](338703 call _cond_test call_tmp[962728]))
+    if call_tmp[962733]
+    {
+      unknown tmp[505242] "maybe param" "temp"
+      (505253 'move' tmp[505242](338674 call < kernel_launch_um[338588] 0))
+      unknown call_tmp[962738] "expr temp" "maybe param" "maybe type" "temp"
+      (962741 'move' call_tmp[962738](505255 call _cond_invalid tmp[505242]))
+      if call_tmp[962738]
+      {
+        (505258 call compilerError "cannot promote short-circuiting && operator")
+      }
+      unknown tmp[711178] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[711179] "maybe param" "temp"
+      unknown call_tmp[962743] "expr temp" "maybe param" "maybe type" "temp"
+      (962746 'move' call_tmp[962743](505243 call isTrue tmp[505242]))
+      (711184 'move' tmp[711179](711182 call _cond_test call_tmp[962743]))
+      if tmp[711179]
+      {
+        unknown tmp[711186] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[962748] "expr temp" "maybe param" "maybe type" "temp"
+        (962751 'move' call_tmp[962748](338678 call < kernel_launch_aod[338594] 0))
+        (711188 'move' tmp[711186](505246 call isTrue call_tmp[962748]))
+        (711193 'move' tmp[711178](711190 '_paramFoldLogical' tmp[711179] tmp[711186]))
+      }
+      {
+        (711198 'move' tmp[711178](711195 '_paramFoldLogical' tmp[711179] 0))
+      }
+      (338671 call assert tmp[711178] "when kernel_launch is set, kernel_launch* shouldn't be set")
+      (572272 'end of statement')
+      (655972 'init var split init' expectedLaunch[338666] kernel_launch[338564])
+      (572273 'end of statement' expectedLaunch[338666])
+    }
+    {
+      unknown tmp[711205] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[711206] "maybe param" "temp"
+      (711211 'move' tmp[711206](711209 call _cond_test isUm[338646]))
+      if tmp[711206]
+      {
+        (711216 'move' tmp[711205](711213 '_paramFoldLogical' tmp[711206] kernel_launch_um[338588]))
+      }
+      {
+        (711221 'move' tmp[711205](711218 '_paramFoldLogical' tmp[711206] kernel_launch_aod[338594]))
+      }
+      (655974 'init var split init' expectedLaunch[338666] tmp[711205])
+      (572275 'end of statement' expectedLaunch[338666])
+    }
+    unknown diags[338708] "dead at end of block" "insert auto destroy"
+    (655976 'default init var' diags[338708] gpuDiagnostics[338495])
+    (338711 'end of statement')
+    {
+      unknown _indexOfInterest[338721] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[338722] "expr temp" "temp"
+      unknown call_tmp[962753] "expr temp" "maybe param" "maybe type" "temp"
+      (962756 'move' call_tmp[962753](338715 call getGpuDiagnostics))
+      (338731 'move' _iterator[338722](338729 call _getIterator call_tmp[962753]))
+      Defer
+      {
+        {
+          (338746 call _freeIterator _iterator[338722])
+        }
+      }
+      { scopeless type
+        (338736 'move' _indexOfInterest[338721](338733 call iteratorIndex _iterator[338722]))
+      }
+      ForLoop[338723]
+      {
+        unknown diag[338712] "index var" "insert auto destroy"
+        (572278 'end of statement')
+        (338741 'move' diag[338712] _indexOfInterest[338721])
+        (572279 'end of statement' diag[338712])
+        {
+          (338717 call += diags[338708] diag[338712])
+          (572281 'end of statement' diags[338708] diag[338712])
+        }
+        label _continueLabel[338726]
+        _indexOfInterest[338721]
+        _iterator[338722]
+      }
+      label _breakLabel[338727]
+    }
+    unknown call_tmp[962760] "expr temp" "maybe param" "maybe type" "temp"
+    (962763 'move' call_tmp[962760](338759 call kernel_launch _mt[203] diags[338708]))
+    unknown call_tmp[962765] "maybe param" "maybe type" "temp"
+    (962768 'move' call_tmp[962765](338756 call compare expectedLaunch[338666] call_tmp[962760] "launches"))
+    unknown success[338754] "dead at end of block" "insert auto destroy"
+    (655978 'init var' success[338754] call_tmp[962765])
+    (338766 'end of statement' expectedLaunch[338666] diags[338708])
+    unknown tmp[505263] "maybe param" "temp"
+    (505274 'move' tmp[505263](338809 call ! isUm[338646]))
+    unknown call_tmp[962770] "expr temp" "maybe param" "maybe type" "temp"
+    (962773 'move' call_tmp[962770](505276 call _cond_invalid tmp[505263]))
+    if call_tmp[962770]
+    {
+      (505279 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[711228] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[711229] "maybe param" "temp"
+    unknown call_tmp[962775] "expr temp" "maybe param" "maybe type" "temp"
+    (962778 'move' call_tmp[962775](505264 call isTrue tmp[505263]))
+    (711234 'move' tmp[711229](711232 call _cond_test call_tmp[962775]))
+    if tmp[711229]
+    {
+      unknown tmp[711236] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[962780] "expr temp" "maybe param" "maybe type" "temp"
+      (962783 'move' call_tmp[962780](338812 call ! isCpu[338656]))
+      (711238 'move' tmp[711236](505267 call isTrue call_tmp[962780]))
+      (711243 'move' tmp[711228](711240 '_paramFoldLogical' tmp[711229] tmp[711236]))
+    }
+    {
+      (711248 'move' tmp[711228](711245 '_paramFoldLogical' tmp[711229] 0))
+    }
+    unknown call_tmp[962785] "expr temp" "maybe param" "maybe type" "temp"
+    (962788 'move' call_tmp[962785](338815 call _cond_test tmp[711228]))
+    if call_tmp[962785]
+    {
+      unknown call_tmp[962792] "expr temp" "maybe param" "maybe type" "temp"
+      (962795 'move' call_tmp[962792](338775 call host_to_device _mt[203] diags[338708]))
+      unknown call_tmp[962797] "expr temp" "maybe param" "maybe type" "temp"
+      (962800 'move' call_tmp[962797](338772 call compare host_to_device[338570] call_tmp[962792] "host to device communication calls"))
+      (338768 call &= success[338754] call_tmp[962797])
+      (572287 'end of statement' success[338754] diags[338708])
+      unknown call_tmp[962804] "expr temp" "maybe param" "maybe type" "temp"
+      (962807 'move' call_tmp[962804](338788 call device_to_host _mt[203] diags[338708]))
+      unknown call_tmp[962809] "expr temp" "maybe param" "maybe type" "temp"
+      (962812 'move' call_tmp[962809](338785 call compare device_to_host[338576] call_tmp[962804] "device to host communication calls"))
+      (338781 call &= success[338754] call_tmp[962809])
+      (572290 'end of statement' success[338754] diags[338708])
+      unknown call_tmp[962816] "expr temp" "maybe param" "maybe type" "temp"
+      (962819 'move' call_tmp[962816](338801 call device_to_device _mt[203] diags[338708]))
+      unknown call_tmp[962821] "expr temp" "maybe param" "maybe type" "temp"
+      (962824 'move' call_tmp[962821](338798 call compare device_to_device[338582] call_tmp[962816] "device to device communication calls"))
+      (338794 call &= success[338754] call_tmp[962821])
+      (572293 'end of statement' success[338754] diags[338708])
+    }
+    (338820 call assert success[338754] "GPU Diagnostics assertion failed")
+    (572296 'end of statement' success[338754])
+    (635578 return _void[46])
+    (397142 'used modules list'(338643 'use' ChplConfig[29952]))
+  }
+  function chpl_gpu_startVerbose[338827](arg stacktrace[338830]:bool[19], arg print_unstable[338834]:bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_stopVerbose[338839]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_startVerboseHere[338843](arg stacktrace[338846]:bool[19], arg print_unstable[338850]:bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_stopVerboseHere[338855]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_startDiagnostics[338859](arg print_unstable[338862]:bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_stopDiagnostics[338867]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_startDiagnosticsHere[338871](arg print_unstable[338874]:bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_stopDiagnosticsHere[338879]() : void[4] "extern" "insert line file info" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_resetDiagnosticsHere[338883]() : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function chpl_gpu_getDiagnosticsHere[338887](ref arg cd[338890] :
+  gpuDiagnostics[338495]) : void[4] "extern" "local args" "no fn body" "private"
+  {
+  }
+  function startVerboseGpu[338895]() : _unknown[42] "no return value for void"
+  {
+    (338899 call chpl_gpu_startVerbose gpuDiagsStacktrace[338453] gpuDiagsPrintUnstable[338458])
+    (635580 return _void[46])
+  }
+  function stopVerboseGpu[338904]() : _unknown[42] "no return value for void"
+  {
+    (338908 call chpl_gpu_stopVerbose)
+    (635582 return _void[46])
+  }
+  function startGpuDiagnostics[338911]() : _unknown[42] "no return value for void"
+  {
+    (338915 call chpl_gpu_startDiagnostics gpuDiagsPrintUnstable[338458])
+    (635584 return _void[46])
+  }
+  function stopGpuDiagnostics[338919]() : _unknown[42] "no return value for void"
+  {
+    (338923 call chpl_gpu_stopDiagnostics)
+    (635586 return _void[46])
+  }
+  function resetGpuDiagnostics[338926]() : _unknown[42] "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[338947] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[338948] "expr temp" "temp"
+      (338957 'move' _iterator[338948](338955 call _getIterator Locales[309572]))
+      Defer
+      {
+        {
+          (338972 call _freeIterator _iterator[338948])
+        }
+      }
+      { scopeless type
+        (338962 'move' _indexOfInterest[338947](338959 call iteratorIndex _iterator[338948]))
+      }
+      ForLoop[338949]
+      {
+        unknown loc[338929] "index var" "insert auto destroy"
+        (572303 'end of statement')
+        (338967 'move' loc[338929] _indexOfInterest[338947])
+        (572304 'end of statement' loc[338929])
+        {
+          const tmp[338939] "const" "temp"
+          unknown call_tmp[962826] "expr temp" "maybe param" "maybe type" "temp"
+          (962829 'move' call_tmp[962826](338936 '_wide_get_locale' loc[338929]))
+          (338940 'move' tmp[338939](338937 'deref' call_tmp[962826]))
+          (338934 call resetGpuDiagnosticsHere)
+          (338943 'elided on block' 0 tmp[338939])
+        }
+        label _continueLabel[338952]
+        _indexOfInterest[338947]
+        _iterator[338948]
+      }
+      label _breakLabel[338953]
+    }
+    (635588 return _void[46])
+  }
+  function getGpuDiagnostics[338981]() : _unknown[42]
+  {
+    unknown ret[635592] "RVV" "temp"
+    unknown D[338985] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[962831] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+    (962834 'move' call_tmp[962831](338987 call chpl__ensureDomainExpr LocaleSpace[309591]))
+    unknown call_tmp[962836] "expr temp" "maybe param" "maybe type" "temp"
+    (962839 'move' call_tmp[962836](338990 call chpl__buildArrayRuntimeType call_tmp[962831] gpuDiagnostics[338495]))
+    (655980 'default init var' D[338985] call_tmp[962836])
+    (338993 'end of statement')
+    {
+      unknown _indexOfInterest[339020] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[339021] "expr temp" "temp"
+      (339030 'move' _iterator[339021](339028 call _getIterator Locales[309572]))
+      Defer
+      {
+        {
+          (339045 call _freeIterator _iterator[339021])
+        }
+      }
+      { scopeless type
+        (339035 'move' _indexOfInterest[339020](339032 call iteratorIndex _iterator[339021]))
+      }
+      ForLoop[339022]
+      {
+        unknown loc[338994] "index var" "insert auto destroy"
+        (572308 'end of statement')
+        (339040 'move' loc[338994] _indexOfInterest[339020])
+        (572309 'end of statement' loc[338994])
+        {
+          const tmp[339012] "const" "temp"
+          unknown call_tmp[962841] "expr temp" "maybe param" "maybe type" "temp"
+          (962844 'move' call_tmp[962841](339009 '_wide_get_locale' loc[338994]))
+          (339013 'move' tmp[339012](339010 'deref' call_tmp[962841]))
+          {
+            unknown call_tmp[962848] "expr temp" "maybe param" "maybe type" "temp"
+            (962851 'move' call_tmp[962848](339004 call id _mt[203] loc[338994]))
+            unknown call_tmp[962853] "expr temp" "maybe param" "maybe type" "temp"
+            (962856 'move' call_tmp[962853](339002 call D[338985] call_tmp[962848]))
+            unknown call_tmp[962858] "expr temp" "maybe param" "maybe type" "temp"
+            (962861 'move' call_tmp[962858](339008 call getGpuDiagnosticsHere))
+            (338999 call = call_tmp[962853] call_tmp[962858])
+            (572311 'end of statement' D[338985] loc[338994])
+          }
+          (339016 'elided on block' 0 tmp[339012])
+        }
+        label _continueLabel[339025]
+        _indexOfInterest[339020]
+        _iterator[339021]
+      }
+      label _breakLabel[339026]
+    }
+    (635597 'move' ret[635592](635596 'deref' D[338985]))
+    gotoReturn _end_getGpuDiagnostics[635590] _end_getGpuDiagnostics[635590]
+    (572314 'end of statement' D[338985])
+    label _end_getGpuDiagnostics[635590]
+    (635594 return ret[635592])
+  }
+  function getGpuDiagnosticsHere[339056]() : _unknown[42] "private"
+  {
+    unknown ret[635603] "RVV" "temp"
+    unknown cd[339060] "dead at end of block" "insert auto destroy"
+    (655982 'default init var' cd[339060] gpuDiagnostics[338495])
+    (339063 'end of statement')
+    (339065 call chpl_gpu_getDiagnosticsHere cd[339060])
+    (572316 'end of statement' cd[339060])
+    (635608 'move' ret[635603](635607 'deref' cd[339060]))
+    gotoReturn _end_getGpuDiagnosticsHere[635601] _end_getGpuDiagnosticsHere[635601]
+    (572318 'end of statement' cd[339060])
+    label _end_getGpuDiagnosticsHere[635601]
+    (635605 return ret[635603])
+  }
+  function resetGpuDiagnosticsHere[339071]() : _unknown[42] "inline" "private" "no return value for void"
+  {
+    (339075 call chpl_gpu_resetDiagnosticsHere)
+    (635612 return _void[46])
+  }
+  (397140 'used modules list'(387076 'use' ChapelStandard[315387]))
+}

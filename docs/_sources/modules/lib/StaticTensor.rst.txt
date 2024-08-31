@@ -19,121 +19,121 @@ or
 
 .. record:: tensor : serializable
 
-   .. data:: config param rank: int
+   .. attribute:: param rank: int
 
-   .. type:: config type eltType = real(64)
+   .. attribute:: type eltType = real(64)
 
-   .. data:: config var resource: shared BaseTensorResource(eltType, rank)
+   .. attribute:: var resource: shared(BaseTensorResource(eltType, rank))
 
-   .. method:: proc meta
+   .. method:: proc  meta 
 
-   .. method:: proc _dom
+   .. method:: proc  _dom 
 
-   .. method:: proc init(param rank: int, type eltType = real(64))
+   .. method:: proc  init(param rank: int, type eltType = real(64)) 
 
-   .. method:: proc init(in resource: shared BaseTensorResource(?eltType, ?rank))
+   .. method:: proc  init(in resource: shared(BaseTensorResource(?eltType, ?rank))) 
 
-   .. method:: proc init(in resource: owned(BaseTensorResource(?eltType, ?rank)))
+   .. method:: proc  init(in resource: owned(BaseTensorResource(?eltType, ?rank))) 
 
-   .. method:: proc init(array: ndarray(?rank, ?eltType))
+   .. method:: proc  init( array: ndarray(?rank, ?eltType)) 
 
-   .. method:: proc init(dom: domain(?), type eltType = real)
+   .. method:: proc  init( dom: domain(?), type eltType = real) 
 
-   .. method:: proc init(arr: [] ?eltType)
+   .. method:: proc  init( arr: [] ?eltType) 
 
-   .. method:: proc init(it: _iteratorRecord)
+   .. method:: proc  init( it: _iteratorRecord) 
 
-   .. method:: proc this(args ...)
+   .. method:: proc  this(args ...) 
 
-   .. method:: proc reshapeDomain(dom: this._dom.type)
+   .. method:: proc  reshapeDomain( dom: this._dom.type) 
 
-   .. method:: proc _setArrayData(value)
+   .. method:: proc  _setArrayData( value) 
 
-   .. method:: proc detach(copy: bool = true, keepGrad: bool = false): tensor(rank, eltType)
+   .. method:: proc  detach( copy: bool = true,  keepGrad: bool = false) : tensor(rank, eltType)
 
-.. function:: operator :(in t: tensor(?rank, ?eltType), type toType): tensor(rank, toType)
+.. function:: operator :(in t: tensor(?rank, ?eltType), type toType) : tensor(rank, toType)
 
-.. function:: proc tensorFromCtx(param rank: int, type eltType, ctx): tensor(rank, eltType)
+.. function:: proc tensorFromCtx(param rank: int, type eltType,  ctx) : tensor(rank, eltType)
 
-.. function:: operator +(a: tensor(?rank, ?eltType), b: tensor(rank, eltType))
+.. function:: operator +( a: tensor(?rank, ?eltType),  b: tensor(rank, eltType)) 
 
-.. function:: operator -(a: tensor(?rank, ?eltType), b: tensor(rank, eltType))
+.. function:: operator -( a: tensor(?rank, ?eltType),  b: tensor(rank, eltType)) 
 
-.. function:: operator *(a: tensor(?rank, ?eltType), b: tensor(rank, eltType))
+.. function:: operator *( a: tensor(?rank, ?eltType),  b: tensor(rank, eltType)) 
 
-.. function:: operator /(a: tensor(?rank, ?eltType), b: tensor(rank, eltType))
+.. function:: operator /( a: tensor(?rank, ?eltType),  b: tensor(rank, eltType)) 
 
-.. method:: proc tensor.reshape(dom: domain(?))
+.. method:: proc  tensor.reshape( dom: domain(?)) 
 
-.. method:: proc tensor.reshape(newShape: int ...?newRank)
+.. method:: proc  tensor.reshape(newShape: int ...?newRank) 
 
-.. method:: proc tensor.relu()
+.. method:: proc  tensor.relu() 
 
-.. method:: proc tensor.permute(axes: int ...rank)
+.. method:: proc  tensor.permute(axes: int ...rank) 
 
-.. method:: proc tensor.expand(axes: int ...rank)
+.. method:: proc  tensor.expand(axes: int ...rank) 
 
-.. method:: proc tensor.pad(args: 2*int ...rank, value: eltType = 0.0)
+.. method:: proc  tensor.pad(args: 2*int ...rank,  value: eltType = 0.0) 
 
-.. method:: proc tensor.shrink(args: 2*int ...rank)
+.. method:: proc  tensor.shrink(args: 2*int ...rank) 
 
-.. method:: proc tensor.slice(dom: domain(?)) where dom.rank == rank
+.. method:: proc  tensor.slice( dom: domain(?))  where dom.rank == rank
 
-.. method:: proc tensor.slice(rngs: range ...rank)
+.. method:: proc  tensor.slice(rngs: range ...rank) 
 
-.. method:: proc tensor.sum(axes: int ...?r)
+.. method:: proc  tensor.sum(axes: int ...?r) 
 
-.. method:: proc tensor.unsqueeze(dim: int): tensor(rank+1, eltType)
+.. method:: proc  tensor.unsqueeze( dim: int) : tensor(rank+1, eltType)
 
-.. method:: proc tensor.max(): tensor(1, eltType)
+.. method:: proc  tensor.max() : tensor(1, eltType)
 
-.. method:: proc tensor.exp(): tensor(rank, eltType)
+.. method:: proc  tensor.exp() : tensor(rank, eltType)
 
-.. method:: proc tensor.softmax(): tensor(rank, eltType)
+.. method:: proc  tensor.softmax() : tensor(rank, eltType)
 
-.. function:: proc matvec(mat: tensor(2, ?eltType), vec: tensor(1, eltType)): tensor(1, eltType)
+.. function:: proc matvec( mat: tensor(2, ?eltType),  vec: tensor(1, eltType)) : tensor(1, eltType)
 
-.. function:: proc matvec(mat: tensor(2, ?eltType), vec: tensor(2, eltType)): tensor(2, eltType)
+.. function:: proc matvec( mat: tensor(2, ?eltType),  vec: tensor(2, eltType)) : tensor(2, eltType)
 
-.. method:: proc type tensor.matvecmul(m, v)
+.. method:: proc type tensor.matvecmul( m,  v) 
 
-.. method:: proc type tensor.convolve(features: tensor(3, ?eltType), kernel: tensor(4, eltType), stride: int): tensor(3, eltType)
+.. method:: proc type tensor.convolve( features: tensor(3, ?eltType),  kernel: tensor(4, eltType),  stride: int) : tensor(3, eltType)
 
-.. method:: proc type tensor.convolve(features: tensor(3, ?eltType), kernel: tensor(4, eltType), bias: tensor(1, eltType), stride: int): tensor(3, eltType)
+.. method:: proc type tensor.convolve( features: tensor(3, ?eltType),  kernel: tensor(4, eltType),  bias: tensor(1, eltType),  stride: int) : tensor(3, eltType)
 
-.. method:: proc type tensor.matvecmulFast(mat: tensor(2, ?eltType), vec: tensor(1, eltType)): tensor(1, eltType)
+.. method:: proc type tensor.matvecmulFast( mat: tensor(2, ?eltType),  vec: tensor(1, eltType)) : tensor(1, eltType)
 
-.. method:: proc tensor.dilate(dil: int): tensor(3, eltType) where this.rank == 3
+.. method:: proc  tensor.dilate( dil: int) : tensor(3, eltType) where this.rank == 3
 
-.. method:: proc tensor.maxPool(poolSize: int): tensor(3, eltType) where this.rank == 3
+.. method:: proc  tensor.maxPool( poolSize: int) : tensor(3, eltType) where this.rank == 3
 
-.. method:: proc type tensor.arange(to: int, type eltType = real, shape: ?rank*int): tensor(rank, eltType)
+.. method:: proc type tensor.arange( to: int, type eltType = real,  shape: ?rank*int) : tensor(rank, eltType)
 
-.. method:: proc type tensor.arange(shape: int ...?rank): tensor(rank, real)
+.. method:: proc type tensor.arange(shape: int ...?rank) : tensor(rank, real)
 
-.. method:: proc type tensor.fromShape(type eltType = real, shape: int ...?rank, value: eltType = 0 : eltType): tensor(rank, eltType)
+.. method:: proc type tensor.fromShape(type eltType = real, shape: int ...?rank,  value: eltType = 0: eltType) : tensor(rank, eltType)
 
-.. method:: proc type tensor.zeros(shape: int ...?rank): tensor(rank, real)
+.. method:: proc type tensor.zeros(shape: int ...?rank) : tensor(rank, real)
 
-.. method:: proc type tensor.zeros(type eltType, shape: int ...?rank): tensor(rank, eltType)
+.. method:: proc type tensor.zeros(type eltType, shape: int ...?rank) : tensor(rank, eltType)
 
-.. method:: proc type tensor.ones(shape: int ...?rank): tensor(rank, real)
+.. method:: proc type tensor.ones(shape: int ...?rank) : tensor(rank, real)
 
-.. method:: proc type tensor.ones(type eltType, shape: int ...?rank): tensor(rank, eltType)
+.. method:: proc type tensor.ones(type eltType, shape: int ...?rank) : tensor(rank, eltType)
 
-.. data:: const n = 100
+.. data:: config const n = 100
 
-.. data:: const diag = false
+.. data:: config const diag = false
 
-.. data:: const size = 3
+.. data:: config const size = 3
 
-.. function:: proc main()
+.. function:: proc main() 
 
-.. method:: proc tensor.serialize(writer: IO.fileWriter(locking = false, IO.defaultSerializer), ref serializer: IO.defaultSerializer)
+.. method:: proc  tensor.serialize( writer: IO.fileWriter(locking = false, IO.defaultSerializer), ref serializer: IO.defaultSerializer) 
 
-.. method:: proc tensor.serialize(writer: IO.fileWriter(?), ref serializer: ?srt2) where srt2 != IO.defaultSerializer
+.. method:: proc  tensor.serialize( writer: IO.fileWriter(?), ref serializer: ?srt2)  where srt2 != IO.defaultSerializer
 
-.. method:: proc tensor.serialize(writer: IO.fileWriter(locking = false, IO.defaultSerializer), ref serializer: IO.defaultSerializer, param capitalT: bool) where capitalT == true
+.. method:: proc  tensor.serialize( writer: IO.fileWriter(locking = false, IO.defaultSerializer), ref serializer: IO.defaultSerializer, param capitalT: bool)  where capitalT == true
 
-.. method:: proc ref tensor.read(fr: IO.fileReader(?)) throws
+.. method:: proc ref tensor.read( fr: IO.fileReader(?))  throws
 

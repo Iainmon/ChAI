@@ -1,0 +1,19 @@
+AST dump for ChapelPrivatization after pass expandExternArrayCalls.
+Module use list: 
+
+{
+  (147218 'use' CTypes)
+  type chpl_privateObject_t[147229] unknown obj[147222](147224 call c_ptr void[4])
+  { scopeless
+    unknown chpl_privateObjects[147232] "extern" "codegen for CPU and GPU"(147234 call c_ptr chpl_privateObject_t)
+    (147237 'end of statement')
+  }
+  function chpl_getPrivatizedCopy[147238](arg objectType[147240]:_any[141](?), arg objectPid[147243] :
+  int[10]) : _unknown[42] "inline" "fn returns infinite lifetime"
+  {
+    (147248 return(147249 'cast' objectType(147256 call .(147252 call chpl_privateObjects objectPid) c"obj")))
+  }
+  { scopeless type
+    objectType
+  }
+}

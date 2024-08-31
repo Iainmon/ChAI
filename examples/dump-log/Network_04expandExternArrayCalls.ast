@@ -1,0 +1,1718 @@
+AST dump for Network after pass expandExternArrayCalls.
+Module use list: IO JSON ObjectSerialization 
+
+{
+  (387094 'use' ChapelStandard)
+  (358898 'use' Tensor)
+  (358901 'use' Map)
+  (358904 'use' List)
+  (358907 'use' OrderedDict)
+  (358910 'use' Reflection)
+  function helpFindModuleByName[358912](arg arg[358914]:_any[141](?), arg x[358917] :
+  string[244]) : _unknown[42]
+  {
+    { scopeless
+      unknown myFields[358927] "param"(358929 call getNumFields(358931 'typeof' arg[358914]))
+      (358933 'end of statement')
+    }
+    {
+      unknown i[358934] "index var" 0
+      unknown tmp[358986] "maybe param" "temp"
+      (358998 'move' tmp[358986](358996 call chpl_compute_low_param_loop_bound 0(358938 call chpl__nudgeHighBound myFields[358927])))
+      unknown tmp[358987] "maybe param" "temp"
+      (359007 'move' tmp[358987](359005 call chpl_compute_high_param_loop_bound 0(359003 call chpl__nudgeHighBound myFields[358927])))
+      unknown tmp[358988] "maybe param" "temp"
+      (359010 'move' tmp[358988] 1)
+      ParamForLoop[359012]
+      { i[358934] tmp[358986] tmp[358987] tmp[358988]
+        {
+          if(358982 call _cond_test(358953 call &&(358955 call &&(358957 call !(358960 call isType(358962 call getField arg[358914] i[358934])))(358966 call isSubtype(358971 'typeof'(358968 call getField arg[358914] i[358934])) Module[362662](?)))(358974 call ==(358977 call getFieldName(358979 'typeof' arg[358914]) i[358934]) x[358917])))
+          {
+            (358944 return(358952 call(358949 call .(358946 call getField arg[358914] i[358934]) c"borrow")))
+          }
+        }
+      }
+      label _unused_continueLabel[358990]
+      label _breakLabel[358989]
+    }
+    (359022 call halt "Could not find module with name: " x[358917])
+  }
+  { scopeless type
+    (358920 'to borrowed class from unknown'(358923 call Module[362662](?) ?[227]))
+  }
+  function helpFindParamDataByName[359030](arg arg[359032]:_any[141](?), arg x[359035] :
+  string[244]) ref : _unknown[42]
+  {
+    { scopeless
+      unknown myFields[359043] "param"(359045 call getNumFields(359047 'typeof' arg[359032]))
+      (359049 'end of statement')
+    }
+    {
+      unknown i[359050] "index var" 0
+      unknown tmp[359103] "maybe param" "temp"
+      (359115 'move' tmp[359103](359113 call chpl_compute_low_param_loop_bound 0(359054 call chpl__nudgeHighBound myFields[359043])))
+      unknown tmp[359104] "maybe param" "temp"
+      (359124 'move' tmp[359104](359122 call chpl_compute_high_param_loop_bound 0(359120 call chpl__nudgeHighBound myFields[359043])))
+      unknown tmp[359105] "maybe param" "temp"
+      (359127 'move' tmp[359105] 1)
+      ParamForLoop[359129]
+      { i[359050] tmp[359103] tmp[359104] tmp[359105]
+        {
+          if(359099 call _cond_test(359069 call &&(359071 call &&(359073 call !(359076 call isType(359078 call getField arg[359032] i[359050])))(359082 call isSubtype(359087 'typeof'(359084 call getField arg[359032] i[359050]))(359089 call Tensor ?[227])))(359091 call ==(359094 call getFieldName(359096 'typeof' arg[359032]) i[359050]) x[359035])))
+          {
+            (359060 return(359068 call(359065 call .(359062 call getField arg[359032] i[359050]) c"borrow")))
+          }
+        }
+      }
+      label _unused_continueLabel[359107]
+      label _breakLabel[359106]
+    }
+    (359138 return(359139 'new'(359141 call Tensor[345586](?) ?[227])))
+  }
+  { scopeless type
+    (359039 call Tensor ?[227])
+  }
+  type moduleChildren[359488](?) unknown eltType[359148] "type variable" real[13] unknown childDict[359152](359154 call map[352283](?) string[244](359156 'to borrowed class from unknown'(359159 call Module[362662](?) eltType[359148]))) unknown order[359164](359166 call list[231871](?) string[244]) function moduleChildren[359488](?).init[359170](arg _mt[359178]:_MT[201], arg this[359172]:moduleChildren[359488](?), arg eltType[359175]:_any[141](?) =
+  real[13]) : _unknown[42] "method" "primary method"
+  {
+    (359181 call =(359184 call . this[359172] c"eltType") eltType[359175])
+    (359188 call =(359193 call . this[359172] c"childDict")(359196 'new'(359198 call map[352283](?) string[244](359200 'to borrowed class from unknown'(359203 call Module[362662](?) eltType[359175]))(initialCapacity = 1))))
+    (359207 call =(359210 call . this[359172] c"order")(359213 'new'(359215 call list[231871](?) string[244])))
+  } function moduleChildren[359488](?).these[359219](arg _mt[359223]:_MT[201], ref arg this[359221]:moduleChildren[359488](?)) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[359261] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[359262] "expr temp" "temp"
+      (359271 'move' _iterator[359262](359269 call _getIterator(359283 call chpl_direct_range_iter 0(359275 call chpl__nudgeHighBound(359277 call .(359279 call . this[359221] c"order") c"size")))))
+      Defer
+      {
+        {
+          (359298 call _freeIterator _iterator[359262])
+        }
+      }
+      { scopeless type
+        (359288 'move' _indexOfInterest[359261](359285 call iteratorIndex _iterator[359262]))
+      }
+      ForLoop[359263]
+      {
+        unknown k[359234] "index var" "insert auto destroy"
+        (359293 'move' k[359234] _indexOfInterest[359261])
+        { scopeless
+          (359248 yield(359253 call(359249 call . this[359221] c"childDict")(359258 call(359254 call . this[359221] c"order") k[359234])))
+        }
+        label _continueLabel[359266]
+        _indexOfInterest[359261]
+        _iterator[359262]
+      }
+      label _breakLabel[359267]
+    }
+  }
+  { scopeless type
+    (359225 'to borrowed class from unknown'(359228 call Module[362662](?)(359229 call . this[359221] c"eltType")))
+  } function moduleChildren[359488](?).items[359308](arg _mt[359312]:_MT[201], ref arg this[359310]:moduleChildren[359488](?)) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[359363] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[359364] "expr temp" "temp"
+      (359373 'move' _iterator[359364](359371 call _getIterator(359385 call chpl_direct_range_iter 0(359377 call chpl__nudgeHighBound(359379 call .(359381 call . this[359310] c"order") c"size")))))
+      Defer
+      {
+        {
+          (359400 call _freeIterator _iterator[359364])
+        }
+      }
+      { scopeless type
+        (359390 'move' _indexOfInterest[359363](359387 call iteratorIndex _iterator[359364]))
+      }
+      ForLoop[359365]
+      {
+        unknown n[359327] "index var" "insert auto destroy"
+        (359395 'move' n[359327] _indexOfInterest[359363])
+        { scopeless
+          (359341 yield(359360 call _build_tuple(359347 call(359343 call . this[359310] c"order") n[359327])(359353 call(359349 call . this[359310] c"childDict")(359358 call(359354 call . this[359310] c"order") n[359327]))))
+        }
+        label _continueLabel[359368]
+        _indexOfInterest[359363]
+        _iterator[359364]
+      }
+      label _breakLabel[359369]
+    }
+  }
+  { scopeless type
+    (359324 call _build_tuple string[244](359316 'to borrowed class from unknown'(359319 call Module[362662](?)(359320 call . this[359310] c"eltType"))))
+  } function moduleChildren[359488](?).add[359410](arg _mt[359429]:_MT[201], ref arg this[359412]:moduleChildren[359488](?), arg name[359415] :
+  string[244], arg m[359426] :
+  (359418 'to borrowed class from unknown'(359421 call Module[362662](?)(359422 call . this[359412] c"eltType")))) : _unknown[42] "method" "primary method"
+  {
+    (359439 call(359436 call .(359432 call . this[359412] c"order") c"pushBack") name[359415])
+    (359448 call(359445 call .(359441 call . this[359412] c"childDict") c"addOrReplace") name[359415] m[359426])
+  } function moduleChildren[359488](?).ith[359453](arg _mt[359461]:_MT[201], ref arg this[359455]:moduleChildren[359488](?), arg i[359458] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    (359472 return(359477 call(359473 call . this[359455] c"childDict")(359482 call(359478 call . this[359455] c"order") i[359458])))
+  }
+  { scopeless type
+    (359463 'to borrowed class from unknown'(359466 call Module[362662](?)(359467 call . this[359455] c"eltType")))
+  }
+  function _unknown[42].this[359490](arg _mt[359500]:_MT[201], arg this[359493] :
+  class[195](?), arg fieldName[359497] :
+  string[244]) : _unknown[42] "method"
+  {
+    (359516 return(359517 call postfix!(359520 call helpFindModuleByName this[359493] fieldName[359497])))
+  }
+  where {
+    (359508 call isSubtype(359510 'typeof' this[359493])(359513 call Module[362662](?) ?[227]))
+  }
+  { scopeless type
+    (359502 'to borrowed class from unknown'(359505 call Module[362662](?) ?[227]))
+  }
+  function _unknown[42].this[359527](arg _mt[359537]:_MT[201], arg this[359530] :
+  class[195](?), arg fieldName[359534] :
+  string[244]) ref : _unknown[42] "method"
+  {
+    (359551 return(359553 call helpFindParamDataByName this[359530] fieldName[359534]))
+  }
+  where {
+    (359543 call isSubtype(359545 'typeof' this[359530])(359548 call Parameter[363555](?) ?[227]))
+  }
+  { scopeless type
+    (359540 call Tensor ?[227])
+  }
+  function _unknown[42].moduleFieldNames[359560](arg _mt[359566]:_MT[201], arg this[359563] :
+  class[195](?)) : _unknown[42] "iterator fn" "method"
+  {
+    { scopeless
+      unknown myFields[359579] "param"(359581 call getNumFields(359583 'typeof' this[359563]))
+      (359585 'end of statement')
+    }
+    {
+      unknown i[359586] "index var" 0
+      unknown tmp[359632] "maybe param" "temp"
+      (359644 'move' tmp[359632](359642 call chpl_compute_low_param_loop_bound 0(359590 call chpl__nudgeHighBound myFields[359579])))
+      unknown tmp[359633] "maybe param" "temp"
+      (359653 'move' tmp[359633](359651 call chpl_compute_high_param_loop_bound 0(359649 call chpl__nudgeHighBound myFields[359579])))
+      unknown tmp[359634] "maybe param" "temp"
+      (359656 'move' tmp[359634] 1)
+      ParamForLoop[359658]
+      { i[359586] tmp[359632] tmp[359633] tmp[359634]
+        {
+          { scopeless
+            unknown fieldName[359596] "param"(359598 call getFieldName(359600 'typeof' this[359563]) i[359586])
+            (359603 'end of statement')
+          }
+          if(359628 call _cond_test(359607 call &&(359609 call !(359612 call isType(359614 call getField this[359563] i[359586])))(359618 call isSubtype(359623 'typeof'(359620 call getField this[359563] i[359586]))(359626 call Module[362662](?) ?[227]))))
+          {
+            (359605 yield fieldName[359596])
+          }
+        }
+      }
+      label _unused_continueLabel[359636]
+      label _breakLabel[359635]
+    }
+  }
+  where {
+    (359570 call isSubtype(359572 'typeof' this[359563])(359575 call Module[362662](?) ?[227]))
+  }
+  { scopeless type
+    string[244]
+  }
+  function _unknown[42].moduleFields[359671](arg _mt[359677]:_MT[201], arg this[359674] :
+  class[195](?)) : _unknown[42] "iterator fn" "method"
+  {
+    {
+      unknown _indexOfInterest[359715] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[359716] "expr temp" "temp"
+      (359725 'move' _iterator[359716](359723 call _getIterator(359705 call(359702 call . this[359674] c"moduleFieldNames"))))
+      Defer
+      {
+        {
+          (359740 call _freeIterator _iterator[359716])
+        }
+      }
+      { scopeless type
+        (359730 'move' _indexOfInterest[359715](359727 call iteratorIndex _iterator[359716]))
+      }
+      ForLoop[359717]
+      {
+        unknown mn[359697] "index var" "insert auto destroy"
+        (359735 'move' mn[359697] _indexOfInterest[359715])
+        {
+          (359707 yield(359713 call _build_tuple mn[359697](359711 call this[359674] mn[359697])))
+        }
+        label _continueLabel[359720]
+        _indexOfInterest[359715]
+        _iterator[359716]
+      }
+      label _breakLabel[359721]
+    }
+  }
+  where {
+    (359689 call isSubtype(359691 'typeof' this[359674])(359694 call Module[362662](?) ?[227]))
+  }
+  { scopeless type
+    (359686 call _build_tuple string[244](359681 'to borrowed class from unknown'(359684 call Module[362662](?) ?[227])))
+  }
+  function _unknown[42].registerModules[359751](arg _mt[359757]:_MT[201], arg this[359754] :
+  class[195](?)) : _unknown[42] "method"
+  {
+    {
+      unknown _indexOfInterest[359787] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[359788] "expr temp" "temp"
+      (359797 'move' _iterator[359788](359795 call _getIterator(359781 call(359778 call . this[359754] c"moduleFields"))))
+      Defer
+      {
+        {
+          (359825 call _freeIterator _iterator[359788])
+        }
+      }
+      { scopeless type
+        (359802 'move' _indexOfInterest[359787](359799 call iteratorIndex _iterator[359788]))
+      }
+      ForLoop[359789]
+      {
+        (359807 call _check_tuple_var_decl _indexOfInterest[359787] 2)
+        unknown n[359769] "index var" "insert auto destroy"
+        (359814 'move' n[359769](359811 call _indexOfInterest[359787] 0))
+        unknown m[359771] "index var" "insert auto destroy"
+        (359820 'move' m[359771](359817 call _indexOfInterest[359787] 1))
+        {
+          (359784 call addModule n[359769] m[359771])
+        }
+        label _continueLabel[359792]
+        _indexOfInterest[359787]
+        _iterator[359788]
+      }
+      label _breakLabel[359793]
+    }
+  }
+  where {
+    (359760 call isSubtype(359762 'typeof' this[359754])(359765 call Module[362662](?) ?[227]))
+  }
+  function _unknown[42].postinit[359835](arg _mt[359841]:_MT[201], arg this[359838] :
+  class[195](?)) : _unknown[42] "method"
+  {
+    {
+      unknown _indexOfInterest[359869] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[359870] "expr temp" "temp"
+      (359879 'move' _iterator[359870](359877 call _getIterator(359863 call(359860 call . this[359838] c"moduleFields"))))
+      Defer
+      {
+        {
+          (359907 call _freeIterator _iterator[359870])
+        }
+      }
+      { scopeless type
+        (359884 'move' _indexOfInterest[359869](359881 call iteratorIndex _iterator[359870]))
+      }
+      ForLoop[359871]
+      {
+        (359889 call _check_tuple_var_decl _indexOfInterest[359869] 2)
+        unknown n[359853] "index var" "insert auto destroy"
+        (359896 'move' n[359853](359893 call _indexOfInterest[359869] 0))
+        unknown m[359855] "index var" "insert auto destroy"
+        (359902 'move' m[359855](359899 call _indexOfInterest[359869] 1))
+        {
+          (359866 call addModule n[359853] m[359855])
+        }
+        label _continueLabel[359874]
+        _indexOfInterest[359869]
+        _iterator[359870]
+      }
+      label _breakLabel[359875]
+    }
+  }
+  where {
+    (359844 call isSubtype(359846 'typeof' this[359838])(359849 call Module[362662](?) ?[227]))
+  }
+  type moduleAttributes[360775] unknown layerType[359921] string[244] unknown moduleName[359926] string[244] unknown attributes[359931](359933 call dict[353403](?) string[244] string[244]) function moduleAttributes[360775].chpl_forwarding_expr1[359939](arg _mt[359944]:_MT[201], arg this[359942]:moduleAttributes[360775]) : _unknown[42] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    (359954 return(359950 call . this[359942] c"attributes"))
+  } function moduleAttributes[360775].init[359957](arg _mt[359977]:_MT[201], arg this[359959]:moduleAttributes[360775], arg layerType[359962] :
+  string[244], arg moduleName[359966] :
+  string[244], in arg attrs[359974] :
+  (359970 call map[352283](?) string[244] string[244] ?[227])) : _unknown[42] "method" "primary method"
+  {
+    (359980 call =(359985 call . this[359959] c"layerType") layerType[359962])
+    (359989 call =(359992 call . this[359959] c"moduleName") moduleName[359966])
+    (359996 call =(359999 call . this[359959] c"attributes")(360002 'new'(360004 call dict[353403](?) attrs[359974])))
+  } function moduleAttributes[360775].init[360008](arg _mt[360027]:_MT[201], arg this[360010]:moduleAttributes[360775], arg layerType[360013] :
+  string[244], arg moduleName[360017] :
+  string[244], in arg attrs[360024] :
+  (360021 call dict[353403](?) string[244] ?[227])) : _unknown[42] "method" "primary method"
+  {
+    (360030 call =(360033 call . this[360010] c"layerType") layerType[360013])
+    (360037 call =(360040 call . this[360010] c"moduleName") moduleName[360017])
+    (360044 call =(360047 call . this[360010] c"attributes")(360050 'new'(360052 call dict[353403](?) string[244] string[244])))
+    (360059 call(360056 call . this[360010] c"chpl__initThisType"))
+    {
+      unknown _indexOfInterest[360089] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[360090] "expr temp" "temp"
+      (360099 'move' _iterator[360090](360097 call _getIterator attrs[360024]))
+      Defer
+      {
+        {
+          (360127 call _freeIterator _iterator[360090])
+        }
+      }
+      { scopeless type
+        (360104 'move' _indexOfInterest[360089](360101 call iteratorIndex _iterator[360090]))
+      }
+      ForLoop[360091]
+      {
+        (360109 call _check_tuple_var_decl _indexOfInterest[360089] 2)
+        unknown k[360061] "index var" "insert auto destroy"
+        (360116 'move' k[360061](360113 call _indexOfInterest[360089] 0))
+        unknown v[360063] "index var" "insert auto destroy"
+        (360122 'move' v[360063](360119 call _indexOfInterest[360089] 1))
+        { scopeless
+          (360077 call(360074 call .(360068 call . this[360010] c"attributes") c"insert") k[360061](360079 call +(360081 call : v[360063] string[244]) "\n\t"))
+        }
+        label _continueLabel[360094]
+        _indexOfInterest[360089]
+        _iterator[360090]
+      }
+      label _breakLabel[360095]
+    }
+  } function moduleAttributes[360775].init[360136](arg _mt[360157]:_MT[201], arg this[360138]:moduleAttributes[360775], arg layerType[360141] :
+  string[244], arg moduleName[360145] :
+  string[244], in arg attrs[360154] :
+  (360149 call map[352283](?) string[244] unknown valType[360151] ?[227])) : _unknown[42] "method" "primary method"
+  {
+    (360164 call =(360167 call . this[360138] c"layerType") layerType[360141])
+    (360171 call =(360174 call . this[360138] c"moduleName") moduleName[360145])
+    (360178 call =(360181 call . this[360138] c"attributes")(360184 'new'(360186 call dict[353403](?) string[244] string[244])))
+    (360193 call(360190 call . this[360138] c"chpl__initThisType"))
+    {
+      unknown _indexOfInterest[360220] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[360221] "expr temp" "temp"
+      (360230 'move' _iterator[360221](360228 call _getIterator(360200 call(360197 call . attrs[360154] c"keys"))))
+      Defer
+      {
+        {
+          (360245 call _freeIterator _iterator[360221])
+        }
+      }
+      { scopeless type
+        (360235 'move' _indexOfInterest[360220](360232 call iteratorIndex _iterator[360221]))
+      }
+      ForLoop[360222]
+      {
+        unknown k[360194] "index var" "insert auto destroy"
+        (360240 'move' k[360194] _indexOfInterest[360220])
+        { scopeless
+          (360208 call(360205 call .(360201 call . this[360138] c"attributes") c"insert") k[360194](360210 call +(360212 call :(360215 call attrs[360154] k[360194]) string[244]) "\n\t"))
+        }
+        label _continueLabel[360225]
+        _indexOfInterest[360220]
+        _iterator[360221]
+      }
+      label _breakLabel[360226]
+    }
+  }
+  where {
+    (360159 call != valType[360151] string[244])
+  } function moduleAttributes[360775].init[360255](arg _mt[360282]:_MT[201], arg this[360257]:moduleAttributes[360775], arg layerType[360260] :
+  string[244], arg moduleName[360264] :
+  string[244], in arg attrs[360273] :
+  (360268 call map[352283](?) string[244] unknown valType[360270] ?[227]), arg order[360279] :
+  (360277 call list[231871](?) string[244])) : _unknown[42] "method" "primary method"
+  {
+    (360285 call =(360288 call . this[360257] c"layerType") layerType[360260])
+    (360292 call =(360295 call . this[360257] c"moduleName") moduleName[360264])
+    (360299 call =(360302 call . this[360257] c"attributes")(360305 'new'(360307 call dict[353403](?) string[244] string[244])))
+    (360314 call(360311 call . this[360257] c"chpl__initThisType"))
+    {
+      unknown _indexOfInterest[360352] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[360353] "expr temp" "temp"
+      (360362 'move' _iterator[360353](360360 call _getIterator(360371 call chpl_direct_range_iter 0(360366 call chpl__nudgeHighBound(360368 call . order[360279] c"size")))))
+      Defer
+      {
+        {
+          (360386 call _freeIterator _iterator[360353])
+        }
+      }
+      { scopeless type
+        (360376 'move' _indexOfInterest[360352](360373 call iteratorIndex _iterator[360353]))
+      }
+      ForLoop[360354]
+      {
+        unknown i[360315] "index var" "insert auto destroy"
+        (360381 'move' i[360315] _indexOfInterest[360352])
+        {
+          { scopeless
+            const k[360328] "const"(360330 call order[360279] i[360315])
+            (360333 'end of statement')
+          }
+          (360341 call(360338 call .(360334 call . this[360257] c"attributes") c"insert") k[360328](360343 call +(360345 call :(360348 call attrs[360273] k[360328]) string[244]) "\n\t"))
+        }
+        label _continueLabel[360357]
+        _indexOfInterest[360352]
+        _iterator[360353]
+      }
+      label _breakLabel[360358]
+    }
+  } function moduleAttributes[360775].init[360395](arg _mt[360412]:_MT[201], arg this[360397]:moduleAttributes[360775], arg layerType[360400] :
+  string[244], arg moduleName[360404] :
+  string[244], arg attrs[360409]:_any[141](?) ...) : _unknown[42] "last resort" "method" "primary method"
+  {
+    (360424 call =(360427 call . this[360397] c"layerType") layerType[360400])
+    (360431 call =(360434 call . this[360397] c"moduleName") moduleName[360404])
+    (360438 call =(360441 call . this[360397] c"attributes")(360444 'new'(360446 call dict[353403](?) string[244] string[244])))
+    (360453 call(360450 call . this[360397] c"chpl__initThisType"))
+    {
+      unknown i[360454] "index var" 0
+      unknown tmp[360484] "maybe param" "temp"
+      (360496 'move' tmp[360484](360494 call chpl_compute_low_param_loop_bound 0(360458 call chpl__nudgeHighBound n[360407])))
+      unknown tmp[360485] "maybe param" "temp"
+      (360505 'move' tmp[360485](360503 call chpl_compute_high_param_loop_bound 0(360501 call chpl__nudgeHighBound n[360407])))
+      unknown tmp[360486] "maybe param" "temp"
+      (360508 'move' tmp[360486] 1)
+      ParamForLoop[360510]
+      { i[360454] tmp[360484] tmp[360485] tmp[360486]
+        {
+          (360470 call(360467 call .(360463 call . this[360397] c"attributes") c"insert")(360474 call(360472 call attrs[360409] i[360454]) 0)(360476 call :(360481 call(360479 call attrs[360409] i[360454]) 1) string[244]))
+        }
+      }
+      label _unused_continueLabel[360488]
+      label _breakLabel[360487]
+    }
+  }
+  where {
+    (360414 call ==(360421 'typeof'(360419 call(360417 call attrs[360409] 0) 0)) string[244])
+  } function moduleAttributes[360775].init[360522](arg _mt[360534]:_MT[201], arg this[360524]:moduleAttributes[360775], arg layerType[360527] :
+  string[244], arg moduleName[360531] :
+  string[244]) : _unknown[42] "method" "primary method"
+  {
+    (360537 call =(360540 call . this[360524] c"layerType") layerType[360527])
+    (360544 call =(360547 call . this[360524] c"moduleName") moduleName[360531])
+    (360551 call =(360554 call . this[360524] c"attributes")(360557 'new'(360559 call dict[353403](?) string[244] string[244])))
+  } function moduleAttributes[360775].getInt[360564](arg _mt[360572]:_MT[201], arg this[360566]:moduleAttributes[360775], arg name[360569] :
+  string[244]) : _unknown[42] "method" "primary method"
+  {
+    (360576 return(360577 call :(360583 call(360579 call . this[360566] c"attributes") name[360569]) int[10]))
+  }
+  { scopeless type
+    int[10]
+  } function moduleAttributes[360775].prettyPrint[360589](arg _mt[360593]:_MT[201], arg this[360591]:moduleAttributes[360775]) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown s[360598](360600 call +(360602 call . this[360591] c"layerType") "(") string[244]
+      (360608 'end of statement')
+    }
+    { scopeless
+      const size[360610] "const"(360615 call .(360611 call . this[360591] c"attributes") c"size")
+      (360619 'end of statement')
+    }
+    { scopeless
+      unknown idx[360621] 0
+      (360624 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[360668] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[360669] "expr temp" "temp"
+      (360678 'move' _iterator[360669](360676 call _getIterator(360632 call . this[360591] c"attributes")))
+      Defer
+      {
+        {
+          (360706 call _freeIterator _iterator[360669])
+        }
+      }
+      { scopeless type
+        (360683 'move' _indexOfInterest[360668](360680 call iteratorIndex _iterator[360669]))
+      }
+      ForLoop[360670]
+      {
+        (360688 call _check_tuple_var_decl _indexOfInterest[360668] 2)
+        unknown k[360626] "index var" "insert auto destroy"
+        (360695 'move' k[360626](360692 call _indexOfInterest[360668] 0))
+        unknown v[360628] "index var" "insert auto destroy"
+        (360701 'move' v[360628](360698 call _indexOfInterest[360668] 1))
+        {
+          (360637 call += s[360598](360640 call +(360642 call + k[360626] " = ") v[360628]))
+          if(360659 call _cond_test(360652 call < idx[360621](360655 call - size[360610] 1)))
+          {
+            { scopeless
+              (360647 call += s[360598] ", ")
+            }
+          }
+          (360664 call += idx[360621] 1)
+        }
+        label _continueLabel[360673]
+        _indexOfInterest[360668]
+        _iterator[360669]
+      }
+      label _breakLabel[360674]
+    }
+    (360713 call += s[360598] ")")
+    (360717 return s[360598])
+  }
+  { scopeless type
+    string[244]
+  } function moduleAttributes[360775].prettyPrintSpec[360722](arg _mt[360726]:_MT[201], arg this[360724]:moduleAttributes[360775]) : _unknown[42] "method" "primary method"
+  {
+    (360730 return(360731 call +(360733 call +(360735 call . this[360724] c"moduleName") " : ")(360746 call(360742 call . this[360724] c"prettyPrint"))))
+  }
+  { scopeless type
+    string[244]
+  } function moduleAttributes[360775].:[360750](arg _mt[360763]:_MT[201], arg this[360752]:moduleAttributes[360775], arg ma[360756] :
+  moduleAttributes[360775], arg T[360760] :
+  string[244]) : _unknown[42] "method" "primary method" "operator"
+  {
+    (360766 return(360771 call(360768 call . ma[360756] c"prettyPrint")))
+  } serializable[310094] forwarding ( )
+  type ModuleSpecification[360813] unknown layerType[360781] string[244] unknown attributes[360786](360788 call map[352283](?) string[244] string[244]) unknown subModules[360794](360796 call map[352283](?) string[244](360799 call _owned(360802 'to nilable class from type' ModuleSpecification[360816](?)))) unknown subModuleOrder[360806](360808 call list[231871](?) string[244]) serializable[310094]
+  type ModuleSpecification[360816](?)
+  function moduleFromSpec[360817](arg ms_[360822] :
+  (360819 'to borrowed class from unknown'(360821 'to nilable class from type' ModuleSpecification[360816](?))), arg dtype[360828]:_any[141](?) =
+  (360826 call real[13] 32)) : _unknown[42]
+  {
+    { scopeless
+      unknown ms[360839](360840 call postfix! ms_[360822])
+      (360844 'end of statement')
+    }
+    {
+      unknown tmp[361150] "expr temp" "maybe param" "maybe type" "temp"
+      (361152 'move' tmp[361150](360846 call . ms[360839] c"layerType"))
+      if(361157 call _cond_test(361154 call == tmp[361150] "Conv2d"))
+      {
+        (360856 return(360857 'new'(360860 call Conv2D[364808](?) dtype[360828](360862 'new'(360864 call moduleAttributes[360775](360866 call . ms[360839] c"layerType") "unknown"(360871 call . ms[360839] c"attributes"))))))
+      }
+      {
+        if(361163 call _cond_test(361160 call == tmp[361150] "Linear"))
+        {
+          { scopeless
+            unknown ma[360882](360883 'new'(360885 call moduleAttributes[360775] "Linear" "unknown"(360889 call . ms[360839] c"attributes")))
+            (360893 'end of statement')
+          }
+          (360894 return(360895 'new'(360898 call Linear[365043](?) dtype[360828](360906 call(360903 call . ma[360882] c"getInt") "in_features")(360914 call(360911 call . ma[360882] c"getInt") "out_features"))))
+        }
+        {
+          if(361170 call _cond_test(361167 call == tmp[361150] "Dropout"))
+          {
+            { scopeless
+              unknown ma[360926](360927 'new'(360929 call moduleAttributes[360775] "Dropout" "unknown"(360933 call . ms[360839] c"attributes")))
+              (360937 'end of statement')
+            }
+            (360938 return(360939 'new'(360942 call Dropout[365329](?) dtype[360828](360944 call :(360947 call ma[360926] "p") dtype[360828]))))
+          }
+          {
+            if(361177 call _cond_test(361174 call == tmp[361150] "Flatten"))
+            {
+              (360959 return(360960 'new'(360963 call Flatten[365034](?) dtype[360828])))
+            }
+            {
+              if(361184 call _cond_test(361181 call == tmp[361150] "ReLU"))
+              {
+                (360972 return(360973 'new'(360976 call ReLU[365056](?) dtype[360828])))
+              }
+              {
+                if(361191 call _cond_test(361188 call == tmp[361150] "MaxPool2d"))
+                {
+                  { scopeless
+                    unknown ma[360986](360987 'new'(360989 call moduleAttributes[360775] "MaxPool" "unknown"(360995 call . ms[360839] c"attributes")))
+                    (360999 'end of statement')
+                  }
+                  (361000 return(361001 'new'(361004 call MaxPool[364824](?) dtype[360828](361010 call(361007 call . ma[360986] c"getInt") "kernel_size"))))
+                }
+                {
+                  if(361198 call _cond_test(361195 call == tmp[361150] "LogSoftmax"))
+                  {
+                    (361021 return(361022 'new'(361025 call Softmax[365065](?) dtype[360828])))
+                  }
+                  {
+                    { scopeless
+                      unknown sms[361032](361042 'new'(361044 call dict[353403](?) string[244](361047 call _shared(361050 call Module[362662](?) dtype[360828]))))(361034 call dict[353403](?) string[244](361037 call _shared(361040 call Module[362662](?) dtype[360828])))
+                      (361053 'end of statement')
+                    }
+                    {
+                      unknown _indexOfInterest[361102] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                      unknown _iterator[361103] "expr temp" "temp"
+                      (361112 'move' _iterator[361103](361110 call _getIterator(361059 call . ms[360839] c"subModuleOrder")))
+                      Defer
+                      {
+                        {
+                          (361127 call _freeIterator _iterator[361103])
+                        }
+                      }
+                      { scopeless type
+                        (361117 'move' _indexOfInterest[361102](361114 call iteratorIndex _iterator[361103]))
+                      }
+                      ForLoop[361104]
+                      {
+                        unknown k[361054] "index var" "insert auto destroy"
+                        (361122 'move' k[361054] _indexOfInterest[361102])
+                        {
+                          { scopeless
+                            const sma[361064] "const"(361071 call(361068 call . ms[360839] c"subModules") k[361054])
+                            (361074 'end of statement')
+                          }
+                          { scopeless
+                            const sm[361076] "const"(361087 call(361084 call . _shared c"adopt")(361089 call moduleFromSpec sma[361064](dtype = dtype[360828])))(361078 call _shared(361081 call Module[362662](?) dtype[360828]))
+                            (361094 'end of statement')
+                          }
+                          (361099 call(361096 call . sms[361032] c"insert") k[361054] sm[361076])
+                        }
+                        label _continueLabel[361107]
+                        _indexOfInterest[361102]
+                        _iterator[361103]
+                      }
+                      label _breakLabel[361108]
+                    }
+                    (361134 return(361135 'new'(361138 call Sequential[365331](?) dtype[360828] sms[361032](overrideName = 1)(moduleName =(361144 call . ms[360839] c"layerType")))))
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    (361203 call halt "This should not happen")
+  }
+  { scopeless type
+    (360832 call _owned(360835 call Module[362662](?) dtype[360828]))
+  }
+  function modelFromSpecFile[361210](arg path[361213] :
+  string[244], arg dtype[361219]:_any[141](?) =
+  (361217 call real[13] 32)) : _unknown[42]
+  {
+    (361231 'import' IO)
+    (361234 'import' JSON)
+    { scopeless
+      unknown fl[361236](361240 call open module=[222] IO[208303] path[361213](361247 call . ioMode[164108] c"r"))
+      (361251 'end of statement')
+    }
+    { scopeless
+      unknown reader[361253](361258 call(361255 call . fl[361236] c"reader")(deserializer =(361259 'new'(361263 call jsonDeserializer[356412]))))
+      (361266 'end of statement')
+    }
+    { scopeless
+      unknown ms[361268](361273 call(361270 call . reader[361253] c"read")(361275 call _owned ModuleSpecification[360816](?)))
+      (361278 'end of statement')
+    }
+    (361283 call(361280 call . fl[361236] c"close"))
+    (361284 return(361286 call moduleFromSpec ms[361268] dtype[361219]))
+    (361290 'referenced modules list' IO[208303] IO[208303] JSON[356500])
+  }
+  { scopeless type
+    (361223 call _owned(361226 call Module[362662](?) dtype[361219]))
+  }
+  function loadModel[361296](arg specFile[361299] :
+  string[244], arg weightsFolder[361303] :
+  string[244], arg dtype[361309]:_any[141](?) =
+  (361307 call real[13] 32)) : _unknown[42]
+  {
+    { scopeless
+      unknown model[361320](361328 call modelFromSpecFile specFile[361299] dtype[361309])(361322 call _owned(361325 call Module[362662](?) f32[316312]))
+      (361332 'end of statement')
+    }
+    (361339 call(361336 call . model[361320] c"loadPyTorchDump") weightsFolder[361303])
+    (361341 return model[361320])
+  }
+  { scopeless type
+    (361313 call _owned(361316 call Module[362662](?) dtype[361309]))
+  }
+  { scopeless
+    unknown moduleInstances[361347] 0
+    (361350 'end of statement')
+  }
+  type Module[362659](?) unknown eltType[361353] "type variable" unknown subModules[361356](361358 call moduleChildren[359488](?) eltType[361353]) unknown moduleId[361363] int[10] unknown moduleName[361368] string[244] unknown ownedModules[361373](361375 call list[231871](?)(361377 call _shared(361380 call Module[362662](?) eltType[361353]))) function Module[362659](?).init[361384](arg _mt[361392]:_MT[201], arg this[361386]:Module[362659](?), arg eltType[361389]:_any[141](?) =
+  real[13]) : _unknown[42] "method" "primary method"
+  {
+    (361395 call =(361398 call . this[361386] c"eltType") eltType[361389])
+    (361402 call =(361405 call . this[361386] c"subModules")(361408 'new'(361410 call moduleChildren[359488](?) eltType[361389])))
+    (361412 call =(361417 call . this[361386] c"moduleId") moduleInstances[361347])
+    (361421 call =(361424 call . this[361386] c"moduleName")(361427 call +(361429 call + "module["(361434 call : moduleInstances[361347] string[244])) "]"))
+    (361439 call =(361444 call . this[361386] c"ownedModules")(361447 'new'(361449 call list[231871](?)(361451 call _shared(361454 call Module[362662](?) eltType[361389])))))
+    (361456 call += moduleInstances[361347] 1)
+  } function Module[362659](?).init[361462](arg _mt[361474]:_MT[201], arg this[361464]:Module[362659](?), arg eltType[361467]:_any[141](?) =
+  real[13], arg ma[361471] :
+  moduleAttributes[360775]) : _unknown[42] "method" "primary method"
+  {
+    (361481 call(361478 call . this[361464] c"init") eltType[361467])
+  } function Module[362659](?).setup[361485](arg _mt[361489]:_MT[201], arg this[361487]:Module[362659](?)) : _unknown[42] "method" "primary method"
+  {
+  } function Module[362659](?).this[361494](arg _mt[361507]:_MT[201], arg this[361496]:Module[362659](?), arg input[361504] :
+  (361499 call Tensor(361500 call . this[361496] c"eltType"))) : _unknown[42] "method" "primary method"
+  {
+    (361516 return(361521 call(361518 call . this[361496] c"forward") input[361504]))
+  }
+  { scopeless type
+    (361510 call Tensor(361511 call . this[361496] c"eltType"))
+  } function Module[362659](?).getSubModuleName[361526](arg _mt[361534]:_MT[201], arg this[361528]:Module[362659](?), arg name[361531] :
+  string[244]) : _unknown[42] "method" "primary method"
+  {
+    (361538 return(361539 call +(361541 call +(361543 call . this[361528] c"moduleName") ".") name[361531]))
+  }
+  { scopeless type
+    string[244]
+  } function Module[362659](?).addModule[361552](arg _mt[361571]:_MT[201], arg this[361554]:Module[362659](?), arg name[361557] :
+  string[244], arg m[361568] :
+  (361560 'to borrowed class from unknown'(361563 call Module[362662](?)(361564 call . this[361554] c"eltType")))) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      const modName[361575] "const"(361582 call(361578 call . this[361554] c"getSubModuleName") name[361557])
+      (361585 'end of statement')
+    }
+    (361586 call =(361589 call . m[361568] c"moduleName") modName[361575])
+    (361597 call(361594 call . m[361568] c"setup"))
+    (361605 call(361602 call .(361598 call . this[361554] c"subModules") c"add") modName[361575] m[361568])
+  } function Module[362659](?).addModule[361610](arg _mt[361630]:_MT[201], arg this[361612]:Module[362659](?), arg name[361615] :
+  string[244], arg m[361627] :
+  (361619 call _shared(361622 call Module[362662](?)(361623 call . this[361612] c"eltType")))) : _unknown[42] "method" "primary method"
+  {
+    (361640 call(361637 call .(361633 call . this[361612] c"ownedModules") c"pushBack") m[361627])
+    (361643 call addModule name[361615](361649 call(361646 call . m[361627] c"borrow")))
+  } function Module[362659](?).addModule[361652](arg _mt[361672]:_MT[201], arg this[361654]:Module[362659](?), arg name[361657] :
+  string[244], in arg m[361669] :
+  (361661 call _owned(361664 call Module[362662](?)(361665 call . this[361654] c"eltType")))) : _unknown[42] "last resort" "method" "primary method"
+  {
+    { scopeless
+      unknown sm[361676](361690 call(361687 call . _shared c"adopt") m[361669])(361678 call _shared(361681 call Module[362662](?)(361682 call . this[361654] c"eltType")))
+      (361693 'end of statement')
+    }
+    (361695 call addModule name[361657] sm[361676])
+  } function Module[362659](?).addParameter[361700](arg _mt[361717]:_MT[201], arg this[361702]:Module[362659](?), arg name[361705] :
+  string[244], arg data[361714] :
+  (361709 call Tensor(361710 call . this[361702] c"eltType"))) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      const modName[361721] "const"(361726 call(361722 call . this[361702] c"getSubModuleName") name[361705])
+      (361729 'end of statement')
+    }
+    { scopeless
+      unknown p[361731](361732 'new'(_chpl_manager = _owned[238](?))(361737 call Parameter[363555](?) data[361714]))
+      (361740 'end of statement')
+    }
+    (361741 call =(361744 call . p[361731] c"moduleName") modName[361721])
+    (361752 call(361749 call . p[361731] c"setup"))
+    (361760 call(361757 call .(361753 call . this[361702] c"subModules") c"add") modName[361721] p[361731])
+  } function Module[362659](?).forward[361765](arg _mt[361778]:_MT[201], arg this[361767]:Module[362659](?), arg input[361775] :
+  (361770 call Tensor(361771 call . this[361767] c"eltType"))) : _unknown[42] "method" "primary method"
+  {
+    (361788 call halt "Unimplemented.")
+  }
+  { scopeless type
+    (361781 call Tensor(361782 call . this[361767] c"eltType"))
+  } function Module[362659](?).par[361795](arg _mt[361803]:_MT[201], arg this[361797]:Module[362659](?), arg paramName[361800] :
+  string[244]) ref : _unknown[42] "method" "primary method"
+  {
+    (361812 return(361837 call .(361813 call :(361822 call(361819 call .(361815 call . this[361797] c"subModules") c"childDict")(361827 call(361823 call . this[361797] c"getSubModuleName") paramName[361800]))(361829 'to borrowed class from unknown'(361832 call Parameter[363555](?)(361833 call . this[361797] c"eltType")))) c"data"))
+  }
+  { scopeless type
+    (361806 call Tensor(361807 call . this[361797] c"eltType"))
+  } function Module[362659](?).mod[361843](arg _mt[361851]:_MT[201], arg this[361845]:Module[362659](?), arg modName[361848] :
+  string[244]) : _unknown[42] "method" "primary method"
+  {
+    (361862 return(361870 call(361867 call .(361863 call . this[361845] c"subModules") c"childDict")(361875 call(361871 call . this[361845] c"getSubModuleName") modName[361848])))
+  }
+  { scopeless type
+    (361853 'to borrowed class from unknown'(361856 call Module[362662](?)(361857 call . this[361845] c"eltType")))
+  } function Module[362659](?).parameters[361880](arg _mt[361884]:_MT[201], arg this[361882]:Module[362659](?)) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[361931] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[361932] "expr temp" "temp"
+      (361941 'move' _iterator[361932](361939 call _getIterator(361903 call(361899 call . this[361882] c"modules"))))
+      Defer
+      {
+        {
+          (361956 call _freeIterator _iterator[361932])
+        }
+      }
+      { scopeless type
+        (361946 'move' _indexOfInterest[361931](361943 call iteratorIndex _iterator[361932]))
+      }
+      ForLoop[361933]
+      {
+        unknown m[361895] "index var" "insert auto destroy"
+        (361951 'move' m[361895] _indexOfInterest[361931])
+        {
+          if(361926 call _cond_test(361925 'if var' unknown p[361923](361911 call : m[361895](361914 'to borrowed class from unknown'(361922 'to nilable class from type'(361917 call Parameter[363555](?)(361918 call . this[361882] c"eltType")))))))
+          {
+            { scopeless
+              (361905 yield(361906 call postfix! p[361923]))
+            }
+          }
+        }
+        label _continueLabel[361936]
+        _indexOfInterest[361931]
+        _iterator[361932]
+      }
+      label _breakLabel[361937]
+    }
+  }
+  { scopeless type
+    (361886 'to borrowed class from unknown'(361889 call Parameter[363555](?)(361890 call . this[361882] c"eltType")))
+  } function Module[362659](?).moduleNames[361966](arg _mt[361970]:_MT[201], arg this[361968]:Module[362659](?)) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[361987] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[361988] "expr temp" "temp"
+      (361997 'move' _iterator[361988](361995 call _getIterator(361980 call(361976 call . this[361968] c"modules"))))
+      Defer
+      {
+        {
+          (362012 call _freeIterator _iterator[361988])
+        }
+      }
+      { scopeless type
+        (362002 'move' _indexOfInterest[361987](361999 call iteratorIndex _iterator[361988]))
+      }
+      ForLoop[361989]
+      {
+        unknown m[361974] "index var" "insert auto destroy"
+        (362007 'move' m[361974] _indexOfInterest[361987])
+        {
+          (361982 yield(361984 call . m[361974] c"moduleName"))
+        }
+        label _continueLabel[361992]
+        _indexOfInterest[361987]
+        _iterator[361988]
+      }
+      label _breakLabel[361993]
+    }
+  }
+  { scopeless type
+    string[244]
+  } function Module[362659](?).parameterNames[362022](arg _mt[362026]:_MT[201], arg this[362024]:Module[362659](?)) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[362045] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[362046] "expr temp" "temp"
+      (362055 'move' _iterator[362046](362053 call _getIterator(362038 call(362034 call . this[362024] c"parameters"))))
+      Defer
+      {
+        {
+          (362070 call _freeIterator _iterator[362046])
+        }
+      }
+      { scopeless type
+        (362060 'move' _indexOfInterest[362045](362057 call iteratorIndex _iterator[362046]))
+      }
+      ForLoop[362047]
+      {
+        unknown p[362030] "index var" "insert auto destroy"
+        (362065 'move' p[362030] _indexOfInterest[362045])
+        {
+          (362040 yield(362042 call . p[362030] c"moduleName"))
+        }
+        label _continueLabel[362050]
+        _indexOfInterest[362045]
+        _iterator[362046]
+      }
+      label _breakLabel[362051]
+    }
+  }
+  { scopeless type
+    string[244]
+  } function Module[362659](?).modules[362080](arg _mt[362084]:_MT[201], arg this[362082]:Module[362659](?)) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[362146] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[362147] "expr temp" "temp"
+      (362156 'move' _iterator[362147](362154 call _getIterator(362097 call . this[362082] c"subModules")))
+      Defer
+      {
+        {
+          (362171 call _freeIterator _iterator[362147])
+        }
+      }
+      { scopeless type
+        (362161 'move' _indexOfInterest[362146](362158 call iteratorIndex _iterator[362147]))
+      }
+      ForLoop[362148]
+      {
+        unknown m[362095] "index var" "insert auto destroy"
+        (362166 'move' m[362095] _indexOfInterest[362146])
+        {
+          (362102 yield m[362095])
+          {
+            unknown _indexOfInterest[362114] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[362115] "expr temp" "temp"
+            (362124 'move' _iterator[362115](362122 call _getIterator(362110 call(362107 call . m[362095] c"modules"))))
+            Defer
+            {
+              {
+                (362139 call _freeIterator _iterator[362115])
+              }
+            }
+            { scopeless type
+              (362129 'move' _indexOfInterest[362114](362126 call iteratorIndex _iterator[362115]))
+            }
+            ForLoop[362116]
+            {
+              unknown m_[362104] "index var" "insert auto destroy"
+              (362134 'move' m_[362104] _indexOfInterest[362114])
+              {
+                (362112 yield m_[362104])
+              }
+              label _continueLabel[362119]
+              _indexOfInterest[362114]
+              _iterator[362115]
+            }
+            label _breakLabel[362120]
+          }
+        }
+        label _continueLabel[362151]
+        _indexOfInterest[362146]
+        _iterator[362147]
+      }
+      label _breakLabel[362152]
+    }
+  }
+  { scopeless type
+    (362086 'to borrowed class from unknown'(362089 call Module[362662](?)(362090 call . this[362082] c"eltType")))
+  } function Module[362659](?).namedModules[362181](arg _mt[362185]:_MT[201], arg this[362183]:Module[362659](?)) : _unknown[42] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[362288] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[362289] "expr temp" "temp"
+      (362298 'move' _iterator[362289](362296 call _getIterator(362214 call(362211 call .(362207 call . this[362183] c"subModules") c"items"))))
+      Defer
+      {
+        {
+          (362326 call _freeIterator _iterator[362289])
+        }
+      }
+      { scopeless type
+        (362303 'move' _indexOfInterest[362288](362300 call iteratorIndex _iterator[362289]))
+      }
+      ForLoop[362290]
+      {
+        (362308 call _check_tuple_var_decl _indexOfInterest[362288] 2)
+        unknown n[362201] "index var" "insert auto destroy"
+        (362315 'move' n[362201](362312 call _indexOfInterest[362288] 0))
+        unknown m[362203] "index var" "insert auto destroy"
+        (362321 'move' m[362203](362318 call _indexOfInterest[362288] 1))
+        {
+          (362216 yield(362220 call _build_tuple n[362201] m[362203]))
+          {
+            unknown _indexOfInterest[362243] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[362244] "expr temp" "temp"
+            (362253 'move' _iterator[362244](362251 call _getIterator(362235 call(362232 call . m[362203] c"namedModules"))))
+            Defer
+            {
+              {
+                (362281 call _freeIterator _iterator[362244])
+              }
+            }
+            { scopeless type
+              (362258 'move' _indexOfInterest[362243](362255 call iteratorIndex _iterator[362244]))
+            }
+            ForLoop[362245]
+            {
+              (362263 call _check_tuple_var_decl _indexOfInterest[362243] 2)
+              unknown n_[362223] "index var" "insert auto destroy"
+              (362270 'move' n_[362223](362267 call _indexOfInterest[362243] 0))
+              unknown m_[362225] "index var" "insert auto destroy"
+              (362276 'move' m_[362225](362273 call _indexOfInterest[362243] 1))
+              {
+                (362237 yield(362241 call _build_tuple n_[362223] m_[362225]))
+              }
+              label _continueLabel[362248]
+              _indexOfInterest[362243]
+              _iterator[362244]
+            }
+            label _breakLabel[362249]
+          }
+        }
+        label _continueLabel[362293]
+        _indexOfInterest[362288]
+        _iterator[362289]
+      }
+      label _breakLabel[362294]
+    }
+  }
+  { scopeless type
+    (362197 call _build_tuple string[244](362189 'to borrowed class from unknown'(362192 call Module[362662](?)(362193 call . this[362183] c"eltType"))))
+  } function Module[362659](?).loadPyTorchDump[362336](arg _mt[362348]:_MT[201], arg this[362338]:Module[362659](?), arg modelPath[362341] :
+  string[244], param arg debug[362345] =
+  0) : _unknown[42] "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[362479] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[362480] "expr temp" "temp"
+      (362489 'move' _iterator[362480](362487 call _getIterator(362362 call(362358 call . this[362338] c"namedModules"))))
+      Defer
+      {
+        {
+          (362517 call _freeIterator _iterator[362480])
+        }
+      }
+      { scopeless type
+        (362494 'move' _indexOfInterest[362479](362491 call iteratorIndex _iterator[362480]))
+      }
+      ForLoop[362481]
+      {
+        (362499 call _check_tuple_var_decl _indexOfInterest[362479] 2)
+        unknown n[362352] "index var" "insert auto destroy"
+        (362506 'move' n[362352](362503 call _indexOfInterest[362479] 0))
+        unknown m[362354] "index var" "insert auto destroy"
+        (362512 'move' m[362354](362509 call _indexOfInterest[362479] 1))
+        {
+          { scopeless
+            const name[362365] "const"(362367 call . m[362354] c"moduleName")
+            (362371 'end of statement')
+          }
+          if(362387 call _cond_test debug[362345])
+          {
+            { scopeless
+              (362373 call writeln(362383 call _build_tuple n[362352] name[362365](362380 call . m[362354] c"signature")))
+            }
+          }
+          if(362475 call _cond_test(362474 'if var' unknown p[362472](362460 call : m[362354](362463 'to borrowed class from unknown'(362471 'to nilable class from type'(362466 call Parameter[363555](?)(362467 call . this[362338] c"eltType")))))))
+          {
+            { scopeless
+              const paramName[362394] "const"(362396 call name(362407 call chpl_build_low_bounded_range(362397 call +(362403 call .(362399 call . this[362338] c"moduleName") c"size") 1)))
+              (362410 'end of statement')
+            }
+            { scopeless
+              const paramPath[362412] "const"(362413 call +(362415 call + modelPath[362341] paramName[362394]) ".chdata")
+              (362423 'end of statement')
+            }
+            (362425 call writeln "Loading " paramName[362394] " from " paramPath[362412])
+            { scopeless
+              unknown loaded[362433](362434 call :(362442 call(362439 call . Tensor[345586](?) c"load") paramPath[362412])(362444 call . this[362338] c"eltType"))
+              (362449 'end of statement')
+            }
+            (362450 call =(362456 call .(362452 call postfix! p[362472]) c"data") loaded[362433])
+          }
+        }
+        label _continueLabel[362484]
+        _indexOfInterest[362479]
+        _iterator[362480]
+      }
+      label _breakLabel[362485]
+    }
+  } function Module[362659](?).attributes[362526](arg _mt[362530]:_MT[201], arg this[362528]:Module[362659](?)) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      unknown ms[362535](362536 'new'(362538 call map[352283](?) string[244] moduleAttributes[360775]))
+      (362542 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[362570] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[362571] "expr temp" "temp"
+      (362580 'move' _iterator[362571](362578 call _getIterator(362557 call(362554 call .(362550 call . this[362528] c"subModules") c"items"))))
+      Defer
+      {
+        {
+          (362608 call _freeIterator _iterator[362571])
+        }
+      }
+      { scopeless type
+        (362585 'move' _indexOfInterest[362570](362582 call iteratorIndex _iterator[362571]))
+      }
+      ForLoop[362572]
+      {
+        (362590 call _check_tuple_var_decl _indexOfInterest[362570] 2)
+        unknown n[362544] "index var" "insert auto destroy"
+        (362597 'move' n[362544](362594 call _indexOfInterest[362570] 0))
+        unknown m[362546] "index var" "insert auto destroy"
+        (362603 'move' m[362546](362600 call _indexOfInterest[362570] 1))
+        {
+          (362563 call(362560 call . ms[362535] c"addOrReplace") n[362544](362569 call(362566 call . m[362546] c"attributes")))
+        }
+        label _continueLabel[362575]
+        _indexOfInterest[362570]
+        _iterator[362571]
+      }
+      label _breakLabel[362576]
+    }
+    (362615 return(362616 'new'(362618 call moduleAttributes[360775] "Module"(362622 call . this[362528] c"moduleName") ms[362535](362631 call .(362627 call . this[362528] c"subModules") c"order"))))
+  }
+  { scopeless type
+    moduleAttributes[360775]
+  } function Module[362659](?).signature[362637](arg _mt[362641]:_MT[201], arg this[362639]:Module[362659](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (362645 return(362654 call(362651 call .(362650 call(362646 call . this[362639] c"attributes")) c"prettyPrint")))
+  }
+  { scopeless type
+    string[244]
+  }
+  type Module[362662](?)
+  type Parameter[362737] unknown data[362667](362669 call Tensor eltType) function Parameter[362737].init[362673](arg _mt[362684]:_MT[201], arg this[362675]:Parameter[362737], arg data[362681] :
+  (362678 call Tensor unknown eltType[362679])) : _unknown[42] "method" "primary method"
+  {
+    (362694 call(362691 call .(362688 call . this[362675] c"super") c"init") eltType[362679])
+    (362696 call =(362699 call . this[362675] c"data") data[362681])
+  } function Parameter[362737].attributes[362705](arg _mt[362709]:_MT[201], arg this[362707]:Parameter[362737]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (362713 return(362714 'new'(362716 call moduleAttributes[360775] "Parameter"(362720 call . this[362707] c"moduleName")(362731 call _build_tuple "data" "<tensor>"))))
+  }
+  { scopeless type
+    moduleAttributes[360775]
+  } Module[362662](?)
+  type Parameter[363555](?)
+  type Sequential[363538] unknown mds[362743](362745 call list[231871](?)(362747 call _shared(362749 call Module[362662](?) eltType))) function Sequential[363538].init[362753](arg _mt[362782]:_MT[201], arg this[362755]:Sequential[363538], arg eltType[362758]:_any[141](?) =
+  real[13], arg ms[362769] :
+  (362762 call dict[353403](?) string[244](362765 call _shared(362767 call Module[362662](?) eltType[362758]))), param arg overrideName[362773] =
+  0, arg moduleName[362778] :
+  string[244] =
+  "") : _unknown[42] "method" "primary method"
+  {
+    (362792 call(362789 call .(362786 call . this[362755] c"super") c"init") eltType[362758])
+    (362794 call =(362799 call . this[362755] c"mds")(362802 'new'(362804 call list[231871](?)(362806 call _shared(362808 call Module[362662](?) eltType[362758])))))
+    (362814 call(362811 call . this[362755] c"chpl__initThisType"))
+    if(362824 call _cond_test overrideName[362773])
+    {
+      { scopeless
+        (362815 call =(362818 call . this[362755] c"moduleName") moduleName[362778])
+      }
+    }
+    {
+      unknown _indexOfInterest[362855] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[362856] "expr temp" "temp"
+      (362865 'move' _iterator[362856](362863 call _getIterator ms[362769]))
+      Defer
+      {
+        {
+          (362893 call _freeIterator _iterator[362856])
+        }
+      }
+      { scopeless type
+        (362870 'move' _indexOfInterest[362855](362867 call iteratorIndex _iterator[362856]))
+      }
+      ForLoop[362857]
+      {
+        (362875 call _check_tuple_var_decl _indexOfInterest[362855] 2)
+        unknown name[362830] "index var" "insert auto destroy"
+        (362882 'move' name[362830](362879 call _indexOfInterest[362855] 0))
+        unknown m[362832] "index var" "insert auto destroy"
+        (362888 'move' m[362832](362885 call _indexOfInterest[362855] 1))
+        {
+          (362839 call addModule name[362830](362845 call(362842 call . m[362832] c"borrow")))
+          (362853 call(362850 call .(362846 call . this[362755] c"mds") c"pushBack") m[362832])
+        }
+        label _continueLabel[362860]
+        _indexOfInterest[362855]
+        _iterator[362856]
+      }
+      label _breakLabel[362861]
+    }
+  } function Sequential[363538].init[362902](arg _mt[362912]:_MT[201], arg this[362904]:Sequential[363538], arg eltType[362907]:_any[141](?) =
+  real[13], in arg ms[362910]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    (362922 call(362919 call .(362916 call . this[362904] c"super") c"init") eltType[362907])
+    (362924 call =(362927 call . this[362904] c"mds")(362930 'new'(362932 call list[231871](?)(362934 call _shared(362936 call Module[362662](?) eltType[362907])))))
+    (362942 call(362939 call . this[362904] c"chpl__initThisType"))
+    (362943 call =(362946 call . this[362904] c"moduleName") "sequential")
+    {
+      unknown i[362952] "index var" 0
+      unknown tmp[363008] "maybe param" "temp"
+      (363020 'move' tmp[363008](363018 call chpl_compute_low_param_loop_bound 0(362959 call chpl__nudgeHighBound(362956 call . ms[362910] c"size"))))
+      unknown tmp[363009] "maybe param" "temp"
+      (363032 'move' tmp[363009](363030 call chpl_compute_high_param_loop_bound 0(363025 call chpl__nudgeHighBound(363027 call . ms[362910] c"size"))))
+      unknown tmp[363010] "maybe param" "temp"
+      (363035 'move' tmp[363010] 1)
+      ParamForLoop[363037]
+      { i[362952] tmp[363008] tmp[363009] tmp[363010]
+        {
+          { scopeless
+            unknown m[362965](362975 call(362972 call . _shared c"adopt")(362976 call postfix!(362982 call(362979 call . _owned c"release")(362984 call ms[362910] i[362952]))))(362967 call _shared(362969 call Module[362662](?) eltType[362907]))
+            (362987 'end of statement')
+          }
+          (362989 call addModule(362990 call : i[362952] string[244])(362998 call(362995 call . m[362965] c"borrow")))
+          (363006 call(363003 call .(362999 call . this[362904] c"mds") c"pushBack") m[362965])
+        }
+      }
+      label _unused_continueLabel[363012]
+      label _breakLabel[363011]
+    }
+  } function Sequential[363538].init[363048](arg _mt[363074]:_MT[201], arg this[363050]:Sequential[363538], arg eltType[363053]:_any[141](?) =
+  real[13], arg order[363059] :
+  (363057 call list[231871](?) string[244]), in arg ms[363071] :
+  (363063 call map[352283](?) string[244](363066 call _owned(363070 'to nilable class from type'(363068 call Module[362662](?) eltType[363053]))))) : _unknown[42] "method" "primary method"
+  {
+    (363084 call(363081 call .(363078 call . this[363050] c"super") c"init") eltType[363053])
+    (363086 call =(363089 call . this[363050] c"mds")(363092 'new'(363094 call list[231871](?)(363096 call _shared(363098 call Module[362662](?) eltType[363053])))))
+    (363104 call(363101 call . this[363050] c"chpl__initThisType"))
+    (363105 call =(363108 call . this[363050] c"moduleName") "sequential")
+    {
+      unknown _indexOfInterest[363198] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[363199] "expr temp" "temp"
+      (363234 'move' _iterator[363199](363134 call _build_tuple(363216 call _getIterator(363225 call chpl_direct_range_iter 0(363220 call chpl__nudgeHighBound(363222 call . ms[363071] c"size"))))(363232 call _getIterator(363231 call(363228 call . ms[363071] c"keys")))))
+      Defer
+      {
+        {
+          (363262 call _freeIterator _iterator[363199])
+        }
+      }
+      { scopeless type
+        (363239 'move' _indexOfInterest[363198](363236 call iteratorIndex _iterator[363199]))
+      }
+      ForLoop[363200]
+      {
+        (363244 call _check_tuple_var_decl _indexOfInterest[363198] 2)
+        unknown i[363113] "index var" "insert auto destroy"
+        (363251 'move' i[363113](363248 call _indexOfInterest[363198] 0))
+        unknown k[363115] "index var" "insert auto destroy"
+        (363257 'move' k[363115](363254 call _indexOfInterest[363198] 1))
+        {
+          { scopeless
+            unknown m[363137](363147 call(363144 call . _shared c"adopt")(363148 call postfix!(363154 call(363151 call . _owned c"release")(363156 call ms[363071] k[363115]))))(363139 call _shared(363141 call Module[362662](?) eltType[363053]))
+            (363159 'end of statement')
+          }
+          { scopeless
+            const j[363161] "const"(363169 call(363166 call .(363162 call . this[363050] c"mds") c"pushBack") m[363137])
+            (363172 'end of statement')
+          }
+          { scopeless
+            unknown b[363174](363184 call(363181 call .(363179 call(363175 call . this[363050] c"mds") j[363161]) c"borrow"))
+            (363186 'end of statement')
+          }
+          (363188 call addModule(363190 call order[363059] i[363113]) b[363174])
+          (363194 call compilerWarning "Iain you need to fix this after the demo.")
+        }
+        label _continueLabel[363203]
+        _indexOfInterest[363198]
+        _iterator[363199]
+      }
+      label _breakLabel[363204]
+    }
+  } function Sequential[363538].init[363271](arg _mt[363287]:_MT[201], arg this[363273]:Sequential[363538], in arg ms[363283] ... :
+  (363276 call _owned(363280 'to nilable class from type'(363278 call Module[362662](?) real[13])))) : _unknown[42] "method" "primary method"
+  {
+    (363294 call(363291 call . this[363273] c"init") real[13] ms[363283])
+  } function Sequential[363538].forward[363299](arg _mt[363312]:_MT[201], arg this[363301]:Sequential[363538], arg input[363309] :
+  (363304 call Tensor(363305 call . this[363301] c"eltType"))) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    if(363341 call _cond_test(363331 call <(363337 call .(363333 call . this[363301] c"mds") c"size") 1))
+    {
+      { scopeless
+        (363322 call halt "Sequential must have submodules! moduleName: "(363326 call . this[363301] c"moduleName"))
+      }
+    }
+    { scopeless
+      unknown x[363347](363354 call(363352 call(363348 call . this[363301] c"mds") 0) input[363309])
+      (363357 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[363384] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[363385] "expr temp" "temp"
+      (363394 'move' _iterator[363385](363392 call _getIterator(363406 call chpl_direct_range_iter 1(363398 call chpl__nudgeHighBound(363400 call .(363402 call . this[363301] c"mds") c"size")))))
+      Defer
+      {
+        {
+          (363421 call _freeIterator _iterator[363385])
+        }
+      }
+      { scopeless type
+        (363411 'move' _indexOfInterest[363384](363408 call iteratorIndex _iterator[363385]))
+      }
+      ForLoop[363386]
+      {
+        unknown i[363358] "index var" "insert auto destroy"
+        (363416 'move' i[363358] _indexOfInterest[363384])
+        {
+          (363373 call = x[363347](363382 call(363380 call(363376 call . this[363301] c"mds") i[363358]) x[363347]))
+        }
+        label _continueLabel[363389]
+        _indexOfInterest[363384]
+        _iterator[363385]
+      }
+      label _breakLabel[363390]
+    }
+    (363428 return x[363347])
+  }
+  { scopeless type
+    (363315 call Tensor(363316 call . this[363301] c"eltType"))
+  } function Sequential[363538].attributes[363433](arg _mt[363437]:_MT[201], arg this[363435]:Sequential[363538]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    { scopeless
+      unknown ms[363442](363443 'new'(363445 call dict[353403](?) string[244] moduleAttributes[360775]))
+      (363449 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[363477] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[363478] "expr temp" "temp"
+      (363487 'move' _iterator[363478](363485 call _getIterator(363464 call(363461 call .(363457 call . this[363435] c"subModules") c"items"))))
+      Defer
+      {
+        {
+          (363515 call _freeIterator _iterator[363478])
+        }
+      }
+      { scopeless type
+        (363492 'move' _indexOfInterest[363477](363489 call iteratorIndex _iterator[363478]))
+      }
+      ForLoop[363479]
+      {
+        (363497 call _check_tuple_var_decl _indexOfInterest[363477] 2)
+        unknown n[363451] "index var" "insert auto destroy"
+        (363504 'move' n[363451](363501 call _indexOfInterest[363477] 0))
+        unknown m[363453] "index var" "insert auto destroy"
+        (363510 'move' m[363453](363507 call _indexOfInterest[363477] 1))
+        {
+          (363470 call(363467 call . ms[363442] c"insert") n[363451](363476 call(363473 call . m[363453] c"attributes")))
+        }
+        label _continueLabel[363482]
+        _indexOfInterest[363477]
+        _iterator[363478]
+      }
+      label _breakLabel[363483]
+    }
+    (363522 return(363523 'new'(363525 call moduleAttributes[360775] "Sequential"(363529 call . this[363435] c"moduleName") ms[363442])))
+  }
+  { scopeless type
+    moduleAttributes[360775]
+  } Module[362662](?)
+  type Sequential[365331](?)
+  type Linear[363803] unknown m[363547] int[10] unknown n[363544](363806 'typeof' m) unknown weight[363551](363553 call _owned(363557 call Parameter[363555](?) eltType)) unknown bias[363562](363564 call _owned(363566 call Parameter[363555](?) eltType)) function Linear[363803].init[363570](arg _mt[363584]:_MT[201], arg this[363572]:Linear[363803], arg eltType[363574]:_any[141](?), arg m[363577] :
+  int[10], arg n[363581] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    (363594 call(363591 call .(363588 call . this[363572] c"super") c"init") eltType[363574])
+    (363596 call =(363601 call . this[363572] c"m") m[363577])
+    (363605 call =(363610 call . this[363572] c"n") n[363581])
+    (363614 call =(363619 call . this[363572] c"weight")(363622 'new'(363624 call Parameter[363555](?)(363625 call :(363631 call(363628 call . Tensor[345586](?) c"arange") n[363581] m[363577]) eltType[363574]))))
+    (363635 call =(363640 call . this[363572] c"bias")(363643 'new'(363645 call Parameter[363555](?)(363646 call :(363652 call(363649 call . Tensor[345586](?) c"zeros") m[363577]) eltType[363574]))))
+    (363659 call(363656 call . this[363572] c"chpl__initThisType"))
+  } function Linear[363803].setup[363662](arg _mt[363666]:_MT[201], arg this[363664]:Linear[363803]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (363670 call addModule "weight"(363674 call . this[363664] c"weight"))
+    (363679 call addModule "bias"(363683 call . this[363664] c"bias"))
+  } function Linear[363803].init[363689](arg _mt[363701]:_MT[201], arg this[363691]:Linear[363803], arg m[363694] :
+  int[10], arg n[363698] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    (363708 call(363705 call . this[363691] c"init") real[13] m[363694] n[363698])
+  } function Linear[363803].forward[363714](arg _mt[363727]:_MT[201], arg this[363716]:Linear[363803], arg input[363724] :
+  (363719 call Tensor(363720 call . this[363716] c"eltType"))) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (363736 return(363737 call +(363743 call(363740 call . Tensor[345586](?) c"matvecmulFast")(363750 call(363746 call . this[363716] c"par") "weight") input[363724])(363757 call(363753 call . this[363716] c"par") "bias")))
+  }
+  { scopeless type
+    (363730 call Tensor(363731 call . this[363716] c"eltType"))
+  } function Linear[363803].attributes[363762](arg _mt[363766]:_MT[201], arg this[363764]:Linear[363803]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (363770 return(363771 'new'(363773 call moduleAttributes[360775] "Linear"(363775 call . this[363764] c"moduleName")(363787 call _build_tuple "inFeatures"(363783 call . this[363764] c"m"))(363797 call _build_tuple "outFeatures"(363793 call . this[363764] c"n")))))
+  }
+  { scopeless type
+    moduleAttributes[360775]
+  } Module[362662](?)
+  type Linear[365043](?)
+  type Conv2D[364199] unknown kernelShape[363811](363812 call * 4 int[10]) unknown stride[363819] int[10] unknown kernel[363824](363826 call _owned(363828 call Parameter[363555](?) eltType)) unknown bias[363833](363835 call _owned(363837 call Parameter[363555](?) eltType)) function Conv2D[364199].init[363841](arg _mt[363867]:_MT[201], arg this[363843]:Conv2D[364199], arg eltType[363846]:_any[141](?) =
+  real[13], arg channels[363850] :
+  int[10], arg features[363854] :
+  int[10], arg kernel[363858] :
+  int[10], arg stride[363863] :
+  int[10] =
+  1) : _unknown[42] "method" "primary method"
+  {
+    (363877 call(363874 call .(363871 call . this[363843] c"super") c"init") eltType[363846])
+    (363879 call =(363884 call . this[363843] c"kernelShape")(363892 call _build_tuple features[363854] channels[363850] kernel[363858] kernel[363858]))
+    (363894 call =(363897 call . this[363843] c"stride") stride[363863])
+    (363901 call =(363904 call . this[363843] c"kernel")(363907 'new'(363909 call Parameter[363555](?)(363910 call :(363916 call(363913 call . Tensor[345586](?) c"arange") features[363854] channels[363850] kernel[363858] kernel[363858]) eltType[363846]))))
+    (363922 call =(363925 call . this[363843] c"bias")(363928 'new'(363930 call Parameter[363555](?)(363931 call :(363937 call(363934 call . Tensor[345586](?) c"arange") features[363854]) eltType[363846]))))
+    (363944 call(363941 call . this[363843] c"chpl__initThisType"))
+  } function Conv2D[364199].init[363947](arg _mt[363959]:_MT[201], arg this[363949]:Conv2D[364199], arg eltType[363952]:_any[141](?) =
+  real[13], arg ma[363956] :
+  moduleAttributes[360775]) : _unknown[42] "method" "primary method"
+  {
+    (363966 call(363963 call . this[363949] c"init") eltType[363952](363972 call(363969 call . ma[363956] c"getInt") "in_channels")(363980 call(363977 call . ma[363956] c"getInt") "out_channels")(363988 call(363985 call . ma[363956] c"getInt") "kernel_size")(363994 call(363991 call . ma[363956] c"getInt") "stride"))
+  } function Conv2D[364199].setup[363998](arg _mt[364002]:_MT[201], arg this[364000]:Conv2D[364199]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364006 call addModule "weight"(364008 call . this[364000] c"kernel"))
+    (364013 call addModule "bias"(364015 call . this[364000] c"bias"))
+  } function Conv2D[364199].init[364021](arg _mt[364043]:_MT[201], arg this[364023]:Conv2D[364199], arg channels[364026] :
+  int[10], arg features[364030] :
+  int[10], arg kernel[364034] :
+  int[10], arg stride[364039] :
+  int[10] =
+  1) : _unknown[42] "method" "primary method"
+  {
+    (364050 call(364047 call . this[364023] c"init") real[13] channels[364026] features[364030] kernel[364034] stride[364039])
+  } function Conv2D[364199].forward[364058](arg _mt[364071]:_MT[201], arg this[364060]:Conv2D[364199], arg input[364068] :
+  (364063 call Tensor(364064 call . this[364060] c"eltType"))) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    { scopeless
+      unknown weights[364081](364086 call .(364083 call . this[364060] c"kernel") c"data")
+      (364090 'end of statement')
+    }
+    { scopeless
+      unknown bias[364092](364097 call .(364094 call . this[364060] c"bias") c"data")
+      (364101 'end of statement')
+    }
+    (364102 return(364107 call(364104 call . Tensor[345586](?) c"convolve") input[364068] weights[364081] bias[364092](364111 call . this[364060] c"stride")))
+  }
+  { scopeless type
+    (364074 call Tensor(364075 call . this[364060] c"eltType"))
+  } function Conv2D[364199].attributes[364118](arg _mt[364122]:_MT[201], arg this[364120]:Conv2D[364199]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    { scopeless
+      const tmp[364139] "const" "temp"(364135 call . this[364120] c"kernelShape")
+      (364149 call _check_tuple_var_decl tmp[364139] 4)
+      const features[364127] "const"(364140 call tmp[364139] 0)
+      const channels[364129] "const"(364143 call tmp[364139] 1)
+      const kernel[364131] "const"(364146 call tmp[364139] 2)
+      (364154 'end of statement')
+    }
+    (364155 return(364156 'new'(364158 call moduleAttributes[360775] "Conv2D"(364162 call . this[364120] c"moduleName")(364171 call _build_tuple "inChannels" channels[364129])(364178 call _build_tuple "outChannels" features[364127])(364185 call _build_tuple "kernelSize" kernel[364131])(364193 call _build_tuple "stride"(364189 call . this[364120] c"stride")))))
+  }
+  { scopeless type
+    moduleAttributes[360775]
+  } Module[362662](?)
+  type Conv2D[364808](?)
+  type MaxPool[364330] unknown poolSize[364205] int[10] function MaxPool[364330].init[364209](arg _mt[364221]:_MT[201], arg this[364211]:MaxPool[364330], arg eltType[364214]:_any[141](?) =
+  real[13], arg poolSize[364218] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    (364231 call(364228 call .(364225 call . this[364211] c"super") c"init") eltType[364214])
+    (364233 call =(364238 call . this[364211] c"poolSize") poolSize[364218])
+  } function MaxPool[364330].init[364244](arg _mt[364252]:_MT[201], arg this[364246]:MaxPool[364330], arg poolSize[364249] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    (364259 call(364256 call . this[364246] c"init") real[13] poolSize[364249])
+  } function MaxPool[364330].forward[364264](arg _mt[364277]:_MT[201], arg this[364266]:MaxPool[364330], arg input[364274] :
+  (364269 call Tensor(364270 call . this[364266] c"eltType"))) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364286 return(364291 call(364288 call . input[364274] c"maxPool")(364292 call . this[364266] c"poolSize")))
+  }
+  { scopeless type
+    (364280 call Tensor(364281 call . this[364266] c"eltType"))
+  } function MaxPool[364330].attributes[364299](arg _mt[364303]:_MT[201], arg this[364301]:MaxPool[364330]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364307 return(364308 'new'(364310 call moduleAttributes[360775] "MaxPool"(364312 call . this[364301] c"moduleName")(364324 call _build_tuple "poolSize"(364320 call . this[364301] c"poolSize")))))
+  }
+  { scopeless type
+    moduleAttributes[360775]
+  } Module[362662](?)
+  type MaxPool[364824](?)
+  type Flatten[364411] function Flatten[364411].init[364335](arg _mt[364343]:_MT[201], arg this[364337]:Flatten[364411], arg eltType[364340]:_any[141](?) =
+  real[13]) : _unknown[42] "method" "primary method"
+  {
+    (364353 call(364350 call .(364347 call . this[364337] c"super") c"init") eltType[364340])
+  } function Flatten[364411].forward[364357](arg _mt[364370]:_MT[201], arg this[364359]:Flatten[364411], arg input[364367] :
+  (364362 call Tensor(364363 call . this[364359] c"eltType"))) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364379 return(364386 call(364383 call . input[364367] c"flatten")))
+  }
+  { scopeless type
+    (364373 call Tensor(364374 call . this[364359] c"eltType"))
+  } function Flatten[364411].attributes[364390](arg _mt[364394]:_MT[201], arg this[364392]:Flatten[364411]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364398 return(364399 'new'(364401 call moduleAttributes[360775] "Flatten"(364403 call . this[364392] c"moduleName"))))
+  }
+  { scopeless type
+    moduleAttributes[360775]
+  } Module[362662](?)
+  type Flatten[365034](?)
+  type ReLU[364490] function ReLU[364490].init[364416](arg _mt[364424]:_MT[201], arg this[364418]:ReLU[364490], arg eltType[364421]:_any[141](?) =
+  real[13]) : _unknown[42] "method" "primary method"
+  {
+    (364434 call(364431 call .(364428 call . this[364418] c"super") c"init") eltType[364421])
+  } function ReLU[364490].forward[364438](arg _mt[364451]:_MT[201], arg this[364440]:ReLU[364490], arg input[364448] :
+  (364443 call Tensor(364444 call . this[364440] c"eltType"))) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364460 return(364465 call(364462 call . input[364448] c"relu")))
+  }
+  { scopeless type
+    (364454 call Tensor(364455 call . this[364440] c"eltType"))
+  } function ReLU[364490].attributes[364469](arg _mt[364473]:_MT[201], arg this[364471]:ReLU[364490]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364477 return(364478 'new'(364480 call moduleAttributes[360775] "ReLU"(364482 call . this[364471] c"moduleName"))))
+  }
+  { scopeless type
+    moduleAttributes[360775]
+  } Module[362662](?)
+  type ReLU[365056](?)
+  type Softmax[364571] function Softmax[364571].init[364495](arg _mt[364503]:_MT[201], arg this[364497]:Softmax[364571], arg eltType[364500]:_any[141](?) =
+  real[13]) : _unknown[42] "method" "primary method"
+  {
+    (364513 call(364510 call .(364507 call . this[364497] c"super") c"init") eltType[364500])
+  } function Softmax[364571].forward[364517](arg _mt[364530]:_MT[201], arg this[364519]:Softmax[364571], arg input[364527] :
+  (364522 call Tensor(364523 call . this[364519] c"eltType"))) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364539 return(364544 call(364541 call . input[364527] c"softmax")))
+  }
+  { scopeless type
+    (364533 call Tensor(364534 call . this[364519] c"eltType"))
+  } function Softmax[364571].attributes[364548](arg _mt[364552]:_MT[201], arg this[364550]:Softmax[364571]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364556 return(364557 'new'(364559 call moduleAttributes[360775] "SoftMax"(364563 call . this[364550] c"moduleName"))))
+  }
+  { scopeless type
+    moduleAttributes[360775]
+  } Module[362662](?)
+  type Softmax[365065](?)
+  type Dropout[364659] function Dropout[364659].init[364576](arg _mt[364590]:_MT[201], arg this[364578]:Dropout[364659], arg eltType[364581]:_any[141](?) =
+  real[13], arg freq[364586] :
+  real[13] =
+  0.5) : _unknown[42] "method" "primary method"
+  {
+    (364600 call(364597 call .(364594 call . this[364578] c"super") c"init") eltType[364581])
+  } function Dropout[364659].forward[364604](arg _mt[364617]:_MT[201], arg this[364606]:Dropout[364659], arg input[364614] :
+  (364609 call Tensor(364610 call . this[364606] c"eltType"))) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364626 return input[364614])
+  }
+  { scopeless type
+    (364620 call Tensor(364621 call . this[364606] c"eltType"))
+  } function Dropout[364659].attributes[364631](arg _mt[364635]:_MT[201], arg this[364633]:Dropout[364659]) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364639 return(364640 'new'(364642 call moduleAttributes[360775] "Dropout"(364644 call . this[364633] c"moduleName")(364653 call _build_tuple "frequency" 0.5))))
+  }
+  { scopeless type
+    moduleAttributes[360775]
+  } Module[362662](?)
+  type Dropout[365329](?)
+  function chain[364661](arg m[364667] :
+  (364663 'to borrowed class from unknown'(364665 call Module[362662](?) ?[227])), arg modNames[364673] ... :
+  string[244], arg input[364681] :
+  (364678 call Tensor unknown eltType[364679])) : _unknown[42]
+  {
+    (364686 call writeln "layer 0")
+    { scopeless
+      unknown output[364691](364702 call(364698 call(364695 call . m[364667] c"mod")(364700 call modNames[364673] 0)) input[364681])
+      (364705 'end of statement')
+    }
+    {
+      unknown i[364706] "index var" 0
+      unknown tmp[364734] "maybe param" "temp"
+      (364746 'move' tmp[364734](364744 call chpl_compute_low_param_loop_bound 1(364710 call chpl__nudgeHighBound n[364671])))
+      unknown tmp[364735] "maybe param" "temp"
+      (364755 'move' tmp[364735](364753 call chpl_compute_high_param_loop_bound 1(364751 call chpl__nudgeHighBound n[364671])))
+      unknown tmp[364736] "maybe param" "temp"
+      (364758 'move' tmp[364736] 1)
+      ParamForLoop[364760]
+      { i[364706] tmp[364734] tmp[364735] tmp[364736]
+        {
+          (364716 call writeln "layer " i[364706])
+          (364721 call = output[364691](364732 call(364728 call(364725 call . m[364667] c"mod")(364730 call modNames[364673] i[364706])) output[364691]))
+        }
+      }
+      label _unused_continueLabel[364738]
+      label _breakLabel[364737]
+    }
+    (364769 return output[364691])
+  }
+  type Net[364988] function Net[364988].init[364776](arg _mt[364784]:_MT[201], arg this[364778]:Net[364988], arg eltType[364781]:_any[141](?) =
+  real[13]) : _unknown[42] "method" "primary method"
+  {
+    (364794 call(364791 call .(364788 call . this[364778] c"super") c"init") eltType[364781])
+    (364800 call(364797 call . this[364778] c"chpl__initThisType"))
+    (364802 call addModule "conv1"(364806 'new'(364810 call Conv2D[364808](?) eltType[364781] 3 32 3(stride = 1))))
+    (364818 call addModule "pool1"(364822 'new'(364826 call MaxPool[364824](?) eltType[364781] 2)))
+    (364830 call addModule "conv2"(364834 'new'(364836 call Conv2D[364808](?) eltType[364781] 32 64 3(stride = 1))))
+    (364844 call addModule "pool2"(364848 'new'(364850 call MaxPool[364824](?) eltType[364781] 2)))
+    (364854 call addModule "conv3"(364858 'new'(364860 call Conv2D[364808](?) eltType[364781] 64 128 3(stride = 1))))
+    (364868 call addModule "pool3"(364872 'new'(364874 call MaxPool[364824](?) eltType[364781] 2)))
+    (364878 call addModule "conv4"(364882 'new'(364884 call Conv2D[364808](?) eltType[364781] 128 256 3(stride = 1))))
+    (364892 call addModule "pool4"(364896 'new'(364898 call MaxPool[364824](?) eltType[364781] 2)))
+    (364902 call addModule "conv5"(364906 'new'(364908 call Conv2D[364808](?) eltType[364781] 256 512 3(stride = 1))))
+    (364916 call addModule "pool5"(364920 'new'(364922 call MaxPool[364824](?) eltType[364781] 2)))
+    (364926 call addModule "conv6"(364930 'new'(364932 call Conv2D[364808](?) eltType[364781] 512 1024 3(stride = 1))))
+    (364940 call addModule "pool6"(364944 'new'(364946 call MaxPool[364824](?) eltType[364781] 2)))
+  } function Net[364988].forward[364951](arg _mt[364964]:_MT[201], arg this[364953]:Net[364988], arg input[364961] :
+  (364956 call Tensor(364957 call . this[364953] c"eltType"))) : _unknown[42] "method" "primary method" "method overrides"
+  {
+    (364973 return(364975 call chain this[364953] "conv1" "conv2" "conv3" "conv4" "conv5" "conv6" input[364961]))
+  }
+  { scopeless type
+    (364967 call Tensor(364968 call . this[364953] c"eltType"))
+  } Module[362662](?)
+  type Net[365154](?)
+  if(364999 call _cond_test diag[342170])
+  {
+    (364992 'use' GpuDiagnostics)
+    (364995 call startGpuDiagnostics)
+    (364997 call startVerboseGpu)
+  }
+  function main[365003]() : _unknown[42]
+  {
+    { scopeless
+      unknown flower[365007](365012 call(365009 call . Tensor[345586](?) c"load") "data/flower.chdata")
+      (365017 'end of statement')
+    }
+    { scopeless
+      unknown conv[365019](365020 'new'(365022 call Conv2D[364808](?) 1 1 3(stride = 1)))
+      (365029 'end of statement')
+    }
+    { scopeless
+      unknown flat[365031](365032 'new'(365036 call Flatten[365034](?)))
+      (365038 'end of statement')
+    }
+    { scopeless
+      unknown linear[365040](365041 'new'(365045 call Linear[365043](?) 3 49))
+      (365051 'end of statement')
+    }
+    { scopeless
+      unknown relu[365053](365054 'new'(365058 call ReLU[365056](?)))
+      (365060 'end of statement')
+    }
+    { scopeless
+      unknown softmax[365062](365063 'new'(365067 call Softmax[365065](?)))
+      (365069 'end of statement')
+    }
+    { scopeless
+      unknown img[365071](365076 call(365073 call . Tensor[345586](?) c"arange") 1 9 9)
+      (365081 'end of statement')
+    }
+    { scopeless
+      unknown fet[365083](365088 call(365085 call . conv[365019] c"forward") img[365071])
+      (365091 'end of statement')
+    }
+    (365093 call writeln fet[365083])
+    { scopeless
+      unknown output[365096](365098 call softmax[365062](365100 call relu[365053](365102 call linear[365040](365104 call flat[365031](365106 call conv[365019] img[365071])))))
+      (365109 'end of statement')
+    }
+    (365111 call writeln output[365096])
+    { scopeless
+      unknown t[365114](365119 call(365116 call . Tensor[345586](?) c"load") "notebooks/mini_cnn_params.chdata")
+      (365124 'end of statement')
+    }
+    (365126 call writeln t[365114])
+    (365129 call writeln(365142 call .(365139 call .(365136 call .(365134 call(365131 call . flower[365007] c"tensorize") 3) c"array") c"_dom") c"shape"))
+    (365146 call writeln "Instantiating network.")
+    { scopeless
+      unknown net[365151](365152 'new'(365156 call Net[365154](?)))
+      (365158 'end of statement')
+    }
+    (365160 call writeln "Feeding flower through network.")
+    (365166 'import' IO)
+    (365169 'import' JSON)
+    (365172 'import' ObjectSerialization)
+    { scopeless
+      unknown objWriter[365174](365182 call(365179 call . stdout[196765] c"withSerializer") objectSerializer[357446])
+      (365187 'end of statement')
+    }
+    { scopeless
+      unknown jsonWriter[365189](365196 call(365193 call . stdout[196765] c"withSerializer") jsonSerializer[354544])
+      (365201 'end of statement')
+    }
+    { scopeless
+      unknown a[365203](365208 call(365205 call . ndarray[328686](?) c"arange") 15 real[13](365214 call _build_tuple 3 5))
+      (365217 'end of statement')
+    }
+    (365222 call(365219 call . jsonWriter[365189] c"writeln") a[365203])
+    (365228 call(365225 call . objWriter[365174] c"writeln") a[365203])
+    (365231 call writeln a[365203])
+    { scopeless
+      unknown b[365234](365239 call(365236 call . staticTensor[339695](?) c"arange") 3 5)
+      (365243 'end of statement')
+    }
+    (365248 call(365245 call . jsonWriter[365189] c"writeln") b[365234])
+    (365254 call(365251 call . objWriter[365174] c"writeln") b[365234])
+    (365257 call writeln b[365234])
+    { scopeless
+      unknown c[365260](365265 call(365262 call . Tensor[345586](?) c"arange") 3 5)
+      (365269 'end of statement')
+    }
+    (365274 call(365271 call . jsonWriter[365189] c"writeln") c[365260])
+    (365280 call(365277 call . objWriter[365174] c"writeln") c[365260])
+    (365283 call writeln c[365260])
+    { scopeless
+      unknown f[365286](365289 call open module=[222] IO[208303] "myfile.txt"(365298 call . ioMode[164108] c"cw"))
+      (365302 'end of statement')
+    }
+    { scopeless
+      unknown fw[365304](365309 call(365306 call . f[365286] c"writer"))
+      (365311 'end of statement')
+    }
+    (365316 call(365313 call . fw[365304] c"writeln") c[365260])
+    (365318 'referenced modules list' IO[208303] ObjectSerialization[358894] IO[208303] JSON[356500] IO[208303] IO[208303])
+  }
+}

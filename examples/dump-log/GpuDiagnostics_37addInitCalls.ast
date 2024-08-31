@@ -1,0 +1,44 @@
+AST dump for GpuDiagnostics after pass addInitCalls.
+Module use list: ChapelStandard String 
+
+{
+  function chpl__init_GpuDiagnostics[468645]() : void[4] "fast on" "insert line file info" "local fn" "module init" "resolved"
+  {
+    if chpl__init_GpuDiagnostics_p[9310047]
+    {
+      goto _exit_chpl__init_GpuDiagnostics[9310084] _exit_chpl__init_GpuDiagnostics[9310084]
+    }
+    val modFormatStr[9310055]:chpl_c_string[16] "temp"
+    val modStr[9310056]:chpl_c_string[16] "temp"
+    ref refIndentLevel[9310070]:int(32)[66] "temp"
+    (9310063 'move' modFormatStr[9310055] c"%*s\n")
+    (9310065 'move' modStr[9310056] c"GpuDiagnostics")
+    (9310068 call printModuleInit[386886] modFormatStr[9310055] modStr[9310056] 14)
+    (9310074 'move' refIndentLevel[9310070](9310073 'addr of' moduleInitLevel[386877]))
+    (9310077 '+=' refIndentLevel[9310070] 1)
+    (9310053 'move' chpl__init_GpuDiagnostics_p[9310047] 1)
+    {
+      (9305844 call chpl__init_String[468339])
+    }
+    (9310080 '-=' refIndentLevel[9310070] 1)
+    label _endchpl__init_GpuDiagnostics[9310086]
+    label _exit_chpl__init_GpuDiagnostics[9310084]
+    (635614 return _void[46])
+  }
+  function chpl_gpu_startVerbose[338827](const in arg stacktrace[338830]:bool[19], const in arg print_unstable[338834]:bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private" "resolved"
+  {
+  }
+  function chpl_gpu_startDiagnostics[338859](const in arg print_unstable[338862]:bool[19]) : void[4] "extern" "insert line file info" "local args" "no fn body" "private" "resolved"
+  {
+  }
+  function startVerboseGpu[338895]() : void[4] "resolved" "no return value for void"
+  {
+    (338899 call chpl_gpu_startVerbose[338827] 0 0)
+    (635580 return _void[46])
+  }
+  function startGpuDiagnostics[338911]() : void[4] "resolved" "no return value for void"
+  {
+    (338915 call chpl_gpu_startDiagnostics[338859] 0)
+    (635584 return _void[46])
+  }
+}

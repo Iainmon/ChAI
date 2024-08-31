@@ -1,0 +1,28 @@
+AST dump for stopInitCommDiags after pass normalize.
+Module use list: ChapelBase CommDiagnostics 
+
+{
+  function chpl__init_stopInitCommDiags[468621]() : void[4] "insert line file info" "module init"
+  {
+    unknown call_tmp[941493] "expr temp" "maybe param" "maybe type" "temp"
+    (941496 'move' call_tmp[941493](315218 call _cond_test printInitVerboseComm[78985]))
+    if call_tmp[941493]
+    {
+      (315216 call stopVerboseComm)
+    }
+    unknown call_tmp[941498] "expr temp" "maybe param" "maybe type" "temp"
+    (941501 'move' call_tmp[941498](315232 call _cond_test printInitCommCounts[78990]))
+    if call_tmp[941498]
+    {
+      (315224 call stopCommDiagnostics)
+      (569297 'end of statement')
+      unknown call_tmp[941503] "expr temp" "maybe param" "maybe type" "temp"
+      (941506 'move' call_tmp[941503](315228 call getCommDiagnostics))
+      (315226 call writeln call_tmp[941503])
+      (569298 'end of statement')
+      (315230 call resetCommDiagnostics)
+    }
+    (631929 return _void[46])
+  }
+  (397094 'used modules list'(315209 'use' ChapelBase[77907])(315212 'use' CommDiagnostics[78994]))
+}

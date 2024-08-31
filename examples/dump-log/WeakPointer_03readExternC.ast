@@ -1,0 +1,312 @@
+AST dump for WeakPointer after pass readExternC.
+Module use list: 
+
+{
+  (387012 'use' ChapelStandard)
+  { scopeless
+    (88225 'use' Errors)
+    (88227 'use' Atomics)
+    (88228 'use' ChapelBase)
+    (88229 'use' SharedObject)
+  }
+  type weak[88953](?) unknown classType[88233] "type variable" unknown chpl_p[88236] "owned"(88237 'to nilable class'(88239 call _to_unmanaged classType)) unknown chpl_pn[88244] "owned"(88245 'to unmanaged class from unknown'(88247 'to nilable class from type' ReferenceCount)) function weak[88953](?).init[88250](arg _mt[88258]:_MT[201], arg this[88252]:weak[88953](?), arg c[88255] :
+  unmanaged[183](?)) : _unknown[42] "method" "primary method"
+  {
+    (88261 call =(88266 call . this c"classType")(88270 'typeof' c))
+    (88272 call compilerError(88273 call +(88275 call + "cannot initialize a `weak` from an unmanaged class: '"(88280 call :(88283 'typeof' c) string[244])) "'"))
+  } function weak[88953](?).init[88288](arg _mt[88296]:_MT[201], arg this[88290]:weak[88953](?), arg c[88293] :
+  _owned) : _unknown[42] "method" "primary method"
+  {
+    (88299 call =(88302 call . this c"classType")(88306 'typeof' c))
+    (88308 call compilerError(88309 call +(88311 call + "cannot initialize a `weak` from an owned class: '"(88316 call :(88319 'typeof' c) string[244])) "'"))
+  } function weak[88953](?).init[88324](arg _mt[88332]:_MT[201], arg this[88326]:weak[88953](?), arg c[88329] :
+  borrowed) : _unknown[42] "method" "primary method"
+  {
+    (88335 call =(88338 call . this c"classType")(88342 'typeof' c))
+    (88344 call compilerError(88345 call +(88347 call + "cannot initialize a `weak` from a borrowed class: '"(88352 call :(88355 'typeof' c) string[244])) "'"))
+  } function weak[88953](?).init[88360](arg _mt[88366]:_MT[201], arg this[88362]:weak[88953](?), arg c[88364]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    (88369 call =(88372 call . this c"classType")(88376 'typeof' c))
+    (88378 call compilerError(88379 call +(88381 call + "cannot initialize a `weak` from: '"(88386 call :(88389 'typeof' c) string[244])) "'"))
+  } function weak[88953](?).init[88394](arg _mt[88402]:_MT[201], arg this[88396]:weak[88953](?), arg c[88399] :
+  _shared) : _unknown[42] "method" "primary method" "@unstable"
+  {
+    { scopeless
+      unknown ptr[88406](88407 call :(88410 call _to_unmanaged(88412 call . c c"chpl_p"))(88416 call _to_nilable(88418 call _to_unmanaged(88420 call . c c"chpl_t"))))
+      (88424 'end of statement')
+    }
+    { scopeless
+      unknown count[88426](88430 call . c c"chpl_pn")
+      (88434 'end of statement')
+    }
+    if(88454 call _cond_test(88450 call != ptr nil[32]))
+    {
+      { scopeless
+        (88443 call(88440 call .(88435 call postfix! count) c"incrementWeak"))
+      }
+    }
+    {
+      { scopeless
+        (88445 call = count nil[32])
+      }
+    }
+    (88460 call =(88463 call . this c"classType")(88467 call _shared(88469 call . c c"chpl_t")))
+    (88472 call =(88475 call . this c"chpl_p") ptr)
+    (88479 call =(88482 call . this c"chpl_pn") count)
+  } function weak[88953](?).init=[88488](arg _mt[88496]:_MT[201], arg this[88490]:weak[88953](?), const  ref arg src[88493] :
+  weak) : _unknown[42] "method" "primary method"
+  {
+    (88499 call =(88502 call . this c"classType")(88506 call . src c"classType"))
+    if(88562 call _cond_test(88555 call !=(88558 call . src c"chpl_p") nil[32]))
+    {
+      (88510 call =(88513 call . this c"chpl_p")(88517 call . src c"chpl_p"))
+      (88529 call(88526 call .(88520 call postfix!(88523 call . src c"chpl_pn")) c"incrementWeak"))
+      (88530 call =(88533 call . this c"chpl_pn")(88537 call . src c"chpl_pn"))
+    }
+    {
+      (88541 call =(88544 call . this c"chpl_p") nil[32])
+      (88548 call =(88551 call . this c"chpl_pn") nil[32])
+    }
+  } function weak[88953](?).init[88568](arg _mt[88576]:_MT[201], arg this[88570]:weak[88953](?), arg classType[88573] :
+  _shared) : _unknown[42] "method" "primary method"
+  {
+    if(88590 call _cond_test(88585 call !(88588 call isClass classType)))
+    {
+      { scopeless
+        (88580 call compilerError "a `weak` can only be initialized from a shared class")
+      }
+    }
+    (88595 call =(88598 call . this c"classType") classType)
+    (88602 call =(88605 call . this c"chpl_p") nil[32])
+    (88609 call =(88612 call . this c"chpl_pn") nil[32])
+  } function weak[88953](?).upgrade[88618](arg _mt[88622]:_MT[201], arg this[88620]:weak[88953](?)) : _unknown[42] "method" "primary method"
+  {
+    if(88775 call _cond_test(88768 call !=(88771 call . this c"chpl_p") nil[32]))
+    {
+      { scopeless
+        unknown sc[88632](88647 call(88644 call .(88641 call .(88633 call postfix!(88636 call . this c"chpl_pn")) c"strongCount") c"read"))
+        (88649 'end of statement')
+      }
+      if(88761 call _cond_test(88757 call == sc 0))
+      {
+        (88651 return nil[32])
+      }
+      {
+        {
+          unknown tmp[88681] "temp"
+          (88723 'move' tmp[88681](88709 call _cond_test(88711 call !(88721 call(88713 call .(88715 call postfix!(88717 call . this c"chpl_pn")) c"tryRetainWeak") sc))))
+          WhileDo[88686]
+          {
+            {
+              if(88677 call _cond_test(88673 call == sc 0))
+              {
+                (88671 return nil[32])
+              }
+            }
+            label _continueLabel[88684]
+            (88704 'move' tmp[88681](88690 call _cond_test(88692 call !(88702 call(88694 call .(88696 call postfix!(88698 call . this c"chpl_pn")) c"tryRetainWeak") sc))))
+            tmp[88681]
+          }
+          label _breakLabel[88685]
+        }
+        { scopeless
+          unknown result[88727](88732 'to nilable class from type'(88729 call . this c"classType"))
+          (88734 'end of statement')
+        }
+        (88735 call =(88738 call . result c"chpl_p")(88742 call . this c"chpl_p"))
+        (88745 call =(88748 call . result c"chpl_pn")(88752 call . this c"chpl_pn"))
+        (88755 return result)
+      }
+    }
+    {
+      (88766 return nil[32])
+    }
+  }
+  { scopeless type
+    (88628 'to nilable class from type'(88625 call . this c"classType"))
+  } function weak[88953](?).deinit[88782](arg _mt[88786]:_MT[201], ref arg this[88784]:weak[88953](?)) : _unknown[42] "destructor" "method" "primary method"
+  {
+    (88795 call(88792 call . this c"doClear"))
+  } function weak[88953](?).doClear[88798](arg _mt[88802]:_MT[201], ref arg this[88800]:weak[88953](?)) : _unknown[42] "method" "primary method"
+  {
+    if(88846 call _cond_test(88839 call !=(88842 call . this c"chpl_p") nil[32]))
+    {
+      { scopeless
+        const totalCount[88807] "const"(88819 call(88816 call .(88808 call postfix!(88811 call . this c"chpl_pn")) c"releaseWeak"))
+        (88821 'end of statement')
+      }
+      if(88834 call _cond_test(88830 call == totalCount 0))
+      {
+        { scopeless
+          (88827 call chpl__delete(88824 call . this c"chpl_pn"))
+        }
+      }
+    }
+    (88850 call =(88853 call . this c"chpl_p") nil[32])
+    (88857 call =(88860 call . this c"chpl_pn") nil[32])
+  } function weak[88953](?).getWeakCount[88866](arg _mt[88870]:_MT[201], arg this[88868]:weak[88953](?)) : _unknown[42] "method" "primary method"
+  {
+    if(88906 call _cond_test(88905 'if var' const counts[88903] "const"(88900 call . this c"chpl_pn")))
+    {
+      { scopeless
+        (88874 return(88875 call -(88886 call(88883 call .(88880 call . counts c"totalCount") c"read"))(88894 call(88891 call .(88888 call . counts c"strongCount") c"read"))))
+      }
+    }
+    {
+      { scopeless
+        (88896 return 0)
+      }
+    }
+  }
+  { scopeless type
+    int[10]
+  } function weak[88953](?).getStrongCount[88915](arg _mt[88919]:_MT[201], arg this[88917]:weak[88953](?)) : _unknown[42] "method" "primary method"
+  {
+    if(88943 call _cond_test(88942 'if var' const counts[88940] "const"(88937 call . this c"chpl_pn")))
+    {
+      { scopeless
+        (88923 return(88931 call(88928 call .(88925 call . counts c"strongCount") c"read")))
+      }
+    }
+    {
+      { scopeless
+        (88933 return 0)
+      }
+    }
+  }
+  { scopeless type
+    int[10]
+  } writeSerializable
+  function :[88955](const  ref arg x[88958] :
+  weak, arg t[88965] :
+  (88962 call _shared(88964 'to nilable class from type' class))) : _unknown[42] "inline" "operator"
+  {
+    if(89120 call _cond_test(89113 call !=(89116 call . x c"chpl_p") nil[32]))
+    {
+      { scopeless
+        unknown sc[88985](88998 call(88995 call .(88992 call .(88986 call postfix!(88989 call . x c"chpl_pn")) c"strongCount") c"read"))
+        (89000 'end of statement')
+      }
+      if(89106 call _cond_test(89102 call == sc 0))
+      {
+        (89002 return nil[32])
+      }
+      {
+        {
+          unknown tmp[89030] "temp"
+          (89072 'move' tmp[89030](89058 call _cond_test(89060 call !(89070 call(89062 call .(89064 call postfix!(89066 call . x c"chpl_pn")) c"tryRetainWeak") sc))))
+          WhileDo[89035]
+          {
+            {
+              if(89026 call _cond_test(89022 call == sc 0))
+              {
+                (89020 return nil[32])
+              }
+            }
+            label _continueLabel[89033]
+            (89053 'move' tmp[89030](89039 call _cond_test(89041 call !(89051 call(89043 call .(89045 call postfix!(89047 call . x c"chpl_pn")) c"tryRetainWeak") sc))))
+            tmp[89030]
+          }
+          label _breakLabel[89034]
+        }
+        { scopeless
+          unknown result[89076] t
+          (89079 'end of statement')
+        }
+        (89080 call =(89083 call . result c"chpl_p")(89087 call . x c"chpl_p"))
+        (89090 call =(89093 call . result c"chpl_pn")(89097 call . x c"chpl_pn"))
+        (89100 return result)
+      }
+    }
+    {
+      (89111 return nil[32])
+    }
+  }
+  where {
+    (88969 call isSubtype(88971 call _to_nonnil(88973 call . x c"classType"))(88977 call _to_nonnil(88979 call . t c"chpl_t")))
+  }
+  function :[89127](const  ref arg x[89130] :
+  weak, arg t[89136] :
+  (89134 call _shared class)) : _unknown[42] throws "inline" "operator"
+  {
+    if(89283 call _cond_test(89276 call !=(89279 call . x c"chpl_p") nil[32]))
+    {
+      { scopeless
+        unknown sc[89154](89167 call(89164 call .(89161 call .(89155 call postfix!(89158 call . x c"chpl_pn")) c"strongCount") c"read"))
+        (89169 'end of statement')
+      }
+      if(89267 call _cond_test(89263 call == sc 0))
+      {
+        (89171 'throw'(89172 'new'(89174 call NilClassError)))
+      }
+      {
+        {
+          unknown tmp[89203] "temp"
+          (89245 'move' tmp[89203](89231 call _cond_test(89233 call !(89243 call(89235 call .(89237 call postfix!(89239 call . x c"chpl_pn")) c"tryRetainWeak") sc))))
+          WhileDo[89208]
+          {
+            {
+              if(89199 call _cond_test(89195 call == sc 0))
+              {
+                (89191 'throw'(89192 'new'(89194 call NilClassError)))
+              }
+            }
+            label _continueLabel[89206]
+            (89226 'move' tmp[89203](89212 call _cond_test(89214 call !(89224 call(89216 call .(89218 call postfix!(89220 call . x c"chpl_pn")) c"tryRetainWeak") sc))))
+            tmp[89203]
+          }
+          label _breakLabel[89207]
+        }
+        (89248 return(89249 'new'(89251 call _shared 1(89253 call postfix!(89256 call . x c"chpl_p"))(89260 call . x c"chpl_pn"))))
+      }
+    }
+    {
+      (89272 'throw'(89273 'new'(89275 call NilClassError)))
+    }
+  }
+  where {
+    (89140 call isSubtype(89142 call _to_nonnil(89144 call . x c"classType"))(89148 call . t c"chpl_t"))
+  }
+  function =[89290](ref arg lhs[89293] :
+  weak, arg rhs[89297] :
+  weak) : _unknown[42] "assignop" "inline" "operator"
+  {
+    if(89329 call _cond_test(89322 call !=(89325 call . rhs c"chpl_pn") nil[32]))
+    {
+      { scopeless
+        (89320 call(89317 call .(89311 call postfix!(89314 call . rhs c"chpl_pn")) c"incrementWeak"))
+      }
+    }
+    { scopeless
+      const chpl_p_tmp[89335] "const"(89337 call . rhs c"chpl_p")
+      (89341 'end of statement')
+    }
+    { scopeless
+      const chpl_pn_tmp[89343] "const"(89345 call . rhs c"chpl_pn")
+      (89349 'end of statement')
+    }
+    (89354 call(89351 call . lhs c"doClear"))
+    (89355 call =(89358 call . lhs c"chpl_p") chpl_p_tmp)
+    (89362 call =(89365 call . lhs c"chpl_pn") chpl_pn_tmp)
+  }
+  where {
+    (89300 call !(89302 call &&(89305 call isNonNilableClass lhs)(89308 call isNilableClass rhs)))
+  }
+  function _unknown[42].serialize[89372](arg _mt[89382]:_MT[201], arg this[89375] :
+  weak, arg writer[89378]:_any[141](?), ref arg serializer[89380]:_any[141](?)) : _unknown[42] throws "method"
+  {
+    if(89438 call _cond_test(89437 'if var' const ptr[89435] "const"(89432 call . this c"chpl_p")))
+    {
+      if(89418 call _cond_test(89402 call >(89416 call(89413 call .(89410 call .(89404 call postfix!(89407 call . this c"chpl_pn")) c"strongCount") c"read")) 0))
+      {
+        (89391 call(89388 call . writer c"write") ptr)
+      }
+      {
+        (89398 call(89395 call . writer c"write") "invalid-ptr")
+      }
+    }
+    {
+      (89427 call(89424 call . writer c"write") "nil-object")
+    }
+  }
+}

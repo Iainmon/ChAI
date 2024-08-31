@@ -1,0 +1,1654 @@
+AST dump for Bytes after pass cleanup.
+Module use list: 
+
+{
+  (32928 'use' ChapelStandard)
+  (32931 'use' ByteBufferHelpers)
+  (32934 'use' BytesStringCommon)
+  (32937 'use' CTypes)
+  (32942 'use' ChplConfig 'only' compiledForSingleLocale)
+  (32945 'use' BytesCasts)
+  (32950 'use' BytesStringCommon 'only' decodePolicy)
+  function _unknown[42].createBorrowingBuffer[32952](arg _mt[32962]:_MT[201], arg this[32955] :
+  bytes[232], arg x[32959] :
+  bytes[232]) : _unknown[42] "inline" "method" "@unstable"
+  {
+    unknown ret[32967] bytes[232]
+    (32970 'end of statement')
+    (32972 call initWithBorrowedBuffer ret x)
+    (32975 return ret)
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].createBorrowingBuffer[32980](arg _mt[32997]:_MT[201], arg this[32983] :
+  bytes[232], arg x[32987] :
+  chpl_c_string, arg length[32994] =
+  (32991 call . x c"size")) : _unknown[42] "deprecated" "inline" "method"
+  {
+    (33001 return(33006 call(33003 call . bytes[232] c"createBorrowingBuffer")(33007 call : x bufferType)(length = length)(size =(33013 call + length 1))))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].createBorrowingBuffer[33021](arg _mt[33040]:_MT[201], arg this[33024] :
+  bytes[232], arg x[33031] :
+  (33028 call c_ptr unknown t[33029]), arg length[33037] =
+  (33035 call strLen x)) : _unknown[42] "inline" "method" "@unstable"
+  {
+    (33044 return(33049 call(33046 call . bytes[232] c"createBorrowingBuffer")(33050 call : x bufferType)(length = length)(size =(33056 call + length 1))))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].createBorrowingBuffer[33064](arg _mt[33083]:_MT[201], arg this[33067] :
+  bytes[232], arg x[33074] :
+  (33071 call c_ptrConst unknown t[33072]), arg length[33080] =
+  (33078 call strLen x)) : _unknown[42] "inline" "method" "@unstable"
+  {
+    (33087 return(33092 call(33089 call . bytes[232] c"createBorrowingBuffer")(33093 call : x bufferType)(length = length)(size =(33099 call + length 1))))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function chpl_createBytesWithLiteral[33107](arg buffer[33110] :
+  chpl_c_string, arg offset[33114] :
+  int[10], arg x[33118] :
+  chpl_c_string, arg length[33122] :
+  int[10]) : _unknown[42]
+  {
+    unknown buf[33127](33128 call :(33130 call : buffer(33134 call c_ptr void[4]))(33137 call c_ptr(33139 call uint[86] 8)))
+    (33142 'end of statement')
+    (33143 call = buf(33146 call + buf offset))
+    (33158 'import'(33155 call .(33152 call . OS c"POSIX") c"memcpy"))
+    (33160 call memcpy(33161 call : buf(33165 call c_ptr void[4]))(33167 call : x(33171 call c_ptr void[4]))(33177 call(33174 call . length c"safeCast") c_size_t))
+    (33179 call =(33182 call buf length) 0)
+    (33185 return(33190 call(33187 call . bytes[232] c"createBorrowingBuffer") buf length))
+  }
+  function _unknown[42].createBorrowingBuffer[33195](arg _mt[33216]:_MT[201], arg this[33198] :
+  bytes[232], arg x[33205] :
+  (33202 call c_ptr unknown t[33203]), arg length[33209] :
+  int[10], arg size[33213] :
+  int[10]) : _unknown[42] "inline" "method" "@unstable"
+  {
+    if(33244 call _cond_test(33230 call &&(33232 call != t(33236 call uint[86] 8))(33238 call != t(33242 call int[10] 8))))
+    {
+      (33222 call compilerError "Cannot create a bytes with a buffer of "(33226 call : t string[244]))
+    }
+    unknown ret[33249] bytes[232]
+    (33252 'end of statement')
+    (33254 call initWithBorrowedBuffer ret(33256 call : x bufferType) length size)
+    (33262 return ret)
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].createAdoptingBuffer[33267](arg _mt[33286]:_MT[201], arg this[33270] :
+  bytes[232], arg x[33277] :
+  (33274 call c_ptr unknown t[33275]), arg length[33283] =
+  (33281 call strLen x)) : _unknown[42] "inline" "method"
+  {
+    (33290 return(33295 call(33292 call . bytes[232] c"createAdoptingBuffer")(33296 call : x bufferType)(length = length)(size =(33302 call + length 1))))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].createAdoptingBuffer[33310](arg _mt[33327]:_MT[201], arg this[33313] :
+  bytes[232], arg x[33317] :
+  chpl_c_string, arg length[33324] =
+  (33321 call . x c"size")) : _unknown[42] "deprecated" "inline" "method"
+  {
+    (33331 return(33336 call(33333 call . bytes[232] c"createAdoptingBuffer")(33337 call : x bufferType)(length = length)(size =(33343 call + length 1))))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].createAdoptingBuffer[33351](arg _mt[33370]:_MT[201], arg this[33354] :
+  bytes[232], arg x[33361] :
+  (33358 call c_ptrConst unknown t[33359]), arg length[33367] =
+  (33365 call strLen x)) : _unknown[42] "inline" "method"
+  {
+    (33374 return(33379 call(33376 call . bytes[232] c"createAdoptingBuffer")(33380 call : x bufferType)(length = length)(size =(33386 call + length 1))))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].createAdoptingBuffer[33394](arg _mt[33415]:_MT[201], arg this[33397] :
+  bytes[232], arg x[33404] :
+  (33401 call c_ptr unknown t[33402]), arg length[33408] :
+  int[10], arg size[33412] :
+  int[10]) : _unknown[42] "inline" "method"
+  {
+    if(33441 call _cond_test(33427 call &&(33429 call != t(33433 call uint[86] 8))(33435 call != t(33439 call int[10] 8))))
+    {
+      (33421 call compilerError "Cannot create a bytes with a buffer of "(33423 call : t string[244]))
+    }
+    unknown ret[33446] bytes[232]
+    (33449 'end of statement')
+    (33451 call initWithOwnedBuffer ret x length size)
+    (33456 return ret)
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].createCopyingBuffer[33461](arg _mt[33480]:_MT[201], arg this[33464] :
+  bytes[232], arg x[33471] :
+  (33468 call c_ptrConst unknown t[33469]), arg length[33477] =
+  (33475 call strLen x)) : _unknown[42] "inline" "method"
+  {
+    (33484 return(33489 call(33486 call . bytes[232] c"createCopyingBuffer")(33490 call : x bufferType)(length = length)(size =(33496 call + length 1))))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].createCopyingBuffer[33504](arg _mt[33521]:_MT[201], arg this[33507] :
+  bytes[232], arg x[33511] :
+  chpl_c_string, arg length[33518] =
+  (33515 call . x c"size")) : _unknown[42] "deprecated" "inline" "method"
+  {
+    (33525 return(33530 call(33527 call . bytes[232] c"createCopyingBuffer")(33531 call : x bufferType)(length = length)(size =(33537 call + length 1))))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].createCopyingBuffer[33545](arg _mt[33571]:_MT[201], arg this[33548] :
+  bytes[232], arg x[33555] :
+  (33552 call c_ptr unknown t[33553]), arg length[33561] =
+  (33559 call strLen x), arg size[33568] =
+  (33564 call + length 1)) : _unknown[42] "inline" "method"
+  {
+    if(33597 call _cond_test(33583 call &&(33585 call != t(33589 call uint[86] 8))(33591 call != t(33595 call int[10] 8))))
+    {
+      (33577 call compilerError "Cannot create a bytes with a buffer of "(33579 call : t string[244]))
+    }
+    unknown ret[33602] bytes[232]
+    (33605 'end of statement')
+    (33607 call initWithNewBuffer ret x length size)
+    (33612 return ret)
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function bytes[232].init[33649](arg _mt[33653]:_MT[201], arg this[33651]:bytes[232]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+  }
+  function bytes[232].deinit[33658](arg _mt[33662]:_MT[201], ref arg this[33660]:bytes[232]) : _unknown[42] "destructor" "method" "primary method" "no return value for void"
+  {
+    if(33701 call _cond_test(33691 call && isOwned(33694 call !=(33697 call . this c"buff") nil[32])))
+    {
+      {
+        const tmp[33683] "const" "temp"
+        (33684 'move' tmp[33683](33681 'deref'(33666 'chpl_on_locale_num'(33668 call chpl_buildLocaleID(33670 call . this c"locale_id") c_sublocid_any))))
+        {
+          (33676 call chpl_here_free(33678 call . this c"buff"))
+        }
+        (33687 'elided on block' 0 tmp[33683])
+      }
+    }
+  }
+  function bytes[232].chpl__serialize[33707](arg _mt[33711]:_MT[201], arg this[33709]:bytes[232]) : _unknown[42] "method" "primary method"
+  {
+    unknown data[33715] chpl__inPlaceBuffer
+    (33718 'end of statement')
+    if(33732 call _cond_test(33728 call <= buffLen CHPL_SHORT_STRING_SIZE))
+    {
+      (33721 call chpl_string_comm_get(33723 call chpl__getInPlaceBufferDataForWrite data) locale_id buff buffLen)
+    }
+    (33736 return(33737 'new'(33739 call __serializeHelper buffLen buff buffSize locale_id data buffLen)))
+  }
+  function bytes[232].chpl__deserialize[33748](arg _mt[33754]:_MT[201], arg this[33750]:bytes[232], arg data[33752]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    if(33850 call _cond_test(33843 call !=(33846 call . data c"locale_id") chpl_nodeID))
+    {
+      if(33820 call _cond_test(33813 call <=(33816 call . data c"buffLen") CHPL_SHORT_STRING_SIZE))
+      {
+        (33759 return(33764 call(33761 call . bytes[232] c"createCopyingBuffer")(33766 call chpl__getInPlaceBufferData(33768 call . data c"shortData"))(33772 call . data c"buffLen")(33776 call . data c"size")))
+      }
+      {
+        unknown localBuff[33781](33783 call bufferCopyRemote(33785 call . data c"locale_id")(33789 call . data c"buff")(33793 call . data c"buffLen"))
+        (33797 'end of statement')
+        (33798 return(33803 call(33800 call . bytes[232] c"createAdoptingBuffer") localBuff(33806 call . data c"buffLen")(33810 call . data c"size")))
+      }
+    }
+    {
+      (33825 return(33830 call(33827 call . bytes[232] c"createBorrowingBuffer")(33832 call . data c"buff")(33836 call . data c"buffLen")(33840 call . data c"size")))
+    }
+  }
+  function bytes[232].serialize[33856](arg _mt[33864]:_MT[201], arg this[33858]:bytes[232], arg writer[33860]:_any[141](?), ref arg serializer[33862]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (33868 call compilerError "not implemented: serialize")
+  }
+  function bytes[232].deserialize[33872](arg _mt[33880]:_MT[201], ref arg this[33874]:bytes[232], arg reader[33876]:_any[141](?), ref arg deserialize[33878]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (33884 call compilerError "not implemented: deserialize")
+  }
+  function bytes[232].init=[33890](arg _mt[33898]:_MT[201], arg this[33892]:bytes[232], arg b[33895] :
+  bytes[232]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (33905 call(33902 call . this c"chpl__initThisType"))
+    (33907 call initWithNewBuffer this b)
+  }
+  function bytes[232].init=[33912](arg _mt[33920]:_MT[201], arg this[33914]:bytes[232], arg b[33917] :
+  string[244]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (33927 call(33924 call . this c"chpl__initThisType"))
+    (33929 call initWithNewBuffer this(33932 call . b c"buff")(length =(33936 call . b c"numBytes"))(size =(33940 call +(33943 call . b c"numBytes") 1)))
+  }
+  function bytes[232].init=[33950](arg _mt[33958]:_MT[201], arg this[33952]:bytes[232], arg b[33955] :
+  c_string) : _unknown[42] "deprecated" "method" "primary method" "no return value for void"
+  {
+    (33965 call(33962 call . this c"chpl__initThisType"))
+    unknown length[33967](33969 call . b c"size")
+    (33973 'end of statement')
+    (33975 call initWithNewBuffer this(33977 call : b bufferType)(length = length)(size =(33983 call + length 1)))
+  }
+  function bytes[232].byteIndices[33990](arg _mt[33994]:_MT[201], arg this[33992]:bytes[232]) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    (33997 return(34002 call chpl_build_bounded_range 0(34000 call chpl__nudgeHighBound size)))
+  }
+  function bytes[232].size[34006](arg _mt[34010]:_MT[201], param arg this[34008]:bytes[232]) param : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    (34013 return(34014 'string_length_bytes' this))
+  }
+  function bytes[232].numBytes[34018](arg _mt[34022]:_MT[201], param arg this[34020]:bytes[232]) param : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    (34025 return(34026 'string_length_bytes' this))
+  }
+  function bytes[232].this[34030](arg _mt[34038]:_MT[201], param arg this[34032]:bytes[232], param arg i[34035] :
+  int[10]) param : _unknown[42] "inline" "method" "primary method"
+  {
+    if(34082 call _cond_test(34066 call ||(34068 call < i 0)(34072 call > i(34075 call -(34078 call . this c"size") 1))))
+    {
+      (34043 call compilerError(34044 call +(34046 call +(34048 call + "index "(34051 call : i string[244])) " out of bounds for bytes with length ")(34058 call :(34061 call . this c"numBytes") string[244])))
+    }
+    (34087 return(34088 'ascii' this i))
+  }
+  { scopeless type
+    int[10]
+  }
+  function bytes[232].item[34094](arg _mt[34102]:_MT[201], param arg this[34096]:bytes[232], param arg i[34099] :
+  int[10]) param : _unknown[42] "inline" "method" "primary method"
+  {
+    if(34144 call _cond_test(34128 call ||(34130 call < i 0)(34134 call > i(34137 call -(34140 call . this c"size") 1))))
+    {
+      (34107 call compilerError(34108 call +(34110 call +(34112 call + "index "(34115 call : i string[244])) " out of bounds for bytes with length ")(34120 call :(34123 call . this c"numBytes") string[244])))
+    }
+    (34149 return(34150 'bytes item' this i))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function bytes[232].item[34156](arg _mt[34164]:_MT[201], arg this[34158]:bytes[232], arg i[34161] :
+  byteIndex) : _unknown[42] "method" "primary method"
+  {
+    (34168 return(34173 call(34170 call . this c"item")(34174 call : i int[10])))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function bytes[232].this[34181](arg _mt[34189]:_MT[201], arg this[34183]:bytes[232], arg i[34186] :
+  byteIndex) : _unknown[42] "method" "primary method"
+  {
+    (34195 return(34200 call(34197 call . this c"byte")(34201 call : i int[10])))
+  }
+  { scopeless type
+    (34192 call uint[86] 8)
+  }
+  function bytes[232].toByte[34208](arg _mt[34212]:_MT[201], param arg this[34210]:bytes[232]) param : _unknown[42] "inline" "method" "primary method"
+  {
+    if(34231 call _cond_test(34224 call !=(34227 call . this c"numBytes") 1))
+    {
+      (34219 call compilerError "bytes.toByte() only accepts single-byte bytes")
+    }
+    (34236 return(34237 'ascii' this))
+  }
+  { scopeless type
+    (34215 call uint[86] 8)
+  }
+  function bytes[232].byte[34242](arg _mt[34250]:_MT[201], param arg this[34244]:bytes[232], param arg i[34247] :
+  int[10]) param : _unknown[42] "inline" "method" "primary method"
+  {
+    if(34291 call _cond_test(34278 call ||(34280 call < i 0)(34284 call >= i(34288 call . this c"numBytes"))))
+    {
+      (34257 call compilerError(34258 call +(34260 call +(34262 call + "index "(34265 call : i string[244])) " out of bounds for bytes with length ")(34270 call :(34273 call . this c"numBytes") string[244])))
+    }
+    (34296 return(34297 'ascii' this i))
+  }
+  { scopeless type
+    (34253 call uint[86] 8)
+  }
+  function bytes[232].join[34303](arg _mt[34314]:_MT[201], arg this[34305]:bytes[232], const  ref arg x[34311] :
+  (34309 call chpl__buildArrayRuntimeType nil[32] bytes[232])) : _unknown[42] "inline" "method" "primary method"
+  {
+    (34318 return(34320 call doJoin this x))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function bytes[232].join[34326](arg _mt[34332]:_MT[201], arg this[34328]:bytes[232], const  ref arg x[34330]:_any[141](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    if(34358 call _cond_test(34344 call ||(34346 call !(34349 call isHomogeneousTuple x))(34351 call !(34354 call isBytes(34356 call x 0)))))
+    {
+      (34339 call compilerError "join() on tuples only handles homogeneous tuples of bytes")
+    }
+    (34363 return(34365 call doJoin this x))
+  }
+  where {
+    (34335 call isTuple x)
+  }
+  function bytes[232].join[34371](arg _mt[34379]:_MT[201], arg this[34373]:bytes[232], arg ir[34376] :
+  _iteratorRecord) : _unknown[42] "inline" "method" "primary method"
+  {
+    (34383 return(34385 call doJoinIterator this ir))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  type bytes[232] unknown buffLen[33621] 0 int[10] unknown buffSize[33627] 0 int[10] unknown buff[33633] nil[32] bufferType unknown isOwned[33639] 1 bool unknown locale_id[33645] chpl_nodeID writeSerializable readDeserializable
+  function _unknown[42].size[34393](arg _mt[34399]:_MT[201], arg this[34396] :
+  bytes[232]) : _unknown[42] "inline" "method" "no parens"
+  {
+    (34403 return buffLen)
+  }
+  { scopeless type
+    int[10]
+  }
+  function _unknown[42].indices[34408](arg _mt[34414]:_MT[201], arg this[34411] :
+  bytes[232]) : _unknown[42] "method" "no parens"
+  {
+    (34418 return(34423 call chpl_build_bounded_range 0(34421 call chpl__nudgeHighBound size)))
+  }
+  { scopeless type
+    range
+  }
+  function _unknown[42].numBytes[34428](arg _mt[34434]:_MT[201], arg this[34431] :
+  bytes[232]) : _unknown[42] "inline" "method" "no parens"
+  {
+    (34438 return buffLen)
+  }
+  { scopeless type
+    int[10]
+  }
+  function _unknown[42].localize[34443](arg _mt[34449]:_MT[201], arg this[34446] :
+  bytes[232]) : _unknown[42] "inline" "method" "@unstable"
+  {
+    if(34481 call _cond_test(34470 call ||(34473 call compiledForSingleLocale)(34474 call ==(34477 call . this c"locale_id") chpl_nodeID)))
+    {
+      (34454 return(34459 call(34456 call . bytes[232] c"createBorrowingBuffer") this))
+    }
+    {
+      const x[34463] "const" this bytes[232]
+      (34467 'end of statement')
+      (34468 return x)
+    }
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].c_str[34488](arg _mt[34494]:_MT[201], arg this[34491] :
+  bytes[232]) : _unknown[42] "deprecated" "inline" "last resort" "method"
+  {
+    (34503 'use' CTypes 'only' c_str)
+    (34505 return(34510 call(34507 call . this c"c_str")))
+  }
+  { scopeless type
+    (34497 call c_ptrConst c_char)
+  }
+  function _unknown[42].item[34514](arg _mt[34524]:_MT[201], arg this[34517] :
+  bytes[232], arg i[34521] :
+  int[10]) : _unknown[42] "method"
+  {
+    if(34554 call _cond_test(34538 call && boundsChecking(34541 call ||(34543 call < i 0)(34547 call >= i(34551 call . this c"buffLen")))))
+    {
+      (34529 call halt "index " i " out of bounds for bytes with length "(34534 call . this c"buffLen"))
+    }
+    unknown tmp[34580] "temp"(34565 call bufferCopy(buf =(34567 call . this c"buff"))(off = i)(len = 1)(loc =(34576 call . this c"locale_id")))
+    (34587 call _check_tuple_var_decl tmp[34580] 2)
+    unknown buf[34560](34581 call tmp[34580] 0)
+    unknown size[34562](34584 call tmp[34580] 1)
+    (34592 'end of statement')
+    (34593 return(34598 call(34595 call . bytes[232] c"createAdoptingBuffer") buf(length = 1)(size = size)))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].this[34607](arg _mt[34617]:_MT[201], arg this[34610] :
+  bytes[232], arg i[34614] :
+  int[10]) : _unknown[42] "method"
+  {
+    (34623 return(34628 call(34625 call . this c"byte") i))
+  }
+  { scopeless type
+    (34620 call uint[86] 8)
+  }
+  function _unknown[42].toByte[34633](arg _mt[34639]:_MT[201], arg this[34636] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    if(34656 call _cond_test(34649 call !=(34652 call . this c"buffLen") 1))
+    {
+      (34647 call halt "bytes.toByte() only accepts single-byte bytes")
+    }
+    (34660 return(34662 call bufferGetByte(buf =(34664 call . this c"buff"))(off = 0)(loc =(34671 call . this c"locale_id"))))
+  }
+  { scopeless type
+    (34642 call uint[86] 8)
+  }
+  function _unknown[42].byte[34678](arg _mt[34688]:_MT[201], arg this[34681] :
+  bytes[232], arg i[34685] :
+  int[10]) : _unknown[42] "method"
+  {
+    if(34720 call _cond_test(34704 call && boundsChecking(34707 call ||(34709 call < i 0)(34713 call >= i(34717 call . this c"buffLen")))))
+    {
+      (34695 call halt "index " i " out of bounds for bytes with length "(34700 call . this c"buffLen"))
+    }
+    (34725 return(34727 call bufferGetByte(buf =(34729 call . this c"buff"))(off = i)(loc =(34736 call . this c"locale_id"))))
+  }
+  { scopeless type
+    (34691 call uint[86] 8)
+  }
+  function _unknown[42].items[34743](arg _mt[34749]:_MT[201], arg this[34746] :
+  bytes[232]) : _unknown[42] "iterator fn" "method" "no return value for void"
+  {
+    if(34760 call _cond_test(34759 call(34756 call . this c"isEmpty")))
+    {
+      (34753 return _void[46])
+    }
+    {
+      unknown _indexOfInterest[34781] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[34782] "expr temp" "temp"
+      (34791 'move' _iterator[34782](34789 call _getIterator(34768 call . this c"indices")))
+      Defer
+      {
+        {
+          (34806 call _freeIterator _iterator[34782])
+        }
+      }
+      { scopeless type
+        (34796 'move' _indexOfInterest[34781](34793 call iteratorIndex _iterator[34782]))
+      }
+      ForLoop[34783] order-independent
+      {
+        unknown i[34765] "index var" "insert auto destroy"
+        (34801 'move' i[34765] _indexOfInterest[34781])
+        (34771 yield(34776 call(34773 call . this c"item") i))
+        label _continueLabel[34786]
+        _indexOfInterest[34781]
+        _iterator[34782]
+      }
+      label _breakLabel[34787]
+    }
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].these[34816](arg _mt[34822]:_MT[201], arg this[34819] :
+  bytes[232]) : _unknown[42] "iterator fn" "method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[34840] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[34841] "expr temp" "temp"
+      (34850 'move' _iterator[34841](34848 call _getIterator(34836 call(34833 call . this c"chpl_bytes"))))
+      Defer
+      {
+        {
+          (34865 call _freeIterator _iterator[34841])
+        }
+      }
+      { scopeless type
+        (34855 'move' _indexOfInterest[34840](34852 call iteratorIndex _iterator[34841]))
+      }
+      ForLoop[34842]
+      {
+        unknown i[34828] "index var" "insert auto destroy"
+        (34860 'move' i[34828] _indexOfInterest[34840])
+        (34837 yield i)
+        label _continueLabel[34845]
+        _indexOfInterest[34840]
+        _iterator[34841]
+      }
+      label _breakLabel[34846]
+    }
+  }
+  { scopeless type
+    (34825 call uint[86] 8)
+  }
+  function _unknown[42].chpl_bytes[34875](arg _mt[34881]:_MT[201], arg this[34878] :
+  bytes[232]) : _unknown[42] "chpldoc ignore chpl prefix" "iterator fn" "method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[34903] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[34904] "expr temp" "temp"
+      (34913 'move' _iterator[34904](34911 call _getIterator(34890 call . this c"indices")))
+      Defer
+      {
+        {
+          (34928 call _freeIterator _iterator[34904])
+        }
+      }
+      { scopeless type
+        (34918 'move' _indexOfInterest[34903](34915 call iteratorIndex _iterator[34904]))
+      }
+      ForLoop[34905] order-independent
+      {
+        unknown i[34887] "index var" "insert auto destroy"
+        (34923 'move' i[34887] _indexOfInterest[34903])
+        (34893 yield(34898 call(34895 call . this c"byte") i))
+        label _continueLabel[34908]
+        _indexOfInterest[34903]
+        _iterator[34904]
+      }
+      label _breakLabel[34909]
+    }
+  }
+  { scopeless type
+    (34884 call uint[86] 8)
+  }
+  function _unknown[42].this[34938](arg _mt[34950]:_MT[201], arg this[34941] :
+  bytes[232], arg r[34947] :
+  (34945 call range ?[227])) : _unknown[42] "inline" "method"
+  {
+    (34954 return(34959 'try!-expr'(34956 call getSlice this r)))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].isEmpty[34963](arg _mt[34969]:_MT[201], arg this[34966] :
+  bytes[232]) : _unknown[42] "inline" "method"
+  {
+    (34973 return(34974 call ==(34977 call . this c"buffLen") 0))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].startsWith[34984](arg _mt[34996]:_MT[201], arg this[34987] :
+  bytes[232], arg patterns[34992] ... :
+  bytes[232]) : _unknown[42] "inline" "method"
+  {
+    (35000 return(35002 call startsEndsWith this patterns(fromLeft = 1)))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].endsWith[35010](arg _mt[35022]:_MT[201], arg this[35013] :
+  bytes[232], arg patterns[35018] ... :
+  bytes[232]) : _unknown[42] "inline" "method"
+  {
+    (35026 return(35028 call startsEndsWith this patterns(fromLeft = 0)))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].find[35036](arg _mt[35057]:_MT[201], arg this[35039] :
+  bytes[232], arg pattern[35043] :
+  bytes[232], arg indices[35053] :
+  (35047 call range ?[227]) =
+  (35050 call . this c"indices")) : _unknown[42] "inline" "method"
+  {
+    (35061 return(35063 call doSearchNoEnc this pattern indices(count = 0)))
+  }
+  { scopeless type
+    int[10]
+  }
+  function _unknown[42].rfind[35072](arg _mt[35093]:_MT[201], arg this[35075] :
+  bytes[232], arg pattern[35079] :
+  bytes[232], arg indices[35089] :
+  (35083 call range ?[227]) =
+  (35086 call . this c"indices")) : _unknown[42] "inline" "method"
+  {
+    (35097 return(35099 call doSearchNoEnc this pattern indices(count = 0)(fromLeft = 0)))
+  }
+  { scopeless type
+    int[10]
+  }
+  function _unknown[42].count[35110](arg _mt[35131]:_MT[201], arg this[35113] :
+  bytes[232], arg pattern[35117] :
+  bytes[232], arg indices[35127] :
+  (35121 call range ?[227]) =
+  (35124 call . this c"indices")) : _unknown[42] "inline" "method"
+  {
+    (35135 return(35137 call doSearchNoEnc this pattern indices(count = 1)))
+  }
+  { scopeless type
+    int[10]
+  }
+  function _unknown[42].replace[35146](arg _mt[35168]:_MT[201], arg this[35149] :
+  bytes[232], arg pattern[35153] :
+  bytes[232], arg replacement[35157] :
+  bytes[232], arg count[35164] :
+  int[10] =
+  (35161 call - 1)) : _unknown[42] "inline" "method"
+  {
+    (35172 return(35174 call doReplace this pattern replacement count))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].split[35182](arg _mt[35206]:_MT[201], arg this[35185] :
+  bytes[232], arg sep[35189] :
+  bytes[232], arg maxsplit[35196] :
+  int[10] =
+  (35193 call - 1), arg ignoreEmpty[35202] :
+  bool =
+  0) : _unknown[42] "iterator fn" "method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[35221] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[35222] "expr temp" "temp"
+      (35231 'move' _iterator[35222](35229 call _getIterator(35213 call doSplit this sep maxsplit ignoreEmpty)))
+      Defer
+      {
+        {
+          (35246 call _freeIterator _iterator[35222])
+        }
+      }
+      { scopeless type
+        (35236 'move' _indexOfInterest[35221](35233 call iteratorIndex _iterator[35222]))
+      }
+      ForLoop[35223]
+      {
+        unknown s[35210] "index var" "insert auto destroy"
+        (35241 'move' s[35210] _indexOfInterest[35221])
+        (35218 yield s)
+        label _continueLabel[35226]
+        _indexOfInterest[35221]
+        _iterator[35222]
+      }
+      label _breakLabel[35227]
+    }
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].split[35256](arg _mt[35270]:_MT[201], arg this[35259] :
+  bytes[232], arg maxsplit[35266] :
+  int[10] =
+  (35263 call - 1)) : _unknown[42] "iterator fn" "method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[35283] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[35284] "expr temp" "temp"
+      (35293 'move' _iterator[35284](35291 call _getIterator(35277 call doSplitWSNoEnc this maxsplit)))
+      Defer
+      {
+        {
+          (35308 call _freeIterator _iterator[35284])
+        }
+      }
+      { scopeless type
+        (35298 'move' _indexOfInterest[35283](35295 call iteratorIndex _iterator[35284]))
+      }
+      ForLoop[35285]
+      {
+        unknown s[35274] "index var" "insert auto destroy"
+        (35303 'move' s[35274] _indexOfInterest[35283])
+        (35280 yield s)
+        label _continueLabel[35288]
+        _indexOfInterest[35283]
+        _iterator[35284]
+      }
+      label _breakLabel[35289]
+    }
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].join[35318](arg _mt[35330]:_MT[201], arg this[35321] :
+  bytes[232], const  ref arg x[35326] ... :
+  bytes[232]) : _unknown[42] "inline" "method"
+  {
+    (35334 return(35336 call doJoin this x))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].join[35342](arg _mt[35350]:_MT[201], arg this[35345] :
+  bytes[232], const  ref arg x[35348]:_any[141](?)) : _unknown[42] "inline" "method" "no return value for void"
+  {
+    (35355 call compilerError(35356 call + "bytes.join() accepts any number of bytes, homogeneous " "tuple of bytes, or array of bytes as an argument"))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].strip[35367](arg _mt[35387]:_MT[201], arg this[35370] :
+  bytes[232], arg chars[35376] =
+  b" \t\r\n", arg leading[35380] =
+  1, arg trailing[35384] =
+  1) : _unknown[42] "method"
+  {
+    (35391 return(35393 call doStripNoEnc this chars leading trailing))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].partition[35401](arg _mt[35411]:_MT[201], const arg this[35404] :
+  bytes[232], arg sep[35408] :
+  bytes[232]) : _unknown[42] "inline" "method"
+  {
+    (35418 return(35420 call doPartition this sep))
+  }
+  { scopeless type
+    (35413 call * 3 bytes[232])
+  }
+  function _unknown[42].dedent[35426](arg _mt[35440]:_MT[201], arg this[35429] :
+  bytes[232], arg columns[35433] =
+  0, arg ignoreFirst[35437] =
+  1) : _unknown[42] "method" "@unstable"
+  {
+    (35444 return(35446 call doDedent this columns ignoreFirst))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].decode[35453](arg _mt[35466]:_MT[201], arg this[35456] :
+  bytes[232], arg policy[35463] =
+  (35460 call . decodePolicy c"strict")) : _unknown[42] throws "method"
+  {
+    unknown localThis[35471](35477 call(35474 call . this c"localize")) bytes[232]
+    (35479 'end of statement')
+    (35480 return(35482 call decodeByteBuffer(35484 call . localThis c"buff")(35488 call . localThis c"buffLen") policy))
+  }
+  { scopeless type
+    string[244]
+  }
+  function _unknown[42].isUpper[35495](arg _mt[35501]:_MT[201], arg this[35498] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    if(35513 call _cond_test(35512 call(35509 call . this c"isEmpty")))
+    {
+      (35505 return 0)
+    }
+    unknown result[35519] 1 bool
+    (35523 'end of statement')
+    {
+      const tmp[35592] "const" "temp"
+      (35593 'move' tmp[35592](35590 'deref'(35524 'chpl_on_locale_num'(35526 call chpl_buildLocaleID(35528 call . this c"locale_id") c_sublocid_any))))
+      {
+        {
+          unknown _indexOfInterest[35558] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[35559] "expr temp" "temp"
+          (35568 'move' _iterator[35559](35566 call _getIterator(35539 call(35536 call . this c"chpl_bytes"))))
+          Defer
+          {
+            {
+              (35583 call _freeIterator _iterator[35559])
+            }
+          }
+          { scopeless type
+            (35573 'move' _indexOfInterest[35558](35570 call iteratorIndex _iterator[35559]))
+          }
+          ForLoop[35560]
+          {
+            unknown b[35533] "index var" "insert auto destroy"
+            (35578 'move' b[35533] _indexOfInterest[35558])
+            {
+              if(35554 call _cond_test(35549 call !(35552 call byte_isUpper b)))
+              {
+                (35542 call = result 0)
+                break nil[32]
+              }
+            }
+            label _continueLabel[35563]
+            _indexOfInterest[35558]
+            _iterator[35559]
+          }
+          label _breakLabel[35564]
+        }
+      }
+      (35596 'elided on block' 0 tmp[35592])
+    }
+    (35600 return result)
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].isLower[35605](arg _mt[35611]:_MT[201], arg this[35608] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    if(35623 call _cond_test(35622 call(35619 call . this c"isEmpty")))
+    {
+      (35615 return 0)
+    }
+    unknown result[35629] 1 bool
+    (35633 'end of statement')
+    {
+      const tmp[35702] "const" "temp"
+      (35703 'move' tmp[35702](35700 'deref'(35634 'chpl_on_locale_num'(35636 call chpl_buildLocaleID(35638 call . this c"locale_id") c_sublocid_any))))
+      {
+        {
+          unknown _indexOfInterest[35668] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[35669] "expr temp" "temp"
+          (35678 'move' _iterator[35669](35676 call _getIterator(35649 call(35646 call . this c"chpl_bytes"))))
+          Defer
+          {
+            {
+              (35693 call _freeIterator _iterator[35669])
+            }
+          }
+          { scopeless type
+            (35683 'move' _indexOfInterest[35668](35680 call iteratorIndex _iterator[35669]))
+          }
+          ForLoop[35670]
+          {
+            unknown b[35643] "index var" "insert auto destroy"
+            (35688 'move' b[35643] _indexOfInterest[35668])
+            {
+              if(35664 call _cond_test(35659 call !(35662 call byte_isLower b)))
+              {
+                (35652 call = result 0)
+                break nil[32]
+              }
+            }
+            label _continueLabel[35673]
+            _indexOfInterest[35668]
+            _iterator[35669]
+          }
+          label _breakLabel[35674]
+        }
+      }
+      (35706 'elided on block' 0 tmp[35702])
+    }
+    (35710 return result)
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].isSpace[35715](arg _mt[35721]:_MT[201], arg this[35718] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    if(35733 call _cond_test(35732 call(35729 call . this c"isEmpty")))
+    {
+      (35725 return 0)
+    }
+    unknown result[35739] 1 bool
+    (35743 'end of statement')
+    {
+      const tmp[35812] "const" "temp"
+      (35813 'move' tmp[35812](35810 'deref'(35744 'chpl_on_locale_num'(35746 call chpl_buildLocaleID(35748 call . this c"locale_id") c_sublocid_any))))
+      {
+        {
+          unknown _indexOfInterest[35778] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[35779] "expr temp" "temp"
+          (35788 'move' _iterator[35779](35786 call _getIterator(35759 call(35756 call . this c"chpl_bytes"))))
+          Defer
+          {
+            {
+              (35803 call _freeIterator _iterator[35779])
+            }
+          }
+          { scopeless type
+            (35793 'move' _indexOfInterest[35778](35790 call iteratorIndex _iterator[35779]))
+          }
+          ForLoop[35780]
+          {
+            unknown b[35753] "index var" "insert auto destroy"
+            (35798 'move' b[35753] _indexOfInterest[35778])
+            {
+              if(35774 call _cond_test(35769 call !(35772 call byte_isWhitespace b)))
+              {
+                (35762 call = result 0)
+                break nil[32]
+              }
+            }
+            label _continueLabel[35783]
+            _indexOfInterest[35778]
+            _iterator[35779]
+          }
+          label _breakLabel[35784]
+        }
+      }
+      (35816 'elided on block' 0 tmp[35812])
+    }
+    (35820 return result)
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].isAlpha[35825](arg _mt[35831]:_MT[201], arg this[35828] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    if(35843 call _cond_test(35842 call(35839 call . this c"isEmpty")))
+    {
+      (35835 return 0)
+    }
+    unknown result[35849] 1 bool
+    (35853 'end of statement')
+    {
+      const tmp[35922] "const" "temp"
+      (35923 'move' tmp[35922](35920 'deref'(35854 'chpl_on_locale_num'(35856 call chpl_buildLocaleID(35858 call . this c"locale_id") c_sublocid_any))))
+      {
+        {
+          unknown _indexOfInterest[35888] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[35889] "expr temp" "temp"
+          (35898 'move' _iterator[35889](35896 call _getIterator(35869 call(35866 call . this c"chpl_bytes"))))
+          Defer
+          {
+            {
+              (35913 call _freeIterator _iterator[35889])
+            }
+          }
+          { scopeless type
+            (35903 'move' _indexOfInterest[35888](35900 call iteratorIndex _iterator[35889]))
+          }
+          ForLoop[35890]
+          {
+            unknown b[35863] "index var" "insert auto destroy"
+            (35908 'move' b[35863] _indexOfInterest[35888])
+            {
+              if(35884 call _cond_test(35879 call !(35882 call byte_isAlpha b)))
+              {
+                (35872 call = result 0)
+                break nil[32]
+              }
+            }
+            label _continueLabel[35893]
+            _indexOfInterest[35888]
+            _iterator[35889]
+          }
+          label _breakLabel[35894]
+        }
+      }
+      (35926 'elided on block' 0 tmp[35922])
+    }
+    (35930 return result)
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].isDigit[35935](arg _mt[35941]:_MT[201], arg this[35938] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    if(35953 call _cond_test(35952 call(35949 call . this c"isEmpty")))
+    {
+      (35945 return 0)
+    }
+    unknown result[35959] 1 bool
+    (35963 'end of statement')
+    {
+      const tmp[36032] "const" "temp"
+      (36033 'move' tmp[36032](36030 'deref'(35964 'chpl_on_locale_num'(35966 call chpl_buildLocaleID(35968 call . this c"locale_id") c_sublocid_any))))
+      {
+        {
+          unknown _indexOfInterest[35998] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[35999] "expr temp" "temp"
+          (36008 'move' _iterator[35999](36006 call _getIterator(35979 call(35976 call . this c"chpl_bytes"))))
+          Defer
+          {
+            {
+              (36023 call _freeIterator _iterator[35999])
+            }
+          }
+          { scopeless type
+            (36013 'move' _indexOfInterest[35998](36010 call iteratorIndex _iterator[35999]))
+          }
+          ForLoop[36000]
+          {
+            unknown b[35973] "index var" "insert auto destroy"
+            (36018 'move' b[35973] _indexOfInterest[35998])
+            {
+              if(35994 call _cond_test(35989 call !(35992 call byte_isDigit b)))
+              {
+                (35982 call = result 0)
+                break nil[32]
+              }
+            }
+            label _continueLabel[36003]
+            _indexOfInterest[35998]
+            _iterator[35999]
+          }
+          label _breakLabel[36004]
+        }
+      }
+      (36036 'elided on block' 0 tmp[36032])
+    }
+    (36040 return result)
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].isAlnum[36045](arg _mt[36051]:_MT[201], arg this[36048] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    if(36063 call _cond_test(36062 call(36059 call . this c"isEmpty")))
+    {
+      (36055 return 0)
+    }
+    unknown result[36069] 1 bool
+    (36073 'end of statement')
+    {
+      const tmp[36142] "const" "temp"
+      (36143 'move' tmp[36142](36140 'deref'(36074 'chpl_on_locale_num'(36076 call chpl_buildLocaleID(36078 call . this c"locale_id") c_sublocid_any))))
+      {
+        {
+          unknown _indexOfInterest[36108] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[36109] "expr temp" "temp"
+          (36118 'move' _iterator[36109](36116 call _getIterator(36089 call(36086 call . this c"chpl_bytes"))))
+          Defer
+          {
+            {
+              (36133 call _freeIterator _iterator[36109])
+            }
+          }
+          { scopeless type
+            (36123 'move' _indexOfInterest[36108](36120 call iteratorIndex _iterator[36109]))
+          }
+          ForLoop[36110]
+          {
+            unknown b[36083] "index var" "insert auto destroy"
+            (36128 'move' b[36083] _indexOfInterest[36108])
+            {
+              if(36104 call _cond_test(36099 call !(36102 call byte_isAlnum b)))
+              {
+                (36092 call = result 0)
+                break nil[32]
+              }
+            }
+            label _continueLabel[36113]
+            _indexOfInterest[36108]
+            _iterator[36109]
+          }
+          label _breakLabel[36114]
+        }
+      }
+      (36146 'elided on block' 0 tmp[36142])
+    }
+    (36150 return result)
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].isPrintable[36155](arg _mt[36161]:_MT[201], arg this[36158] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    if(36173 call _cond_test(36172 call(36169 call . this c"isEmpty")))
+    {
+      (36165 return 0)
+    }
+    unknown result[36179] 1 bool
+    (36183 'end of statement')
+    {
+      const tmp[36252] "const" "temp"
+      (36253 'move' tmp[36252](36250 'deref'(36184 'chpl_on_locale_num'(36186 call chpl_buildLocaleID(36188 call . this c"locale_id") c_sublocid_any))))
+      {
+        {
+          unknown _indexOfInterest[36218] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[36219] "expr temp" "temp"
+          (36228 'move' _iterator[36219](36226 call _getIterator(36199 call(36196 call . this c"chpl_bytes"))))
+          Defer
+          {
+            {
+              (36243 call _freeIterator _iterator[36219])
+            }
+          }
+          { scopeless type
+            (36233 'move' _indexOfInterest[36218](36230 call iteratorIndex _iterator[36219]))
+          }
+          ForLoop[36220]
+          {
+            unknown b[36193] "index var" "insert auto destroy"
+            (36238 'move' b[36193] _indexOfInterest[36218])
+            {
+              if(36214 call _cond_test(36209 call !(36212 call byte_isPrintable b)))
+              {
+                (36202 call = result 0)
+                break nil[32]
+              }
+            }
+            label _continueLabel[36223]
+            _indexOfInterest[36218]
+            _iterator[36219]
+          }
+          label _breakLabel[36224]
+        }
+      }
+      (36256 'elided on block' 0 tmp[36252])
+    }
+    (36260 return result)
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].isTitle[36265](arg _mt[36271]:_MT[201], arg this[36268] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    if(36283 call _cond_test(36282 call(36279 call . this c"isEmpty")))
+    {
+      (36275 return 0)
+    }
+    unknown result[36289] 1 bool
+    (36293 'end of statement')
+    {
+      const tmp[36434] "const" "temp"
+      (36435 'move' tmp[36434](36432 'deref'(36294 'chpl_on_locale_num'(36296 call chpl_buildLocaleID(36298 call . this c"locale_id") c_sublocid_any))))
+      {
+        unknown UN[36313] "param" 0
+        unknown UPPER[36309] "param" 1
+        unknown LOWER[36305] "param" 2
+        (36316 'end of statement')
+        unknown last[36318] UN
+        (36321 'end of statement')
+        {
+          unknown _indexOfInterest[36400] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[36401] "expr temp" "temp"
+          (36410 'move' _iterator[36401](36408 call _getIterator(36328 call(36325 call . this c"chpl_bytes"))))
+          Defer
+          {
+            {
+              (36425 call _freeIterator _iterator[36401])
+            }
+          }
+          { scopeless type
+            (36415 'move' _indexOfInterest[36400](36412 call iteratorIndex _iterator[36401]))
+          }
+          ForLoop[36402]
+          {
+            unknown b[36322] "index var" "insert auto destroy"
+            (36420 'move' b[36322] _indexOfInterest[36400])
+            {
+              if(36395 call _cond_test(36393 call byte_isLower b))
+              {
+                if(36354 call _cond_test(36344 call ||(36346 call == last UPPER)(36350 call == last LOWER)))
+                {
+                  (36332 call = last LOWER)
+                }
+                {
+                  (36337 call = result 0)
+                  break nil[32]
+                }
+              }
+              {
+                if(36388 call _cond_test(36386 call byte_isUpper b))
+                {
+                  if(36376 call _cond_test(36372 call == last UN))
+                  {
+                    (36360 call = last UPPER)
+                  }
+                  {
+                    (36365 call = result 0)
+                    break nil[32]
+                  }
+                }
+                {
+                  (36381 call = last UN)
+                }
+              }
+            }
+            label _continueLabel[36405]
+            _indexOfInterest[36400]
+            _iterator[36401]
+          }
+          label _breakLabel[36406]
+        }
+      }
+      (36438 'elided on block' 0 tmp[36434])
+    }
+    (36442 return result)
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].toLower[36447](arg _mt[36453]:_MT[201], arg this[36450] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    unknown result[36458] this bytes[232]
+    (36462 'end of statement')
+    if(36471 call _cond_test(36470 call(36467 call . result c"isEmpty")))
+    {
+      (36463 return result)
+    }
+    {
+      unknown _indexOfInterest[36505] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[36506] "expr temp" "temp"
+      (36526 'move' _iterator[36506](36492 call _build_tuple(36519 call _getIterator(36518 call(36515 call . result c"chpl_bytes")))(36524 call _getIterator(36522 call chpl_build_low_bounded_range 0))))
+      Defer
+      {
+        {
+          (36554 call _freeIterator _iterator[36506])
+        }
+      }
+      { scopeless type
+        (36531 'move' _indexOfInterest[36505](36528 call iteratorIndex _iterator[36506]))
+      }
+      ForLoop[36507]
+      {
+        (36536 call _check_tuple_var_decl _indexOfInterest[36505] 2)
+        unknown b[36477] "index var" "insert auto destroy"
+        (36543 'move' b[36477](36540 call _indexOfInterest[36505] 0))
+        unknown i[36479] "index var" "insert auto destroy"
+        (36549 'move' i[36479](36546 call _indexOfInterest[36505] 1))
+        {
+          (36494 call =(36500 call(36497 call . result c"buff") i)(36503 call byte_toLower b))
+        }
+        label _continueLabel[36510]
+        _indexOfInterest[36505]
+        _iterator[36506]
+      }
+      label _breakLabel[36511]
+    }
+    (36561 return result)
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].toUpper[36566](arg _mt[36572]:_MT[201], arg this[36569] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    unknown result[36577] this bytes[232]
+    (36581 'end of statement')
+    if(36590 call _cond_test(36589 call(36586 call . result c"isEmpty")))
+    {
+      (36582 return result)
+    }
+    {
+      unknown _indexOfInterest[36624] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[36625] "expr temp" "temp"
+      (36645 'move' _iterator[36625](36611 call _build_tuple(36638 call _getIterator(36637 call(36634 call . result c"chpl_bytes")))(36643 call _getIterator(36641 call chpl_build_low_bounded_range 0))))
+      Defer
+      {
+        {
+          (36673 call _freeIterator _iterator[36625])
+        }
+      }
+      { scopeless type
+        (36650 'move' _indexOfInterest[36624](36647 call iteratorIndex _iterator[36625]))
+      }
+      ForLoop[36626]
+      {
+        (36655 call _check_tuple_var_decl _indexOfInterest[36624] 2)
+        unknown b[36596] "index var" "insert auto destroy"
+        (36662 'move' b[36596](36659 call _indexOfInterest[36624] 0))
+        unknown i[36598] "index var" "insert auto destroy"
+        (36668 'move' i[36598](36665 call _indexOfInterest[36624] 1))
+        {
+          (36613 call =(36619 call(36616 call . result c"buff") i)(36622 call byte_toUpper b))
+        }
+        label _continueLabel[36629]
+        _indexOfInterest[36624]
+        _iterator[36625]
+      }
+      label _breakLabel[36630]
+    }
+    (36680 return result)
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].toTitle[36685](arg _mt[36691]:_MT[201], arg this[36688] :
+  bytes[232]) : _unknown[42] "method"
+  {
+    unknown result[36696] this bytes[232]
+    (36700 'end of statement')
+    if(36709 call _cond_test(36708 call(36705 call . result c"isEmpty")))
+    {
+      (36701 return result)
+    }
+    unknown UN[36720] "param" 0
+    unknown LETTER[36716] "param" 1
+    (36723 'end of statement')
+    unknown last[36725] UN
+    (36728 'end of statement')
+    {
+      unknown _indexOfInterest[36796] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[36797] "expr temp" "temp"
+      (36817 'move' _iterator[36797](36745 call _build_tuple(36810 call _getIterator(36809 call(36806 call . result c"chpl_bytes")))(36815 call _getIterator(36813 call chpl_build_low_bounded_range 0))))
+      Defer
+      {
+        {
+          (36845 call _freeIterator _iterator[36797])
+        }
+      }
+      { scopeless type
+        (36822 'move' _indexOfInterest[36796](36819 call iteratorIndex _iterator[36797]))
+      }
+      ForLoop[36798]
+      {
+        (36827 call _check_tuple_var_decl _indexOfInterest[36796] 2)
+        unknown b[36730] "index var" "insert auto destroy"
+        (36834 'move' b[36730](36831 call _indexOfInterest[36796] 0))
+        unknown i[36732] "index var" "insert auto destroy"
+        (36840 'move' i[36732](36837 call _indexOfInterest[36796] 1))
+        {
+          if(36792 call _cond_test(36790 call byte_isAlpha b))
+          {
+            if(36780 call _cond_test(36776 call == last UN))
+            {
+              (36749 call = last LETTER)
+              (36753 call =(36759 call(36756 call . result c"buff") i)(36762 call byte_toUpper b))
+            }
+            {
+              (36765 call =(36771 call(36768 call . result c"buff") i)(36774 call byte_toLower b))
+            }
+          }
+          {
+            (36785 call = last UN)
+          }
+        }
+        label _continueLabel[36801]
+        _indexOfInterest[36796]
+        _iterator[36797]
+      }
+      label _breakLabel[36802]
+    }
+    (36852 return result)
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function :[36857](arg x[36860] :
+  string[244], arg t[36864] :
+  bytes[232]) : _unknown[42] "inline" "operator"
+  {
+    (36868 return(36873 call(36870 call . bytes[232] c"createCopyingBuffer")(36875 call . x c"buff")(length =(36879 call . x c"numBytes"))(size =(36883 call +(36886 call . x c"numBytes") 1))))
+  }
+  function :[36893](arg x[36896] :
+  c_string, arg t[36900] :
+  bytes[232]) : _unknown[42] "deprecated" "inline" "operator"
+  {
+    unknown length[36905](36907 call . x c"size")
+    (36911 'end of statement')
+    (36912 return(36917 call(36914 call . bytes[232] c"createCopyingBuffer")(36918 call : x bufferType)(length = length)(size =(36924 call + length 1))))
+  }
+  function _unknown[42].+=[36931](arg _mt[36945]:_MT[201], arg this[36934] :
+  bytes[232], ref arg lhs[36938] :
+  bytes[232], const  ref arg rhs[36942] :
+  bytes[232]) : _unknown[42] "assignop" "method" "operator" "no return value for void"
+  {
+    (36950 call doAppend lhs rhs)
+  }
+  { scopeless type
+    void[4]
+  }
+  function _unknown[42].appendByteValues[36956](arg _mt[36970]:_MT[201], ref arg this[36959] :
+  bytes[232], arg x[36966] ... :
+  (36963 call uint[86] 8)) : _unknown[42] "method" "@unstable" "no return value for void"
+  {
+    unknown buf[36975](36977 call c_array(36979 call uint[86] 8)(36982 call . x c"size"))
+    (36986 'end of statement')
+    {
+      unknown i[36987] "index var" 0
+      unknown tmp[37007] "maybe param" "temp"
+      (37019 'move' tmp[37007](37017 call chpl_compute_low_param_loop_bound 0(36994 call chpl__nudgeHighBound(36991 call . x c"size"))))
+      unknown tmp[37008] "maybe param" "temp"
+      (37031 'move' tmp[37008](37029 call chpl_compute_high_param_loop_bound 0(37024 call chpl__nudgeHighBound(37026 call . x c"size"))))
+      unknown tmp[37009] "maybe param" "temp"
+      (37034 'move' tmp[37009] 1)
+      ParamForLoop[37036]
+      { i[36987] tmp[37007] tmp[37008] tmp[37009]
+        {
+          (36999 call =(37002 call buf i)(37005 call x i))
+        }
+      }
+      label _unused_continueLabel[37011]
+      label _breakLabel[37010]
+    }
+    (37046 call doAppendSomeBytes this(37049 call . x c"size") buf(nCodepoints = 0))
+  }
+  { scopeless type
+    void[4]
+  }
+  function convertNibble[37058](in arg nib[37063] :
+  (37061 call uint[86] 8), arg uppercase[37067] :
+  bool) : _unknown[42] "private"
+  {
+    (37074 call = nib(37077 call & nib 15))
+    if(37167 call _cond_test(37155 call &&(37157 call <= 0 nib)(37161 call <= nib 9)))
+    {
+      unknown zero[37085] "param"(37092 call b"0" 0)(37087 call uint[86] 8)
+      (37095 'end of statement')
+      (37096 return(37097 call + zero nib))
+    }
+    {
+      if(37151 call _cond_test(37141 call &&(37143 call <= 10 nib)(37147 call <= nib 15)))
+      {
+        unknown a[37103] "param"(37110 call b"a" 0)(37105 call uint[86] 8)
+        (37113 'end of statement')
+        unknown A[37115] "param"(37122 call b"A" 0)(37117 call uint[86] 8)
+        (37125 'end of statement')
+        (37126 return(37127 call -(37129 call +(37134 IfExpr  uppercase then
+        { scopeless
+          A
+        } else
+        { scopeless
+          a
+        } ) nib) 10))
+      }
+    }
+    (37172 return 0)
+  }
+  { scopeless type
+    (37071 call uint[86] 8)
+  }
+  function _unknown[42].toHexadecimal[37177](arg _mt[37193]:_MT[201], arg this[37180] :
+  bytes[232], arg uppercase[37185] :
+  bool =
+  0, arg resultType[37190]:_any[141](?) =
+  bytes[232]) : _unknown[42] "method" "@unstable"
+  {
+    unknown result[37198] resultType
+    (37201 'end of statement')
+    {
+      unknown _indexOfInterest[37267] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[37268] "expr temp" "temp"
+      (37277 'move' _iterator[37268](37275 call _getIterator this))
+      Defer
+      {
+        {
+          (37292 call _freeIterator _iterator[37268])
+        }
+      }
+      { scopeless type
+        (37282 'move' _indexOfInterest[37267](37279 call iteratorIndex _iterator[37268]))
+      }
+      ForLoop[37269]
+      {
+        unknown byte[37202] "index var" "insert auto destroy"
+        (37287 'move' byte[37202] _indexOfInterest[37267])
+        {
+          const nib1[37207] "const"(37209 call convertNibble(37210 call &(37212 call >> byte 4) 15) uppercase)
+          (37219 'end of statement')
+          const nib2[37221] "const"(37223 call convertNibble(37224 call & byte 15) uppercase)
+          (37230 'end of statement')
+          if(37245 call _cond_test(37241 call == resultType bytes[232]))
+          {
+            (37238 call(37235 call . result c"appendByteValues") nib1 nib2)
+          }
+          if(37263 call _cond_test(37259 call == resultType string[244]))
+          {
+            (37256 call(37253 call . result c"appendCodepointValues") nib1 nib2)
+          }
+        }
+        label _continueLabel[37272]
+        _indexOfInterest[37267]
+        _iterator[37268]
+      }
+      label _breakLabel[37273]
+    }
+    (37299 return result)
+  }
+  { scopeless type
+    resultType
+  }
+  function _unknown[42].=[37304](arg _mt[37318]:_MT[201], arg this[37307] :
+  bytes[232], ref arg lhs[37311] :
+  bytes[232], arg rhs[37315] :
+  bytes[232]) : _unknown[42] "assignop" "method" "operator" "no return value for void"
+  {
+    (37323 call doAssign lhs rhs)
+  }
+  { scopeless type
+    void[4]
+  }
+  function _unknown[42].=[37329](arg _mt[37343]:_MT[201], arg this[37332] :
+  bytes[232], ref arg lhs[37336] :
+  bytes[232], arg rhs_c[37340] :
+  c_string) : _unknown[42] "assignop" "deprecated" "method" "operator" "no return value for void"
+  {
+    (37347 call = lhs(37354 call(37351 call . bytes[232] c"createCopyingBuffer")(37355 call : rhs_c(37359 call c_ptrConst c_char))))
+  }
+  { scopeless type
+    void[4]
+  }
+  function _unknown[42].+[37364](arg _mt[37378]:_MT[201], arg this[37367] :
+  bytes[232], arg s0[37371] :
+  bytes[232], arg s1[37375] :
+  bytes[232]) : _unknown[42] "method" "operator"
+  {
+    (37382 return(37384 call doConcat s0 s1))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function _unknown[42].+[37390](arg _mt[37404]:_MT[201], arg this[37393] :
+  bytes[232], param arg s0[37397] :
+  bytes[232], param arg s1[37401] :
+  bytes[232]) param : _unknown[42] "inline" "method" "operator"
+  {
+    (37407 return(37408 'string_concat' s0 s1))
+  }
+  function *[37413](arg s[37416] :
+  bytes[232], arg n[37420] :
+  integral) : _unknown[42] "operator"
+  {
+    (37425 return(37427 call doMultiply s n))
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function *[37433](arg n[37436] :
+  integral, arg s[37440] :
+  bytes[232]) : _unknown[42] "operator"
+  {
+    (37444 return(37446 call doMultiply s n))
+  }
+  function _unknown[42].==[37451](arg _mt[37465]:_MT[201], arg this[37454] :
+  bytes[232], arg a[37458] :
+  bytes[232], arg b[37462] :
+  bytes[232]) : _unknown[42] "method" "operator"
+  {
+    (37469 return(37471 call doEq a b))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].!=[37477](arg _mt[37491]:_MT[201], arg this[37480] :
+  bytes[232], arg a[37484] :
+  bytes[232], arg b[37488] :
+  bytes[232]) : _unknown[42] "inline" "method" "operator"
+  {
+    (37495 return(37496 call !(37499 call doEq a b)))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].<[37505](arg _mt[37519]:_MT[201], arg this[37508] :
+  bytes[232], arg a[37512] :
+  bytes[232], arg b[37516] :
+  bytes[232]) : _unknown[42] "inline" "method" "operator"
+  {
+    (37523 return(37525 call doLessThan a b))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].>[37531](arg _mt[37545]:_MT[201], arg this[37534] :
+  bytes[232], arg a[37538] :
+  bytes[232], arg b[37542] :
+  bytes[232]) : _unknown[42] "inline" "method" "operator"
+  {
+    (37549 return(37551 call doGreaterThan a b))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].<=[37557](arg _mt[37571]:_MT[201], arg this[37560] :
+  bytes[232], arg a[37564] :
+  bytes[232], arg b[37568] :
+  bytes[232]) : _unknown[42] "inline" "method" "operator"
+  {
+    (37575 return(37577 call doLessThanOrEq a b))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].>=[37583](arg _mt[37597]:_MT[201], arg this[37586] :
+  bytes[232], arg a[37590] :
+  bytes[232], arg b[37594] :
+  bytes[232]) : _unknown[42] "inline" "method" "operator"
+  {
+    (37601 return(37603 call doGreaterThanOrEq a b))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].==[37609](arg _mt[37623]:_MT[201], arg this[37612] :
+  bytes[232], param arg s0[37616] :
+  bytes[232], param arg s1[37620] :
+  bytes[232]) param : _unknown[42] "inline" "method" "operator"
+  {
+    (37626 return(37627 call ==(37629 'string_compare' s0 s1) 0))
+  }
+  function _unknown[42].!=[37635](arg _mt[37649]:_MT[201], arg this[37638] :
+  bytes[232], param arg s0[37642] :
+  bytes[232], param arg s1[37646] :
+  bytes[232]) param : _unknown[42] "inline" "method" "operator"
+  {
+    (37652 return(37653 call !=(37655 'string_compare' s0 s1) 0))
+  }
+  function _unknown[42].<=[37661](arg _mt[37675]:_MT[201], arg this[37664] :
+  bytes[232], param arg a[37668] :
+  bytes[232], param arg b[37672] :
+  bytes[232]) param : _unknown[42] "inline" "method" "operator"
+  {
+    (37678 return(37679 call <=(37681 'string_compare' a b) 0))
+  }
+  function _unknown[42].>=[37687](arg _mt[37701]:_MT[201], arg this[37690] :
+  bytes[232], param arg a[37694] :
+  bytes[232], param arg b[37698] :
+  bytes[232]) param : _unknown[42] "inline" "method" "operator"
+  {
+    (37704 return(37705 call >=(37707 'string_compare' a b) 0))
+  }
+  function _unknown[42].<[37713](arg _mt[37727]:_MT[201], arg this[37716] :
+  bytes[232], param arg a[37720] :
+  bytes[232], param arg b[37724] :
+  bytes[232]) param : _unknown[42] "inline" "method" "operator"
+  {
+    (37730 return(37731 call <(37733 'string_compare' a b) 0))
+  }
+  function _unknown[42].>[37739](arg _mt[37753]:_MT[201], arg this[37742] :
+  bytes[232], param arg a[37746] :
+  bytes[232], param arg b[37750] :
+  bytes[232]) param : _unknown[42] "inline" "method" "operator"
+  {
+    (37756 return(37757 call >(37759 'string_compare' a b) 0))
+  }
+  function _unknown[42].hash[37765](arg _mt[37771]:_MT[201], arg this[37768] :
+  bytes[232]) : _unknown[42] "inline" "method"
+  {
+    (37775 return(37777 call getHash this))
+  }
+  { scopeless type
+    uint[86]
+  } hashable bytes[232]
+  {
+  }
+  function _unknown[42].<=>[37789](arg _mt[37803]:_MT[201], arg this[37792] :
+  bytes[232], ref arg x[37796] :
+  bytes[232], ref arg y[37800] :
+  bytes[232]) : _unknown[42] "method" "operator" "no return value for void"
+  {
+    if(37881 call _cond_test(37871 call !=(37874 call . x c"locale_id")(37878 call . y c"locale_id")))
+    {
+      unknown tmp[37808] x
+      (37811 'end of statement')
+      (37812 call = x y)
+      (37816 call = y tmp)
+    }
+    {
+      (37821 call <=>(37824 call . x c"buffLen")(37828 call . y c"buffLen"))
+      (37831 call <=>(37834 call . x c"buffSize")(37838 call . y c"buffSize"))
+      (37841 call <=>(37844 call . x c"buff")(37848 call . y c"buff"))
+      (37851 call <=>(37854 call . x c"isOwned")(37858 call . y c"isOwned"))
+      (37861 call <=>(37864 call . x c"locale_id")(37868 call . y c"locale_id"))
+    }
+  }
+}

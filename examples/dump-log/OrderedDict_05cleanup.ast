@@ -1,0 +1,171 @@
+AST dump for OrderedDict after pass cleanup.
+Module use list: 
+
+{
+  (387088 'use' ChapelStandard)
+  (352862 'use' List)
+  (352865 'use' Map)
+  function dict[353403](?).chpl_forwarding_expr1[352892](arg _mt[352897]:_MT[201], arg this[352895]:dict[353403](?)) : _unknown[42] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    (352905 return(352901 call . this[352895] c"table"))
+  }
+  function dict[353403](?).init[352908](arg _mt[352927]:_MT[201], arg this[352910]:dict[353403](?), in arg table[352918] :
+  (352913 call map[352283](?) unknown keyType[352914] unknown valType[352916]), in arg order[352924] :
+  (352922 call list[231871](?) keyType[352914])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (352930 call =(352933 call . this[352910] c"keyType") keyType[352914])
+    (352937 call =(352940 call . this[352910] c"valType") valType[352916])
+    (352944 call =(352947 call . this[352910] c"table") table[352918])
+    (352951 call =(352956 call . this[352910] c"order") order[352924])
+  }
+  function dict[353403](?).init[352962](arg _mt[352975]:_MT[201], arg this[352964]:dict[353403](?), in arg table[352972] :
+  (352967 call map[352283](?) unknown keyType[352968] unknown valType[352970])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    unknown ks[352979](352980 'new'(352982 call list[231871](?) keyType[352968]))
+    (352985 'end of statement')
+    {
+      unknown _indexOfInterest[353000] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[353001] "expr temp" "temp"
+      (353010 'move' _iterator[353001](353008 call _getIterator(352992 call(352989 call . table[352972] c"keys"))))
+      Defer
+      {
+        {
+          (353025 call _freeIterator _iterator[353001])
+        }
+      }
+      { scopeless type
+        (353015 'move' _indexOfInterest[353000](353012 call iteratorIndex _iterator[353001]))
+      }
+      ForLoop[353002]
+      {
+        unknown k[352986] "index var" "insert auto destroy"
+        (353020 'move' k[352986] _indexOfInterest[353000])
+        (352997 call(352994 call . ks[352979] c"pushBack") k[352986])
+        label _continueLabel[353005]
+        _indexOfInterest[353000]
+        _iterator[353001]
+      }
+      label _breakLabel[353006]
+    }
+    (353036 call(353033 call . this[352964] c"init") table[352972] ks[352979])
+  }
+  function dict[353403](?).init[353041](arg _mt[353049]:_MT[201], arg this[353043]:dict[353403](?), arg keyType[353045]:_any[141](?), arg valType[353047]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (353052 call =(353055 call . this[353043] c"keyType") keyType[353045])
+    (353059 call =(353062 call . this[353043] c"valType") valType[353047])
+    (353066 call =(353069 call . this[353043] c"table")(353072 'new'(353074 call map[352283](?) keyType[353045] valType[353047])))
+    (353077 call =(353080 call . this[353043] c"order")(353083 'new'(353085 call list[231871](?) keyType[353045])))
+  }
+  function dict[353403](?).size[353089](arg _mt[353093]:_MT[201], arg this[353091]:dict[353403](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    const s[353098] "const"(353103 call .(353099 call . this[353091] c"table") c"size")
+    (353107 'end of statement')
+    (353109 call assert(353110 call == s[353098](353117 call .(353113 call . this[353091] c"order") c"size")) "Table and order sizes out of sync: " s[353098](353128 call .(353124 call . this[353091] c"order") c"size"))
+    (353131 return s[353098])
+  }
+  { scopeless type
+    int[10]
+  }
+  function dict[353403](?).keys[353136](arg _mt[353140]:_MT[201], arg this[353138]:dict[353403](?)) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[353169] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[353170] "expr temp" "temp"
+      (353179 'move' _iterator[353170](353177 call _getIterator(353191 call chpl_direct_range_iter 0(353183 call chpl__nudgeHighBound(353185 call .(353187 call . this[353138] c"order") c"size")))))
+      Defer
+      {
+        {
+          (353206 call _freeIterator _iterator[353170])
+        }
+      }
+      { scopeless type
+        (353196 'move' _indexOfInterest[353169](353193 call iteratorIndex _iterator[353170]))
+      }
+      ForLoop[353171]
+      {
+        unknown i[353147] "index var" "insert auto destroy"
+        (353201 'move' i[353147] _indexOfInterest[353169])
+        (353161 yield(353166 call(353162 call . this[353138] c"order") i[353147]))
+        label _continueLabel[353174]
+        _indexOfInterest[353169]
+        _iterator[353170]
+      }
+      label _breakLabel[353175]
+    }
+  }
+  { scopeless type
+    (353142 call . this[353138] c"keyType")
+  }
+  function dict[353403](?).values[353216](arg _mt[353220]:_MT[201], arg this[353218]:dict[353403](?)) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[353242] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[353243] "expr temp" "temp"
+      (353252 'move' _iterator[353243](353250 call _getIterator(353233 call(353229 call . this[353218] c"keys"))))
+      Defer
+      {
+        {
+          (353267 call _freeIterator _iterator[353243])
+        }
+      }
+      { scopeless type
+        (353257 'move' _indexOfInterest[353242](353254 call iteratorIndex _iterator[353243]))
+      }
+      ForLoop[353244]
+      {
+        unknown k[353227] "index var" "insert auto destroy"
+        (353262 'move' k[353227] _indexOfInterest[353242])
+        (353234 yield(353239 call(353235 call . this[353218] c"table") k[353227]))
+        label _continueLabel[353247]
+        _indexOfInterest[353242]
+        _iterator[353243]
+      }
+      label _breakLabel[353248]
+    }
+  }
+  { scopeless type
+    (353222 call . this[353218] c"valType")
+  }
+  function dict[353403](?).these[353277](arg _mt[353281]:_MT[201], ref arg this[353279]:dict[353403](?)) : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[353307] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[353308] "expr temp" "temp"
+      (353317 'move' _iterator[353308](353315 call _getIterator(353286 call . this[353279] c"order")))
+      Defer
+      {
+        {
+          (353332 call _freeIterator _iterator[353308])
+        }
+      }
+      { scopeless type
+        (353322 'move' _indexOfInterest[353307](353319 call iteratorIndex _iterator[353308]))
+      }
+      ForLoop[353309]
+      {
+        unknown k[353284] "index var" "insert auto destroy"
+        (353327 'move' k[353284] _indexOfInterest[353307])
+        {
+          unknown val[353292] "ref var"(353297 call(353293 call . this[353279] c"table") k[353284])
+          (353300 'end of statement')
+          (353301 yield(353305 call _build_tuple k[353284] val[353292]))
+        }
+        label _continueLabel[353312]
+        _indexOfInterest[353307]
+        _iterator[353308]
+      }
+      label _breakLabel[353313]
+    }
+  }
+  function dict[353403](?).insert[353341](arg _mt[353359]:_MT[201], ref arg this[353343]:dict[353403](?), arg key[353349] :
+  (353345 call . this[353343] c"keyType"), in arg value[353356] :
+  (353352 call . this[353343] c"valType")) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    if(353383 call _cond_test(353372 call !(353381 call(353378 call .(353374 call . this[353343] c"order") c"contains") key[353349])))
+    {
+      (353369 call(353366 call .(353362 call . this[353343] c"order") c"pushBack") key[353349])
+    }
+    (353397 call(353394 call .(353388 call . this[353343] c"table") c"addOrReplace") key[353349] value[353356])
+  }
+  type dict[353403](?) unknown keyType[352871] "type variable" unknown valType[352874] "type variable" unknown table[352877](352879 call map[352283](?) keyType[352871] valType[352874]) unknown order[352885](352887 call list[231871](?) keyType[352871]) serializable[310094] forwarding ( )
+}

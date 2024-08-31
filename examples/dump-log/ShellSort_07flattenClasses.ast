@@ -1,0 +1,223 @@
+AST dump for ShellSort after pass flattenClasses.
+Module use list: ChapelStandard Sort ShallowCopy 
+
+{
+  function shellSort[237128](ref arg Data[237136] :
+  (237134 call chpl__buildArrayRuntimeType unknown Dom[237130] unknown eltType[237132]), arg comparator[237144] :
+  unknown rec[237139] =
+  (237141 'new'(237143 call DefaultComparator[246408])), arg start[237152] =
+  (237149 call . Dom[237130] c"low"), arg end[237159] =
+  (237156 call . Dom[237130] c"high")) : _unknown[42] "no return value for void"
+  {
+    (237164 call chpl_check_comparator comparator[237144] eltType[237132])
+    unknown idxType[237168] "type variable"(237170 call . Data[237136] c"idxType")
+    if(237187 call _cond_test(237180 call !=(237183 call . Dom[237130] c"rank") 1))
+    {
+      (237175 call compilerError "shellSort() requires 1-D array")
+    }
+    if(237205 call _cond_test(237198 call !(237204 call(237201 call . Dom[237130] c"hasUnitStride"))))
+    {
+      (237193 call compilerError "shellSort() requires an array over a non-stridable domain")
+    }
+    unknown type_tmp[237217] "temp" "type variable" idxType[237168]
+    unknown js[237216] type_tmp[237217]
+    unknown hs[237212] type_tmp[237217]
+    (237222 'end of statement')
+    unknown v[237224](237226 call . Data[237136] c"eltType")
+    (237230 'end of statement')
+    const incs[237232] "const"(237252 call _build_tuple 701 301 132 57 23 10 4 1)
+    (237255 'end of statement')
+    {
+      unknown _indexOfInterest[237457] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[237458] "expr temp" "temp"
+      (237467 'move' _iterator[237458](237465 call _getIterator incs[237232]))
+      Defer
+      {
+        {
+          (237482 call _freeIterator _iterator[237458])
+        }
+      }
+      { scopeless type
+        (237472 'move' _indexOfInterest[237457](237469 call iteratorIndex _iterator[237458]))
+      }
+      ForLoop[237459]
+      {
+        unknown hh[237256] "index var" "insert auto destroy"
+        (237477 'move' hh[237256] _indexOfInterest[237457])
+        {
+          if(237286 call _cond_test(237263 call ||(237265 call > hh[237256](237269 call max idxType[237168]))(237271 call >= hh[237256](237274 call -(237276 call :(237279 call max idxType[237168]) uint(64)[86])(237282 call : start[237152] uint(64)[86])))))
+          {
+            continue _continueLabel[237462] _continueLabel[237462]
+          }
+          const h[237292] "const"(237293 call : hh[237256] idxType[237168])
+          (237298 'end of statement')
+          (237299 call = hs[237212](237302 call + h[237292] start[237152]))
+          {
+            unknown _indexOfInterest[237421] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[237422] "expr temp" "temp"
+            (237431 'move' _iterator[237422](237429 call _getIterator(237435 call chpl_direct_range_iter hs[237212] end[237159])))
+            Defer
+            {
+              {
+                (237450 call _freeIterator _iterator[237422])
+              }
+            }
+            { scopeless type
+              (237440 'move' _indexOfInterest[237421](237437 call iteratorIndex _iterator[237422]))
+            }
+            ForLoop[237423]
+            {
+              unknown is[237306] "index var" "insert auto destroy"
+              (237445 'move' is[237306] _indexOfInterest[237421])
+              {
+                (237313 call = v[237224](237317 call Data[237136] is[237306]))
+                (237319 call = js[237216] is[237306])
+                {
+                  unknown tmp[237358] "temp"
+                  (237412 'move' tmp[237358](237392 call _cond_test(237394 call &&(237396 call >= js[237216] hs[237212])(237400 call <(237402 call chpl_compare v[237224](237405 call Data[237136](237407 call - js[237216] h[237292])) comparator[237144]) 0))))
+                  WhileDo[237363]
+                  {
+                    {
+                      (237343 call =(237346 call Data[237136] js[237216])(237349 call Data[237136](237350 call - js[237216] h[237292])))
+                      (237354 call -= js[237216] h[237292])
+                    }
+                    label _continueLabel[237361]
+                    (237387 'move' tmp[237358](237367 call _cond_test(237369 call &&(237371 call >= js[237216] hs[237212])(237375 call <(237377 call chpl_compare v[237224](237380 call Data[237136](237382 call - js[237216] h[237292])) comparator[237144]) 0))))
+                    tmp[237358]
+                  }
+                  label _breakLabel[237362]
+                }
+                (237415 call =(237418 call Data[237136] js[237216]) v[237224])
+              }
+              label _continueLabel[237426]
+              _indexOfInterest[237421]
+              _iterator[237422]
+            }
+            label _breakLabel[237427]
+          }
+        }
+        label _continueLabel[237462]
+        _indexOfInterest[237457]
+        _iterator[237458]
+      }
+      label _breakLabel[237463]
+    }
+  }
+  function shellSortMoveElts[237491](ref arg Data[237499] :
+  (237497 call chpl__buildArrayRuntimeType unknown Dom[237493] unknown eltType[237495]), arg comparator[237507] :
+  unknown rec[237502] =
+  (237504 'new'(237506 call DefaultComparator[246408])), arg start[237519] :
+  (237512 call . Data[237499] c"idxType") =
+  (237516 call . Dom[237493] c"low"), arg end[237531] :
+  (237524 call . Data[237499] c"idxType") =
+  (237528 call . Dom[237493] c"high")) : _unknown[42] "no return value for void"
+  {
+    (237537 call chpl_check_comparator comparator[237507] eltType[237495])
+    unknown idxType[237541] "type variable"(237543 call . Data[237499] c"idxType")
+    if(237558 call _cond_test(237551 call !=(237554 call . Dom[237493] c"rank") 1))
+    {
+      (237548 call compilerError "shellSort() requires 1-D array")
+    }
+    if(237574 call _cond_test(237567 call !(237573 call(237570 call . Dom[237493] c"hasUnitStride"))))
+    {
+      (237564 call compilerError "shellSort() requires an array over a non-stridable domain")
+    }
+    unknown type_tmp[237586] "temp" "type variable" idxType[237541]
+    unknown js[237585] type_tmp[237586]
+    unknown hs[237581] type_tmp[237586]
+    (237591 'end of statement')
+    const incs[237593] "const"(237603 call _build_tuple 701 301 132 57 23 10 4 1)
+    (237606 'end of statement')
+    {
+      unknown _indexOfInterest[237820] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[237821] "expr temp" "temp"
+      (237830 'move' _iterator[237821](237828 call _getIterator incs[237593]))
+      Defer
+      {
+        {
+          (237845 call _freeIterator _iterator[237821])
+        }
+      }
+      { scopeless type
+        (237835 'move' _indexOfInterest[237820](237832 call iteratorIndex _iterator[237821]))
+      }
+      ForLoop[237822]
+      {
+        unknown hh[237607] "index var" "insert auto destroy"
+        (237840 'move' hh[237607] _indexOfInterest[237820])
+        {
+          if(237637 call _cond_test(237614 call ||(237616 call > hh[237607](237620 call max idxType[237541]))(237622 call >= hh[237607](237625 call -(237627 call :(237630 call max idxType[237541]) uint(64)[86])(237633 call : start[237519] uint(64)[86])))))
+          {
+            continue _continueLabel[237825] _continueLabel[237825]
+          }
+          const h[237643] "const"(237644 call : hh[237607] idxType[237541])
+          (237649 'end of statement')
+          (237650 call = hs[237581](237653 call + h[237643] start[237519]))
+          {
+            unknown _indexOfInterest[237784] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[237785] "expr temp" "temp"
+            (237794 'move' _iterator[237785](237792 call _getIterator(237798 call chpl_direct_range_iter hs[237581] end[237531])))
+            Defer
+            {
+              {
+                (237813 call _freeIterator _iterator[237785])
+              }
+            }
+            { scopeless type
+              (237803 'move' _indexOfInterest[237784](237800 call iteratorIndex _iterator[237785]))
+            }
+            ForLoop[237786]
+            {
+              unknown is[237657] "index var" "insert auto destroy"
+              (237808 'move' is[237657] _indexOfInterest[237784])
+              {
+                unknown v[237665] "no auto destroy" "no copy"(237670 call shallowCopyInit module=[222] ShallowCopy[240148](237672 call Data[237499] is[237657]))
+                (237675 'end of statement')
+                (237676 call = js[237585] is[237657])
+                {
+                  unknown tmp[237718] "temp"
+                  (237772 'move' tmp[237718](237752 call _cond_test(237754 call &&(237756 call >= js[237585] hs[237581])(237760 call <(237762 call chpl_compare v[237665](237765 call Data[237499](237767 call - js[237585] h[237643])) comparator[237507]) 0))))
+                  WhileDo[237723]
+                  {
+                    {
+                      (237704 call shallowCopy module=[222] ShallowCopy[240148](237706 call Data[237499] js[237585])(237709 call Data[237499](237710 call - js[237585] h[237643])))
+                      (237714 call -= js[237585] h[237643])
+                      (407273 'referenced modules list' ShallowCopy[240148])
+                    }
+                    label _continueLabel[237721]
+                    (237747 'move' tmp[237718](237727 call _cond_test(237729 call &&(237731 call >= js[237585] hs[237581])(237735 call <(237737 call chpl_compare v[237665](237740 call Data[237499](237742 call - js[237585] h[237643])) comparator[237507]) 0))))
+                    tmp[237718]
+                  }
+                  label _breakLabel[237722]
+                }
+                (237779 call shallowCopy module=[222] ShallowCopy[240148](237781 call Data[237499] js[237585]) v[237665])
+                (407267 'referenced modules list' ShallowCopy[240148] ShallowCopy[240148])
+              }
+              label _continueLabel[237789]
+              _indexOfInterest[237784]
+              _iterator[237785]
+            }
+            label _breakLabel[237790]
+          }
+        }
+        label _continueLabel[237825]
+        _indexOfInterest[237820]
+        _iterator[237821]
+      }
+      label _breakLabel[237826]
+    }
+  }
+  function shellSortMoveEltsIntIdx[237854](ref arg Data[237862] :
+  (237860 call chpl__buildArrayRuntimeType unknown Dom[237856] unknown eltType[237858]), arg comparator[237870] :
+  unknown rec[237865] =
+  (237867 'new'(237869 call DefaultComparator[246408])), arg start[237879] :
+  int(64)[10] =
+  (237876 call . Dom[237856] c"low"), arg end[237888] :
+  int(64)[10] =
+  (237885 call . Dom[237856] c"high")) : _unknown[42] "no return value for void"
+  {
+    unknown idxType[237894] "type variable"(237896 call . Data[237862] c"idxType")
+    (237901 call shellSortMoveElts Data[237862] comparator[237870](237904 call : start[237879] idxType[237894])(237908 call : end[237888] idxType[237894]))
+  }
+  (396852 'used modules list'(387040 'use' ChapelStandard[315387])(237126 'use' Sort[247204]))
+}

@@ -49,6 +49,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">chpldoc documentation</a></li>
 </ul>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../examples/ConvLayerTest.html">ConvLayerTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/MNISTNet.html">MNISTNet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/ModuleSpec.html">ModuleSpec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/MultiLocaleInference.html">MultiLocaleInference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Autograd.html">Autograd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DynamicTensor.html">DynamicTensor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LoadNumpy.html">LoadNumpy</a></li>
@@ -62,6 +66,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Utilities.html">Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Utilities/Standard.html">Standard</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Utilities/Types.html">Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../src/ChAI.html">ChAI</a></li>
 </ul>
 
         </div>
@@ -99,39 +104,285 @@
 </pre></div>
 </div>
 <dl class="chpl function">
+<dt class="sig sig-object chpl" id="SimpleDomain.isDomain">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">isDomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d:</span> <span class="pre">?dt</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#SimpleDomain.isDomain" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
 <dt class="sig sig-object chpl" id="SimpleDomain.zeroTup">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">zeroTup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SimpleDomain.zeroTup" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">zeroTup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em><a class="headerlink" href="#SimpleDomain.zeroTup" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="SimpleDomain.simpleTupleType">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">simpleTupleType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span> <span class="pre">=</span> <span class="pre">int</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">type</span></em><a class="headerlink" href="#SimpleDomain.simpleTupleType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl type">
+<dt class="sig sig-object chpl" id="SimpleDomain.tuple">
+<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">tuple</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">_tuple(?)</span></em><a class="headerlink" href="#SimpleDomain.tuple" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.tuple.first">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">tuple.</span></span><span class="sig-name descname"><span class="pre">first</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><a class="headerlink" href="#SimpleDomain.tuple.first" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.tuple.last">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">tuple.</span></span><span class="sig-name descname"><span class="pre">last</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><a class="headerlink" href="#SimpleDomain.tuple.last" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.tuple.eltType">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">tuple.</span></span><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">type</span></em><a class="headerlink" href="#SimpleDomain.tuple.eltType" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.tuple.uncons">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">tuple.</span></span><span class="sig-name descname"><span class="pre">uncons</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><em class="property"> <span class="pre">:</span> <span class="pre">(head.type,</span> <span class="pre">tail.type)</span></em><a class="headerlink" href="#SimpleDomain.tuple.uncons" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.tuple.head">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">tuple.</span></span><span class="sig-name descname"><span class="pre">head</span></span><span class="w"> </span><em class="property"> <span class="pre">ref</span></em><a class="headerlink" href="#SimpleDomain.tuple.head" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.tuple.tail">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">tuple.</span></span><span class="sig-name descname"><span class="pre">tail</span></span><a class="headerlink" href="#SimpleDomain.tuple.tail" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="SimpleDomain.isTupleOfOrder">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">isTupleOfOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">leafType</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">tup:</span> <span class="pre">?tupType</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#SimpleDomain.isTupleOfOrder" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="SimpleDomain.computeStrides">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">computeStrides</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape:</span> <span class="pre">?rank*int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">simpleTupleType(rank)</span></em><a class="headerlink" href="#SimpleDomain.computeStrides" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="SimpleDomain.computeSize">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">computeSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape:</span> <span class="pre">?rank*int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#SimpleDomain.computeSize" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="SimpleDomain.rect">
-<em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">rect</span></span><a class="headerlink" href="#SimpleDomain.rect" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl data">
+<em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">rect</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#SimpleDomain.rect" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="SimpleDomain.rect.rank">
-<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#SimpleDomain.rect.rank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">rank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#SimpleDomain.rect.rank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl data">
+<dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="SimpleDomain.rect.shape">
-<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em><a class="headerlink" href="#SimpleDomain.rect.shape" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">const</span> </em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em><a class="headerlink" href="#SimpleDomain.rect.shape" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl data">
+<dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="SimpleDomain.rect.offset">
-<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">offset</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span> <span class="pre">=</span> <span class="pre">zeroTup(rank)</span></em><a class="headerlink" href="#SimpleDomain.rect.offset" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">const</span> </em><span class="sig-name descname"><span class="pre">offset</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em><a class="headerlink" href="#SimpleDomain.rect.offset" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.size">
+<em class="property"><span class="pre">const</span> </em><span class="sig-name descname"><span class="pre">size</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#SimpleDomain.rect.size" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.strides">
+<em class="property"><span class="pre">const</span> </em><span class="sig-name descname"><span class="pre">strides</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em><a class="headerlink" href="#SimpleDomain.rect.strides" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="SimpleDomain.rect.init">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape:</span> <span class="pre">int</span> <span class="pre">...?rank</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SimpleDomain.rect.init" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">shape:</span> <span class="pre">?rank*int</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">offset:</span> <span class="pre">rank*int</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">size:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">strides:</span> <span class="pre">rank*int</span> <span class="pre">=</span> <span class="pre">computeStrides(shape)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SimpleDomain.rect.init" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
-<dt class="sig sig-object chpl" id="SimpleDomain.rect.size">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">size</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#SimpleDomain.rect.size" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">shape:</span> <span class="pre">?rank*int</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">offset:</span> <span class="pre">rank*int</span> <span class="pre">=</span> <span class="pre">zeroTup(rank)</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">shape:</span> <span class="pre">int</span> <span class="pre">...?rnk</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ranges:</span> <span class="pre">?rank*range</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ranges:</span> <span class="pre">range(?)</span> <span class="pre">...?rank</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">dom:</span> <span class="pre">domain(?)</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">isDomain(dom)</span> <span class="pre">&amp;&amp;</span> <span class="pre">dom.isRectangular()</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.init=">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">shape:</span> <span class="pre">?rank*int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SimpleDomain.rect.init=" title="Link to this definition">¶</a></dt>
+<dd><p>Copy initializes a <code class="docutils literal notranslate"><span class="pre">rect</span></code> of rank <code class="docutils literal notranslate"><span class="pre">rank</span></code> from a tuple <code class="docutils literal notranslate"><span class="pre">shape</span></code> of <code class="docutils literal notranslate"><span class="pre">int``s</span> <span class="pre">where</span> <span class="pre">``shape.size</span> <span class="pre">==</span> <span class="pre">rank</span></code>.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.:">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">shape:</span> <span class="pre">?rank*int</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">toType:</span> <span class="pre">rect(rank)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">rect(rank)</span></em><a class="headerlink" href="#SimpleDomain.rect.:" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">shapeOffset:</span> <span class="pre">2*(tuple(?))</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">isTupleOfOrder(int,</span> <span class="pre">2,</span> <span class="pre">shapeOffset)</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">shapeOffset:</span> <span class="pre">2*(tuple(?))</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">toType:</span> <span class="pre">rect(?)</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">isTupleOfOrder(int,</span> <span class="pre">2,</span> <span class="pre">shapeOffset)</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">dom:</span> <span class="pre">domain(?)</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">isDomain(dom)</span> <span class="pre">&amp;&amp;</span> <span class="pre">dom.isRectangular()</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">dom:</span> <span class="pre">domain(?)</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">toType:</span> <span class="pre">rect(?)</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">isDomain(dom)</span> <span class="pre">&amp;&amp;</span> <span class="pre">dom.isRectangular()</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.low">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">low</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em><a class="headerlink" href="#SimpleDomain.rect.low" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.high">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">high</span></span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em><a class="headerlink" href="#SimpleDomain.rect.high" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.dims">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">dims</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">rank*range</span></em><a class="headerlink" href="#SimpleDomain.rect.dims" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.indexAt">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">indexAt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">order:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">simpleTupleType(rank)</span></em><a class="headerlink" href="#SimpleDomain.rect.indexAt" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.atIndex">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">atIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">idx:</span> <span class="pre">rank*int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#SimpleDomain.rect.atIndex" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.toDomain">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">toDomain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">const</span></em><em class="property"> <span class="pre">:</span> <span class="pre">domain(rank,</span> <span class="pre">int)</span></em><a class="headerlink" href="#SimpleDomain.rect.toDomain" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">in</span> <span class="pre">sd:</span> <span class="pre">rect(?rank)</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">toType:</span> <span class="pre">domain(rank</span></em>, <em class="sig-param"><span class="pre">int)</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.these">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-name descname"><span class="pre">these</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">const</span></em><em class="property"> <span class="pre">:</span> <span class="pre">simpleTupleType(rank)</span></em><a class="headerlink" href="#SimpleDomain.rect.these" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-name descname"><span class="pre">these</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">tag:</span> <span class="pre">iterKind</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">const</span></em><em class="property"> <span class="pre">:</span> <span class="pre">simpleTupleType(rank)</span></em><em class="property">&#160; <span class="pre">where</span> <span class="pre">tag</span> <span class="pre">==</span> <span class="pre">iterKind.standalone</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.eachOrder">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-name descname"><span class="pre">eachOrder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">const</span></em><em class="property"> <span class="pre">:</span> <span class="pre">(int,</span> <span class="pre">simpleTupleType(rank))</span></em><a class="headerlink" href="#SimpleDomain.rect.eachOrder" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-name descname"><span class="pre">eachOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">tag:</span> <span class="pre">iterKind</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">const</span></em><em class="property"> <span class="pre">:</span> <span class="pre">(int,</span> <span class="pre">simpleTupleType(rank))</span></em><em class="property">&#160; <span class="pre">where</span> <span class="pre">tag</span> <span class="pre">==</span> <span class="pre">iterKind.standalone</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.originate">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">originate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">origin:</span> <span class="pre">rank*int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SimpleDomain.rect.originate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.translate">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">change:</span> <span class="pre">rank*int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SimpleDomain.rect.translate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.contains">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">rct:</span> <span class="pre">rect(rank)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#SimpleDomain.rect.contains" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">idx:</span> <span class="pre">rank*int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.toString">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">toString</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SimpleDomain.rect.toString" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="SimpleDomain.rect.serialize">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">writer:</span> <span class="pre">IO.stdout.type</span></em>, <em class="sig-param"><span class="pre">ref</span> <span class="pre">serializer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SimpleDomain.rect.serialize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">writer:</span> <span class="pre">IO.fileWriter(?)</span></em>, <em class="sig-param"><span class="pre">ref</span> <span class="pre">serializer</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 </dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="SimpleDomain.+">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">+</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">d:</span> <span class="pre">rect(?rank)</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">offset:</span> <span class="pre">rank*int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">rect(rank)</span></em><a class="headerlink" href="#SimpleDomain.+" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="SimpleDomain.-">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">-</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">d:</span> <span class="pre">rect(?rank)</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">offset:</span> <span class="pre">rank*int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">rect(rank)</span></em><a class="headerlink" href="#SimpleDomain.-" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="SimpleDomain.computeBlocks">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">computeBlocks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape:</span> <span class="pre">?rank*int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em><a class="headerlink" href="#SimpleDomain.computeBlocks" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="SimpleDomain.wrap">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">wrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">1*(int)</span></em><a class="headerlink" href="#SimpleDomain.wrap" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">wrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tup:</span> <span class="pre">?rank*int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">rank*int</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="SimpleDomain.unwrap">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">unwrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tup:</span> <span class="pre">?rank*int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SimpleDomain.unwrap" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">isTupleOfOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">order:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">tup:</span> <span class="pre">?tupType</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em></dt>
+<dd></dd></dl>
 
 </section>
 

@@ -1,0 +1,33 @@
+AST dump for ChapelPrivatization after pass normalize.
+Module use list: CTypes 
+
+{
+  function chpl__init_ChapelPrivatization[468450]() : void[4] "insert line file info" "module init"
+  {
+    { scopeless type extern
+      unknown call_tmp[818552] "expr temp" "maybe param" "maybe type" "temp"
+      (818555 'move' call_tmp[818552](147234 call c_ptr[46891](?) chpl_privateObject_t[147229]))
+      (646209 'default init var' chpl_privateObjects[147232] call_tmp[818552])
+    }
+    (147237 'end of statement')
+    (610942 return _void[46])
+  }
+  type chpl_privateObject_t[147229] unknown obj[147222](147224 call c_ptr[46891](?) void[4])
+  unknown chpl_privateObjects[147232] "dead at end of block" "extern" "codegen for CPU and GPU" "insert auto destroy"
+  function chpl_getPrivatizedCopy[147238](arg objectType[147240]:_any[141](?), arg objectPid[147243]:int(64)[10]) : _unknown[42] "inline" "fn returns infinite lifetime"
+  {
+    unknown ret[610934] "RVV" "temp"
+    unknown call_tmp[818557] "expr temp" "maybe param" "maybe type" "temp"
+    (818560 'move' call_tmp[818557](147252 call chpl_privateObjects[147232] objectPid[147243]))
+    unknown call_tmp[818564] "expr temp" "maybe param" "maybe type" "temp"
+    (818567 'move' call_tmp[818564](147256 call obj _mt[203] call_tmp[818557]))
+    unknown call_tmp[818569] "expr temp" "maybe param" "maybe type" "temp"
+    (818572 'move' call_tmp[818569](147249 'cast' objectType[147240] call_tmp[818564]))
+    (610940 'move' ret[610934](610939 'coerce' call_tmp[818569] objectType[147240]))
+    (610936 return ret[610934])
+  }
+  { scopeless type
+    objectType[147240]
+  }
+  (396170 'used modules list'(147218 'use' CTypes[51217]))
+}

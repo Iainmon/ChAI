@@ -1,0 +1,949 @@
+AST dump for TomlReader after pass createTaskFunctions.
+Module use list: ChapelStandard List TOML Regex IO 
+
+{
+  function chpl__init_TomlReader[468681]() : void[4] "insert line file info" "module init"
+  {
+    unknown tmp[657794] "temp"
+    unknown call_tmp[998154] "expr temp" "maybe param" "maybe type" "temp"
+    (998157 'move' call_tmp[998154](657803 call chpl_config_has_value c"debugTomlReader" c"TomlReader"))
+    unknown call_tmp[998159] "expr temp" "maybe param" "maybe type" "temp"
+    (998162 'move' call_tmp[998159](657806 call ! call_tmp[998154]))
+    if call_tmp[998159]
+    {
+      (657799 'noop')
+      (657822 'init var' tmp[657794] 0)
+    }
+    {
+      unknown call_tmp[998164] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (998167 'move' call_tmp[998164](657810 'typeof' tmp[657794]))
+      unknown call_tmp[998169] "expr temp" "maybe param" "maybe type" "temp"
+      (998172 'move' call_tmp[998169](657813 call chpl_config_get_value c"debugTomlReader" c"TomlReader"))
+      (657818 'move' tmp[657794](657816 call _command_line_cast c"debugTomlReader" call_tmp[998164] call_tmp[998169]))
+    }
+    (657796 'move' debugTomlReader[383887] tmp[657794])
+    (383890 'end of statement')
+    (1001247 'resolution point' |serializable[475497])
+    (1001249 'end of statement')
+    (641546 return _void[46])
+  }
+  const debugTomlReader[383887] "config" "const" "insert auto destroy"
+  function top[383891](arg source[383893]:_any[141](?)) : _unknown[42] throws
+  {
+    unknown ret[641408] "RVV" "temp"
+    unknown call_tmp[998176] "expr temp" "maybe param" "maybe type" "temp"
+    (998179 'move' call_tmp[998176](383914 call(383911 call (partial) nextLine _mt[203] source[383893])))
+    unknown call_tmp[998181] "expr temp" "maybe param" "maybe type" "temp"
+    (998184 'move' call_tmp[998181](383906 call ! call_tmp[998176]))
+    unknown call_tmp[998186] "expr temp" "maybe param" "maybe type" "temp"
+    (998189 'move' call_tmp[998186](383915 call _cond_test call_tmp[998181]))
+    if call_tmp[998186]
+    {
+      unknown call_tmp[998191] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (998194 'move' call_tmp[998191](1000905 'new' TomlError[465178](?) "Reached end of file unexpectedly"(_chpl_manager = _owned[238](?))))
+      unknown call_tmp[998196] "expr temp" "maybe param" "maybe type" "temp"
+      (998199 'move' call_tmp[998196](542521 call chpl_fix_thrown_error call_tmp[998191]))
+      (383897 'throw' call_tmp[998196])
+    }
+    unknown call_tmp[998203] "expr temp" "maybe param" "maybe type" "temp"
+    (998206 'move' call_tmp[998203](383925 call currentLine _mt[203] source[383893]))
+    unknown call_tmp[998208] "expr temp" "maybe param" "maybe type" "temp"
+    (998211 'move' call_tmp[998208](383920 call postfix! call_tmp[998203]))
+    unknown call_tmp[998213] "expr temp" "maybe param" "maybe type" "temp"
+    (998216 'move' call_tmp[998213](383928 call call_tmp[998208] 0))
+    (641413 'move' ret[641408](641412 'deref' call_tmp[998213]))
+    (641410 return ret[641408])
+  }
+  function readLine[383932](arg source[383934]:_any[141](?)) : _unknown[42]
+  {
+    unknown ret[641417] "RVV" "temp"
+    unknown call_tmp[998220] "expr temp" "maybe param" "maybe type" "temp"
+    (998223 'move' call_tmp[998220](383942 call(383939 call (partial) nextLine _mt[203] source[383934])))
+    (641422 'move' ret[641417](641421 'deref' call_tmp[998220]))
+    (641419 return ret[641417])
+  }
+  function skipNext[383945](arg source[383947]:_any[141](?)) : _unknown[42] "no return value for void"
+  {
+    unknown call_tmp[998227] "expr temp" "maybe param" "maybe type" "temp"
+    (998230 'move' call_tmp[998227](383953 call currentLine _mt[203] source[383947]))
+    unknown call_tmp[998232] "expr temp" "maybe param" "maybe type" "temp"
+    (998235 'move' call_tmp[998232](383950 call postfix! call_tmp[998227]))
+    (383961 call(383958 call (partial) skip _mt[203] call_tmp[998232]))
+    (641424 return _void[46])
+  }
+  function addToken[383964](arg source[383966]:_any[141](?), arg tokensToAdd[383973]:_array[255540](?)) : _unknown[42] "compiler added where" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[383994] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[383995] "expr temp" "temp"
+      (384004 'move' _iterator[383995](384002 call _getIterator tokensToAdd[383973]))
+      Defer
+      {
+        {
+          (384019 call _freeIterator _iterator[383995])
+        }
+      }
+      { scopeless type
+        (384009 'move' _indexOfInterest[383994](384006 call iteratorIndex _iterator[383995]))
+      }
+      ForLoop[383996]
+      {
+        unknown toke[383977] "index var" "insert auto destroy"
+        (575940 'end of statement')
+        (384014 'move' toke[383977] _indexOfInterest[383994])
+        (575941 'end of statement' toke[383977])
+        {
+          unknown call_tmp[998241] "expr temp" "maybe param" "maybe type" "temp"
+          (998244 'move' call_tmp[998241](383984 call currentLine _mt[203] source[383966]))
+          unknown call_tmp[998246] "expr temp" "maybe param" "maybe type" "temp"
+          (998249 'move' call_tmp[998246](383981 call postfix! call_tmp[998241]))
+          (383992 call(383989 call (partial) addToke _mt[203] call_tmp[998246]) toke[383977])
+          (575943 'end of statement' toke[383977])
+        }
+        label _continueLabel[383999]
+        _indexOfInterest[383994]
+        _iterator[383995]
+      }
+      label _breakLabel[384000]
+    }
+    (641426 return _void[46])
+  }
+  where {
+    unknown call_tmp[998255] "expr temp" "maybe param" "maybe type" "temp"
+    (998258 'move' call_tmp[998255](541833 call eltType _mt[203] tokensToAdd[383973]))
+    unknown call_tmp[998260] "expr temp" "maybe param" "maybe type" "temp"
+    (998263 'move' call_tmp[998260](541837 'is_instantiation_allow_values' string[244] call_tmp[998255]))
+    (541831 call & 1 call_tmp[998260])
+  }
+  function skipLine[384028](arg source[384030]:_any[141](?)) : _unknown[42] "no return value for void"
+  {
+    unknown emptyList[384034] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[998265] "expr temp" "maybe param" "maybe type" "temp"
+    (998268 'move' call_tmp[998265](384036 call list[231871](?) string[244]))
+    (657824 'default init var' emptyList[384034] call_tmp[998265])
+    (384039 'end of statement')
+    unknown call_tmp[998270] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (998273 'move' call_tmp[998270](1000906 'new' Tokens[397998](?) emptyList[384034](_chpl_manager = unmanaged[183](?))))
+    unknown emptyCurrent[384041] "dead at end of block" "insert auto destroy"
+    (657826 'init var' emptyCurrent[384041] call_tmp[998270])
+    (384049 'end of statement')
+    unknown call_tmp[998277] "maybe param" "maybe type" "temp"
+    (998280 'move' call_tmp[998277](384053 call currentLine _mt[203] source[384030]))
+    unknown ptrhold[384051] "dead at end of block" "insert auto destroy"
+    (657828 'init var' ptrhold[384051] call_tmp[998277])
+    (384057 'end of statement')
+    unknown call_tmp[998284] "expr temp" "maybe param" "maybe type" "temp"
+    (998287 'move' call_tmp[998284](384061 call currentLine _mt[203] source[384030]))
+    (384058 call = call_tmp[998284] emptyCurrent[384041])
+    (575946 'end of statement' emptyCurrent[384041])
+    unknown call_tmp[998289] "maybe param" "maybe type" "temp"
+    (998292 'move' call_tmp[998289](384068 call readLine source[384030]))
+    unknown readNextLine[384066] "dead at end of block" "insert auto destroy"
+    (657830 'init var' readNextLine[384066] call_tmp[998289])
+    (384071 'end of statement' emptyList[384034])
+    (384074 call chpl__delete ptrhold[384051])
+    (575948 'end of statement' ptrhold[384051])
+    (641428 return _void[46])
+  }
+  function getToken[384079](arg source[384081]:_any[141](?)) : _unknown[42]
+  {
+    unknown ret[641432] "RVV" "temp"
+    Try!
+    {
+      {
+        unknown call_tmp[998296] "expr temp" "maybe param" "maybe type" "temp"
+        (998299 'move' call_tmp[998296](384092 call(384089 call (partial) nextToke _mt[203] source[384081])))
+        (641437 'move' ret[641432](641436 'deref' call_tmp[998296]))
+        gotoReturn _end_getToken[641430] _end_getToken[641430]
+      }
+    }
+    Catch e : TomlError
+    {
+      unknown call_tmp[998301] "expr temp" "maybe param" "maybe type" "temp"
+      (998304 'move' call_tmp[998301](395846 'current error'))
+      unknown call_tmp[998306] "maybe param" "maybe type" "temp"
+      (998309 'move' call_tmp[998306](395847 'dynamic_cast' unmanaged TomlError?[468289] call_tmp[998301]))
+      unknown tmp[395843] "dead at end of block" "insert auto destroy" "temp"
+      (657832 'init var' tmp[395843] call_tmp[998306])
+      unknown call_tmp[998311] "expr temp" "maybe param" "maybe type" "temp"
+      (998314 'move' call_tmp[998311](395850 '!=' tmp[395843] nil[32]))
+      if call_tmp[998311]
+      {
+        unknown call_tmp[998316] "expr temp" "maybe param" "maybe type" "temp"
+        (998319 'move' call_tmp[998316](395856 'to non nilable class' tmp[395843]))
+        unknown call_tmp[998321] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+        (998324 'move' call_tmp[998321](1000907 'new' _owned[238](?) call_tmp[998316]))
+        unknown e[384107] "dead at end of block" "insert auto destroy"
+        (657834 'init var' e[384107] call_tmp[998321])
+        (575951 'end of statement')
+        {
+          unknown call_tmp[998328] "expr temp" "maybe param" "maybe type" "temp"
+          (998331 'move' call_tmp[998328](384102 call(384099 call (partial) message _mt[203] e[384107])))
+          (384097 call writeln call_tmp[998328])
+          (575952 'end of statement' e[384107])
+          (384104 call exit 1)
+        }
+      }
+      {
+        (395861 'chpl_error')
+      }
+    }
+    label _end_getToken[641430]
+    (641434 return ret[641432])
+  }
+  function Source[384870].init[384134](arg _mt[384142]:_MT[201], arg this[384136]:Source[384870], arg tomlStr[384139]:string[244]) : void[4] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown super_tmp[541890] "temporary of super field" "temp"
+    (541898 'move' super_tmp[541890](541891 '.v' this[384136] c"super"))
+    (541894 call init _mt[203] super_tmp[541890])
+    (575956 'end of statement')
+    unknown tmp[541842] "temp" "type variable"
+    { scopeless type
+      unknown call_type_tmp[579393] "expr temp" "maybe type" "temp" "type variable"
+      unknown call_tmp[998333] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (998336 'move' call_tmp[998333](541844 '.v' this[384136] c"super"))
+      (579397 'move' call_type_tmp[579393](541847 'typeof' call_tmp[998333]))
+    }
+    (541848 'move' tmp[541842] call_type_tmp[579393])
+    unknown call_tmp[998338] "maybe param" "maybe type" "temp"
+    (998341 'move' call_tmp[998338](541853 'cast' tmp[541842] this[384136]))
+    unknown chpl__thisAsParent[541850] "dead at end of block" "insert auto destroy" "temp"
+    (657836 'init var' chpl__thisAsParent[541850] call_tmp[998338] tmp[541842])
+    (541856 'setcid' chpl__thisAsParent[541850])
+    (575957 'end of statement')
+    unknown tomlStr[541858] "temp"
+    (541861 'init var' tomlStr[541858] tomlStr[384139] string[244])
+    (541863 'init field' this[384136] c"tomlStr" tomlStr[541858])
+    (575958 'end of statement')
+    unknown tokenlist[541867] "temp"
+    unknown call_tmp[998343] "expr temp" "maybe param" "maybe type" "temp"
+    (998346 'move' call_tmp[998343](541870 call list[231871](?) unmanaged Tokens[468229]))
+    (541872 'default init var' tokenlist[541867] call_tmp[998343])
+    (541874 '.=' this[384136] c"tokenlist" tokenlist[541867])
+    (575959 'end of statement')
+    val currentLine[541878]:unmanaged Tokens?[468235] "temp"
+    (541881 'default init var' currentLine[541878] unmanaged Tokens?[468235])
+    (541883 '.=' this[384136] c"currentLine" currentLine[541878])
+    (575960 'end of statement')
+    (541889 'init done')
+    (575961 'end of statement')
+    (541888 'setcid' this[384136])
+    (575962 'end of statement')
+    (384160 call(466306 call (partial) genTokenlist _mt[203] this[384136]) tomlStr[384139])
+    (641441 return _void[46])
+  }
+  function Source[384870].genTokenlist[384164](arg _mt[384172]:_MT[201], arg this[384166]:Source[384870], arg input[384169]:string[244]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[384187] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[384188] "expr temp" "temp"
+      unknown call_tmp[998352] "expr temp" "maybe param" "maybe type" "temp"
+      (998355 'move' call_tmp[998352](384181 call(384178 call (partial) split _mt[203] input[384169]) "\n"))
+      (384197 'move' _iterator[384188](384195 call _getIterator call_tmp[998352]))
+      Defer
+      {
+        {
+          (384212 call _freeIterator _iterator[384188])
+        }
+      }
+      { scopeless type
+        (384202 'move' _indexOfInterest[384187](384199 call iteratorIndex _iterator[384188]))
+      }
+      ForLoop[384189]
+      {
+        unknown line[384175] "index var" "insert auto destroy"
+        (575965 'end of statement')
+        (384207 'move' line[384175] _indexOfInterest[384187])
+        (575966 'end of statement' line[384175])
+        {
+          (384185 call(466313 call (partial) splitLine _mt[203] this[384166]) line[384175])
+          (575968 'end of statement' line[384175])
+        }
+        label _continueLabel[384192]
+        _indexOfInterest[384187]
+        _iterator[384188]
+      }
+      label _breakLabel[384193]
+    }
+    unknown call_tmp[998361] "expr temp" "maybe param" "maybe type" "temp"
+    (998364 'move' call_tmp[998361](384232 call(384229 call (partial) isEmpty _mt[203] this[384166])))
+    unknown call_tmp[998366] "expr temp" "maybe param" "maybe type" "temp"
+    (998369 'move' call_tmp[998366](384226 call ! call_tmp[998361]))
+    unknown call_tmp[998371] "expr temp" "maybe param" "maybe type" "temp"
+    (998374 'move' call_tmp[998371](384233 call _cond_test call_tmp[998366]))
+    if call_tmp[998371]
+    {
+      unknown call_tmp[998378] "expr temp" "maybe param" "maybe type" "temp"
+      (998381 'move' call_tmp[998378](466319 call currentLine _mt[203] this[384166]))
+      unknown call_tmp[998385] "expr temp" "maybe param" "maybe type" "temp"
+      (998388 'move' call_tmp[998385](384224 call(466324 call (partial) tokenlist _mt[203] this[384166]) 0))
+      (384220 call = call_tmp[998378] call_tmp[998385])
+    }
+    (641443 return _void[46])
+  }
+  function Source[384870].isEmpty[384239](arg _mt[384243]:_MT[201], arg this[384241]:Source[384870]) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[641447] "RVV" "temp"
+    unknown call_tmp[998392] "expr temp" "maybe param" "maybe type" "temp"
+    (998395 'move' call_tmp[998392](412801 call tokenlist _mt[203] this[384241]))
+    unknown call_tmp[998399] "expr temp" "maybe param" "maybe type" "temp"
+    (998402 'move' call_tmp[998399](384250 call size _mt[203] call_tmp[998392]))
+    unknown call_tmp[998404] "expr temp" "maybe param" "maybe type" "temp"
+    (998407 'move' call_tmp[998404](384247 call == call_tmp[998399] 0))
+    (641452 'move' ret[641447](641451 'deref' call_tmp[998404]))
+    (641449 return ret[641447])
+  }
+  function Source[384870].splitLine[384256](arg _mt[384262]:_MT[201], arg this[384258]:Source[384870], arg line[384260]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    unknown idx[384266] "dead at end of block" "insert auto destroy"
+    (657838 'init var' idx[384266] 0)
+    (384269 'end of statement')
+    unknown linetokens[384271] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[998409] "expr temp" "maybe param" "maybe type" "temp"
+    (998412 'move' call_tmp[998409](384273 call list[231871](?) string[244]))
+    (657840 'default init var' linetokens[384271] call_tmp[998409])
+    (384276 'end of statement')
+    unknown nonEmptyChar[384278] "dead at end of block" "insert auto destroy"
+    (657842 'init var' nonEmptyChar[384278] 0 bool[19])
+    (384282 'end of statement')
+    const doubleQuotes[384341] "dead at end of block" "const" "insert auto destroy"
+    (657844 'init var' doubleQuotes[384341] "(\"[^,]*\?\")")
+    const singleQuotes[384335] "dead at end of block" "const" "insert auto destroy"
+    (657846 'init var' singleQuotes[384335] "('[^,]*\?')")
+    const bracketContents[384329] "dead at end of block" "const" "insert auto destroy"
+    (657848 'init var' bracketContents[384329] "(\\[\\w+\\])")
+    const brackets[384323] "dead at end of block" "const" "insert auto destroy"
+    (657850 'init var' brackets[384323] "(\\[)|(\\])")
+    const comments[384319] "dead at end of block" "const" "insert auto destroy"
+    (657852 'init var' comments[384319] "(\\#)")
+    const commas[384315] "dead at end of block" "const" "insert auto destroy"
+    (657854 'init var' commas[384315] "(\\,)")
+    const equals[384309] "dead at end of block" "const" "insert auto destroy"
+    (657856 'init var' equals[384309] "(\\=)")
+    const curly[384303] "dead at end of block" "const" "insert auto destroy"
+    (657858 'init var' curly[384303] "(\\{)|(\\})")
+    const dt[384297] "dead at end of block" "const" "insert auto destroy"
+    (657860 'init var' dt[384297] "^\\d{4}-\\d{2}-\\d{2}[ T]\\d{2}:\\d{2}:\\d{2}")
+    const ld[384291] "dead at end of block" "const" "insert auto destroy"
+    (657862 'init var' ld[384291] "^\\d{4}-\\d{2}-\\d{2}")
+    const ti[384285] "dead at end of block" "const" "insert auto destroy"
+    (657864 'init var' ti[384285] "^\\d{2}:\\d{2}:\\d{2}(.\\d{6,})\?")
+    (384346 'end of statement')
+    unknown call_tmp[998416] "expr temp" "maybe param" "maybe type" "temp"
+    (998419 'move' call_tmp[998416](384356 call(384353 call (partial) join _mt[203] "|") doubleQuotes[384341] singleQuotes[384335] bracketContents[384329] brackets[384323] commas[384315] curly[384303] equals[384309] dt[384297] ti[384285] ld[384291]))
+    unknown call_tmp[998421] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (998424 'move' call_tmp[998421](1000908 'new' regex[156365](?) call_tmp[998416]))
+    const pattern[384348] "dead at end of block" "const" "insert auto destroy"
+    (657866 'init var' pattern[384348] call_tmp[998421])
+    (384368 'end of statement' doubleQuotes[384341] singleQuotes[384335] bracketContents[384329] brackets[384323] commas[384315] curly[384303] equals[384309] dt[384297] ti[384285] ld[384291])
+    {
+      unknown _indexOfInterest[384530] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[384531] "expr temp" "temp"
+      unknown call_tmp[998428] "expr temp" "maybe param" "maybe type" "temp"
+      (998431 'move' call_tmp[998428](384375 call(384372 call (partial) split _mt[203] pattern[384348]) line[384260]))
+      (384540 'move' _iterator[384531](384538 call _getIterator call_tmp[998428]))
+      Defer
+      {
+        {
+          (384555 call _freeIterator _iterator[384531])
+        }
+      }
+      { scopeless type
+        (384545 'move' _indexOfInterest[384530](384542 call iteratorIndex _iterator[384531]))
+      }
+      ForLoop[384532]
+      {
+        unknown token[384369] "index var" "insert auto destroy"
+        (575983 'end of statement')
+        (384550 'move' token[384369] _indexOfInterest[384530])
+        (575984 'end of statement' token[384369])
+        {
+          (384378 call += idx[384266] 1)
+          (575986 'end of statement' idx[384266])
+          unknown call_tmp[998435] "maybe param" "maybe type" "temp"
+          (998438 'move' call_tmp[998435](384388 call(384385 call (partial) strip _mt[203] token[384369]) " \t"))
+          unknown strippedToken[384383] "dead at end of block" "insert auto destroy"
+          (657868 'init var' strippedToken[384383] call_tmp[998435])
+          (384393 'end of statement' token[384369])
+          unknown call_tmp[998442] "expr temp" "maybe param" "maybe type" "temp"
+          (998445 'move' call_tmp[998442](384522 call size _mt[203] strippedToken[384383]))
+          unknown call_tmp[998447] "expr temp" "maybe param" "maybe type" "temp"
+          (998450 'move' call_tmp[998447](384519 call != call_tmp[998442] 0))
+          unknown call_tmp[998452] "expr temp" "maybe param" "maybe type" "temp"
+          (998455 'move' call_tmp[998452](384526 call _cond_test call_tmp[998447]))
+          if call_tmp[998452]
+          {
+            unknown call_tmp[998457] "expr temp" "maybe param" "maybe type" "temp"
+            (998460 'move' call_tmp[998457](384405 call _cond_test debugTomlReader[383887]))
+            if call_tmp[998457]
+            {
+              (384397 call writeln "Tokenized: " "(" strippedToken[384383] ")")
+              (575989 'end of statement' strippedToken[384383])
+            }
+            (384409 call = nonEmptyChar[384278] 1)
+            (575991 'end of statement' nonEmptyChar[384278])
+            const toke[384414] "dead at end of block" "const" "insert auto destroy"
+            (657870 'init var' toke[384414] strippedToken[384383])
+            (384417 'end of statement')
+            unknown call_tmp[998462] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+            (998465 'move' call_tmp[998462](1000909 'new' regex[156365](?) "\\s"))
+            const isWhiteSpace[384419] "dead at end of block" "const" "insert auto destroy"
+            (657872 'init var' isWhiteSpace[384419] call_tmp[998462])
+            (384425 'end of statement')
+            unknown call_tmp[998469] "maybe param" "maybe type" "temp"
+            (998472 'move' call_tmp[998469](384432 call(384429 call (partial) split _mt[203] isWhiteSpace[384419]) toke[384414]))
+            unknown dateTimeToken[384427] "dead at end of block" "insert auto destroy"
+            (657874 'init var' dateTimeToken[384427] call_tmp[998469])
+            (384435 'end of statement')
+            unknown call_tmp[998476] "expr temp" "maybe param" "maybe type" "temp"
+            (998479 'move' call_tmp[998476](384450 call(384447 call (partial) join _mt[203] "|") dt[384297] ti[384285] ld[384291]))
+            unknown call_tmp[998481] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+            (998484 'move' call_tmp[998481](1000910 'new' regex[156365](?) call_tmp[998476]))
+            unknown call_tmp[998488] "expr temp" "maybe param" "maybe type" "temp"
+            (998491 'move' call_tmp[998488](384457 call(384454 call (partial) match _mt[203] call_tmp[998481]) strippedToken[384383]))
+            unknown call_tmp[998495] "expr temp" "maybe param" "maybe type" "temp"
+            (998498 'move' call_tmp[998495](384459 call matched _mt[203] call_tmp[998488]))
+            unknown call_tmp[998500] "expr temp" "maybe param" "maybe type" "temp"
+            (998503 'move' call_tmp[998500](384462 call _cond_test call_tmp[998495]))
+            if call_tmp[998500]
+            {
+              unknown call_tmp[998505] "expr temp" "maybe param" "maybe type" "temp"
+              (998508 'move' call_tmp[998505](384440 call dateTimeToken[384427] 0))
+              (384436 call = strippedToken[384383] call_tmp[998505])
+              (575996 'end of statement' strippedToken[384383] dateTimeToken[384427])
+            }
+            unknown call_tmp[998510] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+            (998513 'move' call_tmp[998510](1000911 'new' regex[156365](?) comments[384319]))
+            unknown call_tmp[998517] "maybe param" "maybe type" "temp"
+            (998520 'move' call_tmp[998517](384476 call(384473 call (partial) match _mt[203] call_tmp[998510]) strippedToken[384383]))
+            unknown isComment[384468] "dead at end of block" "insert auto destroy"
+            (657876 'init var' isComment[384468] call_tmp[998517])
+            (384479 'end of statement' strippedToken[384383] isWhiteSpace[384419] toke[384414] comments[384319])
+            unknown tmp[507657] "maybe param" "temp"
+            (507668 'move' tmp[507657](384507 call matched _mt[203] isComment[384468]))
+            unknown call_tmp[998524] "expr temp" "maybe param" "maybe type" "temp"
+            (998527 'move' call_tmp[998524](507670 call _cond_invalid tmp[507657]))
+            if call_tmp[998524]
+            {
+              (507673 call compilerError "cannot promote short-circuiting && operator")
+            }
+            unknown tmp[715066] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+            unknown tmp[715067] "maybe param" "temp"
+            unknown call_tmp[998529] "expr temp" "maybe param" "maybe type" "temp"
+            (998532 'move' call_tmp[998529](507658 call isTrue tmp[507657]))
+            (715072 'move' tmp[715067](715070 call _cond_test call_tmp[998529]))
+            if tmp[715067]
+            {
+              unknown tmp[715074] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+              unknown call_tmp[998534] "expr temp" "maybe param" "maybe type" "temp"
+              (998537 'move' call_tmp[998534](384510 call <= idx[384266] 1))
+              (715076 'move' tmp[715074](507661 call isTrue call_tmp[998534]))
+              (715081 'move' tmp[715066](715078 '_paramFoldLogical' tmp[715067] tmp[715074]))
+            }
+            {
+              (715086 'move' tmp[715066](715083 '_paramFoldLogical' tmp[715067] 0))
+            }
+            unknown call_tmp[998539] "expr temp" "maybe param" "maybe type" "temp"
+            (998542 'move' call_tmp[998539](384514 call _cond_test tmp[715066]))
+            if call_tmp[998539]
+            {
+              (384485 call(384482 call (partial) pushBack _mt[203] linetokens[384271]) strippedToken[384383])
+              (576001 'end of statement' linetokens[384271] strippedToken[384383])
+            }
+            {
+              unknown call_tmp[998548] "expr temp" "maybe param" "maybe type" "temp"
+              (998551 'move' call_tmp[998548](384497 call matched _mt[203] isComment[384468]))
+              unknown call_tmp[998553] "expr temp" "maybe param" "maybe type" "temp"
+              (998556 'move' call_tmp[998553](384494 call ! call_tmp[998548]))
+              unknown call_tmp[998558] "expr temp" "maybe param" "maybe type" "temp"
+              (998561 'move' call_tmp[998558](384500 call _cond_test call_tmp[998553]))
+              if call_tmp[998558]
+              {
+                (384492 call(384489 call (partial) pushBack _mt[203] linetokens[384271]) strippedToken[384383])
+                (576004 'end of statement' linetokens[384271] strippedToken[384383])
+              }
+            }
+          }
+        }
+        label _continueLabel[384535]
+        _indexOfInterest[384530]
+        _iterator[384531]
+      }
+      label _breakLabel[384536]
+    }
+    unknown call_tmp[998565] "expr temp" "maybe param" "maybe type" "temp"
+    (998568 'move' call_tmp[998565](384569 call == nonEmptyChar[384278] 0))
+    unknown call_tmp[998570] "expr temp" "maybe param" "maybe type" "temp"
+    (998573 'move' call_tmp[998570](384573 call _cond_test call_tmp[998565]))
+    if call_tmp[998570]
+    {
+      (384567 call(384564 call (partial) pushBack _mt[203] linetokens[384271]) "\n")
+      (576007 'end of statement' linetokens[384271])
+    }
+    unknown call_tmp[998579] "expr temp" "maybe param" "maybe type" "temp"
+    (998582 'move' call_tmp[998579](384600 call(384597 call (partial) isEmpty _mt[203] linetokens[384271])))
+    unknown call_tmp[998584] "expr temp" "maybe param" "maybe type" "temp"
+    (998587 'move' call_tmp[998584](384594 call ! call_tmp[998579]))
+    unknown call_tmp[998589] "expr temp" "maybe param" "maybe type" "temp"
+    (998592 'move' call_tmp[998589](384601 call _cond_test call_tmp[998584]))
+    if call_tmp[998589]
+    {
+      unknown call_tmp[998594] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (998597 'move' call_tmp[998594](1000912 'new' Tokens[397998](?) linetokens[384271](_chpl_manager = unmanaged[183](?))))
+      unknown tokens[384579] "dead at end of block" "insert auto destroy"
+      (657878 'init var' tokens[384579] call_tmp[998594])
+      (384587 'end of statement' linetokens[384271])
+      unknown call_tmp[998601] "expr temp" "maybe param" "maybe type" "temp"
+      (998604 'move' call_tmp[998601](412815 call tokenlist _mt[203] this[384258]))
+      (384592 call(384589 call (partial) pushBack _mt[203] call_tmp[998601]) tokens[384579])
+      (576010 'end of statement' tokens[384579])
+    }
+    (641454 return _void[46])
+  }
+  function Source[384870].nextLine[384607](arg _mt[384611]:_MT[201], arg this[384609]:Source[384870]) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[641458] "RVV" "temp"
+    unknown call_tmp[998610] "expr temp" "maybe param" "maybe type" "temp"
+    (998613 'move' call_tmp[998610](466383 call currentLine _mt[203] this[384609]))
+    unknown call_tmp[998615] "expr temp" "maybe param" "maybe type" "temp"
+    (998618 'move' call_tmp[998615](384656 call postfix! call_tmp[998610]))
+    unknown call_tmp[998622] "expr temp" "maybe param" "maybe type" "temp"
+    (998625 'move' call_tmp[998622](384662 call(384659 call (partial) isEmpty _mt[203] call_tmp[998615])))
+    unknown call_tmp[998627] "expr temp" "maybe param" "maybe type" "temp"
+    (998630 'move' call_tmp[998627](384663 call _cond_test call_tmp[998622]))
+    if call_tmp[998627]
+    {
+      unknown call_tmp[998634] "expr temp" "maybe param" "maybe type" "temp"
+      (998637 'move' call_tmp[998634](412826 call tokenlist _mt[203] this[384609]))
+      unknown call_tmp[998641] "expr temp" "maybe param" "maybe type" "temp"
+      (998644 'move' call_tmp[998641](384648 call size _mt[203] call_tmp[998634]))
+      unknown call_tmp[998646] "expr temp" "maybe param" "maybe type" "temp"
+      (998649 'move' call_tmp[998646](384645 call == call_tmp[998641] 1))
+      unknown call_tmp[998651] "expr temp" "maybe param" "maybe type" "temp"
+      (998654 'move' call_tmp[998651](384652 call _cond_test call_tmp[998646]))
+      if call_tmp[998651]
+      {
+        (641463 'move' ret[641458](641462 'deref' 0))
+        gotoReturn _end_nextLine[641456] _end_nextLine[641456]
+      }
+      {
+        unknown call_tmp[998658] "maybe param" "maybe type" "temp"
+        (998661 'move' call_tmp[998658](466367 call currentLine _mt[203] this[384609]))
+        unknown ptrhold[384620] "dead at end of block" "insert auto destroy"
+        (657880 'init var' ptrhold[384620] call_tmp[998658])
+        (384623 'end of statement')
+        unknown call_tmp[998665] "expr temp" "maybe param" "maybe type" "temp"
+        (998668 'move' call_tmp[998665](412821 call tokenlist _mt[203] this[384609]))
+        (384630 call(384627 call (partial) getAndRemove _mt[203] call_tmp[998665]) 0)
+        (576013 'end of statement')
+        unknown call_tmp[998674] "expr temp" "maybe param" "maybe type" "temp"
+        (998677 'move' call_tmp[998674](466372 call currentLine _mt[203] this[384609]))
+        unknown call_tmp[998681] "expr temp" "maybe param" "maybe type" "temp"
+        (998684 'move' call_tmp[998681](384636 call(466377 call (partial) tokenlist _mt[203] this[384609]) 0))
+        (384632 call = call_tmp[998674] call_tmp[998681])
+        (576014 'end of statement')
+        (384640 call chpl__delete ptrhold[384620])
+        (576015 'end of statement' ptrhold[384620])
+        (641468 'move' ret[641458](641467 'deref' 1))
+        gotoReturn _end_nextLine[641456] _end_nextLine[641456]
+      }
+    }
+    (641473 'move' ret[641458](641472 'deref' 1))
+    label _end_nextLine[641456]
+    (641460 return ret[641458])
+  }
+  function Source[384870].nextToke[384671](arg _mt[384675]:_MT[201], arg this[384673]:Source[384870]) : _unknown[42] throws "method" "primary method"
+  {
+    unknown ret[641477] "RVV" "temp"
+    unknown call_tmp[998688] "expr temp" "maybe param" "maybe type" "temp"
+    (998691 'move' call_tmp[998688](384689 call(466388 call (partial) nextLine _mt[203] this[384673])))
+    unknown call_tmp[998693] "expr temp" "maybe param" "maybe type" "temp"
+    (998696 'move' call_tmp[998693](384686 call ! call_tmp[998688]))
+    unknown call_tmp[998698] "expr temp" "maybe param" "maybe type" "temp"
+    (998701 'move' call_tmp[998698](384690 call _cond_test call_tmp[998693]))
+    if call_tmp[998698]
+    {
+      unknown call_tmp[998703] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (998706 'move' call_tmp[998703](1000913 'new' TomlError[465178](?) "Reached end of file unexpectedly"(_chpl_manager = _owned[238](?))))
+      unknown call_tmp[998708] "expr temp" "maybe param" "maybe type" "temp"
+      (998711 'move' call_tmp[998708](542523 call chpl_fix_thrown_error call_tmp[998703]))
+      (384679 'throw' call_tmp[998708])
+    }
+    unknown call_tmp[998715] "expr temp" "maybe param" "maybe type" "temp"
+    (998718 'move' call_tmp[998715](466393 call currentLine _mt[203] this[384673]))
+    unknown call_tmp[998720] "expr temp" "maybe param" "maybe type" "temp"
+    (998723 'move' call_tmp[998720](384695 call postfix! call_tmp[998715]))
+    unknown call_tmp[998727] "expr temp" "maybe param" "maybe type" "temp"
+    (998730 'move' call_tmp[998727](384701 call(384698 call (partial) next _mt[203] call_tmp[998720])))
+    (641482 'move' ret[641477](641481 'deref' call_tmp[998727]))
+    (641479 return ret[641477])
+  }
+  function Source[384870].debug[384704](arg _mt[384708]:_MT[201], arg this[384706]:Source[384870]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[384785] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[384786] "expr temp" "temp"
+      unknown call_tmp[998734] "expr temp" "maybe param" "maybe type" "temp"
+      (998737 'move' call_tmp[998734](466398 call tokenlist _mt[203] this[384706]))
+      (384795 'move' _iterator[384786](384793 call _getIterator call_tmp[998734]))
+      Defer
+      {
+        {
+          (384810 call _freeIterator _iterator[384786])
+        }
+      }
+      { scopeless type
+        (384800 'move' _indexOfInterest[384785](384797 call iteratorIndex _iterator[384786]))
+      }
+      ForLoop[384787]
+      {
+        unknown line[384711] "index var" "insert auto destroy"
+        (576022 'end of statement')
+        (384805 'move' line[384711] _indexOfInterest[384785])
+        (576023 'end of statement' line[384711])
+        {
+          unknown call_tmp[998741] "expr temp" "maybe param" "maybe type" "temp"
+          (998744 'move' call_tmp[998741](384774 call A _mt[203] line[384711]))
+          unknown call_tmp[998748] "expr temp" "maybe param" "maybe type" "temp"
+          (998751 'move' call_tmp[998748](384777 call size _mt[203] call_tmp[998741]))
+          unknown call_tmp[998753] "expr temp" "maybe param" "maybe type" "temp"
+          (998756 'move' call_tmp[998753](384771 call != call_tmp[998748] 0))
+          unknown call_tmp[998758] "expr temp" "maybe param" "maybe type" "temp"
+          (998761 'move' call_tmp[998758](384781 call _cond_test call_tmp[998753]))
+          if call_tmp[998758]
+          {
+            {
+              unknown _indexOfInterest[384737] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[384738] "expr temp" "temp"
+              (384747 'move' _iterator[384738](384745 call _getIterator line[384711]))
+              Defer
+              {
+                {
+                  (384762 call _freeIterator _iterator[384738])
+                }
+              }
+              { scopeless type
+                (384752 'move' _indexOfInterest[384737](384749 call iteratorIndex _iterator[384738]))
+              }
+              ForLoop[384739]
+              {
+                unknown token[384716] "index var" "insert auto destroy"
+                (576026 'end of statement')
+                (384757 'move' token[384716] _indexOfInterest[384737])
+                (576027 'end of statement' token[384716])
+                {
+                  unknown call_tmp[998765] "expr temp" "maybe param" "maybe type" "temp"
+                  (998768 'move' call_tmp[998765](384729 call size _mt[203] token[384716]))
+                  unknown call_tmp[998770] "expr temp" "maybe param" "maybe type" "temp"
+                  (998773 'move' call_tmp[998770](384726 call != call_tmp[998765] 0))
+                  unknown call_tmp[998775] "expr temp" "maybe param" "maybe type" "temp"
+                  (998778 'move' call_tmp[998775](384733 call _cond_test call_tmp[998770]))
+                  if call_tmp[998775]
+                  {
+                    (384722 call write "(" token[384716] ")")
+                    (576029 'end of statement' token[384716])
+                  }
+                }
+                label _continueLabel[384742]
+                _indexOfInterest[384737]
+                _iterator[384738]
+              }
+              label _breakLabel[384743]
+            }
+            (384770 call writeln)
+          }
+        }
+        label _continueLabel[384790]
+        _indexOfInterest[384785]
+        _iterator[384786]
+      }
+      label _breakLabel[384791]
+    }
+    (641484 return _void[46])
+  }
+  function Source[384870].deinit[384819](arg _mt[384823]:_MT[201], arg this[384821]:Source[384870]) : _unknown[42] "destructor" "method" "primary method" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[384835] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[384836] "expr temp" "temp"
+      unknown call_tmp[998782] "expr temp" "maybe param" "maybe type" "temp"
+      (998785 'move' call_tmp[998782](466405 call tokenlist _mt[203] this[384821]))
+      (384845 'move' _iterator[384836](384843 call _getIterator call_tmp[998782]))
+      Defer
+      {
+        {
+          (384860 call _freeIterator _iterator[384836])
+        }
+      }
+      { scopeless type
+        (384850 'move' _indexOfInterest[384835](384847 call iteratorIndex _iterator[384836]))
+      }
+      ForLoop[384837]
+      {
+        unknown token[384826] "index var" "insert auto destroy"
+        (576033 'end of statement')
+        (384855 'move' token[384826] _indexOfInterest[384835])
+        (576034 'end of statement' token[384826])
+        {
+          (384832 call chpl__delete token[384826])
+          (576036 'end of statement' token[384826])
+        }
+        label _continueLabel[384840]
+        _indexOfInterest[384835]
+        _iterator[384836]
+      }
+      label _breakLabel[384841]
+    }
+    (641486 return _void[46])
+  }
+  function Source[384870].super[1463816](arg _mt[1463818]:_MT[201], arg this[1463820]:Source[384870]) : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1463830] "RVV" "temp"
+    unknown call_tmp[1463837] "expr temp" "maybe param" "maybe type" "temp"
+    (1463840 'move' call_tmp[1463837](1463824 '.v' this[1463820] c"super"))
+    (1463835 'move' ret[1463830](1463834 'deref' call_tmp[1463837]))
+    (1463832 return ret[1463830])
+  }
+  function Source[384870].tomlStr[1463842](arg _mt[1463844]:_MT[201], arg this[1463846]:Source[384870]) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1463856] "RVV" "temp"
+    unknown call_tmp[1463863] "expr temp" "maybe param" "maybe type" "temp"
+    (1463866 'move' call_tmp[1463863](1463850 '.' this[1463846] c"tomlStr"))
+    (1463861 'move' ret[1463856](1463860 'addr of' call_tmp[1463863]))
+    (1463858 return ret[1463856])
+  }
+  function Source[384870].tokenlist[1463868](arg _mt[1463870]:_MT[201], arg this[1463872]:Source[384870]) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1463882] "RVV" "temp"
+    unknown call_tmp[1463889] "expr temp" "maybe param" "maybe type" "temp"
+    (1463892 'move' call_tmp[1463889](1463876 '.' this[1463872] c"tokenlist"))
+    (1463887 'move' ret[1463882](1463886 'addr of' call_tmp[1463889]))
+    (1463884 return ret[1463882])
+  }
+  function Source[384870].currentLine[1463894](arg _mt[1463896]:_MT[201], arg this[1463898]:Source[384870]) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1463908] "RVV" "temp"
+    unknown call_tmp[1463915] "expr temp" "maybe param" "maybe type" "temp"
+    (1463918 'move' call_tmp[1463915](1463902 '.' this[1463898] c"currentLine"))
+    (1463913 'move' ret[1463908](1463912 'addr of' call_tmp[1463915]))
+    (1463910 return ret[1463908])
+  }
+  function Source[384870].serialize[1463920](arg _mt[1463924]:_MT[201], arg this[1463922]:Source[384870], arg writer[1463923]:_any[141](?), ref arg serializer[1463928]:_any[141](?)) : void[4] throws "compiler generated" "last resort" "method" "primary method" "method overrides"
+  {
+    (1463931 call serializeDefaultImpl writer[1463923] serializer[1463928] this[1463922])
+    (1463937 return _void[46])
+  }
+  function Source[384870].deserialize[1463939](arg _mt[1463943]:_MT[201], arg this[1463941]:Source[384870], arg reader[1463942]:_any[141](?), ref arg deserializer[1463948]:_any[141](?)) : void[4] throws "compiler generated" "last resort" "method" "primary method" "method overrides"
+  {
+    unknown _deser_temp[1463950] "temp"
+    (1463952 'move' _deser_temp[1463950] this[1463941])
+    (1463955 call deserializeDefaultImpl reader[1463942] deserializer[1463948] _deser_temp[1463950])
+    (1463961 return _void[46])
+  }
+  type Source[384870] val super[397995]:RootClass[236] "super class" val tomlStr[384115]:string[244] string[244] unknown tokenlist[384120](384122 call list[231871](?) unmanaged Tokens[468229]) val currentLine[384128]:unmanaged Tokens?[468235] unmanaged Tokens?[468235]
+  type Source[465100](?)
+  function Tokens[385115].init[384881](arg _mt[384891]:_MT[201], arg this[384883]:Tokens[385115], arg A[384888]:list[231871](?)) : void[4] "compiler added where" "inline" "method" "primary method" "no return value for void"
+  {
+    unknown super_tmp[541946] "temporary of super field" "temp"
+    (541954 'move' super_tmp[541946](541947 '.v' this[384883] c"super"))
+    (541950 call init _mt[203] super_tmp[541946])
+    (576038 'end of statement')
+    unknown tmp[541919] "temp" "type variable"
+    { scopeless type
+      unknown call_type_tmp[579399] "expr temp" "maybe type" "temp" "type variable"
+      unknown call_tmp[998787] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (998790 'move' call_tmp[998787](541921 '.v' this[384883] c"super"))
+      (579403 'move' call_type_tmp[579399](541924 'typeof' call_tmp[998787]))
+    }
+    (541925 'move' tmp[541919] call_type_tmp[579399])
+    unknown call_tmp[998792] "maybe param" "maybe type" "temp"
+    (998795 'move' call_tmp[998792](541930 'cast' tmp[541919] this[384883]))
+    unknown chpl__thisAsParent[541927] "dead at end of block" "insert auto destroy" "temp"
+    (657882 'init var' chpl__thisAsParent[541927] call_tmp[998792] tmp[541919])
+    (541933 'setcid' chpl__thisAsParent[541927])
+    (576039 'end of statement')
+    unknown call_tmp[998797] "maybe param" "maybe type" "temp"
+    (998800 'move' call_tmp[998797](541938 call list[231871](?) string[244]))
+    unknown A[541935] "temp"
+    (541940 'init var' A[541935] A[384888] call_tmp[998797])
+    (541942 'init field' this[384883] c"A" A[541935])
+    (576040 'end of statement')
+    (541957 'setcid' this[384883])
+    (641488 return _void[46])
+  }
+  where {
+    unknown call_tmp[998802] "expr temp" "maybe param" "maybe type" "temp"
+    (998805 'move' call_tmp[998802](541904 'query' A[384888] 1))
+    unknown call_tmp[998807] "expr temp" "maybe param" "maybe type" "temp"
+    (998810 'move' call_tmp[998807](541908 call == string[244] call_tmp[998802]))
+    (541912 call & 1 call_tmp[998807])
+  }
+  function Tokens[385115].skip[384903](arg _mt[384907]:_MT[201], arg this[384905]:Tokens[385115]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[998814] "expr temp" "maybe param" "maybe type" "temp"
+    (998817 'move' call_tmp[998814](412834 call A _mt[203] this[384905]))
+    (384914 call(384911 call (partial) getAndRemove _mt[203] call_tmp[998814]) 0)
+    (641490 return _void[46])
+  }
+  function Tokens[385115].next[384918](arg _mt[384922]:_MT[201], arg this[384920]:Tokens[385115]) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[641494] "RVV" "temp"
+    unknown call_tmp[998823] "expr temp" "maybe param" "maybe type" "temp"
+    (998826 'move' call_tmp[998823](412839 call A _mt[203] this[384920]))
+    unknown call_tmp[998830] "maybe param" "maybe type" "temp"
+    (998833 'move' call_tmp[998830](384931 call(384928 call (partial) getAndRemove _mt[203] call_tmp[998823]) 0))
+    unknown toke[384926] "dead at end of block" "insert auto destroy"
+    (657884 'init var' toke[384926] call_tmp[998830])
+    (384934 'end of statement')
+    (641499 'move' ret[641494](641498 'deref' toke[384926]))
+    gotoReturn _end_next[641492] _end_next[641492]
+    (576043 'end of statement' toke[384926])
+    label _end_next[641492]
+    (641496 return ret[641494])
+  }
+  function Tokens[385115].addToke[384939](arg _mt[384947]:_MT[201], arg this[384941]:Tokens[385115], arg toke[384944]:string[244]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[998837] "expr temp" "maybe param" "maybe type" "temp"
+    (998840 'move' call_tmp[998837](412844 call A _mt[203] this[384941]))
+    (384954 call(384951 call (partial) insert _mt[203] call_tmp[998837]) 0 toke[384944])
+    (641503 return _void[46])
+  }
+  function Tokens[385115].isEmpty[384959](arg _mt[384963]:_MT[201], arg this[384961]:Tokens[385115]) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[641507] "RVV" "temp"
+    unknown call_tmp[998846] "expr temp" "maybe param" "maybe type" "temp"
+    (998849 'move' call_tmp[998846](384969 call A _mt[203] this[384961]))
+    unknown call_tmp[998853] "expr temp" "maybe param" "maybe type" "temp"
+    (998856 'move' call_tmp[998853](384975 call(384972 call (partial) isEmpty _mt[203] call_tmp[998846])))
+    (641513 'move' ret[641507](641512 'coerce' call_tmp[998853] bool[19]))
+    (641509 return ret[641507])
+  }
+  { scopeless type
+    bool[19]
+  }
+  function Tokens[385115].this[384979](arg _mt[384985]:_MT[201], arg this[384981]:Tokens[385115], arg idx[384983]:_any[141](?)) ref : _unknown[42] "method" "primary method"
+  {
+    unknown ret[641517] "RVV" "temp"
+    unknown call_tmp[998860] "expr temp" "maybe param" "maybe type" "temp"
+    (998863 'move' call_tmp[998860](384993 call(384990 call (partial) A _mt[203] this[384981]) idx[384983]))
+    (641522 'move' ret[641517](641521 'addr of' call_tmp[998860]))
+    (641519 return ret[641517])
+  }
+  function Tokens[385115].these[384997](arg _mt[385001]:_MT[201], arg this[384999]:Tokens[385115]) ref : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    unknown ret[641526] "RVV" "temp"
+    {
+      unknown _indexOfInterest[385013] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[385014] "expr temp" "temp"
+      unknown call_tmp[998867] "expr temp" "maybe param" "maybe type" "temp"
+      (998870 'move' call_tmp[998867](385007 call A _mt[203] this[384999]))
+      (385023 'move' _iterator[385014](385021 call _getIterator call_tmp[998867]))
+      Defer
+      {
+        {
+          (385038 call _freeIterator _iterator[385014])
+        }
+      }
+      { scopeless type
+        (385028 'move' _indexOfInterest[385013](385025 call iteratorIndex _iterator[385014]))
+      }
+      ForLoop[385015]
+      {
+        unknown a[385004] "index var" "insert auto destroy"
+        (576049 'end of statement')
+        (385033 'move' a[385004] _indexOfInterest[385013])
+        (576050 'end of statement' a[385004])
+        {
+          ref yret[641530] "YVV" "temp"
+          (641533 'move' yret[641530](641532 'addr of' a[385004]))
+          (385011 yield yret[641530])
+          (576052 'end of statement' a[385004])
+        }
+        label _continueLabel[385018]
+        _indexOfInterest[385013]
+        _iterator[385014]
+      }
+      label _breakLabel[385019]
+    }
+    (641528 return ret[641526])
+  }
+  function Tokens[385115].deserialize[385047](arg _mt[385055]:_MT[201], arg this[385049]:Tokens[385115], arg reader[385051]:_any[141](?), ref arg deserializer[385053]:_any[141](?)) : _unknown[42] throws "method" "primary method" "no return value for void"
+  {
+    (385059 call compilerError "Reading a Tokens type is not supported")
+    (641536 return _void[46])
+  }
+  function Tokens[385115].init[385065](arg _mt[385075]:_MT[201], arg this[385067]:Tokens[385115], arg reader[385070]:fileReader[170893](?), ref arg deserializer[385073]:_any[141](?)) : void[4] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown super_tmp[541993] "temporary of super field" "temp"
+    (542001 'move' super_tmp[541993](541994 '.v' this[385067] c"super"))
+    (541997 call init _mt[203] super_tmp[541993])
+    (576055 'end of statement')
+    unknown tmp[541963] "temp" "type variable"
+    { scopeless type
+      unknown call_type_tmp[579405] "expr temp" "maybe type" "temp" "type variable"
+      unknown call_tmp[998872] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (998875 'move' call_tmp[998872](541965 '.v' this[385067] c"super"))
+      (579409 'move' call_type_tmp[579405](541968 'typeof' call_tmp[998872]))
+    }
+    (541969 'move' tmp[541963] call_type_tmp[579405])
+    unknown call_tmp[998877] "maybe param" "maybe type" "temp"
+    (998880 'move' call_tmp[998877](541974 'cast' tmp[541963] this[385067]))
+    unknown chpl__thisAsParent[541971] "dead at end of block" "insert auto destroy" "temp"
+    (657886 'init var' chpl__thisAsParent[541971] call_tmp[998877] tmp[541963])
+    (541977 'setcid' chpl__thisAsParent[541971])
+    (576056 'end of statement')
+    unknown A[541979] "temp"
+    unknown call_tmp[998882] "expr temp" "maybe param" "maybe type" "temp"
+    (998885 'move' call_tmp[998882](541982 call list[231871](?) string[244]))
+    (541984 'default init var' A[541979] call_tmp[998882])
+    (541986 '.=' this[385067] c"A" A[541979])
+    (576057 'end of statement')
+    (541992 'init done')
+    (576058 'end of statement')
+    (541991 'setcid' this[385067])
+    (576059 'end of statement')
+    (385084 call compilerError "Reading a Tokens type is not supported")
+    (641538 return _void[46])
+  }
+  function Tokens[385115].serialize[385088](arg _mt[385096]:_MT[201], arg this[385090]:Tokens[385115], arg writer[385092]:_any[141](?), ref arg serializer[385094]:_any[141](?)) : _unknown[42] throws "method" "primary method" "method overrides" "no return value for void"
+  {
+    unknown call_tmp[998891] "expr temp" "maybe param" "maybe type" "temp"
+    (998894 'move' call_tmp[998891](385105 call A _mt[203] this[385090]))
+    unknown call_tmp[998898] "expr temp" "maybe param" "maybe type" "temp"
+    (998901 'move' call_tmp[998898](385111 call(385108 call (partial) toArray _mt[203] call_tmp[998891])))
+    (385103 call(385100 call (partial) write _mt[203] writer[385092]) call_tmp[998898])
+    (641540 return _void[46])
+  }
+  function Tokens[385115].super[1463963](arg _mt[1463965]:_MT[201], arg this[1463967]:Tokens[385115]) : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1463977] "RVV" "temp"
+    unknown call_tmp[1463984] "expr temp" "maybe param" "maybe type" "temp"
+    (1463987 'move' call_tmp[1463984](1463971 '.v' this[1463967] c"super"))
+    (1463982 'move' ret[1463977](1463981 'deref' call_tmp[1463984]))
+    (1463979 return ret[1463977])
+  }
+  function Tokens[385115].A[1463989](arg _mt[1463991]:_MT[201], arg this[1463993]:Tokens[385115]) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1464003] "RVV" "temp"
+    unknown call_tmp[1464010] "expr temp" "maybe param" "maybe type" "temp"
+    (1464013 'move' call_tmp[1464010](1463997 '.' this[1463993] c"A"))
+    (1464008 'move' ret[1464003](1464007 'addr of' call_tmp[1464010]))
+    (1464005 return ret[1464003])
+  }
+  function Tokens[385115].deinit[1464015](arg _mt[1464017]:_MT[201], arg this[1464019]:Tokens[385115]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method"
+  {
+    (1464027 return _void[46])
+  }
+  type Tokens[385115] val super[398006]:RootClass[236] "super class" unknown A[384875](384877 call list[231871](?) string[244])
+  type unmanaged Tokens?[468235]
+  type Tokens?[468232](?)
+  type unmanaged Tokens[468229]
+  type Tokens[397998](?)
+  function |serializable[475497]() : _unknown[42] "ImplementsStmt wrapper"
+  { serializable[310094] Tokens[397998](?)
+    {
+    }
+    (641544 return _void[46])
+  }
+  (397255 'used modules list'(387100 'use' ChapelStandard[315387])(383872 'use' List[232161])(383879 'import' TOML[385119].{TomlError})(383881 'use' Regex[158724])(383884 'use' IO[208303]))
+}

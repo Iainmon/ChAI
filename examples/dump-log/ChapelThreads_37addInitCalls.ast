@@ -1,0 +1,34 @@
+AST dump for ChapelThreads after pass addInitCalls.
+Module use list: 
+
+{
+  function chpl__init_ChapelThreads[468405]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    if chpl__init_ChapelThreads_p[9307183]
+    {
+      goto _exit_chpl__init_ChapelThreads[9307220] _exit_chpl__init_ChapelThreads[9307220]
+    }
+    val modFormatStr[9307191]:chpl_c_string[16] "temp"
+    val modStr[9307192]:chpl_c_string[16] "temp"
+    ref refIndentLevel[9307206]:int(32)[66] "temp"
+    (9307199 'move' modFormatStr[9307191] c"%*s\n")
+    (9307201 'move' modStr[9307192] c"ChapelThreads")
+    (9307204 call printModuleInit[386886] modFormatStr[9307191] modStr[9307192] 13)
+    (9307210 'move' refIndentLevel[9307206](9307209 'addr of' moduleInitLevel[386877]))
+    (9307213 '+=' refIndentLevel[9307206] 1)
+    (9307189 'move' chpl__init_ChapelThreads_p[9307183] 1)
+    const-val call_tmp[775388]:int(32)[66] "dead after last mention" "insert auto destroy" "maybe param" "temp"
+    (775391 'move' call_tmp[775388](94324 call chpl_task_getenvNumThreadsPerLocale[94312]))
+    const-val init_coerce_tmp[1530330]:int(64)[10] "dead after last mention" "temp"
+    (1530340 '=' init_coerce_tmp[1530330](1530336 'cast' int(64)[10] call_tmp[775388]))
+    (644664 'move' numThreadsPerLocale[94321] init_coerce_tmp[1530330])
+    (9307216 '-=' refIndentLevel[9307206] 1)
+    label _endchpl__init_ChapelThreads[9307222]
+    label _exit_chpl__init_ChapelThreads[9307220]
+    (600893 return _void[46])
+  }
+  function chpl_task_getenvNumThreadsPerLocale[94312]() : int(32)[66] "extern" "local args" "no fn body" "resolved"
+  {
+  }
+  const-val numThreadsPerLocale[94321]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+}

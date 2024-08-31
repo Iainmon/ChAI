@@ -1,0 +1,2524 @@
+AST dump for NDArray after pass cleanup.
+Module use list: Utilities Math IO 
+
+{
+  (387072 'use' ChapelStandard)
+  (324025 'import' ChapelArray)
+  (324028 'import' IO)
+  (324030 'use' Remote)
+  (324034 'import' Math)
+  (324037 'import' Utilities 'as' util)
+  (324044 'use'(324041 call . Utilities c"Standard"))
+  (324052 'use'(324049 call . Utilities c"Types"))
+  (324055 'use' SimpleDomain)
+  function ndarray[328686](?).chpl_forwarding_expr1[324098](arg _mt[324103]:_MT[201], arg this[324101]:ndarray[328686](?)) : _unknown[42] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    (324112 return(324108 call . this[324101] c"data"))
+  }
+  function ndarray[328686](?)._dom[324115](arg _mt[324119]:_MT[201], arg this[324117]:ndarray[328686](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    if(324129 call _cond_test 1)
+    {
+      (324124 call compilerWarning "Bounds checking on.")
+    }
+    (324133 return(324136 call . this[324117] c"simpleDomain"))
+  }
+  function ndarray[328686](?).shape[324142](arg _mt[324146]:_MT[201], arg this[324144]:ndarray[328686](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (324156 return(324161 call .(324157 call . this[324144] c"simpleDomain") c"shape"))
+  }
+  { scopeless type
+    (324148 call *(324150 call . this[324144] c"rank") int[10])
+  }
+  function ndarray[328686](?).init[324167](arg _mt[324180]:_MT[201], arg this[324169]:ndarray[328686](?), arg eltType[324171]:_any[141](?), const arg sd[324177] :
+  (324174 call rect[323492](?) unknown rank[324175])) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (324183 call =(324186 call . this[324169] c"rank") rank[324175])
+    (324190 call =(324193 call . this[324169] c"eltType") eltType[324171])
+    (324197 call =(324202 call . this[324169] c"_domain")(324209 call(324206 call . sd[324177] c"toDomain")))
+    (324210 call =(324213 call . this[324169] c"simpleDomain") sd[324177])
+    (324217 call =(324220 call . this[324169] c"data") _gnoinit[34])
+  }
+  function ndarray[328686](?).init[324226](arg _mt[324243]:_MT[201], arg this[324228]:ndarray[328686](?), arg eltType[324230]:_any[141](?), const arg sd[324236] :
+  (324233 call rect[323492](?) unknown rank[324234]), const in arg fill[324240] :
+  eltType[324230]) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (324246 call =(324249 call . this[324228] c"rank") rank[324234])
+    (324253 call =(324256 call . this[324228] c"eltType") eltType[324230])
+    (324260 call =(324263 call . this[324228] c"_domain")(324270 call(324267 call . sd[324236] c"toDomain")))
+    (324271 call =(324274 call . this[324228] c"simpleDomain") sd[324236])
+    (324279 call compilerWarning "Could be a point of performance issues.")
+    (324283 call =(324286 call . this[324228] c"data") fill[324240])
+  }
+  function ndarray[328686](?).init[324292](arg _mt[324310]:_MT[201], arg this[324294]:ndarray[328686](?), param arg rank[324297] :
+  int[10], arg eltType[324300]:_any[141](?), const arg dom[324307] :
+  (324303 call chpl__buildDomainRuntimeType defaultDist rank[324297] int[10])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (324313 call =(324316 call . this[324294] c"rank") rank[324297])
+    (324320 call =(324323 call . this[324294] c"eltType") eltType[324300])
+    const rct[324328] "const"(324335 call(324332 call . dom[324307] c"simplify"))
+    (324337 'end of statement')
+    (324338 call =(324341 call . this[324294] c"_domain")(324348 call(324345 call . rct[324328] c"toDomain")))
+    (324349 call =(324352 call . this[324294] c"simpleDomain") rct[324328])
+    (324356 call =(324359 call . this[324294] c"data") _gnoinit[34])
+  }
+  function ndarray[328686](?).init[324365](arg _mt[324390]:_MT[201], arg this[324367]:ndarray[328686](?), param arg rank[324370] :
+  int[10], arg eltType[324373]:_any[141](?), const arg dom[324380] :
+  (324376 call chpl__buildDomainRuntimeType defaultDist rank[324370] int[10]), const arg arr[324387] :
+  (324385 call chpl__buildArrayRuntimeType nil[32] eltType[324373])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (324393 call =(324396 call . this[324367] c"rank") rank[324370])
+    (324400 call =(324403 call . this[324367] c"eltType") eltType[324373])
+    const rct[324408] "const"(324413 call(324410 call . dom[324380] c"simplify"))
+    (324415 'end of statement')
+    (324416 call =(324419 call . this[324367] c"_domain") rct[324408])
+    (324423 call =(324426 call . this[324367] c"simpleDomain")(324433 call(324430 call . rct[324408] c"toDomain")))
+    (324434 call =(324437 call . this[324367] c"data") arr[324387])
+  }
+  function ndarray[328686](?).init[324443](arg _mt[324457]:_MT[201], arg this[324445]:ndarray[328686](?), arg eltType[324447]:_any[141](?), const arg shape[324454] :
+  (324449 call * unknown rank[324451] int[10])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    const rct[324461] "const" shape[324454](324463 call rect[323492](?) rank[324451])
+    (324467 'end of statement')
+    (324472 call(324469 call . this[324445] c"init") eltType[324447] rct[324461])
+  }
+  function ndarray[328686](?).init[324477](arg _mt[324491]:_MT[201], arg this[324479]:ndarray[328686](?), param arg rank[324482] :
+  int[10], arg eltType[324488]:_any[141](?) =
+  (324486 call real[13] 32)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    const shape[324495] "const"(324496 call * rank[324482] int[10])
+    (324501 'end of statement')
+    (324506 call(324503 call . this[324479] c"init") eltType[324488] shape[324495])
+  }
+  function ndarray[328686](?).init[324511](arg _mt[324528]:_MT[201], arg this[324513]:ndarray[328686](?), arg eltType[324518]:_any[141](?) =
+  (324516 call real[13] 32), const arg shape[324524] ... :
+  int[10]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (324535 call(324532 call . this[324513] c"init") eltType[324518] shape[324524])
+  }
+  function ndarray[328686](?).init[324540](arg _mt[324553]:_MT[201], arg this[324542]:ndarray[328686](?), const arg dom[324548] :
+  (324545 call rect[323492](?) unknown rank[324546]), arg eltType[324551]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (324560 call(324557 call . this[324542] c"init") eltType[324551] dom[324548])
+  }
+  function ndarray[328686](?).init[324565](arg _mt[324580]:_MT[201], arg this[324567]:ndarray[328686](?), const arg dom[324571] :
+  unknown t[324569], arg eltType[324577]:_any[141](?) =
+  (324575 call real[13] 32)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (324597 call(324594 call . this[324567] c"init") eltType[324577](324603 call(324600 call . dom[324571] c"simple")))
+  }
+  where {
+    (324582 call &&(324585 call isDomainType t[324569])(324591 call(324588 call . dom[324571] c"isRectangular")))
+  }
+  function ndarray[328686](?).init[324607](arg _mt[324619]:_MT[201], arg this[324609]:ndarray[328686](?), const arg Arr[324616] :
+  (324614 call chpl__buildArrayRuntimeType nil[32] unknown eltType[324612])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (324622 call =(324625 call . this[324609] c"rank")(324629 call . Arr[324616] c"rank"))
+    (324632 call =(324635 call . this[324609] c"eltType") eltType[324612])
+    const rct[324640] "const"(324648 call(324645 call .(324642 call . Arr[324616] c"_dom") c"simple"))
+    (324650 'end of statement')
+    (324651 call =(324654 call . this[324609] c"_domain")(324661 call(324658 call . rct[324640] c"toDomain")))
+    (324662 call =(324665 call . this[324609] c"simpleDomain") rct[324640])
+    (324669 call =(324672 call . this[324609] c"data") Arr[324616])
+  }
+  function ndarray[328686](?).init[324678](arg _mt[324692]:_MT[201], arg this[324680]:ndarray[328686](?), const arg A[324689] :
+  (324684 call ndarray[328686](?) unknown rank[324685] unknown eltType[324687])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (324695 call =(324698 call . this[324680] c"rank") rank[324685])
+    (324702 call =(324705 call . this[324680] c"eltType") eltType[324687])
+    (324709 call =(324712 call . this[324680] c"_domain")(324716 call . A[324689] c"_domain"))
+    (324719 call =(324722 call . this[324680] c"simpleDomain")(324726 call . A[324689] c"simpleDomain"))
+    (324729 call =(324732 call . this[324680] c"data")(324736 call . A[324689] c"data"))
+  }
+  function ndarray[328686](?).init[324741](arg _mt[324749]:_MT[201], arg this[324743]:ndarray[328686](?), arg it[324746] :
+  _iteratorRecord[165](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    const arr[324753] "const" it[324746]
+    (324756 'end of statement')
+    (324761 call(324758 call . this[324743] c"init") arr[324753])
+  }
+  function ndarray[328686](?).init=[324765](arg _mt[324777]:_MT[201], arg this[324767]:ndarray[328686](?), const arg other[324774] :
+  (324772 call chpl__buildArrayRuntimeType nil[32] unknown eltType[324770])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (324784 call(324781 call . this[324767] c"init") other[324774])
+  }
+  function ndarray[328686](?).init=[324788](arg _mt[324802]:_MT[201], arg this[324790]:ndarray[328686](?), const arg other[324799] :
+  (324794 call ndarray[328686](?) unknown rank[324795] unknown eltType[324797])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (324805 call =(324808 call . this[324790] c"rank") rank[324795])
+    (324812 call =(324815 call . this[324790] c"eltType") eltType[324797])
+    (324819 call =(324822 call . this[324790] c"_domain")(324826 call . other[324799] c"_domain"))
+    (324829 call =(324832 call . this[324790] c"simpleDomain")(324836 call . other[324799] c"simpleDomain"))
+    (324839 call =(324842 call . this[324790] c"data")(324846 call . other[324799] c"data"))
+  }
+  function ndarray[328686](?).init=[324851](arg _mt[324859]:_MT[201], arg this[324853]:ndarray[328686](?), arg other[324856] :
+  _iteratorRecord[165](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (324866 call(324863 call . this[324853] c"init") other[324856])
+  }
+  function ndarray[328686](?).this[324870](arg _mt[324883]:_MT[201], ref arg this[324872]:ndarray[328686](?), arg args[324879] ... :
+  int[10]) ref : _unknown[42] "method" "primary method"
+  {
+    (324886 return(324896 call(324893 call .(324887 call . this[324872] c"data") c"this")(324898 'expand_tuple' args[324879])))
+  }
+  function ndarray[328686](?).setData[324901](arg _mt[324912]:_MT[201], ref arg this[324903]:ndarray[328686](?), const arg arr[324909] :
+  (324907 call chpl__buildArrayRuntimeType nil[32] eltType)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    if(324952 call _cond_test(324938 call ==(324947 call(324944 call .(324941 call . arr[324909] c"_dom") c"simple"))(324949 call . this[324903] c"_dom")))
+    {
+      (324925 call =(324927 call . this[324903] c"data") arr[324909])
+    }
+    {
+      (324933 call = this[324903] arr[324909])
+    }
+  }
+  where {
+    (324914 call ==(324917 call . arr[324909] c"rank")(324920 call . this[324903] c"rank"))
+  }
+  function ndarray[328686](?).reshapeDomain[324961](arg _mt[324976]:_MT[201], ref arg this[324963]:ndarray[328686](?), const arg dom[324973] :
+  (324966 call chpl__buildDomainRuntimeType defaultDist(324968 call . this[324963] c"rank") int[10])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (324982 call =(324984 call . this[324963] c"_domain") dom[324973])
+    (324989 call =(324991 call . this[324963] c"simpleDomain")(324999 call(324996 call . dom[324973] c"simple")))
+  }
+  where {
+    (324979 call isRegularDomain dom[324973])
+  }
+  function ndarray[328686](?).reshapeDomain[325003](arg _mt[325016]:_MT[201], ref arg this[325005]:ndarray[328686](?), const arg dom[325013] :
+  (325008 call rect[323492](?)(325009 call . this[325005] c"rank"))) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (325019 call =(325021 call . this[325005] c"simpleDomain") dom[325013])
+    (325026 call =(325028 call . this[325005] c"_domain")(325036 call(325033 call . dom[325013] c"toDomain")))
+  }
+  function ndarray[328686](?).reshape[325039](arg _mt[325054]:_MT[201], arg this[325041]:ndarray[328686](?), arg dom[325051] :
+  (325044 call chpl__buildDomainRuntimeType defaultDist(325046 call . this[325041] c"rank") int[10])) : _unknown[42] "method" "primary method"
+  {
+    unknown arr[325066](325067 'new'(325070 call ndarray[328686](?)(325071 call . this[325041] c"eltType") dom[325051](fill =(325076 call : 0(325079 call . this[325041] c"eltType")))))
+    (325085 'end of statement')
+    const arrDom[325087] "const"(325095 call . arr[325066] c"_dom")(325089 call rect[323492](?)(325090 call . this[325041] c"rank"))
+    (325099 'end of statement')
+    const selfDom[325101] "const"(325109 call . this[325041] c"_dom")(325103 call rect[323492](?)(325104 call . this[325041] c"rank"))
+    (325113 'end of statement')
+    const inter[325115] "const"(325123 call(325120 call .(325116 call & arrDom[325087] selfDom[325101]) c"toDomain"))
+    (325125 'end of statement')
+    (325126 call =(325132 call(325129 call . arr[325066] c"data") inter[325115])(325138 call(325134 call . this[325041] c"data") inter[325115]))
+    (325140 return arr[325066])
+  }
+  { scopeless type
+    (325058 call ndarray[328686](?)(325059 call . this[325041] c"rank") eltType)
+  }
+  function ndarray[328686](?).reshape[325145](arg _mt[325154]:_MT[201], arg this[325147]:ndarray[328686](?), const arg dom[325151] :
+  unknown t[325149]) : _unknown[42] "method" "primary method"
+  {
+    (325187 return(325189 call reshape(325194 call(325191 call . dom[325151] c"simple"))))
+  }
+  where {
+    (325164 call &&(325166 call &&(325169 call isDomainType t[325149])(325175 call(325172 call . dom[325151] c"isRectangular")))(325176 call !=(325179 call . dom[325151] c"rank")(325182 call . this[325147] c"rank")))
+  }
+  { scopeless type
+    (325158 call ndarray[328686](?)(325160 call . dom[325151] c"rank") eltType)
+  }
+  function ndarray[328686](?).reshape[325199](arg _mt[325210]:_MT[201], arg this[325201]:ndarray[328686](?), const arg dom[325207] :
+  (325204 call rect[323492](?) unknown newRank[325205])) : _unknown[42] "method" "primary method"
+  {
+    unknown arr[325219](325228 'new'(325231 call ndarray[328686](?)(325232 call . this[325201] c"eltType") dom[325207](fill =(325237 call : 0(325240 call . this[325201] c"eltType")))))(325222 call ndarray[328686](?) newRank[325205](325224 call . this[325201] c"eltType"))
+    (325246 'end of statement')
+    const selfDom[325248] "const"(325256 call . this[325201] c"_dom")(325250 call rect[323492](?)(325251 call . this[325201] c"rank"))
+    (325260 'end of statement')
+    const newDom[325262] "const"(325267 call . arr[325219] c"_dom")(325264 call rect[323492](?) newRank[325205])
+    (325271 'end of statement')
+    const minSize[325273] "const"(325276 call min(325278 call . selfDom[325248] c"size")(325282 call . newDom[325262] c"size")) int[10]
+    (325286 'end of statement')
+    const dataDom[325288] "const"(325294 call _build_tuple minSize[325273])(325290 call rect[323492](?) 1)
+    (325297 'end of statement')
+    const zeroDom[325299] "const"(325324 call _build_tuple(325315 call _build_tuple(325305 call -(325308 call . newDom[325262] c"size")(325312 call . dataDom[325288] c"size")))(325322 call _build_tuple(325319 call . dataDom[325288] c"size")))(325301 call rect[323492](?) 1)
+    (325327 'end of statement')
+    unknown arrData[325329] "ref var"(325331 call . arr[325219] c"data")
+    (325335 'end of statement')
+    const selfData[325337] "const" "ref var"(325338 call . this[325201] c"data")
+    (325343 'end of statement')
+    Forall[325378] {
+      induction variables:
+        
+        unknown i[325344] "index var" "insert auto destroy"
+      iterated expressions:
+        dataDom[325288]
+      shadow variables:
+      other variables
+        forall body
+      {
+        const arrIdx[325349] "const"(325354 call(325351 call . newDom[325262] c"indexAt") i[325344])
+        (325357 'end of statement')
+        const selfIdx[325359] "const"(325364 call(325361 call . selfDom[325248] c"indexAt") i[325344])
+        (325367 'end of statement')
+        (325368 call =(325371 call arrData[325329] arrIdx[325349])(325374 call selfData[325337] selfIdx[325359]))
+      }
+    }
+    const zero[325382] "const" 0(325383 call . this[325201] c"eltType")
+    (325389 'end of statement')
+    Forall[325407] {
+      induction variables:
+        
+        unknown i[325390] "index var" "insert auto destroy"
+      iterated expressions:
+        zeroDom[325299]
+      shadow variables:
+      other variables
+        forall body
+      {
+        (325393 call =(325396 call arrData[325329](325401 call(325398 call . newDom[325262] c"indexAt") i[325390])) 0)
+      }
+    }
+    (325410 return arr[325219])
+  }
+  { scopeless type
+    (325214 call ndarray[328686](?) newRank[325205] eltType)
+  }
+  function ndarray[328686](?).reshape[325415](arg _mt[325426]:_MT[201], arg this[325417]:ndarray[328686](?), arg newShape[325422] ... :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    const dom[325435] "const" newShape[325422](325437 call rect[323492](?) newRank[325420])
+    (325441 'end of statement')
+    (325442 return(325449 call(325446 call . this[325417] c"reshape") dom[325435]))
+  }
+  { scopeless type
+    (325430 call ndarray[328686](?) newRank[325420] eltType)
+  }
+  function ndarray[328686](?).slice[325454](arg _mt[325462]:_MT[201], arg this[325456]:ndarray[328686](?), arg args[325459]:_any[141](?) ...) : _unknown[42] "method" "primary method"
+  {
+    const slc[325466] "const"(325471 call(325467 call . this[325456] c"data")(325473 'expand_tuple' args[325459]))
+    (325475 'end of statement')
+    (325476 return(325477 'new'(325480 call ndarray[328686](?) slc[325466])))
+  }
+  function ndarray[328686](?).permute[325484](arg _mt[325497]:_MT[201], arg this[325486]:ndarray[328686](?), arg axes[325493] ... :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    const oldShape[325501] "const"(325506 call .(325502 call . this[325486] c"data") c"shape")
+    (325510 'end of statement')
+    unknown oldShapeR[325512](325520 call(325517 call .(325513 call . this[325486] c"data") c"dims"))
+    (325522 'end of statement')
+    unknown newShapeR[325524](325525 call *(325527 call . this[325486] c"rank") range)
+    (325533 'end of statement')
+    {
+      unknown i[325534] "index var" 0
+      unknown tmp[325562] "maybe param" "temp"
+      (325574 'move' tmp[325562](325572 call chpl_compute_low_param_loop_bound 0(325541 call chpl__nudgeHighBound(325537 call . this[325486] c"rank"))))
+      unknown tmp[325563] "maybe param" "temp"
+      (325586 'move' tmp[325563](325584 call chpl_compute_high_param_loop_bound 0(325579 call chpl__nudgeHighBound(325581 call . this[325486] c"rank"))))
+      unknown tmp[325564] "maybe param" "temp"
+      (325589 'move' tmp[325564] 1)
+      ParamForLoop[325591]
+      { i[325534] tmp[325562] tmp[325563] tmp[325564]
+        {
+          (325546 call =(325549 call newShapeR[325524] i[325534])(325558 call(325555 call .(325551 call . this[325486] c"data") c"dim")(325560 call axes[325493] i[325534])))
+        }
+      }
+      label _unused_continueLabel[325566]
+      label _breakLabel[325565]
+    }
+    const newDom[325601] "const"(325606 call chpl__buildDomainExpr(325604 'expand_tuple' newShapeR[325524]) 1)
+    (325609 'end of statement')
+    unknown prm[325611](325612 'new'(325615 call ndarray[328686](?) newDom[325601](325617 call . this[325486] c"eltType")))
+    (325622 'end of statement')
+    const newShape[325624] "const"(325626 call . prm[325611] c"shape")
+    (325630 'end of statement')
+    unknown prmData[325632] "ref var"(325634 call . prm[325611] c"data")
+    (325638 'end of statement')
+    const thisData[325640] "const" "ref var"(325642 call . this[325486] c"data")
+    (325646 'end of statement')
+    Forall[325763] {
+      induction variables:
+        
+        unknown i[325647] "index var" "insert auto destroy"
+      iterated expressions:
+        (325659 call chpl_build_bounded_range 0(325657 call chpl__nudgeHighBound(325654 call .(325650 call . this[325486] c"data") c"size")))
+      shadow variables:
+      other variables
+        forall body
+      {
+        unknown type_tmp[325675] "temp" "type variable"(325665 call *(325667 call . this[325486] c"rank") int[10])
+        unknown oldIdx[325674] type_tmp[325675]
+        unknown newIdx[325664] type_tmp[325675]
+        (325680 'end of statement')
+        {
+          unknown j[325681] "index var" 0
+          unknown tmp[325715] "maybe param" "temp"
+          (325727 'move' tmp[325715](325725 call chpl_compute_low_param_loop_bound 0(325688 call chpl__nudgeHighBound(325684 call . this[325486] c"rank"))))
+          unknown tmp[325716] "maybe param" "temp"
+          (325739 'move' tmp[325716](325737 call chpl_compute_high_param_loop_bound 0(325732 call chpl__nudgeHighBound(325734 call . this[325486] c"rank"))))
+          unknown tmp[325717] "maybe param" "temp"
+          (325742 'move' tmp[325717] 1)
+          ParamForLoop[325744]
+          { j[325681] tmp[325715] tmp[325716] tmp[325717]
+            {
+              (325693 call =(325696 call oldIdx[325674] j[325681])(325698 call % i[325647](325702 call oldShape[325501] j[325681])))
+              (325704 call =(325707 call newIdx[325664] j[325681])(325709 call % i[325647](325713 call newShape[325624] j[325681])))
+            }
+          }
+          label _unused_continueLabel[325719]
+          label _breakLabel[325718]
+        }
+        (325753 call =(325756 call prmData[325632] newIdx[325664])(325759 call thisData[325640] oldIdx[325674]))
+      }
+    }
+    (325766 return prm[325611])
+  }
+  function ndarray[328686](?).expand[325770](arg _mt[325783]:_MT[201], arg this[325772]:ndarray[328686](?), arg axes[325779] ... :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    const shape[325787] "const"(325795 call .(325792 call .(325788 call . this[325772] c"data") c"_dom") c"shape")
+    (325799 'end of statement')
+    const oldRanges[325801] "const"(325809 call(325806 call .(325802 call . this[325772] c"data") c"dims"))
+    (325811 'end of statement')
+    unknown newRanges[325813] oldRanges[325801](325814 call *(325816 call . this[325772] c"rank") range)
+    (325823 'end of statement')
+    {
+      unknown i[325824] "index var" 0
+      unknown tmp[325894] "maybe param" "temp"
+      (325906 'move' tmp[325894](325904 call chpl_compute_low_param_loop_bound 0(325831 call chpl__nudgeHighBound(325827 call . this[325772] c"rank"))))
+      unknown tmp[325895] "maybe param" "temp"
+      (325918 'move' tmp[325895](325916 call chpl_compute_high_param_loop_bound 0(325911 call chpl__nudgeHighBound(325913 call . this[325772] c"rank"))))
+      unknown tmp[325896] "maybe param" "temp"
+      (325921 'move' tmp[325896] 1)
+      ParamForLoop[325923]
+      { i[325824] tmp[325894] tmp[325895] tmp[325896]
+        {
+          const axis[325837] "const"(325839 call axes[325779] i[325824])
+          (325842 'end of statement')
+          const ds[325844] "const"(325846 call shape i[325824])
+          (325849 'end of statement')
+          if(325890 call _cond_test(325886 call != axis[325837] ds[325844]))
+          {
+            if(325873 call _cond_test(325869 call == ds[325844] 1))
+            {
+              (325852 call =(325855 call newRanges[325813] i[325824])(325861 call chpl_build_bounded_range 0(325859 call chpl__nudgeHighBound axis[325837])))
+            }
+            {
+              (325865 call halt "Cannot expand an axis that is not 1.")
+            }
+          }
+          {
+            (325878 call =(325881 call newRanges[325813] i[325824])(325884 call oldRanges[325801] i[325824]))
+          }
+        }
+      }
+      label _unused_continueLabel[325898]
+      label _breakLabel[325897]
+    }
+    const dom[325933] "const"(325938 call chpl__buildDomainExpr(325936 'expand_tuple' newRanges[325813]) 1)
+    (325941 'end of statement')
+    unknown expanded[325943](325944 'new'(325947 call ndarray[328686](?) dom[325933](325949 call . this[325772] c"eltType")))
+    (325954 'end of statement')
+    const oldShape[325956] "const" shape[325787]
+    (325959 'end of statement')
+    const newShape[325961] "const"(325963 call . dom[325933] c"shape")
+    (325967 'end of statement')
+    unknown expandedData[325969] "ref var"(325971 call . expanded[325943] c"data")
+    (325975 'end of statement')
+    const expandedDataDomain[325977] "const"(325979 call . expandedData[325969] c"_dom")
+    (325983 'end of statement')
+    const thisData[325985] "const" "ref var"(325987 call . this[325772] c"data")
+    (325991 'end of statement')
+    Forall[326106] {
+      induction variables:
+        
+        unknown idx[325992] "index var" "insert auto destroy"
+      iterated expressions:
+        expandedDataDomain[325977]
+      shadow variables:
+      other variables
+        forall body
+      {
+        unknown origIdx[325997](325998 call *(326000 call . this[325772] c"rank") int[10])
+        (326006 'end of statement')
+        if(326024 call _cond_test(326019 call ==(326022 'typeof' idx[325992]) int[10]))
+        {
+          (326008 call =(326011 call origIdx[325997] 0) idx[325992])
+        }
+        {
+          (326015 call = origIdx[325997] idx[325992])
+        }
+        {
+          unknown i[326028] "index var" 0
+          unknown tmp[326058] "maybe param" "temp"
+          (326070 'move' tmp[326058](326068 call chpl_compute_low_param_loop_bound 0(326035 call chpl__nudgeHighBound(326031 call . this[325772] c"rank"))))
+          unknown tmp[326059] "maybe param" "temp"
+          (326082 'move' tmp[326059](326080 call chpl_compute_high_param_loop_bound 0(326075 call chpl__nudgeHighBound(326077 call . this[325772] c"rank"))))
+          unknown tmp[326060] "maybe param" "temp"
+          (326085 'move' tmp[326060] 1)
+          ParamForLoop[326087]
+          { i[326028] tmp[326058] tmp[326059] tmp[326060]
+            {
+              if(326053 call _cond_test(326047 call ==(326050 call oldShape[325956] i[326028]) 1))
+              {
+                (326040 call =(326043 call origIdx[325997] i[326028]) 0)
+              }
+            }
+          }
+          label _unused_continueLabel[326062]
+          label _breakLabel[326061]
+        }
+        (326096 call =(326099 call expandedData[325969] idx[325992])(326102 call thisData[325985] origIdx[325997]))
+      }
+    }
+    (326109 return expanded[325943])
+  }
+  function ndarray[328686](?).sumOneAxis[326113](arg _mt[326121]:_MT[201], ref arg this[326115]:ndarray[328686](?), arg axis[326118] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    const dims[326133] "const"(326141 call(326138 call .(326135 call . this[326115] c"_dom") c"dims"))
+    (326143 'end of statement')
+    const sumAxis[326145] "const"(326147 call dims[326133] axis[326118])
+    (326150 'end of statement')
+    const sumAxisSize[326152] "const"(326154 call . sumAxis[326145] c"size")
+    (326158 'end of statement')
+    unknown newDims[326160] dims[326133]
+    (326163 'end of statement')
+    (326164 call =(326167 call newDims[326160] axis[326118])(326173 call chpl_build_bounded_range 0(326171 call chpl__nudgeHighBound 1)))
+    const newDomain[326176] "const"(326181 call chpl__buildDomainExpr(326179 'expand_tuple' newDims[326160]) 1)
+    (326184 'end of statement')
+    unknown S[326186](326187 'new'(326190 call ndarray[328686](?) newDomain[326176](326192 call . this[326115] c"eltType")))
+    (326197 'end of statement')
+    unknown B[326199] "ref var"(326201 call . S[326186] c"data")
+    (326205 'end of statement')
+    unknown A[326207] "ref var"(326208 call . this[326115] c"data")
+    (326213 'end of statement')
+    Forall[326326] {
+      induction variables:
+        
+        unknown idx[326214] "index var" "insert auto destroy"
+      iterated expressions:
+        newDomain[326176]
+      shadow variables:
+      other variables
+        forall body
+      {
+        unknown origIdx[326219](326220 call *(326223 call . newDomain[326176] c"rank") int[10])
+        (326228 'end of statement')
+        if(326246 call _cond_test(326241 call ==(326244 'typeof' idx[326214]) int[10]))
+        {
+          (326230 call =(326233 call origIdx[326219] 0) idx[326214])
+        }
+        {
+          (326237 call = origIdx[326219] idx[326214])
+        }
+        unknown sum[326251] 0(326252 call . this[326115] c"eltType")
+        (326258 'end of statement')
+        {
+          unknown _indexOfInterest[326280] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[326281] "expr temp" "temp"
+          (326290 'move' _iterator[326281](326288 call _getIterator(326296 call chpl_direct_range_iter 0(326294 call chpl__nudgeHighBound sumAxisSize[326152]))))
+          Defer
+          {
+            {
+              (326311 call _freeIterator _iterator[326281])
+            }
+          }
+          { scopeless type
+            (326301 'move' _indexOfInterest[326280](326298 call iteratorIndex _iterator[326281]))
+          }
+          ForLoop[326282]
+          {
+            unknown i[326259] "index var" "insert auto destroy"
+            (326306 'move' i[326259] _indexOfInterest[326280])
+            {
+              (326268 call =(326271 call origIdx[326219] axis[326118]) i[326259])
+              (326274 call += sum[326251](326278 call A[326207] origIdx[326219]))
+            }
+            label _continueLabel[326285]
+            _indexOfInterest[326280]
+            _iterator[326281]
+          }
+          label _breakLabel[326286]
+        }
+        (326318 call =(326321 call B[326199] idx[326214]) sum[326251])
+      }
+    }
+    (326329 return S[326186])
+  }
+  { scopeless type
+    (326125 call ndarray[328686](?)(326126 call . this[326115] c"rank") eltType)
+  }
+  function ndarray[328686](?).sumAxesMask[326334](arg _mt[326348]:_MT[201], arg this[326336]:ndarray[328686](?), arg withAxesMask[326345] :
+  (326338 call *(326340 call . this[326336] c"rank") int[10])) : _unknown[42] "method" "primary method"
+  {
+    unknown acc[326360] this[326336](326363 call ndarray[328686](?)(326364 call . this[326336] c"rank")(326368 call . this[326336] c"eltType"))
+    (326374 'end of statement')
+    {
+      unknown i[326375] "index var" 0
+      unknown tmp[326409] "maybe param" "temp"
+      (326421 'move' tmp[326409](326419 call chpl_compute_low_param_loop_bound 0(326382 call chpl__nudgeHighBound(326378 call . this[326336] c"rank"))))
+      unknown tmp[326410] "maybe param" "temp"
+      (326433 'move' tmp[326410](326431 call chpl_compute_high_param_loop_bound 0(326426 call chpl__nudgeHighBound(326428 call . this[326336] c"rank"))))
+      unknown tmp[326411] "maybe param" "temp"
+      (326436 'move' tmp[326411] 1)
+      ParamForLoop[326438]
+      { i[326375] tmp[326409] tmp[326410] tmp[326411]
+        {
+          if(326405 call _cond_test(326399 call ==(326402 call withAxesMask[326345] i[326375]) 1))
+          {
+            (326388 call = acc[326360](326397 call(326394 call . acc[326360] c"sumOneAxis") i[326375]))
+          }
+        }
+      }
+      label _unused_continueLabel[326413]
+      label _breakLabel[326412]
+    }
+    (326447 return acc[326360])
+  }
+  { scopeless type
+    (326352 call ndarray[328686](?)(326353 call . this[326336] c"rank") eltType)
+  }
+  function ndarray[328686](?).sum[326452](arg _mt[326463]:_MT[201], arg this[326454]:ndarray[328686](?), arg axes[326459] ... :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    unknown acc[326475](326487 'new'(326490 call ndarray[328686](?)(326491 call . this[326454] c"data")))(326478 call ndarray[328686](?)(326479 call . this[326454] c"rank")(326483 call . this[326454] c"eltType"))
+    (326496 'end of statement')
+    {
+      unknown i[326497] "index var" 0
+      unknown tmp[326520] "maybe param" "temp"
+      (326532 'move' tmp[326520](326530 call chpl_compute_low_param_loop_bound 0(326501 call chpl__nudgeHighBound axesCount[326457])))
+      unknown tmp[326521] "maybe param" "temp"
+      (326541 'move' tmp[326521](326539 call chpl_compute_high_param_loop_bound 0(326537 call chpl__nudgeHighBound axesCount[326457])))
+      unknown tmp[326522] "maybe param" "temp"
+      (326544 'move' tmp[326522] 1)
+      ParamForLoop[326546]
+      { i[326497] tmp[326520] tmp[326521] tmp[326522]
+        {
+          (326506 call = acc[326475](326513 call(326510 call . acc[326475] c"sumOneAxis")(326514 call -(326517 call axes[326459] i[326497]) i[326497])))
+        }
+      }
+      label _unused_continueLabel[326524]
+      label _breakLabel[326523]
+    }
+    (326555 return acc[326475])
+  }
+  { scopeless type
+    (326467 call ndarray[328686](?)(326468 call . this[326454] c"rank") eltType)
+  }
+  function ndarray[328686](?).shrink[326560](arg _mt[326580]:_MT[201], arg this[326562]:ndarray[328686](?), arg narg[326572] ... :
+  (326564 call * 2 int[10]), param arg exactBounds[326577] =
+  0) : _unknown[42] "method" "primary method"
+  {
+    unknown newShape[326592](326593 call *(326595 call . this[326562] c"rank") int[10])
+    (326601 'end of statement')
+    unknown sliceRanges[326603](326604 call *(326606 call . this[326562] c"rank") range)
+    (326612 'end of statement')
+    {
+      unknown i[326613] "index var" 0
+      unknown tmp[326716] "maybe param" "temp"
+      (326728 'move' tmp[326716](326726 call chpl_compute_low_param_loop_bound 0(326620 call chpl__nudgeHighBound(326616 call . this[326562] c"rank"))))
+      unknown tmp[326717] "maybe param" "temp"
+      (326740 'move' tmp[326717](326738 call chpl_compute_high_param_loop_bound 0(326733 call chpl__nudgeHighBound(326735 call . this[326562] c"rank"))))
+      unknown tmp[326718] "maybe param" "temp"
+      (326743 'move' tmp[326718] 1)
+      ParamForLoop[326745]
+      { i[326613] tmp[326716] tmp[326717] tmp[326718]
+        {
+          unknown tmp[326633] "temp"(326631 call narg[326572] i[326613])
+          (326640 call _check_tuple_var_decl tmp[326633] 2)
+          unknown start[326626](326634 call tmp[326633] 0)
+          unknown end[326628](326637 call tmp[326633] 1)
+          (326645 'end of statement')
+          if(326670 call _cond_test(326660 call &&(326662 call < start[326626] 0)(326666 call < end[326628] 0)))
+          {
+            (326647 call = start[326626] 0)
+            (326651 call = end[326628](326658 call(326655 call . this[326562] c"shape") i[326613]))
+          }
+          if(326701 call _cond_test(326698 call ! exactBounds[326577]))
+          {
+            (326675 call =(326678 call sliceRanges[326603] i[326613])(326680 call #(326683 call chpl_build_low_bounded_range start[326626]) end[326628]))
+          }
+          {
+            (326687 call =(326690 call sliceRanges[326603] i[326613])(326696 call chpl_build_bounded_range start[326626](326694 call chpl__nudgeHighBound end[326628])))
+          }
+          (326705 call =(326708 call newShape[326592] i[326613])(326713 call .(326711 call sliceRanges[326603] i[326613]) c"size"))
+        }
+      }
+      label _unused_continueLabel[326720]
+      label _breakLabel[326719]
+    }
+    const sliceDom[326755] "const"(326760 call chpl__buildDomainExpr(326758 'expand_tuple' sliceRanges[326603]) 1)
+    (326763 'end of statement')
+    const newDom[326765] "const"(326769 call domainFromShape module=[222] Utilities[320397](326773 'expand_tuple' newShape[326592]))
+    (326775 'end of statement')
+    unknown shrunk[326777](326778 'new'(326781 call ndarray[328686](?) newDom[326765](326783 call . this[326562] c"eltType")))
+    (326788 'end of statement')
+    (326789 call =(326792 call . shrunk[326777] c"data")(326799 call(326795 call . this[326562] c"data") sliceDom[326755]))
+    (326801 return shrunk[326777])
+    (326804 'referenced modules list' Utilities[320397])
+  }
+  { scopeless type
+    (326584 call ndarray[328686](?)(326585 call . this[326562] c"rank") eltType)
+  }
+  function ndarray[328686](?).pad[326808](arg _mt[326830]:_MT[201], arg this[326810]:ndarray[328686](?), arg narg[326820] ... :
+  (326812 call * 2 int[10]), arg value[326826] :
+  eltType =
+  0) : _unknown[42] "method" "primary method"
+  {
+    unknown newShape[326842](326843 call *(326845 call . this[326810] c"rank") int[10])
+    (326851 'end of statement')
+    unknown sliceRanges[326853](326854 call *(326856 call . this[326810] c"rank") range)
+    (326862 'end of statement')
+    {
+      unknown i[326863] "index var" 0
+      unknown tmp[326935] "maybe param" "temp"
+      (326947 'move' tmp[326935](326945 call chpl_compute_low_param_loop_bound 0(326870 call chpl__nudgeHighBound(326866 call . this[326810] c"rank"))))
+      unknown tmp[326936] "maybe param" "temp"
+      (326959 'move' tmp[326936](326957 call chpl_compute_high_param_loop_bound 0(326952 call chpl__nudgeHighBound(326954 call . this[326810] c"rank"))))
+      unknown tmp[326937] "maybe param" "temp"
+      (326962 'move' tmp[326937] 1)
+      ParamForLoop[326964]
+      { i[326863] tmp[326935] tmp[326936] tmp[326937]
+        {
+          const dimSize[326876] "const"(326887 call(326884 call .(326881 call .(326877 call . this[326810] c"data") c"_dom") c"shape") i[326863])
+          (326890 'end of statement')
+          unknown tmp[326899] "temp"(326897 call narg[326820] i[326863])
+          (326906 call _check_tuple_var_decl tmp[326899] 2)
+          unknown left[326892](326900 call tmp[326899] 0)
+          unknown right[326894](326903 call tmp[326899] 1)
+          (326911 'end of statement')
+          (326912 call =(326915 call sliceRanges[326853] i[326863])(326917 call #(326920 call chpl_build_low_bounded_range left[326892]) dimSize[326876]))
+          (326923 call =(326926 call newShape[326842] i[326863])(326928 call +(326930 call + dimSize[326876] left[326892]) right[326894]))
+        }
+      }
+      label _unused_continueLabel[326939]
+      label _breakLabel[326938]
+    }
+    const sliceDom[326974] "const"(326979 call chpl__buildDomainExpr(326977 'expand_tuple' sliceRanges[326853]) 1)
+    (326982 'end of statement')
+    const newDom[326984] "const"(326988 call domainFromShape module=[222] Utilities[320397](326992 'expand_tuple' newShape[326842]))
+    (326994 'end of statement')
+    unknown padded[326996](326997 'new'(327000 call ndarray[328686](?) newDom[326984](327002 call . this[326810] c"eltType")))
+    (327007 'end of statement')
+    (327008 call =(327011 call . padded[326996] c"data") value[326826])
+    (327015 call =(327021 call(327018 call . padded[326996] c"data") sliceDom[326974])(327023 call . this[326810] c"data"))
+    (327027 return padded[326996])
+    (327030 'referenced modules list' Utilities[320397])
+  }
+  { scopeless type
+    (326834 call ndarray[328686](?)(326835 call . this[326810] c"rank") eltType)
+  }
+  function ndarray[328686](?).dilate[327034](arg _mt[327042]:_MT[201], arg this[327036]:ndarray[328686](?), arg dil[327039] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    if(327082 call _cond_test(327078 call < dil[327039] 0))
+    {
+      (327055 call err module=[222] Utilities[320397] "Cannot dilate "(327061 call :(327064 'typeof' this[327036]) string[244]) ", of shape "(327070 call . this[327036] c"shape") ", by dilation=" dil[327039])
+    }
+    if(327094 call _cond_test(327090 call == dil[327039] 0))
+    {
+      (327087 return this[327036])
+    }
+    const tmp[327108] "const" "temp"(327105 call . this[327036] c"shape")
+    (327115 call _check_tuple_var_decl tmp[327108] 2)
+    const height[327100] "const"(327109 call tmp[327108] 0)
+    const width[327102] "const"(327112 call tmp[327108] 1)
+    (327120 'end of statement')
+    const insertH[327122] "const"(327123 call *(327125 call - height[327100] 1) dil[327039])
+    (327131 'end of statement')
+    const insertW[327133] "const"(327134 call *(327136 call - width[327102] 1) dil[327039])
+    (327142 'end of statement')
+    const newHeight[327144] "const"(327145 call + insertH[327122] height[327100])
+    (327150 'end of statement')
+    const newWidth[327152] "const"(327153 call + insertW[327133] width[327102])
+    (327158 'end of statement')
+    const dom[327160] "const"(327163 call domainFromShape module=[222] Utilities[320397] newHeight[327144] newWidth[327152])
+    (327169 'end of statement')
+    unknown dilated[327171](327172 'new'(327175 call ndarray[328686](?) dom[327160](327177 call . this[327036] c"eltType")))
+    (327182 'end of statement')
+    unknown dat[327184] "ref var"(327186 call . dilated[327171] c"data")
+    (327190 'end of statement')
+    const thisData[327192] "const" "ref var"(327193 call . this[327036] c"data")
+    (327198 'end of statement')
+    const step[327200] "const"(327201 call + dil[327039] 1)
+    (327206 'end of statement')
+    const selfDom[327208] "const"(327210 call . this[327036] c"_dom")
+    (327214 'end of statement')
+    Forall[327254] {
+      induction variables:
+        
+        unknown chpl_idx_1[327255] "index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+      iterated expressions:
+        (327234 call(327231 call .(327226 call .(327222 call . this[327036] c"data") c"_dom") c"every"))
+      shadow variables:
+      other variables
+        forall body
+      {
+        (327260 call _check_tuple_var_decl chpl_idx_1[327255] 2)
+        unknown h[327216] "index var" "insert auto destroy"
+        (327267 'move' h[327216](327264 call chpl_idx_1[327255] 0))
+        unknown w[327218] "index var" "insert auto destroy"
+        (327273 'move' w[327218](327270 call chpl_idx_1[327255] 1))
+        (327236 call =(327239 call dat[327184](327240 call * h[327216] step[327200])(327244 call * w[327218] step[327200]))(327249 call thisData[327192] h[327216] w[327218]))
+      }
+    }
+    (327276 return dilated[327171])
+    (327279 'referenced modules list' Utilities[320397] Utilities[320397])
+  }
+  where {
+    (327044 call ==(327046 call . this[327036] c"rank") 2)
+  }
+  function ndarray[328686](?).dilate[327284](arg _mt[327292]:_MT[201], arg this[327286]:ndarray[328686](?), arg dil[327289] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    if(327326 call _cond_test(327322 call < dil[327289] 0))
+    {
+      (327305 call err module=[222] Utilities[320397] "Cannot dilate "(327309 call :(327312 'typeof' this[327286]) string[244]) ", of shape "(327316 call . this[327286] c"shape") ", by dilation=" dil[327289])
+    }
+    if(327338 call _cond_test(327334 call == dil[327289] 0))
+    {
+      (327331 return this[327286])
+    }
+    const tmp[327354] "const" "temp"(327351 call . this[327286] c"shape")
+    (327364 call _check_tuple_var_decl tmp[327354] 3)
+    const channels[327344] "const"(327355 call tmp[327354] 0)
+    const height[327346] "const"(327358 call tmp[327354] 1)
+    const width[327348] "const"(327361 call tmp[327354] 2)
+    (327369 'end of statement')
+    const insertH[327371] "const"(327372 call *(327374 call - height[327346] 1) dil[327289])
+    (327380 'end of statement')
+    const insertW[327382] "const"(327383 call *(327385 call - width[327348] 1) dil[327289])
+    (327391 'end of statement')
+    const newHeight[327393] "const"(327394 call + insertH[327371] height[327346])
+    (327399 'end of statement')
+    const newWidth[327401] "const"(327402 call + insertW[327382] width[327348])
+    (327407 'end of statement')
+    const dom[327409] "const"(327417 call _build_tuple channels[327344] newHeight[327393] newWidth[327401])(327411 call rect[323492](?) 3)
+    (327420 'end of statement')
+    unknown dilated[327422](327423 'new'(327426 call ndarray[328686](?) dom[327409](327428 call . this[327286] c"eltType")))
+    (327433 'end of statement')
+    unknown dat[327435] "ref var"(327437 call . dilated[327422] c"data")
+    (327441 'end of statement')
+    const thisData[327443] "const" "ref var"(327444 call . this[327286] c"data")
+    (327449 'end of statement')
+    const step[327451] "const"(327452 call + dil[327289] 1)
+    (327457 'end of statement')
+    Forall[327492] {
+      induction variables:
+        
+        unknown chpl_idx_1[327493] "index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+      iterated expressions:
+        (327468 call . this[327286] c"_dom")
+      shadow variables:
+      other variables
+        forall body
+      {
+        (327498 call _check_tuple_var_decl chpl_idx_1[327493] 3)
+        unknown c[327459] "index var" "insert auto destroy"
+        (327505 'move' c[327459](327502 call chpl_idx_1[327493] 0))
+        unknown h[327461] "index var" "insert auto destroy"
+        (327511 'move' h[327461](327508 call chpl_idx_1[327493] 1))
+        unknown w[327463] "index var" "insert auto destroy"
+        (327517 'move' w[327463](327514 call chpl_idx_1[327493] 2))
+        (327471 call =(327474 call dat[327435] c[327459](327476 call * h[327461] step[327451])(327480 call * w[327463] step[327451]))(327485 call thisData[327443] c[327459] h[327461] w[327463]))
+      }
+    }
+    (327520 return dilated[327422])
+    (327523 'referenced modules list' Utilities[320397])
+  }
+  where {
+    (327294 call ==(327296 call . this[327286] c"rank") 3)
+  }
+  function ndarray[328686](?).squeeze[327527](arg _mt[327535]:_MT[201], arg this[327529]:ndarray[328686](?), param arg newRank[327532] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    if(327650 call _cond_test(327646 call == newRank[327532] 1))
+    {
+      unknown me[327552](327553 'new'(327556 call ndarray[328686](?) 1(327558 call . this[327529] c"eltType")))
+      (327563 'end of statement')
+      const s[327565] "const"(327570 call .(327566 call . this[327529] c"data") c"size")
+      (327574 'end of statement')
+      (327581 call(327578 call . me[327552] c"reshapeDomain")(327590 call chpl__buildDomainExpr(327587 call chpl_build_bounded_range 0(327585 call chpl__nudgeHighBound s[327565])) 1))
+      const dataDomain[327593] "const"(327598 call .(327594 call . this[327529] c"data") c"_dom")
+      (327602 'end of statement')
+      unknown meData[327604] "ref var"(327606 call . me[327552] c"data")
+      (327610 'end of statement')
+      const thisData[327612] "const" "ref var"(327613 call . this[327529] c"data")
+      (327618 'end of statement')
+      Forall[327641] {
+        induction variables:
+          
+          unknown i[327619] "index var" "insert auto destroy"
+        iterated expressions:
+          (327622 call . me[327552] c"_dom")
+        shadow variables:
+        other variables
+          forall body
+        {
+          (327626 call =(327629 call meData i[327619])(327632 call thisData[327612](327637 call(327634 call . dataDomain[327593] c"indexAt") i[327619])))
+        }
+      }
+      (327644 return me[327552])
+    }
+    const oldShape[327655] "const"(327657 call . this[327529] c"shape")
+    (327661 'end of statement')
+    unknown newShape[327663](327664 call * newRank[327532] int[10])
+    (327669 'end of statement')
+    unknown offset[327671] 0 int[10]
+    (327675 'end of statement')
+    {
+      unknown i[327676] "index var" 0
+      unknown tmp[327715] "maybe param" "temp"
+      (327727 'move' tmp[327715](327725 call chpl_compute_low_param_loop_bound 0(327683 call chpl__nudgeHighBound(327679 call . this[327529] c"rank"))))
+      unknown tmp[327716] "maybe param" "temp"
+      (327739 'move' tmp[327716](327737 call chpl_compute_high_param_loop_bound 0(327732 call chpl__nudgeHighBound(327734 call . this[327529] c"rank"))))
+      unknown tmp[327717] "maybe param" "temp"
+      (327742 'move' tmp[327717] 1)
+      ParamForLoop[327744]
+      { i[327676] tmp[327715] tmp[327716] tmp[327717]
+        {
+          if(327711 call _cond_test(327705 call ==(327708 call oldShape[327655] i[327676]) 1))
+          {
+            (327689 call -= offset[327671] 1)
+          }
+          {
+            (327694 call =(327697 call newShape[327663](327698 call + i[327676] offset[327671]))(327703 call oldShape[327655] i[327676]))
+          }
+        }
+      }
+      label _unused_continueLabel[327719]
+      label _breakLabel[327718]
+    }
+    const dom[327754] "const"(327758 call domainFromShape module=[222] Utilities[320397](327762 'expand_tuple' newShape[327663]))
+    (327764 'end of statement')
+    unknown me[327766](327767 'new'(327770 call ndarray[328686](?) dom[327754](327772 call . this[327529] c"eltType")))
+    (327777 'end of statement')
+    (327782 call(327779 call . me[327766] c"reshapeDomain") dom[327754])
+    unknown meData[327785] "ref var"(327787 call . me[327766] c"data")
+    (327791 'end of statement')
+    Forall[327815] {
+      induction variables:
+        
+        unknown i[327793] "index var" "insert auto destroy"
+        
+        unknown a[327795] "index var" "insert auto destroy"
+      iterated expressions:
+        dom[327754]
+        (327802 call . this[327529] c"data")
+      shadow variables:
+      other variables
+        forall body
+      {
+        (327806 call =(327809 call meData[327785] i[327793]) a[327795])
+      }
+    }
+    (327819 return me[327766])
+    (327823 'referenced modules list' Utilities[320397])
+  }
+  where {
+    (327542 call < newRank[327532](327545 call . this[327529] c"rank"))
+  }
+  { scopeless type
+    (327539 call ndarray[328686](?) newRank[327532] eltType)
+  }
+  function ndarray[328686](?).max[327827](arg _mt[327831]:_MT[201], arg this[327829]:ndarray[328686](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown me[327840](327841 'new'(327844 call ndarray[328686](?)(327853 call chpl__buildDomainExpr(327850 call chpl_build_bounded_range 0(327848 call chpl__nudgeHighBound 1)) 1)(327855 call . this[327829] c"eltType")))
+    (327860 'end of statement')
+    const myData[327862] "const"(327864 call . this[327829] c"data")
+    (327868 'end of statement')
+    (327869 call =(327875 call(327872 call . me[327840] c"data") 0)(327879 'reduce' MaxReduceScanOp myData[327862] 0))
+    (327881 return me[327840])
+  }
+  { scopeless type
+    (327835 call ndarray[328686](?) 1 eltType)
+  }
+  function ndarray[328686](?).max[327886](arg _mt[327897]:_MT[201], arg this[327888]:ndarray[328686](?), arg axes[327893] ... :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    (327909 call compilerWarning "max is unimplemented.")
+    (327913 return this[327888])
+  }
+  { scopeless type
+    (327901 call ndarray[328686](?)(327902 call . this[327888] c"rank") eltType)
+  }
+  function ndarray[328686](?).populateRemote[327918](arg _mt[327936]:_MT[201], arg this[327920]:ndarray[328686](?), arg re[327933] :
+  (327922 'to borrowed class from unknown'(327924 call Remote(327927 call ndarray[328686](?)(327928 call . this[327920] c"rank") eltType)))) : _unknown[42] "method" "primary method"
+  {
+    {
+      const tmp[327970] "const" "temp"
+      (327971 'move' tmp[327970](327968 'deref'(327967 '_wide_get_locale'(327951 call . re[327933] c"device"))))
+      {
+        unknown reArr[327956] "ref var"(327958 call . re[327933] c"ptr")
+        (327962 'end of statement')
+        (327963 call = reArr[327956] this[327920])
+      }
+      (327974 'elided on block' 0 tmp[327970])
+    }
+    (327978 return re[327933])
+  }
+  { scopeless type
+    (327938 'to borrowed class from unknown'(327940 call Remote(327943 call ndarray[328686](?)(327944 call . this[327920] c"rank") eltType)))
+  }
+  function ndarray[328686](?).toRemote[327983](arg _mt[327987]:_MT[201], arg this[327985]:ndarray[328686](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown re[328003](328004 'new'(328006 call Remote[315927](?)(328009 call ndarray[328686](?)(328010 call . this[327985] c"rank")(328014 call . this[327985] c"eltType"))))
+    (328019 'end of statement')
+    (328026 call(328022 call . this[327985] c"populateRemote")(328031 call(328028 call . re[328003] c"borrow")))
+    (328032 return re[328003])
+  }
+  { scopeless type
+    (327990 call _owned(327992 call Remote(327995 call ndarray[328686](?)(327996 call . this[327985] c"rank") eltType)))
+  }
+  function ndarray[328686](?).batchify[328037](arg _mt[328047]:_MT[201], ref arg this[328039]:ndarray[328686](?), param arg dim[328043] :
+  int[10] =
+  0) ref : _unknown[42] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    const dimR[328058] "const"(328069 call(328066 call .(328063 call .(328059 call . this[328039] c"data") c"_dom") c"shape") dim[328043])
+    (328072 'end of statement')
+    unknown dims[328074](328082 call(328079 call .(328075 call . this[328039] c"data") c"dims"))
+    (328084 'end of statement')
+    {
+      unknown _indexOfInterest[328124] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[328125] "expr temp" "temp"
+      (328134 'move' _iterator[328125](328132 call _getIterator dimR[328058]))
+      Defer
+      {
+        {
+          (328149 call _freeIterator _iterator[328125])
+        }
+      }
+      { scopeless type
+        (328139 'move' _indexOfInterest[328124](328136 call iteratorIndex _iterator[328125]))
+      }
+      ForLoop[328126]
+      {
+        unknown i[328085] "index var" "insert auto destroy"
+        (328144 'move' i[328085] _indexOfInterest[328124])
+        {
+          (328089 yield(328094 call(328090 call . this[328039] c"data")(328123 'expand_tuple'(328121 call _build_tuple(328104 'expand_tuple'(328097 call dims[328074](328102 call chpl_build_bounded_range 0(328100 call chpl__nudgeHighBound dim[328043])))) i[328085](328120 'expand_tuple'(328107 call dims[328074](328118 call chpl_build_bounded_range(328108 call + dim[328043] 1)(328116 call chpl__nudgeHighBound(328112 call . this[328039] c"rank")))))))))
+        }
+        label _continueLabel[328129]
+        _indexOfInterest[328124]
+        _iterator[328125]
+      }
+      label _breakLabel[328130]
+    }
+  }
+  where {
+    (328049 call < dim[328043](328052 call . this[328039] c"rank"))
+  }
+  function ndarray[328686](?).kernelRot[328159](arg _mt[328163]:_MT[201], arg this[328161]:ndarray[328686](?)) : _unknown[42] "method" "primary method"
+  {
+    const tmp[328197] "const" "temp"(328194 call .(328191 call .(328187 call . this[328161] c"data") c"_dom") c"shape")
+    (328210 call _check_tuple_var_decl tmp[328197] 4)
+    const features[328179] "const"(328198 call tmp[328197] 0)
+    const channels[328181] "const"(328201 call tmp[328197] 1)
+    const height[328183] "const"(328204 call tmp[328197] 2)
+    const width[328185] "const"(328207 call tmp[328197] 3)
+    (328215 'end of statement')
+    unknown me[328217](328218 'new'(328221 call ndarray[328686](?)(328226 call .(328222 call . this[328161] c"data") c"_dom")(328229 call . this[328161] c"eltType")))
+    (328234 'end of statement')
+    unknown meData[328236] "ref var"(328238 call . me[328217] c"data")
+    (328242 'end of statement')
+    const thisData[328244] "const" "ref var"(328245 call . this[328161] c"data")
+    (328250 'end of statement')
+    const selfDom[328252] "const"(328254 call . this[328161] c"_dom")
+    (328258 'end of statement')
+    Forall[328300] {
+      induction variables:
+        
+        unknown chpl_idx_1[328301] "index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+      iterated expressions:
+        selfDom[328252]
+      shadow variables:
+      other variables
+        forall body
+      {
+        (328306 call _check_tuple_var_decl chpl_idx_1[328301] 4)
+        unknown f[328260] "index var" "insert auto destroy"
+        (328313 'move' f[328260](328310 call chpl_idx_1[328301] 0))
+        unknown c[328262] "index var" "insert auto destroy"
+        (328319 'move' c[328262](328316 call chpl_idx_1[328301] 1))
+        unknown h[328264] "index var" "insert auto destroy"
+        (328325 'move' h[328264](328322 call chpl_idx_1[328301] 2))
+        unknown w[328266] "index var" "insert auto destroy"
+        (328331 'move' w[328266](328328 call chpl_idx_1[328301] 3))
+        (328272 call =(328275 call meData[328236] f[328260] c[328262] h[328264] w[328266])(328281 call thisData[328244] f[328260] c[328262](328284 call -(328286 call - height[328183] h[328264]) 1)(328291 call -(328293 call - width[328185] w[328266]) 1)))
+      }
+    }
+    (328334 return me[328217])
+  }
+  where {
+    (328170 call ==(328172 call . this[328161] c"rank") 4)
+  }
+  { scopeless type
+    (328167 call ndarray[328686](?) 4 eltType)
+  }
+  function ndarray[328686](?).kernelRot[328340](arg _mt[328344]:_MT[201], arg this[328342]:ndarray[328686](?)) : _unknown[42] "method" "primary method"
+  {
+    const tmp[328376] "const" "temp"(328373 call .(328370 call .(328366 call . this[328342] c"data") c"_dom") c"shape")
+    (328386 call _check_tuple_var_decl tmp[328376] 3)
+    const channels[328360] "const"(328377 call tmp[328376] 0)
+    const height[328362] "const"(328380 call tmp[328376] 1)
+    const width[328364] "const"(328383 call tmp[328376] 2)
+    (328391 'end of statement')
+    unknown me[328393](328394 'new'(328397 call ndarray[328686](?)(328402 call .(328398 call . this[328342] c"data") c"_dom")(328405 call . this[328342] c"eltType")))
+    (328410 'end of statement')
+    unknown meData[328412] "ref var"(328414 call . me[328393] c"data")
+    (328418 'end of statement')
+    const thisData[328420] "const" "ref var"(328421 call . this[328342] c"data")
+    (328426 'end of statement')
+    Forall[328467] {
+      induction variables:
+        
+        unknown chpl_idx_1[328468] "index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+      iterated expressions:
+        (328437 call . this[328342] c"_dom")
+      shadow variables:
+      other variables
+        forall body
+      {
+        (328473 call _check_tuple_var_decl chpl_idx_1[328468] 3)
+        unknown c[328428] "index var" "insert auto destroy"
+        (328480 'move' c[328428](328477 call chpl_idx_1[328468] 0))
+        unknown h[328430] "index var" "insert auto destroy"
+        (328486 'move' h[328430](328483 call chpl_idx_1[328468] 1))
+        unknown w[328432] "index var" "insert auto destroy"
+        (328492 'move' w[328432](328489 call chpl_idx_1[328468] 2))
+        (328441 call =(328444 call meData[328412] c[328428] h[328430] w[328432])(328449 call thisData[328420] c[328428](328451 call -(328453 call - height[328362] h[328430]) 1)(328458 call -(328460 call - width[328364] w[328432]) 1)))
+      }
+    }
+    (328495 return me[328393])
+  }
+  where {
+    (328351 call ==(328353 call . this[328342] c"rank") 3)
+  }
+  { scopeless type
+    (328348 call ndarray[328686](?) 3 eltType)
+  }
+  function ndarray[328686](?).argmax[328501](arg _mt[328505]:_MT[201], arg this[328503]:ndarray[328686](?)) : _unknown[42] "method" "primary method"
+  {
+    unknown mxi[328516] 0 int[10]
+    (328520 'end of statement')
+    const data[328522] "const"(328524 call . this[328503] c"data")
+    (328528 'end of statement')
+    unknown mx[328530](328536 call data mxi[328516])(328531 call . this[328503] c"eltType")
+    (328539 'end of statement')
+    {
+      unknown _indexOfInterest[328571] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[328572] "expr temp" "temp"
+      (328581 'move' _iterator[328572](328579 call _getIterator(328543 call . data[328522] c"_dom")))
+      Defer
+      {
+        {
+          (328596 call _freeIterator _iterator[328572])
+        }
+      }
+      { scopeless type
+        (328586 'move' _indexOfInterest[328571](328583 call iteratorIndex _iterator[328572]))
+      }
+      ForLoop[328573]
+      {
+        unknown i[328540] "index var" "insert auto destroy"
+        (328591 'move' i[328540] _indexOfInterest[328571])
+        {
+          const mei[328548] "const"(328550 call data i[328540])
+          (328553 'end of statement')
+          if(328567 call _cond_test(328563 call < mx[328530] mei[328548]))
+          {
+            (328555 call = mxi[328516] i[328540])
+            (328559 call = mx[328530] mei[328548])
+          }
+        }
+        label _continueLabel[328576]
+        _indexOfInterest[328571]
+        _iterator[328572]
+      }
+      label _breakLabel[328577]
+    }
+    (328603 return mxi[328516])
+  }
+  where {
+    (328507 call ==(328509 call . this[328503] c"rank") 1)
+  }
+  function ndarray[328686](?).relu[328608](arg _mt[328612]:_MT[201], arg this[328610]:ndarray[328686](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    const thisData[328616] "const" "ref var"(328617 call . this[328610] c"data")
+    (328622 'end of statement')
+    const dom[328624] "const"(328626 call . this[328610] c"_dom")
+    (328630 'end of statement')
+    unknown rl[328632](328633 'new'(328636 call ndarray[328686](?) dom[328624](328638 call . this[328610] c"eltType")))
+    (328643 'end of statement')
+    unknown rlD[328645] "ref var"(328647 call . rl[328632] c"data")
+    (328651 'end of statement')
+    Forall[328678] {
+      induction variables:
+        
+        unknown i[328652] "index var" "insert auto destroy"
+      iterated expressions:
+        dom[328624]
+      shadow variables:
+      other variables
+        forall body
+      {
+        const x[328657] "const"(328659 call thisData[328616] i[328652])
+        (328662 'end of statement')
+        (328663 call =(328666 call rlD[328645] i[328652])(328671 call max module=[222] Math[10521] 0 x[328657]))
+        (328668 'referenced modules list' Math[10521])
+      }
+    }
+    (328681 return rl[328632])
+  }
+  type ndarray[328686](?) unknown rank[324061] "param" int[10] unknown eltType[324066] "type variable"(324068 call real[13] 32) unknown _domain[324072](324074 call chpl__buildDomainRuntimeType defaultDist rank[324061] int[10]) unknown simpleDomain[324081](324083 call rect[323492](?) rank[324061]) unknown data[324088](324093 call chpl__buildArrayRuntimeType(324090 call chpl__ensureDomainExpr _domain[324072]) eltType[324066]) serializable[310094] forwarding ( )
+  function _unknown[42].arange[328688](arg _mt[328712]:_MT[201], arg this[328691] :
+  ndarray[328686](?), arg to[328695] :
+  int[10], arg eltType[328701]:_any[141](?) =
+  (328699 call real[13] 64), arg shape[328709] :
+  (328704 call * unknown rank[328706] int[10])) : _unknown[42] "method"
+  {
+    const dom[328720] "const"(328724 call domainFromShape module=[222] Utilities[320397](328728 'expand_tuple' shape[328709]))
+    (328730 'end of statement')
+    const A[328732] "const"(328759 for (328743 call _build_tuple chpl__tuple_blank unknown x[328741] "index var")  in  zip(328753 call _build_tuple dom[328720](328751 call chpl_build_bounded_range 0(328749 call chpl__nudgeHighBound to[328695]))) do
+    {
+      (328754 call : x[328741] eltType[328701])
+    } )(328737 call chpl__buildArrayRuntimeType(328734 call chpl__ensureDomainExpr dom[328720]) eltType[328701])
+    (328762 'end of statement')
+    (328763 return(328764 'new'(328766 call ndarray[328686](?) A[328732])))
+    (328769 'referenced modules list' Utilities[320397])
+  }
+  { scopeless type
+    (328715 call ndarray[328686](?) rank[328706] eltType[328701])
+  }
+  function =[328773](ref arg lhs[328781] :
+  (328776 call ndarray[328686](?) unknown rank[328777] unknown eltType[328779]), const arg rhs[328788] :
+  (328785 call ndarray[328686](?) rank[328777] eltType[328779])) : _unknown[42] "assignop" "operator" "no return value for void"
+  {
+    (328792 call =(328795 call . lhs[328781] c"_domain")(328799 call . rhs[328788] c"_domain"))
+    (328802 call =(328805 call . lhs[328781] c"simpleDomain")(328809 call . rhs[328788] c"simpleDomain"))
+    (328812 call =(328815 call . lhs[328781] c"data")(328819 call . rhs[328788] c"data"))
+  }
+  function =[328824](ref arg lhs[328832] :
+  (328827 call ndarray[328686](?) unknown rank[328828] unknown eltType[328830]), const arg rhs[328839] :
+  (328837 call chpl__buildArrayRuntimeType nil[32] eltType[328830])) : _unknown[42] "assignop" "operator" "no return value for void"
+  {
+    const rct[328851] "const"(328859 call(328856 call .(328853 call . rhs[328839] c"_dom") c"simple"))
+    (328861 'end of statement')
+    (328862 call =(328865 call . lhs[328832] c"_domain")(328872 call(328869 call . rct[328851] c"toDomain")))
+    (328873 call =(328876 call . lhs[328832] c"simpleDomain") rct[328851])
+    (328880 call =(328883 call . lhs[328832] c"data")(328887 call . rhs[328839] c"data"))
+  }
+  where {
+    (328842 call ==(328845 call . rhs[328839] c"rank") rank[328828])
+  }
+  function :[328893](const arg val[328900] :
+  (328898 call chpl__buildArrayRuntimeType nil[32] unknown eltType[328896]), arg t[328910] :
+  (328904 call ndarray[328686](?)(328906 call . val[328900] c"rank") eltType[328896])) : _unknown[42] "operator"
+  {
+    (328914 return(328915 'new'(328917 call ndarray[328686](?) val[328900])))
+  }
+  function :[328921](const arg a[328929] :
+  (328924 call ndarray[328686](?) unknown rank[328925] unknown eltType[328927]), arg toType[328932]:_any[141](?)) : _unknown[42] "operator"
+  {
+    const A[328944] "const"(328946 call . a[328929] c"data")
+    (328950 'end of statement')
+    const D[328952] "const"(328953 call : A[328944] toType[328932])
+    (328958 'end of statement')
+    (328959 return(328960 'new'(328962 call ndarray[328686](?) D[328952])))
+  }
+  where {
+    (328938 call != toType[328932] eltType[328927])
+  }
+  { scopeless type
+    (328935 call ndarray[328686](?) rank[328925] toType[328932])
+  }
+  function :[328968](const arg a[328976] :
+  (328971 call ndarray[328686](?) unknown rank[328972] unknown eltType[328974]), arg toType[328979]:_any[141](?)) : _unknown[42] "operator"
+  {
+    (328990 return a[328976])
+  }
+  where {
+    (328985 call == toType[328979] eltType[328974])
+  }
+  { scopeless type
+    (328982 call ndarray[328686](?) rank[328972] toType[328979])
+  }
+  function :[328996](arg it[328999] :
+  _iteratorRecord[165](?), arg t[329008] :
+  (329003 call ndarray[328686](?) unknown rank[329004] unknown eltType[329006])) : _unknown[42] "operator"
+  {
+    (329012 return(329013 'new'(329015 call ndarray[328686](?) it[328999])))
+  }
+  function zipArr[329019](arg a[329027] :
+  (329022 call ndarray[328686](?) unknown rank[329023] unknown eltType[329025]), arg b[329034] :
+  (329031 call ndarray[328686](?) rank[329023] eltType[329025]), arg f[329037]:_any[141](?)) : _unknown[42]
+  {
+    const dom[329045] "const"(329047 call . a[329027] c"_dom")
+    (329051 'end of statement')
+    unknown c[329053](329058 'new'(329060 call ndarray[328686](?)(329062 call . a[329027] c"_dom") eltType[329025]))(329055 call ndarray[328686](?) rank[329023] eltType[329025])
+    (329067 'end of statement')
+    unknown cData[329069] "ref var"(329071 call . c[329053] c"data")
+    (329075 'end of statement')
+    Forall[329101] {
+      induction variables:
+        
+        unknown i[329076] "index var" "insert auto destroy"
+      iterated expressions:
+        dom[329045]
+      shadow variables:
+      other variables
+        forall body
+      {
+        (329079 call =(329082 call cData[329069] i[329076])(329085 call f[329037](329090 call(329087 call . a[329027] c"data") i[329076])(329096 call(329093 call . b[329034] c"data") i[329076])))
+      }
+    }
+    (329104 return c[329053])
+  }
+  { scopeless type
+    (329040 call ndarray[328686](?) rank[329023] eltType[329025])
+  }
+  function +[329109](arg a[329117] :
+  (329112 call ndarray[328686](?) unknown rank[329113] unknown eltType[329115]), arg b[329124] :
+  (329121 call ndarray[328686](?) rank[329113] eltType[329115])) : _unknown[42] "operator"
+  {
+    const dom[329133] "const"(329135 call . a[329117] c"_dom")
+    (329139 'end of statement')
+    const aData[329141] "const" "ref var"(329143 call . a[329117] c"data")
+    (329147 'end of statement')
+    const bData[329149] "const" "ref var"(329151 call . b[329124] c"data")
+    (329155 'end of statement')
+    unknown c[329157](329162 'new'(329164 call ndarray[328686](?) dom[329133] eltType[329115]))(329159 call ndarray[328686](?) rank[329113] eltType[329115])
+    (329168 'end of statement')
+    unknown cData[329170] "ref var"(329172 call . c[329157] c"data")
+    (329176 'end of statement')
+    Forall[329196] {
+      induction variables:
+        
+        unknown i[329177] "index var" "insert auto destroy"
+      iterated expressions:
+        dom[329133]
+      shadow variables:
+      other variables
+        forall body
+      {
+        (329180 call =(329183 call cData[329170] i[329177])(329185 call +(329188 call aData[329141] i[329177])(329191 call bData[329149] i[329177])))
+      }
+    }
+    (329199 return c[329157])
+  }
+  { scopeless type
+    (329128 call ndarray[328686](?) rank[329113] eltType[329115])
+  }
+  function *[329204](arg a[329212] :
+  (329207 call ndarray[328686](?) unknown rank[329208] unknown eltType[329210]), arg b[329219] :
+  (329216 call ndarray[328686](?) rank[329208] eltType[329210])) : _unknown[42] "operator"
+  {
+    const dom[329228] "const"(329230 call . a[329212] c"_dom")
+    (329234 'end of statement')
+    unknown c[329236](329241 'new'(329243 call ndarray[328686](?)(329245 call . a[329212] c"_dom") eltType[329210]))(329238 call ndarray[328686](?) rank[329208] eltType[329210])
+    (329250 'end of statement')
+    unknown cData[329252] "ref var"(329254 call . c[329236] c"data")
+    (329258 'end of statement')
+    const aData[329260] "const" "ref var"(329262 call . a[329212] c"data")
+    (329266 'end of statement')
+    const bData[329268] "const" "ref var"(329270 call . b[329219] c"data")
+    (329274 'end of statement')
+    Forall[329294] {
+      induction variables:
+        
+        unknown i[329275] "index var" "insert auto destroy"
+      iterated expressions:
+        dom[329228]
+      shadow variables:
+      other variables
+        forall body
+      {
+        (329278 call =(329281 call cData[329252] i[329275])(329283 call *(329286 call aData[329260] i[329275])(329289 call bData[329268] i[329275])))
+      }
+    }
+    (329297 return c[329236])
+  }
+  { scopeless type
+    (329223 call ndarray[328686](?) rank[329208] eltType[329210])
+  }
+  function -[329302](arg a[329310] :
+  (329305 call ndarray[328686](?) unknown rank[329306] unknown eltType[329308]), arg b[329317] :
+  (329314 call ndarray[328686](?) rank[329306] eltType[329308])) : _unknown[42] "operator"
+  {
+    const dom[329326] "const"(329328 call . a[329310] c"_dom")
+    (329332 'end of statement')
+    unknown c[329334](329339 'new'(329341 call ndarray[328686](?)(329343 call . a[329310] c"_dom") eltType[329308]))(329336 call ndarray[328686](?) rank[329306] eltType[329308])
+    (329348 'end of statement')
+    unknown cData[329350] "ref var"(329352 call . c[329334] c"data")
+    (329356 'end of statement')
+    const aData[329358] "const" "ref var"(329360 call . a[329310] c"data")
+    (329364 'end of statement')
+    const bData[329366] "const" "ref var"(329368 call . b[329317] c"data")
+    (329372 'end of statement')
+    Forall[329392] {
+      induction variables:
+        
+        unknown i[329373] "index var" "insert auto destroy"
+      iterated expressions:
+        dom[329326]
+      shadow variables:
+      other variables
+        forall body
+      {
+        (329376 call =(329379 call cData[329350] i[329373])(329381 call -(329384 call aData[329358] i[329373])(329387 call bData[329366] i[329373])))
+      }
+    }
+    (329395 return c[329334])
+  }
+  { scopeless type
+    (329321 call ndarray[328686](?) rank[329306] eltType[329308])
+  }
+  function /[329400](arg a[329408] :
+  (329403 call ndarray[328686](?) unknown rank[329404] unknown eltType[329406]), arg b[329415] :
+  (329412 call ndarray[328686](?) rank[329404] eltType[329406])) : _unknown[42] "operator"
+  {
+    const dom[329424] "const"(329426 call . a[329408] c"_dom")
+    (329430 'end of statement')
+    unknown c[329432](329437 'new'(329439 call ndarray[328686](?)(329441 call . a[329408] c"_dom") eltType[329406]))(329434 call ndarray[328686](?) rank[329404] eltType[329406])
+    (329446 'end of statement')
+    unknown cData[329448] "ref var"(329450 call . c[329432] c"data")
+    (329454 'end of statement')
+    const aData[329456] "const" "ref var"(329458 call . a[329408] c"data")
+    (329462 'end of statement')
+    const bData[329464] "const" "ref var"(329466 call . b[329415] c"data")
+    (329470 'end of statement')
+    Forall[329490] {
+      induction variables:
+        
+        unknown i[329471] "index var" "insert auto destroy"
+      iterated expressions:
+        dom[329424]
+      shadow variables:
+      other variables
+        forall body
+      {
+        (329474 call =(329477 call cData[329448] i[329471])(329479 call /(329482 call aData[329456] i[329471])(329485 call bData[329464] i[329471])))
+      }
+    }
+    (329493 return c[329432])
+  }
+  { scopeless type
+    (329419 call ndarray[328686](?) rank[329404] eltType[329406])
+  }
+  function _unknown[42].convolve[329498](arg _mt[329523]:_MT[201], arg this[329501] :
+  ndarray[328686](?), arg features[329509] :
+  (329505 call ndarray[328686](?) 3 unknown eltType[329507]), arg kernel[329516] :
+  (329513 call ndarray[328686](?) 4 eltType[329507]), arg stride[329520] :
+  int[10]) : _unknown[42] "method"
+  {
+    const tmp[329541] "const" "temp"(329538 call . features[329509] c"shape")
+    (329551 call _check_tuple_var_decl tmp[329541] 3)
+    const channels[329531] "const"(329542 call tmp[329541] 0)
+    const inHeight[329533] "const"(329545 call tmp[329541] 1)
+    const inWidth[329535] "const"(329548 call tmp[329541] 2)
+    (329556 'end of statement')
+    const tmp[329570] "const" "temp"(329567 call . kernel[329516] c"shape")
+    (329583 call _check_tuple_var_decl tmp[329570] 4)
+    const filters[329558] "const"(329571 call tmp[329570] 0)
+    const channels_[329560] "const"(329574 call tmp[329570] 1)
+    const kernelHeight[329562] "const"(329577 call tmp[329570] 2)
+    const kernelWidth[329564] "const"(329580 call tmp[329570] 3)
+    (329588 'end of statement')
+    if(329599 call _cond_test(329595 call != channels[329531] channels_[329560]))
+    {
+      (329590 call halt "Channels must match.")
+    }
+    const outHeight[329605] "const"(329607 call +(329609 call /(329611 call - inHeight[329533] kernelHeight[329562]) stride[329520]) 1) int[10]
+    (329618 'end of statement')
+    const outWidth[329620] "const"(329622 call +(329624 call /(329626 call - inWidth[329535] kernelWidth[329564]) stride[329520]) 1) int[10]
+    (329633 'end of statement')
+    const outShape[329635] "const"(329640 call _build_tuple filters[329558] outHeight[329605] outWidth[329620])
+    (329643 'end of statement')
+    const outDom[329645] "const" outShape[329635](329647 call rect[323492](?) 3)
+    (329651 'end of statement')
+    unknown outFeatures[329653](329654 'new'(329656 call ndarray[328686](?) outDom[329645] eltType[329507]))
+    (329660 'end of statement')
+    const chanR[329662] "const"(329667 call chpl_build_bounded_range 0(329665 call chpl__nudgeHighBound channels[329531]))
+    (329670 'end of statement')
+    const kernelD[329672] "const"(329679 call _build_tuple kernelHeight[329562] kernelWidth[329564])(329674 call rect[323492](?) 2)
+    (329682 'end of statement')
+    const kernelChanD[329684] "const"(329692 call _build_tuple channels[329531] kernelHeight[329562] kernelWidth[329564])(329686 call rect[323492](?) 3)
+    (329695 'end of statement')
+    unknown dat[329697] "ref var"(329699 call . outFeatures[329653] c"data")
+    (329703 'end of statement')
+    unknown fet[329705] "ref var"(329707 call . features[329509] c"data")
+    (329711 'end of statement')
+    unknown ker[329713] "ref var"(329715 call . kernel[329516] c"data")
+    (329719 'end of statement')
+    Forall[329869] {
+      induction variables:
+        
+        unknown chpl_idx_1[329870] "index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+      iterated expressions:
+        outDom[329645]
+      shadow variables:
+      other variables
+        forall body
+      {
+        (329875 call _check_tuple_var_decl chpl_idx_1[329870] 3)
+        unknown f[329721] "index var" "insert auto destroy"
+        (329882 'move' f[329721](329879 call chpl_idx_1[329870] 0))
+        unknown h_[329723] "index var" "insert auto destroy"
+        (329888 'move' h_[329723](329885 call chpl_idx_1[329870] 1))
+        unknown w_[329725] "index var" "insert auto destroy"
+        (329894 'move' w_[329725](329891 call chpl_idx_1[329870] 2))
+        const hi[329732] "const"(329734 call * h_[329723] stride[329520]) int[10]
+        (329739 'end of statement')
+        const wi[329741] "const"(329743 call * w_[329725] stride[329520]) int[10]
+        (329748 'end of statement')
+        unknown sum[329750] 0 eltType[329507]
+        (329754 'end of statement')
+        {
+          unknown _indexOfInterest[329818] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[329819] "expr temp" "temp"
+          (329828 'move' _iterator[329819](329826 call _getIterator(329837 call chpl_direct_range_iter 0(329832 call chpl__nudgeHighBound(329834 call . kernelChanD[329684] c"size")))))
+          Defer
+          {
+            {
+              (329852 call _freeIterator _iterator[329819])
+            }
+          }
+          { scopeless type
+            (329842 'move' _indexOfInterest[329818](329839 call iteratorIndex _iterator[329819]))
+          }
+          ForLoop[329820]
+          {
+            unknown j[329755] "index var" "insert auto destroy"
+            (329847 'move' j[329755] _indexOfInterest[329818])
+            {
+              const tmp[329780] "const" "temp"(329778 call(329775 call . kernelChanD[329684] c"indexAt") j[329755])
+              (329790 call _check_tuple_var_decl tmp[329780] 3)
+              const c[329768] "const"(329781 call tmp[329780] 0)
+              const kh[329770] "const"(329784 call tmp[329780] 1)
+              const kw[329772] "const"(329787 call tmp[329780] 2)
+              (329795 'end of statement')
+              (329796 call += sum[329750](329799 call *(329802 call fet[329705] c[329768](329804 call + hi[329732] kh[329770])(329808 call + wi[329741] kw[329772]))(329813 call ker[329713] f[329721] c[329768] kh[329770] kw[329772])))
+            }
+            label _continueLabel[329823]
+            _indexOfInterest[329818]
+            _iterator[329819]
+          }
+          label _breakLabel[329824]
+        }
+        (329859 call =(329862 call dat[329697] f[329721] h_[329723] w_[329725]) sum[329750])
+      }
+    }
+    (329897 return outFeatures[329653])
+  }
+  { scopeless type
+    (329526 call ndarray[328686](?) 3 eltType[329507])
+  }
+  function _unknown[42].convolve[329902](arg _mt[329934]:_MT[201], arg this[329905] :
+  ndarray[328686](?), arg features[329913] :
+  (329909 call ndarray[328686](?) 3 unknown eltType[329911]), arg kernel[329920] :
+  (329917 call ndarray[328686](?) 4 eltType[329911]), arg bias[329927] :
+  (329924 call ndarray[328686](?) 1 eltType[329911]), arg stride[329931] :
+  int[10]) : _unknown[42] "method"
+  {
+    const tmp[329952] "const" "temp"(329949 call . features[329913] c"shape")
+    (329962 call _check_tuple_var_decl tmp[329952] 3)
+    const channels[329942] "const"(329953 call tmp[329952] 0)
+    const inHeight[329944] "const"(329956 call tmp[329952] 1)
+    const inWidth[329946] "const"(329959 call tmp[329952] 2)
+    (329967 'end of statement')
+    const tmp[329981] "const" "temp"(329978 call . kernel[329920] c"shape")
+    (329994 call _check_tuple_var_decl tmp[329981] 4)
+    const filters[329969] "const"(329982 call tmp[329981] 0)
+    const channels_[329971] "const"(329985 call tmp[329981] 1)
+    const kernelHeight[329973] "const"(329988 call tmp[329981] 2)
+    const kernelWidth[329975] "const"(329991 call tmp[329981] 3)
+    (329999 'end of statement')
+    const tmp[330007] "const" "temp"(330004 call . bias[329927] c"shape")
+    (330011 call _check_tuple_var_decl tmp[330007] 1)
+    const filters_[330001] "const"(330008 call tmp[330007] 0)
+    (330016 'end of statement')
+    if(330036 call _cond_test(330032 call != channels[329942] channels_[329971]))
+    {
+      (330018 call halt "Channels must match. "(330023 call . features[329913] c"shape") " "(330028 call . kernel[329920] c"shape"))
+    }
+    if(330051 call _cond_test(330047 call != filters[329969] filters_[330001]))
+    {
+      (330042 call halt "Bias and filters must match.")
+    }
+    const outHeight[330057] "const"(330059 call +(330061 call /(330063 call - inHeight[329944] kernelHeight[329973]) stride[329931]) 1) int[10]
+    (330070 'end of statement')
+    const outWidth[330072] "const"(330074 call +(330076 call /(330078 call - inWidth[329946] kernelWidth[329975]) stride[329931]) 1) int[10]
+    (330085 'end of statement')
+    const outShape[330087] "const"(330092 call _build_tuple filters[329969] outHeight[330057] outWidth[330072])
+    (330095 'end of statement')
+    const outDom[330097] "const" outShape[330087](330099 call rect[323492](?) 3)
+    (330103 'end of statement')
+    const kernelChanD[330105] "const"(330113 call _build_tuple channels[329942] kernelHeight[329973] kernelWidth[329975])(330107 call rect[323492](?) 3)
+    (330116 'end of statement')
+    const fet[330118] "const" "ref var"(330120 call . features[329913] c"data")
+    (330124 'end of statement')
+    const ker[330126] "const" "ref var"(330128 call . kernel[329920] c"data")
+    (330132 'end of statement')
+    const bis[330134] "const" "ref var"(330136 call . bias[329927] c"data")
+    (330140 'end of statement')
+    unknown outFeatures[330142](330143 'new'(330145 call ndarray[328686](?) outDom[330097] eltType[329911]))
+    (330149 'end of statement')
+    unknown dat[330151] "ref var"(330153 call . outFeatures[330142] c"data")
+    (330157 'end of statement')
+    function fastKernel[330158](param arg kernelSize[330161] :
+    int[10]) : _unknown[42] "inline" "no return value for void"
+    {
+      Forall[330370] {
+        induction variables:
+          
+          unknown chpl_idx_1[330371] "index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        iterated expressions:
+          outDom[330097]
+        shadow variables:
+        other variables
+          forall body
+        {
+          (330376 call _check_tuple_var_decl chpl_idx_1[330371] 3)
+          unknown f[330166] "index var" "insert auto destroy"
+          (330383 'move' f[330166](330380 call chpl_idx_1[330371] 0))
+          unknown h_[330168] "index var" "insert auto destroy"
+          (330389 'move' h_[330168](330386 call chpl_idx_1[330371] 1))
+          unknown w_[330170] "index var" "insert auto destroy"
+          (330395 'move' w_[330170](330392 call chpl_idx_1[330371] 2))
+          const hi[330177] "const"(330178 call * h_[330168] stride[329931])
+          (330183 'end of statement')
+          const wi[330185] "const"(330186 call * w_[330170] stride[329931])
+          (330191 'end of statement')
+          unknown sum[330193] 0 eltType[329911]
+          (330197 'end of statement')
+          {
+            unknown _indexOfInterest[330317] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[330318] "expr temp" "temp"
+            (330327 'move' _iterator[330318](330325 call _getIterator(330333 call chpl_direct_range_iter 0(330331 call chpl__nudgeHighBound channels[329942]))))
+            Defer
+            {
+              {
+                (330348 call _freeIterator _iterator[330318])
+              }
+            }
+            { scopeless type
+              (330338 'move' _indexOfInterest[330317](330335 call iteratorIndex _iterator[330318]))
+            }
+            ForLoop[330319]
+            {
+              unknown c[330198] "index var" "insert auto destroy"
+              (330343 'move' c[330198] _indexOfInterest[330317])
+              {
+                {
+                  unknown kh[330207] "index var" 0
+                  unknown tmp[330282] "maybe param" "temp"
+                  (330294 'move' tmp[330282](330292 call chpl_compute_low_param_loop_bound 0(330211 call chpl__nudgeHighBound kernelSize[330161])))
+                  unknown tmp[330283] "maybe param" "temp"
+                  (330303 'move' tmp[330283](330301 call chpl_compute_high_param_loop_bound 0(330299 call chpl__nudgeHighBound kernelSize[330161])))
+                  unknown tmp[330284] "maybe param" "temp"
+                  (330306 'move' tmp[330284] 1)
+                  ParamForLoop[330308]
+                  { kh[330207] tmp[330282] tmp[330283] tmp[330284]
+                    {
+                      {
+                        unknown kw[330216] "index var" 0
+                        unknown tmp[330247] "maybe param" "temp"
+                        (330259 'move' tmp[330247](330257 call chpl_compute_low_param_loop_bound 0(330220 call chpl__nudgeHighBound kernelSize[330161])))
+                        unknown tmp[330248] "maybe param" "temp"
+                        (330268 'move' tmp[330248](330266 call chpl_compute_high_param_loop_bound 0(330264 call chpl__nudgeHighBound kernelSize[330161])))
+                        unknown tmp[330249] "maybe param" "temp"
+                        (330271 'move' tmp[330249] 1)
+                        ParamForLoop[330273]
+                        { kw[330216] tmp[330247] tmp[330248] tmp[330249]
+                          {
+                            (330225 call += sum[330193](330228 call *(330231 call fet[330118] c[330198](330233 call + hi[330177] kh[330207])(330237 call + wi[330185] kw[330216]))(330242 call ker[330126] f[330166] c[330198] kh[330207] kw[330216])))
+                          }
+                        }
+                        label _unused_continueLabel[330251]
+                        label _breakLabel[330250]
+                      }
+                    }
+                  }
+                  label _unused_continueLabel[330286]
+                  label _breakLabel[330285]
+                }
+              }
+              label _continueLabel[330322]
+              _indexOfInterest[330317]
+              _iterator[330318]
+            }
+            label _breakLabel[330323]
+          }
+          (330355 call =(330358 call dat[330151] f[330166] h_[330168] w_[330170])(330362 call + sum[330193](330366 call bis[330134] f[330166])))
+        }
+      }
+    }
+    function slowKernel[330400]() : _unknown[42] "inline" "no return value for void"
+    {
+      Forall[330706] {
+        induction variables:
+          
+          unknown chpl_idx_1[330707] "index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        iterated expressions:
+          outDom[330097]
+        shadow variables:
+        other variables
+          forall body
+        {
+          (330712 call _check_tuple_var_decl chpl_idx_1[330707] 3)
+          unknown f[330404] "index var" "insert auto destroy"
+          (330719 'move' f[330404](330716 call chpl_idx_1[330707] 0))
+          unknown h_[330406] "index var" "insert auto destroy"
+          (330725 'move' h_[330406](330722 call chpl_idx_1[330707] 1))
+          unknown w_[330408] "index var" "insert auto destroy"
+          (330731 'move' w_[330408](330728 call chpl_idx_1[330707] 2))
+          const hi[330415] "const"(330416 call * h_[330406] stride[329931])
+          (330421 'end of statement')
+          const wi[330423] "const"(330424 call * w_[330408] stride[329931])
+          (330429 'end of statement')
+          unknown sum[330431] 0 eltType[329911]
+          (330435 'end of statement')
+          if(330687 call _cond_test(330684 call targetGpu module=[222] Utilities[320397]))
+          {
+            unknown _indexOfInterest[330559] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[330560] "expr temp" "temp"
+            (330569 'move' _iterator[330560](330567 call _getIterator(330575 call chpl_direct_range_iter 0(330573 call chpl__nudgeHighBound channels[329942]))))
+            Defer
+            {
+              {
+                (330590 call _freeIterator _iterator[330560])
+              }
+            }
+            { scopeless type
+              (330580 'move' _indexOfInterest[330559](330577 call iteratorIndex _iterator[330560]))
+            }
+            ForLoop[330561]
+            {
+              unknown c[330436] "index var" "insert auto destroy"
+              (330585 'move' c[330436] _indexOfInterest[330559])
+              {
+                unknown _indexOfInterest[330521] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                unknown _iterator[330522] "expr temp" "temp"
+                (330531 'move' _iterator[330522](330529 call _getIterator(330537 call chpl_direct_range_iter 0(330535 call chpl__nudgeHighBound kernelHeight[329973]))))
+                Defer
+                {
+                  {
+                    (330552 call _freeIterator _iterator[330522])
+                  }
+                }
+                { scopeless type
+                  (330542 'move' _indexOfInterest[330521](330539 call iteratorIndex _iterator[330522]))
+                }
+                ForLoop[330523]
+                {
+                  unknown kh[330444] "index var" "insert auto destroy"
+                  (330547 'move' kh[330444] _indexOfInterest[330521])
+                  {
+                    unknown _indexOfInterest[330483] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                    unknown _iterator[330484] "expr temp" "temp"
+                    (330493 'move' _iterator[330484](330491 call _getIterator(330499 call chpl_direct_range_iter 0(330497 call chpl__nudgeHighBound kernelWidth[329975]))))
+                    Defer
+                    {
+                      {
+                        (330514 call _freeIterator _iterator[330484])
+                      }
+                    }
+                    { scopeless type
+                      (330504 'move' _indexOfInterest[330483](330501 call iteratorIndex _iterator[330484]))
+                    }
+                    ForLoop[330485]
+                    {
+                      unknown kw[330452] "index var" "insert auto destroy"
+                      (330509 'move' kw[330452] _indexOfInterest[330483])
+                      (330460 call += sum[330431](330463 call *(330466 call fet[330118] c[330436](330468 call + hi[330415] kh[330444])(330472 call + wi[330423] kw[330452]))(330477 call ker[330126] f[330404] c[330436] kh[330444] kw[330452])))
+                      label _continueLabel[330488]
+                      _indexOfInterest[330483]
+                      _iterator[330484]
+                    }
+                    label _breakLabel[330489]
+                  }
+                  label _continueLabel[330526]
+                  _indexOfInterest[330521]
+                  _iterator[330522]
+                }
+                label _breakLabel[330527]
+              }
+              label _continueLabel[330564]
+              _indexOfInterest[330559]
+              _iterator[330560]
+            }
+            label _breakLabel[330565]
+          }
+          {
+            unknown _indexOfInterest[330630] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[330631] "expr temp" "temp"
+            (330640 'move' _iterator[330631](330638 call _getIterator kernelChanD[330105]))
+            Defer
+            {
+              {
+                (330674 call _freeIterator _iterator[330631])
+              }
+            }
+            { scopeless type
+              (330645 'move' _indexOfInterest[330630](330642 call iteratorIndex _iterator[330631]))
+            }
+            ForLoop[330632]
+            {
+              (330650 call _check_tuple_var_decl _indexOfInterest[330630] 3)
+              unknown c[330598] "index var" "insert auto destroy"
+              (330657 'move' c[330598](330654 call _indexOfInterest[330630] 0))
+              unknown kh[330600] "index var" "insert auto destroy"
+              (330663 'move' kh[330600](330660 call _indexOfInterest[330630] 1))
+              unknown kw[330602] "index var" "insert auto destroy"
+              (330669 'move' kw[330602](330666 call _indexOfInterest[330630] 2))
+              (330607 call += sum[330431](330610 call *(330613 call fet[330118] c[330598](330615 call + hi[330415] kh[330600])(330619 call + wi[330423] kw[330602]))(330624 call ker[330126] f[330404] c[330598] kh[330600] kw[330602])))
+              label _continueLabel[330635]
+              _indexOfInterest[330630]
+              _iterator[330631]
+            }
+            label _breakLabel[330636]
+          }
+          (330691 call =(330694 call dat[330151] f[330404] h_[330406] w_[330408])(330698 call + sum[330431](330702 call bis[330134] f[330404])))
+          (330681 'referenced modules list' Utilities[320397])
+        }
+      }
+    }
+    {
+      unknown tmp[330817] "expr temp" "maybe param" "maybe type" "temp"
+      (330819 'move' tmp[330817](330739 call _build_tuple kernelHeight[329973] kernelWidth[329975]))
+      if(330824 call _cond_test(330821 call == tmp[330817](330746 call _build_tuple 3 3)))
+      {
+        (330750 call fastKernel 3)
+      }
+      {
+        if(330830 call _cond_test(330827 call == tmp[330817](330759 call _build_tuple 5 5)))
+        {
+          (330763 call fastKernel 5)
+        }
+        {
+          if(330837 call _cond_test(330834 call == tmp[330817](330772 call _build_tuple 7 7)))
+          {
+            (330776 call fastKernel 7)
+          }
+          {
+            if(330844 call _cond_test(330841 call == tmp[330817](330785 call _build_tuple 9 9)))
+            {
+              (330789 call fastKernel 9)
+            }
+            {
+              if(330851 call _cond_test(330848 call == tmp[330817](330800 call _build_tuple 11 11)))
+              {
+                (330804 call fastKernel 11)
+              }
+              {
+                (330812 call slowKernel)
+              }
+            }
+          }
+        }
+      }
+    }
+    (330855 return outFeatures[330142])
+  }
+  { scopeless type
+    (329937 call ndarray[328686](?) 3 eltType[329911])
+  }
+  function _unknown[42].maxPool[330860](arg _mt[330878]:_MT[201], arg this[330863] :
+  ndarray[328686](?), arg features[330871] :
+  (330867 call ndarray[328686](?) 3 unknown eltType[330869]), arg poolSize[330875] :
+  int[10]) : _unknown[42] "method"
+  {
+    const tmp[330896] "const" "temp"(330893 call . features[330871] c"shape")
+    (330906 call _check_tuple_var_decl tmp[330896] 3)
+    const channels[330886] "const"(330897 call tmp[330896] 0)
+    const height[330888] "const"(330900 call tmp[330896] 1)
+    const width[330890] "const"(330903 call tmp[330896] 2)
+    (330911 'end of statement')
+    if(330997 call _cond_test(330981 call ||(330983 call !=(330985 call % height[330888] poolSize[330875]) 0)(330990 call !=(330992 call % width[330890] poolSize[330875]) 0)))
+    {
+      const moreH[330914] "const"(330915 call *(330917 call :(330922 call ceil module=[222] Math[10521](330925 call /(330927 call : height[330888] real[13])(330931 call : poolSize[330875] real[13]))) int[10]) poolSize[330875])
+      (330938 'end of statement')
+      const moreW[330940] "const"(330941 call *(330943 call :(330947 call ceil module=[222] Math[10521](330950 call /(330952 call : width[330890] real[13])(330956 call : poolSize[330875] real[13]))) int[10]) poolSize[330875])
+      (330963 'end of statement')
+      (330964 return(330971 call(330968 call . ndarray[328686](?) c"maxPool")(330976 call(330973 call . features[330871] c"reshape") channels[330886] moreH[330914] moreW[330940]) poolSize[330875]))
+      (330919 'referenced modules list' Math[10521] Math[10521])
+    }
+    const newHeight[331002] "const"(331004 call / height[330888] poolSize[330875]) int[10]
+    (331009 'end of statement')
+    const newWidth[331011] "const"(331013 call / width[330890] poolSize[330875]) int[10]
+    (331018 'end of statement')
+    const dom[331020] "const"(331028 call _build_tuple channels[330886] newHeight[331002] newWidth[331011])(331022 call rect[323492](?) 3)
+    (331031 'end of statement')
+    unknown pool[331033](331034 'new'(331036 call ndarray[328686](?) dom[331020] eltType[330869]))
+    (331040 'end of statement')
+    unknown dat[331042] "ref var"(331044 call . pool[331033] c"data")
+    (331048 'end of statement')
+    unknown fet[331050] "ref var"(331052 call . features[330871] c"data")
+    (331056 'end of statement')
+    const poolDom[331058] "const"(331065 call _build_tuple poolSize[330875] poolSize[330875])(331060 call rect[323492](?) 2)
+    (331068 'end of statement')
+    Forall[331203] {
+      induction variables:
+        
+        unknown chpl_idx_1[331204] "index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+      iterated expressions:
+        dom[331020]
+      shadow variables:
+      other variables
+        forall body
+      {
+        (331209 call _check_tuple_var_decl chpl_idx_1[331204] 3)
+        unknown c[331070] "index var" "insert auto destroy"
+        (331216 'move' c[331070](331213 call chpl_idx_1[331204] 0))
+        unknown h[331072] "index var" "insert auto destroy"
+        (331222 'move' h[331072](331219 call chpl_idx_1[331204] 1))
+        unknown w[331074] "index var" "insert auto destroy"
+        (331228 'move' w[331074](331225 call chpl_idx_1[331204] 2))
+        const hs[331081] "const"(331082 call * h[331072] poolSize[330875])
+        (331087 'end of statement')
+        const ws[331089] "const"(331090 call * w[331074] poolSize[330875])
+        (331095 'end of statement')
+        unknown mx[331097](331100 call fet[331050] c[331070] h[331072] w[331074]) eltType[330869]
+        (331105 'end of statement')
+        {
+          unknown _indexOfInterest[331148] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[331149] "expr temp" "temp"
+          (331158 'move' _iterator[331149](331156 call _getIterator(331119 call(331116 call . poolDom[331058] c"serialIter"))))
+          Defer
+          {
+            {
+              (331186 call _freeIterator _iterator[331149])
+            }
+          }
+          { scopeless type
+            (331163 'move' _indexOfInterest[331148](331160 call iteratorIndex _iterator[331149]))
+          }
+          ForLoop[331150]
+          {
+            (331168 call _check_tuple_var_decl _indexOfInterest[331148] 2)
+            unknown ph[331107] "index var" "insert auto destroy"
+            (331175 'move' ph[331107](331172 call _indexOfInterest[331148] 0))
+            unknown pw[331109] "index var" "insert auto destroy"
+            (331181 'move' pw[331109](331178 call _indexOfInterest[331148] 1))
+            {
+              const x[331122] "const"(331125 call fet[331050] c[331070](331127 call + ph[331107] hs[331081])(331131 call + pw[331109] ws[331089])) eltType[330869]
+              (331136 'end of statement')
+              (331137 call = mx[331097](331143 call max module=[222] Math[10521] x[331122] mx[331097]))
+              (331140 'referenced modules list' Math[10521])
+            }
+            label _continueLabel[331153]
+            _indexOfInterest[331148]
+            _iterator[331149]
+          }
+          label _breakLabel[331154]
+        }
+        (331193 call =(331196 call dat[331042] c[331070] h[331072] w[331074]) mx[331097])
+      }
+    }
+    (331231 return pool[331033])
+  }
+  { scopeless type
+    (330881 call ndarray[328686](?) 3 eltType[330869])
+  }
+  function _unknown[42].matvecmul[331236](arg _mt[331257]:_MT[201], arg this[331239] :
+  ndarray[328686](?), arg mat[331247] :
+  (331243 call ndarray[328686](?) 2 unknown eltType[331245]), arg vec[331254] :
+  (331251 call ndarray[328686](?) 1 eltType[331245])) : _unknown[42] "method"
+  {
+    const tmp[331273] "const" "temp"(331270 call . mat[331247] c"shape")
+    (331280 call _check_tuple_var_decl tmp[331273] 2)
+    const m[331265] "const"(331274 call tmp[331273] 0)
+    const n[331267] "const"(331277 call tmp[331273] 1)
+    (331285 'end of statement')
+    const tmp[331293] "const" "temp"(331290 call . vec[331254] c"shape")
+    (331297 call _check_tuple_var_decl tmp[331293] 1)
+    const n_[331287] "const"(331294 call tmp[331293] 0)
+    (331302 'end of statement')
+    (331304 call assert(331305 call == n[331267] n_[331287]) "Vector and matrix must be the same shape.")
+    const dom[331313] "const"(331317 call domainFromShape module=[222] Utilities[320397] m[331265])
+    (331322 'end of statement')
+    unknown u[331324](331325 'new'(331327 call ndarray[328686](?) dom[331313] eltType[331245]))
+    (331331 'end of statement')
+    unknown matD[331333] "ref var"(331335 call . mat[331247] c"data")
+    (331339 'end of statement')
+    unknown vecD[331341] "ref var"(331343 call . vec[331254] c"data")
+    (331347 'end of statement')
+    unknown uD[331349] "ref var"(331351 call . u[331324] c"data")
+    (331355 'end of statement')
+    Forall[331437] {
+      induction variables:
+        
+        unknown i[331356] "index var" "insert auto destroy"
+      iterated expressions:
+        (331362 call chpl_build_bounded_range 0(331360 call chpl__nudgeHighBound m[331265]))
+      shadow variables:
+      other variables
+        forall body
+      {
+        unknown sum[331366] eltType[331245]
+        (331369 'end of statement')
+        {
+          unknown _indexOfInterest[331391] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[331392] "expr temp" "temp"
+          (331401 'move' _iterator[331392](331399 call _getIterator(331407 call chpl_direct_range_iter 0(331405 call chpl__nudgeHighBound n[331267]))))
+          Defer
+          {
+            {
+              (331422 call _freeIterator _iterator[331392])
+            }
+          }
+          { scopeless type
+            (331412 'move' _indexOfInterest[331391](331409 call iteratorIndex _iterator[331392]))
+          }
+          ForLoop[331393]
+          {
+            unknown j[331370] "index var" "insert auto destroy"
+            (331417 'move' j[331370] _indexOfInterest[331391])
+            {
+              (331379 call += sum[331366](331382 call *(331385 call matD[331333] i[331356] j[331370])(331389 call vecD[331341] j[331370])))
+            }
+            label _continueLabel[331396]
+            _indexOfInterest[331391]
+            _iterator[331392]
+          }
+          label _breakLabel[331397]
+        }
+        (331429 call =(331432 call uD[331349] i[331356]) sum[331366])
+      }
+    }
+    (331440 return u[331324])
+    (331443 'referenced modules list' Utilities[320397])
+  }
+  { scopeless type
+    (331260 call ndarray[328686](?) 1 eltType[331245])
+  }
+  function _unknown[42].fromRanges[331447](arg _mt[331464]:_MT[201], arg this[331450] :
+  ndarray[328686](?), arg eltType[331454]:_any[141](?) =
+  real[13], arg rngs[331460] ... :
+  range) : _unknown[42] "inline" "method"
+  {
+    const dom_[331472] "const"(331477 call chpl__buildDomainExpr(331475 'expand_tuple' rngs[331460]) 1)
+    (331480 'end of statement')
+    const dom[331482] "const"(331486 call domainFromShape module=[222] Utilities[320397](331493 'expand_tuple'(331490 call . dom_[331472] c"shape")))
+    (331495 'end of statement')
+    unknown a[331497](331498 'new'(331500 call ndarray[328686](?) dom[331482] eltType[331454]))
+    (331504 'end of statement')
+    unknown aData[331506] "ref var"(331508 call . a[331497] c"data")
+    (331512 'end of statement')
+    Forall[331552] {
+      induction variables:
+        
+        unknown i[331513] "index var" "insert auto destroy"
+      iterated expressions:
+        (331522 call chpl_build_bounded_range 0(331520 call chpl__nudgeHighBound(331517 call . dom[331482] c"size")))
+      shadow variables:
+        a[331526] 'ref' intent
+          init block
+          {
+          }
+          deinit block
+          {
+          }
+      other variables
+        forall body
+      {
+        const idx[331532] "const"(331537 call(331534 call . dom[331482] c"indexAt") i[331513])
+        (331540 'end of statement')
+        (331541 call =(331544 call aData[331506] idx[331532])(331546 call : i[331513] eltType[331454]))
+      }
+    }
+    (331555 return a[331497])
+    (331558 'referenced modules list' Utilities[320397])
+  }
+  { scopeless type
+    (331467 call ndarray[328686](?) rank[331458] eltType[331454])
+  }
+  function _unknown[42].serialize[331562](arg _mt[331587]:_MT[201], arg this[331565] :
+  ndarray[328686](?), arg writer[331578] :
+  (331572 call fileWriter[170987](?)(locking = 0) defaultSerializer[171969]), ref arg serializer[331584] :
+  defaultSerializer[171969]) : _unknown[42] "method" "no return value for void"
+  {
+    (331594 call(331591 call . writer[331578] c"write") "ndarray(")
+    const shape[331599] "const"(331604 call .(331601 call . this[331565] c"data") c"shape")
+    (331608 'end of statement')
+    unknown first[331610] 1 bool[19]
+    (331614 'end of statement')
+    {
+      unknown _indexOfInterest[331758] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[331759] "expr temp" "temp"
+      (331778 'move' _iterator[331759](331630 call _build_tuple(331771 call _getIterator(331768 call . this[331565] c"data"))(331776 call _getIterator(331774 call chpl_build_low_bounded_range 0))))
+      Defer
+      {
+        {
+          (331806 call _freeIterator _iterator[331759])
+        }
+      }
+      { scopeless type
+        (331783 'move' _indexOfInterest[331758](331780 call iteratorIndex _iterator[331759]))
+      }
+      ForLoop[331760]
+      {
+        (331788 call _check_tuple_var_decl _indexOfInterest[331758] 2)
+        unknown x[331616] "index var" "insert auto destroy"
+        (331795 'move' x[331616](331792 call _indexOfInterest[331758] 0))
+        unknown i[331618] "index var" "insert auto destroy"
+        (331801 'move' i[331618](331798 call _indexOfInterest[331758] 1))
+        {
+          const idx[331633] "const"(331637 call nbase module=[222] Utilities[320397] shape[331599] i[331618])
+          (331643 'end of statement')
+          if(331679 call _cond_test(331667 call ==(331670 call idx[331633](331671 call -(331673 call . this[331565] c"rank") 1)) 0))
+          {
+            if(331657 call _cond_test(331654 call ! first[331610]))
+            {
+              (331650 call(331647 call . writer[331578] c"write") "\n        ")
+            }
+            (331665 call(331662 call . writer[331578] c"write") "[")
+          }
+          (331687 call(331684 call . writer[331578] c"writef") "%{##.#}" x[331616])
+          if(331750 call _cond_test(331727 call <(331730 call idx[331633](331731 call -(331733 call . this[331565] c"rank") 1))(331738 call -(331741 call shape(331742 call -(331744 call . this[331565] c"rank") 1)) 1)))
+          {
+            if(331714 call _cond_test(331707 call ==(331709 call . this[331565] c"rank") 1))
+            {
+              (331697 call(331694 call . writer[331578] c"write") "  ")
+            }
+            {
+              (331704 call(331701 call . writer[331578] c"write") "  ")
+            }
+          }
+          {
+            (331725 call(331722 call . writer[331578] c"write") "]")
+          }
+          (331754 call = first[331610] 0)
+          (331634 'referenced modules list' Utilities[320397])
+        }
+        label _continueLabel[331763]
+        _indexOfInterest[331758]
+        _iterator[331759]
+      }
+      label _breakLabel[331764]
+    }
+    (331817 call(331814 call . writer[331578] c"write") ",\n        shape = "(331825 call .(331822 call . this[331565] c"data") c"shape"))
+    (331832 call(331829 call . writer[331578] c"write") ",\n        rank = "(331837 call . this[331565] c"rank"))
+    (331844 call(331841 call . writer[331578] c"writeln") ")")
+  }
+  function _unknown[42].read[331848](arg _mt[331862]:_MT[201], ref arg this[331851] :
+  ndarray[328686](?), arg fr[331859] :
+  (331857 call fileReader[170893](?) ?[227])) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown r[331866](331871 call(331868 call . fr[331859] c"read") int[10])
+    (331874 'end of statement')
+    if(331896 call _cond_test(331889 call != r[331866](331892 call . this[331851] c"rank")))
+    {
+      (331876 call err "Error reading tensor: rank mismatch." r[331866] " != this."(331884 call . this[331851] c"rank"))
+    }
+    unknown s[331902](331904 call . this[331851] c"shape")
+    (331908 'end of statement')
+    {
+      unknown _indexOfInterest[331932] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[331933] "expr temp" "temp"
+      (331942 'move' _iterator[331933](331940 call _getIterator(331952 call chpl_direct_counted_range_iter 0(331948 call . this[331851] c"rank"))))
+      Defer
+      {
+        {
+          (331967 call _freeIterator _iterator[331933])
+        }
+      }
+      { scopeless type
+        (331957 'move' _indexOfInterest[331932](331954 call iteratorIndex _iterator[331933]))
+      }
+      ForLoop[331934]
+      {
+        unknown i[331909] "index var" "insert auto destroy"
+        (331962 'move' i[331909] _indexOfInterest[331932])
+        (331920 call =(331923 call s[331902] i[331909])(331929 call(331926 call . fr[331859] c"read") int[10]))
+        label _continueLabel[331937]
+        _indexOfInterest[331932]
+        _iterator[331933]
+      }
+      label _breakLabel[331938]
+    }
+    unknown d[331975](331979 call domainFromShape module=[222] Utilities[320397](331983 'expand_tuple' s[331902]))
+    (331985 'end of statement')
+    (331986 call =(331989 call . this[331851] c"_domain") d[331975])
+    {
+      unknown _indexOfInterest[332014] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[332015] "expr temp" "temp"
+      (332024 'move' _iterator[332015](332022 call _getIterator d[331975]))
+      Defer
+      {
+        {
+          (332039 call _freeIterator _iterator[332015])
+        }
+      }
+      { scopeless type
+        (332029 'move' _indexOfInterest[332014](332026 call iteratorIndex _iterator[332015]))
+      }
+      ForLoop[332016]
+      {
+        unknown i[331993] "index var" "insert auto destroy"
+        (332034 'move' i[331993] _indexOfInterest[332014])
+        (331996 call =(332002 call(331999 call . this[331851] c"data") i[331993])(332008 call(332005 call . fr[331859] c"read")(332009 call . this[331851] c"eltType")))
+        label _continueLabel[332019]
+        _indexOfInterest[332014]
+        _iterator[332015]
+      }
+      label _breakLabel[332020]
+    }
+    (332046 'referenced modules list' Utilities[320397])
+  }
+  function _unknown[42].write[332050](arg _mt[332064]:_MT[201], arg this[332053] :
+  ndarray[328686](?), arg fw[332061] :
+  (332059 call fileWriter[170987](?) ?[227])) : _unknown[42] throws "method" "no return value for void"
+  {
+    (332071 call(332068 call . fw[332061] c"write")(332072 call . this[332053] c"rank"))
+    {
+      unknown _indexOfInterest[332098] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[332099] "expr temp" "temp"
+      (332108 'move' _iterator[332099](332106 call _getIterator(332085 call .(332082 call .(332078 call . this[332053] c"data") c"_dom") c"shape")))
+      Defer
+      {
+        {
+          (332123 call _freeIterator _iterator[332099])
+        }
+      }
+      { scopeless type
+        (332113 'move' _indexOfInterest[332098](332110 call iteratorIndex _iterator[332099]))
+      }
+      ForLoop[332100]
+      {
+        unknown s[332076] "index var" "insert auto destroy"
+        (332118 'move' s[332076] _indexOfInterest[332098])
+        (332092 call(332089 call . fw[332061] c"write")(332093 call : s[332076] int[10]))
+        label _continueLabel[332103]
+        _indexOfInterest[332098]
+        _iterator[332099]
+      }
+      label _breakLabel[332104]
+    }
+    {
+      unknown _indexOfInterest[332151] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[332152] "expr temp" "temp"
+      (332161 'move' _iterator[332152](332159 call _getIterator(332136 call .(332132 call . this[332053] c"data") c"_dom")))
+      Defer
+      {
+        {
+          (332176 call _freeIterator _iterator[332152])
+        }
+      }
+      { scopeless type
+        (332166 'move' _indexOfInterest[332151](332163 call iteratorIndex _iterator[332152]))
+      }
+      ForLoop[332153]
+      {
+        unknown i[332130] "index var" "insert auto destroy"
+        (332171 'move' i[332130] _indexOfInterest[332151])
+        (332143 call(332140 call . fw[332061] c"write")(332148 call(332144 call . this[332053] c"data") i[332130]))
+        label _continueLabel[332156]
+        _indexOfInterest[332151]
+        _iterator[332152]
+      }
+      label _breakLabel[332157]
+    }
+  }
+  type _tensor_resource[332208](?) unknown rank[332187] "param" int[10] unknown eltType[332192] "type variable"(332194 call real[13] 64) unknown data[332198](332200 call remote(332202 call ndarray[328686](?) rank[332187] eltType[332192]))
+  function _unknown[42].fullOuter[332210](arg _mt[332233]:_MT[201], arg this[332213] :
+  ndarray[328686](?), arg a[332222] :
+  (332217 call ndarray[328686](?) unknown rankA[332218] unknown eltType[332220]), arg b[332230] :
+  (332226 call ndarray[328686](?) unknown rankB[332227] eltType[332220])) : _unknown[42] "method"
+  {
+    unknown rankC[332244] "param"(332245 call + rankA[332218] rankB[332227])
+    (332250 'end of statement')
+    unknown newShape[332252](332268 call _build_tuple(332262 'expand_tuple'(332259 call . a[332222] c"shape"))(332267 'expand_tuple'(332264 call . b[332230] c"shape")))(332253 call * rankC[332244] int[10])
+    (332271 'end of statement')
+    const domC[332273] "const"(332277 call domainFromShape module=[222] Utilities[320397](332281 'expand_tuple' newShape[332252]))
+    (332283 'end of statement')
+    unknown c[332285](332290 'new'(332292 call ndarray[328686](?) domC[332273] eltType[332220]))(332287 call ndarray[328686](?) rankC[332244] eltType[332220])
+    (332296 'end of statement')
+    unknown cData[332298] "ref var"(332300 call . c[332285] c"data")
+    (332304 'end of statement')
+    {
+      unknown _indexOfInterest[332360] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[332361] "expr temp" "temp"
+      (332370 'move' _iterator[332361](332368 call _getIterator(332310 call . domC[332273] c"each")))
+      Defer
+      {
+        {
+          (332385 call _freeIterator _iterator[332361])
+        }
+      }
+      { scopeless type
+        (332375 'move' _indexOfInterest[332360](332372 call iteratorIndex _iterator[332361]))
+      }
+      ForLoop[332362] order-independent
+      {
+        unknown i[332305] "index var" "insert auto destroy"
+        (332380 'move' i[332305] _indexOfInterest[332360])
+        {
+          const aIdx[332315] "const"(332320 call(332317 call . i[332305] c"slice") 0 rankA[332218])
+          (332324 'end of statement')
+          const bIdx[332326] "const"(332331 call(332328 call . i[332305] c"slice")(332332 call + rankA[332218] 1) rankB[332227])
+          (332338 'end of statement')
+          (332339 call =(332342 call cData[332298] i[332305])(332344 call *(332350 call(332347 call . a[332222] c"data") aIdx[332315])(332356 call(332353 call . b[332230] c"data") bIdx[332326])))
+        }
+        label _continueLabel[332365]
+        _indexOfInterest[332360]
+        _iterator[332361]
+      }
+      label _breakLabel[332366]
+    }
+    (332392 return c[332285])
+    (332395 'referenced modules list' Utilities[320397])
+  }
+  { scopeless type
+    (332236 call ndarray[328686](?)(332237 call + rankA[332218] rankB[332227]) eltType[332220])
+  }
+  function _unknown[42].contract[332399](arg _mt[332430]:_MT[201], arg this[332402] :
+  ndarray[328686](?), arg a[332411] :
+  (332406 call ndarray[328686](?) unknown rankA[332407] unknown eltType[332409]), arg b[332419] :
+  (332415 call ndarray[328686](?) unknown rankB[332416] eltType[332409]), param arg axisA[332423] :
+  int[10], param arg axisB[332427] :
+  int[10]) : _unknown[42] "method"
+  {
+    const axA[332434] "const"(332442 call(332439 call .(332436 call . a[332411] c"_dom") c"dim") axisA[332423])
+    (332445 'end of statement')
+    const axB[332447] "const"(332455 call(332452 call .(332449 call . b[332419] c"_dom") c"dim") axisB[332427])
+    (332458 'end of statement')
+    if(332469 call _cond_test(332465 call != axA[332434] axB[332447]))
+    {
+      (332460 call halt "Not same axes!")
+    }
+    unknown newRank[332475] "param"(332476 call -(332478 call +(332481 call . a[332411] c"rank")(332485 call . b[332419] c"rank")) 2)
+    (332490 'end of statement')
+    const contractedShapeA[332492] "const"(332502 call(332499 call .(332494 call . a[332411] c"shape") c"removeIdx") axisA[332423])
+    (332505 'end of statement')
+    const contractedShapeB[332507] "const"(332515 call(332512 call .(332509 call . b[332419] c"shape") c"removeIdx") axisB[332427])
+    (332518 'end of statement')
+    const newShape[332520] "const"(332526 call _build_tuple(332523 'expand_tuple' contractedShapeA[332492])(332525 'expand_tuple' contractedShapeB[332507]))
+    (332529 'end of statement')
+    const dom[332531] "const"(332535 call domainFromShape module=[222] Utilities[320397](332539 'expand_tuple' newShape[332520]))
+    (332541 'end of statement')
+    unknown c[332543](332548 'new'(332550 call ndarray[328686](?) dom[332531] eltType[332409]))(332545 call ndarray[328686](?) newRank[332475] eltType[332409])
+    (332554 'end of statement')
+    {
+      unknown _indexOfInterest[332748] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[332749] "expr temp" "temp"
+      (332758 'move' _iterator[332749](332756 call _getIterator(332561 call .(332558 call . c[332543] c"_dom") c"each")))
+      Defer
+      {
+        {
+          (332773 call _freeIterator _iterator[332749])
+        }
+      }
+      { scopeless type
+        (332763 'move' _indexOfInterest[332748](332760 call iteratorIndex _iterator[332749]))
+      }
+      ForLoop[332750] order-independent
+      {
+        unknown i[332555] "index var" "insert auto destroy"
+        (332768 'move' i[332555] _indexOfInterest[332748])
+        {
+          unknown idxA[332572](332595 call(332592 call .(332584 call(332581 call . i[332555] c"slice") 0(332587 call . contractedShapeA[332492] c"size")) c"insertIdx") axisA[332423] 0)(332573 call *(332576 call . a[332411] c"rank") int[10])
+          (332599 'end of statement')
+          unknown idxB[332601](332622 call(332619 call .(332613 call(332610 call . i[332555] c"slice")(332615 call . contractedShapeA[332492] c"size") newRank[332475]) c"insertIdx") axisB[332427] 0)(332602 call *(332605 call . b[332419] c"rank") int[10])
+          (332626 'end of statement')
+          unknown sum[332628] 0 eltType[332409]
+          (332632 'end of statement')
+          {
+            unknown _indexOfInterest[332692] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[332693] "expr temp" "temp"
+            (332702 'move' _iterator[332693](332700 call _getIterator(332660 call chpl__buildDomainExpr(332648 call(332645 call .(332642 call . a[332411] c"_dom") c"dim") axisA[332423])(332657 call(332654 call .(332651 call . b[332419] c"_dom") c"dim") axisB[332427]) 1)))
+            Defer
+            {
+              {
+                (332730 call _freeIterator _iterator[332693])
+              }
+            }
+            { scopeless type
+              (332707 'move' _indexOfInterest[332692](332704 call iteratorIndex _iterator[332693]))
+            }
+            ForLoop[332694]
+            {
+              (332712 call _check_tuple_var_decl _indexOfInterest[332692] 2)
+              unknown ai[332634] "index var" "insert auto destroy"
+              (332719 'move' ai[332634](332716 call _indexOfInterest[332692] 0))
+              unknown bi[332636] "index var" "insert auto destroy"
+              (332725 'move' bi[332636](332722 call _indexOfInterest[332692] 1))
+              {
+                (332663 call =(332666 call idxA[332572] axisA[332423]) ai[332634])
+                (332669 call =(332672 call idxB[332601] axisB[332427]) bi[332636])
+                (332675 call += sum[332628](332678 call *(332684 call(332681 call . a[332411] c"data") idxA[332572])(332690 call(332687 call . b[332419] c"data") idxB[332601])))
+              }
+              label _continueLabel[332697]
+              _indexOfInterest[332692]
+              _iterator[332693]
+            }
+            label _breakLabel[332698]
+          }
+          (332737 call =(332743 call(332740 call . c[332566] c"data") i[332555]) sum[332628])
+        }
+        label _continueLabel[332753]
+        _indexOfInterest[332748]
+        _iterator[332749]
+      }
+      label _breakLabel[332754]
+    }
+    (332780 return c[332543])
+    (332782 'referenced modules list' Utilities[320397])
+  }
+  function splitAt[332786](param arg s[332789] :
+  string[244], param arg del[332793] :
+  string[244], param arg idx[332798] :
+  int[10] =
+  0) param : _unknown[42]
+  {
+    if(332827 call _cond_test(332821 call ==(332824 call s[332789] idx[332798]) del[332793]))
+    {
+      (332804 return "")
+    }
+    {
+      (332807 return(332808 call +(332811 call s[332789] idx[332798])(332814 call splitAt s[332789] del[332793](332817 call + idx[332798] 1))))
+    }
+  }
+  function getFirstIdx[332833](param arg s[332836] :
+  string[244], param arg del[332840] :
+  string[244], param arg idx[332845] :
+  int[10] =
+  0) param : _unknown[42]
+  {
+    if(332869 call _cond_test(332863 call ==(332866 call s[332836] idx[332845]) del[332840]))
+    {
+      (332851 return idx[332845])
+    }
+    {
+      (332854 return(332856 call getFirstIdx s[332836] del[332840](332859 call + idx[332845] 1)))
+    }
+  }
+  function sliceGeneric[332875](arg t[332877]:_any[141](?), param arg start[332880] :
+  int[10], param arg stop[332884] :
+  int[10], param arg s[332888] :
+  t[332877], param arg idx[332893] :
+  int[10] =
+  start[332880]) param : _unknown[42]
+  {
+    (332899 call compilerAssert(332900 call <= start[332880] stop[332884]))
+    (332905 call compilerAssert(332906 call <= stop[332884](332910 call . s[332888] c"size")))
+    if(332947 call _cond_test(332937 call &&(332939 call <= start[332880] idx[332893])(332943 call < idx[332893] stop[332884])))
+    {
+      (332914 return(332915 call +(332918 call s[332888] idx[332893])(332921 call slice start[332880] stop[332884] s[332888](332925 call + idx[332893] 1))))
+    }
+    {
+      unknown zero[332931] "param" t[332877]
+      (332934 'end of statement')
+      (332935 return zero[332931])
+    }
+  }
+  function slice[332953](param arg start[332956] :
+  int[10], param arg stop[332960] :
+  int[10], param arg s[332964] :
+  string[244], param arg idx[332969] :
+  int[10] =
+  start[332956]) param : _unknown[42]
+  {
+    (332975 call compilerAssert(332976 call <= start[332956] stop[332960]))
+    (332981 call compilerAssert(332982 call <= stop[332960](332986 call . s[332964] c"size")))
+    if(333023 call _cond_test(333013 call &&(333015 call <= start[332956] idx[332969])(333019 call < idx[332969] stop[332960])))
+    {
+      (332990 return(332991 call +(332994 call s[332964] idx[332969])(332997 call slice start[332956] stop[332960] s[332964](333001 call + idx[332969] 1))))
+    }
+    {
+      unknown zero[333007] "param" string[244]
+      (333010 'end of statement')
+      (333011 return zero[333007])
+    }
+  }
+  function take[333029](param arg count[333032] :
+  int[10], param arg s[333036] :
+  string[244]) param : _unknown[42]
+  {
+    (333040 return(333042 call slice 0 count[333032] s[333036]))
+  }
+  function drop[333048](param arg count[333051] :
+  int[10], param arg s[333055] :
+  string[244]) param : _unknown[42]
+  {
+    (333059 return(333061 call slice count[333051](333064 call . s[333055] c"size") s[333055]))
+  }
+  function _unknown[42].einsum[333070](arg _mt[333097]:_MT[201], arg this[333073] :
+  ndarray[328686](?), param arg subscripts[333077] :
+  string[244], arg a[333086] :
+  (333081 call ndarray[328686](?) unknown rankA[333082] unknown eltType[333084]), arg b[333094] :
+  (333090 call ndarray[328686](?) unknown rankB[333091] eltType[333084])) : _unknown[42] "method"
+  {
+    {
+      unknown i[333100] "index var" 0
+      unknown tmp[333119] "maybe param" "temp"
+      (333131 'move' tmp[333119](333129 call chpl_compute_low_param_loop_bound 0(333107 call chpl__nudgeHighBound(333104 call . subscripts[333077] c"size"))))
+      unknown tmp[333120] "maybe param" "temp"
+      (333143 'move' tmp[333120](333141 call chpl_compute_high_param_loop_bound 0(333136 call chpl__nudgeHighBound(333138 call . subscripts[333077] c"size"))))
+      unknown tmp[333121] "maybe param" "temp"
+      (333146 'move' tmp[333121] 1)
+      ParamForLoop[333148]
+      { i[333100] tmp[333119] tmp[333120] tmp[333121]
+        {
+          unknown c[333113] "param"(333115 call subscripts[333077] i[333100])
+          (333118 'end of statement')
+        }
+      }
+      label _unused_continueLabel[333123]
+      label _breakLabel[333122]
+    }
+    unknown fst[333158] "param"(333163 call(333160 call . subscripts[333077] c"takeUntil") ",")
+    (333166 'end of statement')
+    unknown subscripts_1[333168] "param"(333173 call(333170 call . subscripts[333077] c"drop")(333174 call +(333177 call . fst[333158] c"size") 1))
+    (333182 'end of statement')
+    unknown snd[333184] "param"(333186 call splitAt subscripts_1[333168] "-")
+    (333190 'end of statement')
+    unknown subscripts_2[333192] "param"(333197 call(333194 call . subscripts_1[333168] c"drop")(333198 call +(333201 call . snd[333184] c"size") 2))
+    (333206 'end of statement')
+    {
+      unknown i[333207] "index var" 0
+      unknown tmp[333333] "maybe param" "temp"
+      (333345 'move' tmp[333333](333343 call chpl_compute_low_param_loop_bound 0(333214 call chpl__nudgeHighBound(333211 call . fst[333158] c"size"))))
+      unknown tmp[333334] "maybe param" "temp"
+      (333357 'move' tmp[333334](333355 call chpl_compute_high_param_loop_bound 0(333350 call chpl__nudgeHighBound(333352 call . fst[333158] c"size"))))
+      unknown tmp[333335] "maybe param" "temp"
+      (333360 'move' tmp[333335] 1)
+      ParamForLoop[333362]
+      { i[333207] tmp[333333] tmp[333334] tmp[333335]
+        {
+          unknown ci[333220] "param"(333222 call fst[333158] i[333207])
+          (333225 'end of statement')
+          if(333329 call _cond_test(333315 call !=(333321 call(333318 call . fst[333158] c"countOccurrences") ci[333220])(333327 call(333324 call . subscripts_2[333192] c"countOccurrences") ci[333220])))
+          {
+            {
+              unknown j[333227] "index var" 0
+              unknown tmp[333277] "maybe param" "temp"
+              (333289 'move' tmp[333277](333287 call chpl_compute_low_param_loop_bound 0(333234 call chpl__nudgeHighBound(333231 call . snd[333184] c"size"))))
+              unknown tmp[333278] "maybe param" "temp"
+              (333301 'move' tmp[333278](333299 call chpl_compute_high_param_loop_bound 0(333294 call chpl__nudgeHighBound(333296 call . snd[333184] c"size"))))
+              unknown tmp[333279] "maybe param" "temp"
+              (333304 'move' tmp[333279] 1)
+              ParamForLoop[333306]
+              { j[333227] tmp[333277] tmp[333278] tmp[333279]
+                {
+                  unknown cj[333240] "param"(333242 call snd[333184] j[333227])
+                  (333245 'end of statement')
+                  if(333273 call _cond_test(333259 call !=(333265 call(333262 call . snd[333184] c"countOccurrences") cj[333240])(333271 call(333268 call . subscripts_2[333192] c"countOccurrences") cj[333240])))
+                  {
+                    (333247 return(333254 call(333251 call . ndarray[328686](?) c"contract") a[333086] b[333094] i[333207] j[333227]))
+                  }
+                }
+              }
+              label _unused_continueLabel[333281]
+              label _breakLabel[333280]
+            }
+          }
+        }
+      }
+      label _unused_continueLabel[333337]
+      label _breakLabel[333336]
+    }
+    (333371 return a[333086])
+  }
+  function main[333375]() : _unknown[42] "no return value for void"
+  {
+    (333379 call writeln "Hello!")
+    unknown A[333384](333391 call(333388 call . ndarray[328686](?) c"fromRanges") real[13](333397 call chpl_build_bounded_range 0(333395 call chpl__nudgeHighBound 5))(333403 call chpl_build_bounded_range 0(333401 call chpl__nudgeHighBound 3)))
+    (333406 'end of statement')
+    unknown B[333408](333413 call(333410 call . ndarray[328686](?) c"fromRanges") real[13](333419 call chpl_build_bounded_range 0(333417 call chpl__nudgeHighBound 5))(333425 call chpl_build_bounded_range 0(333423 call chpl__nudgeHighBound 3)))
+    (333428 'end of statement')
+    (333430 call writeln(333431 call + A[333384] B[333408]))
+  }
+  (331569 'referenced modules list' IO[208303] IO[208303] IO[208303] IO[208303] IO[208303])
+}

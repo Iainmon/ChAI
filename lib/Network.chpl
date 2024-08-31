@@ -787,7 +787,7 @@ proc main() {
     writeln(a);
 
 
-    var b = tensor.arange(3,5);
+    var b = staticTensor.arange(3,5);
     jsonWriter.writeln(b);
     objWriter.writeln(b);
     writeln(b);

@@ -1,0 +1,35 @@
+AST dump for TOML after pass insertLineNumbers.
+Module use list: ChapelStandard List Map TomlParser TomlReader Sort IO 
+
+{
+  function chpl__init_TOML[468684](const in arg _ln[9365801]:int(64)[10], in arg _fn[9365803]:int(32)[66]) : void[4] "fast on" "insert line file info" "local fn" "module init" "resolved"
+  {
+    if chpl__init_TOML_p[9310545]
+    {
+      goto _exit_chpl__init_TOML[9310582] _exit_chpl__init_TOML[9310582]
+    }
+    val modFormatStr[9310553]:chpl_c_string[16] "temp"
+    val modStr[9310554]:chpl_c_string[16] "temp"
+    ref refIndentLevel[9310568]:int(32)[66] "temp"
+    (9310561 'move' modFormatStr[9310553] c"%*s\n")
+    (9310563 'move' modStr[9310554] c"TOML")
+    (9310566 call printModuleInit[386886] modFormatStr[9310553] modStr[9310554] 4 _ln[9365801] _fn[9365803])
+    (9310572 'move' refIndentLevel[9310568](9310571 'addr of' moduleInitLevel[386877]))
+    (9310575 '+=' refIndentLevel[9310568] 1)
+    (9310551 'move' chpl__init_TOML_p[9310545] 1)
+    {
+      (9305990 call chpl__init_List[468483] _ln[9365801] _fn[9365803])
+      (9305992 call chpl__init_Map[468660] _ln[9365801] _fn[9365803])
+      (9305994 call chpl__init_TomlParser[468678] _ln[9365801] _fn[9365803])
+      (9305996 call chpl__init_TomlReader[468681] _ln[9365801] _fn[9365803])
+      (9305998 call chpl__init_Sort[468513] _ln[9365801] _fn[9365803])
+      (9306000 call chpl__init_IO[468474] _ln[9365801] _fn[9365803])
+    }
+    (9310578 '-=' refIndentLevel[9310568] 1)
+    label _endchpl__init_TOML[9310584]
+    label _exit_chpl__init_TOML[9310582]
+    (640978 return _void[46])
+  }
+  def module TomlParser[383868]  
+  def module TomlReader[385117]  
+}

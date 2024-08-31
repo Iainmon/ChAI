@@ -1,0 +1,120 @@
+AST dump for ExternalArray after pass returnStarTuplesByRefArgs.
+Module use list: ChapelStandard CTypes HaltWrappers 
+
+{
+  function chpl__init_ExternalArray[468546]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (629019 return _void[46])
+  }
+  type chpl_opaque_array[286522] val _pid[286505]:int(64)[10] val _instance[286510]:c_ptr(void)[1465614] const-val _unowned[286517]:bool[19]
+  function chpl_call_free_func[286601](const in arg func[286606]:c_ptr(void)[1465614], const in arg elts[286612]:c_ptr(void)[1465614]) : void[4] "extern" "local args" "no fn body" "resolved"
+  {
+  }
+  function cleanupOpaqueArray[287537](const  ref arg arr[287540]:chpl_opaque_array[286522]) : void[4] "export" "local args" "resolved" "no return value for void"
+  {
+    val coerce_tmp[3881999]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3882003 'move' coerce_tmp[3881999](9196376 '.v' arr[287540] _instance[286510]))
+    val call_tmp[8585281]:BaseArr[272224] "dead after last mention" "expr temp" "maybe param" "temp"
+    (8585283 'move' call_tmp[8585281](8585285 'cast' BaseArr[272224] coerce_tmp[3881999]))
+    val coerce_tmp[7824006]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (7824008 'move' coerce_tmp[7824006](7824010 'cast' RootClass[236] call_tmp[8585281]))
+    const-val call_tmp[7824013]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (7824015 'move' call_tmp[7824013](7824017 '!=' coerce_tmp[7824006] nil[32]))
+    if call_tmp[7824013]
+    {
+      const-val coerce_tmp[3882606]:bool[19] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3882610 'move' coerce_tmp[3882606](9196382 '.v' arr[287540] _unowned[286517]))
+      const-val call_tmp[8585313]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (8585315 'move' call_tmp[8585313](8585317 'u!' coerce_tmp[3882606]))
+      if call_tmp[8585313]
+      {
+        const-val call_tmp[8585321]:(borrowed BaseArr,unmanaged BaseDom?)[2122846] "dead after last mention" "maybe param" "temp"
+        const-val ret_tmp[8585323]:(borrowed BaseArr,unmanaged BaseDom?)[2122846] "temp"
+        (8585326 call remove[2121928] call_tmp[8585281] ret_tmp[8585323])
+        (8585329 'move' call_tmp[8585321] ret_tmp[8585323])
+        val tmp_x0[9003613]:BaseArr[272224] "temp"
+        val tmp_x1[9003615]:BaseDom[269761] "temp"
+        (9003621 'move' tmp_x0[9003613](9003619 '.v' call_tmp[8585321] x0[2122842]))
+        (9003626 'move' tmp_x1[9003615](9003624 '.v' call_tmp[8585321] x1[2122844]))
+        val domToFree[8585361]:BaseDom[269761] "dead at end of block" "insert auto destroy"
+        val init_coerce_tmp[8585363]:BaseDom[269761] "dead at end of block" "temp"
+        (8585365 '=' init_coerce_tmp[8585363](8585367 'cast' BaseDom[269761] nil[32]))
+        (8585370 'move' domToFree[8585361] init_coerce_tmp[8585363])
+        val distToRemove[8585373]:BaseDist[268671] "dead at end of block" "insert auto destroy"
+        val init_coerce_tmp[8585375]:BaseDist[268671] "dead at end of block" "temp"
+        (8585377 '=' init_coerce_tmp[8585375](8585379 'cast' BaseDist[268671] nil[32]))
+        (8585382 'move' distToRemove[8585373] init_coerce_tmp[8585375])
+        val distToFree[8585385]:BaseDist[268671] "dead at end of block" "insert auto destroy"
+        val init_coerce_tmp[8585387]:BaseDist[268671] "dead at end of block" "temp"
+        (8585389 '=' init_coerce_tmp[8585387](8585391 'cast' BaseDist[268671] nil[32]))
+        (8585394 'move' distToFree[8585385] init_coerce_tmp[8585387])
+        val domIsPrivatized[8585397]:bool[19] "dead at end of block" "insert auto destroy"
+        (8585399 'move' domIsPrivatized[8585397] 0)
+        val coerce_tmp[8585407]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (8585409 'move' coerce_tmp[8585407](8585411 'cast' RootClass[236] tmp_x1[9003615]))
+        const-val call_tmp[8585414]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (8585416 'move' call_tmp[8585414](8585418 '!=' coerce_tmp[8585407] nil[32]))
+        if call_tmp[8585414]
+        {
+          val tmp_x0[9005969]:BaseDom[269761] "temp"
+          val tmp_x1[9005971]:BaseDist[268671] "temp"
+          const-val ret_tmp[8585425]:(unmanaged BaseDom?,unmanaged BaseDist?)[2123667] "temp"
+          (8585428 call remove[268987] tmp_x1[9003615] ret_tmp[8585425])
+          (9005977 'move' tmp_x0[9005969](9005975 '.v' ret_tmp[8585425] x0[2123663]))
+          (9005982 'move' tmp_x1[9005971](9005980 '.v' ret_tmp[8585425] x1[2123665]))
+          (8585441 '=' domToFree[8585361] tmp_x0[9005969])
+          (8585451 '=' distToRemove[8585373] tmp_x1[9005971])
+          (8585454 '=' domIsPrivatized[8585397] 0)
+        }
+        val distIsPrivatized[8585458]:bool[19] "dead at end of block" "insert auto destroy"
+        (8585460 'move' distIsPrivatized[8585458] 0)
+        val coerce_tmp[8585463]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (8585465 'move' coerce_tmp[8585463](8585467 'cast' RootClass[236] distToRemove[8585373]))
+        const-val call_tmp[8585470]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (8585472 'move' call_tmp[8585470](8585474 '!=' coerce_tmp[8585463] nil[32]))
+        if call_tmp[8585470]
+        {
+          val call_tmp[8585479]:BaseDist[268671] "dead after last mention" "expr temp" "maybe param" "temp"
+          (8585481 'move' call_tmp[8585479](8585484 call remove[268286] distToRemove[8585373]))
+          (8585486 '=' distToFree[8585385] call_tmp[8585479])
+          (8585489 '=' distIsPrivatized[8585458] 0)
+        }
+        val coerce_tmp[8585493]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (8585495 'move' coerce_tmp[8585493](8585497 'cast' RootClass[236] tmp_x0[9003613]))
+        const-val call_tmp[8585500]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (8585502 'move' call_tmp[8585500](8585504 '!=' coerce_tmp[8585493] nil[32]))
+        if call_tmp[8585500]
+        {
+          (8585510 call _delete_arr[2124577] call_tmp[8585281] 1)
+        }
+        val coerce_tmp[8585514]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (8585516 'move' coerce_tmp[8585514](8585518 'cast' RootClass[236] domToFree[8585361]))
+        const-val call_tmp[8585521]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (8585523 'move' call_tmp[8585521](8585525 '!=' coerce_tmp[8585514] nil[32]))
+        if call_tmp[8585521]
+        {
+          val coerce_tmp[8585530]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+          (8585532 'move' coerce_tmp[8585530](8585534 'cast' RootClass[236] tmp_x1[9003615]))
+          const-val call_tmp[8585537]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+          (8585539 'move' call_tmp[8585537](8585541 '==' coerce_tmp[8585530] nil[32]))
+          if call_tmp[8585537]
+          {
+            (8585547 call nilCheckHalt[392] "argument to ! is nil")
+          }
+          (8585551 call _delete_dom[2125727] tmp_x1[9003615] domIsPrivatized[8585397])
+        }
+        val coerce_tmp[8585555]:RootClass[236] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (8585557 'move' coerce_tmp[8585555](8585559 'cast' RootClass[236] distToFree[8585385]))
+        const-val call_tmp[8585562]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (8585564 'move' call_tmp[8585562](8585566 '!=' coerce_tmp[8585555] nil[32]))
+        if call_tmp[8585562]
+        {
+          (8585572 call _delete_dist[273140] distToFree[8585385] distIsPrivatized[8585458])
+        }
+      }
+      {
+      }
+    }
+    (629017 return _void[46])
+  }
+}

@@ -1,0 +1,1254 @@
+AST dump for StaticTensor after pass readExternC.
+Module use list: Utilities IO 
+
+{
+  (387078 'use' ChapelStandard)
+  (339082 'use' NDArray)
+  (339085 'use' Remote)
+  (339088 'use' Autograd)
+  (339092 'import' Utilities 'as' util)
+  (339097 'use'(339094 call . Utilities c"Standard"))
+  type staticTensor[339695](?) unknown rank[339103] "param" int[10] unknown eltType[339108] "type variable"(339110 call real[13] 64) unknown resource[339114](339116 call _shared(339118 call BaseTensorResource[334219](?) eltType[339108] rank[339103])) function staticTensor[339695](?).chpl_forwarding_expr1[339124](arg _mt[339129]:_MT[201], arg this[339127]:staticTensor[339695](?)) : _unknown[42] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    (339142 return(339138 call . this[339127] c"resource"))
+  } function staticTensor[339695](?).meta[339145](arg _mt[339149]:_MT[201], arg this[339147]:staticTensor[339695](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (339152 return(339154 call . this[339147] c"resource"))
+  } function staticTensor[339695](?)._dom[339159](arg _mt[339163]:_MT[201], arg this[339161]:staticTensor[339695](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (339166 return(339174 call .(339171 call .(339167 call . this[339161] c"resource") c"array") c"_dom"))
+  } function staticTensor[339695](?).init[339179](arg _mt[339193]:_MT[201], arg this[339181]:staticTensor[339695](?), param arg rank[339184] :
+  int[10], arg eltType[339190]:_any[141](?) =
+  (339188 call real[13] 64)) : _unknown[42] "method" "primary method"
+  {
+    (339196 call =(339199 call . this[339181] c"rank") rank[339184])
+    (339203 call =(339206 call . this[339181] c"eltType") eltType[339190])
+    (339210 call =(339213 call . this[339181] c"resource")(339216 'new'(_chpl_manager = _shared[242](?))(339220 call TensorResource[334760](?) eltType[339190] rank[339184](339223 'new'(339225 call baseValue[334793])))))
+  } function staticTensor[339695](?).init[339228](arg _mt[339243]:_MT[201], arg this[339230]:staticTensor[339695](?), in arg resource[339240] :
+  (339233 call _shared(339235 call BaseTensorResource[334219](?) unknown eltType[339236] unknown rank[339238]))) : _unknown[42] "method" "primary method"
+  {
+    (339246 call =(339249 call . this[339230] c"rank") rank[339238])
+    (339253 call =(339256 call . this[339230] c"eltType") eltType[339236])
+    (339260 call =(339263 call . this[339230] c"resource") resource[339240])
+  } function staticTensor[339695](?).init[339269](arg _mt[339284]:_MT[201], arg this[339271]:staticTensor[339695](?), in arg resource[339281] :
+  (339274 call _owned(339276 call BaseTensorResource[334219](?) unknown eltType[339277] unknown rank[339279]))) : _unknown[42] "method" "primary method"
+  {
+    (339291 call(339288 call . this[339271] c"init")(339296 call(339293 call . _shared c"adopt") resource[339281]))
+  } function staticTensor[339695](?).init[339300](arg _mt[339313]:_MT[201], arg this[339302]:staticTensor[339695](?), arg array[339310] :
+  (339305 call ndarray[328686](?) unknown rank[339306] unknown eltType[339308])) : _unknown[42] "method" "primary method"
+  {
+    (339316 call =(339319 call . this[339302] c"rank") rank[339306])
+    (339323 call =(339326 call . this[339302] c"eltType") eltType[339308])
+    { scopeless
+      { scopeless
+        unknown chpl_wrapper_ar[339346](339347 call chpl__buildRemoteWrapper(339334 call . Remote[315927](?) c"defaultDevice")(339338 call _shared(339340 call Remote(339342 call ndarray[328686](?) rank[339306] eltType[339308])))(339349 'create thunk' array[339310]))
+        unknown ar[339332] "remote variable" "ref var"(339355 call(339352 call . chpl_wrapper_ar[339346] c"get"))
+      }
+      (339357 'end of statement')
+    }
+    (339358 call =(339361 call . this[339302] c"resource")(339364 'new'(_chpl_manager = _shared[242](?))(339368 call TensorResource[334760](?) ar[339332])))
+  } function staticTensor[339695](?).init[339372](arg _mt[339386]:_MT[201], arg this[339374]:staticTensor[339695](?), arg dom[339379] :
+  (339377 call _domain ?[227]), arg eltType[339383]:_any[141](?) =
+  real[13]) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      const normal[339390] "const"(339394 call normalizeDomain module=[222] Utilities[320397] dom[339379])
+      (339399 'end of statement')
+    }
+    { scopeless
+      unknown rank[339401] "param"(339403 call . normal[339390] c"rank")
+      (339407 'end of statement')
+    }
+    { scopeless
+      { scopeless
+        unknown chpl_wrapper_ar[339428](339429 call chpl__buildRemoteWrapper(339412 call . Remote[315927](?) c"defaultDevice")(339416 call _shared(339418 call Remote(339420 call ndarray[328686](?) rank[339401] eltType[339383])))(339431 'create thunk'(339423 'new'(339425 call ndarray[328686](?) normal[339390] eltType[339383]))))
+        unknown ar[339410] "remote variable" "ref var"(339437 call(339434 call . chpl_wrapper_ar[339428] c"get"))
+      }
+      (339439 'end of statement')
+    }
+    (339440 call =(339443 call . this[339374] c"rank") rank[339401])
+    (339447 call =(339450 call . this[339374] c"eltType") eltType[339383])
+    (339454 call =(339457 call . this[339374] c"resource")(339460 'new'(_chpl_manager = _shared[242](?))(339464 call TensorResource[334760](?) ar[339410])))
+    (339466 'referenced modules list' Utilities[320397])
+  } function staticTensor[339695](?).init[339470](arg _mt[339482]:_MT[201], arg this[339472]:staticTensor[339695](?), arg arr[339479] :
+  (339477 call chpl__buildArrayRuntimeType nil[32] unknown eltType[339475])) : _unknown[42] "method" "primary method"
+  {
+    (339489 call(339486 call . this[339472] c"init")(339490 'new'(339492 call ndarray[328686](?) arr[339479])))
+  } function staticTensor[339695](?).init[339496](arg _mt[339504]:_MT[201], arg this[339498]:staticTensor[339695](?), arg it[339501] :
+  _iteratorRecord[165](?)) : _unknown[42] "method" "primary method"
+  {
+    { scopeless
+      const arr[339508] "const" it[339501]
+      (339511 'end of statement')
+    }
+    (339516 call(339513 call . this[339498] c"init") arr[339508])
+  } function staticTensor[339695](?).this[339520](arg _mt[339528]:_MT[201], arg this[339522]:staticTensor[339695](?), arg args[339525]:_any[141](?) ...) : _unknown[42] "method" "primary method"
+  {
+    (339531 return(339536 call(339533 call . this[339522] c"slice")(339538 'expand_tuple' args[339525])))
+  } function staticTensor[339695](?).reshapeDomain[339541](arg _mt[339553]:_MT[201], arg this[339543]:staticTensor[339695](?), arg dom[339550] :
+  (339549 'typeof'(339546 call . this[339543] c"_dom"))) : _unknown[42] "method" "primary method"
+  {
+    {
+      const tmp[339588] "const" "temp"
+      (339589 'move' tmp[339588](339586 'deref'(339585 '_wide_get_locale'(339557 call . this[339543] c"device"))))
+      {
+        { scopeless
+          unknown arr[339562] "ref var"(339564 call . this[339543] c"array")
+          (339568 'end of statement')
+        }
+        { scopeless
+          unknown gra[339570] "ref var"(339574 call . this[339543] c"grad")
+          (339578 'end of statement')
+        }
+        (339583 call(339580 call . arr[339562] c"reshapeDomain") dom[339550])
+      }
+      (339592 'elided on block' 0 tmp[339588])
+    }
+  } function staticTensor[339695](?)._setArrayData[339598](arg _mt[339604]:_MT[201], arg this[339600]:staticTensor[339695](?), arg value[339602]:_any[141](?)) : _unknown[42] "method" "primary method"
+  {
+    {
+      const tmp[339635] "const" "temp"
+      (339636 'move' tmp[339635](339633 'deref'(339632 '_wide_get_locale'(339608 call . this[339600] c"device"))))
+      {
+        { scopeless
+          const devVal[339613] "const" value[339602]
+          (339616 'end of statement')
+        }
+        { scopeless
+          unknown dat[339618] "ref var"(339623 call .(339620 call . this[339600] c"array") c"data")
+          (339627 'end of statement')
+        }
+        (339628 call = dat[339618] devVal[339613])
+      }
+      (339639 'elided on block' 0 tmp[339635])
+    }
+  } function staticTensor[339695](?).detach[339645](arg _mt[339661]:_MT[201], arg this[339647]:staticTensor[339695](?), arg copy[339651] :
+  bool[19] =
+  1, arg keepGrad[339657] :
+  bool[19] =
+  0) : _unknown[42] "method" "primary method"
+  {
+    (339672 return(339673 'new'(339676 call staticTensor[339695](?)(339688 call(339685 call .(339679 call . this[339647] c"meta") c"detach") copy[339651] keepGrad[339657]))))
+  }
+  { scopeless type
+    (339665 call staticTensor[339695](?)(339666 call . this[339647] c"rank") eltType)
+  } serializable[310094] forwarding ( )
+  function :[339697](in arg t[339705] :
+  (339700 call staticTensor[339695](?) unknown rank[339701] unknown eltType[339703]), arg toType[339708]:_any[141](?)) : _unknown[42] "operator"
+  {
+    { scopeless
+      const a[339716] "const"(339718 call . t[339705] c"array")
+      (339722 'end of statement')
+    }
+    { scopeless
+      const b[339724] "const"(339725 call : a[339716] toType[339708])
+      (339730 'end of statement')
+    }
+    (339731 return(339732 'new'(339734 call staticTensor[339695](?) b[339724])))
+  }
+  { scopeless type
+    (339711 call staticTensor[339695](?) rank[339701] toType[339708])
+  }
+  function tensorFromCtx[339739](param arg rank[339742] :
+  int[10], arg eltType[339745]:_any[141](?), arg ctx[339747]:_any[141](?)) : _unknown[42]
+  {
+    { scopeless
+      unknown newMeta[339755](339756 'new'(_chpl_manager = _owned[238](?))(339760 call TensorResource[334760](?) eltType[339745] rank[339742] ctx[339747]))
+      (339765 'end of statement')
+    }
+    (339770 call(339767 call . newMeta[339755] c"forward"))
+    (339771 return(339772 'new'(339774 call staticTensor[339695](?) newMeta[339755])))
+  }
+  { scopeless type
+    (339750 call staticTensor[339695](?) rank[339742] eltType[339745])
+  }
+  function +[339779](arg a[339787] :
+  (339782 call staticTensor[339695](?) unknown rank[339783] unknown eltType[339785]), arg b[339794] :
+  (339791 call staticTensor[339695](?) rank[339783] eltType[339785])) : _unknown[42] "operator"
+  {
+    { scopeless
+      unknown ctx[339799](339800 'new'(339802 call addOp[335144](?) rank[339783] eltType[339785](339806 call . a[339787] c"meta")(339810 call . b[339794] c"meta")))
+      (339814 'end of statement')
+    }
+    (339815 return(339817 call tensorFromCtx rank[339783] eltType[339785] ctx[339799]))
+  }
+  function -[339823](arg a[339831] :
+  (339826 call staticTensor[339695](?) unknown rank[339827] unknown eltType[339829]), arg b[339838] :
+  (339835 call staticTensor[339695](?) rank[339827] eltType[339829])) : _unknown[42] "operator"
+  {
+    { scopeless
+      unknown ctx[339843](339844 'new'(339846 call subOp[335215](339848 call . a[339831] c"meta")(339852 call . b[339838] c"meta")))
+      (339856 'end of statement')
+    }
+    (339857 return(339859 call tensorFromCtx rank[339827] eltType[339829] ctx[339843]))
+  }
+  function *[339865](arg a[339873] :
+  (339868 call staticTensor[339695](?) unknown rank[339869] unknown eltType[339871]), arg b[339880] :
+  (339877 call staticTensor[339695](?) rank[339869] eltType[339871])) : _unknown[42] "operator"
+  {
+    { scopeless
+      unknown ctx[339885](339886 'new'(339888 call multOp[335552](?) rank[339869] eltType[339871](339892 call . a[339873] c"meta")(339896 call . b[339880] c"meta")))
+      (339900 'end of statement')
+    }
+    (339901 return(339903 call tensorFromCtx rank[339869] eltType[339871] ctx[339885]))
+  }
+  function /[339909](arg a[339917] :
+  (339912 call staticTensor[339695](?) unknown rank[339913] unknown eltType[339915]), arg b[339924] :
+  (339921 call staticTensor[339695](?) rank[339913] eltType[339915])) : _unknown[42] "operator"
+  {
+    { scopeless
+      unknown ctx[339929](339930 'new'(339932 call divOp[335286](339934 call . a[339917] c"meta")(339938 call . b[339924] c"meta")))
+      (339942 'end of statement')
+    }
+    (339943 return(339945 call tensorFromCtx rank[339913] eltType[339915] ctx[339929]))
+  }
+  function _unknown[42].reshape[339951](arg _mt[339963]:_MT[201], arg this[339954] :
+  staticTensor[339695](?), arg dom[339960] :
+  (339958 call _domain ?[227])) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown newRank[339967] "param"(339969 call . dom[339960] c"rank")
+      (339973 'end of statement')
+    }
+    { scopeless
+      unknown ctx[339975](339976 'new'(339978 call reshapeOp[335716](?)(339979 call . this[339954] c"rank") newRank[339967](339984 call . this[339954] c"eltType")(339989 call . dom[339960] c"shape")(339992 call . this[339954] c"meta")))
+      (339997 'end of statement')
+    }
+    (339998 return(340000 call tensorFromCtx newRank[339967](340002 call . this[339954] c"eltType") ctx[339975]))
+  }
+  function _unknown[42].reshape[340009](arg _mt[340022]:_MT[201], arg this[340012] :
+  staticTensor[339695](?), arg newShape[340018] ... :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown ctx[340026](340027 'new'(340029 call reshapeOp[335716](?)(340030 call . this[340012] c"rank") newRank[340016](340035 call . this[340012] c"eltType") newShape[340018](340040 call . this[340012] c"meta")))
+      (340045 'end of statement')
+    }
+    (340046 return(340048 call tensorFromCtx newRank[340016](340050 call . this[340012] c"eltType") ctx[340026]))
+  }
+  function _unknown[42].relu[340057](arg _mt[340063]:_MT[201], arg this[340060] :
+  staticTensor[339695](?)) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown ctx[340067](340068 'new'(340070 call reluOp[334878](340071 call . this[340060] c"meta")))
+      (340076 'end of statement')
+    }
+    (340077 return(340079 call tensorFromCtx(340080 call . this[340060] c"rank")(340084 call . this[340060] c"eltType") ctx[340067]))
+  }
+  function _unknown[42].permute[340091](arg _mt[340106]:_MT[201], arg this[340094] :
+  staticTensor[339695](?), arg axes[340102] ... :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown ctx[340110](340111 'new'(340113 call permuteOp[335856](?)(340114 call . this[340094] c"rank")(340118 call . this[340094] c"eltType") axes[340102](340123 call . this[340094] c"meta")))
+      (340128 'end of statement')
+    }
+    (340129 return(340131 call tensorFromCtx(340132 call . this[340094] c"rank")(340136 call . this[340094] c"eltType") ctx[340110]))
+  }
+  function _unknown[42].expand[340143](arg _mt[340158]:_MT[201], arg this[340146] :
+  staticTensor[339695](?), arg axes[340154] ... :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown ctx[340162](340163 'new'(340165 call expandOp[336080](?)(340166 call . this[340146] c"rank")(340170 call . this[340146] c"eltType") axes[340154](340175 call . this[340146] c"meta")))
+      (340180 'end of statement')
+    }
+    (340181 return(340183 call tensorFromCtx(340184 call . this[340146] c"rank")(340188 call . this[340146] c"eltType") ctx[340162]))
+  }
+  function _unknown[42].pad[340195](arg _mt[340219]:_MT[201], arg this[340198] :
+  staticTensor[339695](?), arg args[340209] ... :
+  (340201 call * 2 int[10]), arg value[340215] :
+  eltType =
+  0.0) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown ctx[340223](340224 'new'(340226 call padOp[336359](?)(340227 call . this[340198] c"rank")(340231 call . this[340198] c"eltType") args[340209] value[340215](340237 call . this[340198] c"meta")))
+      (340242 'end of statement')
+    }
+    (340243 return(340245 call tensorFromCtx(340246 call . this[340198] c"rank")(340250 call . this[340198] c"eltType") ctx[340223]))
+  }
+  function _unknown[42].shrink[340257](arg _mt[340275]:_MT[201], arg this[340260] :
+  staticTensor[339695](?), arg args[340271] ... :
+  (340263 call * 2 int[10])) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown ctx[340279](340280 'new'(340282 call shrinkOp[336623](?)(340283 call . this[340260] c"rank")(340287 call . this[340260] c"eltType") args[340271](340292 call . this[340260] c"meta")))
+      (340297 'end of statement')
+    }
+    (340298 return(340300 call tensorFromCtx(340301 call . this[340260] c"rank")(340305 call . this[340260] c"eltType") ctx[340279]))
+  }
+  function _unknown[42].slice[340312](arg _mt[340324]:_MT[201], arg this[340315] :
+  staticTensor[339695](?), arg dom[340321] :
+  (340319 call _domain ?[227])) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown ctx[340338](340339 'new'(340341 call sliceOp[336787](?)(340342 call . this[340315] c"rank")(340346 call . this[340315] c"eltType") dom[340321](340351 call . this[340315] c"meta")))
+      (340356 'end of statement')
+    }
+    (340357 return(340359 call tensorFromCtx(340360 call . this[340315] c"rank")(340364 call . this[340315] c"eltType") ctx[340338]))
+  }
+  where {
+    (340326 call ==(340329 call . dom[340321] c"rank")(340332 call . this[340315] c"rank"))
+  }
+  function _unknown[42].slice[340372](arg _mt[340387]:_MT[201], arg this[340375] :
+  staticTensor[339695](?), arg rngs[340383] ... :
+  range) : _unknown[42] "method"
+  {
+    { scopeless
+      const dom[340391] "const"(340396 call chpl__buildDomainExpr(340394 'expand_tuple' rngs[340383]) 1)
+      (340399 'end of statement')
+    }
+    { scopeless
+      unknown ctx[340401](340402 'new'(340404 call sliceOp[336787](?)(340405 call . this[340375] c"rank")(340409 call . this[340375] c"eltType") dom[340391](340414 call . this[340375] c"meta")))
+      (340419 'end of statement')
+    }
+    (340420 return(340422 call tensorFromCtx(340423 call . this[340375] c"rank")(340427 call . this[340375] c"eltType") ctx[340401]))
+  }
+  function _unknown[42].sum[340434](arg _mt[340447]:_MT[201], arg this[340437] :
+  staticTensor[339695](?), arg axes[340443] ... :
+  int[10]) : _unknown[42] "method"
+  {
+    if(340466 call _cond_test(340456 call <(340458 call -(340460 call . this[340437] c"rank") r[340441]) 0))
+    {
+      (340452 call compilerError "Cannot sum more axes than rank. ")
+    }
+    { scopeless
+      unknown ctx[340471](340472 'new'(340474 call sumOp[337537](?)(340475 call . this[340437] c"rank")(340479 call . this[340437] c"eltType") r[340441] axes[340443](340485 call . this[340437] c"meta")))
+      (340490 'end of statement')
+    }
+    { scopeless
+      unknown newDim[340492] "param"(340511 IfExpr (340493 call ==(340495 call -(340497 call . this[340437] c"rank") r[340441]) 0) then
+      { scopeless
+        1
+      } else
+      { scopeless
+        (340504 call -(340506 call . this[340437] c"rank") r[340441])
+      } )
+      (340515 'end of statement')
+    }
+    (340516 return(340518 call tensorFromCtx newDim[340492](340520 call . this[340437] c"eltType") ctx[340471]))
+  }
+  function _unknown[42].unsqueeze[340527](arg _mt[340537]:_MT[201], arg this[340530] :
+  staticTensor[339695](?), arg dim[340534] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      const shape[340551] "const"(340559 call .(340556 call .(340553 call . this[340530] c"array") c"_dom") c"shape")
+      (340563 'end of statement')
+    }
+    { scopeless
+      unknown newRank[340565] "param"(340567 call +(340569 call . this[340530] c"rank") 1) int[10]
+      (340575 'end of statement')
+    }
+    { scopeless
+      unknown offset[340577] 0 int[10]
+      (340581 'end of statement')
+    }
+    { scopeless
+      unknown newShape[340583](340584 call * newRank[340565] int[10])
+      (340589 'end of statement')
+    }
+    {
+      unknown i[340590] "index var" 0
+      unknown tmp[340630] "maybe param" "temp"
+      (340642 'move' tmp[340630](340640 call chpl_compute_low_param_loop_bound 0(340594 call chpl__nudgeHighBound newRank[340565])))
+      unknown tmp[340631] "maybe param" "temp"
+      (340651 'move' tmp[340631](340649 call chpl_compute_high_param_loop_bound 0(340647 call chpl__nudgeHighBound newRank[340565])))
+      unknown tmp[340632] "maybe param" "temp"
+      (340654 'move' tmp[340632] 1)
+      ParamForLoop[340656]
+      { i[340590] tmp[340630] tmp[340631] tmp[340632]
+        {
+          if(340626 call _cond_test(340622 call == i[340590] dim[340534]))
+          {
+            (340600 call =(340603 call newShape[340583] i[340590]) 1)
+            (340606 call = offset[340577] 1)
+          }
+          {
+            (340611 call =(340614 call newShape[340583] i[340590])(340617 call shape[340551](340618 call - i[340590] offset[340577])))
+          }
+        }
+      }
+      label _unused_continueLabel[340634]
+      label _breakLabel[340633]
+    }
+    (340665 return(340670 call(340667 call . this[340530] c"reshape")(340672 'expand_tuple' newShape[340583])))
+  }
+  { scopeless type
+    (340540 call staticTensor[339695](?)(340541 call +(340543 call . this[340530] c"rank") 1) eltType)
+  }
+  function _unknown[42].max[340676](arg _mt[340682]:_MT[201], arg this[340679] :
+  staticTensor[339695](?)) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown ctx[340690](340691 'new'(340693 call maxOp[337698](?)(340694 call . this[340679] c"rank")(340698 call . this[340679] c"eltType")(340702 call . this[340679] c"rank")(340710 call .(340707 call . this[340679] c"array") c"shape")(340713 call . this[340679] c"meta")))
+      (340718 'end of statement')
+    }
+    (340719 return(340721 call tensorFromCtx 1(340723 call . this[340679] c"eltType") ctx[340690]))
+  }
+  { scopeless type
+    (340685 call staticTensor[339695](?) 1 eltType)
+  }
+  function _unknown[42].exp[340731](arg _mt[340737]:_MT[201], arg this[340734] :
+  staticTensor[339695](?)) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown ctx[340748](340749 'new'(340751 call expOp[334996](340752 call . this[340734] c"meta")))
+      (340757 'end of statement')
+    }
+    (340758 return(340760 call tensorFromCtx(340761 call . this[340734] c"rank")(340765 call . this[340734] c"eltType") ctx[340748]))
+  }
+  { scopeless type
+    (340740 call staticTensor[339695](?)(340741 call . this[340734] c"rank") eltType)
+  }
+  function _unknown[42].softmax[340773](arg _mt[340779]:_MT[201], arg this[340776] :
+  staticTensor[339695](?)) : _unknown[42] "method"
+  {
+    { scopeless
+      const myShape[340790] "const"(340801 call .(340798 call .(340795 call .(340792 call . this[340776] c"array") c"data") c"_dom") c"shape")
+      (340805 'end of statement')
+    }
+    { scopeless
+      unknown baseShape[340807](340808 call *(340810 call . this[340776] c"rank") int[10])
+      (340816 'end of statement')
+    }
+    {
+      unknown i[340817] "index var" 0
+      unknown tmp[340835] "maybe param" "temp"
+      (340847 'move' tmp[340835](340845 call chpl_compute_low_param_loop_bound 0(340824 call chpl__nudgeHighBound(340820 call . this[340776] c"rank"))))
+      unknown tmp[340836] "maybe param" "temp"
+      (340859 'move' tmp[340836](340857 call chpl_compute_high_param_loop_bound 0(340852 call chpl__nudgeHighBound(340854 call . this[340776] c"rank"))))
+      unknown tmp[340837] "maybe param" "temp"
+      (340862 'move' tmp[340837] 1)
+      ParamForLoop[340864]
+      { i[340817] tmp[340835] tmp[340836] tmp[340837]
+        { scopeless
+          (340828 call =(340831 call baseShape[340807] i[340817]) 1)
+        }
+      }
+      label _unused_continueLabel[340839]
+      label _breakLabel[340838]
+    }
+    { scopeless
+      unknown sumAxes[340874](340875 call *(340877 call . this[340776] c"rank") int[10])
+      (340883 'end of statement')
+    }
+    {
+      unknown i[340884] "index var" 0
+      unknown tmp[340902] "maybe param" "temp"
+      (340914 'move' tmp[340902](340912 call chpl_compute_low_param_loop_bound 0(340891 call chpl__nudgeHighBound(340887 call . this[340776] c"rank"))))
+      unknown tmp[340903] "maybe param" "temp"
+      (340926 'move' tmp[340903](340924 call chpl_compute_high_param_loop_bound 0(340919 call chpl__nudgeHighBound(340921 call . this[340776] c"rank"))))
+      unknown tmp[340904] "maybe param" "temp"
+      (340929 'move' tmp[340904] 1)
+      ParamForLoop[340931]
+      { i[340884] tmp[340902] tmp[340903] tmp[340904]
+        { scopeless
+          (340895 call =(340898 call sumAxes[340874] i[340884]) i[340884])
+        }
+      }
+      label _unused_continueLabel[340906]
+      label _breakLabel[340905]
+    }
+    { scopeless
+      unknown memx[340941](340956 call(340953 call .(340950 call(340947 call .(340946 call(340943 call . this[340776] c"max")) c"reshape")(340952 'expand_tuple' baseShape[340807])) c"expand")(340958 'expand_tuple' myShape[340790]))
+      (340960 'end of statement')
+    }
+    { scopeless
+      unknown m[340962](340963 call - this[340776] memx[340941])
+      (340968 'end of statement')
+    }
+    { scopeless
+      unknown e[340970](340975 call(340972 call . m[340962] c"exp"))
+      (340977 'end of statement')
+    }
+    { scopeless
+      unknown ss[340979](340996 call(340993 call .(340990 call(340987 call .(340984 call(340981 call . e[340970] c"sum")(340986 'expand_tuple' sumAxes[340874])) c"reshape")(340992 'expand_tuple' baseShape[340807])) c"expand")(340998 'expand_tuple' myShape[340790]))
+      (341000 'end of statement')
+    }
+    (341001 return(341002 call / e[340970] ss[340979]))
+  }
+  { scopeless type
+    (340782 call staticTensor[339695](?)(340783 call . this[340776] c"rank") eltType)
+  }
+  function matvec[341009](arg mat[341016] :
+  (341012 call staticTensor[339695](?) 2 unknown eltType[341014]), arg vec[341023] :
+  (341020 call staticTensor[339695](?) 1 eltType[341014])) : _unknown[42]
+  {
+    { scopeless
+      const tmp[341044] "const" "temp"(341041 call .(341038 call .(341035 call . vec[341023] c"array") c"_dom") c"shape")
+      (341048 call _check_tuple_var_decl tmp[341044] 1)
+      const n[341032] "const"(341045 call tmp[341044] 0)
+      (341053 'end of statement')
+    }
+    { scopeless
+      const tmp[341069] "const" "temp"(341066 call .(341063 call .(341060 call . mat[341016] c"array") c"_dom") c"shape")
+      (341076 call _check_tuple_var_decl tmp[341069] 2)
+      const m[341055] "const"(341070 call tmp[341069] 0)
+      const _n[341057] "const"(341073 call tmp[341069] 1)
+      (341081 'end of statement')
+    }
+    if(341107 call _cond_test(341103 call != n[341032] _n[341057]))
+    {
+      { scopeless
+        (341083 call halt(341084 call +(341086 call +(341088 call + "arrays must be same shape"(341093 call : n[341032] string[244])) " ")(341098 call : _n[341057] string[244])))
+      }
+    }
+    { scopeless
+      unknown vec_[341113](341118 call(341115 call . vec[341023] c"reshape") 1 n[341032])
+      (341122 'end of statement')
+    }
+    { scopeless
+      unknown v[341124](341129 call(341126 call . vec_[341113] c"expand") m[341055] n[341032])
+      (341133 'end of statement')
+    }
+    { scopeless
+      unknown Mv[341135](341136 call * mat[341016] v[341124])
+      (341141 'end of statement')
+    }
+    (341142 return(341147 call(341144 call . Mv[341135] c"sum") 1))
+  }
+  { scopeless type
+    (341027 call staticTensor[339695](?) 1 eltType[341014])
+  }
+  function matvec[341152](arg mat[341159] :
+  (341155 call staticTensor[339695](?) 2 unknown eltType[341157]), arg vec[341166] :
+  (341163 call staticTensor[339695](?) 2 eltType[341157])) : _unknown[42]
+  {
+    { scopeless
+      const tmp[341189] "const" "temp"(341186 call .(341183 call .(341180 call . vec[341166] c"array") c"_dom") c"shape")
+      (341196 call _check_tuple_var_decl tmp[341189] 2)
+      const b[341175] "const"(341190 call tmp[341189] 0)
+      const n[341177] "const"(341193 call tmp[341189] 1)
+      (341201 'end of statement')
+    }
+    { scopeless
+      const tmp[341217] "const" "temp"(341214 call .(341211 call .(341208 call . mat[341159] c"array") c"_dom") c"shape")
+      (341224 call _check_tuple_var_decl tmp[341217] 2)
+      const m[341203] "const"(341218 call tmp[341217] 0)
+      const _n[341205] "const"(341221 call tmp[341217] 1)
+      (341229 'end of statement')
+    }
+    if(341253 call _cond_test(341249 call != n[341177] _n[341205]))
+    {
+      { scopeless
+        (341231 call halt(341232 call +(341234 call +(341236 call + "arrays must be same shape"(341239 call : n[341177] string[244])) " ")(341244 call : _n[341205] string[244])))
+      }
+    }
+    { scopeless
+      unknown vec_[341259](341264 call(341261 call . vec[341166] c"reshape") b[341175] 1 n[341177])
+      (341269 'end of statement')
+    }
+    { scopeless
+      unknown v[341271](341276 call(341273 call . vec_[341259] c"expand") b[341175] m[341203] n[341177])
+      (341281 'end of statement')
+    }
+    { scopeless
+      unknown M_[341283](341288 call(341285 call . mat[341159] c"reshape") 1 m[341203] n[341177])
+      (341293 'end of statement')
+    }
+    { scopeless
+      unknown M[341295](341300 call(341297 call . M_[341283] c"expand") b[341175] m[341203] n[341177])
+      (341305 'end of statement')
+    }
+    { scopeless
+      unknown Mv[341307](341308 call * M[341295] v[341271])
+      (341313 'end of statement')
+    }
+    (341314 return(341319 call(341316 call . Mv[341307] c"sum") 2))
+  }
+  { scopeless type
+    (341170 call staticTensor[339695](?) 2 eltType[341157])
+  }
+  function _unknown[42].matvecmul[341324](arg _mt[341334]:_MT[201], arg this[341327] :
+  staticTensor[339695](?), arg m[341330]:_any[141](?), arg v[341332]:_any[141](?)) : _unknown[42] "method"
+  {
+    (341337 return(341339 call matvec m[341330] v[341332]))
+  }
+  function _unknown[42].convolve[341344](arg _mt[341369]:_MT[201], arg this[341347] :
+  staticTensor[339695](?), arg features[341355] :
+  (341351 call staticTensor[339695](?) 3 unknown eltType[341353]), arg kernel[341362] :
+  (341359 call staticTensor[339695](?) 4 eltType[341353]), arg stride[341366] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown ctx[341377](341378 'new'(341380 call conv2DOp[338447](?) eltType[341353](341383 call . features[341355] c"meta")(341387 call . kernel[341362] c"meta") stride[341366]))
+      (341392 'end of statement')
+    }
+    (341393 return(341395 call tensorFromCtx 3 eltType[341353] ctx[341377]))
+  }
+  { scopeless type
+    (341372 call staticTensor[339695](?) 3 eltType[341353])
+  }
+  function _unknown[42].convolve[341402](arg _mt[341434]:_MT[201], arg this[341405] :
+  staticTensor[339695](?), arg features[341413] :
+  (341409 call staticTensor[339695](?) 3 unknown eltType[341411]), arg kernel[341420] :
+  (341417 call staticTensor[339695](?) 4 eltType[341411]), arg bias[341427] :
+  (341424 call staticTensor[339695](?) 1 eltType[341411]), arg stride[341431] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown t[341442](341443 'new'(341445 call staticTensor[339695](?) 3 eltType[341411]))
+      (341449 'end of statement')
+    }
+    {
+      const tmp[341482] "const" "temp"
+      (341483 'move' tmp[341482](341480 'deref'(341479 '_wide_get_locale'(341451 call . t[341442] c"device"))))
+      {
+        (341455 call =(341458 call . t[341442] c"array")(341465 call(341462 call . ndarray[328686](?) c"convolve")(341467 call . features[341413] c"array")(341471 call . kernel[341420] c"array")(341475 call . bias[341427] c"array") stride[341431]))
+      }
+      (341486 'elided on block' 0 tmp[341482])
+    }
+    (341490 return t[341442])
+  }
+  { scopeless type
+    (341437 call staticTensor[339695](?) 3 eltType[341411])
+  }
+  function _unknown[42].matvecmulFast[341495](arg _mt[341516]:_MT[201], arg this[341498] :
+  staticTensor[339695](?), arg mat[341506] :
+  (341502 call staticTensor[339695](?) 2 unknown eltType[341504]), arg vec[341513] :
+  (341510 call staticTensor[339695](?) 1 eltType[341504])) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown u[341524](341525 'new'(341527 call staticTensor[339695](?) 1 eltType[341504]))
+      (341531 'end of statement')
+    }
+    {
+      const tmp[341561] "const" "temp"
+      (341562 'move' tmp[341561](341559 'deref'(341558 '_wide_get_locale'(341533 call . u[341524] c"device"))))
+      {
+        (341537 call =(341540 call . u[341524] c"array")(341549 call(341546 call . ndarray[328686](?) c"matvecmul")(341551 call . mat[341506] c"array")(341555 call . vec[341513] c"array")))
+      }
+      (341565 'elided on block' 0 tmp[341561])
+    }
+    (341569 return u[341524])
+  }
+  { scopeless type
+    (341519 call staticTensor[339695](?) 1 eltType[341504])
+  }
+  function _unknown[42].dilate[341574](arg _mt[341584]:_MT[201], arg this[341577] :
+  staticTensor[339695](?), arg dil[341581] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown dilated[341599](341600 'new'(341602 call staticTensor[339695](?) 3(341604 call . this[341577] c"eltType")))
+      (341609 'end of statement')
+    }
+    {
+      const tmp[341657] "const" "temp"
+      (341658 'move' tmp[341657](341655 'deref'(341654 '_wide_get_locale'(341611 call . this[341577] c"device"))))
+      {
+        { scopeless
+          unknown dat[341616] "ref var"(341618 call . this[341577] c"array")
+          (341622 'end of statement')
+        }
+        { scopeless
+          unknown dila[341624] "ref var"(341626 call . dilated[341599] c"array")
+          (341630 'end of statement')
+        }
+        { scopeless
+          const d[341632] "const"(341637 call(341634 call . dat[341616] c"dilate") dil[341581])
+          (341640 'end of statement')
+        }
+        (341645 call(341642 call . dila[341624] c"reshapeDomain")(341647 call . d[341632] c"_dom"))
+        (341650 call = dila[341624] d[341632])
+      }
+      (341661 'elided on block' 0 tmp[341657])
+    }
+    (341665 return dilated[341599])
+  }
+  where {
+    (341590 call ==(341593 call . this[341577] c"rank") 3)
+  }
+  { scopeless type
+    (341587 call staticTensor[339695](?) 3 eltType)
+  }
+  function _unknown[42].maxPool[341671](arg _mt[341681]:_MT[201], arg this[341674] :
+  staticTensor[339695](?), arg poolSize[341678] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown pool[341696](341697 'new'(341699 call staticTensor[339695](?) 3(341701 call . this[341674] c"eltType")))
+      (341706 'end of statement')
+    }
+    {
+      const tmp[341755] "const" "temp"
+      (341756 'move' tmp[341755](341753 'deref'(341752 '_wide_get_locale'(341708 call . this[341674] c"device"))))
+      {
+        { scopeless
+          unknown dat[341713] "ref var"(341715 call . this[341674] c"array")
+          (341719 'end of statement')
+        }
+        { scopeless
+          unknown pl[341721] "ref var"(341723 call . pool[341696] c"array")
+          (341727 'end of statement')
+        }
+        { scopeless
+          const p[341729] "const"(341734 call(341731 call . ndarray[328686](?) c"maxPool") dat[341713] poolSize[341678])
+          (341738 'end of statement')
+        }
+        (341743 call(341740 call . pl[341721] c"reshapeDomain")(341745 call . p[341729] c"_dom"))
+        (341748 call = pl[341721] p[341729])
+      }
+      (341759 'elided on block' 0 tmp[341755])
+    }
+    (341763 return pool[341696])
+  }
+  where {
+    (341687 call ==(341690 call . this[341674] c"rank") 3)
+  }
+  { scopeless type
+    (341684 call staticTensor[339695](?) 3 eltType)
+  }
+  function _unknown[42].arange[341769](arg _mt[341791]:_MT[201], arg this[341772] :
+  staticTensor[339695](?), arg to[341776] :
+  int[10], arg eltType[341780]:_any[141](?) =
+  real[13], arg shape[341788] :
+  (341783 call * unknown rank[341785] int[10])) : _unknown[42] "method"
+  {
+    { scopeless
+      const dom[341799] "const"(341803 call domainFromShape module=[222] Utilities[320397](341807 'expand_tuple' shape[341788]))
+      (341809 'end of statement')
+    }
+    { scopeless
+      const A[341811] "const"(341838 for (341822 call _build_tuple chpl__tuple_blank unknown x[341820] "index var")  in  zip(341832 call _build_tuple dom[341799](341830 call chpl_build_bounded_range 0(341828 call chpl__nudgeHighBound to[341776]))) do
+      {
+        (341833 call : x[341820] eltType[341780])
+      } )(341816 call chpl__buildArrayRuntimeType(341813 call chpl__ensureDomainExpr dom[341799]) eltType[341780])
+      (341841 'end of statement')
+    }
+    (341842 return(341843 'new'(341845 call staticTensor[339695](?) A[341811])))
+    (341848 'referenced modules list' Utilities[320397])
+  }
+  { scopeless type
+    (341794 call staticTensor[339695](?) rank[341785] eltType[341780])
+  }
+  function _unknown[42].arange[341852](arg _mt[341865]:_MT[201], arg this[341855] :
+  staticTensor[339695](?), arg shape[341861] ... :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      const _shape[341873] "const" shape[341861](341874 call * rank[341859] int[10])
+      (341880 'end of statement')
+    }
+    { scopeless
+      const dom[341882] "const"(341886 call domainFromShape module=[222] Utilities[320397](341890 'expand_tuple' _shape[341873]))
+      (341892 'end of statement')
+    }
+    { scopeless
+      const to[341894] "const"(341896 call . dom[341882] c"size")
+      (341900 'end of statement')
+    }
+    { scopeless
+      const A[341902] "const"(341929 for (341913 call _build_tuple chpl__tuple_blank unknown x[341911] "index var")  in  zip(341923 call _build_tuple dom[341882](341921 call chpl_build_bounded_range 0(341919 call chpl__nudgeHighBound to[341894]))) do
+      {
+        (341924 call : x[341911] real[13])
+      } )(341907 call chpl__buildArrayRuntimeType(341904 call chpl__ensureDomainExpr dom[341882]) real[13])
+      (341932 'end of statement')
+    }
+    (341933 return(341934 'new'(341936 call staticTensor[339695](?) A[341902])))
+    (341939 'referenced modules list' Utilities[320397])
+  }
+  { scopeless type
+    (341868 call staticTensor[339695](?) rank[341859] real[13])
+  }
+  function _unknown[42].fromShape[341943](arg _mt[341969]:_MT[201], arg this[341946] :
+  staticTensor[339695](?), arg eltType[341950]:_any[141](?) =
+  real[13], arg shape[341956] ... :
+  int[10], arg value[341965] :
+  eltType[341950] =
+  (341961 call : 0 eltType[341950])) : _unknown[42] "method"
+  {
+    { scopeless
+      const v[341977] "const" value[341965]
+      (341980 'end of statement')
+    }
+    { scopeless
+      const dom[341982] "const"(341986 call domainFromShape module=[222] Utilities[320397](341990 'expand_tuple' shape[341956]))
+      (341992 'end of statement')
+    }
+    { scopeless
+      const A[341994] "const"(341999 call chpl__buildArrayRuntimeType(341996 call chpl__ensureDomainExpr dom[341982]) eltType[341950])
+      (342002 'end of statement')
+    }
+    { scopeless
+      unknown t[342004](342005 'new'(342007 call staticTensor[339695](?) A[341994]))
+      (342010 'end of statement')
+    }
+    (342011 return t[342004])
+    (342014 'referenced modules list' Utilities[320397])
+  }
+  { scopeless type
+    (341972 call staticTensor[339695](?) rank[341954] eltType[341950])
+  }
+  function _unknown[42].zeros[342018](arg _mt[342031]:_MT[201], arg this[342021] :
+  staticTensor[339695](?), arg shape[342027] ... :
+  int[10]) : _unknown[42] "method"
+  {
+    (342038 return(342045 call(342042 call . staticTensor[339695](?) c"fromShape") real[13](342048 'expand_tuple' shape[342027]) 0.0))
+  }
+  { scopeless type
+    (342034 call staticTensor[339695](?) rank[342025] real[13])
+  }
+  function _unknown[42].zeros[342053](arg _mt[342068]:_MT[201], arg this[342056] :
+  staticTensor[339695](?), arg eltType[342059]:_any[141](?), arg shape[342064] ... :
+  int[10]) : _unknown[42] "method"
+  {
+    (342075 return(342080 call(342077 call . staticTensor[339695](?) c"fromShape") eltType[342059](342083 'expand_tuple' shape[342064])(342084 call : 0 eltType[342059])))
+  }
+  { scopeless type
+    (342071 call staticTensor[339695](?) rank[342062] eltType[342059])
+  }
+  function _unknown[42].ones[342091](arg _mt[342104]:_MT[201], arg this[342094] :
+  staticTensor[339695](?), arg shape[342100] ... :
+  int[10]) : _unknown[42] "method"
+  {
+    (342111 return(342116 call(342113 call . staticTensor[339695](?) c"fromShape") real[13](342119 'expand_tuple' shape[342100])(value = 1.0)))
+  }
+  { scopeless type
+    (342107 call staticTensor[339695](?) rank[342098] real[13])
+  }
+  function _unknown[42].ones[342125](arg _mt[342140]:_MT[201], arg this[342128] :
+  staticTensor[339695](?), arg eltType[342131]:_any[141](?), arg shape[342136] ... :
+  int[10]) : _unknown[42] "method"
+  {
+    (342147 return(342152 call(342149 call . staticTensor[339695](?) c"fromShape") eltType[342131](342155 'expand_tuple' shape[342136])(value =(342156 call : 1 eltType[342131]))))
+  }
+  { scopeless type
+    (342143 call staticTensor[339695](?) rank[342134] eltType[342131])
+  }
+  { scopeless
+    const n[342165] "config" "const" 100
+    (342168 'end of statement')
+  }
+  { scopeless
+    const diag[342170] "config" "const" 0
+    (342173 'end of statement')
+  }
+  { scopeless
+    const size[342175] "config" "const" 3
+    (342178 'end of statement')
+  }
+  function main[342179]() : _unknown[42]
+  {
+    if(342191 call _cond_test diag[342170])
+    {
+      (342184 'use' GpuDiagnostics)
+      (342187 call startGpuDiagnostics)
+      (342189 call startVerboseGpu)
+    }
+    { scopeless
+      unknown t[342196](342197 'new'(342199 call staticTensor[339695](?) 2 real[13]))
+      (342203 'end of statement')
+    }
+    (342211 call(342208 call .(342205 call . t[342196] c"array") c"reshapeDomain")(342226 call chpl__buildDomainExpr(342217 call chpl_build_bounded_range 0(342215 call chpl__nudgeHighBound 3))(342223 call chpl_build_bounded_range 0(342221 call chpl__nudgeHighBound 5)) 1))
+    (342232 call(342229 call . t[342196] c"to")(342234 call . Remote[315927](?) c"defaultDevice"))
+    {
+      const tmp[342294] "const" "temp"
+      (342295 'move' tmp[342294](342292 'deref'(342291 '_wide_get_locale'(342238 call . t[342196] c"device"))))
+      {
+        { scopeless
+          unknown tarr[342243] "ref var"(342245 call . t[342196] c"array")
+          (342249 'end of statement')
+        }
+        { scopeless
+          unknown tdata[342251] "ref var"(342253 call . tarr[342243] c"data")
+          (342257 'end of statement')
+        }
+        Forall[342288] {
+          induction variables:
+            
+            unknown i[342258] "index var" "insert auto destroy"
+          iterated expressions:
+            (342270 call(342267 call .(342264 call .(342261 call . tarr[342243] c"data") c"_dom") c"every"))
+          shadow variables:
+          other variables
+            forall body
+          {
+            (342271 call =(342274 call tdata[342251] i[342258])(342276 call +(342282 call(342279 call . tarr[342243] c"data") i[342258]) 1.0))
+          }
+        }
+      }
+      (342298 'elided on block' 0 tmp[342294])
+    }
+    { scopeless
+      const run1[342303] "const" 0
+      (342306 'end of statement')
+    }
+    if(342432 call _cond_test run1[342303])
+    {
+      { scopeless
+        unknown M[342309](342316 call(342313 call . staticTensor[339695](?) c"arange") 15 real[13](342322 call _build_tuple 5 3))
+        (342325 'end of statement')
+      }
+      (342327 call writeln M[342309])
+      { scopeless
+        unknown u[342330](342335 call(342332 call . staticTensor[339695](?) c"arange") 3 real[13](342341 call _build_tuple 1 3))
+        (342344 'end of statement')
+      }
+      (342346 call writeln u[342330])
+      { scopeless
+        unknown x[342349](342354 call(342351 call . u[342330] c"expand") 5 3)
+        (342358 'end of statement')
+      }
+      (342360 call writeln x[342349])
+      { scopeless
+        unknown Mx[342363](342364 call * M[342309] x[342349])
+        (342369 'end of statement')
+      }
+      (342371 call writeln Mx[342363])
+      { scopeless
+        unknown y[342374](342379 call(342376 call . Mx[342363] c"sum") 1)
+        (342382 'end of statement')
+      }
+      (342384 call writeln y[342374])
+      { scopeless
+        unknown u_[342387](342392 call(342389 call . staticTensor[339695](?) c"arange") 3 real[13](342397 call _build_tuple 3))
+        (342400 'end of statement')
+      }
+      { scopeless
+        unknown y_[342402](342404 call matvec M[342309] u_[342387])
+        (342408 'end of statement')
+      }
+      (342410 call writeln y_[342402])
+      { scopeless
+        unknown z[342413](342418 call(342415 call . y_[342402] c"sum") 0)
+        (342421 'end of statement')
+      }
+      (342423 call writeln z[342413])
+      (342426 call writeln(342428 call . M[342309] c"grad"))
+    }
+    { scopeless
+      unknown M[342437](342442 call(342439 call . staticTensor[339695](?) c"arange") 15 real[13](342448 call _build_tuple 5 3))
+      (342451 'end of statement')
+    }
+    (342453 call writeln M[342437])
+    { scopeless
+      unknown x[342456](342461 call(342458 call . staticTensor[339695](?) c"arange") 9 real[13](342467 call _build_tuple 3 3))
+      (342470 'end of statement')
+    }
+    (342472 call writeln x[342456])
+    { scopeless
+      unknown y[342475](342477 call matvec M[342437] x[342456])
+      (342481 'end of statement')
+    }
+    (342483 call writeln y[342475])
+    { scopeless
+      const run2[342486] "const" 0
+      (342489 'end of statement')
+    }
+    if(342550 call _cond_test run2[342486])
+    {
+      { scopeless
+        unknown W[342492](342494 call . M[342437] c"grad")
+        (342498 'end of statement')
+      }
+      { scopeless
+        unknown Q[342500](342505 call(342502 call . W[342492] c"shrink")(342509 call _build_tuple 1 3)(342514 call _build_tuple 1 2))
+        (342517 'end of statement')
+      }
+      (342519 call writeln Q[342500])
+      (342522 call writeln(342524 call . Q[342500] c"_dom"))
+      { scopeless
+        unknown U[342528](342533 call(342530 call . W[342492] c"pad")(342537 call _build_tuple 0 3)(342542 call _build_tuple 0 0))
+        (342545 'end of statement')
+      }
+      (342547 call writeln U[342528])
+    }
+    { scopeless
+      const run3[342555] "const" 0
+      (342558 'end of statement')
+    }
+    if(342785 call _cond_test run3[342555])
+    {
+      { scopeless
+        unknown W[342561](342568 call(342565 call . staticTensor[339695](?) c"ones") 5 3)
+        (342572 'end of statement')
+      }
+      { scopeless
+        unknown Q[342574](342579 call(342576 call . W[342561] c"shrink")(342583 call _build_tuple 1 3)(342588 call _build_tuple 1 2))
+        (342591 'end of statement')
+      }
+      (342593 call writeln Q[342574])
+      { scopeless
+        unknown U[342596](342601 call(342598 call . W[342561] c"pad")(342605 call _build_tuple 1 3)(342610 call _build_tuple 0 0) 68)
+        (342616 'end of statement')
+      }
+      (342618 call writeln U[342596])
+      (342648 call(342645 call .(342641 call(342638 call .(342636 call(342633 call .(342624 call(342621 call . U[342596] c"slice")(342627 call chpl_build_bounded_range 0 2)(342631 call chpl_build_bounded_range 0 2)) c"sum") 0) c"sum") 0) c"backward"))
+      (342672 call(342669 call .(342667 call(342664 call .(342662 call(342659 call .(342650 call U[342596](342653 call chpl_build_bounded_range 0 2)(342657 call chpl_build_bounded_range 0 2)) c"sum") 0) c"sum") 0) c"backward"))
+      (342674 call writeln(342676 call . W[342561] c"grad"))
+      (342680 call writeln(342685 call(342682 call . staticTensor[339695](?) c"arange") 5 2))
+      { scopeless
+        unknown a[342689](342694 call(342691 call . staticTensor[339695](?) c"arange") 4)
+        (342697 'end of statement')
+      }
+      (342699 call writeln a[342689])
+      (342702 call writeln(342709 call(342706 call . a[342689] c"unsqueeze") 1))
+      { scopeless
+        unknown img[342712](342717 call(342714 call . staticTensor[339695](?) c"arange") 3 9 9)
+        (342722 'end of statement')
+      }
+      { scopeless
+        unknown ker[342724](342729 call(342726 call . staticTensor[339695](?) c"arange") 1 3 3 3)
+        (342735 'end of statement')
+      }
+      { scopeless
+        unknown fet[342737](342742 call(342739 call . staticTensor[339695](?) c"convolve") img[342712] ker[342724] 2)
+        (342747 'end of statement')
+      }
+      (342749 call writeln fet[342737])
+      { scopeless
+        unknown b[342752](342757 call(342754 call . staticTensor[339695](?) c"arange") 1 3 3)
+        (342762 'end of statement')
+      }
+      (342764 call writeln(342769 call(342766 call . b[342752] c"dilate") 1))
+      (342772 call writeln(342782 call(342779 call .(342777 call(342774 call . b[342752] c"dilate") 1) c"maxPool") 2))
+    }
+    { scopeless
+      unknown img[342790](342799 call(342796 call . staticTensor[339695](?) c"arange") 1 9 9)(342792 call staticTensor[339695](?) 3 real[13])
+      (342804 'end of statement')
+    }
+    (342806 call writeln img[342790])
+    { scopeless
+      unknown ker[342809](342814 call(342811 call . staticTensor[339695](?) c"arange") 1 1 3 3)
+      (342820 'end of statement')
+    }
+    { scopeless
+      unknown fet[342822](342827 call(342824 call . staticTensor[339695](?) c"convolve") img[342790] ker[342809] 1)
+      (342832 'end of statement')
+    }
+    (342834 call writeln "Features:" fet[342822])
+    { scopeless
+      unknown sm[342840](342855 call(342852 call .(342850 call(342847 call .(342845 call(342842 call . fet[342822] c"sum") 0) c"sum") 0) c"sum") 0)
+      (342858 'end of statement')
+    }
+    (342860 call writeln sm[342840])
+    (342866 call(342863 call . sm[342840] c"backward"))
+    (342868 call writeln(342870 call . img[342790] c"grad"))
+    (342874 call writeln(342876 call . ker[342809] c"grad"))
+  }
+  (342883 'import' IO)
+  function _unknown[42].serialize[342884](arg _mt[342909]:_MT[201], arg this[342887] :
+  staticTensor[339695](?), arg writer[342900] :
+  (342894 call fileWriter[170987](?)(locking = 0) defaultSerializer[171969]), ref arg serializer[342906] :
+  defaultSerializer[171969]) : _unknown[42] "method"
+  {
+    { scopeless
+      const prevDev[342913] "const"(342915 call . this[342887] c"device")
+      (342919 'end of statement')
+    }
+    (342924 call(342921 call . this[342887] c"to")(342926 call here[135591]))
+    (342931 call(342928 call . writer[342900] c"write") "tensor(")
+    { scopeless
+      const shape[342936] "const"(342941 call .(342938 call . this[342887] c"array") c"shape")
+      (342945 'end of statement')
+    }
+    { scopeless
+      unknown first[342947] 1 bool[19]
+      (342951 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[343096] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[343097] "expr temp" "temp"
+      (343119 'move' _iterator[343097](342970 call _build_tuple(343112 call _getIterator(343106 call .(343108 call . this[342887] c"array") c"data"))(343117 call _getIterator(343115 call chpl_build_low_bounded_range 0))))
+      Defer
+      {
+        {
+          (343147 call _freeIterator _iterator[343097])
+        }
+      }
+      { scopeless type
+        (343124 'move' _indexOfInterest[343096](343121 call iteratorIndex _iterator[343097]))
+      }
+      ForLoop[343098]
+      {
+        (343129 call _check_tuple_var_decl _indexOfInterest[343096] 2)
+        unknown x[342953] "index var" "insert auto destroy"
+        (343136 'move' x[342953](343133 call _indexOfInterest[343096] 0))
+        unknown i[342955] "index var" "insert auto destroy"
+        (343142 'move' i[342955](343139 call _indexOfInterest[343096] 1))
+        {
+          { scopeless
+            const idx[342973] "const"(342977 call nbase module=[222] Utilities[320397] shape[342936] i[342955])
+            (342983 'end of statement')
+          }
+          if(343019 call _cond_test(343007 call ==(343010 call idx[342973](343011 call -(343013 call . this[342887] c"rank") 1)) 0))
+          {
+            if(342997 call _cond_test(342994 call ! first[342947]))
+            {
+              (342990 call(342987 call . writer[342900] c"write") "\n       ")
+            }
+            (343005 call(343002 call . writer[342900] c"write") "[")
+          }
+          (343027 call(343024 call . writer[342900] c"writef") "%{##.#}" x[342953])
+          if(343088 call _cond_test(343065 call <(343068 call idx[342973](343069 call -(343071 call . this[342887] c"rank") 1))(343076 call -(343079 call shape[342936](343080 call -(343082 call . this[342887] c"rank") 1)) 1)))
+          {
+            if(343052 call _cond_test(343045 call ==(343047 call . this[342887] c"rank") 1))
+            {
+              { scopeless
+                (343035 call(343032 call . writer[342900] c"write") "  ")
+              }
+            }
+            {
+              { scopeless
+                (343042 call(343039 call . writer[342900] c"write") "  ")
+              }
+            }
+          }
+          {
+            (343063 call(343060 call . writer[342900] c"write") "]")
+          }
+          (343092 call = first[342947] 0)
+          (342974 'referenced modules list' Utilities[320397])
+        }
+        label _continueLabel[343101]
+        _indexOfInterest[343096]
+        _iterator[343097]
+      }
+      label _breakLabel[343102]
+    }
+    (343158 call(343155 call . writer[342900] c"write") ",\n       shape = "(343169 call .(343166 call .(343163 call . this[342887] c"array") c"data") c"shape"))
+    (343176 call(343173 call . writer[342900] c"write") ",\n       rank = "(343181 call . this[342887] c"rank"))
+    (343188 call(343185 call . writer[342900] c"writeln") ")")
+    (343194 call(343191 call . this[342887] c"to") prevDev[342913])
+  }
+  function _unknown[42].serialize[343198](arg _mt[343217]:_MT[201], arg this[343201] :
+  staticTensor[339695](?), arg writer[343209] :
+  (343207 call fileWriter[170987](?) ?[227]), ref arg serializer[343214] :
+  unknown srt2[343212]) : _unknown[42] "method"
+  {
+    { scopeless
+      const prevDev[343227] "const"(343229 call . this[343201] c"device")
+      (343233 'end of statement')
+    }
+    (343238 call(343235 call . this[343201] c"to")(343240 call here[135591]))
+    { scopeless
+      unknown rh[343242](343247 call(343244 call . serializer[343214] c"startRecord") writer[343209] "tensor" 3)
+      (343254 'end of statement')
+    }
+    (343259 call(343256 call . rh[343242] c"writeField") "rank"(343261 call . this[343201] c"rank"))
+    (343269 call(343266 call . rh[343242] c"writeField") "eltType"(343271 call :(343273 call . this[343201] c"eltType") string[244]))
+    (343282 call(343279 call . rh[343242] c"writeField") "resource"(343286 call . this[343201] c"resource"))
+    (343294 call(343291 call . rh[343242] c"endRecord"))
+    (343299 call(343296 call . this[343201] c"to") prevDev[343227])
+  }
+  where {
+    (343219 call != srt2[343212] defaultSerializer[171969])
+  }
+  function _unknown[42].serialize[343304](arg _mt[343332]:_MT[201], arg this[343307] :
+  staticTensor[339695](?), arg writer[343319] :
+  (343313 call fileWriter[170987](?)(locking = 0) defaultSerializer[171969]), ref arg serializer[343325] :
+  defaultSerializer[171969], param arg capitalT[343329] :
+  bool[19]) : _unknown[42] "method"
+  {
+    { scopeless
+      const prevDev[343340] "const"(343342 call . this[343307] c"device")
+      (343346 'end of statement')
+    }
+    (343351 call(343348 call . this[343307] c"to")(343353 call here[135591]))
+    (343358 call(343355 call . writer[343319] c"write") "Tensor(")
+    { scopeless
+      const shape[343363] "const"(343368 call .(343365 call . this[343307] c"array") c"shape")
+      (343372 'end of statement')
+    }
+    { scopeless
+      unknown first[343374] 1 bool[19]
+      (343378 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[343521] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[343522] "expr temp" "temp"
+      (343544 'move' _iterator[343522](343397 call _build_tuple(343537 call _getIterator(343531 call .(343533 call . this[343307] c"array") c"data"))(343542 call _getIterator(343540 call chpl_build_low_bounded_range 0))))
+      Defer
+      {
+        {
+          (343572 call _freeIterator _iterator[343522])
+        }
+      }
+      { scopeless type
+        (343549 'move' _indexOfInterest[343521](343546 call iteratorIndex _iterator[343522]))
+      }
+      ForLoop[343523]
+      {
+        (343554 call _check_tuple_var_decl _indexOfInterest[343521] 2)
+        unknown x[343380] "index var" "insert auto destroy"
+        (343561 'move' x[343380](343558 call _indexOfInterest[343521] 0))
+        unknown i[343382] "index var" "insert auto destroy"
+        (343567 'move' i[343382](343564 call _indexOfInterest[343521] 1))
+        {
+          { scopeless
+            const idx[343400] "const"(343404 call nbase module=[222] Utilities[320397] shape[343363] i[343382])
+            (343410 'end of statement')
+          }
+          if(343444 call _cond_test(343432 call ==(343435 call idx[343400](343436 call -(343438 call . this[343307] c"rank") 1)) 0))
+          {
+            if(343422 call _cond_test(343419 call ! first[343374]))
+            {
+              (343417 call(343414 call . writer[343319] c"write") "\n       ")
+            }
+            (343430 call(343427 call . writer[343319] c"write") "[")
+          }
+          (343452 call(343449 call . writer[343319] c"writef") "%{##.#}" x[343380])
+          if(343513 call _cond_test(343490 call <(343493 call idx[343400](343494 call -(343496 call . this[343307] c"rank") 1))(343501 call -(343504 call shape[343363](343505 call -(343507 call . this[343307] c"rank") 1)) 1)))
+          {
+            if(343477 call _cond_test(343470 call ==(343472 call . this[343307] c"rank") 1))
+            {
+              { scopeless
+                (343460 call(343457 call . writer[343319] c"write") "  ")
+              }
+            }
+            {
+              { scopeless
+                (343467 call(343464 call . writer[343319] c"write") "  ")
+              }
+            }
+          }
+          {
+            (343488 call(343485 call . writer[343319] c"write") "]")
+          }
+          (343517 call = first[343374] 0)
+          (343401 'referenced modules list' Utilities[320397])
+        }
+        label _continueLabel[343526]
+        _indexOfInterest[343521]
+        _iterator[343522]
+      }
+      label _breakLabel[343527]
+    }
+    (343583 call(343580 call . writer[343319] c"write") ",\n       shape = "(343592 call .(343589 call .(343586 call . this[343307] c"array") c"data") c"shape"))
+    (343599 call(343596 call . writer[343319] c"write") ",\n       rank = "(343602 call . this[343307] c"rank"))
+    (343609 call(343606 call . writer[343319] c"writeln") ")")
+    (343615 call(343612 call . this[343307] c"to") prevDev[343340])
+  }
+  where {
+    (343334 call == capitalT[343329] 1)
+  }
+  function _unknown[42].read[343620](arg _mt[343634]:_MT[201], ref arg this[343623] :
+  staticTensor[339695](?), arg fr[343631] :
+  (343629 call fileReader[170893](?) ?[227])) : _unknown[42] throws "method"
+  {
+    { scopeless
+      unknown arr[343638](343640 call . this[343623] c"array")
+      (343644 'end of statement')
+    }
+    (343649 call(343646 call . arr[343638] c"read") fr[343631])
+    {
+      const tmp[343676] "const" "temp"
+      (343677 'move' tmp[343676](343674 'deref'(343673 '_wide_get_locale'(343652 call . this[343623] c"device"))))
+      {
+        { scopeless
+          const devArr[343657] "const" arr[343638]
+          (343660 'end of statement')
+        }
+        { scopeless
+          unknown ar[343662] "ref var"(343664 call . this[343623] c"array")
+          (343668 'end of statement')
+        }
+        (343669 call = ar[343662] devArr[343657])
+      }
+      (343680 'elided on block' 0 tmp[343676])
+    }
+  }
+  (342891 'referenced modules list' IO[208303] IO[208303] IO[208303] IO[208303] IO[208303] IO[208303] IO[208303] IO[208303] IO[208303])
+}

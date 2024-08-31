@@ -1,0 +1,2147 @@
+AST dump for SharedObject after pass buildDefaultFunctions.
+Module use list: Errors Atomics ChapelBase OwnedObject WeakPointer HaltWrappers 
+
+{
+  function chpl__init_SharedObject[468390]() : void[4] "insert line file info" "module init"
+  {
+    (1000986 'resolution point' |writeSerializable[475137])
+    (1000988 'end of statement')
+    (1000989 'resolution point' |readDeserializable[475142])
+    (1000991 'end of statement')
+    (600000 return _void[46])
+  }
+  function ReferenceCount[89646].init[89475](arg _mt[89479]:_MT[201], arg this[89477]:ReferenceCount[89646]) : void[4] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown super_tmp[520072] "temporary of super field" "temp"
+    (520080 'move' super_tmp[520072](520073 '.v' this[89477] c"super"))
+    (520076 call init _mt[203] super_tmp[520072])
+    (550383 'end of statement')
+    unknown tmp[520031] "temp" "type variable"
+    { scopeless type
+      unknown call_type_tmp[577105] "expr temp" "maybe type" "temp" "type variable"
+      unknown call_tmp[771819] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (771822 'move' call_tmp[771819](520033 '.v' this[89477] c"super"))
+      (577109 'move' call_type_tmp[577105](520036 'typeof' call_tmp[771819]))
+    }
+    (520037 'move' tmp[520031] call_type_tmp[577105])
+    unknown call_tmp[771824] "maybe param" "maybe type" "temp"
+    (771827 'move' call_tmp[771824](520042 'cast' tmp[520031] this[89477]))
+    unknown chpl__thisAsParent[520039] "dead at end of block" "insert auto destroy" "temp"
+    (644547 'init var' chpl__thisAsParent[520039] call_tmp[771824] tmp[520031])
+    (520045 'setcid' chpl__thisAsParent[520039])
+    (550384 'end of statement')
+    unknown strongCount[520047] "temp"
+    unknown call_tmp[771829] "expr temp" "maybe param" "maybe type" "temp"
+    (771832 'move' call_tmp[771829](520050 call chpl__atomicType int(64)[10]))
+    (520052 'default init var' strongCount[520047] call_tmp[771829])
+    (520054 '.=' this[89477] c"strongCount" strongCount[520047])
+    (550385 'end of statement')
+    unknown totalCount[520058] "temp"
+    unknown call_tmp[771834] "expr temp" "maybe param" "maybe type" "temp"
+    (771837 'move' call_tmp[771834](520061 call chpl__atomicType int(64)[10]))
+    (520063 'default init var' totalCount[520058] call_tmp[771834])
+    (520065 '.=' this[89477] c"totalCount" totalCount[520058])
+    (550386 'end of statement')
+    (520071 'init done')
+    (550387 'end of statement')
+    (520070 'setcid' this[89477])
+    (550388 'end of statement')
+    unknown call_tmp[771841] "expr temp" "maybe param" "maybe type" "temp"
+    (771844 'move' call_tmp[771841](400561 call strongCount _mt[203] this[89477]))
+    (89491 call(89488 call (partial) write _mt[203] call_tmp[771841]) 1)
+    (550389 'end of statement')
+    unknown call_tmp[771850] "expr temp" "maybe param" "maybe type" "temp"
+    (771853 'move' call_tmp[771850](400566 call totalCount _mt[203] this[89477]))
+    (89497 call(89494 call (partial) write _mt[203] call_tmp[771850]) 1)
+    (599731 return _void[46])
+  }
+  function ReferenceCount[89646].retain[89501](arg _mt[89505]:_MT[201], arg this[89503]:ReferenceCount[89646]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[771859] "expr temp" "maybe param" "maybe type" "temp"
+    (771862 'move' call_tmp[771859](400571 call strongCount _mt[203] this[89503]))
+    (89512 call(89509 call (partial) add _mt[203] call_tmp[771859]) 1)
+    (550391 'end of statement')
+    unknown call_tmp[771868] "expr temp" "maybe param" "maybe type" "temp"
+    (771871 'move' call_tmp[771868](400576 call totalCount _mt[203] this[89503]))
+    (89518 call(89515 call (partial) add _mt[203] call_tmp[771868]) 1)
+    (599733 return _void[46])
+  }
+  function ReferenceCount[89646].releaseStrong[89522](arg _mt[89526]:_MT[201], arg this[89524]:ReferenceCount[89646]) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[599737] "RVV" "temp"
+    unknown call_tmp[771877] "expr temp" "maybe param" "maybe type" "temp"
+    (771880 'move' call_tmp[771877](400581 call strongCount _mt[203] this[89524]))
+    unknown call_tmp[771884] "expr temp" "maybe param" "maybe type" "temp"
+    (771887 'move' call_tmp[771884](89538 call(89535 call (partial) fetchSub _mt[203] call_tmp[771877]) 1))
+    unknown call_tmp[771889] "expr temp" "maybe param" "maybe type" "temp"
+    (771892 'move' call_tmp[771889](89530 call - call_tmp[771884] 1))
+    (599742 'move' ret[599737](599741 'deref' call_tmp[771889]))
+    (599739 return ret[599737])
+  }
+  function ReferenceCount[89646].releaseTotal[89543](arg _mt[89547]:_MT[201], arg this[89545]:ReferenceCount[89646]) : _unknown[42] "inline" "method" "primary method"
+  {
+    unknown ret[599746] "RVV" "temp"
+    unknown call_tmp[771896] "expr temp" "maybe param" "maybe type" "temp"
+    (771899 'move' call_tmp[771896](400586 call totalCount _mt[203] this[89545]))
+    unknown call_tmp[771903] "expr temp" "maybe param" "maybe type" "temp"
+    (771906 'move' call_tmp[771903](89557 call(89554 call (partial) fetchSub _mt[203] call_tmp[771896]) 1))
+    unknown call_tmp[771908] "expr temp" "maybe param" "maybe type" "temp"
+    (771911 'move' call_tmp[771908](89551 call - call_tmp[771903] 1))
+    (599751 'move' ret[599746](599750 'deref' call_tmp[771908]))
+    (599748 return ret[599746])
+  }
+  function ReferenceCount[89646].tryRetainWeak[89562](arg _mt[89570]:_MT[201], arg this[89564]:ReferenceCount[89646], ref arg expected[89567]:int(64)[10]) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[599755] "RVV" "temp"
+    unknown call_tmp[771913] "maybe param" "maybe type" "temp"
+    (771916 'move' call_tmp[771913](89575 call + expected[89567] 1))
+    const next[89574] "dead at end of block" "const" "insert auto destroy"
+    (644549 'init var' next[89574] call_tmp[771913])
+    (89580 'end of statement')
+    unknown call_tmp[771920] "expr temp" "maybe param" "maybe type" "temp"
+    (771923 'move' call_tmp[771920](400596 call strongCount _mt[203] this[89564]))
+    unknown call_tmp[771927] "expr temp" "maybe param" "maybe type" "temp"
+    (771930 'move' call_tmp[771927](89597 call(89594 call (partial) compareExchangeWeak _mt[203] call_tmp[771920]) expected[89567] next[89574]))
+    unknown call_tmp[771932] "expr temp" "maybe param" "maybe type" "temp"
+    (771935 'move' call_tmp[771932](89600 call _cond_test call_tmp[771927]))
+    if call_tmp[771932]
+    {
+      unknown call_tmp[771939] "expr temp" "maybe param" "maybe type" "temp"
+      (771942 'move' call_tmp[771939](400591 call totalCount _mt[203] this[89564]))
+      (89586 call(89583 call (partial) add _mt[203] call_tmp[771939]) 1)
+      (550395 'end of statement')
+      (599760 'move' ret[599755](599759 'deref' 1))
+      gotoReturn _end_tryRetainWeak[599753] _end_tryRetainWeak[599753]
+    }
+    {
+      (599765 'move' ret[599755](599764 'deref' 0))
+      gotoReturn _end_tryRetainWeak[599753] _end_tryRetainWeak[599753]
+    }
+    label _end_tryRetainWeak[599753]
+    (599757 return ret[599755])
+  }
+  function ReferenceCount[89646].releaseWeak[89606](arg _mt[89610]:_MT[201], arg this[89608]:ReferenceCount[89646]) : _unknown[42] "method" "primary method"
+  {
+    unknown ret[599771] "RVV" "temp"
+    unknown call_tmp[771948] "expr temp" "maybe param" "maybe type" "temp"
+    (771951 'move' call_tmp[771948](400601 call totalCount _mt[203] this[89608]))
+    unknown call_tmp[771955] "maybe param" "maybe type" "temp"
+    (771958 'move' call_tmp[771955](89619 call(89616 call (partial) fetchSub _mt[203] call_tmp[771948]) 1))
+    unknown oldValue[89614] "dead at end of block" "insert auto destroy"
+    (644551 'init var' oldValue[89614] call_tmp[771955])
+    (89622 'end of statement')
+    unknown call_tmp[771960] "expr temp" "maybe param" "maybe type" "temp"
+    (771963 'move' call_tmp[771960](89624 call - oldValue[89614] 1))
+    (599776 'move' ret[599771](599775 'deref' call_tmp[771960]))
+    gotoReturn _end_releaseWeak[599769] _end_releaseWeak[599769]
+    (550398 'end of statement' oldValue[89614])
+    label _end_releaseWeak[599769]
+    (599773 return ret[599771])
+  }
+  function ReferenceCount[89646].incrementWeak[89630](arg _mt[89634]:_MT[201], arg this[89632]:ReferenceCount[89646]) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[771967] "expr temp" "maybe param" "maybe type" "temp"
+    (771970 'move' call_tmp[771967](400606 call totalCount _mt[203] this[89632]))
+    (89641 call(89638 call (partial) add _mt[203] call_tmp[771967]) 1)
+    (599780 return _void[46])
+  }
+  function ReferenceCount[89646].super[1066230](arg _mt[1066232]:_MT[201], arg this[1066234]:ReferenceCount[89646]) : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1066244] "RVV" "temp"
+    unknown call_tmp[1066251] "expr temp" "maybe param" "maybe type" "temp"
+    (1066254 'move' call_tmp[1066251](1066238 '.v' this[1066234] c"super"))
+    (1066249 'move' ret[1066244](1066248 'deref' call_tmp[1066251]))
+    (1066246 return ret[1066244])
+  }
+  function ReferenceCount[89646].strongCount[1066256](arg _mt[1066258]:_MT[201], arg this[1066260]:ReferenceCount[89646]) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1066270] "RVV" "temp"
+    unknown call_tmp[1066277] "expr temp" "maybe param" "maybe type" "temp"
+    (1066280 'move' call_tmp[1066277](1066264 '.' this[1066260] c"strongCount"))
+    (1066275 'move' ret[1066270](1066274 'addr of' call_tmp[1066277]))
+    (1066272 return ret[1066270])
+  }
+  function ReferenceCount[89646].totalCount[1066282](arg _mt[1066284]:_MT[201], arg this[1066286]:ReferenceCount[89646]) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1066296] "RVV" "temp"
+    unknown call_tmp[1066303] "expr temp" "maybe param" "maybe type" "temp"
+    (1066306 'move' call_tmp[1066303](1066290 '.' this[1066286] c"totalCount"))
+    (1066301 'move' ret[1066296](1066300 'addr of' call_tmp[1066303]))
+    (1066298 return ret[1066296])
+  }
+  function ReferenceCount[89646].deinit[1066308](arg _mt[1066310]:_MT[201], arg this[1066312]:ReferenceCount[89646]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method"
+  {
+    (1066320 return _void[46])
+  }
+  function ReferenceCount[89646].serialize[1066322](arg _mt[1066326]:_MT[201], arg this[1066324]:ReferenceCount[89646], arg writer[1066325]:_any[141](?), ref arg serializer[1066330]:_any[141](?)) : void[4] throws "compiler generated" "last resort" "method" "primary method" "method overrides"
+  {
+    (1066333 call serializeDefaultImpl writer[1066325] serializer[1066330] this[1066324])
+    (1066339 return _void[46])
+  }
+  function ReferenceCount[89646].deserialize[1066341](arg _mt[1066345]:_MT[201], arg this[1066343]:ReferenceCount[89646], arg reader[1066344]:_any[141](?), ref arg deserializer[1066350]:_any[141](?)) : void[4] throws "compiler generated" "last resort" "method" "primary method" "method overrides"
+  {
+    unknown _deser_temp[1066352] "temp"
+    (1066354 'move' _deser_temp[1066352] this[1066343])
+    (1066357 call deserializeDefaultImpl reader[1066344] deserializer[1066350] _deser_temp[1066352])
+    (1066363 return _void[46])
+  }
+  type ReferenceCount[89646] val super[397442]:RootClass[236] "super class" unknown strongCount[89462](89464 call chpl__atomicType int(64)[10]) unknown totalCount[89469](89471 call chpl__atomicType int(64)[10])
+  type unmanaged ReferenceCount?[468037]
+  type ReferenceCount?[468034](?)
+  type ReferenceCount[423756](?)
+  function _shared[242](?).chpl_forwarding_expr1[89661](arg _mt[89666]:_MT[201], arg this[89664]:_shared[242](?)) : _unknown[42] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    unknown ret[599784] "RVV" "temp"
+    (599788 'move' ret[599784](89670 call(423819 call (partial) borrow _mt[203] this[89664])))
+    (599786 return ret[599784])
+  }
+  function _shared[242](?).chpl_t[1005810](arg _mt[1005812]:_MT[201], arg this[1005814]:_shared[242](?)) type : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this"
+  {
+    unknown ret[1005833] "RVV" "temp" "type variable"
+    unknown call_tmp[1005847] "expr temp" "maybe param" "maybe type" "temp"
+    (1005850 'move' call_tmp[1005847](1005819 'is bound' this[1005814] c"chpl_t"))
+    if call_tmp[1005847]
+    {
+      unknown call_tmp[1005852] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (1005855 'move' call_tmp[1005852](1005818 '.v' this[1005814] c"chpl_t"))
+      (1005838 'move' ret[1005833](1005837 'deref' call_tmp[1005852]))
+      gotoReturn _end_chpl_t[1005831] _end_chpl_t[1005831]
+    }
+    {
+      (1005843 'move' ret[1005833](1005842 'deref' _uninstantiated[225]))
+      gotoReturn _end_chpl_t[1005831] _end_chpl_t[1005831]
+    }
+    label _end_chpl_t[1005831]
+    (1005835 return ret[1005833])
+  }
+  function _shared[242](?).chpl_t[1005857](arg _mt[1005859]:_MT[201], arg this[1005861]:_shared[242](?)) type : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens"
+  {
+    unknown ret[1005880] "RVV" "temp" "type variable"
+    unknown call_tmp[1005894] "expr temp" "maybe param" "maybe type" "temp"
+    (1005897 'move' call_tmp[1005894](1005866 'is bound' this[1005861] c"chpl_t"))
+    if call_tmp[1005894]
+    {
+      unknown call_tmp[1005899] "expr temp" "maybe param" "used in type" "maybe type" "temp"
+      (1005902 'move' call_tmp[1005899](1005865 '.v' this[1005861] c"chpl_t"))
+      (1005885 'move' ret[1005880](1005884 'deref' call_tmp[1005899]))
+      gotoReturn _end_chpl_t[1005878] _end_chpl_t[1005878]
+    }
+    {
+      (1005890 'move' ret[1005880](1005889 'deref' _uninstantiated[225]))
+      gotoReturn _end_chpl_t[1005878] _end_chpl_t[1005878]
+    }
+    label _end_chpl_t[1005878]
+    (1005882 return ret[1005880])
+  }
+  function _shared[242](?).chpl_p[1005904](arg _mt[1005906]:_MT[201], ref arg this[1005908]:_shared[242](?)) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this"
+  {
+    unknown ret[1005918] "RVV" "temp"
+    unknown call_tmp[1005925] "expr temp" "maybe param" "maybe type" "temp"
+    (1005928 'move' call_tmp[1005925](1005912 '.' this[1005908] c"chpl_p"))
+    (1005923 'move' ret[1005918](1005922 'addr of' call_tmp[1005925]))
+    (1005920 return ret[1005918])
+  }
+  function _shared[242](?).chpl_pn[1005930](arg _mt[1005932]:_MT[201], ref arg this[1005934]:_shared[242](?)) ref : _unknown[42] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this"
+  {
+    unknown ret[1005944] "RVV" "temp"
+    unknown call_tmp[1005951] "expr temp" "maybe param" "maybe type" "temp"
+    (1005954 'move' call_tmp[1005951](1005938 '.' this[1005934] c"chpl_pn"))
+    (1005949 'move' ret[1005944](1005948 'addr of' call_tmp[1005951]))
+    (1005946 return ret[1005944])
+  }
+  function _shared[242](?).hash[1005956](arg _mt[1005959]:_MT[201], arg this[1005958]:_shared[242](?)) : _unknown[42] "compiler generated" "last resort" "method"
+  {
+    unknown ret[1005983] "RVV" "temp"
+    unknown call_tmp[1005990] "expr temp" "maybe param" "maybe type" "temp"
+    (1005993 'move' call_tmp[1005990](1005968 call chpl_pn _mt[203] this[1005958]))
+    unknown call_tmp[1005995] "expr temp" "maybe param" "maybe type" "temp"
+    (1005998 'move' call_tmp[1005995](1005972 call hash _mt[203] call_tmp[1005990]))
+    unknown call_tmp[1006000] "expr temp" "maybe param" "maybe type" "temp"
+    (1006003 'move' call_tmp[1006000](1005962 call chpl_p _mt[203] this[1005958]))
+    unknown call_tmp[1006005] "expr temp" "maybe param" "maybe type" "temp"
+    (1006008 'move' call_tmp[1006005](1005966 call chpl__defaultHashWrapperInner call_tmp[1006000]))
+    unknown call_tmp[1006010] "expr temp" "maybe param" "maybe type" "temp"
+    (1006013 'move' call_tmp[1006010](1005975 call chpl__defaultHashCombine call_tmp[1005995] call_tmp[1006005] 3))
+    (1005988 'move' ret[1005983](1005987 'deref' call_tmp[1006010]))
+    (1005985 return ret[1005983])
+  }
+  function chpl_fields_are_comparable[1006031](arg _arg1[1006033]:_shared[242](?), arg _arg2[1006034]:_shared[242](?)) param : bool[19] "compiler generated" "last resort" "param"
+  {
+    val ret[1006063]:bool[19] "RVV" "param" "temp"
+    unknown call_tmp[1006070] "expr temp" "maybe param" "maybe type" "temp"
+    (1006073 'move' call_tmp[1006070](1006037 call chpl_p _mt[203] _arg1[1006033]))
+    unknown call_tmp[1006075] "expr temp" "maybe param" "maybe type" "temp"
+    (1006078 'move' call_tmp[1006075](1006041 call chpl_p _mt[203] _arg2[1006034]))
+    unknown call_tmp[1006080] "expr temp" "maybe param" "maybe type" "temp"
+    (1006083 'move' call_tmp[1006080](1006045 'call resolves' c"==" call_tmp[1006070] call_tmp[1006075]))
+    unknown call_tmp[1006085] "expr temp" "maybe param" "maybe type" "temp"
+    (1006088 'move' call_tmp[1006085](1006047 call chpl_pn _mt[203] _arg1[1006033]))
+    unknown call_tmp[1006090] "expr temp" "maybe param" "maybe type" "temp"
+    (1006093 'move' call_tmp[1006090](1006051 call chpl_pn _mt[203] _arg2[1006034]))
+    unknown call_tmp[1006095] "expr temp" "maybe param" "maybe type" "temp"
+    (1006098 'move' call_tmp[1006095](1006055 'call resolves' c"==" call_tmp[1006085] call_tmp[1006090]))
+    unknown call_tmp[1006100] "expr temp" "maybe param" "maybe type" "temp"
+    (1006103 'move' call_tmp[1006100](1006057 '&' call_tmp[1006080] call_tmp[1006095]))
+    (1006068 'move' ret[1006063](1006067 'deref' call_tmp[1006100]))
+    (1006065 return ret[1006063])
+  }
+  function _shared[242](?).==[1006015](arg _mt[1006017]:_MT[201], arg this[1006019]:_shared[242](?), arg _arg1[1006021]:_shared[242](?), arg _arg2[1006022]:_shared[242](?)) : bool[19] "compiler generated" "last resort" "method" "operator"
+  {
+    val ret[1006147]:bool[19] "RVV" "temp"
+    unknown call_tmp[1006164] "expr temp" "maybe param" "maybe type" "temp"
+    (1006167 'move' call_tmp[1006164](1006111 call chpl_p _mt[203] _arg1[1006021]))
+    unknown call_tmp[1006169] "expr temp" "maybe param" "maybe type" "temp"
+    (1006172 'move' call_tmp[1006169](1006115 call chpl_p _mt[203] _arg2[1006022]))
+    unknown call_tmp[1006174] "expr temp" "maybe param" "maybe type" "temp"
+    (1006177 'move' call_tmp[1006174](1006119 call chpl_field_neq call_tmp[1006164] call_tmp[1006169]))
+    if call_tmp[1006174]
+    {
+      (1006152 'move' ret[1006147](1006151 'deref' 0))
+      gotoReturn _end_==[1006145] _end_==[1006145]
+    }
+    unknown call_tmp[1006179] "expr temp" "maybe param" "maybe type" "temp"
+    (1006182 'move' call_tmp[1006179](1006125 call chpl_pn _mt[203] _arg1[1006021]))
+    unknown call_tmp[1006184] "expr temp" "maybe param" "maybe type" "temp"
+    (1006187 'move' call_tmp[1006184](1006129 call chpl_pn _mt[203] _arg2[1006022]))
+    unknown call_tmp[1006189] "expr temp" "maybe param" "maybe type" "temp"
+    (1006192 'move' call_tmp[1006189](1006133 call chpl_field_neq call_tmp[1006179] call_tmp[1006184]))
+    if call_tmp[1006189]
+    {
+      (1006157 'move' ret[1006147](1006156 'deref' 0))
+      gotoReturn _end_==[1006145] _end_==[1006145]
+    }
+    (1006162 'move' ret[1006147](1006161 'deref' 1))
+    label _end_==[1006145]
+    (1006149 return ret[1006147])
+  }
+  where {
+    unknown call_tmp[1006194] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1006197 'move' call_tmp[1006194](1006025 'typeof' _arg1[1006021]))
+    unknown call_tmp[1006199] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1006202 'move' call_tmp[1006199](1006027 'typeof' _arg2[1006022]))
+    unknown call_tmp[1006204] "expr temp" "maybe param" "maybe type" "temp"
+    (1006207 'move' call_tmp[1006204](1006029 call == call_tmp[1006194] call_tmp[1006199]))
+    unknown call_tmp[1006209] "expr temp" "maybe param" "maybe type" "temp"
+    (1006212 'move' call_tmp[1006209](1006105 call chpl_fields_are_comparable[1006031] _arg1[1006021] _arg2[1006022]))
+    (1006109 '&' call_tmp[1006204] call_tmp[1006209])
+  }
+  function chpl_fields_are_comparable[1006230](arg _arg1[1006232]:_shared[242](?), arg _arg2[1006233]:_shared[242](?)) param : bool[19] "compiler generated" "last resort" "param"
+  {
+    val ret[1006262]:bool[19] "RVV" "param" "temp"
+    unknown call_tmp[1006269] "expr temp" "maybe param" "maybe type" "temp"
+    (1006272 'move' call_tmp[1006269](1006236 call chpl_p _mt[203] _arg1[1006232]))
+    unknown call_tmp[1006274] "expr temp" "maybe param" "maybe type" "temp"
+    (1006277 'move' call_tmp[1006274](1006240 call chpl_p _mt[203] _arg2[1006233]))
+    unknown call_tmp[1006279] "expr temp" "maybe param" "maybe type" "temp"
+    (1006282 'move' call_tmp[1006279](1006244 'call resolves' c"!=" call_tmp[1006269] call_tmp[1006274]))
+    unknown call_tmp[1006284] "expr temp" "maybe param" "maybe type" "temp"
+    (1006287 'move' call_tmp[1006284](1006246 call chpl_pn _mt[203] _arg1[1006232]))
+    unknown call_tmp[1006289] "expr temp" "maybe param" "maybe type" "temp"
+    (1006292 'move' call_tmp[1006289](1006250 call chpl_pn _mt[203] _arg2[1006233]))
+    unknown call_tmp[1006294] "expr temp" "maybe param" "maybe type" "temp"
+    (1006297 'move' call_tmp[1006294](1006254 'call resolves' c"!=" call_tmp[1006284] call_tmp[1006289]))
+    unknown call_tmp[1006299] "expr temp" "maybe param" "maybe type" "temp"
+    (1006302 'move' call_tmp[1006299](1006256 '&' call_tmp[1006279] call_tmp[1006294]))
+    (1006267 'move' ret[1006262](1006266 'deref' call_tmp[1006299]))
+    (1006264 return ret[1006262])
+  }
+  function _shared[242](?).!=[1006214](arg _mt[1006216]:_MT[201], arg this[1006218]:_shared[242](?), arg _arg1[1006220]:_shared[242](?), arg _arg2[1006221]:_shared[242](?)) : bool[19] "compiler generated" "last resort" "method" "operator"
+  {
+    val ret[1006346]:bool[19] "RVV" "temp"
+    unknown call_tmp[1006363] "expr temp" "maybe param" "maybe type" "temp"
+    (1006366 'move' call_tmp[1006363](1006310 call chpl_p _mt[203] _arg1[1006220]))
+    unknown call_tmp[1006368] "expr temp" "maybe param" "maybe type" "temp"
+    (1006371 'move' call_tmp[1006368](1006314 call chpl_p _mt[203] _arg2[1006221]))
+    unknown call_tmp[1006373] "expr temp" "maybe param" "maybe type" "temp"
+    (1006376 'move' call_tmp[1006373](1006318 call chpl_field_neq call_tmp[1006363] call_tmp[1006368]))
+    if call_tmp[1006373]
+    {
+      (1006351 'move' ret[1006346](1006350 'deref' 1))
+      gotoReturn _end_!=[1006344] _end_!=[1006344]
+    }
+    unknown call_tmp[1006378] "expr temp" "maybe param" "maybe type" "temp"
+    (1006381 'move' call_tmp[1006378](1006324 call chpl_pn _mt[203] _arg1[1006220]))
+    unknown call_tmp[1006383] "expr temp" "maybe param" "maybe type" "temp"
+    (1006386 'move' call_tmp[1006383](1006328 call chpl_pn _mt[203] _arg2[1006221]))
+    unknown call_tmp[1006388] "expr temp" "maybe param" "maybe type" "temp"
+    (1006391 'move' call_tmp[1006388](1006332 call chpl_field_neq call_tmp[1006378] call_tmp[1006383]))
+    if call_tmp[1006388]
+    {
+      (1006356 'move' ret[1006346](1006355 'deref' 1))
+      gotoReturn _end_!=[1006344] _end_!=[1006344]
+    }
+    (1006361 'move' ret[1006346](1006360 'deref' 0))
+    label _end_!=[1006344]
+    (1006348 return ret[1006346])
+  }
+  where {
+    unknown call_tmp[1006393] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1006396 'move' call_tmp[1006393](1006224 'typeof' _arg1[1006220]))
+    unknown call_tmp[1006398] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1006401 'move' call_tmp[1006398](1006226 'typeof' _arg2[1006221]))
+    unknown call_tmp[1006403] "expr temp" "maybe param" "maybe type" "temp"
+    (1006406 'move' call_tmp[1006403](1006228 call == call_tmp[1006393] call_tmp[1006398]))
+    unknown call_tmp[1006408] "expr temp" "maybe param" "maybe type" "temp"
+    (1006411 'move' call_tmp[1006408](1006304 call chpl_fields_are_comparable[1006230] _arg1[1006220] _arg2[1006221]))
+    (1006308 '&' call_tmp[1006403] call_tmp[1006408])
+  }
+  function chpl_fields_are_comparable[1006429](arg _arg1[1006431]:_shared[242](?), arg _arg2[1006432]:_shared[242](?)) param : bool[19] "compiler generated" "last resort" "param"
+  {
+    val ret[1006461]:bool[19] "RVV" "param" "temp"
+    unknown call_tmp[1006468] "expr temp" "maybe param" "maybe type" "temp"
+    (1006471 'move' call_tmp[1006468](1006435 call chpl_p _mt[203] _arg1[1006431]))
+    unknown call_tmp[1006473] "expr temp" "maybe param" "maybe type" "temp"
+    (1006476 'move' call_tmp[1006473](1006439 call chpl_p _mt[203] _arg2[1006432]))
+    unknown call_tmp[1006478] "expr temp" "maybe param" "maybe type" "temp"
+    (1006481 'move' call_tmp[1006478](1006443 'call resolves' c"<" call_tmp[1006468] call_tmp[1006473]))
+    unknown call_tmp[1006483] "expr temp" "maybe param" "maybe type" "temp"
+    (1006486 'move' call_tmp[1006483](1006445 call chpl_pn _mt[203] _arg1[1006431]))
+    unknown call_tmp[1006488] "expr temp" "maybe param" "maybe type" "temp"
+    (1006491 'move' call_tmp[1006488](1006449 call chpl_pn _mt[203] _arg2[1006432]))
+    unknown call_tmp[1006493] "expr temp" "maybe param" "maybe type" "temp"
+    (1006496 'move' call_tmp[1006493](1006453 'call resolves' c"<" call_tmp[1006483] call_tmp[1006488]))
+    unknown call_tmp[1006498] "expr temp" "maybe param" "maybe type" "temp"
+    (1006501 'move' call_tmp[1006498](1006455 '&' call_tmp[1006478] call_tmp[1006493]))
+    (1006466 'move' ret[1006461](1006465 'deref' call_tmp[1006498]))
+    (1006463 return ret[1006461])
+  }
+  function _shared[242](?).<[1006413](arg _mt[1006415]:_MT[201], arg this[1006417]:_shared[242](?), arg _arg1[1006419]:_shared[242](?), arg _arg2[1006420]:_shared[242](?)) : bool[19] "compiler generated" "last resort" "method" "operator"
+  {
+    val ret[1006575]:bool[19] "RVV" "temp"
+    unknown call_tmp[1006602] "expr temp" "maybe param" "maybe type" "temp"
+    (1006605 'move' call_tmp[1006602](1006509 call chpl_p _mt[203] _arg1[1006419]))
+    unknown call_tmp[1006607] "expr temp" "maybe param" "maybe type" "temp"
+    (1006610 'move' call_tmp[1006607](1006513 call chpl_p _mt[203] _arg2[1006420]))
+    unknown call_tmp[1006612] "expr temp" "maybe param" "maybe type" "temp"
+    (1006615 'move' call_tmp[1006612](1006517 call chpl_field_lt call_tmp[1006602] call_tmp[1006607]))
+    if call_tmp[1006612]
+    {
+      (1006580 'move' ret[1006575](1006579 'deref' 1))
+      gotoReturn _end_<[1006573] _end_<[1006573]
+    }
+    unknown call_tmp[1006617] "expr temp" "maybe param" "maybe type" "temp"
+    (1006620 'move' call_tmp[1006617](1006523 call chpl_p _mt[203] _arg1[1006419]))
+    unknown call_tmp[1006622] "expr temp" "maybe param" "maybe type" "temp"
+    (1006625 'move' call_tmp[1006622](1006527 call chpl_p _mt[203] _arg2[1006420]))
+    unknown call_tmp[1006627] "expr temp" "maybe param" "maybe type" "temp"
+    (1006630 'move' call_tmp[1006627](1006531 call chpl_field_gt call_tmp[1006617] call_tmp[1006622]))
+    if call_tmp[1006627]
+    {
+      (1006585 'move' ret[1006575](1006584 'deref' 0))
+      gotoReturn _end_<[1006573] _end_<[1006573]
+    }
+    unknown call_tmp[1006632] "expr temp" "maybe param" "maybe type" "temp"
+    (1006635 'move' call_tmp[1006632](1006537 call chpl_pn _mt[203] _arg1[1006419]))
+    unknown call_tmp[1006637] "expr temp" "maybe param" "maybe type" "temp"
+    (1006640 'move' call_tmp[1006637](1006541 call chpl_pn _mt[203] _arg2[1006420]))
+    unknown call_tmp[1006642] "expr temp" "maybe param" "maybe type" "temp"
+    (1006645 'move' call_tmp[1006642](1006545 call chpl_field_lt call_tmp[1006632] call_tmp[1006637]))
+    if call_tmp[1006642]
+    {
+      (1006590 'move' ret[1006575](1006589 'deref' 1))
+      gotoReturn _end_<[1006573] _end_<[1006573]
+    }
+    unknown call_tmp[1006647] "expr temp" "maybe param" "maybe type" "temp"
+    (1006650 'move' call_tmp[1006647](1006551 call chpl_pn _mt[203] _arg1[1006419]))
+    unknown call_tmp[1006652] "expr temp" "maybe param" "maybe type" "temp"
+    (1006655 'move' call_tmp[1006652](1006555 call chpl_pn _mt[203] _arg2[1006420]))
+    unknown call_tmp[1006657] "expr temp" "maybe param" "maybe type" "temp"
+    (1006660 'move' call_tmp[1006657](1006559 call chpl_field_gt call_tmp[1006647] call_tmp[1006652]))
+    if call_tmp[1006657]
+    {
+      (1006595 'move' ret[1006575](1006594 'deref' 0))
+      gotoReturn _end_<[1006573] _end_<[1006573]
+    }
+    (1006600 'move' ret[1006575](1006599 'deref' 0))
+    label _end_<[1006573]
+    (1006577 return ret[1006575])
+  }
+  where {
+    unknown call_tmp[1006662] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1006665 'move' call_tmp[1006662](1006423 'typeof' _arg1[1006419]))
+    unknown call_tmp[1006667] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1006670 'move' call_tmp[1006667](1006425 'typeof' _arg2[1006420]))
+    unknown call_tmp[1006672] "expr temp" "maybe param" "maybe type" "temp"
+    (1006675 'move' call_tmp[1006672](1006427 call == call_tmp[1006662] call_tmp[1006667]))
+    unknown call_tmp[1006677] "expr temp" "maybe param" "maybe type" "temp"
+    (1006680 'move' call_tmp[1006677](1006503 call chpl_fields_are_comparable[1006429] _arg1[1006419] _arg2[1006420]))
+    (1006507 '&' call_tmp[1006672] call_tmp[1006677])
+  }
+  function chpl_fields_are_comparable[1006698](arg _arg1[1006700]:_shared[242](?), arg _arg2[1006701]:_shared[242](?)) param : bool[19] "compiler generated" "last resort" "param"
+  {
+    val ret[1006730]:bool[19] "RVV" "param" "temp"
+    unknown call_tmp[1006737] "expr temp" "maybe param" "maybe type" "temp"
+    (1006740 'move' call_tmp[1006737](1006704 call chpl_p _mt[203] _arg1[1006700]))
+    unknown call_tmp[1006742] "expr temp" "maybe param" "maybe type" "temp"
+    (1006745 'move' call_tmp[1006742](1006708 call chpl_p _mt[203] _arg2[1006701]))
+    unknown call_tmp[1006747] "expr temp" "maybe param" "maybe type" "temp"
+    (1006750 'move' call_tmp[1006747](1006712 'call resolves' c"<=" call_tmp[1006737] call_tmp[1006742]))
+    unknown call_tmp[1006752] "expr temp" "maybe param" "maybe type" "temp"
+    (1006755 'move' call_tmp[1006752](1006714 call chpl_pn _mt[203] _arg1[1006700]))
+    unknown call_tmp[1006757] "expr temp" "maybe param" "maybe type" "temp"
+    (1006760 'move' call_tmp[1006757](1006718 call chpl_pn _mt[203] _arg2[1006701]))
+    unknown call_tmp[1006762] "expr temp" "maybe param" "maybe type" "temp"
+    (1006765 'move' call_tmp[1006762](1006722 'call resolves' c"<=" call_tmp[1006752] call_tmp[1006757]))
+    unknown call_tmp[1006767] "expr temp" "maybe param" "maybe type" "temp"
+    (1006770 'move' call_tmp[1006767](1006724 '&' call_tmp[1006747] call_tmp[1006762]))
+    (1006735 'move' ret[1006730](1006734 'deref' call_tmp[1006767]))
+    (1006732 return ret[1006730])
+  }
+  function _shared[242](?).<=[1006682](arg _mt[1006684]:_MT[201], arg this[1006686]:_shared[242](?), arg _arg1[1006688]:_shared[242](?), arg _arg2[1006689]:_shared[242](?)) : bool[19] "compiler generated" "last resort" "method" "operator"
+  {
+    val ret[1006844]:bool[19] "RVV" "temp"
+    unknown call_tmp[1006871] "expr temp" "maybe param" "maybe type" "temp"
+    (1006874 'move' call_tmp[1006871](1006778 call chpl_p _mt[203] _arg1[1006688]))
+    unknown call_tmp[1006876] "expr temp" "maybe param" "maybe type" "temp"
+    (1006879 'move' call_tmp[1006876](1006782 call chpl_p _mt[203] _arg2[1006689]))
+    unknown call_tmp[1006881] "expr temp" "maybe param" "maybe type" "temp"
+    (1006884 'move' call_tmp[1006881](1006786 call chpl_field_lt call_tmp[1006871] call_tmp[1006876]))
+    if call_tmp[1006881]
+    {
+      (1006849 'move' ret[1006844](1006848 'deref' 1))
+      gotoReturn _end_<=[1006842] _end_<=[1006842]
+    }
+    unknown call_tmp[1006886] "expr temp" "maybe param" "maybe type" "temp"
+    (1006889 'move' call_tmp[1006886](1006792 call chpl_p _mt[203] _arg1[1006688]))
+    unknown call_tmp[1006891] "expr temp" "maybe param" "maybe type" "temp"
+    (1006894 'move' call_tmp[1006891](1006796 call chpl_p _mt[203] _arg2[1006689]))
+    unknown call_tmp[1006896] "expr temp" "maybe param" "maybe type" "temp"
+    (1006899 'move' call_tmp[1006896](1006800 call chpl_field_gt call_tmp[1006886] call_tmp[1006891]))
+    if call_tmp[1006896]
+    {
+      (1006854 'move' ret[1006844](1006853 'deref' 0))
+      gotoReturn _end_<=[1006842] _end_<=[1006842]
+    }
+    unknown call_tmp[1006901] "expr temp" "maybe param" "maybe type" "temp"
+    (1006904 'move' call_tmp[1006901](1006806 call chpl_pn _mt[203] _arg1[1006688]))
+    unknown call_tmp[1006906] "expr temp" "maybe param" "maybe type" "temp"
+    (1006909 'move' call_tmp[1006906](1006810 call chpl_pn _mt[203] _arg2[1006689]))
+    unknown call_tmp[1006911] "expr temp" "maybe param" "maybe type" "temp"
+    (1006914 'move' call_tmp[1006911](1006814 call chpl_field_lt call_tmp[1006901] call_tmp[1006906]))
+    if call_tmp[1006911]
+    {
+      (1006859 'move' ret[1006844](1006858 'deref' 1))
+      gotoReturn _end_<=[1006842] _end_<=[1006842]
+    }
+    unknown call_tmp[1006916] "expr temp" "maybe param" "maybe type" "temp"
+    (1006919 'move' call_tmp[1006916](1006820 call chpl_pn _mt[203] _arg1[1006688]))
+    unknown call_tmp[1006921] "expr temp" "maybe param" "maybe type" "temp"
+    (1006924 'move' call_tmp[1006921](1006824 call chpl_pn _mt[203] _arg2[1006689]))
+    unknown call_tmp[1006926] "expr temp" "maybe param" "maybe type" "temp"
+    (1006929 'move' call_tmp[1006926](1006828 call chpl_field_gt call_tmp[1006916] call_tmp[1006921]))
+    if call_tmp[1006926]
+    {
+      (1006864 'move' ret[1006844](1006863 'deref' 0))
+      gotoReturn _end_<=[1006842] _end_<=[1006842]
+    }
+    (1006869 'move' ret[1006844](1006868 'deref' 1))
+    label _end_<=[1006842]
+    (1006846 return ret[1006844])
+  }
+  where {
+    unknown call_tmp[1006931] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1006934 'move' call_tmp[1006931](1006692 'typeof' _arg1[1006688]))
+    unknown call_tmp[1006936] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1006939 'move' call_tmp[1006936](1006694 'typeof' _arg2[1006689]))
+    unknown call_tmp[1006941] "expr temp" "maybe param" "maybe type" "temp"
+    (1006944 'move' call_tmp[1006941](1006696 call == call_tmp[1006931] call_tmp[1006936]))
+    unknown call_tmp[1006946] "expr temp" "maybe param" "maybe type" "temp"
+    (1006949 'move' call_tmp[1006946](1006772 call chpl_fields_are_comparable[1006698] _arg1[1006688] _arg2[1006689]))
+    (1006776 '&' call_tmp[1006941] call_tmp[1006946])
+  }
+  function chpl_fields_are_comparable[1006967](arg _arg1[1006969]:_shared[242](?), arg _arg2[1006970]:_shared[242](?)) param : bool[19] "compiler generated" "last resort" "param"
+  {
+    val ret[1006999]:bool[19] "RVV" "param" "temp"
+    unknown call_tmp[1007006] "expr temp" "maybe param" "maybe type" "temp"
+    (1007009 'move' call_tmp[1007006](1006973 call chpl_p _mt[203] _arg1[1006969]))
+    unknown call_tmp[1007011] "expr temp" "maybe param" "maybe type" "temp"
+    (1007014 'move' call_tmp[1007011](1006977 call chpl_p _mt[203] _arg2[1006970]))
+    unknown call_tmp[1007016] "expr temp" "maybe param" "maybe type" "temp"
+    (1007019 'move' call_tmp[1007016](1006981 'call resolves' c">" call_tmp[1007006] call_tmp[1007011]))
+    unknown call_tmp[1007021] "expr temp" "maybe param" "maybe type" "temp"
+    (1007024 'move' call_tmp[1007021](1006983 call chpl_pn _mt[203] _arg1[1006969]))
+    unknown call_tmp[1007026] "expr temp" "maybe param" "maybe type" "temp"
+    (1007029 'move' call_tmp[1007026](1006987 call chpl_pn _mt[203] _arg2[1006970]))
+    unknown call_tmp[1007031] "expr temp" "maybe param" "maybe type" "temp"
+    (1007034 'move' call_tmp[1007031](1006991 'call resolves' c">" call_tmp[1007021] call_tmp[1007026]))
+    unknown call_tmp[1007036] "expr temp" "maybe param" "maybe type" "temp"
+    (1007039 'move' call_tmp[1007036](1006993 '&' call_tmp[1007016] call_tmp[1007031]))
+    (1007004 'move' ret[1006999](1007003 'deref' call_tmp[1007036]))
+    (1007001 return ret[1006999])
+  }
+  function _shared[242](?).>[1006951](arg _mt[1006953]:_MT[201], arg this[1006955]:_shared[242](?), arg _arg1[1006957]:_shared[242](?), arg _arg2[1006958]:_shared[242](?)) : bool[19] "compiler generated" "last resort" "method" "operator"
+  {
+    val ret[1007113]:bool[19] "RVV" "temp"
+    unknown call_tmp[1007140] "expr temp" "maybe param" "maybe type" "temp"
+    (1007143 'move' call_tmp[1007140](1007047 call chpl_p _mt[203] _arg1[1006957]))
+    unknown call_tmp[1007145] "expr temp" "maybe param" "maybe type" "temp"
+    (1007148 'move' call_tmp[1007145](1007051 call chpl_p _mt[203] _arg2[1006958]))
+    unknown call_tmp[1007150] "expr temp" "maybe param" "maybe type" "temp"
+    (1007153 'move' call_tmp[1007150](1007055 call chpl_field_gt call_tmp[1007140] call_tmp[1007145]))
+    if call_tmp[1007150]
+    {
+      (1007118 'move' ret[1007113](1007117 'deref' 1))
+      gotoReturn _end_>[1007111] _end_>[1007111]
+    }
+    unknown call_tmp[1007155] "expr temp" "maybe param" "maybe type" "temp"
+    (1007158 'move' call_tmp[1007155](1007061 call chpl_p _mt[203] _arg1[1006957]))
+    unknown call_tmp[1007160] "expr temp" "maybe param" "maybe type" "temp"
+    (1007163 'move' call_tmp[1007160](1007065 call chpl_p _mt[203] _arg2[1006958]))
+    unknown call_tmp[1007165] "expr temp" "maybe param" "maybe type" "temp"
+    (1007168 'move' call_tmp[1007165](1007069 call chpl_field_lt call_tmp[1007155] call_tmp[1007160]))
+    if call_tmp[1007165]
+    {
+      (1007123 'move' ret[1007113](1007122 'deref' 0))
+      gotoReturn _end_>[1007111] _end_>[1007111]
+    }
+    unknown call_tmp[1007170] "expr temp" "maybe param" "maybe type" "temp"
+    (1007173 'move' call_tmp[1007170](1007075 call chpl_pn _mt[203] _arg1[1006957]))
+    unknown call_tmp[1007175] "expr temp" "maybe param" "maybe type" "temp"
+    (1007178 'move' call_tmp[1007175](1007079 call chpl_pn _mt[203] _arg2[1006958]))
+    unknown call_tmp[1007180] "expr temp" "maybe param" "maybe type" "temp"
+    (1007183 'move' call_tmp[1007180](1007083 call chpl_field_gt call_tmp[1007170] call_tmp[1007175]))
+    if call_tmp[1007180]
+    {
+      (1007128 'move' ret[1007113](1007127 'deref' 1))
+      gotoReturn _end_>[1007111] _end_>[1007111]
+    }
+    unknown call_tmp[1007185] "expr temp" "maybe param" "maybe type" "temp"
+    (1007188 'move' call_tmp[1007185](1007089 call chpl_pn _mt[203] _arg1[1006957]))
+    unknown call_tmp[1007190] "expr temp" "maybe param" "maybe type" "temp"
+    (1007193 'move' call_tmp[1007190](1007093 call chpl_pn _mt[203] _arg2[1006958]))
+    unknown call_tmp[1007195] "expr temp" "maybe param" "maybe type" "temp"
+    (1007198 'move' call_tmp[1007195](1007097 call chpl_field_lt call_tmp[1007185] call_tmp[1007190]))
+    if call_tmp[1007195]
+    {
+      (1007133 'move' ret[1007113](1007132 'deref' 0))
+      gotoReturn _end_>[1007111] _end_>[1007111]
+    }
+    (1007138 'move' ret[1007113](1007137 'deref' 0))
+    label _end_>[1007111]
+    (1007115 return ret[1007113])
+  }
+  where {
+    unknown call_tmp[1007200] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1007203 'move' call_tmp[1007200](1006961 'typeof' _arg1[1006957]))
+    unknown call_tmp[1007205] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1007208 'move' call_tmp[1007205](1006963 'typeof' _arg2[1006958]))
+    unknown call_tmp[1007210] "expr temp" "maybe param" "maybe type" "temp"
+    (1007213 'move' call_tmp[1007210](1006965 call == call_tmp[1007200] call_tmp[1007205]))
+    unknown call_tmp[1007215] "expr temp" "maybe param" "maybe type" "temp"
+    (1007218 'move' call_tmp[1007215](1007041 call chpl_fields_are_comparable[1006967] _arg1[1006957] _arg2[1006958]))
+    (1007045 '&' call_tmp[1007210] call_tmp[1007215])
+  }
+  function chpl_fields_are_comparable[1007236](arg _arg1[1007238]:_shared[242](?), arg _arg2[1007239]:_shared[242](?)) param : bool[19] "compiler generated" "last resort" "param"
+  {
+    val ret[1007268]:bool[19] "RVV" "param" "temp"
+    unknown call_tmp[1007275] "expr temp" "maybe param" "maybe type" "temp"
+    (1007278 'move' call_tmp[1007275](1007242 call chpl_p _mt[203] _arg1[1007238]))
+    unknown call_tmp[1007280] "expr temp" "maybe param" "maybe type" "temp"
+    (1007283 'move' call_tmp[1007280](1007246 call chpl_p _mt[203] _arg2[1007239]))
+    unknown call_tmp[1007285] "expr temp" "maybe param" "maybe type" "temp"
+    (1007288 'move' call_tmp[1007285](1007250 'call resolves' c">=" call_tmp[1007275] call_tmp[1007280]))
+    unknown call_tmp[1007290] "expr temp" "maybe param" "maybe type" "temp"
+    (1007293 'move' call_tmp[1007290](1007252 call chpl_pn _mt[203] _arg1[1007238]))
+    unknown call_tmp[1007295] "expr temp" "maybe param" "maybe type" "temp"
+    (1007298 'move' call_tmp[1007295](1007256 call chpl_pn _mt[203] _arg2[1007239]))
+    unknown call_tmp[1007300] "expr temp" "maybe param" "maybe type" "temp"
+    (1007303 'move' call_tmp[1007300](1007260 'call resolves' c">=" call_tmp[1007290] call_tmp[1007295]))
+    unknown call_tmp[1007305] "expr temp" "maybe param" "maybe type" "temp"
+    (1007308 'move' call_tmp[1007305](1007262 '&' call_tmp[1007285] call_tmp[1007300]))
+    (1007273 'move' ret[1007268](1007272 'deref' call_tmp[1007305]))
+    (1007270 return ret[1007268])
+  }
+  function _shared[242](?).>=[1007220](arg _mt[1007222]:_MT[201], arg this[1007224]:_shared[242](?), arg _arg1[1007226]:_shared[242](?), arg _arg2[1007227]:_shared[242](?)) : bool[19] "compiler generated" "last resort" "method" "operator"
+  {
+    val ret[1007382]:bool[19] "RVV" "temp"
+    unknown call_tmp[1007409] "expr temp" "maybe param" "maybe type" "temp"
+    (1007412 'move' call_tmp[1007409](1007316 call chpl_p _mt[203] _arg1[1007226]))
+    unknown call_tmp[1007414] "expr temp" "maybe param" "maybe type" "temp"
+    (1007417 'move' call_tmp[1007414](1007320 call chpl_p _mt[203] _arg2[1007227]))
+    unknown call_tmp[1007419] "expr temp" "maybe param" "maybe type" "temp"
+    (1007422 'move' call_tmp[1007419](1007324 call chpl_field_gt call_tmp[1007409] call_tmp[1007414]))
+    if call_tmp[1007419]
+    {
+      (1007387 'move' ret[1007382](1007386 'deref' 1))
+      gotoReturn _end_>=[1007380] _end_>=[1007380]
+    }
+    unknown call_tmp[1007424] "expr temp" "maybe param" "maybe type" "temp"
+    (1007427 'move' call_tmp[1007424](1007330 call chpl_p _mt[203] _arg1[1007226]))
+    unknown call_tmp[1007429] "expr temp" "maybe param" "maybe type" "temp"
+    (1007432 'move' call_tmp[1007429](1007334 call chpl_p _mt[203] _arg2[1007227]))
+    unknown call_tmp[1007434] "expr temp" "maybe param" "maybe type" "temp"
+    (1007437 'move' call_tmp[1007434](1007338 call chpl_field_lt call_tmp[1007424] call_tmp[1007429]))
+    if call_tmp[1007434]
+    {
+      (1007392 'move' ret[1007382](1007391 'deref' 0))
+      gotoReturn _end_>=[1007380] _end_>=[1007380]
+    }
+    unknown call_tmp[1007439] "expr temp" "maybe param" "maybe type" "temp"
+    (1007442 'move' call_tmp[1007439](1007344 call chpl_pn _mt[203] _arg1[1007226]))
+    unknown call_tmp[1007444] "expr temp" "maybe param" "maybe type" "temp"
+    (1007447 'move' call_tmp[1007444](1007348 call chpl_pn _mt[203] _arg2[1007227]))
+    unknown call_tmp[1007449] "expr temp" "maybe param" "maybe type" "temp"
+    (1007452 'move' call_tmp[1007449](1007352 call chpl_field_gt call_tmp[1007439] call_tmp[1007444]))
+    if call_tmp[1007449]
+    {
+      (1007397 'move' ret[1007382](1007396 'deref' 1))
+      gotoReturn _end_>=[1007380] _end_>=[1007380]
+    }
+    unknown call_tmp[1007454] "expr temp" "maybe param" "maybe type" "temp"
+    (1007457 'move' call_tmp[1007454](1007358 call chpl_pn _mt[203] _arg1[1007226]))
+    unknown call_tmp[1007459] "expr temp" "maybe param" "maybe type" "temp"
+    (1007462 'move' call_tmp[1007459](1007362 call chpl_pn _mt[203] _arg2[1007227]))
+    unknown call_tmp[1007464] "expr temp" "maybe param" "maybe type" "temp"
+    (1007467 'move' call_tmp[1007464](1007366 call chpl_field_lt call_tmp[1007454] call_tmp[1007459]))
+    if call_tmp[1007464]
+    {
+      (1007402 'move' ret[1007382](1007401 'deref' 0))
+      gotoReturn _end_>=[1007380] _end_>=[1007380]
+    }
+    (1007407 'move' ret[1007382](1007406 'deref' 1))
+    label _end_>=[1007380]
+    (1007384 return ret[1007382])
+  }
+  where {
+    unknown call_tmp[1007469] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1007472 'move' call_tmp[1007469](1007230 'typeof' _arg1[1007226]))
+    unknown call_tmp[1007474] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (1007477 'move' call_tmp[1007474](1007232 'typeof' _arg2[1007227]))
+    unknown call_tmp[1007479] "expr temp" "maybe param" "maybe type" "temp"
+    (1007482 'move' call_tmp[1007479](1007234 call == call_tmp[1007469] call_tmp[1007474]))
+    unknown call_tmp[1007484] "expr temp" "maybe param" "maybe type" "temp"
+    (1007487 'move' call_tmp[1007484](1007310 call chpl_fields_are_comparable[1007236] _arg1[1007226] _arg2[1007227]))
+    (1007314 '&' call_tmp[1007479] call_tmp[1007484])
+  }
+  type _shared[242](?) unknown chpl_t[89652] "type variable" unknown chpl_p[89655] "owned"(89656 'to nilable class' chpl_t[89652]) val chpl_pn[89675]:unmanaged ReferenceCount?[468037] "owned" unmanaged ReferenceCount?[468037] forwarding ( )
+  type shared?[467997](?)
+  type shared[467993](?)
+  type _shared[467879](?)
+  function _shared[242](?).init[89683](arg _mt[89691]:_MT[201], ref arg this[89686]:_shared[242](?) :
+  _shared[242](?), arg chpl_t[89689]:_any[141](?)) : void[4] "leaves this nil" "method" "no return value for void"
+  {
+    unknown call_tmp[771976] "expr temp" "maybe param" "maybe type" "temp"
+    (771979 'move' call_tmp[771976](89703 call isClass chpl_t[89689]))
+    unknown call_tmp[771981] "expr temp" "maybe param" "maybe type" "temp"
+    (771984 'move' call_tmp[771981](89700 call ! call_tmp[771976]))
+    unknown call_tmp[771986] "expr temp" "maybe param" "maybe type" "temp"
+    (771989 'move' call_tmp[771986](89705 call _cond_test call_tmp[771981]))
+    if call_tmp[771986]
+    {
+      (89695 call compilerError "shared only works with classes")
+    }
+    unknown chpl_t[520083] "temp" "type variable"
+    (520085 'move' chpl_t[520083](89717 call _to_borrowed chpl_t[89689]))
+    (520087 'init field' this[89686] c"chpl_t" chpl_t[520083])
+    (550402 'end of statement')
+    unknown call_tmp[771991] "expr temp" "maybe param" "maybe type" "temp"
+    (771994 'move' call_tmp[771991](520101 '.v' this[89686] c"chpl_t"))
+    unknown call_tmp[771996] "maybe param" "maybe type" "temp"
+    (771999 'move' call_tmp[771996](520093 'to nilable class' call_tmp[771991]))
+    unknown chpl_p[520091] "temp"
+    (520095 'init var' chpl_p[520091] nil[32] call_tmp[771996])
+    (520097 'init field' this[89686] c"chpl_p" chpl_p[520091])
+    (550403 'end of statement')
+    unknown chpl_pn[520104] "temp"
+    (520107 'init var' chpl_pn[520104] nil[32] unmanaged ReferenceCount?[468037])
+    (520109 'init field' this[89686] c"chpl_pn" chpl_pn[520104])
+    (550404 'end of statement')
+    (599790 return _void[46])
+  }
+  function _shared[242](?).init[89735](arg _mt[89745]:_MT[201], ref arg this[89738]:_shared[242](?) :
+  _shared[242](?), arg p[89742]:borrowed[174](?)) : void[4] "method" "no return value for void"
+  {
+    (89749 call compilerError "cannot initialize shared from a borrow")
+    (550405 'end of statement')
+    unknown call_tmp[772003] "expr temp" "maybe param" "maybe type" "temp"
+    (772006 'move' call_tmp[772003](89759 call _to_unmanaged p[89742]))
+    (89757 call(89754 call (partial) init _mt[203] this[89738]) call_tmp[772003])
+    (599792 return _void[46])
+  }
+  function _shared[242](?).init[89763](arg _mt[89773]:_MT[201], ref arg this[89766]:_shared[242](?) :
+  _shared[242](?), arg p[89770]:unmanaged[183](?)) : void[4] "method" "no return value for void"
+  {
+    unknown chpl_t[520113] "temp" "type variable"
+    unknown call_tmp[772008] "expr temp" "maybe param" "used in type" "maybe type" "temp" "type variable"
+    (772011 'move' call_tmp[772008](89785 'typeof' p[89770]))
+    (520115 'move' chpl_t[520113](89783 call _to_borrowed call_tmp[772008]))
+    (520117 'init field' this[89766] c"chpl_t" chpl_t[520113])
+    (550407 'end of statement')
+    unknown rc[89787] "dead at end of block" "insert auto destroy"
+    (644553 'init var' rc[89787] nil[32] unmanaged ReferenceCount?[468037])
+    (89793 'end of statement')
+    unknown call_tmp[772013] "expr temp" "maybe param" "maybe type" "temp"
+    (772016 'move' call_tmp[772013](89803 call != p[89770] nil[32]))
+    unknown call_tmp[772018] "expr temp" "maybe param" "maybe type" "temp"
+    (772021 'move' call_tmp[772018](89807 call _cond_test call_tmp[772013]))
+    if call_tmp[772018]
+    {
+      unknown call_tmp[772023] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (772026 'move' call_tmp[772023](1000033 'new' ReferenceCount[423756](?)(_chpl_manager = unmanaged[183](?))))
+      (89794 call = rc[89787] call_tmp[772023])
+      (550408 'end of statement' rc[89787])
+    }
+    unknown call_tmp[772028] "maybe param" "maybe type" "temp"
+    (772031 'move' call_tmp[772028](89819 call _to_borrowed p[89770]))
+    unknown call_tmp[772033] "expr temp" "maybe param" "maybe type" "temp"
+    (772036 'move' call_tmp[772033](520131 '.v' this[89766] c"chpl_t"))
+    unknown call_tmp[772038] "maybe param" "maybe type" "temp"
+    (772041 'move' call_tmp[772038](520123 'to nilable class' call_tmp[772033]))
+    unknown chpl_p[520121] "temp"
+    (520125 'init var' chpl_p[520121] call_tmp[772028] call_tmp[772038])
+    (520127 'init field' this[89766] c"chpl_p" chpl_p[520121])
+    (550410 'end of statement')
+    unknown chpl_pn[520134] "temp"
+    (520137 'init var' chpl_pn[520134] rc[89787] unmanaged ReferenceCount?[468037])
+    (520139 'init field' this[89766] c"chpl_pn" chpl_pn[520134])
+    (550411 'end of statement' rc[89787])
+    (599794 return _void[46])
+  }
+  function _shared[242](?).init[89830](arg _mt[89841]:_MT[201], ref arg this[89833]:_shared[242](?) :
+  _shared[242](?), arg p[89838]:_any[141](?)) : void[4] "method" "no return value for void"
+  {
+    (89868 call compilerError "shared only works with classes")
+    (550413 'end of statement')
+    unknown chpl_t[520149] "temp" "type variable"
+    (520151 'move' chpl_t[520149](520143 'typeof' p[89838]))
+    (520153 'init field' this[89833] c"chpl_t" chpl_t[520149])
+    (550414 'end of statement')
+    unknown call_tmp[772043] "expr temp" "maybe param" "maybe type" "temp"
+    (772046 'move' call_tmp[772043](520167 '.v' this[89833] c"chpl_t"))
+    unknown call_tmp[772048] "maybe param" "maybe type" "temp"
+    (772051 'move' call_tmp[772048](520159 'to nilable class' call_tmp[772043]))
+    unknown chpl_p[520157] "temp"
+    (520161 'init var' chpl_p[520157] p[89838] call_tmp[772048])
+    (520163 'init field' this[89833] c"chpl_p" chpl_p[520157])
+    (550415 'end of statement')
+    val chpl_pn[520171]:unmanaged ReferenceCount?[468037] "temp"
+    (520174 'default init var' chpl_pn[520171] unmanaged ReferenceCount?[468037])
+    (520176 '.=' this[89833] c"chpl_pn" chpl_pn[520171])
+    (550416 'end of statement')
+    (599796 return _void[46])
+  }
+  where {
+    unknown tmp[482016] "maybe param" "temp"
+    unknown tmp[482037] "maybe param" "temp"
+    unknown call_tmp[772053] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772056 'move' call_tmp[772053](520145 'typeof' p[89838]))
+    unknown call_tmp[772058] "expr temp" "maybe param" "maybe type" "temp"
+    (772061 'move' call_tmp[772058](89850 call isClass call_tmp[772053]))
+    (482048 'move' tmp[482037](89847 call == call_tmp[772058] 0))
+    unknown call_tmp[772063] "expr temp" "maybe param" "maybe type" "temp"
+    (772066 'move' call_tmp[772063](482050 call _cond_invalid tmp[482037]))
+    if call_tmp[772063]
+    {
+      (482053 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[669239] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669240] "maybe param" "temp"
+    unknown call_tmp[772068] "expr temp" "maybe param" "maybe type" "temp"
+    (772071 'move' call_tmp[772068](482038 call isTrue tmp[482037]))
+    (669245 'move' tmp[669240](669243 call _cond_test call_tmp[772068]))
+    if tmp[669240]
+    {
+      unknown tmp[669247] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772073] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772076 'move' call_tmp[772073](520147 'typeof' p[89838]))
+      unknown call_tmp[772078] "expr temp" "maybe param" "maybe type" "temp"
+      (772081 'move' call_tmp[772078](394748 'is_subtype' _shared[242](?) call_tmp[772073]))
+      unknown call_tmp[772083] "expr temp" "maybe param" "maybe type" "temp"
+      (772086 'move' call_tmp[772083](89853 call == call_tmp[772078] 0))
+      (669249 'move' tmp[669247](482041 call isTrue call_tmp[772083]))
+      (669254 'move' tmp[669239](669251 '_paramFoldLogical' tmp[669240] tmp[669247]))
+    }
+    {
+      (669259 'move' tmp[669239](669256 '_paramFoldLogical' tmp[669240] 0))
+    }
+    (482027 'move' tmp[482016] tmp[669239])
+    unknown call_tmp[772088] "expr temp" "maybe param" "maybe type" "temp"
+    (772091 'move' call_tmp[772088](482029 call _cond_invalid tmp[482016]))
+    if call_tmp[772088]
+    {
+      (482032 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[669266] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669267] "maybe param" "temp"
+    unknown call_tmp[772093] "expr temp" "maybe param" "maybe type" "temp"
+    (772096 'move' call_tmp[772093](482017 call isTrue tmp[482016]))
+    (669272 'move' tmp[669267](669270 call _cond_test call_tmp[772093]))
+    if tmp[669267]
+    {
+      unknown tmp[669274] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772098] "expr temp" "maybe param" "maybe type" "temp"
+      (772101 'move' call_tmp[772098](89863 call isIterator p[89838]))
+      unknown call_tmp[772103] "expr temp" "maybe param" "maybe type" "temp"
+      (772106 'move' call_tmp[772103](89860 call == call_tmp[772098] 0))
+      (669276 'move' tmp[669274](482020 call isTrue call_tmp[772103]))
+      (669281 'move' tmp[669266](669278 '_paramFoldLogical' tmp[669267] tmp[669274]))
+    }
+    {
+      (669286 'move' tmp[669266](669283 '_paramFoldLogical' tmp[669267] 0))
+    }
+    (1001354 call chpl_statementLevelSymbol tmp[669266])
+  }
+  function _shared[242](?).init[89887](arg _mt[89897]:_MT[201], ref arg this[89890]:_shared[242](?) :
+  _shared[242](?), in arg take[89894]:_owned[238](?)) : void[4] "method" "no return value for void"
+  {
+    unknown call_tmp[772110] "maybe param" "maybe type" "temp"
+    (772113 'move' call_tmp[772110](89906 call(89903 call (partial) release _mt[203] take[89894])))
+    unknown p[89901] "dead at end of block" "insert auto destroy"
+    (644555 'init var' p[89901] call_tmp[772110])
+    (89908 'end of statement')
+    unknown chpl_t[520180] "temp" "type variable"
+    unknown tmp[669293] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669294] "maybe param" "temp"
+    unknown call_tmp[772115] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772118 'move' call_tmp[772115](89918 'typeof' this[89890]))
+    unknown call_tmp[772122] "expr temp" "maybe param" "maybe type" "temp"
+    (772125 'move' call_tmp[772122](89919 call chpl_t _mt[203] call_tmp[772115]))
+    unknown call_tmp[772127] "expr temp" "marked generic" "maybe param" "maybe type" "temp"
+    (772130 'move' call_tmp[772127](89915 call == call_tmp[772122] ?[227]))
+    (669299 'move' tmp[669294](669297 call _cond_test call_tmp[772127]))
+    if tmp[669294]
+    {
+      unknown tmp[669301] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772132] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772135 'move' call_tmp[772132](89926 'typeof' p[89901]))
+      (669303 'move' tmp[669301](89924 call _to_borrowed call_tmp[772132]))
+      (669308 'move' tmp[669293](669305 '_paramFoldLogical' tmp[669294] tmp[669301]))
+    }
+    {
+      unknown tmp[669310] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772137] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772140 'move' call_tmp[772137](89928 'typeof' this[89890]))
+      (669312 'move' tmp[669310](89929 call chpl_t _mt[203] call_tmp[772137]))
+      (669317 'move' tmp[669293](669314 '_paramFoldLogical' tmp[669294] tmp[669310]))
+    }
+    (520182 'move' chpl_t[520180] tmp[669293])
+    (520184 'init field' this[89890] c"chpl_t" chpl_t[520180])
+    (550417 'end of statement')
+    unknown call_tmp[772144] "expr temp" "maybe param" "maybe type" "temp"
+    (772147 'move' call_tmp[772144](89942 call isClass p[89901]))
+    unknown call_tmp[772149] "expr temp" "maybe param" "maybe type" "temp"
+    (772152 'move' call_tmp[772149](89939 call ! call_tmp[772144]))
+    unknown call_tmp[772154] "expr temp" "maybe param" "maybe type" "temp"
+    (772157 'move' call_tmp[772154](89944 call _cond_test call_tmp[772149]))
+    if call_tmp[772154]
+    {
+      (89936 call compilerError "shared only works with classes")
+    }
+    unknown rc[89950] "dead at end of block" "insert auto destroy"
+    (644557 'init var' rc[89950] nil[32] unmanaged ReferenceCount?[468037])
+    (89956 'end of statement')
+    unknown call_tmp[772159] "expr temp" "maybe param" "maybe type" "temp"
+    (772162 'move' call_tmp[772159](89966 call != p[89901] nil[32]))
+    unknown call_tmp[772164] "expr temp" "maybe param" "maybe type" "temp"
+    (772167 'move' call_tmp[772164](89970 call _cond_test call_tmp[772159]))
+    if call_tmp[772164]
+    {
+      unknown call_tmp[772169] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (772172 'move' call_tmp[772169](1000034 'new' ReferenceCount[423756](?)(_chpl_manager = unmanaged[183](?))))
+      (89957 call = rc[89950] call_tmp[772169])
+      (550419 'end of statement' rc[89950])
+    }
+    unknown call_tmp[772174] "expr temp" "maybe param" "maybe type" "temp"
+    (772177 'move' call_tmp[772174](520198 '.v' this[89890] c"chpl_t"))
+    unknown call_tmp[772179] "maybe param" "maybe type" "temp"
+    (772182 'move' call_tmp[772179](520190 'to nilable class' call_tmp[772174]))
+    unknown chpl_p[520188] "temp"
+    (520192 'init var' chpl_p[520188] p[89901] call_tmp[772179])
+    (520194 'init field' this[89890] c"chpl_p" chpl_p[520188])
+    (550421 'end of statement' p[89901])
+    unknown chpl_pn[520201] "temp"
+    (520204 'init var' chpl_pn[520201] rc[89950] unmanaged ReferenceCount?[468037])
+    (520206 'init field' this[89890] c"chpl_pn" chpl_pn[520201])
+    (550423 'end of statement' rc[89950])
+    (520210 'init done')
+    (599798 return _void[46])
+  }
+  function _shared[242](?).init[89996](arg _mt[90012]:_MT[201], ref arg this[89999]:_shared[242](?) :
+  _shared[242](?), arg _private[90003]:bool[19], arg t[90006]:_any[141](?), ref arg src[90009]:_shared[242](?)) : void[4] "method" "no return value for void"
+  {
+    unknown chpl_t[520211] "temp" "type variable"
+    (520213 'move' chpl_t[520211] t[90006])
+    (520215 'init field' this[89999] c"chpl_t" chpl_t[520211])
+    (550426 'end of statement')
+    unknown call_tmp[772186] "expr temp" "maybe param" "maybe type" "temp"
+    (772189 'move' call_tmp[772186](90033 call chpl_p _mt[203] src[90009]))
+    unknown call_tmp[772191] "expr temp" "maybe param" "maybe type" "temp"
+    (772194 'move' call_tmp[772191](90031 call _to_unmanaged call_tmp[772186]))
+    unknown call_tmp[772196] "expr temp" "maybe param" "maybe type" "temp"
+    (772199 'move' call_tmp[772196](90039 call _to_unmanaged t[90006]))
+    unknown call_tmp[772201] "expr temp" "maybe param" "maybe type" "temp"
+    (772204 'move' call_tmp[772201](90037 call _to_nilable call_tmp[772196]))
+    unknown call_tmp[772206] "maybe param" "maybe type" "temp"
+    (772209 'move' call_tmp[772206](90028 call : call_tmp[772191] call_tmp[772201]))
+    unknown call_tmp[772211] "expr temp" "maybe param" "maybe type" "temp"
+    (772214 'move' call_tmp[772211](520229 '.v' this[89999] c"chpl_t"))
+    unknown call_tmp[772216] "maybe param" "maybe type" "temp"
+    (772219 'move' call_tmp[772216](520221 'to nilable class' call_tmp[772211]))
+    unknown chpl_p[520219] "temp"
+    (520223 'init var' chpl_p[520219] call_tmp[772206] call_tmp[772216])
+    (520225 'init field' this[89999] c"chpl_p" chpl_p[520219])
+    (550427 'end of statement')
+    unknown call_tmp[772223] "maybe param" "maybe type" "temp"
+    (772226 'move' call_tmp[772223](90048 call chpl_pn _mt[203] src[90009]))
+    unknown chpl_pn[520232] "temp"
+    (520235 'init var' chpl_pn[520232] call_tmp[772223] unmanaged ReferenceCount?[468037])
+    (520237 'init field' this[89999] c"chpl_pn" chpl_pn[520232])
+    (550428 'end of statement')
+    unknown call_tmp[772230] "expr temp" "maybe param" "maybe type" "temp"
+    (772233 'move' call_tmp[772230](90054 call chpl_p _mt[203] src[90009]))
+    (90051 call = call_tmp[772230] nil[32])
+    (550429 'end of statement')
+    unknown call_tmp[772237] "expr temp" "maybe param" "maybe type" "temp"
+    (772240 'move' call_tmp[772237](90061 call chpl_pn _mt[203] src[90009]))
+    (90058 call = call_tmp[772237] nil[32])
+    (599800 return _void[46])
+  }
+  function _shared[242](?).init[90067](arg _mt[90083]:_MT[201], ref arg this[90070]:_shared[242](?) :
+  _shared[242](?), arg _private[90074]:bool[19], arg t[90077]:_any[141](?), arg p[90079]:_any[141](?), arg pn[90081]:_any[141](?)) : void[4] "method" "no return value for void"
+  {
+    unknown call_tmp[772242] "expr temp" "maybe param" "maybe type" "temp"
+    (772245 'move' call_tmp[772242](90091 call _to_unmanaged p[90079]))
+    unknown call_tmp[772247] "expr temp" "maybe param" "maybe type" "temp"
+    (772250 'move' call_tmp[772247](90096 call _to_unmanaged t[90077]))
+    unknown call_tmp[772252] "expr temp" "maybe param" "maybe type" "temp"
+    (772255 'move' call_tmp[772252](90094 call _to_nilable call_tmp[772247]))
+    unknown call_tmp[772257] "maybe param" "maybe type" "temp"
+    (772260 'move' call_tmp[772257](90088 call : call_tmp[772242] call_tmp[772252]))
+    unknown ptr[90087] "dead at end of block" "insert auto destroy"
+    (644559 'init var' ptr[90087] call_tmp[772257])
+    (90099 'end of statement')
+    unknown count[90101] "dead at end of block" "insert auto destroy"
+    (644561 'init var' count[90101] pn[90081])
+    (90104 'end of statement')
+    unknown call_tmp[772262] "expr temp" "maybe param" "maybe type" "temp"
+    (772265 'move' call_tmp[772262](90120 call != ptr[90087] nil[32]))
+    unknown call_tmp[772267] "expr temp" "maybe param" "maybe type" "temp"
+    (772270 'move' call_tmp[772267](90124 call _cond_test call_tmp[772262]))
+    if call_tmp[772267]
+    {
+      unknown call_tmp[772272] "expr temp" "maybe param" "maybe type" "temp"
+      (772275 'move' call_tmp[772272](90106 call postfix! count[90101]))
+      (90114 call(90111 call (partial) retain _mt[203] call_tmp[772272]))
+      (550431 'end of statement' count[90101])
+    }
+    {
+      (90116 call = count[90101] nil[32])
+      (550433 'end of statement' count[90101])
+    }
+    unknown chpl_t[520241] "temp" "type variable"
+    (520243 'move' chpl_t[520241] t[90077])
+    (520245 'init field' this[90070] c"chpl_t" chpl_t[520241])
+    (550435 'end of statement')
+    unknown call_tmp[772279] "expr temp" "maybe param" "maybe type" "temp"
+    (772282 'move' call_tmp[772279](520259 '.v' this[90070] c"chpl_t"))
+    unknown call_tmp[772284] "maybe param" "maybe type" "temp"
+    (772287 'move' call_tmp[772284](520251 'to nilable class' call_tmp[772279]))
+    unknown chpl_p[520249] "temp"
+    (520253 'init var' chpl_p[520249] ptr[90087] call_tmp[772284])
+    (520255 'init field' this[90070] c"chpl_p" chpl_p[520249])
+    (550436 'end of statement' ptr[90087])
+    unknown chpl_pn[520262] "temp"
+    (520265 'init var' chpl_pn[520262] count[90101] unmanaged ReferenceCount?[468037])
+    (520267 'init field' this[90070] c"chpl_pn" chpl_pn[520262])
+    (550438 'end of statement' count[90101])
+    (599802 return _void[46])
+  }
+  function _shared[242](?).init[90151](arg _mt[90167]:_MT[201], ref arg this[90154]:_shared[242](?) :
+  _shared[242](?), arg _private[90158]:bool[19], arg p[90162]:unmanaged[183](?), arg pn[90165]:_any[141](?)) : void[4] "method" "no return value for void"
+  {
+    unknown chpl_t[520271] "temp" "type variable"
+    unknown call_tmp[772289] "expr temp" "maybe param" "used in type" "maybe type" "temp" "type variable"
+    (772292 'move' call_tmp[772289](90179 'typeof' p[90162]))
+    (520273 'move' chpl_t[520271](90177 call _to_borrowed call_tmp[772289]))
+    (520275 'init field' this[90154] c"chpl_t" chpl_t[520271])
+    (550440 'end of statement')
+    unknown call_tmp[772294] "expr temp" "maybe param" "maybe type" "temp"
+    (772297 'move' call_tmp[772294](520289 '.v' this[90154] c"chpl_t"))
+    unknown call_tmp[772299] "maybe param" "maybe type" "temp"
+    (772302 'move' call_tmp[772299](520281 'to nilable class' call_tmp[772294]))
+    unknown chpl_p[520279] "temp"
+    (520283 'init var' chpl_p[520279] p[90162] call_tmp[772299])
+    (520285 'init field' this[90154] c"chpl_p" chpl_p[520279])
+    (550441 'end of statement')
+    unknown chpl_pn[520292] "temp"
+    (520295 'init var' chpl_pn[520292] pn[90165] unmanaged ReferenceCount?[468037])
+    (520297 'init field' this[90154] c"chpl_pn" chpl_pn[520292])
+    (550442 'end of statement')
+    (599804 return _void[46])
+  }
+  function _shared[242](?).init=[90196](arg _mt[90206]:_MT[201], ref arg this[90199]:_shared[242](?) :
+  _shared[242](?), in arg take[90203]:_owned[238](?)) : void[4] "method" "no return value for void"
+  {
+    unknown call_tmp[772304] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772307 'move' call_tmp[772304](90215 'typeof' this[90199]))
+    unknown call_tmp[772309] "expr temp" "maybe param" "maybe type" "temp"
+    (772312 'move' call_tmp[772309](90212 call : call_tmp[772304] string[244]))
+    unknown call_tmp[772314] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772317 'move' call_tmp[772314](90221 'typeof' take[90203]))
+    unknown call_tmp[772319] "expr temp" "maybe param" "maybe type" "temp"
+    (772322 'move' call_tmp[772319](90218 call : call_tmp[772314] string[244]))
+    (90210 call compilerError "cannot initialize '" call_tmp[772309] "' from a '" call_tmp[772319] "'")
+    (550443 'end of statement')
+    unknown chpl_t[520301] "temp" "type variable"
+    (520303 'move' chpl_t[520301](90231 call chpl_t _mt[203] take[90203]))
+    (520305 'init field' this[90199] c"chpl_t" chpl_t[520301])
+    (550444 'end of statement')
+    unknown call_tmp[772326] "expr temp" "maybe param" "maybe type" "temp"
+    (772329 'move' call_tmp[772326](520319 '.v' this[90199] c"chpl_t"))
+    unknown call_tmp[772331] "maybe param" "maybe type" "temp"
+    (772334 'move' call_tmp[772331](520311 'to nilable class' call_tmp[772326]))
+    unknown chpl_p[520309] "temp"
+    (520313 'init var' chpl_p[520309] nil[32] call_tmp[772331])
+    (520315 'init field' this[90199] c"chpl_p" chpl_p[520309])
+    (550445 'end of statement')
+    val chpl_pn[520323]:unmanaged ReferenceCount?[468037] "temp"
+    (520326 'default init var' chpl_pn[520323] unmanaged ReferenceCount?[468037])
+    (520328 '.=' this[90199] c"chpl_pn" chpl_pn[520323])
+    (550446 'end of statement')
+    (599806 return _void[46])
+  }
+  function _shared[242](?).init=[90243](arg _mt[90253]:_MT[201], ref arg this[90246]:_shared[242](?) :
+  _shared[242](?), const  ref arg src[90250]:_shared[242](?)) : void[4] "method" "no return value for void"
+  {
+    unknown chpl_t[520332] "temp" "type variable"
+    unknown tmp[669324] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669325] "maybe param" "temp"
+    unknown call_tmp[772336] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772339 'move' call_tmp[772336](90265 'typeof' this[90246]))
+    unknown call_tmp[772343] "expr temp" "maybe param" "maybe type" "temp"
+    (772346 'move' call_tmp[772343](90266 call chpl_t _mt[203] call_tmp[772336]))
+    unknown call_tmp[772348] "expr temp" "marked generic" "maybe param" "maybe type" "temp"
+    (772351 'move' call_tmp[772348](90262 call != call_tmp[772343] ?[227]))
+    (669330 'move' tmp[669325](669328 call _cond_test call_tmp[772348]))
+    if tmp[669325]
+    {
+      unknown tmp[669332] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772353] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772356 'move' call_tmp[772353](90271 'typeof' this[90246]))
+      (669334 'move' tmp[669332](90272 call chpl_t _mt[203] call_tmp[772353]))
+      (669339 'move' tmp[669324](669336 '_paramFoldLogical' tmp[669325] tmp[669332]))
+    }
+    {
+      unknown tmp[669341] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772360] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772363 'move' call_tmp[772360](90278 'typeof' src[90250]))
+      (669343 'move' tmp[669341](90276 call _to_borrowed call_tmp[772360]))
+      (669348 'move' tmp[669324](669345 '_paramFoldLogical' tmp[669325] tmp[669341]))
+    }
+    (520334 'move' chpl_t[520332] tmp[669324])
+    (520336 'init field' this[90246] c"chpl_t" chpl_t[520332])
+    (550447 'end of statement')
+    unknown call_tmp[772365] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772368 'move' call_tmp[772365](90307 'typeof' this[90246]))
+    unknown call_tmp[772372] "expr temp" "maybe param" "maybe type" "temp"
+    (772375 'move' call_tmp[772372](90308 call chpl_t _mt[203] call_tmp[772365]))
+    unknown call_tmp[772379] "expr temp" "maybe param" "maybe type" "temp"
+    (772382 'move' call_tmp[772379](90303 call chpl_t _mt[203] src[90250]))
+    unknown call_tmp[772384] "expr temp" "maybe param" "maybe type" "temp"
+    (772387 'move' call_tmp[772384](394749 'is_coercible' call_tmp[772372] call_tmp[772379]))
+    unknown call_tmp[772389] "expr temp" "maybe param" "maybe type" "temp"
+    (772392 'move' call_tmp[772389](90298 call == call_tmp[772384] 0))
+    unknown call_tmp[772394] "expr temp" "maybe param" "maybe type" "temp"
+    (772397 'move' call_tmp[772394](90312 call _cond_test call_tmp[772389]))
+    if call_tmp[772394]
+    {
+      unknown call_tmp[772399] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772402 'move' call_tmp[772399](90288 'typeof' this[90246]))
+      unknown call_tmp[772404] "expr temp" "maybe param" "maybe type" "temp"
+      (772407 'move' call_tmp[772404](90285 call : call_tmp[772399] string[244]))
+      unknown call_tmp[772409] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772412 'move' call_tmp[772409](90294 'typeof' src[90250]))
+      unknown call_tmp[772414] "expr temp" "maybe param" "maybe type" "temp"
+      (772417 'move' call_tmp[772414](90291 call : call_tmp[772409] string[244]))
+      (90283 call compilerError "cannot initialize '" call_tmp[772404] "' from a '" call_tmp[772414] "'")
+    }
+    unknown call_tmp[772421] "maybe param" "maybe type" "temp"
+    (772424 'move' call_tmp[772421](90324 call chpl_p _mt[203] src[90250]))
+    unknown call_tmp[772426] "expr temp" "maybe param" "maybe type" "temp"
+    (772429 'move' call_tmp[772426](520350 '.v' this[90246] c"chpl_t"))
+    unknown call_tmp[772431] "maybe param" "maybe type" "temp"
+    (772434 'move' call_tmp[772431](520342 'to nilable class' call_tmp[772426]))
+    unknown chpl_p[520340] "temp"
+    (520344 'init var' chpl_p[520340] call_tmp[772421] call_tmp[772431])
+    (520346 'init field' this[90246] c"chpl_p" chpl_p[520340])
+    (550449 'end of statement')
+    unknown call_tmp[772438] "maybe param" "maybe type" "temp"
+    (772441 'move' call_tmp[772438](90334 call chpl_pn _mt[203] src[90250]))
+    unknown chpl_pn[520353] "temp"
+    (520356 'init var' chpl_pn[520353] call_tmp[772438] unmanaged ReferenceCount?[468037])
+    (520358 'init field' this[90246] c"chpl_pn" chpl_pn[520353])
+    (550450 'end of statement')
+    (520362 'init done')
+    (550451 'end of statement')
+    unknown call_tmp[772445] "expr temp" "maybe param" "maybe type" "temp"
+    (772448 'move' call_tmp[772445](90356 call chpl_pn _mt[203] this[90246]))
+    unknown call_tmp[772450] "expr temp" "maybe param" "maybe type" "temp"
+    (772453 'move' call_tmp[772450](90353 call != call_tmp[772445] nil[32]))
+    unknown call_tmp[772455] "expr temp" "maybe param" "maybe type" "temp"
+    (772458 'move' call_tmp[772455](90360 call _cond_test call_tmp[772450]))
+    if call_tmp[772455]
+    {
+      unknown call_tmp[772462] "expr temp" "maybe param" "maybe type" "temp"
+      (772465 'move' call_tmp[772462](90345 call chpl_pn _mt[203] this[90246]))
+      unknown call_tmp[772467] "expr temp" "maybe param" "maybe type" "temp"
+      (772470 'move' call_tmp[772467](90342 call postfix! call_tmp[772462]))
+      (90351 call(90348 call (partial) retain _mt[203] call_tmp[772467]))
+    }
+    unknown tmp[482058] "maybe param" "temp"
+    unknown call_tmp[772474] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772477 'move' call_tmp[772474](90386 'typeof' this[90246]))
+    (482069 'move' tmp[482058](90384 call isNonNilableClass call_tmp[772474]))
+    unknown call_tmp[772479] "expr temp" "maybe param" "maybe type" "temp"
+    (772482 'move' call_tmp[772479](482071 call _cond_invalid tmp[482058]))
+    if call_tmp[772479]
+    {
+      (482074 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[669355] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669356] "maybe param" "temp"
+    unknown call_tmp[772484] "expr temp" "maybe param" "maybe type" "temp"
+    (772487 'move' call_tmp[772484](482059 call isTrue tmp[482058]))
+    (669361 'move' tmp[669356](669359 call _cond_test call_tmp[772484]))
+    if tmp[669356]
+    {
+      unknown tmp[669363] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772489] "expr temp" "maybe param" "maybe type" "temp"
+      (772492 'move' call_tmp[772489](90388 call isNilableClass src[90250]))
+      (669365 'move' tmp[669363](482062 call isTrue call_tmp[772489]))
+      (669370 'move' tmp[669355](669367 '_paramFoldLogical' tmp[669356] tmp[669363]))
+    }
+    {
+      (669375 'move' tmp[669355](669372 '_paramFoldLogical' tmp[669356] 0))
+    }
+    unknown call_tmp[772494] "expr temp" "maybe param" "maybe type" "temp"
+    (772497 'move' call_tmp[772494](90390 call _cond_test tmp[669355]))
+    if call_tmp[772494]
+    {
+      unknown call_tmp[772499] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772502 'move' call_tmp[772499](90371 'typeof' this[90246]))
+      unknown call_tmp[772504] "expr temp" "maybe param" "maybe type" "temp"
+      (772507 'move' call_tmp[772504](90368 call : call_tmp[772499] string[244]))
+      unknown call_tmp[772509] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772512 'move' call_tmp[772509](90377 'typeof' src[90250]))
+      unknown call_tmp[772514] "expr temp" "maybe param" "maybe type" "temp"
+      (772517 'move' call_tmp[772514](90374 call : call_tmp[772509] string[244]))
+      (90366 call compilerError "cannot initialize '" call_tmp[772504] "' from a '" call_tmp[772514] "'")
+    }
+    (599808 return _void[46])
+  }
+  function _shared[242](?).init=[90397](arg _mt[90407]:_MT[201], ref arg this[90400]:_shared[242](?) :
+  _shared[242](?), arg src[90404]:borrowed[174](?)) : void[4] "method" "no return value for void"
+  {
+    unknown call_tmp[772519] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772522 'move' call_tmp[772519](90416 'typeof' this[90400]))
+    unknown call_tmp[772524] "expr temp" "maybe param" "maybe type" "temp"
+    (772527 'move' call_tmp[772524](90413 call : call_tmp[772519] string[244]))
+    unknown call_tmp[772529] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772532 'move' call_tmp[772529](90422 'typeof' src[90404]))
+    unknown call_tmp[772534] "expr temp" "maybe param" "maybe type" "temp"
+    (772537 'move' call_tmp[772534](90419 call : call_tmp[772529] string[244]))
+    (90411 call compilerError "cannot initialize '" call_tmp[772524] "' from a '" call_tmp[772534] "'")
+    (550455 'end of statement')
+    unknown chpl_t[520363] "temp" "type variable"
+    unknown tmp[669382] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669383] "maybe param" "temp"
+    unknown call_tmp[772539] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772542 'move' call_tmp[772539](90434 'typeof' this[90400]))
+    unknown call_tmp[772546] "expr temp" "maybe param" "maybe type" "temp"
+    (772549 'move' call_tmp[772546](90435 call chpl_t _mt[203] call_tmp[772539]))
+    unknown call_tmp[772551] "expr temp" "marked generic" "maybe param" "maybe type" "temp"
+    (772554 'move' call_tmp[772551](90431 call != call_tmp[772546] ?[227]))
+    (669388 'move' tmp[669383](669386 call _cond_test call_tmp[772551]))
+    if tmp[669383]
+    {
+      unknown tmp[669390] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772556] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772559 'move' call_tmp[772556](90440 'typeof' this[90400]))
+      (669392 'move' tmp[669390](90441 call chpl_t _mt[203] call_tmp[772556]))
+      (669397 'move' tmp[669382](669394 '_paramFoldLogical' tmp[669383] tmp[669390]))
+    }
+    {
+      unknown tmp[669399] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772563] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772566 'move' call_tmp[772563](90447 'typeof' src[90404]))
+      (669401 'move' tmp[669399](90445 call _to_borrowed call_tmp[772563]))
+      (669406 'move' tmp[669382](669403 '_paramFoldLogical' tmp[669383] tmp[669399]))
+    }
+    (520365 'move' chpl_t[520363] tmp[669382])
+    (520367 'init field' this[90400] c"chpl_t" chpl_t[520363])
+    (550456 'end of statement')
+    unknown chpl_p[520372] "temp"
+    unknown call_tmp[772568] "expr temp" "maybe param" "maybe type" "temp"
+    (772571 'move' call_tmp[772568](520382 '.v' this[90400] c"chpl_t"))
+    unknown call_tmp[772573] "expr temp" "maybe param" "maybe type" "temp"
+    (772576 'move' call_tmp[772573](520374 'to nilable class' call_tmp[772568]))
+    (520376 'default init var' chpl_p[520372] call_tmp[772573])
+    (520378 '.=' this[90400] c"chpl_p" chpl_p[520372])
+    (550457 'end of statement')
+    val chpl_pn[520385]:unmanaged ReferenceCount?[468037] "temp"
+    (520388 'default init var' chpl_pn[520385] unmanaged ReferenceCount?[468037])
+    (520390 '.=' this[90400] c"chpl_pn" chpl_pn[520385])
+    (550458 'end of statement')
+    (599810 return _void[46])
+  }
+  function _shared[242](?).init=[90453](arg _mt[90463]:_MT[201], ref arg this[90456]:_shared[242](?) :
+  _shared[242](?), arg src[90460]:unmanaged[183](?)) : void[4] "method" "no return value for void"
+  {
+    unknown call_tmp[772578] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772581 'move' call_tmp[772578](90472 'typeof' this[90456]))
+    unknown call_tmp[772583] "expr temp" "maybe param" "maybe type" "temp"
+    (772586 'move' call_tmp[772583](90469 call : call_tmp[772578] string[244]))
+    unknown call_tmp[772588] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772591 'move' call_tmp[772588](90478 'typeof' src[90460]))
+    unknown call_tmp[772593] "expr temp" "maybe param" "maybe type" "temp"
+    (772596 'move' call_tmp[772593](90475 call : call_tmp[772588] string[244]))
+    (90467 call compilerError "cannot initialize '" call_tmp[772583] "' from a '" call_tmp[772593] "'")
+    (550459 'end of statement')
+    unknown chpl_t[520394] "temp" "type variable"
+    unknown tmp[669413] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669414] "maybe param" "temp"
+    unknown call_tmp[772598] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772601 'move' call_tmp[772598](90490 'typeof' this[90456]))
+    unknown call_tmp[772605] "expr temp" "maybe param" "maybe type" "temp"
+    (772608 'move' call_tmp[772605](90491 call chpl_t _mt[203] call_tmp[772598]))
+    unknown call_tmp[772610] "expr temp" "marked generic" "maybe param" "maybe type" "temp"
+    (772613 'move' call_tmp[772610](90487 call != call_tmp[772605] ?[227]))
+    (669419 'move' tmp[669414](669417 call _cond_test call_tmp[772610]))
+    if tmp[669414]
+    {
+      unknown tmp[669421] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772615] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772618 'move' call_tmp[772615](90496 'typeof' this[90456]))
+      (669423 'move' tmp[669421](90497 call chpl_t _mt[203] call_tmp[772615]))
+      (669428 'move' tmp[669413](669425 '_paramFoldLogical' tmp[669414] tmp[669421]))
+    }
+    {
+      unknown tmp[669430] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772622] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772625 'move' call_tmp[772622](90503 'typeof' src[90460]))
+      (669432 'move' tmp[669430](90501 call _to_borrowed call_tmp[772622]))
+      (669437 'move' tmp[669413](669434 '_paramFoldLogical' tmp[669414] tmp[669430]))
+    }
+    (520396 'move' chpl_t[520394] tmp[669413])
+    (520398 'init field' this[90456] c"chpl_t" chpl_t[520394])
+    (550460 'end of statement')
+    unknown chpl_p[520403] "temp"
+    unknown call_tmp[772627] "expr temp" "maybe param" "maybe type" "temp"
+    (772630 'move' call_tmp[772627](520413 '.v' this[90456] c"chpl_t"))
+    unknown call_tmp[772632] "expr temp" "maybe param" "maybe type" "temp"
+    (772635 'move' call_tmp[772632](520405 'to nilable class' call_tmp[772627]))
+    (520407 'default init var' chpl_p[520403] call_tmp[772632])
+    (520409 '.=' this[90456] c"chpl_p" chpl_p[520403])
+    (550461 'end of statement')
+    val chpl_pn[520416]:unmanaged ReferenceCount?[468037] "temp"
+    (520419 'default init var' chpl_pn[520416] unmanaged ReferenceCount?[468037])
+    (520421 '.=' this[90456] c"chpl_pn" chpl_pn[520416])
+    (550462 'end of statement')
+    (599812 return _void[46])
+  }
+  function _shared[242](?).init=[90509](arg _mt[90519]:_MT[201], ref arg this[90512]:_shared[242](?) :
+  _shared[242](?), arg src[90516]:_nilType[30]) : void[4] "leaves this nil" "method" "no return value for void"
+  {
+    unknown call_tmp[772637] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772640 'move' call_tmp[772637](90531 'typeof' this[90512]))
+    unknown call_tmp[772644] "expr temp" "maybe param" "maybe type" "temp"
+    (772647 'move' call_tmp[772644](90532 call chpl_t _mt[203] call_tmp[772637]))
+    unknown call_tmp[772649] "expr temp" "marked generic" "maybe param" "maybe type" "temp"
+    (772652 'move' call_tmp[772649](90528 call == call_tmp[772644] ?[227]))
+    unknown call_tmp[772654] "expr temp" "marked generic" "maybe param" "maybe type" "temp"
+    (772657 'move' call_tmp[772654](90536 call _cond_test call_tmp[772649]))
+    if call_tmp[772654]
+    {
+      (90523 call compilerError "cannot establish type of shared when initializing with 'nil'")
+    }
+    unknown call_tmp[772661] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772664 'move' call_tmp[772661](90547 'typeof' this[90512]))
+    unknown call_tmp[772668] "expr temp" "maybe param" "maybe type" "temp"
+    (772671 'move' call_tmp[772668](90548 call chpl_t _mt[203] call_tmp[772661]))
+    (90545 call(90542 call (partial) init _mt[203] this[90512]) call_tmp[772668])
+    (550464 'end of statement')
+    unknown call_tmp[772675] "expr temp" "maybe param" "maybe type" "temp"
+    (772678 'move' call_tmp[772675](423900 call chpl_t _mt[203] this[90512]))
+    unknown call_tmp[772680] "expr temp" "maybe param" "maybe type" "temp"
+    (772683 'move' call_tmp[772680](90562 call isNonNilableClass call_tmp[772675]))
+    unknown call_tmp[772685] "expr temp" "maybe param" "maybe type" "temp"
+    (772688 'move' call_tmp[772685](90564 call _cond_test call_tmp[772680]))
+    if call_tmp[772685]
+    {
+      unknown call_tmp[772690] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (772693 'move' call_tmp[772690](90557 'typeof' this[90512]))
+      unknown call_tmp[772695] "expr temp" "maybe param" "maybe type" "temp"
+      (772698 'move' call_tmp[772695](90554 call : call_tmp[772690] string[244]))
+      (90552 call compilerError "cannot initialize '" call_tmp[772695] "' from 'nil'")
+    }
+    (599814 return _void[46])
+  }
+  function _shared[242](?).doClear[90571](arg _mt[90577]:_MT[201], ref arg this[90574]:_shared[242](?) :
+  _shared[242](?)) : _unknown[42] "method" "no return value for void"
+  {
+    unknown tmp[482079] "maybe param" "temp"
+    unknown call_tmp[772702] "expr temp" "maybe param" "maybe type" "temp"
+    (772705 'move' call_tmp[772702](423927 call chpl_p _mt[203] this[90574]))
+    (482090 'move' tmp[482079](90639 call != call_tmp[772702] nil[32]))
+    unknown call_tmp[772707] "expr temp" "maybe param" "maybe type" "temp"
+    (772710 'move' call_tmp[772707](482092 call _cond_invalid tmp[482079]))
+    if call_tmp[772707]
+    {
+      (482095 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[669444] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669445] "maybe param" "temp"
+    unknown call_tmp[772712] "expr temp" "maybe param" "maybe type" "temp"
+    (772715 'move' call_tmp[772712](482080 call isTrue tmp[482079]))
+    (669450 'move' tmp[669445](669448 call _cond_test call_tmp[772712]))
+    if tmp[669445]
+    {
+      unknown tmp[669452] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772719] "expr temp" "maybe param" "maybe type" "temp"
+      (772722 'move' call_tmp[772719](423932 call chpl_pn _mt[203] this[90574]))
+      unknown call_tmp[772724] "expr temp" "maybe param" "maybe type" "temp"
+      (772727 'move' call_tmp[772724](90643 call != call_tmp[772719] nil[32]))
+      (669454 'move' tmp[669452](482083 call isTrue call_tmp[772724]))
+      (669459 'move' tmp[669444](669456 '_paramFoldLogical' tmp[669445] tmp[669452]))
+    }
+    {
+      (669464 'move' tmp[669444](669461 '_paramFoldLogical' tmp[669445] 0))
+    }
+    unknown call_tmp[772729] "expr temp" "maybe param" "maybe type" "temp"
+    (772732 'move' call_tmp[772729](90647 call _cond_test tmp[669444]))
+    if call_tmp[772729]
+    {
+      unknown call_tmp[772736] "expr temp" "maybe param" "maybe type" "temp"
+      (772739 'move' call_tmp[772736](423905 call chpl_pn _mt[203] this[90574]))
+      unknown call_tmp[772741] "expr temp" "maybe param" "maybe type" "temp"
+      (772744 'move' call_tmp[772741](90583 call postfix! call_tmp[772736]))
+      unknown call_tmp[772748] "maybe param" "maybe type" "temp"
+      (772751 'move' call_tmp[772748](90591 call(90588 call (partial) releaseStrong _mt[203] call_tmp[772741])))
+      const sc[90582] "dead at end of block" "const" "insert auto destroy"
+      (644563 'init var' sc[90582] call_tmp[772748])
+      (90593 'end of statement')
+      unknown call_tmp[772753] "expr temp" "maybe param" "maybe type" "temp"
+      (772756 'move' call_tmp[772753](90601 call == sc[90582] 0))
+      unknown call_tmp[772758] "expr temp" "maybe param" "maybe type" "temp"
+      (772761 'move' call_tmp[772758](90605 call _cond_test call_tmp[772753]))
+      if call_tmp[772758]
+      {
+        unknown call_tmp[772765] "expr temp" "maybe param" "maybe type" "temp"
+        (772768 'move' call_tmp[772765](423910 call chpl_p _mt[203] this[90574]))
+        unknown call_tmp[772770] "expr temp" "maybe param" "maybe type" "temp"
+        (772773 'move' call_tmp[772770](90596 call _to_unmanaged call_tmp[772765]))
+        (90598 call chpl__delete call_tmp[772770])
+      }
+      unknown call_tmp[772777] "expr temp" "maybe param" "maybe type" "temp"
+      (772780 'move' call_tmp[772777](423916 call chpl_pn _mt[203] this[90574]))
+      unknown call_tmp[772782] "expr temp" "maybe param" "maybe type" "temp"
+      (772785 'move' call_tmp[772782](90612 call postfix! call_tmp[772777]))
+      unknown call_tmp[772789] "maybe param" "maybe type" "temp"
+      (772792 'move' call_tmp[772789](90620 call(90617 call (partial) releaseTotal _mt[203] call_tmp[772782])))
+      const tc[90611] "dead at end of block" "const" "insert auto destroy"
+      (644565 'init var' tc[90611] call_tmp[772789])
+      (90622 'end of statement')
+      unknown call_tmp[772794] "expr temp" "maybe param" "maybe type" "temp"
+      (772797 'move' call_tmp[772794](90628 call == tc[90611] 0))
+      unknown call_tmp[772799] "expr temp" "maybe param" "maybe type" "temp"
+      (772802 'move' call_tmp[772799](90632 call _cond_test call_tmp[772794]))
+      if call_tmp[772799]
+      {
+        unknown call_tmp[772806] "expr temp" "maybe param" "maybe type" "temp"
+        (772809 'move' call_tmp[772806](423921 call chpl_pn _mt[203] this[90574]))
+        (90625 call chpl__delete call_tmp[772806])
+      }
+    }
+    unknown call_tmp[772813] "expr temp" "maybe param" "maybe type" "temp"
+    (772816 'move' call_tmp[772813](423937 call chpl_p _mt[203] this[90574]))
+    (90651 call = call_tmp[772813] nil[32])
+    (550469 'end of statement')
+    unknown call_tmp[772820] "expr temp" "maybe param" "maybe type" "temp"
+    (772823 'move' call_tmp[772820](423942 call chpl_pn _mt[203] this[90574]))
+    (90655 call = call_tmp[772820] nil[32])
+    (599816 return _void[46])
+  }
+  function _shared[467879](?).adopt[90661](arg _mt[90669]:_MT[201], arg this[90664]:_shared[467879](?), arg source[90667]:_any[141](?)) : _unknown[42] "method" "no return value for void"
+  {
+    unknown call_tmp[772825] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (772828 'move' call_tmp[772825](90678 'typeof' source[90667]))
+    unknown call_tmp[772830] "expr temp" "maybe param" "maybe type" "temp"
+    (772833 'move' call_tmp[772830](90675 call : call_tmp[772825] string[244]))
+    (90673 call compilerError "cannot adopt a " call_tmp[772830])
+    (599818 return _void[46])
+  }
+  function _shared[467879](?).adopt[90682](arg _mt[90692]:_MT[201], arg this[90685]:_shared[467879](?), in arg obj[90689]:_owned[238](?)) : _unknown[42] "inline" "method"
+  {
+    unknown ret[599822] "RVV" "temp"
+    unknown call_tmp[772837] "maybe param" "maybe type" "temp"
+    (772840 'move' call_tmp[772837](90701 call(90698 call (partial) release _mt[203] _owned[238](?)) obj[90689]))
+    unknown ptr[90696] "dead at end of block" "insert auto destroy"
+    (644567 'init var' ptr[90696] call_tmp[772837])
+    (90704 'end of statement')
+    unknown call_tmp[772844] "expr temp" "maybe param" "maybe type" "temp"
+    (772847 'move' call_tmp[772844](90710 call(90707 call (partial) adopt _mt[203] _shared[242](?)) ptr[90696]))
+    (599827 'move' ret[599822](599826 'deref' call_tmp[772844]))
+    gotoReturn _end_adopt[599820] _end_adopt[599820]
+    (550472 'end of statement' ptr[90696])
+    label _end_adopt[599820]
+    (599824 return ret[599822])
+  }
+  function _shared[467879](?).adopt[90714](arg _mt[90724]:_MT[201], arg this[90717]:_shared[467879](?), in arg obj[90721]:unmanaged[183](?)) : _unknown[42] "inline" "method"
+  {
+    unknown ret[599833] "RVV" "temp"
+    unknown call_tmp[772849] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (772852 'move' call_tmp[772849](1000035 'new' _shared[242](?) obj[90721]))
+    (599838 'move' ret[599833](599837 'deref' call_tmp[772849]))
+    (599835 return ret[599833])
+  }
+  function _shared[242](?).deinit[90734](arg _mt[90740]:_MT[201], ref arg this[90737]:_shared[242](?) :
+  _shared[242](?)) : _unknown[42] "destructor" "method" "no return value for void"
+  {
+    unknown call_tmp[772856] "expr temp" "maybe param" "maybe type" "temp"
+    (772859 'move' call_tmp[772856](423957 call chpl_p _mt[203] this[90737]))
+    unknown call_tmp[772861] "expr temp" "maybe param" "maybe type" "temp"
+    (772864 'move' call_tmp[772861](90747 call isClass call_tmp[772856]))
+    unknown call_tmp[772866] "expr temp" "maybe param" "maybe type" "temp"
+    (772869 'move' call_tmp[772866](90749 call _cond_test call_tmp[772861]))
+    if call_tmp[772866]
+    {
+      (90745 call(423952 call (partial) doClear _mt[203] this[90737]))
+    }
+    (599840 return _void[46])
+  }
+  function _shared[242](?).borrow[90755](arg _mt[90761]:_MT[201], arg this[90758]:_shared[242](?) :
+  _shared[242](?)) : _unknown[42] "nil from this" "method"
+  {
+    unknown ret[599844] "RVV" "temp"
+    unknown call_tmp[772875] "expr temp" "maybe param" "maybe type" "temp"
+    (772878 'move' call_tmp[772875](423972 call chpl_t _mt[203] this[90758]))
+    unknown call_tmp[772880] "expr temp" "maybe param" "maybe type" "temp"
+    (772883 'move' call_tmp[772880](90775 call _to_nilable call_tmp[772875]))
+    unknown call_tmp[772887] "expr temp" "maybe param" "maybe type" "temp"
+    (772890 'move' call_tmp[772887](423977 call chpl_t _mt[203] this[90758]))
+    unknown call_tmp[772892] "expr temp" "maybe param" "maybe type" "temp"
+    (772895 'move' call_tmp[772892](90772 call == call_tmp[772880] call_tmp[772887]))
+    unknown call_tmp[772897] "expr temp" "maybe param" "maybe type" "temp"
+    (772900 'move' call_tmp[772897](90778 call _cond_test call_tmp[772892]))
+    if call_tmp[772897]
+    {
+      unknown call_tmp[772904] "expr temp" "maybe param" "maybe type" "temp"
+      (772907 'move' call_tmp[772904](423962 call chpl_p _mt[203] this[90758]))
+      (599849 'move' ret[599844](599848 'deref' call_tmp[772904]))
+      gotoReturn _end_borrow[599842] _end_borrow[599842]
+    }
+    {
+      unknown call_tmp[772911] "expr temp" "maybe param" "maybe type" "temp"
+      (772914 'move' call_tmp[772911](423967 call chpl_p _mt[203] this[90758]))
+      unknown call_tmp[772916] "expr temp" "maybe param" "maybe type" "temp"
+      (772919 'move' call_tmp[772916](90769 call postfix! call_tmp[772911]))
+      (599854 'move' ret[599844](599853 'deref' call_tmp[772916]))
+      gotoReturn _end_borrow[599842] _end_borrow[599842]
+    }
+    label _end_borrow[599842]
+    (599846 return ret[599844])
+  }
+  function _shared[242](?).downgrade[90784](arg _mt[90790]:_MT[201], arg this[90787]:_shared[242](?) :
+  _shared[242](?)) : _unknown[42] "method" "@unstable"
+  {
+    unknown ret[599860] "RVV" "temp"
+    unknown call_tmp[772921] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (772924 'move' call_tmp[772921](1000036 'new' module=[222] WeakPointer[89444] weak[88953](?) this[90787]))
+    (599865 'move' ret[599860](599864 'deref' call_tmp[772921]))
+    (599862 return ret[599860])
+    (400654 'referenced modules list' WeakPointer[89444])
+  }
+  function =[90805](ref arg lhs[90808]:_shared[242](?), arg rhs[90812]:_shared[242](?)) : _unknown[42] "assignop" "operator" "no return value for void"
+  {
+    unknown call_tmp[772928] "expr temp" "maybe param" "maybe type" "temp"
+    (772931 'move' call_tmp[772928](90840 call chpl_pn _mt[203] rhs[90812]))
+    unknown call_tmp[772933] "expr temp" "maybe param" "maybe type" "temp"
+    (772936 'move' call_tmp[772933](90837 call != call_tmp[772928] nil[32]))
+    unknown call_tmp[772938] "expr temp" "maybe param" "maybe type" "temp"
+    (772941 'move' call_tmp[772938](90844 call _cond_test call_tmp[772933]))
+    if call_tmp[772938]
+    {
+      unknown call_tmp[772945] "expr temp" "maybe param" "maybe type" "temp"
+      (772948 'move' call_tmp[772945](90829 call chpl_pn _mt[203] rhs[90812]))
+      unknown call_tmp[772950] "expr temp" "maybe param" "maybe type" "temp"
+      (772953 'move' call_tmp[772950](90826 call postfix! call_tmp[772945]))
+      (90835 call(90832 call (partial) retain _mt[203] call_tmp[772950]))
+    }
+    unknown call_tmp[772959] "maybe param" "maybe type" "temp"
+    (772962 'move' call_tmp[772959](90852 call chpl_p _mt[203] rhs[90812]))
+    const chpl_p_tmp[90850] "dead at end of block" "const" "insert auto destroy"
+    (644569 'init var' chpl_p_tmp[90850] call_tmp[772959])
+    (90856 'end of statement')
+    unknown call_tmp[772966] "maybe param" "maybe type" "temp"
+    (772969 'move' call_tmp[772966](90860 call chpl_pn _mt[203] rhs[90812]))
+    const chpl_pn_tmp[90858] "dead at end of block" "const" "insert auto destroy"
+    (644571 'init var' chpl_pn_tmp[90858] call_tmp[772966])
+    (90864 'end of statement')
+    (90869 call(90866 call (partial) doClear _mt[203] lhs[90808]))
+    (550480 'end of statement')
+    unknown call_tmp[772975] "expr temp" "maybe param" "maybe type" "temp"
+    (772978 'move' call_tmp[772975](90873 call chpl_p _mt[203] lhs[90808]))
+    (90870 call = call_tmp[772975] chpl_p_tmp[90850])
+    (550481 'end of statement' chpl_p_tmp[90850])
+    unknown call_tmp[772982] "expr temp" "maybe param" "maybe type" "temp"
+    (772985 'move' call_tmp[772982](90880 call chpl_pn _mt[203] lhs[90808]))
+    (90877 call = call_tmp[772982] chpl_pn_tmp[90858])
+    (550483 'end of statement' chpl_pn_tmp[90858])
+    (599867 return _void[46])
+  }
+  where {
+    unknown tmp[482100] "maybe param" "temp"
+    (482111 'move' tmp[482100](90820 call isNonNilableClass lhs[90808]))
+    unknown call_tmp[772987] "expr temp" "maybe param" "maybe type" "temp"
+    (772990 'move' call_tmp[772987](482113 call _cond_invalid tmp[482100]))
+    if call_tmp[772987]
+    {
+      (482116 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[669471] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669472] "maybe param" "temp"
+    unknown call_tmp[772992] "expr temp" "maybe param" "maybe type" "temp"
+    (772995 'move' call_tmp[772992](482101 call isTrue tmp[482100]))
+    (669477 'move' tmp[669472](669475 call _cond_test call_tmp[772992]))
+    if tmp[669472]
+    {
+      unknown tmp[669479] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[772997] "expr temp" "maybe param" "maybe type" "temp"
+      (773000 'move' call_tmp[772997](90823 call isNilableClass rhs[90812]))
+      (669481 'move' tmp[669479](482104 call isTrue call_tmp[772997]))
+      (669486 'move' tmp[669471](669483 '_paramFoldLogical' tmp[669472] tmp[669479]))
+    }
+    {
+      (669491 'move' tmp[669471](669488 '_paramFoldLogical' tmp[669472] 0))
+    }
+    (90815 call ! tmp[669471])
+  }
+  function =[90887](ref arg lhs[90890]:_shared[242](?), in arg rhs[90894]:_owned[238](?)) : _unknown[42] "assignop" "operator" "no return value for void"
+  {
+    unknown call_tmp[773002] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (773005 'move' call_tmp[773002](90906 'typeof' rhs[90894]))
+    unknown call_tmp[773007] "expr temp" "maybe param" "maybe type" "temp"
+    (773010 'move' call_tmp[773007](90903 call : call_tmp[773002] string[244]))
+    unknown call_tmp[773012] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (773015 'move' call_tmp[773012](90914 'typeof' lhs[90890]))
+    unknown call_tmp[773017] "expr temp" "maybe param" "maybe type" "temp"
+    (773020 'move' call_tmp[773017](90911 call : call_tmp[773012] string[244]))
+    (90899 call compilerError "cannot assign '" call_tmp[773007] "' to a '" call_tmp[773017] "'")
+    (599869 return _void[46])
+  }
+  function =[90919](ref arg lhs[90922]:_shared[242](?), arg rhs[90926]:_nilType[30]) : _unknown[42] "assignop" "operator" "no return value for void"
+  {
+    (90934 call(90931 call (partial) doClear _mt[203] lhs[90922]))
+    (599871 return _void[46])
+  }
+  function <=>[90937](ref arg lhs[90940]:_shared[242](?), ref arg rhs[90944]:_shared[242](?)) : _unknown[42] "operator" "no return value for void"
+  {
+    unknown call_tmp[773026] "expr temp" "maybe param" "maybe type" "temp"
+    (773029 'move' call_tmp[773026](90951 call chpl_pn _mt[203] lhs[90940]))
+    unknown call_tmp[773033] "expr temp" "maybe param" "maybe type" "temp"
+    (773036 'move' call_tmp[773033](90955 call chpl_pn _mt[203] rhs[90944]))
+    (90948 call <=> call_tmp[773026] call_tmp[773033])
+    (550487 'end of statement')
+    unknown call_tmp[773040] "expr temp" "maybe param" "maybe type" "temp"
+    (773043 'move' call_tmp[773040](90961 call chpl_p _mt[203] lhs[90940]))
+    unknown call_tmp[773047] "expr temp" "maybe param" "maybe type" "temp"
+    (773050 'move' call_tmp[773047](90965 call chpl_p _mt[203] rhs[90944]))
+    (90958 call <=> call_tmp[773040] call_tmp[773047])
+    (599873 return _void[46])
+  }
+  function chpl__autoDestroy[90970](ref arg x[90973]:_shared[242](?)) : _unknown[42] "auto destroy fn" "no return value for void"
+  {
+    unknown call_tmp[773052] "expr temp" "maybe param" "maybe type" "temp"
+    (773055 'move' call_tmp[773052](90978 'deref' x[90973]))
+    (90977 'call destructor' call_tmp[773052])
+    (599875 return _void[46])
+  }
+  function _shared[242](?).deserialize[90982](arg _mt[90992]:_MT[201], ref arg this[90985]:_shared[242](?) :
+  _shared[242](?), arg reader[90988]:_any[141](?), ref arg deserializer[90990]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    (90996 call(423998 call (partial) _readWriteHelper _mt[203] this[90985]) reader[90988])
+    (599877 return _void[46])
+  }
+  function _shared[242](?).serialize[91000](arg _mt[91010]:_MT[201], arg this[91003]:_shared[242](?) :
+  _shared[242](?), arg writer[91006]:_any[141](?), ref arg serializer[91008]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    (91014 call(424003 call (partial) _readWriteHelper _mt[203] this[91003]) writer[91006])
+    (599879 return _void[46])
+  }
+  function _shared[242](?)._readWriteHelper[91018](arg _mt[91026]:_MT[201], arg this[91021]:_shared[242](?) :
+  _shared[242](?), arg f[91024]:_any[141](?)) : _unknown[42] throws "method" "no return value for void"
+  {
+    unknown call_tmp[773063] "expr temp" "maybe param" "maybe type" "temp"
+    (773066 'move' call_tmp[773063](91177 call chpl_t _mt[203] this[91021]))
+    unknown call_tmp[773068] "expr temp" "maybe param" "maybe type" "temp"
+    (773071 'move' call_tmp[773068](91175 call isNonNilableClass call_tmp[773063]))
+    unknown call_tmp[773073] "expr temp" "maybe param" "maybe type" "temp"
+    (773076 'move' call_tmp[773073](91180 call _cond_test call_tmp[773068]))
+    if call_tmp[773073]
+    {
+      unknown call_tmp[773080] "expr temp" "maybe param" "maybe type" "temp"
+      (773083 'move' call_tmp[773080](91037 call chpl_p _mt[203] this[91021]))
+      unknown call_tmp[773085] "expr temp" "maybe param" "maybe type" "temp"
+      (773088 'move' call_tmp[773085](91034 call postfix! call_tmp[773080]))
+      unknown call_tmp[773090] "maybe param" "maybe type" "temp"
+      (773093 'move' call_tmp[773090](91032 call : call_tmp[773085] _borrowedNonNilable[177](?)))
+      unknown tmp[91031] "dead at end of block" "insert auto destroy"
+      (644573 'init var' tmp[91031] call_tmp[773090])
+      (91043 'end of statement')
+      unknown call_tmp[773097] "expr temp" "maybe param" "maybe type" "temp"
+      (773100 'move' call_tmp[773097](91063 call _writing _mt[203] f[91024]))
+      unknown call_tmp[773102] "expr temp" "maybe param" "maybe type" "temp"
+      (773105 'move' call_tmp[773102](91066 call _cond_test call_tmp[773097]))
+      if call_tmp[773102]
+      {
+        (91048 call(91045 call (partial) write _mt[203] f[91024]) tmp[91031])
+        (550492 'end of statement' tmp[91031])
+      }
+      {
+        unknown call_tmp[773111] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (773114 'move' call_tmp[773111](91060 'typeof' tmp[91031]))
+        unknown call_tmp[773116] "expr temp" "maybe param" "maybe type" "temp"
+        (773119 'move' call_tmp[773116](91058 call(91055 call (partial) read _mt[203] f[91024]) call_tmp[773111]))
+        (91051 call = tmp[91031] call_tmp[773116])
+        (550494 'end of statement' tmp[91031])
+      }
+      unknown call_tmp[773121] "expr temp" "maybe param" "maybe type" "temp"
+      (773124 'move' call_tmp[773121](91076 call == tmp[91031] nil[32]))
+      unknown call_tmp[773126] "expr temp" "maybe param" "maybe type" "temp"
+      (773129 'move' call_tmp[773126](91080 call _cond_test call_tmp[773121]))
+      if call_tmp[773126]
+      {
+        (91073 call halt "internal error - read nil")
+      }
+      unknown call_tmp[773133] "expr temp" "maybe param" "maybe type" "temp"
+      (773136 'move' call_tmp[773133](91093 call chpl_p _mt[203] this[91021]))
+      unknown call_tmp[773138] "expr temp" "maybe param" "maybe type" "temp"
+      (773141 'move' call_tmp[773138](91089 call != tmp[91031] call_tmp[773133]))
+      unknown call_tmp[773143] "expr temp" "maybe param" "maybe type" "temp"
+      (773146 'move' call_tmp[773143](91096 call _cond_test call_tmp[773138]))
+      if call_tmp[773143]
+      {
+        (91086 call halt "internal error - read changed ptr")
+      }
+    }
+    {
+      unknown call_tmp[773150] "expr temp" "maybe param" "maybe type" "temp"
+      (773153 'move' call_tmp[773150](91107 call chpl_p _mt[203] this[91021]))
+      unknown call_tmp[773155] "maybe param" "maybe type" "temp"
+      (773158 'move' call_tmp[773155](91104 call : call_tmp[773150] _borrowedNilable[180](?)))
+      unknown tmp[91103] "dead at end of block" "insert auto destroy"
+      (644575 'init var' tmp[91103] call_tmp[773155])
+      (91114 'end of statement')
+      unknown call_tmp[773162] "expr temp" "maybe param" "maybe type" "temp"
+      (773165 'move' call_tmp[773162](91134 call _writing _mt[203] f[91024]))
+      unknown call_tmp[773167] "expr temp" "maybe param" "maybe type" "temp"
+      (773170 'move' call_tmp[773167](91137 call _cond_test call_tmp[773162]))
+      if call_tmp[773167]
+      {
+        (91119 call(91116 call (partial) write _mt[203] f[91024]) tmp[91103])
+        (550498 'end of statement' tmp[91103])
+      }
+      {
+        unknown call_tmp[773176] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (773179 'move' call_tmp[773176](91131 'typeof' tmp[91103]))
+        unknown call_tmp[773181] "expr temp" "maybe param" "maybe type" "temp"
+        (773184 'move' call_tmp[773181](91129 call(91126 call (partial) read _mt[203] f[91024]) call_tmp[773176]))
+        (91122 call = tmp[91103] call_tmp[773181])
+        (550500 'end of statement' tmp[91103])
+      }
+      unknown call_tmp[773188] "expr temp" "maybe param" "maybe type" "temp"
+      (773191 'move' call_tmp[773188](91151 call chpl_p _mt[203] this[91021]))
+      unknown call_tmp[773193] "expr temp" "maybe param" "maybe type" "temp"
+      (773196 'move' call_tmp[773193](91147 call != tmp[91103] call_tmp[773188]))
+      unknown call_tmp[773198] "expr temp" "maybe param" "maybe type" "temp"
+      (773201 'move' call_tmp[773198](91154 call _cond_test call_tmp[773193]))
+      if call_tmp[773198]
+      {
+        (91144 call halt "internal error - read changed ptr")
+      }
+      unknown call_tmp[773203] "expr temp" "maybe param" "maybe type" "temp"
+      (773206 'move' call_tmp[773203](91165 call == tmp[91103] nil[32]))
+      unknown call_tmp[773208] "expr temp" "maybe param" "maybe type" "temp"
+      (773211 'move' call_tmp[773208](91169 call _cond_test call_tmp[773203]))
+      if call_tmp[773208]
+      {
+        (91163 call(91160 call (partial) doClear _mt[203] this[91021]))
+      }
+    }
+    (599881 return _void[46])
+  }
+  function :[91186](const  ref arg x[91189]:_shared[242](?), arg t[91193]:borrowed[174](?)) : _unknown[42] "inline" "operator"
+  {
+    unknown ret[599885] "RVV" "temp"
+    unknown call_tmp[773217] "expr temp" "maybe param" "maybe type" "temp"
+    (773220 'move' call_tmp[773217](91209 call(91206 call (partial) borrow _mt[203] x[91189])))
+    (599890 'move' ret[599885](599889 'deref' call_tmp[773217]))
+    (599887 return ret[599885])
+  }
+  where {
+    unknown call_tmp[773224] "expr temp" "maybe param" "maybe type" "temp"
+    (773227 'move' call_tmp[773224](91200 call chpl_t _mt[203] x[91189]))
+    (394750 'is_subtype' call_tmp[773224] t[91193])
+  }
+  function :[91213](in arg x[91218]:shared[467993](?), arg t[91225]:shared?[467997](?)) : _unknown[42] "inline" "operator"
+  {
+    unknown ret[599894] "RVV" "temp"
+    unknown call_tmp[773231] "expr temp" "maybe param" "maybe type" "temp"
+    (773234 'move' call_tmp[773231](91250 call chpl_t _mt[203] t[91225]))
+    unknown call_tmp[773236] "expr temp" "maybe param" "maybe type" "temp"
+    (773239 'move' call_tmp[773236](91248 call _to_nilable call_tmp[773231]))
+    unknown call_tmp[773241] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (773244 'move' call_tmp[773241](1000037 'new' _shared[242](?) 1 call_tmp[773236] x[91218]))
+    (599899 'move' ret[599894](599898 'deref' call_tmp[773241]))
+    (599896 return ret[599894])
+  }
+  where {
+    unknown call_tmp[773248] "expr temp" "maybe param" "maybe type" "temp"
+    (773251 'move' call_tmp[773248](91237 call chpl_t _mt[203] t[91225]))
+    unknown call_tmp[773253] "expr temp" "maybe param" "maybe type" "temp"
+    (773256 'move' call_tmp[773253](91234 call : call_tmp[773248] class[195](?)))
+    unknown call_tmp[773260] "expr temp" "maybe param" "maybe type" "temp"
+    (773263 'move' call_tmp[773260](91231 call chpl_t _mt[203] x[91218]))
+    (394751 'is_subtype' call_tmp[773253] call_tmp[773260])
+  }
+  function :[91257](in arg x[91263]:shared?[467997](?), arg t[91270]:shared?[467997](?)) : _unknown[42] "inline" "operator"
+  {
+    unknown ret[599903] "RVV" "temp"
+    unknown call_tmp[773267] "expr temp" "maybe param" "maybe type" "temp"
+    (773270 'move' call_tmp[773267](91290 call chpl_t _mt[203] t[91270]))
+    unknown call_tmp[773272] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (773275 'move' call_tmp[773272](1000038 'new' _shared[242](?) 1 call_tmp[773267] x[91263]))
+    (599908 'move' ret[599903](599907 'deref' call_tmp[773272]))
+    (599905 return ret[599903])
+  }
+  where {
+    unknown call_tmp[773279] "expr temp" "maybe param" "maybe type" "temp"
+    (773282 'move' call_tmp[773279](91280 call chpl_t _mt[203] t[91270]))
+    unknown call_tmp[773286] "expr temp" "maybe param" "maybe type" "temp"
+    (773289 'move' call_tmp[773286](91276 call chpl_t _mt[203] x[91263]))
+    (394752 'is_subtype' call_tmp[773279] call_tmp[773286])
+  }
+  function :[91297](in arg x[91302]:shared[467993](?), arg t[91308]:shared[467993](?)) : _unknown[42] "inline" "operator"
+  {
+    unknown ret[599912] "RVV" "temp"
+    unknown call_tmp[773293] "expr temp" "maybe param" "maybe type" "temp"
+    (773296 'move' call_tmp[773293](91328 call chpl_t _mt[203] t[91308]))
+    unknown call_tmp[773298] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (773301 'move' call_tmp[773298](1000039 'new' _shared[242](?) 1 call_tmp[773293] x[91302]))
+    (599917 'move' ret[599912](599916 'deref' call_tmp[773298]))
+    (599914 return ret[599912])
+  }
+  where {
+    unknown call_tmp[773305] "expr temp" "maybe param" "maybe type" "temp"
+    (773308 'move' call_tmp[773305](91318 call chpl_t _mt[203] t[91308]))
+    unknown call_tmp[773312] "expr temp" "maybe param" "maybe type" "temp"
+    (773315 'move' call_tmp[773312](91314 call chpl_t _mt[203] x[91302]))
+    (394753 'is_subtype' call_tmp[773305] call_tmp[773312])
+  }
+  function :[91335](in arg x[91341]:shared?[467997](?), arg t[91347]:shared[467993](?)) : _unknown[42] throws "inline" "operator"
+  {
+    unknown ret[599921] "RVV" "temp"
+    unknown call_tmp[773319] "expr temp" "maybe param" "maybe type" "temp"
+    (773322 'move' call_tmp[773319](91374 call chpl_p _mt[203] x[91341]))
+    unknown call_tmp[773324] "expr temp" "maybe param" "maybe type" "temp"
+    (773327 'move' call_tmp[773324](91371 call == call_tmp[773319] nil[32]))
+    unknown call_tmp[773329] "expr temp" "maybe param" "maybe type" "temp"
+    (773332 'move' call_tmp[773329](91378 call _cond_test call_tmp[773324]))
+    if call_tmp[773329]
+    {
+      unknown call_tmp[773334] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (773337 'move' call_tmp[773334](1000040 'new' NilClassError[421132](?)(_chpl_manager = _owned[238](?))))
+      unknown call_tmp[773339] "expr temp" "maybe param" "maybe type" "temp"
+      (773342 'move' call_tmp[773339](542245 call chpl_fix_thrown_error call_tmp[773334]))
+      (91365 'throw' call_tmp[773339])
+    }
+    unknown call_tmp[773346] "expr temp" "maybe param" "maybe type" "temp"
+    (773349 'move' call_tmp[773346](91390 call chpl_t _mt[203] t[91347]))
+    unknown call_tmp[773351] "expr temp" "maybe param" "maybe type" "temp"
+    (773354 'move' call_tmp[773351](91388 call _to_nonnil call_tmp[773346]))
+    unknown call_tmp[773356] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (773359 'move' call_tmp[773356](1000041 'new' _shared[242](?) 1 call_tmp[773351] x[91341]))
+    (599926 'move' ret[599921](599925 'deref' call_tmp[773356]))
+    (599923 return ret[599921])
+  }
+  where {
+    unknown call_tmp[773363] "expr temp" "maybe param" "maybe type" "temp"
+    (773366 'move' call_tmp[773363](91360 call chpl_t _mt[203] t[91347]))
+    unknown call_tmp[773370] "expr temp" "maybe param" "maybe type" "temp"
+    (773373 'move' call_tmp[773370](91355 call chpl_t _mt[203] x[91341]))
+    unknown call_tmp[773375] "expr temp" "maybe param" "maybe type" "temp"
+    (773378 'move' call_tmp[773375](91352 call : call_tmp[773370] class[195](?)))
+    (394754 'is_subtype' call_tmp[773363] call_tmp[773375])
+  }
+  function :[91397](const  ref arg x[91403]:shared?[467997](?), arg t[91409]:shared[467993](?)) : _unknown[42] throws "inline" "operator"
+  {
+    unknown ret[599930] "RVV" "temp"
+    unknown call_tmp[773382] "expr temp" "maybe param" "maybe type" "temp"
+    (773385 'move' call_tmp[773382](91436 call chpl_p _mt[203] x[91403]))
+    unknown call_tmp[773387] "expr temp" "maybe param" "maybe type" "temp"
+    (773390 'move' call_tmp[773387](91433 call == call_tmp[773382] nil[32]))
+    unknown call_tmp[773392] "expr temp" "maybe param" "maybe type" "temp"
+    (773395 'move' call_tmp[773392](91440 call _cond_test call_tmp[773387]))
+    if call_tmp[773392]
+    {
+      unknown call_tmp[773397] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+      (773400 'move' call_tmp[773397](1000042 'new' NilClassError[421132](?)(_chpl_manager = _owned[238](?))))
+      unknown call_tmp[773402] "expr temp" "maybe param" "maybe type" "temp"
+      (773405 'move' call_tmp[773402](542247 call chpl_fix_thrown_error call_tmp[773397]))
+      (91427 'throw' call_tmp[773402])
+    }
+    unknown call_tmp[773409] "expr temp" "maybe param" "maybe type" "temp"
+    (773412 'move' call_tmp[773409](91449 call chpl_p _mt[203] x[91403]))
+    unknown call_tmp[773416] "expr temp" "maybe param" "maybe type" "temp"
+    (773419 'move' call_tmp[773416](91457 call chpl_t _mt[203] t[91409]))
+    unknown call_tmp[773421] "expr temp" "maybe param" "maybe type" "temp"
+    (773424 'move' call_tmp[773421](91455 call _to_unmanaged call_tmp[773416]))
+    unknown call_tmp[773426] "expr temp" "maybe param" "maybe type" "temp"
+    (773429 'move' call_tmp[773426](91453 call _to_nonnil call_tmp[773421]))
+    unknown call_tmp[773431] "maybe param" "maybe type" "temp"
+    (773434 'move' call_tmp[773431](91446 call : call_tmp[773409] call_tmp[773426]))
+    unknown p[91445] "dead at end of block" "insert auto destroy"
+    (644577 'init var' p[91445] call_tmp[773431])
+    (91462 'end of statement')
+    unknown call_tmp[773436] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (773439 'move' call_tmp[773436](91471 'typeof' p[91445]))
+    unknown call_tmp[773441] "expr temp" "maybe param" "maybe type" "temp"
+    (773444 'move' call_tmp[773441](91469 call _to_borrowed call_tmp[773436]))
+    unknown call_tmp[773448] "expr temp" "maybe param" "maybe type" "temp"
+    (773451 'move' call_tmp[773448](91474 call chpl_pn _mt[203] x[91403]))
+    unknown call_tmp[773453] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (773456 'move' call_tmp[773453](1000043 'new' _shared[242](?) 1 call_tmp[773441] p[91445] call_tmp[773448]))
+    (599935 'move' ret[599930](599934 'deref' call_tmp[773453]))
+    gotoReturn _end_:[599928] _end_:[599928]
+    (550511 'end of statement' p[91445])
+    label _end_:[599928]
+    (599932 return ret[599930])
+  }
+  where {
+    unknown call_tmp[773460] "expr temp" "maybe param" "maybe type" "temp"
+    (773463 'move' call_tmp[773460](91421 call chpl_t _mt[203] x[91403]))
+    unknown call_tmp[773465] "expr temp" "maybe param" "maybe type" "temp"
+    (773468 'move' call_tmp[773465](91418 call : call_tmp[773460] class[195](?)))
+    unknown call_tmp[773472] "expr temp" "maybe param" "maybe type" "temp"
+    (773475 'move' call_tmp[773472](91415 call chpl_t _mt[203] t[91409]))
+    (394755 'is_proper_subtype' call_tmp[773465] call_tmp[773472])
+  }
+  function :[91480](const  ref arg x[91485]:shared[467993](?), arg t[91491]:shared[467993](?)) : _unknown[42] throws "inline" "operator"
+  {
+    unknown ret[599941] "RVV" "temp"
+    unknown call_tmp[773479] "expr temp" "maybe param" "maybe type" "temp"
+    (773482 'move' call_tmp[773479](91510 call chpl_p _mt[203] x[91485]))
+    unknown call_tmp[773486] "expr temp" "maybe param" "maybe type" "temp"
+    (773489 'move' call_tmp[773486](91518 call chpl_t _mt[203] t[91491]))
+    unknown call_tmp[773491] "expr temp" "maybe param" "maybe type" "temp"
+    (773494 'move' call_tmp[773491](91516 call _to_unmanaged call_tmp[773486]))
+    unknown call_tmp[773496] "expr temp" "maybe param" "maybe type" "temp"
+    (773499 'move' call_tmp[773496](91514 call _to_nonnil call_tmp[773491]))
+    unknown call_tmp[773501] "maybe param" "maybe type" "temp"
+    (773504 'move' call_tmp[773501](91507 call : call_tmp[773479] call_tmp[773496]))
+    unknown p[91506] "dead at end of block" "insert auto destroy"
+    (644579 'init var' p[91506] call_tmp[773501])
+    (91523 'end of statement')
+    unknown call_tmp[773506] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (773509 'move' call_tmp[773506](91532 'typeof' p[91506]))
+    unknown call_tmp[773511] "expr temp" "maybe param" "maybe type" "temp"
+    (773514 'move' call_tmp[773511](91530 call _to_borrowed call_tmp[773506]))
+    unknown call_tmp[773518] "expr temp" "maybe param" "maybe type" "temp"
+    (773521 'move' call_tmp[773518](91535 call chpl_pn _mt[203] x[91485]))
+    unknown call_tmp[773523] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (773526 'move' call_tmp[773523](1000044 'new' _shared[242](?) 1 call_tmp[773511] p[91506] call_tmp[773518]))
+    (599946 'move' ret[599941](599945 'deref' call_tmp[773523]))
+    gotoReturn _end_:[599939] _end_:[599939]
+    (550513 'end of statement' p[91506])
+    label _end_:[599939]
+    (599943 return ret[599941])
+  }
+  where {
+    unknown call_tmp[773530] "expr temp" "maybe param" "maybe type" "temp"
+    (773533 'move' call_tmp[773530](91501 call chpl_t _mt[203] x[91485]))
+    unknown call_tmp[773537] "expr temp" "maybe param" "maybe type" "temp"
+    (773540 'move' call_tmp[773537](91497 call chpl_t _mt[203] t[91491]))
+    (394756 'is_proper_subtype' call_tmp[773530] call_tmp[773537])
+  }
+  function :[91541](const  ref arg x[91547]:shared?[467997](?), arg t[91554]:shared?[467997](?)) : _unknown[42] "inline" "operator"
+  {
+    unknown ret[599952] "RVV" "temp"
+    unknown call_tmp[773544] "expr temp" "maybe param" "maybe type" "temp"
+    (773547 'move' call_tmp[773544](91573 call chpl_p _mt[203] x[91547]))
+    unknown call_tmp[773551] "expr temp" "maybe param" "maybe type" "temp"
+    (773554 'move' call_tmp[773551](91581 call chpl_t _mt[203] t[91554]))
+    unknown call_tmp[773556] "expr temp" "maybe param" "maybe type" "temp"
+    (773559 'move' call_tmp[773556](91579 call _to_unmanaged call_tmp[773551]))
+    unknown call_tmp[773561] "expr temp" "maybe param" "maybe type" "temp"
+    (773564 'move' call_tmp[773561](91577 call _to_nilable call_tmp[773556]))
+    unknown call_tmp[773566] "maybe param" "maybe type" "temp"
+    (773569 'move' call_tmp[773566](91570 call : call_tmp[773544] call_tmp[773561]))
+    unknown p[91569] "dead at end of block" "insert auto destroy"
+    (644581 'init var' p[91569] call_tmp[773566])
+    (91585 'end of statement')
+    unknown call_tmp[773571] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (773574 'move' call_tmp[773571](91594 'typeof' p[91569]))
+    unknown call_tmp[773576] "expr temp" "maybe param" "maybe type" "temp"
+    (773579 'move' call_tmp[773576](91592 call _to_borrowed call_tmp[773571]))
+    unknown call_tmp[773583] "expr temp" "maybe param" "maybe type" "temp"
+    (773586 'move' call_tmp[773583](91597 call chpl_pn _mt[203] x[91547]))
+    unknown call_tmp[773588] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (773591 'move' call_tmp[773588](1000045 'new' _shared[242](?) 1 call_tmp[773576] p[91569] call_tmp[773583]))
+    (599957 'move' ret[599952](599956 'deref' call_tmp[773588]))
+    gotoReturn _end_:[599950] _end_:[599950]
+    (550515 'end of statement' p[91569])
+    label _end_:[599950]
+    (599954 return ret[599952])
+  }
+  where {
+    unknown call_tmp[773595] "expr temp" "maybe param" "maybe type" "temp"
+    (773598 'move' call_tmp[773595](91564 call chpl_t _mt[203] x[91547]))
+    unknown call_tmp[773602] "expr temp" "maybe param" "maybe type" "temp"
+    (773605 'move' call_tmp[773602](91560 call chpl_t _mt[203] t[91554]))
+    (394757 'is_proper_subtype' call_tmp[773595] call_tmp[773602])
+  }
+  function :[91603](const  ref arg x[91608]:shared[467993](?), arg t[91615]:shared?[467997](?)) : _unknown[42] "inline" "operator"
+  {
+    unknown ret[599963] "RVV" "temp"
+    unknown call_tmp[773609] "expr temp" "maybe param" "maybe type" "temp"
+    (773612 'move' call_tmp[773609](91638 call chpl_p _mt[203] x[91608]))
+    unknown call_tmp[773616] "expr temp" "maybe param" "maybe type" "temp"
+    (773619 'move' call_tmp[773616](91646 call chpl_t _mt[203] t[91615]))
+    unknown call_tmp[773621] "expr temp" "maybe param" "maybe type" "temp"
+    (773624 'move' call_tmp[773621](91644 call _to_unmanaged call_tmp[773616]))
+    unknown call_tmp[773626] "expr temp" "maybe param" "maybe type" "temp"
+    (773629 'move' call_tmp[773626](91642 call _to_nilable call_tmp[773621]))
+    unknown call_tmp[773631] "maybe param" "maybe type" "temp"
+    (773634 'move' call_tmp[773631](91635 call : call_tmp[773609] call_tmp[773626]))
+    unknown p[91634] "dead at end of block" "insert auto destroy"
+    (644583 'init var' p[91634] call_tmp[773631])
+    (91650 'end of statement')
+    unknown call_tmp[773636] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (773639 'move' call_tmp[773636](91659 'typeof' p[91634]))
+    unknown call_tmp[773641] "expr temp" "maybe param" "maybe type" "temp"
+    (773644 'move' call_tmp[773641](91657 call _to_borrowed call_tmp[773636]))
+    unknown call_tmp[773648] "expr temp" "maybe param" "maybe type" "temp"
+    (773651 'move' call_tmp[773648](91662 call chpl_pn _mt[203] x[91608]))
+    unknown call_tmp[773653] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (773656 'move' call_tmp[773653](1000046 'new' _shared[242](?) 1 call_tmp[773641] p[91634] call_tmp[773648]))
+    (599968 'move' ret[599963](599967 'deref' call_tmp[773653]))
+    gotoReturn _end_:[599961] _end_:[599961]
+    (550517 'end of statement' p[91634])
+    label _end_:[599961]
+    (599965 return ret[599963])
+  }
+  where {
+    unknown call_tmp[773660] "expr temp" "maybe param" "maybe type" "temp"
+    (773663 'move' call_tmp[773660](91627 call chpl_t _mt[203] x[91608]))
+    unknown call_tmp[773665] "expr temp" "maybe param" "maybe type" "temp"
+    (773668 'move' call_tmp[773665](91624 call : call_tmp[773660] _anyManagementNilable[198](?)))
+    unknown call_tmp[773672] "expr temp" "maybe param" "maybe type" "temp"
+    (773675 'move' call_tmp[773672](91621 call chpl_t _mt[203] t[91615]))
+    (394758 'is_proper_subtype' call_tmp[773665] call_tmp[773672])
+  }
+  function :[91668](arg x[91671]:_nilType[30], arg t[91675]:_shared[242](?)) : _unknown[42] "inline" "operator"
+  {
+    unknown ret[599974] "RVV" "temp"
+    unknown call_tmp[773679] "expr temp" "maybe param" "maybe type" "temp"
+    (773682 'move' call_tmp[773679](91688 call chpl_t _mt[203] t[91675]))
+    unknown call_tmp[773684] "expr temp" "maybe param" "maybe type" "temp"
+    (773687 'move' call_tmp[773684](91686 call isNonNilableClass call_tmp[773679]))
+    unknown call_tmp[773689] "expr temp" "maybe param" "maybe type" "temp"
+    (773692 'move' call_tmp[773689](91691 call _cond_test call_tmp[773684]))
+    if call_tmp[773689]
+    {
+      (91680 call compilerError "Illegal cast from nil to non-nilable shared type")
+    }
+    unknown call_tmp[773694] "expr temp" "maybe param" "maybe type" "temp"
+    (773697 'move' call_tmp[773694](91703 call isGenericType t[91675]))
+    unknown call_tmp[773699] "expr temp" "maybe param" "maybe type" "temp"
+    (773702 'move' call_tmp[773699](91705 call _cond_test call_tmp[773694]))
+    if call_tmp[773699]
+    {
+      (91697 call compilerError "illegal cast from nil to a generic shared type")
+    }
+    unknown tmp[91711] "dead at end of block" "insert auto destroy"
+    (644585 'default init var' tmp[91711] t[91675])
+    (91714 'end of statement')
+    (599979 'move' ret[599974](599978 'deref' tmp[91711]))
+    gotoReturn _end_:[599972] _end_:[599972]
+    (550521 'end of statement' tmp[91711])
+    label _end_:[599972]
+    (599976 return ret[599974])
+  }
+  function postfix![91719](arg x[91722]:_shared[242](?)) : _unknown[42] "always propagate line file info" "inline"
+  {
+    unknown ret[599985] "RVV" "temp"
+    unknown tmp[482121] "maybe param" "temp"
+    (482132 'move' tmp[482121] 1)
+    unknown call_tmp[773704] "expr temp" "maybe param" "maybe type" "temp"
+    (773707 'move' call_tmp[773704](482134 call _cond_invalid tmp[482121]))
+    if call_tmp[773704]
+    {
+      (482137 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[669498] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[669499] "maybe param" "temp"
+    unknown call_tmp[773709] "expr temp" "maybe param" "maybe type" "temp"
+    (773712 'move' call_tmp[773709](482122 call isTrue tmp[482121]))
+    (669504 'move' tmp[669499](669502 call _cond_test call_tmp[773709]))
+    if tmp[669499]
+    {
+      (669509 'move' tmp[669498](669506 '_paramFoldLogical' tmp[669499] 1))
+    }
+    {
+      unknown tmp[669511] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (669513 'move' tmp[669511](482126 call isTrue enablePostfixBangChecks[52057]))
+      (669518 'move' tmp[669498](669515 '_paramFoldLogical' tmp[669499] tmp[669511]))
+    }
+    unknown call_tmp[773714] "expr temp" "maybe param" "maybe type" "temp"
+    (773717 'move' call_tmp[773714](91769 call _cond_test tmp[669498]))
+    if call_tmp[773714]
+    {
+      unknown call_tmp[773721] "expr temp" "maybe param" "maybe type" "temp"
+      (773724 'move' call_tmp[773721](91754 call chpl_t _mt[203] x[91722]))
+      unknown call_tmp[773726] "expr temp" "maybe param" "maybe type" "temp"
+      (773729 'move' call_tmp[773726](91752 call _to_nilable call_tmp[773721]))
+      unknown call_tmp[773733] "expr temp" "maybe param" "maybe type" "temp"
+      (773736 'move' call_tmp[773733](91758 call chpl_t _mt[203] x[91722]))
+      unknown call_tmp[773738] "expr temp" "maybe param" "maybe type" "temp"
+      (773741 'move' call_tmp[773738](91749 call == call_tmp[773726] call_tmp[773733]))
+      unknown call_tmp[773743] "expr temp" "maybe param" "maybe type" "temp"
+      (773746 'move' call_tmp[773743](91761 call _cond_test call_tmp[773738]))
+      if call_tmp[773743]
+      {
+        unknown call_tmp[773750] "expr temp" "maybe param" "maybe type" "temp"
+        (773753 'move' call_tmp[773750](91741 call chpl_p _mt[203] x[91722]))
+        unknown call_tmp[773755] "expr temp" "maybe param" "maybe type" "temp"
+        (773758 'move' call_tmp[773755](91738 call == call_tmp[773750] nil[32]))
+        unknown call_tmp[773760] "expr temp" "maybe param" "maybe type" "temp"
+        (773763 'move' call_tmp[773760](91745 call _cond_test call_tmp[773755]))
+        if call_tmp[773760]
+        {
+          (91736 call nilCheckHalt module=[222] HaltWrappers[518] "argument to ! is nil")
+          (400721 'referenced modules list' HaltWrappers[518])
+        }
+      }
+    }
+    unknown call_tmp[773767] "expr temp" "maybe param" "maybe type" "temp"
+    (773770 'move' call_tmp[773767](91777 call chpl_p _mt[203] x[91722]))
+    unknown call_tmp[773772] "expr temp" "maybe param" "maybe type" "temp"
+    (773775 'move' call_tmp[773772](91775 call _to_nonnil call_tmp[773767]))
+    (599990 'move' ret[599985](599989 'deref' call_tmp[773772]))
+    (599987 return ret[599985])
+    (396095 'used modules list'(91728 'import' HaltWrappers[518]))
+  }
+  function |writeSerializable[475137]() : _unknown[42] "ImplementsStmt wrapper"
+  { writeSerializable[310070] _shared[242](?)
+    {
+    }
+    (599994 return _void[46])
+  }
+  function |readDeserializable[475142]() : _unknown[42] "ImplementsStmt wrapper"
+  { readDeserializable[310078] _shared[242](?)
+    {
+    }
+    (599998 return _void[46])
+  }
+  (396089 'used modules list'(89450 'use' Errors[88218])(89452 'use' Atomics[85230])(89453 'use' ChapelBase[77907])(89455 'use' OwnedObject[80948])(89458 'use' WeakPointer[89444]))
+}

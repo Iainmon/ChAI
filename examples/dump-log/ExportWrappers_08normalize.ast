@@ -1,0 +1,220 @@
+AST dump for ExportWrappers after pass normalize.
+Module use list: ChapelStandard CTypes 
+
+{
+  function chpl__init_ExportWrappers[468597]() : void[4] "insert line file info" "module init"
+  {
+    (654151 'move' chpl__exportTypeChplByteBuffer[311837] chpl_byte_buffer[311826])
+    (569015 'end of statement')
+    (631606 return _void[46])
+  }
+  function _initDynamicEndCount[311752]() : _unknown[42] "private" "no return value for void"
+  {
+    unknown call_tmp[939135] "maybe param" "maybe type" "temp"
+    (939138 'move' call_tmp[939135](311758 call _endCountAlloc(forceLocalTypes = 0)))
+    unknown endCount[311756] "dead at end of block" "insert auto destroy"
+    (654146 'init var' endCount[311756] call_tmp[939135])
+    (311762 'end of statement')
+    (311764 call chpl_task_setDynamicEndCount endCount[311756])
+    (569007 'end of statement' endCount[311756])
+    (631522 return _void[46])
+  }
+  function _destroyDynamicEndCount[311768]() : _unknown[42] "private" "no return value for void"
+  {
+    unknown call_tmp[939140] "maybe param" "maybe type" "temp"
+    (939143 'move' call_tmp[939140](311774 call chpl_task_getDynamicEndCount))
+    unknown endCount[311772] "dead at end of block" "insert auto destroy"
+    (654148 'init var' endCount[311772] call_tmp[939140])
+    (311776 'end of statement')
+    (311778 call _waitEndCount endCount[311772])
+    (569009 'end of statement' endCount[311772])
+    (311781 call _endCountFree endCount[311772])
+    (569011 'end of statement' endCount[311772])
+    (631524 return _void[46])
+  }
+  function chpl_libraryModuleLevelSetup[311785]() : _unknown[42] "export" "local args" "no return value for void"
+  {
+    unknown ret[631528] "RVV" "temp"
+    (311790 call _initDynamicEndCount)
+    (631530 return ret[631528])
+  }
+  { scopeless type
+    void[4]
+  }
+  function chpl_libraryModuleLevelCleanup[311794]() : _unknown[42] "export" "local args" "no return value for void"
+  {
+    unknown ret[631534] "RVV" "temp"
+    (311799 call _destroyDynamicEndCount)
+    (631536 return ret[631534])
+  }
+  { scopeless type
+    void[4]
+  }
+  type chpl_byte_buffer[311826] val isOwned[311805]:int(8)[56](311807 call int(64)[10] 8) unknown data[311812](311814 call c_ptr[46891](?) c_char[562]) val size[311819]:uint(64)[86](311821 call uint(64)[86] 64)
+  function chpl_byte_buffer_free[311828](arg cb[311831]:chpl_byte_buffer[311826]) : void[4] "extern" "local args" "no fn body"
+  {
+  }
+  unknown chpl__exportTypeChplByteBuffer[311837] "dead at end of block" "insert auto destroy" "type variable"
+  function chpl__exportRetStringOrBytes[311840](ref arg val[311842]:_any[141](?)) : _unknown[42]
+  {
+    unknown ret[631540] "RVV" "temp"
+    unknown result[311847] "dead at end of block" "insert auto destroy"
+    (654153 'default init var' result[311847] chpl_byte_buffer[311826])
+    (311850 'end of statement')
+    unknown call_tmp[939147] "expr temp" "maybe param" "maybe type" "temp"
+    (939150 'move' call_tmp[939147](311854 call isOwned _mt[203] result[311847]))
+    unknown call_tmp[939154] "expr temp" "maybe param" "maybe type" "temp"
+    (939157 'move' call_tmp[939154](311860 call isOwned _mt[203] val[311842]))
+    unknown call_tmp[939159] "expr temp" "maybe param" "maybe type" "temp"
+    (939162 'move' call_tmp[939159](311864 call int(64)[10] 8))
+    unknown call_tmp[939164] "expr temp" "maybe param" "maybe type" "temp"
+    (939167 'move' call_tmp[939164](311857 call : call_tmp[939154] call_tmp[939159]))
+    (311851 call = call_tmp[939147] call_tmp[939164])
+    (569016 'end of statement' result[311847])
+    unknown call_tmp[939171] "expr temp" "maybe param" "maybe type" "temp"
+    (939174 'move' call_tmp[939171](311869 call data _mt[203] result[311847]))
+    unknown call_tmp[939178] "expr temp" "maybe param" "maybe type" "temp"
+    (939181 'move' call_tmp[939178](311875 call buff _mt[203] val[311842]))
+    unknown call_tmp[939183] "expr temp" "maybe param" "maybe type" "temp"
+    (939186 'move' call_tmp[939183](311879 call c_ptr[46891](?) c_char[562]))
+    unknown call_tmp[939188] "expr temp" "maybe param" "maybe type" "temp"
+    (939191 'move' call_tmp[939188](311872 call : call_tmp[939178] call_tmp[939183]))
+    (311866 call = call_tmp[939171] call_tmp[939188])
+    (569018 'end of statement' result[311847])
+    unknown call_tmp[939195] "expr temp" "maybe param" "maybe type" "temp"
+    (939198 'move' call_tmp[939195](311884 call size _mt[203] result[311847]))
+    unknown call_tmp[939202] "expr temp" "maybe param" "maybe type" "temp"
+    (939205 'move' call_tmp[939202](311890 call numBytes _mt[203] val[311842]))
+    unknown call_tmp[939207] "expr temp" "maybe param" "maybe type" "temp"
+    (939210 'move' call_tmp[939207](311894 call uint(64)[86] 64))
+    unknown call_tmp[939212] "expr temp" "maybe param" "maybe type" "temp"
+    (939215 'move' call_tmp[939212](311887 call : call_tmp[939202] call_tmp[939207]))
+    (311881 call = call_tmp[939195] call_tmp[939212])
+    (569020 'end of statement' result[311847])
+    unknown call_tmp[939219] "expr temp" "maybe param" "maybe type" "temp"
+    (939222 'move' call_tmp[939219](311899 call isOwned _mt[203] val[311842]))
+    (311896 call = call_tmp[939219] 0)
+    (569022 'end of statement')
+    (631546 'move' ret[631540](631545 'coerce' result[311847] chpl_byte_buffer[311826]))
+    gotoReturn _end_chpl__exportRetStringOrBytes[631538] _end_chpl__exportRetStringOrBytes[631538]
+    (569023 'end of statement' result[311847])
+    label _end_chpl__exportRetStringOrBytes[631538]
+    (631542 return ret[631540])
+  }
+  { scopeless type
+    chpl_byte_buffer[311826]
+  }
+  function chpl__exportRet[311908](ref arg val[311911]:string[244], arg rt[311915]:chpl_byte_buffer[311826]) : _unknown[42]
+  {
+    unknown ret[631552] "RVV" "temp"
+    unknown call_tmp[939224] "expr temp" "maybe param" "maybe type" "temp"
+    (939227 'move' call_tmp[939224](311922 call chpl__exportRetStringOrBytes val[311911]))
+    (631558 'move' ret[631552](631557 'coerce' call_tmp[939224] rt[311915]))
+    (631554 return ret[631552])
+  }
+  { scopeless type
+    rt[311915]
+  }
+  function chpl__exportRet[311927](ref arg val[311930]:bytes[232], arg rt[311934]:chpl_byte_buffer[311826]) : _unknown[42]
+  {
+    unknown ret[631562] "RVV" "temp"
+    unknown call_tmp[939229] "expr temp" "maybe param" "maybe type" "temp"
+    (939232 'move' call_tmp[939229](311941 call chpl__exportRetStringOrBytes val[311930]))
+    (631568 'move' ret[631562](631567 'coerce' call_tmp[939229] rt[311934]))
+    (631564 return ret[631562])
+  }
+  { scopeless type
+    rt[311934]
+  }
+  function chpl__exportArg[311946](arg cp[311949]:bool[19], arg val[311953]:chpl_byte_buffer[311826], arg rt[311957]:string[244]) : _unknown[42]
+  {
+    unknown ret[631572] "RVV" "temp"
+    unknown call_tmp[939236] "expr temp" "maybe param" "maybe type" "temp"
+    (939239 'move' call_tmp[939236](311967 call data _mt[203] val[311953]))
+    unknown call_tmp[939241] "expr temp" "maybe param" "maybe type" "temp"
+    (939244 'move' call_tmp[939241](311971 call c_ptrConst[46990](?) c_char[562]))
+    unknown call_tmp[939246] "maybe param" "maybe type" "temp"
+    (939249 'move' call_tmp[939246](311964 call : call_tmp[939236] call_tmp[939241]))
+    unknown data[311963] "dead at end of block" "insert auto destroy"
+    (654155 'init var' data[311963] call_tmp[939246])
+    (311974 'end of statement')
+    unknown call_tmp[939253] "expr temp" "maybe param" "maybe type" "temp"
+    (939256 'move' call_tmp[939253](311978 call size _mt[203] val[311953]))
+    unknown call_tmp[939260] "maybe param" "maybe type" "temp"
+    (939263 'move' call_tmp[939260](311984 call(311981 call (partial) safeCast _mt[203] call_tmp[939253]) int(64)[10]))
+    unknown size[311976] "dead at end of block" "insert auto destroy"
+    (654157 'init var' size[311976] call_tmp[939260])
+    (311987 'end of statement')
+    Try!
+    {
+      {
+        unknown call_tmp[939265] "expr temp" "maybe param" "maybe type" "temp"
+        (939268 'move' call_tmp[939265](311999 call _cond_test cp[311949]))
+        if call_tmp[939265]
+        {
+          unknown call_tmp[939272] "expr temp" "maybe param" "maybe type" "temp"
+          (939275 'move' call_tmp[939272](311994 call(311991 call (partial) createCopyingBuffer _mt[203] string[244]) data[311963] size[311976]))
+          (631578 'move' ret[631572](631577 'coerce' call_tmp[939272] rt[311957]))
+          gotoReturn _end_chpl__exportArg[631570] _end_chpl__exportArg[631570]
+          (569027 'end of statement' data[311963] size[311976])
+        }
+        unknown call_tmp[939279] "expr temp" "maybe param" "maybe type" "temp"
+        (939282 'move' call_tmp[939279](312009 call(312006 call (partial) createBorrowingBuffer _mt[203] string[244]) data[311963] size[311976]))
+        (631584 'move' ret[631572](631583 'coerce' call_tmp[939279] rt[311957]))
+        gotoReturn _end_chpl__exportArg[631570] _end_chpl__exportArg[631570]
+        (569030 'end of statement' data[311963] size[311976])
+      }
+    }
+    label _end_chpl__exportArg[631570]
+    (631574 return ret[631572])
+  }
+  { scopeless type
+    rt[311957]
+  }
+  function chpl__exportArg[312018](arg cp[312021]:bool[19], arg val[312025]:chpl_byte_buffer[311826], arg rt[312029]:bytes[232]) : _unknown[42]
+  {
+    unknown ret[631590] "RVV" "temp"
+    unknown call_tmp[939286] "expr temp" "maybe param" "maybe type" "temp"
+    (939289 'move' call_tmp[939286](312039 call data _mt[203] val[312025]))
+    unknown call_tmp[939291] "expr temp" "maybe param" "maybe type" "temp"
+    (939294 'move' call_tmp[939291](312043 call c_ptrConst[46990](?) c_char[562]))
+    unknown call_tmp[939296] "maybe param" "maybe type" "temp"
+    (939299 'move' call_tmp[939296](312036 call : call_tmp[939286] call_tmp[939291]))
+    unknown data[312035] "dead at end of block" "insert auto destroy"
+    (654159 'init var' data[312035] call_tmp[939296])
+    (312046 'end of statement')
+    unknown call_tmp[939303] "expr temp" "maybe param" "maybe type" "temp"
+    (939306 'move' call_tmp[939303](312050 call size _mt[203] val[312025]))
+    unknown call_tmp[939310] "maybe param" "maybe type" "temp"
+    (939313 'move' call_tmp[939310](312056 call(312053 call (partial) safeCast _mt[203] call_tmp[939303]) int(64)[10]))
+    unknown size[312048] "dead at end of block" "insert auto destroy"
+    (654161 'init var' size[312048] call_tmp[939310])
+    (312059 'end of statement')
+    Try!
+    {
+      {
+        unknown call_tmp[939315] "expr temp" "maybe param" "maybe type" "temp"
+        (939318 'move' call_tmp[939315](312071 call _cond_test cp[312021]))
+        if call_tmp[939315]
+        {
+          unknown call_tmp[939322] "expr temp" "maybe param" "maybe type" "temp"
+          (939325 'move' call_tmp[939322](312066 call(312063 call (partial) createCopyingBuffer _mt[203] bytes[232]) data[312035] size[312048]))
+          (631596 'move' ret[631590](631595 'coerce' call_tmp[939322] rt[312029]))
+          gotoReturn _end_chpl__exportArg[631588] _end_chpl__exportArg[631588]
+          (569033 'end of statement' data[312035] size[312048])
+        }
+        unknown call_tmp[939329] "expr temp" "maybe param" "maybe type" "temp"
+        (939332 'move' call_tmp[939329](312081 call(312078 call (partial) createBorrowingBuffer _mt[203] bytes[232]) data[312035] size[312048]))
+        (631602 'move' ret[631590](631601 'coerce' call_tmp[939329] rt[312029]))
+        gotoReturn _end_chpl__exportArg[631588] _end_chpl__exportArg[631588]
+        (569036 'end of statement' data[312035] size[312048])
+      }
+    }
+    label _end_chpl__exportArg[631588]
+    (631592 return ret[631590])
+  }
+  { scopeless type
+    rt[312029]
+  }
+  (397067 'used modules list'(311747 'use' ChapelStandard[315387])(311750 'use' CTypes[51217]))
+}

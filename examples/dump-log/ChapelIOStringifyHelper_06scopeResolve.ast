@@ -1,0 +1,154 @@
+AST dump for ChapelIOStringifyHelper after pass scopeResolve.
+Module use list: ChapelStandard CTypes BytesStringCommon 
+
+{
+  function _can_stringify_direct[106217](arg t[106219]:_any[141](?)) param : _unknown[42]
+  {
+    if(106347 call _cond_test(106307 call ||(106309 call ||(106311 call ||(106313 call ||(106315 call ||(106317 call ==(106320 'typeof' t[106219]) string[244])(106322 call ==(106325 'typeof' t[106219]) bytes[232]))(106327 call ==(106330 'typeof' t[106219]) chpl_c_string[16]))(106332 call ==(106335 'typeof' t[106219])(106337 call c_ptrConst[46990](?) c_char[562])))(106340 call isRangeType(106342 'typeof' t[106219])))(106344 call isPrimitiveType(106346 'typeof' t[106219]))))
+    {
+      (106224 return 1)
+    }
+    {
+      if(106303 call _cond_test(106300 call isTupleType(106302 'typeof' t[106219])))
+      {
+        {
+          unknown i[106227] "index var" 0
+          unknown tmp[106255] "maybe param" "temp"
+          (106267 'move' tmp[106255](106265 call chpl_compute_low_param_loop_bound 0(106230 call -(106233 call . t[106219] c"size") 1)))
+          unknown tmp[106256] "maybe param" "temp"
+          (106280 'move' tmp[106256](106278 call chpl_compute_high_param_loop_bound 0(106272 call -(106274 call . t[106219] c"size") 1)))
+          unknown tmp[106257] "maybe param" "temp"
+          (106283 'move' tmp[106257] 1)
+          ParamForLoop[106285]
+          { i[106227] tmp[106255] tmp[106256] tmp[106257]
+            {
+              if(106250 call _cond_test(106243 call !(106246 call _can_stringify_direct(106248 call t[106219] i[106227]))))
+              {
+                (106240 return 0)
+              }
+            }
+          }
+          label _unused_continueLabel[106259]
+          label _breakLabel[106258]
+        }
+        (106294 return 1)
+      }
+      {
+        (106297 return 0)
+      }
+    }
+  }
+  { scopeless type
+    bool[19]
+  }
+  function _stringify_tuple[106355](arg tup[106358] :
+  _tuple[246](?)) : _unknown[42] "private"
+  {
+    unknown str[106363] "("
+    (106366 'end of statement')
+    {
+      unknown i[106367] "index var" 0
+      unknown tmp[106466] "maybe param" "temp"
+      (106478 'move' tmp[106466](106476 call chpl_compute_low_param_loop_bound 0(106370 call -(106373 call . tup[106358] c"size") 1)))
+      unknown tmp[106467] "maybe param" "temp"
+      (106491 'move' tmp[106467](106489 call chpl_compute_high_param_loop_bound 0(106483 call -(106485 call . tup[106358] c"size") 1)))
+      unknown tmp[106468] "maybe param" "temp"
+      (106494 'move' tmp[106468] 1)
+      ParamForLoop[106496]
+      { i[106367] tmp[106466] tmp[106467] tmp[106468]
+        {
+          if(106424 call _cond_test(106406 call ||(106408 call ==(106413 'typeof'(106411 call tup[106358] i[106367])) chpl_c_string[16])(106415 call ==(106420 'typeof'(106418 call tup[106358] i[106367]))(106422 call c_ptrConst[46990](?) c_char[562]))))
+          {
+            Try!
+            {
+              {
+                (106382 call += str[106363](106389 call(106386 call . string[244] c"createCopyingBuffer")(106391 call tup[106358] i[106367])))
+              }
+            }
+          }
+          {
+            (106397 call += str[106363](106400 call :(106403 call tup[106358] i[106367]) string[244]))
+          }
+          if(106460 call _cond_test(106453 call ==(106456 call . tup[106358] c"size") 1))
+          {
+            (106428 call += str[106363] ",")
+          }
+          {
+            if(106448 call _cond_test(106438 call < i[106367](106441 call -(106444 call . tup[106358] c"size") 1)))
+            {
+              (106433 call += str[106363] ", ")
+            }
+          }
+        }
+      }
+      label _unused_continueLabel[106470]
+      label _breakLabel[106469]
+    }
+    (106505 call += str[106363] ")")
+    (106509 return str[106363])
+  }
+  function stringify_simple[106513](const arg args[106517]:_any[141](?) ...) : _unknown[42]
+  {
+    unknown str[106523] ""
+    (106526 'end of statement')
+    {
+      unknown i[106527] "index var" 0
+      unknown tmp[106679] "maybe param" "temp"
+      (106691 'move' tmp[106679](106689 call chpl_compute_low_param_loop_bound 0(106530 call - k[106515] 1)))
+      unknown tmp[106680] "maybe param" "temp"
+      (106701 'move' tmp[106680](106699 call chpl_compute_high_param_loop_bound 0(106696 call - k[106515] 1)))
+      unknown tmp[106681] "maybe param" "temp"
+      (106704 'move' tmp[106681] 1)
+      ParamForLoop[106706]
+      { i[106527] tmp[106679] tmp[106680] tmp[106681]
+        {
+          if(106674 call _cond_test(106667 call ==(106672 'typeof'(106670 call args[106517] i[106527])) string[244]))
+          {
+            (106538 call += str[106523](106542 call args[106517] i[106527]))
+          }
+          {
+            if(106662 call _cond_test(106644 call ||(106646 call ==(106651 'typeof'(106649 call args[106517] i[106527])) chpl_c_string[16])(106653 call ==(106658 'typeof'(106656 call args[106517] i[106527]))(106660 call c_ptrConst[46990](?) c_char[562]))))
+            {
+              Try!
+              {
+                {
+                  (106546 call += str[106523](106553 call(106550 call . string[244] c"createCopyingBuffer")(106555 call args[106517] i[106527])(policy = replace[37978])))
+                }
+              }
+            }
+            {
+              if(106639 call _cond_test(106632 call ==(106637 'typeof'(106635 call args[106517] i[106527])) bytes[232]))
+              {
+                Try!
+                {
+                  {
+                    (106567 call += str[106523](106576 call(106573 call .(106571 call args[106517] i[106527]) c"decode") replace[37978]))
+                  }
+                }
+              }
+              {
+                if(106627 call _cond_test(106613 call ||(106616 call isRangeType(106620 'typeof'(106618 call args[106517] i[106527])))(106622 call isPrimitiveType(106626 'typeof'(106624 call args[106517] i[106527])))))
+                {
+                  (106585 call += str[106523](106588 call :(106591 call args[106517] i[106527]) string[244]))
+                }
+                {
+                  if(106609 call _cond_test(106604 call isTupleType(106608 'typeof'(106606 call args[106517] i[106527]))))
+                  {
+                    (106595 call += str[106523](106599 call _stringify_tuple(106601 call args[106517] i[106527])))
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      label _unused_continueLabel[106683]
+      label _breakLabel[106682]
+    }
+    (106715 return str[106523])
+  }
+  { scopeless type
+    string[244]
+  }
+  (396110 'used modules list'(106209 'use' ChapelStandard[315387])(106211 'use' CTypes[51217])(106215 'use' BytesStringCommon[46748] 'only' decodePolicy))
+}

@@ -3,7 +3,18 @@ module Utilities {
     private use ChplConfig only CHPL_LOCALE_MODEL;
     config param loopGpuSupport = CHPL_LOCALE_MODEL == "gpu";
 
-    proc targetGpu() param : bool do return loopGpuSupport && CHPL_LOCALE_MODEL == "gpu";
+    proc targetGpu() param : bool {
+        if loopGpuSupport && CHPL_LOCALE_MODEL == "gpu" {
+            return true;
+        } else if CHPL_LOCALE_MODEL == "gpu" {
+            return true;
+        } else if loopGpuSupport {
+            compilerError("loopGpuSupport should be enabled if CHPL_LOCALE_MODEL is set to 'gpu'.");
+            return false;
+        } else {
+            return false;
+        }
+    }
 
     module Types {
         type stdRange = range(idxType=int,bounds=boundKind.both,strides=strideKind.one);
@@ -145,6 +156,10 @@ module Utilities {
         return filled;
     }
 
+    proc nbase(bounds: int, n: int): 1*int {
+        return (n,);
+    }
+
     // Does the same thing, but linear in the shape size instead. 
     proc indexInShape(shape: ?rank*int, in n: int): rank*int {
         var idxs: rank*int;
@@ -251,6 +266,8 @@ module Utilities {
         private use Utilities;
         private import Utilities as util;
 
+        public use SimpleDomain;
+
         proc _tuple.imageType(f) type {
             type eltType = this.eltType;
             const t0: eltType = this(0);
@@ -351,6 +368,31 @@ module Utilities {
         //     for param i in 0..<tup.size do
         //         tup(i) = v;
         // }
+
+        /*inline proc _domain.simple() const : rect(rank) do
+            return new rect(this);
+
+        inline iter _domain.every() {
+            const simple = this.simple();
+            foreach idx in simple do yield idx;
+        }
+        inline iter _domain.every(param tag: iterKind) 
+                where tag == iterKind.standalone {
+            const simple = this.simple();
+            foreach idx in simple do yield idx;
+        }
+
+        inline iter _domain.everyZip() {
+            const simple = this.simple();
+            foreach idx in simple.eachOrder() do yield idx;
+        }
+        inline iter _domain.everyZip(param tag: iterKind) 
+                where tag == iterKind.standalone {
+            const simple = this.simple();
+            foreach idx in simple.eachOrder() do yield idx;
+        }*/
+
+
 
         inline iter _domain.each {
             const shape = this.shape;
@@ -468,18 +510,17 @@ module Utilities {
                 if rank == 1 {
                     foreach i in 0..<shape do yield (i,i);
                 } else {
-                    var blks: rank * int;
+                    var strides: rank * int;
+                    var prod = 1;
                     for param j in 0..<rank {
                         param i = rank - j - 1;
-                        if i == rank - 1 then
-                            blks(i) = 1;
-                        else
-                            blks(i) = shape(i) * blks(i + 1);
+                        strides(i) = prod;
+                        prod *= shape(i);
                     }
                     foreach idx in this {
                         var i: int;
                         for param k in 0..<rank do
-                            i += idx(k) * blks(k);
+                            i += idx(k) * strides(k);
                         yield (i,idx);
                     }
                 }
@@ -521,6 +562,59 @@ module Utilities {
                 if rank == 1 {
                     forall i in 0..<shape do yield (i,i);
                 } else {
+                    var strides: rank * int;
+                    var prod = 1;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        strides(i) = prod;
+                        prod *= shape(i);
+                    }
+                    forall idx in this {
+                        var i: int;
+                        for param k in 0..<rank do
+                            i += idx(k) * strides(k);
+                        yield (i,idx);
+                    }
+
+                }
+            } else {
+                if rank == 1 {
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        forall i in 0..<shape do 
+                            yield (i,i);
+                    } else {
+                        forall i in 0..<shape do
+                            yield (i,i);
+                    }
+                } else {
+                    var prod = 1;
+                    var divs: rank * int;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        divs(i) = prod;
+                        prod *= shape(i);
+                    }
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        forall i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
+                    } else {
+                        forall i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
+                    }
+                }
+            }
+        }
+
+        inline iter _domain.everyZip(param tag: iterKind) where tag == iterKind.leader {
+            const shape = this.fastShape;
+            if CHPL_LOCALE_MODEL != "gpu" {
+                if rank == 1 {
+                    forall i in 0..<shape do yield (i,i);
+                } else {
                     var blks: rank * int;
                     for param j in 0..<rank {
                         param i = rank - j - 1;
@@ -529,10 +623,62 @@ module Utilities {
                         else
                             blks(i) = shape(i) * blks(i + 1);
                     }
+                    // forall idx in this {
+                    //     var i: int;
+                    //     for param k in 0..<rank do
+                    //         i += idx(k) * blks(k);
+                    //     yield (i,idx);
+                    // }
+                    forall followThis in _value.these(tag) do yield followThis;
+                }
+            } else {
+                if rank == 1 {
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        forall i in 0..<shape do 
+                            yield (i,i);
+                    } else {
+                        forall i in 0..<shape do
+                            yield (i,i);
+                    }
+                } else {
+                    var prod = 1;
+                    var divs: rank * int;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        divs(i) = prod;
+                        prod *= shape(i);
+                    }
+                    if loopGpuSupport {
+                        @assertOnGpu
+                        forall i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
+                    } else {
+                        forall i in 0..<prod {
+                            yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                        }
+                    }
+                }
+            }
+        }
+        inline iter _domain.everyZip(param tag: iterKind,followThis) where tag == iterKind.follower {
+            const shape = this.fastShape;
+            if CHPL_LOCALE_MODEL != "gpu" {
+                if rank == 1 {
+                    forall i in 0..<shape do yield (i,i);
+                } else {
+                    var strides: rank * int;
+                    var prod = 1;
+                    for param j in 0..<rank {
+                        param i = rank - j - 1;
+                        strides(i) = prod;
+                        prod *= shape(i);
+                    }
                     forall idx in this {
                         var i: int;
                         for param k in 0..<rank do
-                            i += idx(k) * blks(k);
+                            i += idx(k) * strides(k);
                         yield (i,idx);
                     }
                 }

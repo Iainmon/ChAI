@@ -1,0 +1,49 @@
+AST dump for ChapelTaskDataHelp after pass cullOverReferences.
+Module use list: ChapelStandard CTypes POSIX 
+
+{
+  function chpl__init_ChapelTaskDataHelp[468435]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (607990 return _void[46])
+  }
+  type chpl_task_infoChapel_t[135029]
+  function chpl_task_getInfoChapel[135031]() : c_ptr(chpl_task_infoChapel_t)[1526468] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function chpl_task_getInfoChapelInBundle[135039](const in arg args[135042]:chpl_task_bundle_p[306472]) : c_ptr(chpl_task_infoChapel_t)[1526468] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function chpl_task_data_setup[135051](const in arg args[135054]:chpl_task_bundle_p[306472], const in arg infoChapel[135060]:c_ptr(chpl_task_infoChapel_t)[1526468]) : void[4] "resolved" "no return value for void"
+  {
+    val call_tmp[808057]:c_ptr(chpl_task_infoChapel_t)[1526468] "dead after last mention" "expr temp" "maybe param" "temp"
+    (808060 'move' call_tmp[808057](135067 call chpl_task_getInfoChapelInBundle[135039] args[135054]))
+    val call_tmp[808062]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (808065 'move' call_tmp[808062](135071 call c_sizeof[1521779]))
+    val coerce_tmp[3883506]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3883512 'move' coerce_tmp[3883506](3883508 'cast' c_ptr(void)[1465614] call_tmp[808057]))
+    val coerce_tmp[3883514]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (3883520 'move' coerce_tmp[3883514](3883516 'cast' c_ptr(void)[1465614] infoChapel[135060]))
+    (135065 call memcpy[12667] coerce_tmp[3883506] coerce_tmp[3883514] call_tmp[808062])
+    (607984 return _void[46])
+  }
+  function chpl_save_task_error[1802695](const in arg e[1802697]:unmanaged _EndCountBase[1802693], const in arg err[1802699]:unmanaged Error?[467980]) : void[4] "instantiated generic" "invisible fn" "resolved" "task complete impl fn" "no return value for void"
+  {
+    val call_tmp[1802705]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    val coerce_tmp[1802755]:borrowed RootClass?[467971] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1802760 'move' coerce_tmp[1802755](1802757 'cast' borrowed RootClass?[467971] err[1802699]))
+    (1802707 'move' call_tmp[1802705](1802710 call !=[53510] coerce_tmp[1802755] nil[32]))
+    val call_tmp[1802713]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1802715 'move' call_tmp[1802713] call_tmp[1802705])
+    if call_tmp[1802713]
+    {
+      ref call_tmp[1802722]:_ref(chpl_TaskErrors)[1478591] "dead after last mention" "maybe param" "temp"
+      val coerce_tmp[1802773]:_EndCountBase[68933] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1802778 'move' coerce_tmp[1802773](1802775 'cast' _EndCountBase[68933] e[1802697]))
+      (1802724 'move' call_tmp[1802722](1802727 call errors[1041851] coerce_tmp[1802773]))
+      val call_tmp[1802730]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      (1802732 'move' call_tmp[1802730](1802735 call postfix![1499043] err[1802699]))
+      (1802741 call append[85694] call_tmp[1802722] call_tmp[1802730])
+    }
+    (1802744 return _void[46])
+  }
+}

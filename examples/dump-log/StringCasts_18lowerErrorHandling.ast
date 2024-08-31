@@ -1,0 +1,1221 @@
+AST dump for StringCasts after pass lowerErrorHandling.
+Module use list: ChapelStandard BytesStringCommon CTypes NVStringFactory 
+
+{
+  function chpl__init_StringCasts[468333]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (593135 return _void[46])
+  }
+  function :[16582](const  ref arg x[16585]:string[244], ref arg error_out[5497640]:unmanaged Error?[467980]) : bool[19] throws "operator" "resolved"
+  {
+    val _formal_type_tmp_[5477872]:bool[19] "temp"
+    val ret[593004]:bool[19] "dead after last mention" "RVV" "temp"
+    val call_tmp[743385]:string[244] "dead at end of block" "maybe param" "temp"
+    val default_arg_chars[1754615]:string[244] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val default_arg_leading[1754626]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    val default_arg_trailing[1754637]:bool[19] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    (743388 'move' call_tmp[743385](16599 call strip[25999] x[16585] " \t\r\n" 1 1))
+    val str[16594]:string[244] "dead at end of block" "insert auto destroy"
+    (642820 'move' str[16594] call_tmp[743385])
+    (16601 'end of statement')
+    val call_tmp[743392]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (743395 'move' call_tmp[743392](16657 call isEmpty[25458] str[16594]))
+    val call_tmp[743397]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (743400 'move' call_tmp[743397] call_tmp[743392])
+    if call_tmp[743397]
+    {
+      val call_tmp[743402]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[1754666]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (1754668 'move' new_temp[1754666](1754653 call _new[1475209] "bad cast from empty string to bool"))
+      }
+      val initTemp[1754675]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (1754678 call init[1475364] initTemp[1754675] new_temp[1754666])
+      (743405 'move' call_tmp[743402] initTemp[1754675])
+      val call_tmp[743407]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[1754692]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1754698 'move' coerce_tmp[1754692](1754694 call :[1498308] call_tmp[743402]))
+      val _formal_tmp_in_err[1754911]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (1754916 'move' _formal_tmp_in_err[1754911](1754912 call chpl__initCopy[1499782] coerce_tmp[1754692] 0))
+      (743410 'move' call_tmp[743407](542183 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1754911]))
+      {
+        val castedError[5497643]:unmanaged Error?[467980] "temp"
+        (5497649 'move' castedError[5497643](5497645 'cast' unmanaged Error?[467980] call_tmp[743407]))
+        (5497651 '=' error_out[5497640] castedError[5497643])
+        gotoErrorHandlingReturn _end_:[593002] _end_:[593002]
+      }
+    }
+    {
+      val call_tmp[743412]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (743415 'move' call_tmp[743412](16644 call ==[28803] str[16594] "true"))
+      val call_tmp[743417]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (743420 'move' call_tmp[743417] call_tmp[743412])
+      if call_tmp[743417]
+      {
+        (593009 'move' ret[593004] 1)
+        gotoReturn _end_:[593002] _end_:[593002]
+      }
+      {
+        val call_tmp[743422]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (743425 'move' call_tmp[743422](16636 call ==[28803] str[16594] "false"))
+        val call_tmp[743427]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (743430 'move' call_tmp[743427] call_tmp[743422])
+        if call_tmp[743427]
+        {
+          (593014 'move' ret[593004] 0)
+          gotoReturn _end_:[593002] _end_:[593002]
+        }
+        {
+          val call_tmp[743432]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+          (743435 'move' call_tmp[743432](16627 call +[28065] "bad cast from string '" x[16585]))
+          val call_tmp[743437]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+          (743440 'move' call_tmp[743437](16625 call +[28065] call_tmp[743432] "' to bool"))
+          val call_tmp[743442]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+          { scopeless
+            val new_temp[1756825]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+            (1756827 'move' new_temp[1756825](1756812 call _new[1475209] call_tmp[743437]))
+          }
+          val initTemp[1756834]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+          (1756837 call init[1475364] initTemp[1756834] new_temp[1756825])
+          (743445 'move' call_tmp[743442] initTemp[1756834])
+          val call_tmp[743447]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+          val coerce_tmp[1756851]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+          (1756857 'move' coerce_tmp[1756851](1756853 call :[1498308] call_tmp[743442]))
+          val _formal_tmp_in_err[1757070]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+          (1757075 'move' _formal_tmp_in_err[1757070](1757071 call chpl__initCopy[1499782] coerce_tmp[1756851] 0))
+          (743450 'move' call_tmp[743447](542185 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1757070]))
+          {
+            val castedError[5497656]:unmanaged Error?[467980] "temp"
+            (5497662 'move' castedError[5497656](5497658 'cast' unmanaged Error?[467980] call_tmp[743447]))
+            (5497664 '=' error_out[5497640] castedError[5497656])
+            gotoErrorHandlingReturn _end_:[593002] _end_:[593002]
+          }
+        }
+      }
+    }
+    label _end_:[593002]
+    (593006 return ret[593004])
+  }
+  function :[1496816](const in arg x[1496818]:int(64)[10]) : string[244] "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5477978]:string[244] "temp"
+    val ret[1496822]:string[244] "dead after last mention" "RVV" "temp"
+    val isErr[1496915]:bool[19] "dead at end of block" "insert auto destroy"
+    (1503399 'move' isErr[1496915] 0)
+    (1496920 'end of statement')
+    val call_tmp[1496921]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1496928]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1496930 'move' call_tmp[1496928] x[1496818])
+    val call_tmp[1496936]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1496942]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[1496949]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1496955]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[1496962]:c_ptrConst(int(8))[1466333] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[1498084]:uint(32)[81] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1498090 'move' coerce_tmp[1498084](1498086 'cast' uint(32)[81] 8))
+    (1496964 'move' call_tmp[1496962](1496967 call integral_to_c_string[1496879] call_tmp[1496928] coerce_tmp[1498084] 1 isErr[1496915]))
+    val csc[1496972]:c_ptrConst(int(8))[1466333] "dead at end of block" "insert auto destroy"
+    (1496974 'move' csc[1496972](1498093 call chpl__initCopy[1467266] call_tmp[1496962] 0))
+    (1496977 'end of statement')
+    val call_tmp[1496978]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1496980 'move' call_tmp[1496978] isErr[1496915])
+    if call_tmp[1496978]
+    {
+      {
+        val error[5498805]:unmanaged Error?[467980] "error variable" "temp"
+        (5498820 'move' error[5498805] nil[32])
+        val call_tmp[1496988]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+        { scopeless
+          val new_temp[1498114]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+          (1498116 'move' new_temp[1498114](1498101 call _new[1475209] "Unexpected case in integral_to_c_string"))
+        }
+        val initTemp[1498123]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+        (1498126 call init[1475364] initTemp[1498123] new_temp[1498114])
+        (1496990 'move' call_tmp[1496988] initTemp[1498123])
+        val call_tmp[1496997]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+        val coerce_tmp[1498230]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1498236 'move' coerce_tmp[1498230](1498232 call :[1498308] call_tmp[1496988]))
+        val _formal_tmp_in_err[1499774]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+        (1499779 'move' _formal_tmp_in_err[1499774](1499775 call chpl__initCopy[1499782] coerce_tmp[1498230] 0))
+        (1496999 'move' call_tmp[1496997](1497002 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1499774]))
+        {
+          val castedError[5498808]:unmanaged Error?[467980] "temp"
+          (5498814 'move' castedError[5498808](5498810 'cast' unmanaged Error?[467980] call_tmp[1496997]))
+          (5498816 'move' error[5498805] castedError[5498808])
+          gotoErrorHandling handler[5498806] handler[5498806]
+        }
+        label handler[5498806]
+        val shouldHandleError[5498829]:bool[19] "temp"
+        (5498833 'move' shouldHandleError[5498829](5498830 'check error' error[5498805]))
+        if shouldHandleError[5498829]
+        {
+          (5498826 call chpl_uncaught_error[87456] error[5498805])
+        }
+      }
+    }
+    val call_tmp[1497008]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1497010 'move' call_tmp[1497008](1497013 call strlen[1496903] csc[1496972]))
+    val call_tmp[1497015]:int(64)[10] "dead at end of block" "maybe param" "temp"
+    (1497017 'move' call_tmp[1497015](1497023 call safeCast[1480542] call_tmp[1497008]))
+    const len[1497025]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    (1497027 'move' len[1497025] call_tmp[1497015])
+    (1497030 'end of statement' isErr[1496915] csc[1496972])
+    val call_tmp[1497033]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1497040]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1497047]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1497049 'move' call_tmp[1497047](1497052 call :[1501045] csc[1496972]))
+    val call_tmp[1497055]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1497057 'move' call_tmp[1497055](1497060 call +[1471222] len[1497025]))
+    val call_tmp[1497063]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (1497065 'move' call_tmp[1497063](1497068 call chpl_createStringWithOwnedBufferNV[21235] call_tmp[1497047] len[1497025] call_tmp[1497055] len[1497025]))
+    (1497077 'move' ret[1496822] call_tmp[1497063])
+    gotoReturn _end_:[1497086] _end_:[1497086]
+    label _end_:[1497086]
+    (1497088 return ret[1496822])
+  }
+  function :[1721023](const in arg x[1721025]:uint(64)[86]) : string[244] "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5478252]:string[244] "temp"
+    val ret[1721029]:string[244] "dead after last mention" "RVV" "temp"
+    val isErr[1721122]:bool[19] "dead at end of block" "insert auto destroy"
+    (1722012 'move' isErr[1721122] 0)
+    (1721127 'end of statement')
+    val call_tmp[1721128]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1721135]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1721137 'move' call_tmp[1721135](1721140 call :[1482043] x[1721025]))
+    val call_tmp[1721143]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1721149]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[1721156]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1721162]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[1721169]:c_ptrConst(int(8))[1466333] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[1721698]:uint(32)[81] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1721704 'move' coerce_tmp[1721698](1721700 'cast' uint(32)[81] 8))
+    (1721171 'move' call_tmp[1721169](1721174 call integral_to_c_string[1721086] call_tmp[1721135] coerce_tmp[1721698] 0 isErr[1721122]))
+    val csc[1721179]:c_ptrConst(int(8))[1466333] "dead at end of block" "insert auto destroy"
+    (1721181 'move' csc[1721179](1721707 call chpl__initCopy[1467266] call_tmp[1721169] 0))
+    (1721184 'end of statement')
+    val call_tmp[1721185]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1721187 'move' call_tmp[1721185] isErr[1721122])
+    if call_tmp[1721185]
+    {
+      {
+        val error[5499517]:unmanaged Error?[467980] "error variable" "temp"
+        (5499532 'move' error[5499517] nil[32])
+        val call_tmp[1721195]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+        { scopeless
+          val new_temp[1721728]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+          (1721730 'move' new_temp[1721728](1721715 call _new[1475209] "Unexpected case in integral_to_c_string"))
+        }
+        val initTemp[1721737]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+        (1721740 call init[1475364] initTemp[1721737] new_temp[1721728])
+        (1721197 'move' call_tmp[1721195] initTemp[1721737])
+        val call_tmp[1721204]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+        val coerce_tmp[1721754]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1721760 'move' coerce_tmp[1721754](1721756 call :[1498308] call_tmp[1721195]))
+        val _formal_tmp_in_err[1721973]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+        (1721978 'move' _formal_tmp_in_err[1721973](1721974 call chpl__initCopy[1499782] coerce_tmp[1721754] 0))
+        (1721206 'move' call_tmp[1721204](1721209 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1721973]))
+        {
+          val castedError[5499520]:unmanaged Error?[467980] "temp"
+          (5499526 'move' castedError[5499520](5499522 'cast' unmanaged Error?[467980] call_tmp[1721204]))
+          (5499528 'move' error[5499517] castedError[5499520])
+          gotoErrorHandling handler[5499518] handler[5499518]
+        }
+        label handler[5499518]
+        val shouldHandleError[5499541]:bool[19] "temp"
+        (5499545 'move' shouldHandleError[5499541](5499542 'check error' error[5499517]))
+        if shouldHandleError[5499541]
+        {
+          (5499538 call chpl_uncaught_error[87456] error[5499517])
+        }
+      }
+    }
+    val call_tmp[1721215]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1721217 'move' call_tmp[1721215](1721220 call strlen[1721110] csc[1721179]))
+    val call_tmp[1721222]:int(64)[10] "dead at end of block" "maybe param" "temp"
+    (1721224 'move' call_tmp[1721222](1721230 call safeCast[1480542] call_tmp[1721215]))
+    const len[1721232]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    (1721234 'move' len[1721232] call_tmp[1721222])
+    (1721237 'end of statement' isErr[1721122] csc[1721179])
+    val call_tmp[1721240]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1721247]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1721254]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1721256 'move' call_tmp[1721254](1721259 call :[1501045] csc[1721179]))
+    val call_tmp[1721262]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1721264 'move' call_tmp[1721262](1721267 call +[1471222] len[1721232]))
+    val call_tmp[1721270]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (1721272 'move' call_tmp[1721270](1721275 call chpl_createStringWithOwnedBufferNV[21235] call_tmp[1721254] len[1721232] call_tmp[1721262] len[1721232]))
+    (1721284 'move' ret[1721029] call_tmp[1721270])
+    gotoReturn _end_:[1721293] _end_:[1721293]
+    label _end_:[1721293]
+    (1721295 return ret[1721029])
+  }
+  function :[1816123](const in arg x[1816125]:int(32)[66]) : string[244] "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5478383]:string[244] "temp"
+    val ret[1816129]:string[244] "dead after last mention" "RVV" "temp"
+    val isErr[1816222]:bool[19] "dead at end of block" "insert auto destroy"
+    (1817361 'move' isErr[1816222] 0)
+    (1816227 'end of statement')
+    val call_tmp[1816228]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1816235]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1816237 'move' call_tmp[1816235](1816240 'cast' int(64)[10] x[1816125]))
+    val call_tmp[1816243]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1816249]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[1816256]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1816262]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[1816269]:c_ptrConst(int(8))[1466333] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[1817047]:uint(32)[81] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1817053 'move' coerce_tmp[1817047](1817049 'cast' uint(32)[81] 4))
+    (1816271 'move' call_tmp[1816269](1816274 call integral_to_c_string[1816186] call_tmp[1816235] coerce_tmp[1817047] 1 isErr[1816222]))
+    val csc[1816279]:c_ptrConst(int(8))[1466333] "dead at end of block" "insert auto destroy"
+    (1816281 'move' csc[1816279](1817056 call chpl__initCopy[1467266] call_tmp[1816269] 0))
+    (1816284 'end of statement')
+    val call_tmp[1816285]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1816287 'move' call_tmp[1816285] isErr[1816222])
+    if call_tmp[1816285]
+    {
+      {
+        val error[5499920]:unmanaged Error?[467980] "error variable" "temp"
+        (5499935 'move' error[5499920] nil[32])
+        val call_tmp[1816295]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+        { scopeless
+          val new_temp[1817077]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+          (1817079 'move' new_temp[1817077](1817064 call _new[1475209] "Unexpected case in integral_to_c_string"))
+        }
+        val initTemp[1817086]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+        (1817089 call init[1475364] initTemp[1817086] new_temp[1817077])
+        (1816297 'move' call_tmp[1816295] initTemp[1817086])
+        val call_tmp[1816304]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+        val coerce_tmp[1817103]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1817109 'move' coerce_tmp[1817103](1817105 call :[1498308] call_tmp[1816295]))
+        val _formal_tmp_in_err[1817322]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+        (1817327 'move' _formal_tmp_in_err[1817322](1817323 call chpl__initCopy[1499782] coerce_tmp[1817103] 0))
+        (1816306 'move' call_tmp[1816304](1816309 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1817322]))
+        {
+          val castedError[5499923]:unmanaged Error?[467980] "temp"
+          (5499929 'move' castedError[5499923](5499925 'cast' unmanaged Error?[467980] call_tmp[1816304]))
+          (5499931 'move' error[5499920] castedError[5499923])
+          gotoErrorHandling handler[5499921] handler[5499921]
+        }
+        label handler[5499921]
+        val shouldHandleError[5499944]:bool[19] "temp"
+        (5499948 'move' shouldHandleError[5499944](5499945 'check error' error[5499920]))
+        if shouldHandleError[5499944]
+        {
+          (5499941 call chpl_uncaught_error[87456] error[5499920])
+        }
+      }
+    }
+    val call_tmp[1816315]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1816317 'move' call_tmp[1816315](1816320 call strlen[1816210] csc[1816279]))
+    val call_tmp[1816322]:int(64)[10] "dead at end of block" "maybe param" "temp"
+    (1816324 'move' call_tmp[1816322](1816330 call safeCast[1480542] call_tmp[1816315]))
+    const len[1816332]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    (1816334 'move' len[1816332] call_tmp[1816322])
+    (1816337 'end of statement' isErr[1816222] csc[1816279])
+    val call_tmp[1816340]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1816347]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1816354]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1816356 'move' call_tmp[1816354](1816359 call :[1501045] csc[1816279]))
+    val call_tmp[1816362]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1816364 'move' call_tmp[1816362](1816367 call +[1471222] len[1816332]))
+    val call_tmp[1816370]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (1816372 'move' call_tmp[1816370](1816375 call chpl_createStringWithOwnedBufferNV[21235] call_tmp[1816354] len[1816332] call_tmp[1816362] len[1816332]))
+    (1816384 'move' ret[1816129] call_tmp[1816370])
+    gotoReturn _end_:[1816393] _end_:[1816393]
+    label _end_:[1816393]
+    (1816395 return ret[1816129])
+  }
+  function :[1847963](const in arg x[1847965]:uint(8)[71]) : string[244] "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5478414]:string[244] "temp"
+    val ret[1847969]:string[244] "dead after last mention" "RVV" "temp"
+    val isErr[1848062]:bool[19] "dead at end of block" "insert auto destroy"
+    (1849457 'move' isErr[1848062] 0)
+    (1848067 'end of statement')
+    val call_tmp[1848068]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1848075]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1848077 'move' call_tmp[1848075](1848080 'cast' int(64)[10] x[1847965]))
+    val call_tmp[1848083]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1848089]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[1848096]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1848102]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[1848109]:c_ptrConst(int(8))[1466333] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[1849143]:uint(32)[81] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1849149 'move' coerce_tmp[1849143](1849145 'cast' uint(32)[81] 1))
+    (1848111 'move' call_tmp[1848109](1848114 call integral_to_c_string[1848026] call_tmp[1848075] coerce_tmp[1849143] 0 isErr[1848062]))
+    val csc[1848119]:c_ptrConst(int(8))[1466333] "dead at end of block" "insert auto destroy"
+    (1848121 'move' csc[1848119](1849152 call chpl__initCopy[1467266] call_tmp[1848109] 0))
+    (1848124 'end of statement')
+    val call_tmp[1848125]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1848127 'move' call_tmp[1848125] isErr[1848062])
+    if call_tmp[1848125]
+    {
+      {
+        val error[5500684]:unmanaged Error?[467980] "error variable" "temp"
+        (5500699 'move' error[5500684] nil[32])
+        val call_tmp[1848135]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+        { scopeless
+          val new_temp[1849173]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+          (1849175 'move' new_temp[1849173](1849160 call _new[1475209] "Unexpected case in integral_to_c_string"))
+        }
+        val initTemp[1849182]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+        (1849185 call init[1475364] initTemp[1849182] new_temp[1849173])
+        (1848137 'move' call_tmp[1848135] initTemp[1849182])
+        val call_tmp[1848144]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+        val coerce_tmp[1849199]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1849205 'move' coerce_tmp[1849199](1849201 call :[1498308] call_tmp[1848135]))
+        val _formal_tmp_in_err[1849418]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+        (1849423 'move' _formal_tmp_in_err[1849418](1849419 call chpl__initCopy[1499782] coerce_tmp[1849199] 0))
+        (1848146 'move' call_tmp[1848144](1848149 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1849418]))
+        {
+          val castedError[5500687]:unmanaged Error?[467980] "temp"
+          (5500693 'move' castedError[5500687](5500689 'cast' unmanaged Error?[467980] call_tmp[1848144]))
+          (5500695 'move' error[5500684] castedError[5500687])
+          gotoErrorHandling handler[5500685] handler[5500685]
+        }
+        label handler[5500685]
+        val shouldHandleError[5500708]:bool[19] "temp"
+        (5500712 'move' shouldHandleError[5500708](5500709 'check error' error[5500684]))
+        if shouldHandleError[5500708]
+        {
+          (5500705 call chpl_uncaught_error[87456] error[5500684])
+        }
+      }
+    }
+    val call_tmp[1848155]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1848157 'move' call_tmp[1848155](1848160 call strlen[1848050] csc[1848119]))
+    val call_tmp[1848162]:int(64)[10] "dead at end of block" "maybe param" "temp"
+    (1848164 'move' call_tmp[1848162](1848170 call safeCast[1480542] call_tmp[1848155]))
+    const len[1848172]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    (1848174 'move' len[1848172] call_tmp[1848162])
+    (1848177 'end of statement' isErr[1848062] csc[1848119])
+    val call_tmp[1848180]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1848187]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[1848194]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1848196 'move' call_tmp[1848194](1848199 call :[1501045] csc[1848119]))
+    val call_tmp[1848202]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1848204 'move' call_tmp[1848202](1848207 call +[1471222] len[1848172]))
+    val call_tmp[1848210]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (1848212 'move' call_tmp[1848210](1848215 call chpl_createStringWithOwnedBufferNV[21235] call_tmp[1848194] len[1848172] call_tmp[1848202] len[1848172]))
+    (1848224 'move' ret[1847969] call_tmp[1848210])
+    gotoReturn _end_:[1848233] _end_:[1848233]
+    label _end_:[1848233]
+    (1848235 return ret[1847969])
+  }
+  function :[1751964](const  ref arg x[1751966]:string[244], ref arg error_out[5499691]:unmanaged Error?[467980]) : int(64)[10] throws "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5478272]:int(64)[10] "temp"
+    val ret[1751970]:int(64)[10] "dead after last mention" "RVV" "temp"
+    val retVal[1752106]:int(64)[10] "dead at end of block" "insert auto destroy" "split inited"
+    (1752111 'end of statement')
+    val isErr[1752112]:bool[19] "dead at end of block" "insert auto destroy"
+    (1754217 'move' isErr[1752112] 0)
+    (1752117 'end of statement')
+    val call_tmp[1752118]:string[244] "dead at end of block" "maybe param" "temp"
+    (1752120 'move' call_tmp[1752118](1752126 call localize[23546] x[1751966]))
+    val localX[1752127]:string[244] "dead at end of block" "insert auto destroy"
+    (1752129 'move' localX[1752127] call_tmp[1752118])
+    (1752132 'end of statement')
+    val call_tmp[1752133]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1752135 'move' call_tmp[1752133](1752141 call isEmpty[25458] localX[1752127]))
+    val call_tmp[1752142]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1752144 'move' call_tmp[1752142] call_tmp[1752133])
+    if call_tmp[1752142]
+    {
+      val call_tmp[1752151]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1752159]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1752167]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[1752844]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (1752846 'move' new_temp[1752844](1752831 call _new[1475209] "bad cast from empty string to int(64)"))
+      }
+      val initTemp[1752853]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (1752856 call init[1475364] initTemp[1752853] new_temp[1752844])
+      (1752169 'move' call_tmp[1752167] initTemp[1752853])
+      val call_tmp[1752176]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[1752870]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1752876 'move' coerce_tmp[1752870](1752872 call :[1498308] call_tmp[1752167]))
+      val _formal_tmp_in_err[1753089]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (1753094 'move' _formal_tmp_in_err[1753089](1753090 call chpl__initCopy[1499782] coerce_tmp[1752870] 0))
+      (1752178 'move' call_tmp[1752176](1752181 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1753089]))
+      {
+        val castedError[5499694]:unmanaged Error?[467980] "temp"
+        (5499700 'move' castedError[5499694](5499696 'cast' unmanaged Error?[467980] call_tmp[1752176]))
+        (5499702 '=' error_out[5499691] castedError[5499694])
+        gotoErrorHandlingReturn _end_:[1752770] _end_:[1752770]
+      }
+    }
+    (1752187 call _cleanupForNumericCast[1599068] localX[1752127])
+    (1752189 'end of statement' localX[1752127])
+    val call_tmp[1752191]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1752193 'move' call_tmp[1752191](1752199 call isEmpty[25458] localX[1752127]))
+    val call_tmp[1752200]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1752202 'move' call_tmp[1752200] call_tmp[1752191])
+    if call_tmp[1752200]
+    {
+      val call_tmp[1752209]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1752211 'move' call_tmp[1752209](1752214 call +[28065] "bad cast from string '" x[1751966]))
+      val call_tmp[1752217]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1752219 'move' call_tmp[1752217](1752222 call +[28065] call_tmp[1752209] "' to "))
+      val call_tmp[1752225]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1752233]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1752235 'move' call_tmp[1752233](1752238 call +[28065] call_tmp[1752217] "int(64)"))
+      val call_tmp[1752241]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[1753140]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (1753142 'move' new_temp[1753140](1753127 call _new[1475209] call_tmp[1752233]))
+      }
+      val initTemp[1753149]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (1753152 call init[1475364] initTemp[1753149] new_temp[1753140])
+      (1752243 'move' call_tmp[1752241] initTemp[1753149])
+      val call_tmp[1752250]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[1753166]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1753172 'move' coerce_tmp[1753166](1753168 call :[1498308] call_tmp[1752241]))
+      val _formal_tmp_in_err[1753385]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (1753390 'move' _formal_tmp_in_err[1753385](1753386 call chpl__initCopy[1499782] coerce_tmp[1753166] 0))
+      (1752252 'move' call_tmp[1752250](1752255 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1753385]))
+      {
+        val castedError[5499707]:unmanaged Error?[467980] "temp"
+        (5499713 'move' castedError[5499707](5499709 'cast' unmanaged Error?[467980] call_tmp[1752250]))
+        (5499715 '=' error_out[5499691] castedError[5499707])
+        gotoErrorHandlingReturn _end_:[1752770] _end_:[1752770]
+      }
+    }
+    val call_tmp[1752260]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[1752267]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      {
+        val tmp[1752277]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[1752284]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[1752292]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        {
+          val call_tmp[1752327]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val call_tmp[1752335]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          {
+            val call_tmp[1752370]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            val call_tmp[1752378]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            {
+              val call_tmp[1752413]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              val call_tmp[1752421]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              {
+                val call_tmp[1752430]:c_ptrConst(int(8))[1466333] "dead after last mention" "expr temp" "maybe param" "temp"
+                (1752432 'move' call_tmp[1752430](1752438 call c_str[51169] localX[1752127]))
+                val call_tmp[1752439]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+                (1752441 'move' call_tmp[1752439](1752444 call c_string_to_int64_t[1752026] call_tmp[1752430] isErr[1752112]))
+                (1754213 'move' retVal[1752106] call_tmp[1752439])
+                (1752451 'end of statement' retVal[1752106] localX[1752127] isErr[1752112])
+              }
+              (1753902 'end of statement' localX[1752127] isErr[1752112] retVal[1752106] isErr[1752112])
+            }
+            (1753892 'end of statement' localX[1752127] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112])
+          }
+          (1753880 'end of statement' localX[1752127] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112])
+        }
+        (1753644 'end of statement' localX[1752127] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112])
+      }
+    }
+    (1753398 'end of statement' localX[1752127] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112] retVal[1752106] isErr[1752112])
+    val call_tmp[1752702]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1752704 'move' call_tmp[1752702] isErr[1752112])
+    if call_tmp[1752702]
+    {
+      val call_tmp[1752711]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1752713 'move' call_tmp[1752711](1752716 call +[28065] "bad cast from string '" x[1751966]))
+      val call_tmp[1752719]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1752721 'move' call_tmp[1752719](1752724 call +[28065] call_tmp[1752711] "' to "))
+      val call_tmp[1752727]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1752735]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1752737 'move' call_tmp[1752735](1752740 call +[28065] call_tmp[1752719] "int(64)"))
+      val call_tmp[1752743]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[1753958]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (1753960 'move' new_temp[1753958](1753945 call _new[1475209] call_tmp[1752735]))
+      }
+      val initTemp[1753967]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (1753970 call init[1475364] initTemp[1753967] new_temp[1753958])
+      (1752745 'move' call_tmp[1752743] initTemp[1753967])
+      val call_tmp[1752752]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[1753984]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1753990 'move' coerce_tmp[1753984](1753986 call :[1498308] call_tmp[1752743]))
+      val _formal_tmp_in_err[1754203]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (1754208 'move' _formal_tmp_in_err[1754203](1754204 call chpl__initCopy[1499782] coerce_tmp[1753984] 0))
+      (1752754 'move' call_tmp[1752752](1752757 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1754203]))
+      {
+        val castedError[5499720]:unmanaged Error?[467980] "temp"
+        (5499726 'move' castedError[5499720](5499722 'cast' unmanaged Error?[467980] call_tmp[1752752]))
+        (5499728 '=' error_out[5499691] castedError[5499720])
+        gotoErrorHandlingReturn _end_:[1752770] _end_:[1752770]
+      }
+    }
+    (1752762 'move' ret[1751970] retVal[1752106])
+    gotoReturn _end_:[1752770] _end_:[1752770]
+    label _end_:[1752770]
+    (1752772 return ret[1751970])
+  }
+  function :[1918271](const  ref arg x[1918273]:string[244], ref arg error_out[5501339]:unmanaged Error?[467980]) : uint(64)[86] throws "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5478463]:uint(64)[86] "temp"
+    val ret[1918277]:uint(64)[86] "dead after last mention" "RVV" "temp"
+    val retVal[1918413]:uint(64)[86] "dead at end of block" "insert auto destroy" "split inited"
+    (1918418 'end of statement')
+    val isErr[1918419]:bool[19] "dead at end of block" "insert auto destroy"
+    (1920080 'move' isErr[1918419] 0)
+    (1918424 'end of statement')
+    val call_tmp[1918425]:string[244] "dead at end of block" "maybe param" "temp"
+    (1918427 'move' call_tmp[1918425](1918433 call localize[23546] x[1918273]))
+    val localX[1918434]:string[244] "dead at end of block" "insert auto destroy"
+    (1918436 'move' localX[1918434] call_tmp[1918425])
+    (1918439 'end of statement')
+    val call_tmp[1918440]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1918442 'move' call_tmp[1918440](1918448 call isEmpty[25458] localX[1918434]))
+    val call_tmp[1918449]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1918451 'move' call_tmp[1918449] call_tmp[1918440])
+    if call_tmp[1918449]
+    {
+      val call_tmp[1918458]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1918466]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1918474]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[1919151]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (1919153 'move' new_temp[1919151](1919138 call _new[1475209] "bad cast from empty string to uint(64)"))
+      }
+      val initTemp[1919160]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (1919163 call init[1475364] initTemp[1919160] new_temp[1919151])
+      (1918476 'move' call_tmp[1918474] initTemp[1919160])
+      val call_tmp[1918483]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[1919177]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1919183 'move' coerce_tmp[1919177](1919179 call :[1498308] call_tmp[1918474]))
+      val _formal_tmp_in_err[1919396]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (1919401 'move' _formal_tmp_in_err[1919396](1919397 call chpl__initCopy[1499782] coerce_tmp[1919177] 0))
+      (1918485 'move' call_tmp[1918483](1918488 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1919396]))
+      {
+        val castedError[5501342]:unmanaged Error?[467980] "temp"
+        (5501348 'move' castedError[5501342](5501344 'cast' unmanaged Error?[467980] call_tmp[1918483]))
+        (5501350 '=' error_out[5501339] castedError[5501342])
+        gotoErrorHandlingReturn _end_:[1919077] _end_:[1919077]
+      }
+    }
+    (1918494 call _cleanupForNumericCast[1599068] localX[1918434])
+    (1918496 'end of statement' localX[1918434])
+    val call_tmp[1918498]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1918500 'move' call_tmp[1918498](1918506 call isEmpty[25458] localX[1918434]))
+    val call_tmp[1918507]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1918509 'move' call_tmp[1918507] call_tmp[1918498])
+    if call_tmp[1918507]
+    {
+      val call_tmp[1918516]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1918518 'move' call_tmp[1918516](1918521 call +[28065] "bad cast from string '" x[1918273]))
+      val call_tmp[1918524]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1918526 'move' call_tmp[1918524](1918529 call +[28065] call_tmp[1918516] "' to "))
+      val call_tmp[1918532]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1918540]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1918542 'move' call_tmp[1918540](1918545 call +[28065] call_tmp[1918524] "uint(64)"))
+      val call_tmp[1918548]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[1919447]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (1919449 'move' new_temp[1919447](1919434 call _new[1475209] call_tmp[1918540]))
+      }
+      val initTemp[1919456]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (1919459 call init[1475364] initTemp[1919456] new_temp[1919447])
+      (1918550 'move' call_tmp[1918548] initTemp[1919456])
+      val call_tmp[1918557]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[1919473]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1919479 'move' coerce_tmp[1919473](1919475 call :[1498308] call_tmp[1918548]))
+      val _formal_tmp_in_err[1919692]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (1919697 'move' _formal_tmp_in_err[1919692](1919693 call chpl__initCopy[1499782] coerce_tmp[1919473] 0))
+      (1918559 'move' call_tmp[1918557](1918562 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1919692]))
+      {
+        val castedError[5501355]:unmanaged Error?[467980] "temp"
+        (5501361 'move' castedError[5501355](5501357 'cast' unmanaged Error?[467980] call_tmp[1918557]))
+        (5501363 '=' error_out[5501339] castedError[5501355])
+        gotoErrorHandlingReturn _end_:[1919077] _end_:[1919077]
+      }
+    }
+    val call_tmp[1918567]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    val call_tmp[1918574]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      {
+        val tmp[1918797]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[1918804]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[1918812]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        {
+          val call_tmp[1918847]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          val call_tmp[1918855]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+          {
+            val call_tmp[1918890]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            val call_tmp[1918898]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+            {
+              val call_tmp[1918933]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              val call_tmp[1918941]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+              {
+                val call_tmp[1918950]:c_ptrConst(int(8))[1466333] "dead after last mention" "expr temp" "maybe param" "temp"
+                (1918952 'move' call_tmp[1918950](1918958 call c_str[51169] localX[1918434]))
+                val call_tmp[1918959]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+                (1918961 'move' call_tmp[1918959](1918964 call c_string_to_uint64_t[1918397] call_tmp[1918950] isErr[1918419]))
+                (1920076 'move' retVal[1918413] call_tmp[1918959])
+                (1918971 'end of statement' retVal[1918413] localX[1918434] isErr[1918419])
+              }
+              (1919765 'end of statement' localX[1918434] isErr[1918419] retVal[1918413] isErr[1918419])
+            }
+            (1919755 'end of statement' localX[1918434] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419])
+          }
+          (1919743 'end of statement' localX[1918434] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419])
+        }
+        (1919729 'end of statement' localX[1918434] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419])
+      }
+    }
+    (1919705 'end of statement' localX[1918434] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419] retVal[1918413] isErr[1918419])
+    val call_tmp[1919009]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1919011 'move' call_tmp[1919009] isErr[1918419])
+    if call_tmp[1919009]
+    {
+      val call_tmp[1919018]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1919020 'move' call_tmp[1919018](1919023 call +[28065] "bad cast from string '" x[1918273]))
+      val call_tmp[1919026]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1919028 'move' call_tmp[1919026](1919031 call +[28065] call_tmp[1919018] "' to "))
+      val call_tmp[1919034]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1919042]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1919044 'move' call_tmp[1919042](1919047 call +[28065] call_tmp[1919026] "uint(64)"))
+      val call_tmp[1919050]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[1919821]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (1919823 'move' new_temp[1919821](1919808 call _new[1475209] call_tmp[1919042]))
+      }
+      val initTemp[1919830]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (1919833 call init[1475364] initTemp[1919830] new_temp[1919821])
+      (1919052 'move' call_tmp[1919050] initTemp[1919830])
+      val call_tmp[1919059]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[1919847]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1919853 'move' coerce_tmp[1919847](1919849 call :[1498308] call_tmp[1919050]))
+      val _formal_tmp_in_err[1920066]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (1920071 'move' _formal_tmp_in_err[1920066](1920067 call chpl__initCopy[1499782] coerce_tmp[1919847] 0))
+      (1919061 'move' call_tmp[1919059](1919064 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1920066]))
+      {
+        val castedError[5501368]:unmanaged Error?[467980] "temp"
+        (5501374 'move' castedError[5501368](5501370 'cast' unmanaged Error?[467980] call_tmp[1919059]))
+        (5501376 '=' error_out[5501339] castedError[5501368])
+        gotoErrorHandlingReturn _end_:[1919077] _end_:[1919077]
+      }
+    }
+    (1919069 'move' ret[1918277] retVal[1918413])
+    gotoReturn _end_:[1919077] _end_:[1919077]
+    label _end_:[1919077]
+    (1919079 return ret[1918277])
+  }
+  function _real_cast_helper[3103452](const in arg x[3103456]:real(64)[13]) : string[244] "instantiated generic" "invisible fn" "resolved"
+  {
+    val ret[3103462]:string[244] "dead after last mention" "RVV" "temp"
+    val call_tmp[3103514]:real(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3103521]:real(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3103523 'move' call_tmp[3103521] x[3103456])
+    val call_tmp[3103529]:c_ptrConst(int(8))[1466333] "dead after last mention" "maybe param" "temp"
+    (3103531 'move' call_tmp[3103529](3103534 call real_to_c_string[3103486] call_tmp[3103521] 0))
+    val csc[3103537]:c_ptrConst(int(8))[1466333] "dead at end of block" "insert auto destroy"
+    (3103539 'move' csc[3103537](3103638 call chpl__initCopy[1467266] call_tmp[3103529] 0))
+    (3103542 'end of statement')
+    val call_tmp[3103543]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3103545 'move' call_tmp[3103543](3103548 call strlen[3103502] csc[3103537]))
+    val call_tmp[3103550]:int(64)[10] "dead at end of block" "maybe param" "temp"
+    (3103552 'move' call_tmp[3103550](3103558 call safeCast[1480542] call_tmp[3103543]))
+    const len[3103560]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    (3103562 'move' len[3103560] call_tmp[3103550])
+    (3103565 'end of statement' csc[3103537])
+    val call_tmp[3103567]:uint(8)[71] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3103574]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3103581]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3103583 'move' call_tmp[3103581](3103586 call :[1501045] csc[3103537]))
+    val call_tmp[3103589]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3103591 'move' call_tmp[3103589](3103594 call +[1471222] len[3103560]))
+    val call_tmp[3103597]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (3103599 'move' call_tmp[3103597](3103602 call chpl_createStringWithOwnedBufferNV[21235] call_tmp[3103581] len[3103560] call_tmp[3103589] len[3103560]))
+    (3103671 '=' ret[3103462] call_tmp[3103597])
+    gotoReturn _end__real_cast_helper[3103621] _end__real_cast_helper[3103621]
+    label _end__real_cast_helper[3103621]
+    (3103623 return ret[3103462])
+  }
+  function :[3103356](const in arg x[3103358]:real(64)[13]) : string[244] "inline" "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5479626]:string[244] "temp"
+    val ret[3103362]:string[244] "dead after last mention" "RVV" "temp"
+    val call_tmp[3103419]:real(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3103426]:real(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3103428 'move' call_tmp[3103426] x[3103358])
+    val call_tmp[3103434]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (3103436 'move' call_tmp[3103434](3103439 call _real_cast_helper[3103452] call_tmp[3103426]))
+    (3103442 'move' ret[3103362] call_tmp[3103434])
+    (3103446 return ret[3103362])
+  }
+  function :[3743045](const in arg x[3743047]:real(32)[91]) : string[244] "inline" "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5480440]:string[244] "temp"
+    val ret[3743051]:string[244] "dead after last mention" "RVV" "temp"
+    val call_tmp[3743108]:real(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val call_tmp[3743115]:real(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3743117 'move' call_tmp[3743115](3743120 'cast' real(64)[13] x[3743047]))
+    val call_tmp[3743123]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (3743125 'move' call_tmp[3743123](3743128 call _real_cast_helper[3103452] call_tmp[3743115]))
+    (3743131 'move' ret[3743051] call_tmp[3743123])
+    (3743135 return ret[3743051])
+  }
+  function :[1598415](const  ref arg x[1598417]:string[244], ref arg error_out[5499287]:unmanaged Error?[467980]) : real(64)[13] throws "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5478184]:real(64)[13] "temp"
+    val ret[1598421]:real(64)[13] "dead after last mention" "RVV" "temp"
+    val retVal[1598461]:real(64)[13] "dead at end of block" "insert auto destroy" "split inited"
+    (1598466 'end of statement')
+    val isErr[1598467]:bool[19] "dead at end of block" "insert auto destroy"
+    (1750852 'move' isErr[1598467] 0)
+    (1598472 'end of statement')
+    val call_tmp[1598473]:string[244] "dead at end of block" "maybe param" "temp"
+    (1598475 'move' call_tmp[1598473](1598481 call localize[23546] x[1598417]))
+    val localX[1598482]:string[244] "dead at end of block" "insert auto destroy"
+    (1598484 'move' localX[1598482] call_tmp[1598473])
+    (1598487 'end of statement')
+    val call_tmp[1598488]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1598490 'move' call_tmp[1598488](1598496 call isEmpty[25458] localX[1598482]))
+    val call_tmp[1598497]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1598499 'move' call_tmp[1598497] call_tmp[1598488])
+    if call_tmp[1598497]
+    {
+      val call_tmp[1598506]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1598514]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1598522]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[1598813]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (1598815 'move' new_temp[1598813](1598800 call _new[1475209] "bad cast from empty string to real(64)"))
+      }
+      val initTemp[1598822]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (1598825 call init[1475364] initTemp[1598822] new_temp[1598813])
+      (1598524 'move' call_tmp[1598522] initTemp[1598822])
+      val call_tmp[1598531]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[1598839]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1598845 'move' coerce_tmp[1598839](1598841 call :[1498308] call_tmp[1598522]))
+      val _formal_tmp_in_err[1599058]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (1599063 'move' _formal_tmp_in_err[1599058](1599059 call chpl__initCopy[1499782] coerce_tmp[1598839] 0))
+      (1598533 'move' call_tmp[1598531](1598536 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1599058]))
+      {
+        val castedError[5499290]:unmanaged Error?[467980] "temp"
+        (5499296 'move' castedError[5499290](5499292 'cast' unmanaged Error?[467980] call_tmp[1598531]))
+        (5499298 '=' error_out[5499287] castedError[5499290])
+        gotoErrorHandlingReturn _end_:[1598737] _end_:[1598737]
+      }
+    }
+    (1598542 call _cleanupForNumericCast[1599068] localX[1598482])
+    (1598544 'end of statement' localX[1598482])
+    {
+      val tmp[1598547]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1598554]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1598562]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      {
+        val call_tmp[1598597]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[1598605]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        {
+          val call_tmp[1598614]:c_ptrConst(int(8))[1466333] "dead after last mention" "expr temp" "maybe param" "temp"
+          (1598616 'move' call_tmp[1598614](1598622 call c_str[51169] localX[1598482]))
+          val call_tmp[1598623]:real(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+          (1598625 'move' call_tmp[1598623](1598628 call c_string_to_real64[1598445] call_tmp[1598614] isErr[1598467]))
+          (1750848 'move' retVal[1598461] call_tmp[1598623])
+          (1598635 'end of statement' retVal[1598461] localX[1598482] isErr[1598467])
+        }
+        (1750528 'end of statement' localX[1598482] isErr[1598467] retVal[1598461] isErr[1598467])
+      }
+      (1750296 'end of statement' localX[1598482] isErr[1598467] retVal[1598461] isErr[1598467] retVal[1598461] isErr[1598467])
+    }
+    val call_tmp[1598654]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1598656 'move' call_tmp[1598654] isErr[1598467])
+    if call_tmp[1598654]
+    {
+      val call_tmp[1598663]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1598665 'move' call_tmp[1598663](1598668 call +[28065] "bad cast from string '" x[1598417]))
+      val call_tmp[1598671]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1598673 'move' call_tmp[1598671](1598676 call +[28065] call_tmp[1598663] "' to real("))
+      val call_tmp[1598679]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1598686]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[1598694]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1598696 'move' call_tmp[1598694](1598699 call +[28065] call_tmp[1598671] "64"))
+      val call_tmp[1598702]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (1598704 'move' call_tmp[1598702](1598707 call +[28065] call_tmp[1598694] ")"))
+      val call_tmp[1598710]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[1750593]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (1750595 'move' new_temp[1750593](1750580 call _new[1475209] call_tmp[1598702]))
+      }
+      val initTemp[1750602]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (1750605 call init[1475364] initTemp[1750602] new_temp[1750593])
+      (1598712 'move' call_tmp[1598710] initTemp[1750602])
+      val call_tmp[1598719]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[1750619]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1750625 'move' coerce_tmp[1750619](1750621 call :[1498308] call_tmp[1598710]))
+      val _formal_tmp_in_err[1750838]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (1750843 'move' _formal_tmp_in_err[1750838](1750839 call chpl__initCopy[1499782] coerce_tmp[1750619] 0))
+      (1598721 'move' call_tmp[1598719](1598724 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[1750838]))
+      {
+        val castedError[5499303]:unmanaged Error?[467980] "temp"
+        (5499309 'move' castedError[5499303](5499305 'cast' unmanaged Error?[467980] call_tmp[1598719]))
+        (5499311 '=' error_out[5499287] castedError[5499303])
+        gotoErrorHandlingReturn _end_:[1598737] _end_:[1598737]
+      }
+    }
+    (1598729 'move' ret[1598421] retVal[1598461])
+    gotoReturn _end_:[1598737] _end_:[1598737]
+    label _end_:[1598737]
+    (1598739 return ret[1598421])
+  }
+  function :[3387576](const  ref arg x[3387578]:string[244], ref arg error_out[5510683]:unmanaged Error?[467980]) : real(32)[91] throws "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5479997]:real(32)[91] "temp"
+    val ret[3387582]:real(32)[91] "dead after last mention" "RVV" "temp"
+    val retVal[3387622]:real(32)[91] "dead at end of block" "insert auto destroy" "split inited"
+    (3387627 'end of statement')
+    val isErr[3387628]:bool[19] "dead at end of block" "insert auto destroy"
+    (3388785 'move' isErr[3387628] 0)
+    (3387633 'end of statement')
+    val call_tmp[3387634]:string[244] "dead at end of block" "maybe param" "temp"
+    (3387636 'move' call_tmp[3387634](3387642 call localize[23546] x[3387578]))
+    val localX[3387643]:string[244] "dead at end of block" "insert auto destroy"
+    (3387645 'move' localX[3387643] call_tmp[3387634])
+    (3387648 'end of statement')
+    val call_tmp[3387649]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3387651 'move' call_tmp[3387649](3387657 call isEmpty[25458] localX[3387643]))
+    val call_tmp[3387658]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3387660 'move' call_tmp[3387658] call_tmp[3387649])
+    if call_tmp[3387658]
+    {
+      val call_tmp[3387667]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3387675]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3387683]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[3387974]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (3387976 'move' new_temp[3387974](3387961 call _new[1475209] "bad cast from empty string to real(32)"))
+      }
+      val initTemp[3387983]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (3387986 call init[1475364] initTemp[3387983] new_temp[3387974])
+      (3387685 'move' call_tmp[3387683] initTemp[3387983])
+      val call_tmp[3387692]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[3388000]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3388006 'move' coerce_tmp[3388000](3388002 call :[1498308] call_tmp[3387683]))
+      val _formal_tmp_in_err[3388219]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (3388224 'move' _formal_tmp_in_err[3388219](3388220 call chpl__initCopy[1499782] coerce_tmp[3388000] 0))
+      (3387694 'move' call_tmp[3387692](3387697 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3388219]))
+      {
+        val castedError[5510686]:unmanaged Error?[467980] "temp"
+        (5510692 'move' castedError[5510686](5510688 'cast' unmanaged Error?[467980] call_tmp[3387692]))
+        (5510694 '=' error_out[5510683] castedError[5510686])
+        gotoErrorHandlingReturn _end_:[3387898] _end_:[3387898]
+      }
+    }
+    (3387703 call _cleanupForNumericCast[1599068] localX[3387643])
+    (3387705 'end of statement' localX[3387643])
+    {
+      val tmp[3387708]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3387715]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3387723]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      {
+        val call_tmp[3387732]:c_ptrConst(int(8))[1466333] "dead after last mention" "expr temp" "maybe param" "temp"
+        (3387734 'move' call_tmp[3387732](3387740 call c_str[51169] localX[3387643]))
+        val call_tmp[3387741]:real(32)[91] "dead after last mention" "expr temp" "maybe param" "temp"
+        (3387743 'move' call_tmp[3387741](3387746 call c_string_to_real32[3387590] call_tmp[3387732] isErr[3387628]))
+        (3388781 'move' retVal[3387622] call_tmp[3387741])
+        (3387753 'end of statement' retVal[3387622] localX[3387643] isErr[3387628])
+      }
+      (3388457 'end of statement' localX[3387643] isErr[3387628] retVal[3387622] isErr[3387628] retVal[3387622] isErr[3387628])
+    }
+    val call_tmp[3387815]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3387817 'move' call_tmp[3387815] isErr[3387628])
+    if call_tmp[3387815]
+    {
+      val call_tmp[3387824]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3387826 'move' call_tmp[3387824](3387829 call +[28065] "bad cast from string '" x[3387578]))
+      val call_tmp[3387832]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3387834 'move' call_tmp[3387832](3387837 call +[28065] call_tmp[3387824] "' to real("))
+      val call_tmp[3387840]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3387847]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3387855]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3387857 'move' call_tmp[3387855](3387860 call +[28065] call_tmp[3387832] "32"))
+      val call_tmp[3387863]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3387865 'move' call_tmp[3387863](3387868 call +[28065] call_tmp[3387855] ")"))
+      val call_tmp[3387871]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[3388526]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (3388528 'move' new_temp[3388526](3388513 call _new[1475209] call_tmp[3387863]))
+      }
+      val initTemp[3388535]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (3388538 call init[1475364] initTemp[3388535] new_temp[3388526])
+      (3387873 'move' call_tmp[3387871] initTemp[3388535])
+      val call_tmp[3387880]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[3388552]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3388558 'move' coerce_tmp[3388552](3388554 call :[1498308] call_tmp[3387871]))
+      val _formal_tmp_in_err[3388771]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (3388776 'move' _formal_tmp_in_err[3388771](3388772 call chpl__initCopy[1499782] coerce_tmp[3388552] 0))
+      (3387882 'move' call_tmp[3387880](3387885 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3388771]))
+      {
+        val castedError[5510699]:unmanaged Error?[467980] "temp"
+        (5510705 'move' castedError[5510699](5510701 'cast' unmanaged Error?[467980] call_tmp[3387880]))
+        (5510707 '=' error_out[5510683] castedError[5510699])
+        gotoErrorHandlingReturn _end_:[3387898] _end_:[3387898]
+      }
+    }
+    (3387890 'move' ret[3387582] retVal[3387622])
+    gotoReturn _end_:[3387898] _end_:[3387898]
+    label _end_:[3387898]
+    (3387900 return ret[3387582])
+  }
+  function :[3324705](const  ref arg x[3324707]:string[244], ref arg error_out[5509246]:unmanaged Error?[467980]) : imag(64)[101] throws "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5479849]:imag(64)[101] "temp"
+    val ret[3324711]:imag(64)[101] "dead after last mention" "RVV" "temp"
+    val retVal[3324751]:imag(64)[101] "dead at end of block" "insert auto destroy" "split inited"
+    (3324756 'end of statement')
+    val isErr[3324757]:bool[19] "dead at end of block" "insert auto destroy"
+    (3325696 'move' isErr[3324757] 0)
+    (3324762 'end of statement')
+    val call_tmp[3324763]:string[244] "dead at end of block" "maybe param" "temp"
+    (3324765 'move' call_tmp[3324763](3324771 call localize[23546] x[3324707]))
+    val localX[3324772]:string[244] "dead at end of block" "insert auto destroy"
+    (3324774 'move' localX[3324772] call_tmp[3324763])
+    (3324777 'end of statement')
+    val call_tmp[3324778]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3324780 'move' call_tmp[3324778](3324786 call isEmpty[25458] localX[3324772]))
+    val call_tmp[3324787]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3324789 'move' call_tmp[3324787] call_tmp[3324778])
+    if call_tmp[3324787]
+    {
+      val call_tmp[3324796]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3324804]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3324812]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[3325101]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (3325103 'move' new_temp[3325101](3325088 call _new[1475209] "bad cast from empty string to imag(64)"))
+      }
+      val initTemp[3325110]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (3325113 call init[1475364] initTemp[3325110] new_temp[3325101])
+      (3324814 'move' call_tmp[3324812] initTemp[3325110])
+      val call_tmp[3324821]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[3325127]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3325133 'move' coerce_tmp[3325127](3325129 call :[1498308] call_tmp[3324812]))
+      val _formal_tmp_in_err[3325346]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (3325351 'move' _formal_tmp_in_err[3325346](3325347 call chpl__initCopy[1499782] coerce_tmp[3325127] 0))
+      (3324823 'move' call_tmp[3324821](3324826 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3325346]))
+      {
+        val castedError[5509249]:unmanaged Error?[467980] "temp"
+        (5509255 'move' castedError[5509249](5509251 'cast' unmanaged Error?[467980] call_tmp[3324821]))
+        (5509257 '=' error_out[5509246] castedError[5509249])
+        gotoErrorHandlingReturn _end_:[3325027] _end_:[3325027]
+      }
+    }
+    (3324832 call _cleanupForNumericCast[1599068] localX[3324772])
+    (3324834 'end of statement' localX[3324772])
+    {
+      val tmp[3324837]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3324844]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3324852]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      {
+        val call_tmp[3324887]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[3324895]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        {
+          val call_tmp[3324904]:c_ptrConst(int(8))[1466333] "dead after last mention" "expr temp" "maybe param" "temp"
+          (3324906 'move' call_tmp[3324904](3324912 call c_str[51169] localX[3324772]))
+          val call_tmp[3324913]:imag(64)[101] "dead after last mention" "expr temp" "maybe param" "temp"
+          (3324915 'move' call_tmp[3324913](3324918 call c_string_to_imag64[3324735] call_tmp[3324904] isErr[3324757]))
+          (3325692 'move' retVal[3324751] call_tmp[3324913])
+          (3324925 'end of statement' retVal[3324751] localX[3324772] isErr[3324757])
+        }
+        (3325372 'end of statement' localX[3324772] isErr[3324757] retVal[3324751] isErr[3324757])
+      }
+      (3325362 'end of statement' localX[3324772] isErr[3324757] retVal[3324751] isErr[3324757] retVal[3324751] isErr[3324757])
+    }
+    val call_tmp[3324944]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3324946 'move' call_tmp[3324944] isErr[3324757])
+    if call_tmp[3324944]
+    {
+      val call_tmp[3324953]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3324955 'move' call_tmp[3324953](3324958 call +[28065] "bad cast from string '" x[3324707]))
+      val call_tmp[3324961]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3324963 'move' call_tmp[3324961](3324966 call +[28065] call_tmp[3324953] "' to imag("))
+      val call_tmp[3324969]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3324976]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3324984]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3324986 'move' call_tmp[3324984](3324989 call +[28065] call_tmp[3324961] "64"))
+      val call_tmp[3324992]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3324994 'move' call_tmp[3324992](3324997 call +[28065] call_tmp[3324984] ")"))
+      val call_tmp[3325000]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[3325437]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (3325439 'move' new_temp[3325437](3325424 call _new[1475209] call_tmp[3324992]))
+      }
+      val initTemp[3325446]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (3325449 call init[1475364] initTemp[3325446] new_temp[3325437])
+      (3325002 'move' call_tmp[3325000] initTemp[3325446])
+      val call_tmp[3325009]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[3325463]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3325469 'move' coerce_tmp[3325463](3325465 call :[1498308] call_tmp[3325000]))
+      val _formal_tmp_in_err[3325682]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (3325687 'move' _formal_tmp_in_err[3325682](3325683 call chpl__initCopy[1499782] coerce_tmp[3325463] 0))
+      (3325011 'move' call_tmp[3325009](3325014 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3325682]))
+      {
+        val castedError[5509262]:unmanaged Error?[467980] "temp"
+        (5509268 'move' castedError[5509262](5509264 'cast' unmanaged Error?[467980] call_tmp[3325009]))
+        (5509270 '=' error_out[5509246] castedError[5509262])
+        gotoErrorHandlingReturn _end_:[3325027] _end_:[3325027]
+      }
+    }
+    (3325019 'move' ret[3324711] retVal[3324751])
+    gotoReturn _end_:[3325027] _end_:[3325027]
+    label _end_:[3325027]
+    (3325029 return ret[3324711])
+  }
+  function :[3326053](const  ref arg x[3326055]:string[244], ref arg error_out[5509291]:unmanaged Error?[467980]) : complex(128)[111] throws "instantiated generic" "invisible fn" "operator" "resolved"
+  {
+    val _formal_type_tmp_[5479851]:complex(128)[111] "temp"
+    val ret[3326059]:complex(128)[111] "dead after last mention" "RVV" "temp"
+    val retVal[3326099]:complex(128)[111] "dead at end of block" "insert auto destroy" "split inited"
+    (3326104 'end of statement')
+    val isErr[3326105]:bool[19] "dead at end of block" "insert auto destroy"
+    (3327859 'move' isErr[3326105] 0)
+    (3326110 'end of statement')
+    val call_tmp[3326111]:string[244] "dead at end of block" "maybe param" "temp"
+    (3326113 'move' call_tmp[3326111](3326119 call localize[23546] x[3326055]))
+    const localX[3326120]:string[244] "dead at end of block" "const" "insert auto destroy"
+    (3326122 'move' localX[3326120] call_tmp[3326111])
+    (3326125 'end of statement')
+    val call_tmp[3326126]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3326128 'move' call_tmp[3326126](3326134 call isEmpty[25458] localX[3326120]))
+    val call_tmp[3326135]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3326137 'move' call_tmp[3326135] call_tmp[3326126])
+    if call_tmp[3326135]
+    {
+      val call_tmp[3326144]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3326151]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3326159]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3326167]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3326175]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[3326855]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (3326857 'move' new_temp[3326855](3326842 call _new[1475209] "bad cast from empty string to complex(128)"))
+      }
+      val initTemp[3326864]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (3326867 call init[1475364] initTemp[3326864] new_temp[3326855])
+      (3326177 'move' call_tmp[3326175] initTemp[3326864])
+      val call_tmp[3326184]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[3326881]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3326887 'move' coerce_tmp[3326881](3326883 call :[1498308] call_tmp[3326175]))
+      val _formal_tmp_in_err[3327100]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (3327105 'move' _formal_tmp_in_err[3327100](3327101 call chpl__initCopy[1499782] coerce_tmp[3326881] 0))
+      (3326186 'move' call_tmp[3326184](3326189 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3327100]))
+      {
+        val castedError[5509294]:unmanaged Error?[467980] "temp"
+        (5509300 'move' castedError[5509294](5509296 'cast' unmanaged Error?[467980] call_tmp[3326184]))
+        (5509302 '=' error_out[5509291] castedError[5509294])
+        gotoErrorHandlingReturn _end_:[3326385] _end_:[3326385]
+      }
+    }
+    {
+      val tmp[3326195]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3326202]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3326210]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      {
+        val call_tmp[3326245]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        val call_tmp[3326253]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        {
+          val call_tmp[3326262]:c_ptrConst(int(8))[1466333] "dead after last mention" "expr temp" "maybe param" "temp"
+          (3326264 'move' call_tmp[3326262](3326270 call c_str[51169] localX[3326120]))
+          val call_tmp[3326271]:complex(128)[111] "dead after last mention" "expr temp" "maybe param" "temp"
+          (3326273 'move' call_tmp[3326271](3326276 call c_string_to_complex128[3326083] call_tmp[3326262] isErr[3326105]))
+          (3327855 'move' retVal[3326099] call_tmp[3326271])
+          (3326283 'end of statement' retVal[3326099] localX[3326120] isErr[3326105])
+        }
+        (3327535 'end of statement' localX[3326120] isErr[3326105] retVal[3326099] isErr[3326105])
+      }
+      (3327320 'end of statement' localX[3326120] isErr[3326105] retVal[3326099] isErr[3326105] retVal[3326099] isErr[3326105])
+    }
+    val call_tmp[3326302]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (3326304 'move' call_tmp[3326302] isErr[3326105])
+    if call_tmp[3326302]
+    {
+      val call_tmp[3326311]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3326313 'move' call_tmp[3326311](3326316 call +[28065] "bad cast from string '" x[3326055]))
+      val call_tmp[3326319]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3326321 'move' call_tmp[3326319](3326324 call +[28065] call_tmp[3326311] "' to complex("))
+      val call_tmp[3326327]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3326334]:string[244] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      val call_tmp[3326342]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3326344 'move' call_tmp[3326342](3326347 call +[28065] call_tmp[3326319] "128"))
+      val call_tmp[3326350]:string[244] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (3326352 'move' call_tmp[3326350](3326355 call +[28065] call_tmp[3326342] ")"))
+      val call_tmp[3326358]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "insert auto destroy for explicit new" "maybe param" "no auto destroy" "temp"
+      { scopeless
+        val new_temp[3327600]:unmanaged IllegalArgumentError[468280] "dead after last mention" "temp"
+        (3327602 'move' new_temp[3327600](3327587 call _new[1475209] call_tmp[3326350]))
+      }
+      val initTemp[3327609]:owned IllegalArgumentError[1475882] "dead after last mention" "delay instantiation" "temp"
+      (3327612 call init[1475364] initTemp[3327609] new_temp[3327600])
+      (3326360 'move' call_tmp[3326358] initTemp[3327609])
+      val call_tmp[3326367]:unmanaged Error[468025] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[3327626]:owned Error[1498203] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (3327632 'move' coerce_tmp[3327626](3327628 call :[1498308] call_tmp[3326358]))
+      val _formal_tmp_in_err[3327845]:owned Error[1498203] "dead after last mention" "expr temp" "no auto destroy" "temp"
+      (3327850 'move' _formal_tmp_in_err[3327845](3327846 call chpl__initCopy[1499782] coerce_tmp[3327626] 0))
+      (3326369 'move' call_tmp[3326367](3326372 call chpl_fix_thrown_error[87309] _formal_tmp_in_err[3327845]))
+      {
+        val castedError[5509307]:unmanaged Error?[467980] "temp"
+        (5509313 'move' castedError[5509307](5509309 'cast' unmanaged Error?[467980] call_tmp[3326367]))
+        (5509315 '=' error_out[5509291] castedError[5509307])
+        gotoErrorHandlingReturn _end_:[3326385] _end_:[3326385]
+      }
+    }
+    (3326377 'move' ret[3326059] retVal[3326099])
+    gotoReturn _end_:[3326385] _end_:[3326385]
+    label _end_:[3326385]
+    (3326387 return ret[3326059])
+  }
+  function integral_to_c_string[1496879](const in arg x[1496885]:int(64)[10], const in arg size[1496891]:uint(32)[81], const in arg isSigned[1496893]:bool[19], ref arg err[1496895]:_ref(bool)[1466299]) : c_ptrConst(int(8))[1466333] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function strlen[1496903](const in arg str[1496909]:c_ptrConst(int(8))[1466333]) : uint(64)[86] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function c_string_to_real64[1598445](const in arg x[1598451]:c_ptrConst(int(8))[1466333], ref arg err[1598453]:_ref(bool)[1466299]) : real(64)[13] "extern" "insert line file info" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function integral_to_c_string[1721086](const in arg x[1721092]:int(64)[10], const in arg size[1721098]:uint(32)[81], const in arg isSigned[1721100]:bool[19], ref arg err[1721102]:_ref(bool)[1466299]) : c_ptrConst(int(8))[1466333] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function strlen[1721110](const in arg str[1721116]:c_ptrConst(int(8))[1466333]) : uint(64)[86] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function c_string_to_int64_t[1752026](const in arg x[1752032]:c_ptrConst(int(8))[1466333], ref arg err[1752034]:_ref(bool)[1466299]) : int(64)[10] "extern" "insert line file info" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function integral_to_c_string[1816186](const in arg x[1816192]:int(64)[10], const in arg size[1816198]:uint(32)[81], const in arg isSigned[1816200]:bool[19], ref arg err[1816202]:_ref(bool)[1466299]) : c_ptrConst(int(8))[1466333] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function strlen[1816210](const in arg str[1816216]:c_ptrConst(int(8))[1466333]) : uint(64)[86] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function integral_to_c_string[1848026](const in arg x[1848032]:int(64)[10], const in arg size[1848038]:uint(32)[81], const in arg isSigned[1848040]:bool[19], ref arg err[1848042]:_ref(bool)[1466299]) : c_ptrConst(int(8))[1466333] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function strlen[1848050](const in arg str[1848056]:c_ptrConst(int(8))[1466333]) : uint(64)[86] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function c_string_to_uint64_t[1918397](const in arg x[1918403]:c_ptrConst(int(8))[1466333], ref arg err[1918405]:_ref(bool)[1466299]) : uint(64)[86] "extern" "insert line file info" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function real_to_c_string[3103486](const in arg x[3103492]:real(64)[13], const in arg isImag[3103494]:bool[19]) : c_ptrConst(int(8))[1466333] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function strlen[3103502](const in arg str[3103508]:c_ptrConst(int(8))[1466333]) : uint(64)[86] "extern" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function c_string_to_imag64[3324735](const in arg x[3324741]:c_ptrConst(int(8))[1466333], ref arg err[3324743]:_ref(bool)[1466299]) : imag(64)[101] "extern" "insert line file info" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function c_string_to_complex128[3326083](const in arg x[3326089]:c_ptrConst(int(8))[1466333], ref arg err[3326091]:_ref(bool)[1466299]) : complex(128)[111] "extern" "insert line file info" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+  function c_string_to_real32[3387590](const in arg x[3387596]:c_ptrConst(int(8))[1466333], ref arg err[3387598]:_ref(bool)[1466299]) : real(32)[91] "extern" "insert line file info" "local args" "no fn body" "resolved" "fn synchronization free"
+  {
+  }
+}

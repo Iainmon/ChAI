@@ -1,0 +1,302 @@
+AST dump for ChapelHashing after pass readExternC.
+Module use list: 
+
+{
+  (279715 'use' ChapelBase)
+  type Self[279732]
+  {
+    function _unknown[42].hash[279719](arg _mt[279725]:_MT[201], arg this[279722] :
+    Self) : _unknown[42] "method" "no fn body"
+    {
+    }
+    { scopeless type
+      uint[86]
+    }
+  }
+  function chpl__defaultHashWrapperInner[279737](arg x[279739]:_any[141](?)) : _unknown[42]
+  {
+    (279744 'use' Reflection)
+    if(279850 call _cond_test(279842 call !(279845 call canResolveMethod x "hash")))
+    {
+      (279748 call compilerError(279749 call + "No hash function found for "(279754 call :(279757 'typeof' x) string[244])))
+    }
+    {
+      { scopeless
+        if(279838 call _cond_test(279832 call ==(279834 'implements interface' x hashable) 2))
+        {
+          (279761 call compilerWarning "'"(279763 call +(279765 call :(279768 'typeof' x) string[244]) "' has a hash function that is being ")(279773 call +(279775 call + "used by the standard library. However, '"(279780 call :(279783 'typeof' x) string[244])) "' does not implement hashable. ") "In the future, this will result in an error.")
+          if(279828 call _cond_test(279825 call isRecordType(279827 'typeof' x)))
+          {
+            (279793 call compilerWarning(279794 call +(279796 call + "to make '"(279801 call :(279804 'typeof' x) string[244])) "' implement hashable, ")(279809 call +(279811 call + "add the interface to its declaration: 'record "(279816 call :(279819 'typeof' x) string[244])) " : hashable'"))
+          }
+        }
+      }
+    }
+    (279855 return(279862 call(279859 call . x c"hash")))
+  }
+  { scopeless type
+    uint[86]
+  }
+  function chpl__defaultHashWrapper[279866](arg x[279868]:_any[141](?)) : _unknown[42]
+  {
+    { scopeless
+      const hash[279873] "const"(279875 call chpl__defaultHashWrapperInner x)
+      (279878 'end of statement')
+    }
+    (279879 return(279880 call :(279882 call & hash(279886 call max int[10])) int[10]))
+  }
+  { scopeless type
+    int[10]
+  }
+  function _gen_key[279892](arg i[279895] :
+  uint[86]) : _unknown[42]
+  {
+    { scopeless
+      unknown key[279901] i
+      (279904 'end of statement')
+    }
+    (279905 call = key(279908 call +(279910 call ~ key)(279913 call << key 21)))
+    (279919 call = key(279922 call ^ key(279925 call >> key 24)))
+    (279931 call = key(279934 call +(279936 call + key(279939 call << key 3))(279943 call << key 8)))
+    (279947 call = key(279950 call ^ key(279953 call >> key 14)))
+    (279959 call = key(279962 call +(279964 call + key(279967 call << key 2))(279971 call << key 4)))
+    (279975 call = key(279978 call ^ key(279981 call >> key 28)))
+    (279987 call = key(279990 call + key(279993 call << key 31)))
+    (279999 return key)
+  }
+  { scopeless type
+    uint[86]
+  }
+  function _gen_key[280004](arg i[280007] :
+  int[10]) : _unknown[42]
+  {
+    (280012 return(280014 call _gen_key(280015 call : i uint[86])))
+  }
+  { scopeless type
+    uint[86]
+  }
+  function chpl__defaultHashCombine[280022](arg a[280025] :
+  uint[86], arg b[280029] :
+  uint[86], arg fieldnum[280033] :
+  int[10]) : _unknown[42] "inline"
+  {
+    function chpl_bitops_rotl_64[280038](arg x[280043] :
+    (280041 call uint[86] 64), arg n[280049] :
+    (280047 call uint[86] 64)) : _unknown[42] "extern" "codegen for CPU and GPU" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      (280053 call uint[86] 64)
+    }
+    { scopeless
+      unknown n[280059](280061 call :(280063 call + 17 fieldnum) uint[86]) uint[86]
+      (280071 'end of statement')
+    }
+    (280072 return(280074 call _gen_key(280075 call ^ a(280079 call chpl_bitops_rotl_64 b n))))
+  }
+  { scopeless type
+    uint[86]
+  }
+  function _unknown[42].hash[280085](arg _mt[280091]:_MT[201], arg this[280088] :
+  bool) : _unknown[42] "inline" "method"
+  {
+    if(280102 call _cond_test this)
+    {
+      { scopeless
+        (280095 return 0)
+      }
+    }
+    {
+      { scopeless
+        (280098 return 1)
+      }
+    }
+  }
+  { scopeless type
+    uint[86]
+  } hashable bool
+  {
+  } hashable numeric
+  {
+  }
+  function _unknown[42].hash[280126](arg _mt[280132]:_MT[201], arg this[280129] :
+  int[10]) : _unknown[42] "inline" "method"
+  {
+    (280136 return(280138 call _gen_key this))
+  }
+  { scopeless type
+    uint[86]
+  }
+  function _unknown[42].hash[280143](arg _mt[280149]:_MT[201], arg this[280146] :
+  uint[86]) : _unknown[42] "inline" "method"
+  {
+    (280153 return(280155 call _gen_key this))
+  }
+  { scopeless type
+    uint[86]
+  }
+  function _unknown[42].hash[280160](arg _mt[280166]:_MT[201], arg this[280163] :
+  enum) : _unknown[42] "inline" "method"
+  {
+    (280170 return(280172 call _gen_key(280174 call chpl__enumToOrder this)))
+  }
+  { scopeless type
+    uint[86]
+  } hashable enum
+  {
+  }
+  function _unknown[42].hash[280187](arg _mt[280193]:_MT[201], arg this[280190] :
+  real[13]) : _unknown[42] "inline" "method"
+  {
+    (280197 return(280199 call _gen_key(280200 'real2int' this)))
+  }
+  { scopeless type
+    uint[86]
+  }
+  function _unknown[42].hash[280205](arg _mt[280211]:_MT[201], arg this[280208] :
+  complex[111]) : _unknown[42] "inline" "method"
+  {
+    (280215 return(280217 call _gen_key(280218 call ^(280220 'real2int'(280222 call . this c"re"))(280225 'real2int'(280227 call . this c"im")))))
+  }
+  { scopeless type
+    uint[86]
+  }
+  function _unknown[42].hash[280233](arg _mt[280239]:_MT[201], arg this[280236] :
+  imag) : _unknown[42] "inline" "method"
+  {
+    (280243 return(280245 call _gen_key(280246 'real2int'(280248 call _i2r this))))
+  }
+  { scopeless type
+    uint[86]
+  }
+  function _unknown[42].hash[280253](arg _mt[280259]:_MT[201], arg this[280256] :
+  chpl_taskID_t) : _unknown[42] "inline" "method"
+  {
+    (280263 return(280265 call _gen_key(280266 call : this int[10])))
+  }
+  { scopeless type
+    uint[86]
+  } hashable chpl_taskID_t
+  {
+  }
+  function _unknown[42].hash[280280](arg _mt[280286]:_MT[201], arg this[280283] :
+  _array) : _unknown[42] "inline" "method"
+  {
+    { scopeless
+      unknown hash[280291] 0 uint[86]
+      (280295 'end of statement')
+    }
+    { scopeless
+      unknown i[280297] 1
+      (280300 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[280321] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[280322] "expr temp" "temp"
+      (280331 'move' _iterator[280322](280329 call _getIterator this))
+      Defer
+      {
+        {
+          (280346 call _freeIterator _iterator[280322])
+        }
+      }
+      { scopeless type
+        (280336 'move' _indexOfInterest[280321](280333 call iteratorIndex _iterator[280322]))
+      }
+      ForLoop[280323]
+      {
+        unknown obj[280301] "index var" "insert auto destroy"
+        (280341 'move' obj[280301] _indexOfInterest[280321])
+        {
+          (280305 call = hash(280309 call chpl__defaultHashCombine(280314 call(280311 call . obj c"hash")) hash i))
+          (280317 call += i 1)
+        }
+        label _continueLabel[280326]
+        _indexOfInterest[280321]
+        _iterator[280322]
+      }
+      label _breakLabel[280327]
+    }
+    (280353 return hash)
+  }
+  { scopeless type
+    uint[86]
+  } hashable _array
+  {
+  }
+  function _unknown[42].hash[280365](arg _mt[280373]:_MT[201], arg this[280370] :
+  (280367 'to borrowed class from unknown'(280369 'to nilable class from type' RootClass))) : _unknown[42] "inline" "method"
+  {
+    (280377 return(280379 call _gen_key(280380 'object2int' this)))
+  }
+  { scopeless type
+    uint[86]
+  } hashable class
+  {
+  } hashable(280397 'to nilable class from type' class)
+  {
+  }
+  function _unknown[42].hash[280402](arg _mt[280408]:_MT[201], arg this[280405] :
+  locale[234]) : _unknown[42] "inline" "method"
+  {
+    (280412 return(280414 call _gen_key(280415 'object2int'(280417 call . this c"_value"))))
+  }
+  { scopeless type
+    uint[86]
+  } hashable locale[234]
+  {
+  }
+  function _unknown[42].hash[280430](arg _mt[280436]:_MT[201], arg this[280433] :
+  range) : _unknown[42] "inline" "method"
+  {
+    (280441 'use' Reflection)
+    { scopeless
+      unknown ret[280444] uint[86]
+      (280447 'end of statement')
+    }
+    {
+      unknown i[280448] "index var" 0
+      unknown tmp[280536] "maybe param" "temp"
+      (280548 'move' tmp[280536](280546 call chpl_compute_low_param_loop_bound 1(280452 call numImplementationFields(280454 'typeof' this))))
+      unknown tmp[280537] "maybe param" "temp"
+      (280558 'move' tmp[280537](280556 call chpl_compute_high_param_loop_bound 1(280553 call numImplementationFields(280554 'typeof' this))))
+      unknown tmp[280538] "maybe param" "temp"
+      (280561 'move' tmp[280538] 1)
+      ParamForLoop[280563]
+      { i[280448] tmp[280536] tmp[280537] tmp[280538]
+        {
+          if(280532 call _cond_test(280500 call &&(280502 call &&(280504 call ==(280507 call isParam(280509 call getImplementationField this i)) 0)(280513 call ==(280516 call isType(280518 call getImplementationField this i)) 0))(280522 call ==(280525 call isNothingType(280530 'typeof'(280527 call getImplementationField this i))) 0)))
+          {
+            { scopeless
+              const field[280460] "const" "ref var"(280462 call getImplementationField this i)
+              (280466 'end of statement')
+            }
+            { scopeless
+              const fieldHash[280468] "const"(280473 call(280470 call . field c"hash"))
+              (280475 'end of statement')
+            }
+            if(280494 call _cond_test(280490 call == i 1))
+            {
+              { scopeless
+                (280476 call = ret fieldHash)
+              }
+            }
+            {
+              { scopeless
+                (280481 call = ret(280485 call chpl__defaultHashCombine fieldHash ret i))
+              }
+            }
+          }
+        }
+      }
+      label _unused_continueLabel[280540]
+      label _breakLabel[280539]
+    }
+    (280572 return ret)
+  }
+  { scopeless type
+    uint[86]
+  } hashable range
+  {
+  }
+}

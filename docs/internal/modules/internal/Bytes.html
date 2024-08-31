@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bytes &mdash; chpldoc 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="BytesCasts" href="BytesCasts.html" />
+    <link rel="prev" title="ByteBufferHelpers" href="ByteBufferHelpers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            chpldoc
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">chpldoc documentation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ArrayViewRankChange.html">ArrayViewRankChange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ArrayViewReindex.html">ArrayViewReindex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ArrayViewSlice.html">ArrayViewSlice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Atomics.html">Atomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AtomicsCommon.html">AtomicsCommon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ByteBufferHelpers.html">ByteBufferHelpers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bytes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BytesCasts.html">BytesCasts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BytesStringCommon.html">BytesStringCommon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CString.html">CString</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelArray.html">ChapelArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelArrayViewElision.html">ChapelArrayViewElision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelAutoAggregation.html">ChapelAutoAggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelAutoLocalAccess.html">ChapelAutoLocalAccess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelBase.html">ChapelBase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelBase/currentTask.html">currentTask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelContext.html">ChapelContext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelDebugPrint.html">ChapelDebugPrint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelDistribution.html">ChapelDistribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelDomain.html">ChapelDomain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelGpuSupport.html">ChapelGpuSupport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelHashing.html">ChapelHashing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelHashtable.html">ChapelHashtable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelIOSerialize.html">ChapelIOSerialize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelIOStringifyHelper.html">ChapelIOStringifyHelper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelIteratorSupport.html">ChapelIteratorSupport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelLocale.html">ChapelLocale</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelLocks.html">ChapelLocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelNumLocales.html">ChapelNumLocales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelPrivatization.html">ChapelPrivatization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelRange.html">ChapelRange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelReduce.html">ChapelReduce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelRemoteVars.html">ChapelRemoteVars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelSerializedBroadcast.html">ChapelSerializedBroadcast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelShortArrayTransfer.html">ChapelShortArrayTransfer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelStandard.html">ChapelStandard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelStaticVars.html">ChapelStaticVars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelSyncvar.html">ChapelSyncvar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTaskData.html">ChapelTaskData</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTaskDataHelp.html">ChapelTaskDataHelp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTaskID.html">ChapelTaskID</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelThreads.html">ChapelThreads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelTuple.html">ChapelTuple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChapelUtil.html">ChapelUtil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DefaultAssociative.html">DefaultAssociative</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DefaultRectangular.html">DefaultRectangular</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DefaultSparse.html">DefaultSparse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ExportWrappers.html">ExportWrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ExternalArray.html">ExternalArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISO_Fortran_binding.html">ISO_Fortran_binding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpAPU.html">LocaleModelHelpAPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpFlat.html">LocaleModelHelpFlat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpGPU.html">LocaleModelHelpGPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpMem.html">LocaleModelHelpMem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpRuntime.html">LocaleModelHelpRuntime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocaleModelHelpSetup.html">LocaleModelHelpSetup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocalesArray.html">LocalesArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MemConsistency.html">MemConsistency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MemTracking.html">MemTracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NetworkAtomicTypes.html">NetworkAtomicTypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NetworkAtomics.html">NetworkAtomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OwnedObject.html">OwnedObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PrintModuleInitOrder.html">PrintModuleInitOrder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SharedObject.html">SharedObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="String.html">String</a></li>
+<li class="toctree-l1"><a class="reference internal" href="String/NVStringFactory.html">NVStringFactory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StringCasts.html">StringCasts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="startInitCommDiags.html">startInitCommDiags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stopInitCommDiags.html">stopInitCommDiags</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">chpldoc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Bytes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/modules/internal/Bytes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bytes">
+<h1>Bytes<a class="headerlink" href="#bytes" title="Link to this heading">¶</a></h1>
+<p><strong>Usage</strong></p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Bytes</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">Bytes</span><span class="p">;</span>
+</pre></div>
+</div>
+<dl class="chpl type">
+<dt class="sig sig-object chpl" id="Bytes.bytes">
+<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">bytes</span></span><a class="headerlink" href="#Bytes.bytes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Supports the following methods:</p>
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.createBorrowingBuffer">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createBorrowingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.createBorrowingBuffer" title="Link to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>‘createBorrowingBuffer’ is unstable and may change in the future</p>
+</div>
+<p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> which borrows the internal buffer of
+another <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>. If the buffer is freed before the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>
+returned from this function, accessing it is undefined behavior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> – The <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> to borrow the buffer from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createBorrowingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">chpl_c_string</span></em>, <em class="sig-param"><span class="pre">length</span> <span class="pre">=</span> <span class="pre">x.size</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>the type ‘c_string’ is deprecated; please use the variant of ‘bytes.createBorrowingBuffer’ that takes a ‘c_ptrConst(c_char)’ instead</p>
+</div>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createBorrowingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">c_ptr(?t)</span></em>, <em class="sig-param"><span class="pre">length</span> <span class="pre">=</span> <span class="pre">strLen(x)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>‘createBorrowingBuffer’ is unstable and may change in the future</p>
+</div>
+<p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> which borrows the memory allocated for a
+<cite>c_ptr</cite>. If the buffer is freed before the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> returned
+from this function, accessing it is undefined behavior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> : <cite>c_ptr(int(8))</cite> or <cite>c_ptr(uint(8))</cite> – <cite>c_ptr</cite> to borrow as a buffer</p></li>
+<li><p><strong>length</strong> : <cite>int</cite> – Length of <cite>x</cite>, excluding the optional terminating null byte.
+Defaults to the number of bytes in <cite>x</cite> before the terminating
+null byte.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createBorrowingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">c_ptrConst(?t)</span></em>, <em class="sig-param"><span class="pre">length</span> <span class="pre">=</span> <span class="pre">strLen(x)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>‘createBorrowingBuffer’ is unstable and may change in the future</p>
+</div>
+<p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> which borrows the memory allocated for a
+<code class="xref chpl chpl-class docutils literal notranslate"><span class="pre">c_ptrConst</span></code>. If the buffer is freed before the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> returned
+from this function, accessing it is undefined behavior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> : <cite>c_ptrConst(uint(8))</cite> or <cite>c_ptrConst(int(8))</cite> – <cite>c_ptrConst</cite> to borrow as a buffer</p></li>
+<li><p><strong>length</strong> : <cite>int</cite> – Length of <cite>x</cite>, excluding the optional terminating null byte.
+Defaults to the number of bytes in <cite>x</cite> before the terminating
+null byte.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Bytes.chpl_createBytesWithLiteral">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chpl_createBytesWithLiteral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">buffer:</span> <span class="pre">chpl_c_string</span></em>, <em class="sig-param"><span class="pre">offset:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">x:</span> <span class="pre">chpl_c_string</span></em>, <em class="sig-param"><span class="pre">length:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bytes.chpl_createBytesWithLiteral" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createBorrowingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">c_ptr(?t)</span></em>, <em class="sig-param"><span class="pre">length:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">size:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>‘createBorrowingBuffer’ is unstable and may change in the future</p>
+</div>
+<p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> which borrows the memory allocated for a
+<cite>c_ptr</cite>. If the buffer is freed before the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> returned
+from this function, accessing it is undefined behavior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> : <cite>c_ptr(uint(8))</cite> or <cite>c_ptr(int(8))</cite> – Buffer to borrow</p></li>
+<li><p><strong>length</strong> – Length of the buffer <cite>x</cite>, excluding the optional terminating
+null byte.</p></li>
+<li><p><strong>size</strong> – Size of memory allocated for <cite>x</cite> in bytes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.createAdoptingBuffer">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createAdoptingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">c_ptr(?t)</span></em>, <em class="sig-param"><span class="pre">length</span> <span class="pre">=</span> <span class="pre">strLen(x)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.createAdoptingBuffer" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> which takes ownership of the memory
+allocated for a <cite>c_ptr</cite>. The buffer will be freed when the
+<a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> is deinitialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> : <cite>c_ptr(uint(8))</cite> or <cite>c_ptr(int(8))</cite> – The <cite>c_ptr</cite> to take ownership of</p></li>
+<li><p><strong>length</strong> : <cite>int</cite> – Length of buffer <cite>x</cite>, excluding the optional terminating null
+byte. Defaults to the number of bytes in <cite>x</cite> before the
+terminating null byte.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createAdoptingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">chpl_c_string</span></em>, <em class="sig-param"><span class="pre">length</span> <span class="pre">=</span> <span class="pre">x.size</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>the type ‘c_string’ is deprecated; please use the variant of ‘bytes.createAdoptingBuffer’ that takes a ‘c_ptrConst(c_char)’ instead</p>
+</div>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createAdoptingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">c_ptrConst(?t)</span></em>, <em class="sig-param"><span class="pre">length</span> <span class="pre">=</span> <span class="pre">strLen(x)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> which takes ownership of the memory
+allocated for a <code class="xref chpl chpl-class docutils literal notranslate"><span class="pre">c_ptrConst</span></code>. The buffer will be freed when the
+<a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> is deinitialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> : <cite>c_ptrConst(uint(8))</cite> or <cite>c_ptrConst(int(8))</cite> – The <cite>c_ptrConst</cite> to take ownership of</p></li>
+<li><p><strong>length</strong> : <cite>int</cite> – Length of <cite>x</cite>’s buffer, excluding the optional terminating null
+byte. Defaults to the number of bytes in <cite>x</cite> before the
+terminating null byte.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createAdoptingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">c_ptr(?t)</span></em>, <em class="sig-param"><span class="pre">length:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">size:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> which takes ownership of the memory
+allocated for a <cite>c_ptr</cite>. The buffer will be freed when the
+<a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> is deinitialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> : <cite>c_ptr(uint(8))</cite> or <cite>c_ptr(int(8))</cite> – The buffer to take ownership of</p></li>
+<li><p><strong>length</strong> – Length of the buffer <cite>x</cite>, excluding the optional terminating
+null byte.</p></li>
+<li><p><strong>size</strong> – Size of memory allocated for <cite>x</cite> in bytes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.createCopyingBuffer">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createCopyingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">c_ptrConst(?t)</span></em>, <em class="sig-param"><span class="pre">length</span> <span class="pre">=</span> <span class="pre">strLen(x)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.createCopyingBuffer" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> by creating a copy of a buffer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> : <cite>c_ptrConst(uint(8))</cite> or <cite>c_ptrConst(int(8))</cite> – The <code class="xref chpl chpl-class docutils literal notranslate"><span class="pre">c_ptrConst</span></code> to copy</p></li>
+<li><p><strong>length</strong> : <cite>int</cite> – Length of buffer <cite>x</cite>, excluding the optional terminating null
+byte. Defaults to the number of bytes in <cite>x</cite> before the
+terminating null byte.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createCopyingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">chpl_c_string</span></em>, <em class="sig-param"><span class="pre">length</span> <span class="pre">=</span> <span class="pre">x.size</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>the type ‘c_string’ is deprecated; please use the variant of ‘bytes.createCopyingBuffer’ that takes a ‘c_ptrConst(c_char)’ instead</p>
+</div>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">createCopyingBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">c_ptr(?t)</span></em>, <em class="sig-param"><span class="pre">length</span> <span class="pre">=</span> <span class="pre">strLen(x)</span></em>, <em class="sig-param"><span class="pre">size</span> <span class="pre">=</span> <span class="pre">length</span> <span class="pre">+</span> <span class="pre">1</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> by creating a copy of a buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> : <cite>c_ptr(uint(8))</cite> or <cite>c_ptr(int(8))</cite> – The buffer to copy</p></li>
+<li><p><strong>length</strong> – Length of buffer <cite>x</cite>, excluding the optional terminating null
+byte. Defaults to the number of bytes in <cite>x</cite> before the
+terminating null byte.</p></li>
+<li><p><strong>size</strong> – Size of memory allocated for <cite>x</cite> in bytes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl record">
+<dt class="sig sig-object chpl" id="Bytes._bytes">
+<em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">_bytes</span></span><em class="property"> <span class="pre">:</span> <span class="pre">writeSerializable,</span> <span class="pre">readDeserializable</span></em><a class="headerlink" href="#Bytes._bytes" title="Link to this definition">¶</a></dt>
+<dd><dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Bytes._bytes.buffLen">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">buffLen</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#Bytes._bytes.buffLen" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Bytes._bytes.buffSize">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">buffSize</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#Bytes._bytes.buffSize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Bytes._bytes.buff">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">buff</span></span><em class="property"> <span class="pre">:</span> <span class="pre">bufferType</span> <span class="pre">=</span> <span class="pre">nil</span></em><a class="headerlink" href="#Bytes._bytes.buff" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Bytes._bytes.isOwned">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">isOwned</span></span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">true</span></em><a class="headerlink" href="#Bytes._bytes.isOwned" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl attribute">
+<dt class="sig sig-object chpl" id="Bytes._bytes.locale_id">
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">locale_id</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">chpl_nodeID</span></em><a class="headerlink" href="#Bytes._bytes.locale_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.init">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Bytes._bytes.init" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.deinit">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">deinit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Bytes._bytes.deinit" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.chpl__serialize">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">chpl__serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Bytes._bytes.chpl__serialize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.chpl__deserialize">
+<em class="property"><span class="pre">proc</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">chpl__deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bytes._bytes.chpl__deserialize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.serialize">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">writer</span></em>, <em class="sig-param"><span class="pre">ref</span> <span class="pre">serializer</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">throws</span></em><a class="headerlink" href="#Bytes._bytes.serialize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.deserialize">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">reader</span></em>, <em class="sig-param"><span class="pre">ref</span> <span class="pre">deserialize</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">throws</span></em><a class="headerlink" href="#Bytes._bytes.deserialize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.init=">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">b:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bytes._bytes.init=" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">b:</span> <span class="pre">string</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">b:</span> <span class="pre">c_string</span></em><span class="sig-paren">)</span></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>the type ‘c_string’ is deprecated; please use one of the ‘bytes.create*ingBuffer’ methods that takes a ‘c_ptrConst(c_char)’ instead</p>
+</div>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.byteIndices">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">byteIndices</span></span><a class="headerlink" href="#Bytes._bytes.byteIndices" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.size">
+<em class="property"><span class="pre">proc</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">size</span></span><span class="w"> </span><em class="property"> <span class="pre">param</span></em><a class="headerlink" href="#Bytes._bytes.size" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.numBytes">
+<em class="property"><span class="pre">proc</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">numBytes</span></span><span class="w"> </span><em class="property"> <span class="pre">param</span></em><a class="headerlink" href="#Bytes._bytes.numBytes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.this">
+<em class="property"><span class="pre">proc</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">this</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">i:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Bytes._bytes.this" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.item">
+<em class="property"><span class="pre">proc</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">i:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes._bytes.item" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">i:</span> <span class="pre">byteIndex</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">this</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">i:</span> <span class="pre">byteIndex</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">uint(8)</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.toByte">
+<em class="property"><span class="pre">proc</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">toByte</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em><em class="property"> <span class="pre">:</span> <span class="pre">uint(8)</span></em><a class="headerlink" href="#Bytes._bytes.toByte" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.byte">
+<em class="property"><span class="pre">proc</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">i:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em><em class="property"> <span class="pre">:</span> <span class="pre">uint(8)</span></em><a class="headerlink" href="#Bytes._bytes.byte" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes._bytes.join">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">[]</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes._bytes.join" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">isTuple(x)</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ir:</span> <span class="pre">_iteratorRecord</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.size">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">size</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Bytes.bytes.size" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of bytes in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.indices">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">indices</span></span><em class="property"> <span class="pre">:</span> <span class="pre">range</span></em><a class="headerlink" href="#Bytes.bytes.indices" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The indices that can be used to index into the bytes
+(i.e., the range <code class="docutils literal notranslate"><span class="pre">0..&lt;this.size</span></code>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.numBytes">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">numBytes</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Bytes.bytes.numBytes" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of bytes in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.localize">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">localize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.localize" title="Link to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>bytes.localize() is unstable and may change in a future release</p>
+</div>
+<p>Gets a version of the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> that is on the currently
+executing locale.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A shallow copy if the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> is already on the
+current locale, otherwise a deep copy is performed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.c_str">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">c_str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">c_ptrConst(c_char)</span></em><a class="headerlink" href="#Bytes.bytes.c_str" title="Link to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>‘bytes.c_str()’ has moved to ‘CTypes’. Please ‘use CTypes’ to access ‘<code class="xref chpl chpl-proc docutils literal notranslate"><span class="pre">c_str</span></code>’</p>
+</div>
+<p>Gets a <cite>c_ptrConst(c_char)</cite> from a <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>. The returned
+<code class="xref chpl chpl-class docutils literal notranslate"><span class="pre">c_ptrConst</span></code> shares the buffer with the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This can only be called safely on a <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> whose home is
+the current locale.  This property can be enforced by calling
+<a class="reference internal" href="#Bytes.bytes.localize" title="Bytes.bytes.localize"><code class="xref chpl chpl-proc docutils literal notranslate"><span class="pre">bytes.localize()</span></code></a> before <a class="reference internal" href="#Bytes.bytes.c_str" title="Bytes.bytes.c_str"><code class="xref chpl chpl-proc docutils literal notranslate"><span class="pre">c_str()</span></code></a>. If the
+bytes is remote, the program will halt.</p>
+</div>
+<p>For example:</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">myBytes</span> <span class="o">=</span> <span class="nx">b</span><span class="s">&quot;Hello!&quot;</span><span class="p">;</span>
+<span class="k">on</span> <span class="nx">differentLocale</span> <span class="p">{</span>
+  <span class="nx">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="nx">myBytes</span><span class="p">.</span><span class="nx">localize</span><span class="p">().</span><span class="nx">c_str</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <cite>c_ptrConst(c_char)</cite> that points to the underlying buffer used
+by this <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>. The returned <cite>c_ptrConst(c_char)</cite> is only
+valid when used on the same locale as the bytes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.item">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">i:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.item" title="Link to this definition">¶</a></dt>
+<dd><p>Gets an ASCII character from the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> – The index</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1-length <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.this">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">this</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">i:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">uint(8)</span></em><a class="headerlink" href="#Bytes.bytes.this" title="Link to this definition">¶</a></dt>
+<dd><p>Gets a byte from the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> – The index</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>uint(8)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.toByte">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">toByte</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">uint(8)</span></em><a class="headerlink" href="#Bytes.bytes.toByte" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value of a single-byte <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> as an integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.byte">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">i:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">uint(8)</span></em><a class="headerlink" href="#Bytes.bytes.byte" title="Link to this definition">¶</a></dt>
+<dd><p>Gets a byte from the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> – The index</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value of the <cite>i</cite> th byte as an integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl" id="Bytes.bytes.items">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.items" title="Link to this definition">¶</a></dt>
+<dd><p>Iterates over the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>, yielding ASCII characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1-length <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl" id="Bytes.bytes.these">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">these</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">uint(8)</span></em><a class="headerlink" href="#Bytes.bytes.these" title="Link to this definition">¶</a></dt>
+<dd><p>Iterates over the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p>uint(8)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl" id="Bytes.bytes.chpl_bytes">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">chpl_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">uint(8)</span></em><a class="headerlink" href="#Bytes.bytes.chpl_bytes" title="Link to this definition">¶</a></dt>
+<dd><p>Iterates over the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> byte by byte.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p>uint(8)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">this</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">r:</span> <span class="pre">range(?)</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><p>Slices the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>. Halts if r is non-empty and not completely
+inside the range <code class="docutils literal notranslate"><span class="pre">this.indices</span></code> when compiled with <cite>–checks</cite>.
+<cite>–fast</cite> disables this check.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>r</strong> – The range of indices the new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> should be made
+from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> that is a slice within
+<code class="docutils literal notranslate"><span class="pre">this.indices</span></code>. If the length of <cite>r</cite> is zero, an empty
+<a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> is returned.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.isEmpty">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">isEmpty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.isEmpty" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> is empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><cite>true</cite>  – when empty</p></li>
+<li><p><cite>false</cite> – otherwise</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.startsWith">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">startsWith</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">patterns:</span> <span class="pre">bytes</span> <span class="pre">...</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.startsWith" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> starts with any of the given arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>patterns</strong> – <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> (s) to match against.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><cite>true</cite>–when the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> begins with one or more of
+the <cite>patterns</cite></p></li>
+<li><p><cite>false</cite>–otherwise</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.endsWith">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">endsWith</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">patterns:</span> <span class="pre">bytes</span> <span class="pre">...</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.endsWith" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> ends with any of the given arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>patterns</strong> – <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> (s) to match against.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><cite>true</cite>–when the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> ends with one or more of
+the <cite>patterns</cite></p></li>
+<li><p><cite>false</cite>–otherwise</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.find">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">pattern:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">indices:</span> <span class="pre">range(?)</span> <span class="pre">=</span> <span class="pre">this.indices</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Bytes.bytes.find" title="Link to this definition">¶</a></dt>
+<dd><p>Finds the argument in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pattern</strong> – <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> to search for</p></li>
+<li><p><strong>indices</strong> – an optional range defining the indices to search
+within, default is the whole. Halts if the range is not
+within <code class="docutils literal notranslate"><span class="pre">this.indices</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the index of the first occurrence from the left of <cite>pattern</cite>
+within the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>, or -1 if the <cite>pattern</cite> is not in the
+<a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.rfind">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">rfind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">pattern:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">indices:</span> <span class="pre">range(?)</span> <span class="pre">=</span> <span class="pre">this.indices</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Bytes.bytes.rfind" title="Link to this definition">¶</a></dt>
+<dd><p>Finds the argument in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pattern</strong> – The <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> to search for</p></li>
+<li><p><strong>indices</strong> – an optional range defining the indices to search within,
+default is the whole. Halts if the range is not
+within <code class="docutils literal notranslate"><span class="pre">this.indices</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the index of the first occurrence from the right of <cite>pattern</cite>
+within the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>, or -1 if the <cite>pattern</cite> is not in the
+<a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.count">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">pattern:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">indices:</span> <span class="pre">range(?)</span> <span class="pre">=</span> <span class="pre">this.indices</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#Bytes.bytes.count" title="Link to this definition">¶</a></dt>
+<dd><p>Counts the number of occurrences of the argument in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pattern</strong> – The <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> to search for</p></li>
+<li><p><strong>indices</strong> – an optional range defining the substring to search within,
+default is the whole. Halts if the range is not
+within <code class="docutils literal notranslate"><span class="pre">this.indices</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the number of times <cite>pattern</cite> occurs in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.replace">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">pattern:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">replacement:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">count:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.replace" title="Link to this definition">¶</a></dt>
+<dd><p>Replaces occurrences of a <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> with another.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pattern</strong> – The <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> to search for</p></li>
+<li><p><strong>replacement</strong> – The <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> to replace <cite>pattern</cite> with</p></li>
+<li><p><strong>count</strong> – an optional argument specifying the number of replacements to
+make, values less than zero will replace all occurrences</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a copy of the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> where <cite>replacement</cite> replaces
+<cite>pattern</cite> up to <cite>count</cite> times</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl" id="Bytes.bytes.split">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">sep:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">maxsplit:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em>, <em class="sig-param"><span class="pre">ignoreEmpty:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">false</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.split" title="Link to this definition">¶</a></dt>
+<dd><p>Splits the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> on <cite>sep</cite> yielding the bytes between each
+occurrence, up to <cite>maxsplit</cite> times.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sep</strong> – The delimiter used to break the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> into chunks.</p></li>
+<li><p><strong>maxsplit</strong> – The number of times to split the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>,
+negative values indicate no limit.</p></li>
+<li><p><strong>ignoreEmpty</strong> – <ul>
+<li><p><cite>true</cite>– Empty <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> will not be yielded,</p></li>
+<li><p><cite>false</cite>– Empty <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> will be yielded</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl itermethod">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">maxsplit:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><p>Works as above, but uses runs of whitespace as the delimiter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>maxsplit</strong> – The maximum number of times to split the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>,
+negative values indicate no limit.</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.join">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">bytes</span> <span class="pre">...</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.join" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>, which is the concatenation of all of
+the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> passed in with the contents of the method
+receiver inserted between them.</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">myBytes</span> <span class="o">=</span> <span class="nx">b</span><span class="s">&quot;|&quot;</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">b</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="nx">b</span><span class="s">&quot;10&quot;</span><span class="p">,</span><span class="nx">b</span><span class="s">&quot;d&quot;</span><span class="p">);</span>
+<span class="nx">writeln</span><span class="p">(</span><span class="nx">myBytes</span><span class="p">);</span> <span class="c1">// prints: &quot;a|10|d&quot;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> – <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> values to be joined</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">x</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em></dt>
+<dd><p>Returns a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>, which is the concatenation of all of
+the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> passed in with the contents of the method
+receiver inserted between them.</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">tup</span> <span class="o">=</span> <span class="p">(</span><span class="nx">b</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="nx">b</span><span class="s">&quot;10&quot;</span><span class="p">,</span><span class="nx">b</span><span class="s">&quot;d&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">myJoinedTuple</span> <span class="o">=</span> <span class="nx">b</span><span class="s">&quot;|&quot;</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">tup</span><span class="p">);</span>
+<span class="nx">writeln</span><span class="p">(</span><span class="nx">myJoinedTuple</span><span class="p">);</span> <span class="c1">// prints: &quot;a|10|d&quot;</span>
+
+<span class="kd">var</span> <span class="nx">myJoinedArray</span> <span class="o">=</span> <span class="nx">b</span><span class="s">&quot;|&quot;</span><span class="p">.</span><span class="nx">join</span><span class="p">([</span><span class="nx">b</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="nx">b</span><span class="s">&quot;10&quot;</span><span class="p">,</span><span class="nx">b</span><span class="s">&quot;d&quot;</span><span class="p">]);</span>
+<span class="nx">writeln</span><span class="p">(</span><span class="nx">myJoinedArray</span><span class="p">);</span> <span class="c1">// prints: &quot;a|10|d&quot;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> – An array or tuple of <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> values to be joined</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.strip">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">strip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">chars</span> <span class="pre">=</span> <span class="pre">b&quot;</span> <span class="pre">\t\r\n&quot;</span></em>, <em class="sig-param"><span class="pre">leading</span> <span class="pre">=</span> <span class="pre">true</span></em>, <em class="sig-param"><span class="pre">trailing</span> <span class="pre">=</span> <span class="pre">true</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.strip" title="Link to this definition">¶</a></dt>
+<dd><p>Strips given set of leading and/or trailing characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chars</strong> – Characters to remove.  Defaults to <cite>b” \t\r\n”</cite>.</p></li>
+<li><p><strong>leading</strong> – Indicates if leading occurrences should be removed.
+Defaults to <cite>true</cite>.</p></li>
+<li><p><strong>trailing</strong> – Indicates if trailing occurrences should be removed.
+Defaults to <cite>true</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> with <cite>leading</cite> and/or <cite>trailing</cite>
+occurrences of characters in <cite>chars</cite> removed as appropriate.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<span class="sig-name descname"><span class="pre">proc</span> <span class="pre">const</span> <span class="pre">bytes.partition(</span> <span class="pre">sep:</span> <span class="pre">bytes)</span> <span class="pre">:</span> <span class="pre">3*(bytes)</span></span></dt>
+<dd><p>Splits the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> on a given separator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sep</strong> – The separator</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a <cite>3*bytes</cite> consisting of the section before <cite>sep</cite>,
+<cite>sep</cite>, and the section after <cite>sep</cite>. If <cite>sep</cite> is not found, the
+tuple will contain the whole <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>, and then two
+empty <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.dedent">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">dedent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">columns</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">ignoreFirst</span> <span class="pre">=</span> <span class="pre">true</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.dedent" title="Link to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>bytes.dedent is subject to change in the future.</p>
+</div>
+<p>Remove indentation from each line of bytes.</p>
+<p>This can be useful when applied to multi-line bytes that are indented
+in the source code, but should not be indented in the output.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">columns</span> <span class="pre">==</span> <span class="pre">0</span></code>, determine the level of indentation to remove from
+all lines by finding the common leading whitespace across all non-empty
+lines. Empty lines are lines containing only whitespace. Tabs and spaces
+are the only whitespaces that are considered, but are not treated as
+the same characters when determining common whitespace.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">columns</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>, remove <code class="docutils literal notranslate"><span class="pre">columns</span></code> leading whitespace characters
+from each line. Tabs are not considered whitespace when <code class="docutils literal notranslate"><span class="pre">columns</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>,
+so only leading spaces are removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>columns</strong> – The number of columns of indentation to remove. Infer
+common leading whitespace if <code class="docutils literal notranslate"><span class="pre">columns</span> <span class="pre">==</span> <span class="pre">0</span></code>.</p></li>
+<li><p><strong>ignoreFirst</strong> – When <code class="docutils literal notranslate"><span class="pre">true</span></code>, ignore first line when determining the
+common leading whitespace, and make no changes to the
+first line.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> with indentation removed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.decode">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">policy</span> <span class="pre">=</span> <span class="pre">decodePolicy.strict</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">string</span> <span class="pre">throws</span></em><a class="headerlink" href="#Bytes.bytes.decode" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a UTF-8 string from the given <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a>. If the data is
+malformed for UTF-8, <cite>policy</cite> argument determines the action.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>policy</strong> – <ul class="simple">
+<li><p><cite>decodePolicy.strict</cite> raises an error</p></li>
+<li><p><cite>decodePolicy.replace</cite> replaces the malformed character
+with UTF-8 replacement character</p></li>
+<li><p><cite>decodePolicy.drop</cite> drops the data silently</p></li>
+<li><p><cite>decodePolicy.escape</cite> escapes each illegal byte with
+private use codepoints</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p>Throws a <code class="xref chpl chpl-class docutils literal notranslate"><span class="pre">DecodeError</span></code> if <cite>decodePolicy.strict</cite> is
+passed to the <cite>policy</cite> argument and the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> contains non-UTF-8
+characters.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A UTF-8 string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.isUpper">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">isUpper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.isUpper" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if all the characters in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> are uppercase
+(A-Z) in ASCII.  Ignores uncased (not a letter) and extended ASCII
+characters (decimal value larger than 127)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><cite>true</cite>–there is at least one uppercase and no lowercase characters</p></li>
+<li><p><cite>false</cite>–otherwise</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.isLower">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">isLower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.isLower" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if all the characters in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> are lowercase
+(a-z) in ASCII.  Ignores uncased (not a letter) and extended ASCII
+characters (decimal value larger than 127)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><cite>true</cite>–there is at least one lowercase and no uppercase characters</p></li>
+<li><p><cite>false</cite>–otherwise</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.isSpace">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">isSpace</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.isSpace" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if all the characters in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> are whitespace
+(’ ‘, ‘\t’, ‘\n’, ‘\v’, ‘\f’, ‘\r’) in ASCII.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><cite>true</cite>  – when all the characters are whitespace.</p></li>
+<li><p><cite>false</cite> – otherwise</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.isAlpha">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">isAlpha</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.isAlpha" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if all the characters in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> are alphabetic
+(a-zA-Z) in ASCII.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><cite>true</cite>  – when the characters are alphabetic.</p></li>
+<li><p><cite>false</cite> – otherwise</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.isDigit">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">isDigit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.isDigit" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if all the characters in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> are digits (0-9)
+in ASCII.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><cite>true</cite>  – when the characters are digits.</p></li>
+<li><p><cite>false</cite> – otherwise</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.isAlnum">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">isAlnum</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.isAlnum" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if all the characters in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> are alphanumeric
+(a-zA-Z0-9) in ASCII.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><cite>true</cite>  – when the characters are alphanumeric.</p></li>
+<li><p><cite>false</cite> – otherwise</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.isPrintable">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">isPrintable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.isPrintable" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if all the characters in the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> are printable in
+ASCII.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><cite>true</cite>  – when the characters are printable.</p></li>
+<li><p><cite>false</cite> – otherwise</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.isTitle">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">isTitle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.isTitle" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if all uppercase characters are preceded by uncased characters,
+and if all lowercase characters are preceded by cased characters in ASCII.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><cite>true</cite>  – when the condition described above is met.</p></li>
+<li><p><cite>false</cite> – otherwise</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.toLower">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">toLower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.toLower" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> with all applicable characters
+converted to lowercase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> with all uppercase characters (A-Z)
+replaced with their lowercase counterpart in ASCII. Other
+characters remain untouched.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.toUpper">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">toUpper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.toUpper" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> with all applicable characters
+converted to uppercase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> with all lowercase characters (a-z)
+replaced with their uppercase counterpart in ASCII. Other
+characters remain untouched.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.toTitle">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">toTitle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.toTitle" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> with all applicable characters
+converted to title capitalization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> with all cased characters(a-zA-Z)
+following an uncased character converted to uppercase, and all
+cased characters following another cased character converted to
+lowercase.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Bytes.:">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">string</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">t:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bytes.:" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">:</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">c_string</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">t:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>the type ‘c_string’ is deprecated; please use one of the ‘bytes.create*ingBuffer’ methods that takes a ‘c_ptrConst(c_char)’ instead</p>
+</div>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.+=">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">+=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">const</span> <span class="pre">ref</span> <span class="pre">rhs:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Bytes.bytes.+=" title="Link to this definition">¶</a></dt>
+<dd><p>Appends the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> <cite>rhs</cite> to the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> <cite>lhs</cite>.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.appendByteValues">
+<em class="property"><span class="pre">proc</span> <span class="pre">ref</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">appendByteValues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x:</span> <span class="pre">uint(8)</span> <span class="pre">...</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Bytes.bytes.appendByteValues" title="Link to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>‘bytes.appendByteValues’ is unstable and may change in the future</p>
+</div>
+<p>Appends the one or more byte values passed as arguments to
+the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> <cite>this</cite>.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.toHexadecimal">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">toHexadecimal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">uppercase:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">false</span></em>, <em class="sig-param"><span class="pre">type</span> <span class="pre">resultType</span> <span class="pre">=</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">resultType</span></em><a class="headerlink" href="#Bytes.bytes.toHexadecimal" title="Link to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>‘bytes.toHexadecimal’ is unstable and may change in the future</p>
+</div>
+<p>Computes a hexadecimal representation for a <code class="docutils literal notranslate"><span class="pre">bytes</span></code>
+and returns it as a <code class="docutils literal notranslate"><span class="pre">bytes</span></code>.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.=">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">rhs:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em><a class="headerlink" href="#Bytes.bytes.=" title="Link to this definition">¶</a></dt>
+<dd><p>Copies the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> <cite>rhs</cite> into the <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> <cite>lhs</cite>.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">lhs:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">rhs_c:</span> <span class="pre">c_string</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">void</span></em></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>the type ‘c_string’ is deprecated; please use one of the ‘bytes.create*ingBuffer’ methods that takes a ‘c_ptrConst(c_char)’ instead</p>
+</div>
+<p>Copies the c_string <cite>rhs_c</cite> into the bytes <cite>lhs</cite>.</p>
+<p>Halts if <cite>lhs</cite> is a remote bytes.</p>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.+">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">+</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s0:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">s1:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.bytes.+" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> which is the result of concatenating
+<cite>s0</cite> and <cite>s1</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">+</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">s0:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">s1:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl" id="Bytes.*">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">*</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">n:</span> <span class="pre">integral</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bytes</span></em><a class="headerlink" href="#Bytes.*" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new <a class="reference internal" href="#Bytes.bytes" title="Bytes.bytes"><code class="xref chpl chpl-type docutils literal notranslate"><span class="pre">bytes</span></code></a> which is the result of repeating <cite>s</cite>
+<cite>n</cite> times.  If <cite>n</cite> is less than or equal to 0, an empty bytes is
+returned.</p>
+</dd>
+</dl>
+<p>The operation is commutative.
+For example:</p>
+<div class="highlight-chapel notranslate"><div class="highlight"><pre><span></span><span class="nx">writeln</span><span class="p">(</span><span class="nx">b</span><span class="s">&quot;Hello! &quot;</span><span class="o">*</span><span class="mi">3</span><span class="p">);</span>
+<span class="nx">or</span>
+<span class="nx">writeln</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="nx">b</span><span class="s">&quot;Hello! &quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Results in:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Hello! Hello! Hello!
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="chpl function">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-name descname"><span class="pre">*</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n:</span> <span class="pre">integral</span></em>, <em class="sig-param"><span class="pre">s:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.==">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">==</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.==" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.!=">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">!=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.!=" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.&lt;">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">&lt;</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.<" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.&gt;">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">&gt;</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.>" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.&lt;=">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">&lt;=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.<=" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.&gt;=">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">&gt;=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">b:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#Bytes.bytes.>=" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">==</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">s0:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">s1:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">!=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">s0:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">s1:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">&lt;=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">a:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">b:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">&gt;=</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">a:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">b:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">&lt;</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">a:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">b:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">&gt;</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">a:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">param</span> <span class="pre">b:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><span class="w"> </span><em class="property"> <span class="pre">param</span></em></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.hash">
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">hash</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">uint</span></em><a class="headerlink" href="#Bytes.bytes.hash" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="chpl method">
+<dt class="sig sig-object chpl" id="Bytes.bytes.&lt;=&gt;">
+<em class="property"><span class="pre">operator</span> </em><span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">&lt;=&gt;</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ref</span> <span class="pre">x:</span> <span class="pre">bytes</span></em>, <em class="sig-param"><span class="pre">ref</span> <span class="pre">y:</span> <span class="pre">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Bytes.bytes.<=>" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ByteBufferHelpers.html" class="btn btn-neutral float-left" title="ByteBufferHelpers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="BytesCasts.html" class="btn btn-neutral float-right" title="BytesCasts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2015.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+
+
+
+</body>
+</html>

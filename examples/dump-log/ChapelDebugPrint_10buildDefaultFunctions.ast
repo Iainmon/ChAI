@@ -1,0 +1,247 @@
+AST dump for ChapelDebugPrint after pass buildDefaultFunctions.
+Module use list: ChapelStandard CTypes ChapelIOStringifyHelper 
+
+{
+  function chpl__init_ChapelDebugPrint[468417]() : void[4] "insert line file info" "module init"
+  {
+    (645130 'init var' chpl__testParFlag[106873] 0)
+    (106876 'end of statement')
+    (645132 'init var' chpl__testParOn[106878] 0)
+    (106881 'end of statement')
+    (602564 return _void[46])
+  }
+  function chpl_debug_stringify[106731](arg args[106734]:_any[141](?) ...) : _unknown[42]
+  {
+    unknown ret[602544] "RVV" "temp"
+    unknown str[106740] "dead at end of block" "insert auto destroy"
+    (645122 'init var' str[106740] "")
+    (106743 'end of statement')
+    {
+      unknown i[106744] "dead at end of block" "index var" "insert auto destroy"
+      (645124 'init var' i[106744] 0)
+      (551569 'end of statement')
+      unknown tmp[106785] "maybe param" "temp"
+      unknown call_tmp[784895] "expr temp" "maybe param" "maybe type" "temp"
+      (784898 'move' call_tmp[784895](106750 call size _mt[203] args[106734]))
+      unknown call_tmp[784900] "expr temp" "maybe param" "maybe type" "temp"
+      (784903 'move' call_tmp[784900](106747 call - call_tmp[784895] 1))
+      (106797 'move' tmp[106785](106795 call chpl_compute_low_param_loop_bound 0 call_tmp[784900]))
+      unknown tmp[106786] "maybe param" "temp"
+      unknown call_tmp[784907] "expr temp" "maybe param" "maybe type" "temp"
+      (784910 'move' call_tmp[784907](106804 call size _mt[203] args[106734]))
+      unknown call_tmp[784912] "expr temp" "maybe param" "maybe type" "temp"
+      (784915 'move' call_tmp[784912](106802 call - call_tmp[784907] 1))
+      (106810 'move' tmp[106786](106808 call chpl_compute_high_param_loop_bound 0 call_tmp[784912]))
+      unknown tmp[106787] "maybe param" "temp"
+      (106813 'move' tmp[106787] 1)
+      ParamForLoop[106815]
+      { i[106744] tmp[106785] tmp[106786] tmp[106787]
+        {
+          unknown call_tmp[784917] "maybe param" "maybe type" "temp"
+          (784920 'move' call_tmp[784917](106760 call args[106734] i[106744]))
+          unknown tmp[106758] "dead at end of block" "insert auto destroy"
+          (645126 'init var' tmp[106758] call_tmp[784917])
+          (106763 'end of statement' i[106744])
+          unknown call_tmp[784922] "expr temp" "maybe param" "maybe type" "temp"
+          (784925 'move' call_tmp[784922](106779 call _can_stringify_direct tmp[106758]))
+          unknown call_tmp[784927] "expr temp" "maybe param" "maybe type" "temp"
+          (784930 'move' call_tmp[784927](106781 call _cond_test call_tmp[784922]))
+          if call_tmp[784927]
+          {
+            unknown call_tmp[784932] "expr temp" "maybe param" "maybe type" "temp"
+            (784935 'move' call_tmp[784932](106769 call stringify_simple tmp[106758]))
+            (106765 call += str[106740] call_tmp[784932])
+            (551571 'end of statement' str[106740] tmp[106758])
+          }
+          {
+            (106772 call += str[106740] "\?")
+            (551574 'end of statement' str[106740])
+          }
+        }
+      }
+      label _unused_continueLabel[106789]
+      label _breakLabel[106788]
+    }
+    (602550 'move' ret[602544](602549 'coerce' str[106740] string[244]))
+    gotoReturn _end_chpl_debug_stringify[602542] _end_chpl_debug_stringify[602542]
+    (551576 'end of statement' str[106740])
+    label _end_chpl_debug_stringify[602542]
+    (602546 return ret[602544])
+  }
+  { scopeless type
+    string[244]
+  }
+  function chpl_debug_writeln[106829](arg args[106832]:_any[141](?) ...) : _unknown[42] "no return value for void"
+  {
+    function printf[106836](arg fmt[106841] :
+    (106839 call c_ptrConst[46990](?) c_char[562]), arg f[106847] :
+    (106845 call c_ptrConst[46990](?) c_char[562])) : void[4] "extern" "local args" "no fn body"
+    {
+    }
+    unknown call_tmp[784937] "maybe param" "maybe type" "temp"
+    (784940 'move' call_tmp[784937](106855 call chpl_debug_stringify(106857 'expand_tuple' args[106832])))
+    unknown str[106853] "dead at end of block" "insert auto destroy"
+    (645128 'init var' str[106853] call_tmp[784937])
+    (106859 'end of statement')
+    unknown call_tmp[784944] "expr temp" "maybe param" "maybe type" "temp"
+    (784947 'move' call_tmp[784944](106869 call(106866 call (partial) c_str _mt[203] str[106853])))
+    (106861 call printf "%s\n" call_tmp[784944])
+    (551578 'end of statement' str[106853])
+    (602554 return _void[46])
+  }
+  unknown chpl__testParFlag[106873] "config" "param"
+  unknown chpl__testParOn[106878] "dead at end of block" "insert auto destroy"
+  function chpl__testParStart[106882]() : _unknown[42] "no return value for void"
+  {
+    (106885 call = chpl__testParOn[106878] 1)
+    (602556 return _void[46])
+  }
+  function chpl__testParStop[106891]() : _unknown[42] "no return value for void"
+  {
+    (106894 call = chpl__testParOn[106878] 0)
+    (602558 return _void[46])
+  }
+  function chpl__testPar[106900](arg args[106903]:_any[141](?) ...) : _unknown[42] "no return value for void"
+  {
+    unknown tmp[483276] "maybe param" "temp"
+    (483287 'move' tmp[483276] chpl__testParFlag[106873])
+    unknown call_tmp[784949] "expr temp" "maybe param" "maybe type" "temp"
+    (784952 'move' call_tmp[784949](483289 call _cond_invalid tmp[483276]))
+    if call_tmp[784949]
+    {
+      (483292 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[671226] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[671227] "maybe param" "temp"
+    unknown call_tmp[784954] "expr temp" "maybe param" "maybe type" "temp"
+    (784957 'move' call_tmp[784954](483277 call isTrue tmp[483276]))
+    (671232 'move' tmp[671227](671230 call _cond_test call_tmp[784954]))
+    if tmp[671227]
+    {
+      unknown tmp[671234] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (671236 'move' tmp[671234](483280 call isTrue chpl__testParOn[106878]))
+      (671241 'move' tmp[671226](671238 '_paramFoldLogical' tmp[671227] tmp[671234]))
+    }
+    {
+      (671246 'move' tmp[671226](671243 '_paramFoldLogical' tmp[671227] 0))
+    }
+    unknown call_tmp[784959] "expr temp" "maybe param" "maybe type" "temp"
+    (784962 'move' call_tmp[784959](106995 call _cond_test tmp[671226]))
+    if call_tmp[784959]
+    {
+      unknown call_tmp[784964] "expr temp" "maybe param" "maybe type" "temp"
+      (784967 'move' call_tmp[784964](106911 '_get_user_file'))
+      unknown call_tmp[784969] "maybe param" "maybe type" "temp"
+      (784972 'move' call_tmp[784969](106910 'chpl_lookupFilename' call_tmp[784964]))
+      const file_cs[106909] "dead at end of block" "const" "insert auto destroy"
+      (645134 'init var' file_cs[106909] call_tmp[784969])
+      (106913 'end of statement')
+      unknown file[106915] "dead at end of block" "insert auto destroy" "split inited"
+      unknown type_tmp[645136] "maybe param" "maybe type" "temp"
+      (645142 'move' type_tmp[645136] string[244])
+      (645138 'init var split decl' file[106915] type_tmp[645136])
+      (106918 'end of statement')
+      Try!
+      {
+        {
+          unknown call_tmp[784976] "expr temp" "maybe param" "maybe type" "temp"
+          (784979 'move' call_tmp[784976](106932 call c_ptrConst[46990](?) c_char[562]))
+          unknown call_tmp[784981] "expr temp" "maybe param" "maybe type" "temp"
+          (784984 'move' call_tmp[784981](106928 call : file_cs[106909] call_tmp[784976]))
+          unknown call_tmp[784986] "maybe param" "maybe type" "temp"
+          (784989 'move' call_tmp[784986](106927 call(106924 call (partial) createCopyingBuffer _mt[203] string[244]) call_tmp[784981]))
+          (645144 'init var split init' file[106915] call_tmp[784986] type_tmp[645136])
+          (551583 'end of statement' file[106915] file_cs[106909])
+        }
+      }
+      unknown call_tmp[784991] "maybe param" "maybe type" "temp"
+      (784994 'move' call_tmp[784991](106939 '_get_user_line'))
+      const line[106938] "dead at end of block" "const" "insert auto destroy"
+      (645147 'init var' line[106938] call_tmp[784991])
+      (106941 'end of statement')
+      unknown call_tmp[784996] "maybe param" "maybe type" "temp"
+      (784999 'move' call_tmp[784996](106945 call chpl_debug_stringify(106947 'expand_tuple' args[106903])))
+      unknown str[106943] "dead at end of block" "insert auto destroy"
+      (645149 'init var' str[106943] call_tmp[784996])
+      (106949 'end of statement')
+      function printf[106950](arg fmt[106955] :
+      (106953 call c_ptrConst[46990](?) c_char[562]), arg f[106961] :
+      (106959 call c_ptrConst[46990](?) c_char[562]), arg ln[106965] :
+      c_int[522], arg s[106971] :
+      (106969 call c_ptrConst[46990](?) c_char[562])) : void[4] "extern" "local args" "no fn body"
+      {
+      }
+      unknown call_tmp[785001] "expr temp" "maybe param" "maybe type" "temp"
+      (785004 'move' call_tmp[785001](106982 call : line[106938] c_int[522]))
+      unknown call_tmp[785008] "expr temp" "maybe param" "maybe type" "temp"
+      (785011 'move' call_tmp[785008](106990 call(106987 call (partial) c_str _mt[203] str[106943])))
+      (106977 call printf "CHPL TEST PAR (%s:%i): %s\n" file_cs[106909] call_tmp[785001] call_tmp[785008])
+      (551586 'end of statement' file_cs[106909] line[106938] str[106943])
+    }
+    (602560 return _void[46])
+  }
+  function chpl__testParWriteln[107001](arg args[107004]:_any[141](?) ...) : _unknown[42] "no return value for void"
+  {
+    unknown tmp[483297] "maybe param" "temp"
+    (483308 'move' tmp[483297] chpl__testParFlag[106873])
+    unknown call_tmp[785013] "expr temp" "maybe param" "maybe type" "temp"
+    (785016 'move' call_tmp[785013](483310 call _cond_invalid tmp[483297]))
+    if call_tmp[785013]
+    {
+      (483313 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[671253] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[671254] "maybe param" "temp"
+    unknown call_tmp[785018] "expr temp" "maybe param" "maybe type" "temp"
+    (785021 'move' call_tmp[785018](483298 call isTrue tmp[483297]))
+    (671259 'move' tmp[671254](671257 call _cond_test call_tmp[785018]))
+    if tmp[671254]
+    {
+      unknown tmp[671261] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (671263 'move' tmp[671261](483301 call isTrue chpl__testParOn[106878]))
+      (671268 'move' tmp[671253](671265 '_paramFoldLogical' tmp[671254] tmp[671261]))
+    }
+    {
+      (671273 'move' tmp[671253](671270 '_paramFoldLogical' tmp[671254] 0))
+    }
+    unknown call_tmp[785023] "expr temp" "maybe param" "maybe type" "temp"
+    (785026 'move' call_tmp[785023](107060 call _cond_test tmp[671253]))
+    if call_tmp[785023]
+    {
+      unknown call_tmp[785028] "expr temp" "maybe param" "maybe type" "temp"
+      (785031 'move' call_tmp[785028](107012 '_get_user_file'))
+      unknown call_tmp[785033] "maybe param" "maybe type" "temp"
+      (785036 'move' call_tmp[785033](107011 'chpl_lookupFilename' call_tmp[785028]))
+      const file_cs[107010] "dead at end of block" "const" "insert auto destroy"
+      (645151 'init var' file_cs[107010] call_tmp[785033])
+      (107014 'end of statement')
+      unknown file[107016] "dead at end of block" "insert auto destroy" "split inited"
+      unknown type_tmp[645153] "maybe param" "maybe type" "temp"
+      (645159 'move' type_tmp[645153] string[244])
+      (645155 'init var split decl' file[107016] type_tmp[645153])
+      (107019 'end of statement')
+      Try!
+      {
+        {
+          unknown call_tmp[785040] "expr temp" "maybe param" "maybe type" "temp"
+          (785043 'move' call_tmp[785040](107033 call c_ptrConst[46990](?) c_char[562]))
+          unknown call_tmp[785045] "expr temp" "maybe param" "maybe type" "temp"
+          (785048 'move' call_tmp[785045](107029 call : file_cs[107010] call_tmp[785040]))
+          unknown call_tmp[785050] "maybe param" "maybe type" "temp"
+          (785053 'move' call_tmp[785050](107028 call(107025 call (partial) createCopyingBuffer _mt[203] string[244]) call_tmp[785045]))
+          (645161 'init var split init' file[107016] call_tmp[785050] type_tmp[645153])
+          (551591 'end of statement' file[107016] file_cs[107010])
+        }
+      }
+      unknown call_tmp[785055] "maybe param" "maybe type" "temp"
+      (785058 'move' call_tmp[785055](107040 '_get_user_line'))
+      const line[107039] "dead at end of block" "const" "insert auto destroy"
+      (645164 'init var' line[107039] call_tmp[785055])
+      (107042 'end of statement')
+      (107044 call writeln "CHPL TEST PAR (" file[107016] ":" line[107039] "): "(107055 'expand_tuple' args[107004]))
+      (551594 'end of statement' file[107016] line[107039])
+    }
+    (602562 return _void[46])
+  }
+  (396114 'used modules list'(106725 'use' ChapelStandard[315387])(106727 'use' CTypes[51217])(106729 'use' ChapelIOStringifyHelper[106720]))
+}

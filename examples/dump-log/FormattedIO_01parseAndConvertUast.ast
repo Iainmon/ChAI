@@ -1,0 +1,4039 @@
+AST dump for FormattedIO after pass parseAndConvertUast.
+Module use list: 
+
+{
+  (387026 'use' ChapelStandard)
+  (197213 'use' IO)
+  (197216 'use' CTypes)
+  (197222 'use'(197219 call . OS c"POSIX"))
+  (197225 'use' OS)
+  function _toIntegral[197227](arg x[197231] :
+  unknown t[197229]) : _unknown[42] "inline" "private"
+  {
+    (197238 return(197242 call _build_tuple x 1))
+  }
+  where {
+    (197235 call isIntegralType t)
+  }
+  function _toIntegral[197247](arg x[197251] :
+  unknown t[197249]) : _unknown[42] throws "inline" "private"
+  {
+    { scopeless
+      unknown ret[197266](197270 call _build_tuple int[10] bool)
+      (197273 'end of statement')
+    }
+    if(197298 call _cond_test(197296 call isAbstractEnumType t))
+    {
+      { scopeless
+        (197274 call = ret(197280 call _build_tuple 0 0))
+      }
+    }
+    {
+      { scopeless
+        (197283 call = ret(197292 call _build_tuple(197287 call : x int[10]) 1))
+      }
+    }
+    (197304 return ret)
+  }
+  where {
+    (197254 call &&(197257 call _isIoPrimitiveType t)(197259 call !(197262 call isIntegralType t)))
+  }
+  function _toIntegral[197309](arg x[197313] :
+  unknown t[197311]) : _unknown[42] "inline" "private"
+  {
+    (197322 return(197326 call _build_tuple 0 0))
+  }
+  where {
+    (197316 call !(197319 call _isIoPrimitiveType t))
+  }
+  function _toSigned[197331](arg x[197337] :
+  (197334 call int[10] unknown w[197335])) : _unknown[42] "inline" "private"
+  {
+    (197341 return(197345 call _build_tuple x 1))
+  }
+  function _toSigned[197349](arg x[197355] :
+  (197352 call uint[86] unknown w[197353])) : _unknown[42] "inline" "private"
+  {
+    (197359 return(197368 call _build_tuple(197361 call : x(197365 call int[10] w)) 1))
+  }
+  function _toSigned[197372](arg x[197376] :
+  unknown t[197374]) : _unknown[42] throws "inline" "private"
+  {
+    { scopeless
+      unknown ret[197391](197395 call _build_tuple int[10] bool)
+      (197398 'end of statement')
+    }
+    if(197423 call _cond_test(197421 call isAbstractEnumType t))
+    {
+      { scopeless
+        (197399 call = ret(197405 call _build_tuple 0 0))
+      }
+    }
+    {
+      { scopeless
+        (197408 call = ret(197417 call _build_tuple(197412 call : x int[10]) 1))
+      }
+    }
+    (197429 return ret)
+  }
+  where {
+    (197379 call &&(197382 call _isIoPrimitiveType t)(197384 call !(197387 call isIntegralType t)))
+  }
+  function _toSigned[197434](arg x[197438] :
+  unknown t[197436]) : _unknown[42] "inline" "private"
+  {
+    (197447 return(197454 call _build_tuple(197449 call : 0 int[10]) 0))
+  }
+  where {
+    (197441 call !(197444 call _isIoPrimitiveType t))
+  }
+  function _toUnsigned[197459](arg x[197465] :
+  (197462 call uint[86] unknown w[197463])) : _unknown[42] "inline" "private"
+  {
+    (197469 return(197473 call _build_tuple x 1))
+  }
+  function _toUnsigned[197477](arg x[197483] :
+  (197480 call int[10] unknown w[197481])) : _unknown[42] "inline" "private"
+  {
+    (197487 return(197496 call _build_tuple(197489 call : x(197493 call uint[86] w)) 1))
+  }
+  function _toUnsigned[197500](arg x[197504] :
+  unknown t[197502]) : _unknown[42] throws "inline" "private"
+  {
+    { scopeless
+      unknown ret[197519](197523 call _build_tuple uint[86] bool)
+      (197526 'end of statement')
+    }
+    if(197554 call _cond_test(197552 call isAbstractEnumType t))
+    {
+      { scopeless
+        (197527 call = ret(197536 call _build_tuple(197531 call : 0 uint[86]) 0))
+      }
+    }
+    {
+      { scopeless
+        (197539 call = ret(197548 call _build_tuple(197543 call : x uint[86]) 1))
+      }
+    }
+    (197560 return ret)
+  }
+  where {
+    (197507 call &&(197510 call _isIoPrimitiveType t)(197512 call !(197515 call isIntegralType t)))
+  }
+  function _toUnsigned[197565](arg x[197569] :
+  unknown t[197567]) : _unknown[42] "inline" "private"
+  {
+    (197578 return(197585 call _build_tuple(197580 call : 0 uint[86]) 0))
+  }
+  where {
+    (197572 call !(197575 call _isIoPrimitiveType t))
+  }
+  function _toReal[197590](arg x[197594] :
+  unknown t[197592]) : _unknown[42] "inline" "private"
+  {
+    (197601 return(197605 call _build_tuple x 1))
+  }
+  where {
+    (197598 call isRealType t)
+  }
+  function _toReal[197610](arg x[197614] :
+  unknown t[197612]) : _unknown[42] throws "inline" "private"
+  {
+    { scopeless
+      unknown ret[197629](197633 call _build_tuple real[13] bool)
+      (197636 'end of statement')
+    }
+    if(197661 call _cond_test(197659 call isAbstractEnumType t))
+    {
+      { scopeless
+        (197637 call = ret(197643 call _build_tuple 0.0 0))
+      }
+    }
+    {
+      { scopeless
+        (197646 call = ret(197655 call _build_tuple(197650 call : x real[13]) 1))
+      }
+    }
+    (197667 return ret)
+  }
+  where {
+    (197617 call &&(197620 call _isIoPrimitiveType t)(197622 call !(197625 call isRealType t)))
+  }
+  function _toReal[197672](arg x[197676] :
+  unknown t[197674]) : _unknown[42] "inline" "private"
+  {
+    (197685 return(197689 call _build_tuple 0.0 0))
+  }
+  where {
+    (197679 call !(197682 call _isIoPrimitiveType t))
+  }
+  function _toImag[197694](arg x[197698] :
+  unknown t[197696]) : _unknown[42] "inline" "private"
+  {
+    (197705 return(197709 call _build_tuple x 1))
+  }
+  where {
+    (197702 call isImagType t)
+  }
+  function _toImag[197714](arg x[197718] :
+  unknown t[197716]) : _unknown[42] throws "inline" "private"
+  {
+    { scopeless
+      unknown ret[197733](197737 call _build_tuple imag bool)
+      (197740 'end of statement')
+    }
+    if(197765 call _cond_test(197763 call isAbstractEnumType t))
+    {
+      { scopeless
+        (197741 call = ret(197747 call _build_tuple 0.0i 0))
+      }
+    }
+    {
+      { scopeless
+        (197750 call = ret(197759 call _build_tuple(197754 call : x imag) 1))
+      }
+    }
+    (197771 return ret)
+  }
+  where {
+    (197721 call &&(197724 call _isIoPrimitiveType t)(197726 call !(197729 call isImagType t)))
+  }
+  function _toImag[197776](arg x[197780] :
+  unknown t[197778]) : _unknown[42] "inline" "private"
+  {
+    (197789 return(197793 call _build_tuple 0.0i 0))
+  }
+  where {
+    (197783 call !(197786 call _isIoPrimitiveType t))
+  }
+  function _toComplex[197798](arg x[197802] :
+  unknown t[197800]) : _unknown[42] "inline" "private"
+  {
+    (197809 return(197813 call _build_tuple x 1))
+  }
+  where {
+    (197806 call isComplexType t)
+  }
+  function _toComplex[197818](arg x[197822] :
+  unknown t[197820]) : _unknown[42] throws "inline" "private"
+  {
+    { scopeless
+      unknown ret[197837](197841 call _build_tuple complex[111] bool)
+      (197844 'end of statement')
+    }
+    if(197872 call _cond_test(197870 call isAbstractEnumType t))
+    {
+      { scopeless
+        (197845 call = ret(197854 call _build_tuple(197849 call + 0.0 0.0i) 0))
+      }
+    }
+    {
+      { scopeless
+        (197857 call = ret(197866 call _build_tuple(197861 call : x complex[111]) 1))
+      }
+    }
+    (197878 return ret)
+  }
+  where {
+    (197825 call &&(197828 call _isIoPrimitiveType t)(197830 call !(197833 call isComplexType t)))
+  }
+  function _toComplex[197883](arg x[197887] :
+  unknown t[197885]) : _unknown[42] "inline" "private"
+  {
+    (197896 return(197903 call _build_tuple(197898 call + 0.0 0.0i) 0))
+  }
+  where {
+    (197890 call !(197893 call _isIoPrimitiveType t))
+  }
+  function _toRealOrComplex[197908](arg x[197912] :
+  unknown t[197910]) : _unknown[42] "inline" "private"
+  {
+    (197919 return(197923 call _build_tuple x 1))
+  }
+  where {
+    (197916 call isComplexType t)
+  }
+  function _toRealOrComplex[197928](arg x[197932] :
+  unknown t[197930]) : _unknown[42] "inline" "private"
+  {
+    (197944 return(197948 call _build_tuple x 1))
+  }
+  where {
+    (197935 call ||(197938 call isRealType t)(197941 call isImagType t))
+  }
+  function _toRealOrComplex[197953](arg x[197957] :
+  unknown t[197955]) : _unknown[42] "inline" "private"
+  {
+    (197985 return(197992 call _build_tuple(197987 call : x real[13]) 1))
+  }
+  where {
+    (197960 call &&(197962 call &&(197964 call &&(197967 call _isIoPrimitiveType t)(197969 call !(197972 call isComplexType t)))(197974 call !(197977 call isRealType t)))(197979 call !(197982 call isImagType t)))
+  }
+  function _toRealOrComplex[197997](arg x[198001] :
+  unknown t[197999]) : _unknown[42] "inline" "private"
+  {
+    (198010 return(198014 call _build_tuple 0.0 0))
+  }
+  where {
+    (198004 call !(198007 call _isIoPrimitiveType t))
+  }
+  function _toNumeric[198019](arg x[198023] :
+  unknown t[198021]) : _unknown[42] "inline" "private"
+  {
+    (198030 return(198034 call _build_tuple x 1))
+  }
+  where {
+    (198027 call isNumericType t)
+  }
+  function _toNumeric[198039](arg x[198043] :
+  unknown t[198041]) : _unknown[42] throws "inline" "private"
+  {
+    { scopeless
+      unknown ret[198058](198062 call _build_tuple int[10] bool)
+      (198065 'end of statement')
+    }
+    if(198090 call _cond_test(198088 call isAbstractEnumType t))
+    {
+      { scopeless
+        (198066 call = ret(198072 call _build_tuple 0 0))
+      }
+    }
+    {
+      { scopeless
+        (198075 call = ret(198084 call _build_tuple(198079 call : x int[10]) 1))
+      }
+    }
+    (198096 return ret)
+  }
+  where {
+    (198046 call &&(198049 call _isIoPrimitiveType t)(198051 call !(198054 call isNumericType t)))
+  }
+  function _toNumeric[198101](arg x[198105] :
+  unknown t[198103]) : _unknown[42] "inline" "private"
+  {
+    (198114 return(198118 call _build_tuple 0 0))
+  }
+  where {
+    (198108 call !(198111 call _isIoPrimitiveType t))
+  }
+  function _toBytes[198123](arg x[198126] :
+  bytes[232]) : _unknown[42] "inline" "private"
+  {
+    (198130 return(198134 call _build_tuple x 1))
+  }
+  function _toBytes[198138](arg x[198141] :
+  string[244]) : _unknown[42] "inline" "private"
+  {
+    (198145 return(198152 call _build_tuple(198147 call : x bytes[232]) 1))
+  }
+  function _toBytes[198156](arg x[198160] :
+  unknown t[198158]) : _unknown[42] "inline" "private"
+  {
+    (198164 return(198171 call _build_tuple(198166 call : "" bytes[232]) 0))
+  }
+  function _toString[198175](arg x[198178] :
+  string[244]) : _unknown[42] "inline" "private"
+  {
+    (198182 return(198186 call _build_tuple x 1))
+  }
+  function _toString[198190](arg x[198193] :
+  bytes[232]) : _unknown[42] "inline" "private"
+  {
+    (198197 return(198201 call _build_tuple "" 0))
+  }
+  function _toString[198205](arg x[198209] :
+  unknown t[198207]) : _unknown[42] "inline" "private"
+  {
+    if(198250 call _cond_test(198248 call isPrimitiveType t))
+    {
+      (198229 return(198236 call _build_tuple(198231 call : x string[244]) 1))
+    }
+    {
+      (198239 return(198245 call _build_tuple(198242 call chpl_stringify x) 1))
+    }
+  }
+  where {
+    (198212 call &&(198214 call &&(198217 call _isIoPrimitiveType t)(198219 call != t bytes[232]))(198223 call != t string[244]))
+  }
+  function _toString[198257](arg x[198261] :
+  unknown t[198259]) : _unknown[42] "inline" "private"
+  {
+    (198270 return(198274 call _build_tuple "" 0))
+  }
+  where {
+    (198264 call !(198267 call _isIoPrimitiveType t))
+  }
+  function _toChar[198279](arg x[198283] :
+  unknown t[198281]) : _unknown[42] "inline" "private"
+  {
+    (198290 return(198299 call _build_tuple(198292 call : x(198296 call int[10] 32)) 1))
+  }
+  where {
+    (198287 call isIntegralType t)
+  }
+  function _toChar[198304](arg x[198308] :
+  unknown t[198306]) : _unknown[42] "private"
+  {
+    { scopeless
+      unknown chr[198317](198319 call int[10] 32)
+      (198322 'end of statement')
+    }
+    { scopeless
+      unknown nbytes[198324] c_int
+      (198327 'end of statement')
+    }
+    { scopeless
+      unknown local_x[198329](198334 call(198331 call . x c"localize"))
+      (198336 'end of statement')
+    }
+    (198338 call qio_decode_char_buf chr nbytes(198345 call(198342 call . local_x c"c_str"))(198346 call :(198349 call . local_x c"numBytes") c_ssize_t))
+    (198353 return(198357 call _build_tuple chr 1))
+  }
+  where {
+    (198311 call == t string[244])
+  }
+  function _toChar[198362](arg x[198366] :
+  unknown t[198364]) : _unknown[42] "inline" "private"
+  {
+    (198381 return(198390 call _build_tuple(198383 call : 0(198387 call int[10] 32)) 0))
+  }
+  where {
+    (198369 call !(198371 call ||(198373 call == t string[244])(198378 call isIntegralType t)))
+  }
+  function _setIfPrimitive[198395](ref arg lhs[198399] :
+  unknown t[198397], arg rhs[198404] :
+  unknown t2[198402], arg argi[198408] :
+  int[10]) : _unknown[42] "private"
+  {
+    { scopeless
+      unknown empty[198423] t2
+      (198426 'end of statement')
+    }
+    if(198441 call _cond_test(198437 call == rhs empty))
+    {
+      (198428 call = lhs 0)
+    }
+    {
+      (198433 call = lhs 1)
+    }
+    (198445 return 0)
+  }
+  where {
+    (198412 call &&(198414 call == t bool)(198419 call _isIoPrimitiveType t2))
+  }
+  { scopeless type
+    errorCode
+  }
+  function _setIfPrimitive[198451](ref arg lhs[198455] :
+  unknown t[198453], arg rhs[198460] :
+  unknown t2[198458], arg argi[198464] :
+  int[10]) : _unknown[42] "private"
+  {
+    Try
+    {
+      {
+        if(198574 call _cond_test(198572 call isAbstractEnumType t))
+        {
+          if(198494 call _cond_test(198492 call isStringType t2))
+          {
+            (198481 call = lhs(198484 call : rhs t))
+          }
+          {
+            (198489 return ERANGE)
+          }
+        }
+        {
+          { scopeless
+            if(198567 call _cond_test(198565 call isEnumType t))
+            {
+              if(198526 call _cond_test(198518 call ||(198521 call isIntType t2)(198524 call isStringType t2)))
+              {
+                (198500 call = lhs(198503 call : rhs t))
+              }
+              {
+                (198508 call = lhs(198511 call :(198513 call : rhs int[10]) t))
+              }
+            }
+            {
+              if(198560 call _cond_test(198552 call &&(198555 call isBytesType t2)(198558 call isStringType t)))
+              {
+                (198532 call = lhs(198539 call(198536 call . rhs c"decode")(198541 call . decodePolicy c"strict")))
+              }
+              {
+                (198545 call = lhs(198548 call : rhs t))
+              }
+            }
+          }
+        }
+      }
+    }
+    Catch
+    {
+      (198581 return ERANGE)
+    }
+    (198586 return 0)
+  }
+  where {
+    (198468 call &&(198470 call != t bool)(198475 call _isIoPrimitiveType t))
+  }
+  { scopeless type
+    errorCode
+  }
+  function _setIfPrimitive[198592](ref arg lhs[198596] :
+  unknown t[198594], arg rhs[198599]:_any[141](?), arg argi[198602] :
+  int[10]) : _unknown[42] "inline" "private"
+  {
+    (198612 return(198614 call qio_format_error_arg_mismatch argi))
+  }
+  where {
+    (198606 call !(198609 call _isIoPrimitiveType t))
+  }
+  { scopeless type
+    errorCode
+  }
+  function _setIfChar[198620](ref arg lhs[198624] :
+  unknown t[198622], arg rhs[198630] :
+  (198628 call int[10] 32)) : _unknown[42] "inline" "private"
+  {
+    (198638 call = lhs(198641 call :(198643 'new'(198645 call _internalIoChar rhs)) string[244]))
+  }
+  where {
+    (198633 call == t string[244])
+  }
+  function _setIfChar[198651](ref arg lhs[198655] :
+  unknown t[198653], arg rhs[198661] :
+  (198659 call int[10] 32)) : _unknown[42] "inline" "private"
+  {
+    (198668 call = lhs(198671 call : rhs t))
+  }
+  where {
+    (198665 call isIntegralType t)
+  }
+  function _setIfChar[198678](ref arg lhs[198682] :
+  unknown t[198680], arg rhs[198688] :
+  (198686 call int[10] 32)) : _unknown[42] "inline" "private"
+  {
+  }
+  where {
+    (198691 call !(198693 call ||(198695 call == t string[244])(198700 call isIntegralType t)))
+  }
+  function _toRegex[198706](arg x[198710] :
+  unknown t[198708]) : _unknown[42] "inline" "private"
+  {
+    (198720 return(198724 call _build_tuple x 1))
+  }
+  where {
+    (198714 call isSubtype t(198717 call regex ?[227]))
+  }
+  function _toRegex[198729](arg x[198733] :
+  unknown t[198731]) : _unknown[42] "inline" "private"
+  {
+    { scopeless
+      unknown r[198738](198740 call regex string[244])
+      (198743 'end of statement')
+    }
+    (198744 return(198748 call _build_tuple r 0))
+  }
+  type _channel_regex_info[199049] unknown hasRegex[198755] 0 unknown matchedRegex[198760] 0 unknown releaseRegex[198765] 0 unknown theRegex[198770](198772 call qio_regex_null) unknown matches[198776] nil[32](198778 call _ddata qio_regex_string_piece_t) unknown capArr[198784] nil[32](198786 call _ddata bytes[232]) unknown capturei[198792] int[10] unknown ncaptures[198797] int[10] function _channel_regex_info[199049].clear[198801](arg _mt[198805]:_MT[201], arg this[198803]:_channel_regex_info[199049]) : _unknown[42] "method" "primary method"
+  {
+    if(198813 call _cond_test releaseRegex)
+    {
+      (198810 call qio_regex_release theRegex)
+    }
+    (198817 call = theRegex(198821 call qio_regex_null))
+    (198822 call = hasRegex 0)
+    (198826 call = matchedRegex 0)
+    (198830 call = releaseRegex 0)
+    if(198843 call _cond_test matches)
+    {
+      { scopeless
+        (198835 call _ddata_free matches(198837 call + ncaptures 1))
+      }
+    }
+    {
+      unknown _indexOfInterest[198863] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[198864] "expr temp" "temp"
+      (198873 'move' _iterator[198864](198871 call _getIterator(198880 call chpl_direct_counted_range_iter 0 ncaptures)))
+      Defer
+      {
+        {
+          (198895 call _freeIterator _iterator[198864])
+        }
+      }
+      { scopeless type
+        (198885 'move' _indexOfInterest[198863](198882 call iteratorIndex _iterator[198864]))
+      }
+      ForLoop[198865]
+      {
+        unknown i[198848] "index var" "insert auto destroy"
+        (198890 'move' i[198848] _indexOfInterest[198863])
+        { scopeless
+          (198856 call =(198859 call capArr i) b"")
+        }
+        label _continueLabel[198868]
+        _indexOfInterest[198863]
+        _iterator[198864]
+      }
+      label _breakLabel[198869]
+    }
+    if(198908 call _cond_test capArr)
+    {
+      { scopeless
+        (198903 call _ddata_free capArr ncaptures)
+      }
+    }
+  } function _channel_regex_info[199049].allocate_captures[198915](arg _mt[198919]:_MT[201], arg this[198917]:_channel_regex_info[199049]) : _unknown[42] "method" "primary method"
+  {
+    (198922 call = ncaptures(198926 call qio_regex_get_ncaptures theRegex))
+    (198928 call = matches(198932 call _ddata_allocate qio_regex_string_piece_t(198934 call + ncaptures 1)))
+    (198938 call = capArr(198942 call _ddata_allocate bytes[232] ncaptures))
+    (198945 call = capturei 0)
+  } function _channel_regex_info[199049].deinit[198951](arg _mt[198955]:_MT[201], arg this[198953]:_channel_regex_info[199049]) : _unknown[42] "destructor" "method" "primary method"
+  {
+    (198959 call clear)
+  } function _channel_regex_info[199049].serialize[198962](arg _mt[198970]:_MT[201], arg this[198964]:_channel_regex_info[199049], arg writer[198966]:_any[141](?), ref arg serializer[198968]:_any[141](?)) : _unknown[42] throws "method" "primary method" "method overrides"
+  {
+    (198977 call(198974 call . writer c"write")(198978 call + "{hasRegex = "(198983 call : hasRegex string[244])))
+    (198991 call(198988 call . writer c"write")(198992 call + ", matchedRegex = "(198997 call : matchedRegex string[244])))
+    (199005 call(199002 call . writer c"write")(199006 call + ", releaseRegex = "(199011 call : releaseRegex string[244])))
+    (199019 call(199016 call . writer c"write")(199020 call + ", ... capturei = "(199025 call : capturei string[244])))
+    (199033 call(199030 call . writer c"write")(199034 call +(199036 call + ", ncaptures = "(199041 call : ncaptures string[244])) "}"))
+  } writeSerializable
+  function _unknown[42]._match_regex_if_needed[199051](arg _mt[199078]:_MT[201], arg this[199054] :
+  fileReader, arg cur[199058] :
+  c_size_t, arg len[199062] :
+  c_size_t, ref arg error[199066] :
+  errorCode, ref arg style[199070] :
+  iostyleInternal, arg r[199075] :
+  (199073 'to unmanaged class from unknown' _channel_regex_info)) : _unknown[42] "method"
+  {
+    if(199431 call _cond_test(199426 call qio_regex_ok(199428 call . r c"theRegex")))
+    {
+      if(199090 call _cond_test(199087 call . r c"matchedRegex"))
+      {
+        { scopeless
+          (199082 return)
+        }
+      }
+      (199095 call =(199098 call . r c"matchedRegex") 1)
+      (199108 call(199105 call . r c"allocate_captures"))
+      { scopeless
+        unknown ncaps[199110](199114 call . r c"ncaptures")
+        (199118 'end of statement')
+      }
+      { scopeless
+        unknown nm[199120](199121 call + ncaps 1)
+        (199126 'end of statement')
+      }
+      { scopeless
+        unknown maxlen[199128](199135 call . style c"max_width_characters")(199130 call int[10] 64)
+        (199139 'end of statement')
+      }
+      { scopeless
+        unknown can_discard[199141](199142 call == cur len)
+        (199147 'end of statement')
+      }
+      if(199165 call _cond_test(199157 call == maxlen(199161 call max(199163 call uint[86] 32))))
+      {
+        { scopeless
+          (199148 call = maxlen(199152 call max(199154 call int[10] 64)))
+        }
+      }
+      { scopeless
+        unknown before_match[199171](199173 call qio_channel_offset_unlocked _channel_internal)
+        (199176 'end of statement')
+      }
+      (199177 call = error(199181 call qio_regex_channel_match(199185 call . r c"theRegex") 0 _channel_internal maxlen QIO_REGEX_ANCHOR_START can_discard 1 0(199198 call . r c"matches") nm))
+      { scopeless
+        unknown after_match[199203](199205 call qio_channel_offset_unlocked _channel_internal)
+        (199208 'end of statement')
+      }
+      if(199415 call _cond_test(199412 call ! error))
+      {
+        {
+          unknown _indexOfInterest[199255] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[199256] "expr temp" "temp"
+          (199265 'move' _iterator[199256](199263 call _getIterator(199272 call chpl_direct_counted_range_iter 0 ncaps)))
+          Defer
+          {
+            {
+              (199287 call _freeIterator _iterator[199256])
+            }
+          }
+          { scopeless type
+            (199277 'move' _indexOfInterest[199255](199274 call iteratorIndex _iterator[199256]))
+          }
+          ForLoop[199257]
+          {
+            unknown j[199210] "index var" "insert auto destroy"
+            (199282 'move' j[199210] _indexOfInterest[199255])
+            {
+              { scopeless
+                unknown m[199220](199222 call _to_regexMatch(199227 call(199224 call . r c"matches")(199228 call + 1 j)))
+                (199233 'end of statement')
+              }
+              (199235 call _extractMatch m(199243 call(199240 call . r c"capArr") j) error)
+              if(199250 call _cond_test error)
+              {
+                { scopeless
+                  break nil[32]
+                }
+              }
+            }
+            label _continueLabel[199260]
+            _indexOfInterest[199255]
+            _iterator[199256]
+          }
+          label _breakLabel[199261]
+        }
+        { scopeless
+          unknown cur[199295](199297 call qio_channel_offset_unlocked _channel_internal)
+          (199300 'end of statement')
+        }
+        { scopeless
+          unknown target[199302](199303 call :(199305 call +(199313 call .(199311 call(199308 call . r c"matches") 0) c"offset")(199322 call .(199320 call(199317 call . r c"matches") 0) c"len")) int[10])
+          (199327 'end of statement')
+        }
+        (199328 call = error(199332 call qio_channel_advance 0 _channel_internal(199335 call - target cur)))
+      }
+      {
+        {
+          unknown _indexOfInterest[199358] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[199359] "expr temp" "temp"
+          (199368 'move' _iterator[199359](199366 call _getIterator(199375 call chpl_direct_counted_range_iter 0 ncaps)))
+          Defer
+          {
+            {
+              (199390 call _freeIterator _iterator[199359])
+            }
+          }
+          { scopeless type
+            (199380 'move' _indexOfInterest[199358](199377 call iteratorIndex _iterator[199359]))
+          }
+          ForLoop[199360]
+          {
+            unknown j[199340] "index var" "insert auto destroy"
+            (199385 'move' j[199340] _indexOfInterest[199358])
+            {
+              (199349 call =(199355 call(199352 call . r c"capArr") j) b"")
+            }
+            label _continueLabel[199363]
+            _indexOfInterest[199358]
+            _iterator[199359]
+          }
+          label _breakLabel[199364]
+        }
+        { scopeless
+          unknown cur[199398](199400 call qio_channel_offset_unlocked _channel_internal)
+          (199403 'end of statement')
+        }
+        (199405 call qio_channel_advance 0 _channel_internal(199408 call - before_match cur))
+      }
+    }
+    {
+      (199420 call = error(199424 call qio_format_error_bad_regex))
+    }
+  }
+  function _unknown[42]._format_reader[199437](arg _mt[199478]:_MT[201], arg this[199440] :
+  fileReader, arg fmtStr[199445] :
+  unknown fmtType[199443], ref arg cur[199449] :
+  c_size_t, arg len[199453] :
+  c_size_t, ref arg error[199457] :
+  errorCode, ref arg conv[199461] :
+  qio_conv_t, ref arg gotConv[199465] :
+  bool, ref arg style[199469] :
+  iostyleInternal, ref arg r[199475] :
+  (199472 'to unmanaged class from unknown'(199474 'to nilable class from type' _channel_regex_info))) : _unknown[42] "method"
+  {
+    if(199497 call _cond_test(199493 call != r nil[32]))
+    {
+      { scopeless
+        (199481 call =(199488 call .(199483 call postfix! r) c"hasRegex") 0)
+      }
+    }
+    if(199947 call _cond_test(199944 call ! error))
+    {
+      { scopeless
+        const fmt[199504] "const" "ref var"(199513 call(199510 call .(199509 call(199506 call . fmtStr c"localize")) c"c_str"))
+        (199515 'end of statement')
+      }
+      {
+        unknown tmp[199917] "temp"
+        (199941 'move' tmp[199917](199936 call _cond_test(199938 call < cur len)))
+        WhileDo[199922]
+        {
+          {
+            (199521 call = gotConv 0)
+            if(199529 call _cond_test error)
+            {
+              { scopeless
+                break nil[32]
+              }
+            }
+            { scopeless
+              unknown end[199535](199537 call uint[86] 64)
+              (199540 'end of statement')
+            }
+            (199541 call = error(199545 call qio_conv_parse fmt cur end 1 conv style))
+            if(199554 call _cond_test error)
+            {
+            }
+            (199558 call = cur(199561 call : end c_size_t))
+            if(199569 call _cond_test error)
+            {
+              { scopeless
+                break nil[32]
+              }
+            }
+            if(199912 call _cond_test(199905 call ==(199908 call . conv c"argType") QIO_CONV_ARG_TYPE_NONE_LITERAL))
+            {
+              if(199704 call _cond_test(199697 call ==(199700 call . conv c"literal_is_whitespace") 2))
+              {
+                { scopeless
+                  unknown offsetA[199577](199579 call qio_channel_offset_unlocked _channel_internal)
+                  (199582 'end of statement')
+                }
+                (199583 call = error(199587 call qio_channel_skip_past_newline 0 _channel_internal 1))
+                { scopeless
+                  unknown offsetB[199592](199594 call qio_channel_offset_unlocked _channel_internal)
+                  (199597 'end of statement')
+                }
+                if(199612 call _cond_test(199603 call &&(199605 call ! error)(199608 call == offsetA offsetB)))
+                {
+                  (199599 call = error EFORMAT)
+                }
+              }
+              {
+                { scopeless
+                  if(199693 call _cond_test(199684 call ==(199689 call . conv c"literal_is_whitespace") 1))
+                  {
+                    { scopeless
+                      unknown offsetA[199618](199620 call qio_channel_offset_unlocked _channel_internal)
+                      (199623 'end of statement')
+                    }
+                    (199624 call = error(199628 call qio_channel_scan_literal_2 0 _channel_internal(199632 call . conv c"literal") 0 1))
+                    { scopeless
+                      unknown offsetB[199638](199640 call qio_channel_offset_unlocked _channel_internal)
+                      (199643 'end of statement')
+                    }
+                    if(199658 call _cond_test(199649 call &&(199651 call ! error)(199654 call == offsetA offsetB)))
+                    {
+                      (199645 call = error EFORMAT)
+                    }
+                  }
+                  {
+                    (199663 call = error(199667 call qio_channel_scan_literal_2 0 _channel_internal(199671 call . conv c"literal")(199674 call :(199679 call . conv c"literal_length") c_ssize_t) 0))
+                  }
+                }
+              }
+            }
+            {
+              { scopeless
+                if(199901 call _cond_test(199892 call ==(199897 call . conv c"argType") QIO_CONV_ARG_TYPE_NONE_REGEX_LITERAL))
+                {
+                  if(199723 call _cond_test(199719 call == r nil[32]))
+                  {
+                    { scopeless
+                      (199710 call = r(199713 'new'(_chpl_manager = unmanaged[183](?))(199717 call _channel_regex_info)))
+                    }
+                  }
+                  { scopeless
+                    const rnn[199729] "const"(199730 call postfix! r)
+                    (199734 'end of statement')
+                  }
+                  (199739 call(199736 call . rnn c"clear"))
+                  { scopeless
+                    unknown errstr[199741] string[244]
+                    (199744 'end of statement')
+                  }
+                  (199746 call qio_regex_create_compile_flags_2(199750 call . conv c"regex")(199756 call . conv c"regex_length")(199762 call . conv c"regex_flags")(199768 call . conv c"regex_flags_length")(199771 call == fmtType string[244])(199776 call . rnn c"theRegex"))
+                  (199779 call =(199784 call . rnn c"releaseRegex") 1)
+                  if(199880 call _cond_test(199875 call qio_regex_ok(199877 call . rnn c"theRegex")))
+                  {
+                    (199789 call =(199792 call . rnn c"hasRegex") 1)
+                    (199796 call =(199799 call . rnn c"ncaptures")(199803 call qio_regex_get_ncaptures(199805 call . rnn c"theRegex")))
+                    if(199864 call _cond_test(199824 call ||(199826 call ||(199828 call ||(199830 call >(199833 call . rnn c"ncaptures") 0)(199837 call !=(199842 call . conv c"preArg1") QIO_CONV_UNK))(199846 call !=(199851 call . conv c"preArg2") QIO_CONV_UNK))(199855 call !=(199860 call . conv c"preArg3") QIO_CONV_UNK)))
+                    {
+                      (199809 call = gotConv 1)
+                      break nil[32]
+                    }
+                    {
+                      (199818 call _match_regex_if_needed cur len error style rnn)
+                    }
+                  }
+                  {
+                    (199869 call = error(199873 call qio_format_error_bad_regex))
+                  }
+                }
+                {
+                  (199885 call = gotConv 1)
+                  break nil[32]
+                }
+              }
+            }
+          }
+          label _continueLabel[199920]
+          (199931 'move' tmp[199917](199926 call _cond_test(199928 call < cur len)))
+          tmp[199917]
+        }
+        label _breakLabel[199921]
+      }
+    }
+  }
+  function _unknown[42]._format_reader[199953](arg _mt[199988]:_MT[201], arg this[199956] :
+  fileWriter, arg fmtStr[199961] :
+  unknown fmtType[199959], ref arg cur[199965] :
+  c_size_t, arg len[199969] :
+  c_size_t, ref arg error[199973] :
+  errorCode, ref arg conv[199977] :
+  qio_conv_t, ref arg gotConv[199981] :
+  bool, ref arg style[199985] :
+  iostyleInternal) : _unknown[42] "method"
+  {
+    if(200149 call _cond_test(200146 call ! error))
+    {
+      { scopeless
+        const fmt[199993] "const" "ref var"(200002 call(199999 call .(199998 call(199995 call . fmtStr c"localize")) c"c_str"))
+        (200004 'end of statement')
+      }
+      {
+        unknown tmp[200119] "temp"
+        (200143 'move' tmp[200119](200138 call _cond_test(200140 call < cur len)))
+        WhileDo[200124]
+        {
+          {
+            (200010 call = gotConv 0)
+            if(200018 call _cond_test error)
+            {
+              { scopeless
+                break nil[32]
+              }
+            }
+            { scopeless
+              unknown end[200024](200026 call uint[86] 64)
+              (200029 'end of statement')
+            }
+            (200030 call = error(200034 call qio_conv_parse fmt cur end 0 conv style))
+            if(200043 call _cond_test error)
+            {
+            }
+            (200047 call = cur(200050 call : end c_size_t))
+            if(200058 call _cond_test error)
+            {
+              { scopeless
+                break nil[32]
+              }
+            }
+            if(200114 call _cond_test(200107 call ==(200110 call . conv c"argType") QIO_CONV_ARG_TYPE_NONE_LITERAL))
+            {
+              (200064 call = error(200068 call qio_channel_print_literal_2 0 _channel_internal(200072 call . conv c"literal")(200075 call :(200078 call . conv c"literal_length") c_ssize_t)))
+            }
+            {
+              { scopeless
+                if(200103 call _cond_test(200096 call ==(200099 call . conv c"argType") QIO_CONV_ARG_TYPE_NONE_REGEX_LITERAL))
+                {
+                  (200083 call = error(200087 call qio_format_error_write_regex))
+                }
+                {
+                  (200089 call = gotConv 1)
+                  break nil[32]
+                }
+              }
+            }
+          }
+          label _continueLabel[200122]
+          (200133 'move' tmp[200119](200128 call _cond_test(200130 call < cur len)))
+          tmp[200119]
+        }
+        label _breakLabel[200123]
+      }
+    }
+  }
+  function _conv_helper[200155](ref arg error[200158] :
+  errorCode, ref arg conv[200162] :
+  qio_conv_t, ref arg gotConv[200166] :
+  bool, ref arg j[200170] :
+  int[10], arg argType[200176] :
+  (200174 call c_ptr c_int), arg argTypeLen[200180] :
+  int[10]) : _unknown[42] "private"
+  {
+    function boundsCheckHelp[200184]() : _unknown[42]
+    {
+      if(200208 call _cond_test boundsChecking)
+      {
+        if(200203 call _cond_test(200199 call >= j argTypeLen))
+        {
+          (200190 call halt "Index " j " is accessed on argType of length " argTypeLen)
+        }
+      }
+    }
+    (200215 call boundsCheckHelp)
+    if(200219 call _cond_test error)
+    {
+      { scopeless
+        (200216 return)
+      }
+    }
+    if(200343 call _cond_test gotConv)
+    {
+      if(200246 call _cond_test(200239 call !=(200242 call . conv c"preArg1") QIO_CONV_UNK))
+      {
+        (200226 call =(200229 call argType j)(200232 call . conv c"preArg1"))
+        (200235 call += j 1)
+      }
+      (200251 call boundsCheckHelp)
+      if(200273 call _cond_test(200266 call !=(200269 call . conv c"preArg2") QIO_CONV_UNK))
+      {
+        (200253 call =(200256 call argType j)(200259 call . conv c"preArg2"))
+        (200262 call += j 1)
+      }
+      (200278 call boundsCheckHelp)
+      if(200300 call _cond_test(200293 call !=(200296 call . conv c"preArg3") QIO_CONV_UNK))
+      {
+        (200280 call =(200283 call argType j)(200286 call . conv c"preArg3"))
+        (200289 call += j 1)
+      }
+      (200305 call boundsCheckHelp)
+      if(200338 call _cond_test(200331 call !=(200334 call . conv c"argType") QIO_CONV_UNK))
+      {
+        if(200323 call _cond_test(200317 call ==(200320 call argType j) QIO_CONV_UNK))
+        {
+          (200308 call =(200311 call argType j)(200314 call . conv c"argType"))
+        }
+        (200327 call += j 1)
+      }
+    }
+  }
+  function _conv_sethandler[200349](ref arg error[200352] :
+  errorCode, arg argtypei[200356] :
+  c_int, ref arg style[200360] :
+  iostyleInternal, arg i[200364] :
+  int[10], arg argi[200367]:_any[141](?), arg isReadf[200370] :
+  bool) : _unknown[42] throws "private"
+  {
+    if(200379 call _cond_test error)
+    {
+      { scopeless
+        (200375 return 0)
+      }
+    }
+    {
+      unknown tmp[200972] "expr temp" "maybe param" "maybe type" "temp"
+      (200974 'move' tmp[200972] argtypei)
+      if(200979 call _cond_test(200976 call == tmp[200972] QIO_CONV_SET_MIN_WIDTH_COLS))
+      {
+        { scopeless
+          unknown tmp[200398] "temp"(200396 call _toIntegral argi)
+          (200405 call _check_tuple_var_decl tmp[200398] 2)
+          unknown t[200391](200399 call tmp[200398] 0)
+          unknown ok[200393](200402 call tmp[200398] 1)
+          (200410 'end of statement')
+        }
+        if(200436 call _cond_test(200433 call ! ok))
+        {
+          (200412 call = error(200416 call qio_format_error_arg_mismatch i))
+        }
+        {
+          { scopeless
+            (200418 call =(200423 call . style c"min_width_columns")(200426 call : t(200430 call uint[86] 32)))
+          }
+        }
+      }
+      {
+        if(200985 call _cond_test(200982 call == tmp[200972] QIO_CONV_SET_MAX_WIDTH_COLS))
+        {
+          { scopeless
+            unknown tmp[200454] "temp"(200452 call _toIntegral argi)
+            (200461 call _check_tuple_var_decl tmp[200454] 2)
+            unknown t[200447](200455 call tmp[200454] 0)
+            unknown ok[200449](200458 call tmp[200454] 1)
+            (200466 'end of statement')
+          }
+          if(200492 call _cond_test(200489 call ! ok))
+          {
+            (200468 call = error(200472 call qio_format_error_arg_mismatch i))
+          }
+          {
+            { scopeless
+              (200474 call =(200479 call . style c"max_width_columns")(200482 call : t(200486 call uint[86] 32)))
+            }
+          }
+        }
+        {
+          if(200992 call _cond_test(200989 call == tmp[200972] QIO_CONV_SET_MAX_WIDTH_CHARS))
+          {
+            { scopeless
+              unknown tmp[200510] "temp"(200508 call _toIntegral argi)
+              (200517 call _check_tuple_var_decl tmp[200510] 2)
+              unknown t[200503](200511 call tmp[200510] 0)
+              unknown ok[200505](200514 call tmp[200510] 1)
+              (200522 'end of statement')
+            }
+            if(200546 call _cond_test(200543 call ! ok))
+            {
+              (200524 call = error(200528 call qio_format_error_arg_mismatch i))
+            }
+            {
+              { scopeless
+                (200530 call =(200533 call . style c"max_width_characters")(200536 call : t(200540 call uint[86] 32)))
+              }
+            }
+          }
+          {
+            if(200999 call _cond_test(200996 call == tmp[200972] QIO_CONV_SET_MAX_WIDTH_BYTES))
+            {
+              { scopeless
+                unknown tmp[200564] "temp"(200562 call _toIntegral argi)
+                (200571 call _check_tuple_var_decl tmp[200564] 2)
+                unknown t[200557](200565 call tmp[200564] 0)
+                unknown ok[200559](200568 call tmp[200564] 1)
+                (200576 'end of statement')
+              }
+              if(200602 call _cond_test(200599 call ! ok))
+              {
+                (200578 call = error(200582 call qio_format_error_arg_mismatch i))
+              }
+              {
+                { scopeless
+                  (200584 call =(200589 call . style c"max_width_bytes")(200592 call : t(200596 call uint[86] 32)))
+                }
+              }
+            }
+            {
+              if(201006 call _cond_test(201003 call == tmp[200972] QIO_CONV_SET_PRECISION))
+              {
+                { scopeless
+                  unknown tmp[200620] "temp"(200618 call _toIntegral argi)
+                  (200627 call _check_tuple_var_decl tmp[200620] 2)
+                  unknown t[200613](200621 call tmp[200620] 0)
+                  unknown ok[200615](200624 call tmp[200620] 1)
+                  (200632 'end of statement')
+                }
+                if(200656 call _cond_test(200653 call ! ok))
+                {
+                  (200634 call = error(200638 call qio_format_error_arg_mismatch i))
+                }
+                {
+                  { scopeless
+                    (200640 call =(200643 call . style c"precision")(200646 call : t(200650 call int[10] 32)))
+                  }
+                }
+              }
+              {
+                if(201013 call _cond_test(201010 call == tmp[200972] QIO_CONV_SET_STRINGSTART))
+                {
+                  { scopeless
+                    unknown tmp[200674] "temp"(200672 call _toChar argi)
+                    (200681 call _check_tuple_var_decl tmp[200674] 2)
+                    unknown t[200667](200675 call tmp[200674] 0)
+                    unknown ok[200669](200678 call tmp[200674] 1)
+                    (200686 'end of statement')
+                  }
+                  if(200710 call _cond_test(200707 call ! ok))
+                  {
+                    (200688 call = error(200692 call qio_format_error_arg_mismatch i))
+                  }
+                  {
+                    { scopeless
+                      (200694 call =(200699 call . style c"string_start")(200702 call : t style_char_t))
+                    }
+                  }
+                }
+                {
+                  if(201020 call _cond_test(201017 call == tmp[200972] QIO_CONV_SET_STRINGEND))
+                  {
+                    { scopeless
+                      unknown tmp[200728] "temp"(200726 call _toChar argi)
+                      (200735 call _check_tuple_var_decl tmp[200728] 2)
+                      unknown t[200721](200729 call tmp[200728] 0)
+                      unknown ok[200723](200732 call tmp[200728] 1)
+                      (200740 'end of statement')
+                    }
+                    if(200762 call _cond_test(200759 call ! ok))
+                    {
+                      (200742 call = error(200746 call qio_format_error_arg_mismatch i))
+                    }
+                    {
+                      { scopeless
+                        (200748 call =(200751 call . style c"string_end")(200754 call : t style_char_t))
+                      }
+                    }
+                  }
+                  {
+                    if(201027 call _cond_test(201024 call == tmp[200972] QIO_CONV_SET_STRINGSTARTEND))
+                    {
+                      { scopeless
+                        unknown tmp[200780] "temp"(200778 call _toChar argi)
+                        (200787 call _check_tuple_var_decl tmp[200780] 2)
+                        unknown t[200773](200781 call tmp[200780] 0)
+                        unknown ok[200775](200784 call tmp[200780] 1)
+                        (200792 'end of statement')
+                      }
+                      if(200824 call _cond_test(200821 call ! ok))
+                      {
+                        (200794 call = error(200798 call qio_format_error_arg_mismatch i))
+                      }
+                      {
+                        (200801 call =(200804 call . style c"string_start")(200807 call : t style_char_t))
+                        (200811 call =(200814 call . style c"string_end")(200817 call : t style_char_t))
+                      }
+                    }
+                    {
+                      if(201034 call _cond_test(201031 call == tmp[200972] QIO_CONV_SET_STRINGLEN))
+                      {
+                        { scopeless
+                          unknown tmp[200841] "temp"(200839 call _toIntegral argi)
+                          (200848 call _check_tuple_var_decl tmp[200841] 2)
+                          unknown t[200834](200842 call tmp[200841] 0)
+                          unknown ok[200836](200845 call tmp[200841] 1)
+                          (200853 'end of statement')
+                        }
+                        if(200877 call _cond_test(200874 call ! ok))
+                        {
+                          (200855 call = error(200859 call qio_format_error_arg_mismatch i))
+                        }
+                        {
+                          (200862 call =(200865 call . style c"str_style")(200868 call : t(200872 call int[10] 64)))
+                        }
+                      }
+                      {
+                        if(201041 call _cond_test(201038 call == tmp[200972] QIO_CONV_SET_TERMINATOR))
+                        {
+                          { scopeless
+                            unknown tmp[200894] "temp"(200892 call _toChar argi)
+                            (200901 call _check_tuple_var_decl tmp[200894] 2)
+                            unknown t[200887](200895 call tmp[200894] 0)
+                            unknown ok[200889](200898 call tmp[200894] 1)
+                            (200906 'end of statement')
+                          }
+                          if(200945 call _cond_test(200942 call ! ok))
+                          {
+                            (200908 call = error(200912 call qio_format_error_arg_mismatch i))
+                          }
+                          {
+                            (200915 call =(200918 call . style c"str_style")(200921 call -(200923 call -(200925 call : t(200929 call uint[86] 8))(200931 call :(200936 call . iostringstyleInternal c"data_null")(200940 call int[10] 64)))))
+                          }
+                        }
+                        {
+                          if(201048 call _cond_test(201045 call == tmp[200972] QIO_CONV_SET_DONE))
+                          {
+                          }
+                          {
+                            if(201055 call _cond_test(201052 call == tmp[200972] QIO_CONV_UNK))
+                            {
+                              (200959 call = error(200963 call qio_format_error_too_many_args))
+                            }
+                            {
+                              (200968 return 1)
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    (201059 return 0)
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42]._write_signed[201064](arg _mt[201084]:_MT[201], arg this[201067] :
+  fileWriter, arg width[201073] :
+  (201071 call uint[86] 32), arg t[201077] :
+  int[10], arg i[201081] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown err[201089] errorCode
+      (201092 'end of statement')
+    }
+    { scopeless
+      unknown byteorder[201094](201096 call qio_channel_byteorder _channel_internal)
+      (201099 'end of statement')
+    }
+    {
+      unknown tmp[201208] "expr temp" "maybe param" "maybe type" "temp"
+      (201210 'move' tmp[201208] width)
+      if(201215 call _cond_test(201212 call == tmp[201208] 1))
+      {
+        { scopeless
+          unknown x[201107](201108 call : t(201112 call int[10] 8))
+          (201115 'end of statement')
+        }
+        (201116 call = err(201120 call qio_channel_write_int8 0 _channel_internal x))
+      }
+      {
+        if(201221 call _cond_test(201218 call == tmp[201208] 2))
+        {
+          { scopeless
+            unknown x[201130](201131 call : t(201135 call int[10] 16))
+            (201138 'end of statement')
+          }
+          (201139 call = err(201143 call qio_channel_write_int16 0 byteorder _channel_internal x))
+        }
+        {
+          if(201228 call _cond_test(201225 call == tmp[201208] 4))
+          {
+            { scopeless
+              unknown x[201154](201155 call : t(201159 call int[10] 32))
+              (201162 'end of statement')
+            }
+            (201163 call = err(201167 call qio_channel_write_int32 0 byteorder _channel_internal x))
+          }
+          {
+            if(201235 call _cond_test(201232 call == tmp[201208] 8))
+            {
+              { scopeless
+                unknown x[201178](201179 call : t(201183 call int[10] 64))
+                (201186 'end of statement')
+              }
+              (201187 call = err(201191 call qio_channel_write_int64 0 byteorder _channel_internal x))
+            }
+            {
+              (201200 call = err(201204 call qio_format_error_arg_mismatch i))
+            }
+          }
+        }
+      }
+    }
+    (201239 return err)
+  }
+  { scopeless type
+    errorCode
+  }
+  function _unknown[42]._read_signed[201244](arg _mt[201264]:_MT[201], arg this[201247] :
+  fileReader, arg width[201253] :
+  (201251 call uint[86] 32), out arg t[201257] :
+  int[10], arg i[201261] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown err[201269] errorCode
+      (201272 'end of statement')
+    }
+    { scopeless
+      unknown byteorder[201274](201276 call qio_channel_byteorder _channel_internal)
+      (201279 'end of statement')
+    }
+    {
+      unknown tmp[201392] "expr temp" "maybe param" "maybe type" "temp"
+      (201394 'move' tmp[201392] width)
+      if(201399 call _cond_test(201396 call == tmp[201392] 1))
+      {
+        { scopeless
+          unknown x[201287](201289 call int[10] 8)
+          (201292 'end of statement')
+        }
+        (201293 call = err(201297 call qio_channel_read_int8 0 _channel_internal x))
+        (201301 call = t x)
+      }
+      {
+        if(201405 call _cond_test(201402 call == tmp[201392] 2))
+        {
+          { scopeless
+            unknown x[201311](201313 call int[10] 16)
+            (201316 'end of statement')
+          }
+          (201317 call = err(201321 call qio_channel_read_int16 0 byteorder _channel_internal x))
+          (201326 call = t x)
+        }
+        {
+          if(201412 call _cond_test(201409 call == tmp[201392] 4))
+          {
+            { scopeless
+              unknown x[201336](201338 call int[10] 32)
+              (201341 'end of statement')
+            }
+            (201342 call = err(201346 call qio_channel_read_int32 0 byteorder _channel_internal x))
+            (201351 call = t x)
+          }
+          {
+            if(201419 call _cond_test(201416 call == tmp[201392] 8))
+            {
+              { scopeless
+                unknown x[201361](201363 call int[10] 64)
+                (201366 'end of statement')
+              }
+              (201367 call = err(201371 call qio_channel_read_int64 0 byteorder _channel_internal x))
+              (201376 call = t x)
+            }
+            {
+              (201384 call = err(201388 call qio_format_error_arg_mismatch i))
+            }
+          }
+        }
+      }
+    }
+    (201423 return err)
+  }
+  { scopeless type
+    errorCode
+  }
+  function _unknown[42]._write_unsigned[201428](arg _mt[201448]:_MT[201], arg this[201431] :
+  fileWriter, arg width[201437] :
+  (201435 call uint[86] 32), arg t[201441] :
+  uint[86], arg i[201445] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown err[201452] errorCode
+      (201455 'end of statement')
+    }
+    { scopeless
+      unknown byteorder[201457](201459 call qio_channel_byteorder _channel_internal)
+      (201462 'end of statement')
+    }
+    {
+      unknown tmp[201571] "expr temp" "maybe param" "maybe type" "temp"
+      (201573 'move' tmp[201571] width)
+      if(201578 call _cond_test(201575 call == tmp[201571] 1))
+      {
+        { scopeless
+          unknown x[201470](201471 call : t(201475 call uint[86] 8))
+          (201478 'end of statement')
+        }
+        (201479 call = err(201483 call qio_channel_write_uint8 0 _channel_internal x))
+      }
+      {
+        if(201584 call _cond_test(201581 call == tmp[201571] 2))
+        {
+          { scopeless
+            unknown x[201493](201494 call : t(201498 call uint[86] 16))
+            (201501 'end of statement')
+          }
+          (201502 call = err(201506 call qio_channel_write_uint16 0 byteorder _channel_internal x))
+        }
+        {
+          if(201591 call _cond_test(201588 call == tmp[201571] 4))
+          {
+            { scopeless
+              unknown x[201517](201518 call : t(201522 call uint[86] 32))
+              (201525 'end of statement')
+            }
+            (201526 call = err(201530 call qio_channel_write_uint32 0 byteorder _channel_internal x))
+          }
+          {
+            if(201598 call _cond_test(201595 call == tmp[201571] 8))
+            {
+              { scopeless
+                unknown x[201541](201542 call : t(201546 call uint[86] 64))
+                (201549 'end of statement')
+              }
+              (201550 call = err(201554 call qio_channel_write_uint64 0 byteorder _channel_internal x))
+            }
+            {
+              (201563 call = err(201567 call qio_format_error_arg_mismatch i))
+            }
+          }
+        }
+      }
+    }
+    (201602 return err)
+  }
+  function _unknown[42]._read_unsigned[201606](arg _mt[201626]:_MT[201], arg this[201609] :
+  fileReader, arg width[201615] :
+  (201613 call uint[86] 32), out arg t[201619] :
+  uint[86], arg i[201623] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown err[201630] errorCode
+      (201633 'end of statement')
+    }
+    { scopeless
+      unknown byteorder[201635](201637 call qio_channel_byteorder _channel_internal)
+      (201640 'end of statement')
+    }
+    {
+      unknown tmp[201753] "expr temp" "maybe param" "maybe type" "temp"
+      (201755 'move' tmp[201753] width)
+      if(201760 call _cond_test(201757 call == tmp[201753] 1))
+      {
+        { scopeless
+          unknown x[201648](201650 call uint[86] 8)
+          (201653 'end of statement')
+        }
+        (201654 call = err(201658 call qio_channel_read_uint8 0 _channel_internal x))
+        (201662 call = t x)
+      }
+      {
+        if(201766 call _cond_test(201763 call == tmp[201753] 2))
+        {
+          { scopeless
+            unknown x[201672](201674 call uint[86] 16)
+            (201677 'end of statement')
+          }
+          (201678 call = err(201682 call qio_channel_read_uint16 0 byteorder _channel_internal x))
+          (201687 call = t x)
+        }
+        {
+          if(201773 call _cond_test(201770 call == tmp[201753] 4))
+          {
+            { scopeless
+              unknown x[201697](201699 call uint[86] 32)
+              (201702 'end of statement')
+            }
+            (201703 call = err(201707 call qio_channel_read_uint32 0 byteorder _channel_internal x))
+            (201712 call = t x)
+          }
+          {
+            if(201780 call _cond_test(201777 call == tmp[201753] 8))
+            {
+              { scopeless
+                unknown x[201722](201724 call uint[86] 64)
+                (201727 'end of statement')
+              }
+              (201728 call = err(201732 call qio_channel_read_uint64 0 byteorder _channel_internal x))
+              (201737 call = t x)
+            }
+            {
+              (201745 call = err(201749 call qio_format_error_arg_mismatch i))
+            }
+          }
+        }
+      }
+    }
+    (201784 return err)
+  }
+  function _unknown[42]._write_real[201788](arg _mt[201808]:_MT[201], arg this[201791] :
+  fileWriter, arg width[201797] :
+  (201795 call uint[86] 32), arg t[201801] :
+  real[13], arg i[201805] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown err[201812] errorCode
+      (201815 'end of statement')
+    }
+    { scopeless
+      unknown byteorder[201817](201819 call qio_channel_byteorder _channel_internal)
+      (201822 'end of statement')
+    }
+    {
+      unknown tmp[201884] "expr temp" "maybe param" "maybe type" "temp"
+      (201886 'move' tmp[201884] width)
+      if(201891 call _cond_test(201888 call == tmp[201884] 4))
+      {
+        { scopeless
+          unknown x[201830](201831 call : t(201835 call real[13] 32))
+          (201838 'end of statement')
+        }
+        (201839 call = err(201843 call qio_channel_write_float32 0 byteorder _channel_internal x))
+      }
+      {
+        if(201897 call _cond_test(201894 call == tmp[201884] 8))
+        {
+          { scopeless
+            unknown x[201854](201855 call : t(201859 call real[13] 64))
+            (201862 'end of statement')
+          }
+          (201863 call = err(201867 call qio_channel_write_float64 0 byteorder _channel_internal x))
+        }
+        {
+          (201876 call = err(201880 call qio_format_error_arg_mismatch i))
+        }
+      }
+    }
+    (201901 return err)
+  }
+  function _unknown[42]._read_real[201905](arg _mt[201925]:_MT[201], arg this[201908] :
+  fileReader, arg width[201914] :
+  (201912 call uint[86] 32), out arg t[201918] :
+  real[13], arg i[201922] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown err[201929] errorCode
+      (201932 'end of statement')
+    }
+    { scopeless
+      unknown byteorder[201934](201936 call qio_channel_byteorder _channel_internal)
+      (201939 'end of statement')
+    }
+    {
+      unknown tmp[202003] "expr temp" "maybe param" "maybe type" "temp"
+      (202005 'move' tmp[202003] width)
+      if(202010 call _cond_test(202007 call == tmp[202003] 4))
+      {
+        { scopeless
+          unknown x[201947](201949 call real[13] 32)
+          (201952 'end of statement')
+        }
+        (201953 call = err(201957 call qio_channel_read_float32 0 byteorder _channel_internal x))
+        (201962 call = t x)
+      }
+      {
+        if(202016 call _cond_test(202013 call == tmp[202003] 8))
+        {
+          { scopeless
+            unknown x[201972](201974 call real[13] 64)
+            (201977 'end of statement')
+          }
+          (201978 call = err(201982 call qio_channel_read_float64 0 byteorder _channel_internal x))
+          (201987 call = t x)
+        }
+        {
+          (201995 call = err(201999 call qio_format_error_arg_mismatch i))
+        }
+      }
+    }
+    (202020 return err)
+  }
+  function _unknown[42]._write_complex[202024](arg _mt[202044]:_MT[201], arg this[202027] :
+  fileWriter, arg width[202033] :
+  (202031 call uint[86] 32), arg t[202037] :
+  complex[111], arg i[202041] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown err[202048] 0 errorCode
+      (202052 'end of statement')
+    }
+    { scopeless
+      unknown byteorder[202054](202056 call qio_channel_byteorder _channel_internal)
+      (202059 'end of statement')
+    }
+    {
+      unknown tmp[202187] "expr temp" "maybe param" "maybe type" "temp"
+      (202189 'move' tmp[202187] width)
+      if(202194 call _cond_test(202191 call == tmp[202187] 8))
+      {
+        { scopeless
+          unknown x[202067](202068 call : t(202072 call complex[111] 64))
+          (202075 'end of statement')
+        }
+        { scopeless
+          unknown re[202077](202079 call . x c"re")
+          (202083 'end of statement')
+        }
+        { scopeless
+          unknown im[202085](202087 call . x c"im")
+          (202091 'end of statement')
+        }
+        (202092 call = err(202096 call qio_channel_write_float32 0 byteorder _channel_internal re))
+        if(202114 call _cond_test(202111 call ! err))
+        {
+          (202102 call = err(202106 call qio_channel_write_float32 0 byteorder _channel_internal im))
+        }
+      }
+      {
+        if(202200 call _cond_test(202197 call == tmp[202187] 16))
+        {
+          { scopeless
+            unknown x[202124](202125 call : t(202129 call complex[111] 128))
+            (202132 'end of statement')
+          }
+          { scopeless
+            unknown re[202134](202136 call . x c"re")
+            (202140 'end of statement')
+          }
+          { scopeless
+            unknown im[202142](202144 call . x c"im")
+            (202148 'end of statement')
+          }
+          (202149 call = err(202153 call qio_channel_write_float64 0 byteorder _channel_internal re))
+          if(202171 call _cond_test(202168 call ! err))
+          {
+            (202159 call = err(202163 call qio_channel_write_float64 0 byteorder _channel_internal im))
+          }
+        }
+        {
+          (202179 call = err(202183 call qio_format_error_arg_mismatch i))
+        }
+      }
+    }
+    (202204 return err)
+  }
+  function _unknown[42]._read_complex[202208](arg _mt[202228]:_MT[201], arg this[202211] :
+  fileReader, arg width[202217] :
+  (202215 call uint[86] 32), out arg t[202221] :
+  complex[111], arg i[202225] :
+  int[10]) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown err[202232] 0 errorCode
+      (202236 'end of statement')
+    }
+    { scopeless
+      unknown byteorder[202238](202240 call qio_channel_byteorder _channel_internal)
+      (202243 'end of statement')
+    }
+    {
+      unknown tmp[202403] "expr temp" "maybe param" "maybe type" "temp"
+      (202405 'move' tmp[202403] width)
+      if(202410 call _cond_test(202407 call == tmp[202403] 8))
+      {
+        { scopeless
+          unknown x[202251](202253 call complex[111] 64)
+          (202256 'end of statement')
+        }
+        { scopeless
+          unknown re[202258](202263 'typeof'(202260 call . x c"re"))
+          (202265 'end of statement')
+        }
+        { scopeless
+          unknown im[202267](202272 'typeof'(202269 call . x c"im"))
+          (202274 'end of statement')
+        }
+        (202275 call = err(202279 call qio_channel_read_float32 0 byteorder _channel_internal re))
+        if(202297 call _cond_test(202294 call ! err))
+        {
+          (202285 call = err(202289 call qio_channel_read_float32 0 byteorder _channel_internal im))
+        }
+        (202301 call = x(202304 call :(202309 call _build_tuple re im)(202312 call complex[111] 64)))
+        (202314 call = t x)
+      }
+      {
+        if(202416 call _cond_test(202413 call == tmp[202403] 16))
+        {
+          { scopeless
+            unknown x[202324](202326 call complex[111] 128)
+            (202329 'end of statement')
+          }
+          { scopeless
+            unknown re[202331](202336 'typeof'(202333 call . x c"re"))
+            (202338 'end of statement')
+          }
+          { scopeless
+            unknown im[202340](202345 'typeof'(202342 call . x c"im"))
+            (202347 'end of statement')
+          }
+          (202348 call = err(202352 call qio_channel_read_float64 0 byteorder _channel_internal re))
+          if(202370 call _cond_test(202367 call ! err))
+          {
+            (202358 call = err(202362 call qio_channel_read_float64 0 byteorder _channel_internal im))
+          }
+          (202374 call = x(202377 call :(202382 call _build_tuple re im)(202385 call complex[111] 128)))
+          (202387 call = t x)
+        }
+        {
+          (202395 call = err(202399 call qio_format_error_arg_mismatch i))
+        }
+      }
+    }
+    (202420 return err)
+  }
+  function _unknown[42]._writefOne[202424](arg _mt[202480]:_MT[201], arg this[202427] :
+  fileWriter, arg fmtStr[202430]:_any[141](?), ref arg arg[202432]:_any[141](?), arg i[202435] :
+  int[10], ref arg cur[202439] :
+  c_size_t, ref arg j[202443] :
+  int[10], arg argType[202449] :
+  (202447 call c_ptr c_int), arg argTypeLen[202453] :
+  int[10], ref arg conv[202457] :
+  qio_conv_t, ref arg gotConv[202461] :
+  bool, ref arg style[202465] :
+  iostyleInternal, ref arg err[202469] :
+  errorCode, arg origLocale[202473] :
+  locale[234], arg len[202477] :
+  c_size_t) : _unknown[42] throws "method"
+  {
+    if(202500 call _cond_test boundsChecking)
+    {
+      if(202495 call _cond_test(202491 call >= i argTypeLen))
+      {
+        (202486 call halt "Index " i " is accessed on argType of length " argTypeLen)
+      }
+    }
+    (202504 call = gotConv 0)
+    if(202527 call _cond_test(202523 call <= j i))
+    {
+      (202515 call(202512 call . this c"_format_reader") fmtStr cur len err conv gotConv style)
+    }
+    (202532 call _conv_helper err conv gotConv j argType argTypeLen)
+    { scopeless
+      unknown domore[202540](202542 call _conv_sethandler err(202545 call argType i) style i arg 0)
+      (202552 'end of statement')
+    }
+    if(203407 call _cond_test domore)
+    {
+      (202558 call(202555 call . this c"_set_styleInternal") style)
+      {
+        unknown tmp[203301] "expr temp" "maybe param" "maybe type" "temp"
+        (203303 'move' tmp[203301](202561 call argType i))
+        if(203313 call _cond_test(203311 call ||(203305 call == tmp[203301] QIO_CONV_ARG_TYPE_SIGNED)(203308 call == tmp[203301] QIO_CONV_ARG_TYPE_BINARY_SIGNED)))
+        {
+          if(202584 call _cond_test(202575 call !=(202578 call . style c"precision")(202581 call - 1)))
+          {
+            { scopeless
+              (202570 call warning "Setting precision for integer format specifiers is not supported; use '%n' instead")
+            }
+          }
+          { scopeless
+            unknown tmp[202597] "temp"(202595 call _toSigned arg)
+            (202604 call _check_tuple_var_decl tmp[202597] 2)
+            unknown t[202590](202598 call tmp[202597] 0)
+            unknown ok[202592](202601 call tmp[202597] 1)
+            (202609 'end of statement')
+          }
+          if(202657 call _cond_test(202654 call ! ok))
+          {
+            (202611 call = err(202615 call qio_format_error_arg_mismatch i))
+          }
+          {
+            if(202648 call _cond_test(202642 call ==(202645 call argType i) QIO_CONV_ARG_TYPE_BINARY_SIGNED))
+            {
+              { scopeless
+                (202618 call = err(202622 call _write_signed(202624 call . style c"max_width_bytes") t i))
+              }
+            }
+            {
+              { scopeless
+                Try
+                {
+                  {
+                    (202632 call _writeOne(202634 call . _iokind c"dynamic") t origLocale)
+                  }
+                }
+              }
+            }
+          }
+        }
+        {
+          if(203324 call _cond_test(203322 call ||(203316 call == tmp[203301] QIO_CONV_ARG_TYPE_UNSIGNED)(203319 call == tmp[203301] QIO_CONV_ARG_TYPE_BINARY_UNSIGNED)))
+          {
+            if(202680 call _cond_test(202671 call !=(202674 call . style c"precision")(202677 call - 1)))
+            {
+              { scopeless
+                (202668 call warning "Setting precision for integer format specifiers is not supported; use '%n' instead")
+              }
+            }
+            { scopeless
+              unknown tmp[202693] "temp"(202691 call _toUnsigned arg)
+              (202700 call _check_tuple_var_decl tmp[202693] 2)
+              unknown t[202686](202694 call tmp[202693] 0)
+              unknown ok[202688](202697 call tmp[202693] 1)
+              (202705 'end of statement')
+            }
+            if(202753 call _cond_test(202750 call ! ok))
+            {
+              (202707 call = err(202711 call qio_format_error_arg_mismatch i))
+            }
+            {
+              if(202744 call _cond_test(202738 call ==(202741 call argType i) QIO_CONV_ARG_TYPE_BINARY_UNSIGNED))
+              {
+                { scopeless
+                  (202714 call = err(202718 call _write_unsigned(202720 call . style c"max_width_bytes") t i))
+                }
+              }
+              {
+                { scopeless
+                  Try
+                  {
+                    {
+                      (202728 call _writeOne(202730 call . _iokind c"dynamic") t origLocale)
+                    }
+                  }
+                }
+              }
+            }
+          }
+          {
+            if(203336 call _cond_test(203334 call ||(203328 call == tmp[203301] QIO_CONV_ARG_TYPE_REAL)(203331 call == tmp[203301] QIO_CONV_ARG_TYPE_BINARY_REAL)))
+            {
+              { scopeless
+                unknown tmp[202771] "temp"(202769 call _toReal arg)
+                (202778 call _check_tuple_var_decl tmp[202771] 2)
+                unknown t[202764](202772 call tmp[202771] 0)
+                unknown ok[202766](202775 call tmp[202771] 1)
+                (202783 'end of statement')
+              }
+              if(202831 call _cond_test(202828 call ! ok))
+              {
+                (202785 call = err(202789 call qio_format_error_arg_mismatch i))
+              }
+              {
+                if(202822 call _cond_test(202816 call ==(202819 call argType i) QIO_CONV_ARG_TYPE_BINARY_REAL))
+                {
+                  { scopeless
+                    (202792 call = err(202796 call _write_real(202798 call . style c"max_width_bytes") t i))
+                  }
+                }
+                {
+                  { scopeless
+                    Try
+                    {
+                      {
+                        (202806 call _writeOne(202808 call . _iokind c"dynamic") t origLocale)
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            {
+              if(203348 call _cond_test(203346 call ||(203340 call == tmp[203301] QIO_CONV_ARG_TYPE_IMAG)(203343 call == tmp[203301] QIO_CONV_ARG_TYPE_BINARY_IMAG)))
+              {
+                { scopeless
+                  unknown tmp[202849] "temp"(202847 call _toImag arg)
+                  (202856 call _check_tuple_var_decl tmp[202849] 2)
+                  unknown t[202842](202850 call tmp[202849] 0)
+                  unknown ok[202844](202853 call tmp[202849] 1)
+                  (202861 'end of statement')
+                }
+                if(202912 call _cond_test(202909 call ! ok))
+                {
+                  (202863 call = err(202867 call qio_format_error_arg_mismatch i))
+                }
+                {
+                  if(202903 call _cond_test(202897 call ==(202900 call argType i) QIO_CONV_ARG_TYPE_BINARY_IMAG))
+                  {
+                    { scopeless
+                      (202870 call = err(202874 call _write_real(202876 call . style c"max_width_bytes")(202879 call : t real[13]) i))
+                    }
+                  }
+                  {
+                    { scopeless
+                      Try
+                      {
+                        {
+                          (202887 call _writeOne(202889 call . _iokind c"dynamic") t origLocale)
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              {
+                if(203360 call _cond_test(203358 call ||(203352 call == tmp[203301] QIO_CONV_ARG_TYPE_COMPLEX)(203355 call == tmp[203301] QIO_CONV_ARG_TYPE_BINARY_COMPLEX)))
+                {
+                  { scopeless
+                    unknown tmp[202930] "temp"(202928 call _toComplex arg)
+                    (202937 call _check_tuple_var_decl tmp[202930] 2)
+                    unknown t[202923](202931 call tmp[202930] 0)
+                    unknown ok[202925](202934 call tmp[202930] 1)
+                    (202942 'end of statement')
+                  }
+                  if(202990 call _cond_test(202987 call ! ok))
+                  {
+                    (202944 call = err(202948 call qio_format_error_arg_mismatch i))
+                  }
+                  {
+                    if(202981 call _cond_test(202975 call ==(202978 call argType i) QIO_CONV_ARG_TYPE_BINARY_COMPLEX))
+                    {
+                      { scopeless
+                        (202951 call = err(202955 call _write_complex(202957 call . style c"max_width_bytes") t i))
+                      }
+                    }
+                    {
+                      { scopeless
+                        Try
+                        {
+                          {
+                            (202965 call _writeOne(202967 call . _iokind c"dynamic") t origLocale)
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                {
+                  if(203367 call _cond_test(203364 call == tmp[203301] QIO_CONV_ARG_TYPE_NUMERIC))
+                  {
+                    { scopeless
+                      unknown tmp[203007] "temp"(203005 call _toNumeric arg)
+                      (203014 call _check_tuple_var_decl tmp[203007] 2)
+                      unknown t[203000](203008 call tmp[203007] 0)
+                      unknown ok[203002](203011 call tmp[203007] 1)
+                      (203019 'end of statement')
+                    }
+                    if(203042 call _cond_test(203039 call ! ok))
+                    {
+                      (203021 call = err(203025 call qio_format_error_arg_mismatch i))
+                    }
+                    {
+                      { scopeless
+                        Try
+                        {
+                          {
+                            (203029 call _writeOne(203031 call . _iokind c"dynamic") t origLocale)
+                          }
+                        }
+                      }
+                    }
+                  }
+                  {
+                    if(203374 call _cond_test(203371 call == tmp[203301] QIO_CONV_ARG_TYPE_CHAR))
+                    {
+                      { scopeless
+                        unknown tmp[203060] "temp"(203058 call _toChar arg)
+                        (203067 call _check_tuple_var_decl tmp[203060] 2)
+                        unknown t[203053](203061 call tmp[203060] 0)
+                        unknown ok[203055](203064 call tmp[203060] 1)
+                        (203072 'end of statement')
+                      }
+                      if(203098 call _cond_test(203095 call ! ok))
+                      {
+                        (203074 call = err(203078 call qio_format_error_arg_mismatch i))
+                      }
+                      {
+                        { scopeless
+                          Try
+                          {
+                            {
+                              (203082 call _writeOne(203084 call . _iokind c"dynamic")(203087 'new'(203089 call _internalIoChar t)) origLocale)
+                            }
+                          }
+                        }
+                      }
+                    }
+                    {
+                      if(203381 call _cond_test(203378 call == tmp[203301] QIO_CONV_ARG_TYPE_BINARY_STRING))
+                      {
+                        { scopeless
+                          unknown tmp[203116] "temp"(203114 call _toBytes arg)
+                          (203123 call _check_tuple_var_decl tmp[203116] 2)
+                          unknown t[203109](203117 call tmp[203116] 0)
+                          unknown ok[203111](203120 call tmp[203116] 1)
+                          (203128 'end of statement')
+                        }
+                        if(203151 call _cond_test(203148 call ! ok))
+                        {
+                          (203130 call = err(203134 call qio_format_error_arg_mismatch i))
+                        }
+                        {
+                          { scopeless
+                            Try
+                            {
+                              {
+                                (203138 call _writeOne(203140 call . _iokind c"dynamic") t origLocale)
+                              }
+                            }
+                          }
+                        }
+                      }
+                      {
+                        if(203388 call _cond_test(203385 call == tmp[203301] QIO_CONV_ARG_TYPE_STRING))
+                        {
+                          { scopeless
+                            unknown tmp[203169] "temp"(203167 call _toString arg)
+                            (203176 call _check_tuple_var_decl tmp[203169] 2)
+                            unknown t[203162](203170 call tmp[203169] 0)
+                            unknown ok[203164](203173 call tmp[203169] 1)
+                            (203181 'end of statement')
+                          }
+                          if(203204 call _cond_test(203201 call ! ok))
+                          {
+                            (203183 call = err(203187 call qio_format_error_arg_mismatch i))
+                          }
+                          {
+                            { scopeless
+                              Try
+                              {
+                                {
+                                  (203191 call _writeOne(203193 call . _iokind c"dynamic") t origLocale)
+                                }
+                              }
+                            }
+                          }
+                        }
+                        {
+                          if(203395 call _cond_test(203392 call == tmp[203301] QIO_CONV_ARG_TYPE_REGEX))
+                          {
+                            (203214 call = err(203218 call qio_format_error_write_regex))
+                          }
+                          {
+                            if(203402 call _cond_test(203399 call == tmp[203301] QIO_CONV_ARG_TYPE_SERDE))
+                            {
+                              if(203263 call _cond_test(203259 call != serializerType nothing))
+                              {
+                                if(203235 call _cond_test(203231 call == serializerType binarySerializer))
+                                {
+                                  (203227 call warnBinary(203229 'typeof' arg) 3)
+                                }
+                                (203243 call(203240 call . this c"_serializeOne") arg origLocale)
+                              }
+                              {
+                                Try
+                                {
+                                  {
+                                    (203249 call _writeOne(203251 call . _iokind c"dynamic") arg origLocale)
+                                  }
+                                }
+                              }
+                            }
+                            {
+                              (203271 'throw'(203272 'new'(_chpl_manager = _owned[238](?))(203276 call IllegalArgumentError(203277 call +(203279 call +(203281 call + "illegal argument 'args("(203286 call : i string[244])) ")': writef internal error ")(203293 call :(203296 call argType i) string[244])))))
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  function _unknown[42].writef[203413](arg _mt[203429]:_MT[201], arg this[203416] :
+  fileWriter, arg fmtStr[203421] :
+  unknown t[203419], const arg args[203426]:_any[141](?) ...) : _unknown[42] throws "method"
+  {
+    { scopeless
+      const origLocale[203441] "const"(203446 call(203443 call . this c"getLocaleOfIoRequest"))
+      (203448 'end of statement')
+    }
+    { scopeless
+      unknown err[203450] 0 errorCode
+      (203454 'end of statement')
+    }
+    {
+      const tmp[203729] "const" "temp"
+      (203730 'move' tmp[203729](203727 'deref'(203726 '_wide_get_locale'(203456 call . this c"_home"))))
+      {
+        Try
+        {
+          {
+            (203465 call(203462 call . this c"lock"))
+          }
+        }
+        Defer
+        {
+          {
+            (203474 call(203471 call . this c"unlock"))
+          }
+        }
+        { scopeless
+          unknown save_style[203478](203484 call(203481 call . this c"_styleInternal")) iostyleInternal
+          (203486 'end of statement')
+        }
+        Defer
+        {
+          {
+            (203492 call(203489 call . this c"_set_styleInternal") save_style)
+          }
+        }
+        { scopeless
+          unknown cur[203497] 0 c_size_t
+          (203501 'end of statement')
+        }
+        { scopeless
+          unknown len[203503](203505 call :(203508 call . fmtStr c"size") c_size_t) c_size_t
+          (203513 'end of statement')
+        }
+        { scopeless
+          unknown conv[203515] qio_conv_t
+          (203518 'end of statement')
+        }
+        { scopeless
+          unknown gotConv[203520] bool
+          (203523 'end of statement')
+        }
+        { scopeless
+          unknown style[203525] iostyleInternal
+          (203528 'end of statement')
+        }
+        { scopeless
+          unknown argTypeLen[203530] "param"(203531 call + k 5)
+          (203536 'end of statement')
+        }
+        { scopeless
+          unknown argType[203538](203540 call c_array c_int argTypeLen)
+          (203544 'end of statement')
+        }
+        {
+          unknown _indexOfInterest[203564] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[203565] "expr temp" "temp"
+          (203574 'move' _iterator[203565](203572 call _getIterator(203584 call chpl_direct_range_iter 0(203578 call -(203580 call . argType c"size") 1))))
+          Defer
+          {
+            {
+              (203599 call _freeIterator _iterator[203565])
+            }
+          }
+          { scopeless type
+            (203589 'move' _indexOfInterest[203564](203586 call iteratorIndex _iterator[203565]))
+          }
+          ForLoop[203566]
+          {
+            unknown i[203545] "index var" "insert auto destroy"
+            (203594 'move' i[203545] _indexOfInterest[203564])
+            {
+              (203558 call =(203561 call argType i) QIO_CONV_UNK)
+            }
+            label _continueLabel[203569]
+            _indexOfInterest[203564]
+            _iterator[203565]
+          }
+          label _breakLabel[203570]
+        }
+        { scopeless
+          unknown j[203607] 0
+          (203610 'end of statement')
+        }
+        {
+          unknown i[203611] "index var" 0
+          unknown tmp[203642] "maybe param" "temp"
+          (203654 'move' tmp[203642](203652 call chpl_compute_low_param_loop_bound 0(203614 call - k 1)))
+          unknown tmp[203643] "maybe param" "temp"
+          (203664 'move' tmp[203643](203662 call chpl_compute_high_param_loop_bound 0(203659 call - k 1)))
+          unknown tmp[203644] "maybe param" "temp"
+          (203667 'move' tmp[203644] 1)
+          ParamForLoop[203669]
+          { i[203611] tmp[203642] tmp[203643] tmp[203644]
+            {
+              (203622 call _writefOne fmtStr(203625 call args i) i cur j(203631 call c_ptrTo(203633 call argType 0)) argTypeLen conv gotConv style err origLocale len)
+            }
+          }
+          label _unused_continueLabel[203646]
+          label _breakLabel[203645]
+        }
+        if(203722 call _cond_test(203719 call ! err))
+        {
+          if(203701 call _cond_test(203697 call < cur len))
+          {
+            { scopeless
+              unknown dummy[203681] c_int
+              (203684 'end of statement')
+            }
+            (203689 call(203686 call . this c"_format_reader") fmtStr cur len err conv gotConv style)
+          }
+          if(203715 call _cond_test(203711 call < cur len))
+          {
+            (203706 call = err(203710 call qio_format_error_too_few_args))
+          }
+        }
+      }
+      (203733 'elided on block' 0 tmp[203729])
+    }
+    if(203751 call _cond_test err)
+    {
+      { scopeless
+        Try
+        {
+          {
+            (203742 call(203739 call . this c"_ch_ioerror") err "in fileWriter.writef(fmt:string)")
+          }
+        }
+      }
+    }
+  }
+  where {
+    (203431 call ||(203434 call isStringType t)(203437 call isBytesType t))
+  }
+  function _unknown[42].writef[203759](arg _mt[203770]:_MT[201], arg this[203762] :
+  fileWriter, arg fmtStr[203767] :
+  unknown t[203765]) : _unknown[42] throws "method"
+  {
+    { scopeless
+      unknown err[203782] 0 errorCode
+      (203786 'end of statement')
+    }
+    {
+      const tmp[203930] "const" "temp"
+      (203931 'move' tmp[203930](203928 'deref'(203927 '_wide_get_locale'(203788 call . this c"_home"))))
+      {
+        Try
+        {
+          {
+            (203797 call(203794 call . this c"lock"))
+          }
+        }
+        Defer
+        {
+          {
+            (203806 call(203803 call . this c"unlock"))
+          }
+        }
+        { scopeless
+          unknown save_style[203810](203816 call(203813 call . this c"_styleInternal")) iostyleInternal
+          (203818 'end of statement')
+        }
+        Defer
+        {
+          {
+            (203824 call(203821 call . this c"_set_styleInternal") save_style)
+          }
+        }
+        { scopeless
+          unknown cur[203829] 0 c_size_t
+          (203833 'end of statement')
+        }
+        { scopeless
+          unknown len[203835](203837 call :(203840 call . fmtStr c"size") c_size_t) c_size_t
+          (203845 'end of statement')
+        }
+        { scopeless
+          unknown conv[203847] qio_conv_t
+          (203850 'end of statement')
+        }
+        { scopeless
+          unknown gotConv[203852] bool
+          (203855 'end of statement')
+        }
+        { scopeless
+          unknown style[203857] iostyleInternal
+          (203860 'end of statement')
+        }
+        { scopeless
+          unknown end[203862] c_size_t
+          (203865 'end of statement')
+        }
+        { scopeless
+          unknown dummy[203867] c_int
+          (203870 'end of statement')
+        }
+        (203872 call _format_reader fmtStr cur len err conv gotConv style)
+        if(203895 call _cond_test(203892 call ! err))
+        {
+          if(203888 call _cond_test gotConv)
+          {
+            (203882 call = err(203886 call qio_format_error_too_few_args))
+          }
+        }
+        if(203917 call _cond_test(203914 call ! err))
+        {
+          if(203910 call _cond_test(203906 call < cur len))
+          {
+            (203901 call = err(203905 call qio_format_error_too_few_args))
+          }
+        }
+        (203925 call(203922 call . this c"_set_styleInternal") save_style)
+      }
+      (203934 'elided on block' 0 tmp[203930])
+    }
+    if(203952 call _cond_test err)
+    {
+      { scopeless
+        Try
+        {
+          {
+            (203943 call(203940 call . this c"_ch_ioerror") err "in fileWriter.writef(fmt:string, ...)")
+          }
+        }
+      }
+    }
+    (203957 return 1)
+  }
+  where {
+    (203772 call ||(203775 call isStringType t)(203778 call isBytesType t))
+  }
+  function _unknown[42].readf[203962](arg _mt[203978]:_MT[201], arg this[203965] :
+  fileReader, arg fmtStr[203970] :
+  unknown t[203968], ref arg args[203975]:_any[141](?) ...) : _unknown[42] throws "method"
+  {
+    { scopeless
+      const origLocale[203991] "const"(203996 call(203993 call . this c"getLocaleOfIoRequest"))
+      (203998 'end of statement')
+    }
+    { scopeless
+      unknown err[204000] 0 errorCode
+      (204004 'end of statement')
+    }
+    {
+      const tmp[205955] "const" "temp"
+      (205956 'move' tmp[205955](205953 'deref'(205952 '_wide_get_locale'(204006 call . this c"_home"))))
+      {
+        Try
+        {
+          {
+            (204015 call(204012 call . this c"lock"))
+          }
+        }
+        Defer
+        {
+          {
+            (204024 call(204021 call . this c"unlock"))
+          }
+        }
+        { scopeless
+          unknown save_style[204028](204034 call(204031 call . this c"_styleInternal")) iostyleInternal
+          (204036 'end of statement')
+        }
+        Defer
+        {
+          {
+            (204042 call(204039 call . this c"_set_styleInternal") save_style)
+          }
+        }
+        { scopeless
+          unknown cur[204047] 0 c_size_t
+          (204051 'end of statement')
+        }
+        { scopeless
+          unknown len[204053](204055 call :(204058 call . fmtStr c"size") c_size_t) c_size_t
+          (204063 'end of statement')
+        }
+        { scopeless
+          unknown conv[204065] qio_conv_t
+          (204068 'end of statement')
+        }
+        { scopeless
+          unknown gotConv[204070] bool
+          (204073 'end of statement')
+        }
+        { scopeless
+          unknown style[204075] iostyleInternal
+          (204078 'end of statement')
+        }
+        { scopeless
+          unknown end[204080] c_size_t
+          (204083 'end of statement')
+        }
+        { scopeless
+          unknown argTypeLen[204085] "param"(204086 call + k 5)
+          (204091 'end of statement')
+        }
+        { scopeless
+          unknown argType[204093](204095 call c_array c_int argTypeLen)
+          (204099 'end of statement')
+        }
+        { scopeless
+          unknown r[204101](204102 'to unmanaged class from unknown'(204104 'to nilable class from type' _channel_regex_info))
+          (204106 'end of statement')
+        }
+        Defer
+        {
+          {
+            if(204114 call _cond_test r)
+            {
+              { scopeless
+                (204110 call chpl__delete r)
+              }
+            }
+          }
+        }
+        {
+          unknown _indexOfInterest[204140] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[204141] "expr temp" "temp"
+          (204150 'move' _iterator[204141](204148 call _getIterator(204160 call chpl_direct_range_iter 0(204154 call -(204156 call . argType c"size") 1))))
+          Defer
+          {
+            {
+              (204175 call _freeIterator _iterator[204141])
+            }
+          }
+          { scopeless type
+            (204165 'move' _indexOfInterest[204140](204162 call iteratorIndex _iterator[204141]))
+          }
+          ForLoop[204142]
+          {
+            unknown i[204121] "index var" "insert auto destroy"
+            (204170 'move' i[204121] _indexOfInterest[204140])
+            {
+              (204134 call =(204137 call argType i) QIO_CONV_UNK)
+            }
+            label _continueLabel[204145]
+            _indexOfInterest[204140]
+            _iterator[204141]
+          }
+          label _breakLabel[204146]
+        }
+        (204182 call = err(204186 call qio_channel_mark 0 _channel_internal))
+        if(205947 call _cond_test(205944 call ! err))
+        {
+          { scopeless
+            Try
+            {
+              {
+                { scopeless
+                  unknown j[204191] 0
+                  (204194 'end of statement')
+                }
+                {
+                  unknown i[204195] "index var" 0
+                  unknown tmp[205827] "maybe param" "temp"
+                  (205839 'move' tmp[205827](205837 call chpl_compute_low_param_loop_bound 0(204198 call - k 1)))
+                  unknown tmp[205828] "maybe param" "temp"
+                  (205849 'move' tmp[205828](205847 call chpl_compute_high_param_loop_bound 0(205844 call - k 1)))
+                  unknown tmp[205829] "maybe param" "temp"
+                  (205852 'move' tmp[205829] 1)
+                  ParamForLoop[205854]
+                  { i[204195] tmp[205827] tmp[205828] tmp[205829]
+                    {
+                      if(204346 call _cond_test(204342 call <= j i))
+                      {
+                        (204207 call _format_reader fmtStr cur len err conv gotConv style r)
+                        if(204338 call _cond_test(204334 call != r nil[32]))
+                        {
+                          { scopeless
+                            const rnn[204218] "const"(204219 call postfix! r)
+                            (204223 'end of statement')
+                          }
+                          if(204330 call _cond_test(204327 call . rnn c"hasRegex"))
+                          {
+                            if(204244 call _cond_test(204231 call >(204233 call -(204235 call + i(204239 call . rnn c"ncaptures")) 1) k))
+                            {
+                              (204226 call = err(204230 call qio_format_error_too_few_args))
+                            }
+                            {
+                              unknown _indexOfInterest[204284] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                              unknown _iterator[204285] "expr temp" "temp"
+                              (204294 'move' _iterator[204285](204292 call _getIterator(204304 call chpl_direct_counted_range_iter 0(204300 call . rnn c"ncaptures"))))
+                              Defer
+                              {
+                                {
+                                  (204319 call _freeIterator _iterator[204285])
+                                }
+                              }
+                              { scopeless type
+                                (204309 'move' _indexOfInterest[204284](204306 call iteratorIndex _iterator[204285]))
+                              }
+                              ForLoop[204286]
+                              {
+                                unknown z[204248] "index var" "insert auto destroy"
+                                (204314 'move' z[204248] _indexOfInterest[204284])
+                                {
+                                  if(204280 call _cond_test(204270 call <=(204272 call + i z)(204277 call . argType c"size")))
+                                  {
+                                    (204261 call =(204264 call argType(204265 call + i z)) QIO_CONV_SET_CAPTURE)
+                                  }
+                                }
+                                label _continueLabel[204289]
+                                _indexOfInterest[204284]
+                                _iterator[204285]
+                              }
+                              label _breakLabel[204290]
+                            }
+                          }
+                        }
+                      }
+                      (204351 call _conv_helper err conv gotConv j argType(argTypeLen =(204357 call + k 5)))
+                      { scopeless
+                        unknown domore[204363](204365 call _conv_sethandler err(204368 call argType i) style i(204373 call args i) 0)
+                        (204377 'end of statement')
+                      }
+                      if(205823 call _cond_test domore)
+                      {
+                        (204383 call(204380 call . this c"_set_styleInternal") style)
+                        {
+                          unknown tmp[205710] "expr temp" "maybe param" "maybe type" "temp"
+                          (205712 'move' tmp[205710](204386 call argType i))
+                          if(205722 call _cond_test(205720 call ||(205714 call == tmp[205710] QIO_CONV_ARG_TYPE_SIGNED)(205717 call == tmp[205710] QIO_CONV_ARG_TYPE_BINARY_SIGNED)))
+                          {
+                            { scopeless
+                              unknown tmp[204404] "temp"(204400 call _toSigned(204402 call args i))
+                              (204411 call _check_tuple_var_decl tmp[204404] 2)
+                              unknown t[204395](204405 call tmp[204404] 0)
+                              unknown ok[204397](204408 call tmp[204404] 1)
+                              (204416 'end of statement')
+                            }
+                            if(204488 call _cond_test(204485 call ! ok))
+                            {
+                              (204418 call = err(204422 call qio_format_error_arg_mismatch i))
+                            }
+                            {
+                              { scopeless
+                                unknown ti[204426] int[10]
+                                (204429 'end of statement')
+                              }
+                              if(204460 call _cond_test(204454 call ==(204457 call argType i) QIO_CONV_ARG_TYPE_BINARY_SIGNED))
+                              {
+                                { scopeless
+                                  (204430 call = err(204434 call _read_signed(204436 call . style c"max_width_bytes") ti i))
+                                }
+                              }
+                              {
+                                { scopeless
+                                  Try
+                                  {
+                                    {
+                                      (204444 call _readOne(204446 call . _iokind c"dynamic") ti origLocale)
+                                    }
+                                  }
+                                }
+                              }
+                              if(204480 call _cond_test(204477 call ! err))
+                              {
+                                { scopeless
+                                  (204466 call = err(204470 call _setIfPrimitive(204472 call args i) ti i))
+                                }
+                              }
+                            }
+                          }
+                          {
+                            if(205733 call _cond_test(205731 call ||(205725 call == tmp[205710] QIO_CONV_ARG_TYPE_UNSIGNED)(205728 call == tmp[205710] QIO_CONV_ARG_TYPE_BINARY_UNSIGNED)))
+                            {
+                              { scopeless
+                                unknown tmp[204508] "temp"(204504 call _toUnsigned(204506 call args i))
+                                (204515 call _check_tuple_var_decl tmp[204508] 2)
+                                unknown t[204499](204509 call tmp[204508] 0)
+                                unknown ok[204501](204512 call tmp[204508] 1)
+                                (204520 'end of statement')
+                              }
+                              if(204592 call _cond_test(204589 call ! ok))
+                              {
+                                (204522 call = err(204526 call qio_format_error_arg_mismatch i))
+                              }
+                              {
+                                { scopeless
+                                  unknown ti[204530] uint[86]
+                                  (204533 'end of statement')
+                                }
+                                if(204564 call _cond_test(204558 call ==(204561 call argType i) QIO_CONV_ARG_TYPE_BINARY_UNSIGNED))
+                                {
+                                  { scopeless
+                                    (204534 call = err(204538 call _read_unsigned(204540 call . style c"max_width_bytes") ti i))
+                                  }
+                                }
+                                {
+                                  { scopeless
+                                    Try
+                                    {
+                                      {
+                                        (204548 call _readOne(204550 call . _iokind c"dynamic") ti origLocale)
+                                      }
+                                    }
+                                  }
+                                }
+                                if(204584 call _cond_test(204581 call ! err))
+                                {
+                                  { scopeless
+                                    (204570 call = err(204574 call _setIfPrimitive(204576 call args i) ti i))
+                                  }
+                                }
+                              }
+                            }
+                            {
+                              if(205745 call _cond_test(205743 call ||(205737 call == tmp[205710] QIO_CONV_ARG_TYPE_REAL)(205740 call == tmp[205710] QIO_CONV_ARG_TYPE_BINARY_REAL)))
+                              {
+                                { scopeless
+                                  unknown tmp[204612] "temp"(204608 call _toReal(204610 call args i))
+                                  (204619 call _check_tuple_var_decl tmp[204612] 2)
+                                  unknown t[204603](204613 call tmp[204612] 0)
+                                  unknown ok[204605](204616 call tmp[204612] 1)
+                                  (204624 'end of statement')
+                                }
+                                if(204696 call _cond_test(204693 call ! ok))
+                                {
+                                  (204626 call = err(204630 call qio_format_error_arg_mismatch i))
+                                }
+                                {
+                                  { scopeless
+                                    unknown ti[204634] real[13]
+                                    (204637 'end of statement')
+                                  }
+                                  if(204668 call _cond_test(204662 call ==(204665 call argType i) QIO_CONV_ARG_TYPE_BINARY_REAL))
+                                  {
+                                    { scopeless
+                                      (204638 call = err(204642 call _read_real(204644 call . style c"max_width_bytes") ti i))
+                                    }
+                                  }
+                                  {
+                                    { scopeless
+                                      Try
+                                      {
+                                        {
+                                          (204652 call _readOne(204654 call . _iokind c"dynamic") ti origLocale)
+                                        }
+                                      }
+                                    }
+                                  }
+                                  if(204688 call _cond_test(204685 call ! err))
+                                  {
+                                    { scopeless
+                                      (204674 call = err(204678 call _setIfPrimitive(204680 call args i) ti i))
+                                    }
+                                  }
+                                }
+                              }
+                              {
+                                if(205757 call _cond_test(205755 call ||(205749 call == tmp[205710] QIO_CONV_ARG_TYPE_IMAG)(205752 call == tmp[205710] QIO_CONV_ARG_TYPE_BINARY_IMAG)))
+                                {
+                                  { scopeless
+                                    unknown tmp[204716] "temp"(204712 call _toImag(204714 call args i))
+                                    (204723 call _check_tuple_var_decl tmp[204716] 2)
+                                    unknown t[204707](204717 call tmp[204716] 0)
+                                    unknown ok[204709](204720 call tmp[204716] 1)
+                                    (204728 'end of statement')
+                                  }
+                                  if(204811 call _cond_test(204808 call ! ok))
+                                  {
+                                    (204730 call = err(204734 call qio_format_error_arg_mismatch i))
+                                  }
+                                  {
+                                    { scopeless
+                                      unknown ti[204738] imag
+                                      (204741 'end of statement')
+                                    }
+                                    if(204784 call _cond_test(204778 call ==(204781 call argType i) QIO_CONV_ARG_TYPE_BINARY_IMAG))
+                                    {
+                                      { scopeless
+                                        unknown tr[204744] real[13]
+                                        (204747 'end of statement')
+                                      }
+                                      (204748 call = err(204752 call _read_real(204754 call . style c"max_width_bytes") tr i))
+                                      (204759 call = ti(204762 call : tr imag))
+                                    }
+                                    {
+                                      { scopeless
+                                        Try
+                                        {
+                                          {
+                                            (204768 call _readOne(204770 call . _iokind c"dynamic") ti origLocale)
+                                          }
+                                        }
+                                      }
+                                    }
+                                    if(204803 call _cond_test(204800 call ! err))
+                                    {
+                                      { scopeless
+                                        (204789 call = err(204793 call _setIfPrimitive(204795 call args i) ti i))
+                                      }
+                                    }
+                                  }
+                                }
+                                {
+                                  if(205769 call _cond_test(205767 call ||(205761 call == tmp[205710] QIO_CONV_ARG_TYPE_COMPLEX)(205764 call == tmp[205710] QIO_CONV_ARG_TYPE_BINARY_COMPLEX)))
+                                  {
+                                    { scopeless
+                                      unknown tmp[204831] "temp"(204827 call _toComplex(204829 call args i))
+                                      (204838 call _check_tuple_var_decl tmp[204831] 2)
+                                      unknown t[204822](204832 call tmp[204831] 0)
+                                      unknown ok[204824](204835 call tmp[204831] 1)
+                                      (204843 'end of statement')
+                                    }
+                                    if(204915 call _cond_test(204912 call ! ok))
+                                    {
+                                      (204845 call = err(204849 call qio_format_error_arg_mismatch i))
+                                    }
+                                    {
+                                      { scopeless
+                                        unknown ti[204853] complex[111]
+                                        (204856 'end of statement')
+                                      }
+                                      if(204887 call _cond_test(204881 call ==(204884 call argType i) QIO_CONV_ARG_TYPE_BINARY_COMPLEX))
+                                      {
+                                        { scopeless
+                                          (204857 call = err(204861 call _read_complex(204863 call . style c"max_width_bytes") ti i))
+                                        }
+                                      }
+                                      {
+                                        { scopeless
+                                          Try
+                                          {
+                                            {
+                                              (204871 call _readOne(204873 call . _iokind c"dynamic") ti origLocale)
+                                            }
+                                          }
+                                        }
+                                      }
+                                      if(204907 call _cond_test(204904 call ! err))
+                                      {
+                                        { scopeless
+                                          (204893 call = err(204897 call _setIfPrimitive(204899 call args i) ti i))
+                                        }
+                                      }
+                                    }
+                                  }
+                                  {
+                                    if(205776 call _cond_test(205773 call == tmp[205710] QIO_CONV_ARG_TYPE_NUMERIC))
+                                    {
+                                      { scopeless
+                                        unknown tmp[204934] "temp"(204930 call _toNumeric(204932 call args i))
+                                        (204941 call _check_tuple_var_decl tmp[204934] 2)
+                                        unknown t[204925](204935 call tmp[204934] 0)
+                                        unknown ok[204927](204938 call tmp[204934] 1)
+                                        (204946 'end of statement')
+                                      }
+                                      if(204994 call _cond_test(204991 call ! ok))
+                                      {
+                                        (204948 call = err(204952 call qio_format_error_arg_mismatch i))
+                                      }
+                                      {
+                                        { scopeless
+                                          unknown ti[204956] t
+                                          (204959 'end of statement')
+                                        }
+                                        Try
+                                        {
+                                          {
+                                            (204962 call _readOne(204964 call . _iokind c"dynamic") ti origLocale)
+                                          }
+                                        }
+                                        if(204986 call _cond_test(204983 call ! err))
+                                        {
+                                          { scopeless
+                                            (204972 call = err(204976 call _setIfPrimitive(204978 call args i) ti i))
+                                          }
+                                        }
+                                      }
+                                    }
+                                    {
+                                      if(205783 call _cond_test(205780 call == tmp[205710] QIO_CONV_ARG_TYPE_CHAR))
+                                      {
+                                        { scopeless
+                                          unknown tmp[205013] "temp"(205009 call _toChar(205011 call args i))
+                                          (205020 call _check_tuple_var_decl tmp[205013] 2)
+                                          unknown t[205004](205014 call tmp[205013] 0)
+                                          unknown ok[205006](205017 call tmp[205013] 1)
+                                          (205025 'end of statement')
+                                        }
+                                        { scopeless
+                                          unknown chr[205027](205028 'new'(205030 call _internalIoChar t))
+                                          (205033 'end of statement')
+                                        }
+                                        if(205056 call _cond_test(205053 call ! ok))
+                                        {
+                                          (205035 call = err(205039 call qio_format_error_arg_mismatch i))
+                                        }
+                                        {
+                                          { scopeless
+                                            Try
+                                            {
+                                              {
+                                                (205043 call _readOne(205045 call . _iokind c"dynamic") chr origLocale)
+                                              }
+                                            }
+                                          }
+                                        }
+                                        if(205074 call _cond_test(205071 call ! err))
+                                        {
+                                          { scopeless
+                                            (205062 call _setIfChar(205064 call args i)(205067 call . chr c"ch"))
+                                          }
+                                        }
+                                      }
+                                      {
+                                        if(205790 call _cond_test(205787 call == tmp[205710] QIO_CONV_ARG_TYPE_BINARY_STRING))
+                                        {
+                                          { scopeless
+                                            unknown tmp[205094] "temp"(205090 call _toBytes(205092 call args i))
+                                            (205101 call _check_tuple_var_decl tmp[205094] 2)
+                                            unknown t[205085](205095 call tmp[205094] 0)
+                                            unknown ok[205087](205098 call tmp[205094] 1)
+                                            (205106 'end of statement')
+                                          }
+                                          if(205129 call _cond_test(205126 call ! ok))
+                                          {
+                                            (205108 call = err(205112 call qio_format_error_arg_mismatch i))
+                                          }
+                                          {
+                                            { scopeless
+                                              Try
+                                              {
+                                                {
+                                                  (205116 call _readOne(205118 call . _iokind c"dynamic") t origLocale)
+                                                }
+                                              }
+                                            }
+                                          }
+                                          if(205148 call _cond_test(205145 call ! err))
+                                          {
+                                            { scopeless
+                                              (205134 call = err(205138 call _setIfPrimitive(205140 call args i) t i))
+                                            }
+                                          }
+                                        }
+                                        {
+                                          if(205797 call _cond_test(205794 call == tmp[205710] QIO_CONV_ARG_TYPE_STRING))
+                                          {
+                                            { scopeless
+                                              unknown tmp[205168] "temp"(205164 call _toString(205166 call args i))
+                                              (205175 call _check_tuple_var_decl tmp[205168] 2)
+                                              unknown t[205159](205169 call tmp[205168] 0)
+                                              unknown ok[205161](205172 call tmp[205168] 1)
+                                              (205180 'end of statement')
+                                            }
+                                            if(205203 call _cond_test(205200 call ! ok))
+                                            {
+                                              (205182 call = err(205186 call qio_format_error_arg_mismatch i))
+                                            }
+                                            {
+                                              { scopeless
+                                                Try
+                                                {
+                                                  {
+                                                    (205190 call _readOne(205192 call . _iokind c"dynamic") t origLocale)
+                                                  }
+                                                }
+                                              }
+                                            }
+                                            if(205222 call _cond_test(205219 call ! err))
+                                            {
+                                              { scopeless
+                                                (205208 call = err(205212 call _setIfPrimitive(205214 call args i) t i))
+                                              }
+                                            }
+                                          }
+                                          {
+                                            if(205804 call _cond_test(205801 call == tmp[205710] QIO_CONV_ARG_TYPE_REGEX))
+                                            {
+                                              { scopeless
+                                                unknown tmp[205242] "temp"(205238 call _toRegex(205240 call args i))
+                                                (205249 call _check_tuple_var_decl tmp[205242] 2)
+                                                unknown t[205233](205243 call tmp[205242] 0)
+                                                unknown ok[205235](205246 call tmp[205242] 1)
+                                                (205254 'end of statement')
+                                              }
+                                              if(205431 call _cond_test(205428 call ! ok))
+                                              {
+                                                (205256 call = err(205260 call qio_format_error_arg_mismatch i))
+                                              }
+                                              {
+                                                if(205276 call _cond_test(205272 call == r nil[32]))
+                                                {
+                                                  { scopeless
+                                                    (205263 call = r(205266 'new'(_chpl_manager = unmanaged[183](?))(205270 call _channel_regex_info)))
+                                                  }
+                                                }
+                                                { scopeless
+                                                  const rnn[205282] "const"(205283 call postfix! r)
+                                                  (205287 'end of statement')
+                                                }
+                                                (205292 call(205289 call . rnn c"clear"))
+                                                (205293 call =(205296 call . rnn c"theRegex")(205300 call . t c"_regex"))
+                                                (205303 call =(205306 call . rnn c"hasRegex") 1)
+                                                (205310 call =(205313 call . rnn c"releaseRegex") 0)
+                                                (205318 call _match_regex_if_needed cur len err style rnn)
+                                                if(205343 call _cond_test(205330 call >(205332 call -(205334 call + i(205338 call . rnn c"ncaptures")) 1) k))
+                                                {
+                                                  (205325 call = err(205329 call qio_format_error_too_few_args))
+                                                }
+                                                {
+                                                  unknown _indexOfInterest[205386] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                                                  unknown _iterator[205387] "expr temp" "temp"
+                                                  (205396 'move' _iterator[205387](205394 call _getIterator(205406 call chpl_direct_counted_range_iter 0(205402 call . rnn c"ncaptures"))))
+                                                  Defer
+                                                  {
+                                                    {
+                                                      (205421 call _freeIterator _iterator[205387])
+                                                    }
+                                                  }
+                                                  { scopeless type
+                                                    (205411 'move' _indexOfInterest[205386](205408 call iteratorIndex _iterator[205387]))
+                                                  }
+                                                  ForLoop[205388]
+                                                  {
+                                                    unknown z[205347] "index var" "insert auto destroy"
+                                                    (205416 'move' z[205347] _indexOfInterest[205386])
+                                                    {
+                                                      if(205382 call _cond_test(205372 call <=(205374 call + i z)(205379 call . argType c"size")))
+                                                      {
+                                                        (205360 call =(205363 call argType(205364 call +(205366 call + i z) 1)) QIO_CONV_SET_CAPTURE)
+                                                      }
+                                                    }
+                                                    label _continueLabel[205391]
+                                                    _indexOfInterest[205386]
+                                                    _iterator[205387]
+                                                  }
+                                                  label _breakLabel[205392]
+                                                }
+                                              }
+                                            }
+                                            {
+                                              if(205811 call _cond_test(205808 call == tmp[205710] QIO_CONV_ARG_TYPE_SERDE))
+                                              {
+                                                if(205487 call _cond_test(205483 call != deserializerType nothing))
+                                                {
+                                                  if(205453 call _cond_test(205449 call == deserializerType binaryDeserializer))
+                                                  {
+                                                    (205443 call warnBinaryRead(205447 'typeof'(205445 call args i)) 4)
+                                                  }
+                                                  (205463 call(205460 call . this c"_deserializeOne")(205465 call args i) origLocale)
+                                                }
+                                                {
+                                                  Try
+                                                  {
+                                                    {
+                                                      (205471 call _readOne(205473 call . _iokind c"dynamic")(205477 call args i) origLocale)
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                              {
+                                                if(205818 call _cond_test(205815 call == tmp[205710] QIO_CONV_SET_CAPTURE))
+                                                {
+                                                  if(205674 call _cond_test(205670 call == r nil[32]))
+                                                  {
+                                                    (205497 call = err(205501 call qio_format_error_bad_regex))
+                                                  }
+                                                  {
+                                                    { scopeless
+                                                      const rnn[205504] "const"(205505 call postfix! r)
+                                                      (205509 'end of statement')
+                                                    }
+                                                    (205511 call _match_regex_if_needed cur len err style rnn)
+                                                    if(205666 call _cond_test(205656 call >=(205659 call . rnn c"capturei")(205663 call . rnn c"ncaptures")))
+                                                    {
+                                                      (205518 call = err(205522 call qio_format_error_bad_regex))
+                                                    }
+                                                    {
+                                                      if(205645 call _cond_test(205640 call _isIoPrimitiveType(205644 'typeof'(205642 call args i))))
+                                                      {
+                                                        Try
+                                                        {
+                                                          {
+                                                            if(205612 call _cond_test(205605 call ==(205610 'typeof'(205608 call args i)) string[244]))
+                                                            {
+                                                              { scopeless
+                                                                (205526 call =(205529 call args i)(205545 call(205542 call .(205535 call(205532 call . rnn c"capArr")(205539 call . rnn c"capturei")) c"decode")))
+                                                              }
+                                                            }
+                                                            {
+                                                              { scopeless
+                                                                if(205599 call _cond_test(205594 call isEnumType(205598 'typeof'(205596 call args i))))
+                                                                {
+                                                                  { scopeless
+                                                                    (205547 call =(205550 call args i)(205552 call :(205566 call(205563 call .(205558 call(205555 call . rnn c"capArr")(205560 call . rnn c"capturei")) c"decode"))(205570 'typeof'(205568 call args i))))
+                                                                  }
+                                                                }
+                                                                {
+                                                                  { scopeless
+                                                                    (205572 call =(205575 call args i)(205577 call :(205583 call(205580 call . rnn c"capArr")(205585 call . rnn c"capturei"))(205591 'typeof'(205589 call args i))))
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                        Catch e : DecodeError
+                                                        {
+                                                          unknown e[205628]
+                                                          (205621 call = err(205625 call qio_format_error_arg_mismatch i))
+                                                        }
+                                                        Catch
+                                                        {
+                                                          (205631 call = err(205635 call qio_format_error_bad_regex))
+                                                        }
+                                                      }
+                                                      (205649 call +=(205652 call . rnn c"capturei") 1)
+                                                    }
+                                                  }
+                                                }
+                                                {
+                                                  (205682 'throw'(205683 'new'(_chpl_manager = _owned[238](?))(205687 call IllegalArgumentError(205688 call +(205690 call +(205692 call + "illegal argument 'args("(205695 call : i string[244])) ")': readf internal error ")(205702 call :(205705 call argType i) string[244])))))
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  label _unused_continueLabel[205831]
+                  label _breakLabel[205830]
+                }
+                if(205891 call _cond_test(205888 call ! err))
+                {
+                  if(205884 call _cond_test(205880 call < cur len))
+                  {
+                    { scopeless
+                      unknown dummy[205866] c_int
+                      (205869 'end of statement')
+                    }
+                    (205871 call _format_reader fmtStr cur len err conv gotConv style r)
+                  }
+                }
+                if(205913 call _cond_test(205910 call ! err))
+                {
+                  if(205906 call _cond_test(205902 call < cur len))
+                  {
+                    (205897 call = err(205901 call qio_format_error_too_few_args))
+                  }
+                }
+                if(205928 call _cond_test(205925 call ! err))
+                {
+                  (205919 call qio_channel_commit_unlocked _channel_internal)
+                }
+                {
+                  (205923 call qio_channel_revert_unlocked _channel_internal)
+                }
+              }
+            }
+            Catch thrownError : EofError
+            {
+              unknown thrownError[205940]
+              (205935 call = err EEOF)
+            }
+          }
+        }
+      }
+      (205959 'elided on block' 0 tmp[205955])
+    }
+    if(205994 call _cond_test(205991 call ! err))
+    {
+      (205964 return 1)
+    }
+    {
+      { scopeless
+        if(205987 call _cond_test(205983 call == err EEOF))
+        {
+          (205967 return 0)
+        }
+        {
+          Try
+          {
+            {
+              (205975 call(205972 call . this c"_ch_ioerror") err "in fileReader.readf(fmt:string, ...)")
+            }
+          }
+        }
+      }
+    }
+    (205999 return 0)
+  }
+  where {
+    (203981 call ||(203984 call isStringType t)(203987 call isBytesType t))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42].readf[206005](arg _mt[206016]:_MT[201], arg this[206008] :
+  fileReader, arg fmtStr[206013] :
+  unknown t[206011]) : _unknown[42] throws "method"
+  {
+    { scopeless
+      unknown err[206028] 0 errorCode
+      (206032 'end of statement')
+    }
+    {
+      const tmp[206214] "const" "temp"
+      (206215 'move' tmp[206214](206212 'deref'(206211 '_wide_get_locale'(206034 call . this c"_home"))))
+      {
+        Try
+        {
+          {
+            (206043 call(206040 call . this c"lock"))
+          }
+        }
+        Defer
+        {
+          {
+            (206052 call(206049 call . this c"unlock"))
+          }
+        }
+        { scopeless
+          unknown save_style[206056](206062 call(206059 call . this c"_styleInternal")) iostyleInternal
+          (206064 'end of statement')
+        }
+        Defer
+        {
+          {
+            (206070 call(206067 call . this c"_set_styleInternal") save_style)
+          }
+        }
+        { scopeless
+          unknown cur[206075] 0 c_size_t
+          (206079 'end of statement')
+        }
+        { scopeless
+          unknown len[206081](206083 call :(206086 call . fmtStr c"size") c_size_t) c_size_t
+          (206091 'end of statement')
+        }
+        { scopeless
+          unknown conv[206093] qio_conv_t
+          (206096 'end of statement')
+        }
+        { scopeless
+          unknown gotConv[206098] bool
+          (206101 'end of statement')
+        }
+        { scopeless
+          unknown style[206103] iostyleInternal
+          (206106 'end of statement')
+        }
+        { scopeless
+          unknown end[206108] c_size_t
+          (206111 'end of statement')
+        }
+        { scopeless
+          unknown dummy[206113] c_int
+          (206116 'end of statement')
+        }
+        { scopeless
+          unknown r[206118](206119 'to unmanaged class from unknown'(206121 'to nilable class from type' _channel_regex_info))
+          (206123 'end of statement')
+        }
+        Defer
+        {
+          {
+            if(206131 call _cond_test r)
+            {
+              { scopeless
+                (206127 call chpl__delete r)
+              }
+            }
+          }
+        }
+        (206138 call = err(206142 call qio_channel_mark 0 _channel_internal))
+        if(206170 call _cond_test(206167 call ! err))
+        {
+          (206147 call _format_reader fmtStr cur len err conv gotConv style r)
+          if(206163 call _cond_test gotConv)
+          {
+            (206157 call = err(206161 call qio_format_error_too_few_args))
+          }
+        }
+        if(206192 call _cond_test(206189 call ! err))
+        {
+          if(206185 call _cond_test(206181 call < cur len))
+          {
+            (206176 call = err(206180 call qio_format_error_too_few_args))
+          }
+        }
+        if(206207 call _cond_test(206204 call ! err))
+        {
+          (206198 call qio_channel_commit_unlocked _channel_internal)
+        }
+        {
+          (206202 call qio_channel_revert_unlocked _channel_internal)
+        }
+      }
+      (206218 'elided on block' 0 tmp[206214])
+    }
+    if(206255 call _cond_test(206252 call ! err))
+    {
+      (206223 return 1)
+    }
+    {
+      { scopeless
+        if(206248 call _cond_test(206244 call == err EEOF))
+        {
+          (206226 return 0)
+        }
+        {
+          Try
+          {
+            {
+              (206234 call(206231 call . this c"_ch_ioerror") err "in fileReader.readf(fmt:string)")
+            }
+          }
+          (206242 return 0)
+        }
+      }
+    }
+  }
+  where {
+    (206018 call ||(206021 call isStringType t)(206024 call isBytesType t))
+  }
+  function readf[206263](arg fmt[206266] :
+  string[244], ref arg args[206271]:_any[141](?) ...) : _unknown[42] throws
+  {
+    (206276 return(206287 'try-expr'(206283 call(206280 call . stdin c"readf") fmt(206286 'expand_tuple' args))))
+  }
+  { scopeless type
+    bool
+  }
+  function readf[206291](arg fmt[206294] :
+  string[244]) : _unknown[42] throws
+  {
+    (206299 return(206306 'try-expr'(206304 call(206301 call . stdin c"readf") fmt)))
+  }
+  { scopeless type
+    bool
+  }
+  function _unknown[42]._skipField[206310](arg _mt[206316]:_MT[201], arg this[206313] :
+  fileReader) : _unknown[42] throws "method"
+  {
+    { scopeless
+      unknown err[206320] 0 errorCode
+      (206324 'end of statement')
+    }
+    {
+      const tmp[206381] "const" "temp"
+      (206382 'move' tmp[206381](206379 'deref'(206378 '_wide_get_locale'(206326 call . this c"_home"))))
+      {
+        Try
+        {
+          {
+            (206335 call(206332 call . this c"lock"))
+          }
+        }
+        Defer
+        {
+          {
+            (206344 call(206341 call . this c"unlock"))
+          }
+        }
+        { scopeless
+          unknown st[206348](206353 call(206350 call . this c"styleElement") QIO_STYLE_ELEMENT_AGGREGATE)
+          (206356 'end of statement')
+        }
+        if(206374 call _cond_test(206370 call == st QIO_AGGREGATE_FORMAT_JSON))
+        {
+          (206358 call = err(206362 call qio_channel_skip_json_field 0 _channel_internal))
+        }
+        {
+          (206366 call = err ENOTSUP)
+        }
+      }
+      (206385 'elided on block' 0 tmp[206381])
+    }
+    if(206403 call _cond_test err)
+    {
+      { scopeless
+        Try
+        {
+          {
+            (206394 call(206391 call . this c"_ch_ioerror") err "in skipField")
+          }
+        }
+      }
+    }
+  }
+  function _unknown[42].format[206410](arg _mt[206421]:_MT[201], arg this[206413] :
+  string[244], arg args[206418]:_any[141](?) ...) : _unknown[42] throws "method"
+  {
+    Try
+    {
+      {
+        (206426 return(206428 call chpl_do_format this(206431 'expand_tuple' args)))
+      }
+    }
+    Catch e : IllegalArgumentError
+    {
+      unknown e[206438]
+      (206435 'throw' e)
+    }
+    Catch e : EofError
+    {
+      unknown e[206445]
+      (206442 'throw' e)
+    }
+    Catch e : UnexpectedEofError
+    {
+      unknown e[206452]
+      (206449 'throw' e)
+    }
+    Catch e : BadFormatError
+    {
+      unknown e[206459]
+      (206456 'throw' e)
+    }
+    Catch e : SystemError
+    {
+      unknown e[206477]
+      Try
+      {
+        {
+          (206465 call ioerror(206467 call . e c"err") "in string.format")
+        }
+      }
+    }
+    Catch e : DecodeError
+    {
+      unknown e[206493]
+      Try
+      {
+        {
+          (206483 call ioerror(206484 call : EILSEQ errorCode) "in string.format")
+        }
+      }
+    }
+    Catch
+    {
+      Try
+      {
+        {
+          (206498 call ioerror(206499 call : EINVAL errorCode) "in string.format")
+        }
+      }
+    }
+    (206510 return "")
+  }
+  { scopeless type
+    string[244]
+  }
+  function _unknown[42].format[206515](arg _mt[206526]:_MT[201], arg this[206518] :
+  bytes[232], arg args[206523]:_any[141](?) ...) : _unknown[42] throws "method"
+  {
+    Try
+    {
+      {
+        (206531 return(206533 call chpl_do_format this(206536 'expand_tuple' args)))
+      }
+    }
+    Catch e : EofError
+    {
+      unknown e[206543]
+      (206540 'throw' e)
+    }
+    Catch e : UnexpectedEofError
+    {
+      unknown e[206550]
+      (206547 'throw' e)
+    }
+    Catch e : BadFormatError
+    {
+      unknown e[206557]
+      (206554 'throw' e)
+    }
+    Catch e : SystemError
+    {
+      unknown e[206575]
+      Try
+      {
+        {
+          (206563 call ioerror(206565 call . e c"err") "in bytes.format")
+        }
+      }
+    }
+    Catch
+    {
+      Try
+      {
+        {
+          (206580 call ioerror(206581 call : EINVAL errorCode) "in bytes.format")
+        }
+      }
+    }
+    (206592 return b"")
+  }
+  { scopeless type
+    bytes[232]
+  }
+  function chpl_do_format[206597](arg fmt[206601] :
+  unknown t[206599], arg args[206606]:_any[141](?) ...) : _unknown[42] throws "private"
+  {
+    { scopeless
+      unknown f[206620](206623 'try-expr'(206622 call openMemFile))
+      (206625 'end of statement')
+    }
+    Defer
+    {
+      {
+        Try
+        {
+          {
+            (206632 call(206629 call . f c"close"))
+          }
+        }
+        Catch
+        {
+        }
+      }
+    }
+    { scopeless
+      unknown offset[206641] 0 int[10]
+      (206645 'end of statement')
+    }
+    {
+      { scopeless
+        unknown w[206648](206656 'try-expr'(206653 call(206650 call . f c"writer")(locking = 0)))
+        (206658 'end of statement')
+      }
+      Defer
+      {
+        {
+          Try
+          {
+            {
+              (206665 call(206662 call . w c"close"))
+            }
+          }
+          Catch
+          {
+          }
+        }
+      }
+      Try
+      {
+        {
+          (206678 call(206675 call . w c"writef") fmt(206681 'expand_tuple' args))
+        }
+      }
+      Try!
+      {
+        {
+          (206690 call(206687 call . w c"lock"))
+        }
+      }
+      (206694 call = offset(206701 call(206698 call . w c"offset")))
+      (206706 call(206703 call . w c"unlock"))
+      Try
+      {
+        {
+          (206712 call(206709 call . w c"close"))
+        }
+      }
+    }
+    { scopeless
+      unknown buf[206717](206719 call allocate(206721 call uint[86] 8)(206730 call(206727 call .(206723 call + offset 1) c"safeCast") c_size_t))
+      (206733 'end of statement')
+    }
+    { scopeless
+      unknown r[206735](206743 'try-expr'(206740 call(206737 call . f c"reader")(locking = 0)))
+      (206745 'end of statement')
+    }
+    Defer
+    {
+      {
+        Try
+        {
+          {
+            (206752 call(206749 call . r c"close"))
+          }
+        }
+        Catch
+        {
+        }
+      }
+    }
+    Try
+    {
+      {
+        (206765 call(206762 call . r c"readBinary") buf offset)
+      }
+    }
+    Try
+    {
+      {
+        (206776 call(206773 call . r c"close"))
+      }
+    }
+    Try
+    {
+      {
+        (206785 call(206782 call . f c"close"))
+      }
+    }
+    (206789 call =(206792 call buf offset) 0)
+    (206795 return(206800 call(206797 call . t c"createAdoptingBuffer") buf offset(206803 call + offset 1)))
+  }
+  where {
+    (206610 call ||(206613 call isStringType t)(206616 call isBytesType t))
+  }
+  { scopeless type
+    t
+  }
+  (206812 'use' Regex)
+  function qio_regex_channel_match[206814](const  ref arg re[206817] :
+  qio_regex_t, arg threadsafe[206821] :
+  c_int, arg ch[206825] :
+  qio_channel_ptr_t, arg maxlen[206831] :
+  (206829 call int[10] 64), arg anchor[206835] :
+  c_int, arg can_discard[206839] :
+  bool, arg keep_unmatched[206843] :
+  bool, arg keep_whole_pattern[206847] :
+  bool, arg submatch[206853] :
+  (206851 call _ddata qio_regex_string_piece_t), arg nsubmatch[206859] :
+  (206857 call int[10] 64)) : _unknown[42] "extern" "local args" "no fn body" "private"
+  {
+  }
+  { scopeless type
+    errorCode
+  }
+  function _unknown[42]._extractMatch[206866](arg _mt[206884]:_MT[201], arg this[206869] :
+  fileReader, arg m[206873] :
+  regexMatch, ref arg arg[206877] :
+  regexMatch, ref arg error[206881] :
+  errorCode) : _unknown[42] "method"
+  {
+    (206887 call = arg m)
+  }
+  function _unknown[42]._extractMatch[206893](arg _mt[206911]:_MT[201], arg this[206896] :
+  fileReader, arg m[206900] :
+  regexMatch, ref arg arg[206904] :
+  bytes[232], ref arg error[206908] :
+  errorCode) : _unknown[42] "method"
+  {
+    { scopeless
+      unknown cur[206915](206917 call int[10] 64)
+      (206920 'end of statement')
+    }
+    { scopeless
+      unknown target[206922](206923 call :(206926 call . m c"byteOffset") int[10])
+      (206931 'end of statement')
+    }
+    { scopeless
+      unknown len[206933](206935 call . m c"numBytes")
+      (206939 'end of statement')
+    }
+    { scopeless
+      const oldPosition[206941] "const"(206943 call qio_channel_offset_unlocked _channel_internal)
+      (206946 'end of statement')
+    }
+    if(206958 call _cond_test(206952 call !(206955 call . m c"matched")))
+    {
+      (206948 call = arg b"")
+    }
+    if(206982 call _cond_test(206979 call ! error))
+    {
+      (206964 call qio_channel_revert_unlocked _channel_internal)
+      (206966 call = error(206970 call qio_channel_mark 0 _channel_internal))
+      (206973 call = cur(206977 call qio_channel_offset_unlocked _channel_internal))
+    }
+    if(207001 call _cond_test(206998 call ! error))
+    {
+      (206987 call = error(206991 call qio_channel_advance 0 _channel_internal(206994 call - target cur)))
+    }
+    { scopeless
+      unknown s[207006] bytes[232]
+      (207009 'end of statement')
+    }
+    if(207065 call _cond_test(207062 call ! error))
+    {
+      { scopeless
+        unknown gotlen[207012](207014 call int[10] 64)
+        (207017 'end of statement')
+      }
+      { scopeless
+        unknown ts[207019](207021 call c_ptrConst c_char)
+        (207024 'end of statement')
+      }
+      (207025 call = error(207029 call qio_channel_read_string 0(207031 call :(207034 call . _iokind c"native") c_int)(207038 call : len(207042 call int[10] 64)) _channel_internal ts gotlen(207047 call : len c_ssize_t)))
+      (207051 call = s(207058 call(207055 call . bytes[232] c"createAdoptingBuffer") ts(length = gotlen)))
+    }
+    if(207082 call _cond_test(207079 call ! error))
+    {
+      (207070 call = arg s)
+    }
+    {
+      (207075 call = arg b"")
+    }
+    (207086 call = cur(207090 call qio_channel_offset_unlocked _channel_internal))
+    if(207105 call _cond_test(207101 call > oldPosition cur))
+    {
+      { scopeless
+        (207093 call qio_channel_advance 0 _channel_internal(207096 call - oldPosition cur))
+      }
+    }
+  }
+  function _unknown[42]._extractMatch[207112](arg _mt[207131]:_MT[201], arg this[207115] :
+  fileReader, arg m[207119] :
+  regexMatch, ref arg arg[207124] :
+  unknown t[207122], ref arg error[207128] :
+  errorCode) : _unknown[42] "method"
+  {
+    if(207161 call _cond_test(207155 call !(207158 call . m c"matched")))
+    {
+      { scopeless
+        unknown empty[207146](207148 'typeof' arg)
+        (207150 'end of statement')
+      }
+      (207151 call = arg empty)
+    }
+    { scopeless
+      unknown s[207166] bytes[232]
+      (207169 'end of statement')
+    }
+    (207171 call _extractMatch m s error)
+    if(207227 call _cond_test(207224 call ! error))
+    {
+      if(207209 call _cond_test(207204 call ==(207207 'typeof' arg) string[244]))
+      {
+        Try
+        {
+          {
+            (207178 call = arg(207185 call(207182 call . s c"decode")))
+          }
+        }
+        Catch
+        {
+          (207188 call = error EFORMAT)
+        }
+      }
+      {
+        (207196 call = arg(207199 call : s(207203 'typeof' arg)))
+      }
+    }
+    {
+      { scopeless
+        unknown empty[207215](207217 'typeof' arg)
+        (207219 'end of statement')
+      }
+      (207220 call = arg empty)
+    }
+  }
+  where {
+    (207133 call &&(207135 call != t regexMatch)(207139 call != t bytes[232]))
+  }
+  function _unknown[42].extractMatch[207234](arg _mt[207246]:_MT[201], arg this[207237] :
+  fileReader, arg m[207241] :
+  regexMatch, ref arg arg[207244]:_any[141](?)) : _unknown[42] throws "method"
+  {
+    { scopeless
+      unknown err[207250] 0 errorCode
+      (207254 'end of statement')
+    }
+    {
+      const tmp[207285] "const" "temp"
+      (207286 'move' tmp[207285](207283 'deref'(207282 '_wide_get_locale'(207256 call . this c"_home"))))
+      {
+        Try
+        {
+          {
+            (207265 call(207262 call . this c"lock"))
+          }
+        }
+        Defer
+        {
+          {
+            (207274 call(207271 call . this c"unlock"))
+          }
+        }
+        (207278 call _extractMatch m arg err)
+      }
+      (207289 'elided on block' 0 tmp[207285])
+    }
+    if(207318 call _cond_test err)
+    {
+      Try
+      {
+        {
+          (207299 call(207296 call . this c"_ch_ioerror") err(207301 call +(207303 call + "in fileReader.extractMatch(m:regexMatch, ref "(207308 call :(207311 'typeof' arg) string[244])) ")"))
+        }
+      }
+    }
+  }
+  function _unknown[42]._ch_handle_captures[207324](arg _mt[207346]:_MT[201], arg this[207327] :
+  fileReader, arg matches[207333] :
+  (207331 call _ddata qio_regex_string_piece_t), arg nmatches[207337] :
+  int[10], ref arg captures[207340]:_any[141](?), ref arg error[207343] :
+  errorCode) : _unknown[42] "method"
+  {
+    (207350 call assert(207351 call >= nmatches(207355 call . captures c"size")))
+    {
+      unknown i[207358] "index var" 0
+      unknown tmp[207387] "maybe param" "temp"
+      (207399 'move' tmp[207387](207397 call chpl_compute_low_param_loop_bound 0(207361 call -(207364 call . captures c"size") 1)))
+      unknown tmp[207388] "maybe param" "temp"
+      (207412 'move' tmp[207388](207410 call chpl_compute_high_param_loop_bound 0(207404 call -(207406 call . captures c"size") 1)))
+      unknown tmp[207389] "maybe param" "temp"
+      (207415 'move' tmp[207389] 1)
+      ParamForLoop[207417]
+      { i[207358] tmp[207387] tmp[207388] tmp[207389]
+        {
+          { scopeless
+            unknown m[207372](207374 call _to_regexMatch(207376 call matches i))
+            (207379 'end of statement')
+          }
+          (207381 call _extractMatch m(207384 call captures i) error)
+        }
+      }
+      label _unused_continueLabel[207391]
+      label _breakLabel[207390]
+    }
+  }
+  function advanceToEof[207428](arg fr[207431] :
+  fileReader) : _unknown[42] "private"
+  {
+    { scopeless
+      unknown error[207437] 0 errorCode
+      (207441 'end of statement')
+    }
+    (207442 call = error(207446 call qio_channel_advance 0(207449 call . fr c"_channel_internal")(207453 call max(207455 call int[10] 64))))
+    if(207466 call _cond_test(207462 call == error EEOF))
+    {
+      { scopeless
+        (207457 call = error 0)
+      }
+    }
+    (207471 return error)
+  }
+  { scopeless type
+    errorCode
+  }
+  function _searchHelp[207476](ref arg fr[207479] :
+  fileReader, arg re[207485] :
+  (207483 call regex ?[227]), ref arg error[207489] :
+  errorCode, param arg numMatches[207492]:_any[141](?), param arg doCapture[207495] :
+  bool, ref arg captures[207498]:_any[141](?)) : _unknown[42] "inline" "private"
+  {
+    { scopeless
+      unknown m[207503] regexMatch
+      (207506 'end of statement')
+    }
+    {
+      const tmp[207708] "const" "temp"
+      (207709 'move' tmp[207708](207706 'deref'(207705 '_wide_get_locale'(207508 call . fr c"_home"))))
+      {
+        Try!
+        {
+          {
+            (207517 call(207514 call . fr c"lock"))
+          }
+        }
+        Defer
+        {
+          {
+            (207526 call(207523 call . fr c"unlock"))
+          }
+        }
+        { scopeless
+          unknown nm[207530] "param" numMatches
+          (207533 'end of statement')
+        }
+        { scopeless
+          unknown matches[207535](207537 call _ddata_allocate qio_regex_string_piece_t nm)
+          (207541 'end of statement')
+        }
+        (207542 call = error(207546 call qio_channel_mark 0(207549 call . fr c"_channel_internal")))
+        if(207581 call _cond_test(207578 call ! error))
+        {
+          (207553 call = error(207557 call qio_regex_channel_match(207559 call . re c"_regex") 0(207564 call . fr c"_channel_internal")(207568 call max(207570 call int[10] 64)) QIO_REGEX_ANCHOR_UNANCHORED 1 0 1 matches nm))
+        }
+        if(207600 call _cond_test(207590 call ||(207592 call == error EFORMAT)(207596 call == error EEOF)))
+        {
+          { scopeless
+            (207585 call = error 0)
+          }
+        }
+        if(207697 call _cond_test(207694 call ! error))
+        {
+          (207606 call = m(207610 call _to_regexMatch(207612 call matches 0)))
+          if(207690 call _cond_test(207687 call . m c"matched"))
+          {
+            if(207628 call _cond_test doCapture)
+            {
+              (207622 call(207619 call . fr c"_ch_handle_captures") matches nm captures error)
+            }
+            (207633 call qio_channel_revert_unlocked(207635 call . fr c"_channel_internal"))
+            { scopeless
+              unknown cur[207639](207641 call qio_channel_offset_unlocked(207643 call . fr c"_channel_internal"))
+              (207647 'end of statement')
+            }
+            { scopeless
+              unknown target[207649](207650 call :(207653 call . m c"byteOffset") int[10])
+              (207658 'end of statement')
+            }
+            (207659 call = error(207663 call qio_channel_advance 0(207666 call . fr c"_channel_internal")(207669 call - target cur)))
+          }
+          {
+            (207675 call qio_channel_commit_unlocked(207677 call . fr c"_channel_internal"))
+            (207680 call = error(207684 call advanceToEof fr))
+          }
+        }
+        (207702 call _ddata_free matches nm)
+      }
+      (207712 'elided on block' 0 tmp[207708])
+    }
+    (207716 return m)
+  }
+  { scopeless type
+    regexMatch
+  }
+  function _unknown[42].search[207721](arg _mt[207733]:_MT[201], ref arg this[207724] :
+  fileReader, arg re[207730] :
+  (207728 call regex ?[227])) : _unknown[42] throws "method"
+  {
+    { scopeless
+      unknown e[207738] 0 errorCode
+      (207742 'end of statement')
+    }
+    { scopeless
+      unknown dummy[207744] int[10]
+      (207747 'end of statement')
+    }
+    { scopeless
+      unknown ret[207749](207751 call _searchHelp this re e 1 0 dummy)
+      (207759 'end of statement')
+    }
+    if(207774 call _cond_test e)
+    {
+      { scopeless
+        Try
+        {
+          {
+            (207765 call(207762 call . this c"_ch_ioerror") e "in fileReader.search")
+          }
+        }
+      }
+    }
+    (207779 return ret)
+  }
+  { scopeless type
+    regexMatch
+  }
+  function _unknown[42].search[207784](arg _mt[207801]:_MT[201], ref arg this[207787] :
+  fileReader, arg re[207793] :
+  (207791 call regex ?[227]), ref arg captures[207798]:_any[141](?) ...) : _unknown[42] throws "method"
+  {
+    { scopeless
+      unknown e[207806] 0 errorCode
+      (207810 'end of statement')
+    }
+    { scopeless
+      unknown ret[207812](207814 call _searchHelp this re e(207818 call +(207821 call . captures c"size") 1) 1 captures)
+      (207828 'end of statement')
+    }
+    if(207841 call _cond_test e)
+    {
+      { scopeless
+        Try
+        {
+          {
+            (207834 call(207831 call . this c"_ch_ioerror") e "in fileReader.search")
+          }
+        }
+      }
+    }
+    (207846 return ret)
+  }
+  { scopeless type
+    regexMatch
+  }
+  function _unknown[42].matches[207851](arg _mt[207875]:_MT[201], arg this[207854] :
+  fileReader, arg re[207860] :
+  (207858 call regex ?[227]), param arg captures[207864] =
+  0, arg maxmatches[207871] :
+  int[10] =
+  (207869 call max int[10])) : _unknown[42] "iterator fn" "method"
+  {
+    { scopeless
+      unknown go[207879] 1
+      (207882 'end of statement')
+    }
+    { scopeless
+      unknown i[207884] 0
+      (207887 'end of statement')
+    }
+    { scopeless
+      unknown error[207889] 0 errorCode
+      (207893 'end of statement')
+    }
+    { scopeless
+      unknown nret[207895] "param"(207896 call + captures 1)
+      (207901 'end of statement')
+    }
+    { scopeless
+      unknown ret[207903](207904 call * nret regexMatch)
+      (207909 'end of statement')
+    }
+    Try!
+    {
+      {
+        (207912 call lock)
+      }
+    }
+    {
+      const tmp[207929] "const" "temp"
+      (207930 'move' tmp[207929](207927 'deref'(207926 '_wide_get_locale'(207917 call . this c"_home"))))
+      { scopeless
+        Try!
+        {
+          {
+            (207922 call mark)
+          }
+        }
+      }
+      (207933 'elided on block' 0 tmp[207929])
+    }
+    {
+      unknown tmp[208205] "temp"
+      (208235 'move' tmp[208205](208227 call _cond_test(208229 call && go(208232 call < i maxmatches))))
+      WhileDo[208210]
+      {
+        {
+          {
+            const tmp[208182] "const" "temp"
+            (208183 'move' tmp[208182](208180 'deref'(208179 '_wide_get_locale'(207946 call . this c"_home"))))
+            {
+              { scopeless
+                unknown m[207951] regexMatch
+                (207954 'end of statement')
+              }
+              { scopeless
+                const matches[207956] "const"(207958 call _ddata_allocate qio_regex_string_piece_t nret)
+                (207962 'end of statement')
+              }
+              if(207989 call _cond_test(207986 call ! error))
+              {
+                (207964 call = error(207968 call qio_regex_channel_match(207970 call . re c"_regex") 0 _channel_internal(207976 call max(207978 call int[10] 64)) QIO_REGEX_ANCHOR_UNANCHORED 1 0 1 matches nret))
+              }
+              if(208160 call _cond_test(208157 call ! error))
+              {
+                (207994 call = m(207998 call _to_regexMatch(208000 call matches 0)))
+                if(208153 call _cond_test(208150 call . m c"matched"))
+                {
+                  {
+                    unknown i[208003] "index var" 0
+                    unknown tmp[208028] "maybe param" "temp"
+                    (208040 'move' tmp[208028](208038 call chpl_compute_low_param_loop_bound 0(208006 call - nret 1)))
+                    unknown tmp[208029] "maybe param" "temp"
+                    (208050 'move' tmp[208029](208048 call chpl_compute_high_param_loop_bound 0(208045 call - nret 1)))
+                    unknown tmp[208030] "maybe param" "temp"
+                    (208053 'move' tmp[208030] 1)
+                    ParamForLoop[208055]
+                    { i[208003] tmp[208028] tmp[208029] tmp[208030]
+                      {
+                        (208013 call = m(208017 call _to_regexMatch(208019 call matches i)))
+                        (208022 call _extractMatch m(208025 call ret i) error)
+                      }
+                    }
+                    label _unused_continueLabel[208032]
+                    label _breakLabel[208031]
+                  }
+                  (208065 call qio_channel_revert_unlocked _channel_internal)
+                  (208067 call = error(208071 call qio_channel_mark 0 _channel_internal))
+                  if(208144 call _cond_test(208141 call ! error))
+                  {
+                    { scopeless
+                      unknown cur[208076](208078 call qio_channel_offset_unlocked _channel_internal)
+                      (208081 'end of statement')
+                    }
+                    { scopeless
+                      unknown target[208083](208084 call :(208087 call . m c"byteOffset") int[10])
+                      (208092 'end of statement')
+                    }
+                    (208093 call = error(208097 call qio_channel_advance 0 _channel_internal(208100 call - target cur)))
+                    if(208137 call _cond_test(208130 call ==(208133 call . m c"numBytes") 0))
+                    {
+                      (208105 call = error(208109 call qio_channel_advance 0 _channel_internal 1))
+                      if(208126 call _cond_test(208122 call == error EEOF))
+                      {
+                        (208114 call = error 0)
+                        (208118 call = go 0)
+                      }
+                    }
+                  }
+                }
+                {
+                }
+              }
+              (208165 call _ddata_free matches nret)
+              if(208174 call _cond_test error)
+              {
+                { scopeless
+                  (208168 call = go 0)
+                }
+              }
+            }
+            (208186 'elided on block' 0 tmp[208182])
+          }
+          if(208196 call _cond_test(208193 call ! error))
+          {
+            { scopeless
+              (208190 yield ret)
+            }
+          }
+          (208201 call += i 1)
+        }
+        label _continueLabel[208208]
+        (208222 'move' tmp[208205](208214 call _cond_test(208216 call && go(208219 call < i maxmatches))))
+        tmp[208205]
+      }
+      label _breakLabel[208209]
+    }
+    (208239 call commit)
+    if(208251 call _cond_test(208247 call < i maxmatches))
+    {
+      (208241 call = error(208245 call advanceToEof this))
+    }
+    (208256 call unlock)
+    if(208272 call _cond_test(208262 call ||(208264 call == error EFORMAT)(208268 call == error EEOF)))
+    {
+      { scopeless
+        (208257 call = error 0)
+      }
+    }
+    if(208291 call _cond_test error)
+    {
+      { scopeless
+        Try!
+        {
+          {
+            (208282 call(208279 call . this c"_ch_ioerror") error "in fileReader.matches")
+          }
+        }
+      }
+    }
+  }
+}

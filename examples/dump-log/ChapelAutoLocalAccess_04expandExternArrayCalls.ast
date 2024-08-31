@@ -1,0 +1,121 @@
+AST dump for ChapelAutoLocalAccess after pass expandExternArrayCalls.
+Module use list: 
+
+{
+  (309602 'use' ChapelLocale)
+  function chpl__staticAutoLocalCheck[309604](arg accessBase[309609] :
+  (309607 call chpl__buildArrayRuntimeType nil[32]), arg loopDomain[309613] :
+  _domain, param arg hasOffsets[309617] =
+  0) param : _unknown[42]
+  {
+    if(309639 call _cond_test(309624 call && hasOffsets(309627 call !(309638 call(309635 call .(309630 call . accessBase c"_dom") c"supportsOffsetAutoLocalAccess")))))
+    {
+      (309622 return 0)
+    }
+    if(309672 call _cond_test(309663 call ==(309669 'typeof'(309666 call . accessBase c"_dom"))(309671 'typeof' loopDomain)))
+    {
+      if(309659 call _cond_test(309657 call chpl__isArrayViewWithDifferentDist accessBase))
+      {
+        (309645 return 0)
+      }
+      {
+        (309648 return(309655 call(309652 call . loopDomain c"supportsAutoLocalAccess")))
+      }
+    }
+    if(309695 call _cond_test(309694 call(309691 call .(309690 'typeof'(309687 call . loopDomain c"_value")) c"isDefaultRectangular")))
+    {
+      (309677 return(309685 call(309682 call .(309679 call . accessBase c"_dom") c"supportsAutoLocalAccess")))
+    }
+    (309699 return 0)
+  }
+  function chpl__staticAutoLocalCheck[309703](arg accessBase[309705]:_any[141](?), arg loopDomain[309707]:_any[141](?), param arg hasOffsets[309710] =
+  0) param : _unknown[42]
+  {
+    (309714 return 0)
+  }
+  function chpl__staticAutoLocalCheck[309718](arg accessBase[309720]:_any[141](?), arg loopDomain[309722]:_any[141](?), param arg hasOffsets[309725] =
+  0) param : _unknown[42]
+  {
+    (309729 return 0)
+  }
+  function chpl__staticAutoLocalCheck[309733](arg accessBase[309735]:_any[141](?), arg loopDomain[309737]:_any[141](?), param arg hasOffsets[309740] =
+  0) param : _unknown[42]
+  {
+    (309744 return 0)
+  }
+  function chpl__staticAutoLocalCheck[309748](arg accessBase[309750]:_any[141](?), arg loopDomain[309752]:_any[141](?), param arg hasOffsets[309755] =
+  0) param : _unknown[42]
+  {
+    (309759 return 0)
+  }
+  function chpl__dynamicAutoLocalCheck[309763](arg accessBase[309765]:_any[141](?), arg loopDomain[309767]:_any[141](?), param arg hasOffsets[309770] =
+  0) : _unknown[42]
+  {
+    if(309893 call _cond_test(309889 call chpl__staticAutoLocalCheck accessBase loopDomain hasOffsets))
+    {
+      if(309817 call _cond_test(309778 call &&(309780 call &&(309783 call chpl_sameDomainKind(309785 call . accessBase c"_dom") loopDomain)(309789 call ==(309792 call . accessBase c"_dom") loopDomain))(309809 call(309806 call .(309803 call .(309800 call .(309797 call . accessBase c"_dom") c"_value") c"dist") c"dsiEqualDMaps")(309814 call .(309811 call . loopDomain c"_value") c"dist"))))
+      {
+        { scopeless
+          (309775 return 1)
+        }
+      }
+      if(309838 call _cond_test(309825 call ==(309831 call .(309828 call . accessBase c"_dom") c"distribution")(309835 call . loopDomain c"distribution")))
+      {
+        { scopeless
+          (309822 return 1)
+        }
+      }
+      if(309884 call _cond_test(309883 call(309880 call .(309879 'typeof'(309876 call . loopDomain c"_value")) c"isDefaultRectangular")))
+      {
+        if(309871 call _cond_test(309864 call ==(309868 call chpl_localeID_to_locale(309867 '_wide_get_locale' loopDomain)) here))
+        {
+          if(309860 call _cond_test(309858 call(309855 call .(309854 call(309851 call . accessBase c"localSubdomain")) c"contains") loopDomain))
+          {
+            (309846 return 1)
+          }
+        }
+      }
+    }
+    (309897 return 0)
+  }
+  function chpl__dynamicAutoLocalCheck[309901](arg accessBase[309903]:_any[141](?), arg loopDomain[309905]:_any[141](?), param arg hasOffsets[309908] =
+  0) : _unknown[42]
+  {
+    (309912 return 0)
+  }
+  function chpl__dynamicAutoLocalCheck[309916](arg accessBase[309918]:_any[141](?), arg loopDomain[309920]:_any[141](?), param arg hasOffsets[309923] =
+  0) : _unknown[42]
+  {
+    (309927 return 0)
+  }
+  function chpl__dynamicAutoLocalCheck[309931](arg accessBase[309933]:_any[141](?), arg loopDomain[309935]:_any[141](?), param arg hasOffsets[309938] =
+  0) : _unknown[42]
+  {
+    (309942 return 0)
+  }
+  function chpl__ala_offsetCheck[309946](arg accessBase[309951] :
+  (309949 call chpl__buildArrayRuntimeType nil[32]), arg offsets[309956] ... :
+  integral) : _unknown[42] "inline"
+  {
+    if(309980 call _cond_test(309970 call !=(309973 call . offsets c"size")(309977 call . accessBase c"rank")))
+    {
+      (309963 call compilerError "Automatic local access optimization failure: " "Number of offsets doesn't match rank")
+    }
+    (309984 return(309994 call(309991 call .(309986 call . accessBase c"_dom") c"autoLocalAccessOffsetCheck") offsets))
+  }
+  function chpl__ala_offsetCheck[309998](arg accessBase[310000]:_any[141](?), arg offsets[310003]:_any[141](?) ...) : _unknown[42] "inline"
+  {
+    (310007 return 0)
+  }
+  function chpl__isArrayViewWithDifferentDist[310011](arg arr[310016] :
+  (310014 call chpl__buildArrayRuntimeType nil[32])) param : _unknown[42]
+  {
+    if(310053 call _cond_test(310052 call(310049 call .(310046 call . arr c"_value") c"isSliceArrayView")))
+    {
+      (310021 return(310022 call !=(310033 'typeof'(310030 call .(310025 call chpl__getActualArray(310027 call . arr c"_value")) c"dom"))(310041 'typeof'(310038 call .(310035 call . arr c"_dom") c"_value"))))
+    }
+    {
+      (310043 return 0)
+    }
+  }
+}

@@ -1,5 +1,3 @@
-// watch -d -n 0.1 nvidia-smi
-
 use NDArray;
 use Remote;
 
@@ -19,7 +17,7 @@ proc getRank(te: shared TensorEssence(?eltType)): int {
     for param i in 1..6 do
         if checkRank(te,i) then return i;
     // Who would need an 11 tensor?
-    halt("Unable to find rank for this tensor. Rank may be too high.");
+    halt("Unable to find rank for this staticTensor. Rank may be too high.");
 }
 
 proc forceRank(te: shared TensorEssence(?eltType),param rank: int): shared BaseTensorResource(eltType,rank) {

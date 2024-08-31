@@ -1,0 +1,44 @@
+AST dump for ChapelTaskDataHelp after pass flattenClasses.
+Module use list: ChapelStandard CTypes POSIX 
+
+{
+  type chpl_task_infoChapel_t[135029]
+  function chpl_task_getInfoChapel[135031]() : _unknown[42] "extern" "local args" "no fn body" "fn synchronization free"
+  {
+  }
+  { scopeless type
+    (135034 call c_ptr[46891](?) chpl_task_infoChapel_t[135029])
+  }
+  function chpl_task_getInfoChapelInBundle[135039](arg args[135042] :
+  chpl_task_bundle_p[306472]) : _unknown[42] "extern" "local args" "no fn body" "fn synchronization free"
+  {
+  }
+  { scopeless type
+    (135046 call c_ptr[46891](?) chpl_task_infoChapel_t[135029])
+  }
+  function chpl_task_data_setup[135051](arg args[135054] :
+  chpl_task_bundle_p[306472], arg infoChapel[135060] :
+  (135058 call c_ptr[46891](?) chpl_task_infoChapel_t[135029])) : _unknown[42] "no return value for void"
+  {
+    (135065 call memcpy(135067 call chpl_task_getInfoChapelInBundle args[135054]) infoChapel[135060](135071 call c_sizeof chpl_task_infoChapel_t[135029]))
+  }
+  function chpl_save_task_error[135075](arg e[135078] :
+  _EndCountBase[430761](?), arg err[135084] :
+  unmanaged Error?[467980]) : _unknown[42] "task complete impl fn" "no return value for void"
+  {
+    if(135106 call _cond_test(135102 call != err[135084] nil[32]))
+    {
+      (135098 call(135095 call .(135090 call . e[135078] c"errors") c"append")(135099 call postfix! err[135084]))
+    }
+  }
+  function chpl_save_task_error_owned[135112](arg e[135115] :
+  _EndCountBase[430761](?), in arg err[135122] :
+  (135119 call _owned[238](?) borrowed Error?[467977])) : _unknown[42] "task complete impl fn" "no return value for void"
+  {
+    if(135147 call _cond_test(135143 call != err[135122] nil[32]))
+    {
+      (135134 call(135131 call .(135128 call . e[135115] c"errors") c"append")(135135 call postfix!(135141 call(135138 call . _owned[238](?) c"release") err[135122])))
+    }
+  }
+  (396152 'used modules list'(135014 'use' ChapelStandard[315387])(135017 'use' CTypes[51217])(135023 'use' POSIX[12822]))
+}

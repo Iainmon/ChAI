@@ -1,0 +1,43 @@
+AST dump for ChapelLocks after pass parseAndConvertUast.
+Module use list: 
+
+{
+  { scopeless
+    (85235 'use' Atomics)
+    (85237 'use' ChapelBase)
+  }
+  (85239 'use' MemConsistency)
+  type chpl_LocalSpinlock[85418] unknown l[85243](85245 call chpl__processorAtomicType bool) function chpl_LocalSpinlock[85418].init[85249](arg _mt[85253]:_MT[201], arg this[85251]:chpl_LocalSpinlock[85418]) : _unknown[42] "method" "primary method"
+  {
+  } function chpl_LocalSpinlock[85418].init=[85258](arg _mt[85266]:_MT[201], arg this[85260]:chpl_LocalSpinlock[85418], arg other[85263] :
+  chpl_LocalSpinlock) : _unknown[42] "method" "primary method"
+  {
+    (85273 call(85270 call . this c"chpl__initThisType"))
+    (85285 call(85282 call .(85277 call . this c"l") c"init_helper")(85293 call(85290 call .(85287 call . other c"l") c"read")))
+  } function chpl_LocalSpinlock[85418].lock[85296](arg _mt[85300]:_MT[201], ref arg this[85298]:chpl_LocalSpinlock[85418]) : _unknown[42] "inline" "method" "primary method"
+  {
+    (85309 'use'(85306 call . ChapelBase c"currentTask"))
+    {
+      const tmp[85387] "const" "temp"
+      (85388 'move' tmp[85387](85385 'deref'(85384 '_wide_get_locale' this)))
+      {
+        unknown tmp[85333] "temp"
+        (85381 'move' tmp[85333](85364 call _cond_test(85366 call ||(85371 call(85368 call . l c"read"))(85376 call(85373 call . l c"testAndSet")(85378 call . memoryOrder c"acquire")))))
+        WhileDo[85338]
+        {
+          { scopeless
+            (85331 call yieldExecution)
+          }
+          label _continueLabel[85336]
+          (85359 'move' tmp[85333](85342 call _cond_test(85344 call ||(85349 call(85346 call . l c"read"))(85354 call(85351 call . l c"testAndSet")(85356 call . memoryOrder c"acquire")))))
+          tmp[85333]
+        }
+        label _breakLabel[85337]
+      }
+      (85391 'elided on block' 0 tmp[85387])
+    }
+  } function chpl_LocalSpinlock[85418].unlock[85397](arg _mt[85401]:_MT[201], ref arg this[85399]:chpl_LocalSpinlock[85418]) : _unknown[42] "inline" "method" "primary method"
+  {
+    (85410 call(85407 call . l c"clear")(85412 call . memoryOrder c"release"))
+  }
+}

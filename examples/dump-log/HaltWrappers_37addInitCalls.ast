@@ -1,0 +1,58 @@
+AST dump for HaltWrappers after pass addInitCalls.
+Module use list: ChapelStandard CTypes 
+
+{
+  function chpl__init_HaltWrappers[468312]() : void[4] "fast on" "insert line file info" "local fn" "module init" "resolved"
+  {
+    if chpl__init_HaltWrappers_p[9306085]
+    {
+      goto _exit_chpl__init_HaltWrappers[9306122] _exit_chpl__init_HaltWrappers[9306122]
+    }
+    val modFormatStr[9306093]:chpl_c_string[16] "temp"
+    val modStr[9306094]:chpl_c_string[16] "temp"
+    ref refIndentLevel[9306108]:int(32)[66] "temp"
+    (9306101 'move' modFormatStr[9306093] c"%*s\n")
+    (9306103 'move' modStr[9306094] c"HaltWrappers")
+    (9306106 call printModuleInit[386886] modFormatStr[9306093] modStr[9306094] 12)
+    (9306112 'move' refIndentLevel[9306108](9306111 'addr of' moduleInitLevel[386877]))
+    (9306115 '+=' refIndentLevel[9306108] 1)
+    (9306091 'move' chpl__init_HaltWrappers_p[9306085] 1)
+    {
+      (9304983 call chpl__init_CTypes[468360])
+    }
+    (9306118 '-=' refIndentLevel[9306108] 1)
+    label _endchpl__init_HaltWrappers[9306124]
+    label _exit_chpl__init_HaltWrappers[9306122]
+    (588039 return _void[46])
+  }
+  function initHalt[291](const  ref arg s[294]:string[244]) : void[4] "always propagate line file info" "function terminates program" "resolved" "no return value for void"
+  {
+    (299 call halt[88131] s[294])
+    (588011 return _void[46])
+  }
+  function pureVirtualMethodHalt[315]() : void[4] "always propagate line file info" "function terminates program" "resolved" "no return value for void"
+  {
+    (319 call halt[88131] "pure virtual method called")
+    (588015 return _void[46])
+  }
+  function exhaustiveSelectHalt[325](const  ref arg s[328]:string[244]) : void[4] "always propagate line file info" "function terminates program" "resolved" "fn synchronization free" "no return value for void"
+  {
+    (333 call halt[88131] s[328])
+    (588017 return _void[46])
+  }
+  function nilCheckHalt[392](const  ref arg s[395]:string[244]) : void[4] "always propagate line file info" "function terminates program" "resolved" "fn synchronization free" "no return value for void"
+  {
+    (400 call halt[88131] s[395])
+    (588023 return _void[46])
+  }
+  function boundsCheckHalt[404](const  ref arg s[407]:string[244]) : void[4] "always propagate line file info" "function terminates program" "resolved" "fn synchronization free" "no return value for void"
+  {
+    (412 call halt[88131] s[407])
+    (588025 return _void[46])
+  }
+  function safeCastCheckHalt[440](const  ref arg s[443]:string[244]) : void[4] "always propagate line file info" "function terminates program" "resolved" "fn synchronization free" "no return value for void"
+  {
+    (448 call halt[88131] s[443])
+    (588031 return _void[46])
+  }
+}

@@ -1,0 +1,73 @@
+AST dump for ChapelTaskDataHelp after pass buildDefaultFunctions.
+Module use list: ChapelStandard CTypes POSIX 
+
+{
+  function chpl__init_ChapelTaskDataHelp[468435]() : void[4] "insert line file info" "module init"
+  {
+    (607990 return _void[46])
+  }
+  function =[1082239](ref arg _arg1[1082241]:chpl_task_infoChapel_t[135029], arg _arg2[1082242]:chpl_task_infoChapel_t[135029]) : _unknown[42] "assignop" "compiler generated" "inline" "last resort"
+  {
+    (1082245 '=' _arg1[1082241] _arg2[1082242])
+    (1082250 return _void[46])
+  }
+  type chpl_task_infoChapel_t[135029]
+  function chpl_task_getInfoChapel[135031]() : _unknown[42] "extern" "local args" "no fn body" "fn synchronization free"
+  {
+  }
+  { scopeless type
+    (135034 call c_ptr[46891](?) chpl_task_infoChapel_t[135029])
+  }
+  function chpl_task_getInfoChapelInBundle[135039](arg args[135042]:chpl_task_bundle_p[306472]) : _unknown[42] "extern" "local args" "no fn body" "fn synchronization free"
+  {
+  }
+  { scopeless type
+    (135046 call c_ptr[46891](?) chpl_task_infoChapel_t[135029])
+  }
+  function chpl_task_data_setup[135051](arg args[135054]:chpl_task_bundle_p[306472], arg infoChapel[135060] :
+  (135058 call c_ptr[46891](?) chpl_task_infoChapel_t[135029])) : _unknown[42] "no return value for void"
+  {
+    unknown call_tmp[808057] "expr temp" "maybe param" "maybe type" "temp"
+    (808060 'move' call_tmp[808057](135067 call chpl_task_getInfoChapelInBundle args[135054]))
+    unknown call_tmp[808062] "expr temp" "maybe param" "maybe type" "temp"
+    (808065 'move' call_tmp[808062](135071 call c_sizeof chpl_task_infoChapel_t[135029]))
+    (135065 call memcpy call_tmp[808057] infoChapel[135060] call_tmp[808062])
+    (607984 return _void[46])
+  }
+  function chpl_save_task_error[135075](arg e[135078]:_EndCountBase[430761](?), arg err[135084]:unmanaged Error?[467980]) : _unknown[42] "task complete impl fn" "no return value for void"
+  {
+    unknown call_tmp[808067] "expr temp" "maybe param" "maybe type" "temp"
+    (808070 'move' call_tmp[808067](135102 call != err[135084] nil[32]))
+    unknown call_tmp[808072] "expr temp" "maybe param" "maybe type" "temp"
+    (808075 'move' call_tmp[808072](135106 call _cond_test call_tmp[808067]))
+    if call_tmp[808072]
+    {
+      unknown call_tmp[808079] "expr temp" "maybe param" "maybe type" "temp"
+      (808082 'move' call_tmp[808079](135090 call errors _mt[203] e[135078]))
+      unknown call_tmp[808086] "expr temp" "maybe param" "maybe type" "temp"
+      (808089 'move' call_tmp[808086](135099 call postfix! err[135084]))
+      (135098 call(135095 call (partial) append _mt[203] call_tmp[808079]) call_tmp[808086])
+    }
+    (607986 return _void[46])
+  }
+  function chpl_save_task_error_owned[135112](arg e[135115]:_EndCountBase[430761](?), in arg err[135122] :
+  (135119 call _owned[238](?) borrowed Error?[467977])) : _unknown[42] "task complete impl fn" "no return value for void"
+  {
+    unknown call_tmp[808091] "expr temp" "maybe param" "maybe type" "temp"
+    (808094 'move' call_tmp[808091](135143 call != err[135122] nil[32]))
+    unknown call_tmp[808096] "expr temp" "maybe param" "maybe type" "temp"
+    (808099 'move' call_tmp[808096](135147 call _cond_test call_tmp[808091]))
+    if call_tmp[808096]
+    {
+      unknown call_tmp[808103] "expr temp" "maybe param" "maybe type" "temp"
+      (808106 'move' call_tmp[808103](135128 call errors _mt[203] e[135115]))
+      unknown call_tmp[808112] "expr temp" "maybe param" "maybe type" "temp"
+      (808115 'move' call_tmp[808112](135141 call(135138 call (partial) release _mt[203] _owned[238](?)) err[135122]))
+      unknown call_tmp[808117] "expr temp" "maybe param" "maybe type" "temp"
+      (808120 'move' call_tmp[808117](135135 call postfix! call_tmp[808112]))
+      (135134 call(135131 call (partial) append _mt[203] call_tmp[808103]) call_tmp[808117])
+    }
+    (607988 return _void[46])
+  }
+  (396152 'used modules list'(135014 'use' ChapelStandard[315387])(135017 'use' CTypes[51217])(135023 'use' POSIX[12822]))
+}

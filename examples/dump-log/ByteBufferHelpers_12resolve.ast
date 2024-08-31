@@ -1,0 +1,534 @@
+AST dump for ByteBufferHelpers after pass resolve.
+Module use list: ChapelStandard CTypes POSIX ChplConfig Communication 
+
+{
+  function chpl__init_ByteBufferHelpers[468348]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (30228 'end of statement' byteType[30206])
+    (595501 return _void[46])
+  }
+  unknown byteType[30206]:uint(8)[71] "dead at end of block" "insert auto destroy" "type variable"
+  unknown bufferType[30212]:c_ptr(uint(8))[1466369] "dead at end of block" "insert auto destroy" "type variable"
+  unknown locIdType[30218]:int(32)[66] "dead at end of block" "insert auto destroy" "type variable"
+  function chpl_memhook_md_num[30229]() : int(16)[61] "extern" "local args" "no fn body" "private" "resolved" "fn synchronization free"
+  {
+  }
+  function offset_STR_COPY_DATA[30235]() : int(16)[61] "no parens" "private" "resolved"
+  {
+    unknown ret[595294]:int(16)[61] "dead after last mention" "RVV" "temp"
+    const CHPL_RT_MD_STR_COPY_DATA[30239]:int(16)[61] "dead at end of block" "const" "extern" "insert auto destroy"
+    (30242 'end of statement')
+    unknown call_tmp[751165]:int(16)[61] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751168 'move' call_tmp[751165](30248 call chpl_memhook_md_num[30229]))
+    unknown call_tmp[751170]:int(16)[61] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751173 'move' call_tmp[751170](30244 call -[57263] CHPL_RT_MD_STR_COPY_DATA[30239] call_tmp[751165]))
+    (595299 'move' ret[595294] call_tmp[751170])
+    gotoReturn _end_offset_STR_COPY_DATA[595292] _end_offset_STR_COPY_DATA[595292]
+    label _end_offset_STR_COPY_DATA[595292]
+    (595296 return ret[595294])
+  }
+  function chpl_string_comm_get[1483330](arg dest[1483334]:c_ptr(uint(8))[1466369], arg src_loc_id[1483338]:int(64)[10], arg src_addr[1483342]:c_ptr(uint(8))[1466369], arg len[1483344]:int(64)[10]) : void[4] "inline" "instantiated generic" "invisible fn" "resolved" "no return value for void"
+  {
+    unknown call_tmp[1483355]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1483357 'move' call_tmp[1483355](1483363 call safeCast[1471587] len[1483344]))
+    unknown coerce_tmp[1483615]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1483621 'move' coerce_tmp[1483615](1483617 'cast' c_ptr(void)[1465614] dest[1483334]))
+    unknown coerce_tmp[1483623]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1483629 'move' coerce_tmp[1483623](1483625 'cast' c_ptr(void)[1465614] src_addr[1483342]))
+    (1483366 call get[1483393] coerce_tmp[1483615] coerce_tmp[1483623] src_loc_id[1483338] call_tmp[1483355])
+    (1483373 return _void[46])
+  }
+  function getGoodAllocSize[30309](arg requestedSize[30312]:int(64)[10]) : int(64)[10] "inline" "private" "resolved"
+  {
+    unknown ret[595318]:int(64)[10] "dead after last mention" "RVV" "temp"
+    unknown call_tmp[751192]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751195 'move' call_tmp[751192](30322 call chpl_here_good_alloc_size[1471515] requestedSize[30312]))
+    unknown call_tmp[751197]:int(64)[10] "dead at end of block" "maybe param" "temp"
+    (751200 'move' call_tmp[751197](30320 call max[2679] call_tmp[751192] 0))
+    const allocSize[30318]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    (643596 'move' allocSize[30318] call_tmp[751197])
+    (30326 'end of statement')
+    (1482875 '=' ret[595318] allocSize[30318])
+    gotoReturn _end_getGoodAllocSize[595316] _end_getGoodAllocSize[595316]
+    label _end_getGoodAllocSize[595316]
+    (595320 return ret[595318])
+  }
+  function bufferAlloc[1471284](arg requestedSize[1471286]:int(64)[10]) : (c_ptr(uint(8)),int(64))[1471327] "inline" "instantiated generic" "invisible fn" "resolved"
+  {
+    unknown ret[1471293]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "RVV" "temp"
+    unknown call_tmp[1471441]:int(64)[10] "dead at end of block" "maybe param" "temp"
+    (1471443 'move' call_tmp[1471441](1471446 call getGoodAllocSize[30309] requestedSize[1471286]))
+    const allocSize[1471448]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    (1471450 'move' allocSize[1471448] call_tmp[1471441])
+    (1471453 'end of statement')
+    unknown call_tmp[1471454]:int(16)[61] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1471456 'move' call_tmp[1471454](1471459 call offset_STR_COPY_DATA[30235]))
+    unknown call_tmp[1471460]:c_ptr(void)[1465614] "dead after last mention" "expr temp" "maybe param" "temp"
+    val cast_tmp[1483009]:c_ptr(void)[1465614] "dead after last mention" "temp"
+    (1483011 'move' cast_tmp[1483009](1471465 call chpl_here_alloc[308303] allocSize[1471448] call_tmp[1471454]))
+    (1471462 'move' call_tmp[1471460] cast_tmp[1483009])
+    unknown call_tmp[1471468]:c_ptr(uint(8))[1466369] "dead after last mention" "maybe param" "temp"
+    (1471470 'move' call_tmp[1471468](1471473 call :[1483124] call_tmp[1471460]))
+    unknown buf[1471476]:c_ptr(uint(8))[1466369] "dead at end of block" "insert auto destroy"
+    (1471478 'move' buf[1471476](1483283 call chpl__initCopy[1467227] call_tmp[1471468] 0))
+    (1471481 'end of statement' allocSize[1471448])
+    unknown call_tmp[1471483]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (1471485 'move' call_tmp[1471483](1471488 call _build_tuple[1474766] buf[1471476] allocSize[1471448]))
+    unknown call_tmp[1471491]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    (1483291 '=' ret[1471293] call_tmp[1471483])
+    gotoReturn _end_bufferAlloc[1471509] _end_bufferAlloc[1471509]
+    label _end_bufferAlloc[1471509]
+    (1471511 return ret[1471293])
+  }
+  function bufferRealloc[30369](arg buf[30372]:c_ptr(uint(8))[1466369], arg requestedSize[30376]:int(64)[10]) : (c_ptr(uint(8)),int(64))[1471327] "resolved"
+  {
+    unknown ret[595345]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "RVV" "temp"
+    unknown call_tmp[751232]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751235 'move' call_tmp[751232](30384 call +[1471222] requestedSize[30376]))
+    unknown call_tmp[751237]:int(64)[10] "dead at end of block" "maybe param" "temp"
+    (751240 'move' call_tmp[751237](30383 call getGoodAllocSize[30309] call_tmp[751232]))
+    const allocSize[30381]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    (643602 'move' allocSize[30381] call_tmp[751237])
+    (30389 'end of statement')
+    unknown call_tmp[751242]:int(16)[61] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751245 'move' call_tmp[751242](416442 call offset_STR_COPY_DATA[30235]))
+    unknown call_tmp[751247]:c_ptr(void)[1465614] "dead after last mention" "expr temp" "maybe param" "temp"
+    unknown coerce_tmp[1496287]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1496293 'move' coerce_tmp[1496287](1496289 'cast' c_ptr(void)[1465614] buf[30372]))
+    (751250 'move' call_tmp[751247](30395 call chpl_here_realloc[1496171] coerce_tmp[1496287] allocSize[30381] call_tmp[751242]))
+    unknown call_tmp[751252]:c_ptr(uint(8))[1466369] "dead after last mention" "maybe param" "temp"
+    (751255 'move' call_tmp[751252](30392 call :[1483124] call_tmp[751247]))
+    unknown newBuff[30391]:c_ptr(uint(8))[1466369] "dead at end of block" "insert auto destroy"
+    (643604 'move' newBuff[30391](1496337 call chpl__initCopy[1467227] call_tmp[751252] 0))
+    (30401 'end of statement' allocSize[30381])
+    unknown call_tmp[751257]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (751260 'move' call_tmp[751257](30406 call _build_tuple[1474766] newBuff[30391] allocSize[30381]))
+    (595350 'move' ret[595345] call_tmp[751257])
+    gotoReturn _end_bufferRealloc[595343] _end_bufferRealloc[595343]
+    label _end_bufferRealloc[595343]
+    (595347 return ret[595345])
+  }
+  function bufferEnsureSize[30410](arg buf[30413]:c_ptr(uint(8))[1466369], arg currentSize[30417]:int(64)[10], arg requestedSize[30421]:int(64)[10]) : (c_ptr(uint(8)),int(64))[1471327] "resolved"
+  {
+    unknown ret[595356]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "RVV" "temp"
+    unknown call_tmp[751262]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751265 'move' call_tmp[751262](30438 call <[1469576] currentSize[30417] requestedSize[30421]))
+    unknown call_tmp[751267]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751270 'move' call_tmp[751267] call_tmp[751262])
+    if call_tmp[751267]
+    {
+      unknown call_tmp[751272]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (751275 'move' call_tmp[751272](30427 call bufferRealloc[30369] buf[30413] requestedSize[30421]))
+      (595361 'move' ret[595356] call_tmp[751272])
+      gotoReturn _end_bufferEnsureSize[595354] _end_bufferEnsureSize[595354]
+    }
+    {
+      unknown call_tmp[751277]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (751280 'move' call_tmp[751277](30435 call _build_tuple[1474766] buf[30413] currentSize[30417]))
+      (595366 'move' ret[595356] call_tmp[751277])
+      gotoReturn _end_bufferEnsureSize[595354] _end_bufferEnsureSize[595354]
+    }
+    label _end_bufferEnsureSize[595354]
+    (595358 return ret[595356])
+  }
+  function bufferCopyRemote[30450](arg src_loc_id[30455]:int(64)[10], arg src_addr[30459]:c_ptr(uint(8))[1466369], arg len[30463]:int(64)[10]) : c_ptr(uint(8))[1466369] "resolved"
+  {
+    unknown ret[595372]:c_ptr(uint(8))[1466369] "dead after last mention" "RVV" "temp"
+    unknown call_tmp[751282]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751285 'move' call_tmp[751282](30475 call +[1471222] len[30463]))
+    unknown call_tmp[751287]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "maybe param" "temp"
+    (751290 'move' call_tmp[751287](30474 call bufferAlloc[1471284] call_tmp[751282]))
+    const tmp[30479]:(c_ptr(uint(8)),int(64))[1471327] "dead at end of block" "const" "insert auto destroy" "temp"
+    (643606 'move' tmp[30479](1483293 call chpl__initCopy[1473813] call_tmp[751287] 1))
+    1
+    (548187 'end of statement')
+    ref call_tmp[751292]:_ref(c_ptr(uint(8)))[1466378] "dead after last mention" "maybe param" "reference to a const" "temp"
+    (751295 'move' call_tmp[751292](1483301 '.' tmp[30479] x0[1471323]))
+    const dst[30469]:c_ptr(uint(8))[1466369] "dead at end of block" "const" "insert auto destroy"
+    unknown coerce_tmp[1483307]:c_ptr(uint(8))[1466369] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1483311 'move' coerce_tmp[1483307](1483309 'deref' call_tmp[751292]))
+    (643608 'move' dst[30469](1483304 call chpl__initCopy[1467227] coerce_tmp[1483307] 1))
+    ref call_tmp[751297]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "reference to a const" "temp"
+    (751300 'move' call_tmp[751297](1483316 '.' tmp[30479] x1[1471325]))
+    const allocSize[30471]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    unknown coerce_tmp[1483322]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1483326 'move' coerce_tmp[1483322](1483324 'deref' call_tmp[751297]))
+    (643610 'move' allocSize[30471](1483319 call chpl__initCopy[1473915] coerce_tmp[1483322] 1))
+    (30491 'end of statement')
+    (30493 call chpl_string_comm_get[1483330] dst[30469] src_loc_id[30455] src_addr[30459] len[30463])
+    (548188 'end of statement' dst[30469])
+    ref call_tmp[751302]:_ref(uint(8))[1466089] "dead after last mention" "maybe param" "temp"
+    (751305 'move' call_tmp[751302](30501 call this[1474553] dst[30469] len[30463]))
+    unknown coerce_tmp[1504417]:uint(8)[71] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1504423 'move' coerce_tmp[1504417](1504419 'cast' uint(8)[71] 0))
+    (30498 call =[52249] call_tmp[751302] coerce_tmp[1504417])
+    (548190 'end of statement' dst[30469])
+    (1504427 '=' ret[595372] dst[30469])
+    gotoReturn _end_bufferCopyRemote[595370] _end_bufferCopyRemote[595370]
+    label _end_bufferCopyRemote[595370]
+    (595374 return ret[595372])
+  }
+  function bufferCopyLocal[30509](arg src_addr[30512]:c_ptr(uint(8))[1466369], arg len[30516]:int(64)[10]) : (c_ptr(uint(8)),int(64))[1471327] "inline" "resolved"
+  {
+    unknown ret[595384]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "RVV" "temp"
+    unknown call_tmp[751307]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751310 'move' call_tmp[751307](30527 call +[1471222] len[30516]))
+    unknown call_tmp[751312]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "maybe param" "temp"
+    (751315 'move' call_tmp[751312](30526 call bufferAlloc[1471284] call_tmp[751307]))
+    const tmp[30531]:(c_ptr(uint(8)),int(64))[1471327] "dead at end of block" "const" "insert auto destroy" "temp"
+    (643612 'move' tmp[30531](1473810 call chpl__initCopy[1473813] call_tmp[751312] 1))
+    1
+    (548194 'end of statement')
+    ref call_tmp[751317]:_ref(c_ptr(uint(8)))[1466378] "dead after last mention" "maybe param" "reference to a const" "temp"
+    (751320 'move' call_tmp[751317](1474361 '.' tmp[30531] x0[1471323]))
+    const dst[30521]:c_ptr(uint(8))[1466369] "dead at end of block" "const" "insert auto destroy"
+    unknown coerce_tmp[1474367]:c_ptr(uint(8))[1466369] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1474371 'move' coerce_tmp[1474367](1474369 'deref' call_tmp[751317]))
+    (643614 'move' dst[30521](1474364 call chpl__initCopy[1467227] coerce_tmp[1474367] 1))
+    ref call_tmp[751322]:_ref(int(64))[1465689] "dead after last mention" "maybe param" "reference to a const" "temp"
+    (751325 'move' call_tmp[751322](1474376 '.' tmp[30531] x1[1471325]))
+    const allocSize[30523]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    unknown coerce_tmp[1474382]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1474386 'move' coerce_tmp[1474382](1474384 'deref' call_tmp[751322]))
+    (643616 'move' allocSize[30523](1474379 call chpl__initCopy[1473915] coerce_tmp[1474382] 1))
+    (30543 'end of statement')
+    unknown default_arg_dst_off[1474413]:int(64)[10] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    unknown default_arg_src_off[1474440]:int(64)[10] "dead after last mention" "default actual temp" "expr temp" "maybe param" "maybe type" "suppress lvalue error" "temp"
+    (30545 call bufferMemcpyLocal[30720] dst[30521] src_addr[30512] len[30516] 0 0)
+    (548195 'end of statement' dst[30521])
+    ref call_tmp[751327]:_ref(uint(8))[1466089] "dead after last mention" "maybe param" "temp"
+    (751330 'move' call_tmp[751327](30555 call this[1474553] dst[30521] len[30516]))
+    unknown coerce_tmp[1474757]:uint(8)[71] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1474763 'move' coerce_tmp[1474757](1474759 'cast' uint(8)[71] 0))
+    (30552 call =[52249] call_tmp[751327] coerce_tmp[1474757])
+    (548197 'end of statement' dst[30521])
+    unknown call_tmp[751332]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    (751335 'move' call_tmp[751332](30562 call _build_tuple[1474766] dst[30521] allocSize[30523]))
+    (595389 'move' ret[595384] call_tmp[751332])
+    gotoReturn _end_bufferCopyLocal[595382] _end_bufferCopyLocal[595382]
+    label _end_bufferCopyLocal[595382]
+    (595386 return ret[595384])
+  }
+  function bufferFree[30566](arg buf[30569]:c_ptr(uint(8))[1466369]) : void[4] "inline" "resolved" "no return value for void"
+  {
+    unknown coerce_tmp[1514550]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1514556 'move' coerce_tmp[1514550](1514552 'cast' c_ptr(void)[1465614] buf[30569]))
+    (30574 call chpl_here_free[308686] coerce_tmp[1514550])
+    (595393 return _void[46])
+  }
+  function bufferCopy[30578](arg buf[30581]:c_ptr(uint(8))[1466369], arg off[30585]:int(64)[10], arg len[30589]:int(64)[10], arg loc[30593]:int(32)[66]) : (c_ptr(uint(8)),int(64))[1471327] "inline" "resolved"
+  {
+    unknown ret[595397]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "RVV" "temp"
+    unknown tmp[477711]:bool[19] "dead after last mention" "maybe param" "temp"
+    unknown call_tmp[751337]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    unknown call_tmp[751342]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (1652169 'end of statement')
+    unknown tmp[665763]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    unknown tmp[665764]:bool[19] "dead after last mention" "maybe param" "temp"
+    unknown call_tmp[751347]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (1652171 'end of statement')
+    unknown call_tmp[751362]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      unknown call_tmp[751382]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751385 'move' call_tmp[751382](30620 call +[1474450] buf[30581] off[30585]))
+      unknown call_tmp[751387]:(c_ptr(uint(8)),int(64))[1471327] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      (751390 'move' call_tmp[751387](30619 call bufferCopyLocal[30509] call_tmp[751382] len[30589]))
+      (595407 'move' ret[595397] call_tmp[751387])
+      gotoReturn _end_bufferCopy[595395] _end_bufferCopy[595395]
+    }
+    label _end_bufferCopy[595395]
+    (595399 return ret[595397])
+  }
+  function bufferMemcpy[30641](arg dst[30644]:c_ptr(uint(8))[1466369], arg src_loc[30650]:int(64)[10], arg src[30654]:c_ptr(uint(8))[1466369], arg len[30658]:int(64)[10], arg dst_off[30663]:int(64)[10], arg src_off[30669]:int(64)[10]) : void[4] "inline" "resolved" "no return value for void"
+  {
+    unknown tmp[477732]:bool[19] "dead after last mention" "maybe param" "temp"
+    unknown call_tmp[751392]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    unknown call_tmp[751397]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (1496562 'end of statement')
+    unknown tmp[665790]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    unknown tmp[665791]:bool[19] "dead after last mention" "maybe param" "temp"
+    unknown call_tmp[751402]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (1496564 'end of statement')
+    unknown call_tmp[751417]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      unknown call_tmp[751432]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751435 'move' call_tmp[751432](30690 call +[1474450] dst[30644] dst_off[30663]))
+      unknown call_tmp[751437]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751440 'move' call_tmp[751437](30694 call +[1474450] src[30654] src_off[30669]))
+      unknown call_tmp[751444]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751447 'move' call_tmp[751444](30702 call safeCast[1471587] len[30658]))
+      unknown coerce_tmp[1496582]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1496588 'move' coerce_tmp[1496582](1496584 'cast' c_ptr(void)[1465614] call_tmp[751432]))
+      unknown coerce_tmp[1496590]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1496596 'move' coerce_tmp[1496590](1496592 'cast' c_ptr(void)[1465614] call_tmp[751437]))
+      (30689 call memcpy[12667] coerce_tmp[1496582] coerce_tmp[1496590] call_tmp[751444])
+    }
+    (1496566 'end of statement')
+    (595411 return _void[46])
+  }
+  function bufferMemcpyLocal[30720](arg dst[30723]:c_ptr(uint(8))[1466369], arg src[30727]:c_ptr(uint(8))[1466369], arg len[30731]:int(64)[10], arg dst_off[30736]:int(64)[10], arg src_off[30742]:int(64)[10]) : void[4] "inline" "resolved" "no return value for void"
+  {
+    unknown call_tmp[751449]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751452 'move' call_tmp[751449] dst[30723])
+    unknown call_tmp[751454]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751457 'move' call_tmp[751454](30749 call +[1474450] call_tmp[751449] dst_off[30736]))
+    unknown call_tmp[751459]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751462 'move' call_tmp[751459] src[30727])
+    unknown call_tmp[751464]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751467 'move' call_tmp[751464](30756 call +[1474450] call_tmp[751459] src_off[30742]))
+    unknown call_tmp[751471]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751474 'move' call_tmp[751471](30767 call safeCast[1471587] len[30731]))
+    unknown coerce_tmp[1474517]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1474523 'move' coerce_tmp[1474517](1474519 'cast' c_ptr(void)[1465614] call_tmp[751454]))
+    unknown coerce_tmp[1474525]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1474531 'move' coerce_tmp[1474525](1474527 'cast' c_ptr(void)[1465614] call_tmp[751464]))
+    (30748 call memcpy[12667] coerce_tmp[1474517] coerce_tmp[1474525] call_tmp[751471])
+    (595413 return _void[46])
+  }
+  function bufferMemmoveLocal[1542194](arg dst[1542198]:c_ptr(uint(8))[1466369], arg src[1542200]:c_ptr(uint(8))[1466369], arg len[1542202]:int(64)[10], arg dst_off[1542206]:int(64)[10], arg src_off[1542210]:int(64)[10]) : void[4] "inline" "instantiated generic" "invisible fn" "resolved" "no return value for void"
+  {
+    unknown call_tmp[1542216]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1542218 'move' call_tmp[1542216](1542221 call +[1474450] dst[1542198] dst_off[1542206]))
+    unknown call_tmp[1542224]:c_ptr(uint(8))[1466369] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1542226 'move' call_tmp[1542224](1542229 call +[1474450] src[1542200] src_off[1542210]))
+    unknown call_tmp[1542232]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1542234 'move' call_tmp[1542232](1542240 call safeCast[1471587] len[1542202]))
+    unknown coerce_tmp[1542346]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1542352 'move' coerce_tmp[1542346](1542348 'cast' c_ptr(void)[1465614] call_tmp[1542216]))
+    unknown coerce_tmp[1542354]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1542360 'move' coerce_tmp[1542354](1542356 'cast' c_ptr(void)[1465614] call_tmp[1542224]))
+    (1542243 call memmove[12621] coerce_tmp[1542346] coerce_tmp[1542354] call_tmp[1542232])
+    (1542247 return _void[46])
+  }
+  function bufferGetByte[30814](arg buf[30817]:c_ptr(uint(8))[1466369], arg off[30821]:int(64)[10], arg loc[30825]:int(32)[66]) : uint(8)[71] "inline" "resolved"
+  {
+    unknown ret[595419]:uint(8)[71] "dead after last mention" "RVV" "temp"
+    unknown tmp[477753]:bool[19] "dead after last mention" "maybe param" "temp"
+    unknown call_tmp[751493]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    unknown call_tmp[751498]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (1609192 'end of statement')
+    unknown tmp[665817]:bool[19] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "maybe type" "temp"
+    unknown tmp[665818]:bool[19] "dead after last mention" "maybe param" "temp"
+    unknown call_tmp[751503]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (1609194 'end of statement')
+    unknown call_tmp[751518]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    {
+      ref call_tmp[751538]:_ref(uint(8))[1466089] "dead after last mention" "maybe param" "temp"
+      (751541 'move' call_tmp[751538](30860 call this[1474553] buf[30817] off[30821]))
+      (595429 'move' ret[595419](595428 'deref' call_tmp[751538]))
+      gotoReturn _end_bufferGetByte[595417] _end_bufferGetByte[595417]
+    }
+    label _end_bufferGetByte[595417]
+    (595421 return ret[595419])
+  }
+  function _strcmp_local[30980](arg buf1[30983]:c_ptr(uint(8))[1466369], arg len1[30987]:int(64)[10], arg buf2[30991]:c_ptr(uint(8))[1466369], arg len2[30995]:int(64)[10]) : int(64)[10] "inline" "private" "resolved"
+  {
+    unknown ret[595453]:int(64)[10] "dead after last mention" "RVV" "temp"
+    unknown call_tmp[751583]:int(64)[10] "dead at end of block" "maybe param" "temp"
+    (751586 'move' call_tmp[751583](31003 call min[3347] len1[30987] len2[30995]))
+    const size[31001]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    (643624 'move' size[31001] call_tmp[751583])
+    (31007 'end of statement')
+    unknown call_tmp[751590]:uint(64)[86] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751593 'move' call_tmp[751590](31018 call safeCast[1471587] size[31001]))
+    unknown call_tmp[751595]:int(64)[10] "dead at end of block" "maybe param" "temp"
+    unknown coerce_tmp[1755177]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1755183 'move' coerce_tmp[1755177](1755179 'cast' c_ptr(void)[1465614] buf1[30983]))
+    unknown coerce_tmp[1755185]:c_ptr(void)[1465614] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1755191 'move' coerce_tmp[1755185](1755187 'cast' c_ptr(void)[1465614] buf2[30991]))
+    (751598 'move' call_tmp[751595](31011 call memcmp[12713] coerce_tmp[1755177] coerce_tmp[1755185] call_tmp[751590]))
+    const result[31009]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+    (643626 'move' result[31009] call_tmp[751595])
+    (31021 'end of statement' size[31001])
+    unknown call_tmp[751600]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751603 'move' call_tmp[751600](31049 call ==[52746] result[31009] 0))
+    unknown call_tmp[751605]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751608 'move' call_tmp[751605] call_tmp[751600])
+    if call_tmp[751605]
+    {
+      unknown call_tmp[751610]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751613 'move' call_tmp[751610](31026 call <[1469576] size[31001] len1[30987]))
+      unknown call_tmp[751615]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751618 'move' call_tmp[751615] call_tmp[751610])
+      if call_tmp[751615]
+      {
+        (595459 'move' ret[595453] 1)
+        gotoReturn _end__strcmp_local[595451] _end__strcmp_local[595451]
+      }
+      unknown call_tmp[751620]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751623 'move' call_tmp[751620](31040 call <[1469576] size[31001] len2[30995]))
+      unknown call_tmp[751625]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751628 'move' call_tmp[751625] call_tmp[751620])
+      if call_tmp[751625]
+      {
+        unknown call_tmp[751630]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        (595465 'move' ret[595453] -1)
+        gotoReturn _end__strcmp_local[595451] _end__strcmp_local[595451]
+      }
+    }
+    (1756708 '=' ret[595453] result[31009])
+    gotoReturn _end__strcmp_local[595451] _end__strcmp_local[595451]
+    label _end__strcmp_local[595451]
+    (595455 return ret[595453])
+  }
+  function _strcmp[31062](arg buf1[31065]:c_ptr(uint(8))[1466369], arg len1[31069]:int(64)[10], arg loc1[31073]:int(32)[66], arg buf2[31077]:c_ptr(uint(8))[1466369], arg len2[31081]:int(64)[10], arg loc2[31085]:int(32)[66]) : int(64)[10] "inline" "resolved"
+  {
+    unknown ret[595477]:int(64)[10] "dead after last mention" "RVV" "temp"
+    unknown tmp[477816]:bool[19] "dead after last mention" "maybe param" "temp"
+    unknown call_tmp[751635]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751638 'move' call_tmp[751635](416618 call chpl_nodeID[305038]))
+    (477827 'move' tmp[477816](31215 call ==[52725] loc1[31073] call_tmp[751635]))
+    unknown call_tmp[751640]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+    (1755155 'end of statement')
+    unknown tmp[665844]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    unknown tmp[665845]:bool[19] "dead after last mention" "maybe param" "temp"
+    unknown call_tmp[751645]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751648 'move' call_tmp[751645] tmp[477816])
+    (665850 'move' tmp[665845] call_tmp[751645])
+    if tmp[665845]
+    {
+      unknown tmp[665852]:bool[19] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+      unknown call_tmp[751650]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751653 'move' call_tmp[751650](416621 call chpl_nodeID[305038]))
+      unknown call_tmp[751655]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751658 'move' call_tmp[751655](31219 call ==[52725] loc2[31085] call_tmp[751650]))
+      (665854 'move' tmp[665852] call_tmp[751655])
+      (665859 'move' tmp[665844] tmp[665852])
+    }
+    {
+      (665864 'move' tmp[665844] 0)
+    }
+    unknown call_tmp[751660]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (751663 'move' call_tmp[751660] tmp[665844])
+    if call_tmp[751660]
+    {
+      unknown call_tmp[751665]:int(64)[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751668 'move' call_tmp[751665](31092 call _strcmp_local[30980] buf1[31065] len1[31069] buf2[31077] len2[31081]))
+      (595482 'move' ret[595477] call_tmp[751665])
+      gotoReturn _end__strcmp[595475] _end__strcmp[595475]
+    }
+    {
+      unknown tmp[477795]:bool[19] "dead after last mention" "maybe param" "temp"
+      unknown call_tmp[751670]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751673 'move' call_tmp[751670](416612 call chpl_nodeID[305038]))
+      (477806 'move' tmp[477795](31200 call !=[53199] loc1[31073] call_tmp[751670]))
+      unknown call_tmp[751675]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+      (1756714 'end of statement')
+      unknown tmp[665871]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+      unknown tmp[665872]:bool[19] "dead after last mention" "maybe param" "temp"
+      unknown call_tmp[751680]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751683 'move' call_tmp[751680] tmp[477795])
+      (665877 'move' tmp[665872] call_tmp[751680])
+      if tmp[665872]
+      {
+        unknown tmp[665879]:bool[19] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+        unknown call_tmp[751685]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+        (751688 'move' call_tmp[751685](416615 call chpl_nodeID[305038]))
+        unknown call_tmp[751690]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (751693 'move' call_tmp[751690](31204 call ==[52725] loc2[31085] call_tmp[751685]))
+        (665881 'move' tmp[665879] call_tmp[751690])
+        (665886 'move' tmp[665871] tmp[665879])
+      }
+      {
+        (665891 'move' tmp[665871] 0)
+      }
+      unknown call_tmp[751695]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+      (751698 'move' call_tmp[751695] tmp[665871])
+      if call_tmp[751695]
+      {
+        unknown call_tmp[751700]:c_ptr(uint(8))[1466369] "dead after last mention" "maybe param" "temp"
+        unknown coerce_tmp[1756717]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1756723 'move' coerce_tmp[1756717](1756719 'cast' int(64)[10] loc1[31073]))
+        (751703 'move' call_tmp[751700](31101 call bufferCopyRemote[30450] coerce_tmp[1756717] buf1[31065] len1[31069]))
+        unknown locBuf1[31099]:c_ptr(uint(8))[1466369] "dead at end of block" "insert auto destroy"
+        (643628 'move' locBuf1[31099](1756726 call chpl__initCopy[1467227] call_tmp[751700] 0))
+        (31106 'end of statement')
+        unknown call_tmp[751705]:int(64)[10] "dead at end of block" "maybe param" "temp"
+        (751708 'move' call_tmp[751705](31110 call _strcmp_local[30980] locBuf1[31099] len1[31069] buf2[31077] len2[31081]))
+        const ret[31108]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+        (643630 'move' ret[31108] call_tmp[751705])
+        (31116 'end of statement' locBuf1[31099])
+        (31118 call bufferFree[30566] locBuf1[31099])
+        (548230 'end of statement' locBuf1[31099])
+        (595487 'move' ret[595477] ret[31108])
+        gotoReturn _end__strcmp[595475] _end__strcmp[595475]
+      }
+      {
+        unknown tmp[477774]:bool[19] "dead after last mention" "maybe param" "temp"
+        unknown call_tmp[751710]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+        (751713 'move' call_tmp[751710](416606 call chpl_nodeID[305038]))
+        (477785 'move' tmp[477774](31186 call ==[52725] loc1[31073] call_tmp[751710]))
+        unknown call_tmp[751715]:bool[19] "dead after last mention" "expr temp" "maybe param" "maybe type" "temp"
+        (1756736 'end of statement')
+        unknown tmp[665898]:bool[19] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+        unknown tmp[665899]:bool[19] "dead after last mention" "maybe param" "temp"
+        unknown call_tmp[751720]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (751723 'move' call_tmp[751720] tmp[477774])
+        (665904 'move' tmp[665899] call_tmp[751720])
+        if tmp[665899]
+        {
+          unknown tmp[665906]:bool[19] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+          unknown call_tmp[751725]:int(32)[66] "dead after last mention" "expr temp" "maybe param" "temp"
+          (751728 'move' call_tmp[751725](416609 call chpl_nodeID[305038]))
+          unknown call_tmp[751730]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+          (751733 'move' call_tmp[751730](31190 call !=[53199] loc2[31085] call_tmp[751725]))
+          (665908 'move' tmp[665906] call_tmp[751730])
+          (665913 'move' tmp[665898] tmp[665906])
+        }
+        {
+          (665918 'move' tmp[665898] 0)
+        }
+        unknown call_tmp[751735]:bool[19] "dead after last mention" "expr temp" "maybe param" "temp"
+        (751738 'move' call_tmp[751735] tmp[665898])
+        if call_tmp[751735]
+        {
+          unknown call_tmp[751740]:c_ptr(uint(8))[1466369] "dead after last mention" "maybe param" "temp"
+          unknown coerce_tmp[1756739]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+          (1756745 'move' coerce_tmp[1756739](1756741 'cast' int(64)[10] loc2[31085]))
+          (751743 'move' call_tmp[751740](31126 call bufferCopyRemote[30450] coerce_tmp[1756739] buf2[31077] len2[31081]))
+          unknown locBuf2[31124]:c_ptr(uint(8))[1466369] "dead at end of block" "insert auto destroy"
+          (643632 'move' locBuf2[31124](1756748 call chpl__initCopy[1467227] call_tmp[751740] 0))
+          (31131 'end of statement')
+          unknown call_tmp[751745]:int(64)[10] "dead at end of block" "maybe param" "temp"
+          (751748 'move' call_tmp[751745](31135 call _strcmp_local[30980] buf1[31065] len1[31069] locBuf2[31124] len2[31081]))
+          const ret[31133]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+          (643634 'move' ret[31133] call_tmp[751745])
+          (31141 'end of statement' locBuf2[31124])
+          (31143 call bufferFree[30566] locBuf2[31124])
+          (548236 'end of statement' locBuf2[31124])
+          (595492 'move' ret[595477] ret[31133])
+          gotoReturn _end__strcmp[595475] _end__strcmp[595475]
+        }
+        {
+          unknown call_tmp[751750]:c_ptr(uint(8))[1466369] "dead after last mention" "maybe param" "temp"
+          unknown coerce_tmp[1756754]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+          (1756760 'move' coerce_tmp[1756754](1756756 'cast' int(64)[10] loc1[31073]))
+          (751753 'move' call_tmp[751750](31151 call bufferCopyRemote[30450] coerce_tmp[1756754] buf1[31065] len1[31069]))
+          unknown locBuf1[31149]:c_ptr(uint(8))[1466369] "dead at end of block" "insert auto destroy"
+          (643636 'move' locBuf1[31149](1756763 call chpl__initCopy[1467227] call_tmp[751750] 0))
+          (31156 'end of statement')
+          unknown call_tmp[751755]:c_ptr(uint(8))[1466369] "dead after last mention" "maybe param" "temp"
+          unknown coerce_tmp[1756767]:int(64)[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+          (1756773 'move' coerce_tmp[1756767](1756769 'cast' int(64)[10] loc2[31085]))
+          (751758 'move' call_tmp[751755](31160 call bufferCopyRemote[30450] coerce_tmp[1756767] buf2[31077] len2[31081]))
+          unknown locBuf2[31158]:c_ptr(uint(8))[1466369] "dead at end of block" "insert auto destroy"
+          (643638 'move' locBuf2[31158](1756776 call chpl__initCopy[1467227] call_tmp[751755] 0))
+          (31165 'end of statement')
+          unknown call_tmp[751760]:int(64)[10] "dead at end of block" "maybe param" "temp"
+          (751763 'move' call_tmp[751760](31169 call _strcmp_local[30980] locBuf1[31149] len1[31069] locBuf2[31158] len2[31081]))
+          const ret[31167]:int(64)[10] "dead at end of block" "const" "insert auto destroy"
+          (643640 'move' ret[31167] call_tmp[751760])
+          (31175 'end of statement' locBuf1[31149] locBuf2[31158])
+          (31177 call bufferFree[30566] locBuf1[31149])
+          (548242 'end of statement' locBuf1[31149])
+          (31180 call bufferFree[30566] locBuf2[31158])
+          (548244 'end of statement' locBuf2[31158])
+          (595497 'move' ret[595477] ret[31167])
+          gotoReturn _end__strcmp[595475] _end__strcmp[595475]
+        }
+      }
+    }
+    label _end__strcmp[595475]
+    (595479 return ret[595477])
+  }
+}

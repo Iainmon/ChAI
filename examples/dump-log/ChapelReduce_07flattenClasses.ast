@@ -1,0 +1,506 @@
+AST dump for ChapelReduce after pass flattenClasses.
+Module use list: ChapelStandard ChapelLocks Reflection 
+
+{
+  function chpl__scanStateResTypesMatch[129924](arg op[129926]:_any[141](?)) param : _unknown[42]
+  {
+    unknown resType[129930] "type variable"(129938 'typeof'(129937 call(129934 call . op[129926] c"generate")))
+    unknown stateType[129941] "type variable"(129948 'typeof'(129945 call . op[129926] c"identity"))
+    (129950 return(129951 call == resType[129930] stateType[129941]))
+  }
+  function chpl__scanIteratorZip[129957](arg op[129959]:_any[141](?), arg data[129961]:_any[141](?)) : _unknown[42] "@unstable"
+  {
+    (129965 call compilerWarning "scan has been serialized (see issue #12482)")
+    unknown arr[129970](129982 for  unknown d[129971] "index var"  in  zip(129976 call _build_tuple(129975 'expand_tuple' data[129961])) do
+    {
+      (129978 call chpl__accumgen op[129959] d[129971])
+    } )
+    (129985 'end of statement')
+    (129988 call chpl__delete op[129959])
+    (129991 return arr[129970])
+  }
+  function chpl__scanIterator[129995](arg op[129997]:_any[141](?), arg data[129999]:_any[141](?)) : _unknown[42] "@unstable"
+  {
+    unknown supportsPar[130006] "param"(130007 call &&(130010 call isArray data[129999])(130013 call canResolveMethod data[129999] "_scan" op[129997]))
+    (130020 'end of statement')
+    if(130056 call _cond_test supportsPar[130006])
+    {
+      (130022 return(130029 call(130026 call . data[129999] c"_scan") op[129997]))
+    }
+    {
+      (130033 call compilerWarning "scan has been serialized (see issue #12482)")
+      unknown arr[130036](130044 for  unknown d[130037] "index var"  in  data[129999] do
+      {
+        (130041 call chpl__accumgen op[129997] d[130037])
+      } )
+      (130047 'end of statement')
+      (130050 call chpl__delete op[129997])
+      (130053 return arr[130036])
+    }
+    (396134 'used modules list'(130003 'use' Reflection[1804]))
+  }
+  function chpl__accumgen[130062](arg op[130064]:_any[141](?), arg d[130066]:_any[141](?)) : _unknown[42]
+  {
+    (130075 call(130072 call . op[130064] c"accumulate") d[130066])
+    (130077 return(130082 call(130079 call . op[130064] c"generate")))
+  }
+  function chpl__reduceCombine[130085](arg globalOp[130087]:_any[141](?), arg localOp[130089]:_any[141](?)) : _unknown[42] "no return value for void"
+  {
+    {
+      const tmp[130121] "const" "temp"
+      (130122 'move' tmp[130121](130119 'deref'(130118 '_wide_get_locale' globalOp[130087])))
+      {
+        (130101 call(130098 call .(130095 call . globalOp[130087] c"l") c"lock"))
+        (130108 call(130105 call . globalOp[130087] c"combine") localOp[130089])
+        (130117 call(130114 call .(130111 call . globalOp[130087] c"l") c"unlock"))
+      }
+      (130125 'elided on block' 0 tmp[130121])
+    }
+  }
+  function chpl__cleanupLocalOp[130131](arg globalOp[130133]:_any[141](?), arg localOp[130135]:_any[141](?)) : _unknown[42] "inline" "no return value for void"
+  {
+    (130140 call chpl__delete localOp[130135])
+  }
+  function chpl_sumTypeIsSame[130145](arg eltType[130147]:_any[141](?)) param : _unknown[42]
+  {
+    if(130220 call _cond_test(130212 call ||(130215 call isNumeric eltType[130147])(130218 call isString eltType[130147])))
+    {
+      (130151 return 1)
+    }
+    {
+      if(130207 call _cond_test(130205 call isDomain eltType[130147]))
+      {
+        unknown d[130155] eltType[130147]
+        (130158 'end of statement')
+        (130159 return(130166 call(130163 call . d[130155] c"isAssociative")))
+      }
+      {
+        if(130200 call _cond_test(130198 call isArray eltType[130147]))
+        {
+          unknown arrInstType[130169] "type variable"(130170 'static field type' eltType[130147] "_instance")
+          unknown instanceObj[130175](130177 'to nilable class from type' arrInstType[130169])
+          (130179 'end of statement')
+          unknown instanceEltType[130181] "type variable"(130182 'static typeof'(130186 call .(130183 call postfix! instanceObj[130175]) c"eltType"))
+          (130190 return(130192 call chpl_sumTypeIsSame instanceEltType[130181]))
+        }
+        {
+          (130195 return 0)
+        }
+      }
+    }
+  }
+  function chpl__sumType[130227](arg eltType[130229]:_any[141](?)) type : _unknown[42]
+  {
+    if(130321 call _cond_test(130319 call chpl_sumTypeIsSame eltType[130229]))
+    {
+      (130233 return eltType[130229])
+    }
+    {
+      unknown x[130237] eltType[130229]
+      (130240 'end of statement')
+      if(130314 call _cond_test(130312 call isArray x[130237]))
+      {
+        unknown xET[130243] "type variable"(130245 call . x[130237] c"eltType")
+        unknown xST[130250] "type variable"(130252 call chpl__sumType xET[130243])
+        if(130271 call _cond_test(130267 call == xET[130243] xST[130250]))
+        {
+          (130255 return eltType[130229])
+        }
+        {
+          (130258 return(130264 [ (130260 call . x[130237] c"_dom") ]
+          {
+            xST[130250]
+          } ))
+        }
+      }
+      {
+        if(130300 call _cond_test(130291 call !(130294 call canResolve "+" x[130237] x[130237])))
+        {
+          (130282 call compilerError "+ reduce cannot be used on values of the type "(130286 call : eltType[130229] string[244]))
+        }
+        (130305 return(130310 'typeof'(130306 call + x[130237] x[130237])))
+        (396136 'used modules list'(130279 'use' Reflection[1804]))
+      }
+    }
+  }
+  type ReduceScanOp[130334] val super[397462]:RootClass[236] "super class" unknown l[130329] chpl_LocalSpinlock[85418]
+  function SumReduceScanOp[130447](?).identity[130348](arg _mt[130352]:_MT[201], arg this[130350]:SumReduceScanOp[130447](?)) : _unknown[42] "inline" "method" "primary method" "no parens"
+  {
+    unknown x[130356](130358 call chpl__sumType(429503 call . this[130350] c"eltType"))
+    (130361 'end of statement')
+    (130362 return x[130356])
+  }
+  function SumReduceScanOp[130447](?).accumulate[130366](arg _mt[130372]:_MT[201], arg this[130368]:SumReduceScanOp[130447](?), arg x[130370]:_any[141](?)) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (130375 call +=(429509 call . this[130368] c"value") x[130370])
+  }
+  function SumReduceScanOp[130447](?).accumulateOntoState[130381](arg _mt[130389]:_MT[201], arg this[130383]:SumReduceScanOp[130447](?), ref arg state[130385]:_any[141](?), arg x[130387]:_any[141](?)) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (130392 call += state[130385] x[130387])
+  }
+  function SumReduceScanOp[130447](?).combine[130398](arg _mt[130404]:_MT[201], arg this[130400]:SumReduceScanOp[130447](?), arg x[130402]:_any[141](?)) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (130407 call +=(429517 call . this[130400] c"value")(130413 call . x[130402] c"value"))
+  }
+  function SumReduceScanOp[130447](?).generate[130418](arg _mt[130422]:_MT[201], arg this[130420]:SumReduceScanOp[130447](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    (130425 return(429522 call . this[130420] c"value"))
+  }
+  function SumReduceScanOp[130447](?).clone[130429](arg _mt[130433]:_MT[201], arg this[130431]:SumReduceScanOp[130447](?)) : _unknown[42] "inline" "method" "primary method"
+  {
+    (130436 return(130437 'new'(_chpl_manager = unmanaged[183](?))(130441 call SumReduceScanOp[429526](?)(eltType =(429531 call . this[130431] c"eltType")))))
+  }
+  type SumReduceScanOp[130447](?) val super[397464]:ReduceScanOp[130334] "super class" unknown eltType[130339] "type variable" unknown value[130342](130344 call chpl__sumType eltType[130339])
+  type SumReduceScanOp[429526](?)
+  function ProductReduceScanOp[130553](?).identity[130461](arg _mt[130465]:_MT[201], arg this[130463]:ProductReduceScanOp[130553](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (130468 return(130470 call _prod_id(429537 call . this[130463] c"eltType")))
+  }
+  function ProductReduceScanOp[130553](?).accumulate[130474](arg _mt[130480]:_MT[201], arg this[130476]:ProductReduceScanOp[130553](?), arg x[130478]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (130483 call *=(429542 call . this[130476] c"value") x[130478])
+  }
+  function ProductReduceScanOp[130553](?).accumulateOntoState[130489](arg _mt[130497]:_MT[201], arg this[130491]:ProductReduceScanOp[130553](?), ref arg state[130493]:_any[141](?), arg x[130495]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (130500 call *= state[130493] x[130495])
+  }
+  function ProductReduceScanOp[130553](?).combine[130506](arg _mt[130512]:_MT[201], arg this[130508]:ProductReduceScanOp[130553](?), arg x[130510]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (130515 call *=(429550 call . this[130508] c"value")(130519 call . x[130510] c"value"))
+  }
+  function ProductReduceScanOp[130553](?).generate[130524](arg _mt[130528]:_MT[201], arg this[130526]:ProductReduceScanOp[130553](?)) : _unknown[42] "method" "primary method"
+  {
+    (130531 return(429555 call . this[130526] c"value"))
+  }
+  function ProductReduceScanOp[130553](?).clone[130535](arg _mt[130539]:_MT[201], arg this[130537]:ProductReduceScanOp[130553](?)) : _unknown[42] "method" "primary method"
+  {
+    (130542 return(130543 'new'(_chpl_manager = unmanaged[183](?))(130547 call ProductReduceScanOp[429559](?)(eltType =(429564 call . this[130537] c"eltType")))))
+  }
+  type ProductReduceScanOp[130553](?) val super[397466]:ReduceScanOp[130334] "super class" unknown eltType[130452] "type variable" unknown value[130455](130457 call _prod_id eltType[130452])
+  type ProductReduceScanOp[429559](?)
+  function MaxReduceScanOp[130668](?).identity[130567](arg _mt[130571]:_MT[201], arg this[130569]:MaxReduceScanOp[130668](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (130574 return(130576 call min(429570 call . this[130569] c"eltType")))
+  }
+  function MaxReduceScanOp[130668](?).accumulate[130580](arg _mt[130586]:_MT[201], arg this[130582]:MaxReduceScanOp[130668](?), arg x[130584]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (130589 call =(429575 call . this[130582] c"value")(130593 call max x[130584](429581 call . this[130582] c"value")))
+  }
+  function MaxReduceScanOp[130668](?).accumulateOntoState[130598](arg _mt[130606]:_MT[201], arg this[130600]:MaxReduceScanOp[130668](?), ref arg state[130602]:_any[141](?), arg x[130604]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (130609 call = state[130602](130613 call max state[130602] x[130604]))
+  }
+  function MaxReduceScanOp[130668](?).combine[130618](arg _mt[130624]:_MT[201], arg this[130620]:MaxReduceScanOp[130668](?), arg x[130622]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (130627 call =(429589 call . this[130620] c"value")(130631 call max(429594 call . this[130620] c"value")(130634 call . x[130622] c"value")))
+  }
+  function MaxReduceScanOp[130668](?).generate[130639](arg _mt[130643]:_MT[201], arg this[130641]:MaxReduceScanOp[130668](?)) : _unknown[42] "method" "primary method"
+  {
+    (130646 return(429599 call . this[130641] c"value"))
+  }
+  function MaxReduceScanOp[130668](?).clone[130650](arg _mt[130654]:_MT[201], arg this[130652]:MaxReduceScanOp[130668](?)) : _unknown[42] "method" "primary method"
+  {
+    (130657 return(130658 'new'(_chpl_manager = unmanaged[183](?))(130662 call MaxReduceScanOp[429603](?)(eltType =(429608 call . this[130652] c"eltType")))))
+  }
+  type MaxReduceScanOp[130668](?) val super[397468]:ReduceScanOp[130334] "super class" unknown eltType[130558] "type variable" unknown value[130561](130563 call min eltType[130558])
+  type MaxReduceScanOp[429603](?)
+  function MinReduceScanOp[130783](?).identity[130682](arg _mt[130686]:_MT[201], arg this[130684]:MinReduceScanOp[130783](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (130689 return(130691 call max(429614 call . this[130684] c"eltType")))
+  }
+  function MinReduceScanOp[130783](?).accumulate[130695](arg _mt[130701]:_MT[201], arg this[130697]:MinReduceScanOp[130783](?), arg x[130699]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (130704 call =(429619 call . this[130697] c"value")(130708 call min x[130699](429625 call . this[130697] c"value")))
+  }
+  function MinReduceScanOp[130783](?).accumulateOntoState[130713](arg _mt[130721]:_MT[201], arg this[130715]:MinReduceScanOp[130783](?), ref arg state[130717]:_any[141](?), arg x[130719]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (130724 call = state[130717](130728 call min state[130717] x[130719]))
+  }
+  function MinReduceScanOp[130783](?).combine[130733](arg _mt[130739]:_MT[201], arg this[130735]:MinReduceScanOp[130783](?), arg x[130737]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (130742 call =(429633 call . this[130735] c"value")(130746 call min(429638 call . this[130735] c"value")(130749 call . x[130737] c"value")))
+  }
+  function MinReduceScanOp[130783](?).generate[130754](arg _mt[130758]:_MT[201], arg this[130756]:MinReduceScanOp[130783](?)) : _unknown[42] "method" "primary method"
+  {
+    (130761 return(429643 call . this[130756] c"value"))
+  }
+  function MinReduceScanOp[130783](?).clone[130765](arg _mt[130769]:_MT[201], arg this[130767]:MinReduceScanOp[130783](?)) : _unknown[42] "method" "primary method"
+  {
+    (130772 return(130773 'new'(_chpl_manager = unmanaged[183](?))(130777 call MinReduceScanOp[429647](?)(eltType =(429652 call . this[130767] c"eltType")))))
+  }
+  type MinReduceScanOp[130783](?) val super[397470]:ReduceScanOp[130334] "super class" unknown eltType[130673] "type variable" unknown value[130676](130678 call max eltType[130673])
+  type MinReduceScanOp[429647](?)
+  function minmax[130991](?).identity[130803](arg _mt[130807]:_MT[201], arg this[130805]:minmax[130991](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (130810 return(130818 call _build_tuple(130813 call max(429659 call . this[130805] c"eltType"))(130816 call min(429664 call . this[130805] c"eltType"))))
+  }
+  function minmax[130991](?).accumulateOntoState[130822](arg _mt[130832]:_MT[201], arg this[130824]:minmax[130991](?), ref arg state[130826]:_any[141](?), arg x[130829] :
+  (429669 call . this[130824] c"eltType")) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (130835 call =(130838 call state[130826] 0)(130841 call min(130843 call state[130826] 0) x[130829]))
+    (130846 call =(130849 call state[130826] 1)(130852 call max(130854 call state[130826] 1) x[130829]))
+  }
+  function minmax[130991](?).accumulateOntoState[130859](arg _mt[130872]:_MT[201], arg this[130861]:minmax[130991](?), ref arg state[130863]:_any[141](?), arg other[130869] :
+  (130865 call * 2(429680 call . this[130861] c"eltType"))) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (130875 call =(130878 call state[130863] 0)(130881 call min(130883 call state[130863] 0)(130886 call other[130869] 0)))
+    (130888 call =(130891 call state[130863] 1)(130894 call max(130896 call state[130863] 1)(130899 call other[130869] 1)))
+  }
+  function minmax[130991](?).accumulate[130903](arg _mt[130911]:_MT[201], arg this[130905]:minmax[130991](?), arg x[130908] :
+  (429691 call . this[130905] c"eltType")) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (130915 call(429695 call . this[130905] c"accumulateOntoState")(429700 call . this[130905] c"value") x[130908])
+  }
+  function minmax[130991](?).accumulate[130920](arg _mt[130931]:_MT[201], arg this[130922]:minmax[130991](?), arg state[130928] :
+  (130924 call * 2(429706 call . this[130922] c"eltType"))) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (130935 call(429710 call . this[130922] c"accumulateOntoState")(429715 call . this[130922] c"value") state[130928])
+  }
+  function minmax[130991](?).combine[130940](arg _mt[130950]:_MT[201], arg this[130942]:minmax[130991](?), arg other[130947] :
+  (130945 call minmax[429720](?)(429725 call . this[130942] c"eltType"))) : _unknown[42] "inline" "method" "primary method" "no return value for void"
+  {
+    (130954 call(429729 call . this[130942] c"accumulateOntoState")(429734 call . this[130942] c"value")(130957 call . other[130947] c"value"))
+  }
+  function minmax[130991](?).generate[130962](arg _mt[130966]:_MT[201], arg this[130964]:minmax[130991](?)) : _unknown[42] "method" "primary method"
+  {
+    (130969 return(429739 call . this[130964] c"value"))
+  }
+  function minmax[130991](?).clone[130973](arg _mt[130977]:_MT[201], arg this[130975]:minmax[130991](?)) : _unknown[42] "method" "primary method"
+  {
+    (130980 return(130981 'new'(_chpl_manager = unmanaged[183](?))(130985 call minmax[429720](?)(eltType =(429745 call . this[130975] c"eltType")))))
+  }
+  type minmax[130991](?) val super[397472]:ReduceScanOp[130334] "super class" unknown eltType[130788] "type variable" unknown value[130791](130799 call _build_tuple(130794 call max eltType[130788])(130797 call min eltType[130788]))
+  type minmax[429720](?)
+  function LogicalAndReduceScanOp[131127](?).identity[131005](arg _mt[131009]:_MT[201], arg this[131007]:LogicalAndReduceScanOp[131127](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (131012 return(131014 call _land_id(429751 call . this[131007] c"eltType")))
+  }
+  function LogicalAndReduceScanOp[131127](?).accumulate[131018](arg _mt[131024]:_MT[201], arg this[131020]:LogicalAndReduceScanOp[131127](?), arg x[131022]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    {
+      unknown tmp[131030] "temp"
+      (131033 'move' tmp[131030](131032 'addr of'(429756 call . this[131020] c"value")))
+      (131038 call = tmp[131030](131035 call && tmp[131030] x[131022]))
+    }
+  }
+  function LogicalAndReduceScanOp[131127](?).accumulateOntoState[131043](arg _mt[131051]:_MT[201], arg this[131045]:LogicalAndReduceScanOp[131127](?), ref arg state[131047]:_any[141](?), arg x[131049]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    {
+      unknown tmp[131057] "temp"
+      (131060 'move' tmp[131057](131059 'addr of' state[131047]))
+      (131065 call = tmp[131057](131062 call && tmp[131057] x[131049]))
+    }
+  }
+  function LogicalAndReduceScanOp[131127](?).combine[131070](arg _mt[131076]:_MT[201], arg this[131072]:LogicalAndReduceScanOp[131127](?), arg x[131074]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    {
+      unknown tmp[131085] "temp"
+      (131088 'move' tmp[131085](131087 'addr of'(429764 call . this[131072] c"value")))
+      (131093 call = tmp[131085](131090 call && tmp[131085](131081 call . x[131074] c"value")))
+    }
+  }
+  function LogicalAndReduceScanOp[131127](?).generate[131098](arg _mt[131102]:_MT[201], arg this[131100]:LogicalAndReduceScanOp[131127](?)) : _unknown[42] "method" "primary method"
+  {
+    (131105 return(429769 call . this[131100] c"value"))
+  }
+  function LogicalAndReduceScanOp[131127](?).clone[131109](arg _mt[131113]:_MT[201], arg this[131111]:LogicalAndReduceScanOp[131127](?)) : _unknown[42] "method" "primary method"
+  {
+    (131116 return(131117 'new'(_chpl_manager = unmanaged[183](?))(131121 call LogicalAndReduceScanOp[429773](?)(eltType =(429778 call . this[131111] c"eltType")))))
+  }
+  type LogicalAndReduceScanOp[131127](?) val super[397474]:ReduceScanOp[130334] "super class" unknown eltType[130996] "type variable" unknown value[130999](131001 call _land_id eltType[130996])
+  type LogicalAndReduceScanOp[429773](?)
+  function LogicalOrReduceScanOp[131263](?).identity[131141](arg _mt[131145]:_MT[201], arg this[131143]:LogicalOrReduceScanOp[131263](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (131148 return(131150 call _lor_id(429784 call . this[131143] c"eltType")))
+  }
+  function LogicalOrReduceScanOp[131263](?).accumulate[131154](arg _mt[131160]:_MT[201], arg this[131156]:LogicalOrReduceScanOp[131263](?), arg x[131158]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    {
+      unknown tmp[131166] "temp"
+      (131169 'move' tmp[131166](131168 'addr of'(429789 call . this[131156] c"value")))
+      (131174 call = tmp[131166](131171 call || tmp[131166] x[131158]))
+    }
+  }
+  function LogicalOrReduceScanOp[131263](?).accumulateOntoState[131179](arg _mt[131187]:_MT[201], arg this[131181]:LogicalOrReduceScanOp[131263](?), ref arg state[131183]:_any[141](?), arg x[131185]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    {
+      unknown tmp[131193] "temp"
+      (131196 'move' tmp[131193](131195 'addr of' state[131183]))
+      (131201 call = tmp[131193](131198 call || tmp[131193] x[131185]))
+    }
+  }
+  function LogicalOrReduceScanOp[131263](?).combine[131206](arg _mt[131212]:_MT[201], arg this[131208]:LogicalOrReduceScanOp[131263](?), arg x[131210]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    {
+      unknown tmp[131221] "temp"
+      (131224 'move' tmp[131221](131223 'addr of'(429797 call . this[131208] c"value")))
+      (131229 call = tmp[131221](131226 call || tmp[131221](131217 call . x[131210] c"value")))
+    }
+  }
+  function LogicalOrReduceScanOp[131263](?).generate[131234](arg _mt[131238]:_MT[201], arg this[131236]:LogicalOrReduceScanOp[131263](?)) : _unknown[42] "method" "primary method"
+  {
+    (131241 return(429802 call . this[131236] c"value"))
+  }
+  function LogicalOrReduceScanOp[131263](?).clone[131245](arg _mt[131249]:_MT[201], arg this[131247]:LogicalOrReduceScanOp[131263](?)) : _unknown[42] "method" "primary method"
+  {
+    (131252 return(131253 'new'(_chpl_manager = unmanaged[183](?))(131257 call LogicalOrReduceScanOp[421904](?)(eltType =(429808 call . this[131247] c"eltType")))))
+  }
+  type LogicalOrReduceScanOp[131263](?) val super[397476]:ReduceScanOp[130334] "super class" unknown eltType[131132] "type variable" unknown value[131135](131137 call _lor_id eltType[131132])
+  type LogicalOrReduceScanOp[421904](?)
+  function BitwiseAndReduceScanOp[131369](?).identity[131277](arg _mt[131281]:_MT[201], arg this[131279]:BitwiseAndReduceScanOp[131369](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (131284 return(131286 call _band_id(429814 call . this[131279] c"eltType")))
+  }
+  function BitwiseAndReduceScanOp[131369](?).accumulate[131290](arg _mt[131296]:_MT[201], arg this[131292]:BitwiseAndReduceScanOp[131369](?), arg x[131294]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131299 call &=(429819 call . this[131292] c"value") x[131294])
+  }
+  function BitwiseAndReduceScanOp[131369](?).accumulateOntoState[131305](arg _mt[131313]:_MT[201], arg this[131307]:BitwiseAndReduceScanOp[131369](?), ref arg state[131309]:_any[141](?), arg x[131311]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131316 call &= state[131309] x[131311])
+  }
+  function BitwiseAndReduceScanOp[131369](?).combine[131322](arg _mt[131328]:_MT[201], arg this[131324]:BitwiseAndReduceScanOp[131369](?), arg x[131326]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131331 call &=(429827 call . this[131324] c"value")(131335 call . x[131326] c"value"))
+  }
+  function BitwiseAndReduceScanOp[131369](?).generate[131340](arg _mt[131344]:_MT[201], arg this[131342]:BitwiseAndReduceScanOp[131369](?)) : _unknown[42] "method" "primary method"
+  {
+    (131347 return(429832 call . this[131342] c"value"))
+  }
+  function BitwiseAndReduceScanOp[131369](?).clone[131351](arg _mt[131355]:_MT[201], arg this[131353]:BitwiseAndReduceScanOp[131369](?)) : _unknown[42] "method" "primary method"
+  {
+    (131358 return(131359 'new'(_chpl_manager = unmanaged[183](?))(131363 call BitwiseAndReduceScanOp[429836](?)(eltType =(429841 call . this[131353] c"eltType")))))
+  }
+  type BitwiseAndReduceScanOp[131369](?) val super[397478]:ReduceScanOp[130334] "super class" unknown eltType[131268] "type variable" unknown value[131271](131273 call _band_id eltType[131268])
+  type BitwiseAndReduceScanOp[429836](?)
+  function BitwiseOrReduceScanOp[131475](?).identity[131383](arg _mt[131387]:_MT[201], arg this[131385]:BitwiseOrReduceScanOp[131475](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (131390 return(131392 call _bor_id(429847 call . this[131385] c"eltType")))
+  }
+  function BitwiseOrReduceScanOp[131475](?).accumulate[131396](arg _mt[131402]:_MT[201], arg this[131398]:BitwiseOrReduceScanOp[131475](?), arg x[131400]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131405 call |=(429852 call . this[131398] c"value") x[131400])
+  }
+  function BitwiseOrReduceScanOp[131475](?).accumulateOntoState[131411](arg _mt[131419]:_MT[201], arg this[131413]:BitwiseOrReduceScanOp[131475](?), ref arg state[131415]:_any[141](?), arg x[131417]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131422 call |= state[131415] x[131417])
+  }
+  function BitwiseOrReduceScanOp[131475](?).combine[131428](arg _mt[131434]:_MT[201], arg this[131430]:BitwiseOrReduceScanOp[131475](?), arg x[131432]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131437 call |=(429860 call . this[131430] c"value")(131441 call . x[131432] c"value"))
+  }
+  function BitwiseOrReduceScanOp[131475](?).generate[131446](arg _mt[131450]:_MT[201], arg this[131448]:BitwiseOrReduceScanOp[131475](?)) : _unknown[42] "method" "primary method"
+  {
+    (131453 return(429865 call . this[131448] c"value"))
+  }
+  function BitwiseOrReduceScanOp[131475](?).clone[131457](arg _mt[131461]:_MT[201], arg this[131459]:BitwiseOrReduceScanOp[131475](?)) : _unknown[42] "method" "primary method"
+  {
+    (131464 return(131465 'new'(_chpl_manager = unmanaged[183](?))(131469 call BitwiseOrReduceScanOp[429869](?)(eltType =(429874 call . this[131459] c"eltType")))))
+  }
+  type BitwiseOrReduceScanOp[131475](?) val super[397480]:ReduceScanOp[130334] "super class" unknown eltType[131374] "type variable" unknown value[131377](131379 call _bor_id eltType[131374])
+  type BitwiseOrReduceScanOp[429869](?)
+  function BitwiseXorReduceScanOp[131581](?).identity[131489](arg _mt[131493]:_MT[201], arg this[131491]:BitwiseXorReduceScanOp[131581](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (131496 return(131498 call _bxor_id(429880 call . this[131491] c"eltType")))
+  }
+  function BitwiseXorReduceScanOp[131581](?).accumulate[131502](arg _mt[131508]:_MT[201], arg this[131504]:BitwiseXorReduceScanOp[131581](?), arg x[131506]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131511 call ^=(429885 call . this[131504] c"value") x[131506])
+  }
+  function BitwiseXorReduceScanOp[131581](?).accumulateOntoState[131517](arg _mt[131525]:_MT[201], arg this[131519]:BitwiseXorReduceScanOp[131581](?), ref arg state[131521]:_any[141](?), arg x[131523]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131528 call ^= state[131521] x[131523])
+  }
+  function BitwiseXorReduceScanOp[131581](?).combine[131534](arg _mt[131540]:_MT[201], arg this[131536]:BitwiseXorReduceScanOp[131581](?), arg x[131538]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131543 call ^=(429893 call . this[131536] c"value")(131547 call . x[131538] c"value"))
+  }
+  function BitwiseXorReduceScanOp[131581](?).generate[131552](arg _mt[131556]:_MT[201], arg this[131554]:BitwiseXorReduceScanOp[131581](?)) : _unknown[42] "method" "primary method"
+  {
+    (131559 return(429898 call . this[131554] c"value"))
+  }
+  function BitwiseXorReduceScanOp[131581](?).clone[131563](arg _mt[131567]:_MT[201], arg this[131565]:BitwiseXorReduceScanOp[131581](?)) : _unknown[42] "method" "primary method"
+  {
+    (131570 return(131571 'new'(_chpl_manager = unmanaged[183](?))(131575 call BitwiseXorReduceScanOp[429902](?)(eltType =(429907 call . this[131565] c"eltType")))))
+  }
+  type BitwiseXorReduceScanOp[131581](?) val super[397482]:ReduceScanOp[130334] "super class" unknown eltType[131480] "type variable" unknown value[131483](131485 call _bxor_id eltType[131480])
+  type BitwiseXorReduceScanOp[429902](?)
+  function _maxloc_id[131583](arg eltType[131585]:_any[141](?)) : _unknown[42]
+  {
+    (131588 return(131600 call _build_tuple(131591 call min(131593 call eltType[131585] 0))(131596 call max(131598 call eltType[131585] 1))))
+  }
+  function _minloc_id[131604](arg eltType[131606]:_any[141](?)) : _unknown[42]
+  {
+    (131609 return(131611 call max eltType[131606]))
+  }
+  function maxloc[131779](?).identity[131627](arg _mt[131631]:_MT[201], arg this[131629]:maxloc[131779](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (131634 return(131636 call _maxloc_id(429916 call . this[131629] c"eltType")))
+  }
+  function maxloc[131779](?).accumulate[131640](arg _mt[131646]:_MT[201], arg this[131642]:maxloc[131779](?), arg x[131644]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131650 call(429920 call . this[131642] c"accumulateOntoState")(429925 call . this[131642] c"value") x[131644])
+  }
+  function maxloc[131779](?).accumulateOntoState[131655](arg _mt[131663]:_MT[201], arg this[131657]:maxloc[131779](?), ref arg state[131659]:_any[141](?), arg x[131661]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    if(131725 call _cond_test(131671 call ||(131673 call ||(131675 call >(131678 call x[131661] 0)(131681 call state[131659] 0))(131683 call &&(131685 call ==(131688 call x[131661] 0)(131691 call state[131659] 0))(131693 call <(131696 call x[131661] 1)(131699 call state[131659] 1))))(131701 call &&(131704 call gotNaN(131706 call x[131661] 0))(131708 call ||(131710 call !(131713 call gotNaN(131715 call state[131659] 0)))(131717 call <(131720 call x[131661] 1)(131723 call state[131659] 1))))))
+    {
+      (131666 call = state[131659] x[131661])
+    }
+  }
+  function maxloc[131779](?).combine[131732](arg _mt[131738]:_MT[201], arg this[131734]:maxloc[131779](?), arg x[131736]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131742 call(429942 call . this[131734] c"accumulateOntoState")(429947 call . this[131734] c"value")(131745 call . x[131736] c"value"))
+  }
+  function maxloc[131779](?).generate[131750](arg _mt[131754]:_MT[201], arg this[131752]:maxloc[131779](?)) : _unknown[42] "method" "primary method"
+  {
+    (131757 return(429952 call . this[131752] c"value"))
+  }
+  function maxloc[131779](?).clone[131761](arg _mt[131765]:_MT[201], arg this[131763]:maxloc[131779](?)) : _unknown[42] "method" "primary method"
+  {
+    (131768 return(131769 'new'(_chpl_manager = unmanaged[183](?))(131773 call maxloc[429956](?)(eltType =(429961 call . this[131763] c"eltType")))))
+  }
+  type maxloc[131779](?) val super[397484]:ReduceScanOp[130334] "super class" unknown eltType[131618] "type variable" unknown value[131621](131623 call _maxloc_id eltType[131618])
+  type maxloc[429956](?)
+  function minloc[131945](?).identity[131793](arg _mt[131797]:_MT[201], arg this[131795]:minloc[131945](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    (131800 return(131802 call _minloc_id(429967 call . this[131795] c"eltType")))
+  }
+  function minloc[131945](?).accumulate[131806](arg _mt[131812]:_MT[201], arg this[131808]:minloc[131945](?), arg x[131810]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131816 call(429971 call . this[131808] c"accumulateOntoState")(429976 call . this[131808] c"value") x[131810])
+  }
+  function minloc[131945](?).accumulateOntoState[131821](arg _mt[131829]:_MT[201], arg this[131823]:minloc[131945](?), ref arg state[131825]:_any[141](?), arg x[131827]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    if(131891 call _cond_test(131837 call ||(131839 call ||(131841 call <(131844 call x[131827] 0)(131847 call state[131825] 0))(131849 call &&(131851 call ==(131854 call x[131827] 0)(131857 call state[131825] 0))(131859 call <(131862 call x[131827] 1)(131865 call state[131825] 1))))(131867 call &&(131870 call gotNaN(131872 call x[131827] 0))(131874 call ||(131876 call !(131879 call gotNaN(131881 call state[131825] 0)))(131883 call <(131886 call x[131827] 1)(131889 call state[131825] 1))))))
+    {
+      (131832 call = state[131825] x[131827])
+    }
+  }
+  function minloc[131945](?).combine[131898](arg _mt[131904]:_MT[201], arg this[131900]:minloc[131945](?), arg x[131902]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (131908 call(429993 call . this[131900] c"accumulateOntoState")(429998 call . this[131900] c"value")(131911 call . x[131902] c"value"))
+  }
+  function minloc[131945](?).generate[131916](arg _mt[131920]:_MT[201], arg this[131918]:minloc[131945](?)) : _unknown[42] "method" "primary method"
+  {
+    (131923 return(430003 call . this[131918] c"value"))
+  }
+  function minloc[131945](?).clone[131927](arg _mt[131931]:_MT[201], arg this[131929]:minloc[131945](?)) : _unknown[42] "method" "primary method"
+  {
+    (131934 return(131935 'new'(_chpl_manager = unmanaged[183](?))(131939 call minloc[430007](?)(eltType =(430012 call . this[131929] c"eltType")))))
+  }
+  type minloc[131945](?) val super[397486]:ReduceScanOp[130334] "super class" unknown eltType[131784] "type variable" unknown value[131787](131789 call _minloc_id eltType[131784])
+  type minloc[430007](?)
+  function gotNaN[131947](arg value[131949]:_any[141](?)) : _unknown[42] "inline" "private"
+  {
+    (131955 return(131957 call isNan value[131949]))
+  }
+  where {
+    (131952 call isReal value[131949])
+  }
+  function gotNaN[131962](arg value[131964]:_any[141](?)) param : _unknown[42] "private"
+  {
+    (131967 return 0)
+  }
+  (396131 'used modules list'(129919 'use' ChapelStandard[315387])(129922 'use' ChapelLocks[85420]))
+}

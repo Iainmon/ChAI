@@ -1,0 +1,1099 @@
+AST dump for DynamicTensor after pass cleanup.
+Module use list: LoadNumpy IO Utilities 
+
+{
+  (387082 'use' ChapelStandard)
+  (344516 'use' NDArray)
+  (344519 'use' Remote)
+  (344522 'use' Autograd)
+  (344526 'import' Autograd 'as' ag)
+  (344529 'import' StaticTensor 'as' tn)
+  (344531 'use' StaticTensor)
+  (344535 'import' Utilities 'as' util)
+  (344540 'use'(344537 call . Utilities c"Standard"))
+  unknown maxRank[344543] "config" "param" 6
+  (344546 'end of statement')
+  (344549 'import' LoadNumpy)
+  unknown defaultDetachedMode[344551] "param" 1
+  (344554 'end of statement')
+  function Tensor[345586](?).init[344579](arg _mt[344585]:_MT[201], arg this[344581]:Tensor[345586](?), arg eltType[344583]:_any[141](?)) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (344588 call =(344591 call . this[344581] c"eltType") eltType[344583])
+    (344595 call =(344598 call . this[344581] c"meta")(344601 'new'(_chpl_manager = _shared[242](?))(344605 call TensorEssence[333748](?) eltType[344583])))
+    (344608 call halt "Degenerate initialization of dynamicTensor.")
+  }
+  function Tensor[345586](?).init[344614](arg _mt[344628]:_MT[201], arg this[344616]:Tensor[345586](?), arg eltType[344618]:_any[141](?), in arg meta[344625] :
+  (344621 call _shared(344623 call TensorEssence[333748](?) eltType[344618]))) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (344631 call =(344634 call . this[344616] c"eltType") eltType[344618])
+    (344638 call =(344641 call . this[344616] c"meta") meta[344625])
+    (344645 call =(344650 call . this[344616] c"runtimeRank")(344654 call . meta[344625] c"runtimeRank"))
+  }
+  function Tensor[345586](?).init[344659](arg _mt[344672]:_MT[201], arg this[344661]:Tensor[345586](?), in arg meta[344669] :
+  (344664 call _shared(344666 call TensorEssence[333748](?) unknown eltType[344667]))) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (344675 call =(344678 call . this[344661] c"eltType") eltType[344667])
+    (344682 call =(344685 call . this[344661] c"meta") meta[344669])
+    (344689 call =(344692 call . this[344661] c"runtimeRank")(344696 call . meta[344669] c"runtimeRank"))
+  }
+  function Tensor[345586](?).init[344701](arg _mt[344727]:_MT[201], arg this[344703]:Tensor[345586](?), arg t[344711] :
+  (344706 call staticTensor[339695](?) unknown rank[344707] unknown eltType[344709]), arg detached[344723] :
+  bool[19] =
+  (344722 call(344719 call . Tensor[345586](?) c"detachMode"))) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (344730 call =(344733 call . this[344703] c"eltType") eltType[344709])
+    if(344795 call _cond_test detached[344723])
+    {
+      unknown u[344739](344744 call(344741 call . t[344711] c"detach"))
+      (344746 'end of statement')
+      (344747 call =(344750 call . this[344703] c"meta")(344754 call . u[344739] c"meta"))
+      (344757 call =(344760 call . this[344703] c"runtimeRank")(344767 call .(344764 call . u[344739] c"meta") c"runtimeRank"))
+    }
+    {
+      (344771 call =(344774 call . this[344703] c"meta")(344778 call . t[344711] c"meta"))
+      (344781 call =(344784 call . this[344703] c"runtimeRank")(344791 call .(344788 call . t[344711] c"meta") c"runtimeRank"))
+    }
+  }
+  function Tensor[345586](?).init[344801](arg _mt[344814]:_MT[201], arg this[344803]:Tensor[345586](?), arg a[344811] :
+  (344806 call ndarray[328686](?) unknown rank[344807] unknown eltType[344809])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (344821 call(344818 call . this[344803] c"init")(344822 'new'(344824 call staticTensor[339695](?) a[344811])))
+  }
+  function Tensor[345586](?).init[344828](arg _mt[344840]:_MT[201], arg this[344830]:Tensor[345586](?), arg arr[344837] :
+  (344835 call chpl__buildArrayRuntimeType nil[32] unknown eltType[344833])) : _unknown[42] "method" "primary method" "no return value for void"
+  {
+    (344847 call(344844 call . this[344830] c"init")(344848 'new'(344850 call staticTensor[339695](?) arr[344837])))
+  }
+  function Tensor[345586](?).this[344854](arg _mt[344862]:_MT[201], arg this[344856]:Tensor[345586](?), arg args[344859]:_any[141](?) ...) : _unknown[42] "method" "primary method"
+  {
+    (344865 return(344870 call(344867 call . this[344856] c"slice")(344872 'expand_tuple' args[344859])))
+  }
+  function Tensor[345586](?).tensorize[344875](arg _mt[344883]:_MT[201], arg this[344877]:Tensor[345586](?), param arg rank[344880] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    if(344926 call _cond_test(344919 call != rank[344880](344922 call . this[344877] c"runtimeRank")))
+    {
+      (344891 call halt(344892 call +(344894 call +(344896 call +(344898 call + "Cannot cast this Tensor of rank "(344903 call :(344905 call . this[344877] c"runtimeRank") string[244])) " to tensor of rank ")(344913 call : rank[344880] string[244])) "."))
+    }
+    (344931 return(344933 call forceRank rank[344880]))
+  }
+  { scopeless type
+    (344886 call staticTensor[339695](?) rank[344880] eltType)
+  }
+  function Tensor[345586](?).resource[344938](arg _mt[344946]:_MT[201], arg this[344940]:Tensor[345586](?), param arg rank[344943] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    if(344988 call _cond_test(344981 call !=(344983 call . this[344940] c"runtimeRank") rank[344943]))
+    {
+      (344956 call halt(344957 call +(344959 call +(344961 call + "Given rank "(344966 call : rank[344943] string[244])) " does not match this Tensor of rank ")(344973 call :(344975 call . this[344940] c"runtimeRank") string[244])))
+    }
+    (344993 return(345000 call(344996 call . this[344940] c"forceRankMeta") rank[344943]))
+  }
+  { scopeless type
+    (344949 call _shared(344951 call BaseTensorResource[334219](?) eltType rank[344943]))
+  }
+  function Tensor[345586](?).forceRank[345005](arg _mt[345013]:_MT[201], arg this[345007]:Tensor[345586](?), param arg rank[345010] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    (345020 return(345021 'new'(345023 call staticTensor[339695](?)(345024 call :(345026 call . this[345007] c"meta")(345031 call _shared(345033 call BaseTensorResource[334219](?) eltType rank[345010]))))))
+  }
+  { scopeless type
+    (345016 call staticTensor[339695](?) rank[345010] eltType)
+  }
+  function Tensor[345586](?).forceRankMeta[345039](arg _mt[345047]:_MT[201], arg this[345041]:Tensor[345586](?), param arg rank[345044] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    (345056 return(345057 call :(345059 call . this[345041] c"meta")(345064 call _shared(345066 call BaseTensorResource[334219](?) eltType rank[345044]))))
+  }
+  { scopeless type
+    (345050 call _shared(345052 call BaseTensorResource[334219](?) eltType rank[345044]))
+  }
+  function Tensor[345586](?).hardCheckRank[345072](arg _mt[345080]:_MT[201], arg this[345074]:Tensor[345586](?), param arg rank[345077] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    if(345103 call _cond_test(345102 'if var' unknown myMeta[345100](345087 call :(345089 call . this[345074] c"meta")(345094 call _shared(345099 'to nilable class from type'(345096 call BaseTensorResource[334219](?) eltType rank[345077]))))))
+    {
+      (345084 return 1)
+    }
+    (345108 return 0)
+  }
+  { scopeless type
+    bool[19]
+  }
+  function Tensor[345586](?).checkRank[345113](arg _mt[345121]:_MT[201], arg this[345115]:Tensor[345586](?), param arg rank[345118] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    (345125 return(345126 call == rank[345118](345129 call . this[345115] c"runtimeRank")))
+  }
+  { scopeless type
+    bool[19]
+  }
+  function Tensor[345586](?).to[345136](arg _mt[345144]:_MT[201], arg this[345138]:Tensor[345586](?), arg device[345141] :
+  locale[234]) : _unknown[42] "method" "primary method"
+  {
+    {
+      unknown rank[345147] "index var" 0
+      unknown tmp[345177] "maybe param" "temp"
+      (345189 'move' tmp[345177](345187 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[345178] "maybe param" "temp"
+      (345196 'move' tmp[345178](345194 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[345179] "maybe param" "temp"
+      (345199 'move' tmp[345179] 1)
+      ParamForLoop[345201]
+      { rank[345147] tmp[345177] tmp[345178] tmp[345179]
+        {
+          if(345173 call _cond_test(345171 call checkRank rank[345147]))
+          {
+            (345166 call(345163 call .(345161 call(345158 call . this[345138] c"tensorize") rank[345147]) c"to") device[345141])
+            (345168 return this[345138])
+          }
+        }
+      }
+      label _unused_continueLabel[345181]
+      label _breakLabel[345180]
+    }
+    (345211 call halt "Unable to find my own rank.")
+    (345215 return this[345138])
+  }
+  function Tensor[345586](?).device[345219](arg _mt[345223]:_MT[201], arg this[345221]:Tensor[345586](?)) : _unknown[42] "method" "primary method" "no parens"
+  {
+    {
+      unknown rank[345227] "index var" 0
+      unknown tmp[345252] "maybe param" "temp"
+      (345264 'move' tmp[345252](345262 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[345253] "maybe param" "temp"
+      (345271 'move' tmp[345253](345269 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[345254] "maybe param" "temp"
+      (345274 'move' tmp[345254] 1)
+      ParamForLoop[345276]
+      { rank[345227] tmp[345252] tmp[345253] tmp[345254]
+        {
+          if(345248 call _cond_test(345246 call checkRank rank[345227]))
+          {
+            (345235 return(345242 call .(345240 call(345237 call . this[345221] c"tensorize") rank[345227]) c"device"))
+          }
+        }
+      }
+      label _unused_continueLabel[345256]
+      label _breakLabel[345255]
+    }
+    (345286 call halt "Unable to find my own rank.")
+    (345288 return this[345221])
+  }
+  { scopeless type
+    locale[234]
+  }
+  function Tensor[345586](?).array[345293](arg _mt[345301]:_MT[201], arg this[345295]:Tensor[345586](?), param arg rank[345298] :
+  int[10]) ref : _unknown[42] "method" "primary method"
+  {
+    (345308 return(345324 call .(345309 call :(345318 call(345315 call .(345312 call . this[345295] c"meta") c"borrow"))(345319 'to borrowed class from unknown'(345321 call BaseTensorResource[334219](?) eltType rank[345298]))) c"array"))
+  }
+  { scopeless type
+    (345304 call ndarray[328686](?) rank[345298] eltType)
+  }
+  function Tensor[345586](?).grad[345330](arg _mt[345338]:_MT[201], arg this[345332]:Tensor[345586](?), param arg rank[345335] :
+  int[10]) ref : _unknown[42] "method" "primary method"
+  {
+    (345345 return(345361 call .(345346 call :(345355 call(345352 call .(345349 call . this[345332] c"meta") c"borrow"))(345356 'to borrowed class from unknown'(345358 call BaseTensorResource[334219](?) eltType rank[345335]))) c"grad"))
+  }
+  { scopeless type
+    (345341 call ndarray[328686](?) rank[345335] eltType)
+  }
+  function Tensor[345586](?).data[345367](arg _mt[345375]:_MT[201], arg this[345369]:Tensor[345586](?), param arg rank[345372] :
+  int[10]) ref : _unknown[42] "method" "primary method"
+  {
+    (345382 return(345398 call .(345383 call :(345392 call(345389 call .(345386 call . this[345369] c"meta") c"borrow"))(345393 'to borrowed class from unknown'(345395 call BaseTensorResource[334219](?) eltType rank[345372]))) c"data"))
+  }
+  { scopeless type
+    (345379 call chpl__buildArrayRuntimeType nil[32] eltType)
+  }
+  function Tensor[345586](?).toNDArray[345404](arg _mt[345412]:_MT[201], arg this[345406]:Tensor[345586](?), param arg rank[345409] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    unknown tt[345420](345425 call(345422 call . this[345406] c"tensorize") rank[345409])
+    (345428 'end of statement')
+    const prevDev[345430] "const"(345432 call . tt[345420] c"device")
+    (345436 'end of statement')
+    (345441 call(345438 call . tt[345420] c"to")(345443 call here[135591]))
+    const nda[345445] "const"(345454 call . tt[345420] c"array")(345447 call ndarray[328686](?) rank[345409](345449 call . this[345406] c"eltType"))
+    (345458 'end of statement')
+    (345463 call(345460 call . tt[345420] c"to") prevDev[345430])
+    (345465 return nda[345445])
+  }
+  { scopeless type
+    (345415 call ndarray[328686](?) rank[345409] eltType)
+  }
+  function Tensor[345586](?).toArray[345470](arg _mt[345478]:_MT[201], arg this[345472]:Tensor[345586](?), param arg rank[345475] :
+  int[10]) : _unknown[42] "method" "primary method"
+  {
+    (345485 return(345494 call .(345492 call(345488 call . this[345472] c"toNDArray") rank[345475]) c"data"))
+  }
+  { scopeless type
+    (345482 call chpl__buildArrayRuntimeType nil[32] eltType)
+  }
+  function Tensor[345586](?).detach[345500](arg _mt[345504]:_MT[201], arg this[345502]:Tensor[345586](?)) : _unknown[42] "method" "primary method"
+  {
+    {
+      unknown rank[345511] "index var" 0
+      unknown tmp[345543] "maybe param" "temp"
+      (345555 'move' tmp[345543](345553 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[345544] "maybe param" "temp"
+      (345562 'move' tmp[345544](345560 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[345545] "maybe param" "temp"
+      (345565 'move' tmp[345545] 1)
+      ParamForLoop[345567]
+      { rank[345511] tmp[345543] tmp[345544] tmp[345545]
+        if(345538 call _cond_test(345536 call checkRank rank[345511]))
+        {
+          (345517 return(345533 call(345530 call .(345527 call(345524 call .(345522 call(345518 call . this[345502] c"tensorize") rank[345511]) c"detach")) c"eraseRank")))
+        }
+      }
+      label _unused_continueLabel[345547]
+      label _breakLabel[345546]
+    }
+    (345577 call halt "Could not identify rank for this: " this[345502])
+  }
+  { scopeless type
+    (345508 call Tensor[345586](?) eltType)
+  }
+  type Tensor[345586](?) unknown eltType[344559] "type variable" real[13] unknown meta[344563](344565 call _shared(344567 call TensorEssence[333748](?) eltType[344559])) unknown runtimeRank[344572](344574 call - 1) int[10] serializable[310094]
+  function :[345588](in arg t[345594] :
+  (345591 call Tensor[345586](?) unknown eltType[345592]), arg toType[345597]:_any[141](?)) : _unknown[42] "operator"
+  {
+    {
+      unknown rank[345603] "index var" 0
+      unknown tmp[345637] "maybe param" "temp"
+      (345649 'move' tmp[345637](345647 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[345638] "maybe param" "temp"
+      (345656 'move' tmp[345638](345654 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[345639] "maybe param" "temp"
+      (345659 'move' tmp[345639] 1)
+      ParamForLoop[345661]
+      { rank[345603] tmp[345637] tmp[345638] tmp[345639]
+        if(345632 call _cond_test(345630 call(345627 call . t[345594] c"checkRank") rank[345603]))
+        {
+          (345609 return(345622 call(345619 call .(345610 call :(345616 call(345613 call . t[345594] c"tensorize") rank[345603]) toType[345597]) c"eraseRank")))
+        }
+      }
+      label _unused_continueLabel[345641]
+      label _breakLabel[345640]
+    }
+    (345671 call halt "Could not identify rank for this: " t[345594])
+  }
+  { scopeless type
+    (345600 call Tensor[345586](?) toType[345597])
+  }
+  function _unknown[42].detachMode[345677](arg _mt[345683]:_MT[201], arg this[345680] :
+  Tensor[345586](?)) param : _unknown[42] "method"
+  {
+    (345687 return defaultDetachedMode[344551])
+  }
+  { scopeless type
+    bool[19]
+  }
+  function _unknown[42].detachMode[345692](arg _mt[345702]:_MT[201], arg this[345695] :
+  Tensor[345586](?), arg detachMode[345699] :
+  bool[19]) : _unknown[42] "method" "no return value for void"
+  {
+  }
+  function _unknown[42].toTensor[345707](arg _mt[345713]:_MT[201], arg this[345710] :
+  ndarray[328686](?)) : _unknown[42] "inline" "method"
+  {
+    (345722 return(345723 'new'(345725 call Tensor[345586](?) this[345710])))
+  }
+  { scopeless type
+    (345716 call Tensor[345586](?)(345717 call . this[345710] c"eltType"))
+  }
+  function _unknown[42].eraseRank[345730](arg _mt[345746]:_MT[201], arg this[345733] :
+  staticTensor[339695](?), arg detach[345742] :
+  bool[19] =
+  (345741 call(345738 call . Tensor[345586](?) c"detachMode"))) : _unknown[42] "method"
+  {
+    (345755 return(345756 'new'(345758 call Tensor[345586](?) this[345733] detach[345742])))
+  }
+  { scopeless type
+    (345749 call Tensor[345586](?)(345750 call . this[345733] c"eltType"))
+  }
+  function :[345764](arg t[345772] :
+  (345767 call staticTensor[339695](?) unknown rank[345768] unknown eltType[345770]), arg T[345778] :
+  (345776 call Tensor[345586](?) eltType[345770])) : _unknown[42] "operator"
+  {
+    (345785 return(345790 call(345787 call . t[345772] c"eraseRank")))
+  }
+  { scopeless type
+    (345782 call Tensor[345586](?) eltType[345770])
+  }
+  function zipBinOp[345794](param arg opName[345797] :
+  string[244], arg a[345804] :
+  (345801 call Tensor[345586](?) unknown eltType[345802]), arg b[345810] :
+  (345808 call Tensor[345586](?) eltType[345802])) : _unknown[42]
+  {
+    {
+      unknown rank[345817] "index var" 0
+      unknown tmp[345945] "maybe param" "temp"
+      (345957 'move' tmp[345945](345955 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[345946] "maybe param" "temp"
+      (345964 'move' tmp[345946](345962 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[345947] "maybe param" "temp"
+      (345967 'move' tmp[345947] 1)
+      ParamForLoop[345969]
+      { rank[345817] tmp[345945] tmp[345946] tmp[345947]
+        {
+          if(345941 call _cond_test(345927 call &&(345933 call(345930 call . a[345804] c"checkRank") rank[345817])(345939 call(345936 call . b[345810] c"checkRank") rank[345817])))
+          {
+            const at[345826] "const"(345835 call(345832 call . a[345804] c"tensorize") rank[345817])(345828 call staticTensor[339695](?) rank[345817] eltType[345802])
+            (345838 'end of statement')
+            const bt[345840] "const"(345849 call(345846 call . b[345810] c"tensorize") rank[345817])(345842 call staticTensor[339695](?) rank[345817] eltType[345802])
+            (345852 'end of statement')
+            {
+              unknown tmp[345903] "expr temp" "maybe param" "maybe type" "temp"
+              (345905 'move' tmp[345903] opName[345797])
+              if(345910 call _cond_test(345907 call == tmp[345903] "+"))
+              {
+                (345858 return(345866 call(345863 call .(345859 call + at[345826] bt[345840]) c"eraseRank")))
+              }
+              {
+                if(345916 call _cond_test(345913 call == tmp[345903] "-"))
+                {
+                  (345873 return(345881 call(345878 call .(345874 call - at[345826] bt[345840]) c"eraseRank")))
+                }
+                {
+                  if(345923 call _cond_test(345920 call == tmp[345903] "*"))
+                  {
+                    (345890 return(345898 call(345895 call .(345891 call * at[345826] bt[345840]) c"eraseRank")))
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      label _unused_continueLabel[345949]
+      label _breakLabel[345948]
+    }
+    (345979 call halt "Degenerate initialization of dynamicTensor.")
+    (345981 return(345982 'new'(345984 call Tensor[345586](?) eltType[345802])))
+  }
+  { scopeless type
+    (345814 call Tensor[345586](?) eltType[345802])
+  }
+  function _unknown[42].loadFromNumpy[345989](arg _mt[345999]:_MT[201], arg this[345992] :
+  Tensor[345586](?), arg path[345996] :
+  string[244]) : _unknown[42] "method"
+  {
+    unknown npa[346006](346010 call loadNumpyArray module=[222] LoadNumpy[344512] path[345996])
+    (346015 'end of statement')
+    {
+      unknown rank[346016] "index var" 0
+      unknown tmp[346067] "maybe param" "temp"
+      (346079 'move' tmp[346067](346077 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346068] "maybe param" "temp"
+      (346086 'move' tmp[346068](346084 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346069] "maybe param" "temp"
+      (346089 'move' tmp[346069] 1)
+      ParamForLoop[346091]
+      { rank[346016] tmp[346067] tmp[346068] tmp[346069]
+        {
+          if(346063 call _cond_test(346062 'if var' const x[346060] "const"(346048 call : npa[346006](346052 call _owned(346059 'to nilable class from type'(346057 call ArrClass[344079](?) rank[346016]))))))
+          {
+            const t[346025] "const"(346030 'new'(346032 call staticTensor[339695](?)(346037 call .(346033 call postfix! x[346060]) c"data")))(346027 call staticTensor[339695](?) rank[346016] real[13])
+            (346041 'end of statement')
+            (346042 return(346047 call(346044 call . t[346025] c"eraseRank")))
+          }
+          (346054 'referenced modules list' LoadNumpy[344512])
+        }
+      }
+      label _unused_continueLabel[346071]
+      label _breakLabel[346070]
+    }
+    (346101 call halt "Could not find rank of loaded numpy array.")
+    (346105 return(346106 'new'(346108 call Tensor[345586](?) real[13])))
+    (346111 'referenced modules list' LoadNumpy[344512])
+  }
+  { scopeless type
+    (346002 call Tensor[345586](?) real[13])
+  }
+  function +[346115](arg a[346121] :
+  (346118 call Tensor[345586](?) unknown eltType[346119]), arg b[346127] :
+  (346125 call Tensor[345586](?) eltType[346119])) : _unknown[42] "operator"
+  {
+    (346134 return(346136 call zipBinOp "+" a[346121] b[346127]))
+  }
+  { scopeless type
+    (346131 call Tensor[345586](?) eltType[346119])
+  }
+  function -[346143](arg a[346149] :
+  (346146 call Tensor[345586](?) unknown eltType[346147]), arg b[346155] :
+  (346153 call Tensor[345586](?) eltType[346147])) : _unknown[42] "operator"
+  {
+    (346162 return(346164 call zipBinOp "-" a[346149] b[346155]))
+  }
+  { scopeless type
+    (346159 call Tensor[345586](?) eltType[346147])
+  }
+  function *[346171](arg a[346177] :
+  (346174 call Tensor[345586](?) unknown eltType[346175]), arg b[346183] :
+  (346181 call Tensor[345586](?) eltType[346175])) : _unknown[42] "operator"
+  {
+    (346190 return(346192 call zipBinOp "*" a[346177] b[346183]))
+  }
+  { scopeless type
+    (346187 call Tensor[345586](?) eltType[346175])
+  }
+  function _unknown[42].sum[346199](arg _mt[346212]:_MT[201], arg this[346202] :
+  Tensor[345586](?), arg axes[346208] ... :
+  int[10]) : _unknown[42] "method"
+  {
+    {
+      unknown rank[346218] "index var" 0
+      unknown tmp[346254] "maybe param" "temp"
+      (346266 'move' tmp[346254](346264 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346255] "maybe param" "temp"
+      (346273 'move' tmp[346255](346271 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346256] "maybe param" "temp"
+      (346276 'move' tmp[346256] 1)
+      ParamForLoop[346278]
+      { rank[346218] tmp[346254] tmp[346255] tmp[346256]
+        {
+          if(346249 call _cond_test(346247 call(346244 call . this[346202] c"checkRank") rank[346218]))
+          {
+            (346225 return(346241 call(346238 call .(346235 call(346232 call .(346230 call(346227 call . this[346202] c"tensorize") rank[346218]) c"sum")(346237 'expand_tuple' axes[346208])) c"eraseRank")))
+          }
+        }
+      }
+      label _unused_continueLabel[346258]
+      label _breakLabel[346257]
+    }
+    (346288 call halt "Could not determine rank in Tensor.sum.")
+    (346292 return(346293 'new'(346295 call Tensor[345586](?) eltType)))
+  }
+  { scopeless type
+    (346215 call Tensor[345586](?) eltType)
+  }
+  function _unknown[42].relu[346300](arg _mt[346306]:_MT[201], arg this[346303] :
+  Tensor[345586](?)) : _unknown[42] "method"
+  {
+    {
+      unknown rank[346312] "index var" 0
+      unknown tmp[346346] "maybe param" "temp"
+      (346358 'move' tmp[346346](346356 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346347] "maybe param" "temp"
+      (346365 'move' tmp[346347](346363 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346348] "maybe param" "temp"
+      (346368 'move' tmp[346348] 1)
+      ParamForLoop[346370]
+      { rank[346312] tmp[346346] tmp[346347] tmp[346348]
+        {
+          if(346341 call _cond_test(346339 call(346336 call . this[346303] c"checkRank") rank[346312]))
+          {
+            (346319 return(346333 call(346330 call .(346329 call(346326 call .(346324 call(346321 call . this[346303] c"tensorize") rank[346312]) c"relu")) c"eraseRank")))
+          }
+        }
+      }
+      label _unused_continueLabel[346350]
+      label _breakLabel[346349]
+    }
+    (346380 call halt "Could not determine rank in Tensor.relu.")
+    (346384 return(346385 'new'(346387 call Tensor[345586](?) eltType)))
+  }
+  { scopeless type
+    (346309 call Tensor[345586](?) eltType)
+  }
+  function _unknown[42].max[346392](arg _mt[346398]:_MT[201], arg this[346395] :
+  Tensor[345586](?)) : _unknown[42] "method"
+  {
+    {
+      unknown rank[346404] "index var" 0
+      unknown tmp[346438] "maybe param" "temp"
+      (346450 'move' tmp[346438](346448 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346439] "maybe param" "temp"
+      (346457 'move' tmp[346439](346455 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346440] "maybe param" "temp"
+      (346460 'move' tmp[346440] 1)
+      ParamForLoop[346462]
+      { rank[346404] tmp[346438] tmp[346439] tmp[346440]
+        {
+          if(346433 call _cond_test(346431 call(346428 call . this[346395] c"checkRank") rank[346404]))
+          {
+            (346411 return(346425 call(346422 call .(346421 call(346418 call .(346416 call(346413 call . this[346395] c"tensorize") rank[346404]) c"max")) c"eraseRank")))
+          }
+        }
+      }
+      label _unused_continueLabel[346442]
+      label _breakLabel[346441]
+    }
+    (346472 call halt "Could not determine rank in Tensor.max.")
+    (346476 return(346477 'new'(346479 call Tensor[345586](?) eltType)))
+  }
+  { scopeless type
+    (346401 call Tensor[345586](?) eltType)
+  }
+  function _unknown[42].exp[346484](arg _mt[346490]:_MT[201], arg this[346487] :
+  Tensor[345586](?)) : _unknown[42] "method"
+  {
+    {
+      unknown rank[346496] "index var" 0
+      unknown tmp[346530] "maybe param" "temp"
+      (346542 'move' tmp[346530](346540 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346531] "maybe param" "temp"
+      (346549 'move' tmp[346531](346547 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346532] "maybe param" "temp"
+      (346552 'move' tmp[346532] 1)
+      ParamForLoop[346554]
+      { rank[346496] tmp[346530] tmp[346531] tmp[346532]
+        {
+          if(346525 call _cond_test(346523 call(346520 call . this[346487] c"checkRank") rank[346496]))
+          {
+            (346503 return(346517 call(346514 call .(346513 call(346510 call .(346508 call(346505 call . this[346487] c"tensorize") rank[346496]) c"exp")) c"eraseRank")))
+          }
+        }
+      }
+      label _unused_continueLabel[346534]
+      label _breakLabel[346533]
+    }
+    (346564 call halt "Could not determine rank in Tensor.exp.")
+    (346568 return(346569 'new'(346571 call Tensor[345586](?) eltType)))
+  }
+  { scopeless type
+    (346493 call Tensor[345586](?) eltType)
+  }
+  function _unknown[42].softmax[346576](arg _mt[346582]:_MT[201], arg this[346579] :
+  Tensor[345586](?)) : _unknown[42] "method"
+  {
+    {
+      unknown rank[346588] "index var" 0
+      unknown tmp[346624] "maybe param" "temp"
+      (346636 'move' tmp[346624](346634 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346625] "maybe param" "temp"
+      (346643 'move' tmp[346625](346641 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346626] "maybe param" "temp"
+      (346646 'move' tmp[346626] 1)
+      ParamForLoop[346648]
+      { rank[346588] tmp[346624] tmp[346625] tmp[346626]
+        {
+          if(346619 call _cond_test(346617 call(346614 call . this[346579] c"checkRank") rank[346588]))
+          {
+            (346595 return(346611 call(346608 call .(346607 call(346604 call .(346600 call(346597 call . this[346579] c"tensorize") rank[346588]) c"softmax")) c"eraseRank")))
+          }
+        }
+      }
+      label _unused_continueLabel[346628]
+      label _breakLabel[346627]
+    }
+    (346658 call halt "Could not determine rank in Tensor.softmax.")
+    (346662 return(346663 'new'(346665 call Tensor[345586](?) eltType)))
+  }
+  { scopeless type
+    (346585 call Tensor[345586](?) eltType)
+  }
+  function _unknown[42].maxPool[346670](arg _mt[346680]:_MT[201], arg this[346673] :
+  Tensor[345586](?), arg poolSize[346677] :
+  int[10]) : _unknown[42] "method"
+  {
+    {
+      unknown rank[346686] "index var" 0
+      unknown tmp[346721] "maybe param" "temp"
+      (346733 'move' tmp[346721](346731 call chpl_compute_low_param_loop_bound 3 3))
+      unknown tmp[346722] "maybe param" "temp"
+      (346740 'move' tmp[346722](346738 call chpl_compute_high_param_loop_bound 3 3))
+      unknown tmp[346723] "maybe param" "temp"
+      (346743 'move' tmp[346723] 1)
+      ParamForLoop[346745]
+      { rank[346686] tmp[346721] tmp[346722] tmp[346723]
+        {
+          if(346716 call _cond_test(346714 call(346711 call . this[346673] c"checkRank") rank[346686]))
+          {
+            (346693 return(346708 call(346705 call .(346703 call(346700 call .(346698 call(346695 call . this[346673] c"tensorize") rank[346686]) c"maxPool") poolSize[346677]) c"eraseRank")))
+          }
+        }
+      }
+      label _unused_continueLabel[346725]
+      label _breakLabel[346724]
+    }
+    (346755 call halt "Could not determine rank in Tensor.maxPool.")
+    (346759 return(346760 'new'(346762 call Tensor[345586](?) eltType)))
+  }
+  { scopeless type
+    (346683 call Tensor[345586](?) eltType)
+  }
+  function _unknown[42].reshape[346767](arg _mt[346777]:_MT[201], arg this[346770] :
+  Tensor[345586](?), arg args[346774]:_any[141](?) ...) : _unknown[42] "method"
+  {
+    {
+      unknown rank[346783] "index var" 0
+      unknown tmp[346819] "maybe param" "temp"
+      (346831 'move' tmp[346819](346829 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346820] "maybe param" "temp"
+      (346838 'move' tmp[346820](346836 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[346821] "maybe param" "temp"
+      (346841 'move' tmp[346821] 1)
+      ParamForLoop[346843]
+      { rank[346783] tmp[346819] tmp[346820] tmp[346821]
+        {
+          if(346814 call _cond_test(346812 call(346809 call . this[346770] c"checkRank") rank[346783]))
+          {
+            (346790 return(346806 call(346803 call .(346800 call(346797 call .(346795 call(346792 call . this[346770] c"tensorize") rank[346783]) c"reshape")(346802 'expand_tuple' args[346774])) c"eraseRank")))
+          }
+        }
+      }
+      label _unused_continueLabel[346823]
+      label _breakLabel[346822]
+    }
+    (346853 call halt "Could not determine rank in Tensor.reshape.")
+    (346857 return(346858 'new'(346860 call Tensor[345586](?) eltType)))
+  }
+  { scopeless type
+    (346780 call Tensor[345586](?) eltType)
+  }
+  function _unknown[42].slice[346865](arg _mt[346878]:_MT[201], arg this[346868] :
+  Tensor[345586](?), arg rngs[346874] ... :
+  range) : _unknown[42] "method"
+  {
+    if(346897 call _cond_test(346890 call != rank[346872](346894 call . this[346868] c"runtimeRank")))
+    {
+      (346885 call halt "Rank mismatch in Tensor.slice.")
+    }
+    (346902 return(346918 call(346915 call .(346912 call(346909 call .(346907 call(346904 call . this[346868] c"tensorize") rank[346872]) c"slice")(346914 'expand_tuple' rngs[346874])) c"eraseRank")))
+  }
+  { scopeless type
+    (346881 call Tensor[345586](?) eltType)
+  }
+  function _unknown[42].slice[346922](arg _mt[346934]:_MT[201], arg this[346925] :
+  Tensor[345586](?), arg dom[346931] :
+  (346929 call _domain ?[227])) : _unknown[42] "method"
+  {
+    if(346954 call _cond_test(346944 call !=(346947 call . dom[346931] c"rank")(346951 call . this[346925] c"runtimeRank")))
+    {
+      (346941 call halt "Rank mismatch in Tensor.slice.")
+    }
+    (346959 return(346977 call(346974 call .(346972 call(346969 call .(346964 call(346961 call . this[346925] c"tensorize")(346966 call . dom[346931] c"rank")) c"slice") dom[346931]) c"eraseRank")))
+  }
+  { scopeless type
+    (346937 call Tensor[345586](?) eltType)
+  }
+  function _unknown[42].flatten[346981](arg _mt[346987]:_MT[201], arg this[346984] :
+  Tensor[345586](?)) : _unknown[42] "method"
+  {
+    {
+      unknown rank[346993] "index var" 0
+      unknown tmp[347043] "maybe param" "temp"
+      (347055 'move' tmp[347043](347053 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[347044] "maybe param" "temp"
+      (347062 'move' tmp[347044](347060 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[347045] "maybe param" "temp"
+      (347065 'move' tmp[347045] 1)
+      ParamForLoop[347067]
+      { rank[346993] tmp[347043] tmp[347044] tmp[347045]
+        {
+          if(347039 call _cond_test(347037 call(347034 call . this[346984] c"checkRank") rank[346993]))
+          {
+            unknown t[347002](347007 call(347004 call . this[346984] c"tensorize") rank[346993])
+            (347010 'end of statement')
+            const size[347012] "const"(347017 call .(347014 call . t[347002] c"_dom") c"size")
+            (347021 'end of statement')
+            (347022 return(347032 call(347029 call .(347027 call(347024 call . t[347002] c"reshape") size[347012]) c"eraseRank")))
+          }
+        }
+      }
+      label _unused_continueLabel[347047]
+      label _breakLabel[347046]
+    }
+    (347077 call halt "Could not determine rank in Tensor.flatten.")
+    (347081 return(347082 'new'(347084 call Tensor[345586](?) eltType)))
+  }
+  { scopeless type
+    (346990 call Tensor[345586](?) eltType)
+  }
+  function _unknown[42].matvecmul[347089](arg _mt[347108]:_MT[201], arg this[347092] :
+  Tensor[345586](?), arg m[347099] :
+  (347096 call Tensor[345586](?) unknown eltType[347097]), arg v[347105] :
+  (347103 call Tensor[345586](?) eltType[347097])) : _unknown[42] "method"
+  {
+    {
+      unknown rankM[347114] "index var" 0
+      unknown tmp[347207] "maybe param" "temp"
+      (347219 'move' tmp[347207](347217 call chpl_compute_low_param_loop_bound 2 2))
+      unknown tmp[347208] "maybe param" "temp"
+      (347226 'move' tmp[347208](347224 call chpl_compute_high_param_loop_bound 2 2))
+      unknown tmp[347209] "maybe param" "temp"
+      (347229 'move' tmp[347209] 1)
+      ParamForLoop[347231]
+      { rankM[347114] tmp[347207] tmp[347208] tmp[347209]
+        {
+          if(347203 call _cond_test(347201 call(347198 call . m[347099] c"checkRank") rankM[347114]))
+          {
+            {
+              unknown rankV[347122] "index var" 0
+              unknown tmp[347164] "maybe param" "temp"
+              (347176 'move' tmp[347164](347174 call chpl_compute_low_param_loop_bound 1 2))
+              unknown tmp[347165] "maybe param" "temp"
+              (347183 'move' tmp[347165](347181 call chpl_compute_high_param_loop_bound 1 2))
+              unknown tmp[347166] "maybe param" "temp"
+              (347186 'move' tmp[347166] 1)
+              ParamForLoop[347188]
+              { rankV[347122] tmp[347164] tmp[347165] tmp[347166]
+                {
+                  if(347160 call _cond_test(347158 call(347155 call . v[347105] c"checkRank") rankV[347122]))
+                  {
+                    (347130 return(347153 call(347150 call .(347135 call(347132 call . staticTensor[339695](?) c"matvecmul")(347142 call(347139 call . m[347099] c"forceRank") rankM[347114])(347148 call(347145 call . v[347105] c"forceRank") rankV[347122])) c"eraseRank")))
+                  }
+                }
+              }
+              label _unused_continueLabel[347168]
+              label _breakLabel[347167]
+            }
+          }
+        }
+      }
+      label _unused_continueLabel[347211]
+      label _breakLabel[347210]
+    }
+    (347241 call halt "Could not determine rank in Tensor.matvecmul.")
+    (347245 return(347246 'new'(347248 call Tensor[345586](?) eltType[347097])))
+  }
+  { scopeless type
+    (347111 call Tensor[345586](?) eltType[347097])
+  }
+  function _unknown[42].matvecmulFast[347253](arg _mt[347272]:_MT[201], arg this[347256] :
+  Tensor[345586](?), arg m[347263] :
+  (347260 call Tensor[345586](?) unknown eltType[347261]), arg v[347269] :
+  (347267 call Tensor[345586](?) eltType[347261])) : _unknown[42] "method"
+  {
+    (347278 return(347301 call(347298 call .(347285 call(347282 call . staticTensor[339695](?) c"matvecmulFast")(347290 call(347287 call . m[347263] c"forceRank") 2)(347296 call(347293 call . v[347269] c"forceRank") 1)) c"eraseRank")))
+  }
+  { scopeless type
+    (347275 call Tensor[345586](?) eltType[347261])
+  }
+  function _unknown[42].argmax[347305](arg _mt[347311]:_MT[201], arg this[347308] :
+  Tensor[345586](?)) : _unknown[42] "method"
+  {
+    unknown t[347316](347321 call(347318 call . this[347308] c"tensorize") 1)
+    (347324 'end of statement')
+    const a[347326] "const"(347328 call . t[347316] c"array")
+    (347332 'end of statement')
+    (347333 return(347340 call(347337 call . a[347326] c"argmax")))
+  }
+  { scopeless type
+    int[10]
+  }
+  function _unknown[42].convolve[347344](arg _mt[347367]:_MT[201], arg this[347347] :
+  Tensor[345586](?), arg features[347354] :
+  (347351 call Tensor[345586](?) unknown eltType[347352]), arg kernel[347360] :
+  (347358 call Tensor[345586](?) eltType[347352]), arg stride[347364] :
+  int[10]) : _unknown[42] "method"
+  {
+    (347373 return(347395 call(347392 call .(347378 call(347375 call . staticTensor[339695](?) c"convolve")(347383 call(347380 call . features[347354] c"forceRank") 3)(347389 call(347386 call . kernel[347360] c"forceRank") 4) stride[347364]) c"eraseRank")))
+  }
+  { scopeless type
+    (347370 call Tensor[345586](?) eltType[347352])
+  }
+  function _unknown[42].convolve[347399](arg _mt[347428]:_MT[201], arg this[347402] :
+  Tensor[345586](?), arg features[347409] :
+  (347406 call Tensor[345586](?) unknown eltType[347407]), arg kernel[347415] :
+  (347413 call Tensor[345586](?) eltType[347407]), arg bias[347421] :
+  (347419 call Tensor[345586](?) eltType[347407]), arg stride[347425] :
+  int[10]) : _unknown[42] "method"
+  {
+    (347434 return(347462 call(347459 call .(347439 call(347436 call . staticTensor[339695](?) c"convolve")(347444 call(347441 call . features[347409] c"forceRank") 3)(347450 call(347447 call . kernel[347415] c"forceRank") 4)(347456 call(347453 call . bias[347421] c"forceRank") 1) stride[347425]) c"eraseRank")))
+  }
+  { scopeless type
+    (347431 call Tensor[345586](?) eltType[347407])
+  }
+  function _unknown[42].arange[347466](arg _mt[347476]:_MT[201], arg this[347469] :
+  Tensor[345586](?), arg args[347473]:_any[141](?) ...) : _unknown[42] "method"
+  {
+    (347479 return(347490 call(347487 call .(347484 call(347481 call . staticTensor[339695](?) c"arange")(347486 'expand_tuple' args[347473])) c"eraseRank")))
+  }
+  function _unknown[42].ones[347493](arg _mt[347503]:_MT[201], arg this[347496] :
+  Tensor[345586](?), arg args[347500]:_any[141](?) ...) : _unknown[42] "method"
+  {
+    (347506 return(347517 call(347514 call .(347511 call(347508 call . staticTensor[339695](?) c"ones")(347513 'expand_tuple' args[347500])) c"eraseRank")))
+  }
+  function _unknown[42].zeros[347520](arg _mt[347530]:_MT[201], arg this[347523] :
+  Tensor[345586](?), arg args[347527]:_any[141](?) ...) : _unknown[42] "method"
+  {
+    (347533 return(347546 call(347543 call .(347540 call(347537 call . staticTensor[339695](?) c"zeros")(347542 'expand_tuple' args[347527])) c"eraseRank")))
+  }
+  function main[347549]() : _unknown[42] "no return value for void"
+  {
+    const t_[347553] "const"(347562 call(347559 call . staticTensor[339695](?) c"arange") 3 5)(347555 call staticTensor[339695](?) 2 real[13])
+    (347566 'end of statement')
+    (347568 call writeln t_[347553])
+    const t[347571] "const"(347572 'new'(347574 call Tensor[345586](?) t_[347553]))
+    (347577 'end of statement')
+    const t2[347579] "const"(347580 call + t[347571] t[347571])
+    (347585 'end of statement')
+    const t3[347587] "const"(347595 call(347592 call . Tensor[345586](?) c"arange") 3 5)(347589 call Tensor[345586](?) real[13])
+    (347599 'end of statement')
+    (347601 call writeln(347602 call - t3[347587](347609 call(347606 call . Tensor[345586](?) c"ones") 3 5)))
+    (347613 call writeln(347623 call(347620 call .(347618 call(347615 call . t3[347587] c"sum") 0) c"sum") 0))
+    (347626 call writeln(347631 call(347628 call . t3[347587] c"reshape") 5 3))
+    unknown t4[347635](347640 call(347637 call . t3[347587] c"reshape") 5 3)
+    (347644 'end of statement')
+    unknown t4t[347646](347655 call(347652 call . t4[347635] c"tensorize") 2)(347648 call staticTensor[339695](?) 2 real[13])
+    (347658 'end of statement')
+    (347659 call =(347668 call(347665 call .(347662 call . t4t[347646] c"array") c"data") 1 1) 70)
+    (347674 call =(347685 call(347682 call .(347680 call(347677 call . t4[347635] c"array") 2) c"data") 0 0) 99)
+    (347691 call =(347699 call(347697 call(347694 call . t4[347635] c"data") 2) 2 2) 200)
+    unknown t4Data[347706] "ref var"(347711 call(347708 call . t4[347635] c"data") 2)
+    (347714 'end of statement')
+    (347715 call =(347718 call t4Data[347706] 1 0) 500)
+    const a[347725] "const"(347734 call(347731 call . t4[347635] c"array") 2)(347727 call ndarray[328686](?) 2 real[13])
+    (347737 'end of statement')
+    (347739 call writeln a[347725])
+    unknown img[347742](347747 call(347744 call . Tensor[345586](?) c"arange") 1 9 9)
+    (347752 'end of statement')
+    unknown ker[347754](347759 call(347756 call . Tensor[345586](?) c"arange") 1 1 3 3)
+    (347765 'end of statement')
+    unknown fet[347767](347772 call(347769 call . Tensor[345586](?) c"convolve") img[347742] ker[347754] 1)
+    (347777 'end of statement')
+    (347779 call writeln fet[347767])
+    (347787 call(347784 call . fet[347767] c"save") "data/my_features.chdata")
+    const npa[347792] "const"(347799 call(347796 call . Tensor[345586](?) c"loadFromNumpy") "notebooks/numpy_y.npy")
+    (347804 'end of statement')
+  }
+  (347809 'import' IO)
+  function _unknown[42].serialize[347810](arg _mt[347835]:_MT[201], arg this[347813] :
+  Tensor[345586](?), arg writer[347826] :
+  (347820 call fileWriter[170987](?)(locking = 0) defaultSerializer[171969]), ref arg serializer[347832] :
+  defaultSerializer[171969]) : _unknown[42] "method" "no return value for void"
+  {
+    {
+      unknown rank[347838] "index var" 0
+      unknown tmp[347871] "maybe param" "temp"
+      (347883 'move' tmp[347871](347881 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[347872] "maybe param" "temp"
+      (347890 'move' tmp[347872](347888 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[347873] "maybe param" "temp"
+      (347893 'move' tmp[347873] 1)
+      ParamForLoop[347895]
+      { rank[347838] tmp[347871] tmp[347872] tmp[347873]
+        {
+          if(347867 call _cond_test(347865 call(347862 call . this[347813] c"checkRank") rank[347838]))
+          {
+            (347855 call(347852 call .(347850 call(347847 call . this[347813] c"forceRank") rank[347838]) c"serialize") writer[347826] serializer[347832](capitalT = 1))
+            (347860 return _void[46])
+          }
+        }
+      }
+      label _unused_continueLabel[347875]
+      label _breakLabel[347874]
+    }
+  }
+  function _unknown[42].serialize[347906](arg _mt[347925]:_MT[201], arg this[347909] :
+  Tensor[345586](?), arg writer[347917] :
+  (347915 call fileWriter[170987](?) ?[227]), ref arg serializer[347922] :
+  unknown srt2[347920]) : _unknown[42] "method" "no return value for void"
+  {
+    const prevDev[347935] "const"(347937 call . this[347909] c"device")
+    (347941 'end of statement')
+    (347946 call(347943 call . this[347909] c"to")(347948 call here[135591]))
+    unknown rh[347950](347955 call(347952 call . serializer[347922] c"startRecord") writer[347917] "Tensor" 2)
+    (347962 'end of statement')
+    (347967 call(347964 call . rh[347950] c"writeField") "eltType"(347969 call :(347971 call . this[347909] c"eltType") string[244]))
+    (347980 call(347977 call . rh[347950] c"writeField") "meta"(347984 call . this[347909] c"meta"))
+    (347992 call(347989 call . rh[347950] c"endRecord"))
+    (347997 call(347994 call . this[347909] c"to") prevDev[347935])
+  }
+  where {
+    (347927 call != srt2[347920] defaultSerializer[171969])
+  }
+  function _unknown[42].write[348002](arg _mt[348016]:_MT[201], arg this[348005] :
+  Tensor[345586](?), arg fw[348013] :
+  (348011 call fileWriter[170987](?) ?[227])) : _unknown[42] throws "method" "no return value for void"
+  {
+    {
+      unknown rank[348019] "index var" 0
+      unknown tmp[348155] "maybe param" "temp"
+      (348167 'move' tmp[348155](348165 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[348156] "maybe param" "temp"
+      (348174 'move' tmp[348156](348172 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[348157] "maybe param" "temp"
+      (348177 'move' tmp[348157] 1)
+      ParamForLoop[348179]
+      { rank[348019] tmp[348155] tmp[348156] tmp[348157]
+        {
+          if(348151 call _cond_test(348144 call == rank[348019](348147 call . this[348005] c"runtimeRank")))
+          {
+            const a[348028] "const"(348033 call(348029 call . this[348005] c"array") rank[348019])
+            (348036 'end of statement')
+            (348041 call(348038 call . fw[348013] c"write") rank[348019])
+            {
+              unknown _indexOfInterest[348059] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[348060] "expr temp" "temp"
+              (348069 'move' _iterator[348060](348067 call _getIterator(348046 call . a[348028] c"shape")))
+              Defer
+              {
+                {
+                  (348084 call _freeIterator _iterator[348060])
+                }
+              }
+              { scopeless type
+                (348074 'move' _indexOfInterest[348059](348071 call iteratorIndex _iterator[348060]))
+              }
+              ForLoop[348061]
+              {
+                unknown s[348043] "index var" "insert auto destroy"
+                (348079 'move' s[348043] _indexOfInterest[348059])
+                (348053 call(348050 call . fw[348013] c"write")(348054 call : s[348043] int[10]))
+                label _continueLabel[348064]
+                _indexOfInterest[348059]
+                _iterator[348060]
+              }
+              label _breakLabel[348065]
+            }
+            {
+              unknown _indexOfInterest[348112] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[348113] "expr temp" "temp"
+              (348122 'move' _iterator[348113](348120 call _getIterator(348097 call .(348094 call . a[348028] c"data") c"_dom")))
+              Defer
+              {
+                {
+                  (348137 call _freeIterator _iterator[348113])
+                }
+              }
+              { scopeless type
+                (348127 'move' _indexOfInterest[348112](348124 call iteratorIndex _iterator[348113]))
+              }
+              ForLoop[348114]
+              {
+                unknown i[348091] "index var" "insert auto destroy"
+                (348132 'move' i[348091] _indexOfInterest[348112])
+                (348104 call(348101 call . fw[348013] c"write")(348109 call(348106 call . a[348028] c"data") i[348091]))
+                label _continueLabel[348117]
+                _indexOfInterest[348112]
+                _iterator[348113]
+              }
+              label _breakLabel[348118]
+            }
+          }
+        }
+      }
+      label _unused_continueLabel[348159]
+      label _breakLabel[348158]
+    }
+  }
+  function _unknown[42].save[348190](arg _mt[348200]:_MT[201], arg this[348193] :
+  Tensor[345586](?), arg path[348197] :
+  string[244]) : _unknown[42] "method" "no return value for void"
+  {
+    unknown file[348204](348208 call open module=[222] IO[208303] path[348197](348215 call . ioMode[164108] c"cw"))
+    (348219 'end of statement')
+    unknown serializer[348221](348222 'new'(348226 call binarySerializer[174153](348230 call . endianness[164137] c"native")))
+    (348234 'end of statement')
+    unknown fw[348236](348241 call(348238 call . file[348204] c"writer")(locking = 0)(serializer = serializer[348221]))
+    (348247 'end of statement')
+    (348252 call(348249 call . this[348193] c"write") fw[348236])
+    (348258 call(348255 call . fw[348236] c"close"))
+    (348259 'referenced modules list' IO[208303] IO[208303] IO[208303] IO[208303])
+  }
+  function _unknown[42].multiReader[348266](arg _mt[348276]:_MT[201], arg this[348269] :
+  Tensor[345586](?), arg path[348273] :
+  string[244]) : _unknown[42] "method"
+  {
+    unknown file[348280](348284 call open module=[222] IO[208303] path[348273](348291 call . ioMode[164108] c"r"))
+    (348295 'end of statement')
+    unknown deserializer[348297](348298 'new'(348302 call binaryDeserializer[175632](348306 call . endianness[164137] c"native")))
+    (348310 'end of statement')
+    unknown fr[348312](348317 call(348314 call . file[348280] c"reader")(locking = 0)(deserializer = deserializer[348297]))
+    (348323 'end of statement')
+    (348324 return fr[348312])
+    (348326 'referenced modules list' IO[208303] IO[208303] IO[208303] IO[208303])
+  }
+  function _unknown[42].load[348333](arg _mt[348347]:_MT[201], arg this[348336] :
+  Tensor[345586](?), arg path[348340] :
+  string[244], param arg precision[348344] =
+  64) : _unknown[42] "method"
+  {
+    (348353 return(348360 call(348357 call . Tensor[345586](?) c"readInPlace")(348367 call(348364 call . Tensor[345586](?) c"multiReader") path[348340]) precision[348344]))
+  }
+  { scopeless type
+    (348350 call Tensor[345586](?) real[13])
+  }
+  function _unknown[42].readInPlace[348373](arg _mt[348391]:_MT[201], arg this[348376] :
+  Tensor[345586](?), arg fr[348384] :
+  (348382 call fileReader[170893](?) ?[227]), param arg precision[348388] =
+  64) : _unknown[42] "method"
+  {
+    (348401 call(348398 call . fr[348384] c"mark"))
+    const r[348403] "const"(348408 call(348405 call . fr[348384] c"read") int[10])
+    (348411 'end of statement')
+    {
+      unknown rank[348412] "index var" 0
+      unknown tmp[348624] "maybe param" "temp"
+      (348636 'move' tmp[348624](348634 call chpl_compute_low_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[348625] "maybe param" "temp"
+      (348643 'move' tmp[348625](348641 call chpl_compute_high_param_loop_bound 1 maxRank[344543]))
+      unknown tmp[348626] "maybe param" "temp"
+      (348646 'move' tmp[348626] 1)
+      ParamForLoop[348648]
+      { rank[348412] tmp[348624] tmp[348625] tmp[348626]
+        {
+          if(348620 call _cond_test(348616 call == r[348403] rank[348412]))
+          {
+            Try!
+            {
+              {
+                unknown shape[348422](348423 call * rank[348412] int[10])
+                (348428 'end of statement')
+                {
+                  unknown i[348429] "index var" 0
+                  unknown tmp[348449] "maybe param" "temp"
+                  (348461 'move' tmp[348449](348459 call chpl_compute_low_param_loop_bound 0(348433 call chpl__nudgeHighBound rank[348412])))
+                  unknown tmp[348450] "maybe param" "temp"
+                  (348470 'move' tmp[348450](348468 call chpl_compute_high_param_loop_bound 0(348466 call chpl__nudgeHighBound rank[348412])))
+                  unknown tmp[348451] "maybe param" "temp"
+                  (348473 'move' tmp[348451] 1)
+                  ParamForLoop[348475]
+                  { i[348429] tmp[348449] tmp[348450] tmp[348451]
+                    (348437 call =(348440 call shape[348422] i[348429])(348446 call(348443 call . fr[348384] c"read") int[10]))
+                  }
+                  label _unused_continueLabel[348453]
+                  label _breakLabel[348452]
+                }
+                const dom[348485] "const"(348489 call domainFromShape module=[222] Utilities[320397](348493 'expand_tuple' shape[348422]))
+                (348495 'end of statement')
+                unknown A[348497](348504 call chpl__buildArrayRuntimeType(348499 call chpl__ensureDomainExpr dom[348485])(348502 call real[13] precision[348388]))
+                (348507 'end of statement')
+                (348512 call(348509 call . fr[348384] c"read") A[348497])
+                const AReal[348515] "const"(348522 call : A[348497](348526 call real[13] 64))(348520 call chpl__buildArrayRuntimeType(348517 call chpl__ensureDomainExpr dom[348485]) real[13])
+                (348529 'end of statement')
+                unknown a[348531](348536 'new'(348538 call ndarray[328686](?) AReal[348515]))(348533 call ndarray[328686](?) rank[348412] real[13])
+                (348541 'end of statement')
+                (348546 call(348543 call . fr[348384] c"commit"))
+                (348547 return(348548 'new'(348550 call Tensor[345586](?) a[348531])))
+                (348486 'referenced modules list' Utilities[320397])
+              }
+            }
+            Catch e : UnexpectedEofError
+            {
+              unknown tmp[395651] "temp"(395655 'dynamic_cast'(395653 'to nilable class'(395652 'to unmanaged class' UnexpectedEofError[348557](?)))(395654 'current error'))
+              if(395658 '!=' tmp[395651] nil[32])
+              {
+                unknown e[348612](395668 'new'(395667 call _owned[238](?)(395664 'to non nilable class' tmp[395651])))
+                {
+                  (348568 call(348565 call . stderr[196795] c"writeln") e[348612])
+                  (348577 call(348574 call . stderr[196795] c"writeln") "Error reading from "(348590 call .(348587 call(348584 call . fr[348384] c"getFile")) c"path") " . Going to try read with 32 bit precision instead of " precision[348388])
+                  (348601 call(348598 call . fr[348384] c"revert"))
+                  (348602 return(348607 call(348604 call . Tensor[345586](?) c"readInPlace") fr[348384](precision = 32)))
+                  (348562 'referenced modules list' IO[208303] IO[208303])
+                }
+              }
+              {
+                (395669 'chpl_error')
+              }
+            }
+          }
+        }
+      }
+      label _unused_continueLabel[348628]
+      label _breakLabel[348627]
+    }
+    (348658 call halt(348659 call + "Something bad happened.: "(348664 call : r[348403] string[244])))
+    (348668 return(348669 'new'(348671 call Tensor[345586](?) real[13])))
+  }
+  { scopeless type
+    (348394 call Tensor[345586](?) real[13])
+  }
+  (347817 'referenced modules list' IO[208303] IO[208303] IO[208303] IO[208303] IO[208303] IO[208303] IO[208303])
+}

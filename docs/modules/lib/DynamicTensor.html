@@ -49,6 +49,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">chpldoc documentation</a></li>
 </ul>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../examples/ConvLayerTest.html">ConvLayerTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/MNISTNet.html">MNISTNet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/ModuleSpec.html">ModuleSpec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/MultiLocaleInference.html">MultiLocaleInference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Autograd.html">Autograd</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">DynamicTensor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LoadNumpy.html">LoadNumpy</a></li>
@@ -62,6 +66,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Utilities.html">Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Utilities/Standard.html">Standard</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Utilities/Types.html">Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../src/ChAI.html">ChAI</a></li>
 </ul>
 
         </div>
@@ -100,7 +105,7 @@
 </div>
 <dl class="chpl data">
 <dt class="sig sig-object chpl" id="DynamicTensor.maxRank">
-<em class="property"><span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">maxRank</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">6</span></em><a class="headerlink" href="#DynamicTensor.maxRank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">config</span> <span class="pre">param</span> </em><span class="sig-name descname"><span class="pre">maxRank</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">6</span></em><a class="headerlink" href="#DynamicTensor.maxRank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl data">
@@ -111,19 +116,19 @@
 <dl class="chpl record">
 <dt class="sig sig-object chpl" id="DynamicTensor.Tensor">
 <em class="property"><span class="pre">record</span> </em><span class="sig-name descname"><span class="pre">Tensor</span></span><em class="property"> <span class="pre">:</span> <span class="pre">serializable</span></em><a class="headerlink" href="#DynamicTensor.Tensor" title="Link to this definition">¶</a></dt>
-<dd><dl class="chpl type">
+<dd><dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="DynamicTensor.Tensor.eltType">
-<em class="property"><span class="pre">config</span> <span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#DynamicTensor.Tensor.eltType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">type</span> </em><span class="sig-name descname"><span class="pre">eltType</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">real</span></em><a class="headerlink" href="#DynamicTensor.Tensor.eltType" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl data">
+<dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="DynamicTensor.Tensor.meta">
-<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">meta</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">TensorEssence(eltType)</span></em><a class="headerlink" href="#DynamicTensor.Tensor.meta" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">meta</span></span><em class="property"> <span class="pre">:</span> <span class="pre">shared(TensorEssence(eltType))</span></em><a class="headerlink" href="#DynamicTensor.Tensor.meta" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="chpl data">
+<dl class="chpl attribute">
 <dt class="sig sig-object chpl" id="DynamicTensor.Tensor.runtimeRank">
-<em class="property"><span class="pre">config</span> <span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">runtimeRank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em><a class="headerlink" href="#DynamicTensor.Tensor.runtimeRank" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">runtimeRank</span></span><em class="property"> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em><a class="headerlink" href="#DynamicTensor.Tensor.runtimeRank" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -133,12 +138,12 @@
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">in</span> <span class="pre">meta:</span> <span class="pre">shared</span> <span class="pre">TensorEssence(eltType)</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">type</span> <span class="pre">eltType</span></em>, <em class="sig-param"><span class="pre">in</span> <span class="pre">meta:</span> <span class="pre">shared(TensorEssence(eltType))</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">in</span> <span class="pre">meta:</span> <span class="pre">shared</span> <span class="pre">TensorEssence(?eltType)</span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">in</span> <span class="pre">meta:</span> <span class="pre">shared(TensorEssence(?eltType))</span></em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -168,7 +173,7 @@
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="DynamicTensor.Tensor.resource">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#DynamicTensor.Tensor.resource" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">shared(BaseTensorResource(eltType,</span> <span class="pre">rank))</span></em><a class="headerlink" href="#DynamicTensor.Tensor.resource" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -178,7 +183,7 @@
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="DynamicTensor.Tensor.forceRankMeta">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">forceRankMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">shared</span> <span class="pre">BaseTensorResource(eltType,</span> <span class="pre">rank)</span></em><a class="headerlink" href="#DynamicTensor.Tensor.forceRankMeta" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-name descname"><span class="pre">forceRankMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">rank:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property"> <span class="pre">:</span> <span class="pre">shared(BaseTensorResource(eltType,</span> <span class="pre">rank))</span></em><a class="headerlink" href="#DynamicTensor.Tensor.forceRankMeta" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
@@ -390,7 +395,7 @@
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">Tensor.</span></span><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">writer:</span> <span class="pre">IO.fileWriter(?)</span></em>, <em class="sig-param"><span class="pre">ref</span> <span class="pre">serializer:</span> <span class="pre">?srt2</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">srt2</span> <span class="pre">!=</span> <span class="pre">IO.defaultSerializer</span></em></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">Tensor.</span></span><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">writer:</span> <span class="pre">IO.fileWriter(?)</span></em>, <em class="sig-param"><span class="pre">ref</span> <span class="pre">serializer:</span> <span class="pre">?srt2</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">srt2</span> <span class="pre">!=</span> <span class="pre">IO.defaultSerializer</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">

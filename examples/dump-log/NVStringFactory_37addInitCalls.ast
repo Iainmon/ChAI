@@ -1,0 +1,30 @@
+AST dump for NVStringFactory after pass addInitCalls.
+Module use list: ChapelStandard BytesStringCommon ByteBufferHelpers 
+
+{
+  function chpl__init_NVStringFactory[468336]() : void[4] "fast on" "insert line file info" "local fn" "module init" "resolved"
+  {
+    if chpl__init_NVStringFactory_p[9306451]
+    {
+      goto _exit_chpl__init_NVStringFactory[9306486] _exit_chpl__init_NVStringFactory[9306486]
+    }
+    val modFormatStr[9306459]:chpl_c_string[16] "temp"
+    val modStr[9306460]:chpl_c_string[16] "temp"
+    ref refIndentLevel[9306472]:int(32)[66] "temp"
+    (9306465 'move' modFormatStr[9306459] c"%*s\n")
+    (9306467 'move' modStr[9306460] c"NVStringFactory")
+    (9306470 call printModuleInit[386886] modFormatStr[9306459] modStr[9306460] 15)
+    (9306476 'move' refIndentLevel[9306472](9306475 'addr of' moduleInitLevel[386877]))
+    (9306479 '+=' refIndentLevel[9306472] 1)
+    (9306457 'move' chpl__init_NVStringFactory_p[9306451] 1)
+    {
+      (9305017 call chpl__init_String[468339])
+      (9305019 call chpl__init_BytesStringCommon[468357])
+      (9305021 call chpl__init_ByteBufferHelpers[468348])
+    }
+    (9306482 '-=' refIndentLevel[9306472] 1)
+    label _endchpl__init_NVStringFactory[9306488]
+    label _exit_chpl__init_NVStringFactory[9306486]
+    (595273 return _void[46])
+  }
+}
