@@ -156,6 +156,10 @@ module Utilities {
         return filled;
     }
 
+    proc nbase(bounds: int, n: int): 1*int {
+        return (n,);
+    }
+
     // Does the same thing, but linear in the shape size instead. 
     proc indexInShape(shape: ?rank*int, in n: int): rank*int {
         var idxs: rank*int;
