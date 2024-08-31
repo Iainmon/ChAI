@@ -28,6 +28,8 @@ module Utilities {
     // import ChapelDomain;
     import Math;
 
+    import SimpleDomain;
+
 
     param debugPrint = false;
 
@@ -75,6 +77,12 @@ module Utilities {
             yield D.orderToIndex(i);
         }
     }
+
+    inline proc product(tup: int...?rank) do
+        return SimpleDomain.computeSize(tup);
+
+    inline proc linearIdx(shape: ?rank*int, idx: rank*int) do 
+        return SimpleDomain.computeAtIndex(shape,idx);
 
     inline proc normalizeArray(arr: []) {
         const arrDom = arr.domain;
@@ -608,7 +616,7 @@ module Utilities {
                 }
             }
         }
-
+/*
         inline iter _domain.everyZip(param tag: iterKind) where tag == iterKind.leader {
             const shape = this.fastShape;
             if CHPL_LOCALE_MODEL != "gpu" {
@@ -712,7 +720,7 @@ module Utilities {
                     }
                 }
             }
-        }
+        }*/
 
         inline proc _domain.indexAt(n: int) where rank == 1 {
             return n;

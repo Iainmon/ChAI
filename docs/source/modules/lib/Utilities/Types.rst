@@ -1,0 +1,25 @@
+.. default-domain:: chpl
+
+.. module:: Types
+
+Types
+=====
+**Usage**
+
+.. code-block:: chapel
+
+   use Utilities.Types;
+
+
+or
+
+.. code-block:: chapel
+
+   import Utilities.Types;
+
+.. type:: type stdRange = range(idxType = int, bounds = boundKind.both, strides = strideKind.one)
+
+.. type:: type f32 = real(32)
+
+.. type:: type f64 = real(64)
+

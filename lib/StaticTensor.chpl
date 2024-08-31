@@ -6,6 +6,8 @@ use Autograd;
 import Utilities as util;
 use Utilities.Standard;
 
+type tensor = staticTensor(?);
+
 record staticTensor : serializable {
     param rank: int;
     type eltType = real(64);

@@ -549,11 +549,15 @@ record ndarray : serializable {
 }
 
 
-proc type ndarray.arange(to: int,type eltType = real(64),shape: ?rank*int): ndarray(rank,eltType) {
+
+proc type ndarray.arange(type eltType = real(32),shape: ?rank*int): ndarray(rank,eltType) {
     const dom = util.domainFromShape((...shape));
-    const A: [dom] eltType = foreach (_,x) in zip(dom,0..<to) do x:eltType;
+    const A: [dom] eltType = foreach (i,_) in dom.everyZip() do i : eltType;
     return new ndarray(A);
 }
+proc type ndarray.arange(shape: int...?rank): ndarray(rank,real(32)) do
+    return ndarray.arange(eltType=real(32), shape);
+
 
 
 operator =(ref lhs: ndarray(?rank,?eltType), const rhs: ndarray(rank,eltType)) {

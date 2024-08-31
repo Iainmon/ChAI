@@ -110,7 +110,7 @@
 
 <dl class="chpl data">
 <dt class="sig sig-object chpl" id="ModuleSpec.model">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">model</span></span><em class="property"> <span class="pre">:</span> <span class="pre">owned(Module(real))</span> <span class="pre">=</span> <span class="pre">modelFromSpecFile(&quot;scripts/models/cnn/specification.json&quot;)</span></em><a class="headerlink" href="#ModuleSpec.model" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">model</span></span><em class="property"> <span class="pre">:</span> <span class="pre">owned(Module(real(32)))</span> <span class="pre">=</span> <span class="pre">loadModel(specFile</span> <span class="pre">=</span> <span class="pre">&quot;scripts/models/cnn/specification.json&quot;,</span> <span class="pre">weightsFolder</span> <span class="pre">=</span> <span class="pre">&quot;scripts/models/cnn/&quot;,</span> <span class="pre">dtype</span> <span class="pre">=</span> <span class="pre">real(32))</span></em><a class="headerlink" href="#ModuleSpec.model" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl data">
@@ -120,7 +120,7 @@
 
 <dl class="chpl data">
 <dt class="sig sig-object chpl" id="ModuleSpec.images">
-<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">images</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">forall</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">0..&lt;numImages</span> <span class="pre">do</span> <span class="pre">Tensor.load(&quot;data/datasets/mnist/image_idx_&quot;</span> <span class="pre">+</span> <span class="pre">i</span></em><em class="property"> <span class="pre">:</span> <span class="pre">string</span> <span class="pre">+</span> <span class="pre">&quot;.chdata&quot;)</span></em><a class="headerlink" href="#ModuleSpec.images" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">var</span> </em><span class="sig-name descname"><span class="pre">images</span></span><span class="w"> </span><em class="property"> <span class="pre">=</span> <span class="pre">forall</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">0..&lt;numImages</span> <span class="pre">do</span> <span class="pre">Tensor.load(&quot;data/datasets/mnist/image_idx_&quot;</span> <span class="pre">+</span> <span class="pre">i</span></em><em class="property"> <span class="pre">:</span> <span class="pre">string</span> <span class="pre">+</span> <span class="pre">&quot;.chdata&quot;)</span> <span class="pre">:</span> <span class="pre">real(32)</span></em><a class="headerlink" href="#ModuleSpec.images" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl data">

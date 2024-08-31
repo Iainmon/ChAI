@@ -161,26 +161,58 @@
 <dl class="chpl itermethod">
 <dt class="sig sig-object chpl" id="Standard._domain.each">
 <em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">each</span></span><a class="headerlink" href="#Standard._domain.each" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="simple">
+<dt>inline proc _domain.simple() const<span class="classifier">rect(rank) do</span></dt><dd><p>return new rect(this);</p>
+</dd>
+<dt>inline iter _domain.every() {</dt><dd><p>const simple = this.simple();
+foreach idx in simple do yield idx;</p>
+</dd>
+</dl>
+<p>}
+inline iter _domain.every(param tag: iterKind)</p>
+<blockquote>
+<div><blockquote>
+<div><p>where tag == iterKind.standalone {</p>
+</div></blockquote>
+<p>const simple = this.simple();
+foreach idx in simple do yield idx;</p>
+</div></blockquote>
+<p>}</p>
+<dl class="simple">
+<dt>inline iter _domain.everyZip() {</dt><dd><p>const simple = this.simple();
+foreach idx in simple.eachOrder() do yield idx;</p>
+</dd>
+</dl>
+<p>}
+inline iter _domain.everyZip(param tag: iterKind)</p>
+<blockquote>
+<div><blockquote>
+<div><p>where tag == iterKind.standalone {</p>
+</div></blockquote>
+<p>const simple = this.simple();
+foreach idx in simple.eachOrder() do yield idx;</p>
+</div></blockquote>
+<p>}</p>
+</dd></dl>
 
 <dl class="chpl itermethod">
 <dt class="sig sig-object chpl" id="Standard._domain.every">
-<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">every</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">rank</span> <span class="pre">==</span> <span class="pre">1</span></em><a class="headerlink" href="#Standard._domain.every" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">every</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">rank</span> <span class="pre">==</span> <span class="pre">1</span></em><a class="headerlink" href="#Standard._domain.every" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="chpl itermethod">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">every</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">tag:</span> <span class="pre">iterKind</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">tag</span> <span class="pre">==</span> <span class="pre">iterKind.standalone</span> <span class="pre">&amp;&amp;</span> <span class="pre">rank</span> <span class="pre">==</span> <span class="pre">1</span></em></dt>
+<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">every</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">tag:</span> <span class="pre">iterKind</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">tag</span> <span class="pre">==</span> <span class="pre">iterKind.standalone</span> <span class="pre">&amp;&amp;</span> <span class="pre">rank</span> <span class="pre">==</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl itermethod">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">every</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">rank</span> <span class="pre">&gt;</span> <span class="pre">1</span></em></dt>
+<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">every</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">rank</span> <span class="pre">&gt;</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl itermethod">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">every</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">tag:</span> <span class="pre">iterKind</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">tag</span> <span class="pre">==</span> <span class="pre">iterKind.standalone</span> <span class="pre">&amp;&amp;</span> <span class="pre">rank</span> <span class="pre">&gt;</span> <span class="pre">1</span></em></dt>
+<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">every</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">tag:</span> <span class="pre">iterKind</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">tag</span> <span class="pre">==</span> <span class="pre">iterKind.standalone</span> <span class="pre">&amp;&amp;</span> <span class="pre">rank</span> <span class="pre">&gt;</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl itermethod">
@@ -190,27 +222,185 @@
 
 <dl class="chpl itermethod">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">everyZip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">tag:</span> <span class="pre">iterKind</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">tag</span> <span class="pre">==</span> <span class="pre">iterKind.standalone</span></em></dt>
-<dd></dd></dl>
-
-<dl class="chpl itermethod">
-<dt class="sig sig-object chpl">
-<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">everyZip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">tag:</span> <span class="pre">iterKind</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">tag</span> <span class="pre">==</span> <span class="pre">iterKind.leader</span></em></dt>
-<dd></dd></dl>
-
-<dl class="chpl itermethod">
-<dt class="sig sig-object chpl">
-<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">everyZip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">tag:</span> <span class="pre">iterKind</span></em>, <em class="sig-param"><span class="pre">followThis</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">tag</span> <span class="pre">==</span> <span class="pre">iterKind.follower</span></em></dt>
+<em class="property"><span class="pre">iter</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">everyZip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">param</span> <span class="pre">tag:</span> <span class="pre">iterKind</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">tag</span> <span class="pre">==</span> <span class="pre">iterKind.standalone</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl" id="Standard._domain.indexAt">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">indexAt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">rank</span> <span class="pre">==</span> <span class="pre">1</span></em><a class="headerlink" href="#Standard._domain.indexAt" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">indexAt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">rank</span> <span class="pre">==</span> <span class="pre">1</span></em><a class="headerlink" href="#Standard._domain.indexAt" title="Link to this definition">¶</a></dt>
+<dd><dl>
+<dt>inline iter _domain.everyZip(param tag: iterKind) where tag == iterKind.leader {</dt><dd><p>const shape = this.fastShape;
+if CHPL_LOCALE_MODEL != “gpu” {</p>
+<blockquote>
+<div><dl>
+<dt>if rank == 1 {</dt><dd><p>forall i in 0..&lt;shape do yield (i,i);</p>
+</dd>
+<dt>} else {</dt><dd><p>var blks: rank * int;
+for param j in 0..&lt;rank {</p>
+<blockquote>
+<div><p>param i = rank - j - 1;
+if i == rank - 1 then</p>
+<blockquote>
+<div><p>blks(i) = 1;</p>
+</div></blockquote>
+<dl class="simple">
+<dt>else</dt><dd><p>blks(i) = shape(i) * blks(i + 1);</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>}
+// forall idx in this {
+//     var i: int;
+//     for param k in 0..&lt;rank do
+//         i += idx(k) * blks(k);
+//     yield (i,idx);
+// }
+forall followThis in _value.these(tag) do yield followThis;</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<dl>
+<dt>} else {</dt><dd><dl>
+<dt>if rank == 1 {</dt><dd><dl>
+<dt>if loopGpuSupport {</dt><dd><p>&#64;assertOnGpu
+forall i in 0..&lt;shape do</p>
+<blockquote>
+<div><p>yield (i,i);</p>
+</div></blockquote>
+</dd>
+<dt>} else {</dt><dd><dl class="simple">
+<dt>forall i in 0..&lt;shape do</dt><dd><p>yield (i,i);</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+<dt>} else {</dt><dd><p>var prod = 1;
+var divs: rank * int;
+for param j in 0..&lt;rank {</p>
+<blockquote>
+<div><p>param i = rank - j - 1;
+divs(i) = prod;
+prod <a href="#id1"><span class="problematic" id="id2">*</span></a>= shape(i);</p>
+</div></blockquote>
+<p>}
+if loopGpuSupport {</p>
+<blockquote>
+<div><p>&#64;assertOnGpu
+forall i in 0..&lt;prod {</p>
+<blockquote>
+<div><p>yield (i,indexAtHelperMultiples(i,(…divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(…divs));</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<dl>
+<dt>} else {</dt><dd><dl class="simple">
+<dt>forall i in 0..&lt;prod {</dt><dd><p>yield (i,indexAtHelperMultiples(i,(…divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(…divs));</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}
+inline iter _domain.everyZip(param tag: iterKind,followThis) where tag == iterKind.follower {</p>
+<blockquote>
+<div><p>const shape = this.fastShape;
+if CHPL_LOCALE_MODEL != “gpu” {</p>
+<blockquote>
+<div><dl>
+<dt>if rank == 1 {</dt><dd><p>forall i in 0..&lt;shape do yield (i,i);</p>
+</dd>
+<dt>} else {</dt><dd><p>var strides: rank * int;
+var prod = 1;
+for param j in 0..&lt;rank {</p>
+<blockquote>
+<div><p>param i = rank - j - 1;
+strides(i) = prod;
+prod <a href="#id3"><span class="problematic" id="id4">*</span></a>= shape(i);</p>
+</div></blockquote>
+<p>}
+forall idx in this {</p>
+<blockquote>
+<div><p>var i: int;
+for param k in 0..&lt;rank do</p>
+<blockquote>
+<div><p>i += idx(k) * strides(k);</p>
+</div></blockquote>
+<p>yield (i,idx);</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<dl>
+<dt>} else {</dt><dd><dl>
+<dt>if rank == 1 {</dt><dd><dl>
+<dt>if loopGpuSupport {</dt><dd><p>&#64;assertOnGpu
+forall i in 0..&lt;shape do</p>
+<blockquote>
+<div><p>yield (i,i);</p>
+</div></blockquote>
+</dd>
+<dt>} else {</dt><dd><dl class="simple">
+<dt>forall i in 0..&lt;shape do</dt><dd><p>yield (i,i);</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+<dt>} else {</dt><dd><p>var prod = 1;
+var divs: rank * int;
+for param j in 0..&lt;rank {</p>
+<blockquote>
+<div><p>param i = rank - j - 1;
+divs(i) = prod;
+prod <a href="#id5"><span class="problematic" id="id6">*</span></a>= shape(i);</p>
+</div></blockquote>
+<p>}
+if loopGpuSupport {</p>
+<blockquote>
+<div><p>&#64;assertOnGpu
+forall i in 0..&lt;prod {</p>
+<blockquote>
+<div><p>yield (i,indexAtHelperMultiples(i,(…divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(…divs));</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<dl>
+<dt>} else {</dt><dd><dl class="simple">
+<dt>forall i in 0..&lt;prod {</dt><dd><p>yield (i,indexAtHelperMultiples(i,(…divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(…divs));</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd></dl>
 
 <dl class="chpl method">
 <dt class="sig sig-object chpl">
-<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">indexAt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property">&#160;&#160; <span class="pre">where</span> <span class="pre">rank</span> <span class="pre">&gt;</span> <span class="pre">1</span></em></dt>
+<em class="property"><span class="pre">proc</span> </em><span class="sig-prename descclassname"><span class="pre">_domain.</span></span><span class="sig-name descname"><span class="pre">indexAt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n:</span> <span class="pre">int</span></em><span class="sig-paren">)</span><em class="property">&#160; <span class="pre">where</span> <span class="pre">rank</span> <span class="pre">&gt;</span> <span class="pre">1</span></em></dt>
 <dd></dd></dl>
 
 <dl class="chpl method">
