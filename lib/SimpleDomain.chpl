@@ -100,6 +100,20 @@ inline proc computeSize(shape: ?rank*int): int {
     return s;
 }
 
+inline proc computeAtIndex(const idx: int): int do
+    return idx;
+
+inline proc computeAtIndex(const shape: ?rank*int, const idx: rank*int): int {
+    if rank == 1 then
+        return idx;
+    const strides = computeStrides(shape);
+    // if rank > 1 do
+    var i: int;
+    for param j in 0..<rank do
+        i += idx(j) * strides(j);
+    return i;
+}
+
 
 
 record rect : serializable {

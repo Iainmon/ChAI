@@ -376,7 +376,7 @@ class Module {
             if var p = m : borrowed Parameter(eltType)? {
                 const paramName = name[(moduleName.size + 1)..];
                 const paramPath = modelPath + paramName + ".chdata";
-                writeln("Loading ",paramName," from ", paramPath);
+                if debug then writeln("Loading ",paramName," from ", paramPath);
                 var loaded = Tensor.load(paramPath) : eltType;
                 p!.data = loaded;
             }
@@ -666,10 +666,8 @@ class Dropout : Module(?) {
 
 
 proc chain(m: borrowed Module(?), modNames: string...?n, input: Tensor(?eltType)) {
-    writeln("layer 0");
     var output = m.mod(modNames(0))(input);
     for param i in 1..<n {
-        writeln("layer ", i);
         output = m.mod(modNames(i))(output);
     }
     return output;
