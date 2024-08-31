@@ -45,6 +45,10 @@ or
 
 .. function:: proc computeSize(shape: ?rank*int): int
 
+.. function:: proc computeAtIndex(const idx: int): int
+
+.. function:: proc computeAtIndex(const shape: ?rank*int, const idx: rank*int): int
+
 .. record:: rect : serializable
 
    .. attribute:: param rank: int

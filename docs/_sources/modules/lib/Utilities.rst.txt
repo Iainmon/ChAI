@@ -43,6 +43,10 @@ or
 
 .. iterfunction:: iter flatIter(param tag: iterKind, D: domain(?)) where tag == iterKind.standalone
 
+.. function:: proc product(tup: int ...?rank)
+
+.. function:: proc linearIdx(shape: ?rank*int, idx: rank*int)
+
 .. function:: proc normalizeArray(arr: [])
 
 .. function:: proc normalizeArray(unknown: ?t) where !isArrayType(t)

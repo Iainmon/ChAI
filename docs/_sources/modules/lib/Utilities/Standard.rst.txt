@@ -74,11 +74,113 @@ or
 
 .. itermethod:: iter _domain.everyZip(param tag: iterKind) where tag == iterKind.standalone
 
-.. itermethod:: iter _domain.everyZip(param tag: iterKind) where tag == iterKind.leader
-
-.. itermethod:: iter _domain.everyZip(param tag: iterKind, followThis) where tag == iterKind.follower
-
 .. method:: proc _domain.indexAt(n: int) where rank == 1
+
+   
+   inline iter _domain.everyZip(param tag: iterKind) where tag == iterKind.leader {
+       const shape = this.fastShape;
+       if CHPL_LOCALE_MODEL != "gpu" {
+           if rank == 1 {
+               forall i in 0..<shape do yield (i,i);
+           } else {
+               var blks: rank * int;
+               for param j in 0..<rank {
+                   param i = rank - j - 1;
+                   if i == rank - 1 then
+                       blks(i) = 1;
+                   else
+                       blks(i) = shape(i) * blks(i + 1);
+               }
+               // forall idx in this {
+               //     var i: int;
+               //     for param k in 0..<rank do
+               //         i += idx(k) * blks(k);
+               //     yield (i,idx);
+               // }
+               forall followThis in _value.these(tag) do yield followThis;
+           }
+       } else {
+           if rank == 1 {
+               if loopGpuSupport {
+                   @assertOnGpu
+                   forall i in 0..<shape do 
+                       yield (i,i);
+               } else {
+                   forall i in 0..<shape do
+                       yield (i,i);
+               }
+           } else {
+               var prod = 1;
+               var divs: rank * int;
+               for param j in 0..<rank {
+                   param i = rank - j - 1;
+                   divs(i) = prod;
+                   prod *= shape(i);
+               }
+               if loopGpuSupport {
+                   @assertOnGpu
+                   forall i in 0..<prod {
+                       yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                   }
+               } else {
+                   forall i in 0..<prod {
+                       yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                   }
+               }
+           }
+       }
+   }
+   inline iter _domain.everyZip(param tag: iterKind,followThis) where tag == iterKind.follower {
+       const shape = this.fastShape;
+       if CHPL_LOCALE_MODEL != "gpu" {
+           if rank == 1 {
+               forall i in 0..<shape do yield (i,i);
+           } else {
+               var strides: rank * int;
+               var prod = 1;
+               for param j in 0..<rank {
+                   param i = rank - j - 1;
+                   strides(i) = prod;
+                   prod *= shape(i);
+               }
+               forall idx in this {
+                   var i: int;
+                   for param k in 0..<rank do
+                       i += idx(k) * strides(k);
+                   yield (i,idx);
+               }
+           }
+       } else {
+           if rank == 1 {
+               if loopGpuSupport {
+                   @assertOnGpu
+                   forall i in 0..<shape do 
+                       yield (i,i);
+               } else {
+                   forall i in 0..<shape do
+                       yield (i,i);
+               }
+           } else {
+               var prod = 1;
+               var divs: rank * int;
+               for param j in 0..<rank {
+                   param i = rank - j - 1;
+                   divs(i) = prod;
+                   prod *= shape(i);
+               }
+               if loopGpuSupport {
+                   @assertOnGpu
+                   forall i in 0..<prod {
+                       yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                   }
+               } else {
+                   forall i in 0..<prod {
+                       yield (i,indexAtHelperMultiples(i,(...divs))); // orderToIndex(i); // indexAtHelperMultiples(i,(...divs));
+                   }
+               }
+           }
+       }
+   }
 
 .. method:: proc _domain.indexAt(n: int) where rank > 1
 

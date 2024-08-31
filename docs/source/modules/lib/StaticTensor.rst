@@ -17,6 +17,8 @@ or
 
    import StaticTensor;
 
+.. type:: type tensor = staticTensor(?)
+
 .. record:: staticTensor : serializable
 
    .. attribute:: param rank: int

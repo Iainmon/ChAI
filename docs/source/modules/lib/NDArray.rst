@@ -111,7 +111,9 @@ or
 
    .. method:: proc relu()
 
-.. method:: proc type ndarray.arange(to: int, type eltType = real(64), shape: ?rank*int): ndarray(rank, eltType)
+.. method:: proc type ndarray.arange(type eltType = real(32), shape: ?rank*int): ndarray(rank, eltType)
+
+.. method:: proc type ndarray.arange(shape: int ...?rank): ndarray(rank, real(32))
 
 .. function:: operator  = (ref lhs: ndarray(?rank, ?eltType), const rhs: ndarray(rank, eltType))
 
