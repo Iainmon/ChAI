@@ -38,23 +38,21 @@ var preds: [imagesD] int;
 config const numTries = 1;
 
 var totalTime: real;
-
 for i in 0..<numTries {
 
+    // Begin timing the inference on entire batch
     var st = new Time.stopwatch();
     st.start();
 
-    // coforall loc in Locales {
-    //     on loc {
-    //         const myAD = A.domain.localIndices();
-    //         forall i in myAD;
-    //     }
-    // }
+    // Feed each input through the network in parallel
     forall (image,pred) in zip(images,preds) {
+        // Get reference to the model instance on the iteration's node
         var model = localeModels[here.id].borrow();
+        // Map the input image to an int from 0-9
         pred = model(image).argmax();
     }
-    
+
+    // Stop the timer
     st.stop();
     const tm = st.elapsed();
     totalTime += tm;
