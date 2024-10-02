@@ -290,12 +290,12 @@ record rect : serializable {
 
     // pragma "suppress lvalue error"
     // pragma "fn returns iterator"
-    // inline proc every(param tag: iterKind) do  
+    // inline proc every(param tag: iterKind) do
     //     return these(tag=tag);
     
     // pragma "suppress lvalue error"
     // pragma "fn returns iterator"
-    // inline proc every() do  
+    // inline proc every() do
     //     return these();
 
     inline iter serialIter() const : simpleTupleType(rank) do

@@ -18,7 +18,7 @@ use Reflection;
 
 
 
-proc helpFindModuleByName(arg, x: string) : borrowed Module(?) {
+proc helpFindModuleByName(arg, x: string) : borrowed Module(?)? {
   param myFields = getNumFields(arg.type);
   for param i in 0..<myFields {
     if !isType(getField(arg, i)) &&
@@ -28,6 +28,7 @@ proc helpFindModuleByName(arg, x: string) : borrowed Module(?) {
         }
   }
   halt("Could not find module with name: ", x);
+  return nil;
 }
 
 proc helpFindParamDataByName(arg, x: string) ref : Tensor(?) {
@@ -56,9 +57,13 @@ record moduleChildren {
     iter ref these(): borrowed Module(eltType) do
         for k in 0..<order.size do
             yield childDict[order(k)];
-    
-    iter ref items(): (string,borrowed Module(eltType)) do 
-        for n in 0..<order.size do 
+
+    iter ref items(): (string,borrowed Module(eltType)) do
+        for n in 0..<order.size do
+            yield (order(n),childDict[order(n)]);
+
+    iter ref itemsPar(): (string,borrowed Module(eltType)) do
+        foreach n in 0..<order.size do
             yield (order(n),childDict[order(n)]);
 
     proc ref add(name: string,m: borrowed Module(eltType)) {
@@ -228,7 +233,11 @@ proc moduleFromSpec(ms_: borrowed ModuleSpecification?,type dtype = real(32)): o
         }
         when "MaxPool2d" {
             var ma = new moduleAttributes("MaxPool","unknown",ms.attributes);
-            return new MaxPool(dtype,ma.getInt("kernel_size"));
+            return new MaxPool(dtype,ma.getInt("kernel_size"),ma.getInt("stride"));
+        }
+        when "AdaptiveAvgPool2d" {
+            var ma = new moduleAttributes("AdaptiveAvgPool2D","unknown",ms.attributes);
+            return new AdaptiveAvgPool2D(dtype,ma.getInt("output_size"));
         }
         when "LogSoftmax" {
             return new Softmax(dtype);
@@ -365,12 +374,20 @@ class Module {
             }
         }
     }
+    iter namedModules(param tag: iterKind): (string,borrowed Module(eltType)) where tag == iterKind.standalone {
+        foreach (n,m) in subModules.itemsPar() {
+            yield (n,m);
+            foreach (n_,m_) in m.namedModules() {
+                yield (n_,m_);
+            }
+        }
+    }
 
     // iter modules(): borrowed Module(eltType) {
     //     for (n,m) in this.moduleFields()
     // }
     proc loadPyTorchDump(modelPath: string, param debug = false) {
-        for (n,m) in namedModules() {
+        forall (n,m) in namedModules() {
             const name = m.moduleName;
             if debug then writeln((n,name,m.signature));
             if var p = m : borrowed Parameter(eltType)? {
@@ -396,7 +413,7 @@ class Module {
         );
     }
 
-    proc signature: string do 
+    proc signature: string do
         return attributes().prettyPrint();
 }
 
@@ -408,7 +425,7 @@ class Parameter : Module(?) {
         this.data = data;
     }
 
-    override proc attributes(): moduleAttributes do 
+    override proc attributes(): moduleAttributes do
         return new moduleAttributes(
             "Parameter",
             moduleName,
@@ -530,13 +547,15 @@ class Linear : Module(?) {
 class Conv2D : Module(?) {
     var kernelShape: 4*int;
     var stride: int;
+    var padding: int;
     var kernel: owned Parameter(eltType);
     var bias: owned Parameter(eltType);
 
-    proc init(type eltType = real,channels: int, features: int, kernel: int, stride: int = 1) {
+    proc init(type eltType = real,channels: int, features: int, kernel: int, stride: int = 1, padding: int = 0) {
         super.init(eltType);
         this.kernelShape = (features,channels,kernel,kernel);
         this.stride = stride;
+        this.padding = padding;
         this.kernel = new Parameter(Tensor.arange(features,channels,kernel,kernel) : eltType);
         this.bias = new Parameter(Tensor.arange(features) : eltType);
         init this;
@@ -547,7 +566,8 @@ class Conv2D : Module(?) {
                   ma.getInt("in_channels"),
                   ma.getInt("out_channels"),
                   ma.getInt("kernel_size"),
-                  ma.getInt("stride"));
+                  ma.getInt("stride"),
+                  ma.getInt("padding"));
     }
 
     // proc init(reader,ref deserializer: jsonDeserializer) {
@@ -570,14 +590,14 @@ class Conv2D : Module(?) {
         addModule("bias",bias);
     }
 
-    proc init(channels: int, features: int, kernel: int, stride: int = 1) {
-        this.init(real,channels,features,kernel,stride);
+    proc init(channels: int, features: int, kernel: int, stride: int = 1, padding: int = 0) {
+        this.init(real,channels,features,kernel,stride,padding);
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
         var weights = this.kernel.data;
         var bias = this.bias.data;
-        return Tensor.convolve(input,weights,bias,stride);
+        return Tensor.convolve(input,weights,bias,stride,padding);
     }
 
     override proc attributes(): moduleAttributes {
@@ -588,30 +608,61 @@ class Conv2D : Module(?) {
             ("inChannels", channels),
             ("outChannels", features),
             ("kernelSize", kernel),
-            ("stride",stride));
+            ("stride",stride),
+            ("padding",padding));
     }
 }
 
 class MaxPool : Module(?) {
     var poolSize: int;
+    var stride: int;
 
-    proc init(type eltType = real, poolSize: int) {
+    proc init(type eltType = real, poolSize: int, stride: int = -1) {
         super.init(eltType);
         this.poolSize = poolSize;
+        if stride == -1 then
+          this.stride = poolSize;
+        else
+          this.stride = stride;
     }
 
-    proc init(poolSize: int) do
-        this.init(real,poolSize);
+    proc init(poolSize: int, stride: int = -1) do
+        this.init(real,poolSize, stride);
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
-        return input.maxPool(poolSize);
+        return input.maxPool(poolSize, stride);
     }
 
     override proc attributes(): moduleAttributes {
         return new moduleAttributes(
             "MaxPool",
             moduleName,
-            ("poolSize", poolSize));
+            ("poolSize", poolSize),
+            ("stride", stride));
+    }
+}
+
+class AdaptiveAvgPool2D : Module(?) {
+  // only handles square pooling
+  var outputSize: int;
+
+  proc init(type eltType = real, outputSize: int) {
+        super.init(eltType);
+        this.outputSize = outputSize;
+    }
+
+    proc init(outputSize: int) do
+        this.init(real,outputSize);
+
+    override proc forward(input: Tensor(eltType)): Tensor(eltType) {
+        return input.adaptiveAvgPool2d(outputSize);
+    }
+
+    override proc attributes(): moduleAttributes {
+      return new moduleAttributes(
+            "AdaptiveAvgPool2D",
+            moduleName,
+            ("outputSize", outputSize));
     }
 }
 
@@ -621,7 +672,7 @@ class Flatten : Module(?) {
     
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
         return input.flatten();
-    
+
     override proc attributes(): moduleAttributes do
         return new moduleAttributes("Flatten",moduleName);
 }
@@ -638,9 +689,11 @@ class ReLU : Module(?) {
 }
 
 class Softmax : Module(?) {
-    proc init(type eltType = real) do
+
+    proc init(type eltType = real) {
         super.init(eltType);
-    
+    }
+
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
         return input.softmax();
 
@@ -648,13 +701,14 @@ class Softmax : Module(?) {
         return new moduleAttributes("SoftMax",moduleName);
 }
 
+// TODO: dropout is only valid for inference, since its a noop
 class Dropout : Module(?) {
     proc init(type eltType = real,freq: real = 0.5) do
         super.init(eltType);
-    
+
     override proc forward(input: Tensor(eltType)): Tensor(eltType) do
-        return input;
-    
+        return input; // dropout is not used for inference
+
     override proc attributes(): moduleAttributes {
         return new moduleAttributes(
             "Dropout",
