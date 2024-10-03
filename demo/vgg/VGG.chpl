@@ -8,8 +8,6 @@ module VGG {
       super.init(eltType, channels, features, kernel, stride, padding);
     }
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
-      // writeln("am i here?");
-            // writeln(this);
       var x = super.forward(input);
       x = x.relu();
       return x;
@@ -119,8 +117,6 @@ module VGG {
     }
 
     override proc forward(input: Tensor(eltType)): Tensor(eltType) {
-      // writeln("input", input.shape);
-      // writeln("run here");
       var x = this.conv64_1(input);
       x = this.conv64_2(x);
       x = this.maxPool64(x);

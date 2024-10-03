@@ -31,7 +31,7 @@ var localeModels = forall li in localeModelsD do
               weightsFolder="scripts/models/cnn/",
               dtype=dtype);
 
-// Create distributed array of output results. 
+// Create distributed array of output results.
 var preds: [imagesD] int;
 
 
@@ -54,7 +54,7 @@ for i in 0..<numTries {
         var model = localeModels[here.id].borrow();
         pred = model(image).argmax();
     }
-    
+
     st.stop();
     const tm = st.elapsed();
     totalTime += tm;
