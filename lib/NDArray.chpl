@@ -704,36 +704,75 @@ operator /(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
 //     return c;
 // }
 
+proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltType), stride: int) do
+    return ndarray.convolve(features,kernel,stride,padding = (0,0));
 
-proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltType), stride: int): ndarray(3,eltType) {
+
+proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltType), bias: ndarray(1,eltType), stride: int, padding: 2*int): ndarray(3,eltType) {
     const (channels,inHeight,inWidth) = features.shape;
     const (filters,channels_,kernelHeight,kernelWidth) = kernel.shape;
-    if channels != channels_ then halt("Channels must match.");
+    const (filters_,) = bias.shape;
+    const (paddingHeight,paddingWidth) = padding;
+    if channels != channels_ then halt("Channels must match. ", features.shape , " ", kernel.shape);
 
-    const outHeight: int = ((inHeight - kernelHeight) / stride) + 1;
-    const outWidth: int = ((inWidth - kernelWidth) / stride) + 1;
+    const outHeight: int = ((inHeight - kernelHeight) / stride) + 1 + (paddingHeight * 2);
+    const outWidth: int = ((inWidth - kernelWidth) / stride) + 1 + (paddingWidth * 2);
     const outShape = (filters,outHeight,outWidth);
     const outDom = util.domainFromShape((...outShape));
+
+    const ref fet = features.data;
+    const ref ker = kernel.data;
+
     var outFeatures = new ndarray(outDom,eltType);
-
-    const chanR = 0..<channels; // don't trust daniel's codemotion.
-    const kernelD = util.domainFromShape(kernelHeight,kernelWidth);
-    const kernelChanD = util.domainFromShape(channels,kernelHeight,kernelWidth);
-
     ref dat = outFeatures.data;
-    ref fet = features.data;
-    ref ker = kernel.data;
 
-    // @assertOnGpu
-    forall (f,h_,w_) in outDom.every() {
-        const hi: int = h_ * stride;
-        const wi: int = w_ * stride;
-        var sum: eltType = 0;
-        for j in 0..<kernelChanD.size {
-            const (c,kh,kw) = kernelChanD.indexAt(j);
-            sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+    inline proc fastKernel(param kernelSize: int) {
+        forall (f,h_,w_) in outDom.every() {
+            const hi = h_ * stride;
+            const wi = w_ * stride;
+            var sum: eltType = 0;
+            for c in 0..<channels {
+                for param kh in 0..<kernelSize {
+                    for param kw in 0..<kernelSize {
+                        sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+                    }
+                }
+            }
+            dat[f,h_ + paddingHeight,w_ + paddingWidth] = sum;
         }
-        dat[f,h_,w_] = sum;
+    }
+
+    inline proc slowKernel() {
+        const kernelChanD = util.domainFromShape(channels,kernelHeight,kernelWidth);
+        forall (f,h_,w_) in outDom.every() {
+            const hi = h_ * stride;
+            const wi = w_ * stride;
+            var sum: eltType = 0;
+            if util.targetGpu() then
+                for c in 0..<channels do
+                    for kh in 0..<kernelHeight do
+                        for kw in 0..<kernelWidth do
+                            sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+            else
+                for (c,kh,kw) in kernelChanD do
+                    sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
+            dat[f,h_ + paddingHeight,w_ + paddingWidth] = sum;
+        }
+    }
+
+    select (kernelHeight,kernelWidth) {
+        when (3,3) do 
+            fastKernel(3);
+        when (5,5) do
+            fastKernel(5);
+        when (7,7) do
+            fastKernel(7);
+        when (9,9) do
+            fastKernel(9);
+        when (11,11) do
+            fastKernel(11);
+        otherwise do
+            slowKernel();
     }
 
     return outFeatures;
