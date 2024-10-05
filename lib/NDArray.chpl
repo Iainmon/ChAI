@@ -705,19 +705,18 @@ operator /(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
 // }
 
 proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltType), stride: int) do
-    return ndarray.convolve(features,kernel,stride,padding = 0);
+    return ndarray.convolve(features,kernel,stride,padding = (0,0));
 
 
-proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltType), bias: ndarray(1,eltType), stride: int, padding: int): ndarray(3,eltType) {
+proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltType), bias: ndarray(1,eltType), stride: int, padding: 2*int): ndarray(3,eltType) {
     const (channels,inHeight,inWidth) = features.shape;
     const (filters,channels_,kernelHeight,kernelWidth) = kernel.shape;
     const (filters_,) = bias.shape;
+    const (paddingHeight,paddingWidth) = padding;
     if channels != channels_ then halt("Channels must match. ", features.shape , " ", kernel.shape);
 
-    if padding != 0 then halt("Padding other than 0 is not yet supported. Given ", padding); 
-
-    const outHeight: int = ((inHeight - kernelHeight) / stride) + 1;
-    const outWidth: int = ((inWidth - kernelWidth) / stride) + 1;
+    const outHeight: int = ((inHeight - kernelHeight) / stride) + 1 + (paddingHeight * 2);
+    const outWidth: int = ((inWidth - kernelWidth) / stride) + 1 + (paddingWidth * 2);
     const outShape = (filters,outHeight,outWidth);
     const outDom = util.domainFromShape((...outShape));
 
@@ -739,7 +738,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
                     }
                 }
             }
-            dat[f,h_,w_] = sum;
+            dat[f,h_ + paddingHeight,w_ + paddingWidth] = sum;
         }
     }
 
@@ -757,7 +756,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
             else
                 for (c,kh,kw) in kernelChanD do
                     sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
-            dat[f,h_,w_] = sum;
+            dat[f,h_ + paddingHeight,w_ + paddingWidth] = sum;
         }
     }
 
