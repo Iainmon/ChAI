@@ -45,7 +45,7 @@ proc tuple.eltType type do
 //         return this(0);
 
 pragma "reference to const when const this"
-inline proc tuple.uncons ref : (head.type,tail.type) {
+inline proc tuple.uncons ref : (this.head.type,this.tail.type) {
     inline proc firstRest(first, rest...) do
         return (first,rest);
     return firstRest((...this));
@@ -374,7 +374,6 @@ record rect : serializable {
     }
 
     proc toString() {
-        use IO;
         use IO.FormattedIO;
         const dms = dims();
         var content: string = "";
