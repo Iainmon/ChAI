@@ -206,7 +206,9 @@ class ModuleSpecification : serializable {
     var subModuleOrder: list(string);
 }
 
-proc moduleFromSpec(ms_: borrowed ModuleSpecification?,type dtype = real(32)): owned Module(dtype) {
+const empty_locales: [1..0] locale;
+
+proc moduleFromSpec(ms_: borrowed ModuleSpecification?,type dtype = real(32), targetLocales: [] locale = empty_locales): owned Module(dtype) {
     var ms = ms_!;
     select ms.layerType {
         when "Conv2d" {
@@ -235,11 +237,25 @@ proc moduleFromSpec(ms_: borrowed ModuleSpecification?,type dtype = real(32)): o
         }
         otherwise {
             var sms: dict(string,shared Module(dtype)) = new dict(string,shared Module(dtype));
-            for k in ms.subModuleOrder {
-                const sma = ms.subModules[k];
-                const sm: shared Module(dtype) = shared.adopt(moduleFromSpec(sma,dtype=dtype));
-                sms.insert(k,sm);
+            if targetLocales.size > 0 {
+                // split the modules into groups across the target locales
+                const moduleLocs = partitionTargetLocales(ms.subModules.size, targetLocales);
+
+                for (k, tl) in zip(ms.subModuleOrder, moduleLocs) {
+                    const sma = ms.subModules[k];
+                    on tl {
+                        const sm: shared Module(dtype) = shared.adopt(moduleFromSpec(sma,dtype=dtype));
+                        sms.insert(k,sm);
+                    }
+                }
+            } else {
+                for k in ms.subModuleOrder {
+                    const sma = ms.subModules[k];
+                    const sm: shared Module(dtype) = shared.adopt(moduleFromSpec(sma,dtype=dtype));
+                    sms.insert(k,sm);
+                }
             }
+
             return new Sequential(dtype,sms,overrideName=true,moduleName=ms.layerType);
         }
     }
@@ -247,20 +263,39 @@ proc moduleFromSpec(ms_: borrowed ModuleSpecification?,type dtype = real(32)): o
 }
 
 
-proc modelFromSpecFile(path: string, type dtype=real(32)) : owned Module(dtype) {
+proc modelFromSpecFile(path: string, type dtype=real(32), targetLocales: [] locale = empty_locales) : owned Module(dtype) {
     import IO;
     import JSON;
     var fl = IO.open(path, IO.ioMode.r);
     var reader = fl.reader(deserializer=new JSON.jsonDeserializer());
     var ms = reader.read(owned ModuleSpecification);
     fl.close();
-    return moduleFromSpec(ms,dtype);
+    return moduleFromSpec(ms,dtype,targetLocales);
 }
 
-proc loadModel(specFile: string, weightsFolder: string, type dtype = real(32)): owned Module(dtype) {
-    var model: owned Module(f32) = modelFromSpecFile(specFile, dtype);
+proc loadModel(specFile: string, weightsFolder: string, type dtype = real(32), targetLocales: [] locale = empty_locales): owned Module(dtype) {
+    var model: owned Module(f32) = modelFromSpecFile(specFile, dtype, targetLocales);
+
     model.loadPyTorchDump(weightsFolder);
     return model;
+}
+
+// partition n modules evenly across target locales
+private proc partitionTargetLocales(n: int, targetLocales: [] locale): [] locale {
+    var moduleLocs: [0..<n] locale;
+    const nl = targetLocales.size,
+          modsPerLoc = n / nl,
+          modsLeft = n % nl;
+
+    var prev = 0;
+    for (i, tl) in zip(0..<nl, targetLocales) {
+        const start = prev,
+              stop = min(start + modsPerLoc + if i < modsLeft then 1 else 0, n);
+        moduleLocs[start..<stop] = tl;
+        prev = stop;
+    }
+
+    return moduleLocs;
 }
 
 
