@@ -4,7 +4,7 @@ use Network;
 config const baseDir = "../";
 
 // Load an array of images.
-config const numImages = 1;
+config const numImages = 5;
 
 // Create domain for images.
 const imagesD = {0..<numImages};
@@ -26,7 +26,7 @@ for (image,pred) in zip(images,preds) {
     pred = model(image).argmax();
 }
 
-config const printResults = false;
+config const printResults = true;
 if printResults {
     for i in imagesD {
         writeln((i, preds[i]));

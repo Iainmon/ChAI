@@ -6,7 +6,7 @@ use DynamicTensor;
 config const baseDir = "../";
 
 // Load an array of images.
-config const numImages = 1;
+config const numImages = 5;
 
 // Create distributed domain for images.
 const imagesD = blockDist.createDomain({0..<numImages});
@@ -23,8 +23,6 @@ var localeModels = forall li in localeModelsD do
     loadModel(specFile = baseDir + "scripts/models/cnn/specification.json",
               weightsFolder = baseDir + "scripts/models/cnn/");
 
-for i in localeModelsD do writeln("lm ", i, " on ", localeModels[i].locale);
-
 // Create distributed array of output results.
 var preds: [imagesD] int;
 
@@ -36,7 +34,7 @@ coforall loc in Locales do on loc {
     }
 }
 
-config const printResults = false;
+config const printResults = true;
 if printResults {
     for i in imagesD {
         writeln((i, preds[i]));
