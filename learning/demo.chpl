@@ -47,7 +47,7 @@ cnn.loadPyTorchDump(modelPath);
 
 config const imageCount = 1;
 
-var images = for i in 0..<imageCount do 
+var images = for i in 0..<imageCount do
     Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata");
 
 for i in images.domain {

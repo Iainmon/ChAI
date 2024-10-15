@@ -243,17 +243,17 @@ proc type staticTensor.matvecmul(m,v) {
     return matvec(m,v);
 }
 
-proc type staticTensor.convolve(features: staticTensor(3,?eltType),kernel: staticTensor(4,eltType), stride: int): staticTensor(3,eltType) {
-    var ctx = new conv2DOp(eltType,features.meta,kernel.meta,stride);
+proc type staticTensor.convolve(features: staticTensor(3,?eltType),kernel: staticTensor(4,eltType), stride: int, padding: int): staticTensor(3,eltType) {
+    var ctx = new conv2DOp(eltType,features.meta,kernel.meta,stride,padding);
     return tensorFromCtx(3,eltType,ctx);
 }
 
-proc type staticTensor.convolve(features: staticTensor(3,?eltType),kernel: staticTensor(4,eltType), bias: staticTensor(1,eltType), stride: int): staticTensor(3,eltType) {
+proc type staticTensor.convolve(features: staticTensor(3,?eltType),kernel: staticTensor(4,eltType), bias: staticTensor(1,eltType), stride: int, padding: int): staticTensor(3,eltType) {
     // on here.gpus[0] var x: shared Remote(ndarray(3,eltType)) = ndarray.convolve(features.array,kernel.array,bias.array,stride);
 
     var t = new staticTensor(3,eltType);
     on t.device {
-        t.array = ndarray.convolve(features.array,kernel.array,bias.array,stride);
+        t.array = ndarray.convolve(features.array,kernel.array,bias.array,stride, padding);
     }
     return t;
 }
@@ -268,6 +268,14 @@ proc type staticTensor.matvecmulFast(mat: staticTensor(2,?eltType),vec: staticTe
 }
 
 
+proc type staticTensor.topk(t: staticTensor(1,?eltType), k: int): staticTensor(1,int) {
+    var u = new staticTensor(1,int);
+    on u.device {
+        u.array = t.array.topk(k);
+    }
+    return u;
+}
+
 proc staticTensor.dilate(dil: int): staticTensor(3,eltType) where this.rank == 3 {
     var dilated = new staticTensor(3,eltType);
     on this.device {
@@ -280,12 +288,26 @@ proc staticTensor.dilate(dil: int): staticTensor(3,eltType) where this.rank == 3
     return dilated;
 }
 
-proc staticTensor.maxPool(poolSize: int): staticTensor(3,eltType) where this.rank == 3 {
+proc staticTensor.maxPool(poolSize:int) do return this.maxPool(poolSize,poolSize);
+proc staticTensor.maxPool(poolSize: int, stride: int): staticTensor(3,eltType) where this.rank == 3 {
     var pool = new staticTensor(3,eltType);
     on this.device {
         ref dat = this.array;
         ref pl = pool.array;
-        const p = ndarray.maxPool(dat,poolSize);
+        const p = ndarray.maxPool(dat,poolSize, stride);
+        pl.reshapeDomain(p.domain);
+        pl = p;
+    }
+    return pool;
+}
+
+// adaptiveAvgPool2d
+proc staticTensor.adaptiveAvgPool2d(outputSize: int): staticTensor(3,eltType) where this.rank == 3 {
+    var pool = new staticTensor(3,eltType);
+    on this.device {
+        ref dat = this.array;
+        ref pl = pool.array;
+        const p = ndarray.adaptiveAvgPool2d(dat,outputSize);
         pl.reshapeDomain(p.domain);
         pl = p;
     }
@@ -442,7 +464,7 @@ proc main() {
 
         var img = staticTensor.arange(3,9,9);
         var ker = staticTensor.arange(1,3,3,3);
-        var fet = staticTensor.convolve(img,ker,2);
+        var fet = staticTensor.convolve(img,ker,2,0);
         writeln(fet);
 
         var b = staticTensor.arange(1,3,3);
@@ -458,7 +480,7 @@ proc main() {
     writeln(img);
 
     var ker = staticTensor.arange(1,1,3,3);
-    var fet = staticTensor.convolve(img,ker,1);
+    var fet = staticTensor.convolve(img,ker,1,0);
     writeln("Features:", fet);
     var sm = fet.sum(0).sum(0).sum(0);
     writeln(sm);
@@ -511,7 +533,7 @@ proc main() {
 
     // img = staticTensor.arange(1,9,9);
     // ker = staticTensor.arange(1,1,3,3);
-    // fet = staticTensor.convolve(img,ker,2);
+    // fet = staticTensor.convolve(img,ker,2,0);
     // sm = fet.sum(0).sum(0).sum(0);
     // writeln(sm);
     // sm.backward();

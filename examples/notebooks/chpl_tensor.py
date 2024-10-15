@@ -13,7 +13,7 @@ def save_tensor(t,path,append=False):
         return
     if isinstance(t,torch.Tensor):
         t = t.to(torch.float64).cpu().detach().numpy()
-    
+
     if append:
         mode = 'ab'
     else:

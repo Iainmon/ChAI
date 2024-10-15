@@ -127,9 +127,9 @@ record ndarray : serializable {
         return data.this((...args));
     }
 
-    proc ref setData(const arr: [] eltType) 
+    proc ref setData(const arr: [] eltType)
             where arr.rank == rank do
-        if arr.domain == this.domain then 
+        if arr.domain == this.domain then
             data = arr;
         else
             this = arr;
@@ -418,7 +418,7 @@ record ndarray : serializable {
 
 
     proc squeeze(param newRank: int): ndarray(newRank,eltType) where newRank < rank {
-        // I think this will work: (a member of the chapel team needs to review this) 
+        // I think this will work: (a member of the chapel team needs to review this)
         // I suspect heavy performance hits will happen when running this on CUDA. 
         if newRank == 1 {
             var me = new ndarray(1,eltType);
@@ -512,6 +512,36 @@ record ndarray : serializable {
             meData[c,h,w] = thisData[c,height - h - 1,width - w - 1];
         }
         return me;
+    }
+
+    proc topk(k: int): ndarray(1, int) where rank == 1 {
+        const myData = this.data;
+        const myDom = this.domain;
+        const mySize = myDom.size;
+        if k > mySize then util.err("Cannot get top ", k, " from ", mySize, " elements.");
+        var topK: [0..<k] int = 0..<k;
+        var topKData: [0..<k] eltType = myData(0..<k);
+        for i in k..<mySize {
+            var minIdx = 0;
+            var minVal = topKData(minIdx);
+            for j in 1..<k {
+                if topKData(j) < minVal {
+                    minIdx = j;
+                    minVal = topKData(j);
+                }
+            }
+            if myData(i) > minVal {
+                topK(minIdx) = i;
+                topKData(minIdx) = myData(i);
+            }
+        }
+        // sort topK based on topKData
+        use Sort;
+        record cmp: keyComparator { proc key(x) do return x(1); }
+        var paired = [i in 0..<k] (topK(i), topKData(i));
+        sort(paired, comparator=new ReverseComparator(new cmp()));
+        var res = [p in paired] p(0);
+        return new ndarray(res);
     }
 
     proc argmax() where rank == 1 {
@@ -704,7 +734,6 @@ operator /(a: ndarray(?rank,?eltType),b: ndarray(rank,eltType)): ndarray(rank,el
 //     return c;
 // }
 
-
 proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltType), stride: int): ndarray(3,eltType) {
     const (channels,inHeight,inWidth) = features.shape;
     const (filters,channels_,kernelHeight,kernelWidth) = kernel.shape;
@@ -734,6 +763,55 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
             sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
         }
         dat[f,h_,w_] = sum;
+    }
+
+    return outFeatures;
+}
+
+
+proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltType), stride: int, padding: int): ndarray(3,eltType) {
+    const (channels, inHeight, inWidth) = features.shape;
+    const (filters, channels_, kernelHeight, kernelWidth) = kernel.shape;
+    if channels != channels_ then halt("Channels must match.");
+
+    // Calculate the dimensions of the output feature map
+    const outHeight: int = ((inHeight + 2 * padding - kernelHeight) / stride) + 1;
+    const outWidth: int = ((inWidth + 2 * padding - kernelWidth) / stride) + 1;
+    const outShape = (filters, outHeight, outWidth);
+    const outDom = util.domainFromShape((...outShape));
+    var outFeatures = new ndarray(outDom, eltType);
+
+    // Create a padded feature map
+    const paddedHeight = inHeight + 2 * padding;
+    const paddedWidth = inWidth + 2 * padding;
+    const paddedDom = util.domainFromShape(channels, paddedHeight, paddedWidth);
+    var paddedFeatures = new ndarray(paddedDom, eltType);
+    ref paddedData = paddedFeatures.data;
+    ref fet = features.data;
+
+    // Initialize the padded feature map with zeros
+    paddedData = 0;
+
+    // Copy the original feature map into the center of the padded feature map
+    forall (c, h, w) in features.domain {
+        paddedData[c, h + padding, w + padding] = fet[c, h, w];
+    }
+
+    ref dat = outFeatures.data;
+    ref ker = kernel.data;
+
+    const kernelChanD = util.domainFromShape(channels, kernelHeight, kernelWidth);
+
+    // Perform the convolution on the padded feature map
+    forall (f, h_, w_) in outDom.every() {
+        const hi: int = h_ * stride;
+        const wi: int = w_ * stride;
+        var sum: eltType = 0;
+        for j in 0..<kernelChanD.size {
+            const (c, kh, kw) = kernelChanD.indexAt(j);
+            sum += paddedData[c, hi + kh, wi + kw] * ker[f, c, kh, kw];
+        }
+        dat[f, h_, w_] = sum;
     }
 
     return outFeatures;
@@ -793,7 +871,7 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
     }
 
     select (kernelHeight,kernelWidth) {
-        when (3,3) do 
+        when (3,3) do
             fastKernel(3);
         when (5,5) do
             fastKernel(5);
@@ -806,42 +884,108 @@ proc type ndarray.convolve(features: ndarray(3,?eltType),kernel: ndarray(4,eltTy
         otherwise do
             slowKernel();
     }
+    return outFeatures;
+}
 
-    // @assertOnGpu
-    // forall (f,h_,w_) in outDom {
-    //     const hi: int = h_ * stride;
-    //     const wi: int = w_ * stride;
-    //     // proc innerHelper() {
-    //     var sum: eltType = 0;
-    //         // @llvm.assertVectorized()
-    //         // for (c,kh,kw) in kernelChanD {
-    //         //     sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
-    //         // }
-    //     for c in 0..<channels {
-    //         for param kh in 0..<3 {
-    //             for param kw in 0..<3 {
-    //                 sum += fet[c,hi + kh, wi + kw] * ker[f,c,kh,kw];
-    //             }
-    //         }
-    //     }
-    //     dat[f,h_,w_] = sum + bis[f];
-    // }
+proc type ndarray.convolve(features: ndarray(3,?eltType), kernel: ndarray(4,eltType), bias: ndarray(1,eltType), stride: int, padding: int): ndarray(3,eltType) {
+    const (channels, inHeight, inWidth) = features.shape;
+    const (filters, channels_, kernelHeight, kernelWidth) = kernel.shape;
+    const (filters_,) = bias.shape;
+    if channels != channels_ then halt("Channels must match. ", features.shape , " ", kernel.shape);
+    if filters != filters_ then halt("Bias and filters must match.");
 
+    // Calculate the dimensions of the output feature map
+    const outHeight: int = ((inHeight + 2 * padding - kernelHeight) / stride) + 1;
+    const outWidth: int = ((inWidth + 2 * padding - kernelWidth) / stride) + 1;
+    const outShape = (filters, outHeight, outWidth);
+    const outDom = util.domainFromShape((...outShape));
+
+    // Create a padded feature map
+    const paddedHeight = inHeight + 2 * padding;
+    const paddedWidth = inWidth + 2 * padding;
+    const paddedDom = util.domainFromShape(channels, paddedHeight, paddedWidth);
+    var paddedFeatures = new ndarray(paddedDom, eltType);
+    ref paddedData = paddedFeatures.data;
+    ref fet = features.data;
+
+    // Initialize the padded feature map with zeros
+    paddedData = 0;
+
+    // Copy the original feature map into the center of the padded feature map
+    forall (c, h, w) in features.domain {
+        paddedData[c, h + padding, w + padding] = fet[c, h, w];
+    }
+
+    const ref ker = kernel.data;
+    const ref bis = bias.data;
+
+    var outFeatures = new ndarray(outDom, eltType);
+    ref dat = outFeatures.data;
+
+    inline proc fastKernel(param kernelSize: int) {
+        forall (f, h_, w_) in outDom.every() {
+            const hi = h_ * stride;
+            const wi = w_ * stride;
+            var sum: eltType = 0;
+            for c in 0..<channels {
+                for param kh in 0..<kernelSize {
+                    for param kw in 0..<kernelSize {
+                        sum += paddedData[c, hi + kh, wi + kw] * ker[f, c, kh, kw];
+                    }
+                }
+            }
+            dat[f, h_, w_] = sum + bis[f];
+        }
+    }
+
+    inline proc slowKernel() {
+        const kernelChanD = util.domainFromShape(channels, kernelHeight, kernelWidth);
+        forall (f, h_, w_) in outDom.every() {
+            const hi = h_ * stride;
+            const wi = w_ * stride;
+            var sum: eltType = 0;
+            if util.targetGpu() then
+                for c in 0..<channels do
+                    for kh in 0..<kernelHeight do
+                        for kw in 0..<kernelWidth do
+                            sum += paddedData[c, hi + kh, wi + kw] * ker[f, c, kh, kw];
+            else
+                for (c, kh, kw) in kernelChanD do
+                    sum += paddedData[c, hi + kh, wi + kw] * ker[f, c, kh, kw];
+            dat[f, h_, w_] = sum + bis[f];
+        }
+    }
+
+    select (kernelHeight, kernelWidth) {
+        when (3, 3) do
+            fastKernel(3);
+        when (5, 5) do
+            fastKernel(5);
+        when (7, 7) do
+            fastKernel(7);
+        when (9, 9) do
+            fastKernel(9);
+        when (11, 11) do
+            fastKernel(11);
+        otherwise do
+            slowKernel();
+    }
     return outFeatures;
 }
 
 
-proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(3,eltType) {
+proc type ndarray.maxPool(features: ndarray(3, ?eltType), poolSize: int) do return this.maxPool(features,poolSize,poolSize);
+proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int, stride: int): ndarray(3,eltType) {
 
     const (channels,height,width) = features.shape;
     if (height % poolSize != 0) || (width % poolSize != 0) {
         const moreH = (Math.ceil(height:real / poolSize:real): int) * poolSize;
         const moreW = (Math.ceil(width:real / poolSize:real): int) * poolSize;
-        return ndarray.maxPool(features.reshape(channels,moreH,moreW),poolSize);
+        return ndarray.maxPool(features.reshape(channels,moreH,moreW),poolSize,stride);
     }
 
-    const newHeight: int = height / poolSize;
-    const newWidth: int = width / poolSize;
+    const newHeight: int = (height - poolSize) / stride + 1;
+    const newWidth: int = (width - poolSize) / stride + 1;
     const dom = util.domainFromShape(channels,newHeight,newWidth);
     var pool = new ndarray(dom,eltType);
     ref dat = pool.data;
@@ -849,14 +993,37 @@ proc type ndarray.maxPool(features: ndarray(3,?eltType),poolSize: int): ndarray(
     const poolDom = util.domainFromShape(poolSize,poolSize);
     // @assertOnGpu
     forall (c,h,w) in dom.every() {
-        const hs = h * poolSize;
-        const ws = w * poolSize;
+        const hs = h * stride;
+        const ws = w * stride;
         var mx: eltType = fet[c,h,w];
         for (ph,pw) in poolDom {
             const x: eltType = fet[c,ph + hs,pw + ws];
             mx = Math.max(x,mx);
         }
         dat[c,h,w] = mx;
+    }
+    return pool;
+}
+
+// adaptiveAvgPool2d
+proc type ndarray.adaptiveAvgPool2d(features: ndarray(3,?eltType),outputSize: int): ndarray(3,eltType) {
+    const (channels,height,width) = features.shape;
+    const newHeight = outputSize;
+    const newWidth = outputSize;
+    const dom = util.domainFromShape(channels,newHeight,newWidth);
+    var pool = new ndarray(dom,eltType);
+    ref dat = pool.data;
+    ref fet = features.data;
+    const poolDom = util.domainFromShape(height,width);
+    // @assertOnGpu
+    forall (c,h,w) in dom.every() {
+        const hs = h * height / newHeight;
+        const ws = w * width / newWidth;
+        var sum: eltType = 0;
+        for (ph,pw) in poolDom {
+            sum += fet[c,ph + hs,pw + ws];
+        }
+        dat[c,h,w] = sum / (height * width);
     }
     return pool;
 }
@@ -912,7 +1079,7 @@ proc ndarray.serialize(writer: IO.fileWriter(locking=false, IO.defaultSerializer
             writer.write("[");
         }
         writer.writef("%{##.#}",x);
-        
+
         if idx[rank - 1] < shape[rank - 1] - 1 {
             if rank == 1 then
                 writer.write("  ");

@@ -609,11 +609,12 @@ record conv2DOp : serializable {
     var features: shared BaseTensorResource(eltType,3);
     var kernel: shared BaseTensorResource(eltType,4);
     var stride: int;
+    var padding: int;
 
     proc children do return (features,kernel);
 
     proc forward(): ndarray(3,eltType) {
-        return ndarray.convolve(features.array,kernel.array,stride);
+        return ndarray.convolve(features.array,kernel.array,stride,padding);
         // writeln((here,features.device,kernel.device));
         // var output: ndarray(3,eltType);
         // on features.device {
@@ -647,7 +648,7 @@ record conv2DOp : serializable {
             const gslice = gradSl.dilate(strideDil)
                                  .reshape(1,1,outHeight,outWidth)
                                  .expand(1,channels,outHeight,outWidth);
-            const filterGrad: ndarray(3,real) = ndarray.convolve(fets,gslice,stride=stride);
+            const filterGrad: ndarray(3,real) = ndarray.convolve(fets,gslice,stride=stride, 0);
 
             // foreach (c,h,w) in {0..<channels,0..<kerHeight,0..<kerWidth} with (ref kerGrad) {
             //     kerGrad.data[f,c,h,w] = filterGrad.data[c,h,w];
@@ -682,7 +683,7 @@ record conv2DOp : serializable {
                                  .expand(channels,outHeight,outWidth)
                                  .pad((0,0),(padH,padH),(padW,padW));
 
-            const imGrad = ndarray.convolve(gslice,rotKernel,stride=1);
+            const imGrad = ndarray.convolve(gslice,rotKernel,stride=1,0);
             fetGrad.data += imGrad.data;
         }
 

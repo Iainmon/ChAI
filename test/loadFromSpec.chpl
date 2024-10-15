@@ -10,12 +10,12 @@ config const baseDir = "../";
 
 proc myTest2(test: borrowed Test) throws {
 
-    // Construct the model from specification. 
+    // Construct the model from specification.
     var model: owned Module(real(32)) =  Network.loadModel(specFile=baseDir+"scripts/models/cnn/specification.json",
               weightsFolder=baseDir+"scripts/models/cnn/",
               dtype=real(32));
 
-    // Load an array of images. 
+    // Load an array of images.
     const numImages = 10;
     var images = forall i in 0..<numImages do Tensor.load(baseDir+"examples/data/datasets/mnist/image_idx_" + i:string + ".chdata") : real(32);
 

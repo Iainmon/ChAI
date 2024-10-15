@@ -71,7 +71,7 @@ record dynamicTensor : serializable {
         return this.slice((...args));
 
     proc tensorize(param rank: int) : staticTensor(rank,eltType) {
-        if rank != runtimeRank then 
+        if rank != runtimeRank then
             halt("Cannot cast this dynamicTensor of rank " + runtimeRank: string + " to dynamicTensor of rank " + rank : string + ".");
         return forceRank(rank);
     }
@@ -262,14 +262,26 @@ proc dynamicTensor.softmax(): dynamicTensor(eltType) {
     return new dynamicTensor(eltType);
 }
 
-proc dynamicTensor.maxPool(poolSize: int): dynamicTensor(eltType) {
+proc dynamicTensor.maxPool(poolSize: int) do return this.maxPool(poolSize,stride=poolSize);
+proc dynamicTensor.maxPool(poolSize: int, stride: int): dynamicTensor(eltType) {
     for param rank in 3..3 {
         if this.checkRank(rank) then
-            return this.tensorize(rank).maxPool(poolSize).eraseRank();
+            return this.tensorize(rank).maxPool(poolSize, stride).eraseRank();
     }
     halt("Could not determine rank in dynamicTensor.maxPool.");
     return new dynamicTensor(eltType);
 }
+
+// adaptiveAvgPool2d
+proc dynamicTensor.adaptiveAvgPool2d(outputSize: int): dynamicTensor(eltType) {
+    for param rank in 3..3 {
+        if this.checkRank(rank) then
+            return this.tensorize(rank).adaptiveAvgPool2d(outputSize).eraseRank();
+    }
+    halt("Could not determine rank in dynamicTensor.adaptiveAvgPool2d.");
+    return new dynamicTensor(eltType);
+}
+
 
 proc dynamicTensor.reshape(args...): dynamicTensor(eltType) {
     for param rank in 1..maxRank {
@@ -320,6 +332,10 @@ proc type dynamicTensor.matvecmulFast(m: dynamicTensor(?eltType),v: dynamicTenso
     return staticTensor.matvecmulFast(m.forceRank(2),v.forceRank(1)).eraseRank();
 }
 
+proc dynamicTensor.topk(k: int): dynamicTensor(int) {
+  return staticTensor.topk(this.tensorize(1),k).eraseRank();
+}
+
 proc dynamicTensor.argmax(): int {
     var t = this.tensorize(1);
     const a = t.array;
@@ -327,11 +343,11 @@ proc dynamicTensor.argmax(): int {
 }
 
 // Right now, the supported shapes are (3,4) -> 3
-proc type dynamicTensor.convolve(features: dynamicTensor(?eltType), kernel: dynamicTensor(eltType), stride: int): dynamicTensor(eltType) do
-    return staticTensor.convolve(features.forceRank(3),kernel.forceRank(4),stride).eraseRank();
+proc type dynamicTensor.convolve(features: dynamicTensor(?eltType), kernel: dynamicTensor(eltType), stride: int, padding: int): dynamicTensor(eltType) do
+    return staticTensor.convolve(features.forceRank(3),kernel.forceRank(4),stride, padding).eraseRank();
 
-proc type dynamicTensor.convolve(features: dynamicTensor(?eltType), kernel: dynamicTensor(eltType), bias: dynamicTensor(eltType), stride: int): dynamicTensor(eltType) do
-    return staticTensor.convolve(features.forceRank(3),kernel.forceRank(4),bias.forceRank(1),stride).eraseRank();
+proc type dynamicTensor.convolve(features: dynamicTensor(?eltType), kernel: dynamicTensor(eltType), bias: dynamicTensor(eltType), stride: int, padding: int): dynamicTensor(eltType) do
+    return staticTensor.convolve(features.forceRank(3),kernel.forceRank(4),bias.forceRank(1),stride,padding).eraseRank();
 
 
 proc type dynamicTensor.arange(args...) do
@@ -373,7 +389,7 @@ proc main() {
 
     var img = dynamicTensor.arange(1,9,9);
     var ker = dynamicTensor.arange(1,1,3,3);
-    var fet = dynamicTensor.convolve(img,ker,1);
+    var fet = dynamicTensor.convolve(img,ker,1,0);
 
     writeln(fet);
     fet.save("data/my_features.chdata");

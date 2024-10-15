@@ -22,16 +22,16 @@ const imagesD = blockDist.createDomain({0..<numImages});
 var images = forall i in imagesD do 
     Tensor.load("data/datasets/mnist/image_idx_" + i:string + ".chdata") : dtype;
 
-// Create distributed domain for models. 
+// Create distributed domain for models.
 const localeModelsD = blockDist.createDomain(Locales.domain);
 
 // Load distributed array of models. 
-var localeModels = forall li in localeModelsD do 
+var localeModels = forall li in localeModelsD do
     loadModel(specFile="scripts/models/cnn/specification.json",
               weightsFolder="scripts/models/cnn/",
               dtype=dtype);
 
-// Create distributed array of output results. 
+// Create distributed array of output results.
 var preds: [imagesD] int;
 
 
@@ -54,7 +54,7 @@ for i in 0..<numTries {
         var model = localeModels[here.id].borrow();
         pred = model(image).argmax();
     }
-    
+
     st.stop();
     const tm = st.elapsed();
     totalTime += tm;
