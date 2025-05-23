@@ -1084,13 +1084,12 @@ record nllLossOp : serializable {
     var target: shared BaseTensorResource(?);
     var weight: shared BaseTensorResource(?);
     var ignoreIndex: int;
-    var red: bool;
     var reduction: string;
     
     proc children do return (input,target,weight);
 
     proc forward() do
-        return ndarray.nllLoss(input.array,target.array,weight.array,ignoreIndex,red,reduction);
+        return ndarray.nllLoss(input.array,target.array,weight.array,ignoreIndex,reduction);
     
     proc spec : GradOpSpec do return new dict(("operation", "nllLoss"));
 }

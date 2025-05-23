@@ -111,6 +111,13 @@ module Bridge {
         in a: bridge_tensor_t, 
         in b: bridge_tensor_t): bridge_tensor_t;
 
+    extern "nll_loss" proc nllLoss(
+        in input: bridge_tensor_t, 
+        in target: ndarray(1,eltType), 
+        in weight: ndarray(1, eltType),
+        in ignoreIndex: int(32),
+        in reduction: int(32): bridge_tensor_t;
+
     extern "split_loop" proc splitLoop(idx: int(64), n: int(64)): void;
 
     extern "split_loop_filler" proc splitLoopFiller(n: int(64),ret: c_ptr(int(64))): void;

@@ -431,6 +431,39 @@ extern "C" bridge_tensor_t add_two_arrays(bridge_tensor_t a, bridge_tensor_t b) 
     return torch_to_bridge(output);
 }
 
+extern "C" bridge_tensor_t nll_loss(
+    bridge_tensor_t input, 
+    bridge_tensor_t target, 
+    bridge_tensor_t weight,
+    int ignoreIndex,
+    int reduction
+) {
+    // Convert bridge_tensor_t to torch::Tensor
+    torch::Tensor t_input = bridge_to_torch(input);
+    torch::Tensor t_target = bridge_to_torch(target);
+    torch::Tensor t_weight = bridge_to_torch(weight);
+
+    // Map reduction int to string
+    std::string reduction_str;
+    switch (reduction) {
+        case 0: reduction_str = "none"; break;
+        case 1: reduction_str = "mean"; break;
+        case 2: reduction_str = "sum"; break;
+        default: reduction_str = "mean"; break;  // fallback default
+    }
+
+    torch::Tensor output = torch::nn::functional::nll_loss(
+        t_input,
+        t_target,
+        torch::nn::functional::NLLLossFuncOptions()
+            .weight(t_weight)
+            .ignore_index(ignoreIndex)
+            .reduction(reduction_str)
+    );
+
+    return torch_to_bridge(output);
+}
+
 // extern "C" bridge_tensor_t capture_webcam_bridge(int cam_index) {
 //     torch::Tensor image = capture_webcam(cam_index);
 //     return torch_to_bridge(image);

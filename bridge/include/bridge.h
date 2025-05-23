@@ -94,6 +94,14 @@ bridge_tensor_t conv2d(
     int padding
 );
 
+bridge_tensor_t nll_loss(
+    bridge_tensor_t input, 
+    bridge_tensor_t target, 
+    bridge_tensor_t weight,
+    int ignoreIndex,
+    int reduction
+);
+
 bridge_tensor_t matmul(bridge_tensor_t a, bridge_tensor_t b);
 
 bridge_tensor_t max_pool2d(
