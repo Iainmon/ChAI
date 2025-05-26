@@ -80,6 +80,331 @@ module Layer {
             );
     }
 
+    class SiLU : Module(?) {
+
+        proc init(type eltType = defaultEltType) {
+            super.init(eltType);
+            init this;
+            this.moduleName = "SiLU";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.silu();
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes("SiLU", moduleName);
+    }
+
+    class Mish : Module(?) {
+
+        proc init(type eltType = defaultEltType) {
+            super.init(eltType);
+            init this;
+            this.moduleName = "Mish";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.mish();
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes("Mish", moduleName);
+    }
+
+    class Sigmoid : Module(?) {
+
+        proc init(type eltType = defaultEltType) {
+            super.init(eltType);
+            init this;
+            this.moduleName = "Sigmoid";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.sigmoid();
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes("Sigmoid", moduleName);
+    }
+
+    class Tanh : Module(?) {
+
+        proc init(type eltType = defaultEltType) {
+            super.init(eltType);
+            init this;
+            this.moduleName = "Tanh";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.tanh();
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes("Tanh", moduleName);
+    }
+
+    class ReLU6 : Module(?) {
+
+        proc init(type eltType = defaultEltType) {
+            super.init(eltType);
+            init this;
+            this.moduleName = "ReLU6";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.relu6();
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes("ReLU6", moduleName);
+    }
+
+    class SELU : Module(?) {
+
+        proc init(type eltType = defaultEltType) {
+            super.init(eltType);
+            init this;
+            this.moduleName = "SELU";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.selu();
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes("SELU", moduleName);
+    }
+
+    class Hardsigmoid : Module(?) {
+
+        proc init(type eltType = defaultEltType) {
+            super.init(eltType);
+            init this;
+            this.moduleName = "Hardsigmoid";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.hardsigmoid();
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes("Hardsigmoid", moduleName);
+    }
+
+    class LogSigmoid : Module(?) {
+
+        proc init(type eltType = defaultEltType) {
+            super.init(eltType);
+            init this;
+            this.moduleName = "LogSigmoid";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.logsigmoid();
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes("LogSigmoid", moduleName);
+    }
+
+    class Tanhshrink : Module(?) {
+
+        proc init(type eltType = defaultEltType) {
+            super.init(eltType);
+            init this;
+            this.moduleName = "Tanhshrink";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.tanhshrink();
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes("Tanhshrink", moduleName);
+    }
+
+    class SoftSign : Module(?) {
+
+        proc init(type eltType = defaultEltType) {
+            super.init(eltType);
+            init this;
+            this.moduleName = "SoftSign";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.softsign();
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes("SoftSign", moduleName);
+    }
+
+    class Hardswish : Module(?) {
+
+        proc init(type eltType = defaultEltType) {
+            super.init(eltType);
+            init this;
+            this.moduleName = "Hardswish";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.hardswish();
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes("Hardswish", moduleName);
+    }
+
+    class Hardshrink : Module(?) {
+        var alpha: eltType;
+
+        proc init(type eltType = defaultEltType, alpha: eltType = 0.5) {
+            super.init(eltType);
+            this.alpha = alpha;
+            init this;
+            this.moduleName = "Hardshrink";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.hardShrink(alpha);
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes(
+                "Hardshrink",
+                moduleName,
+                ("alpha", alpha)
+            );
+    }
+
+    class Hardtanh : Module(?) {
+        var minVal: eltType;
+        var maxVal: eltType;
+
+        proc init(type eltType = defaultEltType, minVal: eltType = -1.0, maxVal: eltType = 1.0) {
+            super.init(eltType);
+            this.minVal = minVal;
+            this.maxVal = maxVal;
+            init this;
+            this.moduleName = "Hardtanh";
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.hardTanh(minVal, maxVal);
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes(
+                "Hardtanh",
+                moduleName,
+                ("minVal", minVal),
+                ("maxVal", maxVal)
+            );
+    }
+
+    class Softplus : Module(?) {
+        var beta: eltType;
+        var threshold: eltType;
+
+        proc init(type eltType = defaultEltType, beta: eltType = 1.0, threshold: eltType = 20.0) {
+            super.init(eltType);
+            this.beta = beta;
+            this.threshold = threshold;
+            init this;
+            this.moduleName = "Softplus";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.softplus(beta, threshold);
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes(
+                "Softplus",
+                moduleName,
+                ("beta", beta),
+                ("threshold", threshold)
+            );
+    }
+
+    class Threshold : Module(?) {
+        var threshold: eltType;
+        var value: eltType;
+
+        proc init(type eltType = defaultEltType, threshold: eltType, value: eltType) {
+            super.init(eltType);
+            this.threshold = threshold;
+            this.value = value;
+            init this;
+            this.moduleName = "Threshold";            
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.threshold(threshold, value);
+        
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes(
+                "Threshold",
+                moduleName,
+                ("threshold",threshold),
+                ("value",value)
+            );
+    }
+
+    class CELU : Module(?) {
+        var alpha: eltType;
+
+        proc init(type eltType = defaultEltType, alpha: eltType=1.0) {
+            super.init(eltType);
+            this.alpha = alpha;
+            init this;
+            this.moduleName = "CELU";
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.celu(alpha);
+
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes(
+                "CELU",
+                moduleName,
+                ("alpha", alpha)
+            );
+    }
+
+    class LeakyReLU : Module(?) {
+        var negativeSlope: eltType;
+
+        proc init(type eltType = defaultEltType, negativeSlope: eltType=0.01) {
+            super.init(eltType);
+            this.negativeSlope = negativeSlope;
+            init this;
+            this.moduleName = "LeakyReLU";
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.leakyrelu(negativeSlope);
+
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes(
+                "LeakyReLU",
+                moduleName,
+                ("negativeSlope", negativeSlope)
+            );
+    }
+
+    class Softshrink : Module(?) {
+        var alpha: eltType;
+
+        proc init(type eltType = defaultEltType, alpha: eltType=0.5) {
+            super.init(eltType);
+            this.alpha = alpha;
+            init this;
+            this.moduleName = "Softshrink";
+        }
+
+        override proc forward(input: dynamicTensor(eltType)): dynamicTensor(eltType) do
+            return input.softshrink(alpha);
+
+        override proc attributes(): moduleAttributes do
+            return new moduleAttributes(
+                "Softshrink",
+                moduleName,
+                ("alpha", alpha)
+            );
+    }
+
+
+
+
+
     class Flatten : Module(?) {
         proc init(type eltType = defaultEltType) {
             super.init(eltType);

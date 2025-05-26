@@ -1080,13 +1080,39 @@ inline proc ndarray.hardswish() {
     const dom = this.domain;
     var rl = new ndarray(dom, eltType);
     ref rld = rl.data;
+
     forall i in dom.every() {
         const x = thisData[i];
         const floatMax: eltType = Types.max(eltType);
-        const xgeq3: eltType = Math.ceil(1.0 / floatMax); // x >= 3: 1 if true, 0 otherwise
-        const xleqn3: eltType = Math.ceil(1.0 / floatMax); // x <= -3: 1 if true, 0 otherwise
-        rld[i] = x * xgeq3 + x * (x + 3) / 6.0 * (1 - xgeq3) * xleqn3;
+        const xgeq3: eltType = Math.ceil((x - 3.0) / floatMax); // x >= 3: 1 if true, 0 otherwise
+        const xleqn3: eltType = Math.ceil((-x - 3.0) / floatMax); // x <= -3: 1 if true, 0 otherwise
+        rld[i] = x * xgeq3 + x * (x + 3) / 6.0 * (1 - xgeq3) * (1 - xleqn3);
     }
+
+    // use CTypes only c_sizeof, c_ptrTo;
+    // use OS.POSIX only memcpy;
+
+    // type intType = int(numBits(eltType)); // integer w/ same #ofbits as real
+    // forall i in dom.every() {
+    //     const x = thisData[i]; // negative x
+    //     const threshold: eltType = 20.0;
+            
+    //     var func: eltType = ; // result after applying hardswish(x) activation function
+    //     var lin: eltType = x;                          
+
+    //     var func_bits: intType;
+    //     var lin_bits: intType;
+    //     memcpy(c_ptrTo(func_bits), c_ptrTo(func), c_sizeof(eltType));
+    //     memcpy(c_ptrTo(lin_bits), c_ptrTo(lin), c_sizeof(eltType));
+
+    //     const condition: intType = (-x > threshold);
+    //     const mask: intType = 0 - condition;
+
+    //     var result_bits: intType = (mask & lin_bits) | (~mask & func_bits);
+
+    //     // rld[i] = output;
+    //     memcpy(c_ptrTo(rld[i]), c_ptrTo(result_bits), c_sizeof(eltType));
+    // }
     return rl;
 }
 
@@ -1228,14 +1254,14 @@ inline proc ndarray.celu(alpha: eltType=1.0) {
     return rl;
 }
 
-inline proc ndarray.leakyrelu(negativeSlope: eltType=Math.exp(-2)) {
+inline proc ndarray.leakyrelu(negativeSlope: eltType=0.01) {
     const ref thisData = data;
     const dom = this.domain;
     var rl = new ndarray(dom, eltType);
     ref rld = rl.data;
     forall i in dom.every() {
         const x = thisData[i];
-        rld[i] = Math.max(0, x) + negativeSlope * Math.min(0, x);
+        rld[i] = Math.max(0.0, x) + negativeSlope * Math.min(0.0, x);
     }
     return rl;
 }

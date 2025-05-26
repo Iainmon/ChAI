@@ -8,6 +8,9 @@ def test(imports):
 
     b = torch.nn.LeakyReLU()(torch.zeros(2,3,4) - 60.0)
     print(b)
+    
+    b = torch.nn.LeakyReLU()(torch.zeros(2,3,4) - 1.0)
+    print(b)
 
     c = torch.nn.LeakyReLU()(torch.zeros(10) + 40.0)
     print(c)

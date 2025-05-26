@@ -280,9 +280,9 @@ add_custom_command(
 
 # add_subdirectory(bridge)
 
-add_subdirectory(examples)
+# add_subdirectory(examples)
 add_subdirectory("test")
-add_subdirectory(demos)
+# add_subdirectory(demos)
 
 
 

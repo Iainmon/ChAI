@@ -608,7 +608,7 @@ proc dynamicTensor.celu(alpha: eltType = 1.0): dynamicTensor(eltType) {
     return new dynamicTensor(eltType);
 }
 
-proc dynamicTensor.leakyrelu(negativeSlope: eltType = 1.0): dynamicTensor(eltType) {
+proc dynamicTensor.leakyrelu(negativeSlope: eltType = 0.01): dynamicTensor(eltType) {
     for param rank in 1..maxRank {
         if this.checkRank(rank) then
             return this.forceRank(rank).leakyrelu(negativeSlope).eraseRank();
