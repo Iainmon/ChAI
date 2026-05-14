@@ -104,7 +104,7 @@ $ chpl -M <ChAI>/lib -sEnv.maxNeededRank=15 my_program.chpl
 
 # Current Status
 
-Currently, you need to have a working installation of CMake, PyThon, and Chapel to use ChAI. 
+Currently, you need to have a working installation of CMake, Python, and Chapel to use ChAI. 
 
 ## General build instructions
 
